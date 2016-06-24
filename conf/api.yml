@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   title: Adobe Experience Manager (AEM) API
-  description: Adobe Experience Manager (AEM) API
+  description: An unofficial Adobe Experience Manager (AEM) API specification by Shine Solutions
   version: "0.1.0"
 schemes:
   - http
