@@ -30,3 +30,12 @@ paths:
           type: string
       tags:
         - console
+  /system/console/jmx/com.adobe.granite:type=Repository/op/{action}:
+    post:
+      parameters:
+        - name: action
+          in: path
+          required: true
+          type: string
+      tags:
+        - console
