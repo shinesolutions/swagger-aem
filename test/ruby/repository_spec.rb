@@ -2,7 +2,7 @@ require_relative 'spec_helper'
 
 describe 'Repository' do
   before do
-    conf_client
+    init_client
     @console = SwaggerClient::ConsoleApi.new
   end
 
