@@ -17,6 +17,23 @@ securityDefinitions:
 security:
   - aemAuth: []
 paths:
+  /etc/replication/treeactivation.html:
+    post:
+      parameters:
+        - name: ignoredeactivated
+          in: query
+          required: true
+          type: boolean
+        - name: onlymodified
+          in: query
+          required: true
+          type: boolean
+        - name: path
+          in: query
+          required: true
+          type: string
+      tags:
+        - sling
   /system/console/bundles/{name}:
     post:
       parameters:

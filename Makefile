@@ -1,7 +1,7 @@
 tools-osx:
 	brew install swagger-codegen
 
-ruby: ruby-clean ruby-build ruby-install
+ruby: ruby-clean ruby-build ruby-install ruby-test
 
 ruby-deps:
 	gem install bundler
