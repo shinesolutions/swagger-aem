@@ -1,0 +1,32 @@
+swagger: '2.0'
+info:
+  title: Adobe Experience Manager (AEM) API
+  description: Adobe Experience Manager (AEM) API
+  version: "0.1.0"
+schemes:
+  - http
+  - https
+basePath: /
+produces:
+  - text/html
+  - text/plain
+  - application/json
+securityDefinitions:
+  aemAuth:
+    type: basic
+security:
+  - aemAuth: []
+paths:
+  /system/console/bundles/{name}:
+    post:
+      parameters:
+        - name: name
+          in: path
+          required: true
+          type: string
+        - name: action
+          in: query
+          required: true
+          type: string
+      tags:
+        - console
