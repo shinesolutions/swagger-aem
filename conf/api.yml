@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   title: Adobe Experience Manager (AEM) API
   description: An unofficial Adobe Experience Manager (AEM) API specification by Shine Solutions
-  version: "0.1.0"
+  version: "6.2"
 schemes:
   - http
   - https
@@ -17,6 +17,23 @@ securityDefinitions:
 security:
   - aemAuth: []
 paths:
+  /{path}/:
+    post:
+      parameters:
+        - name: path
+          in: path
+          required: true
+          type: string
+        - name: jcr:primaryType
+          in: query
+          required: true
+          type: string
+        - name: :name
+          in: query
+          required: true
+          type: string
+      tags:
+        - sling
   /etc/replication/treeactivation.html:
     post:
       parameters:

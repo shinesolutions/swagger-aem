@@ -1,8 +1,8 @@
 $: << File.expand_path('../../../generated/ruby/lib', __FILE__)
-require 'swagger_client'
+require 'swagger_aem'
 
 def init_client
-  SwaggerClient.configure { |conf| [
+  SwaggerAemClient.configure { |conf| [
     conf.host = 'http://localhost:4502',
     conf.username = 'admin',
     conf.password = 'admin',

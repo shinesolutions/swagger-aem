@@ -3,7 +3,7 @@ require_relative 'spec_helper'
 describe 'Bundle' do
   before do
     init_client
-    @console = SwaggerClient::ConsoleApi.new
+    @console = SwaggerAemClient::ConsoleApi.new
   end
 
   after do
@@ -25,7 +25,7 @@ describe 'Bundle' do
           name = 'someinexistingbundle',
           action = 'stop'
         )
-      rescue SwaggerClient::ApiError => err
+      rescue SwaggerAemClient::ApiError => err
         expect(err.code).to eq(404)
       end
     end
@@ -48,7 +48,7 @@ describe 'Bundle' do
           name = 'someinexistingbundle',
           action = 'start'
         )
-      rescue SwaggerClient::ApiError => err
+      rescue SwaggerAemClient::ApiError => err
         expect(err.code).to eq(404)
       end
     end

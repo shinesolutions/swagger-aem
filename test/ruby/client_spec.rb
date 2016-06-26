@@ -2,13 +2,13 @@ require_relative 'spec_helper'
 
 describe 'Client' do
   before do
-    SwaggerClient.configure { |conf| [
+    SwaggerAemClient.configure { |conf| [
       conf.host = 'http://localhost:4502',
       conf.username = 'someinexistingusername',
       conf.password = 'someinexistingpassword',
       conf.debugging = false
     ]}
-    @sling = SwaggerClient::SlingApi.new
+    @sling = SwaggerAemClient::SlingApi.new
   end
 
   after do
@@ -24,7 +24,7 @@ describe 'Client' do
           path = '/etc/designs/geometrixx'
         )
         expect(status_code).to eq(200)
-      rescue SwaggerClient::ApiError => err
+      rescue SwaggerAemClient::ApiError => err
         expect(err.code).to eq(401)
       end
     end

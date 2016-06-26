@@ -3,7 +3,7 @@ require_relative 'spec_helper'
 describe 'Path' do
   before do
     init_client
-    @sling = SwaggerClient::SlingApi.new
+    @sling = SwaggerAemClient::SlingApi.new
   end
 
   after do
