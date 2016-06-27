@@ -19,6 +19,7 @@ security:
 paths:
   .cqactions.html:
     post:
+      operationId: postCqActions
       parameters:
         - name: authorizableId
           in: query
@@ -32,6 +33,7 @@ paths:
         - cq
   /{path}/:
     post:
+      operationId: postPath
       parameters:
         - name: path
           in: path
@@ -49,6 +51,7 @@ paths:
         - sling
   /{path}/{name}:
     get:
+      operationId: getNode
       parameters:
         - name: path
           in: path
@@ -61,6 +64,7 @@ paths:
       tags:
         - sling
     delete:
+      operationId: deleteNode
       parameters:
         - name: path
           in: path
@@ -74,6 +78,7 @@ paths:
         - sling
   /{path}/{name}.rw.html:
     post:
+      operationId: postNodeRw
       parameters:
         - name: path
           in: path
@@ -91,6 +96,7 @@ paths:
         - sling
   /apps/system/config.{runmode}/{name}:
     post:
+      operationId: postConfig
       parameters:
         - name: runmode
           in: path
@@ -184,6 +190,7 @@ paths:
         - sling
   /bin/querybuilder.json:
     post:
+      operationId: postQuery
       parameters:
         - name: path
           in: query
@@ -209,6 +216,7 @@ paths:
         - sling
   /etc/replication/treeactivation.html:
     post:
+      operationId: postTreeActivation
       parameters:
         - name: ignoredeactivated
           in: query
@@ -226,6 +234,7 @@ paths:
         - sling
   /libs/granite/security/post/authorizables:
     post:
+      operationId: postAuthorizables
       parameters:
         - name: authorizableId
           in: query
@@ -255,6 +264,7 @@ paths:
         - sling
   /crx/explorer/ui/setpassword.jsp:
     post:
+      operationId: postSetPassword
       parameters:
         - name: old
           in: query
@@ -272,6 +282,7 @@ paths:
         - crx
   /system/console/bundles/{name}:
     post:
+      operationId: postBundle
       parameters:
         - name: name
           in: path
@@ -285,6 +296,7 @@ paths:
         - console
   /system/console/jmx/com.adobe.granite:type=Repository/op/{action}:
     post:
+      operationId: postJmxRepository
       parameters:
         - name: action
           in: path

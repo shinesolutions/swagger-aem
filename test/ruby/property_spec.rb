@@ -7,7 +7,7 @@ describe 'Property' do
 
     # ensure config.author already exists
     begin
-      data, status_code, headers = @sling.path_post_with_http_info(
+      data, status_code, headers = @sling.post_path_with_http_info(
         path = 'apps/system',
         jcrprimary_type = 'sling:Folder',
         name = 'config.author'
@@ -29,7 +29,7 @@ describe 'Property' do
 
       # ensure http OSGI config node exists
       begin
-        data, status_code, headers = @sling.path_post_with_http_info(
+        data, status_code, headers = @sling.post_path_with_http_info(
           path = 'apps/system/config.author',
           jcrprimary_type = 'sling:OsgiConfig',
           name = 'org.apache.felix.http'
@@ -41,7 +41,7 @@ describe 'Property' do
         expect(err.code).to eq(500)
       end
 
-      data, status_code, headers = @sling.apps_system_config_runmode_name_post_with_http_info(
+      data, status_code, headers = @sling.post_config_with_http_info(
         runmode = 'author',
         name = 'org.apache.felix.http',
         opts = {

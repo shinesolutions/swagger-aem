@@ -18,7 +18,7 @@ describe 'Client' do
 
     it 'should error when credential is incorrect' do
       begin
-        data, status_code, headers = @sling.etc_replication_treeactivation_html_post_with_http_info(
+        data, status_code, headers = @sling.post_tree_activation_with_http_info(
           ignoredeactivated = true,
           onlymodified = false,
           path = '/etc/designs/geometrixx'

@@ -12,7 +12,7 @@ describe 'Repository' do
   describe 'test block repository writes' do
 
     it 'should succeed' do
-      data, status_code, headers = @console.system_console_jmx_com_adobe_granitetype_repository_op_action_post_with_http_info(
+      data, status_code, headers = @console.post_jmx_repository_with_http_info(
         action = 'blockRepositoryWrites'
       )
       expect(status_code).to eq(200)
@@ -23,7 +23,7 @@ describe 'Repository' do
   describe 'test unblock repository writes' do
 
     it 'should succeed' do
-      data, status_code, headers = @console.system_console_jmx_com_adobe_granitetype_repository_op_action_post_with_http_info(
+      data, status_code, headers = @console.post_jmx_repository_with_http_info(
         action = 'unblockRepositoryWrites'
       )
       expect(status_code).to eq(200)

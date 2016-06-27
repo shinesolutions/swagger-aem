@@ -10,7 +10,7 @@ describe 'User' do
     # ensure user doesn't exist prior to testing
     authorizable_id = find_authorizable_id(@sling, '/home/users/s', 'someuser')
     if authorizable_id
-      data, status_code, headers = @sling.path_name_delete_with_http_info(
+      data, status_code, headers = @sling.delete_node_with_http_info(
         path = 'home/users/s',
         name = authorizable_id
       )
@@ -18,7 +18,7 @@ describe 'User' do
     end
 
     # create user
-    data, status_code, headers = @sling.libs_granite_security_post_authorizables_post_with_http_info(
+    data, status_code, headers = @sling.post_authorizables_with_http_info(
       authorizable_id = 'someuser',
       intermediate_path = '/home/users/s',
       {
@@ -38,7 +38,7 @@ describe 'User' do
 
     it 'should succeed existence check' do
       begin
-        data, status_code, headers = @sling.path_name_get_with_http_info(
+        data, status_code, headers = @sling.get_node_with_http_info(
           path = 'home/users/s',
           name = @authorizable_id
         )
@@ -50,7 +50,7 @@ describe 'User' do
     end
 
     it 'should succeed permission setting' do
-      data, status_code, headers = @cq.cqactions_html_post_with_http_info(
+      data, status_code, headers = @cq.post_cq_actions_with_http_info(
         authorizable_id = 'someuser',
         changelog = 'path:/etc/replication,read:true,modify:true'
       )
@@ -58,7 +58,7 @@ describe 'User' do
     end
 
     it 'should succeed admin password change' do
-      data, status_code, headers = @crx.crx_explorer_ui_setpassword_jsp_post_with_http_info(
+      data, status_code, headers = @crx.post_set_password_with_http_info(
         old = 'admin',
         plain = 'admin',
         verify = 'admin'
@@ -74,7 +74,7 @@ describe 'User' do
         conf.debugging = false
       ]}
       crx = SwaggerAemClient::CrxApi.new
-      data, status_code, headers = crx.crx_explorer_ui_setpassword_jsp_post_with_http_info(
+      data, status_code, headers = crx.post_set_password_with_http_info(
         old = 'somepassword',
         plain = 'somenewpassword',
         verify = 'somenewpassword'
@@ -87,7 +87,7 @@ describe 'User' do
       # ensure group doesn't exist prior to testing
       group_authorizable_id = find_authorizable_id(@sling, '/home/groups/s', 'somegroup')
       if group_authorizable_id
-        data, status_code, headers = @sling.path_name_delete_with_http_info(
+        data, status_code, headers = @sling.delete_node_with_http_info(
           path = 'home/groups/s',
           name = group_authorizable_id
         )
@@ -95,7 +95,7 @@ describe 'User' do
       end
 
       # create group
-      data, status_code, headers = @sling.libs_granite_security_post_authorizables_post_with_http_info(
+      data, status_code, headers = @sling.post_authorizables_with_http_info(
         authorizable_id = 'somegroup',
         intermediate_path = '/home/groups/s',
         {
@@ -107,7 +107,7 @@ describe 'User' do
       group_authorizable_id = find_authorizable_id(@sling, '/home/groups/s', 'somegroup')
 
       # add user as member to the group
-      data, status_code, headers = @sling.path_name_rw_html_post_with_http_info(
+      data, status_code, headers = @sling.post_node_rw_with_http_info(
         path = 'home/groups/s',
         name = group_authorizable_id,
         {
@@ -115,7 +115,7 @@ describe 'User' do
         }
       )
       expect(status_code).to eq(200)
-      
+
     end
 
   end

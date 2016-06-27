@@ -12,7 +12,7 @@ describe 'Path' do
   describe 'test path activation' do
 
     it 'should succeed when path exists' do
-      data, status_code, headers = @sling.etc_replication_treeactivation_html_post_with_http_info(
+      data, status_code, headers = @sling.post_tree_activation_with_http_info(
         ignoredeactivated = true,
         onlymodified = false,
         path = '/etc/designs/geometrixx'
@@ -22,7 +22,7 @@ describe 'Path' do
 
     # tree activation returns 200 regardless whether the path exists or not
     it 'should still succeed when path does not exist' do
-      data, status_code, headers = @sling.etc_replication_treeactivation_html_post_with_http_info(
+      data, status_code, headers = @sling.post_tree_activation_with_http_info(
         ignoredeactivated = true,
         onlymodified = false,
         path = '/some/inexisting/path'

@@ -9,7 +9,7 @@ describe 'Group' do
     # ensure group doesn't exist prior to testing
     authorizable_id = find_authorizable_id(@sling, '/home/groups/s', 'somegroup')
     if authorizable_id
-      data, status_code, headers = @sling.path_name_delete_with_http_info(
+      data, status_code, headers = @sling.delete_node_with_http_info(
         path = 'home/groups/s',
         name = authorizable_id
       )
@@ -17,7 +17,7 @@ describe 'Group' do
     end
 
     # create group
-    data, status_code, headers = @sling.libs_granite_security_post_authorizables_post_with_http_info(
+    data, status_code, headers = @sling.post_authorizables_with_http_info(
       authorizable_id = 'somegroup',
       intermediate_path = '/home/groups/s',
       {
@@ -38,7 +38,7 @@ describe 'Group' do
 
     it 'should succeed existence check' do
       begin
-        data, status_code, headers = @sling.path_name_get_with_http_info(
+        data, status_code, headers = @sling.get_node_with_http_info(
           path = 'home/groups/s',
           name = @authorizable_id
         )
@@ -50,7 +50,7 @@ describe 'Group' do
     end
 
     it 'should succeed permission setting' do
-      data, status_code, headers = @cq.cqactions_html_post_with_http_info(
+      data, status_code, headers = @cq.post_cq_actions_with_http_info(
         authorizable_id = 'somegroup',
         changelog = 'path:/etc/replication,read:true,modify:true'
       )
@@ -62,7 +62,7 @@ describe 'Group' do
       # ensure member group doesn't exist prior to testing
       member_authorizable_id = find_authorizable_id(@sling, '/home/groups/s', 'somemembergroup')
       if member_authorizable_id
-        data, status_code, headers = @sling.path_name_delete_with_http_info(
+        data, status_code, headers = @sling.delete_node_with_http_info(
           path = 'home/groups/s',
           name = member_authorizable_id
         )
@@ -70,7 +70,7 @@ describe 'Group' do
       end
 
       # create member group
-      data, status_code, headers = @sling.libs_granite_security_post_authorizables_post_with_http_info(
+      data, status_code, headers = @sling.post_authorizables_with_http_info(
         authorizable_id = 'somemembergroup',
         intermediate_path = '/home/groups/s',
         {
@@ -81,7 +81,7 @@ describe 'Group' do
       expect(status_code).to eq(201)
 
       # add user as member to the group
-      data, status_code, headers = @sling.path_name_rw_html_post_with_http_info(
+      data, status_code, headers = @sling.post_node_rw_with_http_info(
         path = 'home/groups/s',
         name = @authorizable_id,
         {

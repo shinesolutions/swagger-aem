@@ -7,7 +7,7 @@ describe 'Node' do
 
     # ensure node doesn't exist prior to testing
     begin
-      data, status_code, headers = @sling.path_name_delete_with_http_info(
+      data, status_code, headers = @sling.delete_node_with_http_info(
         path = 'apps/system',
         name = 'somefolder'
       )
@@ -25,7 +25,7 @@ describe 'Node' do
   describe 'test node create' do
 
     it 'should succeed when node does not exist' do
-      data, status_code, headers = @sling.path_post_with_http_info(
+      data, status_code, headers = @sling.post_path_with_http_info(
         path = 'apps/system',
         jcrprimary_type = 'sling:Folder',
         name = 'somefolder'
@@ -36,7 +36,7 @@ describe 'Node' do
     it 'should error when node already exists' do
 
       # create node
-      data, status_code, headers = @sling.path_post_with_http_info(
+      data, status_code, headers = @sling.post_path_with_http_info(
         path = 'apps/system',
         jcrprimary_type = 'sling:Folder',
         name = 'somefolder'
@@ -45,7 +45,7 @@ describe 'Node' do
 
       # create the same node the second time
       begin
-        data, status_code, headers = @sling.path_post_with_http_info(
+        data, status_code, headers = @sling.post_path_with_http_info(
           path = 'apps/system',
           jcrprimary_type = 'sling:Folder',
           name = 'somefolder'
@@ -58,7 +58,7 @@ describe 'Node' do
     it 'should succeed existence check when node already exists' do
       # node does not exist
       begin
-        data, status_code, headers = @sling.path_name_get_with_http_info(
+        data, status_code, headers = @sling.get_node_with_http_info(
           path = 'apps/system',
           name = 'somefolder'
         )
@@ -67,7 +67,7 @@ describe 'Node' do
       end
 
       # create node
-      data, status_code, headers = @sling.path_post_with_http_info(
+      data, status_code, headers = @sling.post_path_with_http_info(
         path = 'apps/system',
         jcrprimary_type = 'sling:Folder',
         name = 'somefolder'
@@ -76,7 +76,7 @@ describe 'Node' do
 
       # node should exist
       begin
-        data, status_code, headers = @sling.path_name_get_with_http_info(
+        data, status_code, headers = @sling.get_node_with_http_info(
           path = 'apps/system',
           name = 'somefolder'
         )
