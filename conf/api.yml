@@ -34,6 +34,31 @@ paths:
           type: string
       tags:
         - sling
+  /{path}/{name}:
+    get:
+      parameters:
+        - name: path
+          in: path
+          required: true
+          type: string
+        - name: name
+          in: path
+          required: true
+          type: string
+      tags:
+        - sling
+    delete:
+      parameters:
+        - name: path
+          in: path
+          required: true
+          type: string
+        - name: name
+          in: path
+          required: true
+          type: string
+      tags:
+        - sling
   /etc/replication/treeactivation.html:
     post:
       parameters:

@@ -4,6 +4,19 @@ describe 'Node' do
   before do
     init_client
     @sling = SwaggerAemClient::SlingApi.new
+
+    # ensure node doesn't exist prior to testing
+    begin
+      data, status_code, headers = @sling.path_name_delete_with_http_info(
+        path = 'apps/system',
+        name = 'somefolder'
+      )
+      # delete node when it exists
+      expect(status_code).to eq(204)
+    rescue SwaggerAemClient::ApiError => err
+      # ignore when node does not exist
+      expect(err.code).to eq(404)
+    end
   end
 
   after do
@@ -21,6 +34,16 @@ describe 'Node' do
     end
 
     it 'should error when node already exists' do
+
+      # create node
+      data, status_code, headers = @sling.path_post_with_http_info(
+        path = 'apps/system',
+        jcrprimary_type = 'sling:Folder',
+        name = 'somefolder'
+      )
+      expect([200, 201]).to include(status_code)
+
+      # create the same node the second time
       begin
         data, status_code, headers = @sling.path_post_with_http_info(
           path = 'apps/system',
@@ -29,6 +52,38 @@ describe 'Node' do
         )
       rescue SwaggerAemClient::ApiError => err
         expect(err.code).to eq(500)
+      end
+    end
+
+    it 'should succeed existence check when node already exists' do
+      # node does not exist
+      begin
+        data, status_code, headers = @sling.path_name_get_with_http_info(
+          path = 'apps/system',
+          name = 'somefolder'
+        )
+      rescue SwaggerAemClient::ApiError => err
+        expect(err.code).to eq(404)
+      end
+
+      # create node
+      data, status_code, headers = @sling.path_post_with_http_info(
+        path = 'apps/system',
+        jcrprimary_type = 'sling:Folder',
+        name = 'somefolder'
+      )
+      expect([200, 201]).to include(status_code)
+
+      # node should exist
+      begin
+        data, status_code, headers = @sling.path_name_get_with_http_info(
+          path = 'apps/system',
+          name = 'somefolder'
+        )
+      rescue SwaggerAemClient::ApiError => err
+        # AEM 6.1 responds with 302 when a node exists
+        # AEM 6.2 responds with 500 when a node exists
+        expect([302, 500]).to include(err.code)
       end
     end
 
