@@ -23,9 +23,9 @@ describe 'Property' do
   after do
   end
 
-  describe 'test create SSL OSGI config properties' do
+  describe 'test properties create SSL config' do
 
-    it 'should succeed' do
+    it 'should succeed when path node already exists' do
 
       # ensure http OSGI config node exists
       begin

@@ -34,7 +34,7 @@ describe 'User' do
   after do
   end
 
-  describe 'test user' do
+  describe 'test user create' do
 
     it 'should succeed existence check' do
       begin

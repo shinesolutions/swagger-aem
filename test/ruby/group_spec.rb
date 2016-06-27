@@ -34,7 +34,7 @@ describe 'Group' do
   after do
   end
 
-  describe 'test group' do
+  describe 'test group create' do
 
     it 'should succeed existence check' do
       begin
