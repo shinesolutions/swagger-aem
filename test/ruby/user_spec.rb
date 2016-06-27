@@ -35,7 +35,7 @@ describe 'User' do
   end
 
   describe 'test user' do
-
+    
     it 'should succeed existence check' do
       begin
         data, status_code, headers = @sling.path_name_get_with_http_info(
@@ -81,5 +81,41 @@ describe 'User' do
       )
       expect(status_code).to eq(200)
     end
+
+    it 'should succeed being added to a group' do
+
+      # ensure group doesn't exist prior to testing
+      group_authorizable_id = find_authorizable_id(@sling, '/home/groups/s', 'somegroup')
+      if group_authorizable_id
+        data, status_code, headers = @sling.path_name_delete_with_http_info(
+          path = 'home/groups/s',
+          name = group_authorizable_id
+        )
+        expect(status_code).to eq(204)
+      end
+
+      # create group
+      data, status_code, headers = @sling.libs_granite_security_post_authorizables_post_with_http_info(
+        authorizable_id = 'somegroup',
+        intermediate_path = '/home/groups/s',
+        {
+          :create_group => '',
+          :profilegiven_name => 'somegroup'
+        }
+      )
+      expect(status_code).to eq(201)
+      group_authorizable_id = find_authorizable_id(@sling, '/home/groups/s', 'somegroup')
+
+      # add user as member to the group
+      data, status_code, headers = @sling.path_name_rw_html_post_with_http_info(
+        path = 'home/groups/s',
+        name = group_authorizable_id,
+        {
+          :add_members => 'someuser'
+        }
+      )
+      expect(status_code).to eq(200)
+    end
+
   end
 end

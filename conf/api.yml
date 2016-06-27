@@ -72,6 +72,23 @@ paths:
           type: string
       tags:
         - sling
+  /{path}/{name}.rw.html:
+    post:
+      parameters:
+        - name: path
+          in: path
+          required: true
+          type: string
+        - name: name
+          in: path
+          required: true
+          type: string
+        - name: addMembers
+          in: query
+          required: false
+          type: string
+      tags:
+        - sling
   /apps/system/config.{runmode}/{name}:
     post:
       parameters:
