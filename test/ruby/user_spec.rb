@@ -5,6 +5,7 @@ describe 'User' do
     init_client
     @sling = SwaggerAemClient::SlingApi.new
     @cq = SwaggerAemClient::CqApi.new
+    @crx = SwaggerAemClient::CrxApi.new
 
     # ensure user doesn't exist prior to testing
     authorizable_id = find_authorizable_id(@sling, '/home/users/s', 'someuser')
@@ -56,5 +57,29 @@ describe 'User' do
       expect(status_code).to eq(200)
     end
 
+    it 'should succeed admin password change' do
+      data, status_code, headers = @crx.crx_explorer_ui_setpassword_jsp_post_with_http_info(
+        old = 'admin',
+        plain = 'admin',
+        verify = 'admin'
+      )
+      expect(status_code).to eq(200)
+    end
+
+    it 'should succeed created user password change' do
+      SwaggerAemClient.configure { |conf| [
+        conf.host = 'http://localhost:4502',
+        conf.username = 'someuser',
+        conf.password = 'somepassword',
+        conf.debugging = false
+      ]}
+      crx = SwaggerAemClient::CrxApi.new
+      data, status_code, headers = crx.crx_explorer_ui_setpassword_jsp_post_with_http_info(
+        old = 'somepassword',
+        plain = 'somenewpassword',
+        verify = 'somenewpassword'
+      )
+      expect(status_code).to eq(200)
+    end
   end
 end

@@ -236,6 +236,23 @@ paths:
           type: string
       tags:
         - sling
+  /crx/explorer/ui/setpassword.jsp:
+    post:
+      parameters:
+        - name: old
+          in: query
+          required: true
+          type: string
+        - name: plain
+          in: query
+          required: true
+          type: string
+        - name: verify
+          in: query
+          required: true
+          type: string
+      tags:
+        - crx
   /system/console/bundles/{name}:
     post:
       parameters:
