@@ -17,6 +17,19 @@ securityDefinitions:
 security:
   - aemAuth: []
 paths:
+  .cqactions.html:
+    post:
+      parameters:
+        - name: authorizableId
+          in: query
+          required: true
+          type: string
+        - name: changelog
+          in: query
+          required: true
+          type: string
+      tags:
+        - cq
   /{path}/:
     post:
       parameters:
