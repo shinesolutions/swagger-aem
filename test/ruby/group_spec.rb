@@ -6,33 +6,13 @@ describe 'Group' do
     @sling = SwaggerAemClient::SlingApi.new
 
     # ensure group doesn't exist prior to testing
-
-    # lookup for the group's authorizable ID
-    begin
-      data, status_code, headers = @sling.bin_querybuilder_json_post_with_http_info(
-        path = '/home/groups/s',
-        p_limit = -1,
-        _1_property = 'rep:authorizableId',
-        _1_property_value = 'somegroup'
+    authorizable_id = find_authorizable_id(@sling, '/home/groups/s', 'somegroup')
+    if authorizable_id
+      data, status_code, headers = @sling.path_name_delete_with_http_info(
+        path = 'home/groups/s',
+        name = authorizable_id
       )
-      expect(status_code).to eq(200)
-
-      data = JSON.parse(data)
-      if data['success'] == true && data['hits'].length == 1
-        authorizable_id = data['hits'][0]['name']
-
-        # delete the group if it exists
-        data, status_code, headers = @sling.path_name_delete_with_http_info(
-          path = 'home/groups/s',
-          name = authorizable_id
-        )
-        # delete group when it exists
-        expect(status_code).to eq(204)
-
-      end
-    rescue SwaggerAemClient::ApiError => err
-      # ignore when group does not exist
-      expect(err.code).to eq(404)
+      expect(status_code).to eq(204)
     end
 
   end
@@ -52,6 +32,19 @@ describe 'Group' do
         }
       )
       expect(status_code).to eq(201)
+
+      authorizable_id = find_authorizable_id(@sling, '/home/groups/s', 'somegroup')
+      # group should exist
+      begin
+        data, status_code, headers = @sling.path_name_get_with_http_info(
+          path = 'home/groups/s',
+          name = authorizable_id
+        )
+      rescue SwaggerAemClient::ApiError => err
+        # AEM 6.1 responds with 302 when a node exists
+        # AEM 6.2 responds with 500 when a node exists
+        expect([302, 500]).to include(err.code)
+      end
     end
 
   end

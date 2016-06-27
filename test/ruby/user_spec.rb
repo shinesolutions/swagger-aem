@@ -6,35 +6,14 @@ describe 'User' do
     @sling = SwaggerAemClient::SlingApi.new
 
     # ensure user doesn't exist prior to testing
-
-    # lookup for the user's authorizable ID
-    begin
-      data, status_code, headers = @sling.bin_querybuilder_json_post_with_http_info(
-        path = '/home/users/s',
-        p_limit = -1,
-        _1_property = 'rep:authorizableId',
-        _1_property_value = 'someuser'
+    authorizable_id = find_authorizable_id(@sling, '/home/users/s', 'someuser')
+    if authorizable_id
+      data, status_code, headers = @sling.path_name_delete_with_http_info(
+        path = 'home/users/s',
+        name = authorizable_id
       )
-      expect(status_code).to eq(200)
-
-      data = JSON.parse(data)
-      if data['success'] == true && data['hits'].length == 1
-        authorizable_id = data['hits'][0]['name']
-
-        # delete the user if it exists
-        data, status_code, headers = @sling.path_name_delete_with_http_info(
-          path = 'home/users/s',
-          name = authorizable_id
-        )
-        # delete user when it exists
-        expect(status_code).to eq(204)
-
-      end
-    rescue SwaggerAemClient::ApiError => err
-      # ignore when user does not exist
-      expect(err.code).to eq(404)
+      expect(status_code).to eq(204)
     end
-
   end
 
   after do
@@ -43,6 +22,8 @@ describe 'User' do
   describe 'test create user' do
 
     it 'should succeed when user does not exist' do
+
+      # create user
       data, status_code, headers = @sling.libs_granite_security_post_authorizables_post_with_http_info(
         authorizable_id = 'someuser',
         intermediate_path = '/home/users/s',
@@ -52,6 +33,20 @@ describe 'User' do
         }
       )
       expect(status_code).to eq(201)
+
+      authorizable_id = find_authorizable_id(@sling, '/home/users/s', 'someuser')
+      # user should exist
+      begin
+        data, status_code, headers = @sling.path_name_get_with_http_info(
+          path = 'home/users/s',
+          name = authorizable_id
+        )
+      rescue SwaggerAemClient::ApiError => err
+        # AEM 6.1 responds with 302 when a node exists
+        # AEM 6.2 responds with 500 when a node exists
+        expect([302, 500]).to include(err.code)
+      end
+
     end
 
   end
