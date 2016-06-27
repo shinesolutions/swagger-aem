@@ -35,7 +35,7 @@ describe 'User' do
   end
 
   describe 'test user' do
-    
+
     it 'should succeed existence check' do
       begin
         data, status_code, headers = @sling.path_name_get_with_http_info(
@@ -115,6 +115,7 @@ describe 'User' do
         }
       )
       expect(status_code).to eq(200)
+      
     end
 
   end
