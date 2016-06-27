@@ -162,7 +162,7 @@ paths:
         - name: p.limit
           in: query
           required: true
-          type: string
+          type: number
         - name: 1_property
           in: query
           required: true
@@ -171,6 +171,12 @@ paths:
           in: query
           required: true
           type: string
+      responses:
+        default:
+          schema:
+            type: string
+      tags:
+        - sling
   /etc/replication/treeactivation.html:
     post:
       parameters:

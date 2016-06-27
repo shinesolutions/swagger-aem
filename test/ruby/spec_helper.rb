@@ -1,4 +1,5 @@
 $: << File.expand_path('../../../generated/ruby/lib', __FILE__)
+require 'json'
 require 'swagger_aem'
 
 def init_client
