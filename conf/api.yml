@@ -59,6 +59,99 @@ paths:
           type: string
       tags:
         - sling
+  /apps/system/config.{runmode}/{name}:
+    post:
+      parameters:
+        - name: runmode
+          in: path
+          required: true
+          type: string
+        - name: name
+          in: path
+          required: true
+          type: string
+        - name: org.apache.felix.https.nio
+          in: query
+          required: false
+          type: boolean
+        - name: org.apache.felix.https.nio@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: org.apache.felix.https.keystore
+          in: query
+          required: false
+          type: string
+        - name: org.apache.felix.https.keystore@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: org.apache.felix.https.keystore.password
+          in: query
+          required: false
+          type: string
+        - name: org.apache.felix.https.keystore.password@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: org.apache.felix.https.keystore.key
+          in: query
+          required: false
+          type: string
+        - name: org.apache.felix.https.keystore.key@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: org.apache.felix.https.keystore.key.password
+          in: query
+          required: false
+          type: string
+        - name: org.apache.felix.https.keystore.key.password@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: org.apache.felix.https.truststore
+          in: query
+          required: false
+          type: string
+        - name: org.apache.felix.https.truststore@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: org.apache.felix.https.truststore.password
+          in: query
+          required: false
+          type: string
+        - name: org.apache.felix.https.truststore.password@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: org.apache.felix.https.clientcertificate
+          in: query
+          required: false
+          type: string
+        - name: org.apache.felix.https.clientcertificate@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: org.apache.felix.https.enable
+          in: query
+          required: false
+          type: string
+        - name: org.apache.felix.https.enable@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: org.osgi.service.http.port.secure
+          in: query
+          required: false
+          type: string
+        - name: org.osgi.service.http.port.secure@TypeHint
+          in: query
+          required: false
+          type: string
+      tags:
+        - sling
   /etc/replication/treeactivation.html:
     post:
       parameters:
