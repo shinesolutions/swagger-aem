@@ -152,6 +152,25 @@ paths:
           type: string
       tags:
         - sling
+  /bin/querybuilder.json:
+    post:
+      parameters:
+        - name: path
+          in: query
+          required: true
+          type: string
+        - name: p.limit
+          in: query
+          required: true
+          type: string
+        - name: 1_property
+          in: query
+          required: true
+          type: string
+        - name: 1_property.value
+          in: query
+          required: true
+          type: string
   /etc/replication/treeactivation.html:
     post:
       parameters:
@@ -166,6 +185,35 @@ paths:
         - name: path
           in: query
           required: true
+          type: string
+      tags:
+        - sling
+  /libs/granite/security/post/authorizables:
+    post:
+      parameters:
+        - name: authorizableId
+          in: query
+          required: true
+          type: string
+        - name: intermediatePath
+          in: query
+          required: true
+          type: string
+        - name: createUser
+          in: query
+          required: false
+          type: string
+        - name: createGroup
+          in: query
+          required: false
+          type: string
+        - name: rep:password
+          in: query
+          required: false
+          type: string
+        - name: profile/givenName
+          in: query
+          required: false
           type: string
       tags:
         - sling
