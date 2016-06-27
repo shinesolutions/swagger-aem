@@ -214,6 +214,114 @@ paths:
             type: string
       tags:
         - sling
+  /etc/replication/agents.{runmode}/{name}:
+    get:
+      operationId: getAgent
+      parameters:
+        - name: runmode
+          in: path
+          required: true
+          type: string
+        - name: name
+          in: path
+          required: true
+          type: string
+      tags:
+        - sling
+    delete:
+      operationId: deleteAgent
+      parameters:
+        - name: runmode
+          in: path
+          required: true
+          type: string
+        - name: name
+          in: path
+          required: true
+          type: string
+      tags:
+        - sling
+    post:
+      operationId: postAgent
+      parameters:
+        - name: runmode
+          in: path
+          required: true
+          type: string
+        - name: name
+          in: path
+          required: true
+          type: string
+        - name: jcr:primaryType
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/cq:name
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/jcr:title
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/jcr:description
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/sling:resourceType
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/transportUri
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/logLevel
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/noVersioning
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/protocolHTTPHeaders@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/protocolHTTPMethod
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/retryDelay
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/serializationType
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/jcr:mixinTypes
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/triggerReceive
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/triggerSpecific
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/cq:template
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/enabled
+          in: query
+          required: false
+          type: string
+      tags:
+        - sling
   /etc/replication/treeactivation.html:
     post:
       operationId: postTreeActivation
