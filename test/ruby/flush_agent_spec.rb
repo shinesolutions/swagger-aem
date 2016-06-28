@@ -49,6 +49,7 @@ describe 'Flush Agent' do
           :jcrcontenttransport_uri => 'http://somehost:8080/dispatcher/invalidate.cache',
           :jcrcontentlog_level => 'error',
           :jcrcontentno_versioning => true,
+          :jcrcontentprotocol_http_headers => ['CQ-Action:{action}', 'CQ-Handle:{path}', 'CQ-Path:{path}'],
           :jcrcontentprotocol_http_headers_type_hint => 'String[]',
           :jcrcontentprotocol_http_method => 'GET',
           :jcrcontentretry_delay => '30000',

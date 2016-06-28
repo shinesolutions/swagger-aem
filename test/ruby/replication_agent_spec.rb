@@ -12,7 +12,7 @@ describe 'Replication Agent' do
         name = 'some-replication-agent'
       )
       # delete agent when it exists
-      expect(status_code).to eq(200)
+      expect([200, 204]).to include(status_code)
     rescue SwaggerAemClient::ApiError => err
       # ignore when agent does not exist
       expect(err.code).to eq(404)
