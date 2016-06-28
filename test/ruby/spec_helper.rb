@@ -7,7 +7,8 @@ def init_client
     conf.host = 'http://localhost:4502',
     conf.username = 'admin',
     conf.password = 'admin',
-    conf.debugging = false
+    conf.debugging = false,
+    conf.params_encoding = :multi
   ]}
 end
 
