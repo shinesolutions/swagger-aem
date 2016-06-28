@@ -214,6 +214,8 @@ paths:
             type: string
       tags:
         - sling
+  # /etc/packages/{group}/{name}-{version}.zip:
+  # /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json:
   /etc/replication/agents.{runmode}/{name}:
     get:
       operationId: getAgent
@@ -283,7 +285,12 @@ paths:
         - name: jcr:content/noVersioning
           in: query
           required: false
-          type: string
+          type: boolean
+        - name: jcr:content/protocolHTTPHeaders
+          in: query
+          required: false
+          type: array
+          collectionFormat: multi
         - name: jcr:content/protocolHTTPHeaders@TypeHint
           in: query
           required: false
@@ -307,11 +314,11 @@ paths:
         - name: jcr:content/triggerReceive
           in: query
           required: false
-          type: string
+          type: boolean
         - name: jcr:content/triggerSpecific
           in: query
           required: false
-          type: string
+          type: boolean
         - name: jcr:content/cq:template
           in: query
           required: false
@@ -319,7 +326,7 @@ paths:
         - name: jcr:content/enabled
           in: query
           required: false
-          type: string
+          type: boolean
       tags:
         - sling
   /etc/replication/treeactivation.html:
@@ -388,6 +395,11 @@ paths:
           type: string
       tags:
         - crx
+  # /crx/packmgr/service.jsp:
+  # /crx/packmgr/update.jsp:
+  # /crx/packmgr/service/.json/:
+  # /crx/packmgr/service/.json/etc/packages/{name}:
+  # /crx/packmgr/service/.json/etc/packages/{group}/{name}-{version}.zip:
   /system/console/bundles/{name}:
     post:
       operationId: postBundle
