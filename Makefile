@@ -10,7 +10,7 @@ ruby: ruby-clean ruby-build ruby-install ruby-test
 
 ruby-deps:
 	gem install bundler
-	bundle install
+	BUNDLE_GEMFILE=ruby/Gemfile bundle install
 
 ruby-clean:
 	rm -rf ruby/generated/
