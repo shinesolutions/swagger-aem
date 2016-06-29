@@ -30,13 +30,21 @@ describe 'Package' do
   after do
   end
 
-  describe 'test package build install replicate' do
+  describe 'test package build download install replicate' do
 
     it 'should succeed' do
       # build package
       data, status_code, headers = @crx.post_package_service_json_with_http_info(
         name = 'somepackagegroup/somepackage-1.2.3.zip',
         cmd = 'build'
+      )
+      expect(status_code).to eq(200)
+
+      # download package
+      data, status_code, headers = @sling.get_package_with_http_info(
+        group = 'somepackagegroup',
+        name = 'somepackage',
+        version = '1.2.3'
       )
       expect(status_code).to eq(200)
 
@@ -97,14 +105,15 @@ describe 'Package' do
       )
       expect(status_code).to eq(200)
 
-      data, status_code, headers = @sling.get_package_filter_with_http_info(
-        group = 'somepackagegroup',
-        name = 'somepackage',
-        version = '1.2.3'
-      )
-      expect(status_code).to eq(200)
+      # data, status_code, headers = @sling.get_package_filter_with_http_info(
+      #   group = 'somepackagegroup',
+      #   name = 'somepackage',
+      #   version = '1.2.3'
+      # )
+      # expect(status_code).to eq(200)
     end
 
   end
+
 
 end
