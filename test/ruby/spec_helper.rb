@@ -8,8 +8,7 @@ def init_client
     conf.username = 'admin',
     conf.password = 'admin',
     conf.debugging = false,
-    conf.params_encoding = :multi,
-    conf.temp_folder_path = '/tmp'
+    conf.params_encoding = :multi
   ]}
 end
 
