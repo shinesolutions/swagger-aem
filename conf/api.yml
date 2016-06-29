@@ -395,7 +395,20 @@ paths:
           type: string
       tags:
         - crx
-  # /crx/packmgr/service.jsp:
+  /crx/packmgr/service.jsp:
+    post:
+      operationId: postPackageService
+      parameters:
+        - name: cmd
+          in: query
+          required: true
+          type: string
+      responses:
+        default:
+          schema:
+            type: string
+      tags:
+        - crx
   /crx/packmgr/update.jsp:
     post:
       operationId: postPackageUpdate

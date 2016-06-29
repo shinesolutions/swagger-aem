@@ -32,7 +32,6 @@ describe 'Package' do
   describe 'test package build install replicate' do
 
     it 'should succeed' do
-
       # build package
       data, status_code, headers = @crx.post_package_service_json_with_http_info(
         name = 'somepackagegroup/somepackage-1.2.3.zip',
@@ -53,7 +52,6 @@ describe 'Package' do
         cmd = 'replicate'
       )
       expect(status_code).to eq(200)
-
     end
 
   end
@@ -61,7 +59,6 @@ describe 'Package' do
   describe 'test package update' do
 
     it 'should succeed' do
-
       # update package
       data, status_code, headers = @crx.post_package_update_with_http_info(
         groupName = 'somepackagegroup',
@@ -73,7 +70,18 @@ describe 'Package' do
         }
       )
       expect(status_code).to eq(200)
+    end
 
+  end
+
+  describe 'test package list' do
+
+    it 'should succeed' do
+      # update package
+      data, status_code, headers = @crx.post_package_service_with_http_info(
+        cmd = 'ls'
+      )
+      expect(status_code).to eq(200)
     end
 
   end
