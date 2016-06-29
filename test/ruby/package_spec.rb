@@ -5,9 +5,16 @@ describe 'Package' do
     init_client
     @crx = SwaggerAemClient::CrxApi.new
 
+    # ensure package does not exist
+    data, status_code, headers = @crx.post_package_service_json_with_http_info(
+      name = 'somepackagegroup/somepackage-1.2.3.zip',
+      cmd = 'delete'
+    )
+    expect(status_code).to eq(200)
+
     # create package
     data, status_code, headers = @crx.post_package_service_json_with_http_info(
-      name = 'apps/system',
+      name = 'somepackage',
       cmd = 'create',
       {
         :group_name => 'somepackagegroup',
@@ -22,9 +29,24 @@ describe 'Package' do
   after do
   end
 
-  describe 'test node create' do
+  describe 'test package build install' do
 
-    it 'should succeed when node does not exist' do
+    it 'should succeed' do
+
+      # build package
+      data, status_code, headers = @crx.post_package_service_json_with_http_info(
+        name = 'somepackagegroup/somepackage-1.2.3.zip',
+        cmd = 'build'
+      )
+      expect(status_code).to eq(200)
+
+      # install package
+      data, status_code, headers = @crx.post_package_service_json_with_http_info(
+        name = 'somepackagegroup/somepackage-1.2.3.zip',
+        cmd = 'install'
+      )
+      expect(status_code).to eq(200)
+
     end
 
   end
