@@ -1,6 +1,12 @@
+ifndef SWAGGER_CODEGEN_JAR
+		SWAGGER_CODEGEN = swagger-codegen
+else
+    SWAGGER_CODEGEN = java -jar $(SWAGGER_CODEGEN_JAR)
+endif
+
 all: ruby
 
-ruby: ruby-clean ruby-build-with-jar ruby-install ruby-test
+ruby: ruby-clean ruby-build ruby-install ruby-test
 
 ruby-deps:
 	gem install bundler
@@ -10,14 +16,7 @@ ruby-clean:
 	rm -rf ruby/generated/
 
 ruby-build:
-	swagger-codegen generate \
-	  --input-spec conf/api.yml \
-		--lang ruby \
-		--output ruby/generated/ \
-		--config ruby/conf/client.json
-
-ruby-build-with-jar:
-	java -jar $(SWAGGER_CODEGEN_JAR) generate \
+	$(SWAGGER_CODEGEN) generate \
 	  --input-spec conf/api.yml \
 		--lang ruby \
 		--output ruby/generated/ \
@@ -34,4 +33,4 @@ ruby-test:
 tools-osx:
 	brew install swagger-codegen
 
-.PHONY: all ruby ruby-deps ruby-clean ruby-build ruby-build-with-jar ruby-install ruby-test tools-osx
+.PHONY: all ruby ruby-deps ruby-clean ruby-build ruby-install ruby-test tools-osx
