@@ -30,7 +30,7 @@ describe 'Package' do
   after do
   end
 
-  describe 'test package build download install replicate' do
+  describe 'test package build install replicate download' do
 
     it 'should succeed' do
       # build package
@@ -39,14 +39,6 @@ describe 'Package' do
         cmd = 'build'
       )
       expect(status_code).to eq(200)
-
-      # # download package
-      # data, status_code, headers = @sling.get_package_with_http_info(
-      #   group = 'somepackagegroup',
-      #   name = 'somepackage',
-      #   version = '1.2.3'
-      # )
-      # expect(status_code).to eq(200)
 
       # install package
       data, status_code, headers = @crx.post_package_service_json_with_http_info(
@@ -61,6 +53,17 @@ describe 'Package' do
         cmd = 'replicate'
       )
       expect(status_code).to eq(200)
+
+      # download package
+      data, status_code, headers = @sling.get_package_with_http_info(
+        group = 'somepackagegroup',
+        name = 'somepackage',
+        version = '1.2.3'
+      )
+      expect(status_code).to eq(200)
+      # data is a temporary file created by Swagger API client
+      FileUtils.cp(data.path, '/tmp/somepackage-1.2.3.zip')
+      data.delete
     end
 
   end
