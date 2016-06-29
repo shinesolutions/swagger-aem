@@ -7,14 +7,14 @@ ruby-deps:
 	bundle install
 
 ruby-clean:
-	rm -rf generated/ruby/
+	rm -rf ruby/generated/
 
 ruby-build:
 	mkdir -p generated/ruby/
 	swagger-codegen generate \
 	  --input-spec conf/api.yml \
 		--lang ruby \
-		--output generated/ruby/ \
+		--output ruby/generated/ \
 		--config conf/ruby.json
 
 ruby-build-with-jar:
@@ -22,16 +22,16 @@ ruby-build-with-jar:
 	java -jar $(SWAGGER_CODEGEN_JAR) generate \
 	  --input-spec conf/api.yml \
 		--lang ruby \
-		--output generated/ruby/ \
+		--output ruby/generated/ \
 		--config conf/ruby.json
 
 ruby-install:
-	cd generated/ruby && \
+	cd ruby/generated/ && \
 	  gem build swagger_aem.gemspec && \
 	  gem install swagger_aem-0.0.1.gem
 
 ruby-test:
-	rspec test/ruby
+	rspec ruby/test/
 
 tools-osx:
 	brew install swagger-codegen

@@ -1,4 +1,4 @@
-$: << File.expand_path('../../../generated/ruby/lib', __FILE__)
+$: << File.expand_path('../../../ruby/generated/lib', __FILE__)
 require 'json'
 require 'swagger_aem'
 require 'tmpdir'
