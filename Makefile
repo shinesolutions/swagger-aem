@@ -10,7 +10,6 @@ ruby-clean:
 	rm -rf ruby/generated/
 
 ruby-build:
-	mkdir -p generated/ruby/
 	swagger-codegen generate \
 	  --input-spec conf/api.yml \
 		--lang ruby \
@@ -18,7 +17,6 @@ ruby-build:
 		--config ruby/conf/client.json
 
 ruby-build-with-jar:
-	mkdir -p generated/ruby/
 	java -jar $(SWAGGER_CODEGEN_JAR) generate \
 	  --input-spec conf/api.yml \
 		--lang ruby \
