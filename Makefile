@@ -15,7 +15,7 @@ ruby-build:
 	  --input-spec conf/api.yml \
 		--lang ruby \
 		--output ruby/generated/ \
-		--config conf/ruby.json
+		--config ruby/conf/client.json
 
 ruby-build-with-jar:
 	mkdir -p generated/ruby/
@@ -23,7 +23,7 @@ ruby-build-with-jar:
 	  --input-spec conf/api.yml \
 		--lang ruby \
 		--output ruby/generated/ \
-		--config conf/ruby.json
+		--config ruby/conf/client.json
 
 ruby-install:
 	cd ruby/generated/ && \
