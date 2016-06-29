@@ -398,7 +398,36 @@ paths:
   # /crx/packmgr/service.jsp:
   # /crx/packmgr/update.jsp:
   # /crx/packmgr/service/.json/:
-  # /crx/packmgr/service/.json/etc/packages/{name}:
+  /crx/packmgr/service/.json/etc/packages/{name}:
+    post:
+      operationId: postPackageServiceJson
+      parameters:
+        - name: name
+          in: path
+          required: true
+          type: string
+        - name: cmd
+          in: query
+          required: true
+          type: string
+        - name: groupName
+          in: query
+          required: true
+          type: string
+        - name: packageName
+          in: query
+          required: true
+          type: string
+        - name: packageVersion
+          in: query
+          required: true
+          type: string
+        - name: _charset_
+          in: query
+          required: true
+          type: string
+      tags:
+        - crx
   # /crx/packmgr/service/.json/etc/packages/{group}/{name}-{version}.zip:
   /system/console/bundles/{name}:
     post:
