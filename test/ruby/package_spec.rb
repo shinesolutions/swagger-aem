@@ -4,6 +4,7 @@ describe 'Package' do
   before do
     init_client
     @crx = SwaggerAemClient::CrxApi.new
+    @sling = SwaggerAemClient::SlingApi.new
 
     # ensure package does not exist
     data, status_code, headers = @crx.post_package_service_json_with_http_info(
@@ -77,9 +78,29 @@ describe 'Package' do
   describe 'test package list' do
 
     it 'should succeed' do
-      # update package
       data, status_code, headers = @crx.post_package_service_with_http_info(
         cmd = 'ls'
+      )
+      expect(status_code).to eq(200)
+    end
+
+  end
+
+  describe 'test package filter' do
+
+    it 'should succeed' do
+
+      # build package so that the package exists within /etc/packages
+      data, status_code, headers = @crx.post_package_service_json_with_http_info(
+        name = 'somepackagegroup/somepackage-1.2.3.zip',
+        cmd = 'build'
+      )
+      expect(status_code).to eq(200)
+
+      data, status_code, headers = @sling.get_package_filter_with_http_info(
+        group = 'somepackagegroup',
+        name = 'somepackage',
+        version = '1.2.3'
       )
       expect(status_code).to eq(200)
     end

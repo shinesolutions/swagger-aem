@@ -215,7 +215,28 @@ paths:
       tags:
         - sling
   # /etc/packages/{group}/{name}-{version}.zip:
-  # /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json:
+  /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json:
+    get:
+      operationId: getPackageFilter
+      parameters:
+        - name: group
+          in: path
+          required: true
+          type: string
+        - name: name
+          in: path
+          required: true
+          type: string
+        - name: version
+          in: path
+          required: true
+          type: string
+      responses:
+        default:
+          schema:
+            type: string
+      tags:
+        - sling
   /etc/replication/agents.{runmode}/{name}:
     get:
       operationId: getAgent
