@@ -6,6 +6,8 @@ describe 'Package' do
     @crx = SwaggerAemClient::CrxApi.new
     @sling = SwaggerAemClient::SlingApi.new
 
+    @temp_dir = Dir.tmpdir()
+
     # ensure package does not exist
     data, status_code, headers = @crx.post_package_service_json_with_http_info(
       path = 'etc/packages/somepackagegroup/somepackage-1.2.3.zip',
@@ -61,8 +63,10 @@ describe 'Package' do
         version = '1.2.3'
       )
       expect(status_code).to eq(200)
+
       # data is a temporary file created by Swagger API client
-      FileUtils.cp(data.path, '/tmp/somepackage-1.2.3.zip')
+      FileUtils.cp(data.path, "#{@temp_dir}/somepackage-1.2.3.zip")
+      puts "#{@temp_dir}/somepackage-1.2.3.zip"
       data.delete
     end
 
@@ -72,7 +76,7 @@ describe 'Package' do
 
     it 'should succeed' do
 
-      File.open('/tmp/somepackage-1.2.3.zip', 'r') { |file|
+      File.open("#{@temp_dir}/somepackage-1.2.3.zip", 'r') { |file|
         # upload package
         data, status_code, headers = @crx.post_package_service_json_with_http_info(
           path = '',
