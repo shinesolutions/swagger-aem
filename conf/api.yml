@@ -412,23 +412,22 @@ paths:
           type: string
         - name: groupName
           in: query
-          required: true
+          required: false
           type: string
         - name: packageName
           in: query
-          required: true
+          required: false
           type: string
         - name: packageVersion
           in: query
-          required: true
+          required: false
           type: string
         - name: _charset_
           in: query
-          required: true
+          required: false
           type: string
       tags:
         - crx
-  # /crx/packmgr/service/.json/etc/packages/{group}/{name}-{version}.zip:
   /system/console/bundles/{name}:
     post:
       operationId: postBundle

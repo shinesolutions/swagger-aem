@@ -9,10 +9,12 @@ describe 'Package' do
     data, status_code, headers = @crx.post_package_service_json_with_http_info(
       name = 'apps/system',
       cmd = 'create',
-      group_name = 'somepackagegroup',
-      package_name = 'somepackage',
-      package_version = '1.2.3',
-      charset = 'utf-8'
+      {
+        :group_name => 'somepackagegroup',
+        :package_name => 'somepackage',
+        :package_version => '1.2.3',
+        :charset => 'utf-8'
+      }
     )
     expect(status_code).to eq(200)
   end
