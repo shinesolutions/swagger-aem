@@ -481,12 +481,11 @@ paths:
           type: string
       tags:
         - crx
-  # /crx/packmgr/service/.json/:
-  /crx/packmgr/service/.json/etc/packages/{name}:
+  /crx/packmgr/service/.json/{path}:
     post:
       operationId: postPackageServiceJson
       parameters:
-        - name: name
+        - name: path
           in: path
           required: true
           type: string
@@ -510,6 +509,20 @@ paths:
           in: query
           required: false
           type: string
+        - name: force
+          in: query
+          required: false
+          type: boolean
+        - name: package
+          in: formData
+          required: false
+          type: file
+      consumes:
+        - multipart/form-data
+      responses:
+        default:
+          schema:
+            type: string
       tags:
         - crx
   /system/console/bundles/{name}:

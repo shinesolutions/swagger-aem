@@ -8,14 +8,14 @@ describe 'Package' do
 
     # ensure package does not exist
     data, status_code, headers = @crx.post_package_service_json_with_http_info(
-      name = 'somepackagegroup/somepackage-1.2.3.zip',
+      path = 'etc/packages/somepackagegroup/somepackage-1.2.3.zip',
       cmd = 'delete'
     )
     expect(status_code).to eq(200)
 
     # create package
     data, status_code, headers = @crx.post_package_service_json_with_http_info(
-      name = 'somepackage',
+      path = 'etc/packages/somepackage',
       cmd = 'create',
       {
         :group_name => 'somepackagegroup',
@@ -35,7 +35,7 @@ describe 'Package' do
     it 'should succeed' do
       # build package
       data, status_code, headers = @crx.post_package_service_json_with_http_info(
-        name = 'somepackagegroup/somepackage-1.2.3.zip',
+        path = 'etc/packages/somepackagegroup/somepackage-1.2.3.zip',
         cmd = 'build'
       )
       expect(status_code).to eq(200)
@@ -50,17 +50,59 @@ describe 'Package' do
 
       # install package
       data, status_code, headers = @crx.post_package_service_json_with_http_info(
-        name = 'somepackagegroup/somepackage-1.2.3.zip',
+        path = 'etc/packages/somepackagegroup/somepackage-1.2.3.zip',
         cmd = 'install'
       )
       expect(status_code).to eq(200)
 
       # replicate package
       data, status_code, headers = @crx.post_package_service_json_with_http_info(
-        name = 'somepackagegroup/somepackage-1.2.3.zip',
+        path = 'etc/packages/somepackagegroup/somepackage-1.2.3.zip',
         cmd = 'replicate'
       )
       expect(status_code).to eq(200)
+    end
+
+  end
+
+  describe 'test package upload rebuild install replicate' do
+
+    it 'should succeed' do
+
+      File.open('/tmp/somepackage-1.2.3.zip', 'r') { |file|
+        # upload package
+        data, status_code, headers = @crx.post_package_service_json_with_http_info(
+          path = '',
+          cmd = 'upload',
+          {
+            :force => true,
+            :package => file
+          }
+        )
+        expect(status_code).to eq(200)
+      }
+
+      # rebuild package
+      data, status_code, headers = @crx.post_package_service_json_with_http_info(
+        path = 'etc/packages/somepackagegroup/somepackage-1.2.3.zip',
+        cmd = 'build'
+      )
+      expect(status_code).to eq(200)
+
+      # install package
+      data, status_code, headers = @crx.post_package_service_json_with_http_info(
+        path = 'etc/packages/somepackagegroup/somepackage-1.2.3.zip',
+        cmd = 'install'
+      )
+      expect(status_code).to eq(200)
+
+      # replicate package
+      data, status_code, headers = @crx.post_package_service_json_with_http_info(
+        path = 'etc/packages/somepackagegroup/somepackage-1.2.3.zip',
+        cmd = 'replicate'
+      )
+      expect(status_code).to eq(200)
+
     end
 
   end
@@ -115,6 +157,5 @@ describe 'Package' do
     end
 
   end
-
 
 end
