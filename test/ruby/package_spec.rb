@@ -40,13 +40,13 @@ describe 'Package' do
       )
       expect(status_code).to eq(200)
 
-      # download package
-      data, status_code, headers = @sling.get_package_with_http_info(
-        group = 'somepackagegroup',
-        name = 'somepackage',
-        version = '1.2.3'
-      )
-      expect(status_code).to eq(200)
+      # # download package
+      # data, status_code, headers = @sling.get_package_with_http_info(
+      #   group = 'somepackagegroup',
+      #   name = 'somepackage',
+      #   version = '1.2.3'
+      # )
+      # expect(status_code).to eq(200)
 
       # install package
       data, status_code, headers = @crx.post_package_service_json_with_http_info(
@@ -65,20 +65,42 @@ describe 'Package' do
 
   end
 
-  describe 'test package update' do
+  describe 'test package update and get filter' do
 
-    it 'should succeed' do
-      # update package
+    it 'should succeed when the package has filter' do
+
+      # update package filter
       data, status_code, headers = @crx.post_package_update_with_http_info(
         groupName = 'somepackagegroup',
         packageName = 'somepackage',
         version = '1.2.3',
         path = '/etc/packages/somepackagegroup/somepackage-1.2.3.zip',
         {
+          :filter => '[{"root":"/apps/geometrixx","rules":[]}]',
           :charset => 'utf-8'
         }
       )
       expect(status_code).to eq(200)
+
+      # get package filter
+      data, status_code, headers = @sling.get_package_filter_with_http_info(
+        group = 'somepackagegroup',
+        name = 'somepackage',
+        version = '1.2.3'
+      )
+      expect(status_code).to eq(200)
+    end
+
+    it 'should error when the package does not have any filter' do
+      begin
+        data, status_code, headers = @sling.get_package_filter_with_http_info(
+          group = 'somepackagegroup',
+          name = 'somepackage',
+          version = '1.2.3'
+        )
+      rescue SwaggerAemClient::ApiError => err
+        expect(err.code).to eq(404)
+      end
     end
 
   end
@@ -90,27 +112,6 @@ describe 'Package' do
         cmd = 'ls'
       )
       expect(status_code).to eq(200)
-    end
-
-  end
-
-  describe 'test package filter' do
-
-    it 'should succeed' do
-
-      # build package so that the package exists within /etc/packages
-      data, status_code, headers = @crx.post_package_service_json_with_http_info(
-        name = 'somepackagegroup/somepackage-1.2.3.zip',
-        cmd = 'build'
-      )
-      expect(status_code).to eq(200)
-
-      # data, status_code, headers = @sling.get_package_filter_with_http_info(
-      #   group = 'somepackagegroup',
-      #   name = 'somepackage',
-      #   version = '1.2.3'
-      # )
-      # expect(status_code).to eq(200)
     end
 
   end

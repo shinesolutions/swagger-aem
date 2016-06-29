@@ -471,6 +471,10 @@ paths:
           in: query
           required: true
           type: string
+        - name: filter
+          in: query
+          required: false
+          type: string
         - name: _charset_
           in: query
           required: false
