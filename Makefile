@@ -4,7 +4,7 @@ else
     SWAGGER_CODEGEN = java -jar $(SWAGGER_CODEGEN_JAR)
 endif
 
-all: ruby
+all: ruby doc
 
 ruby: ruby-clean ruby-build ruby-install ruby-test
 
@@ -30,7 +30,16 @@ ruby-install:
 ruby-test:
 	rspec ruby/test/
 
-tools-osx:
+clean:
+	rm -rf doc
+
+doc:
+	bootprint openapi conf/api.yml doc
+
+tools:
+	npm install -g bootprint bootprint-openapi
+
+tools-osx: tools
 	brew install swagger-codegen
 
-.PHONY: all ruby ruby-deps ruby-clean ruby-build ruby-install ruby-test tools-osx
+.PHONY: all doc ruby ruby-deps ruby-clean ruby-build ruby-install ruby-test tools tools-osx
