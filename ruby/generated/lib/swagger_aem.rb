@@ -1,7 +1,7 @@
 =begin
 #Adobe Experience Manager (AEM) API
 
-#An unofficial Adobe Experience Manager (AEM) API specification by Shine Solutions
+#An Adobe Experience Manager (AEM) API specification
 
 OpenAPI spec version: 6.2
 
