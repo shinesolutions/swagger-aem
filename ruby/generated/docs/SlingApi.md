@@ -430,7 +430,7 @@ nil (empty response body)
 
 
 # **post_authorizables**
-> post_authorizables(authorizable_id, intermediate_path, opts)
+> String post_authorizables(authorizable_id, intermediate_path, opts)
 
 
 
@@ -459,7 +459,8 @@ opts = {
 }
 
 begin
-  api_instance.post_authorizables(authorizable_id, intermediate_path, opts)
+  result = api_instance.post_authorizables(authorizable_id, intermediate_path, opts)
+  p result
 rescue SwaggerAemClient::ApiError => e
   puts "Exception when calling SlingApi->post_authorizables: #{e}"
 end
@@ -478,7 +479,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-nil (empty response body)
+**String**
 
 ### Authorization
 

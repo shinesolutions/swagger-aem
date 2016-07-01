@@ -164,7 +164,7 @@ describe 'SlingApi' do
   # @option opts [String] :create_group 
   # @option opts [String] :reppassword 
   # @option opts [String] :profilegiven_name 
-  # @return [nil]
+  # @return [String]
   describe 'post_authorizables test' do
     it "should work" do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

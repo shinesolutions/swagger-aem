@@ -524,10 +524,10 @@ module SwaggerAemClient
     # @option opts [String] :create_group 
     # @option opts [String] :reppassword 
     # @option opts [String] :profilegiven_name 
-    # @return [nil]
+    # @return [String]
     def post_authorizables(authorizable_id, intermediate_path, opts = {})
-      post_authorizables_with_http_info(authorizable_id, intermediate_path, opts)
-      return nil
+      data, _status_code, _headers = post_authorizables_with_http_info(authorizable_id, intermediate_path, opts)
+      return data
     end
 
     # 
@@ -539,7 +539,7 @@ module SwaggerAemClient
     # @option opts [String] :create_group 
     # @option opts [String] :reppassword 
     # @option opts [String] :profilegiven_name 
-    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    # @return [Array<(String, Fixnum, Hash)>] String data, response status code and response headers
     def post_authorizables_with_http_info(authorizable_id, intermediate_path, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: SlingApi.post_authorizables ..."
@@ -582,7 +582,8 @@ module SwaggerAemClient
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
-        :auth_names => auth_names)
+        :auth_names => auth_names,
+        :return_type => 'String')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: SlingApi#post_authorizables\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
