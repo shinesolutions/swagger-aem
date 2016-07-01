@@ -81,9 +81,7 @@ describe 'Node' do
           name = 'somefolder'
         )
       rescue SwaggerAemClient::ApiError => err
-        # AEM 6.1 responds with 302 when a node exists
-        # AEM 6.2 responds with 500 when a node exists
-        expect([302, 500]).to include(err.code)
+        expect(err.code).to eq(302)
       end
     end
 
