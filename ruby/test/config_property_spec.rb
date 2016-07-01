@@ -1,6 +1,6 @@
 require_relative 'spec_helper'
 
-describe 'Property' do
+describe 'ConfigProperty' do
   before do
     init_client
     @sling = SwaggerAemClient::SlingApi.new
@@ -23,7 +23,7 @@ describe 'Property' do
   after do
   end
 
-  describe 'test properties create SSL config' do
+  describe 'test create SSL config properties' do
 
     it 'should succeed when path node already exists' do
 
