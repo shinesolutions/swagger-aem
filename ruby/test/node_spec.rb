@@ -75,6 +75,7 @@ describe 'Node' do
       expect([200, 201]).to include(status_code)
 
       # node should exist
+      # Swagger client automatically considers non-200 as an error
       begin
         data, status_code, headers = @sling.get_node_with_http_info(
           path = 'apps/system',
@@ -83,6 +84,51 @@ describe 'Node' do
       rescue SwaggerAemClient::ApiError => err
         expect(err.code).to eq(302)
       end
+    end
+
+    describe 'test node delete' do
+
+      it 'should succeed when node exists' do
+
+        # ensure node exists prior to deletion
+        data, status_code, headers = @sling.post_path_with_http_info(
+          path = 'apps/system',
+          jcrprimary_type = 'sling:Folder',
+          name = 'somefolder'
+        )
+        expect([200, 201]).to include(status_code)
+
+        data, status_code, headers = @sling.delete_node_with_http_info(
+          path = 'apps/system',
+          name = 'somefolder'
+        )
+        expect(status_code).to eq(204)
+      end
+
+    end
+
+    describe 'test node exists' do
+
+      it 'should succeed when node exists' do
+
+        # ensure node exists prior to deletion
+        data, status_code, headers = @sling.post_path_with_http_info(
+          path = 'apps/system',
+          jcrprimary_type = 'sling:Folder',
+          name = 'somefolder'
+        )
+        expect([200, 201]).to include(status_code)
+
+        begin
+          data, status_code, headers = @sling.get_node_with_http_info(
+            path = 'apps/system',
+            name = 'somefolder'
+          )
+        rescue SwaggerAemClient::ApiError => err
+          expect(err.code).to eq(302)
+        end
+      end
+
     end
 
   end
