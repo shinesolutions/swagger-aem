@@ -178,10 +178,10 @@ module SwaggerAemClient
     # @param [Hash] opts the optional parameters
     # @option opts [String] :filter 
     # @option opts [String] :_charset_ 
-    # @return [nil]
+    # @return [String]
     def post_package_update(group_name, package_name, version, path, opts = {})
-      post_package_update_with_http_info(group_name, package_name, version, path, opts)
-      return nil
+      data, _status_code, _headers = post_package_update_with_http_info(group_name, package_name, version, path, opts)
+      return data
     end
 
     # 
@@ -193,7 +193,7 @@ module SwaggerAemClient
     # @param [Hash] opts the optional parameters
     # @option opts [String] :filter 
     # @option opts [String] :_charset_ 
-    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    # @return [Array<(String, Fixnum, Hash)>] String data, response status code and response headers
     def post_package_update_with_http_info(group_name, package_name, version, path, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: CrxApi.post_package_update ..."
@@ -240,7 +240,8 @@ module SwaggerAemClient
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
-        :auth_names => auth_names)
+        :auth_names => auth_names,
+        :return_type => 'String')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: CrxApi#post_package_update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end

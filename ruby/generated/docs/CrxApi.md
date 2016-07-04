@@ -128,7 +128,7 @@ Name | Type | Description  | Notes
 
 
 # **post_package_update**
-> post_package_update(group_name, package_name, version, path, opts)
+> String post_package_update(group_name, package_name, version, path, opts)
 
 
 
@@ -159,7 +159,8 @@ opts = {
 }
 
 begin
-  api_instance.post_package_update(group_name, package_name, version, path, opts)
+  result = api_instance.post_package_update(group_name, package_name, version, path, opts)
+  p result
 rescue SwaggerAemClient::ApiError => e
   puts "Exception when calling CrxApi->post_package_update: #{e}"
 end
@@ -178,7 +179,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-nil (empty response body)
+**String**
 
 ### Authorization
 

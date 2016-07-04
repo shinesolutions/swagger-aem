@@ -84,7 +84,7 @@ describe 'CrxApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :filter 
   # @option opts [String] :_charset_ 
-  # @return [nil]
+  # @return [String]
   describe 'post_package_update test' do
     it "should work" do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

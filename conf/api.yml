@@ -483,6 +483,10 @@ paths:
           in: query
           required: false
           type: string
+      responses:
+        default:
+          schema:
+            type: string
       tags:
         - crx
   /crx/packmgr/service/.json/{path}:
