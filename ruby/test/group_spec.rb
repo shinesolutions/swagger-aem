@@ -78,7 +78,7 @@ describe 'Group' do
       )
       expect(status_code).to eq(201)
 
-      # add user as member to the group
+      # add member group to the main group
       data, status_code, headers = @sling.post_node_rw_with_http_info(
         path = 'home/groups/s',
         name = @authorizable_id,
