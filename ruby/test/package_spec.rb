@@ -66,7 +66,7 @@ describe 'Package' do
 
       # data is a temporary file created by Swagger API client
       FileUtils.cp(data.path, "#{@temp_dir}/somepackage-1.2.3.zip")
-      puts "#{@temp_dir}/somepackage-1.2.3.zip"
+      expect(File.file? "#{@temp_dir}/somepackage-1.2.3.zip").to be(true)
       data.delete
     end
 
