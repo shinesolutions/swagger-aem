@@ -30,6 +30,11 @@ ruby-install:
 ruby-test:
 	rspec ruby/test/
 
+ruby-doc:
+	cd ruby/generated/ && \
+	  yard doc \
+		--output-dir ../doc/
+
 clean:
 	rm -rf doc
 
