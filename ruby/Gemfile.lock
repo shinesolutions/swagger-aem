@@ -20,6 +20,7 @@ GEM
     rspec-support (3.4.1)
     typhoeus (1.0.2)
       ethon (>= 0.9.0)
+    yard (0.9.0)
 
 PLATFORMS
   ruby
@@ -27,6 +28,7 @@ PLATFORMS
 DEPENDENCIES
   rspec (= 3.4.0)
   typhoeus (~> 1.0, >= 1.0.1)
+  yard (= 0.9.0)
 
 BUNDLED WITH
    1.12.5
