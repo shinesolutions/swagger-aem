@@ -1,0 +1,10 @@
+language: ruby
+rvm:
+  - 1.9
+  - 2.0
+  - 2.1
+  - 2.1
+before_install:
+  - make ruby-deps
+script:
+  - SWAGGER_CODEGEN_JAR=bin/swagger-codegen-cli-20160701.jar make ruby-clean ruby-build ruby-install ruby-doc
