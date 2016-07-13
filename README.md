@@ -3,12 +3,17 @@ Swagger AEM
 
 Swagger AEM is a [Swagger](http://swagger.io/) specification for [Adobe Experience Manager (AEM)](http://www.adobe.com/au/marketing-cloud/enterprise-content-management.html) API.
 
-This specification is used to generate client library in Ruby.
+This specification is used to generate a client library in Ruby with more languages support to follow.
+
+Install
+-------
+
+    gem install swagger_aem
 
 Development
 -----------
 
-To run the full build using a default `swagger-codegen` in your path:
+To run the full build using `swagger-codegen` in your path:
 
     make
 
