@@ -1,7 +1,7 @@
 ifndef SWAGGER_CODEGEN_JAR
-		SWAGGER_CODEGEN = swagger-codegen
+	SWAGGER_CODEGEN = swagger-codegen
 else
-    SWAGGER_CODEGEN = java -jar $(SWAGGER_CODEGEN_JAR)
+	SWAGGER_CODEGEN = java -jar $(SWAGGER_CODEGEN_JAR)
 endif
 
 all: ruby doc
