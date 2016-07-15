@@ -23,6 +23,7 @@ describe 'Flush Agent' do
         runmode = 'author',
         name = 'some-flush-agent'
       )
+      fail
     rescue SwaggerAemClient::ApiError => err
       expect(err.code).to eq(404)
     end

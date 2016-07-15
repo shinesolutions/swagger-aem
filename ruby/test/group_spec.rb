@@ -42,6 +42,7 @@ describe 'Group' do
           path = 'home/groups/s',
           name = @authorizable_id
         )
+        fail
       rescue SwaggerAemClient::ApiError => err
         expect(err.code).to eq(302)
       end

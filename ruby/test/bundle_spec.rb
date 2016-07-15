@@ -25,6 +25,7 @@ describe 'Bundle' do
           name = 'someinexistingbundle',
           action = 'stop'
         )
+        fail
       rescue SwaggerAemClient::ApiError => err
         expect(err.code).to eq(404)
       end
@@ -48,6 +49,7 @@ describe 'Bundle' do
           name = 'someinexistingbundle',
           action = 'start'
         )
+        fail
       rescue SwaggerAemClient::ApiError => err
         expect(err.code).to eq(404)
       end

@@ -23,6 +23,7 @@ describe 'Replication Agent' do
         runmode = 'author',
         name = 'some-replication-agent'
       )
+      fail
     rescue SwaggerAemClient::ApiError => err
       expect(err.code).to eq(404)
     end

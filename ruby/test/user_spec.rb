@@ -42,6 +42,7 @@ describe 'User' do
           path = 'home/users/s',
           name = @authorizable_id
         )
+        fail
       rescue SwaggerAemClient::ApiError => err
         expect(err.code).to eq(302)
       end

@@ -23,7 +23,7 @@ describe 'Client' do
           onlymodified = false,
           path = '/etc/designs/geometrixx'
         )
-        expect(status_code).to eq(200)
+        fail
       rescue SwaggerAemClient::ApiError => err
         expect(err.code).to eq(401)
       end

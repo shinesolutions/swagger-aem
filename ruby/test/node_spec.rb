@@ -50,6 +50,7 @@ describe 'Node' do
           jcrprimary_type = 'sling:Folder',
           name = 'somefolder'
         )
+        fail
       rescue SwaggerAemClient::ApiError => err
         expect(err.code).to eq(500)
       end
@@ -62,6 +63,7 @@ describe 'Node' do
           path = 'apps/system',
           name = 'somefolder'
         )
+        fail
       rescue SwaggerAemClient::ApiError => err
         expect(err.code).to eq(404)
       end
@@ -81,6 +83,7 @@ describe 'Node' do
           path = 'apps/system',
           name = 'somefolder'
         )
+        fail
       rescue SwaggerAemClient::ApiError => err
         expect(err.code).to eq(302)
       end
@@ -124,6 +127,7 @@ describe 'Node' do
             path = 'apps/system',
             name = 'somefolder'
           )
+          fail
         rescue SwaggerAemClient::ApiError => err
           expect(err.code).to eq(302)
         end

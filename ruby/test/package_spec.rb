@@ -147,6 +147,7 @@ describe 'Package' do
           name = 'somepackage',
           version = '1.2.3'
         )
+        fail
       rescue SwaggerAemClient::ApiError => err
         expect(err.code).to eq(404)
       end
