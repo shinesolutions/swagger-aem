@@ -67,7 +67,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/html, text/plain, application/json
+ - **Accept**: text/plain
 
 
 
@@ -119,7 +119,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/html, text/plain, application/json
+ - **Accept**: text/plain
 
 
 
@@ -171,7 +171,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/html, text/plain, application/json
+ - **Accept**: text/plain
 
 
 
@@ -223,7 +223,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/html, text/plain, application/json
+ - **Accept**: text/plain
 
 
 
@@ -279,7 +279,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/html, text/plain, application/json
+ - **Accept**: application/octet-stream
 
 
 
@@ -335,7 +335,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/html, text/plain, application/json
+ - **Accept**: application/json
 
 
 
@@ -425,7 +425,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/html, text/plain, application/json
+ - **Accept**: text/plain
 
 
 
@@ -488,7 +488,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/html, text/plain, application/json
+ - **Accept**: text/html
 
 
 
@@ -582,7 +582,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/html, text/plain, application/json
+ - **Accept**: text/plain
 
 
 
@@ -638,7 +638,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/html, text/plain, application/json
+ - **Accept**: text/plain
 
 
 
@@ -693,7 +693,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/html, text/plain, application/json
+ - **Accept**: text/plain
 
 
 
@@ -752,7 +752,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/html, text/plain, application/json
+ - **Accept**: application/json
 
 
 
@@ -807,7 +807,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/html, text/plain, application/json
+ - **Accept**: text/plain
 
 
 

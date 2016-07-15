@@ -56,7 +56,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/html, text/plain, application/json
+ - **Accept**: text/plain
 
 
 
@@ -105,7 +105,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/html, text/plain, application/json
+ - **Accept**: text/plain
 
 
 

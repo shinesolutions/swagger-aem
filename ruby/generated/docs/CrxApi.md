@@ -56,7 +56,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/html, text/plain, application/json
+ - **Accept**: text/xml
 
 
 
@@ -123,7 +123,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: multipart/form-data
- - **Accept**: text/html, text/plain, application/json
+ - **Accept**: application/json
 
 
 
@@ -188,7 +188,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/html, text/plain, application/json
+ - **Accept**: application/json
 
 
 
@@ -243,7 +243,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/html, text/plain, application/json
+ - **Accept**: text/plain
 
 
 
