@@ -7,10 +7,6 @@ schemes:
   - http
   - https
 basePath: /
-produces:
-  - text/html
-  - text/plain
-  - application/json
 securityDefinitions:
   aemAuth:
     type: basic
@@ -20,6 +16,8 @@ paths:
   .cqactions.html:
     post:
       operationId: postCqActions
+      produces:
+        - text/plain
       parameters:
         - name: authorizableId
           in: query
@@ -34,6 +32,8 @@ paths:
   /{path}/:
     post:
       operationId: postPath
+      produces:
+        - text/plain
       parameters:
         - name: path
           in: path
@@ -52,6 +52,8 @@ paths:
   /{path}/{name}:
     get:
       operationId: getNode
+      produces:
+        - text/plain
       parameters:
         - name: path
           in: path
@@ -65,6 +67,8 @@ paths:
         - sling
     delete:
       operationId: deleteNode
+      produces:
+        - text/plain
       parameters:
         - name: path
           in: path
@@ -79,6 +83,8 @@ paths:
   /{path}/{name}.rw.html:
     post:
       operationId: postNodeRw
+      produces:
+        - text/plain
       parameters:
         - name: path
           in: path
@@ -97,6 +103,8 @@ paths:
   /apps/system/config.{runmode}/{name}:
     post:
       operationId: postConfig
+      produces:
+        - text/plain
       parameters:
         - name: runmode
           in: path
@@ -191,6 +199,8 @@ paths:
   /bin/querybuilder.json:
     post:
       operationId: postQuery
+      produces:
+        - application/json
       parameters:
         - name: path
           in: query
@@ -217,6 +227,8 @@ paths:
   /etc/packages/{group}/{name}-{version}.zip:
     get:
       operationId: getPackage
+      produces:
+        - application/octet-stream
       parameters:
         - name: group
           in: path
@@ -239,6 +251,8 @@ paths:
   /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json:
     get:
       operationId: getPackageFilter
+      produces:
+        - application/json
       parameters:
         - name: group
           in: path
@@ -261,6 +275,8 @@ paths:
   /etc/replication/agents.{runmode}/{name}:
     get:
       operationId: getAgent
+      produces:
+        - text/plain
       parameters:
         - name: runmode
           in: path
@@ -274,6 +290,8 @@ paths:
         - sling
     delete:
       operationId: deleteAgent
+      produces:
+        - text/plain
       parameters:
         - name: runmode
           in: path
@@ -287,6 +305,8 @@ paths:
         - sling
     post:
       operationId: postAgent
+      produces:
+        - text/plain
       parameters:
         - name: runmode
           in: path
@@ -374,6 +394,8 @@ paths:
   /etc/replication/treeactivation.html:
     post:
       operationId: postTreeActivation
+      produces:
+        - text/plain
       parameters:
         - name: ignoredeactivated
           in: query
@@ -392,6 +414,8 @@ paths:
   /libs/granite/security/post/authorizables:
     post:
       operationId: postAuthorizables
+      produces:
+        - text/html
       parameters:
         - name: authorizableId
           in: query
@@ -426,6 +450,8 @@ paths:
   /crx/explorer/ui/setpassword.jsp:
     post:
       operationId: postSetPassword
+      produces:
+        - text/plain
       parameters:
         - name: old
           in: query
@@ -444,6 +470,8 @@ paths:
   /crx/packmgr/service.jsp:
     post:
       operationId: postPackageService
+      produces:
+        - text/xml
       parameters:
         - name: cmd
           in: query
@@ -458,6 +486,8 @@ paths:
   /crx/packmgr/update.jsp:
     post:
       operationId: postPackageUpdate
+      produces:
+        - application/json
       parameters:
         - name: groupName
           in: query
@@ -492,6 +522,8 @@ paths:
   /crx/packmgr/service/.json/{path}:
     post:
       operationId: postPackageServiceJson
+      produces:
+        - application/json
       parameters:
         - name: path
           in: path
@@ -536,6 +568,8 @@ paths:
   /system/console/bundles/{name}:
     post:
       operationId: postBundle
+      produces:
+        - text/plain
       parameters:
         - name: name
           in: path
@@ -550,6 +584,8 @@ paths:
   /system/console/jmx/com.adobe.granite:type=Repository/op/{action}:
     post:
       operationId: postJmxRepository
+      produces:
+        - text/plain
       parameters:
         - name: action
           in: path
