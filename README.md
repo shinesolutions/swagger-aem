@@ -1,3 +1,5 @@
+[![Build Status](https://img.shields.io/travis/shinesolutions/swagger-aem.svg)](http://travis-ci.org/shinesolutions/swagger-aem)
+
 Swagger AEM
 -----------
 
