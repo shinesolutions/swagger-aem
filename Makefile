@@ -38,11 +38,14 @@ ruby-doc:
 clean:
 	rm -rf doc
 
-doc:
+doc: ruby-doc
 	bootprint openapi conf/api.yml doc/latest/api/
 
+doc-publish: doc
+	gh-pages --dist doc/
+
 tools:
-	npm install -g bootprint bootprint-openapi
+	npm install -g bootprint bootprint-openapi gh-pages
 
 tools-osx: tools
 	brew install swagger-codegen
