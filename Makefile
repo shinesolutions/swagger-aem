@@ -33,13 +33,13 @@ ruby-test:
 ruby-doc:
 	cd ruby/generated/ && \
 	  yard doc \
-		--output-dir ../doc/
+		--output-dir ../../doc/latest/ruby/
 
 clean:
 	rm -rf doc
 
 doc:
-	bootprint openapi conf/api.yml doc
+	bootprint openapi conf/api.yml doc/latest/api/
 
 tools:
 	npm install -g bootprint bootprint-openapi
