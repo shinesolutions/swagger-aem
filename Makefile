@@ -4,50 +4,18 @@ else
 	SWAGGER_CODEGEN = java -jar $(SWAGGER_CODEGEN_JAR)
 endif
 
-all: ruby doc
-
-ruby: ruby-clean ruby-build ruby-install ruby-test
-
-ruby-deps:
-	gem install bundler
-	BUNDLE_GEMFILE=ruby/Gemfile bundle install
-
-ruby-clean:
-	rm -rf ruby/generated/
-
-ruby-build:
-	$(SWAGGER_CODEGEN) generate \
-	  --input-spec conf/api.yml \
-		--lang ruby \
-		--output ruby/generated/ \
-		--config ruby/conf/client.json
-
-ruby-install:
-	cd ruby/generated/ && \
-	  gem build swagger_aem.gemspec && \
-	  gem install swagger_aem-0.0.1.gem
-
-ruby-test:
-	rspec ruby/test/
-
-ruby-doc:
-	cd ruby/generated/ && \
-	  yard doc \
-		--output-dir ../../doc/latest/ruby/
+all: clean doc
 
 clean:
 	rm -rf doc
 
-doc: ruby-doc
+doc:
 	bootprint openapi conf/api.yml doc/latest/api/
 
-doc-publish: doc
-	gh-pages --dist doc/
-
 tools:
-	npm install -g bootprint bootprint-openapi gh-pages
+	npm install -g bootprint bootprint-openapi
 
 tools-osx: tools
 	brew install swagger-codegen
 
-.PHONY: all doc ruby ruby-deps ruby-clean ruby-build ruby-install ruby-test tools tools-osx
+.PHONY: all clean doc tools tools-osx
