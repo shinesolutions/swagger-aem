@@ -8,7 +8,7 @@ all: deps clean build install test doc
 
 deps:
 	gem install bundler
-	BUNDLE_GEMFILE=ruby/Gemfile bundle install
+	BUNDLE_GEMFILE=Gemfile bundle install
 
 clean:
 	rm -rf generated/
