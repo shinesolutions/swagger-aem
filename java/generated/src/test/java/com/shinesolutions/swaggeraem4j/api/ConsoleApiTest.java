@@ -23,29 +23,55 @@
  */
 
 
-package com.shinesolutions.swaggeraem4j;
+package com.shinesolutions.swaggeraem4j.api;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:36:18.302+10:00")
-public class Configuration {
-    private static ApiClient defaultApiClient = new ApiClient();
+import com.shinesolutions.swaggeraem4j.ApiException;
+import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * API tests for ConsoleApi
+ */
+public class ConsoleApiTest {
+
+    private final ConsoleApi api = new ConsoleApi();
+
+    
     /**
-     * Get the default API client, which would be used when creating API
-     * instances without providing an API client.
+     * 
      *
-     * @return Default API client
+     * 
+     *
+     * @throws ApiException
+     *          if the Api call fails
      */
-    public static ApiClient getDefaultApiClient() {
-        return defaultApiClient;
-    }
+    @Test
+    public void postBundleTest() throws ApiException {
+        String name = null;
+        String action = null;
+        // api.postBundle(name, action);
 
-    /**
-     * Set the default API client, which would be used when creating API
-     * instances without providing an API client.
-     *
-     * @param apiClient API client
-     */
-    public static void setDefaultApiClient(ApiClient apiClient) {
-        defaultApiClient = apiClient;
+        // TODO: test validations
     }
+    
+    /**
+     * 
+     *
+     * 
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void postJmxRepositoryTest() throws ApiException {
+        String action = null;
+        // api.postJmxRepository(action);
+
+        // TODO: test validations
+    }
+    
 }

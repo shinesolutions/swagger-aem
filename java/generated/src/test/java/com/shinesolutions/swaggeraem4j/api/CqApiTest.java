@@ -23,29 +23,39 @@
  */
 
 
-package com.shinesolutions.swaggeraem4j.auth;
+package com.shinesolutions.swaggeraem4j.api;
 
-import com.shinesolutions.swaggeraem4j.Pair;
+import com.shinesolutions.swaggeraem4j.ApiException;
+import org.junit.Test;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:36:18.302+10:00")
-public class OAuth implements Authentication {
-  private String accessToken;
+/**
+ * API tests for CqApi
+ */
+public class CqApiTest {
 
-  public String getAccessToken() {
-    return accessToken;
-  }
+    private final CqApi api = new CqApi();
 
-  public void setAccessToken(String accessToken) {
-    this.accessToken = accessToken;
-  }
+    
+    /**
+     * 
+     *
+     * 
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void postCqActionsTest() throws ApiException {
+        String authorizableId = null;
+        String changelog = null;
+        // api.postCqActions(authorizableId, changelog);
 
-  @Override
-  public void applyToParams(List<Pair> queryParams, Map<String, String> headerParams) {
-    if (accessToken != null) {
-      headerParams.put("Authorization", "Bearer " + accessToken);
+        // TODO: test validations
     }
-  }
+    
 }
