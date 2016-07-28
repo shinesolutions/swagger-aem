@@ -4,11 +4,8 @@ else
 	SWAGGER_CODEGEN = java -jar $(SWAGGER_CODEGEN_JAR)
 endif
 
-all: deps clean build install test doc
+all: clean build install test doc
 
-deps:
-	echo "TODO"
-	
 clean:
 	rm -rf generated/
 
@@ -29,6 +26,9 @@ test:
 	echo "TODO"
 
 doc:
-	echo "TODO"
+	cd generated/ && \
+	  mvn javadoc:javadoc && \
+		mkdir -p ../../doc/latest/java/ && \
+		cp -R target/site/apidocs/ ../../doc/latest/java/
 
-.PHONY: all travis deps clean build install test doc
+.PHONY: all clean build install test doc
