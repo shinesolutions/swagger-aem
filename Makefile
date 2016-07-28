@@ -12,8 +12,11 @@ clean:
 doc:
 	bootprint openapi conf/api.yml doc/latest/api/
 
+doc-publish:
+	gh-pages --dist doc/
+
 tools:
-	npm install -g bootprint bootprint-openapi
+	npm install -g bootprint bootprint-openapi gh-pages
 
 tools-osx: tools
 	brew install swagger-codegen
