@@ -4,7 +4,7 @@ else
 	SWAGGER_CODEGEN = java -jar $(SWAGGER_CODEGEN_JAR)
 endif
 
-all: deps clean build install test doc
+all: deps clean build install test-unit test-integration doc
 
 deps:
 	gem install bundler
@@ -25,7 +25,11 @@ install:
 	  gem build swagger_aem.gemspec && \
 	  gem install swagger_aem-0.0.1.gem
 
-test:
+test-unit:
+	cd generated/ && \
+	  rspec spec/
+
+test-integration:
 	rspec test/
 
 doc:
@@ -33,4 +37,4 @@ doc:
     yard doc \
     --output-dir ../../doc/latest/ruby/
 
-.PHONY: all travis deps clean build install test doc
+.PHONY: all travis deps clean build install test-unit test-integration doc
