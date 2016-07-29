@@ -4,7 +4,7 @@ else
 	SWAGGER_CODEGEN = java -jar $(SWAGGER_CODEGEN_JAR)
 endif
 
-all: clean build install test doc
+all: clean build install test-unit doc
 
 clean:
 	rm -rf generated/
@@ -22,8 +22,9 @@ install:
 	cd generated/ && \
 	  mvn install
 
-test:
-	echo "TODO"
+test-unit:
+	cd generated/ && \
+	  mvn test
 
 doc:
 	cd generated/ && \
@@ -31,4 +32,4 @@ doc:
 		mkdir -p ../../doc/latest/java/ && \
 		cp -R target/site/apidocs/ ../../doc/latest/java/
 
-.PHONY: all clean build install test doc
+.PHONY: all clean build install test-unit doc
