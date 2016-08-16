@@ -30,7 +30,7 @@ test-unit:
 	  rspec spec/
 
 test-integration:
-	rspec test/
+	rspec test-integration/
 
 doc:
 	cd generated/ && \
