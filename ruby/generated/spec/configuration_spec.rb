@@ -27,21 +27,26 @@ describe SwaggerAemClient::Configuration do
   let(:config) { SwaggerAemClient::Configuration.default }
 
   before(:each) do
-    SwaggerAemClient.configure do |c|
-      c.host = 'petstore.swagger.io'
-      c.base_path = 'v2'
-    end
+    # uncomment below to setup host and base_path
+    #require 'URI'
+    #uri = URI.parse("http://localhost/")
+    #SwaggerAemClient.configure do |c|
+    #  c.host = uri.host
+    #  c.base_path = uri.path
+    #end
   end
 
   describe '#base_url' do
     it 'should have the default value' do
-      expect(config.base_url).to eq('http://petstore.swagger.io/v2')
+      # uncomment below to test default value of the base path
+      #expect(config.base_url).to eq("http://localhost/")
     end
 
     it 'should remove trailing slashes' do
       [nil, '', '/', '//'].each do |base_path|
         config.base_path = base_path
-        expect(config.base_url).to eq('http://petstore.swagger.io')
+        # uncomment below to test trailing slashes
+        #expect(config.base_url).to eq("http://localhost/")
       end
     end
   end
