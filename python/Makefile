@@ -7,7 +7,7 @@ endif
 all: deps clean build install test-unit test-integration doc
 
 deps:
-	echo "TODO"
+	pip install -r requirements-dev.txt
 
 clean:
 	rm -rf generated/
@@ -21,14 +21,22 @@ build:
 
 install:
 	cd generated/ && \
-	  echo "TODO"
+	  python setup.py install
 
 test-unit:
 	cd generated/ && \
-	  echo "TODO"
+	  echo "Not supported by swagger-codegen yet"
+
+test-integration:
+	nose2
 
 doc:
 	cd generated/ && \
-	  echo "TODO"
+	  sphinx-apidoc -o ../../doc/latest/python/stage/ --full -H "Swagger AEM" -A "Shine Solutions" swaggeraem && \
+		cd ../../doc/latest/python/stage/ && \
+		make html && \
+		cd .. && \
+		cp -R stage/_build/html/* ./ && \
+		rm -rf stage/
 
 .PHONY: all travis deps clean build install test-unit test-integration doc
