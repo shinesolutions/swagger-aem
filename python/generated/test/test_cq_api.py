@@ -24,4 +24,32 @@
 
 from __future__ import absolute_import
 
-# import models into model package
+import os
+import sys
+import unittest
+
+import swaggeraem
+from swaggeraem.rest import ApiException
+from swaggeraem.apis.cq_api import CqApi
+
+
+class TestCqApi(unittest.TestCase):
+    """ CqApi unit test stubs """
+
+    def setUp(self):
+        self.api = swaggeraem.apis.cq_api.CqApi()
+
+    def tearDown(self):
+        pass
+
+    def test_post_cq_actions(self):
+        """
+        Test case for post_cq_actions
+
+        
+        """
+        pass
+
+
+if __name__ == '__main__':
+    unittest.main()

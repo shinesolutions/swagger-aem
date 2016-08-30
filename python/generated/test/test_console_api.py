@@ -24,4 +24,40 @@
 
 from __future__ import absolute_import
 
-# import models into model package
+import os
+import sys
+import unittest
+
+import swaggeraem
+from swaggeraem.rest import ApiException
+from swaggeraem.apis.console_api import ConsoleApi
+
+
+class TestConsoleApi(unittest.TestCase):
+    """ ConsoleApi unit test stubs """
+
+    def setUp(self):
+        self.api = swaggeraem.apis.console_api.ConsoleApi()
+
+    def tearDown(self):
+        pass
+
+    def test_post_bundle(self):
+        """
+        Test case for post_bundle
+
+        
+        """
+        pass
+
+    def test_post_jmx_repository(self):
+        """
+        Test case for post_jmx_repository
+
+        
+        """
+        pass
+
+
+if __name__ == '__main__':
+    unittest.main()
