@@ -3,7 +3,7 @@
 import sys
 from setuptools import setup, find_packages
 
-NAME = "swagger-aem"
+NAME = "swaggeraem"
 VERSION = "1.0.0"
 
 
