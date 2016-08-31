@@ -22,8 +22,9 @@ build:
 
 install:
 	cd generated/ && \
+	  rm -f swagger_aem-*.gem && \
 	  gem build swagger_aem.gemspec && \
-	  gem install swagger_aem-0.0.1.gem
+	  gem install `ls swagger_aem-*.gem`
 
 test-unit:
 	cd generated/ && \
