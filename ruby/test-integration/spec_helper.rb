@@ -30,7 +30,7 @@ def find_authorizable_id(sling, path, name)
     end
     fail
   rescue SwaggerAemClient::ApiError => err
-    # ignore when user does not exist
+    # ignore when authorizable does not exist
     expect(err.code).to eq(404)
   end
 end
