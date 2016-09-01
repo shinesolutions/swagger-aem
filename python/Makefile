@@ -25,7 +25,7 @@ install:
 
 test-unit:
 	cd generated/ && \
-	  echo "Not supported by swagger-codegen yet"
+	  nose2
 
 test-integration:
 	nose2
