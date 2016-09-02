@@ -5,9 +5,13 @@ Swagger AEM
 
 Swagger AEM is a [Swagger](http://swagger.io/) specification for [Adobe Experience Manager (AEM)](http://www.adobe.com/au/marketing-cloud/enterprise-content-management.html) API.
 
-This specification is used to generate client libraries (currently only Ruby and Java clients, more languages support to follow).
+This specification is used to generate client libraries for Ruby, Python, node.js, and Java.
 
 API Spec documentation: [Latest](https://shinesolutions.github.io/swagger-aem/api/latest/index.html)
+
+| API Spec Version | AEM Version   | Notes |
+|------------------|---------------|-------|
+| 1.0              | 6.0, 6.1, 6.2 |       |
 
 Generated Client
 ----------------
