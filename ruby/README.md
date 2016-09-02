@@ -3,7 +3,7 @@ swagger_aem
 
 swagger_aem is a ruby client generated from [Swagger AEM specification](https://github.com/shinesolutions/swagger-aem) using [Swagger Code Generator](https://github.com/swagger-api/swagger-codegen).
 
-This ruby client returns raw HTTP response AS-IS. If you are looking for an abstraction layer with resource oriented API and response handling, check out [ruby_aem](https://github.com/shinesolutions/ruby_aem).
+This ruby client returns raw HTTP response AS-IS. Check out [ruby_aem](https://github.com/shinesolutions/ruby_aem) for an abstraction layer with resource-oriented API and convenient response handling.
 
 Tested with AEM 6.0, 6.1, and 6.2, using ruby 1.9, 2.0, 2.1, 2.2, 2.3 .
 
@@ -66,7 +66,81 @@ CQ API - Group:
       changelog = 'path:/etc/replication,read:true,modify:true'
     )
 
-CRX API - TODO:
+CRX API - Package:
+
+    # create package
+    data, status_code, headers = crx.post_package_service_json_with_http_info(
+      path = 'etc/packages/somepackage',
+      cmd = 'create',
+      {
+        :group_name => 'somepackagegroup',
+        :package_name => 'somepackage',
+        :package_version => '1.2.3',
+        :charset => 'utf-8'
+      }
+    )
+
+    # build package
+    data, status_code, headers = crx.post_package_service_json_with_http_info(
+      path = 'etc/packages/somepackagegroup/somepackage-1.2.3.zip',
+      cmd = 'build'
+    )
+
+    # upload package
+    File.open("/path/to/somepackage-1.2.3.zip", 'r') { |file|
+      data, status_code, headers = crx.post_package_service_json_with_http_info(
+        path = '',
+        cmd = 'upload',
+        {
+          :force => true,
+          :package => file
+        }
+      )
+    }
+
+    # update package filter
+    data, status_code, headers = crx.post_package_update_with_http_info(
+      groupName = 'somepackagegroup',
+      packageName = 'somepackage',
+      version = '1.2.3',
+      path = '/etc/packages/somepackagegroup/somepackage-1.2.3.zip',
+      {
+        :filter => '[{"root":"/apps/geometrixx","rules":[]}]',
+        :charset => 'utf-8'
+      }
+    )
+
+    # install package
+    data, status_code, headers = crx.post_package_service_json_with_http_info(
+      path = 'etc/packages/somepackagegroup/somepackage-1.2.3.zip',
+      cmd = 'install'
+    )
+
+    # replicate package
+    data, status_code, headers = crx.post_package_service_json_with_http_info(
+      path = 'etc/packages/somepackagegroup/somepackage-1.2.3.zip',
+      cmd = 'replicate'
+    )
+
+    # list packages
+    data, status_code, headers = crx.post_package_service_with_http_info(
+      cmd = 'ls'
+    )
+
+    # delete package
+    data, status_code, headers = crx.post_package_service_json_with_http_info(
+      path = 'etc/packages/somepackagegroup/somepackage-1.2.3.zip',
+      cmd = 'delete'
+    )
+
+CRX API - User:
+
+    # change user password
+    data, status_code, headers = crx.post_set_password_with_http_info(
+      old = 'somepassword',
+      plain = 'somenewpassword',
+      verify = 'somenewpassword'
+    )
 
 Sling API - Group:
 
@@ -156,6 +230,22 @@ Sling API - Node Property:
       opts = {
         :org_apache_felix_https_enable => false
       }
+    )
+
+Sling API - Package:
+
+    # download package
+    data, status_code, headers = sling.get_package_with_http_info(
+      group = 'somepackagegroup',
+      name = 'somepackage',
+      version = '1.2.3'
+    )
+
+    # get package filter
+    data, status_code, headers = sling.get_package_filter_with_http_info(
+      group = 'somepackagegroup',
+      name = 'somepackage',
+      version = '1.2.3'
     )
 
 Sling API - Path:
