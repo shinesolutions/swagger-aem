@@ -29,7 +29,7 @@ test-unit:
 doc:
 	cd generated/ && \
 	  mvn javadoc:javadoc && \
-		mkdir -p ../../doc/latest/java/ && \
-		cp -R target/site/apidocs/ ../../doc/latest/java/
+		mkdir -p ../../doc/java/latest/ && \
+		cp -R target/site/apidocs/ ../../doc/java/latest/
 
 .PHONY: all clean build install test-unit doc

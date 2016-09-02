@@ -32,8 +32,8 @@ test-integration:
 
 doc:
 	cd generated/ && \
-	  sphinx-apidoc -o ../../doc/latest/python/stage/ --full -H "Swagger AEM" -A "Shine Solutions" swaggeraem && \
-		cd ../../doc/latest/python/stage/ && \
+	  sphinx-apidoc -o ../../doc/python/latest/stage/ --full -H "Swagger AEM" -A "Shine Solutions" swaggeraem && \
+		cd ../../doc/python/latest/stage/ && \
 		make html && \
 		cd .. && \
 		cp -R stage/_build/html/* ./ && \

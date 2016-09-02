@@ -36,6 +36,6 @@ test-integration:
 doc:
 	cd generated/ && \
     yard doc \
-    --output-dir ../../doc/latest/ruby/
+    --output-dir ../../doc/ruby/latest/
 
 .PHONY: all travis deps clean build install test-unit test-integration doc

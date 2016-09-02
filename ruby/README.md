@@ -7,7 +7,7 @@ This ruby client returns raw HTTP response AS-IS. Check out [ruby_aem](https://g
 
 Tested with AEM 6.0, 6.1, and 6.2, using ruby 1.9, 2.0, 2.1, 2.2, 2.3 .
 
-API documentation: [Latest](https://shinesolutions.github.io/swagger-aem/latest/ruby/index.html)
+API documentation: [Latest](https://shinesolutions.github.io/swagger-aem/ruby/latest/index.html)
 
 Install
 -------
