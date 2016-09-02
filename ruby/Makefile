@@ -5,6 +5,7 @@ else
 endif
 
 all: deps clean build install test-unit test-integration doc
+ci: deps clean build install test-unit doc
 
 deps:
 	gem install bundler
@@ -38,4 +39,8 @@ doc:
     yard doc \
     --output-dir ../../doc/ruby/latest/
 
-.PHONY: all travis deps clean build install test-unit test-integration doc
+publish:
+	cd generated/ && \
+	  gem push `ls swagger_aem-*.gem`
+
+.PHONY: all ci deps clean build install test-unit test-integration doc publish
