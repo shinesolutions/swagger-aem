@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   title: Adobe Experience Manager (AEM) API
   description: An Adobe Experience Manager (AEM) API specification
-  version: "6.2"
+  version: "1.0"
 schemes:
   - http
   - https
