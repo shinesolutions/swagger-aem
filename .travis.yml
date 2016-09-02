@@ -4,7 +4,5 @@ rvm:
   - 2.0
   - 2.1
   - 2.2
-before_install:
-  - cd ruby && make deps && cd ..
 script:
-  - cd ruby && SWAGGER_CODEGEN_JAR=../bin/swagger-codegen-cli-20160902.jar make clean build install doc  && cd ..
+  - cd ruby && SWAGGER_CODEGEN_JAR=`ls ../bin/swagger-codegen-cli-*.jar` make ci  && cd ..
