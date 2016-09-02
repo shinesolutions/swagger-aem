@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   title: Adobe Experience Manager (AEM) API
-  description: An Adobe Experience Manager (AEM) API specification
+  description: Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
   version: "1.0"
 schemes:
   - http
