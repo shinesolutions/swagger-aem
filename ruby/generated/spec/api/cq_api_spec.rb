@@ -1,7 +1,7 @@
 =begin
 #Adobe Experience Manager (AEM) API
 
-#An Adobe Experience Manager (AEM) API specification
+#Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
 
 OpenAPI spec version: 1.0
 
