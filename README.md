@@ -7,18 +7,18 @@ Swagger AEM is an OpenAPI specification for [Adobe Experience Manager (AEM)](htt
 
 This specification is used to generate client libraries for Ruby, Python, node.js, and Java using [Swagger Code Generator](https://github.com/swagger-api/swagger-codegen).
 
-| Specification Version                                                  | Tested on AEM Versions |
+| Swagger AEM                                                            | AEM                    |
 |------------------------------------------------------------------------|------------------------|
 | [1.0](https://shinesolutions.github.io/swagger-aem/api/1.0/index.html) | 6.0, 6.1, 6.2          |
 
-Generated Client
-----------------
+Generated Clients
+-----------------
 
-| Language | Getting Started                                                                                                                                                                 | API Documentation                                                               |
-|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------|
-| Ruby     | [README](https://github.com/shinesolutions/swagger-aem/blob/master/ruby/README.md) [CHANGELOG](https://github.com/shinesolutions/swagger-aem/blob/master/ruby/CHANGELOG.md)     | [Latest](https://shinesolutions.github.io/swagger-aem/ruby/latest/index.html)   |
-| Python   | [README](https://github.com/shinesolutions/swagger-aem/blob/master/python/README.md) [CHANGELOG](https://github.com/shinesolutions/swagger-aem/blob/master/python/CHANGELOG.md) | [Latest](https://shinesolutions.github.io/swagger-aem/python/latest/index.html) |
-| Java     | [README](https://github.com/shinesolutions/swagger-aem/blob/master/java/README.md) [CHANGELOG](https://github.com/shinesolutions/swagger-aem/blob/master/java/CHANGELOG.md)     | [Latest](https://shinesolutions.github.io/swagger-aem/java/latest/index.html)   |
+| Language | Package                                              | Getting Started                                                                                                                                                                 |
+|----------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Ruby     | [swagger_aem](https://rubygems.org/gems/swagger_aem) | [README](https://github.com/shinesolutions/swagger-aem/blob/master/ruby/README.md) [CHANGELOG](https://github.com/shinesolutions/swagger-aem/blob/master/ruby/CHANGELOG.md)     |
+| Python   |                                                      | [README](https://github.com/shinesolutions/swagger-aem/blob/master/python/README.md) [CHANGELOG](https://github.com/shinesolutions/swagger-aem/blob/master/python/CHANGELOG.md) |
+| Java     |                                                      | [README](https://github.com/shinesolutions/swagger-aem/blob/master/java/README.md) [CHANGELOG](https://github.com/shinesolutions/swagger-aem/blob/master/java/CHANGELOG.md)     |
 
 Development
 -----------
