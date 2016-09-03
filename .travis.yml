@@ -4,5 +4,6 @@ rvm:
   - 2.0
   - 2.1
   - 2.2
+  - 2.3
 script:
   - cd ruby && SWAGGER_CODEGEN_JAR=`ls ../bin/swagger-codegen-cli-*.jar` make ci  && cd ..
