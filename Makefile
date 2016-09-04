@@ -21,4 +21,4 @@ tools:
 tools-osx: tools
 	brew install swagger-codegen
 
-.PHONY: all clean doc tools tools-osx
+.PHONY: all clean doc doc-publish tools tools-osx
