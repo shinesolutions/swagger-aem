@@ -9,7 +9,7 @@ ci: deps clean build install test-unit doc
 
 deps:
 	gem install bundler
-	BUNDLE_GEMFILE=Gemfile bundle install
+	bundle install
 
 clean:
 	rm -rf generated/
