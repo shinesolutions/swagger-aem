@@ -19,6 +19,8 @@ Usage
 
 Initialise client:
 
+    require 'swagger_aem'
+
     SwaggerAemClient.configure { |conf| [
       conf.host = 'http://localhost:4502',
       conf.username = 'admin',
