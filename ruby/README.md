@@ -5,9 +5,9 @@ swagger_aem is a ruby client generated from [Swagger AEM specification](https://
 
 This ruby client returns raw HTTP response AS-IS. Check out [ruby_aem](https://github.com/shinesolutions/ruby_aem) for an abstraction layer with resource-oriented API and convenient response handling.
 
-| swagger_aem                                                                 | Supported AEM          | Supported Ruby          |
-|-----------------------------------------------------------------------------|------------------------|-------------------------|
-| [0.9.1](https://shinesolutions.github.io/swagger-aem/ruby/0.9.1/index.html) | 6.0, 6.1, 6.2          | 1.9, 2.0, 2.1, 2.2, 2.3 |
+| swagger_aem                                                                 | Supported AEM          | Supported Ruby          | Swagger Codegen CLI |
+|-----------------------------------------------------------------------------|------------------------|-------------------------|---------------------|
+| [0.9.1](https://shinesolutions.github.io/swagger-aem/ruby/0.9.1/index.html) | 6.0, 6.1, 6.2          | 1.9, 2.0, 2.1, 2.2, 2.3 | 20160902            |
 
 Install
 -------
