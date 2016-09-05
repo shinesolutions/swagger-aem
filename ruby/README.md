@@ -1,3 +1,5 @@
+[![Published Version](https://badge.fury.io/rb/swagger_aem.svg)](https://rubygems.org/gems/swagger_aem)
+
 swagger_aem
 -----------
 
