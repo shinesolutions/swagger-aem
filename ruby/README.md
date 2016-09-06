@@ -1,3 +1,4 @@
+[![Build Status](https://img.shields.io/travis/shinesolutions/swagger-aem.svg)](http://travis-ci.org/shinesolutions/swagger-aem)
 [![Published Version](https://badge.fury.io/rb/swagger_aem.svg)](https://rubygems.org/gems/swagger_aem)
 
 swagger_aem
@@ -15,6 +16,12 @@ Install
 -------
 
     gem install swagger_aem
+
+swagger_aem will install some native dependencies, the following packages need to be available on your OS.
+
+| Operating System | Packages        |
+|------------------|-----------------|
+| Amazon Linux     | gcc, ruby-devel |
 
 Usage
 -----
