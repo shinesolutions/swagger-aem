@@ -1,7 +1,8 @@
 {
   "name": "node-swagger-aem",
   "version": "0.0.1",
-  "description": "An Adobe Experience Manager (AEM) API specification",
+  "description": "Swagger_AEM_is_an_OpenAPI_specification_for_Adobe_Experience_Manager__AEM_API",
+  "license": "Apache-2.0",
   "main": "src/index.js",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha --recursive"

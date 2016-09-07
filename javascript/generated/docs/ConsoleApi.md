@@ -5,7 +5,7 @@ All URIs are relative to *http://localhost/*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**postBundle**](ConsoleApi.md#postBundle) | **POST** /system/console/bundles/{name} | 
-[**postJmxRepository**](ConsoleApi.md#postJmxRepository) | **POST** /system/console/jmx/com.adobe.granite:type=Repository/op/{action} | 
+[**postJmxRepository**](ConsoleApi.md#postJmxRepository) | **POST** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} | 
 
 
 <a name="postBundle"></a>
@@ -21,14 +21,14 @@ var defaultClient = NodeSwaggerAem.ApiClient.default;
 
 // Configure HTTP basic authorization: aemAuth
 var aemAuth = defaultClient.authentications['aemAuth'];
-aemAuth.username = 'YOUR USERNAME'
-aemAuth.password = 'YOUR PASSWORD'
+aemAuth.username = 'YOUR USERNAME';
+aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.ConsoleApi()
+var apiInstance = new NodeSwaggerAem.ConsoleApi();
 
-var name = "name_example"; // {String} 
+var name = "name_example"; // String | 
 
-var action = "action_example"; // {String} 
+var action = "action_example"; // String | 
 
 
 var callback = function(error, data, response) {
@@ -38,7 +38,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-api.postBundle(name, action, callback);
+apiInstance.postBundle(name, action, callback);
 ```
 
 ### Parameters
@@ -56,7 +56,7 @@ null (empty response body)
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain
@@ -74,12 +74,12 @@ var defaultClient = NodeSwaggerAem.ApiClient.default;
 
 // Configure HTTP basic authorization: aemAuth
 var aemAuth = defaultClient.authentications['aemAuth'];
-aemAuth.username = 'YOUR USERNAME'
-aemAuth.password = 'YOUR PASSWORD'
+aemAuth.username = 'YOUR USERNAME';
+aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.ConsoleApi()
+var apiInstance = new NodeSwaggerAem.ConsoleApi();
 
-var action = "action_example"; // {String} 
+var action = "action_example"; // String | 
 
 
 var callback = function(error, data, response) {
@@ -89,7 +89,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-api.postJmxRepository(action, callback);
+apiInstance.postJmxRepository(action, callback);
 ```
 
 ### Parameters
@@ -106,7 +106,7 @@ null (empty response body)
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain

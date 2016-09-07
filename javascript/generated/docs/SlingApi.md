@@ -32,14 +32,14 @@ var defaultClient = NodeSwaggerAem.ApiClient.default;
 
 // Configure HTTP basic authorization: aemAuth
 var aemAuth = defaultClient.authentications['aemAuth'];
-aemAuth.username = 'YOUR USERNAME'
-aemAuth.password = 'YOUR PASSWORD'
+aemAuth.username = 'YOUR USERNAME';
+aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.SlingApi()
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-var runmode = "runmode_example"; // {String} 
+var runmode = "runmode_example"; // String | 
 
-var name = "name_example"; // {String} 
+var name = "name_example"; // String | 
 
 
 var callback = function(error, data, response) {
@@ -49,7 +49,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-api.deleteAgent(runmode, name, callback);
+apiInstance.deleteAgent(runmode, name, callback);
 ```
 
 ### Parameters
@@ -67,7 +67,7 @@ null (empty response body)
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain
@@ -85,14 +85,14 @@ var defaultClient = NodeSwaggerAem.ApiClient.default;
 
 // Configure HTTP basic authorization: aemAuth
 var aemAuth = defaultClient.authentications['aemAuth'];
-aemAuth.username = 'YOUR USERNAME'
-aemAuth.password = 'YOUR PASSWORD'
+aemAuth.username = 'YOUR USERNAME';
+aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.SlingApi()
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-var path = "path_example"; // {String} 
+var path = "path_example"; // String | 
 
-var name = "name_example"; // {String} 
+var name = "name_example"; // String | 
 
 
 var callback = function(error, data, response) {
@@ -102,7 +102,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-api.deleteNode(path, name, callback);
+apiInstance.deleteNode(path, name, callback);
 ```
 
 ### Parameters
@@ -120,7 +120,7 @@ null (empty response body)
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain
@@ -138,14 +138,14 @@ var defaultClient = NodeSwaggerAem.ApiClient.default;
 
 // Configure HTTP basic authorization: aemAuth
 var aemAuth = defaultClient.authentications['aemAuth'];
-aemAuth.username = 'YOUR USERNAME'
-aemAuth.password = 'YOUR PASSWORD'
+aemAuth.username = 'YOUR USERNAME';
+aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.SlingApi()
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-var runmode = "runmode_example"; // {String} 
+var runmode = "runmode_example"; // String | 
 
-var name = "name_example"; // {String} 
+var name = "name_example"; // String | 
 
 
 var callback = function(error, data, response) {
@@ -155,7 +155,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-api.getAgent(runmode, name, callback);
+apiInstance.getAgent(runmode, name, callback);
 ```
 
 ### Parameters
@@ -173,7 +173,7 @@ null (empty response body)
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain
@@ -191,14 +191,14 @@ var defaultClient = NodeSwaggerAem.ApiClient.default;
 
 // Configure HTTP basic authorization: aemAuth
 var aemAuth = defaultClient.authentications['aemAuth'];
-aemAuth.username = 'YOUR USERNAME'
-aemAuth.password = 'YOUR PASSWORD'
+aemAuth.username = 'YOUR USERNAME';
+aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.SlingApi()
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-var path = "path_example"; // {String} 
+var path = "path_example"; // String | 
 
-var name = "name_example"; // {String} 
+var name = "name_example"; // String | 
 
 
 var callback = function(error, data, response) {
@@ -208,7 +208,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-api.getNode(path, name, callback);
+apiInstance.getNode(path, name, callback);
 ```
 
 ### Parameters
@@ -226,7 +226,7 @@ null (empty response body)
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain
@@ -244,16 +244,16 @@ var defaultClient = NodeSwaggerAem.ApiClient.default;
 
 // Configure HTTP basic authorization: aemAuth
 var aemAuth = defaultClient.authentications['aemAuth'];
-aemAuth.username = 'YOUR USERNAME'
-aemAuth.password = 'YOUR PASSWORD'
+aemAuth.username = 'YOUR USERNAME';
+aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.SlingApi()
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-var group = "group_example"; // {String} 
+var group = "group_example"; // String | 
 
-var name = "name_example"; // {String} 
+var name = "name_example"; // String | 
 
-var version = "version_example"; // {String} 
+var version = "version_example"; // String | 
 
 
 var callback = function(error, data, response) {
@@ -263,7 +263,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.getPackage(group, name, version, callback);
+apiInstance.getPackage(group, name, version, callback);
 ```
 
 ### Parameters
@@ -282,7 +282,7 @@ Name | Type | Description  | Notes
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/octet-stream
@@ -300,16 +300,16 @@ var defaultClient = NodeSwaggerAem.ApiClient.default;
 
 // Configure HTTP basic authorization: aemAuth
 var aemAuth = defaultClient.authentications['aemAuth'];
-aemAuth.username = 'YOUR USERNAME'
-aemAuth.password = 'YOUR PASSWORD'
+aemAuth.username = 'YOUR USERNAME';
+aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.SlingApi()
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-var group = "group_example"; // {String} 
+var group = "group_example"; // String | 
 
-var name = "name_example"; // {String} 
+var name = "name_example"; // String | 
 
-var version = "version_example"; // {String} 
+var version = "version_example"; // String | 
 
 
 var callback = function(error, data, response) {
@@ -319,7 +319,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.getPackageFilter(group, name, version, callback);
+apiInstance.getPackageFilter(group, name, version, callback);
 ```
 
 ### Parameters
@@ -338,7 +338,7 @@ Name | Type | Description  | Notes
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
@@ -356,34 +356,34 @@ var defaultClient = NodeSwaggerAem.ApiClient.default;
 
 // Configure HTTP basic authorization: aemAuth
 var aemAuth = defaultClient.authentications['aemAuth'];
-aemAuth.username = 'YOUR USERNAME'
-aemAuth.password = 'YOUR PASSWORD'
+aemAuth.username = 'YOUR USERNAME';
+aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.SlingApi()
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-var runmode = "runmode_example"; // {String} 
+var runmode = "runmode_example"; // String | 
 
-var name = "name_example"; // {String} 
+var name = "name_example"; // String | 
 
 var opts = { 
-  'jcrprimaryType': "jcrprimaryType_example", // {String} 
-  'jcrcontentcqname': "jcrcontentcqname_example", // {String} 
-  'jcrcontentjcrtitle': "jcrcontentjcrtitle_example", // {String} 
-  'jcrcontentjcrdescription': "jcrcontentjcrdescription_example", // {String} 
-  'jcrcontentslingresourceType': "jcrcontentslingresourceType_example", // {String} 
-  'jcrcontenttransportUri': "jcrcontenttransportUri_example", // {String} 
-  'jcrcontentlogLevel': "jcrcontentlogLevel_example", // {String} 
-  'jcrcontentnoVersioning': true, // {Boolean} 
-  'jcrcontentprotocolHTTPHeaders': ["jcrcontentprotocolHTTPHeaders_example"], // {[String]} 
-  'jcrcontentprotocolHTTPHeadersTypeHint': "jcrcontentprotocolHTTPHeadersTypeHint_example", // {String} 
-  'jcrcontentprotocolHTTPMethod': "jcrcontentprotocolHTTPMethod_example", // {String} 
-  'jcrcontentretryDelay': "jcrcontentretryDelay_example", // {String} 
-  'jcrcontentserializationType': "jcrcontentserializationType_example", // {String} 
-  'jcrcontentjcrmixinTypes': "jcrcontentjcrmixinTypes_example", // {String} 
-  'jcrcontenttriggerReceive': true, // {Boolean} 
-  'jcrcontenttriggerSpecific': true, // {Boolean} 
-  'jcrcontentcqtemplate': "jcrcontentcqtemplate_example", // {String} 
-  'jcrcontentenabled': true // {Boolean} 
+  'jcrprimaryType': "jcrprimaryType_example", // String | 
+  'jcrcontentcqname': "jcrcontentcqname_example", // String | 
+  'jcrcontentjcrtitle': "jcrcontentjcrtitle_example", // String | 
+  'jcrcontentjcrdescription': "jcrcontentjcrdescription_example", // String | 
+  'jcrcontentslingresourceType': "jcrcontentslingresourceType_example", // String | 
+  'jcrcontenttransportUri': "jcrcontenttransportUri_example", // String | 
+  'jcrcontentlogLevel': "jcrcontentlogLevel_example", // String | 
+  'jcrcontentnoVersioning': true, // Boolean | 
+  'jcrcontentprotocolHTTPHeaders': ["jcrcontentprotocolHTTPHeaders_example"], // [String] | 
+  'jcrcontentprotocolHTTPHeadersTypeHint': "jcrcontentprotocolHTTPHeadersTypeHint_example", // String | 
+  'jcrcontentprotocolHTTPMethod': "jcrcontentprotocolHTTPMethod_example", // String | 
+  'jcrcontentretryDelay': "jcrcontentretryDelay_example", // String | 
+  'jcrcontentserializationType': "jcrcontentserializationType_example", // String | 
+  'jcrcontentjcrmixinTypes': "jcrcontentjcrmixinTypes_example", // String | 
+  'jcrcontenttriggerReceive': true, // Boolean | 
+  'jcrcontenttriggerSpecific': true, // Boolean | 
+  'jcrcontentcqtemplate': "jcrcontentcqtemplate_example", // String | 
+  'jcrcontentenabled': true // Boolean | 
 };
 
 var callback = function(error, data, response) {
@@ -393,7 +393,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-api.postAgent(runmode, name, opts, callback);
+apiInstance.postAgent(runmode, name, opts, callback);
 ```
 
 ### Parameters
@@ -429,7 +429,7 @@ null (empty response body)
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain
@@ -447,20 +447,20 @@ var defaultClient = NodeSwaggerAem.ApiClient.default;
 
 // Configure HTTP basic authorization: aemAuth
 var aemAuth = defaultClient.authentications['aemAuth'];
-aemAuth.username = 'YOUR USERNAME'
-aemAuth.password = 'YOUR PASSWORD'
+aemAuth.username = 'YOUR USERNAME';
+aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.SlingApi()
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-var authorizableId = "authorizableId_example"; // {String} 
+var authorizableId = "authorizableId_example"; // String | 
 
-var intermediatePath = "intermediatePath_example"; // {String} 
+var intermediatePath = "intermediatePath_example"; // String | 
 
 var opts = { 
-  'createUser': "createUser_example", // {String} 
-  'createGroup': "createGroup_example", // {String} 
-  'reppassword': "reppassword_example", // {String} 
-  'profilegivenName': "profilegivenName_example" // {String} 
+  'createUser': "createUser_example", // String | 
+  'createGroup': "createGroup_example", // String | 
+  'reppassword': "reppassword_example", // String | 
+  'profilegivenName': "profilegivenName_example" // String | 
 };
 
 var callback = function(error, data, response) {
@@ -470,7 +470,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.postAuthorizables(authorizableId, intermediatePath, opts, callback);
+apiInstance.postAuthorizables(authorizableId, intermediatePath, opts, callback);
 ```
 
 ### Parameters
@@ -492,7 +492,7 @@ Name | Type | Description  | Notes
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: text/html
@@ -510,36 +510,36 @@ var defaultClient = NodeSwaggerAem.ApiClient.default;
 
 // Configure HTTP basic authorization: aemAuth
 var aemAuth = defaultClient.authentications['aemAuth'];
-aemAuth.username = 'YOUR USERNAME'
-aemAuth.password = 'YOUR PASSWORD'
+aemAuth.username = 'YOUR USERNAME';
+aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.SlingApi()
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-var runmode = "runmode_example"; // {String} 
+var runmode = "runmode_example"; // String | 
 
-var name = "name_example"; // {String} 
+var name = "name_example"; // String | 
 
 var opts = { 
-  'orgApacheFelixHttpsNio': true, // {Boolean} 
-  'orgApacheFelixHttpsNioTypeHint': "orgApacheFelixHttpsNioTypeHint_example", // {String} 
-  'orgApacheFelixHttpsKeystore': "orgApacheFelixHttpsKeystore_example", // {String} 
-  'orgApacheFelixHttpsKeystoreTypeHint': "orgApacheFelixHttpsKeystoreTypeHint_example", // {String} 
-  'orgApacheFelixHttpsKeystorePassword': "orgApacheFelixHttpsKeystorePassword_example", // {String} 
-  'orgApacheFelixHttpsKeystorePasswordTypeHint': "orgApacheFelixHttpsKeystorePasswordTypeHint_example", // {String} 
-  'orgApacheFelixHttpsKeystoreKey': "orgApacheFelixHttpsKeystoreKey_example", // {String} 
-  'orgApacheFelixHttpsKeystoreKeyTypeHint': "orgApacheFelixHttpsKeystoreKeyTypeHint_example", // {String} 
-  'orgApacheFelixHttpsKeystoreKeyPassword': "orgApacheFelixHttpsKeystoreKeyPassword_example", // {String} 
-  'orgApacheFelixHttpsKeystoreKeyPasswordTypeHint': "orgApacheFelixHttpsKeystoreKeyPasswordTypeHint_example", // {String} 
-  'orgApacheFelixHttpsTruststore': "orgApacheFelixHttpsTruststore_example", // {String} 
-  'orgApacheFelixHttpsTruststoreTypeHint': "orgApacheFelixHttpsTruststoreTypeHint_example", // {String} 
-  'orgApacheFelixHttpsTruststorePassword': "orgApacheFelixHttpsTruststorePassword_example", // {String} 
-  'orgApacheFelixHttpsTruststorePasswordTypeHint': "orgApacheFelixHttpsTruststorePasswordTypeHint_example", // {String} 
-  'orgApacheFelixHttpsClientcertificate': "orgApacheFelixHttpsClientcertificate_example", // {String} 
-  'orgApacheFelixHttpsClientcertificateTypeHint': "orgApacheFelixHttpsClientcertificateTypeHint_example", // {String} 
-  'orgApacheFelixHttpsEnable': "orgApacheFelixHttpsEnable_example", // {String} 
-  'orgApacheFelixHttpsEnableTypeHint': "orgApacheFelixHttpsEnableTypeHint_example", // {String} 
-  'orgOsgiServiceHttpPortSecure': "orgOsgiServiceHttpPortSecure_example", // {String} 
-  'orgOsgiServiceHttpPortSecureTypeHint': "orgOsgiServiceHttpPortSecureTypeHint_example" // {String} 
+  'orgApacheFelixHttpsNio': true, // Boolean | 
+  'orgApacheFelixHttpsNioTypeHint': "orgApacheFelixHttpsNioTypeHint_example", // String | 
+  'orgApacheFelixHttpsKeystore': "orgApacheFelixHttpsKeystore_example", // String | 
+  'orgApacheFelixHttpsKeystoreTypeHint': "orgApacheFelixHttpsKeystoreTypeHint_example", // String | 
+  'orgApacheFelixHttpsKeystorePassword': "orgApacheFelixHttpsKeystorePassword_example", // String | 
+  'orgApacheFelixHttpsKeystorePasswordTypeHint': "orgApacheFelixHttpsKeystorePasswordTypeHint_example", // String | 
+  'orgApacheFelixHttpsKeystoreKey': "orgApacheFelixHttpsKeystoreKey_example", // String | 
+  'orgApacheFelixHttpsKeystoreKeyTypeHint': "orgApacheFelixHttpsKeystoreKeyTypeHint_example", // String | 
+  'orgApacheFelixHttpsKeystoreKeyPassword': "orgApacheFelixHttpsKeystoreKeyPassword_example", // String | 
+  'orgApacheFelixHttpsKeystoreKeyPasswordTypeHint': "orgApacheFelixHttpsKeystoreKeyPasswordTypeHint_example", // String | 
+  'orgApacheFelixHttpsTruststore': "orgApacheFelixHttpsTruststore_example", // String | 
+  'orgApacheFelixHttpsTruststoreTypeHint': "orgApacheFelixHttpsTruststoreTypeHint_example", // String | 
+  'orgApacheFelixHttpsTruststorePassword': "orgApacheFelixHttpsTruststorePassword_example", // String | 
+  'orgApacheFelixHttpsTruststorePasswordTypeHint': "orgApacheFelixHttpsTruststorePasswordTypeHint_example", // String | 
+  'orgApacheFelixHttpsClientcertificate': "orgApacheFelixHttpsClientcertificate_example", // String | 
+  'orgApacheFelixHttpsClientcertificateTypeHint': "orgApacheFelixHttpsClientcertificateTypeHint_example", // String | 
+  'orgApacheFelixHttpsEnable': "orgApacheFelixHttpsEnable_example", // String | 
+  'orgApacheFelixHttpsEnableTypeHint': "orgApacheFelixHttpsEnableTypeHint_example", // String | 
+  'orgOsgiServiceHttpPortSecure': "orgOsgiServiceHttpPortSecure_example", // String | 
+  'orgOsgiServiceHttpPortSecureTypeHint': "orgOsgiServiceHttpPortSecureTypeHint_example" // String | 
 };
 
 var callback = function(error, data, response) {
@@ -549,7 +549,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-api.postConfig(runmode, name, opts, callback);
+apiInstance.postConfig(runmode, name, opts, callback);
 ```
 
 ### Parameters
@@ -587,7 +587,7 @@ null (empty response body)
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain
@@ -605,17 +605,17 @@ var defaultClient = NodeSwaggerAem.ApiClient.default;
 
 // Configure HTTP basic authorization: aemAuth
 var aemAuth = defaultClient.authentications['aemAuth'];
-aemAuth.username = 'YOUR USERNAME'
-aemAuth.password = 'YOUR PASSWORD'
+aemAuth.username = 'YOUR USERNAME';
+aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.SlingApi()
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-var path = "path_example"; // {String} 
+var path = "path_example"; // String | 
 
-var name = "name_example"; // {String} 
+var name = "name_example"; // String | 
 
 var opts = { 
-  'addMembers': "addMembers_example" // {String} 
+  'addMembers': "addMembers_example" // String | 
 };
 
 var callback = function(error, data, response) {
@@ -625,7 +625,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-api.postNodeRw(path, name, opts, callback);
+apiInstance.postNodeRw(path, name, opts, callback);
 ```
 
 ### Parameters
@@ -644,7 +644,7 @@ null (empty response body)
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain
@@ -662,16 +662,16 @@ var defaultClient = NodeSwaggerAem.ApiClient.default;
 
 // Configure HTTP basic authorization: aemAuth
 var aemAuth = defaultClient.authentications['aemAuth'];
-aemAuth.username = 'YOUR USERNAME'
-aemAuth.password = 'YOUR PASSWORD'
+aemAuth.username = 'YOUR USERNAME';
+aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.SlingApi()
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-var path = "path_example"; // {String} 
+var path = "path_example"; // String | 
 
-var jcrprimaryType = "jcrprimaryType_example"; // {String} 
+var jcrprimaryType = "jcrprimaryType_example"; // String | 
 
-var name = "name_example"; // {String} 
+var name = "name_example"; // String | 
 
 
 var callback = function(error, data, response) {
@@ -681,7 +681,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-api.postPath(path, jcrprimaryType, name, callback);
+apiInstance.postPath(path, jcrprimaryType, name, callback);
 ```
 
 ### Parameters
@@ -700,7 +700,7 @@ null (empty response body)
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain
@@ -718,18 +718,18 @@ var defaultClient = NodeSwaggerAem.ApiClient.default;
 
 // Configure HTTP basic authorization: aemAuth
 var aemAuth = defaultClient.authentications['aemAuth'];
-aemAuth.username = 'YOUR USERNAME'
-aemAuth.password = 'YOUR PASSWORD'
+aemAuth.username = 'YOUR USERNAME';
+aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.SlingApi()
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-var path = "path_example"; // {String} 
+var path = "path_example"; // String | 
 
-var pLimit = 3.4; // {Number} 
+var pLimit = 3.4; // Number | 
 
-var _1Property = "_1Property_example"; // {String} 
+var _1Property = "_1Property_example"; // String | 
 
-var _1PropertyValue = "_1PropertyValue_example"; // {String} 
+var _1PropertyValue = "_1PropertyValue_example"; // String | 
 
 
 var callback = function(error, data, response) {
@@ -739,7 +739,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.postQuery(path, pLimit, _1Property, _1PropertyValue, callback);
+apiInstance.postQuery(path, pLimit, _1Property, _1PropertyValue, callback);
 ```
 
 ### Parameters
@@ -747,7 +747,7 @@ api.postQuery(path, pLimit, _1Property, _1PropertyValue, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path** | **String**|  | 
- **pLimit** | [**Number**](.md)|  | 
+ **pLimit** | **Number**|  | 
  **_1Property** | **String**|  | 
  **_1PropertyValue** | **String**|  | 
 
@@ -759,7 +759,7 @@ Name | Type | Description  | Notes
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
@@ -777,16 +777,16 @@ var defaultClient = NodeSwaggerAem.ApiClient.default;
 
 // Configure HTTP basic authorization: aemAuth
 var aemAuth = defaultClient.authentications['aemAuth'];
-aemAuth.username = 'YOUR USERNAME'
-aemAuth.password = 'YOUR PASSWORD'
+aemAuth.username = 'YOUR USERNAME';
+aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.SlingApi()
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-var ignoredeactivated = true; // {Boolean} 
+var ignoredeactivated = true; // Boolean | 
 
-var onlymodified = true; // {Boolean} 
+var onlymodified = true; // Boolean | 
 
-var path = "path_example"; // {String} 
+var path = "path_example"; // String | 
 
 
 var callback = function(error, data, response) {
@@ -796,7 +796,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-api.postTreeActivation(ignoredeactivated, onlymodified, path, callback);
+apiInstance.postTreeActivation(ignoredeactivated, onlymodified, path, callback);
 ```
 
 ### Parameters
@@ -815,7 +815,7 @@ null (empty response body)
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain

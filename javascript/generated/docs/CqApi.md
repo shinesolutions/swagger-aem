@@ -20,14 +20,14 @@ var defaultClient = NodeSwaggerAem.ApiClient.default;
 
 // Configure HTTP basic authorization: aemAuth
 var aemAuth = defaultClient.authentications['aemAuth'];
-aemAuth.username = 'YOUR USERNAME'
-aemAuth.password = 'YOUR PASSWORD'
+aemAuth.username = 'YOUR USERNAME';
+aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.CqApi()
+var apiInstance = new NodeSwaggerAem.CqApi();
 
-var authorizableId = "authorizableId_example"; // {String} 
+var authorizableId = "authorizableId_example"; // String | 
 
-var changelog = "changelog_example"; // {String} 
+var changelog = "changelog_example"; // String | 
 
 
 var callback = function(error, data, response) {
@@ -37,7 +37,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully.');
   }
 };
-api.postCqActions(authorizableId, changelog, callback);
+apiInstance.postCqActions(authorizableId, changelog, callback);
 ```
 
 ### Parameters
@@ -55,7 +55,7 @@ null (empty response body)
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain
