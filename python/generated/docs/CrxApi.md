@@ -17,6 +17,7 @@ Method | HTTP request | Description
 
 ### Example 
 ```python
+from __future__ import print_statement
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
@@ -34,7 +35,7 @@ try:
     api_response = api_instance.post_package_service(cmd)
     pprint(api_response)
 except ApiException as e:
-    print "Exception when calling CrxApi->post_package_service: %s\n" % e
+    print("Exception when calling CrxApi->post_package_service: %s\n" % e)
 ```
 
 ### Parameters
@@ -65,6 +66,7 @@ Name | Type | Description  | Notes
 
 ### Example 
 ```python
+from __future__ import print_statement
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
@@ -89,7 +91,7 @@ try:
     api_response = api_instance.post_package_service_json(path, cmd, group_name=group_name, package_name=package_name, package_version=package_version, charset_=charset_, force=force, package=package)
     pprint(api_response)
 except ApiException as e:
-    print "Exception when calling CrxApi->post_package_service_json: %s\n" % e
+    print("Exception when calling CrxApi->post_package_service_json: %s\n" % e)
 ```
 
 ### Parameters
@@ -127,6 +129,7 @@ Name | Type | Description  | Notes
 
 ### Example 
 ```python
+from __future__ import print_statement
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
@@ -149,7 +152,7 @@ try:
     api_response = api_instance.post_package_update(group_name, package_name, version, path, filter=filter, charset_=charset_)
     pprint(api_response)
 except ApiException as e:
-    print "Exception when calling CrxApi->post_package_update: %s\n" % e
+    print("Exception when calling CrxApi->post_package_update: %s\n" % e)
 ```
 
 ### Parameters
@@ -185,6 +188,7 @@ Name | Type | Description  | Notes
 
 ### Example 
 ```python
+from __future__ import print_statement
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
@@ -203,7 +207,7 @@ verify = 'verify_example' # str |
 try: 
     api_instance.post_set_password(old, plain, verify)
 except ApiException as e:
-    print "Exception when calling CrxApi->post_set_password: %s\n" % e
+    print("Exception when calling CrxApi->post_set_password: %s\n" % e)
 ```
 
 ### Parameters

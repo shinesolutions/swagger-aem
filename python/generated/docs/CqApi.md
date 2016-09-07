@@ -14,6 +14,7 @@ Method | HTTP request | Description
 
 ### Example 
 ```python
+from __future__ import print_statement
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
@@ -31,7 +32,7 @@ changelog = 'changelog_example' # str |
 try: 
     api_instance.post_cq_actions(authorizable_id, changelog)
 except ApiException as e:
-    print "Exception when calling CqApi->post_cq_actions: %s\n" % e
+    print("Exception when calling CqApi->post_cq_actions: %s\n" % e)
 ```
 
 ### Parameters

@@ -15,6 +15,7 @@ Method | HTTP request | Description
 
 ### Example 
 ```python
+from __future__ import print_statement
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
@@ -32,7 +33,7 @@ action = 'action_example' # str |
 try: 
     api_instance.post_bundle(name, action)
 except ApiException as e:
-    print "Exception when calling ConsoleApi->post_bundle: %s\n" % e
+    print("Exception when calling ConsoleApi->post_bundle: %s\n" % e)
 ```
 
 ### Parameters
@@ -64,6 +65,7 @@ void (empty response body)
 
 ### Example 
 ```python
+from __future__ import print_statement
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
@@ -80,7 +82,7 @@ action = 'action_example' # str |
 try: 
     api_instance.post_jmx_repository(action)
 except ApiException as e:
-    print "Exception when calling ConsoleApi->post_jmx_repository: %s\n" % e
+    print("Exception when calling ConsoleApi->post_jmx_repository: %s\n" % e)
 ```
 
 ### Parameters

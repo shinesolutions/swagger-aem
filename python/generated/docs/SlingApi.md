@@ -26,6 +26,7 @@ Method | HTTP request | Description
 
 ### Example 
 ```python
+from __future__ import print_statement
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
@@ -43,7 +44,7 @@ name = 'name_example' # str |
 try: 
     api_instance.delete_agent(runmode, name)
 except ApiException as e:
-    print "Exception when calling SlingApi->delete_agent: %s\n" % e
+    print("Exception when calling SlingApi->delete_agent: %s\n" % e)
 ```
 
 ### Parameters
@@ -75,6 +76,7 @@ void (empty response body)
 
 ### Example 
 ```python
+from __future__ import print_statement
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
@@ -92,7 +94,7 @@ name = 'name_example' # str |
 try: 
     api_instance.delete_node(path, name)
 except ApiException as e:
-    print "Exception when calling SlingApi->delete_node: %s\n" % e
+    print("Exception when calling SlingApi->delete_node: %s\n" % e)
 ```
 
 ### Parameters
@@ -124,6 +126,7 @@ void (empty response body)
 
 ### Example 
 ```python
+from __future__ import print_statement
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
@@ -141,7 +144,7 @@ name = 'name_example' # str |
 try: 
     api_instance.get_agent(runmode, name)
 except ApiException as e:
-    print "Exception when calling SlingApi->get_agent: %s\n" % e
+    print("Exception when calling SlingApi->get_agent: %s\n" % e)
 ```
 
 ### Parameters
@@ -173,6 +176,7 @@ void (empty response body)
 
 ### Example 
 ```python
+from __future__ import print_statement
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
@@ -190,7 +194,7 @@ name = 'name_example' # str |
 try: 
     api_instance.get_node(path, name)
 except ApiException as e:
-    print "Exception when calling SlingApi->get_node: %s\n" % e
+    print("Exception when calling SlingApi->get_node: %s\n" % e)
 ```
 
 ### Parameters
@@ -222,6 +226,7 @@ void (empty response body)
 
 ### Example 
 ```python
+from __future__ import print_statement
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
@@ -241,7 +246,7 @@ try:
     api_response = api_instance.get_package(group, name, version)
     pprint(api_response)
 except ApiException as e:
-    print "Exception when calling SlingApi->get_package: %s\n" % e
+    print("Exception when calling SlingApi->get_package: %s\n" % e)
 ```
 
 ### Parameters
@@ -274,6 +279,7 @@ Name | Type | Description  | Notes
 
 ### Example 
 ```python
+from __future__ import print_statement
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
@@ -293,7 +299,7 @@ try:
     api_response = api_instance.get_package_filter(group, name, version)
     pprint(api_response)
 except ApiException as e:
-    print "Exception when calling SlingApi->get_package_filter: %s\n" % e
+    print("Exception when calling SlingApi->get_package_filter: %s\n" % e)
 ```
 
 ### Parameters
@@ -326,6 +332,7 @@ Name | Type | Description  | Notes
 
 ### Example 
 ```python
+from __future__ import print_statement
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
@@ -361,7 +368,7 @@ jcrcontentenabled = true # bool |  (optional)
 try: 
     api_instance.post_agent(runmode, name, jcrprimary_type=jcrprimary_type, jcrcontentcqname=jcrcontentcqname, jcrcontentjcrtitle=jcrcontentjcrtitle, jcrcontentjcrdescription=jcrcontentjcrdescription, jcrcontentslingresource_type=jcrcontentslingresource_type, jcrcontenttransport_uri=jcrcontenttransport_uri, jcrcontentlog_level=jcrcontentlog_level, jcrcontentno_versioning=jcrcontentno_versioning, jcrcontentprotocol_http_headers=jcrcontentprotocol_http_headers, jcrcontentprotocol_http_headers_type_hint=jcrcontentprotocol_http_headers_type_hint, jcrcontentprotocol_http_method=jcrcontentprotocol_http_method, jcrcontentretry_delay=jcrcontentretry_delay, jcrcontentserialization_type=jcrcontentserialization_type, jcrcontentjcrmixin_types=jcrcontentjcrmixin_types, jcrcontenttrigger_receive=jcrcontenttrigger_receive, jcrcontenttrigger_specific=jcrcontenttrigger_specific, jcrcontentcqtemplate=jcrcontentcqtemplate, jcrcontentenabled=jcrcontentenabled)
 except ApiException as e:
-    print "Exception when calling SlingApi->post_agent: %s\n" % e
+    print("Exception when calling SlingApi->post_agent: %s\n" % e)
 ```
 
 ### Parameters
@@ -411,6 +418,7 @@ void (empty response body)
 
 ### Example 
 ```python
+from __future__ import print_statement
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
@@ -433,7 +441,7 @@ try:
     api_response = api_instance.post_authorizables(authorizable_id, intermediate_path, create_user=create_user, create_group=create_group, reppassword=reppassword, profilegiven_name=profilegiven_name)
     pprint(api_response)
 except ApiException as e:
-    print "Exception when calling SlingApi->post_authorizables: %s\n" % e
+    print("Exception when calling SlingApi->post_authorizables: %s\n" % e)
 ```
 
 ### Parameters
@@ -469,6 +477,7 @@ Name | Type | Description  | Notes
 
 ### Example 
 ```python
+from __future__ import print_statement
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
@@ -506,7 +515,7 @@ org_osgi_service_http_port_secure_type_hint = 'org_osgi_service_http_port_secure
 try: 
     api_instance.post_config(runmode, name, org_apache_felix_https_nio=org_apache_felix_https_nio, org_apache_felix_https_nio_type_hint=org_apache_felix_https_nio_type_hint, org_apache_felix_https_keystore=org_apache_felix_https_keystore, org_apache_felix_https_keystore_type_hint=org_apache_felix_https_keystore_type_hint, org_apache_felix_https_keystore_password=org_apache_felix_https_keystore_password, org_apache_felix_https_keystore_password_type_hint=org_apache_felix_https_keystore_password_type_hint, org_apache_felix_https_keystore_key=org_apache_felix_https_keystore_key, org_apache_felix_https_keystore_key_type_hint=org_apache_felix_https_keystore_key_type_hint, org_apache_felix_https_keystore_key_password=org_apache_felix_https_keystore_key_password, org_apache_felix_https_keystore_key_password_type_hint=org_apache_felix_https_keystore_key_password_type_hint, org_apache_felix_https_truststore=org_apache_felix_https_truststore, org_apache_felix_https_truststore_type_hint=org_apache_felix_https_truststore_type_hint, org_apache_felix_https_truststore_password=org_apache_felix_https_truststore_password, org_apache_felix_https_truststore_password_type_hint=org_apache_felix_https_truststore_password_type_hint, org_apache_felix_https_clientcertificate=org_apache_felix_https_clientcertificate, org_apache_felix_https_clientcertificate_type_hint=org_apache_felix_https_clientcertificate_type_hint, org_apache_felix_https_enable=org_apache_felix_https_enable, org_apache_felix_https_enable_type_hint=org_apache_felix_https_enable_type_hint, org_osgi_service_http_port_secure=org_osgi_service_http_port_secure, org_osgi_service_http_port_secure_type_hint=org_osgi_service_http_port_secure_type_hint)
 except ApiException as e:
-    print "Exception when calling SlingApi->post_config: %s\n" % e
+    print("Exception when calling SlingApi->post_config: %s\n" % e)
 ```
 
 ### Parameters
@@ -558,6 +567,7 @@ void (empty response body)
 
 ### Example 
 ```python
+from __future__ import print_statement
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
@@ -576,7 +586,7 @@ add_members = 'add_members_example' # str |  (optional)
 try: 
     api_instance.post_node_rw(path, name, add_members=add_members)
 except ApiException as e:
-    print "Exception when calling SlingApi->post_node_rw: %s\n" % e
+    print("Exception when calling SlingApi->post_node_rw: %s\n" % e)
 ```
 
 ### Parameters
@@ -609,6 +619,7 @@ void (empty response body)
 
 ### Example 
 ```python
+from __future__ import print_statement
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
@@ -627,7 +638,7 @@ name = 'name_example' # str |
 try: 
     api_instance.post_path(path, jcrprimary_type, name)
 except ApiException as e:
-    print "Exception when calling SlingApi->post_path: %s\n" % e
+    print("Exception when calling SlingApi->post_path: %s\n" % e)
 ```
 
 ### Parameters
@@ -660,6 +671,7 @@ void (empty response body)
 
 ### Example 
 ```python
+from __future__ import print_statement
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
@@ -680,7 +692,7 @@ try:
     api_response = api_instance.post_query(path, p_limit, _1_property, _1_property_value)
     pprint(api_response)
 except ApiException as e:
-    print "Exception when calling SlingApi->post_query: %s\n" % e
+    print("Exception when calling SlingApi->post_query: %s\n" % e)
 ```
 
 ### Parameters
@@ -714,6 +726,7 @@ Name | Type | Description  | Notes
 
 ### Example 
 ```python
+from __future__ import print_statement
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
@@ -732,7 +745,7 @@ path = 'path_example' # str |
 try: 
     api_instance.post_tree_activation(ignoredeactivated, onlymodified, path)
 except ApiException as e:
-    print "Exception when calling SlingApi->post_tree_activation: %s\n" % e
+    print("Exception when calling SlingApi->post_tree_activation: %s\n" % e)
 ```
 
 ### Parameters
