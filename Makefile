@@ -10,7 +10,7 @@ clean:
 	rm -rf doc
 
 doc:
-	bootprint openapi conf/api.yml doc/api/latest/
+	bootprint openapi conf/api.yml doc/api/master/
 
 doc-publish:
 	gh-pages --dist doc/

@@ -37,7 +37,7 @@ test-integration:
 doc:
 	cd generated/ && \
     yard doc \
-    --output-dir ../../doc/ruby/latest/
+    --output-dir ../../doc/ruby/master/
 
 publish:
 	cd generated/ && \
