@@ -283,7 +283,7 @@ Sling API - User:
 Error handling
 --------------
 
-Any API error will be thrown as [SwaggerAemClient::AepiError](https://shinesolutions.github.io/swagger-aem/ruby/latest/SwaggerAemClient/ApiError.html) .
+Any API error will be thrown as [SwaggerAemClient::ApiError](https://shinesolutions.github.io/swagger-aem/ruby/latest/SwaggerAemClient/ApiError.html) .
 
     begin
       data, status_code, headers = console.post_bundle_with_http_info(
