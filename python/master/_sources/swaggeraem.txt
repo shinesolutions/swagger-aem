@@ -1,0 +1,46 @@
+swaggeraem package
+==================
+
+Subpackages
+-----------
+
+.. toctree::
+
+    swaggeraem.apis
+    swaggeraem.models
+
+Submodules
+----------
+
+swaggeraem.api_client module
+----------------------------
+
+.. automodule:: swaggeraem.api_client
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+swaggeraem.configuration module
+-------------------------------
+
+.. automodule:: swaggeraem.configuration
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+swaggeraem.rest module
+----------------------
+
+.. automodule:: swaggeraem.rest
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: swaggeraem
+    :members:
+    :undoc-members:
+    :show-inheritance:

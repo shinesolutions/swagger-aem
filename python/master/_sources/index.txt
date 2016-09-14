@@ -1,0 +1,23 @@
+.. Swagger AEM documentation master file, created by
+   sphinx-quickstart on Fri Sep  9 00:24:41 2016.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Welcome to Swagger AEM's documentation!
+=======================================
+
+Contents:
+
+.. toctree::
+   :maxdepth: 4
+
+   swaggeraem
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+

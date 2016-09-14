@@ -1,0 +1,46 @@
+swaggeraem.apis package
+=======================
+
+Submodules
+----------
+
+swaggeraem.apis.console_api module
+----------------------------------
+
+.. automodule:: swaggeraem.apis.console_api
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+swaggeraem.apis.cq_api module
+-----------------------------
+
+.. automodule:: swaggeraem.apis.cq_api
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+swaggeraem.apis.crx_api module
+------------------------------
+
+.. automodule:: swaggeraem.apis.crx_api
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+swaggeraem.apis.sling_api module
+--------------------------------
+
+.. automodule:: swaggeraem.apis.sling_api
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: swaggeraem.apis
+    :members:
+    :undoc-members:
+    :show-inheritance:

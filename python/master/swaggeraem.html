@@ -1,0 +1,521 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>swaggeraem package &#8212; Swagger AEM  documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Swagger AEM  documentation" href="index.html" />
+    <link rel="next" title="swaggeraem.apis package" href="swaggeraem.apis.html" />
+    <link rel="prev" title="Welcome to Swagger AEM’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="swaggeraem-package">
+<h1>swaggeraem package<a class="headerlink" href="#swaggeraem-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="swaggeraem.apis.html">swaggeraem.apis package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="swaggeraem.apis.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="swaggeraem.apis.html#module-swaggeraem.apis.console_api">swaggeraem.apis.console_api module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="swaggeraem.apis.html#module-swaggeraem.apis.cq_api">swaggeraem.apis.cq_api module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="swaggeraem.apis.html#module-swaggeraem.apis.crx_api">swaggeraem.apis.crx_api module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="swaggeraem.apis.html#module-swaggeraem.apis.sling_api">swaggeraem.apis.sling_api module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="swaggeraem.apis.html#module-swaggeraem.apis">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="swaggeraem.models.html">swaggeraem.models package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="swaggeraem.models.html#module-swaggeraem.models">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-swaggeraem.api_client">
+<span id="swaggeraem-api-client-module"></span><h2>swaggeraem.api_client module<a class="headerlink" href="#module-swaggeraem.api_client" title="Permalink to this headline">¶</a></h2>
+<p>Copyright 2016 SmartBear Software</p>
+<blockquote>
+<div><p>Licensed under the Apache License, Version 2.0 (the &#8220;License&#8221;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at</p>
+<blockquote>
+<div><a class="reference external" href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></div></blockquote>
+<p>Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &#8220;AS IS&#8221; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</p>
+<p>ref: <a class="reference external" href="https://github.com/swagger-api/swagger-codegen">https://github.com/swagger-api/swagger-codegen</a></p>
+</div></blockquote>
+<dl class="class">
+<dt id="swaggeraem.api_client.ApiClient">
+<em class="property">class </em><code class="descclassname">swaggeraem.api_client.</code><code class="descname">ApiClient</code><span class="sig-paren">(</span><em>host=None</em>, <em>header_name=None</em>, <em>header_value=None</em>, <em>cookie=None</em><span class="sig-paren">)</span><a class="headerlink" href="#swaggeraem.api_client.ApiClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Generic API client for Swagger client library builds.</p>
+<p>Swagger generic API client. This client handles the client-
+server communication, and is invariant across implementations. Specifics of
+the methods and models for each application are generated from the Swagger
+templates.</p>
+<p>NOTE: This class is auto generated by the swagger code generator program.
+Ref: <a class="reference external" href="https://github.com/swagger-api/swagger-codegen">https://github.com/swagger-api/swagger-codegen</a>
+Do not edit the class manually.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>host</strong> &#8211; The base path for the server to call.</li>
+<li><strong>header_name</strong> &#8211; a header to pass when making calls to the API.</li>
+<li><strong>header_value</strong> &#8211; a header value to pass when making calls to the API.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="swaggeraem.api_client.ApiClient.call_api">
+<code class="descname">call_api</code><span class="sig-paren">(</span><em>resource_path</em>, <em>method</em>, <em>path_params=None</em>, <em>query_params=None</em>, <em>header_params=None</em>, <em>body=None</em>, <em>post_params=None</em>, <em>files=None</em>, <em>response_type=None</em>, <em>auth_settings=None</em>, <em>callback=None</em>, <em>_return_http_data_only=None</em><span class="sig-paren">)</span><a class="headerlink" href="#swaggeraem.api_client.ApiClient.call_api" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes the HTTP request (synchronous) and return the deserialized data.
+To make an async request, define a function for callback.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>resource_path</strong> &#8211; Path to method endpoint.</li>
+<li><strong>method</strong> &#8211; Method to call.</li>
+<li><strong>path_params</strong> &#8211; Path parameters in the url.</li>
+<li><strong>query_params</strong> &#8211; Query parameters in the url.</li>
+<li><strong>header_params</strong> &#8211; Header parameters to be
+placed in the request header.</li>
+<li><strong>body</strong> &#8211; Request body.</li>
+<li><strong>dict</strong> (<em>files</em>) &#8211; Request post form parameters,
+for <cite>application/x-www-form-urlencoded</cite>, <cite>multipart/form-data</cite>.</li>
+<li><strong>list</strong> (<em>auth_settings</em>) &#8211; Auth Settings names for the request.</li>
+<li><strong>response</strong> &#8211; Response data type.</li>
+<li><strong>dict</strong> &#8211; key -&gt; filename, value -&gt; filepath,
+for <cite>multipart/form-data</cite>.</li>
+<li><strong>function</strong> (<em>callback</em>) &#8211; Callback function for asynchronous request.
+If provide this parameter,
+the request will be called asynchronously.</li>
+<li><strong>_return_http_data_only</strong> &#8211; response data without head status code and headers</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">If provide parameter callback,
+the request will be called asynchronously.
+The method will return the request thread.
+If parameter callback is None,
+then the method will return the response directly.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="swaggeraem.api_client.ApiClient.deserialize">
+<code class="descname">deserialize</code><span class="sig-paren">(</span><em>response</em>, <em>response_type</em><span class="sig-paren">)</span><a class="headerlink" href="#swaggeraem.api_client.ApiClient.deserialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deserializes response into an object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>response</strong> &#8211; RESTResponse object to be deserialized.</li>
+<li><strong>response_type</strong> &#8211; class literal for
+deserialzied object, or string of class name.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">deserialized object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="swaggeraem.api_client.ApiClient.prepare_post_parameters">
+<code class="descname">prepare_post_parameters</code><span class="sig-paren">(</span><em>post_params=None</em>, <em>files=None</em><span class="sig-paren">)</span><a class="headerlink" href="#swaggeraem.api_client.ApiClient.prepare_post_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Builds form parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>post_params</strong> &#8211; Normal form parameters.</li>
+<li><strong>files</strong> &#8211; File parameters.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Form parameters with files.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="swaggeraem.api_client.ApiClient.request">
+<code class="descname">request</code><span class="sig-paren">(</span><em>method</em>, <em>url</em>, <em>query_params=None</em>, <em>headers=None</em>, <em>post_params=None</em>, <em>body=None</em><span class="sig-paren">)</span><a class="headerlink" href="#swaggeraem.api_client.ApiClient.request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes the HTTP request using RESTClient.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="swaggeraem.api_client.ApiClient.sanitize_for_serialization">
+<code class="descname">sanitize_for_serialization</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#swaggeraem.api_client.ApiClient.sanitize_for_serialization" title="Permalink to this definition">¶</a></dt>
+<dd><p>Builds a JSON POST object.</p>
+<p>If obj is None, return None.
+If obj is str, int, long, float, bool, return directly.
+If obj is datetime.datetime, datetime.date</p>
+<blockquote>
+<div>convert to string in iso8601 format.</div></blockquote>
+<p>If obj is list, sanitize each element in the list.
+If obj is dict, return the dict.
+If obj is swagger model, return the properties dict.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> &#8211; The data to serialize.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The serialized form of data.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="swaggeraem.api_client.ApiClient.select_header_accept">
+<code class="descname">select_header_accept</code><span class="sig-paren">(</span><em>accepts</em><span class="sig-paren">)</span><a class="headerlink" href="#swaggeraem.api_client.ApiClient.select_header_accept" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <cite>Accept</cite> based on an array of accepts provided.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>accepts</strong> &#8211; List of headers.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Accept (e.g. application/json).</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="swaggeraem.api_client.ApiClient.select_header_content_type">
+<code class="descname">select_header_content_type</code><span class="sig-paren">(</span><em>content_types</em><span class="sig-paren">)</span><a class="headerlink" href="#swaggeraem.api_client.ApiClient.select_header_content_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <cite>Content-Type</cite> based on an array of content_types provided.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>content_types</strong> &#8211; List of content-types.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Content-Type (e.g. application/json).</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="swaggeraem.api_client.ApiClient.set_default_header">
+<code class="descname">set_default_header</code><span class="sig-paren">(</span><em>header_name</em>, <em>header_value</em><span class="sig-paren">)</span><a class="headerlink" href="#swaggeraem.api_client.ApiClient.set_default_header" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="swaggeraem.api_client.ApiClient.to_path_value">
+<code class="descname">to_path_value</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#swaggeraem.api_client.ApiClient.to_path_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes value and turn it into a string suitable for inclusion in
+the path, by url-encoding.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> &#8211; object or string value.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return string:</th><td class="field-body">quoted value.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="swaggeraem.api_client.ApiClient.update_params_for_auth">
+<code class="descname">update_params_for_auth</code><span class="sig-paren">(</span><em>headers</em>, <em>querys</em>, <em>auth_settings</em><span class="sig-paren">)</span><a class="headerlink" href="#swaggeraem.api_client.ApiClient.update_params_for_auth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates header and query params based on authentication setting.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>headers</strong> &#8211; Header parameters dict to be updated.</li>
+<li><strong>querys</strong> &#8211; Query parameters dict to be updated.</li>
+<li><strong>auth_settings</strong> &#8211; Authentication setting identifiers list.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="swaggeraem.api_client.ApiClient.user_agent">
+<code class="descname">user_agent</code><a class="headerlink" href="#swaggeraem.api_client.ApiClient.user_agent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets user agent.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-swaggeraem.configuration">
+<span id="swaggeraem-configuration-module"></span><h2>swaggeraem.configuration module<a class="headerlink" href="#module-swaggeraem.configuration" title="Permalink to this headline">¶</a></h2>
+<p>Adobe Experience Manager (AEM) API</p>
+<p>An Adobe Experience Manager (AEM) API specification</p>
+<p>OpenAPI spec version: 6.2</p>
+<p>Generated by: <a class="reference external" href="https://github.com/swagger-api/swagger-codegen.git">https://github.com/swagger-api/swagger-codegen.git</a></p>
+<p>Licensed under the Apache License, Version 2.0 (the &#8220;License&#8221;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at</p>
+<blockquote>
+<div><a class="reference external" href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></div></blockquote>
+<p>Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &#8220;AS IS&#8221; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</p>
+<dl class="function">
+<dt id="swaggeraem.configuration.Configuration">
+<code class="descclassname">swaggeraem.configuration.</code><code class="descname">Configuration</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#swaggeraem.configuration.Configuration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="swaggeraem.configuration.singleton">
+<code class="descclassname">swaggeraem.configuration.</code><code class="descname">singleton</code><span class="sig-paren">(</span><em>cls</em>, <em>*args</em>, <em>**kw</em><span class="sig-paren">)</span><a class="headerlink" href="#swaggeraem.configuration.singleton" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-swaggeraem.rest">
+<span id="swaggeraem-rest-module"></span><h2>swaggeraem.rest module<a class="headerlink" href="#module-swaggeraem.rest" title="Permalink to this headline">¶</a></h2>
+<p>Adobe Experience Manager (AEM) API</p>
+<p>An Adobe Experience Manager (AEM) API specification</p>
+<p>OpenAPI spec version: 6.2</p>
+<p>Generated by: <a class="reference external" href="https://github.com/swagger-api/swagger-codegen.git">https://github.com/swagger-api/swagger-codegen.git</a></p>
+<p>Licensed under the Apache License, Version 2.0 (the &#8220;License&#8221;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at</p>
+<blockquote>
+<div><a class="reference external" href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></div></blockquote>
+<p>Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &#8220;AS IS&#8221; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</p>
+<dl class="exception">
+<dt id="swaggeraem.rest.ApiException">
+<em class="property">exception </em><code class="descclassname">swaggeraem.rest.</code><code class="descname">ApiException</code><span class="sig-paren">(</span><em>status=None</em>, <em>reason=None</em>, <em>http_resp=None</em><span class="sig-paren">)</span><a class="headerlink" href="#swaggeraem.rest.ApiException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="swaggeraem.rest.RESTClientObject">
+<em class="property">class </em><code class="descclassname">swaggeraem.rest.</code><code class="descname">RESTClientObject</code><span class="sig-paren">(</span><em>pools_size=4</em><span class="sig-paren">)</span><a class="headerlink" href="#swaggeraem.rest.RESTClientObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="swaggeraem.rest.RESTClientObject.DELETE">
+<code class="descname">DELETE</code><span class="sig-paren">(</span><em>url</em>, <em>headers=None</em>, <em>query_params=None</em>, <em>body=None</em><span class="sig-paren">)</span><a class="headerlink" href="#swaggeraem.rest.RESTClientObject.DELETE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="swaggeraem.rest.RESTClientObject.GET">
+<code class="descname">GET</code><span class="sig-paren">(</span><em>url</em>, <em>headers=None</em>, <em>query_params=None</em><span class="sig-paren">)</span><a class="headerlink" href="#swaggeraem.rest.RESTClientObject.GET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="swaggeraem.rest.RESTClientObject.HEAD">
+<code class="descname">HEAD</code><span class="sig-paren">(</span><em>url</em>, <em>headers=None</em>, <em>query_params=None</em><span class="sig-paren">)</span><a class="headerlink" href="#swaggeraem.rest.RESTClientObject.HEAD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="swaggeraem.rest.RESTClientObject.OPTIONS">
+<code class="descname">OPTIONS</code><span class="sig-paren">(</span><em>url</em>, <em>headers=None</em>, <em>query_params=None</em>, <em>post_params=None</em>, <em>body=None</em><span class="sig-paren">)</span><a class="headerlink" href="#swaggeraem.rest.RESTClientObject.OPTIONS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="swaggeraem.rest.RESTClientObject.PATCH">
+<code class="descname">PATCH</code><span class="sig-paren">(</span><em>url</em>, <em>headers=None</em>, <em>query_params=None</em>, <em>post_params=None</em>, <em>body=None</em><span class="sig-paren">)</span><a class="headerlink" href="#swaggeraem.rest.RESTClientObject.PATCH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="swaggeraem.rest.RESTClientObject.POST">
+<code class="descname">POST</code><span class="sig-paren">(</span><em>url</em>, <em>headers=None</em>, <em>query_params=None</em>, <em>post_params=None</em>, <em>body=None</em><span class="sig-paren">)</span><a class="headerlink" href="#swaggeraem.rest.RESTClientObject.POST" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="swaggeraem.rest.RESTClientObject.PUT">
+<code class="descname">PUT</code><span class="sig-paren">(</span><em>url</em>, <em>headers=None</em>, <em>query_params=None</em>, <em>post_params=None</em>, <em>body=None</em><span class="sig-paren">)</span><a class="headerlink" href="#swaggeraem.rest.RESTClientObject.PUT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="swaggeraem.rest.RESTClientObject.request">
+<code class="descname">request</code><span class="sig-paren">(</span><em>method</em>, <em>url</em>, <em>query_params=None</em>, <em>headers=None</em>, <em>body=None</em>, <em>post_params=None</em><span class="sig-paren">)</span><a class="headerlink" href="#swaggeraem.rest.RESTClientObject.request" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>method</strong> &#8211; http request method</li>
+<li><strong>url</strong> &#8211; http request url</li>
+<li><strong>query_params</strong> &#8211; query parameters in the url</li>
+<li><strong>headers</strong> &#8211; http request headers</li>
+<li><strong>body</strong> &#8211; request json body, for <cite>application/json</cite></li>
+<li><strong>post_params</strong> &#8211; request post parameters,
+<cite>application/x-www-form-urlencode</cite>
+and <cite>multipart/form-data</cite></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="swaggeraem.rest.RESTResponse">
+<em class="property">class </em><code class="descclassname">swaggeraem.rest.</code><code class="descname">RESTResponse</code><span class="sig-paren">(</span><em>resp</em><span class="sig-paren">)</span><a class="headerlink" href="#swaggeraem.rest.RESTResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">io.IOBase</span></code></p>
+<dl class="method">
+<dt id="swaggeraem.rest.RESTResponse.getheader">
+<code class="descname">getheader</code><span class="sig-paren">(</span><em>name</em>, <em>default=None</em><span class="sig-paren">)</span><a class="headerlink" href="#swaggeraem.rest.RESTResponse.getheader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a given response header.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="swaggeraem.rest.RESTResponse.getheaders">
+<code class="descname">getheaders</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#swaggeraem.rest.RESTResponse.getheaders" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary of the response headers.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-swaggeraem">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-swaggeraem" title="Permalink to this headline">¶</a></h2>
+<p>Adobe Experience Manager (AEM) API</p>
+<p>An Adobe Experience Manager (AEM) API specification</p>
+<p>OpenAPI spec version: 6.2</p>
+<p>Generated by: <a class="reference external" href="https://github.com/swagger-api/swagger-codegen.git">https://github.com/swagger-api/swagger-codegen.git</a></p>
+<p>Licensed under the Apache License, Version 2.0 (the &#8220;License&#8221;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at</p>
+<blockquote>
+<div><a class="reference external" href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></div></blockquote>
+<p>Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &#8220;AS IS&#8221; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">swaggeraem package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-swaggeraem.api_client">swaggeraem.api_client module</a></li>
+<li><a class="reference internal" href="#module-swaggeraem.configuration">swaggeraem.configuration module</a></li>
+<li><a class="reference internal" href="#module-swaggeraem.rest">swaggeraem.rest module</a></li>
+<li><a class="reference internal" href="#module-swaggeraem">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to Swagger AEM&#8217;s documentation!</a></li>
+      <li>Next: <a href="swaggeraem.apis.html" title="next chapter">swaggeraem.apis package</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/swaggeraem.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Shine Solutions.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/swaggeraem.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

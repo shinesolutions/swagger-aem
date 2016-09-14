@@ -1,0 +1,10 @@
+swaggeraem.models package
+=========================
+
+Module contents
+---------------
+
+.. automodule:: swaggeraem.models
+    :members:
+    :undoc-members:
+    :show-inheritance:
