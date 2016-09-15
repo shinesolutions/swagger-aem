@@ -34,7 +34,7 @@ describe 'ConfigProperty' do
           jcrprimary_type = 'sling:OsgiConfig',
           name = 'org.apache.felix.http'
         )
-        # create config.author when it does not exist
+        # create config when it does not exist
         expect([200, 201]).to include(status_code)
       rescue SwaggerAemClient::ApiError => err
         # ignore when it already exists
@@ -56,7 +56,7 @@ describe 'ConfigProperty' do
           :org_apache_felix_https_keystore_key_password => 'somekeypassword',
           :org_apache_felix_https_keystore_key_password_type_hint => 'String',
           :org_apache_felix_https_truststore => '/some/path/to/truststore',
-          :org_apache_felix_https_truststore_key_type_hint => 'String',
+          :org_apache_felix_https_truststore_type_hint => 'String',
           :org_apache_felix_https_truststore_password => 'sometruststorepassword',
           :org_apache_felix_https_truststore_password_type_hint => 'String',
           :org_apache_felix_https_clientcertificate => 'none',
