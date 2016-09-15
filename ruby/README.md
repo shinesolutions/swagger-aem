@@ -4,9 +4,9 @@
 swagger_aem
 -----------
 
-swagger_aem is a ruby client generated from [Swagger AEM specification](https://github.com/shinesolutions/swagger-aem) using [Swagger Code Generator](https://github.com/swagger-api/swagger-codegen).
+swagger_aem is a Ruby client generated from [Swagger AEM specification](https://github.com/shinesolutions/swagger-aem) using [Swagger Code Generator](https://github.com/swagger-api/swagger-codegen).
 
-This ruby client returns raw HTTP response AS-IS. Check out [ruby_aem](https://github.com/shinesolutions/ruby_aem) for an abstraction layer with resource-oriented API and convenient response handling.
+This Ruby client returns raw HTTP response AS-IS. Check out [ruby_aem](https://github.com/shinesolutions/ruby_aem) for an abstraction layer with resource-oriented API and convenient response handling.
 
 | swagger_aem | Supported AEM          | Supported Ruby          | Swagger Codegen CLI | Documentation                                                             |
 |-------------|------------------------|-------------------------|---------------------|---------------------------------------------------------------------------|
@@ -283,7 +283,7 @@ Sling API - User:
 Error handling
 --------------
 
-Any API error will be thrown as [SwaggerAemClient::ApiError](https://shinesolutions.github.io/swagger-aem/ruby/latest/SwaggerAemClient/ApiError.html) .
+Any API error will be thrown as [SwaggerAemClient::ApiError](https://shinesolutions.github.io/swagger-aem/ruby/master/SwaggerAemClient/ApiError.html) .
 
     begin
       data, status_code, headers = console.post_bundle_with_http_info(
