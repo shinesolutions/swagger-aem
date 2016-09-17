@@ -1,9 +1,3 @@
-ifndef SWAGGER_CODEGEN_JAR
-	SWAGGER_CODEGEN = swagger-codegen
-else
-	SWAGGER_CODEGEN = java -jar $(SWAGGER_CODEGEN_JAR)
-endif
-
 all: clean doc
 
 clean:
