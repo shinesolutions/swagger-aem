@@ -1,7 +1,7 @@
 swaggeraem
 ----------
 
-swagger_aem is a Python client generated from [Swagger AEM specification](https://github.com/shinesolutions/swagger-aem) using [Swagger Code Generator](https://github.com/swagger-api/swagger-codegen).
+swaggeraem is a Python client generated from [Swagger AEM specification](https://github.com/shinesolutions/swagger-aem) using [Swagger Code Generator](https://github.com/swagger-api/swagger-codegen).
 
 This Python client returns raw HTTP response AS-IS. Check out [pythonaem](https://github.com/shinesolutions/ruby_aem) for an abstraction layer with resource-oriented API and convenient response handling.
 
