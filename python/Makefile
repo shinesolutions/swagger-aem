@@ -39,4 +39,13 @@ doc:
 		cp -R stage/_build/html/* ./ && \
 		rm -rf stage/
 
-.PHONY: all travis deps clean build install test-unit test-integration doc
+publish:
+	cd generated/ && \
+	  gem push `ls swagger_aem-*.gem`
+
+publish-test:
+	cd generated/ && \
+	  python setup.py register -r pypitest && \
+		python setup.py sdist upload -r pypitest
+
+.PHONY: all travis deps clean build install test-unit test-integration doc publish publish-test
