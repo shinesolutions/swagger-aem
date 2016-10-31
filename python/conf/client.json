@@ -1,6 +1,7 @@
 {
   "packageName": "swaggeraem",
-  "appVersion": "0.0.1",
+  "packageVersion": "0.9.0",
+  "packageUrl": "https://github.com/shinesolutions/swagger-aem/tree/master/python",
   "gitUserId": "shinesolutions",
   "gitRepoId": "swagger-aem"
 }

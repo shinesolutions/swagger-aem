@@ -3,6 +3,10 @@ info:
   title: Adobe Experience Manager (AEM) API
   description: Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
   version: "1.0"
+  contact:
+    name: Shine Solutions
+    url: http://shinesolutions.com
+    email: opensource@shinesolutions.com
 schemes:
   - http
   - https
