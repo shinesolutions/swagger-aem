@@ -3,7 +3,7 @@ import swaggeraem
 from swaggeraem.rest import ApiException
 import unittest
 
-class TestConfigPropertyCreateSSL(unittest.TestCase):
+class TestConfigProperty(unittest.TestCase):
 
     def setUp(self):
         client = helper.init_client()
@@ -18,7 +18,7 @@ class TestConfigPropertyCreateSSL(unittest.TestCase):
             # ignore when it already exists
             self.assertEqual(err.status, 500)
 
-    def test_should_succeed_when_path_node_already_exists(self):
+    def test_create_ssl_should_succeed_when_path_node_already_exists(self):
 
         # ensure http OSGI config node exists
         try:
