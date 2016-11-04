@@ -295,3 +295,10 @@ Any API error will be thrown as [SwaggerAemClient::ApiError](https://shinesoluti
       puts err.code
       puts err.response_headers
     end
+
+Development
+-----------
+
+To regenerate the client with a custom Swagger Codegen:
+
+    SWAGGER_CODEGEN_CLI_JAR=/path/to/swagger-codegen-cli.jar make build
