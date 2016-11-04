@@ -10,6 +10,7 @@ This Ruby client returns raw HTTP response AS-IS. Check out [ruby_aem](https://g
 
 | swagger_aem | Supported AEM          | Supported Ruby          | Swagger Codegen CLI | Documentation                                                             |
 |-------------|------------------------|-------------------------|---------------------|---------------------------------------------------------------------------|
+| 0.9.2       | 6.0, 6.1, 6.2          | 1.9, 2.0, 2.1, 2.2, 2.3 | 20161104            | [API](https://shinesolutions.github.io/swagger-aem/ruby/0.9.2/index.html) |
 | 0.9.1       | 6.0, 6.1, 6.2          | 1.9, 2.0, 2.1, 2.2, 2.3 | 20160902            | [API](https://shinesolutions.github.io/swagger-aem/ruby/0.9.1/index.html) |
 
 Install
