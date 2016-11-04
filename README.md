@@ -7,6 +7,7 @@ This specification is used to generate client libraries for Ruby, Python, node.j
 
 | Swagger AEM | Supported AEM          | Documentation                                                                    |
 |-------------|------------------------|----------------------------------------------------------------------------------|
+| 1.1         | 6.0, 6.1, 6.2          | [Specification](https://shinesolutions.github.io/swagger-aem/api/1.1/index.html) |
 | 1.0         | 6.0, 6.1, 6.2          | [Specification](https://shinesolutions.github.io/swagger-aem/api/1.0/index.html) |
 
 Generated Clients
