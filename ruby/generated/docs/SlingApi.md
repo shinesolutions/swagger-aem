@@ -368,6 +368,8 @@ opts = {
   jcrcontentjcrdescription: "jcrcontentjcrdescription_example", # String | 
   jcrcontentslingresource_type: "jcrcontentslingresource_type_example", # String | 
   jcrcontenttransport_uri: "jcrcontenttransport_uri_example", # String | 
+  jcrcontenttransport_user: "jcrcontenttransport_user_example", # String | 
+  jcrcontenttransport_password: "jcrcontenttransport_password_example", # String | 
   jcrcontentlog_level: "jcrcontentlog_level_example", # String | 
   jcrcontentno_versioning: true, # BOOLEAN | 
   jcrcontentprotocol_http_headers: ["jcrcontentprotocol_http_headers_example"], # Array<String> | 
@@ -401,6 +403,8 @@ Name | Type | Description  | Notes
  **jcrcontentjcrdescription** | **String**|  | [optional] 
  **jcrcontentslingresource_type** | **String**|  | [optional] 
  **jcrcontenttransport_uri** | **String**|  | [optional] 
+ **jcrcontenttransport_user** | **String**|  | [optional] 
+ **jcrcontenttransport_password** | **String**|  | [optional] 
  **jcrcontentlog_level** | **String**|  | [optional] 
  **jcrcontentno_versioning** | **BOOLEAN**|  | [optional] 
  **jcrcontentprotocol_http_headers** | [**Array&lt;String&gt;**](String.md)|  | [optional] 
