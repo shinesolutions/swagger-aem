@@ -28,7 +28,7 @@ To run build targets using `swagger-codegen` in your path:
 
 If you want to use a custom `swagger-codegen-cli.jar`:
 
-    SWAGGER_CODEGEN_JAR=/path/to/swagger-codegen-cli.jar make <target>
+    SWAGGER_CODEGEN_CLI_JAR=/path/to/swagger-codegen-cli.jar make <target>
 
 Testing
 -------

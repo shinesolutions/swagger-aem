@@ -1,7 +1,7 @@
-ifndef SWAGGER_CODEGEN_JAR
+ifndef SWAGGER_CODEGEN_CLI_JAR
 	SWAGGER_CODEGEN = swagger-codegen
 else
-	SWAGGER_CODEGEN = java -jar $(SWAGGER_CODEGEN_JAR)
+	SWAGGER_CODEGEN = java -jar $(SWAGGER_CODEGEN_CLI_JAR)
 endif
 
 all: deps clean build install test-unit test-integration doc
