@@ -326,7 +326,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_agent**
-> post_agent(runmode, name, jcrprimary_type=jcrprimary_type, jcrcontentcqname=jcrcontentcqname, jcrcontentjcrtitle=jcrcontentjcrtitle, jcrcontentjcrdescription=jcrcontentjcrdescription, jcrcontentslingresource_type=jcrcontentslingresource_type, jcrcontenttransport_uri=jcrcontenttransport_uri, jcrcontentlog_level=jcrcontentlog_level, jcrcontentno_versioning=jcrcontentno_versioning, jcrcontentprotocol_http_headers=jcrcontentprotocol_http_headers, jcrcontentprotocol_http_headers_type_hint=jcrcontentprotocol_http_headers_type_hint, jcrcontentprotocol_http_method=jcrcontentprotocol_http_method, jcrcontentretry_delay=jcrcontentretry_delay, jcrcontentserialization_type=jcrcontentserialization_type, jcrcontentjcrmixin_types=jcrcontentjcrmixin_types, jcrcontenttrigger_receive=jcrcontenttrigger_receive, jcrcontenttrigger_specific=jcrcontenttrigger_specific, jcrcontentcqtemplate=jcrcontentcqtemplate, jcrcontentenabled=jcrcontentenabled)
+> post_agent(runmode, name, jcrprimary_type=jcrprimary_type, jcrcontentcqname=jcrcontentcqname, jcrcontentjcrtitle=jcrcontentjcrtitle, jcrcontentjcrdescription=jcrcontentjcrdescription, jcrcontentslingresource_type=jcrcontentslingresource_type, jcrcontenttransport_uri=jcrcontenttransport_uri, jcrcontenttransport_user=jcrcontenttransport_user, jcrcontenttransport_password=jcrcontenttransport_password, jcrcontentlog_level=jcrcontentlog_level, jcrcontentno_versioning=jcrcontentno_versioning, jcrcontentprotocol_http_headers=jcrcontentprotocol_http_headers, jcrcontentprotocol_http_headers_type_hint=jcrcontentprotocol_http_headers_type_hint, jcrcontentprotocol_http_method=jcrcontentprotocol_http_method, jcrcontentretry_delay=jcrcontentretry_delay, jcrcontentserialization_type=jcrcontentserialization_type, jcrcontentjcrmixin_types=jcrcontentjcrmixin_types, jcrcontenttrigger_receive=jcrcontenttrigger_receive, jcrcontenttrigger_specific=jcrcontenttrigger_specific, jcrcontentcqtemplate=jcrcontentcqtemplate, jcrcontentenabled=jcrcontentenabled)
 
 
 
@@ -352,6 +352,8 @@ jcrcontentjcrtitle = 'jcrcontentjcrtitle_example' # str |  (optional)
 jcrcontentjcrdescription = 'jcrcontentjcrdescription_example' # str |  (optional)
 jcrcontentslingresource_type = 'jcrcontentslingresource_type_example' # str |  (optional)
 jcrcontenttransport_uri = 'jcrcontenttransport_uri_example' # str |  (optional)
+jcrcontenttransport_user = 'jcrcontenttransport_user_example' # str |  (optional)
+jcrcontenttransport_password = 'jcrcontenttransport_password_example' # str |  (optional)
 jcrcontentlog_level = 'jcrcontentlog_level_example' # str |  (optional)
 jcrcontentno_versioning = true # bool |  (optional)
 jcrcontentprotocol_http_headers = ['jcrcontentprotocol_http_headers_example'] # list[str] |  (optional)
@@ -366,7 +368,7 @@ jcrcontentcqtemplate = 'jcrcontentcqtemplate_example' # str |  (optional)
 jcrcontentenabled = true # bool |  (optional)
 
 try: 
-    api_instance.post_agent(runmode, name, jcrprimary_type=jcrprimary_type, jcrcontentcqname=jcrcontentcqname, jcrcontentjcrtitle=jcrcontentjcrtitle, jcrcontentjcrdescription=jcrcontentjcrdescription, jcrcontentslingresource_type=jcrcontentslingresource_type, jcrcontenttransport_uri=jcrcontenttransport_uri, jcrcontentlog_level=jcrcontentlog_level, jcrcontentno_versioning=jcrcontentno_versioning, jcrcontentprotocol_http_headers=jcrcontentprotocol_http_headers, jcrcontentprotocol_http_headers_type_hint=jcrcontentprotocol_http_headers_type_hint, jcrcontentprotocol_http_method=jcrcontentprotocol_http_method, jcrcontentretry_delay=jcrcontentretry_delay, jcrcontentserialization_type=jcrcontentserialization_type, jcrcontentjcrmixin_types=jcrcontentjcrmixin_types, jcrcontenttrigger_receive=jcrcontenttrigger_receive, jcrcontenttrigger_specific=jcrcontenttrigger_specific, jcrcontentcqtemplate=jcrcontentcqtemplate, jcrcontentenabled=jcrcontentenabled)
+    api_instance.post_agent(runmode, name, jcrprimary_type=jcrprimary_type, jcrcontentcqname=jcrcontentcqname, jcrcontentjcrtitle=jcrcontentjcrtitle, jcrcontentjcrdescription=jcrcontentjcrdescription, jcrcontentslingresource_type=jcrcontentslingresource_type, jcrcontenttransport_uri=jcrcontenttransport_uri, jcrcontenttransport_user=jcrcontenttransport_user, jcrcontenttransport_password=jcrcontenttransport_password, jcrcontentlog_level=jcrcontentlog_level, jcrcontentno_versioning=jcrcontentno_versioning, jcrcontentprotocol_http_headers=jcrcontentprotocol_http_headers, jcrcontentprotocol_http_headers_type_hint=jcrcontentprotocol_http_headers_type_hint, jcrcontentprotocol_http_method=jcrcontentprotocol_http_method, jcrcontentretry_delay=jcrcontentretry_delay, jcrcontentserialization_type=jcrcontentserialization_type, jcrcontentjcrmixin_types=jcrcontentjcrmixin_types, jcrcontenttrigger_receive=jcrcontenttrigger_receive, jcrcontenttrigger_specific=jcrcontenttrigger_specific, jcrcontentcqtemplate=jcrcontentcqtemplate, jcrcontentenabled=jcrcontentenabled)
 except ApiException as e:
     print("Exception when calling SlingApi->post_agent: %s\n" % e)
 ```
@@ -383,6 +385,8 @@ Name | Type | Description  | Notes
  **jcrcontentjcrdescription** | **str**|  | [optional] 
  **jcrcontentslingresource_type** | **str**|  | [optional] 
  **jcrcontenttransport_uri** | **str**|  | [optional] 
+ **jcrcontenttransport_user** | **str**|  | [optional] 
+ **jcrcontenttransport_password** | **str**|  | [optional] 
  **jcrcontentlog_level** | **str**|  | [optional] 
  **jcrcontentno_versioning** | **bool**|  | [optional] 
  **jcrcontentprotocol_http_headers** | [**list[str]**](str.md)|  | [optional] 
