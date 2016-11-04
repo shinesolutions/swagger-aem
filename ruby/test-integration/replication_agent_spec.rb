@@ -47,6 +47,8 @@ describe 'Replication Agent' do
         :jcrcontentslingresource_type => '/libs/cq/replication/components/agent',
         :jcrcontentserialization_type => 'durbo',
         :jcrcontenttransport_uri => 'http://somehost:8080/bin/receive?sling:authRequestLogin=1',
+        :jcrcontenttransport_user => 'admin',
+        :jcrcontenttransport_password => 'admin',
         :jcrcontentlog_level => 'error',
         :jcrcontentretry_delay => '30000',
         :jcrcontentcqtemplate => '/libs/cq/replication/templates/agent',
