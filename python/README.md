@@ -271,3 +271,10 @@ Any API exception will be thrown as [ApiException](https://shinesolutions.github
         console.post_bundle_with_http_info('someinexistingbundle', 'stop')
     except ApiException as err:
         puts err.status
+
+Development
+-----------
+
+To regenerate the client with a custom Swagger Codegen:
+
+    SWAGGER_CODEGEN_CLI_JAR=/path/to/swagger-codegen-cli.jar make build
