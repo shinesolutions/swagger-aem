@@ -345,7 +345,7 @@ Name | Type | Description  | Notes
 
 <a name="postAgent"></a>
 # **postAgent**
-> postAgent(runmode, name, jcrprimaryType, jcrcontentcqname, jcrcontentjcrtitle, jcrcontentjcrdescription, jcrcontentslingresourceType, jcrcontenttransportUri, jcrcontentlogLevel, jcrcontentnoVersioning, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentretryDelay, jcrcontentserializationType, jcrcontentjcrmixinTypes, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentcqtemplate, jcrcontentenabled)
+> postAgent(runmode, name, jcrprimaryType, jcrcontentcqname, jcrcontentjcrtitle, jcrcontentjcrdescription, jcrcontentslingresourceType, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttransportPassword, jcrcontentlogLevel, jcrcontentnoVersioning, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentretryDelay, jcrcontentserializationType, jcrcontentjcrmixinTypes, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentcqtemplate, jcrcontentenabled)
 
 
 
@@ -374,6 +374,8 @@ String jcrcontentjcrtitle = "jcrcontentjcrtitle_example"; // String |
 String jcrcontentjcrdescription = "jcrcontentjcrdescription_example"; // String | 
 String jcrcontentslingresourceType = "jcrcontentslingresourceType_example"; // String | 
 String jcrcontenttransportUri = "jcrcontenttransportUri_example"; // String | 
+String jcrcontenttransportUser = "jcrcontenttransportUser_example"; // String | 
+String jcrcontenttransportPassword = "jcrcontenttransportPassword_example"; // String | 
 String jcrcontentlogLevel = "jcrcontentlogLevel_example"; // String | 
 Boolean jcrcontentnoVersioning = true; // Boolean | 
 List<String> jcrcontentprotocolHTTPHeaders = Arrays.asList("jcrcontentprotocolHTTPHeaders_example"); // List<String> | 
@@ -387,7 +389,7 @@ Boolean jcrcontenttriggerSpecific = true; // Boolean |
 String jcrcontentcqtemplate = "jcrcontentcqtemplate_example"; // String | 
 Boolean jcrcontentenabled = true; // Boolean | 
 try {
-    apiInstance.postAgent(runmode, name, jcrprimaryType, jcrcontentcqname, jcrcontentjcrtitle, jcrcontentjcrdescription, jcrcontentslingresourceType, jcrcontenttransportUri, jcrcontentlogLevel, jcrcontentnoVersioning, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentretryDelay, jcrcontentserializationType, jcrcontentjcrmixinTypes, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentcqtemplate, jcrcontentenabled);
+    apiInstance.postAgent(runmode, name, jcrprimaryType, jcrcontentcqname, jcrcontentjcrtitle, jcrcontentjcrdescription, jcrcontentslingresourceType, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttransportPassword, jcrcontentlogLevel, jcrcontentnoVersioning, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentretryDelay, jcrcontentserializationType, jcrcontentjcrmixinTypes, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentcqtemplate, jcrcontentenabled);
 } catch (ApiException e) {
     System.err.println("Exception when calling SlingApi#postAgent");
     e.printStackTrace();
@@ -406,6 +408,8 @@ Name | Type | Description  | Notes
  **jcrcontentjcrdescription** | **String**|  | [optional]
  **jcrcontentslingresourceType** | **String**|  | [optional]
  **jcrcontenttransportUri** | **String**|  | [optional]
+ **jcrcontenttransportUser** | **String**|  | [optional]
+ **jcrcontenttransportPassword** | **String**|  | [optional]
  **jcrcontentlogLevel** | **String**|  | [optional]
  **jcrcontentnoVersioning** | **Boolean**|  | [optional]
  **jcrcontentprotocolHTTPHeaders** | [**List&lt;String&gt;**](String.md)|  | [optional]
