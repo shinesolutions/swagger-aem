@@ -11,7 +11,6 @@ public class TestHelper {
 		client.setUsername("admin");
 		client.setPassword("admin");
 		client.setDebugging(false);
-		//conf.params_encoding = :multi
 
 		return new ConsoleApi(client);
 	}

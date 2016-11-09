@@ -26,7 +26,7 @@ test-unit:
 	cd generated/ && \
 	  mvn test
 
-test-integration2:
+test-integration:
 	cd test-integration/ && \
 	  mvn test
 
