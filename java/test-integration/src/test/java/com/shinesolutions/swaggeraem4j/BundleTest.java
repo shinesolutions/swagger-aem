@@ -14,14 +14,7 @@ public class BundleTest {
 	
 	@Before
 	public void init() {
-		ApiClient client = new ApiClient();
-		client.setBasePath("http://localhost:4502");
-		client.setUsername("admin");
-		client.setPassword("admin");
-		client.setDebugging(false);
-		//conf.params_encoding = :multi
-
-		console = new ConsoleApi(client);
+		console = TestHelper.createConsoleApi();
 	}
 	
 	@After
