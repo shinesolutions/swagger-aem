@@ -26,6 +26,10 @@ test-unit:
 	cd generated/ && \
 	  mvn test
 
+test-integration2:
+	cd test-integration/ && \
+	  mvn test
+
 doc:
 	cd generated/ && \
 	  mvn javadoc:javadoc && \
