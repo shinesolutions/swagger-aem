@@ -7,7 +7,7 @@ endif
 all: deps clean build install test-unit test-integration doc
 
 deps:
-	echo "TODO"
+	npm install -g mocha
 
 clean:
 	rm -rf generated/
@@ -21,11 +21,11 @@ build:
 
 install:
 	cd generated/ && \
-	  echo "TODO"
+	  npm link
 
 test-unit:
 	cd generated/ && \
-	  echo "TODO"
+	  npm test
 
 doc:
 	cd generated/ && \
