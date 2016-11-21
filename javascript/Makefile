@@ -27,6 +27,10 @@ test-unit:
 	cd generated/ && \
 	  npm test
 
+test-integration:
+	cd generated/ && \
+	  mocha --recursive ../test-integration
+
 doc:
 	cd generated/ && \
 	  echo "TODO"
