@@ -63,7 +63,7 @@ public class ReplicationAgentTest {
 		String jcrContentProtocolHTTPMethod = "";
 		String jcrContentRetryDelay = "30000";
 		String jcrContentSerializationType = "durbo";
-		String jcrContentJcrMixinTypes = "";
+		String jcrContentJcrMixinTypes = null;
 		boolean jcrContentTriggerReceive = false;
 		boolean jcrContentTriggerSpecific = false;
 		String jcrContentCqTemplate = "/libs/cq/replication/templates/agent";
@@ -101,7 +101,7 @@ public class ReplicationAgentTest {
 		jcrContentProtocolHTTPMethod = "";
 		jcrContentRetryDelay = "";
 		jcrContentSerializationType = "";
-		jcrContentJcrMixinTypes = "";
+		jcrContentJcrMixinTypes = null;
 		jcrContentTriggerReceive = false;
 		jcrContentTriggerSpecific = false;
 		jcrContentCqTemplate = "";
