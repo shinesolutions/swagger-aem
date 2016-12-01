@@ -44,7 +44,8 @@ public class FlushAgentTest {
 	}
 
 	@Test
-	public void testCreateNewFlushAgent() throws ApiException {
+	public void testFlushAgent() throws ApiException {
+		// Create a new flush agent
 		String runMode = "author";
 		String name = "some-flush-agent";
 		String jcrPrimaryType = "cq:Page";
@@ -52,19 +53,19 @@ public class FlushAgentTest {
 		String jcrContentJcrTitle = "Some Flush Agent Title";
 		String jcrContentJcrDescription = "Some Flush Agent Description";
 		String jcrContentSlingResourceType = "/libs/cq/replication/components/agent";
-		String jcrContentTransportUri = "httpString //somehostString 8080/dispatcher/invalidate.cache";
+		String jcrContentTransportUri = "http://somehost:8080/dispatcher/invalidate.cache";
 		String jcrContentTransportUser = "";
 		String jcrContentTransportPassword = "";
 		String jcrContentLogLevel = "error";
 		boolean jcrContentNoVersioning = true;
 		List<String> jcrContentProtocolHTTPHeaders = Arrays.asList(
-				"CQ-ActionString {action}", "CQ-HandleString {path}",
-				"CQ-PathString {path}");
+				"CQ-Action:{action}", "CQ-Handle:{path}",
+				"CQ-Path:{path}");
 		String jcrContentProtocolHTTPHeadersTypeHint = "String[]";
 		String jcrContentProtocolHTTPMethod = "GET";
 		String jcrContentRetryDelay = "30000";
 		String jcrContentSerializationType = "flush";
-		String jcrContentJcrMixinTypes = "cqString ReplicationStatus";
+		String jcrContentJcrMixinTypes = "cq:ReplicationStatus";
 		boolean jcrContentTriggerReceive = true;
 		boolean jcrContentTriggerSpecific = true;
 		String jcrContentCqTemplate = "/libs/cq/replication/templates/agent";
@@ -84,6 +85,7 @@ public class FlushAgentTest {
 
 		assertEquals(201, response.getStatusCode());
 
+		// Update an existing flush agent
 		runMode = "author";
 		name = "some-flush-agent";
 		jcrPrimaryType = "cq:Page";
@@ -101,7 +103,7 @@ public class FlushAgentTest {
 		jcrContentProtocolHTTPMethod = "";
 		jcrContentRetryDelay = "";
 		jcrContentSerializationType = "";
-		jcrContentJcrMixinTypes = "";
+		jcrContentJcrMixinTypes = null;
 		jcrContentTriggerReceive = false;
 		jcrContentTriggerSpecific = false;
 		jcrContentCqTemplate = "";
