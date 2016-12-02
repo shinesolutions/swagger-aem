@@ -1,4 +1,5 @@
 .DS_Store
 doc
-java/generated/target
+java/generated/target/
+javascript/generated/node_modules/
 *.pyc

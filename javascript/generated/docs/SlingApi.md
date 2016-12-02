@@ -372,6 +372,8 @@ var opts = {
   'jcrcontentjcrdescription': "jcrcontentjcrdescription_example", // String | 
   'jcrcontentslingresourceType': "jcrcontentslingresourceType_example", // String | 
   'jcrcontenttransportUri': "jcrcontenttransportUri_example", // String | 
+  'jcrcontenttransportUser': "jcrcontenttransportUser_example", // String | 
+  'jcrcontenttransportPassword': "jcrcontenttransportPassword_example", // String | 
   'jcrcontentlogLevel': "jcrcontentlogLevel_example", // String | 
   'jcrcontentnoVersioning': true, // Boolean | 
   'jcrcontentprotocolHTTPHeaders': ["jcrcontentprotocolHTTPHeaders_example"], // [String] | 
@@ -408,6 +410,8 @@ Name | Type | Description  | Notes
  **jcrcontentjcrdescription** | **String**|  | [optional] 
  **jcrcontentslingresourceType** | **String**|  | [optional] 
  **jcrcontenttransportUri** | **String**|  | [optional] 
+ **jcrcontenttransportUser** | **String**|  | [optional] 
+ **jcrcontenttransportPassword** | **String**|  | [optional] 
  **jcrcontentlogLevel** | **String**|  | [optional] 
  **jcrcontentnoVersioning** | **Boolean**|  | [optional] 
  **jcrcontentprotocolHTTPHeaders** | [**[String]**](String.md)|  | [optional] 
