@@ -1,3 +1,5 @@
+LANGS = ruby python
+
 all: clean doc
 
 clean:
@@ -15,4 +17,9 @@ tools:
 tools-osx: tools
 	brew install swagger-codegen
 
-.PHONY: all clean doc doc-publish tools tools-osx
+$(LANGS):
+	cd $@ && SWAGGER_CODEGEN_CLI_JAR=`ls ../bin/*.jar` make all && cd ..
+
+build: $(LANGS)
+
+.PHONY: $(LANGS) all build clean doc doc-publish tools tools-osx
