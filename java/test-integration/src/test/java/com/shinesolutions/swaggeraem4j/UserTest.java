@@ -104,9 +104,9 @@ public class UserTest {
 		// Create group
 		id = "somegroup";
 		String intermediatePath = "/home/groups/s";
-		String createUser = "";
+		String createUser = null;
 		String createGroup = "";
-		String reppassword = "";
+		String reppassword = null;
 		String profilegivenName = "somegroup";
 		ApiResponse<String> responseString = sling
 				.postAuthorizablesWithHttpInfo(id, intermediatePath,

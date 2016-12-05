@@ -36,7 +36,7 @@ public class TestHelper {
 
 	private static ApiClient createApiClient() {
 		ApiClient client = new ApiClient();
-		client.getHttpClient().setFollowRedirects(false);
+		client.getHttpClient().setFollowRedirects(false); // 302 HTTP code should not be redirected 
 		client.setBasePath("http://localhost:4502");
 		client.setUsername("admin");
 		client.setPassword("admin");
