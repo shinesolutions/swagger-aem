@@ -36,6 +36,7 @@ public class TestHelper {
 
 	private static ApiClient createApiClient() {
 		ApiClient client = new ApiClient();
+		client.getHttpClient().setFollowRedirects(false);
 		client.setBasePath("http://localhost:4502");
 		client.setUsername("admin");
 		client.setPassword("admin");

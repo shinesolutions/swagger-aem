@@ -34,9 +34,9 @@ public class GroupTest {
 		// Create group
 		id = "somegroup";
 		String intermediatePath = "/home/groups/s";
-		String createUser = "";
+		String createUser = null;
 		String createGroup = "";
-		String reppassword = "";
+		String reppassword = null;
 		String profilegivenName = "somegroup";
 		ApiResponse<String> response = sling.postAuthorizablesWithHttpInfo(id,
 				intermediatePath, createUser, createGroup, reppassword,
@@ -75,15 +75,15 @@ public class GroupTest {
 			String path = "home/groups/s";
 			String name = id;
 			response = sling.deleteNodeWithHttpInfo(path, name);
+			assertEquals(204, response.getStatusCode());
 		}
-		assertEquals(204, response.getStatusCode());
 
 		// Create member group
 		id = "somemembergroup";
 		String intermediatePath = "/home/groups/s";
-		String createUser = "";
+		String createUser = null;
 		String createGroup = "";
-		String reppassword = "";
+		String reppassword = null;
 		String profilegivenName = "somemembergroup";
 		ApiResponse<String> responseString = sling
 				.postAuthorizablesWithHttpInfo(id, intermediatePath,
