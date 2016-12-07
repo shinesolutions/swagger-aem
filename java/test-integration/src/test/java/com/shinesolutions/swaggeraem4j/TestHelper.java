@@ -9,7 +9,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 import com.shinesolutions.swaggeraem4j.api.ConsoleApi;
 import com.shinesolutions.swaggeraem4j.api.CqApi;
@@ -36,11 +35,14 @@ public class TestHelper {
 
 	private static ApiClient createApiClient() {
 		ApiClient client = new ApiClient();
-		client.getHttpClient().setFollowRedirects(false); // 302 HTTP code should not be redirected 
 		client.setBasePath("http://localhost:4502");
 		client.setUsername("admin");
 		client.setPassword("admin");
 		client.setDebugging(false);
+
+		// HTTP return code 302 is used in tests and should not be redirected
+		client.getHttpClient().setFollowRedirects(false);
+
 		return client;
 	}
 
