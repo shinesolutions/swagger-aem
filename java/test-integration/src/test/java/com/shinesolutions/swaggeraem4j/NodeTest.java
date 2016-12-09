@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-import com.shinesolutions.swaggeraem4j.api.CqApi;
 import com.shinesolutions.swaggeraem4j.api.SlingApi;
 
 public class NodeTest {

@@ -3,6 +3,7 @@ package com.shinesolutions.swaggeraem4j;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -16,22 +17,28 @@ import com.shinesolutions.swaggeraem4j.api.SlingApi;
 
 public class PackageTest {
 
-	CrxApi crx;
-	SlingApi sling;
+	private CrxApi crx;
+	private SlingApi sling;
+
+	private File fakeFile; // Fake empty file, temporary solution
 
 	@Rule
 	public TemporaryFolder tmpDir = new TemporaryFolder();
 
 	@Before
-	public void init() throws ApiException {
+	public void init() throws ApiException, IOException {
 		crx = TestHelper.createCrxApi();
 		sling = TestHelper.createSlingApi();
+
+		// Fake empty file for calls to crx.postPackageServiceJsonWithHttpInfo,
+		// postPackageServiceJsonWithHttpInfo throws exceptions without a file
+		fakeFile = tmpDir.newFile("fakeFile.txt");
 
 		// Ensure package does not exist
 		String path = "etc/packages/somepackagegroup/somepackage-1.2.3.zip";
 		String cmd = "delete";
 		ApiResponse<String> response = crx.postPackageServiceJsonWithHttpInfo(
-				path, cmd, "", "", "", "", false, null);
+				path, cmd, "", "", "", "", false, fakeFile);
 		assertEquals(200, response.getStatusCode());
 
 		// Create package
@@ -42,7 +49,7 @@ public class PackageTest {
 		String packageVersion = "1.2.3";
 		String charset = "utf-8";
 		crx.postPackageServiceJsonWithHttpInfo(path, cmd, groupName,
-				packageName, packageVersion, charset, false, null);
+				packageName, packageVersion, charset, false, fakeFile);
 		assertEquals(200, response.getStatusCode());
 	}
 
@@ -53,21 +60,21 @@ public class PackageTest {
 		String path = "etc/packages/somepackagegroup/somepackage-1.2.3.zip";
 		String cmd = "build";
 		ApiResponse<String> response = crx.postPackageServiceJsonWithHttpInfo(
-				path, cmd, "", "", "", "", false, null);
+				path, cmd, "", "", "", "", false, fakeFile);
 		assertEquals(200, response.getStatusCode());
 
 		// Install package
 		path = "etc/packages/somepackagegroup/somepackage-1.2.3.zip";
 		cmd = "install";
 		response = crx.postPackageServiceJsonWithHttpInfo(path, cmd, "", "",
-				"", "", false, null);
+				"", "", false, fakeFile);
 		assertEquals(200, response.getStatusCode());
 
 		// Replicate package
 		path = "etc/packages/somepackagegroup/somepackage-1.2.3.zip";
 		cmd = "replicate";
 		response = crx.postPackageServiceJsonWithHttpInfo(path, cmd, "", "",
-				"", "", false, null);
+				"", "", false, fakeFile);
 		assertEquals(200, response.getStatusCode());
 
 		// Download package
@@ -81,45 +88,41 @@ public class PackageTest {
 		File data = fileResponse.getData();
 
 		// Data is a temporary file created by Swagger API client
-		Files.copy(data.toPath(), tmpDir.newFile("somepackage-1.2.3.zip")
-				.toPath());
-		String filePath = tmpDir.getRoot().toString()
-				+ "/somepackage-1.2.3.zip";
-		assertTrue(new File(filePath).exists());
+		Path filePath = tmpDir.getRoot().toPath()
+				.resolve("somepackage-1.2.3.zip");
+		Files.copy(data.toPath(), filePath);
+		assertTrue(filePath.toFile().exists());
 		data.delete();
-	}
 
-	@Test
-	public void testUploadRebuildInstallReplicatePackage() throws ApiException {
 		// Upload package
-		String path = "";
-		String cmd = "upload";
+		path = "";
+		cmd = "upload";
 		boolean force = true;
 		File packageFile = new File(tmpDir.getRoot().toString()
 				+ "/somepackage-1.2.3.zip");
-		ApiResponse<String> response = crx.postPackageServiceJsonWithHttpInfo(
-				path, cmd, "", "", "", "", force, packageFile);
+		response = crx.postPackageServiceJsonWithHttpInfo(path, cmd, "", "",
+				"", "", force, packageFile);
 		assertEquals(200, response.getStatusCode());
 
 		// Rebuild package
 		path = "etc/packages/somepackagegroup/somepackage-1.2.3.zip";
 		cmd = "build";
 		response = crx.postPackageServiceJsonWithHttpInfo(path, cmd, "", "",
-				"", "", false, null);
+				"", "", false, fakeFile);
 		assertEquals(200, response.getStatusCode());
 
 		// Install package
 		path = "etc/packages/somepackagegroup/somepackage-1.2.3.zip";
 		cmd = "install";
 		response = crx.postPackageServiceJsonWithHttpInfo(path, cmd, "", "",
-				"", "", false, null);
+				"", "", false, fakeFile);
 		assertEquals(200, response.getStatusCode());
 
 		// Replicate package
 		path = "etc/packages/somepackagegroup/somepackage-1.2.3.zip";
 		cmd = "replicate";
 		response = crx.postPackageServiceJsonWithHttpInfo(path, cmd, "", "",
-				"", "", false, null);
+				"", "", false, fakeFile);
 		assertEquals(200, response.getStatusCode());
 	}
 
@@ -142,15 +145,18 @@ public class PackageTest {
 		version = "1.2.3";
 		response = sling.getPackageFilterWithHttpInfo(group, name, version);
 		assertEquals(200, response.getStatusCode());
+	}
 
+	@Test
+	public void testGetNonExistingFilter() throws ApiException {
 		try {
-			group = "somepackagegroup";
-			name = "somepackage";
-			version = "1.2.3";
-			response = sling.getPackageFilterWithHttpInfo(group, name, version);
+			String group = "somepackagegroup";
+			String name = "somepackage";
+			String version = "1.2.3";
+			sling.getPackageFilterWithHttpInfo(group, name, version);
 			fail();
 		} catch (ApiException e) {
-			assertEquals(404, response.getStatusCode());
+			assertEquals(404, e.getCode());
 		}
 	}
 
