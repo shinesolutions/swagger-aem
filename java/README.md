@@ -31,17 +31,27 @@ Initialise client:
     client.setPassword("admin");
     client.setDebugging(false);
 
-    ConsoleApi consoleApi = new ConsoleApi(client);
-    SlingApi slingApi = new SlingApi(client);
-    CqApi cqApi = new CqApi(client);
-    CrxApi crxApi = new CrxApi(client);
+    ConsoleApi console = new ConsoleApi(client);
+    SlingApi sling = new SlingApi(client);
+    CqApi cq = new CqApi(client);
+    CrxApi crx = new CrxApi(client);
 
 TODO
 
 Error handling
 --------------
 
-TODO
+Any API error will be thrown as [ApiException](https://shinesolutions.github.io/swagger-aem/java/master/com/shinesolutions/swaggeraem4j/ApiException.html) .
+
+    try {
+      String name = "someinexistingbundle";
+      String action = "stop";
+      console.postBundleWithHttpInfo(name, action);
+    } catch (ApiException e) {
+      System.out.println(e.getResponseBody());
+      System.out.println(e.getCode());
+      System.out.println(e.getResponseHeaders());
+    }
 
 Development
 -----------
