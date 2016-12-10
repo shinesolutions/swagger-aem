@@ -4,7 +4,7 @@ All URIs are relative to *http://localhost/*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**postCqActions**](CqApi.md#postCqActions) | **POST** .cqactions.html | 
+[**postCqActions**](CqApi.md#postCqActions) | **POST** /.cqactions.html | 
 
 
 <a name="postCqActions"></a>
