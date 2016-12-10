@@ -36,4 +36,4 @@ doc:
 		mkdir -p ../../doc/java/master/ && \
 		cp -R target/site/apidocs/ ../../doc/java/master/
 
-.PHONY: all clean build install test-unit doc
+.PHONY: all clean build install test-unit test-integration doc
