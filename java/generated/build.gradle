@@ -2,7 +2,7 @@ apply plugin: 'idea'
 apply plugin: 'eclipse'
 
 group = 'io.swagger'
-version = '0.0.1'
+version = '0.9.0'
 
 buildscript {
     repositories {

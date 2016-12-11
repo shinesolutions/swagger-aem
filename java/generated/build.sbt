@@ -2,7 +2,7 @@ lazy val root = (project in file(".")).
   settings(
     organization := "io.swagger",
     name := "swaggeraem4j",
-    version := "0.0.1",
+    version := "0.9.0",
     scalaVersion := "2.11.4",
     scalacOptions ++= Seq("-feature"),
     javacOptions in compile ++= Seq("-Xlint:deprecation"),
