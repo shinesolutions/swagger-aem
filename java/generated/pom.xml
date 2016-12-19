@@ -7,9 +7,9 @@
   <name>swaggeraem4j</name>
   <version>0.9.0</version>
   <scm>
-    <connection>scm:git:git@github.com:swagger-api/swagger-mustache.git</connection>
-    <developerConnection>scm:git:git@github.com:swagger-api/swagger-codegen.git</developerConnection>
-    <url>https://github.com/swagger-api/swagger-codegen</url>
+    <connection>scm:git:git@github.com:shinesolutions/swagger-aem.git</connection>
+    <developerConnection>scm:git:git@github.com:shinesolutions/swagger-aem.git</developerConnection>
+    <url>https://github.com/shinesolutions/swagger-aem</url>
   </scm>
   <prerequisites>
     <maven>2.2.0</maven>
@@ -22,7 +22,7 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
-  
+
   <build>
     <plugins>
       <plugin>
