@@ -3,5 +3,7 @@
   "artifactVersion": "0.9.0",
   "invokerPackage": "com.shinesolutions.swaggeraem4j",
   "apiPackage": "com.shinesolutions.swaggeraem4j.api",
-  "modelPackage": "com.shinesolutions.swaggeraem4j.model"
+  "modelPackage": "com.shinesolutions.swaggeraem4j.model",
+  "licenseName": "Apache License, Version 2.0",
+  "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0.txt"
 }
