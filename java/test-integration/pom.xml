@@ -128,11 +128,11 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>io.swagger</groupId>
+      <groupId>com.shinesolutions</groupId>
       <artifactId>swaggeraem4j</artifactId>
-      <version>0.0.1</version>
+      <version>0.9.0</version>
       <scope>system</scope>
-      <systemPath>${basedir}/../generated/target/swaggeraem4j-0.0.1.jar</systemPath>
+      <systemPath>${basedir}/../generated/target/swaggeraem4j-0.9.0.jar</systemPath>
     </dependency>
   </dependencies>
   <properties>
