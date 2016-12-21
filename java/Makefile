@@ -8,6 +8,8 @@ all: clean build install test-unit doc
 
 clean:
 	rm -rf generated/
+	cd test-integration/ && \
+	  mvn clean
 
 build:
 	$(SWAGGER_CODEGEN) generate \
