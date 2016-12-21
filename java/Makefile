@@ -38,4 +38,8 @@ doc:
 		mkdir -p ../../doc/java/master/ && \
 		cp -R target/site/apidocs/ ../../doc/java/master/
 
-.PHONY: all clean build install test-unit test-integration doc
+publish:
+	cd generated/ && \
+	  mvn jar:jar deploy:deploy
+
+.PHONY: all clean build install test-unit test-integration doc publish
