@@ -23,6 +23,15 @@
     </license>
   </licenses>
 
+  <developers>
+    <developer>
+      <name>Shine Solutions</name>
+      <email>opensource@shinesolutions.com</email>
+      <organization>Shine Solutions</organization>
+      <organizationUrl>http://shinesolutions.com</organizationUrl>
+    </developer>
+  </developers>
+
   <distributionManagement>
     <repository>
       <id>sonatype-release</id>
