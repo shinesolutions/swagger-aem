@@ -40,6 +40,6 @@ doc:
 
 publish:
 	cd generated/ && \
-	  mvn jar:jar deploy:deploy
+	  mvn clean package deploy
 
 .PHONY: all clean build install test-unit test-integration doc publish
