@@ -1,6 +1,7 @@
 {
   "artifactId": "swaggeraem4j",
   "artifactVersion": "0.9.0",
+  "groupId": "com.shinesolutions",
   "invokerPackage": "com.shinesolutions.swaggeraem4j",
   "apiPackage": "com.shinesolutions.swaggeraem4j.api",
   "modelPackage": "com.shinesolutions.swaggeraem4j.model",
