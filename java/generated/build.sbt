@@ -1,6 +1,6 @@
 lazy val root = (project in file(".")).
   settings(
-    organization := "io.swagger",
+    organization := "com.shinesolutions",
     name := "swaggeraem4j",
     version := "0.9.0",
     scalaVersion := "2.11.4",

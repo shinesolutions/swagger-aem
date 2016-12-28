@@ -27,6 +27,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,17 +57,6 @@ public class ConsoleApi {
     private com.squareup.okhttp.Call postBundleCall(String name, String action, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
-        // verify the required parameter 'name' is set
-        if (name == null) {
-            throw new ApiException("Missing the required parameter 'name' when calling postBundle(Async)");
-        }
-        
-        // verify the required parameter 'action' is set
-        if (action == null) {
-            throw new ApiException("Missing the required parameter 'action' when calling postBundle(Async)");
-        }
-        
-
         // create path and map variables
         String localVarPath = "/system/console/bundles/{name}".replaceAll("\\{format\\}","json")
         .replaceAll("\\{" + "name" + "\\}", apiClient.escapeString(name.toString()));
@@ -106,6 +96,29 @@ public class ConsoleApi {
         String[] localVarAuthNames = new String[] { "aemAuth" };
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
+    
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call postBundleValidateBeforeCall(String name, String action, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'name' is set
+        if (name == null) {
+            throw new ApiException("Missing the required parameter 'name' when calling postBundle(Async)");
+        }
+        
+        // verify the required parameter 'action' is set
+        if (action == null) {
+            throw new ApiException("Missing the required parameter 'action' when calling postBundle(Async)");
+        }
+        
+        
+        com.squareup.okhttp.Call call = postBundleCall(name, action, progressListener, progressRequestListener);
+        return call;
+
+        
+        
+        
+        
+    }
 
     /**
      * 
@@ -127,7 +140,7 @@ public class ConsoleApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<Void> postBundleWithHttpInfo(String name, String action) throws ApiException {
-        com.squareup.okhttp.Call call = postBundleCall(name, action, null, null);
+        com.squareup.okhttp.Call call = postBundleValidateBeforeCall(name, action, null, null);
         return apiClient.execute(call);
     }
 
@@ -161,7 +174,7 @@ public class ConsoleApi {
             };
         }
 
-        com.squareup.okhttp.Call call = postBundleCall(name, action, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = postBundleValidateBeforeCall(name, action, progressListener, progressRequestListener);
         apiClient.executeAsync(call, callback);
         return call;
     }
@@ -169,12 +182,6 @@ public class ConsoleApi {
     private com.squareup.okhttp.Call postJmxRepositoryCall(String action, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
-        // verify the required parameter 'action' is set
-        if (action == null) {
-            throw new ApiException("Missing the required parameter 'action' when calling postJmxRepository(Async)");
-        }
-        
-
         // create path and map variables
         String localVarPath = "/system/console/jmx/com.adobe.granite:type=Repository/op/{action}".replaceAll("\\{format\\}","json")
         .replaceAll("\\{" + "action" + "\\}", apiClient.escapeString(action.toString()));
@@ -212,6 +219,24 @@ public class ConsoleApi {
         String[] localVarAuthNames = new String[] { "aemAuth" };
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
+    
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call postJmxRepositoryValidateBeforeCall(String action, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'action' is set
+        if (action == null) {
+            throw new ApiException("Missing the required parameter 'action' when calling postJmxRepository(Async)");
+        }
+        
+        
+        com.squareup.okhttp.Call call = postJmxRepositoryCall(action, progressListener, progressRequestListener);
+        return call;
+
+        
+        
+        
+        
+    }
 
     /**
      * 
@@ -231,7 +256,7 @@ public class ConsoleApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<Void> postJmxRepositoryWithHttpInfo(String action) throws ApiException {
-        com.squareup.okhttp.Call call = postJmxRepositoryCall(action, null, null);
+        com.squareup.okhttp.Call call = postJmxRepositoryValidateBeforeCall(action, null, null);
         return apiClient.execute(call);
     }
 
@@ -264,7 +289,7 @@ public class ConsoleApi {
             };
         }
 
-        com.squareup.okhttp.Call call = postJmxRepositoryCall(action, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = postJmxRepositoryValidateBeforeCall(action, progressListener, progressRequestListener);
         apiClient.executeAsync(call, callback);
         return call;
     }

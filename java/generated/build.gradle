@@ -1,7 +1,7 @@
 apply plugin: 'idea'
 apply plugin: 'eclipse'
 
-group = 'io.swagger'
+group = 'com.shinesolutions'
 version = '0.9.0'
 
 buildscript {

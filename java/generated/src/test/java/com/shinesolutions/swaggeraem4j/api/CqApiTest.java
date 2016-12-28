@@ -15,6 +15,7 @@ package com.shinesolutions.swaggeraem4j.api;
 
 import com.shinesolutions.swaggeraem4j.ApiException;
 import org.junit.Test;
+import org.junit.Ignore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,6 +25,7 @@ import java.util.Map;
 /**
  * API tests for CqApi
  */
+@Ignore
 public class CqApiTest {
 
     private final CqApi api = new CqApi();
@@ -41,7 +43,7 @@ public class CqApiTest {
     public void postCqActionsTest() throws ApiException {
         String authorizableId = null;
         String changelog = null;
-        // api.postCqActions(authorizableId, changelog);
+        api.postCqActions(authorizableId, changelog);
 
         // TODO: test validations
     }

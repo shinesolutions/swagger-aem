@@ -15,6 +15,7 @@ package com.shinesolutions.swaggeraem4j.api;
 
 import com.shinesolutions.swaggeraem4j.ApiException;
 import org.junit.Test;
+import org.junit.Ignore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,6 +25,7 @@ import java.util.Map;
 /**
  * API tests for ConsoleApi
  */
+@Ignore
 public class ConsoleApiTest {
 
     private final ConsoleApi api = new ConsoleApi();
@@ -41,7 +43,7 @@ public class ConsoleApiTest {
     public void postBundleTest() throws ApiException {
         String name = null;
         String action = null;
-        // api.postBundle(name, action);
+        api.postBundle(name, action);
 
         // TODO: test validations
     }
@@ -57,7 +59,7 @@ public class ConsoleApiTest {
     @Test
     public void postJmxRepositoryTest() throws ApiException {
         String action = null;
-        // api.postJmxRepository(action);
+        api.postJmxRepository(action);
 
         // TODO: test validations
     }

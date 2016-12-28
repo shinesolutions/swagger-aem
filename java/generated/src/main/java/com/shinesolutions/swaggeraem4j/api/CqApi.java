@@ -27,6 +27,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,17 +57,6 @@ public class CqApi {
     private com.squareup.okhttp.Call postCqActionsCall(String authorizableId, String changelog, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
-        // verify the required parameter 'authorizableId' is set
-        if (authorizableId == null) {
-            throw new ApiException("Missing the required parameter 'authorizableId' when calling postCqActions(Async)");
-        }
-        
-        // verify the required parameter 'changelog' is set
-        if (changelog == null) {
-            throw new ApiException("Missing the required parameter 'changelog' when calling postCqActions(Async)");
-        }
-        
-
         // create path and map variables
         String localVarPath = "/.cqactions.html".replaceAll("\\{format\\}","json");
 
@@ -107,6 +97,29 @@ public class CqApi {
         String[] localVarAuthNames = new String[] { "aemAuth" };
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
+    
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call postCqActionsValidateBeforeCall(String authorizableId, String changelog, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'authorizableId' is set
+        if (authorizableId == null) {
+            throw new ApiException("Missing the required parameter 'authorizableId' when calling postCqActions(Async)");
+        }
+        
+        // verify the required parameter 'changelog' is set
+        if (changelog == null) {
+            throw new ApiException("Missing the required parameter 'changelog' when calling postCqActions(Async)");
+        }
+        
+        
+        com.squareup.okhttp.Call call = postCqActionsCall(authorizableId, changelog, progressListener, progressRequestListener);
+        return call;
+
+        
+        
+        
+        
+    }
 
     /**
      * 
@@ -128,7 +141,7 @@ public class CqApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<Void> postCqActionsWithHttpInfo(String authorizableId, String changelog) throws ApiException {
-        com.squareup.okhttp.Call call = postCqActionsCall(authorizableId, changelog, null, null);
+        com.squareup.okhttp.Call call = postCqActionsValidateBeforeCall(authorizableId, changelog, null, null);
         return apiClient.execute(call);
     }
 
@@ -162,7 +175,7 @@ public class CqApi {
             };
         }
 
-        com.squareup.okhttp.Call call = postCqActionsCall(authorizableId, changelog, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = postCqActionsValidateBeforeCall(authorizableId, changelog, progressListener, progressRequestListener);
         apiClient.executeAsync(call, callback);
         return call;
     }

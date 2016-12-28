@@ -26,6 +26,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 
+
 import java.io.File;
 
 import java.lang.reflect.Type;
@@ -57,12 +58,6 @@ public class CrxApi {
     private com.squareup.okhttp.Call postPackageServiceCall(String cmd, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
-        // verify the required parameter 'cmd' is set
-        if (cmd == null) {
-            throw new ApiException("Missing the required parameter 'cmd' when calling postPackageService(Async)");
-        }
-        
-
         // create path and map variables
         String localVarPath = "/crx/packmgr/service.jsp".replaceAll("\\{format\\}","json");
 
@@ -101,6 +96,24 @@ public class CrxApi {
         String[] localVarAuthNames = new String[] { "aemAuth" };
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
+    
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call postPackageServiceValidateBeforeCall(String cmd, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'cmd' is set
+        if (cmd == null) {
+            throw new ApiException("Missing the required parameter 'cmd' when calling postPackageService(Async)");
+        }
+        
+        
+        com.squareup.okhttp.Call call = postPackageServiceCall(cmd, progressListener, progressRequestListener);
+        return call;
+
+        
+        
+        
+        
+    }
 
     /**
      * 
@@ -122,7 +135,7 @@ public class CrxApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<String> postPackageServiceWithHttpInfo(String cmd) throws ApiException {
-        com.squareup.okhttp.Call call = postPackageServiceCall(cmd, null, null);
+        com.squareup.okhttp.Call call = postPackageServiceValidateBeforeCall(cmd, null, null);
         Type localVarReturnType = new TypeToken<String>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -156,7 +169,7 @@ public class CrxApi {
             };
         }
 
-        com.squareup.okhttp.Call call = postPackageServiceCall(cmd, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = postPackageServiceValidateBeforeCall(cmd, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<String>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -165,17 +178,6 @@ public class CrxApi {
     private com.squareup.okhttp.Call postPackageServiceJsonCall(String path, String cmd, String groupName, String packageName, String packageVersion, String charset_, Boolean force, File _package, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
-        // verify the required parameter 'path' is set
-        if (path == null) {
-            throw new ApiException("Missing the required parameter 'path' when calling postPackageServiceJson(Async)");
-        }
-        
-        // verify the required parameter 'cmd' is set
-        if (cmd == null) {
-            throw new ApiException("Missing the required parameter 'cmd' when calling postPackageServiceJson(Async)");
-        }
-        
-
         // create path and map variables
         String localVarPath = "/crx/packmgr/service/.json/{path}".replaceAll("\\{format\\}","json")
         .replaceAll("\\{" + "path" + "\\}", apiClient.escapeString(path.toString()));
@@ -227,6 +229,29 @@ public class CrxApi {
         String[] localVarAuthNames = new String[] { "aemAuth" };
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
+    
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call postPackageServiceJsonValidateBeforeCall(String path, String cmd, String groupName, String packageName, String packageVersion, String charset_, Boolean force, File _package, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'path' is set
+        if (path == null) {
+            throw new ApiException("Missing the required parameter 'path' when calling postPackageServiceJson(Async)");
+        }
+        
+        // verify the required parameter 'cmd' is set
+        if (cmd == null) {
+            throw new ApiException("Missing the required parameter 'cmd' when calling postPackageServiceJson(Async)");
+        }
+        
+        
+        com.squareup.okhttp.Call call = postPackageServiceJsonCall(path, cmd, groupName, packageName, packageVersion, charset_, force, _package, progressListener, progressRequestListener);
+        return call;
+
+        
+        
+        
+        
+    }
 
     /**
      * 
@@ -262,7 +287,7 @@ public class CrxApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<String> postPackageServiceJsonWithHttpInfo(String path, String cmd, String groupName, String packageName, String packageVersion, String charset_, Boolean force, File _package) throws ApiException {
-        com.squareup.okhttp.Call call = postPackageServiceJsonCall(path, cmd, groupName, packageName, packageVersion, charset_, force, _package, null, null);
+        com.squareup.okhttp.Call call = postPackageServiceJsonValidateBeforeCall(path, cmd, groupName, packageName, packageVersion, charset_, force, _package, null, null);
         Type localVarReturnType = new TypeToken<String>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -303,7 +328,7 @@ public class CrxApi {
             };
         }
 
-        com.squareup.okhttp.Call call = postPackageServiceJsonCall(path, cmd, groupName, packageName, packageVersion, charset_, force, _package, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = postPackageServiceJsonValidateBeforeCall(path, cmd, groupName, packageName, packageVersion, charset_, force, _package, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<String>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -312,27 +337,6 @@ public class CrxApi {
     private com.squareup.okhttp.Call postPackageUpdateCall(String groupName, String packageName, String version, String path, String filter, String charset_, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
-        // verify the required parameter 'groupName' is set
-        if (groupName == null) {
-            throw new ApiException("Missing the required parameter 'groupName' when calling postPackageUpdate(Async)");
-        }
-        
-        // verify the required parameter 'packageName' is set
-        if (packageName == null) {
-            throw new ApiException("Missing the required parameter 'packageName' when calling postPackageUpdate(Async)");
-        }
-        
-        // verify the required parameter 'version' is set
-        if (version == null) {
-            throw new ApiException("Missing the required parameter 'version' when calling postPackageUpdate(Async)");
-        }
-        
-        // verify the required parameter 'path' is set
-        if (path == null) {
-            throw new ApiException("Missing the required parameter 'path' when calling postPackageUpdate(Async)");
-        }
-        
-
         // create path and map variables
         String localVarPath = "/crx/packmgr/update.jsp".replaceAll("\\{format\\}","json");
 
@@ -381,6 +385,39 @@ public class CrxApi {
         String[] localVarAuthNames = new String[] { "aemAuth" };
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
+    
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call postPackageUpdateValidateBeforeCall(String groupName, String packageName, String version, String path, String filter, String charset_, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'groupName' is set
+        if (groupName == null) {
+            throw new ApiException("Missing the required parameter 'groupName' when calling postPackageUpdate(Async)");
+        }
+        
+        // verify the required parameter 'packageName' is set
+        if (packageName == null) {
+            throw new ApiException("Missing the required parameter 'packageName' when calling postPackageUpdate(Async)");
+        }
+        
+        // verify the required parameter 'version' is set
+        if (version == null) {
+            throw new ApiException("Missing the required parameter 'version' when calling postPackageUpdate(Async)");
+        }
+        
+        // verify the required parameter 'path' is set
+        if (path == null) {
+            throw new ApiException("Missing the required parameter 'path' when calling postPackageUpdate(Async)");
+        }
+        
+        
+        com.squareup.okhttp.Call call = postPackageUpdateCall(groupName, packageName, version, path, filter, charset_, progressListener, progressRequestListener);
+        return call;
+
+        
+        
+        
+        
+    }
 
     /**
      * 
@@ -412,7 +449,7 @@ public class CrxApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<String> postPackageUpdateWithHttpInfo(String groupName, String packageName, String version, String path, String filter, String charset_) throws ApiException {
-        com.squareup.okhttp.Call call = postPackageUpdateCall(groupName, packageName, version, path, filter, charset_, null, null);
+        com.squareup.okhttp.Call call = postPackageUpdateValidateBeforeCall(groupName, packageName, version, path, filter, charset_, null, null);
         Type localVarReturnType = new TypeToken<String>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -451,7 +488,7 @@ public class CrxApi {
             };
         }
 
-        com.squareup.okhttp.Call call = postPackageUpdateCall(groupName, packageName, version, path, filter, charset_, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = postPackageUpdateValidateBeforeCall(groupName, packageName, version, path, filter, charset_, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<String>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -460,22 +497,6 @@ public class CrxApi {
     private com.squareup.okhttp.Call postSetPasswordCall(String old, String plain, String verify, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
-        // verify the required parameter 'old' is set
-        if (old == null) {
-            throw new ApiException("Missing the required parameter 'old' when calling postSetPassword(Async)");
-        }
-        
-        // verify the required parameter 'plain' is set
-        if (plain == null) {
-            throw new ApiException("Missing the required parameter 'plain' when calling postSetPassword(Async)");
-        }
-        
-        // verify the required parameter 'verify' is set
-        if (verify == null) {
-            throw new ApiException("Missing the required parameter 'verify' when calling postSetPassword(Async)");
-        }
-        
-
         // create path and map variables
         String localVarPath = "/crx/explorer/ui/setpassword.jsp".replaceAll("\\{format\\}","json");
 
@@ -518,6 +539,34 @@ public class CrxApi {
         String[] localVarAuthNames = new String[] { "aemAuth" };
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
+    
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call postSetPasswordValidateBeforeCall(String old, String plain, String verify, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'old' is set
+        if (old == null) {
+            throw new ApiException("Missing the required parameter 'old' when calling postSetPassword(Async)");
+        }
+        
+        // verify the required parameter 'plain' is set
+        if (plain == null) {
+            throw new ApiException("Missing the required parameter 'plain' when calling postSetPassword(Async)");
+        }
+        
+        // verify the required parameter 'verify' is set
+        if (verify == null) {
+            throw new ApiException("Missing the required parameter 'verify' when calling postSetPassword(Async)");
+        }
+        
+        
+        com.squareup.okhttp.Call call = postSetPasswordCall(old, plain, verify, progressListener, progressRequestListener);
+        return call;
+
+        
+        
+        
+        
+    }
 
     /**
      * 
@@ -541,7 +590,7 @@ public class CrxApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<Void> postSetPasswordWithHttpInfo(String old, String plain, String verify) throws ApiException {
-        com.squareup.okhttp.Call call = postSetPasswordCall(old, plain, verify, null, null);
+        com.squareup.okhttp.Call call = postSetPasswordValidateBeforeCall(old, plain, verify, null, null);
         return apiClient.execute(call);
     }
 
@@ -576,7 +625,7 @@ public class CrxApi {
             };
         }
 
-        com.squareup.okhttp.Call call = postSetPasswordCall(old, plain, verify, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = postSetPasswordValidateBeforeCall(old, plain, verify, progressListener, progressRequestListener);
         apiClient.executeAsync(call, callback);
         return call;
     }

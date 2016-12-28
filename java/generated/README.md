@@ -26,7 +26,7 @@ Add this dependency to your project's POM:
 
 ```xml
 <dependency>
-    <groupId>io.swagger</groupId>
+    <groupId>com.shinesolutions</groupId>
     <artifactId>swaggeraem4j</artifactId>
     <version>0.9.0</version>
     <scope>compile</scope>
@@ -38,7 +38,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "io.swagger:swaggeraem4j:0.9.0"
+compile "com.shinesolutions:swaggeraem4j:0.9.0"
 ```
 
 ### Others

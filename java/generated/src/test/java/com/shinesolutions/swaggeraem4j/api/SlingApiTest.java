@@ -17,6 +17,7 @@ import com.shinesolutions.swaggeraem4j.ApiException;
 import java.math.BigDecimal;
 import java.io.File;
 import org.junit.Test;
+import org.junit.Ignore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,6 +27,7 @@ import java.util.Map;
 /**
  * API tests for SlingApi
  */
+@Ignore
 public class SlingApiTest {
 
     private final SlingApi api = new SlingApi();
@@ -43,7 +45,7 @@ public class SlingApiTest {
     public void deleteAgentTest() throws ApiException {
         String runmode = null;
         String name = null;
-        // api.deleteAgent(runmode, name);
+        api.deleteAgent(runmode, name);
 
         // TODO: test validations
     }
@@ -60,7 +62,7 @@ public class SlingApiTest {
     public void deleteNodeTest() throws ApiException {
         String path = null;
         String name = null;
-        // api.deleteNode(path, name);
+        api.deleteNode(path, name);
 
         // TODO: test validations
     }
@@ -77,7 +79,7 @@ public class SlingApiTest {
     public void getAgentTest() throws ApiException {
         String runmode = null;
         String name = null;
-        // api.getAgent(runmode, name);
+        api.getAgent(runmode, name);
 
         // TODO: test validations
     }
@@ -94,7 +96,7 @@ public class SlingApiTest {
     public void getNodeTest() throws ApiException {
         String path = null;
         String name = null;
-        // api.getNode(path, name);
+        api.getNode(path, name);
 
         // TODO: test validations
     }
@@ -112,7 +114,7 @@ public class SlingApiTest {
         String group = null;
         String name = null;
         String version = null;
-        // File response = api.getPackage(group, name, version);
+        File response = api.getPackage(group, name, version);
 
         // TODO: test validations
     }
@@ -130,7 +132,7 @@ public class SlingApiTest {
         String group = null;
         String name = null;
         String version = null;
-        // String response = api.getPackageFilter(group, name, version);
+        String response = api.getPackageFilter(group, name, version);
 
         // TODO: test validations
     }
@@ -167,7 +169,7 @@ public class SlingApiTest {
         Boolean jcrcontenttriggerSpecific = null;
         String jcrcontentcqtemplate = null;
         Boolean jcrcontentenabled = null;
-        // api.postAgent(runmode, name, jcrprimaryType, jcrcontentcqname, jcrcontentjcrtitle, jcrcontentjcrdescription, jcrcontentslingresourceType, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttransportPassword, jcrcontentlogLevel, jcrcontentnoVersioning, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentretryDelay, jcrcontentserializationType, jcrcontentjcrmixinTypes, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentcqtemplate, jcrcontentenabled);
+        api.postAgent(runmode, name, jcrprimaryType, jcrcontentcqname, jcrcontentjcrtitle, jcrcontentjcrdescription, jcrcontentslingresourceType, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttransportPassword, jcrcontentlogLevel, jcrcontentnoVersioning, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentretryDelay, jcrcontentserializationType, jcrcontentjcrmixinTypes, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentcqtemplate, jcrcontentenabled);
 
         // TODO: test validations
     }
@@ -188,7 +190,7 @@ public class SlingApiTest {
         String createGroup = null;
         String reppassword = null;
         String profilegivenName = null;
-        // String response = api.postAuthorizables(authorizableId, intermediatePath, createUser, createGroup, reppassword, profilegivenName);
+        String response = api.postAuthorizables(authorizableId, intermediatePath, createUser, createGroup, reppassword, profilegivenName);
 
         // TODO: test validations
     }
@@ -225,7 +227,7 @@ public class SlingApiTest {
         String orgApacheFelixHttpsEnableTypeHint = null;
         String orgOsgiServiceHttpPortSecure = null;
         String orgOsgiServiceHttpPortSecureTypeHint = null;
-        // api.postConfig(runmode, name, orgApacheFelixHttpsNio, orgApacheFelixHttpsNioTypeHint, orgApacheFelixHttpsKeystore, orgApacheFelixHttpsKeystoreTypeHint, orgApacheFelixHttpsKeystorePassword, orgApacheFelixHttpsKeystorePasswordTypeHint, orgApacheFelixHttpsKeystoreKey, orgApacheFelixHttpsKeystoreKeyTypeHint, orgApacheFelixHttpsKeystoreKeyPassword, orgApacheFelixHttpsKeystoreKeyPasswordTypeHint, orgApacheFelixHttpsTruststore, orgApacheFelixHttpsTruststoreTypeHint, orgApacheFelixHttpsTruststorePassword, orgApacheFelixHttpsTruststorePasswordTypeHint, orgApacheFelixHttpsClientcertificate, orgApacheFelixHttpsClientcertificateTypeHint, orgApacheFelixHttpsEnable, orgApacheFelixHttpsEnableTypeHint, orgOsgiServiceHttpPortSecure, orgOsgiServiceHttpPortSecureTypeHint);
+        api.postConfig(runmode, name, orgApacheFelixHttpsNio, orgApacheFelixHttpsNioTypeHint, orgApacheFelixHttpsKeystore, orgApacheFelixHttpsKeystoreTypeHint, orgApacheFelixHttpsKeystorePassword, orgApacheFelixHttpsKeystorePasswordTypeHint, orgApacheFelixHttpsKeystoreKey, orgApacheFelixHttpsKeystoreKeyTypeHint, orgApacheFelixHttpsKeystoreKeyPassword, orgApacheFelixHttpsKeystoreKeyPasswordTypeHint, orgApacheFelixHttpsTruststore, orgApacheFelixHttpsTruststoreTypeHint, orgApacheFelixHttpsTruststorePassword, orgApacheFelixHttpsTruststorePasswordTypeHint, orgApacheFelixHttpsClientcertificate, orgApacheFelixHttpsClientcertificateTypeHint, orgApacheFelixHttpsEnable, orgApacheFelixHttpsEnableTypeHint, orgOsgiServiceHttpPortSecure, orgOsgiServiceHttpPortSecureTypeHint);
 
         // TODO: test validations
     }
@@ -243,7 +245,7 @@ public class SlingApiTest {
         String path = null;
         String name = null;
         String addMembers = null;
-        // api.postNodeRw(path, name, addMembers);
+        api.postNodeRw(path, name, addMembers);
 
         // TODO: test validations
     }
@@ -261,7 +263,7 @@ public class SlingApiTest {
         String path = null;
         String jcrprimaryType = null;
         String name = null;
-        // api.postPath(path, jcrprimaryType, name);
+        api.postPath(path, jcrprimaryType, name);
 
         // TODO: test validations
     }
@@ -280,7 +282,7 @@ public class SlingApiTest {
         BigDecimal pLimit = null;
         String _1Property = null;
         String _1PropertyValue = null;
-        // String response = api.postQuery(path, pLimit, _1Property, _1PropertyValue);
+        String response = api.postQuery(path, pLimit, _1Property, _1PropertyValue);
 
         // TODO: test validations
     }
@@ -298,7 +300,7 @@ public class SlingApiTest {
         Boolean ignoredeactivated = null;
         Boolean onlymodified = null;
         String path = null;
-        // api.postTreeActivation(ignoredeactivated, onlymodified, path);
+        api.postTreeActivation(ignoredeactivated, onlymodified, path);
 
         // TODO: test validations
     }

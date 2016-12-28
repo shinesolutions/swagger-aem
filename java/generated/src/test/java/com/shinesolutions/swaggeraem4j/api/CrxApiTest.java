@@ -16,6 +16,7 @@ package com.shinesolutions.swaggeraem4j.api;
 import com.shinesolutions.swaggeraem4j.ApiException;
 import java.io.File;
 import org.junit.Test;
+import org.junit.Ignore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +26,7 @@ import java.util.Map;
 /**
  * API tests for CrxApi
  */
+@Ignore
 public class CrxApiTest {
 
     private final CrxApi api = new CrxApi();
@@ -41,7 +43,7 @@ public class CrxApiTest {
     @Test
     public void postPackageServiceTest() throws ApiException {
         String cmd = null;
-        // String response = api.postPackageService(cmd);
+        String response = api.postPackageService(cmd);
 
         // TODO: test validations
     }
@@ -64,7 +66,7 @@ public class CrxApiTest {
         String charset_ = null;
         Boolean force = null;
         File _package = null;
-        // String response = api.postPackageServiceJson(path, cmd, groupName, packageName, packageVersion, charset_, force, _package);
+        String response = api.postPackageServiceJson(path, cmd, groupName, packageName, packageVersion, charset_, force, _package);
 
         // TODO: test validations
     }
@@ -85,7 +87,7 @@ public class CrxApiTest {
         String path = null;
         String filter = null;
         String charset_ = null;
-        // String response = api.postPackageUpdate(groupName, packageName, version, path, filter, charset_);
+        String response = api.postPackageUpdate(groupName, packageName, version, path, filter, charset_);
 
         // TODO: test validations
     }
@@ -103,7 +105,7 @@ public class CrxApiTest {
         String old = null;
         String plain = null;
         String verify = null;
-        // api.postSetPassword(old, plain, verify);
+        api.postSetPassword(old, plain, verify);
 
         // TODO: test validations
     }

@@ -26,6 +26,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 
+
 import java.math.BigDecimal;
 import java.io.File;
 
@@ -58,17 +59,6 @@ public class SlingApi {
     private com.squareup.okhttp.Call deleteAgentCall(String runmode, String name, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
-        // verify the required parameter 'runmode' is set
-        if (runmode == null) {
-            throw new ApiException("Missing the required parameter 'runmode' when calling deleteAgent(Async)");
-        }
-        
-        // verify the required parameter 'name' is set
-        if (name == null) {
-            throw new ApiException("Missing the required parameter 'name' when calling deleteAgent(Async)");
-        }
-        
-
         // create path and map variables
         String localVarPath = "/etc/replication/agents.{runmode}/{name}".replaceAll("\\{format\\}","json")
         .replaceAll("\\{" + "runmode" + "\\}", apiClient.escapeString(runmode.toString()))
@@ -107,6 +97,29 @@ public class SlingApi {
         String[] localVarAuthNames = new String[] { "aemAuth" };
         return apiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
+    
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call deleteAgentValidateBeforeCall(String runmode, String name, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'runmode' is set
+        if (runmode == null) {
+            throw new ApiException("Missing the required parameter 'runmode' when calling deleteAgent(Async)");
+        }
+        
+        // verify the required parameter 'name' is set
+        if (name == null) {
+            throw new ApiException("Missing the required parameter 'name' when calling deleteAgent(Async)");
+        }
+        
+        
+        com.squareup.okhttp.Call call = deleteAgentCall(runmode, name, progressListener, progressRequestListener);
+        return call;
+
+        
+        
+        
+        
+    }
 
     /**
      * 
@@ -128,7 +141,7 @@ public class SlingApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<Void> deleteAgentWithHttpInfo(String runmode, String name) throws ApiException {
-        com.squareup.okhttp.Call call = deleteAgentCall(runmode, name, null, null);
+        com.squareup.okhttp.Call call = deleteAgentValidateBeforeCall(runmode, name, null, null);
         return apiClient.execute(call);
     }
 
@@ -162,7 +175,7 @@ public class SlingApi {
             };
         }
 
-        com.squareup.okhttp.Call call = deleteAgentCall(runmode, name, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = deleteAgentValidateBeforeCall(runmode, name, progressListener, progressRequestListener);
         apiClient.executeAsync(call, callback);
         return call;
     }
@@ -170,17 +183,6 @@ public class SlingApi {
     private com.squareup.okhttp.Call deleteNodeCall(String path, String name, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
-        // verify the required parameter 'path' is set
-        if (path == null) {
-            throw new ApiException("Missing the required parameter 'path' when calling deleteNode(Async)");
-        }
-        
-        // verify the required parameter 'name' is set
-        if (name == null) {
-            throw new ApiException("Missing the required parameter 'name' when calling deleteNode(Async)");
-        }
-        
-
         // create path and map variables
         String localVarPath = "/{path}/{name}".replaceAll("\\{format\\}","json")
         .replaceAll("\\{" + "path" + "\\}", apiClient.escapeString(path.toString()))
@@ -219,6 +221,29 @@ public class SlingApi {
         String[] localVarAuthNames = new String[] { "aemAuth" };
         return apiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
+    
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call deleteNodeValidateBeforeCall(String path, String name, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'path' is set
+        if (path == null) {
+            throw new ApiException("Missing the required parameter 'path' when calling deleteNode(Async)");
+        }
+        
+        // verify the required parameter 'name' is set
+        if (name == null) {
+            throw new ApiException("Missing the required parameter 'name' when calling deleteNode(Async)");
+        }
+        
+        
+        com.squareup.okhttp.Call call = deleteNodeCall(path, name, progressListener, progressRequestListener);
+        return call;
+
+        
+        
+        
+        
+    }
 
     /**
      * 
@@ -240,7 +265,7 @@ public class SlingApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<Void> deleteNodeWithHttpInfo(String path, String name) throws ApiException {
-        com.squareup.okhttp.Call call = deleteNodeCall(path, name, null, null);
+        com.squareup.okhttp.Call call = deleteNodeValidateBeforeCall(path, name, null, null);
         return apiClient.execute(call);
     }
 
@@ -274,7 +299,7 @@ public class SlingApi {
             };
         }
 
-        com.squareup.okhttp.Call call = deleteNodeCall(path, name, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = deleteNodeValidateBeforeCall(path, name, progressListener, progressRequestListener);
         apiClient.executeAsync(call, callback);
         return call;
     }
@@ -282,17 +307,6 @@ public class SlingApi {
     private com.squareup.okhttp.Call getAgentCall(String runmode, String name, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
-        // verify the required parameter 'runmode' is set
-        if (runmode == null) {
-            throw new ApiException("Missing the required parameter 'runmode' when calling getAgent(Async)");
-        }
-        
-        // verify the required parameter 'name' is set
-        if (name == null) {
-            throw new ApiException("Missing the required parameter 'name' when calling getAgent(Async)");
-        }
-        
-
         // create path and map variables
         String localVarPath = "/etc/replication/agents.{runmode}/{name}".replaceAll("\\{format\\}","json")
         .replaceAll("\\{" + "runmode" + "\\}", apiClient.escapeString(runmode.toString()))
@@ -331,6 +345,29 @@ public class SlingApi {
         String[] localVarAuthNames = new String[] { "aemAuth" };
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
+    
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call getAgentValidateBeforeCall(String runmode, String name, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'runmode' is set
+        if (runmode == null) {
+            throw new ApiException("Missing the required parameter 'runmode' when calling getAgent(Async)");
+        }
+        
+        // verify the required parameter 'name' is set
+        if (name == null) {
+            throw new ApiException("Missing the required parameter 'name' when calling getAgent(Async)");
+        }
+        
+        
+        com.squareup.okhttp.Call call = getAgentCall(runmode, name, progressListener, progressRequestListener);
+        return call;
+
+        
+        
+        
+        
+    }
 
     /**
      * 
@@ -352,7 +389,7 @@ public class SlingApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<Void> getAgentWithHttpInfo(String runmode, String name) throws ApiException {
-        com.squareup.okhttp.Call call = getAgentCall(runmode, name, null, null);
+        com.squareup.okhttp.Call call = getAgentValidateBeforeCall(runmode, name, null, null);
         return apiClient.execute(call);
     }
 
@@ -386,7 +423,7 @@ public class SlingApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getAgentCall(runmode, name, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getAgentValidateBeforeCall(runmode, name, progressListener, progressRequestListener);
         apiClient.executeAsync(call, callback);
         return call;
     }
@@ -394,17 +431,6 @@ public class SlingApi {
     private com.squareup.okhttp.Call getNodeCall(String path, String name, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
-        // verify the required parameter 'path' is set
-        if (path == null) {
-            throw new ApiException("Missing the required parameter 'path' when calling getNode(Async)");
-        }
-        
-        // verify the required parameter 'name' is set
-        if (name == null) {
-            throw new ApiException("Missing the required parameter 'name' when calling getNode(Async)");
-        }
-        
-
         // create path and map variables
         String localVarPath = "/{path}/{name}".replaceAll("\\{format\\}","json")
         .replaceAll("\\{" + "path" + "\\}", apiClient.escapeString(path.toString()))
@@ -443,6 +469,29 @@ public class SlingApi {
         String[] localVarAuthNames = new String[] { "aemAuth" };
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
+    
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call getNodeValidateBeforeCall(String path, String name, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'path' is set
+        if (path == null) {
+            throw new ApiException("Missing the required parameter 'path' when calling getNode(Async)");
+        }
+        
+        // verify the required parameter 'name' is set
+        if (name == null) {
+            throw new ApiException("Missing the required parameter 'name' when calling getNode(Async)");
+        }
+        
+        
+        com.squareup.okhttp.Call call = getNodeCall(path, name, progressListener, progressRequestListener);
+        return call;
+
+        
+        
+        
+        
+    }
 
     /**
      * 
@@ -464,7 +513,7 @@ public class SlingApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<Void> getNodeWithHttpInfo(String path, String name) throws ApiException {
-        com.squareup.okhttp.Call call = getNodeCall(path, name, null, null);
+        com.squareup.okhttp.Call call = getNodeValidateBeforeCall(path, name, null, null);
         return apiClient.execute(call);
     }
 
@@ -498,7 +547,7 @@ public class SlingApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getNodeCall(path, name, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getNodeValidateBeforeCall(path, name, progressListener, progressRequestListener);
         apiClient.executeAsync(call, callback);
         return call;
     }
@@ -506,22 +555,6 @@ public class SlingApi {
     private com.squareup.okhttp.Call getPackageCall(String group, String name, String version, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
-        // verify the required parameter 'group' is set
-        if (group == null) {
-            throw new ApiException("Missing the required parameter 'group' when calling getPackage(Async)");
-        }
-        
-        // verify the required parameter 'name' is set
-        if (name == null) {
-            throw new ApiException("Missing the required parameter 'name' when calling getPackage(Async)");
-        }
-        
-        // verify the required parameter 'version' is set
-        if (version == null) {
-            throw new ApiException("Missing the required parameter 'version' when calling getPackage(Async)");
-        }
-        
-
         // create path and map variables
         String localVarPath = "/etc/packages/{group}/{name}-{version}.zip".replaceAll("\\{format\\}","json")
         .replaceAll("\\{" + "group" + "\\}", apiClient.escapeString(group.toString()))
@@ -561,6 +594,34 @@ public class SlingApi {
         String[] localVarAuthNames = new String[] { "aemAuth" };
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
+    
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call getPackageValidateBeforeCall(String group, String name, String version, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'group' is set
+        if (group == null) {
+            throw new ApiException("Missing the required parameter 'group' when calling getPackage(Async)");
+        }
+        
+        // verify the required parameter 'name' is set
+        if (name == null) {
+            throw new ApiException("Missing the required parameter 'name' when calling getPackage(Async)");
+        }
+        
+        // verify the required parameter 'version' is set
+        if (version == null) {
+            throw new ApiException("Missing the required parameter 'version' when calling getPackage(Async)");
+        }
+        
+        
+        com.squareup.okhttp.Call call = getPackageCall(group, name, version, progressListener, progressRequestListener);
+        return call;
+
+        
+        
+        
+        
+    }
 
     /**
      * 
@@ -586,7 +647,7 @@ public class SlingApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<File> getPackageWithHttpInfo(String group, String name, String version) throws ApiException {
-        com.squareup.okhttp.Call call = getPackageCall(group, name, version, null, null);
+        com.squareup.okhttp.Call call = getPackageValidateBeforeCall(group, name, version, null, null);
         Type localVarReturnType = new TypeToken<File>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -622,7 +683,7 @@ public class SlingApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getPackageCall(group, name, version, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getPackageValidateBeforeCall(group, name, version, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<File>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -631,22 +692,6 @@ public class SlingApi {
     private com.squareup.okhttp.Call getPackageFilterCall(String group, String name, String version, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
-        // verify the required parameter 'group' is set
-        if (group == null) {
-            throw new ApiException("Missing the required parameter 'group' when calling getPackageFilter(Async)");
-        }
-        
-        // verify the required parameter 'name' is set
-        if (name == null) {
-            throw new ApiException("Missing the required parameter 'name' when calling getPackageFilter(Async)");
-        }
-        
-        // verify the required parameter 'version' is set
-        if (version == null) {
-            throw new ApiException("Missing the required parameter 'version' when calling getPackageFilter(Async)");
-        }
-        
-
         // create path and map variables
         String localVarPath = "/etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json".replaceAll("\\{format\\}","json")
         .replaceAll("\\{" + "group" + "\\}", apiClient.escapeString(group.toString()))
@@ -686,6 +731,34 @@ public class SlingApi {
         String[] localVarAuthNames = new String[] { "aemAuth" };
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
+    
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call getPackageFilterValidateBeforeCall(String group, String name, String version, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'group' is set
+        if (group == null) {
+            throw new ApiException("Missing the required parameter 'group' when calling getPackageFilter(Async)");
+        }
+        
+        // verify the required parameter 'name' is set
+        if (name == null) {
+            throw new ApiException("Missing the required parameter 'name' when calling getPackageFilter(Async)");
+        }
+        
+        // verify the required parameter 'version' is set
+        if (version == null) {
+            throw new ApiException("Missing the required parameter 'version' when calling getPackageFilter(Async)");
+        }
+        
+        
+        com.squareup.okhttp.Call call = getPackageFilterCall(group, name, version, progressListener, progressRequestListener);
+        return call;
+
+        
+        
+        
+        
+    }
 
     /**
      * 
@@ -711,7 +784,7 @@ public class SlingApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<String> getPackageFilterWithHttpInfo(String group, String name, String version) throws ApiException {
-        com.squareup.okhttp.Call call = getPackageFilterCall(group, name, version, null, null);
+        com.squareup.okhttp.Call call = getPackageFilterValidateBeforeCall(group, name, version, null, null);
         Type localVarReturnType = new TypeToken<String>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -747,7 +820,7 @@ public class SlingApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getPackageFilterCall(group, name, version, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getPackageFilterValidateBeforeCall(group, name, version, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<String>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -756,17 +829,6 @@ public class SlingApi {
     private com.squareup.okhttp.Call postAgentCall(String runmode, String name, String jcrprimaryType, String jcrcontentcqname, String jcrcontentjcrtitle, String jcrcontentjcrdescription, String jcrcontentslingresourceType, String jcrcontenttransportUri, String jcrcontenttransportUser, String jcrcontenttransportPassword, String jcrcontentlogLevel, Boolean jcrcontentnoVersioning, List<String> jcrcontentprotocolHTTPHeaders, String jcrcontentprotocolHTTPHeadersTypeHint, String jcrcontentprotocolHTTPMethod, String jcrcontentretryDelay, String jcrcontentserializationType, String jcrcontentjcrmixinTypes, Boolean jcrcontenttriggerReceive, Boolean jcrcontenttriggerSpecific, String jcrcontentcqtemplate, Boolean jcrcontentenabled, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
-        // verify the required parameter 'runmode' is set
-        if (runmode == null) {
-            throw new ApiException("Missing the required parameter 'runmode' when calling postAgent(Async)");
-        }
-        
-        // verify the required parameter 'name' is set
-        if (name == null) {
-            throw new ApiException("Missing the required parameter 'name' when calling postAgent(Async)");
-        }
-        
-
         // create path and map variables
         String localVarPath = "/etc/replication/agents.{runmode}/{name}".replaceAll("\\{format\\}","json")
         .replaceAll("\\{" + "runmode" + "\\}", apiClient.escapeString(runmode.toString()))
@@ -845,6 +907,29 @@ public class SlingApi {
         String[] localVarAuthNames = new String[] { "aemAuth" };
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
+    
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call postAgentValidateBeforeCall(String runmode, String name, String jcrprimaryType, String jcrcontentcqname, String jcrcontentjcrtitle, String jcrcontentjcrdescription, String jcrcontentslingresourceType, String jcrcontenttransportUri, String jcrcontenttransportUser, String jcrcontenttransportPassword, String jcrcontentlogLevel, Boolean jcrcontentnoVersioning, List<String> jcrcontentprotocolHTTPHeaders, String jcrcontentprotocolHTTPHeadersTypeHint, String jcrcontentprotocolHTTPMethod, String jcrcontentretryDelay, String jcrcontentserializationType, String jcrcontentjcrmixinTypes, Boolean jcrcontenttriggerReceive, Boolean jcrcontenttriggerSpecific, String jcrcontentcqtemplate, Boolean jcrcontentenabled, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'runmode' is set
+        if (runmode == null) {
+            throw new ApiException("Missing the required parameter 'runmode' when calling postAgent(Async)");
+        }
+        
+        // verify the required parameter 'name' is set
+        if (name == null) {
+            throw new ApiException("Missing the required parameter 'name' when calling postAgent(Async)");
+        }
+        
+        
+        com.squareup.okhttp.Call call = postAgentCall(runmode, name, jcrprimaryType, jcrcontentcqname, jcrcontentjcrtitle, jcrcontentjcrdescription, jcrcontentslingresourceType, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttransportPassword, jcrcontentlogLevel, jcrcontentnoVersioning, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentretryDelay, jcrcontentserializationType, jcrcontentjcrmixinTypes, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentcqtemplate, jcrcontentenabled, progressListener, progressRequestListener);
+        return call;
+
+        
+        
+        
+        
+    }
 
     /**
      * 
@@ -906,7 +991,7 @@ public class SlingApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<Void> postAgentWithHttpInfo(String runmode, String name, String jcrprimaryType, String jcrcontentcqname, String jcrcontentjcrtitle, String jcrcontentjcrdescription, String jcrcontentslingresourceType, String jcrcontenttransportUri, String jcrcontenttransportUser, String jcrcontenttransportPassword, String jcrcontentlogLevel, Boolean jcrcontentnoVersioning, List<String> jcrcontentprotocolHTTPHeaders, String jcrcontentprotocolHTTPHeadersTypeHint, String jcrcontentprotocolHTTPMethod, String jcrcontentretryDelay, String jcrcontentserializationType, String jcrcontentjcrmixinTypes, Boolean jcrcontenttriggerReceive, Boolean jcrcontenttriggerSpecific, String jcrcontentcqtemplate, Boolean jcrcontentenabled) throws ApiException {
-        com.squareup.okhttp.Call call = postAgentCall(runmode, name, jcrprimaryType, jcrcontentcqname, jcrcontentjcrtitle, jcrcontentjcrdescription, jcrcontentslingresourceType, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttransportPassword, jcrcontentlogLevel, jcrcontentnoVersioning, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentretryDelay, jcrcontentserializationType, jcrcontentjcrmixinTypes, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentcqtemplate, jcrcontentenabled, null, null);
+        com.squareup.okhttp.Call call = postAgentValidateBeforeCall(runmode, name, jcrprimaryType, jcrcontentcqname, jcrcontentjcrtitle, jcrcontentjcrdescription, jcrcontentslingresourceType, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttransportPassword, jcrcontentlogLevel, jcrcontentnoVersioning, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentretryDelay, jcrcontentserializationType, jcrcontentjcrmixinTypes, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentcqtemplate, jcrcontentenabled, null, null);
         return apiClient.execute(call);
     }
 
@@ -960,7 +1045,7 @@ public class SlingApi {
             };
         }
 
-        com.squareup.okhttp.Call call = postAgentCall(runmode, name, jcrprimaryType, jcrcontentcqname, jcrcontentjcrtitle, jcrcontentjcrdescription, jcrcontentslingresourceType, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttransportPassword, jcrcontentlogLevel, jcrcontentnoVersioning, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentretryDelay, jcrcontentserializationType, jcrcontentjcrmixinTypes, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentcqtemplate, jcrcontentenabled, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = postAgentValidateBeforeCall(runmode, name, jcrprimaryType, jcrcontentcqname, jcrcontentjcrtitle, jcrcontentjcrdescription, jcrcontentslingresourceType, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttransportPassword, jcrcontentlogLevel, jcrcontentnoVersioning, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentretryDelay, jcrcontentserializationType, jcrcontentjcrmixinTypes, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentcqtemplate, jcrcontentenabled, progressListener, progressRequestListener);
         apiClient.executeAsync(call, callback);
         return call;
     }
@@ -968,17 +1053,6 @@ public class SlingApi {
     private com.squareup.okhttp.Call postAuthorizablesCall(String authorizableId, String intermediatePath, String createUser, String createGroup, String reppassword, String profilegivenName, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
-        // verify the required parameter 'authorizableId' is set
-        if (authorizableId == null) {
-            throw new ApiException("Missing the required parameter 'authorizableId' when calling postAuthorizables(Async)");
-        }
-        
-        // verify the required parameter 'intermediatePath' is set
-        if (intermediatePath == null) {
-            throw new ApiException("Missing the required parameter 'intermediatePath' when calling postAuthorizables(Async)");
-        }
-        
-
         // create path and map variables
         String localVarPath = "/libs/granite/security/post/authorizables".replaceAll("\\{format\\}","json");
 
@@ -1027,6 +1101,29 @@ public class SlingApi {
         String[] localVarAuthNames = new String[] { "aemAuth" };
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
+    
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call postAuthorizablesValidateBeforeCall(String authorizableId, String intermediatePath, String createUser, String createGroup, String reppassword, String profilegivenName, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'authorizableId' is set
+        if (authorizableId == null) {
+            throw new ApiException("Missing the required parameter 'authorizableId' when calling postAuthorizables(Async)");
+        }
+        
+        // verify the required parameter 'intermediatePath' is set
+        if (intermediatePath == null) {
+            throw new ApiException("Missing the required parameter 'intermediatePath' when calling postAuthorizables(Async)");
+        }
+        
+        
+        com.squareup.okhttp.Call call = postAuthorizablesCall(authorizableId, intermediatePath, createUser, createGroup, reppassword, profilegivenName, progressListener, progressRequestListener);
+        return call;
+
+        
+        
+        
+        
+    }
 
     /**
      * 
@@ -1058,7 +1155,7 @@ public class SlingApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<String> postAuthorizablesWithHttpInfo(String authorizableId, String intermediatePath, String createUser, String createGroup, String reppassword, String profilegivenName) throws ApiException {
-        com.squareup.okhttp.Call call = postAuthorizablesCall(authorizableId, intermediatePath, createUser, createGroup, reppassword, profilegivenName, null, null);
+        com.squareup.okhttp.Call call = postAuthorizablesValidateBeforeCall(authorizableId, intermediatePath, createUser, createGroup, reppassword, profilegivenName, null, null);
         Type localVarReturnType = new TypeToken<String>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -1097,7 +1194,7 @@ public class SlingApi {
             };
         }
 
-        com.squareup.okhttp.Call call = postAuthorizablesCall(authorizableId, intermediatePath, createUser, createGroup, reppassword, profilegivenName, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = postAuthorizablesValidateBeforeCall(authorizableId, intermediatePath, createUser, createGroup, reppassword, profilegivenName, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<String>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -1106,17 +1203,6 @@ public class SlingApi {
     private com.squareup.okhttp.Call postConfigCall(String runmode, String name, Boolean orgApacheFelixHttpsNio, String orgApacheFelixHttpsNioTypeHint, String orgApacheFelixHttpsKeystore, String orgApacheFelixHttpsKeystoreTypeHint, String orgApacheFelixHttpsKeystorePassword, String orgApacheFelixHttpsKeystorePasswordTypeHint, String orgApacheFelixHttpsKeystoreKey, String orgApacheFelixHttpsKeystoreKeyTypeHint, String orgApacheFelixHttpsKeystoreKeyPassword, String orgApacheFelixHttpsKeystoreKeyPasswordTypeHint, String orgApacheFelixHttpsTruststore, String orgApacheFelixHttpsTruststoreTypeHint, String orgApacheFelixHttpsTruststorePassword, String orgApacheFelixHttpsTruststorePasswordTypeHint, String orgApacheFelixHttpsClientcertificate, String orgApacheFelixHttpsClientcertificateTypeHint, String orgApacheFelixHttpsEnable, String orgApacheFelixHttpsEnableTypeHint, String orgOsgiServiceHttpPortSecure, String orgOsgiServiceHttpPortSecureTypeHint, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
-        // verify the required parameter 'runmode' is set
-        if (runmode == null) {
-            throw new ApiException("Missing the required parameter 'runmode' when calling postConfig(Async)");
-        }
-        
-        // verify the required parameter 'name' is set
-        if (name == null) {
-            throw new ApiException("Missing the required parameter 'name' when calling postConfig(Async)");
-        }
-        
-
         // create path and map variables
         String localVarPath = "/apps/system/config.{runmode}/{name}".replaceAll("\\{format\\}","json")
         .replaceAll("\\{" + "runmode" + "\\}", apiClient.escapeString(runmode.toString()))
@@ -1195,6 +1281,29 @@ public class SlingApi {
         String[] localVarAuthNames = new String[] { "aemAuth" };
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
+    
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call postConfigValidateBeforeCall(String runmode, String name, Boolean orgApacheFelixHttpsNio, String orgApacheFelixHttpsNioTypeHint, String orgApacheFelixHttpsKeystore, String orgApacheFelixHttpsKeystoreTypeHint, String orgApacheFelixHttpsKeystorePassword, String orgApacheFelixHttpsKeystorePasswordTypeHint, String orgApacheFelixHttpsKeystoreKey, String orgApacheFelixHttpsKeystoreKeyTypeHint, String orgApacheFelixHttpsKeystoreKeyPassword, String orgApacheFelixHttpsKeystoreKeyPasswordTypeHint, String orgApacheFelixHttpsTruststore, String orgApacheFelixHttpsTruststoreTypeHint, String orgApacheFelixHttpsTruststorePassword, String orgApacheFelixHttpsTruststorePasswordTypeHint, String orgApacheFelixHttpsClientcertificate, String orgApacheFelixHttpsClientcertificateTypeHint, String orgApacheFelixHttpsEnable, String orgApacheFelixHttpsEnableTypeHint, String orgOsgiServiceHttpPortSecure, String orgOsgiServiceHttpPortSecureTypeHint, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'runmode' is set
+        if (runmode == null) {
+            throw new ApiException("Missing the required parameter 'runmode' when calling postConfig(Async)");
+        }
+        
+        // verify the required parameter 'name' is set
+        if (name == null) {
+            throw new ApiException("Missing the required parameter 'name' when calling postConfig(Async)");
+        }
+        
+        
+        com.squareup.okhttp.Call call = postConfigCall(runmode, name, orgApacheFelixHttpsNio, orgApacheFelixHttpsNioTypeHint, orgApacheFelixHttpsKeystore, orgApacheFelixHttpsKeystoreTypeHint, orgApacheFelixHttpsKeystorePassword, orgApacheFelixHttpsKeystorePasswordTypeHint, orgApacheFelixHttpsKeystoreKey, orgApacheFelixHttpsKeystoreKeyTypeHint, orgApacheFelixHttpsKeystoreKeyPassword, orgApacheFelixHttpsKeystoreKeyPasswordTypeHint, orgApacheFelixHttpsTruststore, orgApacheFelixHttpsTruststoreTypeHint, orgApacheFelixHttpsTruststorePassword, orgApacheFelixHttpsTruststorePasswordTypeHint, orgApacheFelixHttpsClientcertificate, orgApacheFelixHttpsClientcertificateTypeHint, orgApacheFelixHttpsEnable, orgApacheFelixHttpsEnableTypeHint, orgOsgiServiceHttpPortSecure, orgOsgiServiceHttpPortSecureTypeHint, progressListener, progressRequestListener);
+        return call;
+
+        
+        
+        
+        
+    }
 
     /**
      * 
@@ -1256,7 +1365,7 @@ public class SlingApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<Void> postConfigWithHttpInfo(String runmode, String name, Boolean orgApacheFelixHttpsNio, String orgApacheFelixHttpsNioTypeHint, String orgApacheFelixHttpsKeystore, String orgApacheFelixHttpsKeystoreTypeHint, String orgApacheFelixHttpsKeystorePassword, String orgApacheFelixHttpsKeystorePasswordTypeHint, String orgApacheFelixHttpsKeystoreKey, String orgApacheFelixHttpsKeystoreKeyTypeHint, String orgApacheFelixHttpsKeystoreKeyPassword, String orgApacheFelixHttpsKeystoreKeyPasswordTypeHint, String orgApacheFelixHttpsTruststore, String orgApacheFelixHttpsTruststoreTypeHint, String orgApacheFelixHttpsTruststorePassword, String orgApacheFelixHttpsTruststorePasswordTypeHint, String orgApacheFelixHttpsClientcertificate, String orgApacheFelixHttpsClientcertificateTypeHint, String orgApacheFelixHttpsEnable, String orgApacheFelixHttpsEnableTypeHint, String orgOsgiServiceHttpPortSecure, String orgOsgiServiceHttpPortSecureTypeHint) throws ApiException {
-        com.squareup.okhttp.Call call = postConfigCall(runmode, name, orgApacheFelixHttpsNio, orgApacheFelixHttpsNioTypeHint, orgApacheFelixHttpsKeystore, orgApacheFelixHttpsKeystoreTypeHint, orgApacheFelixHttpsKeystorePassword, orgApacheFelixHttpsKeystorePasswordTypeHint, orgApacheFelixHttpsKeystoreKey, orgApacheFelixHttpsKeystoreKeyTypeHint, orgApacheFelixHttpsKeystoreKeyPassword, orgApacheFelixHttpsKeystoreKeyPasswordTypeHint, orgApacheFelixHttpsTruststore, orgApacheFelixHttpsTruststoreTypeHint, orgApacheFelixHttpsTruststorePassword, orgApacheFelixHttpsTruststorePasswordTypeHint, orgApacheFelixHttpsClientcertificate, orgApacheFelixHttpsClientcertificateTypeHint, orgApacheFelixHttpsEnable, orgApacheFelixHttpsEnableTypeHint, orgOsgiServiceHttpPortSecure, orgOsgiServiceHttpPortSecureTypeHint, null, null);
+        com.squareup.okhttp.Call call = postConfigValidateBeforeCall(runmode, name, orgApacheFelixHttpsNio, orgApacheFelixHttpsNioTypeHint, orgApacheFelixHttpsKeystore, orgApacheFelixHttpsKeystoreTypeHint, orgApacheFelixHttpsKeystorePassword, orgApacheFelixHttpsKeystorePasswordTypeHint, orgApacheFelixHttpsKeystoreKey, orgApacheFelixHttpsKeystoreKeyTypeHint, orgApacheFelixHttpsKeystoreKeyPassword, orgApacheFelixHttpsKeystoreKeyPasswordTypeHint, orgApacheFelixHttpsTruststore, orgApacheFelixHttpsTruststoreTypeHint, orgApacheFelixHttpsTruststorePassword, orgApacheFelixHttpsTruststorePasswordTypeHint, orgApacheFelixHttpsClientcertificate, orgApacheFelixHttpsClientcertificateTypeHint, orgApacheFelixHttpsEnable, orgApacheFelixHttpsEnableTypeHint, orgOsgiServiceHttpPortSecure, orgOsgiServiceHttpPortSecureTypeHint, null, null);
         return apiClient.execute(call);
     }
 
@@ -1310,7 +1419,7 @@ public class SlingApi {
             };
         }
 
-        com.squareup.okhttp.Call call = postConfigCall(runmode, name, orgApacheFelixHttpsNio, orgApacheFelixHttpsNioTypeHint, orgApacheFelixHttpsKeystore, orgApacheFelixHttpsKeystoreTypeHint, orgApacheFelixHttpsKeystorePassword, orgApacheFelixHttpsKeystorePasswordTypeHint, orgApacheFelixHttpsKeystoreKey, orgApacheFelixHttpsKeystoreKeyTypeHint, orgApacheFelixHttpsKeystoreKeyPassword, orgApacheFelixHttpsKeystoreKeyPasswordTypeHint, orgApacheFelixHttpsTruststore, orgApacheFelixHttpsTruststoreTypeHint, orgApacheFelixHttpsTruststorePassword, orgApacheFelixHttpsTruststorePasswordTypeHint, orgApacheFelixHttpsClientcertificate, orgApacheFelixHttpsClientcertificateTypeHint, orgApacheFelixHttpsEnable, orgApacheFelixHttpsEnableTypeHint, orgOsgiServiceHttpPortSecure, orgOsgiServiceHttpPortSecureTypeHint, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = postConfigValidateBeforeCall(runmode, name, orgApacheFelixHttpsNio, orgApacheFelixHttpsNioTypeHint, orgApacheFelixHttpsKeystore, orgApacheFelixHttpsKeystoreTypeHint, orgApacheFelixHttpsKeystorePassword, orgApacheFelixHttpsKeystorePasswordTypeHint, orgApacheFelixHttpsKeystoreKey, orgApacheFelixHttpsKeystoreKeyTypeHint, orgApacheFelixHttpsKeystoreKeyPassword, orgApacheFelixHttpsKeystoreKeyPasswordTypeHint, orgApacheFelixHttpsTruststore, orgApacheFelixHttpsTruststoreTypeHint, orgApacheFelixHttpsTruststorePassword, orgApacheFelixHttpsTruststorePasswordTypeHint, orgApacheFelixHttpsClientcertificate, orgApacheFelixHttpsClientcertificateTypeHint, orgApacheFelixHttpsEnable, orgApacheFelixHttpsEnableTypeHint, orgOsgiServiceHttpPortSecure, orgOsgiServiceHttpPortSecureTypeHint, progressListener, progressRequestListener);
         apiClient.executeAsync(call, callback);
         return call;
     }
@@ -1318,17 +1427,6 @@ public class SlingApi {
     private com.squareup.okhttp.Call postNodeRwCall(String path, String name, String addMembers, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
-        // verify the required parameter 'path' is set
-        if (path == null) {
-            throw new ApiException("Missing the required parameter 'path' when calling postNodeRw(Async)");
-        }
-        
-        // verify the required parameter 'name' is set
-        if (name == null) {
-            throw new ApiException("Missing the required parameter 'name' when calling postNodeRw(Async)");
-        }
-        
-
         // create path and map variables
         String localVarPath = "/{path}/{name}.rw.html".replaceAll("\\{format\\}","json")
         .replaceAll("\\{" + "path" + "\\}", apiClient.escapeString(path.toString()))
@@ -1369,6 +1467,29 @@ public class SlingApi {
         String[] localVarAuthNames = new String[] { "aemAuth" };
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
+    
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call postNodeRwValidateBeforeCall(String path, String name, String addMembers, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'path' is set
+        if (path == null) {
+            throw new ApiException("Missing the required parameter 'path' when calling postNodeRw(Async)");
+        }
+        
+        // verify the required parameter 'name' is set
+        if (name == null) {
+            throw new ApiException("Missing the required parameter 'name' when calling postNodeRw(Async)");
+        }
+        
+        
+        com.squareup.okhttp.Call call = postNodeRwCall(path, name, addMembers, progressListener, progressRequestListener);
+        return call;
+
+        
+        
+        
+        
+    }
 
     /**
      * 
@@ -1392,7 +1513,7 @@ public class SlingApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<Void> postNodeRwWithHttpInfo(String path, String name, String addMembers) throws ApiException {
-        com.squareup.okhttp.Call call = postNodeRwCall(path, name, addMembers, null, null);
+        com.squareup.okhttp.Call call = postNodeRwValidateBeforeCall(path, name, addMembers, null, null);
         return apiClient.execute(call);
     }
 
@@ -1427,7 +1548,7 @@ public class SlingApi {
             };
         }
 
-        com.squareup.okhttp.Call call = postNodeRwCall(path, name, addMembers, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = postNodeRwValidateBeforeCall(path, name, addMembers, progressListener, progressRequestListener);
         apiClient.executeAsync(call, callback);
         return call;
     }
@@ -1435,22 +1556,6 @@ public class SlingApi {
     private com.squareup.okhttp.Call postPathCall(String path, String jcrprimaryType, String name, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
-        // verify the required parameter 'path' is set
-        if (path == null) {
-            throw new ApiException("Missing the required parameter 'path' when calling postPath(Async)");
-        }
-        
-        // verify the required parameter 'jcrprimaryType' is set
-        if (jcrprimaryType == null) {
-            throw new ApiException("Missing the required parameter 'jcrprimaryType' when calling postPath(Async)");
-        }
-        
-        // verify the required parameter 'name' is set
-        if (name == null) {
-            throw new ApiException("Missing the required parameter 'name' when calling postPath(Async)");
-        }
-        
-
         // create path and map variables
         String localVarPath = "/{path}/".replaceAll("\\{format\\}","json")
         .replaceAll("\\{" + "path" + "\\}", apiClient.escapeString(path.toString()));
@@ -1492,6 +1597,34 @@ public class SlingApi {
         String[] localVarAuthNames = new String[] { "aemAuth" };
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
+    
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call postPathValidateBeforeCall(String path, String jcrprimaryType, String name, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'path' is set
+        if (path == null) {
+            throw new ApiException("Missing the required parameter 'path' when calling postPath(Async)");
+        }
+        
+        // verify the required parameter 'jcrprimaryType' is set
+        if (jcrprimaryType == null) {
+            throw new ApiException("Missing the required parameter 'jcrprimaryType' when calling postPath(Async)");
+        }
+        
+        // verify the required parameter 'name' is set
+        if (name == null) {
+            throw new ApiException("Missing the required parameter 'name' when calling postPath(Async)");
+        }
+        
+        
+        com.squareup.okhttp.Call call = postPathCall(path, jcrprimaryType, name, progressListener, progressRequestListener);
+        return call;
+
+        
+        
+        
+        
+    }
 
     /**
      * 
@@ -1515,7 +1648,7 @@ public class SlingApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<Void> postPathWithHttpInfo(String path, String jcrprimaryType, String name) throws ApiException {
-        com.squareup.okhttp.Call call = postPathCall(path, jcrprimaryType, name, null, null);
+        com.squareup.okhttp.Call call = postPathValidateBeforeCall(path, jcrprimaryType, name, null, null);
         return apiClient.execute(call);
     }
 
@@ -1550,7 +1683,7 @@ public class SlingApi {
             };
         }
 
-        com.squareup.okhttp.Call call = postPathCall(path, jcrprimaryType, name, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = postPathValidateBeforeCall(path, jcrprimaryType, name, progressListener, progressRequestListener);
         apiClient.executeAsync(call, callback);
         return call;
     }
@@ -1558,27 +1691,6 @@ public class SlingApi {
     private com.squareup.okhttp.Call postQueryCall(String path, BigDecimal pLimit, String _1Property, String _1PropertyValue, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
-        // verify the required parameter 'path' is set
-        if (path == null) {
-            throw new ApiException("Missing the required parameter 'path' when calling postQuery(Async)");
-        }
-        
-        // verify the required parameter 'pLimit' is set
-        if (pLimit == null) {
-            throw new ApiException("Missing the required parameter 'pLimit' when calling postQuery(Async)");
-        }
-        
-        // verify the required parameter '_1Property' is set
-        if (_1Property == null) {
-            throw new ApiException("Missing the required parameter '_1Property' when calling postQuery(Async)");
-        }
-        
-        // verify the required parameter '_1PropertyValue' is set
-        if (_1PropertyValue == null) {
-            throw new ApiException("Missing the required parameter '_1PropertyValue' when calling postQuery(Async)");
-        }
-        
-
         // create path and map variables
         String localVarPath = "/bin/querybuilder.json".replaceAll("\\{format\\}","json");
 
@@ -1623,6 +1735,39 @@ public class SlingApi {
         String[] localVarAuthNames = new String[] { "aemAuth" };
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
+    
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call postQueryValidateBeforeCall(String path, BigDecimal pLimit, String _1Property, String _1PropertyValue, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'path' is set
+        if (path == null) {
+            throw new ApiException("Missing the required parameter 'path' when calling postQuery(Async)");
+        }
+        
+        // verify the required parameter 'pLimit' is set
+        if (pLimit == null) {
+            throw new ApiException("Missing the required parameter 'pLimit' when calling postQuery(Async)");
+        }
+        
+        // verify the required parameter '_1Property' is set
+        if (_1Property == null) {
+            throw new ApiException("Missing the required parameter '_1Property' when calling postQuery(Async)");
+        }
+        
+        // verify the required parameter '_1PropertyValue' is set
+        if (_1PropertyValue == null) {
+            throw new ApiException("Missing the required parameter '_1PropertyValue' when calling postQuery(Async)");
+        }
+        
+        
+        com.squareup.okhttp.Call call = postQueryCall(path, pLimit, _1Property, _1PropertyValue, progressListener, progressRequestListener);
+        return call;
+
+        
+        
+        
+        
+    }
 
     /**
      * 
@@ -1650,7 +1795,7 @@ public class SlingApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<String> postQueryWithHttpInfo(String path, BigDecimal pLimit, String _1Property, String _1PropertyValue) throws ApiException {
-        com.squareup.okhttp.Call call = postQueryCall(path, pLimit, _1Property, _1PropertyValue, null, null);
+        com.squareup.okhttp.Call call = postQueryValidateBeforeCall(path, pLimit, _1Property, _1PropertyValue, null, null);
         Type localVarReturnType = new TypeToken<String>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -1687,7 +1832,7 @@ public class SlingApi {
             };
         }
 
-        com.squareup.okhttp.Call call = postQueryCall(path, pLimit, _1Property, _1PropertyValue, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = postQueryValidateBeforeCall(path, pLimit, _1Property, _1PropertyValue, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<String>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -1696,22 +1841,6 @@ public class SlingApi {
     private com.squareup.okhttp.Call postTreeActivationCall(Boolean ignoredeactivated, Boolean onlymodified, String path, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
-        // verify the required parameter 'ignoredeactivated' is set
-        if (ignoredeactivated == null) {
-            throw new ApiException("Missing the required parameter 'ignoredeactivated' when calling postTreeActivation(Async)");
-        }
-        
-        // verify the required parameter 'onlymodified' is set
-        if (onlymodified == null) {
-            throw new ApiException("Missing the required parameter 'onlymodified' when calling postTreeActivation(Async)");
-        }
-        
-        // verify the required parameter 'path' is set
-        if (path == null) {
-            throw new ApiException("Missing the required parameter 'path' when calling postTreeActivation(Async)");
-        }
-        
-
         // create path and map variables
         String localVarPath = "/etc/replication/treeactivation.html".replaceAll("\\{format\\}","json");
 
@@ -1754,6 +1883,34 @@ public class SlingApi {
         String[] localVarAuthNames = new String[] { "aemAuth" };
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
+    
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call postTreeActivationValidateBeforeCall(Boolean ignoredeactivated, Boolean onlymodified, String path, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'ignoredeactivated' is set
+        if (ignoredeactivated == null) {
+            throw new ApiException("Missing the required parameter 'ignoredeactivated' when calling postTreeActivation(Async)");
+        }
+        
+        // verify the required parameter 'onlymodified' is set
+        if (onlymodified == null) {
+            throw new ApiException("Missing the required parameter 'onlymodified' when calling postTreeActivation(Async)");
+        }
+        
+        // verify the required parameter 'path' is set
+        if (path == null) {
+            throw new ApiException("Missing the required parameter 'path' when calling postTreeActivation(Async)");
+        }
+        
+        
+        com.squareup.okhttp.Call call = postTreeActivationCall(ignoredeactivated, onlymodified, path, progressListener, progressRequestListener);
+        return call;
+
+        
+        
+        
+        
+    }
 
     /**
      * 
@@ -1777,7 +1934,7 @@ public class SlingApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<Void> postTreeActivationWithHttpInfo(Boolean ignoredeactivated, Boolean onlymodified, String path) throws ApiException {
-        com.squareup.okhttp.Call call = postTreeActivationCall(ignoredeactivated, onlymodified, path, null, null);
+        com.squareup.okhttp.Call call = postTreeActivationValidateBeforeCall(ignoredeactivated, onlymodified, path, null, null);
         return apiClient.execute(call);
     }
 
@@ -1812,7 +1969,7 @@ public class SlingApi {
             };
         }
 
-        com.squareup.okhttp.Call call = postTreeActivationCall(ignoredeactivated, onlymodified, path, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = postTreeActivationValidateBeforeCall(ignoredeactivated, onlymodified, path, progressListener, progressRequestListener);
         apiClient.executeAsync(call, callback);
         return call;
     }
