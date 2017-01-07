@@ -12,7 +12,16 @@ This Java client returns raw HTTP response AS-IS. Check out [aem4j](https://gith
 Install
 -------
 
-    TODO
+Maven:
+
+    <dependency>
+        <groupId>com.shinesolutions</groupId>
+        <artifactId>swaggeraem4j</artifactId>
+    </dependency>
+
+Gradle:
+
+    compile group: 'com.shinesolutions', name: 'swaggeraem4j'
 
 Usage
 -----
