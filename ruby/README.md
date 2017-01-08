@@ -155,6 +155,40 @@ CRX API - User:
       verify = 'somenewpassword'
     )
 
+Sling API - Flush agent:
+
+    # create flush agent
+    data, status_code, headers = sling.post_agent_with_http_info(
+      runmode = 'author',
+      name = 'some-flush-agent',
+      {
+        :jcrprimary_type => 'cq:Page',
+        :jcrcontentcqname => 'some-flush-agent',
+        :jcrcontentjcrtitle => 'Some Flush Agent Title',
+        :jcrcontentjcrdescription => 'Some Flush Agent Description',
+        :jcrcontentslingresource_type => '/libs/cq/replication/components/agent',
+        :jcrcontenttransport_uri => 'http://somehost:8080/dispatcher/invalidate.cache',
+        :jcrcontentlog_level => 'error',
+        :jcrcontentno_versioning => true,
+        :jcrcontentprotocol_http_headers => ['CQ-Action:{action}', 'CQ-Handle:{path}', 'CQ-Path:{path}'],
+        :jcrcontentprotocol_http_headers_type_hint => 'String[]',
+        :jcrcontentprotocol_http_method => 'GET',
+        :jcrcontentretry_delay => '30000',
+        :jcrcontentserialization_type => 'flush',
+        :jcrcontentjcrmixin_types => 'cq:ReplicationStatus',
+        :jcrcontenttrigger_receive => true,
+        :jcrcontenttrigger_specific => true,
+        :jcrcontentcqtemplate => '/libs/cq/replication/templates/agent',
+        :jcrcontentenabled => true
+      }
+    )
+
+    # delete flush agent
+    data, status_code, headers = sling.delete_agent_with_http_info(
+      runmode = 'author',
+      name = 'some-flush-agent'
+    )
+
 Sling API - Group:
 
     # create group
@@ -268,6 +302,35 @@ Sling API - Path:
       ignoredeactivated = true,
       onlymodified = false,
       path = '/etc/designs/geometrixx'
+    )
+
+Sling API - Replication agent:
+
+    # create replication agent
+    data, status_code, headers = sling.post_agent_with_http_info(
+      runmode = 'author',
+      name = 'some-replication-agent',
+      {
+        :jcrprimary_type => 'cq:Page',
+        :jcrcontentcqname => 'some-replication-agent',
+        :jcrcontentjcrtitle => 'Some Replication Agent Title',
+        :jcrcontentjcrdescription => 'Some Replication Agent Description',
+        :jcrcontentslingresource_type => '/libs/cq/replication/components/agent',
+        :jcrcontentserialization_type => 'durbo',
+        :jcrcontenttransport_uri => 'http://somehost:8080/bin/receive?sling:authRequestLogin=1',
+        :jcrcontenttransport_user => 'admin',
+        :jcrcontenttransport_password => 'admin',
+        :jcrcontentlog_level => 'error',
+        :jcrcontentretry_delay => '30000',
+        :jcrcontentcqtemplate => '/libs/cq/replication/templates/agent',
+        :jcrcontentenabled => true
+      }
+    )
+
+    # delete replication agent
+    data, status_code, headers = sling.delete_agent_with_http_info(
+      runmode = 'author',
+      name = 'some-replication-agent'
     )
 
 Sling API - User:
