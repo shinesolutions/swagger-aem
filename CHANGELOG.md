@@ -1,3 +1,6 @@
+### 1.1.2
+* Add cq getLoginPage operation
+
 ### 1.1.1
 * Fix missing leading slash on postCqActions
 
