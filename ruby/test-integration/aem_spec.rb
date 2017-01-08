@@ -14,6 +14,7 @@ describe 'Aem' do
     it 'should succeed and contain readyness detection' do
       data, status_code, headers = @cq.get_login_page_with_http_info()
       expect(status_code).to eq(200)
+      expect(data).to include('QUICKSTART_HOMEPAGE')
     end
 
   end
