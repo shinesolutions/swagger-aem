@@ -4,7 +4,45 @@ All URIs are relative to *http://localhost/*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**get_login_page**](CqApi.md#get_login_page) | **GET** /libs/granite/core/content/login.html | 
 [**post_cq_actions**](CqApi.md#post_cq_actions) | **POST** /.cqactions.html | 
+
+
+# **get_login_page**
+> get_login_page
+
+
+
+### Example
+```ruby
+# load the gem
+require 'swagger_aem'
+
+api_instance = SwaggerAemClient::CqApi.new
+
+begin
+  api_instance.get_login_page
+rescue SwaggerAemClient::ApiError => e
+  puts "Exception when calling CqApi->get_login_page: #{e}"
+end
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/html
+
 
 
 # **post_cq_actions**
