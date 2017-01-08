@@ -7,6 +7,7 @@ This specification is used to generate client libraries for Ruby, Python, node.j
 
 | Swagger AEM Spec | Supported AEM          | Documentation                                                                                                                                                            |
 |------------------|------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1.1.2            | 6.0, 6.1, 6.2          | [Specification](https://shinesolutions.github.io/swagger-aem/api/1.1.2/index.html) [Changes](https://github.com/shinesolutions/swagger-aem/blob/master/CHANGELOG.md#112) |
 | 1.1.1            | 6.0, 6.1, 6.2          | [Specification](https://shinesolutions.github.io/swagger-aem/api/1.1.1/index.html) [Changes](https://github.com/shinesolutions/swagger-aem/blob/master/CHANGELOG.md#111) |
 | 1.1              | 6.0, 6.1, 6.2          | [Specification](https://shinesolutions.github.io/swagger-aem/api/1.1/index.html) [Changes](https://github.com/shinesolutions/swagger-aem/blob/master/CHANGELOG.md#11)    |
 | 1.0              | 6.0, 6.1, 6.2          | [Specification](https://shinesolutions.github.io/swagger-aem/api/1.0/index.html) [Changes](https://github.com/shinesolutions/swagger-aem/blob/master/CHANGELOG.md#10)    |
@@ -46,5 +47,5 @@ Since swagger-aem contains multiple languages, add a `[ruby|python|javascript|ja
 
 Tagging should also be prefixed with:
 
-* `api` when the release is for the OpenAPI specification, e.g. `api-1.0`
+* `api` when the release is for the OpenAPI specification, e.g. `api-1.0.0`
 * `ruby|python|javascript|java` when the release is for the generated client, e.g. `ruby-0.9.2`, `python-0.9.0`
