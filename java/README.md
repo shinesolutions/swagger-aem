@@ -136,6 +136,51 @@ CRX API - User:
 		String verify = "admin";
 		ApiResponse<Void> response = crx.postSetPasswordWithHttpInfo(old, plain, verify);
 
+Sling API - Flush agent:
+
+    // create flush agent
+    String runMode = "author";
+    String name = "some-flush-agent";
+    String jcrPrimaryType = "cq:Page";
+    String jcrContentCqName = "some-flush-agent";
+    String jcrContentJcrTitle = "Some Flush Agent Title";
+    String jcrContentJcrDescription = "Some Flush Agent Description";
+    String jcrContentSlingResourceType = "/libs/cq/replication/components/agent";
+    String jcrContentTransportUri = "http://somehost:8080/dispatcher/invalidate.cache";
+    String jcrContentTransportUser = "";
+    String jcrContentTransportPassword = "";
+    String jcrContentLogLevel = "error";
+    boolean jcrContentNoVersioning = true;
+    List<String> jcrContentProtocolHTTPHeaders = Arrays.asList(
+        "CQ-Action:{action}", "CQ-Handle:{path}",
+        "CQ-Path:{path}");
+    String jcrContentProtocolHTTPHeadersTypeHint = "String[]";
+    String jcrContentProtocolHTTPMethod = "GET";
+    String jcrContentRetryDelay = "30000";
+    String jcrContentSerializationType = "flush";
+    String jcrContentJcrMixinTypes = "cq:ReplicationStatus";
+    boolean jcrContentTriggerReceive = true;
+    boolean jcrContentTriggerSpecific = true;
+    String jcrContentCqTemplate = "/libs/cq/replication/templates/agent";
+    boolean jcrContentEnabled = true;
+
+    ApiResponse<Void> response = sling.postAgentWithHttpInfo(runMode, name,
+        jcrPrimaryType, jcrContentCqName, jcrContentJcrTitle,
+        jcrContentJcrDescription, jcrContentSlingResourceType,
+        jcrContentTransportUri, jcrContentTransportUser,
+        jcrContentTransportPassword, jcrContentLogLevel,
+        jcrContentNoVersioning, jcrContentProtocolHTTPHeaders,
+        jcrContentProtocolHTTPHeadersTypeHint,
+        jcrContentProtocolHTTPMethod, jcrContentRetryDelay,
+        jcrContentSerializationType, jcrContentJcrMixinTypes,
+        jcrContentTriggerReceive, jcrContentTriggerSpecific,
+        jcrContentCqTemplate, jcrContentEnabled);
+
+    // delete flush agent
+    String runMode = "author";
+    String name = "some-flush-agent";
+    ApiResponse<Void> response = sling.deleteAgentWithHttpInfo(runMode, name);
+
 Sling API - Group:
 
     // create group
@@ -229,6 +274,49 @@ Sling API - Path:
     boolean onlyModified = false;
     String path = "/some/inexisting/path";
     ApiResponse<Void> response = sling.postTreeActivationWithHttpInfo(ignoreDeactivated, onlyModified, path);
+
+Sling API - Replication agent:
+
+    // create replication agent
+    String runMode = "author";
+    String name = "some-replication-agent";
+    String jcrPrimaryType = "cq:Page";
+    String jcrContentCqName = "some-replication-agent";
+    String jcrContentJcrTitle = "Some Replication Agent Title";
+    String jcrContentJcrDescription = "Some Replication Agent Description";
+    String jcrContentSlingResourceType = "/libs/cq/replication/components/agent";
+    String jcrContentTransportUri = "http://somehost:8080/bin/receive?sling:authRequestLogin=1";
+    String jcrContentTransportUser = "admin";
+    String jcrContentTransportPassword = "admin";
+    String jcrContentLogLevel = "error";
+    boolean jcrContentNoVersioning = false;
+    List<String> jcrContentProtocolHTTPHeaders = Collections.emptyList();
+    String jcrContentProtocolHTTPHeadersTypeHint = "";
+    String jcrContentProtocolHTTPMethod = "";
+    String jcrContentRetryDelay = "30000";
+    String jcrContentSerializationType = "durbo";
+    String jcrContentJcrMixinTypes = null;
+    boolean jcrContentTriggerReceive = false;
+    boolean jcrContentTriggerSpecific = false;
+    String jcrContentCqTemplate = "/libs/cq/replication/templates/agent";
+    boolean jcrContentEnabled = true;
+
+    ApiResponse<Void> response = sling.postAgentWithHttpInfo(runMode, name,
+        jcrPrimaryType, jcrContentCqName, jcrContentJcrTitle,
+        jcrContentJcrDescription, jcrContentSlingResourceType,
+        jcrContentTransportUri, jcrContentTransportUser,
+        jcrContentTransportPassword, jcrContentLogLevel,
+        jcrContentNoVersioning, jcrContentProtocolHTTPHeaders,
+        jcrContentProtocolHTTPHeadersTypeHint,
+        jcrContentProtocolHTTPMethod, jcrContentRetryDelay,
+        jcrContentSerializationType, jcrContentJcrMixinTypes,
+        jcrContentTriggerReceive, jcrContentTriggerSpecific,
+        jcrContentCqTemplate, jcrContentEnabled);
+
+    // delete replication agent
+    String runMode = "author";
+    String name = "some-replication-agent";
+    ApiResponse<Void> response = sling.deleteAgentWithHttpInfo(runMode, name);
 
 Sling API - User:
 
