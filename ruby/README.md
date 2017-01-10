@@ -71,6 +71,11 @@ Console API - Repository:
       action = 'unblockRepositoryWrites'
     )
 
+CQ API - AEM:
+
+    # retrieve login page
+    data, status_code, headers = cq.get_login_page_with_http_info()
+
 CQ API - Group:
 
     # set permission
