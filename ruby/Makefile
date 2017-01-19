@@ -29,6 +29,7 @@ install:
 
 test-unit:
 	cd generated/ && \
+	  rm -f swagger_aem-*.gem && \
 	  rspec spec/
 
 test-integration:
