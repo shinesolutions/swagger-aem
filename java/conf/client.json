@@ -1,6 +1,6 @@
 {
   "artifactId": "swaggeraem4j",
-  "artifactVersion": "0.9.0",
+  "artifactVersion": "0.9.1",
   "artifactUrl": "https://github.com/shinesolutions/swagger-aem",
   "artifactDescription": "Java client generated from Swagger AEM specification using Swagger Code Generator.",
   "groupId": "com.shinesolutions",
