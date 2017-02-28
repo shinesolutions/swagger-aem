@@ -28,7 +28,7 @@ test-unit:
 	cd generated/ && \
 	  mvn test
 
-test-integration:
+test-integration: install
 	cd test-integration/ && \
 	  mvn test
 
