@@ -6,14 +6,33 @@
   <packaging>jar</packaging>
   <name>swaggeraem4j</name>
   <version>0.9.1</version>
+  <url>https://github.com/shinesolutions/swagger-aem</url>
+  <description>Java client generated from Swagger AEM specification using Swagger Code Generator.</description>
   <scm>
-    <connection>scm:git:git@github.com:swagger-api/swagger-mustache.git</connection>
-    <developerConnection>scm:git:git@github.com:swagger-api/swagger-codegen.git</developerConnection>
-    <url>https://github.com/swagger-api/swagger-codegen</url>
+    <connection>scm:git:git@github.com:shinesolutions/swagger-aem.git</connection>
+    <developerConnection>scm:git:git@github.com:shinesolutions/swagger-aem.git</developerConnection>
+    <url>https://github.com/shinesolutions/swagger-aem</url>
   </scm>
   <prerequisites>
     <maven>2.2.0</maven>
   </prerequisites>
+
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>Shine Solutions</name>
+      <email>opensource@shinesolutions.com</email>
+      <organization>Shine Solutions</organization>
+      <organizationUrl>http://shinesolutions.com</organizationUrl>
+    </developer>
+  </developers>
 
   <build>
     <plugins>
@@ -100,6 +119,41 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>2.10.4</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.2.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>1.5</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>deploy</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
@@ -129,7 +183,6 @@
       <artifactId>joda-time</artifactId>
       <version>${jodatime-version}</version>
     </dependency>
-
     <!-- test dependencies -->
     <dependency>
       <groupId>junit</groupId>

@@ -7,7 +7,7 @@ This Java client returns raw HTTP response AS-IS. An abstraction layer with reso
 
 | swaggeraem4j | Swagger AEM Spec | Supported JDK       | Swagger Codegen CLI | Documentation                                                             |
 |--------------|------------------|---------------------|---------------------|---------------------------------------------------------------------------|
-| 0.9.1        | 1.1.3            | 1.8                 | 20161104            | [API](https://shinesolutions.github.io/swagger-aem/java/0.9.1/index.html) |
+| 0.9.1        | 1.1.3            | 1.8                 | 20161128            | [API](https://shinesolutions.github.io/swagger-aem/java/0.9.1/index.html) |
 | 0.9.0        | 1.1.1            | 1.8                 | 20161104            | [API](https://shinesolutions.github.io/swagger-aem/java/0.9.0/index.html) |
 
 Install
@@ -164,6 +164,7 @@ Sling API - Flush agent:
     boolean jcrContentTriggerSpecific = true;
     String jcrContentCqTemplate = "/libs/cq/replication/templates/agent";
     boolean jcrContentEnabled = true;
+    boolean jcrReverseReplication = true;
 
     ApiResponse<Void> response = sling.postAgentWithHttpInfo(runMode, name,
         jcrPrimaryType, jcrContentCqName, jcrContentJcrTitle,
@@ -175,7 +176,8 @@ Sling API - Flush agent:
         jcrContentProtocolHTTPMethod, jcrContentRetryDelay,
         jcrContentSerializationType, jcrContentJcrMixinTypes,
         jcrContentTriggerReceive, jcrContentTriggerSpecific,
-        jcrContentCqTemplate, jcrContentEnabled);
+        jcrContentCqTemplate, jcrContentEnabled,
+        jcrReverseReplication);
 
     // delete flush agent
     String runMode = "author";
@@ -301,6 +303,7 @@ Sling API - Replication agent:
     boolean jcrContentTriggerSpecific = false;
     String jcrContentCqTemplate = "/libs/cq/replication/templates/agent";
     boolean jcrContentEnabled = true;
+    boolean jcrReverseReplication = true;
 
     ApiResponse<Void> response = sling.postAgentWithHttpInfo(runMode, name,
         jcrPrimaryType, jcrContentCqName, jcrContentJcrTitle,
@@ -312,7 +315,8 @@ Sling API - Replication agent:
         jcrContentProtocolHTTPMethod, jcrContentRetryDelay,
         jcrContentSerializationType, jcrContentJcrMixinTypes,
         jcrContentTriggerReceive, jcrContentTriggerSpecific,
-        jcrContentCqTemplate, jcrContentEnabled);
+        jcrContentCqTemplate, jcrContentEnabled,
+        jcrReverseReplication);
 
     // delete replication agent
     String runMode = "author";
