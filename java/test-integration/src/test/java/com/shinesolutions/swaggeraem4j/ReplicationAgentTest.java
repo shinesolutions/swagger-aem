@@ -68,6 +68,7 @@ public class ReplicationAgentTest {
 		boolean jcrContentTriggerSpecific = false;
 		String jcrContentCqTemplate = "/libs/cq/replication/templates/agent";
 		boolean jcrContentEnabled = true;
+		boolean jcrReverseReplication = true;
 
 		ApiResponse<Void> response = sling.postAgentWithHttpInfo(runMode, name,
 				jcrPrimaryType, jcrContentCqName, jcrContentJcrTitle,
@@ -79,7 +80,7 @@ public class ReplicationAgentTest {
 				jcrContentProtocolHTTPMethod, jcrContentRetryDelay,
 				jcrContentSerializationType, jcrContentJcrMixinTypes,
 				jcrContentTriggerReceive, jcrContentTriggerSpecific,
-				jcrContentCqTemplate, jcrContentEnabled);
+				jcrContentCqTemplate, jcrContentEnabled, jcrReverseReplication);
 
 		assertEquals(201, response.getStatusCode());
 
@@ -117,7 +118,7 @@ public class ReplicationAgentTest {
 				jcrContentProtocolHTTPMethod, jcrContentRetryDelay,
 				jcrContentSerializationType, jcrContentJcrMixinTypes,
 				jcrContentTriggerReceive, jcrContentTriggerSpecific,
-				jcrContentCqTemplate, jcrContentEnabled);
+				jcrContentCqTemplate, jcrContentEnabled, jcrReverseReplication);
 
 		assertEquals(200, response.getStatusCode());
 	}

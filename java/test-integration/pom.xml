@@ -130,9 +130,9 @@
     <dependency>
       <groupId>com.shinesolutions</groupId>
       <artifactId>swaggeraem4j</artifactId>
-      <version>0.9.0</version>
+      <version>0.9.1</version>
       <scope>system</scope>
-      <systemPath>${basedir}/../generated/target/swaggeraem4j-0.9.0.jar</systemPath>
+      <systemPath>${basedir}/../generated/target/swaggeraem4j-0.9.1.jar</systemPath>
     </dependency>
   </dependencies>
   <properties>
