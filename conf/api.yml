@@ -413,6 +413,10 @@ paths:
           in: query
           required: false
           type: boolean
+        - name: :operation
+          in: query
+          required: false
+          type: string
       tags:
         - sling
   /etc/replication/treeactivation.html:
