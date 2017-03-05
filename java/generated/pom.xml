@@ -17,13 +17,6 @@
     <maven>2.2.0</maven>
   </prerequisites>
 
-  <distributionManagement>
-     <repository>
-       <id>sonatype-release</id>
-       <name>Sonatype Release</name>
-       <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
-     </repository>
-   </distributionManagement>
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
@@ -213,7 +206,7 @@
     <java.version>1.7</java.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
-    <swagger-core-version>1.5.9</swagger-core-version>
+    <swagger-core-version>1.5.12</swagger-core-version>
     <okhttp-version>2.7.5</okhttp-version>
     <gson-version>2.6.2</gson-version>
     <jodatime-version>2.9.3</jodatime-version>

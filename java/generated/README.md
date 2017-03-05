@@ -28,7 +28,7 @@ Add this dependency to your project's POM:
 <dependency>
     <groupId>com.shinesolutions</groupId>
     <artifactId>swaggeraem4j</artifactId>
-    <version>0.9.1</version>
+    <version>0.9.2</version>
     <scope>compile</scope>
 </dependency>
 ```
@@ -38,7 +38,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "com.shinesolutions:swaggeraem4j:0.9.1"
+compile "com.shinesolutions:swaggeraem4j:0.9.2"
 ```
 
 ### Others
@@ -49,7 +49,7 @@ At first generate the JAR by executing:
 
 Then manually install the following JARs:
 
-* target/swaggeraem4j-0.9.1.jar
+* target/swaggeraem4j-0.9.2.jar
 * target/lib/*.jar
 
 ## Getting Started
