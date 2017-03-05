@@ -165,7 +165,8 @@ Sling API - Flush agent:
     boolean jcrContentTriggerSpecific = true;
     String jcrContentCqTemplate = "/libs/cq/replication/templates/agent";
     boolean jcrContentEnabled = true;
-    boolean jcrReverseReplication = true;
+    boolean jcrReverseReplication = false;
+    String operation = null;
 
     ApiResponse<Void> response = sling.postAgentWithHttpInfo(runMode, name,
         jcrPrimaryType, jcrContentCqName, jcrContentJcrTitle,
@@ -178,7 +179,7 @@ Sling API - Flush agent:
         jcrContentSerializationType, jcrContentJcrMixinTypes,
         jcrContentTriggerReceive, jcrContentTriggerSpecific,
         jcrContentCqTemplate, jcrContentEnabled,
-        jcrReverseReplication);
+        jcrReverseReplication, operation);
 
     // delete flush agent
     String runMode = "author";
@@ -304,7 +305,8 @@ Sling API - Replication agent:
     boolean jcrContentTriggerSpecific = false;
     String jcrContentCqTemplate = "/libs/cq/replication/templates/agent";
     boolean jcrContentEnabled = true;
-    boolean jcrReverseReplication = true;
+    boolean jcrReverseReplication = false;
+    String operation = null;
 
     ApiResponse<Void> response = sling.postAgentWithHttpInfo(runMode, name,
         jcrPrimaryType, jcrContentCqName, jcrContentJcrTitle,
@@ -317,11 +319,57 @@ Sling API - Replication agent:
         jcrContentSerializationType, jcrContentJcrMixinTypes,
         jcrContentTriggerReceive, jcrContentTriggerSpecific,
         jcrContentCqTemplate, jcrContentEnabled,
-        jcrReverseReplication);
+        jcrReverseReplication, operation);
 
     // delete replication agent
     String runMode = "author";
     String name = "some-replication-agent";
+    ApiResponse<Void> response = sling.deleteAgentWithHttpInfo(runMode, name);
+
+Sling API - Reverse Replication agent:
+
+    // create reverse replication agent
+    String runMode = "author";
+    String name = "some-replication-agent";
+    String jcrPrimaryType = "cq:Page";
+    String jcrContentCqName = "some-replication-agent";
+    String jcrContentJcrTitle = "Some Replication Agent Title";
+    String jcrContentJcrDescription = "Some Replication Agent Description";
+    String jcrContentSlingResourceType = "/libs/cq/replication/components/agent";
+    String jcrContentTransportUri = "http://somehost:8080/bin/receive?sling:authRequestLogin=1";
+    String jcrContentTransportUser = "admin";
+    String jcrContentTransportPassword = "admin";
+    String jcrContentLogLevel = "error";
+    boolean jcrContentNoVersioning = false;
+    List<String> jcrContentProtocolHTTPHeaders = Collections.emptyList();
+    String jcrContentProtocolHTTPHeadersTypeHint = "";
+    String jcrContentProtocolHTTPMethod = "";
+    String jcrContentRetryDelay = "30000";
+    String jcrContentSerializationType = "durbo";
+    String jcrContentJcrMixinTypes = null;
+    boolean jcrContentTriggerReceive = false;
+    boolean jcrContentTriggerSpecific = false;
+    String jcrContentCqTemplate = "/libs/cq/replication/templates/agent";
+    boolean jcrContentEnabled = true;
+    boolean jcrReverseReplication = true;
+    String operation = null;
+
+    ApiResponse<Void> response = sling.postAgentWithHttpInfo(runMode, name,
+        jcrPrimaryType, jcrContentCqName, jcrContentJcrTitle,
+        jcrContentJcrDescription, jcrContentSlingResourceType,
+        jcrContentTransportUri, jcrContentTransportUser,
+        jcrContentTransportPassword, jcrContentLogLevel,
+        jcrContentNoVersioning, jcrContentProtocolHTTPHeaders,
+        jcrContentProtocolHTTPHeadersTypeHint,
+        jcrContentProtocolHTTPMethod, jcrContentRetryDelay,
+        jcrContentSerializationType, jcrContentJcrMixinTypes,
+        jcrContentTriggerReceive, jcrContentTriggerSpecific,
+        jcrContentCqTemplate, jcrContentEnabled,
+        jcrReverseReplication, operation);
+
+    // delete reverse replication agent
+    String runMode = "author";
+    String name = "some-reverse-replication-agent";
     ApiResponse<Void> response = sling.deleteAgentWithHttpInfo(runMode, name);
 
 Sling API - User:
