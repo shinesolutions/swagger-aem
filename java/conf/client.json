@@ -15,5 +15,8 @@
   "developerOrganizationUrl": "http://shinesolutions.com",
   "scmConnection": "scm:git:git@github.com:shinesolutions/swagger-aem.git",
   "scmDeveloperConnection": "scm:git:git@github.com:shinesolutions/swagger-aem.git",
-  "scmUrl": "https://github.com/shinesolutions/swagger-aem"
+  "scmUrl": "https://github.com/shinesolutions/swagger-aem",
+  "distributionManagementRepositoryId": "sonatype-release",
+  "distributionManagementRepositoryName": "Sonatype Release",
+  "distributionManagementRepositoryUrl": "https://oss.sonatype.org/service/local/staging/deploy/maven2"
 }
