@@ -1,3 +1,6 @@
+### 1.1.4
+*
+
 ### 1.1.3
 * Add jcr:content/reverseReplication query parameter to postAgent operation #12
 
