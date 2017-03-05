@@ -385,7 +385,9 @@ var opts = {
   'jcrcontenttriggerReceive': true, // Boolean | 
   'jcrcontenttriggerSpecific': true, // Boolean | 
   'jcrcontentcqtemplate': "jcrcontentcqtemplate_example", // String | 
-  'jcrcontentenabled': true // Boolean | 
+  'jcrcontentenabled': true, // Boolean | 
+  'jcrcontentreverseReplication': true, // Boolean | 
+  'operation': "operation_example" // String | 
 };
 
 var callback = function(error, data, response) {
@@ -424,6 +426,8 @@ Name | Type | Description  | Notes
  **jcrcontenttriggerSpecific** | **Boolean**|  | [optional] 
  **jcrcontentcqtemplate** | **String**|  | [optional] 
  **jcrcontentenabled** | **Boolean**|  | [optional] 
+ **jcrcontentreverseReplication** | **Boolean**|  | [optional] 
+ **operation** | **String**|  | [optional] 
 
 ### Return type
 
