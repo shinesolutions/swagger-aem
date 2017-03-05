@@ -69,6 +69,11 @@ Console API - Repository:
     String action = "unblockRepositoryWrites";
 		ApiResponse<Void> response = console.postJmxRepositoryWithHttpInfo(action);
 
+CQ API - AEM:
+
+    # retrieve login page
+    ApiResponse<Void> response = cq.getLoginPageWithHttpInfo();
+
 CQ API - Group:
 
     // set permission
