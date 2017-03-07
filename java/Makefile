@@ -40,6 +40,6 @@ doc:
 
 publish:
 	cd generated/ && \
-	  mvn clean package deploy -P sign-artifacts
+	  mvn deploy -P sign-artifacts
 
 .PHONY: all clean build install test-unit test-integration doc publish
