@@ -539,7 +539,7 @@ opts = {
   org_apache_felix_https_truststore_password_type_hint: "org_apache_felix_https_truststore_password_type_hint_example", # String | 
   org_apache_felix_https_clientcertificate: "org_apache_felix_https_clientcertificate_example", # String | 
   org_apache_felix_https_clientcertificate_type_hint: "org_apache_felix_https_clientcertificate_type_hint_example", # String | 
-  org_apache_felix_https_enable: "org_apache_felix_https_enable_example", # String | 
+  org_apache_felix_https_enable: true, # BOOLEAN | 
   org_apache_felix_https_enable_type_hint: "org_apache_felix_https_enable_type_hint_example", # String | 
   org_osgi_service_http_port_secure: "org_osgi_service_http_port_secure_example", # String | 
   org_osgi_service_http_port_secure_type_hint: "org_osgi_service_http_port_secure_type_hint_example", # String | 
@@ -582,7 +582,7 @@ Name | Type | Description  | Notes
  **org_apache_felix_https_truststore_password_type_hint** | **String**|  | [optional] 
  **org_apache_felix_https_clientcertificate** | **String**|  | [optional] 
  **org_apache_felix_https_clientcertificate_type_hint** | **String**|  | [optional] 
- **org_apache_felix_https_enable** | **String**|  | [optional] 
+ **org_apache_felix_https_enable** | **BOOLEAN**|  | [optional] 
  **org_apache_felix_https_enable_type_hint** | **String**|  | [optional] 
  **org_osgi_service_http_port_secure** | **String**|  | [optional] 
  **org_osgi_service_http_port_secure_type_hint** | **String**|  | [optional] 

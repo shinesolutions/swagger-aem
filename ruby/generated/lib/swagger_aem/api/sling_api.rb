@@ -563,7 +563,7 @@ module SwaggerAemClient
     # @option opts [String] :org_apache_felix_https_truststore_password_type_hint 
     # @option opts [String] :org_apache_felix_https_clientcertificate 
     # @option opts [String] :org_apache_felix_https_clientcertificate_type_hint 
-    # @option opts [String] :org_apache_felix_https_enable 
+    # @option opts [BOOLEAN] :org_apache_felix_https_enable 
     # @option opts [String] :org_apache_felix_https_enable_type_hint 
     # @option opts [String] :org_osgi_service_http_port_secure 
     # @option opts [String] :org_osgi_service_http_port_secure_type_hint 
@@ -602,7 +602,7 @@ module SwaggerAemClient
     # @option opts [String] :org_apache_felix_https_truststore_password_type_hint 
     # @option opts [String] :org_apache_felix_https_clientcertificate 
     # @option opts [String] :org_apache_felix_https_clientcertificate_type_hint 
-    # @option opts [String] :org_apache_felix_https_enable 
+    # @option opts [BOOLEAN] :org_apache_felix_https_enable 
     # @option opts [String] :org_apache_felix_https_enable_type_hint 
     # @option opts [String] :org_osgi_service_http_port_secure 
     # @option opts [String] :org_osgi_service_http_port_secure_type_hint 
