@@ -1,3 +1,6 @@
+### 1.1.6
+*
+
 ### 1.1.5
 * Add json.maximumresults, enable.html, enable.txt, enable.xml parameters to postConfig operation
 * Fix org.apache.felix.https.enable parameter type to be boolean
