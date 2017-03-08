@@ -1,3 +1,6 @@
+### 0.9.6
+*
+
 ### 0.9.5
 * Add Apache Sling GET Servlet OSGI config support
 * Add jcrcontentreverse_replication parameter support to sling#post_agent_with_http_info #14
