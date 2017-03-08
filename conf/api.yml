@@ -193,7 +193,7 @@ paths:
         - name: org.apache.felix.https.enable
           in: query
           required: false
-          type: string
+          type: boolean
         - name: org.apache.felix.https.enable@TypeHint
           in: query
           required: false
