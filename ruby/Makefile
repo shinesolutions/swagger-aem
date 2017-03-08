@@ -41,7 +41,7 @@ doc:
     yard doc \
     --output-dir ../../doc/ruby/master/
 
-publish:
+publish: install
 	cd generated/ && \
 	  gem push `ls swagger_aem-*.gem`
 
