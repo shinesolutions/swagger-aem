@@ -338,6 +338,36 @@ Sling API - Replication agent:
       name = 'some-replication-agent'
     )
 
+Sling API - Reverse replication agent:
+
+    # create reverse replication agent
+    data, status_code, headers = sling.post_agent_with_http_info(
+      runmode = 'author',
+      name = 'some-reverse-replication-agent',
+      {
+        :jcrprimary_type => 'cq:Page',
+        :jcrcontentcqname => 'some-replication-agent',
+        :jcrcontentjcrtitle => 'Some Replication Agent Title',
+        :jcrcontentjcrdescription => 'Some Reverse Replication Agent Description',
+        :jcrcontentslingresource_type => '/libs/cq/replication/components/agent',
+        :jcrcontentserialization_type => 'durbo',
+        :jcrcontenttransport_uri => 'http://somehost:8080/bin/receive?sling:authRequestLogin=1',
+        :jcrcontenttransport_user => 'admin',
+        :jcrcontenttransport_password => 'admin',
+        :jcrcontentlog_level => 'error',
+        :jcrcontentretry_delay => '30000',
+        :jcrcontentcqtemplate => '/libs/cq/replication/templates/agent',
+        :jcrcontentenabled => true,
+        :jcrcontentreverse_replication => true
+      }
+    )
+
+    # delete reverse replication agent
+    data, status_code, headers = sling.delete_agent_with_http_info(
+      runmode = 'author',
+      name = 'some-reverse-replication-agent'
+    )
+
 Sling API - User:
 
     # create user
