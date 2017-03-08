@@ -206,6 +206,38 @@ paths:
           in: query
           required: false
           type: string
+        - name: json.maximumresults
+          in: query
+          required: false
+          type: string
+        - name: json.maximumresults@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: enable.html
+          in: query
+          required: false
+          type: boolean
+        - name: enable.html@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: enable.txt
+          in: query
+          required: false
+          type: boolean
+        - name: enable.txt@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: enable.xml
+          in: query
+          required: false
+          type: boolean
+        - name: enable.xml@TypeHint
+          in: query
+          required: false
+          type: string
       tags:
         - sling
   /bin/querybuilder.json:

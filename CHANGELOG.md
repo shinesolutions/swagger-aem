@@ -1,5 +1,5 @@
 ### 1.1.5
-*
+* Add json.maximumresults, enable.html, enable.txt, enable.xml parameters to postConfig operation
 
 ### 1.1.4
 * Add :operation query parameter to postAgent operation #15
