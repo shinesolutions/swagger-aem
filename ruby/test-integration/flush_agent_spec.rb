@@ -6,10 +6,16 @@ describe 'Flush Agent' do
     @sling = SwaggerAemClient::SlingApi.new
 
     # ensure agent doesn't exist prior to testing
+    # this deletion uses POST with operation=delete approach that works with
+    # both secured AEM (webdav bundle stopped) and unsecured AEM
+    # delete_agent_with_http_info method only works for unsecured AEM
     begin
-      data, status_code, headers = @sling.delete_agent_with_http_info(
+      data, status_code, headers = @sling.post_agent_with_http_info(
         runmode = 'author',
-        name = 'some-flush-agent'
+        name = 'some-flush-agent',
+        {
+          :operation => 'delete'
+        }
       )
       # delete agent when it exists
       expect([200, 204]).to include(status_code)
