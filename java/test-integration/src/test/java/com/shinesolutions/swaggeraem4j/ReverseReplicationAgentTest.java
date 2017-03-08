@@ -21,7 +21,7 @@ public class ReverseReplicationAgentTest {
 		// Ensure agent doesn't exist prior to testing
 		try {
 			String runMode = "author";
-			String name = "some-replication-agent";
+			String name = "some-reverse-replication-agent";
 			ApiResponse<Void> response = sling.deleteAgentWithHttpInfo(runMode,
 					name);
 			// Delete agent when it exists
@@ -34,7 +34,7 @@ public class ReverseReplicationAgentTest {
 
 		try {
 			String runMode = "author";
-			String name = "some-replication-agent";
+			String name = "some-reverse-replication-agent";
 			sling.getAgentWithHttpInfo(runMode, name);
 			fail();
 		} catch (ApiException e) {
@@ -45,13 +45,13 @@ public class ReverseReplicationAgentTest {
 
 	@Test
 	public void testPathActivation() throws ApiException {
-		// Create a new replication agent
+		// Create a new reverse replication agent
 		String runMode = "author";
-		String name = "some-replication-agent";
+		String name = "some-reverse-replication-agent";
 		String jcrPrimaryType = "cq:Page";
-		String jcrContentCqName = "some-replication-agent";
-		String jcrContentJcrTitle = "Some Replication Agent Title";
-		String jcrContentJcrDescription = "Some Replication Agent Description";
+		String jcrContentCqName = "some-reverse-replication-agent";
+		String jcrContentJcrTitle = "Some Reverse Replication Agent Title";
+		String jcrContentJcrDescription = "Some Reverse Replication Agent Description";
 		String jcrContentSlingResourceType = "/libs/cq/replication/components/agent";
 		String jcrContentTransportUri = "http://somehost:8080/bin/receive?sling:authRequestLogin=1";
 		String jcrContentTransportUser = "admin";
@@ -86,13 +86,13 @@ public class ReverseReplicationAgentTest {
 
 		assertEquals(201, response.getStatusCode());
 
-		// Update an existing replication agent
+		// Update an existing reverse replication agent
 		runMode = "author";
-		name = "some-replication-agent";
+		name = "some-reverse-replication-agent";
 		jcrPrimaryType = "cq:Page";
-		jcrContentCqName = "some-replication-agent";
-		jcrContentJcrTitle = "Some Replication Agent Title";
-		jcrContentJcrDescription = "Some Replication Agent Description";
+		jcrContentCqName = "some-reverse-replication-agent";
+		jcrContentJcrTitle = "Some Reverse Replication Agent Title";
+		jcrContentJcrDescription = "Some Reverse Replication Agent Description";
 		jcrContentSlingResourceType = "";
 		jcrContentTransportUri = "";
 		jcrContentTransportUser = "";
