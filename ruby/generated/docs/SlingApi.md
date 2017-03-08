@@ -381,7 +381,9 @@ opts = {
   jcrcontenttrigger_receive: true, # BOOLEAN | 
   jcrcontenttrigger_specific: true, # BOOLEAN | 
   jcrcontentcqtemplate: "jcrcontentcqtemplate_example", # String | 
-  jcrcontentenabled: true # BOOLEAN | 
+  jcrcontentenabled: true, # BOOLEAN | 
+  jcrcontentreverse_replication: true, # BOOLEAN | 
+  operation: "operation_example" # String | 
 }
 
 begin
@@ -417,6 +419,8 @@ Name | Type | Description  | Notes
  **jcrcontenttrigger_specific** | **BOOLEAN**|  | [optional] 
  **jcrcontentcqtemplate** | **String**|  | [optional] 
  **jcrcontentenabled** | **BOOLEAN**|  | [optional] 
+ **jcrcontentreverse_replication** | **BOOLEAN**|  | [optional] 
+ **operation** | **String**|  | [optional] 
 
 ### Return type
 
@@ -538,7 +542,15 @@ opts = {
   org_apache_felix_https_enable: "org_apache_felix_https_enable_example", # String | 
   org_apache_felix_https_enable_type_hint: "org_apache_felix_https_enable_type_hint_example", # String | 
   org_osgi_service_http_port_secure: "org_osgi_service_http_port_secure_example", # String | 
-  org_osgi_service_http_port_secure_type_hint: "org_osgi_service_http_port_secure_type_hint_example" # String | 
+  org_osgi_service_http_port_secure_type_hint: "org_osgi_service_http_port_secure_type_hint_example", # String | 
+  json_maximumresults: "json_maximumresults_example", # String | 
+  json_maximumresults_type_hint: "json_maximumresults_type_hint_example", # String | 
+  enable_html: true, # BOOLEAN | 
+  enable_html_type_hint: "enable_html_type_hint_example", # String | 
+  enable_txt: true, # BOOLEAN | 
+  enable_txt_type_hint: "enable_txt_type_hint_example", # String | 
+  enable_xml: true, # BOOLEAN | 
+  enable_xml_type_hint: "enable_xml_type_hint_example" # String | 
 }
 
 begin
@@ -574,6 +586,14 @@ Name | Type | Description  | Notes
  **org_apache_felix_https_enable_type_hint** | **String**|  | [optional] 
  **org_osgi_service_http_port_secure** | **String**|  | [optional] 
  **org_osgi_service_http_port_secure_type_hint** | **String**|  | [optional] 
+ **json_maximumresults** | **String**|  | [optional] 
+ **json_maximumresults_type_hint** | **String**|  | [optional] 
+ **enable_html** | **BOOLEAN**|  | [optional] 
+ **enable_html_type_hint** | **String**|  | [optional] 
+ **enable_txt** | **BOOLEAN**|  | [optional] 
+ **enable_txt_type_hint** | **String**|  | [optional] 
+ **enable_xml** | **BOOLEAN**|  | [optional] 
+ **enable_xml_type_hint** | **String**|  | [optional] 
 
 ### Return type
 

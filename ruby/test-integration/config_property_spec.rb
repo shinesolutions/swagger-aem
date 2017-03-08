@@ -71,4 +71,41 @@ describe 'ConfigProperty' do
     end
 
   end
+
+  describe 'test create Apache Sling GET Servlet properties' do
+
+    it 'should succeed when path node already exists' do
+
+      # ensure http OSGI config node exists
+      begin
+        data, status_code, headers = @sling.post_path_with_http_info(
+          path = 'apps/system/config.author',
+          jcrprimary_type = 'sling:OsgiConfig',
+          name = 'org.apache.sling.servlets.get.DefaultGetServlet'
+        )
+        # create config when it does not exist
+        expect([200, 201]).to include(status_code)
+      rescue SwaggerAemClient::ApiError => err
+        # ignore when it already exists
+        expect(err.code).to eq(500)
+      end
+
+      data, status_code, headers = @sling.post_config_with_http_info(
+        runmode = 'author',
+        name = 'org.apache.sling.servlets.get.DefaultGetServlet',
+        opts = {
+          :json_maximumresults => '100',
+          :json_maximumresults_type_hint => 'String',
+          :enable_html => false,
+          :enable_html_type_hint => 'Boolean',
+          :enable_txt => false,
+          :enable_txt_type_hint => 'Boolean',
+          :enable_xml => false,
+          :enable_xml_type_hint => 'Boolean'
+        }
+      )
+      expect([200, 201]).to include(status_code)
+    end
+
+  end
 end
