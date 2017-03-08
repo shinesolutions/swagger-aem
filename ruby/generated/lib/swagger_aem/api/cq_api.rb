@@ -19,8 +19,8 @@ module SwaggerAemClient
       @api_client = api_client
     end
 
-    # 
-    # 
+    #
+    #
     # @param [Hash] opts the optional parameters
     # @return [nil]
     def get_login_page(opts = {})
@@ -28,8 +28,8 @@ module SwaggerAemClient
       return nil
     end
 
-    # 
-    # 
+    #
+    #
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
     def get_login_page_with_http_info(opts = {})
@@ -58,17 +58,18 @@ module SwaggerAemClient
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
-        :auth_names => auth_names)
+        :auth_names => auth_names,
+        :return_type => 'String')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: CqApi#get_login_page\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
 
-    # 
-    # 
-    # @param authorizable_id 
-    # @param changelog 
+    #
+    #
+    # @param authorizable_id
+    # @param changelog
     # @param [Hash] opts the optional parameters
     # @return [nil]
     def post_cq_actions(authorizable_id, changelog, opts = {})
@@ -76,10 +77,10 @@ module SwaggerAemClient
       return nil
     end
 
-    # 
-    # 
-    # @param authorizable_id 
-    # @param changelog 
+    #
+    #
+    # @param authorizable_id
+    # @param changelog
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
     def post_cq_actions_with_http_info(authorizable_id, changelog, opts = {})
