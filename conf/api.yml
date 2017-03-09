@@ -238,6 +238,30 @@ paths:
           in: query
           required: false
           type: string
+        - name: allow.empty
+          in: query
+          required: false
+          type: boolean
+        - name: allow.empty@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: allow.hosts
+          in: query
+          required: false
+          type: string
+        - name: allow.hosts@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: allow.hosts.regexp
+          in: query
+          required: false
+          type: string
+        - name: allow.hosts.regexp@TypeHint
+          in: query
+          required: false
+          type: string
       tags:
         - sling
   /bin/querybuilder.json:
