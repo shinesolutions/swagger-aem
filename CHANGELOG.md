@@ -1,3 +1,6 @@
+### 1.1.7
+*
+
 ### 1.1.6
 * Add allow.empty, allow.hosts, and allow.hosts.regexp parameters to postConfig operation
 * Add alias and dav.create-absolute-uri parameters to postConfig operation #11
