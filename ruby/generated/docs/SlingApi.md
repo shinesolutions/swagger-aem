@@ -28,7 +28,7 @@ Method | HTTP request | Description
 ```ruby
 # load the gem
 require 'swagger_aem'
-# setup authorization 
+# setup authorization
 SwaggerAemClient.configure do |config|
   # Configure HTTP basic authorization: aemAuth
   config.username = 'YOUR USERNAME'
@@ -64,7 +64,7 @@ nil (empty response body)
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain
@@ -80,7 +80,7 @@ nil (empty response body)
 ```ruby
 # load the gem
 require 'swagger_aem'
-# setup authorization 
+# setup authorization
 SwaggerAemClient.configure do |config|
   # Configure HTTP basic authorization: aemAuth
   config.username = 'YOUR USERNAME'
@@ -116,7 +116,7 @@ nil (empty response body)
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain
@@ -132,7 +132,7 @@ nil (empty response body)
 ```ruby
 # load the gem
 require 'swagger_aem'
-# setup authorization 
+# setup authorization
 SwaggerAemClient.configure do |config|
   # Configure HTTP basic authorization: aemAuth
   config.username = 'YOUR USERNAME'
@@ -168,7 +168,7 @@ nil (empty response body)
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain
@@ -184,7 +184,7 @@ nil (empty response body)
 ```ruby
 # load the gem
 require 'swagger_aem'
-# setup authorization 
+# setup authorization
 SwaggerAemClient.configure do |config|
   # Configure HTTP basic authorization: aemAuth
   config.username = 'YOUR USERNAME'
@@ -220,7 +220,7 @@ nil (empty response body)
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain
@@ -236,7 +236,7 @@ nil (empty response body)
 ```ruby
 # load the gem
 require 'swagger_aem'
-# setup authorization 
+# setup authorization
 SwaggerAemClient.configure do |config|
   # Configure HTTP basic authorization: aemAuth
   config.username = 'YOUR USERNAME'
@@ -276,7 +276,7 @@ Name | Type | Description  | Notes
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/octet-stream
@@ -292,7 +292,7 @@ Name | Type | Description  | Notes
 ```ruby
 # load the gem
 require 'swagger_aem'
-# setup authorization 
+# setup authorization
 SwaggerAemClient.configure do |config|
   # Configure HTTP basic authorization: aemAuth
   config.username = 'YOUR USERNAME'
@@ -332,7 +332,7 @@ Name | Type | Description  | Notes
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
@@ -348,7 +348,7 @@ Name | Type | Description  | Notes
 ```ruby
 # load the gem
 require 'swagger_aem'
-# setup authorization 
+# setup authorization
 SwaggerAemClient.configure do |config|
   # Configure HTTP basic authorization: aemAuth
   config.username = 'YOUR USERNAME'
@@ -430,7 +430,7 @@ nil (empty response body)
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain
@@ -446,7 +446,7 @@ nil (empty response body)
 ```ruby
 # load the gem
 require 'swagger_aem'
-# setup authorization 
+# setup authorization
 SwaggerAemClient.configure do |config|
   # Configure HTTP basic authorization: aemAuth
   config.username = 'YOUR USERNAME'
@@ -493,7 +493,7 @@ Name | Type | Description  | Notes
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: text/html
@@ -509,7 +509,7 @@ Name | Type | Description  | Notes
 ```ruby
 # load the gem
 require 'swagger_aem'
-# setup authorization 
+# setup authorization
 SwaggerAemClient.configure do |config|
   # Configure HTTP basic authorization: aemAuth
   config.username = 'YOUR USERNAME'
@@ -623,7 +623,7 @@ nil (empty response body)
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain
@@ -639,7 +639,7 @@ nil (empty response body)
 ```ruby
 # load the gem
 require 'swagger_aem'
-# setup authorization 
+# setup authorization
 SwaggerAemClient.configure do |config|
   # Configure HTTP basic authorization: aemAuth
   config.username = 'YOUR USERNAME'
@@ -679,7 +679,7 @@ nil (empty response body)
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain
@@ -695,7 +695,7 @@ nil (empty response body)
 ```ruby
 # load the gem
 require 'swagger_aem'
-# setup authorization 
+# setup authorization
 SwaggerAemClient.configure do |config|
   # Configure HTTP basic authorization: aemAuth
   config.username = 'YOUR USERNAME'
@@ -734,7 +734,7 @@ nil (empty response body)
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain
@@ -750,7 +750,7 @@ nil (empty response body)
 ```ruby
 # load the gem
 require 'swagger_aem'
-# setup authorization 
+# setup authorization
 SwaggerAemClient.configure do |config|
   # Configure HTTP basic authorization: aemAuth
   config.username = 'YOUR USERNAME'
@@ -781,7 +781,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path** | **String**|  | 
- **p_limit** | [**Float**](.md)|  | 
+ **p_limit** | **Float**|  | 
  **_1_property** | **String**|  | 
  **_1_property_value** | **String**|  | 
 
@@ -793,7 +793,7 @@ Name | Type | Description  | Notes
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
@@ -809,7 +809,7 @@ Name | Type | Description  | Notes
 ```ruby
 # load the gem
 require 'swagger_aem'
-# setup authorization 
+# setup authorization
 SwaggerAemClient.configure do |config|
   # Configure HTTP basic authorization: aemAuth
   config.username = 'YOUR USERNAME'
@@ -848,7 +848,7 @@ nil (empty response body)
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP reuqest headers
+### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain
