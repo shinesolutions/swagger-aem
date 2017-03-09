@@ -99,7 +99,10 @@ Class | Method | HTTP request | Description
 *SwaggerAemClient::SlingApi* | [**get_package_filter**](docs/SlingApi.md#get_package_filter) | **GET** /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json | 
 *SwaggerAemClient::SlingApi* | [**post_agent**](docs/SlingApi.md#post_agent) | **POST** /etc/replication/agents.{runmode}/{name} | 
 *SwaggerAemClient::SlingApi* | [**post_authorizables**](docs/SlingApi.md#post_authorizables) | **POST** /libs/granite/security/post/authorizables | 
-*SwaggerAemClient::SlingApi* | [**post_config**](docs/SlingApi.md#post_config) | **POST** /apps/system/config.{runmode}/{name} | 
+*SwaggerAemClient::SlingApi* | [**post_config_apache_felix_jetty_based_http_service**](docs/SlingApi.md#post_config_apache_felix_jetty_based_http_service) | **POST** /apps/system/config.{runmode}/org.apache.felix.http | 
+*SwaggerAemClient::SlingApi* | [**post_config_apache_sling_dav_ex_servlet**](docs/SlingApi.md#post_config_apache_sling_dav_ex_servlet) | **POST** /apps/system/config.{runmode}/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet | 
+*SwaggerAemClient::SlingApi* | [**post_config_apache_sling_get_servlet**](docs/SlingApi.md#post_config_apache_sling_get_servlet) | **POST** /apps/system/config.{runmode}/org.apache.sling.servlets.get.DefaultGetServlet | 
+*SwaggerAemClient::SlingApi* | [**post_config_apache_sling_referrer_filter**](docs/SlingApi.md#post_config_apache_sling_referrer_filter) | **POST** /apps/system/config.{runmode}/org.apache.sling.security.impl.ReferrerFilter | 
 *SwaggerAemClient::SlingApi* | [**post_node_rw**](docs/SlingApi.md#post_node_rw) | **POST** /{path}/{name}.rw.html | 
 *SwaggerAemClient::SlingApi* | [**post_path**](docs/SlingApi.md#post_path) | **POST** /{path}/ | 
 *SwaggerAemClient::SlingApi* | [**post_query**](docs/SlingApi.md#post_query) | **POST** /bin/querybuilder.json | 

@@ -23,7 +23,7 @@ describe 'ConfigProperty' do
   after do
   end
 
-  describe 'test create SSL config properties' do
+  describe 'test create Apache Felix Jetty Based HTTP Service properties' do
 
     it 'should succeed when path node already exists' do
 
@@ -41,9 +41,8 @@ describe 'ConfigProperty' do
         expect(err.code).to eq(500)
       end
 
-      data, status_code, headers = @sling.post_config_with_http_info(
+      data, status_code, headers = @sling.post_config_apache_felix_jetty_based_http_service_with_http_info(
         runmode = 'author',
-        name = 'org.apache.felix.http',
         opts = {
           :org_apache_felix_https_nio => true,
           :org_apache_felix_https_nio_type_hint => 'Boolean',
@@ -90,9 +89,8 @@ describe 'ConfigProperty' do
         expect(err.code).to eq(500)
       end
 
-      data, status_code, headers = @sling.post_config_with_http_info(
+      data, status_code, headers = @sling.post_config_apache_sling_get_servlet_with_http_info(
         runmode = 'author',
-        name = 'org.apache.sling.servlets.get.DefaultGetServlet',
         opts = {
           :json_maximumresults => '100',
           :json_maximumresults_type_hint => 'String',
@@ -127,9 +125,8 @@ describe 'ConfigProperty' do
         expect(err.code).to eq(500)
       end
 
-      data, status_code, headers = @sling.post_config_with_http_info(
+      data, status_code, headers = @sling.post_config_apache_sling_referrer_filter_with_http_info(
         runmode = 'author',
-        name = 'org.apache.sling.security.impl.ReferrerFilter',
         opts = {
           :allow_empty => false,
           :allow_empty_type_hint => 'Boolean',
@@ -162,9 +159,8 @@ describe 'ConfigProperty' do
         expect(err.code).to eq(500)
       end
 
-      data, status_code, headers = @sling.post_config_with_http_info(
+      data, status_code, headers = @sling.post_config_apache_sling_dav_ex_servlet_with_http_info(
         runmode = 'author',
-        name = 'org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet',
         opts = {
           :alias => '/crx/server',
           :alias_type_hint => 'String',

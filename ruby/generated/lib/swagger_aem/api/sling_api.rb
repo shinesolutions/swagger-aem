@@ -545,7 +545,6 @@ module SwaggerAemClient
     # 
     # 
     # @param runmode 
-    # @param name 
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :org_apache_felix_https_nio 
     # @option opts [String] :org_apache_felix_https_nio_type_hint 
@@ -567,34 +566,15 @@ module SwaggerAemClient
     # @option opts [String] :org_apache_felix_https_enable_type_hint 
     # @option opts [String] :org_osgi_service_http_port_secure 
     # @option opts [String] :org_osgi_service_http_port_secure_type_hint 
-    # @option opts [String] :json_maximumresults 
-    # @option opts [String] :json_maximumresults_type_hint 
-    # @option opts [BOOLEAN] :enable_html 
-    # @option opts [String] :enable_html_type_hint 
-    # @option opts [BOOLEAN] :enable_txt 
-    # @option opts [String] :enable_txt_type_hint 
-    # @option opts [BOOLEAN] :enable_xml 
-    # @option opts [String] :enable_xml_type_hint 
-    # @option opts [BOOLEAN] :allow_empty 
-    # @option opts [String] :allow_empty_type_hint 
-    # @option opts [String] :allow_hosts 
-    # @option opts [String] :allow_hosts_type_hint 
-    # @option opts [String] :allow_hosts_regexp 
-    # @option opts [String] :allow_hosts_regexp_type_hint 
-    # @option opts [String] :_alias 
-    # @option opts [String] :alias_type_hint 
-    # @option opts [BOOLEAN] :dav_create_absolute_uri 
-    # @option opts [String] :dav_create_absolute_uri_type_hint 
     # @return [nil]
-    def post_config(runmode, name, opts = {})
-      post_config_with_http_info(runmode, name, opts)
+    def post_config_apache_felix_jetty_based_http_service(runmode, opts = {})
+      post_config_apache_felix_jetty_based_http_service_with_http_info(runmode, opts)
       return nil
     end
 
     # 
     # 
     # @param runmode 
-    # @param name 
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :org_apache_felix_https_nio 
     # @option opts [String] :org_apache_felix_https_nio_type_hint 
@@ -616,35 +596,15 @@ module SwaggerAemClient
     # @option opts [String] :org_apache_felix_https_enable_type_hint 
     # @option opts [String] :org_osgi_service_http_port_secure 
     # @option opts [String] :org_osgi_service_http_port_secure_type_hint 
-    # @option opts [String] :json_maximumresults 
-    # @option opts [String] :json_maximumresults_type_hint 
-    # @option opts [BOOLEAN] :enable_html 
-    # @option opts [String] :enable_html_type_hint 
-    # @option opts [BOOLEAN] :enable_txt 
-    # @option opts [String] :enable_txt_type_hint 
-    # @option opts [BOOLEAN] :enable_xml 
-    # @option opts [String] :enable_xml_type_hint 
-    # @option opts [BOOLEAN] :allow_empty 
-    # @option opts [String] :allow_empty_type_hint 
-    # @option opts [String] :allow_hosts 
-    # @option opts [String] :allow_hosts_type_hint 
-    # @option opts [String] :allow_hosts_regexp 
-    # @option opts [String] :allow_hosts_regexp_type_hint 
-    # @option opts [String] :_alias 
-    # @option opts [String] :alias_type_hint 
-    # @option opts [BOOLEAN] :dav_create_absolute_uri 
-    # @option opts [String] :dav_create_absolute_uri_type_hint 
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
-    def post_config_with_http_info(runmode, name, opts = {})
+    def post_config_apache_felix_jetty_based_http_service_with_http_info(runmode, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SlingApi.post_config ..."
+        @api_client.config.logger.debug "Calling API: SlingApi.post_config_apache_felix_jetty_based_http_service ..."
       end
       # verify the required parameter 'runmode' is set
-      fail ArgumentError, "Missing the required parameter 'runmode' when calling SlingApi.post_config" if runmode.nil?
-      # verify the required parameter 'name' is set
-      fail ArgumentError, "Missing the required parameter 'name' when calling SlingApi.post_config" if name.nil?
+      fail ArgumentError, "Missing the required parameter 'runmode' when calling SlingApi.post_config_apache_felix_jetty_based_http_service" if runmode.nil?
       # resource path
-      local_var_path = "/apps/system/config.{runmode}/{name}".sub('{format}','json').sub('{' + 'runmode' + '}', runmode.to_s).sub('{' + 'name' + '}', name.to_s)
+      local_var_path = "/apps/system/config.{runmode}/org.apache.felix.http".sub('{format}','json').sub('{' + 'runmode' + '}', runmode.to_s)
 
       # query parameters
       query_params = {}
@@ -668,20 +628,64 @@ module SwaggerAemClient
       query_params[:'org.apache.felix.https.enable@TypeHint'] = opts[:'org_apache_felix_https_enable_type_hint'] if !opts[:'org_apache_felix_https_enable_type_hint'].nil?
       query_params[:'org.osgi.service.http.port.secure'] = opts[:'org_osgi_service_http_port_secure'] if !opts[:'org_osgi_service_http_port_secure'].nil?
       query_params[:'org.osgi.service.http.port.secure@TypeHint'] = opts[:'org_osgi_service_http_port_secure_type_hint'] if !opts[:'org_osgi_service_http_port_secure_type_hint'].nil?
-      query_params[:'json.maximumresults'] = opts[:'json_maximumresults'] if !opts[:'json_maximumresults'].nil?
-      query_params[:'json.maximumresults@TypeHint'] = opts[:'json_maximumresults_type_hint'] if !opts[:'json_maximumresults_type_hint'].nil?
-      query_params[:'enable.html'] = opts[:'enable_html'] if !opts[:'enable_html'].nil?
-      query_params[:'enable.html@TypeHint'] = opts[:'enable_html_type_hint'] if !opts[:'enable_html_type_hint'].nil?
-      query_params[:'enable.txt'] = opts[:'enable_txt'] if !opts[:'enable_txt'].nil?
-      query_params[:'enable.txt@TypeHint'] = opts[:'enable_txt_type_hint'] if !opts[:'enable_txt_type_hint'].nil?
-      query_params[:'enable.xml'] = opts[:'enable_xml'] if !opts[:'enable_xml'].nil?
-      query_params[:'enable.xml@TypeHint'] = opts[:'enable_xml_type_hint'] if !opts[:'enable_xml_type_hint'].nil?
-      query_params[:'allow.empty'] = opts[:'allow_empty'] if !opts[:'allow_empty'].nil?
-      query_params[:'allow.empty@TypeHint'] = opts[:'allow_empty_type_hint'] if !opts[:'allow_empty_type_hint'].nil?
-      query_params[:'allow.hosts'] = opts[:'allow_hosts'] if !opts[:'allow_hosts'].nil?
-      query_params[:'allow.hosts@TypeHint'] = opts[:'allow_hosts_type_hint'] if !opts[:'allow_hosts_type_hint'].nil?
-      query_params[:'allow.hosts.regexp'] = opts[:'allow_hosts_regexp'] if !opts[:'allow_hosts_regexp'].nil?
-      query_params[:'allow.hosts.regexp@TypeHint'] = opts[:'allow_hosts_regexp_type_hint'] if !opts[:'allow_hosts_regexp_type_hint'].nil?
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['text/plain'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = ['aemAuth']
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: SlingApi#post_config_apache_felix_jetty_based_http_service\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # 
+    # 
+    # @param runmode 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :_alias 
+    # @option opts [String] :alias_type_hint 
+    # @option opts [BOOLEAN] :dav_create_absolute_uri 
+    # @option opts [String] :dav_create_absolute_uri_type_hint 
+    # @return [nil]
+    def post_config_apache_sling_dav_ex_servlet(runmode, opts = {})
+      post_config_apache_sling_dav_ex_servlet_with_http_info(runmode, opts)
+      return nil
+    end
+
+    # 
+    # 
+    # @param runmode 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :_alias 
+    # @option opts [String] :alias_type_hint 
+    # @option opts [BOOLEAN] :dav_create_absolute_uri 
+    # @option opts [String] :dav_create_absolute_uri_type_hint 
+    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    def post_config_apache_sling_dav_ex_servlet_with_http_info(runmode, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: SlingApi.post_config_apache_sling_dav_ex_servlet ..."
+      end
+      # verify the required parameter 'runmode' is set
+      fail ArgumentError, "Missing the required parameter 'runmode' when calling SlingApi.post_config_apache_sling_dav_ex_servlet" if runmode.nil?
+      # resource path
+      local_var_path = "/apps/system/config.{runmode}/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet".sub('{format}','json').sub('{' + 'runmode' + '}', runmode.to_s)
+
+      # query parameters
+      query_params = {}
       query_params[:'alias'] = opts[:'_alias'] if !opts[:'_alias'].nil?
       query_params[:'alias@TypeHint'] = opts[:'alias_type_hint'] if !opts[:'alias_type_hint'].nil?
       query_params[:'dav.create-absolute-uri'] = opts[:'dav_create_absolute_uri'] if !opts[:'dav_create_absolute_uri'].nil?
@@ -705,7 +709,149 @@ module SwaggerAemClient
         :body => post_body,
         :auth_names => auth_names)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SlingApi#post_config\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: SlingApi#post_config_apache_sling_dav_ex_servlet\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # 
+    # 
+    # @param runmode 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :json_maximumresults 
+    # @option opts [String] :json_maximumresults_type_hint 
+    # @option opts [BOOLEAN] :enable_html 
+    # @option opts [String] :enable_html_type_hint 
+    # @option opts [BOOLEAN] :enable_txt 
+    # @option opts [String] :enable_txt_type_hint 
+    # @option opts [BOOLEAN] :enable_xml 
+    # @option opts [String] :enable_xml_type_hint 
+    # @return [nil]
+    def post_config_apache_sling_get_servlet(runmode, opts = {})
+      post_config_apache_sling_get_servlet_with_http_info(runmode, opts)
+      return nil
+    end
+
+    # 
+    # 
+    # @param runmode 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :json_maximumresults 
+    # @option opts [String] :json_maximumresults_type_hint 
+    # @option opts [BOOLEAN] :enable_html 
+    # @option opts [String] :enable_html_type_hint 
+    # @option opts [BOOLEAN] :enable_txt 
+    # @option opts [String] :enable_txt_type_hint 
+    # @option opts [BOOLEAN] :enable_xml 
+    # @option opts [String] :enable_xml_type_hint 
+    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    def post_config_apache_sling_get_servlet_with_http_info(runmode, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: SlingApi.post_config_apache_sling_get_servlet ..."
+      end
+      # verify the required parameter 'runmode' is set
+      fail ArgumentError, "Missing the required parameter 'runmode' when calling SlingApi.post_config_apache_sling_get_servlet" if runmode.nil?
+      # resource path
+      local_var_path = "/apps/system/config.{runmode}/org.apache.sling.servlets.get.DefaultGetServlet".sub('{format}','json').sub('{' + 'runmode' + '}', runmode.to_s)
+
+      # query parameters
+      query_params = {}
+      query_params[:'json.maximumresults'] = opts[:'json_maximumresults'] if !opts[:'json_maximumresults'].nil?
+      query_params[:'json.maximumresults@TypeHint'] = opts[:'json_maximumresults_type_hint'] if !opts[:'json_maximumresults_type_hint'].nil?
+      query_params[:'enable.html'] = opts[:'enable_html'] if !opts[:'enable_html'].nil?
+      query_params[:'enable.html@TypeHint'] = opts[:'enable_html_type_hint'] if !opts[:'enable_html_type_hint'].nil?
+      query_params[:'enable.txt'] = opts[:'enable_txt'] if !opts[:'enable_txt'].nil?
+      query_params[:'enable.txt@TypeHint'] = opts[:'enable_txt_type_hint'] if !opts[:'enable_txt_type_hint'].nil?
+      query_params[:'enable.xml'] = opts[:'enable_xml'] if !opts[:'enable_xml'].nil?
+      query_params[:'enable.xml@TypeHint'] = opts[:'enable_xml_type_hint'] if !opts[:'enable_xml_type_hint'].nil?
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['text/plain'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = ['aemAuth']
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: SlingApi#post_config_apache_sling_get_servlet\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # 
+    # 
+    # @param runmode 
+    # @param [Hash] opts the optional parameters
+    # @option opts [BOOLEAN] :allow_empty 
+    # @option opts [String] :allow_empty_type_hint 
+    # @option opts [String] :allow_hosts 
+    # @option opts [String] :allow_hosts_type_hint 
+    # @option opts [String] :allow_hosts_regexp 
+    # @option opts [String] :allow_hosts_regexp_type_hint 
+    # @return [nil]
+    def post_config_apache_sling_referrer_filter(runmode, opts = {})
+      post_config_apache_sling_referrer_filter_with_http_info(runmode, opts)
+      return nil
+    end
+
+    # 
+    # 
+    # @param runmode 
+    # @param [Hash] opts the optional parameters
+    # @option opts [BOOLEAN] :allow_empty 
+    # @option opts [String] :allow_empty_type_hint 
+    # @option opts [String] :allow_hosts 
+    # @option opts [String] :allow_hosts_type_hint 
+    # @option opts [String] :allow_hosts_regexp 
+    # @option opts [String] :allow_hosts_regexp_type_hint 
+    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    def post_config_apache_sling_referrer_filter_with_http_info(runmode, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: SlingApi.post_config_apache_sling_referrer_filter ..."
+      end
+      # verify the required parameter 'runmode' is set
+      fail ArgumentError, "Missing the required parameter 'runmode' when calling SlingApi.post_config_apache_sling_referrer_filter" if runmode.nil?
+      # resource path
+      local_var_path = "/apps/system/config.{runmode}/org.apache.sling.security.impl.ReferrerFilter".sub('{format}','json').sub('{' + 'runmode' + '}', runmode.to_s)
+
+      # query parameters
+      query_params = {}
+      query_params[:'allow.empty'] = opts[:'allow_empty'] if !opts[:'allow_empty'].nil?
+      query_params[:'allow.empty@TypeHint'] = opts[:'allow_empty_type_hint'] if !opts[:'allow_empty_type_hint'].nil?
+      query_params[:'allow.hosts'] = opts[:'allow_hosts'] if !opts[:'allow_hosts'].nil?
+      query_params[:'allow.hosts@TypeHint'] = opts[:'allow_hosts_type_hint'] if !opts[:'allow_hosts_type_hint'].nil?
+      query_params[:'allow.hosts.regexp'] = opts[:'allow_hosts_regexp'] if !opts[:'allow_hosts_regexp'].nil?
+      query_params[:'allow.hosts.regexp@TypeHint'] = opts[:'allow_hosts_regexp_type_hint'] if !opts[:'allow_hosts_regexp_type_hint'].nil?
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['text/plain'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = ['aemAuth']
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: SlingApi#post_config_apache_sling_referrer_filter\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

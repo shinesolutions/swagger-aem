@@ -12,7 +12,10 @@ Method | HTTP request | Description
 [**get_package_filter**](SlingApi.md#get_package_filter) | **GET** /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json | 
 [**post_agent**](SlingApi.md#post_agent) | **POST** /etc/replication/agents.{runmode}/{name} | 
 [**post_authorizables**](SlingApi.md#post_authorizables) | **POST** /libs/granite/security/post/authorizables | 
-[**post_config**](SlingApi.md#post_config) | **POST** /apps/system/config.{runmode}/{name} | 
+[**post_config_apache_felix_jetty_based_http_service**](SlingApi.md#post_config_apache_felix_jetty_based_http_service) | **POST** /apps/system/config.{runmode}/org.apache.felix.http | 
+[**post_config_apache_sling_dav_ex_servlet**](SlingApi.md#post_config_apache_sling_dav_ex_servlet) | **POST** /apps/system/config.{runmode}/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet | 
+[**post_config_apache_sling_get_servlet**](SlingApi.md#post_config_apache_sling_get_servlet) | **POST** /apps/system/config.{runmode}/org.apache.sling.servlets.get.DefaultGetServlet | 
+[**post_config_apache_sling_referrer_filter**](SlingApi.md#post_config_apache_sling_referrer_filter) | **POST** /apps/system/config.{runmode}/org.apache.sling.security.impl.ReferrerFilter | 
 [**post_node_rw**](SlingApi.md#post_node_rw) | **POST** /{path}/{name}.rw.html | 
 [**post_path**](SlingApi.md#post_path) | **POST** /{path}/ | 
 [**post_query**](SlingApi.md#post_query) | **POST** /bin/querybuilder.json | 
@@ -500,8 +503,8 @@ Name | Type | Description  | Notes
 
 
 
-# **post_config**
-> post_config(runmode, name, opts)
+# **post_config_apache_felix_jetty_based_http_service**
+> post_config_apache_felix_jetty_based_http_service(runmode, opts)
 
 
 
@@ -519,8 +522,6 @@ end
 api_instance = SwaggerAemClient::SlingApi.new
 
 runmode = "runmode_example" # String | 
-
-name = "name_example" # String | 
 
 opts = { 
   org_apache_felix_https_nio: true, # BOOLEAN | 
@@ -542,31 +543,13 @@ opts = {
   org_apache_felix_https_enable: true, # BOOLEAN | 
   org_apache_felix_https_enable_type_hint: "org_apache_felix_https_enable_type_hint_example", # String | 
   org_osgi_service_http_port_secure: "org_osgi_service_http_port_secure_example", # String | 
-  org_osgi_service_http_port_secure_type_hint: "org_osgi_service_http_port_secure_type_hint_example", # String | 
-  json_maximumresults: "json_maximumresults_example", # String | 
-  json_maximumresults_type_hint: "json_maximumresults_type_hint_example", # String | 
-  enable_html: true, # BOOLEAN | 
-  enable_html_type_hint: "enable_html_type_hint_example", # String | 
-  enable_txt: true, # BOOLEAN | 
-  enable_txt_type_hint: "enable_txt_type_hint_example", # String | 
-  enable_xml: true, # BOOLEAN | 
-  enable_xml_type_hint: "enable_xml_type_hint_example", # String | 
-  allow_empty: true, # BOOLEAN | 
-  allow_empty_type_hint: "allow_empty_type_hint_example", # String | 
-  allow_hosts: "allow_hosts_example", # String | 
-  allow_hosts_type_hint: "allow_hosts_type_hint_example", # String | 
-  allow_hosts_regexp: "allow_hosts_regexp_example", # String | 
-  allow_hosts_regexp_type_hint: "allow_hosts_regexp_type_hint_example", # String | 
-  _alias: "_alias_example", # String | 
-  alias_type_hint: "alias_type_hint_example", # String | 
-  dav_create_absolute_uri: true, # BOOLEAN | 
-  dav_create_absolute_uri_type_hint: "dav_create_absolute_uri_type_hint_example" # String | 
+  org_osgi_service_http_port_secure_type_hint: "org_osgi_service_http_port_secure_type_hint_example" # String | 
 }
 
 begin
-  api_instance.post_config(runmode, name, opts)
+  api_instance.post_config_apache_felix_jetty_based_http_service(runmode, opts)
 rescue SwaggerAemClient::ApiError => e
-  puts "Exception when calling SlingApi->post_config: #{e}"
+  puts "Exception when calling SlingApi->post_config_apache_felix_jetty_based_http_service: #{e}"
 end
 ```
 
@@ -575,7 +558,6 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **runmode** | **String**|  | 
- **name** | **String**|  | 
  **org_apache_felix_https_nio** | **BOOLEAN**|  | [optional] 
  **org_apache_felix_https_nio_type_hint** | **String**|  | [optional] 
  **org_apache_felix_https_keystore** | **String**|  | [optional] 
@@ -596,6 +578,124 @@ Name | Type | Description  | Notes
  **org_apache_felix_https_enable_type_hint** | **String**|  | [optional] 
  **org_osgi_service_http_port_secure** | **String**|  | [optional] 
  **org_osgi_service_http_port_secure_type_hint** | **String**|  | [optional] 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain
+
+
+
+# **post_config_apache_sling_dav_ex_servlet**
+> post_config_apache_sling_dav_ex_servlet(runmode, opts)
+
+
+
+### Example
+```ruby
+# load the gem
+require 'swagger_aem'
+# setup authorization
+SwaggerAemClient.configure do |config|
+  # Configure HTTP basic authorization: aemAuth
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = SwaggerAemClient::SlingApi.new
+
+runmode = "runmode_example" # String | 
+
+opts = { 
+  _alias: "_alias_example", # String | 
+  alias_type_hint: "alias_type_hint_example", # String | 
+  dav_create_absolute_uri: true, # BOOLEAN | 
+  dav_create_absolute_uri_type_hint: "dav_create_absolute_uri_type_hint_example" # String | 
+}
+
+begin
+  api_instance.post_config_apache_sling_dav_ex_servlet(runmode, opts)
+rescue SwaggerAemClient::ApiError => e
+  puts "Exception when calling SlingApi->post_config_apache_sling_dav_ex_servlet: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **runmode** | **String**|  | 
+ **_alias** | **String**|  | [optional] 
+ **alias_type_hint** | **String**|  | [optional] 
+ **dav_create_absolute_uri** | **BOOLEAN**|  | [optional] 
+ **dav_create_absolute_uri_type_hint** | **String**|  | [optional] 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain
+
+
+
+# **post_config_apache_sling_get_servlet**
+> post_config_apache_sling_get_servlet(runmode, opts)
+
+
+
+### Example
+```ruby
+# load the gem
+require 'swagger_aem'
+# setup authorization
+SwaggerAemClient.configure do |config|
+  # Configure HTTP basic authorization: aemAuth
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = SwaggerAemClient::SlingApi.new
+
+runmode = "runmode_example" # String | 
+
+opts = { 
+  json_maximumresults: "json_maximumresults_example", # String | 
+  json_maximumresults_type_hint: "json_maximumresults_type_hint_example", # String | 
+  enable_html: true, # BOOLEAN | 
+  enable_html_type_hint: "enable_html_type_hint_example", # String | 
+  enable_txt: true, # BOOLEAN | 
+  enable_txt_type_hint: "enable_txt_type_hint_example", # String | 
+  enable_xml: true, # BOOLEAN | 
+  enable_xml_type_hint: "enable_xml_type_hint_example" # String | 
+}
+
+begin
+  api_instance.post_config_apache_sling_get_servlet(runmode, opts)
+rescue SwaggerAemClient::ApiError => e
+  puts "Exception when calling SlingApi->post_config_apache_sling_get_servlet: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **runmode** | **String**|  | 
  **json_maximumresults** | **String**|  | [optional] 
  **json_maximumresults_type_hint** | **String**|  | [optional] 
  **enable_html** | **BOOLEAN**|  | [optional] 
@@ -604,16 +704,69 @@ Name | Type | Description  | Notes
  **enable_txt_type_hint** | **String**|  | [optional] 
  **enable_xml** | **BOOLEAN**|  | [optional] 
  **enable_xml_type_hint** | **String**|  | [optional] 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain
+
+
+
+# **post_config_apache_sling_referrer_filter**
+> post_config_apache_sling_referrer_filter(runmode, opts)
+
+
+
+### Example
+```ruby
+# load the gem
+require 'swagger_aem'
+# setup authorization
+SwaggerAemClient.configure do |config|
+  # Configure HTTP basic authorization: aemAuth
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = SwaggerAemClient::SlingApi.new
+
+runmode = "runmode_example" # String | 
+
+opts = { 
+  allow_empty: true, # BOOLEAN | 
+  allow_empty_type_hint: "allow_empty_type_hint_example", # String | 
+  allow_hosts: "allow_hosts_example", # String | 
+  allow_hosts_type_hint: "allow_hosts_type_hint_example", # String | 
+  allow_hosts_regexp: "allow_hosts_regexp_example", # String | 
+  allow_hosts_regexp_type_hint: "allow_hosts_regexp_type_hint_example" # String | 
+}
+
+begin
+  api_instance.post_config_apache_sling_referrer_filter(runmode, opts)
+rescue SwaggerAemClient::ApiError => e
+  puts "Exception when calling SlingApi->post_config_apache_sling_referrer_filter: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **runmode** | **String**|  | 
  **allow_empty** | **BOOLEAN**|  | [optional] 
  **allow_empty_type_hint** | **String**|  | [optional] 
  **allow_hosts** | **String**|  | [optional] 
  **allow_hosts_type_hint** | **String**|  | [optional] 
  **allow_hosts_regexp** | **String**|  | [optional] 
  **allow_hosts_regexp_type_hint** | **String**|  | [optional] 
- **_alias** | **String**|  | [optional] 
- **alias_type_hint** | **String**|  | [optional] 
- **dav_create_absolute_uri** | **BOOLEAN**|  | [optional] 
- **dav_create_absolute_uri_type_hint** | **String**|  | [optional] 
 
 ### Return type
 
