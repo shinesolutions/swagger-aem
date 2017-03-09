@@ -1,5 +1,5 @@
 ### 0.9.6
-*
+* Add Apache Sling DavEx Servlet OSGI config support #11
 
 ### 0.9.5
 * Add Apache Sling GET Servlet OSGI config support

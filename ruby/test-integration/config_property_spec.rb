@@ -108,4 +108,37 @@ describe 'ConfigProperty' do
     end
 
   end
+
+  describe 'test create Apache Sling DavEx Servlet properties' do
+
+    it 'should succeed when path node already exists' do
+
+      # ensure http OSGI config node exists
+      begin
+        data, status_code, headers = @sling.post_path_with_http_info(
+          path = 'apps/system/config.author',
+          jcrprimary_type = 'sling:OsgiConfig',
+          name = 'org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet'
+        )
+        # create config when it does not exist
+        expect([200, 201]).to include(status_code)
+      rescue SwaggerAemClient::ApiError => err
+        # ignore when it already exists
+        expect(err.code).to eq(500)
+      end
+
+      data, status_code, headers = @sling.post_config_with_http_info(
+        runmode = 'author',
+        name = 'org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet',
+        opts = {
+          :alias => '/crx/server',
+          :alias_type_hint => 'String',
+          :dav_create_absolute_uri => true,
+          :dav_create_absolute_uri_type_hint => 'Boolean',
+        }
+      )
+      expect([200, 201]).to include(status_code)
+    end
+
+  end
 end
