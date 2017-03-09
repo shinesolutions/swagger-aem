@@ -109,6 +109,41 @@ describe 'ConfigProperty' do
 
   end
 
+  describe 'test create Apache Sling Referrer Filter properties' do
+
+    it 'should succeed when path node already exists' do
+
+      # ensure http OSGI config node exists
+      begin
+        data, status_code, headers = @sling.post_path_with_http_info(
+          path = 'apps/system/config.author',
+          jcrprimary_type = 'sling:OsgiConfig',
+          name = 'org.apache.sling.security.impl.ReferrerFilter'
+        )
+        # create config when it does not exist
+        expect([200, 201]).to include(status_code)
+      rescue SwaggerAemClient::ApiError => err
+        # ignore when it already exists
+        expect(err.code).to eq(500)
+      end
+
+      data, status_code, headers = @sling.post_config_with_http_info(
+        runmode = 'author',
+        name = 'org.apache.sling.security.impl.ReferrerFilter',
+        opts = {
+          :allow_empty => false,
+          :allow_empty_type_hint => 'Boolean',
+          :allow_hosts => '',
+          :allow_hosts_type_hint => 'String',
+          :allow_hosts_regexp => '',
+          :allow_hosts_regexp_type_hint => 'String'
+        }
+      )
+      expect([200, 201]).to include(status_code)
+    end
+
+  end
+
   describe 'test create Apache Sling DavEx Servlet properties' do
 
     it 'should succeed when path node already exists' do
@@ -141,4 +176,5 @@ describe 'ConfigProperty' do
     end
 
   end
+
 end

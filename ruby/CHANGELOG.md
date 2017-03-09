@@ -1,5 +1,6 @@
 ### 0.9.6
 * Add Apache Sling DavEx Servlet OSGI config support #11
+* Add Apache Sling Referrer Filter OSGI config support
 
 ### 0.9.5
 * Add Apache Sling GET Servlet OSGI config support
