@@ -12,7 +12,10 @@ Method | HTTP request | Description
 [**getPackageFilter**](SlingApi.md#getPackageFilter) | **GET** /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json | 
 [**postAgent**](SlingApi.md#postAgent) | **POST** /etc/replication/agents.{runmode}/{name} | 
 [**postAuthorizables**](SlingApi.md#postAuthorizables) | **POST** /libs/granite/security/post/authorizables | 
-[**postConfig**](SlingApi.md#postConfig) | **POST** /apps/system/config.{runmode}/{name} | 
+[**postConfigApacheFelixJettyBasedHttpService**](SlingApi.md#postConfigApacheFelixJettyBasedHttpService) | **POST** /apps/system/config.{runmode}/org.apache.felix.http | 
+[**postConfigApacheSlingDavExServlet**](SlingApi.md#postConfigApacheSlingDavExServlet) | **POST** /apps/system/config.{runmode}/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet | 
+[**postConfigApacheSlingGetServlet**](SlingApi.md#postConfigApacheSlingGetServlet) | **POST** /apps/system/config.{runmode}/org.apache.sling.servlets.get.DefaultGetServlet | 
+[**postConfigApacheSlingReferrerFilter**](SlingApi.md#postConfigApacheSlingReferrerFilter) | **POST** /apps/system/config.{runmode}/org.apache.sling.security.impl.ReferrerFilter | 
 [**postNodeRw**](SlingApi.md#postNodeRw) | **POST** /{path}/{name}.rw.html | 
 [**postPath**](SlingApi.md#postPath) | **POST** /{path}/ | 
 [**postQuery**](SlingApi.md#postQuery) | **POST** /bin/querybuilder.json | 
@@ -502,9 +505,9 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: text/html
 
-<a name="postConfig"></a>
-# **postConfig**
-> postConfig(runmode, name, orgApacheFelixHttpsNio, orgApacheFelixHttpsNioTypeHint, orgApacheFelixHttpsKeystore, orgApacheFelixHttpsKeystoreTypeHint, orgApacheFelixHttpsKeystorePassword, orgApacheFelixHttpsKeystorePasswordTypeHint, orgApacheFelixHttpsKeystoreKey, orgApacheFelixHttpsKeystoreKeyTypeHint, orgApacheFelixHttpsKeystoreKeyPassword, orgApacheFelixHttpsKeystoreKeyPasswordTypeHint, orgApacheFelixHttpsTruststore, orgApacheFelixHttpsTruststoreTypeHint, orgApacheFelixHttpsTruststorePassword, orgApacheFelixHttpsTruststorePasswordTypeHint, orgApacheFelixHttpsClientcertificate, orgApacheFelixHttpsClientcertificateTypeHint, orgApacheFelixHttpsEnable, orgApacheFelixHttpsEnableTypeHint, orgOsgiServiceHttpPortSecure, orgOsgiServiceHttpPortSecureTypeHint)
+<a name="postConfigApacheFelixJettyBasedHttpService"></a>
+# **postConfigApacheFelixJettyBasedHttpService**
+> postConfigApacheFelixJettyBasedHttpService(runmode, orgApacheFelixHttpsNio, orgApacheFelixHttpsNioTypeHint, orgApacheFelixHttpsKeystore, orgApacheFelixHttpsKeystoreTypeHint, orgApacheFelixHttpsKeystorePassword, orgApacheFelixHttpsKeystorePasswordTypeHint, orgApacheFelixHttpsKeystoreKey, orgApacheFelixHttpsKeystoreKeyTypeHint, orgApacheFelixHttpsKeystoreKeyPassword, orgApacheFelixHttpsKeystoreKeyPasswordTypeHint, orgApacheFelixHttpsTruststore, orgApacheFelixHttpsTruststoreTypeHint, orgApacheFelixHttpsTruststorePassword, orgApacheFelixHttpsTruststorePasswordTypeHint, orgApacheFelixHttpsClientcertificate, orgApacheFelixHttpsClientcertificateTypeHint, orgApacheFelixHttpsEnable, orgApacheFelixHttpsEnableTypeHint, orgOsgiServiceHttpPortSecure, orgOsgiServiceHttpPortSecureTypeHint)
 
 
 
@@ -526,7 +529,6 @@ aemAuth.setPassword("YOUR PASSWORD");
 
 SlingApi apiInstance = new SlingApi();
 String runmode = "runmode_example"; // String | 
-String name = "name_example"; // String | 
 Boolean orgApacheFelixHttpsNio = true; // Boolean | 
 String orgApacheFelixHttpsNioTypeHint = "orgApacheFelixHttpsNioTypeHint_example"; // String | 
 String orgApacheFelixHttpsKeystore = "orgApacheFelixHttpsKeystore_example"; // String | 
@@ -543,14 +545,14 @@ String orgApacheFelixHttpsTruststorePassword = "orgApacheFelixHttpsTruststorePas
 String orgApacheFelixHttpsTruststorePasswordTypeHint = "orgApacheFelixHttpsTruststorePasswordTypeHint_example"; // String | 
 String orgApacheFelixHttpsClientcertificate = "orgApacheFelixHttpsClientcertificate_example"; // String | 
 String orgApacheFelixHttpsClientcertificateTypeHint = "orgApacheFelixHttpsClientcertificateTypeHint_example"; // String | 
-String orgApacheFelixHttpsEnable = "orgApacheFelixHttpsEnable_example"; // String | 
+Boolean orgApacheFelixHttpsEnable = true; // Boolean | 
 String orgApacheFelixHttpsEnableTypeHint = "orgApacheFelixHttpsEnableTypeHint_example"; // String | 
 String orgOsgiServiceHttpPortSecure = "orgOsgiServiceHttpPortSecure_example"; // String | 
 String orgOsgiServiceHttpPortSecureTypeHint = "orgOsgiServiceHttpPortSecureTypeHint_example"; // String | 
 try {
-    apiInstance.postConfig(runmode, name, orgApacheFelixHttpsNio, orgApacheFelixHttpsNioTypeHint, orgApacheFelixHttpsKeystore, orgApacheFelixHttpsKeystoreTypeHint, orgApacheFelixHttpsKeystorePassword, orgApacheFelixHttpsKeystorePasswordTypeHint, orgApacheFelixHttpsKeystoreKey, orgApacheFelixHttpsKeystoreKeyTypeHint, orgApacheFelixHttpsKeystoreKeyPassword, orgApacheFelixHttpsKeystoreKeyPasswordTypeHint, orgApacheFelixHttpsTruststore, orgApacheFelixHttpsTruststoreTypeHint, orgApacheFelixHttpsTruststorePassword, orgApacheFelixHttpsTruststorePasswordTypeHint, orgApacheFelixHttpsClientcertificate, orgApacheFelixHttpsClientcertificateTypeHint, orgApacheFelixHttpsEnable, orgApacheFelixHttpsEnableTypeHint, orgOsgiServiceHttpPortSecure, orgOsgiServiceHttpPortSecureTypeHint);
+    apiInstance.postConfigApacheFelixJettyBasedHttpService(runmode, orgApacheFelixHttpsNio, orgApacheFelixHttpsNioTypeHint, orgApacheFelixHttpsKeystore, orgApacheFelixHttpsKeystoreTypeHint, orgApacheFelixHttpsKeystorePassword, orgApacheFelixHttpsKeystorePasswordTypeHint, orgApacheFelixHttpsKeystoreKey, orgApacheFelixHttpsKeystoreKeyTypeHint, orgApacheFelixHttpsKeystoreKeyPassword, orgApacheFelixHttpsKeystoreKeyPasswordTypeHint, orgApacheFelixHttpsTruststore, orgApacheFelixHttpsTruststoreTypeHint, orgApacheFelixHttpsTruststorePassword, orgApacheFelixHttpsTruststorePasswordTypeHint, orgApacheFelixHttpsClientcertificate, orgApacheFelixHttpsClientcertificateTypeHint, orgApacheFelixHttpsEnable, orgApacheFelixHttpsEnableTypeHint, orgOsgiServiceHttpPortSecure, orgOsgiServiceHttpPortSecureTypeHint);
 } catch (ApiException e) {
-    System.err.println("Exception when calling SlingApi#postConfig");
+    System.err.println("Exception when calling SlingApi#postConfigApacheFelixJettyBasedHttpService");
     e.printStackTrace();
 }
 ```
@@ -560,7 +562,6 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **runmode** | **String**|  |
- **name** | **String**|  |
  **orgApacheFelixHttpsNio** | **Boolean**|  | [optional]
  **orgApacheFelixHttpsNioTypeHint** | **String**|  | [optional]
  **orgApacheFelixHttpsKeystore** | **String**|  | [optional]
@@ -577,10 +578,199 @@ Name | Type | Description  | Notes
  **orgApacheFelixHttpsTruststorePasswordTypeHint** | **String**|  | [optional]
  **orgApacheFelixHttpsClientcertificate** | **String**|  | [optional]
  **orgApacheFelixHttpsClientcertificateTypeHint** | **String**|  | [optional]
- **orgApacheFelixHttpsEnable** | **String**|  | [optional]
+ **orgApacheFelixHttpsEnable** | **Boolean**|  | [optional]
  **orgApacheFelixHttpsEnableTypeHint** | **String**|  | [optional]
  **orgOsgiServiceHttpPortSecure** | **String**|  | [optional]
  **orgOsgiServiceHttpPortSecureTypeHint** | **String**|  | [optional]
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain
+
+<a name="postConfigApacheSlingDavExServlet"></a>
+# **postConfigApacheSlingDavExServlet**
+> postConfigApacheSlingDavExServlet(runmode, alias, aliasTypeHint, davCreateAbsoluteUri, davCreateAbsoluteUriTypeHint)
+
+
+
+### Example
+```java
+// Import classes:
+//import com.shinesolutions.swaggeraem4j.ApiClient;
+//import com.shinesolutions.swaggeraem4j.ApiException;
+//import com.shinesolutions.swaggeraem4j.Configuration;
+//import com.shinesolutions.swaggeraem4j.auth.*;
+//import com.shinesolutions.swaggeraem4j.api.SlingApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure HTTP basic authorization: aemAuth
+HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+aemAuth.setUsername("YOUR USERNAME");
+aemAuth.setPassword("YOUR PASSWORD");
+
+SlingApi apiInstance = new SlingApi();
+String runmode = "runmode_example"; // String | 
+String alias = "alias_example"; // String | 
+String aliasTypeHint = "aliasTypeHint_example"; // String | 
+Boolean davCreateAbsoluteUri = true; // Boolean | 
+String davCreateAbsoluteUriTypeHint = "davCreateAbsoluteUriTypeHint_example"; // String | 
+try {
+    apiInstance.postConfigApacheSlingDavExServlet(runmode, alias, aliasTypeHint, davCreateAbsoluteUri, davCreateAbsoluteUriTypeHint);
+} catch (ApiException e) {
+    System.err.println("Exception when calling SlingApi#postConfigApacheSlingDavExServlet");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **runmode** | **String**|  |
+ **alias** | **String**|  | [optional]
+ **aliasTypeHint** | **String**|  | [optional]
+ **davCreateAbsoluteUri** | **Boolean**|  | [optional]
+ **davCreateAbsoluteUriTypeHint** | **String**|  | [optional]
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain
+
+<a name="postConfigApacheSlingGetServlet"></a>
+# **postConfigApacheSlingGetServlet**
+> postConfigApacheSlingGetServlet(runmode, jsonMaximumresults, jsonMaximumresultsTypeHint, enableHtml, enableHtmlTypeHint, enableTxt, enableTxtTypeHint, enableXml, enableXmlTypeHint)
+
+
+
+### Example
+```java
+// Import classes:
+//import com.shinesolutions.swaggeraem4j.ApiClient;
+//import com.shinesolutions.swaggeraem4j.ApiException;
+//import com.shinesolutions.swaggeraem4j.Configuration;
+//import com.shinesolutions.swaggeraem4j.auth.*;
+//import com.shinesolutions.swaggeraem4j.api.SlingApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure HTTP basic authorization: aemAuth
+HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+aemAuth.setUsername("YOUR USERNAME");
+aemAuth.setPassword("YOUR PASSWORD");
+
+SlingApi apiInstance = new SlingApi();
+String runmode = "runmode_example"; // String | 
+String jsonMaximumresults = "jsonMaximumresults_example"; // String | 
+String jsonMaximumresultsTypeHint = "jsonMaximumresultsTypeHint_example"; // String | 
+Boolean enableHtml = true; // Boolean | 
+String enableHtmlTypeHint = "enableHtmlTypeHint_example"; // String | 
+Boolean enableTxt = true; // Boolean | 
+String enableTxtTypeHint = "enableTxtTypeHint_example"; // String | 
+Boolean enableXml = true; // Boolean | 
+String enableXmlTypeHint = "enableXmlTypeHint_example"; // String | 
+try {
+    apiInstance.postConfigApacheSlingGetServlet(runmode, jsonMaximumresults, jsonMaximumresultsTypeHint, enableHtml, enableHtmlTypeHint, enableTxt, enableTxtTypeHint, enableXml, enableXmlTypeHint);
+} catch (ApiException e) {
+    System.err.println("Exception when calling SlingApi#postConfigApacheSlingGetServlet");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **runmode** | **String**|  |
+ **jsonMaximumresults** | **String**|  | [optional]
+ **jsonMaximumresultsTypeHint** | **String**|  | [optional]
+ **enableHtml** | **Boolean**|  | [optional]
+ **enableHtmlTypeHint** | **String**|  | [optional]
+ **enableTxt** | **Boolean**|  | [optional]
+ **enableTxtTypeHint** | **String**|  | [optional]
+ **enableXml** | **Boolean**|  | [optional]
+ **enableXmlTypeHint** | **String**|  | [optional]
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain
+
+<a name="postConfigApacheSlingReferrerFilter"></a>
+# **postConfigApacheSlingReferrerFilter**
+> postConfigApacheSlingReferrerFilter(runmode, allowEmpty, allowEmptyTypeHint, allowHosts, allowHostsTypeHint, allowHostsRegexp, allowHostsRegexpTypeHint)
+
+
+
+### Example
+```java
+// Import classes:
+//import com.shinesolutions.swaggeraem4j.ApiClient;
+//import com.shinesolutions.swaggeraem4j.ApiException;
+//import com.shinesolutions.swaggeraem4j.Configuration;
+//import com.shinesolutions.swaggeraem4j.auth.*;
+//import com.shinesolutions.swaggeraem4j.api.SlingApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure HTTP basic authorization: aemAuth
+HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+aemAuth.setUsername("YOUR USERNAME");
+aemAuth.setPassword("YOUR PASSWORD");
+
+SlingApi apiInstance = new SlingApi();
+String runmode = "runmode_example"; // String | 
+Boolean allowEmpty = true; // Boolean | 
+String allowEmptyTypeHint = "allowEmptyTypeHint_example"; // String | 
+String allowHosts = "allowHosts_example"; // String | 
+String allowHostsTypeHint = "allowHostsTypeHint_example"; // String | 
+String allowHostsRegexp = "allowHostsRegexp_example"; // String | 
+String allowHostsRegexpTypeHint = "allowHostsRegexpTypeHint_example"; // String | 
+try {
+    apiInstance.postConfigApacheSlingReferrerFilter(runmode, allowEmpty, allowEmptyTypeHint, allowHosts, allowHostsTypeHint, allowHostsRegexp, allowHostsRegexpTypeHint);
+} catch (ApiException e) {
+    System.err.println("Exception when calling SlingApi#postConfigApacheSlingReferrerFilter");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **runmode** | **String**|  |
+ **allowEmpty** | **Boolean**|  | [optional]
+ **allowEmptyTypeHint** | **String**|  | [optional]
+ **allowHosts** | **String**|  | [optional]
+ **allowHostsTypeHint** | **String**|  | [optional]
+ **allowHostsRegexp** | **String**|  | [optional]
+ **allowHostsRegexpTypeHint** | **String**|  | [optional]
 
 ### Return type
 
