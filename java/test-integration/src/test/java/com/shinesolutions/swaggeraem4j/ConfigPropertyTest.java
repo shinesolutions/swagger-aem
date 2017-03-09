@@ -32,7 +32,7 @@ public class ConfigPropertyTest {
 	}
 
 	@Test
-	public void testCreateSslConfigProperties() throws ApiException {
+	public void testApacheFelixJettyBasedHttpServiceConfigProperties() throws ApiException {
 		// Ensure http OSGI config node exists
 		try {
 			String path = "apps/system/config.author";
@@ -49,8 +49,7 @@ public class ConfigPropertyTest {
 		}
 
 		String runmode = "author";
-		String name = "org.apache.felix.http";
-		boolean orgApacheFelixHttpsNio = true;
+		Boolean orgApacheFelixHttpsNio = true;
 		String orgApacheFelixHttpsNioTypeHint = "Boolean";
 		String orgApacheFelixHttpsKeystore = "/some/path/to/keystore";
 		String orgApacheFelixHttpsKeystoreTypeHint = "String";
@@ -66,13 +65,13 @@ public class ConfigPropertyTest {
 		String orgApacheFelixHttpsTruststorePasswordTypeHint = "String";
 		String orgApacheFelixHttpsClientcertificate = "none";
 		String orgApacheFelixHttpsClientcertificateTypeHint = "String";
-		String orgApacheFelixHttpsEnable = "false";
+		Boolean orgApacheFelixHttpsEnable = false;
 		String orgApacheFelixHttpsEnableTypeHint = "Boolean";
 		String orgOsgiServiceHttpPortSecure = "4503";
 		String orgOsgiServiceHttpPortSecureTypeHint = "Long";
 
-		ApiResponse<Void> response = sling.postConfigWithHttpInfo(runmode,
-				name, orgApacheFelixHttpsNio, orgApacheFelixHttpsNioTypeHint,
+		ApiResponse<Void> response = sling.postConfigApacheFelixJettyBasedHttpServiceWithHttpInfo(runmode,
+				orgApacheFelixHttpsNio, orgApacheFelixHttpsNioTypeHint,
 				orgApacheFelixHttpsKeystore,
 				orgApacheFelixHttpsKeystoreTypeHint,
 				orgApacheFelixHttpsKeystorePassword,
