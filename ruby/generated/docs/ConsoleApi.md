@@ -5,7 +5,7 @@ All URIs are relative to *http://localhost/*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**post_bundle**](ConsoleApi.md#post_bundle) | **POST** /system/console/bundles/{name} | 
-[**post_jmx_repository**](ConsoleApi.md#post_jmx_repository) | **POST** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} | 
+[**post_jmx_repository**](ConsoleApi.md#post_jmx_repository) | **POST** /system/console/jmx/com.adobe.granite:type=Repository/op/{action} | 
 
 
 # **post_bundle**
@@ -17,7 +17,7 @@ Method | HTTP request | Description
 ```ruby
 # load the gem
 require 'swagger_aem'
-# setup authorization
+# setup authorization 
 SwaggerAemClient.configure do |config|
   # Configure HTTP basic authorization: aemAuth
   config.username = 'YOUR USERNAME'
@@ -53,7 +53,7 @@ nil (empty response body)
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP request headers
+### HTTP reuqest headers
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain
@@ -69,7 +69,7 @@ nil (empty response body)
 ```ruby
 # load the gem
 require 'swagger_aem'
-# setup authorization
+# setup authorization 
 SwaggerAemClient.configure do |config|
   # Configure HTTP basic authorization: aemAuth
   config.username = 'YOUR USERNAME'
@@ -102,7 +102,7 @@ nil (empty response body)
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP request headers
+### HTTP reuqest headers
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain

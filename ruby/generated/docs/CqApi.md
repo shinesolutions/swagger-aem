@@ -38,7 +38,7 @@ nil (empty response body)
 
 No authorization required
 
-### HTTP request headers
+### HTTP reuqest headers
 
  - **Content-Type**: Not defined
  - **Accept**: text/html
@@ -54,7 +54,7 @@ No authorization required
 ```ruby
 # load the gem
 require 'swagger_aem'
-# setup authorization
+# setup authorization 
 SwaggerAemClient.configure do |config|
   # Configure HTTP basic authorization: aemAuth
   config.username = 'YOUR USERNAME'
@@ -90,7 +90,7 @@ nil (empty response body)
 
 [aemAuth](../README.md#aemAuth)
 
-### HTTP request headers
+### HTTP reuqest headers
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain
