@@ -262,6 +262,22 @@ paths:
           in: query
           required: false
           type: string
+        - name: alias
+          in: query
+          required: false
+          type: string
+        - name: alias@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: dav.create-absolute-uri
+          in: query
+          required: false
+          type: boolean
+        - name: dav.create-absolute-uri@TypeHint
+          in: query
+          required: false
+          type: string
       tags:
         - sling
   /bin/querybuilder.json:

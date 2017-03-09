@@ -1,5 +1,6 @@
 ### 1.1.6
 * Add allow.empty, allow.hosts, and allow.hosts.regexp parameters to postConfig operation
+* Add alias and dav.create-absolute-uri parameters to postConfig operation #11
 
 ### 1.1.5
 * Add json.maximumresults, enable.html, enable.txt, enable.xml parameters to postConfig operation
