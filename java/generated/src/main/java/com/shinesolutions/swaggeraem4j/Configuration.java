@@ -13,7 +13,7 @@
 
 package com.shinesolutions.swaggeraem4j;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-03-09T23:06:15.319+11:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-03-09T23:13:51.716+11:00")
 public class Configuration {
     private static ApiClient defaultApiClient = new ApiClient();
 

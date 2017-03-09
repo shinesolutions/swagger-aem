@@ -28,7 +28,7 @@ Add this dependency to your project's POM:
 <dependency>
     <groupId>com.shinesolutions</groupId>
     <artifactId>swaggeraem4j</artifactId>
-    <version>0.9.2</version>
+    <version>0.9.3</version>
     <scope>compile</scope>
 </dependency>
 ```
@@ -38,7 +38,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "com.shinesolutions:swaggeraem4j:0.9.2"
+compile "com.shinesolutions:swaggeraem4j:0.9.3"
 ```
 
 ### Others
@@ -49,7 +49,7 @@ At first generate the JAR by executing:
 
 Then manually install the following JARs:
 
-* target/swaggeraem4j-0.9.2.jar
+* target/swaggeraem4j-0.9.3.jar
 * target/lib/*.jar
 
 ## Getting Started
@@ -112,7 +112,10 @@ Class | Method | HTTP request | Description
 *SlingApi* | [**getPackageFilter**](docs/SlingApi.md#getPackageFilter) | **GET** /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json | 
 *SlingApi* | [**postAgent**](docs/SlingApi.md#postAgent) | **POST** /etc/replication/agents.{runmode}/{name} | 
 *SlingApi* | [**postAuthorizables**](docs/SlingApi.md#postAuthorizables) | **POST** /libs/granite/security/post/authorizables | 
-*SlingApi* | [**postConfig**](docs/SlingApi.md#postConfig) | **POST** /apps/system/config.{runmode}/{name} | 
+*SlingApi* | [**postConfigApacheFelixJettyBasedHttpService**](docs/SlingApi.md#postConfigApacheFelixJettyBasedHttpService) | **POST** /apps/system/config.{runmode}/org.apache.felix.http | 
+*SlingApi* | [**postConfigApacheSlingDavExServlet**](docs/SlingApi.md#postConfigApacheSlingDavExServlet) | **POST** /apps/system/config.{runmode}/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet | 
+*SlingApi* | [**postConfigApacheSlingGetServlet**](docs/SlingApi.md#postConfigApacheSlingGetServlet) | **POST** /apps/system/config.{runmode}/org.apache.sling.servlets.get.DefaultGetServlet | 
+*SlingApi* | [**postConfigApacheSlingReferrerFilter**](docs/SlingApi.md#postConfigApacheSlingReferrerFilter) | **POST** /apps/system/config.{runmode}/org.apache.sling.security.impl.ReferrerFilter | 
 *SlingApi* | [**postNodeRw**](docs/SlingApi.md#postNodeRw) | **POST** /{path}/{name}.rw.html | 
 *SlingApi* | [**postPath**](docs/SlingApi.md#postPath) | **POST** /{path}/ | 
 *SlingApi* | [**postQuery**](docs/SlingApi.md#postQuery) | **POST** /bin/querybuilder.json | 

@@ -2,7 +2,7 @@ apply plugin: 'idea'
 apply plugin: 'eclipse'
 
 group = 'com.shinesolutions'
-version = '0.9.2'
+version = '0.9.3'
 
 buildscript {
     repositories {
