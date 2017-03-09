@@ -93,4 +93,34 @@ public class ConfigPropertyTest {
 				|| (response.getStatusCode() == 201));
 	}
 
+	@Test
+	public void testApacheSlingDavExServletConfigProperties() throws ApiException {
+		// Ensure http OSGI config node exists
+		try {
+			String path = "apps/system/config.author";
+			String jcrPrimaryType = "sling:OsgiConfig";
+			String name = "org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet";
+			ApiResponse<Void> response = sling.postPathWithHttpInfo(path,
+					jcrPrimaryType, name);
+			// Create config when it does not exist
+			assertTrue((response.getStatusCode() == 200)
+					|| (response.getStatusCode() == 201));
+		} catch (ApiException e) {
+			// Ignore when it already exists
+			assertEquals(500, e.getCode());
+		}
+
+		String runmode = "author";
+		String alias = "/crx/server";
+		String aliasTypeHint = "String";
+		Boolean davCreateAbsoluteUri = true;
+		String davCreateAbsoluteUriTypeHint = "Boolean";
+
+		ApiResponse<Void> response = sling.postConfigApacheSlingDavExServletWithHttpInfo(runmode,
+				alias, aliasTypeHint,
+				davCreateAbsoluteUri,
+				davCreateAbsoluteUriTypeHint);
+		assertTrue((response.getStatusCode() == 200)
+				|| (response.getStatusCode() == 201));
+	}
 }
