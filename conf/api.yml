@@ -388,16 +388,20 @@ paths:
             type: string
       tags:
         - sling
-  /etc/replication/agents.{runmode}.-1.json
+  /etc/replication/agents.{runmode}.-1.json:
     get:
       operationId: getAgents
       produces:
-        - text/plain
+        - application/json
       parameters:
         - name: runmode
           in: path
           required: true
           type: string
+      responses:
+        default:
+          schema:
+            type: string
       tags:
         - sling
   /etc/replication/agents.{runmode}/{name}:
