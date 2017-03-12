@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **get_login_page**
-> get_login_page
+> String get_login_page
 
 
 
@@ -21,7 +21,8 @@ require 'swagger_aem'
 api_instance = SwaggerAemClient::CqApi.new
 
 begin
-  api_instance.get_login_page
+  result = api_instance.get_login_page
+  p result
 rescue SwaggerAemClient::ApiError => e
   puts "Exception when calling CqApi->get_login_page: #{e}"
 end
@@ -32,7 +33,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-nil (empty response body)
+**String**
 
 ### Authorization
 

@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**delete_agent**](SlingApi.md#delete_agent) | **DELETE** /etc/replication/agents.{runmode}/{name} | 
 [**delete_node**](SlingApi.md#delete_node) | **DELETE** /{path}/{name} | 
 [**get_agent**](SlingApi.md#get_agent) | **GET** /etc/replication/agents.{runmode}/{name} | 
+[**get_agents**](SlingApi.md#get_agents) | **GET** /etc/replication/agents.{runmode}.-1.json | 
 [**get_node**](SlingApi.md#get_node) | **GET** /{path}/{name} | 
 [**get_package**](SlingApi.md#get_package) | **GET** /etc/packages/{group}/{name}-{version}.zip | 
 [**get_package_filter**](SlingApi.md#get_package_filter) | **GET** /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json | 
@@ -175,6 +176,56 @@ nil (empty response body)
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain
+
+
+
+# **get_agents**
+> String get_agents(runmode)
+
+
+
+### Example
+```ruby
+# load the gem
+require 'swagger_aem'
+# setup authorization
+SwaggerAemClient.configure do |config|
+  # Configure HTTP basic authorization: aemAuth
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = SwaggerAemClient::SlingApi.new
+
+runmode = "runmode_example" # String | 
+
+
+begin
+  result = api_instance.get_agents(runmode)
+  p result
+rescue SwaggerAemClient::ApiError => e
+  puts "Exception when calling SlingApi->get_agents: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **runmode** | **String**|  | 
+
+### Return type
+
+**String**
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 
 
