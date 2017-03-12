@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**deleteAgent**](SlingApi.md#deleteAgent) | **DELETE** /etc/replication/agents.{runmode}/{name} | 
 [**deleteNode**](SlingApi.md#deleteNode) | **DELETE** /{path}/{name} | 
 [**getAgent**](SlingApi.md#getAgent) | **GET** /etc/replication/agents.{runmode}/{name} | 
+[**getAgents**](SlingApi.md#getAgents) | **GET** /etc/replication/agents.{runmode}.-1.json | 
 [**getNode**](SlingApi.md#getNode) | **GET** /{path}/{name} | 
 [**getPackage**](SlingApi.md#getPackage) | **GET** /etc/packages/{group}/{name}-{version}.zip | 
 [**getPackageFilter**](SlingApi.md#getPackageFilter) | **GET** /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json | 
@@ -180,6 +181,58 @@ null (empty response body)
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain
+
+<a name="getAgents"></a>
+# **getAgents**
+> String getAgents(runmode)
+
+
+
+### Example
+```java
+// Import classes:
+//import com.shinesolutions.swaggeraem4j.ApiClient;
+//import com.shinesolutions.swaggeraem4j.ApiException;
+//import com.shinesolutions.swaggeraem4j.Configuration;
+//import com.shinesolutions.swaggeraem4j.auth.*;
+//import com.shinesolutions.swaggeraem4j.api.SlingApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure HTTP basic authorization: aemAuth
+HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+aemAuth.setUsername("YOUR USERNAME");
+aemAuth.setPassword("YOUR PASSWORD");
+
+SlingApi apiInstance = new SlingApi();
+String runmode = "runmode_example"; // String | 
+try {
+    String result = apiInstance.getAgents(runmode);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling SlingApi#getAgents");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **runmode** | **String**|  |
+
+### Return type
+
+**String**
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 <a name="getNode"></a>
 # **getNode**

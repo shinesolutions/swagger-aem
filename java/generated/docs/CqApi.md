@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 <a name="getLoginPage"></a>
 # **getLoginPage**
-> getLoginPage()
+> String getLoginPage()
 
 
 
@@ -23,7 +23,8 @@ Method | HTTP request | Description
 
 CqApi apiInstance = new CqApi();
 try {
-    apiInstance.getLoginPage();
+    String result = apiInstance.getLoginPage();
+    System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling CqApi#getLoginPage");
     e.printStackTrace();
@@ -35,7 +36,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-null (empty response body)
+**String**
 
 ### Authorization
 
