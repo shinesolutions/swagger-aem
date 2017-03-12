@@ -1,5 +1,6 @@
 ### 1.1.7
 * Add getAgents operation #16
+* Set getLoginPage operation's return type to string
 
 ### 1.1.6
 * Add allow.empty, allow.hosts, and allow.hosts.regexp parameters to postConfig operation

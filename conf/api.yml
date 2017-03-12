@@ -23,6 +23,10 @@ paths:
       security: []
       produces:
         - text/html
+      responses:
+        default:
+          schema:
+            type: string
       tags:
         - cq
   /.cqactions.html:
