@@ -17,9 +17,9 @@ public class AemTest {
 
 	@Test
 	public void testGetLoginPage() throws ApiException {
-		ApiResponse<Void> response = cq.getLoginPageWithHttpInfo();
+		ApiResponse<String> response = cq.getLoginPageWithHttpInfo();
 		assertEquals(200, response.getStatusCode());
-    assertTrue(String.valueOf(response.getData()).contains("QUICKSTART_HOMEPAGE"));
+    assertTrue(response.getData().contains("QUICKSTART_HOMEPAGE"));
 	}
 
 }
