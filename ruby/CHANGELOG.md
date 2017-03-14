@@ -1,3 +1,6 @@
+### 0.9.8
+* Add optional recursive param to package installation
+
 ### 0.9.7
 * Add sling get agents support #16
 

@@ -88,6 +88,7 @@ opts = {
   package_version: "package_version_example", # String | 
   _charset_: "_charset__example", # String | 
   force: true, # BOOLEAN | 
+  recursive: true, # BOOLEAN | 
   package: File.new("/path/to/file.txt") # File | 
 }
 
@@ -110,6 +111,7 @@ Name | Type | Description  | Notes
  **package_version** | **String**|  | [optional] 
  **_charset_** | **String**|  | [optional] 
  **force** | **BOOLEAN**|  | [optional] 
+ **recursive** | **BOOLEAN**|  | [optional] 
  **package** | **File**|  | [optional] 
 
 ### Return type

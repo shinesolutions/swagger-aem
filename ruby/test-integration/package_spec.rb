@@ -45,7 +45,10 @@ describe 'Package' do
       # install package
       data, status_code, headers = @crx.post_package_service_json_with_http_info(
         path = 'etc/packages/somepackagegroup/somepackage-1.2.3.zip',
-        cmd = 'install'
+        cmd = 'install',
+        {
+          :recursive => true
+        }
       )
       expect(status_code).to eq(200)
 
@@ -99,7 +102,10 @@ describe 'Package' do
       # install package
       data, status_code, headers = @crx.post_package_service_json_with_http_info(
         path = 'etc/packages/somepackagegroup/somepackage-1.2.3.zip',
-        cmd = 'install'
+        cmd = 'install',
+        {
+          :recursive => true
+        }
       )
       expect(status_code).to eq(200)
 
