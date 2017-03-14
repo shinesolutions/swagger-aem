@@ -1,3 +1,6 @@
+### 1.1.8
+*
+
 ### 1.1.7
 * Add getAgents operation #16
 * Set getLoginPage operation's return type to string #9
