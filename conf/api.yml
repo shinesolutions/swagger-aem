@@ -705,6 +705,10 @@ paths:
           in: query
           required: false
           type: boolean
+        - name: recursive
+          in: query
+          required: false
+          type: boolean
         - name: package
           in: formData
           required: false

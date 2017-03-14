@@ -1,5 +1,5 @@
 ### 1.1.8
-*
+* Add recursive param to postPackageServiceJson operation
 
 ### 1.1.7
 * Add getAgents operation #16
