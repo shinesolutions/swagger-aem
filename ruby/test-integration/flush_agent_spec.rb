@@ -21,7 +21,9 @@ describe 'Flush Agent' do
       expect([200, 204]).to include(status_code)
     rescue SwaggerAemClient::ApiError => err
       # ignore when agent does not exist
-      expect(err.code).to eq(404)
+      # AEM intermittently responds with 403 Forbidden when the agent doesn't exist
+      # the expected response is 404
+      expect([403, 404]).to include(err.code)
     end
 
     begin
