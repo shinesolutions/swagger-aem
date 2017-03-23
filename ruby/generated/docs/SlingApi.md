@@ -526,8 +526,7 @@ opts = {
   create_user: "create_user_example", # String | 
   create_group: "create_group_example", # String | 
   reppassword: "reppassword_example", # String | 
-  profilegiven_name: "profilegiven_name_example", # String | 
-  operation: "operation_example" # String | 
+  profilegiven_name: "profilegiven_name_example" # String | 
 }
 
 begin
@@ -548,7 +547,6 @@ Name | Type | Description  | Notes
  **create_group** | **String**|  | [optional] 
  **reppassword** | **String**|  | [optional] 
  **profilegiven_name** | **String**|  | [optional] 
- **operation** | **String**|  | [optional] 
 
 ### Return type
 

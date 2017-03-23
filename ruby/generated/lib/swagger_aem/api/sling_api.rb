@@ -545,7 +545,6 @@ module SwaggerAemClient
     # @option opts [String] :create_group 
     # @option opts [String] :reppassword 
     # @option opts [String] :profilegiven_name 
-    # @option opts [String] :operation 
     # @return [String]
     def post_authorizables(authorizable_id, intermediate_path, opts = {})
       data, _status_code, _headers = post_authorizables_with_http_info(authorizable_id, intermediate_path, opts)
@@ -561,7 +560,6 @@ module SwaggerAemClient
     # @option opts [String] :create_group 
     # @option opts [String] :reppassword 
     # @option opts [String] :profilegiven_name 
-    # @option opts [String] :operation 
     # @return [Array<(String, Fixnum, Hash)>] String data, response status code and response headers
     def post_authorizables_with_http_info(authorizable_id, intermediate_path, opts = {})
       if @api_client.config.debugging
@@ -582,7 +580,6 @@ module SwaggerAemClient
       query_params[:'createGroup'] = opts[:'create_group'] if !opts[:'create_group'].nil?
       query_params[:'rep:password'] = opts[:'reppassword'] if !opts[:'reppassword'].nil?
       query_params[:'profile/givenName'] = opts[:'profilegiven_name'] if !opts[:'profilegiven_name'].nil?
-      query_params[:':operation'] = opts[:'operation'] if !opts[:'operation'].nil?
 
       # header parameters
       header_params = {}
