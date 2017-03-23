@@ -1,3 +1,6 @@
+### 0.9.9
+*
+
 ### 0.9.8
 * Add optional recursive param to package installation
 
