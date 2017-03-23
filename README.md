@@ -7,9 +7,14 @@ This specification is used to generate client libraries for Ruby, Python, node.j
 
 | Swagger AEM Spec | Supported AEM          | Documentation                                                                                                                                                            |
 |------------------|------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1.1.9            | 6.2          | [Specification](https://shinesolutions.github.io/swagger-aem/api/1.1.9/index.html)
+[Changes](https://github.com/shinesolutions/swagger-aem/blob/master/CHANGELOG.md#119) |
 | 1.1.8            | 6.2          | [Specification](https://shinesolutions.github.io/swagger-aem/api/1.1.8/index.html)
+[Changes](https://github.com/shinesolutions/swagger-aem/blob/master/CHANGELOG.md#118) |
 | 1.1.7            | 6.2          | [Specification](https://shinesolutions.github.io/swagger-aem/api/1.1.7/index.html)
+[Changes](https://github.com/shinesolutions/swagger-aem/blob/master/CHANGELOG.md#117) |
 | 1.1.6            | 6.2          | [Specification](https://shinesolutions.github.io/swagger-aem/api/1.1.6/index.html)
+[Changes](https://github.com/shinesolutions/swagger-aem/blob/master/CHANGELOG.md#116) |
 | 1.1.5            | 6.2          | [Specification](https://shinesolutions.github.io/swagger-aem/api/1.1.5/index.html) [Changes](https://github.com/shinesolutions/swagger-aem/blob/master/CHANGELOG.md#115) |
 | 1.1.4            | 6.0, 6.1, 6.2          | [Specification](https://shinesolutions.github.io/swagger-aem/api/1.1.4/index.html) [Changes](https://github.com/shinesolutions/swagger-aem/blob/master/CHANGELOG.md#114) |
 | 1.1.3            | 6.0, 6.1, 6.2          | [Specification](https://shinesolutions.github.io/swagger-aem/api/1.1.3/index.html) [Changes](https://github.com/shinesolutions/swagger-aem/blob/master/CHANGELOG.md#113) |
