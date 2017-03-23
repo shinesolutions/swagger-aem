@@ -345,6 +345,41 @@ Sling API - Replication agent:
       name = 'some-replication-agent'
     )
 
+Sling API - Outbox replication agent:
+
+    # create outbox replication agent
+    data, status_code, headers = sling.post_agent_with_http_info(
+      runmode = 'publish',
+      name = 'some-outbox-replication-agent',
+      {
+        :jcrprimary_type => 'cq:Page',
+        :jcrcontentcqname => 'some-outbox-replication-agent',
+        :jcrcontentjcrtitle => 'Some Outbox Replication Agent Title',
+        :jcrcontentjcrdescription => 'Some Outbox Replication Agent Description',
+        :jcrcontentslingresource_type => 'cq/replication/components/agent',
+        :jcrcontenttransport_uri => 'repo://var/replication/outbox',
+        :jcrcontentno_versioning => true,
+        :jcrcontentlog_level => 'error',
+        :jcrcontentcqtemplate => '/libs/cq/replication/templates/agent',
+        :jcrcontentenabled => true,
+        :jcrcontenttrigger_distribute => true,
+        :jcrcontenttrigger_modified => true,
+        :jcrcontenttrigger_specific => true,
+        :jcrcontentuser_id => 'admin'
+      }
+    )
+
+    # delete outbox replication agent
+    data, status_code, headers = sling.post_agent_with_http_info(
+      runmode = 'publish',
+      name = 'some-outbox-replication-agent',
+      {
+        :jcrprimary_type => 'cq:Page',
+        :jcrcontentcqname => 'some-outbox-replication-agent',
+        :jcrcontentjcrtitle => 'Some New Outbox Replication Agent Title',
+        :jcrcontentjcrdescription => 'Some New Outbox Replication Agent Description'        }
+    )
+
 Sling API - Reverse replication agent:
 
     # create reverse replication agent

@@ -65,7 +65,7 @@ describe 'Reverse Replication Agent' do
       {
         :jcrprimary_type => 'cq:Page',
         :jcrcontentcqname => 'some-reverse-replication-agent',
-        :jcrcontentjcrtitle => 'Some New Revese Replication Agent Title',
+        :jcrcontentjcrtitle => 'Some New Reverse Replication Agent Title',
         :jcrcontentjcrdescription => 'Some New Reverse Replication Agent Description'        }
     )
     expect(status_code).to eq(200)
