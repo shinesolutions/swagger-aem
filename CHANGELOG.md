@@ -1,3 +1,6 @@
+### 1.1.9
+* Add :operation query parameter to postAuthorizables operation #17
+
 ### 1.1.8
 * Add recursive param to postPackageServiceJson operation
 
