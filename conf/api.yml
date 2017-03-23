@@ -81,25 +81,6 @@ paths:
           type: string
       tags:
         - sling
-    post:
-      operationId: postNode
-      produces:
-        - text/plain
-      parameters:
-        - name: path
-          in: path
-          required: true
-          type: string
-        - name: name
-          in: path
-          required: true
-          type: string
-        - name: :operation
-          in: query
-          required: false
-          type: string
-      tags:
-        - sling
     delete:
       operationId: deleteNode
       produces:
@@ -565,10 +546,6 @@ paths:
           required: false
           type: boolean
         - name: jcr:content/triggerModified
-          in: query
-          required: false
-          type: boolean
-        - name: jcr:content/triggerSpecific
           in: query
           required: false
           type: boolean

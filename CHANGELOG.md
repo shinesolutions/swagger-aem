@@ -1,6 +1,5 @@
 ### 1.1.9
-* Add jcr:content/triggerDistribute, jcr:content/triggerModified, jcr:content/triggerSpecific, and jcr:content/userId parameters to postAgent operation #18
-* Add postNode operation #17
+* Add jcr:content/triggerDistribute, jcr:content/triggerModified, and jcr:content/userId parameters to postAgent operation #18
 
 ### 1.1.8
 * Add recursive param to postPackageServiceJson operation
