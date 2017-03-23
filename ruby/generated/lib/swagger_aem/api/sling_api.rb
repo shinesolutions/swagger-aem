@@ -927,6 +927,63 @@ module SwaggerAemClient
     # @param path 
     # @param name 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :operation 
+    # @return [nil]
+    def post_node(path, name, opts = {})
+      post_node_with_http_info(path, name, opts)
+      return nil
+    end
+
+    # 
+    # 
+    # @param path 
+    # @param name 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :operation 
+    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    def post_node_with_http_info(path, name, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: SlingApi.post_node ..."
+      end
+      # verify the required parameter 'path' is set
+      fail ArgumentError, "Missing the required parameter 'path' when calling SlingApi.post_node" if path.nil?
+      # verify the required parameter 'name' is set
+      fail ArgumentError, "Missing the required parameter 'name' when calling SlingApi.post_node" if name.nil?
+      # resource path
+      local_var_path = "/{path}/{name}".sub('{format}','json').sub('{' + 'path' + '}', path.to_s).sub('{' + 'name' + '}', name.to_s)
+
+      # query parameters
+      query_params = {}
+      query_params[:':operation'] = opts[:'operation'] if !opts[:'operation'].nil?
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['text/plain'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = ['aemAuth']
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: SlingApi#post_node\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # 
+    # 
+    # @param path 
+    # @param name 
+    # @param [Hash] opts the optional parameters
     # @option opts [String] :add_members 
     # @return [nil]
     def post_node_rw(path, name, opts = {})
