@@ -541,6 +541,22 @@ paths:
           in: query
           required: false
           type: string
+        - name: jcr:content/triggerDistribute
+          in: query
+          required: false
+          type: boolean
+        - name: jcr:content/triggerModified
+          in: query
+          required: false
+          type: boolean
+        - name: jcr:content/triggerSpecific
+          in: query
+          required: false
+          type: boolean
+        - name: jcr:content/userId
+          in: query
+          required: false
+          type: string
       tags:
         - sling
   /etc/replication/treeactivation.html:
