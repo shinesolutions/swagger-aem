@@ -1,5 +1,4 @@
 ### 1.1.9
-* Add :operation query parameter to postAuthorizables operation #17
 * Add jcr:content/triggerDistribute, jcr:content/triggerModified, jcr:content/triggerSpecific, and jcr:content/userId parameters to postAgent operation #18
 * Add postNode operation #17
 
