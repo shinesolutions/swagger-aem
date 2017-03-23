@@ -437,7 +437,11 @@ opts = {
   jcrcontentcqtemplate: "jcrcontentcqtemplate_example", # String | 
   jcrcontentenabled: true, # BOOLEAN | 
   jcrcontentreverse_replication: true, # BOOLEAN | 
-  operation: "operation_example" # String | 
+  operation: "operation_example", # String | 
+  jcrcontenttrigger_distribute: true, # BOOLEAN | 
+  jcrcontenttrigger_modified: true, # BOOLEAN | 
+  jcrcontenttrigger_specific2: true, # BOOLEAN | 
+  jcrcontentuser_id: "jcrcontentuser_id_example" # String | 
 }
 
 begin
@@ -475,6 +479,10 @@ Name | Type | Description  | Notes
  **jcrcontentenabled** | **BOOLEAN**|  | [optional] 
  **jcrcontentreverse_replication** | **BOOLEAN**|  | [optional] 
  **operation** | **String**|  | [optional] 
+ **jcrcontenttrigger_distribute** | **BOOLEAN**|  | [optional] 
+ **jcrcontenttrigger_modified** | **BOOLEAN**|  | [optional] 
+ **jcrcontenttrigger_specific2** | **BOOLEAN**|  | [optional] 
+ **jcrcontentuser_id** | **String**|  | [optional] 
 
 ### Return type
 
@@ -517,7 +525,8 @@ opts = {
   create_user: "create_user_example", # String | 
   create_group: "create_group_example", # String | 
   reppassword: "reppassword_example", # String | 
-  profilegiven_name: "profilegiven_name_example" # String | 
+  profilegiven_name: "profilegiven_name_example", # String | 
+  operation: "operation_example" # String | 
 }
 
 begin
@@ -538,6 +547,7 @@ Name | Type | Description  | Notes
  **create_group** | **String**|  | [optional] 
  **reppassword** | **String**|  | [optional] 
  **profilegiven_name** | **String**|  | [optional] 
+ **operation** | **String**|  | [optional] 
 
 ### Return type
 
