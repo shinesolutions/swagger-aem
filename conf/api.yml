@@ -81,6 +81,25 @@ paths:
           type: string
       tags:
         - sling
+    post:
+      operationId: postNode
+      produces:
+        - text/plain
+      parameters:
+        - name: path
+          in: path
+          required: true
+          type: string
+        - name: name
+          in: path
+          required: true
+          type: string
+        - name: :operation
+          in: query
+          required: false
+          type: string
+      tags:
+        - sling
     delete:
       operationId: deleteNode
       produces:
