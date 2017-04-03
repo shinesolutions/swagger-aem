@@ -331,7 +331,7 @@ paths:
           required: false
           type: string
       tags:
-        - sling
+        - custom
   /bin/querybuilder.json:
     post:
       operationId: postQuery
