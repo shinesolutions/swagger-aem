@@ -1,6 +1,7 @@
 ### 1.1.10
 * Add jcr:content/protocolHTTPSRelaxed parameter to postAgent operation #19
 * Add postConfigAemPasswordReset operation #20
+* Add getAemHealthCheck operation #21
 
 ### 1.1.9
 * Add jcr:content/triggerDistribute, jcr:content/triggerModified, and jcr:content/userId parameters to postAgent operation #18

@@ -781,3 +781,19 @@ paths:
           type: string
       tags:
         - console
+  /system/health:
+    get:
+      operationId: getAemHealthCheck
+      produces:
+        - application/json
+      parameters:
+        - name: tags
+          in: query
+          required: true
+          type: string
+        - name: combineTagsOr
+          in: query
+          required: false
+          type: boolean
+      tags:
+        - custom
