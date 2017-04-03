@@ -4,6 +4,7 @@ describe 'ConfigProperty' do
   before do
     init_client
     @sling = SwaggerAemClient::SlingApi.new
+    @custom = SwaggerAemClient::CustomApi.new
 
     # ensure config.author already exists
     begin
@@ -166,6 +167,36 @@ describe 'ConfigProperty' do
           :alias_type_hint => 'String',
           :dav_create_absolute_uri => true,
           :dav_create_absolute_uri_type_hint => 'Boolean',
+        }
+      )
+      expect([200, 201]).to include(status_code)
+    end
+
+  end
+
+  describe 'test create AEM Password Reset properties' do
+
+    it 'should succeed when path node already exists' do
+
+      # ensure http OSGI config node exists
+      begin
+        data, status_code, headers = @sling.post_path_with_http_info(
+          path = 'apps/system/config.author',
+          jcrprimary_type = 'sling:OsgiConfig',
+          name = 'com.shinesolutions.aem.passwordreset.Activator'
+        )
+        # create config when it does not exist
+        expect([200, 201]).to include(status_code)
+      rescue SwaggerAemClient::ApiError => err
+        # ignore when it already exists
+        expect(err.code).to eq(500)
+      end
+
+      data, status_code, headers = @custom.post_config_aem_password_reset_with_http_info(
+        runmode = 'author',
+        opts = {
+          :passwordreset_authorizables => '[orchestrator,replicator,deployer]',
+          :passwordreset_authorizables_type_hint => 'String',
         }
       )
       expect([200, 201]).to include(status_code)
