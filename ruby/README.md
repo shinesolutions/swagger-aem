@@ -424,6 +424,24 @@ Sling API - User:
       }
     )
 
+Custom API - AEM Password Reset config property:
+
+  data, status_code, headers = @custom.post_config_aem_password_reset_with_http_info(
+    runmode = 'author',
+    opts = {
+      :passwordreset_authorizables => '[orchestrator,replicator,deployer]',
+      :passwordreset_authorizables_type_hint => 'String',
+    }
+  )
+
+Custom API - Get Health Check:
+    data, status_code, headers = @custom.get_aem_health_check_with_http_info(
+      opts = {
+        :tags => 'shallow',
+        :combinetagsor => false
+      }
+    )
+
 Error handling
 --------------
 
