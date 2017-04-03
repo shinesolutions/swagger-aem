@@ -316,6 +316,22 @@ paths:
           type: string
       tags:
         - sling
+  /apps/system/config.{runmode}/com.shinesolutions.aem.passwordreset.Activator:
+    post:
+      operationId: postConfigAemPasswordReset
+      produces:
+        - text/plain
+      parameters:
+        - name: runmode
+          in: path
+          required: true
+          type: string
+        - name: passwordreset.authorizables
+          in: query
+          required: false
+          type: string
+      tags:
+        - sling
   /bin/querybuilder.json:
     post:
       operationId: postQuery
