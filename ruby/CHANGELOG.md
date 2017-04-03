@@ -1,3 +1,6 @@
+### 0.9.10
+*
+
 ### 0.9.9
 * Add jcrcontenttrigger_distribute, jcrcontenttrigger_modified, and jcrcontentuser_id parameters support to sling#post_agent_with_http_info #18
 
