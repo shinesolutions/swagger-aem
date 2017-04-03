@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   title: Adobe Experience Manager (AEM) API
   description: Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
-  version: "1.1.10"
+  version: "1.1.11"
   contact:
     name: Shine Solutions
     url: http://shinesolutions.com
@@ -326,11 +326,11 @@ paths:
           in: path
           required: true
           type: string
-        - name: passwordreset.authorizables
+        - name: pwdreset.authorizables
           in: query
           required: false
           type: array
-        - name: passwordreset.authorizables@TypeHint
+        - name: pwdreset.authorizables@TypeHint
           in: query
           required: false
           type: string

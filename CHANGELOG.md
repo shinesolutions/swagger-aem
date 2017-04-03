@@ -1,3 +1,6 @@
+### 1.1.11
+* Rename postConfigAemPasswordReset operation's property to pwdreset.authorizables
+
 ### 1.1.10
 * Add jcr:content/protocolHTTPSRelaxed parameter to postAgent operation #19
 * Add postConfigAemPasswordReset operation #20
