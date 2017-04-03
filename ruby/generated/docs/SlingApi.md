@@ -440,7 +440,8 @@ opts = {
   operation: "operation_example", # String | 
   jcrcontenttrigger_distribute: true, # BOOLEAN | 
   jcrcontenttrigger_modified: true, # BOOLEAN | 
-  jcrcontentuser_id: "jcrcontentuser_id_example" # String | 
+  jcrcontentuser_id: "jcrcontentuser_id_example", # String | 
+  jcrcontentprotocol_https_relaxed: true # BOOLEAN | 
 }
 
 begin
@@ -481,6 +482,7 @@ Name | Type | Description  | Notes
  **jcrcontenttrigger_distribute** | **BOOLEAN**|  | [optional] 
  **jcrcontenttrigger_modified** | **BOOLEAN**|  | [optional] 
  **jcrcontentuser_id** | **String**|  | [optional] 
+ **jcrcontentprotocol_https_relaxed** | **BOOLEAN**|  | [optional] 
 
 ### Return type
 
