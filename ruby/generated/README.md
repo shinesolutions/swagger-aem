@@ -91,6 +91,8 @@ Class | Method | HTTP request | Description
 *SwaggerAemClient::CrxApi* | [**post_package_service_json**](docs/CrxApi.md#post_package_service_json) | **POST** /crx/packmgr/service/.json/{path} | 
 *SwaggerAemClient::CrxApi* | [**post_package_update**](docs/CrxApi.md#post_package_update) | **POST** /crx/packmgr/update.jsp | 
 *SwaggerAemClient::CrxApi* | [**post_set_password**](docs/CrxApi.md#post_set_password) | **POST** /crx/explorer/ui/setpassword.jsp | 
+*SwaggerAemClient::CustomApi* | [**get_aem_health_check**](docs/CustomApi.md#get_aem_health_check) | **GET** /system/health | 
+*SwaggerAemClient::CustomApi* | [**post_config_aem_password_reset**](docs/CustomApi.md#post_config_aem_password_reset) | **POST** /apps/system/config.{runmode}/com.shinesolutions.aem.passwordreset.Activator | 
 *SwaggerAemClient::SlingApi* | [**delete_agent**](docs/SlingApi.md#delete_agent) | **DELETE** /etc/replication/agents.{runmode}/{name} | 
 *SwaggerAemClient::SlingApi* | [**delete_node**](docs/SlingApi.md#delete_node) | **DELETE** /{path}/{name} | 
 *SwaggerAemClient::SlingApi* | [**get_agent**](docs/SlingApi.md#get_agent) | **GET** /etc/replication/agents.{runmode}/{name} | 

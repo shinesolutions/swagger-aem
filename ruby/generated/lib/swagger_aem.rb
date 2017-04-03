@@ -21,6 +21,7 @@ require 'swagger_aem/configuration'
 require 'swagger_aem/api/console_api'
 require 'swagger_aem/api/cq_api'
 require 'swagger_aem/api/crx_api'
+require 'swagger_aem/api/custom_api'
 require 'swagger_aem/api/sling_api'
 
 module SwaggerAemClient
