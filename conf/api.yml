@@ -789,11 +789,15 @@ paths:
       parameters:
         - name: tags
           in: query
-          required: true
+          required: false
           type: string
         - name: combineTagsOr
           in: query
           required: false
           type: boolean
+      responses:
+        default:
+          schema:
+            type: string
       tags:
         - custom

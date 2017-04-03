@@ -4,6 +4,7 @@ describe 'Aem' do
   before do
     init_client
     @cq = SwaggerAemClient::CqApi.new
+    @custom = SwaggerAemClient::CustomApi.new
   end
 
   after do
@@ -18,4 +19,21 @@ describe 'Aem' do
     end
 
   end
+
+  describe 'test get health check' do
+
+    it 'should succeed' do
+      data, status_code, headers = @custom.get_aem_health_check_with_http_info(
+        opts = {
+          :tags => 'shallow',
+          :combinetagsor => false
+        }
+      )
+      expect(status_code).to eq(200)
+      json = JSON.parse(data)
+      expect(json['results'][0]['status']).to eq('OK')
+    end
+
+  end
+
 end

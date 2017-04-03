@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **get_aem_health_check**
-> get_aem_health_check(tags, opts)
+> String get_aem_health_check(opts)
 
 
 
@@ -26,14 +26,14 @@ end
 
 api_instance = SwaggerAemClient::CustomApi.new
 
-tags = "tags_example" # String | 
-
 opts = { 
+  tags: "tags_example", # String | 
   combine_tags_or: true # BOOLEAN | 
 }
 
 begin
-  api_instance.get_aem_health_check(tags, opts)
+  result = api_instance.get_aem_health_check(opts)
+  p result
 rescue SwaggerAemClient::ApiError => e
   puts "Exception when calling CustomApi->get_aem_health_check: #{e}"
 end
@@ -43,12 +43,12 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tags** | **String**|  | 
+ **tags** | **String**|  | [optional] 
  **combine_tags_or** | **BOOLEAN**|  | [optional] 
 
 ### Return type
 
-nil (empty response body)
+**String**
 
 ### Authorization
 

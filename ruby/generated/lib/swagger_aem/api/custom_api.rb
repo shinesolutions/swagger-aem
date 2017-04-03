@@ -21,33 +21,31 @@ module SwaggerAemClient
 
     # 
     # 
-    # @param tags 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :tags 
     # @option opts [BOOLEAN] :combine_tags_or 
-    # @return [nil]
-    def get_aem_health_check(tags, opts = {})
-      get_aem_health_check_with_http_info(tags, opts)
-      return nil
+    # @return [String]
+    def get_aem_health_check(opts = {})
+      data, _status_code, _headers = get_aem_health_check_with_http_info(opts)
+      return data
     end
 
     # 
     # 
-    # @param tags 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :tags 
     # @option opts [BOOLEAN] :combine_tags_or 
-    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
-    def get_aem_health_check_with_http_info(tags, opts = {})
+    # @return [Array<(String, Fixnum, Hash)>] String data, response status code and response headers
+    def get_aem_health_check_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: CustomApi.get_aem_health_check ..."
       end
-      # verify the required parameter 'tags' is set
-      fail ArgumentError, "Missing the required parameter 'tags' when calling CustomApi.get_aem_health_check" if tags.nil?
       # resource path
       local_var_path = "/system/health".sub('{format}','json')
 
       # query parameters
       query_params = {}
-      query_params[:'tags'] = tags
+      query_params[:'tags'] = opts[:'tags'] if !opts[:'tags'].nil?
       query_params[:'combineTagsOr'] = opts[:'combine_tags_or'] if !opts[:'combine_tags_or'].nil?
 
       # header parameters
@@ -66,7 +64,8 @@ module SwaggerAemClient
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
-        :auth_names => auth_names)
+        :auth_names => auth_names,
+        :return_type => 'String')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: CustomApi#get_aem_health_check\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
