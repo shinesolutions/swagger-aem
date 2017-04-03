@@ -46,13 +46,14 @@ describe 'Replication Agent' do
         :jcrcontentjcrdescription => 'Some Replication Agent Description',
         :jcrcontentslingresource_type => '/libs/cq/replication/components/agent',
         :jcrcontentserialization_type => 'durbo',
-        :jcrcontenttransport_uri => 'http://somehost:8080/bin/receive?sling:authRequestLogin=1',
+        :jcrcontenttransport_uri => 'https://somehost:8080/bin/receive?sling:authRequestLogin=1',
         :jcrcontenttransport_user => 'admin',
         :jcrcontenttransport_password => 'admin',
         :jcrcontentlog_level => 'error',
         :jcrcontentretry_delay => '30000',
         :jcrcontentcqtemplate => '/libs/cq/replication/templates/agent',
-        :jcrcontentenabled => true
+        :jcrcontentenabled => true,
+        :jcrcontentrelaxedssl => true
       }
     )
     expect(status_code).to eq(201)
@@ -65,7 +66,8 @@ describe 'Replication Agent' do
         :jcrprimary_type => 'cq:Page',
         :jcrcontentcqname => 'some-replication-agent',
         :jcrcontentjcrtitle => 'Some New Replication Agent Title',
-        :jcrcontentjcrdescription => 'Some New Replication Agent Description'        }
+        :jcrcontentjcrdescription => 'Some New Replication Agent Description'
+      }
     )
     expect(status_code).to eq(200)
   end

@@ -336,7 +336,8 @@ Sling API - Replication agent:
         :jcrcontentlog_level => 'error',
         :jcrcontentretry_delay => '30000',
         :jcrcontentcqtemplate => '/libs/cq/replication/templates/agent',
-        :jcrcontentenabled => true
+        :jcrcontentenabled => true,
+        :jcrcontentrelaxedssl => true
       }
     )
 
