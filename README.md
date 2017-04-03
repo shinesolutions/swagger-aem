@@ -5,7 +5,7 @@ Swagger AEM is an OpenAPI specification for [Adobe Experience Manager (AEM)](htt
 
 This specification is used to generate client libraries for Ruby, Python, node.js, and Java using [Swagger Code Generator](https://github.com/swagger-api/swagger-codegen).
 
-[API Versions History](docs/api-versions.md)
+[Versions History](docs/versions.md)
 
 Generated Clients
 -----------------
