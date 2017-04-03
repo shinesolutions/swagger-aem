@@ -82,8 +82,8 @@ api_instance = SwaggerAemClient::CustomApi.new
 runmode = "runmode_example" # String | 
 
 opts = { 
-  passwordreset_authorizables: "passwordreset_authorizables_example", # String | 
-  passwordreset_authorizables_type_hint: "passwordreset_authorizables_type_hint_example" # String | 
+  pwdreset_authorizables: ["pwdreset_authorizables_example"], # Array<String> | 
+  pwdreset_authorizables_type_hint: "pwdreset_authorizables_type_hint_example" # String | 
 }
 
 begin
@@ -98,8 +98,8 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **runmode** | **String**|  | 
- **passwordreset_authorizables** | **String**|  | [optional] 
- **passwordreset_authorizables_type_hint** | **String**|  | [optional] 
+ **pwdreset_authorizables** | [**Array&lt;String&gt;**](String.md)|  | [optional] 
+ **pwdreset_authorizables_type_hint** | **String**|  | [optional] 
 
 ### Return type
 
