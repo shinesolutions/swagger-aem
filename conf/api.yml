@@ -329,6 +329,10 @@ paths:
         - name: passwordreset.authorizables
           in: query
           required: false
+          type: array
+        - name: passwordreset.authorizables@TypeHint
+          in: query
+          required: false
           type: string
       tags:
         - custom

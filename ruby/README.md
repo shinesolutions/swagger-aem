@@ -429,8 +429,8 @@ Custom API - AEM Password Reset config property:
   data, status_code, headers = @custom.post_config_aem_password_reset_with_http_info(
     runmode = 'author',
     opts = {
-      :passwordreset_authorizables => '[orchestrator,replicator,deployer]',
-      :passwordreset_authorizables_type_hint => 'String',
+      :passwordreset_authorizables => ['orchestrator', 'replicator', 'deployer'],
+      :passwordreset_authorizables_type_hint => 'String[]',
     }
   )
 

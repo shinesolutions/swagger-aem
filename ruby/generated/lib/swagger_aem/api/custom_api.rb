@@ -77,6 +77,7 @@ module SwaggerAemClient
     # @param runmode 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :passwordreset_authorizables 
+    # @option opts [String] :passwordreset_authorizables_type_hint 
     # @return [nil]
     def post_config_aem_password_reset(runmode, opts = {})
       post_config_aem_password_reset_with_http_info(runmode, opts)
@@ -88,6 +89,7 @@ module SwaggerAemClient
     # @param runmode 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :passwordreset_authorizables 
+    # @option opts [String] :passwordreset_authorizables_type_hint 
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
     def post_config_aem_password_reset_with_http_info(runmode, opts = {})
       if @api_client.config.debugging
@@ -101,6 +103,7 @@ module SwaggerAemClient
       # query parameters
       query_params = {}
       query_params[:'passwordreset.authorizables'] = opts[:'passwordreset_authorizables'] if !opts[:'passwordreset_authorizables'].nil?
+      query_params[:'passwordreset.authorizables@TypeHint'] = opts[:'passwordreset_authorizables_type_hint'] if !opts[:'passwordreset_authorizables_type_hint'].nil?
 
       # header parameters
       header_params = {}
