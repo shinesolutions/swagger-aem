@@ -1,5 +1,9 @@
+### 0.9.11
+* Rename AEM Password Reset config property to pwdreset_authorizables
+
 ### 0.9.10
-*
+* Add custom API with aem-healthcheck and aem-password-reset support #20 #21
+* Add jcrcontentrelaxedssl parameter support to sling#post_agent_with_http_info #19
 
 ### 0.9.9
 * Add jcrcontenttrigger_distribute, jcrcontenttrigger_modified, and jcrcontentuser_id parameters support to sling#post_agent_with_http_info #18
