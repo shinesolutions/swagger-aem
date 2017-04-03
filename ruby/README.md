@@ -8,16 +8,7 @@ swagger_aem is a Ruby client generated from [Swagger AEM specification](https://
 
 This Ruby client returns raw HTTP response AS-IS. Check out [ruby_aem](https://github.com/shinesolutions/ruby_aem) for an abstraction layer with resource-oriented API and convenient response handling.
 
-| swagger_aem | Swagger AEM Spec | Supported Ruby          | Swagger Codegen CLI | Documentation                                                                                                                                                        |
-|-------------|------------------|-------------------------|---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 0.9.9       | 1.1.9            | 1.9, 2.0, 2.1, 2.2, 2.3 | 20170305            | [API](https://shinesolutions.github.io/swagger-aem/ruby/0.9.9/index.html) [Changes](https://github.com/shinesolutions/swagger-aem/blob/master/ruby/CHANGELOG.md#099) |
-| 0.9.8       | 1.1.8            | 1.9, 2.0, 2.1, 2.2, 2.3 | 20170305            | [API](https://shinesolutions.github.io/swagger-aem/ruby/0.9.8/index.html) [Changes](https://github.com/shinesolutions/swagger-aem/blob/master/ruby/CHANGELOG.md#098) |
-| 0.9.7       | 1.1.7            | 1.9, 2.0, 2.1, 2.2, 2.3 | 20170305            | [API](https://shinesolutions.github.io/swagger-aem/ruby/0.9.7/index.html) [Changes](https://github.com/shinesolutions/swagger-aem/blob/master/ruby/CHANGELOG.md#097) |
-| 0.9.6       | 1.1.6            | 1.9, 2.0, 2.1, 2.2, 2.3 | 20170305            | [API](https://shinesolutions.github.io/swagger-aem/ruby/0.9.6/index.html) [Changes](https://github.com/shinesolutions/swagger-aem/blob/master/ruby/CHANGELOG.md#096) |
-| 0.9.5       | 1.1.5            | 1.9, 2.0, 2.1, 2.2, 2.3 | 20170305            | [API](https://shinesolutions.github.io/swagger-aem/ruby/0.9.5/index.html) [Changes](https://github.com/shinesolutions/swagger-aem/blob/master/ruby/CHANGELOG.md#095) |
-| 0.9.4       | 1.1.2            | 1.9, 2.0, 2.1, 2.2, 2.3 | 20161228            | [API](https://shinesolutions.github.io/swagger-aem/ruby/0.9.4/index.html) [Changes](https://github.com/shinesolutions/swagger-aem/blob/master/ruby/CHANGELOG.md#094) |
-| 0.9.2       | 1.1              | 1.9, 2.0, 2.1, 2.2, 2.3 | 20161104            | [API](https://shinesolutions.github.io/swagger-aem/ruby/0.9.2/index.html) [Changes](https://github.com/shinesolutions/swagger-aem/blob/master/ruby/CHANGELOG.md#092) |
-| 0.9.1       | 1.0              | 1.9, 2.0, 2.1, 2.2, 2.3 | 20160902            | [API](https://shinesolutions.github.io/swagger-aem/ruby/0.9.1/index.html) [Changes](https://github.com/shinesolutions/swagger-aem/blob/master/ruby/CHANGELOG.md#091) |
+[Versions History](../docs/ruby/versions.md)
 
 Install
 -------
