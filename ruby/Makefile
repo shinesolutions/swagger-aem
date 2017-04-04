@@ -14,7 +14,7 @@ deps:
 clean:
 	rm -rf generated/
 
-build:
+build: clean
 	$(SWAGGER_CODEGEN) generate \
 	  --input-spec ../conf/api.yml \
 		--lang ruby \
