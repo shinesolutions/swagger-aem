@@ -38,7 +38,7 @@ public class PackageTest {
 		String path = "etc/packages/somepackagegroup/somepackage-1.2.3.zip";
 		String cmd = "delete";
 		ApiResponse<String> response = crx.postPackageServiceJsonWithHttpInfo(
-				path, cmd, "", "", "", "", false, fakeFile);
+				path, cmd, "", "", "", "", false, true, fakeFile);
 		assertEquals(200, response.getStatusCode());
 
 		// Create package
@@ -49,7 +49,7 @@ public class PackageTest {
 		String packageVersion = "1.2.3";
 		String charset = "utf-8";
 		crx.postPackageServiceJsonWithHttpInfo(path, cmd, groupName,
-				packageName, packageVersion, charset, false, fakeFile);
+				packageName, packageVersion, charset, false, true, fakeFile);
 		assertEquals(200, response.getStatusCode());
 	}
 
@@ -60,21 +60,21 @@ public class PackageTest {
 		String path = "etc/packages/somepackagegroup/somepackage-1.2.3.zip";
 		String cmd = "build";
 		ApiResponse<String> response = crx.postPackageServiceJsonWithHttpInfo(
-				path, cmd, "", "", "", "", false, fakeFile);
+				path, cmd, "", "", "", "", false, true, fakeFile);
 		assertEquals(200, response.getStatusCode());
 
 		// Install package
 		path = "etc/packages/somepackagegroup/somepackage-1.2.3.zip";
 		cmd = "install";
 		response = crx.postPackageServiceJsonWithHttpInfo(path, cmd, "", "",
-				"", "", false, fakeFile);
+				"", "", false, true, fakeFile);
 		assertEquals(200, response.getStatusCode());
 
 		// Replicate package
 		path = "etc/packages/somepackagegroup/somepackage-1.2.3.zip";
 		cmd = "replicate";
 		response = crx.postPackageServiceJsonWithHttpInfo(path, cmd, "", "",
-				"", "", false, fakeFile);
+				"", "", false, true, fakeFile);
 		assertEquals(200, response.getStatusCode());
 
 		// Download package
@@ -98,31 +98,32 @@ public class PackageTest {
 		path = "";
 		cmd = "upload";
 		boolean force = true;
+		boolean recursive = true;
 		File packageFile = new File(tmpDir.getRoot().toString()
 				+ "/somepackage-1.2.3.zip");
 		response = crx.postPackageServiceJsonWithHttpInfo(path, cmd, "", "",
-				"", "", force, packageFile);
+				"", "", force, recursive, packageFile);
 		assertEquals(200, response.getStatusCode());
 
 		// Rebuild package
 		path = "etc/packages/somepackagegroup/somepackage-1.2.3.zip";
 		cmd = "build";
 		response = crx.postPackageServiceJsonWithHttpInfo(path, cmd, "", "",
-				"", "", false, fakeFile);
+				"", "", false, recursive, fakeFile);
 		assertEquals(200, response.getStatusCode());
 
 		// Install package
 		path = "etc/packages/somepackagegroup/somepackage-1.2.3.zip";
 		cmd = "install";
 		response = crx.postPackageServiceJsonWithHttpInfo(path, cmd, "", "",
-				"", "", false, fakeFile);
+				"", "", false, recursive, fakeFile);
 		assertEquals(200, response.getStatusCode());
 
 		// Replicate package
 		path = "etc/packages/somepackagegroup/somepackage-1.2.3.zip";
 		cmd = "replicate";
 		response = crx.postPackageServiceJsonWithHttpInfo(path, cmd, "", "",
-				"", "", false, fakeFile);
+				"", "", false, recursive, fakeFile);
 		assertEquals(200, response.getStatusCode());
 	}
 

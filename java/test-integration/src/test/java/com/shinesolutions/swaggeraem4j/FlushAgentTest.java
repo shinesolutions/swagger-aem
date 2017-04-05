@@ -72,6 +72,10 @@ public class FlushAgentTest {
 		boolean jcrContentEnabled = true;
 		boolean jcrReverseReplication = true;
 		String operation = null;
+		Boolean jcrcontenttriggerDistribute = null;
+		Boolean jcrcontenttriggerModified = null;
+		String jcrcontentuserId = null;
+		Boolean jcrcontentprotocolHTTPSRelaxed = null;
 
 		ApiResponse<Void> response = sling.postAgentWithHttpInfo(runMode, name,
 				jcrPrimaryType, jcrContentCqName, jcrContentJcrTitle,
@@ -84,7 +88,8 @@ public class FlushAgentTest {
 				jcrContentSerializationType, jcrContentJcrMixinTypes,
 				jcrContentTriggerReceive, jcrContentTriggerSpecific,
 				jcrContentCqTemplate, jcrContentEnabled, jcrReverseReplication,
-				operation);
+				operation, jcrcontenttriggerDistribute, jcrcontenttriggerModified,
+				jcrcontentuserId, jcrcontentprotocolHTTPSRelaxed);
 
 		assertEquals(201, response.getStatusCode());
 
@@ -113,6 +118,10 @@ public class FlushAgentTest {
 		jcrContentEnabled = false;
 		jcrReverseReplication = false;
 		operation = null;
+		jcrcontenttriggerDistribute = null;
+		jcrcontenttriggerModified = null;
+		jcrcontentuserId = null;
+		jcrcontentprotocolHTTPSRelaxed = null;
 
 		response = sling.postAgentWithHttpInfo(runMode, name, jcrPrimaryType,
 				jcrContentCqName, jcrContentJcrTitle, jcrContentJcrDescription,
@@ -125,7 +134,8 @@ public class FlushAgentTest {
 				jcrContentSerializationType, jcrContentJcrMixinTypes,
 				jcrContentTriggerReceive, jcrContentTriggerSpecific,
 				jcrContentCqTemplate, jcrContentEnabled, jcrReverseReplication,
-				operation);
+				operation, jcrcontenttriggerDistribute, jcrcontenttriggerModified,
+				jcrcontentuserId, jcrcontentprotocolHTTPSRelaxed);
 
 		assertEquals(200, response.getStatusCode());
 	}
