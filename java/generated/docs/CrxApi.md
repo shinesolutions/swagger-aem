@@ -64,7 +64,7 @@ Name | Type | Description  | Notes
 
 <a name="postPackageServiceJson"></a>
 # **postPackageServiceJson**
-> String postPackageServiceJson(path, cmd, groupName, packageName, packageVersion, charset_, force, _package)
+> String postPackageServiceJson(path, cmd, groupName, packageName, packageVersion, charset_, force, recursive, _package)
 
 
 
@@ -92,9 +92,10 @@ String packageName = "packageName_example"; // String |
 String packageVersion = "packageVersion_example"; // String | 
 String charset_ = "charset__example"; // String | 
 Boolean force = true; // Boolean | 
+Boolean recursive = true; // Boolean | 
 File _package = new File("/path/to/file.txt"); // File | 
 try {
-    String result = apiInstance.postPackageServiceJson(path, cmd, groupName, packageName, packageVersion, charset_, force, _package);
+    String result = apiInstance.postPackageServiceJson(path, cmd, groupName, packageName, packageVersion, charset_, force, recursive, _package);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling CrxApi#postPackageServiceJson");
@@ -113,6 +114,7 @@ Name | Type | Description  | Notes
  **packageVersion** | **String**|  | [optional]
  **charset_** | **String**|  | [optional]
  **force** | **Boolean**|  | [optional]
+ **recursive** | **Boolean**|  | [optional]
  **_package** | **File**|  | [optional]
 
 ### Return type

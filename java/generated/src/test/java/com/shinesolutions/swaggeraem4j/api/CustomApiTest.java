@@ -23,12 +23,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * API tests for ConsoleApi
+ * API tests for CustomApi
  */
 @Ignore
-public class ConsoleApiTest {
+public class CustomApiTest {
 
-    private final ConsoleApi api = new ConsoleApi();
+    private final CustomApi api = new CustomApi();
 
     
     /**
@@ -40,10 +40,10 @@ public class ConsoleApiTest {
      *          if the Api call fails
      */
     @Test
-    public void postBundleTest() throws ApiException {
-        String name = null;
-        String action = null;
-        api.postBundle(name, action);
+    public void getAemHealthCheckTest() throws ApiException {
+        String tags = null;
+        Boolean combineTagsOr = null;
+        String response = api.getAemHealthCheck(tags, combineTagsOr);
 
         // TODO: test validations
     }
@@ -57,9 +57,11 @@ public class ConsoleApiTest {
      *          if the Api call fails
      */
     @Test
-    public void postJmxRepositoryTest() throws ApiException {
-        String action = null;
-        api.postJmxRepository(action);
+    public void postConfigAemPasswordResetTest() throws ApiException {
+        String runmode = null;
+        List<String> pwdresetAuthorizables = null;
+        String pwdresetAuthorizablesTypeHint = null;
+        api.postConfigAemPasswordReset(runmode, pwdresetAuthorizables, pwdresetAuthorizablesTypeHint);
 
         // TODO: test validations
     }
