@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   title: Adobe Experience Manager (AEM) API
   description: Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
-  version: "1.1.11"
+  version: "1.1.12"
   contact:
     name: Shine Solutions
     url: http://shinesolutions.com
@@ -472,35 +472,27 @@ paths:
           in: path
           required: true
           type: string
-        - name: jcr:primaryType
-          in: query
-          required: false
-          type: string
         - name: jcr:content/cq:name
           in: query
           required: false
           type: string
-        - name: jcr:content/jcr:title
+        - name: jcr:content/cq:template
           in: query
           required: false
           type: string
+        - name: jcr:content/enabled
+          in: query
+          required: false
+          type: boolean
         - name: jcr:content/jcr:description
           in: query
           required: false
           type: string
-        - name: jcr:content/sling:resourceType
+        - name: jcr:content/jcr:mixinTypes
           in: query
           required: false
           type: string
-        - name: jcr:content/transportUri
-          in: query
-          required: false
-          type: string
-        - name: jcr:content/transportUser
-          in: query
-          required: false
-          type: string
-        - name: jcr:content/transportPassword
+        - name: jcr:content/jcr:title
           in: query
           required: false
           type: string
@@ -525,39 +517,35 @@ paths:
           in: query
           required: false
           type: string
+        - name: jcr:content/protocolHTTPSRelaxed
+          in: query
+          required: false
+          type: boolean
         - name: jcr:content/retryDelay
           in: query
           required: false
           type: string
-        - name: jcr:content/serializationType
-          in: query
-          required: false
-          type: string
-        - name: jcr:content/jcr:mixinTypes
-          in: query
-          required: false
-          type: string
-        - name: jcr:content/triggerReceive
-          in: query
-          required: false
-          type: boolean
-        - name: jcr:content/triggerSpecific
-          in: query
-          required: false
-          type: boolean
-        - name: jcr:content/cq:template
-          in: query
-          required: false
-          type: string
-        - name: jcr:content/enabled
-          in: query
-          required: false
-          type: boolean
         - name: jcr:content/reverseReplication
           in: query
           required: false
           type: boolean
-        - name: :operation
+        - name: jcr:content/serializationType
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/sling:resourceType
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/transportPassword
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/transportUri
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/transportUser
           in: query
           required: false
           type: string
@@ -569,14 +557,26 @@ paths:
           in: query
           required: false
           type: boolean
+        - name: jcr:content/triggerReceive
+          in: query
+          required: false
+          type: boolean
+        - name: jcr:content/triggerSpecific
+          in: query
+          required: false
+          type: boolean
         - name: jcr:content/userId
           in: query
           required: false
           type: string
-        - name: jcr:content/protocolHTTPSRelaxed
+        - name: jcr:primaryType
           in: query
           required: false
-          type: boolean
+          type: string
+        - name: :operation
+          in: query
+          required: false
+          type: string
       tags:
         - sling
   /etc/replication/treeactivation.html:
