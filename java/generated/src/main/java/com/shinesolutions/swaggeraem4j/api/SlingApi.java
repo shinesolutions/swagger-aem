@@ -945,7 +945,7 @@ public class SlingApi {
         return call;
     }
     /* Build call for postAgent */
-    private com.squareup.okhttp.Call postAgentCall(String runmode, String name, String jcrcontentcqname, String jcrcontentcqtemplate, Boolean jcrcontentenabled, String jcrcontentjcrdescription, String jcrcontentjcrmixinTypes, String jcrcontentjcrtitle, String jcrcontentlogLevel, Boolean jcrcontentnoVersioning, List<String> jcrcontentprotocolHTTPHeaders, String jcrcontentprotocolHTTPHeadersTypeHint, String jcrcontentprotocolHTTPMethod, Boolean jcrcontentprotocolHTTPSRelaxed, String jcrcontentretryDelay, Boolean jcrcontentreverseReplication, String jcrcontentserializationType, String jcrcontentslingresourceType, String jcrcontenttransportPassword, String jcrcontenttransportUri, String jcrcontenttransportUser, Boolean jcrcontenttriggerDistribute, Boolean jcrcontenttriggerModified, Boolean jcrcontenttriggerReceive, Boolean jcrcontenttriggerSpecific, String jcrcontentuserId, String jcrprimaryType, String operation, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call postAgentCall(String runmode, String name, String jcrcontentcqname, String jcrcontentcqtemplate, Boolean jcrcontentenabled, String jcrcontentjcrdescription, String jcrcontentjcrlastModified, String jcrcontentjcrlastModifiedBy, String jcrcontentjcrmixinTypes, String jcrcontentjcrtitle, String jcrcontentlogLevel, Boolean jcrcontentnoStatusUpdate, Boolean jcrcontentnoVersioning, Boolean jcrcontentprotocolHTTPConnectionClose, BigDecimal jcrcontentprotocolConnectTimeout, String jcrcontentprotocolHTTPExpired, List<String> jcrcontentprotocolHTTPHeaders, String jcrcontentprotocolHTTPHeadersTypeHint, String jcrcontentprotocolHTTPMethod, Boolean jcrcontentprotocolHTTPSRelaxed, String jcrcontentprotocolInterface, BigDecimal jcrcontentprotocolSocketTimeout, String jcrcontentprotocolVersion, String jcrcontentproxyNTLMDomain, String jcrcontentproxyNTLMHost, String jcrcontentproxyHost, BigDecimal jcrcontentproxyPort, String jcrcontentproxyUser, String jcrcontentproxyPassword, BigDecimal jcrcontentqueueBatchMaxSize, String jcrcontentqueueBatchMode, BigDecimal jcrcontentqueueBatchWaitTime, String jcrcontentretryDelay, Boolean jcrcontentreverseReplication, String jcrcontentserializationType, String jcrcontentslingresourceType, String jcrcontentssl, String jcrcontenttransportNTLMDomain, String jcrcontenttransportNTLMHost, String jcrcontenttransportPassword, String jcrcontenttransportUri, String jcrcontenttransportUser, Boolean jcrcontenttriggerDistribute, Boolean jcrcontenttriggerModified, Boolean jcrcontenttriggerOnOffTime, Boolean jcrcontenttriggerReceive, Boolean jcrcontenttriggerSpecific, String jcrcontentuserId, String jcrprimaryType, String operation, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -962,14 +962,26 @@ public class SlingApi {
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/enabled", jcrcontentenabled));
         if (jcrcontentjcrdescription != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/jcr:description", jcrcontentjcrdescription));
+        if (jcrcontentjcrlastModified != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/jcr:lastModified", jcrcontentjcrlastModified));
+        if (jcrcontentjcrlastModifiedBy != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/jcr:lastModifiedBy", jcrcontentjcrlastModifiedBy));
         if (jcrcontentjcrmixinTypes != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/jcr:mixinTypes", jcrcontentjcrmixinTypes));
         if (jcrcontentjcrtitle != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/jcr:title", jcrcontentjcrtitle));
         if (jcrcontentlogLevel != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/logLevel", jcrcontentlogLevel));
+        if (jcrcontentnoStatusUpdate != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/noStatusUpdate", jcrcontentnoStatusUpdate));
         if (jcrcontentnoVersioning != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/noVersioning", jcrcontentnoVersioning));
+        if (jcrcontentprotocolHTTPConnectionClose != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/protocolHTTPConnectionClose", jcrcontentprotocolHTTPConnectionClose));
+        if (jcrcontentprotocolConnectTimeout != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/protocolConnectTimeout", jcrcontentprotocolConnectTimeout));
+        if (jcrcontentprotocolHTTPExpired != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/protocolHTTPExpired", jcrcontentprotocolHTTPExpired));
         if (jcrcontentprotocolHTTPHeaders != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "jcr:content/protocolHTTPHeaders", jcrcontentprotocolHTTPHeaders));
         if (jcrcontentprotocolHTTPHeadersTypeHint != null)
@@ -978,6 +990,30 @@ public class SlingApi {
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/protocolHTTPMethod", jcrcontentprotocolHTTPMethod));
         if (jcrcontentprotocolHTTPSRelaxed != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/protocolHTTPSRelaxed", jcrcontentprotocolHTTPSRelaxed));
+        if (jcrcontentprotocolInterface != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/protocolInterface", jcrcontentprotocolInterface));
+        if (jcrcontentprotocolSocketTimeout != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/protocolSocketTimeout", jcrcontentprotocolSocketTimeout));
+        if (jcrcontentprotocolVersion != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/protocolVersion", jcrcontentprotocolVersion));
+        if (jcrcontentproxyNTLMDomain != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/proxyNTLMDomain", jcrcontentproxyNTLMDomain));
+        if (jcrcontentproxyNTLMHost != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/proxyNTLMHost", jcrcontentproxyNTLMHost));
+        if (jcrcontentproxyHost != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/proxyHost", jcrcontentproxyHost));
+        if (jcrcontentproxyPort != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/proxyPort", jcrcontentproxyPort));
+        if (jcrcontentproxyUser != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/proxyUser", jcrcontentproxyUser));
+        if (jcrcontentproxyPassword != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/proxyPassword", jcrcontentproxyPassword));
+        if (jcrcontentqueueBatchMaxSize != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/queueBatchMaxSize", jcrcontentqueueBatchMaxSize));
+        if (jcrcontentqueueBatchMode != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/queueBatchMode", jcrcontentqueueBatchMode));
+        if (jcrcontentqueueBatchWaitTime != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/queueBatchWaitTime", jcrcontentqueueBatchWaitTime));
         if (jcrcontentretryDelay != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/retryDelay", jcrcontentretryDelay));
         if (jcrcontentreverseReplication != null)
@@ -986,6 +1022,12 @@ public class SlingApi {
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/serializationType", jcrcontentserializationType));
         if (jcrcontentslingresourceType != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/sling:resourceType", jcrcontentslingresourceType));
+        if (jcrcontentssl != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/ssl", jcrcontentssl));
+        if (jcrcontenttransportNTLMDomain != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/transportNTLMDomain", jcrcontenttransportNTLMDomain));
+        if (jcrcontenttransportNTLMHost != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/transportNTLMHost", jcrcontenttransportNTLMHost));
         if (jcrcontenttransportPassword != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/transportPassword", jcrcontenttransportPassword));
         if (jcrcontenttransportUri != null)
@@ -996,6 +1038,8 @@ public class SlingApi {
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/triggerDistribute", jcrcontenttriggerDistribute));
         if (jcrcontenttriggerModified != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/triggerModified", jcrcontenttriggerModified));
+        if (jcrcontenttriggerOnOffTime != null)
+        localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/triggerOnOffTime", jcrcontenttriggerOnOffTime));
         if (jcrcontenttriggerReceive != null)
         localVarQueryParams.addAll(apiClient.parameterToPairs("", "jcr:content/triggerReceive", jcrcontenttriggerReceive));
         if (jcrcontenttriggerSpecific != null)
@@ -1040,7 +1084,7 @@ public class SlingApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call postAgentValidateBeforeCall(String runmode, String name, String jcrcontentcqname, String jcrcontentcqtemplate, Boolean jcrcontentenabled, String jcrcontentjcrdescription, String jcrcontentjcrmixinTypes, String jcrcontentjcrtitle, String jcrcontentlogLevel, Boolean jcrcontentnoVersioning, List<String> jcrcontentprotocolHTTPHeaders, String jcrcontentprotocolHTTPHeadersTypeHint, String jcrcontentprotocolHTTPMethod, Boolean jcrcontentprotocolHTTPSRelaxed, String jcrcontentretryDelay, Boolean jcrcontentreverseReplication, String jcrcontentserializationType, String jcrcontentslingresourceType, String jcrcontenttransportPassword, String jcrcontenttransportUri, String jcrcontenttransportUser, Boolean jcrcontenttriggerDistribute, Boolean jcrcontenttriggerModified, Boolean jcrcontenttriggerReceive, Boolean jcrcontenttriggerSpecific, String jcrcontentuserId, String jcrprimaryType, String operation, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call postAgentValidateBeforeCall(String runmode, String name, String jcrcontentcqname, String jcrcontentcqtemplate, Boolean jcrcontentenabled, String jcrcontentjcrdescription, String jcrcontentjcrlastModified, String jcrcontentjcrlastModifiedBy, String jcrcontentjcrmixinTypes, String jcrcontentjcrtitle, String jcrcontentlogLevel, Boolean jcrcontentnoStatusUpdate, Boolean jcrcontentnoVersioning, Boolean jcrcontentprotocolHTTPConnectionClose, BigDecimal jcrcontentprotocolConnectTimeout, String jcrcontentprotocolHTTPExpired, List<String> jcrcontentprotocolHTTPHeaders, String jcrcontentprotocolHTTPHeadersTypeHint, String jcrcontentprotocolHTTPMethod, Boolean jcrcontentprotocolHTTPSRelaxed, String jcrcontentprotocolInterface, BigDecimal jcrcontentprotocolSocketTimeout, String jcrcontentprotocolVersion, String jcrcontentproxyNTLMDomain, String jcrcontentproxyNTLMHost, String jcrcontentproxyHost, BigDecimal jcrcontentproxyPort, String jcrcontentproxyUser, String jcrcontentproxyPassword, BigDecimal jcrcontentqueueBatchMaxSize, String jcrcontentqueueBatchMode, BigDecimal jcrcontentqueueBatchWaitTime, String jcrcontentretryDelay, Boolean jcrcontentreverseReplication, String jcrcontentserializationType, String jcrcontentslingresourceType, String jcrcontentssl, String jcrcontenttransportNTLMDomain, String jcrcontenttransportNTLMHost, String jcrcontenttransportPassword, String jcrcontenttransportUri, String jcrcontenttransportUser, Boolean jcrcontenttriggerDistribute, Boolean jcrcontenttriggerModified, Boolean jcrcontenttriggerOnOffTime, Boolean jcrcontenttriggerReceive, Boolean jcrcontenttriggerSpecific, String jcrcontentuserId, String jcrprimaryType, String operation, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         // verify the required parameter 'runmode' is set
         if (runmode == null) {
@@ -1053,7 +1097,7 @@ public class SlingApi {
         }
         
         
-        com.squareup.okhttp.Call call = postAgentCall(runmode, name, jcrcontentcqname, jcrcontentcqtemplate, jcrcontentenabled, jcrcontentjcrdescription, jcrcontentjcrmixinTypes, jcrcontentjcrtitle, jcrcontentlogLevel, jcrcontentnoVersioning, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentprotocolHTTPSRelaxed, jcrcontentretryDelay, jcrcontentreverseReplication, jcrcontentserializationType, jcrcontentslingresourceType, jcrcontenttransportPassword, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttriggerDistribute, jcrcontenttriggerModified, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentuserId, jcrprimaryType, operation, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = postAgentCall(runmode, name, jcrcontentcqname, jcrcontentcqtemplate, jcrcontentenabled, jcrcontentjcrdescription, jcrcontentjcrlastModified, jcrcontentjcrlastModifiedBy, jcrcontentjcrmixinTypes, jcrcontentjcrtitle, jcrcontentlogLevel, jcrcontentnoStatusUpdate, jcrcontentnoVersioning, jcrcontentprotocolHTTPConnectionClose, jcrcontentprotocolConnectTimeout, jcrcontentprotocolHTTPExpired, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentprotocolHTTPSRelaxed, jcrcontentprotocolInterface, jcrcontentprotocolSocketTimeout, jcrcontentprotocolVersion, jcrcontentproxyNTLMDomain, jcrcontentproxyNTLMHost, jcrcontentproxyHost, jcrcontentproxyPort, jcrcontentproxyUser, jcrcontentproxyPassword, jcrcontentqueueBatchMaxSize, jcrcontentqueueBatchMode, jcrcontentqueueBatchWaitTime, jcrcontentretryDelay, jcrcontentreverseReplication, jcrcontentserializationType, jcrcontentslingresourceType, jcrcontentssl, jcrcontenttransportNTLMDomain, jcrcontenttransportNTLMHost, jcrcontenttransportPassword, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttriggerDistribute, jcrcontenttriggerModified, jcrcontenttriggerOnOffTime, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentuserId, jcrprimaryType, operation, progressListener, progressRequestListener);
         return call;
 
         
@@ -1071,23 +1115,45 @@ public class SlingApi {
      * @param jcrcontentcqtemplate  (optional)
      * @param jcrcontentenabled  (optional)
      * @param jcrcontentjcrdescription  (optional)
+     * @param jcrcontentjcrlastModified  (optional)
+     * @param jcrcontentjcrlastModifiedBy  (optional)
      * @param jcrcontentjcrmixinTypes  (optional)
      * @param jcrcontentjcrtitle  (optional)
      * @param jcrcontentlogLevel  (optional)
+     * @param jcrcontentnoStatusUpdate  (optional)
      * @param jcrcontentnoVersioning  (optional)
+     * @param jcrcontentprotocolHTTPConnectionClose  (optional)
+     * @param jcrcontentprotocolConnectTimeout  (optional)
+     * @param jcrcontentprotocolHTTPExpired  (optional)
      * @param jcrcontentprotocolHTTPHeaders  (optional)
      * @param jcrcontentprotocolHTTPHeadersTypeHint  (optional)
      * @param jcrcontentprotocolHTTPMethod  (optional)
      * @param jcrcontentprotocolHTTPSRelaxed  (optional)
+     * @param jcrcontentprotocolInterface  (optional)
+     * @param jcrcontentprotocolSocketTimeout  (optional)
+     * @param jcrcontentprotocolVersion  (optional)
+     * @param jcrcontentproxyNTLMDomain  (optional)
+     * @param jcrcontentproxyNTLMHost  (optional)
+     * @param jcrcontentproxyHost  (optional)
+     * @param jcrcontentproxyPort  (optional)
+     * @param jcrcontentproxyUser  (optional)
+     * @param jcrcontentproxyPassword  (optional)
+     * @param jcrcontentqueueBatchMaxSize  (optional)
+     * @param jcrcontentqueueBatchMode  (optional)
+     * @param jcrcontentqueueBatchWaitTime  (optional)
      * @param jcrcontentretryDelay  (optional)
      * @param jcrcontentreverseReplication  (optional)
      * @param jcrcontentserializationType  (optional)
      * @param jcrcontentslingresourceType  (optional)
+     * @param jcrcontentssl  (optional)
+     * @param jcrcontenttransportNTLMDomain  (optional)
+     * @param jcrcontenttransportNTLMHost  (optional)
      * @param jcrcontenttransportPassword  (optional)
      * @param jcrcontenttransportUri  (optional)
      * @param jcrcontenttransportUser  (optional)
      * @param jcrcontenttriggerDistribute  (optional)
      * @param jcrcontenttriggerModified  (optional)
+     * @param jcrcontenttriggerOnOffTime  (optional)
      * @param jcrcontenttriggerReceive  (optional)
      * @param jcrcontenttriggerSpecific  (optional)
      * @param jcrcontentuserId  (optional)
@@ -1095,8 +1161,8 @@ public class SlingApi {
      * @param operation  (optional)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public void postAgent(String runmode, String name, String jcrcontentcqname, String jcrcontentcqtemplate, Boolean jcrcontentenabled, String jcrcontentjcrdescription, String jcrcontentjcrmixinTypes, String jcrcontentjcrtitle, String jcrcontentlogLevel, Boolean jcrcontentnoVersioning, List<String> jcrcontentprotocolHTTPHeaders, String jcrcontentprotocolHTTPHeadersTypeHint, String jcrcontentprotocolHTTPMethod, Boolean jcrcontentprotocolHTTPSRelaxed, String jcrcontentretryDelay, Boolean jcrcontentreverseReplication, String jcrcontentserializationType, String jcrcontentslingresourceType, String jcrcontenttransportPassword, String jcrcontenttransportUri, String jcrcontenttransportUser, Boolean jcrcontenttriggerDistribute, Boolean jcrcontenttriggerModified, Boolean jcrcontenttriggerReceive, Boolean jcrcontenttriggerSpecific, String jcrcontentuserId, String jcrprimaryType, String operation) throws ApiException {
-        postAgentWithHttpInfo(runmode, name, jcrcontentcqname, jcrcontentcqtemplate, jcrcontentenabled, jcrcontentjcrdescription, jcrcontentjcrmixinTypes, jcrcontentjcrtitle, jcrcontentlogLevel, jcrcontentnoVersioning, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentprotocolHTTPSRelaxed, jcrcontentretryDelay, jcrcontentreverseReplication, jcrcontentserializationType, jcrcontentslingresourceType, jcrcontenttransportPassword, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttriggerDistribute, jcrcontenttriggerModified, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentuserId, jcrprimaryType, operation);
+    public void postAgent(String runmode, String name, String jcrcontentcqname, String jcrcontentcqtemplate, Boolean jcrcontentenabled, String jcrcontentjcrdescription, String jcrcontentjcrlastModified, String jcrcontentjcrlastModifiedBy, String jcrcontentjcrmixinTypes, String jcrcontentjcrtitle, String jcrcontentlogLevel, Boolean jcrcontentnoStatusUpdate, Boolean jcrcontentnoVersioning, Boolean jcrcontentprotocolHTTPConnectionClose, BigDecimal jcrcontentprotocolConnectTimeout, String jcrcontentprotocolHTTPExpired, List<String> jcrcontentprotocolHTTPHeaders, String jcrcontentprotocolHTTPHeadersTypeHint, String jcrcontentprotocolHTTPMethod, Boolean jcrcontentprotocolHTTPSRelaxed, String jcrcontentprotocolInterface, BigDecimal jcrcontentprotocolSocketTimeout, String jcrcontentprotocolVersion, String jcrcontentproxyNTLMDomain, String jcrcontentproxyNTLMHost, String jcrcontentproxyHost, BigDecimal jcrcontentproxyPort, String jcrcontentproxyUser, String jcrcontentproxyPassword, BigDecimal jcrcontentqueueBatchMaxSize, String jcrcontentqueueBatchMode, BigDecimal jcrcontentqueueBatchWaitTime, String jcrcontentretryDelay, Boolean jcrcontentreverseReplication, String jcrcontentserializationType, String jcrcontentslingresourceType, String jcrcontentssl, String jcrcontenttransportNTLMDomain, String jcrcontenttransportNTLMHost, String jcrcontenttransportPassword, String jcrcontenttransportUri, String jcrcontenttransportUser, Boolean jcrcontenttriggerDistribute, Boolean jcrcontenttriggerModified, Boolean jcrcontenttriggerOnOffTime, Boolean jcrcontenttriggerReceive, Boolean jcrcontenttriggerSpecific, String jcrcontentuserId, String jcrprimaryType, String operation) throws ApiException {
+        postAgentWithHttpInfo(runmode, name, jcrcontentcqname, jcrcontentcqtemplate, jcrcontentenabled, jcrcontentjcrdescription, jcrcontentjcrlastModified, jcrcontentjcrlastModifiedBy, jcrcontentjcrmixinTypes, jcrcontentjcrtitle, jcrcontentlogLevel, jcrcontentnoStatusUpdate, jcrcontentnoVersioning, jcrcontentprotocolHTTPConnectionClose, jcrcontentprotocolConnectTimeout, jcrcontentprotocolHTTPExpired, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentprotocolHTTPSRelaxed, jcrcontentprotocolInterface, jcrcontentprotocolSocketTimeout, jcrcontentprotocolVersion, jcrcontentproxyNTLMDomain, jcrcontentproxyNTLMHost, jcrcontentproxyHost, jcrcontentproxyPort, jcrcontentproxyUser, jcrcontentproxyPassword, jcrcontentqueueBatchMaxSize, jcrcontentqueueBatchMode, jcrcontentqueueBatchWaitTime, jcrcontentretryDelay, jcrcontentreverseReplication, jcrcontentserializationType, jcrcontentslingresourceType, jcrcontentssl, jcrcontenttransportNTLMDomain, jcrcontenttransportNTLMHost, jcrcontenttransportPassword, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttriggerDistribute, jcrcontenttriggerModified, jcrcontenttriggerOnOffTime, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentuserId, jcrprimaryType, operation);
     }
 
     /**
@@ -1108,23 +1174,45 @@ public class SlingApi {
      * @param jcrcontentcqtemplate  (optional)
      * @param jcrcontentenabled  (optional)
      * @param jcrcontentjcrdescription  (optional)
+     * @param jcrcontentjcrlastModified  (optional)
+     * @param jcrcontentjcrlastModifiedBy  (optional)
      * @param jcrcontentjcrmixinTypes  (optional)
      * @param jcrcontentjcrtitle  (optional)
      * @param jcrcontentlogLevel  (optional)
+     * @param jcrcontentnoStatusUpdate  (optional)
      * @param jcrcontentnoVersioning  (optional)
+     * @param jcrcontentprotocolHTTPConnectionClose  (optional)
+     * @param jcrcontentprotocolConnectTimeout  (optional)
+     * @param jcrcontentprotocolHTTPExpired  (optional)
      * @param jcrcontentprotocolHTTPHeaders  (optional)
      * @param jcrcontentprotocolHTTPHeadersTypeHint  (optional)
      * @param jcrcontentprotocolHTTPMethod  (optional)
      * @param jcrcontentprotocolHTTPSRelaxed  (optional)
+     * @param jcrcontentprotocolInterface  (optional)
+     * @param jcrcontentprotocolSocketTimeout  (optional)
+     * @param jcrcontentprotocolVersion  (optional)
+     * @param jcrcontentproxyNTLMDomain  (optional)
+     * @param jcrcontentproxyNTLMHost  (optional)
+     * @param jcrcontentproxyHost  (optional)
+     * @param jcrcontentproxyPort  (optional)
+     * @param jcrcontentproxyUser  (optional)
+     * @param jcrcontentproxyPassword  (optional)
+     * @param jcrcontentqueueBatchMaxSize  (optional)
+     * @param jcrcontentqueueBatchMode  (optional)
+     * @param jcrcontentqueueBatchWaitTime  (optional)
      * @param jcrcontentretryDelay  (optional)
      * @param jcrcontentreverseReplication  (optional)
      * @param jcrcontentserializationType  (optional)
      * @param jcrcontentslingresourceType  (optional)
+     * @param jcrcontentssl  (optional)
+     * @param jcrcontenttransportNTLMDomain  (optional)
+     * @param jcrcontenttransportNTLMHost  (optional)
      * @param jcrcontenttransportPassword  (optional)
      * @param jcrcontenttransportUri  (optional)
      * @param jcrcontenttransportUser  (optional)
      * @param jcrcontenttriggerDistribute  (optional)
      * @param jcrcontenttriggerModified  (optional)
+     * @param jcrcontenttriggerOnOffTime  (optional)
      * @param jcrcontenttriggerReceive  (optional)
      * @param jcrcontenttriggerSpecific  (optional)
      * @param jcrcontentuserId  (optional)
@@ -1133,8 +1221,8 @@ public class SlingApi {
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Void> postAgentWithHttpInfo(String runmode, String name, String jcrcontentcqname, String jcrcontentcqtemplate, Boolean jcrcontentenabled, String jcrcontentjcrdescription, String jcrcontentjcrmixinTypes, String jcrcontentjcrtitle, String jcrcontentlogLevel, Boolean jcrcontentnoVersioning, List<String> jcrcontentprotocolHTTPHeaders, String jcrcontentprotocolHTTPHeadersTypeHint, String jcrcontentprotocolHTTPMethod, Boolean jcrcontentprotocolHTTPSRelaxed, String jcrcontentretryDelay, Boolean jcrcontentreverseReplication, String jcrcontentserializationType, String jcrcontentslingresourceType, String jcrcontenttransportPassword, String jcrcontenttransportUri, String jcrcontenttransportUser, Boolean jcrcontenttriggerDistribute, Boolean jcrcontenttriggerModified, Boolean jcrcontenttriggerReceive, Boolean jcrcontenttriggerSpecific, String jcrcontentuserId, String jcrprimaryType, String operation) throws ApiException {
-        com.squareup.okhttp.Call call = postAgentValidateBeforeCall(runmode, name, jcrcontentcqname, jcrcontentcqtemplate, jcrcontentenabled, jcrcontentjcrdescription, jcrcontentjcrmixinTypes, jcrcontentjcrtitle, jcrcontentlogLevel, jcrcontentnoVersioning, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentprotocolHTTPSRelaxed, jcrcontentretryDelay, jcrcontentreverseReplication, jcrcontentserializationType, jcrcontentslingresourceType, jcrcontenttransportPassword, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttriggerDistribute, jcrcontenttriggerModified, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentuserId, jcrprimaryType, operation, null, null);
+    public ApiResponse<Void> postAgentWithHttpInfo(String runmode, String name, String jcrcontentcqname, String jcrcontentcqtemplate, Boolean jcrcontentenabled, String jcrcontentjcrdescription, String jcrcontentjcrlastModified, String jcrcontentjcrlastModifiedBy, String jcrcontentjcrmixinTypes, String jcrcontentjcrtitle, String jcrcontentlogLevel, Boolean jcrcontentnoStatusUpdate, Boolean jcrcontentnoVersioning, Boolean jcrcontentprotocolHTTPConnectionClose, BigDecimal jcrcontentprotocolConnectTimeout, String jcrcontentprotocolHTTPExpired, List<String> jcrcontentprotocolHTTPHeaders, String jcrcontentprotocolHTTPHeadersTypeHint, String jcrcontentprotocolHTTPMethod, Boolean jcrcontentprotocolHTTPSRelaxed, String jcrcontentprotocolInterface, BigDecimal jcrcontentprotocolSocketTimeout, String jcrcontentprotocolVersion, String jcrcontentproxyNTLMDomain, String jcrcontentproxyNTLMHost, String jcrcontentproxyHost, BigDecimal jcrcontentproxyPort, String jcrcontentproxyUser, String jcrcontentproxyPassword, BigDecimal jcrcontentqueueBatchMaxSize, String jcrcontentqueueBatchMode, BigDecimal jcrcontentqueueBatchWaitTime, String jcrcontentretryDelay, Boolean jcrcontentreverseReplication, String jcrcontentserializationType, String jcrcontentslingresourceType, String jcrcontentssl, String jcrcontenttransportNTLMDomain, String jcrcontenttransportNTLMHost, String jcrcontenttransportPassword, String jcrcontenttransportUri, String jcrcontenttransportUser, Boolean jcrcontenttriggerDistribute, Boolean jcrcontenttriggerModified, Boolean jcrcontenttriggerOnOffTime, Boolean jcrcontenttriggerReceive, Boolean jcrcontenttriggerSpecific, String jcrcontentuserId, String jcrprimaryType, String operation) throws ApiException {
+        com.squareup.okhttp.Call call = postAgentValidateBeforeCall(runmode, name, jcrcontentcqname, jcrcontentcqtemplate, jcrcontentenabled, jcrcontentjcrdescription, jcrcontentjcrlastModified, jcrcontentjcrlastModifiedBy, jcrcontentjcrmixinTypes, jcrcontentjcrtitle, jcrcontentlogLevel, jcrcontentnoStatusUpdate, jcrcontentnoVersioning, jcrcontentprotocolHTTPConnectionClose, jcrcontentprotocolConnectTimeout, jcrcontentprotocolHTTPExpired, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentprotocolHTTPSRelaxed, jcrcontentprotocolInterface, jcrcontentprotocolSocketTimeout, jcrcontentprotocolVersion, jcrcontentproxyNTLMDomain, jcrcontentproxyNTLMHost, jcrcontentproxyHost, jcrcontentproxyPort, jcrcontentproxyUser, jcrcontentproxyPassword, jcrcontentqueueBatchMaxSize, jcrcontentqueueBatchMode, jcrcontentqueueBatchWaitTime, jcrcontentretryDelay, jcrcontentreverseReplication, jcrcontentserializationType, jcrcontentslingresourceType, jcrcontentssl, jcrcontenttransportNTLMDomain, jcrcontenttransportNTLMHost, jcrcontenttransportPassword, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttriggerDistribute, jcrcontenttriggerModified, jcrcontenttriggerOnOffTime, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentuserId, jcrprimaryType, operation, null, null);
         return apiClient.execute(call);
     }
 
@@ -1147,23 +1235,45 @@ public class SlingApi {
      * @param jcrcontentcqtemplate  (optional)
      * @param jcrcontentenabled  (optional)
      * @param jcrcontentjcrdescription  (optional)
+     * @param jcrcontentjcrlastModified  (optional)
+     * @param jcrcontentjcrlastModifiedBy  (optional)
      * @param jcrcontentjcrmixinTypes  (optional)
      * @param jcrcontentjcrtitle  (optional)
      * @param jcrcontentlogLevel  (optional)
+     * @param jcrcontentnoStatusUpdate  (optional)
      * @param jcrcontentnoVersioning  (optional)
+     * @param jcrcontentprotocolHTTPConnectionClose  (optional)
+     * @param jcrcontentprotocolConnectTimeout  (optional)
+     * @param jcrcontentprotocolHTTPExpired  (optional)
      * @param jcrcontentprotocolHTTPHeaders  (optional)
      * @param jcrcontentprotocolHTTPHeadersTypeHint  (optional)
      * @param jcrcontentprotocolHTTPMethod  (optional)
      * @param jcrcontentprotocolHTTPSRelaxed  (optional)
+     * @param jcrcontentprotocolInterface  (optional)
+     * @param jcrcontentprotocolSocketTimeout  (optional)
+     * @param jcrcontentprotocolVersion  (optional)
+     * @param jcrcontentproxyNTLMDomain  (optional)
+     * @param jcrcontentproxyNTLMHost  (optional)
+     * @param jcrcontentproxyHost  (optional)
+     * @param jcrcontentproxyPort  (optional)
+     * @param jcrcontentproxyUser  (optional)
+     * @param jcrcontentproxyPassword  (optional)
+     * @param jcrcontentqueueBatchMaxSize  (optional)
+     * @param jcrcontentqueueBatchMode  (optional)
+     * @param jcrcontentqueueBatchWaitTime  (optional)
      * @param jcrcontentretryDelay  (optional)
      * @param jcrcontentreverseReplication  (optional)
      * @param jcrcontentserializationType  (optional)
      * @param jcrcontentslingresourceType  (optional)
+     * @param jcrcontentssl  (optional)
+     * @param jcrcontenttransportNTLMDomain  (optional)
+     * @param jcrcontenttransportNTLMHost  (optional)
      * @param jcrcontenttransportPassword  (optional)
      * @param jcrcontenttransportUri  (optional)
      * @param jcrcontenttransportUser  (optional)
      * @param jcrcontenttriggerDistribute  (optional)
      * @param jcrcontenttriggerModified  (optional)
+     * @param jcrcontenttriggerOnOffTime  (optional)
      * @param jcrcontenttriggerReceive  (optional)
      * @param jcrcontenttriggerSpecific  (optional)
      * @param jcrcontentuserId  (optional)
@@ -1173,7 +1283,7 @@ public class SlingApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call postAgentAsync(String runmode, String name, String jcrcontentcqname, String jcrcontentcqtemplate, Boolean jcrcontentenabled, String jcrcontentjcrdescription, String jcrcontentjcrmixinTypes, String jcrcontentjcrtitle, String jcrcontentlogLevel, Boolean jcrcontentnoVersioning, List<String> jcrcontentprotocolHTTPHeaders, String jcrcontentprotocolHTTPHeadersTypeHint, String jcrcontentprotocolHTTPMethod, Boolean jcrcontentprotocolHTTPSRelaxed, String jcrcontentretryDelay, Boolean jcrcontentreverseReplication, String jcrcontentserializationType, String jcrcontentslingresourceType, String jcrcontenttransportPassword, String jcrcontenttransportUri, String jcrcontenttransportUser, Boolean jcrcontenttriggerDistribute, Boolean jcrcontenttriggerModified, Boolean jcrcontenttriggerReceive, Boolean jcrcontenttriggerSpecific, String jcrcontentuserId, String jcrprimaryType, String operation, final ApiCallback<Void> callback) throws ApiException {
+    public com.squareup.okhttp.Call postAgentAsync(String runmode, String name, String jcrcontentcqname, String jcrcontentcqtemplate, Boolean jcrcontentenabled, String jcrcontentjcrdescription, String jcrcontentjcrlastModified, String jcrcontentjcrlastModifiedBy, String jcrcontentjcrmixinTypes, String jcrcontentjcrtitle, String jcrcontentlogLevel, Boolean jcrcontentnoStatusUpdate, Boolean jcrcontentnoVersioning, Boolean jcrcontentprotocolHTTPConnectionClose, BigDecimal jcrcontentprotocolConnectTimeout, String jcrcontentprotocolHTTPExpired, List<String> jcrcontentprotocolHTTPHeaders, String jcrcontentprotocolHTTPHeadersTypeHint, String jcrcontentprotocolHTTPMethod, Boolean jcrcontentprotocolHTTPSRelaxed, String jcrcontentprotocolInterface, BigDecimal jcrcontentprotocolSocketTimeout, String jcrcontentprotocolVersion, String jcrcontentproxyNTLMDomain, String jcrcontentproxyNTLMHost, String jcrcontentproxyHost, BigDecimal jcrcontentproxyPort, String jcrcontentproxyUser, String jcrcontentproxyPassword, BigDecimal jcrcontentqueueBatchMaxSize, String jcrcontentqueueBatchMode, BigDecimal jcrcontentqueueBatchWaitTime, String jcrcontentretryDelay, Boolean jcrcontentreverseReplication, String jcrcontentserializationType, String jcrcontentslingresourceType, String jcrcontentssl, String jcrcontenttransportNTLMDomain, String jcrcontenttransportNTLMHost, String jcrcontenttransportPassword, String jcrcontenttransportUri, String jcrcontenttransportUser, Boolean jcrcontenttriggerDistribute, Boolean jcrcontenttriggerModified, Boolean jcrcontenttriggerOnOffTime, Boolean jcrcontenttriggerReceive, Boolean jcrcontenttriggerSpecific, String jcrcontentuserId, String jcrprimaryType, String operation, final ApiCallback<Void> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1194,7 +1304,7 @@ public class SlingApi {
             };
         }
 
-        com.squareup.okhttp.Call call = postAgentValidateBeforeCall(runmode, name, jcrcontentcqname, jcrcontentcqtemplate, jcrcontentenabled, jcrcontentjcrdescription, jcrcontentjcrmixinTypes, jcrcontentjcrtitle, jcrcontentlogLevel, jcrcontentnoVersioning, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentprotocolHTTPSRelaxed, jcrcontentretryDelay, jcrcontentreverseReplication, jcrcontentserializationType, jcrcontentslingresourceType, jcrcontenttransportPassword, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttriggerDistribute, jcrcontenttriggerModified, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentuserId, jcrprimaryType, operation, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = postAgentValidateBeforeCall(runmode, name, jcrcontentcqname, jcrcontentcqtemplate, jcrcontentenabled, jcrcontentjcrdescription, jcrcontentjcrlastModified, jcrcontentjcrlastModifiedBy, jcrcontentjcrmixinTypes, jcrcontentjcrtitle, jcrcontentlogLevel, jcrcontentnoStatusUpdate, jcrcontentnoVersioning, jcrcontentprotocolHTTPConnectionClose, jcrcontentprotocolConnectTimeout, jcrcontentprotocolHTTPExpired, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentprotocolHTTPSRelaxed, jcrcontentprotocolInterface, jcrcontentprotocolSocketTimeout, jcrcontentprotocolVersion, jcrcontentproxyNTLMDomain, jcrcontentproxyNTLMHost, jcrcontentproxyHost, jcrcontentproxyPort, jcrcontentproxyUser, jcrcontentproxyPassword, jcrcontentqueueBatchMaxSize, jcrcontentqueueBatchMode, jcrcontentqueueBatchWaitTime, jcrcontentretryDelay, jcrcontentreverseReplication, jcrcontentserializationType, jcrcontentslingresourceType, jcrcontentssl, jcrcontenttransportNTLMDomain, jcrcontenttransportNTLMHost, jcrcontenttransportPassword, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttriggerDistribute, jcrcontenttriggerModified, jcrcontenttriggerOnOffTime, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentuserId, jcrprimaryType, operation, progressListener, progressRequestListener);
         apiClient.executeAsync(call, callback);
         return call;
     }

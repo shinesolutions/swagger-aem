@@ -18,7 +18,7 @@ import com.shinesolutions.swaggeraem4j.Pair;
 import java.util.Map;
 import java.util.List;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-04-06T17:26:59.917+10:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2017-04-07T12:58:11.527+10:00")
 public class ApiKeyAuth implements Authentication {
   private final String location;
   private final String paramName;
