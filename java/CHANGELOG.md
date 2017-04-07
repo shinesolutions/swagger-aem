@@ -1,3 +1,6 @@
+### 0.9.4
+* Rearrange optional parameters postAgentWithHttpInfo method signature to be in alphabetical order
+
 ### 0.9.3
 * Add Apache Sling DavEx Servlet OSGI config support #11
 * Fix missing getLoginPage operation response body

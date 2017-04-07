@@ -401,7 +401,7 @@ Name | Type | Description  | Notes
 
 <a name="postAgent"></a>
 # **postAgent**
-> postAgent(runmode, name, jcrprimaryType, jcrcontentcqname, jcrcontentjcrtitle, jcrcontentjcrdescription, jcrcontentslingresourceType, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttransportPassword, jcrcontentlogLevel, jcrcontentnoVersioning, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentretryDelay, jcrcontentserializationType, jcrcontentjcrmixinTypes, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentcqtemplate, jcrcontentenabled, jcrcontentreverseReplication, operation, jcrcontenttriggerDistribute, jcrcontenttriggerModified, jcrcontentuserId, jcrcontentprotocolHTTPSRelaxed)
+> postAgent(runmode, name, jcrcontentcqname, jcrcontentcqtemplate, jcrcontentenabled, jcrcontentjcrdescription, jcrcontentjcrmixinTypes, jcrcontentjcrtitle, jcrcontentlogLevel, jcrcontentnoVersioning, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentprotocolHTTPSRelaxed, jcrcontentretryDelay, jcrcontentreverseReplication, jcrcontentserializationType, jcrcontentslingresourceType, jcrcontenttransportPassword, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttriggerDistribute, jcrcontenttriggerModified, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentuserId, jcrprimaryType, operation)
 
 
 
@@ -424,34 +424,34 @@ aemAuth.setPassword("YOUR PASSWORD");
 SlingApi apiInstance = new SlingApi();
 String runmode = "runmode_example"; // String | 
 String name = "name_example"; // String | 
-String jcrprimaryType = "jcrprimaryType_example"; // String | 
 String jcrcontentcqname = "jcrcontentcqname_example"; // String | 
-String jcrcontentjcrtitle = "jcrcontentjcrtitle_example"; // String | 
+String jcrcontentcqtemplate = "jcrcontentcqtemplate_example"; // String | 
+Boolean jcrcontentenabled = true; // Boolean | 
 String jcrcontentjcrdescription = "jcrcontentjcrdescription_example"; // String | 
-String jcrcontentslingresourceType = "jcrcontentslingresourceType_example"; // String | 
-String jcrcontenttransportUri = "jcrcontenttransportUri_example"; // String | 
-String jcrcontenttransportUser = "jcrcontenttransportUser_example"; // String | 
-String jcrcontenttransportPassword = "jcrcontenttransportPassword_example"; // String | 
+String jcrcontentjcrmixinTypes = "jcrcontentjcrmixinTypes_example"; // String | 
+String jcrcontentjcrtitle = "jcrcontentjcrtitle_example"; // String | 
 String jcrcontentlogLevel = "jcrcontentlogLevel_example"; // String | 
 Boolean jcrcontentnoVersioning = true; // Boolean | 
 List<String> jcrcontentprotocolHTTPHeaders = Arrays.asList("jcrcontentprotocolHTTPHeaders_example"); // List<String> | 
 String jcrcontentprotocolHTTPHeadersTypeHint = "jcrcontentprotocolHTTPHeadersTypeHint_example"; // String | 
 String jcrcontentprotocolHTTPMethod = "jcrcontentprotocolHTTPMethod_example"; // String | 
+Boolean jcrcontentprotocolHTTPSRelaxed = true; // Boolean | 
 String jcrcontentretryDelay = "jcrcontentretryDelay_example"; // String | 
-String jcrcontentserializationType = "jcrcontentserializationType_example"; // String | 
-String jcrcontentjcrmixinTypes = "jcrcontentjcrmixinTypes_example"; // String | 
-Boolean jcrcontenttriggerReceive = true; // Boolean | 
-Boolean jcrcontenttriggerSpecific = true; // Boolean | 
-String jcrcontentcqtemplate = "jcrcontentcqtemplate_example"; // String | 
-Boolean jcrcontentenabled = true; // Boolean | 
 Boolean jcrcontentreverseReplication = true; // Boolean | 
-String operation = "operation_example"; // String | 
+String jcrcontentserializationType = "jcrcontentserializationType_example"; // String | 
+String jcrcontentslingresourceType = "jcrcontentslingresourceType_example"; // String | 
+String jcrcontenttransportPassword = "jcrcontenttransportPassword_example"; // String | 
+String jcrcontenttransportUri = "jcrcontenttransportUri_example"; // String | 
+String jcrcontenttransportUser = "jcrcontenttransportUser_example"; // String | 
 Boolean jcrcontenttriggerDistribute = true; // Boolean | 
 Boolean jcrcontenttriggerModified = true; // Boolean | 
+Boolean jcrcontenttriggerReceive = true; // Boolean | 
+Boolean jcrcontenttriggerSpecific = true; // Boolean | 
 String jcrcontentuserId = "jcrcontentuserId_example"; // String | 
-Boolean jcrcontentprotocolHTTPSRelaxed = true; // Boolean | 
+String jcrprimaryType = "jcrprimaryType_example"; // String | 
+String operation = "operation_example"; // String | 
 try {
-    apiInstance.postAgent(runmode, name, jcrprimaryType, jcrcontentcqname, jcrcontentjcrtitle, jcrcontentjcrdescription, jcrcontentslingresourceType, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttransportPassword, jcrcontentlogLevel, jcrcontentnoVersioning, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentretryDelay, jcrcontentserializationType, jcrcontentjcrmixinTypes, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentcqtemplate, jcrcontentenabled, jcrcontentreverseReplication, operation, jcrcontenttriggerDistribute, jcrcontenttriggerModified, jcrcontentuserId, jcrcontentprotocolHTTPSRelaxed);
+    apiInstance.postAgent(runmode, name, jcrcontentcqname, jcrcontentcqtemplate, jcrcontentenabled, jcrcontentjcrdescription, jcrcontentjcrmixinTypes, jcrcontentjcrtitle, jcrcontentlogLevel, jcrcontentnoVersioning, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentprotocolHTTPSRelaxed, jcrcontentretryDelay, jcrcontentreverseReplication, jcrcontentserializationType, jcrcontentslingresourceType, jcrcontenttransportPassword, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttriggerDistribute, jcrcontenttriggerModified, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentuserId, jcrprimaryType, operation);
 } catch (ApiException e) {
     System.err.println("Exception when calling SlingApi#postAgent");
     e.printStackTrace();
@@ -464,32 +464,32 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **runmode** | **String**|  |
  **name** | **String**|  |
- **jcrprimaryType** | **String**|  | [optional]
  **jcrcontentcqname** | **String**|  | [optional]
- **jcrcontentjcrtitle** | **String**|  | [optional]
+ **jcrcontentcqtemplate** | **String**|  | [optional]
+ **jcrcontentenabled** | **Boolean**|  | [optional]
  **jcrcontentjcrdescription** | **String**|  | [optional]
- **jcrcontentslingresourceType** | **String**|  | [optional]
- **jcrcontenttransportUri** | **String**|  | [optional]
- **jcrcontenttransportUser** | **String**|  | [optional]
- **jcrcontenttransportPassword** | **String**|  | [optional]
+ **jcrcontentjcrmixinTypes** | **String**|  | [optional]
+ **jcrcontentjcrtitle** | **String**|  | [optional]
  **jcrcontentlogLevel** | **String**|  | [optional]
  **jcrcontentnoVersioning** | **Boolean**|  | [optional]
  **jcrcontentprotocolHTTPHeaders** | [**List&lt;String&gt;**](String.md)|  | [optional]
  **jcrcontentprotocolHTTPHeadersTypeHint** | **String**|  | [optional]
  **jcrcontentprotocolHTTPMethod** | **String**|  | [optional]
+ **jcrcontentprotocolHTTPSRelaxed** | **Boolean**|  | [optional]
  **jcrcontentretryDelay** | **String**|  | [optional]
- **jcrcontentserializationType** | **String**|  | [optional]
- **jcrcontentjcrmixinTypes** | **String**|  | [optional]
- **jcrcontenttriggerReceive** | **Boolean**|  | [optional]
- **jcrcontenttriggerSpecific** | **Boolean**|  | [optional]
- **jcrcontentcqtemplate** | **String**|  | [optional]
- **jcrcontentenabled** | **Boolean**|  | [optional]
  **jcrcontentreverseReplication** | **Boolean**|  | [optional]
- **operation** | **String**|  | [optional]
+ **jcrcontentserializationType** | **String**|  | [optional]
+ **jcrcontentslingresourceType** | **String**|  | [optional]
+ **jcrcontenttransportPassword** | **String**|  | [optional]
+ **jcrcontenttransportUri** | **String**|  | [optional]
+ **jcrcontenttransportUser** | **String**|  | [optional]
  **jcrcontenttriggerDistribute** | **Boolean**|  | [optional]
  **jcrcontenttriggerModified** | **Boolean**|  | [optional]
+ **jcrcontenttriggerReceive** | **Boolean**|  | [optional]
+ **jcrcontenttriggerSpecific** | **Boolean**|  | [optional]
  **jcrcontentuserId** | **String**|  | [optional]
- **jcrcontentprotocolHTTPSRelaxed** | **Boolean**|  | [optional]
+ **jcrprimaryType** | **String**|  | [optional]
+ **operation** | **String**|  | [optional]
 
 ### Return type
 

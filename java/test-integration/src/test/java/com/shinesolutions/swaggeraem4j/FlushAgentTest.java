@@ -58,9 +58,7 @@ public class FlushAgentTest {
 		String jcrContentTransportPassword = "";
 		String jcrContentLogLevel = "error";
 		boolean jcrContentNoVersioning = true;
-		List<String> jcrContentProtocolHTTPHeaders = Arrays.asList(
-				"CQ-Action:{action}", "CQ-Handle:{path}",
-				"CQ-Path:{path}");
+		List<String> jcrContentProtocolHTTPHeaders = Arrays.asList("CQ-Action:{action}", "CQ-Handle:{path}", "CQ-Path:{path}");
 		String jcrContentProtocolHTTPHeadersTypeHint = "String[]";
 		String jcrContentProtocolHTTPMethod = "GET";
 		String jcrContentRetryDelay = "30000";
@@ -72,38 +70,34 @@ public class FlushAgentTest {
 		boolean jcrContentEnabled = true;
 		boolean jcrReverseReplication = true;
 		String operation = null;
-		Boolean jcrcontenttriggerDistribute = null;
-		Boolean jcrcontenttriggerModified = null;
-		String jcrcontentuserId = null;
-		Boolean jcrcontentprotocolHTTPSRelaxed = null;
+		Boolean jcrContentTriggerDistribute = null;
+		Boolean jcrContentTriggerModified = null;
+		String jcrContentUserId = null;
+		Boolean jcrContentProtocolHTTPSRelaxed = null;
 
 		ApiResponse<Void> response = sling.postAgentWithHttpInfo(runMode, name,
-				jcrPrimaryType, jcrContentCqName, jcrContentJcrTitle,
-				jcrContentJcrDescription, jcrContentSlingResourceType,
-				jcrContentTransportUri, jcrContentTransportUser,
-				jcrContentTransportPassword, jcrContentLogLevel,
-				jcrContentNoVersioning, jcrContentProtocolHTTPHeaders,
-				jcrContentProtocolHTTPHeadersTypeHint,
-				jcrContentProtocolHTTPMethod, jcrContentRetryDelay,
-				jcrContentSerializationType, jcrContentJcrMixinTypes,
-				jcrContentTriggerReceive, jcrContentTriggerSpecific,
-				jcrContentCqTemplate, jcrContentEnabled, jcrReverseReplication,
-				operation, jcrcontenttriggerDistribute, jcrcontenttriggerModified,
-				jcrcontentuserId, jcrcontentprotocolHTTPSRelaxed);
+				jcrContentCqName, jcrContentCqTemplate, jcrContentEnabled,
+				jcrContentJcrDescription, jcrContentJcrMixinTypes, jcrContentJcrTitle,
+				jcrContentLogLevel, jcrContentNoVersioning, jcrContentProtocolHTTPHeaders,
+				jcrContentProtocolHTTPHeadersTypeHint, jcrContentProtocolHTTPMethod,
+				jcrContentProtocolHTTPSRelaxed, jcrContentRetryDelay, jcrReverseReplication,
+				jcrContentSerializationType, jcrContentSlingResourceType,
+				jcrContentTransportPassword, jcrContentTransportUri, jcrContentTransportUser,
+				jcrContentTriggerDistribute, jcrContentTriggerModified, jcrContentTriggerReceive,
+				jcrContentTriggerSpecific, jcrContentUserId, jcrPrimaryType,
+				operation);
 
 		assertEquals(201, response.getStatusCode());
 
 		// Update an existing flush agent
 		runMode = "author";
 		name = "some-flush-agent";
-		jcrPrimaryType = "cq:Page";
 		jcrContentCqName = "some-flush-agent";
-		jcrContentJcrTitle = "Some New Flush Agent Title";
+		jcrContentCqTemplate = "";
+		jcrContentEnabled = false;
 		jcrContentJcrDescription = "Some New Flush Agent Description";
-		jcrContentSlingResourceType = "";
-		jcrContentTransportUri = "";
-		jcrContentTransportUser = "";
-		jcrContentTransportPassword = "";
+		jcrContentJcrMixinTypes = null;
+		jcrContentJcrTitle = "Some New Flush Agent Title";
 		jcrContentLogLevel = "";
 		jcrContentNoVersioning = false;
 		jcrContentProtocolHTTPHeaders = Collections.emptyList();
@@ -111,31 +105,31 @@ public class FlushAgentTest {
 		jcrContentProtocolHTTPMethod = "";
 		jcrContentRetryDelay = "";
 		jcrContentSerializationType = "";
-		jcrContentJcrMixinTypes = null;
+		jcrContentSlingResourceType = "";
+		jcrContentTransportPassword = "";
+		jcrContentTransportUri = "";
+		jcrContentTransportUser = "";
 		jcrContentTriggerReceive = false;
 		jcrContentTriggerSpecific = false;
-		jcrContentCqTemplate = "";
-		jcrContentEnabled = false;
+		jcrPrimaryType = "cq:Page";
 		jcrReverseReplication = false;
+		jcrContentProtocolHTTPSRelaxed = null;
+		jcrContentTriggerDistribute = null;
+		jcrContentTriggerModified = null;
+		jcrContentUserId = null;
 		operation = null;
-		jcrcontenttriggerDistribute = null;
-		jcrcontenttriggerModified = null;
-		jcrcontentuserId = null;
-		jcrcontentprotocolHTTPSRelaxed = null;
 
-		response = sling.postAgentWithHttpInfo(runMode, name, jcrPrimaryType,
-				jcrContentCqName, jcrContentJcrTitle, jcrContentJcrDescription,
-				jcrContentSlingResourceType, jcrContentTransportUri,
-				jcrContentTransportUser, jcrContentTransportPassword,
-				jcrContentLogLevel, jcrContentNoVersioning,
-				jcrContentProtocolHTTPHeaders,
-				jcrContentProtocolHTTPHeadersTypeHint,
-				jcrContentProtocolHTTPMethod, jcrContentRetryDelay,
-				jcrContentSerializationType, jcrContentJcrMixinTypes,
-				jcrContentTriggerReceive, jcrContentTriggerSpecific,
-				jcrContentCqTemplate, jcrContentEnabled, jcrReverseReplication,
-				operation, jcrcontenttriggerDistribute, jcrcontenttriggerModified,
-				jcrcontentuserId, jcrcontentprotocolHTTPSRelaxed);
+		response = sling.postAgentWithHttpInfo(runMode, name,
+			jcrContentCqName, jcrContentCqTemplate, jcrContentEnabled,
+			jcrContentJcrDescription, jcrContentJcrMixinTypes, jcrContentJcrTitle,
+			jcrContentLogLevel, jcrContentNoVersioning, jcrContentProtocolHTTPHeaders,
+			jcrContentProtocolHTTPHeadersTypeHint, jcrContentProtocolHTTPMethod,
+			jcrContentProtocolHTTPSRelaxed, jcrContentRetryDelay, jcrReverseReplication,
+			jcrContentSerializationType, jcrContentSlingResourceType,
+			jcrContentTransportPassword, jcrContentTransportUri, jcrContentTransportUser,
+			jcrContentTriggerDistribute, jcrContentTriggerModified, jcrContentTriggerReceive,
+			jcrContentTriggerSpecific, jcrContentUserId, jcrPrimaryType,
+			operation);
 
 		assertEquals(200, response.getStatusCode());
 	}

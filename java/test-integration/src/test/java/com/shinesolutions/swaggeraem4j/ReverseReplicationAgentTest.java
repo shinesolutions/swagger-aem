@@ -70,24 +70,22 @@ public class ReverseReplicationAgentTest {
 		boolean jcrContentEnabled = true;
 		boolean jcrReverseReplication = true;
 		String operation = null;
-		Boolean jcrcontenttriggerDistribute = null;
-		Boolean jcrcontenttriggerModified = null;
-		String jcrcontentuserId = "admin";
-		Boolean jcrcontentprotocolHTTPSRelaxed = null;
+		Boolean jcrContentTriggerDistribute = null;
+		Boolean jcrContentTriggerModified = null;
+		String jcrContentUserId = null;
+		Boolean jcrContentProtocolHTTPSRelaxed = null;
 
 		ApiResponse<Void> response = sling.postAgentWithHttpInfo(runMode, name,
-				jcrPrimaryType, jcrContentCqName, jcrContentJcrTitle,
-				jcrContentJcrDescription, jcrContentSlingResourceType,
-				jcrContentTransportUri, jcrContentTransportUser,
-				jcrContentTransportPassword, jcrContentLogLevel,
-				jcrContentNoVersioning, jcrContentProtocolHTTPHeaders,
-				jcrContentProtocolHTTPHeadersTypeHint,
-				jcrContentProtocolHTTPMethod, jcrContentRetryDelay,
-				jcrContentSerializationType, jcrContentJcrMixinTypes,
-				jcrContentTriggerReceive, jcrContentTriggerSpecific,
-				jcrContentCqTemplate, jcrContentEnabled, jcrReverseReplication,
-				operation, jcrcontenttriggerDistribute, jcrcontenttriggerModified,
-				jcrcontentuserId, jcrcontentprotocolHTTPSRelaxed);
+				jcrContentCqName, jcrContentCqTemplate, jcrContentEnabled,
+				jcrContentJcrDescription, jcrContentJcrMixinTypes, jcrContentJcrTitle,
+				jcrContentLogLevel, jcrContentNoVersioning, jcrContentProtocolHTTPHeaders,
+				jcrContentProtocolHTTPHeadersTypeHint, jcrContentProtocolHTTPMethod,
+				jcrContentProtocolHTTPSRelaxed, jcrContentRetryDelay, jcrReverseReplication,
+				jcrContentSerializationType, jcrContentSlingResourceType,
+				jcrContentTransportPassword, jcrContentTransportUri, jcrContentTransportUser,
+				jcrContentTriggerDistribute, jcrContentTriggerModified, jcrContentTriggerReceive,
+				jcrContentTriggerSpecific, jcrContentUserId, jcrPrimaryType,
+				operation);
 
 		assertEquals(201, response.getStatusCode());
 
@@ -115,25 +113,23 @@ public class ReverseReplicationAgentTest {
 		jcrContentCqTemplate = "";
 		jcrContentEnabled = true;
 		jcrReverseReplication = true;
+		jcrContentProtocolHTTPSRelaxed = null;
+		jcrContentTriggerDistribute = null;
+		jcrContentTriggerModified = null;
+		jcrContentUserId = null;
 		operation = null;
-		jcrcontenttriggerDistribute = null;
-		jcrcontenttriggerModified = null;
-		jcrcontentuserId = "admin";
-		jcrcontentprotocolHTTPSRelaxed = null;
 
-		response = sling.postAgentWithHttpInfo(runMode, name, jcrPrimaryType,
-				jcrContentCqName, jcrContentJcrTitle, jcrContentJcrDescription,
-				jcrContentSlingResourceType, jcrContentTransportUri,
-				jcrContentTransportUser, jcrContentTransportPassword,
-				jcrContentLogLevel, jcrContentNoVersioning,
-				jcrContentProtocolHTTPHeaders,
-				jcrContentProtocolHTTPHeadersTypeHint,
-				jcrContentProtocolHTTPMethod, jcrContentRetryDelay,
-				jcrContentSerializationType, jcrContentJcrMixinTypes,
-				jcrContentTriggerReceive, jcrContentTriggerSpecific,
-				jcrContentCqTemplate, jcrContentEnabled, jcrReverseReplication,
-				operation, jcrcontenttriggerDistribute, jcrcontenttriggerModified,
-				jcrcontentuserId, jcrcontentprotocolHTTPSRelaxed);
+		response = sling.postAgentWithHttpInfo(runMode, name,
+			jcrContentCqName, jcrContentCqTemplate, jcrContentEnabled,
+			jcrContentJcrDescription, jcrContentJcrMixinTypes, jcrContentJcrTitle,
+			jcrContentLogLevel, jcrContentNoVersioning, jcrContentProtocolHTTPHeaders,
+			jcrContentProtocolHTTPHeadersTypeHint, jcrContentProtocolHTTPMethod,
+			jcrContentProtocolHTTPSRelaxed, jcrContentRetryDelay, jcrReverseReplication,
+			jcrContentSerializationType, jcrContentSlingResourceType,
+			jcrContentTransportPassword, jcrContentTransportUri, jcrContentTransportUser,
+			jcrContentTriggerDistribute, jcrContentTriggerModified, jcrContentTriggerReceive,
+			jcrContentTriggerSpecific, jcrContentUserId, jcrPrimaryType,
+			operation);
 
 		assertEquals(200, response.getStatusCode());
 	}
