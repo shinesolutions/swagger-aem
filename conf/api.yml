@@ -488,6 +488,14 @@ paths:
           in: query
           required: false
           type: string
+        - name: jcr:content/jcr:lastModified
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/jcr:lastModifiedBy
+          in: query
+          required: false
+          type: string
         - name: jcr:content/jcr:mixinTypes
           in: query
           required: false
@@ -500,10 +508,26 @@ paths:
           in: query
           required: false
           type: string
+        - name: jcr:content/noStatusUpdate
+          in: query
+          required: false
+          type: boolean
         - name: jcr:content/noVersioning
           in: query
           required: false
           type: boolean
+        - name: jcr:content/protocolHTTPConnectionClose
+          in: query
+          required: false
+          type: boolean
+        - name: jcr:content/protocolConnectTimeout
+          in: query
+          required: false
+          type: number
+        - name: jcr:content/protocolHTTPExpired
+          in: query
+          required: false
+          type: string
         - name: jcr:content/protocolHTTPHeaders
           in: query
           required: false
@@ -521,6 +545,54 @@ paths:
           in: query
           required: false
           type: boolean
+        - name: jcr:content/protocolInterface
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/protocolSocketTimeout
+          in: query
+          required: false
+          type: number
+        - name: jcr:content/protocolVersion
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/proxyNTLMDomain
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/proxyNTLMHost
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/proxyHost
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/proxyPort
+          in: query
+          required: false
+          type: number
+        - name: jcr:content/proxyUser
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/proxyPassword
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/queueBatchMaxSize
+          in: query
+          required: false
+          type: number
+        - name: jcr:content/queueBatchMode
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/queueBatchWaitTime
+          in: query
+          required: false
+          type: number
         - name: jcr:content/retryDelay
           in: query
           required: false
@@ -534,6 +606,18 @@ paths:
           required: false
           type: string
         - name: jcr:content/sling:resourceType
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/ssl
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/transportNTLMDomain
+          in: query
+          required: false
+          type: string
+        - name: jcr:content/transportNTLMHost
           in: query
           required: false
           type: string
@@ -554,6 +638,10 @@ paths:
           required: false
           type: boolean
         - name: jcr:content/triggerModified
+          in: query
+          required: false
+          type: boolean
+        - name: jcr:content/triggerOnOffTime
           in: query
           required: false
           type: boolean

@@ -1,5 +1,6 @@
 ### 1.1.12
 * Rearrange postAgent parameters in alphabetical order
+* Add 22 optional parameters to postAgent operation #22
 
 ### 1.1.11
 * Rename postConfigAemPasswordReset operation's property to pwdreset.authorizables
