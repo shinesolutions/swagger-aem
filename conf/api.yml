@@ -516,7 +516,7 @@ paths:
           in: query
           required: false
           type: boolean
-        - name: jcr:content/protocolHTTPConnectionClose
+        - name: jcr:content/protocolHTTPConnectionClosed
           in: query
           required: false
           type: boolean
