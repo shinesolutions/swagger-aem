@@ -1,5 +1,6 @@
 ### 0.9.4
 * Rearrange optional parameters postAgentWithHttpInfo method signature to be in alphabetical order
+* Add 22 optional parameters to agents support #22
 
 ### 0.9.3
 * Add Apache Sling DavEx Servlet OSGI config support #11

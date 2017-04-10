@@ -1,5 +1,6 @@
 package com.shinesolutions.swaggeraem4j;
 
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 
@@ -68,24 +69,84 @@ public class ReplicationAgentTest {
 		boolean jcrContentTriggerSpecific = false;
 		String jcrContentCqTemplate = "/libs/cq/replication/templates/agent";
 		boolean jcrContentEnabled = true;
-		boolean jcrReverseReplication = false;
+		boolean jcrContentReverseReplication = false;
 		String operation = null;
 		Boolean jcrContentTriggerDistribute = null;
 		Boolean jcrContentTriggerModified = null;
 		String jcrContentUserId = null;
 		Boolean jcrContentProtocolHTTPSRelaxed = null;
+		String jcrContentjcrlastModified = null;
+		String jcrContentjcrlastModifiedBy = null;
+		Boolean jcrContentnoStatusUpdate = null;
+		Boolean jcrContentprotocolHTTPConnectionClose = null;
+		BigDecimal jcrContentprotocolConnectTimeout = null;
+		String jcrContentprotocolHTTPExpired = null;
+		String jcrContentprotocolInterface = null;
+		BigDecimal jcrContentprotocolSocketTimeout = null;
+		String jcrContentprotocolVersion = null;
+		String jcrContentproxyNTLMDomain = null;
+		String jcrContentproxyNTLMHost = null;
+		String jcrContentproxyHost = null;
+		BigDecimal jcrContentproxyPort = null;
+		String jcrContentproxyUser = null;
+		String jcrContentproxyPassword = null;
+		BigDecimal jcrContentqueueBatchMaxSize = null;
+		String jcrContentqueueBatchMode = null;
+		BigDecimal jcrContentqueueBatchWaitTime = null;
+		String jcrContentssl = null;
+		String jcrContenttransportNTLMDomain = null;
+		String jcrContenttransportNTLMHost = null;
+		Boolean jcrContenttriggerOnOffTime = null;
 
 		ApiResponse<Void> response = sling.postAgentWithHttpInfo(runMode, name,
-				jcrContentCqName, jcrContentCqTemplate, jcrContentEnabled,
-				jcrContentJcrDescription, jcrContentJcrMixinTypes, jcrContentJcrTitle,
-				jcrContentLogLevel, jcrContentNoVersioning, jcrContentProtocolHTTPHeaders,
-				jcrContentProtocolHTTPHeadersTypeHint, jcrContentProtocolHTTPMethod,
-				jcrContentProtocolHTTPSRelaxed, jcrContentRetryDelay, jcrReverseReplication,
-				jcrContentSerializationType, jcrContentSlingResourceType,
-				jcrContentTransportPassword, jcrContentTransportUri, jcrContentTransportUser,
-				jcrContentTriggerDistribute, jcrContentTriggerModified, jcrContentTriggerReceive,
-				jcrContentTriggerSpecific, jcrContentUserId, jcrPrimaryType,
-				operation);
+			jcrContentCqName,
+			jcrContentCqTemplate,
+			jcrContentEnabled,
+			jcrContentJcrDescription,
+			jcrContentjcrlastModified,
+			jcrContentjcrlastModifiedBy,
+			jcrContentJcrMixinTypes,
+			jcrContentJcrTitle,
+			jcrContentLogLevel,
+			jcrContentnoStatusUpdate,
+			jcrContentNoVersioning,
+			jcrContentprotocolConnectTimeout,
+			jcrContentprotocolHTTPConnectionClose,
+			jcrContentprotocolHTTPExpired,
+			jcrContentProtocolHTTPHeaders,
+			jcrContentProtocolHTTPHeadersTypeHint,
+			jcrContentProtocolHTTPMethod,
+			jcrContentProtocolHTTPSRelaxed,
+			jcrContentprotocolInterface,
+			jcrContentprotocolSocketTimeout,
+			jcrContentprotocolVersion,
+			jcrContentproxyHost,
+			jcrContentproxyNTLMDomain,
+			jcrContentproxyNTLMHost,
+			jcrContentproxyPassword,
+			jcrContentproxyPort,
+			jcrContentproxyUser,
+			jcrContentqueueBatchMaxSize,
+			jcrContentqueueBatchMode,
+			jcrContentqueueBatchWaitTime,
+			jcrContentRetryDelay,
+			jcrContentReverseReplication,
+			jcrContentSerializationType,
+			jcrContentSlingResourceType,
+			jcrContentssl,
+			jcrContenttransportNTLMDomain,
+			jcrContenttransportNTLMHost,
+			jcrContentTransportPassword,
+			jcrContentTransportUri,
+			jcrContentTransportUser,
+			jcrContentTriggerDistribute,
+			jcrContentTriggerModified,
+			jcrContenttriggerOnOffTime,
+			jcrContentTriggerReceive,
+			jcrContentTriggerSpecific,
+			jcrContentUserId,
+			jcrPrimaryType,
+			operation);
 
 		assertEquals(201, response.getStatusCode());
 
@@ -112,23 +173,83 @@ public class ReplicationAgentTest {
 		jcrContentTriggerReceive = false;
 		jcrContentTriggerSpecific = false;
 		jcrPrimaryType = "cq:Page";
-		jcrReverseReplication = false;
+		jcrContentReverseReplication = false;
 		jcrContentProtocolHTTPSRelaxed = null;
 		jcrContentTriggerDistribute = null;
 		jcrContentTriggerModified = null;
 		jcrContentUserId = null;
 		operation = null;
+		jcrContentjcrlastModified = null;
+		jcrContentjcrlastModifiedBy = null;
+		jcrContentnoStatusUpdate = null;
+		jcrContentprotocolHTTPConnectionClose = null;
+		jcrContentprotocolConnectTimeout = null;
+		jcrContentprotocolHTTPExpired = null;
+		jcrContentprotocolInterface = null;
+		jcrContentprotocolSocketTimeout = null;
+		jcrContentprotocolVersion = null;
+		jcrContentproxyNTLMDomain = null;
+		jcrContentproxyNTLMHost = null;
+		jcrContentproxyHost = null;
+		jcrContentproxyPort = null;
+		jcrContentproxyUser = null;
+		jcrContentproxyPassword = null;
+		jcrContentqueueBatchMaxSize = null;
+		jcrContentqueueBatchMode = null;
+		jcrContentqueueBatchWaitTime = null;
+		jcrContentssl = null;
+		jcrContenttransportNTLMDomain = null;
+		jcrContenttransportNTLMHost = null;
+		jcrContenttriggerOnOffTime = null;
 
 		response = sling.postAgentWithHttpInfo(runMode, name,
-			jcrContentCqName, jcrContentCqTemplate, jcrContentEnabled,
-			jcrContentJcrDescription, jcrContentJcrMixinTypes, jcrContentJcrTitle,
-			jcrContentLogLevel, jcrContentNoVersioning, jcrContentProtocolHTTPHeaders,
-			jcrContentProtocolHTTPHeadersTypeHint, jcrContentProtocolHTTPMethod,
-			jcrContentProtocolHTTPSRelaxed, jcrContentRetryDelay, jcrReverseReplication,
-			jcrContentSerializationType, jcrContentSlingResourceType,
-			jcrContentTransportPassword, jcrContentTransportUri, jcrContentTransportUser,
-			jcrContentTriggerDistribute, jcrContentTriggerModified, jcrContentTriggerReceive,
-			jcrContentTriggerSpecific, jcrContentUserId, jcrPrimaryType,
+			jcrContentCqName,
+			jcrContentCqTemplate,
+			jcrContentEnabled,
+			jcrContentJcrDescription,
+			jcrContentjcrlastModified,
+			jcrContentjcrlastModifiedBy,
+			jcrContentJcrMixinTypes,
+			jcrContentJcrTitle,
+			jcrContentLogLevel,
+			jcrContentnoStatusUpdate,
+			jcrContentNoVersioning,
+			jcrContentprotocolConnectTimeout,
+			jcrContentprotocolHTTPConnectionClose,
+			jcrContentprotocolHTTPExpired,
+			jcrContentProtocolHTTPHeaders,
+			jcrContentProtocolHTTPHeadersTypeHint,
+			jcrContentProtocolHTTPMethod,
+			jcrContentProtocolHTTPSRelaxed,
+			jcrContentprotocolInterface,
+			jcrContentprotocolSocketTimeout,
+			jcrContentprotocolVersion,
+			jcrContentproxyHost,
+			jcrContentproxyNTLMDomain,
+			jcrContentproxyNTLMHost,
+			jcrContentproxyPassword,
+			jcrContentproxyPort,
+			jcrContentproxyUser,
+			jcrContentqueueBatchMaxSize,
+			jcrContentqueueBatchMode,
+			jcrContentqueueBatchWaitTime,
+			jcrContentRetryDelay,
+			jcrContentReverseReplication,
+			jcrContentSerializationType,
+			jcrContentSlingResourceType,
+			jcrContentssl,
+			jcrContenttransportNTLMDomain,
+			jcrContenttransportNTLMHost,
+			jcrContentTransportPassword,
+			jcrContentTransportUri,
+			jcrContentTransportUser,
+			jcrContentTriggerDistribute,
+			jcrContentTriggerModified,
+			jcrContenttriggerOnOffTime,
+			jcrContentTriggerReceive,
+			jcrContentTriggerSpecific,
+			jcrContentUserId,
+			jcrPrimaryType,
 			operation);
 
 		assertEquals(200, response.getStatusCode());

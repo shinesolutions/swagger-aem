@@ -401,7 +401,7 @@ Name | Type | Description  | Notes
 
 <a name="postAgent"></a>
 # **postAgent**
-> postAgent(runmode, name, jcrcontentcqname, jcrcontentcqtemplate, jcrcontentenabled, jcrcontentjcrdescription, jcrcontentjcrlastModified, jcrcontentjcrlastModifiedBy, jcrcontentjcrmixinTypes, jcrcontentjcrtitle, jcrcontentlogLevel, jcrcontentnoStatusUpdate, jcrcontentnoVersioning, jcrcontentprotocolHTTPConnectionClose, jcrcontentprotocolConnectTimeout, jcrcontentprotocolHTTPExpired, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentprotocolHTTPSRelaxed, jcrcontentprotocolInterface, jcrcontentprotocolSocketTimeout, jcrcontentprotocolVersion, jcrcontentproxyNTLMDomain, jcrcontentproxyNTLMHost, jcrcontentproxyHost, jcrcontentproxyPort, jcrcontentproxyUser, jcrcontentproxyPassword, jcrcontentqueueBatchMaxSize, jcrcontentqueueBatchMode, jcrcontentqueueBatchWaitTime, jcrcontentretryDelay, jcrcontentreverseReplication, jcrcontentserializationType, jcrcontentslingresourceType, jcrcontentssl, jcrcontenttransportNTLMDomain, jcrcontenttransportNTLMHost, jcrcontenttransportPassword, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttriggerDistribute, jcrcontenttriggerModified, jcrcontenttriggerOnOffTime, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentuserId, jcrprimaryType, operation)
+> postAgent(runmode, name, jcrcontentcqname, jcrcontentcqtemplate, jcrcontentenabled, jcrcontentjcrdescription, jcrcontentjcrlastModified, jcrcontentjcrlastModifiedBy, jcrcontentjcrmixinTypes, jcrcontentjcrtitle, jcrcontentlogLevel, jcrcontentnoStatusUpdate, jcrcontentnoVersioning, jcrcontentprotocolConnectTimeout, jcrcontentprotocolHTTPConnectionClosed, jcrcontentprotocolHTTPExpired, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentprotocolHTTPSRelaxed, jcrcontentprotocolInterface, jcrcontentprotocolSocketTimeout, jcrcontentprotocolVersion, jcrcontentproxyNTLMDomain, jcrcontentproxyNTLMHost, jcrcontentproxyHost, jcrcontentproxyPassword, jcrcontentproxyPort, jcrcontentproxyUser, jcrcontentqueueBatchMaxSize, jcrcontentqueueBatchMode, jcrcontentqueueBatchWaitTime, jcrcontentretryDelay, jcrcontentreverseReplication, jcrcontentserializationType, jcrcontentslingresourceType, jcrcontentssl, jcrcontenttransportNTLMDomain, jcrcontenttransportNTLMHost, jcrcontenttransportPassword, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttriggerDistribute, jcrcontenttriggerModified, jcrcontenttriggerOnOffTime, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentuserId, jcrprimaryType, operation)
 
 
 
@@ -435,8 +435,8 @@ String jcrcontentjcrtitle = "jcrcontentjcrtitle_example"; // String |
 String jcrcontentlogLevel = "jcrcontentlogLevel_example"; // String | 
 Boolean jcrcontentnoStatusUpdate = true; // Boolean | 
 Boolean jcrcontentnoVersioning = true; // Boolean | 
-Boolean jcrcontentprotocolHTTPConnectionClose = true; // Boolean | 
 BigDecimal jcrcontentprotocolConnectTimeout = new BigDecimal(); // BigDecimal | 
+Boolean jcrcontentprotocolHTTPConnectionClosed = true; // Boolean | 
 String jcrcontentprotocolHTTPExpired = "jcrcontentprotocolHTTPExpired_example"; // String | 
 List<String> jcrcontentprotocolHTTPHeaders = Arrays.asList("jcrcontentprotocolHTTPHeaders_example"); // List<String> | 
 String jcrcontentprotocolHTTPHeadersTypeHint = "jcrcontentprotocolHTTPHeadersTypeHint_example"; // String | 
@@ -448,9 +448,9 @@ String jcrcontentprotocolVersion = "jcrcontentprotocolVersion_example"; // Strin
 String jcrcontentproxyNTLMDomain = "jcrcontentproxyNTLMDomain_example"; // String | 
 String jcrcontentproxyNTLMHost = "jcrcontentproxyNTLMHost_example"; // String | 
 String jcrcontentproxyHost = "jcrcontentproxyHost_example"; // String | 
+String jcrcontentproxyPassword = "jcrcontentproxyPassword_example"; // String | 
 BigDecimal jcrcontentproxyPort = new BigDecimal(); // BigDecimal | 
 String jcrcontentproxyUser = "jcrcontentproxyUser_example"; // String | 
-String jcrcontentproxyPassword = "jcrcontentproxyPassword_example"; // String | 
 BigDecimal jcrcontentqueueBatchMaxSize = new BigDecimal(); // BigDecimal | 
 String jcrcontentqueueBatchMode = "jcrcontentqueueBatchMode_example"; // String | 
 BigDecimal jcrcontentqueueBatchWaitTime = new BigDecimal(); // BigDecimal | 
@@ -473,7 +473,7 @@ String jcrcontentuserId = "jcrcontentuserId_example"; // String |
 String jcrprimaryType = "jcrprimaryType_example"; // String | 
 String operation = "operation_example"; // String | 
 try {
-    apiInstance.postAgent(runmode, name, jcrcontentcqname, jcrcontentcqtemplate, jcrcontentenabled, jcrcontentjcrdescription, jcrcontentjcrlastModified, jcrcontentjcrlastModifiedBy, jcrcontentjcrmixinTypes, jcrcontentjcrtitle, jcrcontentlogLevel, jcrcontentnoStatusUpdate, jcrcontentnoVersioning, jcrcontentprotocolHTTPConnectionClose, jcrcontentprotocolConnectTimeout, jcrcontentprotocolHTTPExpired, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentprotocolHTTPSRelaxed, jcrcontentprotocolInterface, jcrcontentprotocolSocketTimeout, jcrcontentprotocolVersion, jcrcontentproxyNTLMDomain, jcrcontentproxyNTLMHost, jcrcontentproxyHost, jcrcontentproxyPort, jcrcontentproxyUser, jcrcontentproxyPassword, jcrcontentqueueBatchMaxSize, jcrcontentqueueBatchMode, jcrcontentqueueBatchWaitTime, jcrcontentretryDelay, jcrcontentreverseReplication, jcrcontentserializationType, jcrcontentslingresourceType, jcrcontentssl, jcrcontenttransportNTLMDomain, jcrcontenttransportNTLMHost, jcrcontenttransportPassword, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttriggerDistribute, jcrcontenttriggerModified, jcrcontenttriggerOnOffTime, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentuserId, jcrprimaryType, operation);
+    apiInstance.postAgent(runmode, name, jcrcontentcqname, jcrcontentcqtemplate, jcrcontentenabled, jcrcontentjcrdescription, jcrcontentjcrlastModified, jcrcontentjcrlastModifiedBy, jcrcontentjcrmixinTypes, jcrcontentjcrtitle, jcrcontentlogLevel, jcrcontentnoStatusUpdate, jcrcontentnoVersioning, jcrcontentprotocolConnectTimeout, jcrcontentprotocolHTTPConnectionClosed, jcrcontentprotocolHTTPExpired, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentprotocolHTTPSRelaxed, jcrcontentprotocolInterface, jcrcontentprotocolSocketTimeout, jcrcontentprotocolVersion, jcrcontentproxyNTLMDomain, jcrcontentproxyNTLMHost, jcrcontentproxyHost, jcrcontentproxyPassword, jcrcontentproxyPort, jcrcontentproxyUser, jcrcontentqueueBatchMaxSize, jcrcontentqueueBatchMode, jcrcontentqueueBatchWaitTime, jcrcontentretryDelay, jcrcontentreverseReplication, jcrcontentserializationType, jcrcontentslingresourceType, jcrcontentssl, jcrcontenttransportNTLMDomain, jcrcontenttransportNTLMHost, jcrcontenttransportPassword, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttriggerDistribute, jcrcontenttriggerModified, jcrcontenttriggerOnOffTime, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentuserId, jcrprimaryType, operation);
 } catch (ApiException e) {
     System.err.println("Exception when calling SlingApi#postAgent");
     e.printStackTrace();
@@ -497,8 +497,8 @@ Name | Type | Description  | Notes
  **jcrcontentlogLevel** | **String**|  | [optional]
  **jcrcontentnoStatusUpdate** | **Boolean**|  | [optional]
  **jcrcontentnoVersioning** | **Boolean**|  | [optional]
- **jcrcontentprotocolHTTPConnectionClose** | **Boolean**|  | [optional]
  **jcrcontentprotocolConnectTimeout** | **BigDecimal**|  | [optional]
+ **jcrcontentprotocolHTTPConnectionClosed** | **Boolean**|  | [optional]
  **jcrcontentprotocolHTTPExpired** | **String**|  | [optional]
  **jcrcontentprotocolHTTPHeaders** | [**List&lt;String&gt;**](String.md)|  | [optional]
  **jcrcontentprotocolHTTPHeadersTypeHint** | **String**|  | [optional]
@@ -510,9 +510,9 @@ Name | Type | Description  | Notes
  **jcrcontentproxyNTLMDomain** | **String**|  | [optional]
  **jcrcontentproxyNTLMHost** | **String**|  | [optional]
  **jcrcontentproxyHost** | **String**|  | [optional]
+ **jcrcontentproxyPassword** | **String**|  | [optional]
  **jcrcontentproxyPort** | **BigDecimal**|  | [optional]
  **jcrcontentproxyUser** | **String**|  | [optional]
- **jcrcontentproxyPassword** | **String**|  | [optional]
  **jcrcontentqueueBatchMaxSize** | **BigDecimal**|  | [optional]
  **jcrcontentqueueBatchMode** | **String**|  | [optional]
  **jcrcontentqueueBatchWaitTime** | **BigDecimal**|  | [optional]

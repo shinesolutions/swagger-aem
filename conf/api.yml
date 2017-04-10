@@ -516,14 +516,14 @@ paths:
           in: query
           required: false
           type: boolean
-        - name: jcr:content/protocolHTTPConnectionClosed
-          in: query
-          required: false
-          type: boolean
         - name: jcr:content/protocolConnectTimeout
           in: query
           required: false
           type: number
+        - name: jcr:content/protocolHTTPConnectionClosed
+          in: query
+          required: false
+          type: boolean
         - name: jcr:content/protocolHTTPExpired
           in: query
           required: false
@@ -569,15 +569,15 @@ paths:
           in: query
           required: false
           type: string
+        - name: jcr:content/proxyPassword
+          in: query
+          required: false
+          type: string
         - name: jcr:content/proxyPort
           in: query
           required: false
           type: number
         - name: jcr:content/proxyUser
-          in: query
-          required: false
-          type: string
-        - name: jcr:content/proxyPassword
           in: query
           required: false
           type: string
