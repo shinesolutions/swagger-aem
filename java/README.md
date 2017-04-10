@@ -5,11 +5,7 @@ swaggeraem4j is a Java client generated from [Swagger AEM specification](https:/
 
 This Java client returns raw HTTP response AS-IS. An abstraction layer with resource-oriented API and convenient response handling (a la [ruby_aem](https://github.com/shinesolutions/ruby_aem)) is still a work in progress.
 
-| swaggeraem4j | Swagger AEM Spec | Supported JDK       | Swagger Codegen CLI | Documentation                                                             |
-|--------------|------------------|---------------------|---------------------|---------------------------------------------------------------------------|
-| 0.9.2        | 1.1.4            | 1.8                 | 20170305            | [API](https://shinesolutions.github.io/swagger-aem/java/0.9.2/index.html) |
-| 0.9.1        | 1.1.3            | 1.8                 | 20161128            | [API](https://shinesolutions.github.io/swagger-aem/java/0.9.1/index.html) |
-| 0.9.0        | 1.1.1            | 1.8                 | 20161104            | [API](https://shinesolutions.github.io/swagger-aem/java/0.9.0/index.html) |
+[Versions History](../docs/java/versions.md)
 
 Install
 -------
