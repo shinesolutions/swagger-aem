@@ -204,4 +204,34 @@ describe 'ConfigProperty' do
 
   end
 
+  describe 'test create AEM Health Check properties' do
+
+    it 'should succeed when path node already exists' do
+
+      # ensure http OSGI config node exists
+      begin
+        data, status_code, headers = @sling.post_path_with_http_info(
+          path = 'apps/system/config.author',
+          jcrprimary_type = 'sling:OsgiConfig',
+          name = 'com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck'
+        )
+        # create config when it does not exist
+        expect([200, 201]).to include(status_code)
+      rescue SwaggerAemClient::ApiError => err
+        # ignore when it already exists
+        expect(err.code).to eq(500)
+      end
+
+      data, status_code, headers = @custom.post_config_aem_health_check_servlet_with_http_info(
+        runmode = 'author',
+        opts = {
+          :bundles_ignored => ['com.day.cq.dam.dam-webdav-support'],
+          :bundles_ignored_type_hint => 'String[]',
+        }
+      )
+      expect([200, 201]).to include(status_code)
+    end
+
+  end
+
 end
