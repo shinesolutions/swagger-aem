@@ -416,32 +416,54 @@ runmode = "runmode_example" # String |
 name = "name_example" # String | 
 
 opts = { 
-  jcrprimary_type: "jcrprimary_type_example", # String | 
   jcrcontentcqname: "jcrcontentcqname_example", # String | 
-  jcrcontentjcrtitle: "jcrcontentjcrtitle_example", # String | 
+  jcrcontentcqtemplate: "jcrcontentcqtemplate_example", # String | 
+  jcrcontentenabled: true, # BOOLEAN | 
   jcrcontentjcrdescription: "jcrcontentjcrdescription_example", # String | 
-  jcrcontentslingresource_type: "jcrcontentslingresource_type_example", # String | 
-  jcrcontenttransport_uri: "jcrcontenttransport_uri_example", # String | 
-  jcrcontenttransport_user: "jcrcontenttransport_user_example", # String | 
-  jcrcontenttransport_password: "jcrcontenttransport_password_example", # String | 
+  jcrcontentjcrlast_modified: "jcrcontentjcrlast_modified_example", # String | 
+  jcrcontentjcrlast_modified_by: "jcrcontentjcrlast_modified_by_example", # String | 
+  jcrcontentjcrmixin_types: "jcrcontentjcrmixin_types_example", # String | 
+  jcrcontentjcrtitle: "jcrcontentjcrtitle_example", # String | 
   jcrcontentlog_level: "jcrcontentlog_level_example", # String | 
+  jcrcontentno_status_update: true, # BOOLEAN | 
   jcrcontentno_versioning: true, # BOOLEAN | 
+  jcrcontentprotocol_connect_timeout: 3.4, # Float | 
+  jcrcontentprotocol_http_connection_closed: true, # BOOLEAN | 
+  jcrcontentprotocol_http_expired: "jcrcontentprotocol_http_expired_example", # String | 
   jcrcontentprotocol_http_headers: ["jcrcontentprotocol_http_headers_example"], # Array<String> | 
   jcrcontentprotocol_http_headers_type_hint: "jcrcontentprotocol_http_headers_type_hint_example", # String | 
   jcrcontentprotocol_http_method: "jcrcontentprotocol_http_method_example", # String | 
+  jcrcontentprotocol_https_relaxed: true, # BOOLEAN | 
+  jcrcontentprotocol_interface: "jcrcontentprotocol_interface_example", # String | 
+  jcrcontentprotocol_socket_timeout: 3.4, # Float | 
+  jcrcontentprotocol_version: "jcrcontentprotocol_version_example", # String | 
+  jcrcontentproxy_ntlm_domain: "jcrcontentproxy_ntlm_domain_example", # String | 
+  jcrcontentproxy_ntlm_host: "jcrcontentproxy_ntlm_host_example", # String | 
+  jcrcontentproxy_host: "jcrcontentproxy_host_example", # String | 
+  jcrcontentproxy_password: "jcrcontentproxy_password_example", # String | 
+  jcrcontentproxy_port: 3.4, # Float | 
+  jcrcontentproxy_user: "jcrcontentproxy_user_example", # String | 
+  jcrcontentqueue_batch_max_size: 3.4, # Float | 
+  jcrcontentqueue_batch_mode: "jcrcontentqueue_batch_mode_example", # String | 
+  jcrcontentqueue_batch_wait_time: 3.4, # Float | 
   jcrcontentretry_delay: "jcrcontentretry_delay_example", # String | 
-  jcrcontentserialization_type: "jcrcontentserialization_type_example", # String | 
-  jcrcontentjcrmixin_types: "jcrcontentjcrmixin_types_example", # String | 
-  jcrcontenttrigger_receive: true, # BOOLEAN | 
-  jcrcontenttrigger_specific: true, # BOOLEAN | 
-  jcrcontentcqtemplate: "jcrcontentcqtemplate_example", # String | 
-  jcrcontentenabled: true, # BOOLEAN | 
   jcrcontentreverse_replication: true, # BOOLEAN | 
-  operation: "operation_example", # String | 
+  jcrcontentserialization_type: "jcrcontentserialization_type_example", # String | 
+  jcrcontentslingresource_type: "jcrcontentslingresource_type_example", # String | 
+  jcrcontentssl: "jcrcontentssl_example", # String | 
+  jcrcontenttransport_ntlm_domain: "jcrcontenttransport_ntlm_domain_example", # String | 
+  jcrcontenttransport_ntlm_host: "jcrcontenttransport_ntlm_host_example", # String | 
+  jcrcontenttransport_password: "jcrcontenttransport_password_example", # String | 
+  jcrcontenttransport_uri: "jcrcontenttransport_uri_example", # String | 
+  jcrcontenttransport_user: "jcrcontenttransport_user_example", # String | 
   jcrcontenttrigger_distribute: true, # BOOLEAN | 
   jcrcontenttrigger_modified: true, # BOOLEAN | 
+  jcrcontenttrigger_on_off_time: true, # BOOLEAN | 
+  jcrcontenttrigger_receive: true, # BOOLEAN | 
+  jcrcontenttrigger_specific: true, # BOOLEAN | 
   jcrcontentuser_id: "jcrcontentuser_id_example", # String | 
-  jcrcontentprotocol_https_relaxed: true # BOOLEAN | 
+  jcrprimary_type: "jcrprimary_type_example", # String | 
+  operation: "operation_example" # String | 
 }
 
 begin
@@ -457,32 +479,54 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **runmode** | **String**|  | 
  **name** | **String**|  | 
- **jcrprimary_type** | **String**|  | [optional] 
  **jcrcontentcqname** | **String**|  | [optional] 
- **jcrcontentjcrtitle** | **String**|  | [optional] 
+ **jcrcontentcqtemplate** | **String**|  | [optional] 
+ **jcrcontentenabled** | **BOOLEAN**|  | [optional] 
  **jcrcontentjcrdescription** | **String**|  | [optional] 
- **jcrcontentslingresource_type** | **String**|  | [optional] 
- **jcrcontenttransport_uri** | **String**|  | [optional] 
- **jcrcontenttransport_user** | **String**|  | [optional] 
- **jcrcontenttransport_password** | **String**|  | [optional] 
+ **jcrcontentjcrlast_modified** | **String**|  | [optional] 
+ **jcrcontentjcrlast_modified_by** | **String**|  | [optional] 
+ **jcrcontentjcrmixin_types** | **String**|  | [optional] 
+ **jcrcontentjcrtitle** | **String**|  | [optional] 
  **jcrcontentlog_level** | **String**|  | [optional] 
+ **jcrcontentno_status_update** | **BOOLEAN**|  | [optional] 
  **jcrcontentno_versioning** | **BOOLEAN**|  | [optional] 
+ **jcrcontentprotocol_connect_timeout** | **Float**|  | [optional] 
+ **jcrcontentprotocol_http_connection_closed** | **BOOLEAN**|  | [optional] 
+ **jcrcontentprotocol_http_expired** | **String**|  | [optional] 
  **jcrcontentprotocol_http_headers** | [**Array&lt;String&gt;**](String.md)|  | [optional] 
  **jcrcontentprotocol_http_headers_type_hint** | **String**|  | [optional] 
  **jcrcontentprotocol_http_method** | **String**|  | [optional] 
+ **jcrcontentprotocol_https_relaxed** | **BOOLEAN**|  | [optional] 
+ **jcrcontentprotocol_interface** | **String**|  | [optional] 
+ **jcrcontentprotocol_socket_timeout** | **Float**|  | [optional] 
+ **jcrcontentprotocol_version** | **String**|  | [optional] 
+ **jcrcontentproxy_ntlm_domain** | **String**|  | [optional] 
+ **jcrcontentproxy_ntlm_host** | **String**|  | [optional] 
+ **jcrcontentproxy_host** | **String**|  | [optional] 
+ **jcrcontentproxy_password** | **String**|  | [optional] 
+ **jcrcontentproxy_port** | **Float**|  | [optional] 
+ **jcrcontentproxy_user** | **String**|  | [optional] 
+ **jcrcontentqueue_batch_max_size** | **Float**|  | [optional] 
+ **jcrcontentqueue_batch_mode** | **String**|  | [optional] 
+ **jcrcontentqueue_batch_wait_time** | **Float**|  | [optional] 
  **jcrcontentretry_delay** | **String**|  | [optional] 
- **jcrcontentserialization_type** | **String**|  | [optional] 
- **jcrcontentjcrmixin_types** | **String**|  | [optional] 
- **jcrcontenttrigger_receive** | **BOOLEAN**|  | [optional] 
- **jcrcontenttrigger_specific** | **BOOLEAN**|  | [optional] 
- **jcrcontentcqtemplate** | **String**|  | [optional] 
- **jcrcontentenabled** | **BOOLEAN**|  | [optional] 
  **jcrcontentreverse_replication** | **BOOLEAN**|  | [optional] 
- **operation** | **String**|  | [optional] 
+ **jcrcontentserialization_type** | **String**|  | [optional] 
+ **jcrcontentslingresource_type** | **String**|  | [optional] 
+ **jcrcontentssl** | **String**|  | [optional] 
+ **jcrcontenttransport_ntlm_domain** | **String**|  | [optional] 
+ **jcrcontenttransport_ntlm_host** | **String**|  | [optional] 
+ **jcrcontenttransport_password** | **String**|  | [optional] 
+ **jcrcontenttransport_uri** | **String**|  | [optional] 
+ **jcrcontenttransport_user** | **String**|  | [optional] 
  **jcrcontenttrigger_distribute** | **BOOLEAN**|  | [optional] 
  **jcrcontenttrigger_modified** | **BOOLEAN**|  | [optional] 
+ **jcrcontenttrigger_on_off_time** | **BOOLEAN**|  | [optional] 
+ **jcrcontenttrigger_receive** | **BOOLEAN**|  | [optional] 
+ **jcrcontenttrigger_specific** | **BOOLEAN**|  | [optional] 
  **jcrcontentuser_id** | **String**|  | [optional] 
- **jcrcontentprotocol_https_relaxed** | **BOOLEAN**|  | [optional] 
+ **jcrprimary_type** | **String**|  | [optional] 
+ **operation** | **String**|  | [optional] 
 
 ### Return type
 
