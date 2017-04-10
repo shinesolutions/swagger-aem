@@ -1,3 +1,6 @@
+### 1.1.13
+* Add postConfigAemHealthCheckServlet operation
+
 ### 1.1.12
 * Rearrange postAgent parameters in alphabetical order
 * Add 22 optional parameters to postAgent operation #22
