@@ -5,6 +5,7 @@ All URIs are relative to *http://localhost/*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_aem_health_check**](CustomApi.md#get_aem_health_check) | **GET** /system/health | 
+[**post_config_aem_health_check_servlet**](CustomApi.md#post_config_aem_health_check_servlet) | **POST** /apps/system/config.{runmode}/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck | 
 [**post_config_aem_password_reset**](CustomApi.md#post_config_aem_password_reset) | **POST** /apps/system/config.{runmode}/com.shinesolutions.aem.passwordreset.Activator | 
 
 
@@ -58,6 +59,61 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+
+
+# **post_config_aem_health_check_servlet**
+> post_config_aem_health_check_servlet(runmode, opts)
+
+
+
+### Example
+```ruby
+# load the gem
+require 'swagger_aem'
+# setup authorization
+SwaggerAemClient.configure do |config|
+  # Configure HTTP basic authorization: aemAuth
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = SwaggerAemClient::CustomApi.new
+
+runmode = "runmode_example" # String | 
+
+opts = { 
+  bundles_ignored: ["bundles_ignored_example"], # Array<String> | 
+  bundles_ignored_type_hint: "bundles_ignored_type_hint_example" # String | 
+}
+
+begin
+  api_instance.post_config_aem_health_check_servlet(runmode, opts)
+rescue SwaggerAemClient::ApiError => e
+  puts "Exception when calling CustomApi->post_config_aem_health_check_servlet: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **runmode** | **String**|  | 
+ **bundles_ignored** | [**Array&lt;String&gt;**](String.md)|  | [optional] 
+ **bundles_ignored_type_hint** | **String**|  | [optional] 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain
 
 
 
