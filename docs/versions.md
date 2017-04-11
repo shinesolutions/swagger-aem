@@ -1,5 +1,6 @@
 | Swagger AEM Spec | Supported AEM          | Documentation                                                                                                                                                            |
 |------------------|------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1.1.13            | 6.2          | [Specification](https://shinesolutions.github.io/swagger-aem/api/1.1.13/index.html) [Changes](https://github.com/shinesolutions/swagger-aem/blob/master/CHANGELOG.md#1113) |
 | 1.1.11            | 6.2          | [Specification](https://shinesolutions.github.io/swagger-aem/api/1.1.11/index.html) [Changes](https://github.com/shinesolutions/swagger-aem/blob/master/CHANGELOG.md#1111) |
 | 1.1.10            | 6.2          | [Specification](https://shinesolutions.github.io/swagger-aem/api/1.1.10/index.html) [Changes](https://github.com/shinesolutions/swagger-aem/blob/master/CHANGELOG.md#1110) |
 | 1.1.9            | 6.2          | [Specification](https://shinesolutions.github.io/swagger-aem/api/1.1.9/index.html) [Changes](https://github.com/shinesolutions/swagger-aem/blob/master/CHANGELOG.md#119) |
