@@ -330,6 +330,7 @@ paths:
           in: query
           required: false
           type: array
+          collectionFormat: multi
         - name: pwdreset.authorizables@TypeHint
           in: query
           required: false
@@ -350,6 +351,7 @@ paths:
           in: query
           required: false
           type: array
+          collectionFormat: multi
         - name: bundles.ignored@TypeHint
           in: query
           required: false

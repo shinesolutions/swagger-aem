@@ -1,5 +1,6 @@
 ### 1.1.13
 * Add postConfigAemHealthCheckServlet operation
+* Add missing collectionFormat: multi to pwdreset.authorizables and bundles.ignored parameters
 
 ### 1.1.12
 * Rearrange postAgent parameters in alphabetical order
