@@ -102,7 +102,7 @@ module SwaggerAemClient
 
       # query parameters
       query_params = {}
-      query_params[:'bundles.ignored'] = @api_client.build_collection_param(opts[:'bundles_ignored'], :csv) if !opts[:'bundles_ignored'].nil?
+      query_params[:'bundles.ignored'] = @api_client.build_collection_param(opts[:'bundles_ignored'], :multi) if !opts[:'bundles_ignored'].nil?
       query_params[:'bundles.ignored@TypeHint'] = opts[:'bundles_ignored_type_hint'] if !opts[:'bundles_ignored_type_hint'].nil?
 
       # header parameters
@@ -158,7 +158,7 @@ module SwaggerAemClient
 
       # query parameters
       query_params = {}
-      query_params[:'pwdreset.authorizables'] = @api_client.build_collection_param(opts[:'pwdreset_authorizables'], :csv) if !opts[:'pwdreset_authorizables'].nil?
+      query_params[:'pwdreset.authorizables'] = @api_client.build_collection_param(opts[:'pwdreset_authorizables'], :multi) if !opts[:'pwdreset_authorizables'].nil?
       query_params[:'pwdreset.authorizables@TypeHint'] = opts[:'pwdreset_authorizables_type_hint'] if !opts[:'pwdreset_authorizables_type_hint'].nil?
 
       # header parameters

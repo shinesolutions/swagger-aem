@@ -1,6 +1,7 @@
 ### 0.9.12
 * Add 22 optional parameters to sling post agents support #22
 * Add AEM Health Check Servlet config support
+* Fix pwdreset_authorizables and bundles_ignored array value passing
 
 ### 0.9.11
 * Rename AEM Password Reset config property to pwdreset_authorizables
