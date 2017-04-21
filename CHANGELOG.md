@@ -1,3 +1,6 @@
+### 1.1.14
+* Set postSetPassword operation's return type to string
+
 ### 1.1.13
 * Add postConfigAemHealthCheckServlet operation
 * Add missing collectionFormat: multi to pwdreset.authorizables and bundles.ignored parameters
