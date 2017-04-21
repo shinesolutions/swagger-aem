@@ -1,3 +1,6 @@
+### 0.9.13
+* Add response body to crx#post_set_password_with_http_info data
+
 ### 0.9.12
 * Add 22 optional parameters to sling post agents support #22
 * Add AEM Health Check Servlet config support

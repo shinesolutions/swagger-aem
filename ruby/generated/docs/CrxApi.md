@@ -195,7 +195,7 @@ Name | Type | Description  | Notes
 
 
 # **post_set_password**
-> post_set_password(old, plain, verify)
+> String post_set_password(old, plain, verify)
 
 
 
@@ -220,7 +220,8 @@ verify = "verify_example" # String |
 
 
 begin
-  api_instance.post_set_password(old, plain, verify)
+  result = api_instance.post_set_password(old, plain, verify)
+  p result
 rescue SwaggerAemClient::ApiError => e
   puts "Exception when calling CrxApi->post_set_password: #{e}"
 end
@@ -236,7 +237,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-nil (empty response body)
+**String**
 
 ### Authorization
 
