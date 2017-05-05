@@ -1,3 +1,6 @@
+### 1.0.0
+* Add sling#get_query support
+
 ### 0.9.13
 * Add response body to crx#post_set_password_with_http_info data
 

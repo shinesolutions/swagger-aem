@@ -14,7 +14,7 @@ end
 
 def find_authorizable_id(sling, path, name)
   begin
-    data, status_code, headers = sling.post_query_with_http_info(
+    data, status_code, headers = sling.get_query_with_http_info(
       path = path,
       p_limit = -1,
       _1_property = 'rep:authorizableId',
