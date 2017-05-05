@@ -1,3 +1,6 @@
+### 1.2.0
+* Add getQuery operation
+
 ### 1.1.14
 * Set postSetPassword operation's return type to string
 
