@@ -1,5 +1,6 @@
 ### 1.2.0
 * Add getQuery operation
+* Add jcr:content/cq:distribute parameter to postAgent operation
 
 ### 1.1.14
 * Set postSetPassword operation's return type to string

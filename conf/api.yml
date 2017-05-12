@@ -521,6 +521,10 @@ paths:
           in: path
           required: true
           type: string
+        - name: jcr:content/cq:distribute
+          in: query
+          required: false
+          type: boolean
         - name: jcr:content/cq:name
           in: query
           required: false
