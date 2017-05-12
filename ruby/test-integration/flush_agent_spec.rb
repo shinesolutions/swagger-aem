@@ -89,13 +89,4 @@ describe 'Flush Agent' do
 
   end
 
-  describe 'test agents list' do
-
-    it 'should succeed' do
-      data, status_code, headers = @sling.get_agents_with_http_info('author')
-      expect(status_code).to eq(200)
-    end
-
-  end
-
 end

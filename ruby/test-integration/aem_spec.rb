@@ -5,6 +5,7 @@ describe 'Aem' do
     init_client
     @cq = SwaggerAemClient::CqApi.new
     @custom = SwaggerAemClient::CustomApi.new
+    @sling = SwaggerAemClient::SlingApi.new
   end
 
   after do
@@ -32,6 +33,15 @@ describe 'Aem' do
       expect(status_code).to eq(200)
       json = JSON.parse(data)
       expect(json['results'][0]['status']).to eq('OK')
+    end
+
+  end
+
+  describe 'test agents list' do
+
+    it 'should succeed' do
+      data, status_code, headers = @sling.get_agents_with_http_info('author')
+      expect(status_code).to eq(200)
     end
 
   end
