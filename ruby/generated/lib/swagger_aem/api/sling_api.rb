@@ -476,6 +476,8 @@ module SwaggerAemClient
     # @param runmode 
     # @param name 
     # @param [Hash] opts the optional parameters
+    # @option opts [BOOLEAN] :jcrcontentcqdistribute 
+    # @option opts [String] :jcrcontentcqdistribute_type_hint 
     # @option opts [String] :jcrcontentcqname 
     # @option opts [String] :jcrcontentcqtemplate 
     # @option opts [BOOLEAN] :jcrcontentenabled 
@@ -535,6 +537,8 @@ module SwaggerAemClient
     # @param runmode 
     # @param name 
     # @param [Hash] opts the optional parameters
+    # @option opts [BOOLEAN] :jcrcontentcqdistribute 
+    # @option opts [String] :jcrcontentcqdistribute_type_hint 
     # @option opts [String] :jcrcontentcqname 
     # @option opts [String] :jcrcontentcqtemplate 
     # @option opts [BOOLEAN] :jcrcontentenabled 
@@ -597,6 +601,8 @@ module SwaggerAemClient
 
       # query parameters
       query_params = {}
+      query_params[:'jcr:content/cq:distribute'] = opts[:'jcrcontentcqdistribute'] if !opts[:'jcrcontentcqdistribute'].nil?
+      query_params[:'jcr:content/cq:distribute@TypeHint'] = opts[:'jcrcontentcqdistribute_type_hint'] if !opts[:'jcrcontentcqdistribute_type_hint'].nil?
       query_params[:'jcr:content/cq:name'] = opts[:'jcrcontentcqname'] if !opts[:'jcrcontentcqname'].nil?
       query_params[:'jcr:content/cq:template'] = opts[:'jcrcontentcqtemplate'] if !opts[:'jcrcontentcqtemplate'].nil?
       query_params[:'jcr:content/enabled'] = opts[:'jcrcontentenabled'] if !opts[:'jcrcontentenabled'].nil?

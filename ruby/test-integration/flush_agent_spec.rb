@@ -66,6 +66,8 @@ describe 'Flush Agent' do
           :jcrcontentjcrmixin_types => 'cq:ReplicationStatus',
           :jcrcontenttrigger_receive => true,
           :jcrcontenttrigger_specific => true,
+          :jcrcontentcqdistribute => false,
+          :jcrcontentcqdistribute_type_hint => 'Boolean',
           :jcrcontentcqtemplate => '/libs/cq/replication/templates/agent',
           :jcrcontentenabled => true
         }

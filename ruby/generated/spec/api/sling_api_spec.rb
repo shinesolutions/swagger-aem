@@ -144,6 +144,8 @@ describe 'SlingApi' do
   # @param runmode 
   # @param name 
   # @param [Hash] opts the optional parameters
+  # @option opts [BOOLEAN] :jcrcontentcqdistribute 
+  # @option opts [String] :jcrcontentcqdistribute_type_hint 
   # @option opts [String] :jcrcontentcqname 
   # @option opts [String] :jcrcontentcqtemplate 
   # @option opts [BOOLEAN] :jcrcontentenabled 

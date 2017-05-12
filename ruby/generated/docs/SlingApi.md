@@ -476,6 +476,8 @@ runmode = "runmode_example" # String |
 name = "name_example" # String | 
 
 opts = { 
+  jcrcontentcqdistribute: true, # BOOLEAN | 
+  jcrcontentcqdistribute_type_hint: "jcrcontentcqdistribute_type_hint_example", # String | 
   jcrcontentcqname: "jcrcontentcqname_example", # String | 
   jcrcontentcqtemplate: "jcrcontentcqtemplate_example", # String | 
   jcrcontentenabled: true, # BOOLEAN | 
@@ -539,6 +541,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **runmode** | **String**|  | 
  **name** | **String**|  | 
+ **jcrcontentcqdistribute** | **BOOLEAN**|  | [optional] 
+ **jcrcontentcqdistribute_type_hint** | **String**|  | [optional] 
  **jcrcontentcqname** | **String**|  | [optional] 
  **jcrcontentcqtemplate** | **String**|  | [optional] 
  **jcrcontentenabled** | **BOOLEAN**|  | [optional] 
