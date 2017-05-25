@@ -340,7 +340,7 @@ module SwaggerAemClient
 
     # Sets user agent in HTTP header
     #
-    # @param [String] user_agent User agent (e.g. swagger-codegen/ruby/1.0.0)
+    # @param [String] user_agent User agent (e.g. swagger-codegen/ruby/1.1.0)
     def user_agent=(user_agent)
       @user_agent = user_agent
       @default_headers['User-Agent'] = @user_agent
