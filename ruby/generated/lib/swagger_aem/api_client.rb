@@ -122,7 +122,9 @@ module SwaggerAemClient
         end
       end
 
-      Typhoeus::Request.new(url, req_opts)
+      request = Typhoeus::Request.new(url, req_opts)
+      download_file_chunked(request) if opts[:return_type] == 'File'
+      request
     end
 
     # Check if the given MIME is a JSON MIME.
@@ -143,13 +145,15 @@ module SwaggerAemClient
     # @param [String] return_type some examples: "User", "Array[User]", "Hash[String,Integer]"
     def deserialize(response, return_type)
       body = response.body
+
+      # return temp file for File return type
+      # the response body itself would be an empty String
+      return @tempfile if return_type == 'File'
+
       return nil if body.nil? || body.empty?
 
       # return response body directly for String return type
       return body if return_type == 'String'
-
-      # handle file downloading - save response body into a tmp file and return the File instance
-      return download_file(response) if return_type == 'File'
 
       # ensuring a default content type
       content_type = response.headers['Content-Type'] || 'application/json'
@@ -208,6 +212,41 @@ module SwaggerAemClient
         SwaggerAemClient.const_get(return_type).new.tap do |model|
           model.build_from_hash data
         end
+      end
+    end
+
+    # Save response body into a file in (the defined) temporary folder, using the filename
+    # from the "Content-Disposition" header if provided, otherwise a random filename.
+    # In order to handle a large response body, the body is written to the file in chunks.
+    #
+    # @see Configuration#temp_folder_path
+    def download_file_chunked(request)
+      tempfile = nil
+      encoding = nil
+      prefix = nil
+      request.on_headers do |response|
+        content_disposition = response.headers['Content-Disposition']
+        if content_disposition and content_disposition =~ /filename=/i
+          filename = content_disposition[/filename=['"]?([^'"\s]+)['"]?/, 1]
+          prefix = sanitize_filename(filename)
+        else
+          prefix = 'download-'
+        end
+        prefix = prefix + '-' unless prefix.end_with?('-')
+        encoding = response.body.encoding
+        tempfile = Tempfile.open(prefix, @config.temp_folder_path, encoding: encoding)
+        @tempfile = tempfile
+      end
+      request.on_body do |chunk|
+        chunk.force_encoding(encoding)
+        tempfile.write(chunk)
+      end
+      request.on_complete do |response|
+        tempfile.close
+        @config.logger.info "Temp file written to #{tempfile.path}, please copy the file to a proper folder "\
+                            "with e.g. `FileUtils.cp(tempfile.path, '/new/file/path')` otherwise the temp file "\
+                            "will be deleted automatically with GC. It's also recommended to delete the temp file "\
+                            "explicitly with `tempfile.delete`"
       end
     end
 

@@ -1,3 +1,6 @@
+### 1.1.0
+* Add chunked file download support #24
+
 ### 1.0.0
 * Add sling#get_query support
 * Add jcrcontentcqdistribute parameter to sling#postAgent
