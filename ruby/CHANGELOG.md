@@ -1,5 +1,6 @@
 ### 1.1.0
 * Add chunked file download support #24
+* Drop Ruby 1.9 support
 
 ### 1.0.0
 * Add sling#get_query support
