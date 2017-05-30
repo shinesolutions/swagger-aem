@@ -1,6 +1,6 @@
 # SwaggerAemClient::SlingApi
 
-All URIs are relative to *http://localhost/*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
