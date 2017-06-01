@@ -1,5 +1,5 @@
 ### 1.1.1
-*
+* Switch chunked file download support to be generated from Swagger Codegen CLI jar 20170530
 
 ### 1.1.0
 * Add chunked file download support #24
