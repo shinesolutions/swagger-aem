@@ -1,6 +1,6 @@
 # swaggeraem.CqApi
 
-All URIs are relative to *http://localhost/*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -9,13 +9,13 @@ Method | HTTP request | Description
 
 
 # **get_login_page**
-> get_login_page()
+> str get_login_page()
 
 
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
@@ -25,7 +25,8 @@ from pprint import pprint
 api_instance = swaggeraem.CqApi()
 
 try: 
-    api_instance.get_login_page()
+    api_response = api_instance.get_login_page()
+    pprint(api_response)
 except ApiException as e:
     print("Exception when calling CqApi->get_login_page: %s\n" % e)
 ```
@@ -35,7 +36,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-void (empty response body)
+**str**
 
 ### Authorization
 
@@ -55,7 +56,7 @@ No authorization required
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException

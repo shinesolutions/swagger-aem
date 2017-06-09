@@ -19,29 +19,37 @@ import unittest
 
 import swaggeraem
 from swaggeraem.rest import ApiException
-from swaggeraem.apis.console_api import ConsoleApi
+from swaggeraem.apis.custom_api import CustomApi
 
 
-class TestConsoleApi(unittest.TestCase):
-    """ ConsoleApi unit test stubs """
+class TestCustomApi(unittest.TestCase):
+    """ CustomApi unit test stubs """
 
     def setUp(self):
-        self.api = swaggeraem.apis.console_api.ConsoleApi()
+        self.api = swaggeraem.apis.custom_api.CustomApi()
 
     def tearDown(self):
         pass
 
-    def test_post_bundle(self):
+    def test_get_aem_health_check(self):
         """
-        Test case for post_bundle
+        Test case for get_aem_health_check
 
         
         """
         pass
 
-    def test_post_jmx_repository(self):
+    def test_post_config_aem_health_check_servlet(self):
         """
-        Test case for post_jmx_repository
+        Test case for post_config_aem_health_check_servlet
+
+        
+        """
+        pass
+
+    def test_post_config_aem_password_reset(self):
+        """
+        Test case for post_config_aem_password_reset
 
         
         """

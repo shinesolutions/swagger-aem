@@ -1,6 +1,6 @@
 # swaggeraem.ConsoleApi
 
-All URIs are relative to *http://localhost/*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
@@ -65,7 +65,7 @@ void (empty response body)
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException

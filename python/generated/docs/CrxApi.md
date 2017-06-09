@@ -1,6 +1,6 @@
 # swaggeraem.CrxApi
 
-All URIs are relative to *http://localhost/*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
@@ -60,13 +60,13 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_package_service_json**
-> str post_package_service_json(path, cmd, group_name=group_name, package_name=package_name, package_version=package_version, charset_=charset_, force=force, package=package)
+> str post_package_service_json(path, cmd, group_name=group_name, package_name=package_name, package_version=package_version, charset_=charset_, force=force, recursive=recursive, package=package)
 
 
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
@@ -85,10 +85,11 @@ package_name = 'package_name_example' # str |  (optional)
 package_version = 'package_version_example' # str |  (optional)
 charset_ = 'charset__example' # str |  (optional)
 force = true # bool |  (optional)
+recursive = true # bool |  (optional)
 package = '/path/to/file.txt' # file |  (optional)
 
 try: 
-    api_response = api_instance.post_package_service_json(path, cmd, group_name=group_name, package_name=package_name, package_version=package_version, charset_=charset_, force=force, package=package)
+    api_response = api_instance.post_package_service_json(path, cmd, group_name=group_name, package_name=package_name, package_version=package_version, charset_=charset_, force=force, recursive=recursive, package=package)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling CrxApi->post_package_service_json: %s\n" % e)
@@ -105,6 +106,7 @@ Name | Type | Description  | Notes
  **package_version** | **str**|  | [optional] 
  **charset_** | **str**|  | [optional] 
  **force** | **bool**|  | [optional] 
+ **recursive** | **bool**|  | [optional] 
  **package** | **file**|  | [optional] 
 
 ### Return type
@@ -129,7 +131,7 @@ Name | Type | Description  | Notes
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
@@ -182,13 +184,13 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_set_password**
-> post_set_password(old, plain, verify)
+> str post_set_password(old, plain, verify)
 
 
 
 ### Example 
 ```python
-from __future__ import print_statement
+from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
@@ -205,7 +207,8 @@ plain = 'plain_example' # str |
 verify = 'verify_example' # str | 
 
 try: 
-    api_instance.post_set_password(old, plain, verify)
+    api_response = api_instance.post_set_password(old, plain, verify)
+    pprint(api_response)
 except ApiException as e:
     print("Exception when calling CrxApi->post_set_password: %s\n" % e)
 ```
@@ -220,7 +223,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+**str**
 
 ### Authorization
 
