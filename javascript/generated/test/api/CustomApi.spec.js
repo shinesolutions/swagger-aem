@@ -31,7 +31,7 @@
   var instance;
 
   beforeEach(function() {
-    instance = new NodeSwaggerAem.CqApi();
+    instance = new NodeSwaggerAem.CustomApi();
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,21 +50,31 @@
       object[property] = value;
   }
 
-  describe('CqApi', function() {
-    describe('getLoginPage', function() {
-      it('should call getLoginPage successfully', function(done) {
-        //uncomment below and update the code to test getLoginPage
-        //instance.getLoginPage(function(error) {
+  describe('CustomApi', function() {
+    describe('getAemHealthCheck', function() {
+      it('should call getAemHealthCheck successfully', function(done) {
+        //uncomment below and update the code to test getAemHealthCheck
+        //instance.getAemHealthCheck(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe('postCqActions', function() {
-      it('should call postCqActions successfully', function(done) {
-        //uncomment below and update the code to test postCqActions
-        //instance.postCqActions(function(error) {
+    describe('postConfigAemHealthCheckServlet', function() {
+      it('should call postConfigAemHealthCheckServlet successfully', function(done) {
+        //uncomment below and update the code to test postConfigAemHealthCheckServlet
+        //instance.postConfigAemHealthCheckServlet(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe('postConfigAemPasswordReset', function() {
+      it('should call postConfigAemPasswordReset successfully', function(done) {
+        //uncomment below and update the code to test postConfigAemPasswordReset
+        //instance.postConfigAemPasswordReset(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});

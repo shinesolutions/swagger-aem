@@ -1,6 +1,6 @@
 # NodeSwaggerAem.CqApi
 
-All URIs are relative to *http://localhost/*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 <a name="getLoginPage"></a>
 # **getLoginPage**
-> getLoginPage()
+> &#39;String&#39; getLoginPage()
 
 
 
@@ -24,7 +24,7 @@ var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
-    console.log('API called successfully.');
+    console.log('API called successfully. Returned data: ' + data);
   }
 };
 apiInstance.getLoginPage(callback);
@@ -35,7 +35,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-null (empty response body)
+**&#39;String&#39;**
 
 ### Authorization
 
@@ -55,7 +55,7 @@ No authorization required
 ### Example
 ```javascript
 var NodeSwaggerAem = require('node-swagger-aem');
-var defaultClient = NodeSwaggerAem.ApiClient.default;
+var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
 var aemAuth = defaultClient.authentications['aemAuth'];

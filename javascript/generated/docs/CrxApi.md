@@ -1,6 +1,6 @@
 # NodeSwaggerAem.CrxApi
 
-All URIs are relative to *http://localhost/*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -19,7 +19,7 @@ Method | HTTP request | Description
 ### Example
 ```javascript
 var NodeSwaggerAem = require('node-swagger-aem');
-var defaultClient = NodeSwaggerAem.ApiClient.default;
+var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
 var aemAuth = defaultClient.authentications['aemAuth'];
@@ -69,7 +69,7 @@ Name | Type | Description  | Notes
 ### Example
 ```javascript
 var NodeSwaggerAem = require('node-swagger-aem');
-var defaultClient = NodeSwaggerAem.ApiClient.default;
+var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
 var aemAuth = defaultClient.authentications['aemAuth'];
@@ -88,6 +88,7 @@ var opts = {
   'packageVersion': "packageVersion_example", // String | 
   'charset_': "charset__example", // String | 
   'force': true, // Boolean | 
+  'recursive': true, // Boolean | 
   '_package': "/path/to/file.txt" // File | 
 };
 
@@ -112,6 +113,7 @@ Name | Type | Description  | Notes
  **packageVersion** | **String**|  | [optional] 
  **charset_** | **String**|  | [optional] 
  **force** | **Boolean**|  | [optional] 
+ **recursive** | **Boolean**|  | [optional] 
  **_package** | **File**|  | [optional] 
 
 ### Return type
@@ -136,7 +138,7 @@ Name | Type | Description  | Notes
 ### Example
 ```javascript
 var NodeSwaggerAem = require('node-swagger-aem');
-var defaultClient = NodeSwaggerAem.ApiClient.default;
+var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
 var aemAuth = defaultClient.authentications['aemAuth'];
@@ -194,14 +196,14 @@ Name | Type | Description  | Notes
 
 <a name="postSetPassword"></a>
 # **postSetPassword**
-> postSetPassword(old, plain, verify)
+> &#39;String&#39; postSetPassword(old, plain, verify)
 
 
 
 ### Example
 ```javascript
 var NodeSwaggerAem = require('node-swagger-aem');
-var defaultClient = NodeSwaggerAem.ApiClient.default;
+var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
 var aemAuth = defaultClient.authentications['aemAuth'];
@@ -221,7 +223,7 @@ var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
-    console.log('API called successfully.');
+    console.log('API called successfully. Returned data: ' + data);
   }
 };
 apiInstance.postSetPassword(old, plain, verify, callback);
@@ -237,7 +239,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-null (empty response body)
+**&#39;String&#39;**
 
 ### Authorization
 
