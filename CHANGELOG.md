@@ -1,3 +1,7 @@
+### 1.2.1
+* Add string response schema to operations which response body is ignored
+* Add string type item to parameters with multi collectionFormat
+
 ### 1.2.0
 * Add getQuery operation
 * Add jcr:content/cq:distribute parameter to postAgent operation
