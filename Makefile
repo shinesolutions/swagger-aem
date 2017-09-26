@@ -1,6 +1,6 @@
-LANGS = ruby python
+LANGS = ruby
 
-all: clean doc
+ci: clean tools lint build-docker doc
 
 clean:
 	rm -rf doc
@@ -15,14 +15,34 @@ lint:
 	swagger validate conf/*.yml
 
 tools:
-	npm install -g bootprint bootprint-openapi gh-pages swagger-cli
+	npm install -g bootprint bootprint-openapi gh-pages swagger-cli swaggy-c
+	docker pull cliffano/swaggy-c
 
-tools-osx: tools
-	brew install swagger-codegen
+define build
+	swaggy-c \
+    $(if $(SWAGGER_CODEGEN_CLI_JAR), --jar $(SWAGGER_CODEGEN_CLI_JAR)) \
+		--api-spec conf/api.yml \
+		--conf-file {lang}/conf/client.json \
+		--out-dir {lang}/generated/ \
+		--log-dir {lang}/log/ \
+		$(1)
+endef
 
-$(LANGS):
-	cd $@ && SWAGGER_CODEGEN_CLI_JAR=`ls ../bin/*.jar` make all && cd ..
+python:
+	$(call build, python-clean python-gen python-deps python-test python-build python-install)
+
+ruby:
+	$(call build, ruby-clean ruby-gen ruby-deps ruby-test ruby-build ruby-install)
 
 build: $(LANGS)
 
-.PHONY: $(LANGS) all build clean doc doc-publish lint tools tools-osx
+build-docker:
+	docker run \
+ 	  --rm \
+	  --workdir /opt/workspace \
+	  -v `pwd`:/opt/workspace \
+	  -t cliffano/swaggy-c \
+	  make $(LANGS) \
+	  SWAGGER_CODEGEN_CLI_JAR=/opt/swagger-codegen/repo/modules/swagger-codegen-cli/target/swagger-codegen-cli.jar
+
+.PHONY: $(LANGS) all build build-docker ci clean doc doc-publish lint tools
