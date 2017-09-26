@@ -1,4 +1,4 @@
-LANGS = ruby
+LANGS = java javascript python ruby
 
 ci: clean tools lint build-docker doc
 
