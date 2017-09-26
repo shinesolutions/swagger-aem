@@ -28,6 +28,12 @@ define build
 		$(1)
 endef
 
+java:
+	$(call build, java-clean java-gen java-deps java-test java-build java-install)
+
+javascript:
+	$(call build, javascript-clean javascript-gen javascript-deps javascript-install)
+	
 python:
 	$(call build, python-clean python-gen python-deps python-test python-build python-install)
 
