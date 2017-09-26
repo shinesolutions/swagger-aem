@@ -11,8 +11,11 @@ doc:
 doc-publish:
 	gh-pages --dist doc/
 
+lint:
+	swagger validate conf/*.yml
+
 tools:
-	npm install -g bootprint bootprint-openapi gh-pages
+	npm install -g bootprint bootprint-openapi gh-pages swagger-cli
 
 tools-osx: tools
 	brew install swagger-codegen
@@ -22,4 +25,4 @@ $(LANGS):
 
 build: $(LANGS)
 
-.PHONY: $(LANGS) all build clean doc doc-publish tools tools-osx
+.PHONY: $(LANGS) all build clean doc doc-publish lint tools tools-osx
