@@ -44,3 +44,10 @@ Tagging should also be prefixed with:
 
 * `api` when the release is for the OpenAPI specification, e.g. `api-1.0.0`
 * `ruby|python|javascript|java` when the release is for the generated client, e.g. `ruby-0.9.2`, `python-0.9.0`
+
+Others
+------
+
+Presentation:
+
+* [Building An AEM API Clients Ecosystem](https://www.slideshare.net/cliffano/building-an-aem-api-clients-ecosystem/)
