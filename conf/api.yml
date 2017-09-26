@@ -25,6 +25,7 @@ paths:
         - text/html
       responses:
         default:
+          description: 'Default response'
           schema:
             type: string
       tags:
@@ -45,6 +46,9 @@ paths:
           type: string
       tags:
         - cq
+      responses:
+        default:
+          description: 'Default response'
   /{path}/:
     post:
       operationId: postPath
@@ -65,6 +69,9 @@ paths:
           type: string
       tags:
         - sling
+      responses:
+        default:
+          description: 'Default response'
   /{path}/{name}:
     get:
       operationId: getNode
@@ -81,6 +88,9 @@ paths:
           type: string
       tags:
         - sling
+      responses:
+        default:
+          description: 'Default response'
     delete:
       operationId: deleteNode
       produces:
@@ -96,6 +106,9 @@ paths:
           type: string
       tags:
         - sling
+      responses:
+        default:
+          description: 'Default response'
   /{path}/{name}.rw.html:
     post:
       operationId: postNodeRw
@@ -116,6 +129,9 @@ paths:
           type: string
       tags:
         - sling
+      responses:
+        default:
+          description: 'Default response'
   /apps/system/config.{runmode}/org.apache.felix.http:
     post:
       operationId: postConfigApacheFelixJettyBasedHttpService
@@ -208,6 +224,9 @@ paths:
           type: string
       tags:
         - sling
+      responses:
+        default:
+          description: 'Default response'
   /apps/system/config.{runmode}/org.apache.sling.servlets.get.DefaultGetServlet:
     post:
       operationId: postConfigApacheSlingGetServlet
@@ -252,6 +271,9 @@ paths:
           type: string
       tags:
         - sling
+      responses:
+        default:
+          description: 'Default response'
   /apps/system/config.{runmode}/org.apache.sling.security.impl.ReferrerFilter:
     post:
       operationId: postConfigApacheSlingReferrerFilter
@@ -288,6 +310,9 @@ paths:
           type: string
       tags:
         - sling
+      responses:
+        default:
+          description: 'Default response'
   /apps/system/config.{runmode}/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet:
     post:
       operationId: postConfigApacheSlingDavExServlet
@@ -316,6 +341,9 @@ paths:
           type: string
       tags:
         - sling
+      responses:
+        default:
+          description: 'Default response'
   /apps/system/config.{runmode}/com.shinesolutions.aem.passwordreset.Activator:
     post:
       operationId: postConfigAemPasswordReset
@@ -331,12 +359,17 @@ paths:
           required: false
           type: array
           collectionFormat: multi
+          items:
+            type: string
         - name: pwdreset.authorizables@TypeHint
           in: query
           required: false
           type: string
       tags:
         - custom
+      responses:
+        default:
+          description: 'Default response'
   /apps/system/config.{runmode}/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck:
     post:
       operationId: postConfigAemHealthCheckServlet
@@ -352,12 +385,17 @@ paths:
           required: false
           type: array
           collectionFormat: multi
+          items:
+            type: string
         - name: bundles.ignored@TypeHint
           in: query
           required: false
           type: string
       tags:
         - custom
+      responses:
+        default:
+          description: 'Default response'
   /bin/querybuilder.json:
     get:
       operationId: getQuery
@@ -382,6 +420,7 @@ paths:
           type: string
       responses:
         default:
+          description: 'Default response'
           schema:
             type: string
       tags:
@@ -409,6 +448,7 @@ paths:
           type: string
       responses:
         default:
+          description: 'Default response'
           schema:
             type: string
       tags:
@@ -433,6 +473,7 @@ paths:
           type: string
       responses:
         default:
+          description: 'Default response'
           schema:
             type: file
       tags:
@@ -457,6 +498,7 @@ paths:
           type: string
       responses:
         default:
+          description: 'Default response'
           schema:
             type: string
       tags:
@@ -473,6 +515,7 @@ paths:
           type: string
       responses:
         default:
+          description: 'Default response'
           schema:
             type: string
       tags:
@@ -493,6 +536,9 @@ paths:
           type: string
       tags:
         - sling
+      responses:
+        default:
+          description: 'Default response'
     delete:
       operationId: deleteAgent
       produces:
@@ -508,6 +554,9 @@ paths:
           type: string
       tags:
         - sling
+      responses:
+        default:
+          description: 'Default response'
     post:
       operationId: postAgent
       produces:
@@ -590,6 +639,8 @@ paths:
           required: false
           type: array
           collectionFormat: multi
+          items:
+            type: string
         - name: jcr:content/protocolHTTPHeaders@TypeHint
           in: query
           required: false
@@ -724,6 +775,9 @@ paths:
           type: string
       tags:
         - sling
+      responses:
+        default:
+          description: 'Default response'
   /etc/replication/treeactivation.html:
     post:
       operationId: postTreeActivation
@@ -744,6 +798,9 @@ paths:
           type: string
       tags:
         - sling
+      responses:
+        default:
+          description: 'Default response'
   /libs/granite/security/post/authorizables:
     post:
       operationId: postAuthorizables
@@ -776,6 +833,7 @@ paths:
           type: string
       responses:
         default:
+          description: 'Default response'
           schema:
             type: string
       tags:
@@ -800,6 +858,7 @@ paths:
           type: string
       responses:
         default:
+          description: 'Default response'
           schema:
             type: string
       tags:
@@ -816,6 +875,7 @@ paths:
           type: string
       responses:
         default:
+          description: 'Default response'
           schema:
             type: string
       tags:
@@ -852,6 +912,7 @@ paths:
           type: string
       responses:
         default:
+          description: 'Default response'
           schema:
             type: string
       tags:
@@ -902,6 +963,7 @@ paths:
         - multipart/form-data
       responses:
         default:
+          description: 'Default response'
           schema:
             type: string
       tags:
@@ -922,6 +984,9 @@ paths:
           type: string
       tags:
         - console
+      responses:
+        default:
+          description: 'Default response'
   /system/console/jmx/com.adobe.granite:type=Repository/op/{action}:
     post:
       operationId: postJmxRepository
@@ -934,6 +999,9 @@ paths:
           type: string
       tags:
         - console
+      responses:
+        default:
+          description: 'Default response'
   /system/health:
     get:
       operationId: getAemHealthCheck
@@ -950,6 +1018,7 @@ paths:
           type: boolean
       responses:
         default:
+          description: 'Default response'
           schema:
             type: string
       tags:
