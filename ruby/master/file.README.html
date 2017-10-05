@@ -6,7 +6,7 @@
 <title>
   File: README
   
-    &mdash; Documentation by YARD 0.9.5
+    &mdash; Documentation by YARD 0.9.0
   
 </title>
 
@@ -73,7 +73,7 @@ project:</p>
 <ul><li>
 <p>API version: 1.2.0</p>
 </li><li>
-<p>Package version: 1.1.1</p>
+<p>Package version: 1.2.0</p>
 </li><li>
 <p>Build package: io.swagger.codegen.languages.RubyClientCodegen
 For more
@@ -91,17 +91,17 @@ href="http://shinesolutions.com">shinesolutions.com</a></p>
 
 <p>Then either install the gem locally:</p>
 
-<pre class="code ruby"><code class="ruby">gem install ./swagger_aem-1.1.1.gem</code></pre>
+<pre class="code ruby"><code class="ruby">gem install ./swagger_aem-1.2.0.gem</code></pre>
 
 <p>(for development, run <code>gem install --dev
-./swagger_aem-1.1.1.gem</code> to install the development dependencies)</p>
+./swagger_aem-1.2.0.gem</code> to install the development dependencies)</p>
 
 <p>or publish the gem to a gem hosting service, e.g. <a
 href="https://rubygems.org/">RubyGems</a>.</p>
 
 <p>Finally add this to the Gemfile:</p>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>swagger_aem</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>~&gt; 1.1.1</span><span class='tstring_end'>&#39;</span></span></code></pre>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>swagger_aem</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>~&gt; 1.2.0</span><span class='tstring_end'>&#39;</span></span></code></pre>
 
 <h3 id="label-Install+from+Git">Install from Git</h3>
 
@@ -178,7 +178,10 @@ href="http://docs/CqApi.md#get_login_page">get_login_page</a> |
 href="http://docs/CqApi.md#post_cq_actions">post_cq_actions</a> |
 <strong>POST</strong> /.cqactions.html |
 <em>SwaggerAemClient::CrxApi</em>
-| <a
+| <a href="http://docs/CrxApi.md#get_install_status">get_install_status</a>
+| <strong>GET</strong> /crx/packmgr/installstatus.jsp
+|
+<em>SwaggerAemClient::CrxApi</em> | <a
 href="http://docs/CrxApi.md#post_package_service">post_package_service</a>
 | <strong>POST</strong> /crx/packmgr/service.jsp
 |
@@ -283,6 +286,12 @@ href="http://docs/SlingApi.md#post_tree_activation">post_tree_activation</a>
 | <strong>POST</strong> /etc/replication/treeactivation.html |</p>
 
 <h2 id="label-Documentation+for+Models">Documentation for Models</h2>
+<ul><li>
+<p><a href="http://docs/InstallStatus.md">SwaggerAemClient::InstallStatus</a></p>
+</li><li>
+<p><a
+href="http://docs/InstallStatusStatus.md">SwaggerAemClient::InstallStatusStatus</a></p>
+</li></ul>
 
 <h2 id="label-Documentation+for+Authorization">Documentation for Authorization</h2>
 
@@ -293,9 +302,9 @@ href="http://docs/SlingApi.md#post_tree_activation">post_tree_activation</a>
 </div></div>
 
       <div id="footer">
-  Generated on Thu Jun  1 15:09:55 2017 by
+  Generated on Thu Oct  5 23:06:49 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.5 (ruby-2.0.0).
+  0.9.0 (ruby-2.0.0).
 </div>
 
     </div>
