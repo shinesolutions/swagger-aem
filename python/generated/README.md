@@ -77,6 +77,7 @@ Class | Method | HTTP request | Description
 *ConsoleApi* | [**post_jmx_repository**](docs/ConsoleApi.md#post_jmx_repository) | **POST** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} | 
 *CqApi* | [**get_login_page**](docs/CqApi.md#get_login_page) | **GET** /libs/granite/core/content/login.html | 
 *CqApi* | [**post_cq_actions**](docs/CqApi.md#post_cq_actions) | **POST** /.cqactions.html | 
+*CrxApi* | [**get_install_status**](docs/CrxApi.md#get_install_status) | **GET** /crx/packmgr/installstatus.jsp | 
 *CrxApi* | [**post_package_service**](docs/CrxApi.md#post_package_service) | **POST** /crx/packmgr/service.jsp | 
 *CrxApi* | [**post_package_service_json**](docs/CrxApi.md#post_package_service_json) | **POST** /crx/packmgr/service/.json/{path} | 
 *CrxApi* | [**post_package_update**](docs/CrxApi.md#post_package_update) | **POST** /crx/packmgr/update.jsp | 
@@ -106,6 +107,8 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [InstallStatus](docs/InstallStatus.md)
+ - [InstallStatusStatus](docs/InstallStatusStatus.md)
 
 
 ## Documentation For Authorization

@@ -22,11 +22,12 @@ from swaggeraem.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: aemAuth
-swaggeraem.configuration.username = 'YOUR_USERNAME'
-swaggeraem.configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swaggeraem.ConsoleApi()
+api_instance = swaggeraem.ConsoleApi(swaggeraem.ApiClient(configuration))
 name = 'name_example' # str | 
 action = 'action_example' # str | 
 
@@ -72,11 +73,12 @@ from swaggeraem.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: aemAuth
-swaggeraem.configuration.username = 'YOUR_USERNAME'
-swaggeraem.configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swaggeraem.ConsoleApi()
+api_instance = swaggeraem.ConsoleApi(swaggeraem.ApiClient(configuration))
 action = 'action_example' # str | 
 
 try: 

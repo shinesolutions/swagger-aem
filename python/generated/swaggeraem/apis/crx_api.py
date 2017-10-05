@@ -20,7 +20,6 @@ import re
 # python 2 and python 3 compatibility library
 from six import iteritems
 
-from ..configuration import Configuration
 from ..api_client import ApiClient
 
 
@@ -32,33 +31,107 @@ class CrxApi(object):
     """
 
     def __init__(self, api_client=None):
-        config = Configuration()
-        if api_client:
-            self.api_client = api_client
+        if api_client is None:
+            api_client = ApiClient()
+        self.api_client = api_client
+
+    def get_install_status(self, **kwargs):
+        """
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.get_install_status(async=True)
+        >>> result = thread.get()
+
+        :param async bool
+        :return: InstallStatus
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async'):
+            return self.get_install_status_with_http_info(**kwargs)
         else:
-            if not config.api_client:
-                config.api_client = ApiClient()
-            self.api_client = config.api_client
+            (data) = self.get_install_status_with_http_info(**kwargs)
+            return data
+
+    def get_install_status_with_http_info(self, **kwargs):
+        """
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.get_install_status_with_http_info(async=True)
+        >>> result = thread.get()
+
+        :param async bool
+        :return: InstallStatus
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = []
+        all_params.append('async')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_install_status" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['aemAuth']
+
+        return self.api_client.call_api('/crx/packmgr/installstatus.jsp', 'GET',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='InstallStatus',
+                                        auth_settings=auth_settings,
+                                        async=params.get('async'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
 
     def post_package_service(self, cmd, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.post_package_service(cmd, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.post_package_service(cmd, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str cmd: (required)
         :return: str
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.post_package_service_with_http_info(cmd, **kwargs)
         else:
             (data) = self.post_package_service_with_http_info(cmd, **kwargs)
@@ -67,15 +140,11 @@ class CrxApi(object):
     def post_package_service_with_http_info(self, cmd, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.post_package_service_with_http_info(cmd, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.post_package_service_with_http_info(cmd, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str cmd: (required)
         :return: str
                  If the method is called asynchronously,
@@ -83,7 +152,7 @@ class CrxApi(object):
         """
 
         all_params = ['cmd']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -132,7 +201,7 @@ class CrxApi(object):
                                         files=local_var_files,
                                         response_type='str',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -141,15 +210,11 @@ class CrxApi(object):
     def post_package_service_json(self, path, cmd, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.post_package_service_json(path, cmd, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.post_package_service_json(path, cmd, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str path: (required)
         :param str cmd: (required)
         :param str group_name:
@@ -164,7 +229,7 @@ class CrxApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.post_package_service_json_with_http_info(path, cmd, **kwargs)
         else:
             (data) = self.post_package_service_json_with_http_info(path, cmd, **kwargs)
@@ -173,15 +238,11 @@ class CrxApi(object):
     def post_package_service_json_with_http_info(self, path, cmd, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.post_package_service_json_with_http_info(path, cmd, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.post_package_service_json_with_http_info(path, cmd, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str path: (required)
         :param str cmd: (required)
         :param str group_name:
@@ -197,7 +258,7 @@ class CrxApi(object):
         """
 
         all_params = ['path', 'cmd', 'group_name', 'package_name', 'package_version', 'charset_', 'force', 'recursive', 'package']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -269,7 +330,7 @@ class CrxApi(object):
                                         files=local_var_files,
                                         response_type='str',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -278,15 +339,11 @@ class CrxApi(object):
     def post_package_update(self, group_name, package_name, version, path, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.post_package_update(group_name, package_name, version, path, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.post_package_update(group_name, package_name, version, path, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str group_name: (required)
         :param str package_name: (required)
         :param str version: (required)
@@ -298,7 +355,7 @@ class CrxApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.post_package_update_with_http_info(group_name, package_name, version, path, **kwargs)
         else:
             (data) = self.post_package_update_with_http_info(group_name, package_name, version, path, **kwargs)
@@ -307,15 +364,11 @@ class CrxApi(object):
     def post_package_update_with_http_info(self, group_name, package_name, version, path, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.post_package_update_with_http_info(group_name, package_name, version, path, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.post_package_update_with_http_info(group_name, package_name, version, path, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str group_name: (required)
         :param str package_name: (required)
         :param str version: (required)
@@ -328,7 +381,7 @@ class CrxApi(object):
         """
 
         all_params = ['group_name', 'package_name', 'version', 'path', 'filter', 'charset_']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -396,7 +449,7 @@ class CrxApi(object):
                                         files=local_var_files,
                                         response_type='str',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -405,15 +458,11 @@ class CrxApi(object):
     def post_set_password(self, old, plain, verify, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.post_set_password(old, plain, verify, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.post_set_password(old, plain, verify, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str old: (required)
         :param str plain: (required)
         :param str verify: (required)
@@ -422,7 +471,7 @@ class CrxApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.post_set_password_with_http_info(old, plain, verify, **kwargs)
         else:
             (data) = self.post_set_password_with_http_info(old, plain, verify, **kwargs)
@@ -431,15 +480,11 @@ class CrxApi(object):
     def post_set_password_with_http_info(self, old, plain, verify, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.post_set_password_with_http_info(old, plain, verify, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.post_set_password_with_http_info(old, plain, verify, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str old: (required)
         :param str plain: (required)
         :param str verify: (required)
@@ -449,7 +494,7 @@ class CrxApi(object):
         """
 
         all_params = ['old', 'plain', 'verify']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -508,7 +553,7 @@ class CrxApi(object):
                                         files=local_var_files,
                                         response_type='str',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),

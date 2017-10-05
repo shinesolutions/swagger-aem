@@ -1,14 +1,63 @@
 # CrxApi
 
-All URIs are relative to *http://localhost/*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**getInstallStatus**](CrxApi.md#getInstallStatus) | **GET** /crx/packmgr/installstatus.jsp | 
 [**postPackageService**](CrxApi.md#postPackageService) | **POST** /crx/packmgr/service.jsp | 
 [**postPackageServiceJson**](CrxApi.md#postPackageServiceJson) | **POST** /crx/packmgr/service/.json/{path} | 
 [**postPackageUpdate**](CrxApi.md#postPackageUpdate) | **POST** /crx/packmgr/update.jsp | 
 [**postSetPassword**](CrxApi.md#postSetPassword) | **POST** /crx/explorer/ui/setpassword.jsp | 
 
+
+<a name="getInstallStatus"></a>
+# **getInstallStatus**
+> InstallStatus getInstallStatus()
+
+
+
+### Example
+```java
+// Import classes:
+//import com.shinesolutions.swaggeraem4j.ApiClient;
+//import com.shinesolutions.swaggeraem4j.ApiException;
+//import com.shinesolutions.swaggeraem4j.Configuration;
+//import com.shinesolutions.swaggeraem4j.auth.*;
+//import com.shinesolutions.swaggeraem4j.api.CrxApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure HTTP basic authorization: aemAuth
+HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+aemAuth.setUsername("YOUR USERNAME");
+aemAuth.setPassword("YOUR PASSWORD");
+
+CrxApi apiInstance = new CrxApi();
+try {
+    InstallStatus result = apiInstance.getInstallStatus();
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling CrxApi#getInstallStatus");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**InstallStatus**](InstallStatus.md)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 <a name="postPackageService"></a>
 # **postPackageService**
@@ -194,7 +243,7 @@ Name | Type | Description  | Notes
 
 <a name="postSetPassword"></a>
 # **postSetPassword**
-> postSetPassword(old, plain, verify)
+> String postSetPassword(old, plain, verify)
 
 
 
@@ -219,7 +268,8 @@ String old = "old_example"; // String |
 String plain = "plain_example"; // String | 
 String verify = "verify_example"; // String | 
 try {
-    apiInstance.postSetPassword(old, plain, verify);
+    String result = apiInstance.postSetPassword(old, plain, verify);
+    System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling CrxApi#postSetPassword");
     e.printStackTrace();
@@ -236,7 +286,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-null (empty response body)
+**String**
 
 ### Authorization
 

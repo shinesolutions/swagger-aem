@@ -4,11 +4,58 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**get_install_status**](CrxApi.md#get_install_status) | **GET** /crx/packmgr/installstatus.jsp | 
 [**post_package_service**](CrxApi.md#post_package_service) | **POST** /crx/packmgr/service.jsp | 
 [**post_package_service_json**](CrxApi.md#post_package_service_json) | **POST** /crx/packmgr/service/.json/{path} | 
 [**post_package_update**](CrxApi.md#post_package_update) | **POST** /crx/packmgr/update.jsp | 
 [**post_set_password**](CrxApi.md#post_set_password) | **POST** /crx/explorer/ui/setpassword.jsp | 
 
+
+# **get_install_status**
+> InstallStatus get_install_status()
+
+
+
+### Example 
+```python
+from __future__ import print_function
+import time
+import swaggeraem
+from swaggeraem.rest import ApiException
+from pprint import pprint
+
+# Configure HTTP basic authorization: aemAuth
+configuration = swaggeraem.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
+
+# create an instance of the API class
+api_instance = swaggeraem.CrxApi(swaggeraem.ApiClient(configuration))
+
+try: 
+    api_response = api_instance.get_install_status()
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CrxApi->get_install_status: %s\n" % e)
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**InstallStatus**](InstallStatus.md)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_package_service**
 > str post_package_service(cmd)
@@ -24,11 +71,12 @@ from swaggeraem.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: aemAuth
-swaggeraem.configuration.username = 'YOUR_USERNAME'
-swaggeraem.configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swaggeraem.CrxApi()
+api_instance = swaggeraem.CrxApi(swaggeraem.ApiClient(configuration))
 cmd = 'cmd_example' # str | 
 
 try: 
@@ -73,11 +121,12 @@ from swaggeraem.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: aemAuth
-swaggeraem.configuration.username = 'YOUR_USERNAME'
-swaggeraem.configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swaggeraem.CrxApi()
+api_instance = swaggeraem.CrxApi(swaggeraem.ApiClient(configuration))
 path = 'path_example' # str | 
 cmd = 'cmd_example' # str | 
 group_name = 'group_name_example' # str |  (optional)
@@ -138,11 +187,12 @@ from swaggeraem.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: aemAuth
-swaggeraem.configuration.username = 'YOUR_USERNAME'
-swaggeraem.configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swaggeraem.CrxApi()
+api_instance = swaggeraem.CrxApi(swaggeraem.ApiClient(configuration))
 group_name = 'group_name_example' # str | 
 package_name = 'package_name_example' # str | 
 version = 'version_example' # str | 
@@ -197,11 +247,12 @@ from swaggeraem.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: aemAuth
-swaggeraem.configuration.username = 'YOUR_USERNAME'
-swaggeraem.configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swaggeraem.CrxApi()
+api_instance = swaggeraem.CrxApi(swaggeraem.ApiClient(configuration))
 old = 'old_example' # str | 
 plain = 'plain_example' # str | 
 verify = 'verify_example' # str | 

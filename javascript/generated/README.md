@@ -46,6 +46,24 @@ browserify main.js > bundle.js
 
 Then include *bundle.js* in the HTML pages.
 
+### Webpack Configuration
+
+Using Webpack you may encounter the following error: "Module not found: Error:
+Cannot resolve module", most certainly you should disable AMD loader. Add/merge
+the following section to your webpack config:
+
+```javascript
+module: {
+  rules: [
+    {
+      parser: {
+        amd: false
+      }
+    }
+  ]
+}
+```
+
 ## Getting Started
 
 Please follow the [installation](#installation) instruction and execute the following JS code:
@@ -88,6 +106,7 @@ Class | Method | HTTP request | Description
 *NodeSwaggerAem.ConsoleApi* | [**postJmxRepository**](docs/ConsoleApi.md#postJmxRepository) | **POST** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} | 
 *NodeSwaggerAem.CqApi* | [**getLoginPage**](docs/CqApi.md#getLoginPage) | **GET** /libs/granite/core/content/login.html | 
 *NodeSwaggerAem.CqApi* | [**postCqActions**](docs/CqApi.md#postCqActions) | **POST** /.cqactions.html | 
+*NodeSwaggerAem.CrxApi* | [**getInstallStatus**](docs/CrxApi.md#getInstallStatus) | **GET** /crx/packmgr/installstatus.jsp | 
 *NodeSwaggerAem.CrxApi* | [**postPackageService**](docs/CrxApi.md#postPackageService) | **POST** /crx/packmgr/service.jsp | 
 *NodeSwaggerAem.CrxApi* | [**postPackageServiceJson**](docs/CrxApi.md#postPackageServiceJson) | **POST** /crx/packmgr/service/.json/{path} | 
 *NodeSwaggerAem.CrxApi* | [**postPackageUpdate**](docs/CrxApi.md#postPackageUpdate) | **POST** /crx/packmgr/update.jsp | 
@@ -117,6 +136,8 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
+ - [NodeSwaggerAem.InstallStatus](docs/InstallStatus.md)
+ - [NodeSwaggerAem.InstallStatusStatus](docs/InstallStatusStatus.md)
 
 
 ## Documentation for Authorization

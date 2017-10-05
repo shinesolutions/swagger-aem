@@ -63,11 +63,12 @@ from swaggeraem.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: aemAuth
-swaggeraem.configuration.username = 'YOUR_USERNAME'
-swaggeraem.configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swaggeraem.CqApi()
+api_instance = swaggeraem.CqApi(swaggeraem.ApiClient(configuration))
 authorizable_id = 'authorizable_id_example' # str | 
 changelog = 'changelog_example' # str | 
 

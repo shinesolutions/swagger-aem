@@ -92,7 +92,7 @@ public class ConsoleApiExample {
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *http://localhost/*
+All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
@@ -100,11 +100,13 @@ Class | Method | HTTP request | Description
 *ConsoleApi* | [**postJmxRepository**](docs/ConsoleApi.md#postJmxRepository) | **POST** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} | 
 *CqApi* | [**getLoginPage**](docs/CqApi.md#getLoginPage) | **GET** /libs/granite/core/content/login.html | 
 *CqApi* | [**postCqActions**](docs/CqApi.md#postCqActions) | **POST** /.cqactions.html | 
+*CrxApi* | [**getInstallStatus**](docs/CrxApi.md#getInstallStatus) | **GET** /crx/packmgr/installstatus.jsp | 
 *CrxApi* | [**postPackageService**](docs/CrxApi.md#postPackageService) | **POST** /crx/packmgr/service.jsp | 
 *CrxApi* | [**postPackageServiceJson**](docs/CrxApi.md#postPackageServiceJson) | **POST** /crx/packmgr/service/.json/{path} | 
 *CrxApi* | [**postPackageUpdate**](docs/CrxApi.md#postPackageUpdate) | **POST** /crx/packmgr/update.jsp | 
 *CrxApi* | [**postSetPassword**](docs/CrxApi.md#postSetPassword) | **POST** /crx/explorer/ui/setpassword.jsp | 
 *CustomApi* | [**getAemHealthCheck**](docs/CustomApi.md#getAemHealthCheck) | **GET** /system/health | 
+*CustomApi* | [**postConfigAemHealthCheckServlet**](docs/CustomApi.md#postConfigAemHealthCheckServlet) | **POST** /apps/system/config.{runmode}/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck | 
 *CustomApi* | [**postConfigAemPasswordReset**](docs/CustomApi.md#postConfigAemPasswordReset) | **POST** /apps/system/config.{runmode}/com.shinesolutions.aem.passwordreset.Activator | 
 *SlingApi* | [**deleteAgent**](docs/SlingApi.md#deleteAgent) | **DELETE** /etc/replication/agents.{runmode}/{name} | 
 *SlingApi* | [**deleteNode**](docs/SlingApi.md#deleteNode) | **DELETE** /{path}/{name} | 
@@ -113,6 +115,7 @@ Class | Method | HTTP request | Description
 *SlingApi* | [**getNode**](docs/SlingApi.md#getNode) | **GET** /{path}/{name} | 
 *SlingApi* | [**getPackage**](docs/SlingApi.md#getPackage) | **GET** /etc/packages/{group}/{name}-{version}.zip | 
 *SlingApi* | [**getPackageFilter**](docs/SlingApi.md#getPackageFilter) | **GET** /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json | 
+*SlingApi* | [**getQuery**](docs/SlingApi.md#getQuery) | **GET** /bin/querybuilder.json | 
 *SlingApi* | [**postAgent**](docs/SlingApi.md#postAgent) | **POST** /etc/replication/agents.{runmode}/{name} | 
 *SlingApi* | [**postAuthorizables**](docs/SlingApi.md#postAuthorizables) | **POST** /libs/granite/security/post/authorizables | 
 *SlingApi* | [**postConfigApacheFelixJettyBasedHttpService**](docs/SlingApi.md#postConfigApacheFelixJettyBasedHttpService) | **POST** /apps/system/config.{runmode}/org.apache.felix.http | 
@@ -127,6 +130,8 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
+ - [InstallStatus](docs/InstallStatus.md)
+ - [InstallStatusStatus](docs/InstallStatusStatus.md)
 
 
 ## Documentation for Authorization

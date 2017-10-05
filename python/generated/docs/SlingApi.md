@@ -38,11 +38,12 @@ from swaggeraem.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: aemAuth
-swaggeraem.configuration.username = 'YOUR_USERNAME'
-swaggeraem.configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swaggeraem.SlingApi()
+api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
 runmode = 'runmode_example' # str | 
 name = 'name_example' # str | 
 
@@ -88,11 +89,12 @@ from swaggeraem.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: aemAuth
-swaggeraem.configuration.username = 'YOUR_USERNAME'
-swaggeraem.configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swaggeraem.SlingApi()
+api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
 path = 'path_example' # str | 
 name = 'name_example' # str | 
 
@@ -138,11 +140,12 @@ from swaggeraem.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: aemAuth
-swaggeraem.configuration.username = 'YOUR_USERNAME'
-swaggeraem.configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swaggeraem.SlingApi()
+api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
 runmode = 'runmode_example' # str | 
 name = 'name_example' # str | 
 
@@ -188,11 +191,12 @@ from swaggeraem.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: aemAuth
-swaggeraem.configuration.username = 'YOUR_USERNAME'
-swaggeraem.configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swaggeraem.SlingApi()
+api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
 runmode = 'runmode_example' # str | 
 
 try: 
@@ -237,11 +241,12 @@ from swaggeraem.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: aemAuth
-swaggeraem.configuration.username = 'YOUR_USERNAME'
-swaggeraem.configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swaggeraem.SlingApi()
+api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
 path = 'path_example' # str | 
 name = 'name_example' # str | 
 
@@ -287,11 +292,12 @@ from swaggeraem.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: aemAuth
-swaggeraem.configuration.username = 'YOUR_USERNAME'
-swaggeraem.configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swaggeraem.SlingApi()
+api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
 group = 'group_example' # str | 
 name = 'name_example' # str | 
 version = 'version_example' # str | 
@@ -340,11 +346,12 @@ from swaggeraem.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: aemAuth
-swaggeraem.configuration.username = 'YOUR_USERNAME'
-swaggeraem.configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swaggeraem.SlingApi()
+api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
 group = 'group_example' # str | 
 name = 'name_example' # str | 
 version = 'version_example' # str | 
@@ -393,11 +400,12 @@ from swaggeraem.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: aemAuth
-swaggeraem.configuration.username = 'YOUR_USERNAME'
-swaggeraem.configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swaggeraem.SlingApi()
+api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
 path = 'path_example' # str | 
 p_limit = 3.4 # float | 
 _1_property = '_1_property_example' # str | 
@@ -448,11 +456,12 @@ from swaggeraem.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: aemAuth
-swaggeraem.configuration.username = 'YOUR_USERNAME'
-swaggeraem.configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swaggeraem.SlingApi()
+api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
 runmode = 'runmode_example' # str | 
 name = 'name_example' # str | 
 jcrcontentcqdistribute = true # bool |  (optional)
@@ -598,11 +607,12 @@ from swaggeraem.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: aemAuth
-swaggeraem.configuration.username = 'YOUR_USERNAME'
-swaggeraem.configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swaggeraem.SlingApi()
+api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
 authorizable_id = 'authorizable_id_example' # str | 
 intermediate_path = 'intermediate_path_example' # str | 
 create_user = 'create_user_example' # str |  (optional)
@@ -657,11 +667,12 @@ from swaggeraem.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: aemAuth
-swaggeraem.configuration.username = 'YOUR_USERNAME'
-swaggeraem.configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swaggeraem.SlingApi()
+api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
 runmode = 'runmode_example' # str | 
 org_apache_felix_https_nio = true # bool |  (optional)
 org_apache_felix_https_nio_type_hint = 'org_apache_felix_https_nio_type_hint_example' # str |  (optional)
@@ -745,11 +756,12 @@ from swaggeraem.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: aemAuth
-swaggeraem.configuration.username = 'YOUR_USERNAME'
-swaggeraem.configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swaggeraem.SlingApi()
+api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
 runmode = 'runmode_example' # str | 
 alias = 'alias_example' # str |  (optional)
 alias_type_hint = 'alias_type_hint_example' # str |  (optional)
@@ -801,11 +813,12 @@ from swaggeraem.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: aemAuth
-swaggeraem.configuration.username = 'YOUR_USERNAME'
-swaggeraem.configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swaggeraem.SlingApi()
+api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
 runmode = 'runmode_example' # str | 
 json_maximumresults = 'json_maximumresults_example' # str |  (optional)
 json_maximumresults_type_hint = 'json_maximumresults_type_hint_example' # str |  (optional)
@@ -865,11 +878,12 @@ from swaggeraem.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: aemAuth
-swaggeraem.configuration.username = 'YOUR_USERNAME'
-swaggeraem.configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swaggeraem.SlingApi()
+api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
 runmode = 'runmode_example' # str | 
 allow_empty = true # bool |  (optional)
 allow_empty_type_hint = 'allow_empty_type_hint_example' # str |  (optional)
@@ -925,11 +939,12 @@ from swaggeraem.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: aemAuth
-swaggeraem.configuration.username = 'YOUR_USERNAME'
-swaggeraem.configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swaggeraem.SlingApi()
+api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
 path = 'path_example' # str | 
 name = 'name_example' # str | 
 add_members = 'add_members_example' # str |  (optional)
@@ -977,11 +992,12 @@ from swaggeraem.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: aemAuth
-swaggeraem.configuration.username = 'YOUR_USERNAME'
-swaggeraem.configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swaggeraem.SlingApi()
+api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
 path = 'path_example' # str | 
 jcrprimary_type = 'jcrprimary_type_example' # str | 
 name = 'name_example' # str | 
@@ -1029,11 +1045,12 @@ from swaggeraem.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: aemAuth
-swaggeraem.configuration.username = 'YOUR_USERNAME'
-swaggeraem.configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swaggeraem.SlingApi()
+api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
 path = 'path_example' # str | 
 p_limit = 3.4 # float | 
 _1_property = '_1_property_example' # str | 
@@ -1084,11 +1101,12 @@ from swaggeraem.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: aemAuth
-swaggeraem.configuration.username = 'YOUR_USERNAME'
-swaggeraem.configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swaggeraem.SlingApi()
+api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
 ignoredeactivated = true # bool | 
 onlymodified = true # bool | 
 path = 'path_example' # str | 

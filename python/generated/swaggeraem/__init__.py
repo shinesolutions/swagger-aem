@@ -14,6 +14,8 @@
 from __future__ import absolute_import
 
 # import models into sdk package
+from .models.install_status import InstallStatus
+from .models.install_status_status import InstallStatusStatus
 
 # import apis into sdk package
 from .apis.console_api import ConsoleApi
@@ -26,5 +28,3 @@ from .apis.sling_api import SlingApi
 from .api_client import ApiClient
 
 from .configuration import Configuration
-
-configuration = Configuration()

@@ -23,11 +23,12 @@ from swaggeraem.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: aemAuth
-swaggeraem.configuration.username = 'YOUR_USERNAME'
-swaggeraem.configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swaggeraem.CustomApi()
+api_instance = swaggeraem.CustomApi(swaggeraem.ApiClient(configuration))
 tags = 'tags_example' # str |  (optional)
 combine_tags_or = true # bool |  (optional)
 
@@ -74,11 +75,12 @@ from swaggeraem.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: aemAuth
-swaggeraem.configuration.username = 'YOUR_USERNAME'
-swaggeraem.configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swaggeraem.CustomApi()
+api_instance = swaggeraem.CustomApi(swaggeraem.ApiClient(configuration))
 runmode = 'runmode_example' # str | 
 bundles_ignored = ['bundles_ignored_example'] # list[str] |  (optional)
 bundles_ignored_type_hint = 'bundles_ignored_type_hint_example' # str |  (optional)
@@ -126,11 +128,12 @@ from swaggeraem.rest import ApiException
 from pprint import pprint
 
 # Configure HTTP basic authorization: aemAuth
-swaggeraem.configuration.username = 'YOUR_USERNAME'
-swaggeraem.configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
-api_instance = swaggeraem.CustomApi()
+api_instance = swaggeraem.CustomApi(swaggeraem.ApiClient(configuration))
 runmode = 'runmode_example' # str | 
 pwdreset_authorizables = ['pwdreset_authorizables_example'] # list[str] |  (optional)
 pwdreset_authorizables_type_hint = 'pwdreset_authorizables_type_hint_example' # str |  (optional)

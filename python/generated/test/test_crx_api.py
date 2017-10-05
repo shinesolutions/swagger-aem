@@ -31,6 +31,14 @@ class TestCrxApi(unittest.TestCase):
     def tearDown(self):
         pass
 
+    def test_get_install_status(self):
+        """
+        Test case for get_install_status
+
+        
+        """
+        pass
+
     def test_post_package_service(self):
         """
         Test case for post_package_service

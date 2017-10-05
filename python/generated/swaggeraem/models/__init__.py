@@ -14,3 +14,5 @@
 from __future__ import absolute_import
 
 # import models into model package
+from .install_status import InstallStatus
+from .install_status_status import InstallStatusStatus

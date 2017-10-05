@@ -20,7 +20,6 @@ import re
 # python 2 and python 3 compatibility library
 from six import iteritems
 
-from ..configuration import Configuration
 from ..api_client import ApiClient
 
 
@@ -32,26 +31,18 @@ class SlingApi(object):
     """
 
     def __init__(self, api_client=None):
-        config = Configuration()
-        if api_client:
-            self.api_client = api_client
-        else:
-            if not config.api_client:
-                config.api_client = ApiClient()
-            self.api_client = config.api_client
+        if api_client is None:
+            api_client = ApiClient()
+        self.api_client = api_client
 
     def delete_agent(self, runmode, name, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_agent(runmode, name, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_agent(runmode, name, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str runmode: (required)
         :param str name: (required)
         :return: None
@@ -59,7 +50,7 @@ class SlingApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.delete_agent_with_http_info(runmode, name, **kwargs)
         else:
             (data) = self.delete_agent_with_http_info(runmode, name, **kwargs)
@@ -68,15 +59,11 @@ class SlingApi(object):
     def delete_agent_with_http_info(self, runmode, name, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_agent_with_http_info(runmode, name, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_agent_with_http_info(runmode, name, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str runmode: (required)
         :param str name: (required)
         :return: None
@@ -85,7 +72,7 @@ class SlingApi(object):
         """
 
         all_params = ['runmode', 'name']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -139,7 +126,7 @@ class SlingApi(object):
                                         files=local_var_files,
                                         response_type=None,
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -148,15 +135,11 @@ class SlingApi(object):
     def delete_node(self, path, name, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_node(path, name, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_node(path, name, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str path: (required)
         :param str name: (required)
         :return: None
@@ -164,7 +147,7 @@ class SlingApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.delete_node_with_http_info(path, name, **kwargs)
         else:
             (data) = self.delete_node_with_http_info(path, name, **kwargs)
@@ -173,15 +156,11 @@ class SlingApi(object):
     def delete_node_with_http_info(self, path, name, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_node_with_http_info(path, name, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.delete_node_with_http_info(path, name, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str path: (required)
         :param str name: (required)
         :return: None
@@ -190,7 +169,7 @@ class SlingApi(object):
         """
 
         all_params = ['path', 'name']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -244,7 +223,7 @@ class SlingApi(object):
                                         files=local_var_files,
                                         response_type=None,
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -253,15 +232,11 @@ class SlingApi(object):
     def get_agent(self, runmode, name, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.get_agent(runmode, name, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.get_agent(runmode, name, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str runmode: (required)
         :param str name: (required)
         :return: None
@@ -269,7 +244,7 @@ class SlingApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.get_agent_with_http_info(runmode, name, **kwargs)
         else:
             (data) = self.get_agent_with_http_info(runmode, name, **kwargs)
@@ -278,15 +253,11 @@ class SlingApi(object):
     def get_agent_with_http_info(self, runmode, name, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.get_agent_with_http_info(runmode, name, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.get_agent_with_http_info(runmode, name, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str runmode: (required)
         :param str name: (required)
         :return: None
@@ -295,7 +266,7 @@ class SlingApi(object):
         """
 
         all_params = ['runmode', 'name']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -349,7 +320,7 @@ class SlingApi(object):
                                         files=local_var_files,
                                         response_type=None,
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -358,22 +329,18 @@ class SlingApi(object):
     def get_agents(self, runmode, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.get_agents(runmode, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.get_agents(runmode, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str runmode: (required)
         :return: str
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.get_agents_with_http_info(runmode, **kwargs)
         else:
             (data) = self.get_agents_with_http_info(runmode, **kwargs)
@@ -382,15 +349,11 @@ class SlingApi(object):
     def get_agents_with_http_info(self, runmode, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.get_agents_with_http_info(runmode, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.get_agents_with_http_info(runmode, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str runmode: (required)
         :return: str
                  If the method is called asynchronously,
@@ -398,7 +361,7 @@ class SlingApi(object):
         """
 
         all_params = ['runmode']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -447,7 +410,7 @@ class SlingApi(object):
                                         files=local_var_files,
                                         response_type='str',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -456,15 +419,11 @@ class SlingApi(object):
     def get_node(self, path, name, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.get_node(path, name, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.get_node(path, name, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str path: (required)
         :param str name: (required)
         :return: None
@@ -472,7 +431,7 @@ class SlingApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.get_node_with_http_info(path, name, **kwargs)
         else:
             (data) = self.get_node_with_http_info(path, name, **kwargs)
@@ -481,15 +440,11 @@ class SlingApi(object):
     def get_node_with_http_info(self, path, name, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.get_node_with_http_info(path, name, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.get_node_with_http_info(path, name, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str path: (required)
         :param str name: (required)
         :return: None
@@ -498,7 +453,7 @@ class SlingApi(object):
         """
 
         all_params = ['path', 'name']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -552,7 +507,7 @@ class SlingApi(object):
                                         files=local_var_files,
                                         response_type=None,
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -561,15 +516,11 @@ class SlingApi(object):
     def get_package(self, group, name, version, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.get_package(group, name, version, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.get_package(group, name, version, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str group: (required)
         :param str name: (required)
         :param str version: (required)
@@ -578,7 +529,7 @@ class SlingApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.get_package_with_http_info(group, name, version, **kwargs)
         else:
             (data) = self.get_package_with_http_info(group, name, version, **kwargs)
@@ -587,15 +538,11 @@ class SlingApi(object):
     def get_package_with_http_info(self, group, name, version, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.get_package_with_http_info(group, name, version, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.get_package_with_http_info(group, name, version, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str group: (required)
         :param str name: (required)
         :param str version: (required)
@@ -605,7 +552,7 @@ class SlingApi(object):
         """
 
         all_params = ['group', 'name', 'version']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -664,7 +611,7 @@ class SlingApi(object):
                                         files=local_var_files,
                                         response_type='file',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -673,15 +620,11 @@ class SlingApi(object):
     def get_package_filter(self, group, name, version, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.get_package_filter(group, name, version, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.get_package_filter(group, name, version, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str group: (required)
         :param str name: (required)
         :param str version: (required)
@@ -690,7 +633,7 @@ class SlingApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.get_package_filter_with_http_info(group, name, version, **kwargs)
         else:
             (data) = self.get_package_filter_with_http_info(group, name, version, **kwargs)
@@ -699,15 +642,11 @@ class SlingApi(object):
     def get_package_filter_with_http_info(self, group, name, version, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.get_package_filter_with_http_info(group, name, version, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.get_package_filter_with_http_info(group, name, version, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str group: (required)
         :param str name: (required)
         :param str version: (required)
@@ -717,7 +656,7 @@ class SlingApi(object):
         """
 
         all_params = ['group', 'name', 'version']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -776,7 +715,7 @@ class SlingApi(object):
                                         files=local_var_files,
                                         response_type='str',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -785,15 +724,11 @@ class SlingApi(object):
     def get_query(self, path, p_limit, _1_property, _1_property_value, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.get_query(path, p_limit, _1_property, _1_property_value, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.get_query(path, p_limit, _1_property, _1_property_value, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str path: (required)
         :param float p_limit: (required)
         :param str _1_property: (required)
@@ -803,7 +738,7 @@ class SlingApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.get_query_with_http_info(path, p_limit, _1_property, _1_property_value, **kwargs)
         else:
             (data) = self.get_query_with_http_info(path, p_limit, _1_property, _1_property_value, **kwargs)
@@ -812,15 +747,11 @@ class SlingApi(object):
     def get_query_with_http_info(self, path, p_limit, _1_property, _1_property_value, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.get_query_with_http_info(path, p_limit, _1_property, _1_property_value, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.get_query_with_http_info(path, p_limit, _1_property, _1_property_value, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str path: (required)
         :param float p_limit: (required)
         :param str _1_property: (required)
@@ -831,7 +762,7 @@ class SlingApi(object):
         """
 
         all_params = ['path', 'p_limit', '_1_property', '_1_property_value']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -895,7 +826,7 @@ class SlingApi(object):
                                         files=local_var_files,
                                         response_type='str',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -904,15 +835,11 @@ class SlingApi(object):
     def post_agent(self, runmode, name, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.post_agent(runmode, name, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.post_agent(runmode, name, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str runmode: (required)
         :param str name: (required)
         :param bool jcrcontentcqdistribute:
@@ -970,7 +897,7 @@ class SlingApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.post_agent_with_http_info(runmode, name, **kwargs)
         else:
             (data) = self.post_agent_with_http_info(runmode, name, **kwargs)
@@ -979,15 +906,11 @@ class SlingApi(object):
     def post_agent_with_http_info(self, runmode, name, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.post_agent_with_http_info(runmode, name, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.post_agent_with_http_info(runmode, name, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str runmode: (required)
         :param str name: (required)
         :param bool jcrcontentcqdistribute:
@@ -1046,7 +969,7 @@ class SlingApi(object):
         """
 
         all_params = ['runmode', 'name', 'jcrcontentcqdistribute', 'jcrcontentcqdistribute_type_hint', 'jcrcontentcqname', 'jcrcontentcqtemplate', 'jcrcontentenabled', 'jcrcontentjcrdescription', 'jcrcontentjcrlast_modified', 'jcrcontentjcrlast_modified_by', 'jcrcontentjcrmixin_types', 'jcrcontentjcrtitle', 'jcrcontentlog_level', 'jcrcontentno_status_update', 'jcrcontentno_versioning', 'jcrcontentprotocol_connect_timeout', 'jcrcontentprotocol_http_connection_closed', 'jcrcontentprotocol_http_expired', 'jcrcontentprotocol_http_headers', 'jcrcontentprotocol_http_headers_type_hint', 'jcrcontentprotocol_http_method', 'jcrcontentprotocol_https_relaxed', 'jcrcontentprotocol_interface', 'jcrcontentprotocol_socket_timeout', 'jcrcontentprotocol_version', 'jcrcontentproxy_ntlm_domain', 'jcrcontentproxy_ntlm_host', 'jcrcontentproxy_host', 'jcrcontentproxy_password', 'jcrcontentproxy_port', 'jcrcontentproxy_user', 'jcrcontentqueue_batch_max_size', 'jcrcontentqueue_batch_mode', 'jcrcontentqueue_batch_wait_time', 'jcrcontentretry_delay', 'jcrcontentreverse_replication', 'jcrcontentserialization_type', 'jcrcontentslingresource_type', 'jcrcontentssl', 'jcrcontenttransport_ntlm_domain', 'jcrcontenttransport_ntlm_host', 'jcrcontenttransport_password', 'jcrcontenttransport_uri', 'jcrcontenttransport_user', 'jcrcontenttrigger_distribute', 'jcrcontenttrigger_modified', 'jcrcontenttrigger_on_off_time', 'jcrcontenttrigger_receive', 'jcrcontenttrigger_specific', 'jcrcontentuser_id', 'jcrprimary_type', 'operation']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -1201,7 +1124,7 @@ class SlingApi(object):
                                         files=local_var_files,
                                         response_type=None,
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -1210,15 +1133,11 @@ class SlingApi(object):
     def post_authorizables(self, authorizable_id, intermediate_path, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.post_authorizables(authorizable_id, intermediate_path, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.post_authorizables(authorizable_id, intermediate_path, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str authorizable_id: (required)
         :param str intermediate_path: (required)
         :param str create_user:
@@ -1230,7 +1149,7 @@ class SlingApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.post_authorizables_with_http_info(authorizable_id, intermediate_path, **kwargs)
         else:
             (data) = self.post_authorizables_with_http_info(authorizable_id, intermediate_path, **kwargs)
@@ -1239,15 +1158,11 @@ class SlingApi(object):
     def post_authorizables_with_http_info(self, authorizable_id, intermediate_path, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.post_authorizables_with_http_info(authorizable_id, intermediate_path, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.post_authorizables_with_http_info(authorizable_id, intermediate_path, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str authorizable_id: (required)
         :param str intermediate_path: (required)
         :param str create_user:
@@ -1260,7 +1175,7 @@ class SlingApi(object):
         """
 
         all_params = ['authorizable_id', 'intermediate_path', 'create_user', 'create_group', 'reppassword', 'profilegiven_name']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -1322,7 +1237,7 @@ class SlingApi(object):
                                         files=local_var_files,
                                         response_type='str',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -1331,15 +1246,11 @@ class SlingApi(object):
     def post_config_apache_felix_jetty_based_http_service(self, runmode, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.post_config_apache_felix_jetty_based_http_service(runmode, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.post_config_apache_felix_jetty_based_http_service(runmode, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str runmode: (required)
         :param bool org_apache_felix_https_nio:
         :param str org_apache_felix_https_nio_type_hint:
@@ -1366,7 +1277,7 @@ class SlingApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.post_config_apache_felix_jetty_based_http_service_with_http_info(runmode, **kwargs)
         else:
             (data) = self.post_config_apache_felix_jetty_based_http_service_with_http_info(runmode, **kwargs)
@@ -1375,15 +1286,11 @@ class SlingApi(object):
     def post_config_apache_felix_jetty_based_http_service_with_http_info(self, runmode, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.post_config_apache_felix_jetty_based_http_service_with_http_info(runmode, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.post_config_apache_felix_jetty_based_http_service_with_http_info(runmode, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str runmode: (required)
         :param bool org_apache_felix_https_nio:
         :param str org_apache_felix_https_nio_type_hint:
@@ -1411,7 +1318,7 @@ class SlingApi(object):
         """
 
         all_params = ['runmode', 'org_apache_felix_https_nio', 'org_apache_felix_https_nio_type_hint', 'org_apache_felix_https_keystore', 'org_apache_felix_https_keystore_type_hint', 'org_apache_felix_https_keystore_password', 'org_apache_felix_https_keystore_password_type_hint', 'org_apache_felix_https_keystore_key', 'org_apache_felix_https_keystore_key_type_hint', 'org_apache_felix_https_keystore_key_password', 'org_apache_felix_https_keystore_key_password_type_hint', 'org_apache_felix_https_truststore', 'org_apache_felix_https_truststore_type_hint', 'org_apache_felix_https_truststore_password', 'org_apache_felix_https_truststore_password_type_hint', 'org_apache_felix_https_clientcertificate', 'org_apache_felix_https_clientcertificate_type_hint', 'org_apache_felix_https_enable', 'org_apache_felix_https_enable_type_hint', 'org_osgi_service_http_port_secure', 'org_osgi_service_http_port_secure_type_hint']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -1500,7 +1407,7 @@ class SlingApi(object):
                                         files=local_var_files,
                                         response_type=None,
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -1509,15 +1416,11 @@ class SlingApi(object):
     def post_config_apache_sling_dav_ex_servlet(self, runmode, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.post_config_apache_sling_dav_ex_servlet(runmode, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.post_config_apache_sling_dav_ex_servlet(runmode, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str runmode: (required)
         :param str alias:
         :param str alias_type_hint:
@@ -1528,7 +1431,7 @@ class SlingApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.post_config_apache_sling_dav_ex_servlet_with_http_info(runmode, **kwargs)
         else:
             (data) = self.post_config_apache_sling_dav_ex_servlet_with_http_info(runmode, **kwargs)
@@ -1537,15 +1440,11 @@ class SlingApi(object):
     def post_config_apache_sling_dav_ex_servlet_with_http_info(self, runmode, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.post_config_apache_sling_dav_ex_servlet_with_http_info(runmode, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.post_config_apache_sling_dav_ex_servlet_with_http_info(runmode, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str runmode: (required)
         :param str alias:
         :param str alias_type_hint:
@@ -1557,7 +1456,7 @@ class SlingApi(object):
         """
 
         all_params = ['runmode', 'alias', 'alias_type_hint', 'dav_create_absolute_uri', 'dav_create_absolute_uri_type_hint']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -1614,7 +1513,7 @@ class SlingApi(object):
                                         files=local_var_files,
                                         response_type=None,
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -1623,15 +1522,11 @@ class SlingApi(object):
     def post_config_apache_sling_get_servlet(self, runmode, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.post_config_apache_sling_get_servlet(runmode, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.post_config_apache_sling_get_servlet(runmode, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str runmode: (required)
         :param str json_maximumresults:
         :param str json_maximumresults_type_hint:
@@ -1646,7 +1541,7 @@ class SlingApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.post_config_apache_sling_get_servlet_with_http_info(runmode, **kwargs)
         else:
             (data) = self.post_config_apache_sling_get_servlet_with_http_info(runmode, **kwargs)
@@ -1655,15 +1550,11 @@ class SlingApi(object):
     def post_config_apache_sling_get_servlet_with_http_info(self, runmode, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.post_config_apache_sling_get_servlet_with_http_info(runmode, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.post_config_apache_sling_get_servlet_with_http_info(runmode, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str runmode: (required)
         :param str json_maximumresults:
         :param str json_maximumresults_type_hint:
@@ -1679,7 +1570,7 @@ class SlingApi(object):
         """
 
         all_params = ['runmode', 'json_maximumresults', 'json_maximumresults_type_hint', 'enable_html', 'enable_html_type_hint', 'enable_txt', 'enable_txt_type_hint', 'enable_xml', 'enable_xml_type_hint']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -1744,7 +1635,7 @@ class SlingApi(object):
                                         files=local_var_files,
                                         response_type=None,
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -1753,15 +1644,11 @@ class SlingApi(object):
     def post_config_apache_sling_referrer_filter(self, runmode, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.post_config_apache_sling_referrer_filter(runmode, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.post_config_apache_sling_referrer_filter(runmode, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str runmode: (required)
         :param bool allow_empty:
         :param str allow_empty_type_hint:
@@ -1774,7 +1661,7 @@ class SlingApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.post_config_apache_sling_referrer_filter_with_http_info(runmode, **kwargs)
         else:
             (data) = self.post_config_apache_sling_referrer_filter_with_http_info(runmode, **kwargs)
@@ -1783,15 +1670,11 @@ class SlingApi(object):
     def post_config_apache_sling_referrer_filter_with_http_info(self, runmode, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.post_config_apache_sling_referrer_filter_with_http_info(runmode, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.post_config_apache_sling_referrer_filter_with_http_info(runmode, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str runmode: (required)
         :param bool allow_empty:
         :param str allow_empty_type_hint:
@@ -1805,7 +1688,7 @@ class SlingApi(object):
         """
 
         all_params = ['runmode', 'allow_empty', 'allow_empty_type_hint', 'allow_hosts', 'allow_hosts_type_hint', 'allow_hosts_regexp', 'allow_hosts_regexp_type_hint']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -1866,7 +1749,7 @@ class SlingApi(object):
                                         files=local_var_files,
                                         response_type=None,
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -1875,15 +1758,11 @@ class SlingApi(object):
     def post_node_rw(self, path, name, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.post_node_rw(path, name, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.post_node_rw(path, name, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str path: (required)
         :param str name: (required)
         :param str add_members:
@@ -1892,7 +1771,7 @@ class SlingApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.post_node_rw_with_http_info(path, name, **kwargs)
         else:
             (data) = self.post_node_rw_with_http_info(path, name, **kwargs)
@@ -1901,15 +1780,11 @@ class SlingApi(object):
     def post_node_rw_with_http_info(self, path, name, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.post_node_rw_with_http_info(path, name, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.post_node_rw_with_http_info(path, name, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str path: (required)
         :param str name: (required)
         :param str add_members:
@@ -1919,7 +1794,7 @@ class SlingApi(object):
         """
 
         all_params = ['path', 'name', 'add_members']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -1975,7 +1850,7 @@ class SlingApi(object):
                                         files=local_var_files,
                                         response_type=None,
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -1984,15 +1859,11 @@ class SlingApi(object):
     def post_path(self, path, jcrprimary_type, name, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.post_path(path, jcrprimary_type, name, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.post_path(path, jcrprimary_type, name, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str path: (required)
         :param str jcrprimary_type: (required)
         :param str name: (required)
@@ -2001,7 +1872,7 @@ class SlingApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.post_path_with_http_info(path, jcrprimary_type, name, **kwargs)
         else:
             (data) = self.post_path_with_http_info(path, jcrprimary_type, name, **kwargs)
@@ -2010,15 +1881,11 @@ class SlingApi(object):
     def post_path_with_http_info(self, path, jcrprimary_type, name, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.post_path_with_http_info(path, jcrprimary_type, name, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.post_path_with_http_info(path, jcrprimary_type, name, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str path: (required)
         :param str jcrprimary_type: (required)
         :param str name: (required)
@@ -2028,7 +1895,7 @@ class SlingApi(object):
         """
 
         all_params = ['path', 'jcrprimary_type', 'name']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -2087,7 +1954,7 @@ class SlingApi(object):
                                         files=local_var_files,
                                         response_type=None,
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -2096,15 +1963,11 @@ class SlingApi(object):
     def post_query(self, path, p_limit, _1_property, _1_property_value, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.post_query(path, p_limit, _1_property, _1_property_value, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.post_query(path, p_limit, _1_property, _1_property_value, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str path: (required)
         :param float p_limit: (required)
         :param str _1_property: (required)
@@ -2114,7 +1977,7 @@ class SlingApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.post_query_with_http_info(path, p_limit, _1_property, _1_property_value, **kwargs)
         else:
             (data) = self.post_query_with_http_info(path, p_limit, _1_property, _1_property_value, **kwargs)
@@ -2123,15 +1986,11 @@ class SlingApi(object):
     def post_query_with_http_info(self, path, p_limit, _1_property, _1_property_value, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.post_query_with_http_info(path, p_limit, _1_property, _1_property_value, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.post_query_with_http_info(path, p_limit, _1_property, _1_property_value, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param str path: (required)
         :param float p_limit: (required)
         :param str _1_property: (required)
@@ -2142,7 +2001,7 @@ class SlingApi(object):
         """
 
         all_params = ['path', 'p_limit', '_1_property', '_1_property_value']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -2206,7 +2065,7 @@ class SlingApi(object):
                                         files=local_var_files,
                                         response_type='str',
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
@@ -2215,15 +2074,11 @@ class SlingApi(object):
     def post_tree_activation(self, ignoredeactivated, onlymodified, path, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.post_tree_activation(ignoredeactivated, onlymodified, path, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.post_tree_activation(ignoredeactivated, onlymodified, path, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param bool ignoredeactivated: (required)
         :param bool onlymodified: (required)
         :param str path: (required)
@@ -2232,7 +2087,7 @@ class SlingApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
+        if kwargs.get('async'):
             return self.post_tree_activation_with_http_info(ignoredeactivated, onlymodified, path, **kwargs)
         else:
             (data) = self.post_tree_activation_with_http_info(ignoredeactivated, onlymodified, path, **kwargs)
@@ -2241,15 +2096,11 @@ class SlingApi(object):
     def post_tree_activation_with_http_info(self, ignoredeactivated, onlymodified, path, **kwargs):
         """
         This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.post_tree_activation_with_http_info(ignoredeactivated, onlymodified, path, callback=callback_function)
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.post_tree_activation_with_http_info(ignoredeactivated, onlymodified, path, async=True)
+        >>> result = thread.get()
 
-        :param callback function: The callback function
-            for asynchronous request. (optional)
+        :param async bool
         :param bool ignoredeactivated: (required)
         :param bool onlymodified: (required)
         :param str path: (required)
@@ -2259,7 +2110,7 @@ class SlingApi(object):
         """
 
         all_params = ['ignoredeactivated', 'onlymodified', 'path']
-        all_params.append('callback')
+        all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
         all_params.append('_request_timeout')
@@ -2318,7 +2169,7 @@ class SlingApi(object):
                                         files=local_var_files,
                                         response_type=None,
                                         auth_settings=auth_settings,
-                                        callback=params.get('callback'),
+                                        async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
                                         _preload_content=params.get('_preload_content', True),
                                         _request_timeout=params.get('_request_timeout'),
