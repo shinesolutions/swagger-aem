@@ -1,3 +1,6 @@
+### 1.2.0
+* Add crx#getInstallStatus operation
+
 ### 1.1.1
 * Switch chunked file download support to be generated from Swagger Codegen CLI jar 20170530
 
