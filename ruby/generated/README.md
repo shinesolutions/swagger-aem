@@ -87,6 +87,7 @@ Class | Method | HTTP request | Description
 *SwaggerAemClient::ConsoleApi* | [**post_jmx_repository**](docs/ConsoleApi.md#post_jmx_repository) | **POST** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} | 
 *SwaggerAemClient::CqApi* | [**get_login_page**](docs/CqApi.md#get_login_page) | **GET** /libs/granite/core/content/login.html | 
 *SwaggerAemClient::CqApi* | [**post_cq_actions**](docs/CqApi.md#post_cq_actions) | **POST** /.cqactions.html | 
+*SwaggerAemClient::CrxApi* | [**get_install_status**](docs/CrxApi.md#get_install_status) | **GET** /crx/packmgr/installstatus.jsp | 
 *SwaggerAemClient::CrxApi* | [**post_package_service**](docs/CrxApi.md#post_package_service) | **POST** /crx/packmgr/service.jsp | 
 *SwaggerAemClient::CrxApi* | [**post_package_service_json**](docs/CrxApi.md#post_package_service_json) | **POST** /crx/packmgr/service/.json/{path} | 
 *SwaggerAemClient::CrxApi* | [**post_package_update**](docs/CrxApi.md#post_package_update) | **POST** /crx/packmgr/update.jsp | 
@@ -116,6 +117,8 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
+ - [SwaggerAemClient::InstallStatus](docs/InstallStatus.md)
+ - [SwaggerAemClient::InstallStatusStatus](docs/InstallStatusStatus.md)
 
 
 ## Documentation for Authorization

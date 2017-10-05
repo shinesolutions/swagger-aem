@@ -4,10 +4,55 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**get_install_status**](CrxApi.md#get_install_status) | **GET** /crx/packmgr/installstatus.jsp | 
 [**post_package_service**](CrxApi.md#post_package_service) | **POST** /crx/packmgr/service.jsp | 
 [**post_package_service_json**](CrxApi.md#post_package_service_json) | **POST** /crx/packmgr/service/.json/{path} | 
 [**post_package_update**](CrxApi.md#post_package_update) | **POST** /crx/packmgr/update.jsp | 
 [**post_set_password**](CrxApi.md#post_set_password) | **POST** /crx/explorer/ui/setpassword.jsp | 
+
+
+# **get_install_status**
+> InstallStatus get_install_status
+
+
+
+### Example
+```ruby
+# load the gem
+require 'swagger_aem'
+# setup authorization
+SwaggerAemClient.configure do |config|
+  # Configure HTTP basic authorization: aemAuth
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = SwaggerAemClient::CrxApi.new
+
+begin
+  result = api_instance.get_install_status
+  p result
+rescue SwaggerAemClient::ApiError => e
+  puts "Exception when calling CrxApi->get_install_status: #{e}"
+end
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**InstallStatus**](InstallStatus.md)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
 
 
 # **post_package_service**

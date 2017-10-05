@@ -33,7 +33,7 @@ java:
 
 javascript:
 	$(call build, javascript-clean javascript-gen javascript-deps javascript-install)
-	
+
 python:
 	$(call build, python-clean python-gen python-deps python-test python-build python-install)
 
