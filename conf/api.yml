@@ -863,6 +863,22 @@ paths:
             type: string
       tags:
         - crx
+  /crx/packmgr/installstatus.jsp:
+    get:
+      operationId: getInstallStatus
+      produces:
+        - application/json
+      responses:
+        200:
+          description: 'Retrieved CRX package manager install status'
+          schema:
+            $ref: '#/definitions/InstallStatus'
+        default:
+          description: 'Default response'
+          schema:
+            type: string
+      tags:
+        - crx
   /crx/packmgr/service.jsp:
     post:
       operationId: postPackageService
@@ -1023,3 +1039,14 @@ paths:
             type: string
       tags:
         - custom
+definitions:
+  InstallStatus:
+    type: object
+    properties:
+      status:
+        type: object
+        properties:
+          finished:
+            type: boolean
+          itemCount:
+            type: integer
