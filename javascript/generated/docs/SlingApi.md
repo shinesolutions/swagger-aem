@@ -32,28 +32,29 @@ Method | HTTP request | Description
 
 ### Example
 ```javascript
-import NodeSwaggerAem from 'node-swagger-aem';
-let defaultClient = NodeSwaggerAem.ApiClient.instance;
+var NodeSwaggerAem = require('node-swagger-aem');
+var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
-let aemAuth = defaultClient.authentications['aemAuth'];
+var aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-let apiInstance = new NodeSwaggerAem.SlingApi();
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-let runmode = "runmode_example"; // String | 
+var runmode = "runmode_example"; // String | 
 
-let name = "name_example"; // String | 
+var name = "name_example"; // String | 
 
 
-apiInstance.deleteAgent(runmode, name, (error, data, response) => {
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully.');
   }
-});
+};
+apiInstance.deleteAgent(runmode, name, callback);
 ```
 
 ### Parameters
@@ -84,28 +85,29 @@ null (empty response body)
 
 ### Example
 ```javascript
-import NodeSwaggerAem from 'node-swagger-aem';
-let defaultClient = NodeSwaggerAem.ApiClient.instance;
+var NodeSwaggerAem = require('node-swagger-aem');
+var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
-let aemAuth = defaultClient.authentications['aemAuth'];
+var aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-let apiInstance = new NodeSwaggerAem.SlingApi();
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-let path = "path_example"; // String | 
+var path = "path_example"; // String | 
 
-let name = "name_example"; // String | 
+var name = "name_example"; // String | 
 
 
-apiInstance.deleteNode(path, name, (error, data, response) => {
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully.');
   }
-});
+};
+apiInstance.deleteNode(path, name, callback);
 ```
 
 ### Parameters
@@ -136,28 +138,29 @@ null (empty response body)
 
 ### Example
 ```javascript
-import NodeSwaggerAem from 'node-swagger-aem';
-let defaultClient = NodeSwaggerAem.ApiClient.instance;
+var NodeSwaggerAem = require('node-swagger-aem');
+var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
-let aemAuth = defaultClient.authentications['aemAuth'];
+var aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-let apiInstance = new NodeSwaggerAem.SlingApi();
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-let runmode = "runmode_example"; // String | 
+var runmode = "runmode_example"; // String | 
 
-let name = "name_example"; // String | 
+var name = "name_example"; // String | 
 
 
-apiInstance.getAgent(runmode, name, (error, data, response) => {
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully.');
   }
-});
+};
+apiInstance.getAgent(runmode, name, callback);
 ```
 
 ### Parameters
@@ -188,26 +191,27 @@ null (empty response body)
 
 ### Example
 ```javascript
-import NodeSwaggerAem from 'node-swagger-aem';
-let defaultClient = NodeSwaggerAem.ApiClient.instance;
+var NodeSwaggerAem = require('node-swagger-aem');
+var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
-let aemAuth = defaultClient.authentications['aemAuth'];
+var aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-let apiInstance = new NodeSwaggerAem.SlingApi();
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-let runmode = "runmode_example"; // String | 
+var runmode = "runmode_example"; // String | 
 
 
-apiInstance.getAgents(runmode, (error, data, response) => {
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully. Returned data: ' + data);
   }
-});
+};
+apiInstance.getAgents(runmode, callback);
 ```
 
 ### Parameters
@@ -237,28 +241,29 @@ Name | Type | Description  | Notes
 
 ### Example
 ```javascript
-import NodeSwaggerAem from 'node-swagger-aem';
-let defaultClient = NodeSwaggerAem.ApiClient.instance;
+var NodeSwaggerAem = require('node-swagger-aem');
+var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
-let aemAuth = defaultClient.authentications['aemAuth'];
+var aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-let apiInstance = new NodeSwaggerAem.SlingApi();
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-let path = "path_example"; // String | 
+var path = "path_example"; // String | 
 
-let name = "name_example"; // String | 
+var name = "name_example"; // String | 
 
 
-apiInstance.getNode(path, name, (error, data, response) => {
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully.');
   }
-});
+};
+apiInstance.getNode(path, name, callback);
 ```
 
 ### Parameters
@@ -289,30 +294,31 @@ null (empty response body)
 
 ### Example
 ```javascript
-import NodeSwaggerAem from 'node-swagger-aem';
-let defaultClient = NodeSwaggerAem.ApiClient.instance;
+var NodeSwaggerAem = require('node-swagger-aem');
+var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
-let aemAuth = defaultClient.authentications['aemAuth'];
+var aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-let apiInstance = new NodeSwaggerAem.SlingApi();
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-let group = "group_example"; // String | 
+var group = "group_example"; // String | 
 
-let name = "name_example"; // String | 
+var name = "name_example"; // String | 
 
-let version = "version_example"; // String | 
+var version = "version_example"; // String | 
 
 
-apiInstance.getPackage(group, name, version, (error, data, response) => {
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully. Returned data: ' + data);
   }
-});
+};
+apiInstance.getPackage(group, name, version, callback);
 ```
 
 ### Parameters
@@ -344,30 +350,31 @@ Name | Type | Description  | Notes
 
 ### Example
 ```javascript
-import NodeSwaggerAem from 'node-swagger-aem';
-let defaultClient = NodeSwaggerAem.ApiClient.instance;
+var NodeSwaggerAem = require('node-swagger-aem');
+var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
-let aemAuth = defaultClient.authentications['aemAuth'];
+var aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-let apiInstance = new NodeSwaggerAem.SlingApi();
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-let group = "group_example"; // String | 
+var group = "group_example"; // String | 
 
-let name = "name_example"; // String | 
+var name = "name_example"; // String | 
 
-let version = "version_example"; // String | 
+var version = "version_example"; // String | 
 
 
-apiInstance.getPackageFilter(group, name, version, (error, data, response) => {
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully. Returned data: ' + data);
   }
-});
+};
+apiInstance.getPackageFilter(group, name, version, callback);
 ```
 
 ### Parameters
@@ -399,32 +406,33 @@ Name | Type | Description  | Notes
 
 ### Example
 ```javascript
-import NodeSwaggerAem from 'node-swagger-aem';
-let defaultClient = NodeSwaggerAem.ApiClient.instance;
+var NodeSwaggerAem = require('node-swagger-aem');
+var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
-let aemAuth = defaultClient.authentications['aemAuth'];
+var aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-let apiInstance = new NodeSwaggerAem.SlingApi();
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-let path = "path_example"; // String | 
+var path = "path_example"; // String | 
 
-let pLimit = 3.4; // Number | 
+var pLimit = 8.14; // Number | 
 
-let _1Property = "_1Property_example"; // String | 
+var _1Property = "_1Property_example"; // String | 
 
-let _1PropertyValue = "_1PropertyValue_example"; // String | 
+var _1PropertyValue = "_1PropertyValue_example"; // String | 
 
 
-apiInstance.getQuery(path, pLimit, _1Property, _1PropertyValue, (error, data, response) => {
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully. Returned data: ' + data);
   }
-});
+};
+apiInstance.getQuery(path, pLimit, _1Property, _1PropertyValue, callback);
 ```
 
 ### Parameters
@@ -457,21 +465,21 @@ Name | Type | Description  | Notes
 
 ### Example
 ```javascript
-import NodeSwaggerAem from 'node-swagger-aem';
-let defaultClient = NodeSwaggerAem.ApiClient.instance;
+var NodeSwaggerAem = require('node-swagger-aem');
+var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
-let aemAuth = defaultClient.authentications['aemAuth'];
+var aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-let apiInstance = new NodeSwaggerAem.SlingApi();
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-let runmode = "runmode_example"; // String | 
+var runmode = "runmode_example"; // String | 
 
-let name = "name_example"; // String | 
+var name = "name_example"; // String | 
 
-let opts = { 
+var opts = { 
   'jcrcontentcqdistribute': true, // Boolean | 
   'jcrcontentcqdistributeTypeHint': "jcrcontentcqdistributeTypeHint_example", // String | 
   'jcrcontentcqname': "jcrcontentcqname_example", // String | 
@@ -485,7 +493,7 @@ let opts = {
   'jcrcontentlogLevel': "jcrcontentlogLevel_example", // String | 
   'jcrcontentnoStatusUpdate': true, // Boolean | 
   'jcrcontentnoVersioning': true, // Boolean | 
-  'jcrcontentprotocolConnectTimeout': 3.4, // Number | 
+  'jcrcontentprotocolConnectTimeout': 8.14, // Number | 
   'jcrcontentprotocolHTTPConnectionClosed': true, // Boolean | 
   'jcrcontentprotocolHTTPExpired': "jcrcontentprotocolHTTPExpired_example", // String | 
   'jcrcontentprotocolHTTPHeaders': ["jcrcontentprotocolHTTPHeaders_example"], // [String] | 
@@ -493,17 +501,17 @@ let opts = {
   'jcrcontentprotocolHTTPMethod': "jcrcontentprotocolHTTPMethod_example", // String | 
   'jcrcontentprotocolHTTPSRelaxed': true, // Boolean | 
   'jcrcontentprotocolInterface': "jcrcontentprotocolInterface_example", // String | 
-  'jcrcontentprotocolSocketTimeout': 3.4, // Number | 
+  'jcrcontentprotocolSocketTimeout': 8.14, // Number | 
   'jcrcontentprotocolVersion': "jcrcontentprotocolVersion_example", // String | 
   'jcrcontentproxyNTLMDomain': "jcrcontentproxyNTLMDomain_example", // String | 
   'jcrcontentproxyNTLMHost': "jcrcontentproxyNTLMHost_example", // String | 
   'jcrcontentproxyHost': "jcrcontentproxyHost_example", // String | 
   'jcrcontentproxyPassword': "jcrcontentproxyPassword_example", // String | 
-  'jcrcontentproxyPort': 3.4, // Number | 
+  'jcrcontentproxyPort': 8.14, // Number | 
   'jcrcontentproxyUser': "jcrcontentproxyUser_example", // String | 
-  'jcrcontentqueueBatchMaxSize': 3.4, // Number | 
+  'jcrcontentqueueBatchMaxSize': 8.14, // Number | 
   'jcrcontentqueueBatchMode': "jcrcontentqueueBatchMode_example", // String | 
-  'jcrcontentqueueBatchWaitTime': 3.4, // Number | 
+  'jcrcontentqueueBatchWaitTime': 8.14, // Number | 
   'jcrcontentretryDelay': "jcrcontentretryDelay_example", // String | 
   'jcrcontentreverseReplication': true, // Boolean | 
   'jcrcontentserializationType': "jcrcontentserializationType_example", // String | 
@@ -524,13 +532,14 @@ let opts = {
   'operation': "operation_example" // String | 
 };
 
-apiInstance.postAgent(runmode, name, opts, (error, data, response) => {
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully.');
   }
-});
+};
+apiInstance.postAgent(runmode, name, opts, callback);
 ```
 
 ### Parameters
@@ -611,34 +620,35 @@ null (empty response body)
 
 ### Example
 ```javascript
-import NodeSwaggerAem from 'node-swagger-aem';
-let defaultClient = NodeSwaggerAem.ApiClient.instance;
+var NodeSwaggerAem = require('node-swagger-aem');
+var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
-let aemAuth = defaultClient.authentications['aemAuth'];
+var aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-let apiInstance = new NodeSwaggerAem.SlingApi();
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-let authorizableId = "authorizableId_example"; // String | 
+var authorizableId = "authorizableId_example"; // String | 
 
-let intermediatePath = "intermediatePath_example"; // String | 
+var intermediatePath = "intermediatePath_example"; // String | 
 
-let opts = { 
+var opts = { 
   'createUser': "createUser_example", // String | 
   'createGroup': "createGroup_example", // String | 
   'reppassword': "reppassword_example", // String | 
   'profilegivenName': "profilegivenName_example" // String | 
 };
 
-apiInstance.postAuthorizables(authorizableId, intermediatePath, opts, (error, data, response) => {
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully. Returned data: ' + data);
   }
-});
+};
+apiInstance.postAuthorizables(authorizableId, intermediatePath, opts, callback);
 ```
 
 ### Parameters
@@ -673,19 +683,19 @@ Name | Type | Description  | Notes
 
 ### Example
 ```javascript
-import NodeSwaggerAem from 'node-swagger-aem';
-let defaultClient = NodeSwaggerAem.ApiClient.instance;
+var NodeSwaggerAem = require('node-swagger-aem');
+var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
-let aemAuth = defaultClient.authentications['aemAuth'];
+var aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-let apiInstance = new NodeSwaggerAem.SlingApi();
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-let runmode = "runmode_example"; // String | 
+var runmode = "runmode_example"; // String | 
 
-let opts = { 
+var opts = { 
   'orgApacheFelixHttpsNio': true, // Boolean | 
   'orgApacheFelixHttpsNioTypeHint': "orgApacheFelixHttpsNioTypeHint_example", // String | 
   'orgApacheFelixHttpsKeystore': "orgApacheFelixHttpsKeystore_example", // String | 
@@ -708,13 +718,14 @@ let opts = {
   'orgOsgiServiceHttpPortSecureTypeHint': "orgOsgiServiceHttpPortSecureTypeHint_example" // String | 
 };
 
-apiInstance.postConfigApacheFelixJettyBasedHttpService(runmode, opts, (error, data, response) => {
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully.');
   }
-});
+};
+apiInstance.postConfigApacheFelixJettyBasedHttpService(runmode, opts, callback);
 ```
 
 ### Parameters
@@ -764,32 +775,33 @@ null (empty response body)
 
 ### Example
 ```javascript
-import NodeSwaggerAem from 'node-swagger-aem';
-let defaultClient = NodeSwaggerAem.ApiClient.instance;
+var NodeSwaggerAem = require('node-swagger-aem');
+var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
-let aemAuth = defaultClient.authentications['aemAuth'];
+var aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-let apiInstance = new NodeSwaggerAem.SlingApi();
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-let runmode = "runmode_example"; // String | 
+var runmode = "runmode_example"; // String | 
 
-let opts = { 
+var opts = { 
   'alias': "alias_example", // String | 
   'aliasTypeHint': "aliasTypeHint_example", // String | 
   'davCreateAbsoluteUri': true, // Boolean | 
   'davCreateAbsoluteUriTypeHint': "davCreateAbsoluteUriTypeHint_example" // String | 
 };
 
-apiInstance.postConfigApacheSlingDavExServlet(runmode, opts, (error, data, response) => {
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully.');
   }
-});
+};
+apiInstance.postConfigApacheSlingDavExServlet(runmode, opts, callback);
 ```
 
 ### Parameters
@@ -823,19 +835,19 @@ null (empty response body)
 
 ### Example
 ```javascript
-import NodeSwaggerAem from 'node-swagger-aem';
-let defaultClient = NodeSwaggerAem.ApiClient.instance;
+var NodeSwaggerAem = require('node-swagger-aem');
+var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
-let aemAuth = defaultClient.authentications['aemAuth'];
+var aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-let apiInstance = new NodeSwaggerAem.SlingApi();
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-let runmode = "runmode_example"; // String | 
+var runmode = "runmode_example"; // String | 
 
-let opts = { 
+var opts = { 
   'jsonMaximumresults': "jsonMaximumresults_example", // String | 
   'jsonMaximumresultsTypeHint': "jsonMaximumresultsTypeHint_example", // String | 
   'enableHtml': true, // Boolean | 
@@ -846,13 +858,14 @@ let opts = {
   'enableXmlTypeHint': "enableXmlTypeHint_example" // String | 
 };
 
-apiInstance.postConfigApacheSlingGetServlet(runmode, opts, (error, data, response) => {
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully.');
   }
-});
+};
+apiInstance.postConfigApacheSlingGetServlet(runmode, opts, callback);
 ```
 
 ### Parameters
@@ -890,19 +903,19 @@ null (empty response body)
 
 ### Example
 ```javascript
-import NodeSwaggerAem from 'node-swagger-aem';
-let defaultClient = NodeSwaggerAem.ApiClient.instance;
+var NodeSwaggerAem = require('node-swagger-aem');
+var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
-let aemAuth = defaultClient.authentications['aemAuth'];
+var aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-let apiInstance = new NodeSwaggerAem.SlingApi();
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-let runmode = "runmode_example"; // String | 
+var runmode = "runmode_example"; // String | 
 
-let opts = { 
+var opts = { 
   'allowEmpty': true, // Boolean | 
   'allowEmptyTypeHint': "allowEmptyTypeHint_example", // String | 
   'allowHosts': "allowHosts_example", // String | 
@@ -911,13 +924,14 @@ let opts = {
   'allowHostsRegexpTypeHint': "allowHostsRegexpTypeHint_example" // String | 
 };
 
-apiInstance.postConfigApacheSlingReferrerFilter(runmode, opts, (error, data, response) => {
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully.');
   }
-});
+};
+apiInstance.postConfigApacheSlingReferrerFilter(runmode, opts, callback);
 ```
 
 ### Parameters
@@ -953,31 +967,32 @@ null (empty response body)
 
 ### Example
 ```javascript
-import NodeSwaggerAem from 'node-swagger-aem';
-let defaultClient = NodeSwaggerAem.ApiClient.instance;
+var NodeSwaggerAem = require('node-swagger-aem');
+var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
-let aemAuth = defaultClient.authentications['aemAuth'];
+var aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-let apiInstance = new NodeSwaggerAem.SlingApi();
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-let path = "path_example"; // String | 
+var path = "path_example"; // String | 
 
-let name = "name_example"; // String | 
+var name = "name_example"; // String | 
 
-let opts = { 
+var opts = { 
   'addMembers': "addMembers_example" // String | 
 };
 
-apiInstance.postNodeRw(path, name, opts, (error, data, response) => {
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully.');
   }
-});
+};
+apiInstance.postNodeRw(path, name, opts, callback);
 ```
 
 ### Parameters
@@ -1009,30 +1024,31 @@ null (empty response body)
 
 ### Example
 ```javascript
-import NodeSwaggerAem from 'node-swagger-aem';
-let defaultClient = NodeSwaggerAem.ApiClient.instance;
+var NodeSwaggerAem = require('node-swagger-aem');
+var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
-let aemAuth = defaultClient.authentications['aemAuth'];
+var aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-let apiInstance = new NodeSwaggerAem.SlingApi();
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-let path = "path_example"; // String | 
+var path = "path_example"; // String | 
 
-let jcrprimaryType = "jcrprimaryType_example"; // String | 
+var jcrprimaryType = "jcrprimaryType_example"; // String | 
 
-let name = "name_example"; // String | 
+var name = "name_example"; // String | 
 
 
-apiInstance.postPath(path, jcrprimaryType, name, (error, data, response) => {
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully.');
   }
-});
+};
+apiInstance.postPath(path, jcrprimaryType, name, callback);
 ```
 
 ### Parameters
@@ -1064,32 +1080,33 @@ null (empty response body)
 
 ### Example
 ```javascript
-import NodeSwaggerAem from 'node-swagger-aem';
-let defaultClient = NodeSwaggerAem.ApiClient.instance;
+var NodeSwaggerAem = require('node-swagger-aem');
+var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
-let aemAuth = defaultClient.authentications['aemAuth'];
+var aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-let apiInstance = new NodeSwaggerAem.SlingApi();
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-let path = "path_example"; // String | 
+var path = "path_example"; // String | 
 
-let pLimit = 3.4; // Number | 
+var pLimit = 8.14; // Number | 
 
-let _1Property = "_1Property_example"; // String | 
+var _1Property = "_1Property_example"; // String | 
 
-let _1PropertyValue = "_1PropertyValue_example"; // String | 
+var _1PropertyValue = "_1PropertyValue_example"; // String | 
 
 
-apiInstance.postQuery(path, pLimit, _1Property, _1PropertyValue, (error, data, response) => {
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully. Returned data: ' + data);
   }
-});
+};
+apiInstance.postQuery(path, pLimit, _1Property, _1PropertyValue, callback);
 ```
 
 ### Parameters
@@ -1122,30 +1139,31 @@ Name | Type | Description  | Notes
 
 ### Example
 ```javascript
-import NodeSwaggerAem from 'node-swagger-aem';
-let defaultClient = NodeSwaggerAem.ApiClient.instance;
+var NodeSwaggerAem = require('node-swagger-aem');
+var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
-let aemAuth = defaultClient.authentications['aemAuth'];
+var aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-let apiInstance = new NodeSwaggerAem.SlingApi();
+var apiInstance = new NodeSwaggerAem.SlingApi();
 
-let ignoredeactivated = true; // Boolean | 
+var ignoredeactivated = true; // Boolean | 
 
-let onlymodified = true; // Boolean | 
+var onlymodified = true; // Boolean | 
 
-let path = "path_example"; // String | 
+var path = "path_example"; // String | 
 
 
-apiInstance.postTreeActivation(ignoredeactivated, onlymodified, path, (error, data, response) => {
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully.');
   }
-});
+};
+apiInstance.postTreeActivation(ignoredeactivated, onlymodified, path, callback);
 ```
 
 ### Parameters

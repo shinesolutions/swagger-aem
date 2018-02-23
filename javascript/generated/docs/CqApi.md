@@ -16,17 +16,18 @@ Method | HTTP request | Description
 
 ### Example
 ```javascript
-import NodeSwaggerAem from 'node-swagger-aem';
+var NodeSwaggerAem = require('node-swagger-aem');
 
-let apiInstance = new NodeSwaggerAem.CqApi();
+var apiInstance = new NodeSwaggerAem.CqApi();
 
-apiInstance.getLoginPage((error, data, response) => {
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully. Returned data: ' + data);
   }
-});
+};
+apiInstance.getLoginPage(callback);
 ```
 
 ### Parameters
@@ -53,28 +54,29 @@ No authorization required
 
 ### Example
 ```javascript
-import NodeSwaggerAem from 'node-swagger-aem';
-let defaultClient = NodeSwaggerAem.ApiClient.instance;
+var NodeSwaggerAem = require('node-swagger-aem');
+var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
-let aemAuth = defaultClient.authentications['aemAuth'];
+var aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-let apiInstance = new NodeSwaggerAem.CqApi();
+var apiInstance = new NodeSwaggerAem.CqApi();
 
-let authorizableId = "authorizableId_example"; // String | 
+var authorizableId = "authorizableId_example"; // String | 
 
-let changelog = "changelog_example"; // String | 
+var changelog = "changelog_example"; // String | 
 
 
-apiInstance.postCqActions(authorizableId, changelog, (error, data, response) => {
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully.');
   }
-});
+};
+apiInstance.postCqActions(authorizableId, changelog, callback);
 ```
 
 ### Parameters

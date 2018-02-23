@@ -19,23 +19,24 @@ Method | HTTP request | Description
 
 ### Example
 ```javascript
-import NodeSwaggerAem from 'node-swagger-aem';
-let defaultClient = NodeSwaggerAem.ApiClient.instance;
+var NodeSwaggerAem = require('node-swagger-aem');
+var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
-let aemAuth = defaultClient.authentications['aemAuth'];
+var aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-let apiInstance = new NodeSwaggerAem.CrxApi();
+var apiInstance = new NodeSwaggerAem.CrxApi();
 
-apiInstance.getInstallStatus((error, data, response) => {
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully. Returned data: ' + data);
   }
-});
+};
+apiInstance.getInstallStatus(callback);
 ```
 
 ### Parameters
@@ -62,26 +63,27 @@ This endpoint does not need any parameter.
 
 ### Example
 ```javascript
-import NodeSwaggerAem from 'node-swagger-aem';
-let defaultClient = NodeSwaggerAem.ApiClient.instance;
+var NodeSwaggerAem = require('node-swagger-aem');
+var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
-let aemAuth = defaultClient.authentications['aemAuth'];
+var aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-let apiInstance = new NodeSwaggerAem.CrxApi();
+var apiInstance = new NodeSwaggerAem.CrxApi();
 
-let cmd = "cmd_example"; // String | 
+var cmd = "cmd_example"; // String | 
 
 
-apiInstance.postPackageService(cmd, (error, data, response) => {
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully. Returned data: ' + data);
   }
-});
+};
+apiInstance.postPackageService(cmd, callback);
 ```
 
 ### Parameters
@@ -111,21 +113,21 @@ Name | Type | Description  | Notes
 
 ### Example
 ```javascript
-import NodeSwaggerAem from 'node-swagger-aem';
-let defaultClient = NodeSwaggerAem.ApiClient.instance;
+var NodeSwaggerAem = require('node-swagger-aem');
+var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
-let aemAuth = defaultClient.authentications['aemAuth'];
+var aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-let apiInstance = new NodeSwaggerAem.CrxApi();
+var apiInstance = new NodeSwaggerAem.CrxApi();
 
-let path = "path_example"; // String | 
+var path = "path_example"; // String | 
 
-let cmd = "cmd_example"; // String | 
+var cmd = "cmd_example"; // String | 
 
-let opts = { 
+var opts = { 
   'groupName': "groupName_example", // String | 
   'packageName': "packageName_example", // String | 
   'packageVersion': "packageVersion_example", // String | 
@@ -135,13 +137,14 @@ let opts = {
   '_package': "/path/to/file.txt" // File | 
 };
 
-apiInstance.postPackageServiceJson(path, cmd, opts, (error, data, response) => {
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully. Returned data: ' + data);
   }
-});
+};
+apiInstance.postPackageServiceJson(path, cmd, opts, callback);
 ```
 
 ### Parameters
@@ -179,36 +182,37 @@ Name | Type | Description  | Notes
 
 ### Example
 ```javascript
-import NodeSwaggerAem from 'node-swagger-aem';
-let defaultClient = NodeSwaggerAem.ApiClient.instance;
+var NodeSwaggerAem = require('node-swagger-aem');
+var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
-let aemAuth = defaultClient.authentications['aemAuth'];
+var aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-let apiInstance = new NodeSwaggerAem.CrxApi();
+var apiInstance = new NodeSwaggerAem.CrxApi();
 
-let groupName = "groupName_example"; // String | 
+var groupName = "groupName_example"; // String | 
 
-let packageName = "packageName_example"; // String | 
+var packageName = "packageName_example"; // String | 
 
-let version = "version_example"; // String | 
+var version = "version_example"; // String | 
 
-let path = "path_example"; // String | 
+var path = "path_example"; // String | 
 
-let opts = { 
+var opts = { 
   'filter': "filter_example", // String | 
   'charset_': "charset__example" // String | 
 };
 
-apiInstance.postPackageUpdate(groupName, packageName, version, path, opts, (error, data, response) => {
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully. Returned data: ' + data);
   }
-});
+};
+apiInstance.postPackageUpdate(groupName, packageName, version, path, opts, callback);
 ```
 
 ### Parameters
@@ -243,30 +247,31 @@ Name | Type | Description  | Notes
 
 ### Example
 ```javascript
-import NodeSwaggerAem from 'node-swagger-aem';
-let defaultClient = NodeSwaggerAem.ApiClient.instance;
+var NodeSwaggerAem = require('node-swagger-aem');
+var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
-let aemAuth = defaultClient.authentications['aemAuth'];
+var aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-let apiInstance = new NodeSwaggerAem.CrxApi();
+var apiInstance = new NodeSwaggerAem.CrxApi();
 
-let old = "old_example"; // String | 
+var old = "old_example"; // String | 
 
-let plain = "plain_example"; // String | 
+var plain = "plain_example"; // String | 
 
-let verify = "verify_example"; // String | 
+var verify = "verify_example"; // String | 
 
 
-apiInstance.postSetPassword(old, plain, verify, (error, data, response) => {
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully. Returned data: ' + data);
   }
-});
+};
+apiInstance.postSetPassword(old, plain, verify, callback);
 ```
 
 ### Parameters
