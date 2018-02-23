@@ -1,0 +1,3 @@
+| swaggeraem | Swagger AEM Spec | Supported Python        | Swagger Codegen CLI | Documentation                                                                                                                                                            |
+|------------|------------------|-------------------------|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 0.9.0      | 1.2.1            | 2.6, 2.7                | 2.3.1               | [API](https://shinesolutions.github.io/swagger-aem/python/0.9.0/index.html) [Changes](https://github.com/shinesolutions/swagger-aem/blob/master/python/CHANGELOG.md#090) |
