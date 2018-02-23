@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -32,7 +32,7 @@ configuration.password = 'YOUR_PASSWORD'
 # create an instance of the API class
 api_instance = swaggeraem.CrxApi(swaggeraem.ApiClient(configuration))
 
-try: 
+try:
     api_response = api_instance.get_install_status()
     pprint(api_response)
 except ApiException as e:
@@ -62,7 +62,7 @@ This endpoint does not need any parameter.
 
 
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -79,7 +79,7 @@ configuration.password = 'YOUR_PASSWORD'
 api_instance = swaggeraem.CrxApi(swaggeraem.ApiClient(configuration))
 cmd = 'cmd_example' # str | 
 
-try: 
+try:
     api_response = api_instance.post_package_service(cmd)
     pprint(api_response)
 except ApiException as e:
@@ -112,7 +112,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -137,7 +137,7 @@ force = true # bool |  (optional)
 recursive = true # bool |  (optional)
 package = '/path/to/file.txt' # file |  (optional)
 
-try: 
+try:
     api_response = api_instance.post_package_service_json(path, cmd, group_name=group_name, package_name=package_name, package_version=package_version, charset_=charset_, force=force, recursive=recursive, package=package)
     pprint(api_response)
 except ApiException as e:
@@ -178,7 +178,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -200,7 +200,7 @@ path = 'path_example' # str |
 filter = 'filter_example' # str |  (optional)
 charset_ = 'charset__example' # str |  (optional)
 
-try: 
+try:
     api_response = api_instance.post_package_update(group_name, package_name, version, path, filter=filter, charset_=charset_)
     pprint(api_response)
 except ApiException as e:
@@ -238,7 +238,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -257,7 +257,7 @@ old = 'old_example' # str |
 plain = 'plain_example' # str | 
 verify = 'verify_example' # str | 
 
-try: 
+try:
     api_response = api_instance.post_set_password(old, plain, verify)
     pprint(api_response)
 except ApiException as e:

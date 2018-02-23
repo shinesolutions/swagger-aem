@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -32,7 +32,7 @@ api_instance = swaggeraem.CustomApi(swaggeraem.ApiClient(configuration))
 tags = 'tags_example' # str |  (optional)
 combine_tags_or = true # bool |  (optional)
 
-try: 
+try:
     api_response = api_instance.get_aem_health_check(tags=tags, combine_tags_or=combine_tags_or)
     pprint(api_response)
 except ApiException as e:
@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -85,7 +85,7 @@ runmode = 'runmode_example' # str |
 bundles_ignored = ['bundles_ignored_example'] # list[str] |  (optional)
 bundles_ignored_type_hint = 'bundles_ignored_type_hint_example' # str |  (optional)
 
-try: 
+try:
     api_instance.post_config_aem_health_check_servlet(runmode, bundles_ignored=bundles_ignored, bundles_ignored_type_hint=bundles_ignored_type_hint)
 except ApiException as e:
     print("Exception when calling CustomApi->post_config_aem_health_check_servlet: %s\n" % e)
@@ -119,7 +119,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -138,7 +138,7 @@ runmode = 'runmode_example' # str |
 pwdreset_authorizables = ['pwdreset_authorizables_example'] # list[str] |  (optional)
 pwdreset_authorizables_type_hint = 'pwdreset_authorizables_type_hint_example' # str |  (optional)
 
-try: 
+try:
     api_instance.post_config_aem_password_reset(runmode, pwdreset_authorizables=pwdreset_authorizables, pwdreset_authorizables_type_hint=pwdreset_authorizables_type_hint)
 except ApiException as e:
     print("Exception when calling CustomApi->post_config_aem_password_reset: %s\n" % e)

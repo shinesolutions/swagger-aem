@@ -29,7 +29,7 @@ Method | HTTP request | Description
 
 
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -47,7 +47,7 @@ api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
 runmode = 'runmode_example' # str | 
 name = 'name_example' # str | 
 
-try: 
+try:
     api_instance.delete_agent(runmode, name)
 except ApiException as e:
     print("Exception when calling SlingApi->delete_agent: %s\n" % e)
@@ -80,7 +80,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -98,7 +98,7 @@ api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
 path = 'path_example' # str | 
 name = 'name_example' # str | 
 
-try: 
+try:
     api_instance.delete_node(path, name)
 except ApiException as e:
     print("Exception when calling SlingApi->delete_node: %s\n" % e)
@@ -131,7 +131,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -149,7 +149,7 @@ api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
 runmode = 'runmode_example' # str | 
 name = 'name_example' # str | 
 
-try: 
+try:
     api_instance.get_agent(runmode, name)
 except ApiException as e:
     print("Exception when calling SlingApi->get_agent: %s\n" % e)
@@ -182,7 +182,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -199,7 +199,7 @@ configuration.password = 'YOUR_PASSWORD'
 api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
 runmode = 'runmode_example' # str | 
 
-try: 
+try:
     api_response = api_instance.get_agents(runmode)
     pprint(api_response)
 except ApiException as e:
@@ -232,7 +232,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -250,7 +250,7 @@ api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
 path = 'path_example' # str | 
 name = 'name_example' # str | 
 
-try: 
+try:
     api_instance.get_node(path, name)
 except ApiException as e:
     print("Exception when calling SlingApi->get_node: %s\n" % e)
@@ -283,7 +283,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -302,7 +302,7 @@ group = 'group_example' # str |
 name = 'name_example' # str | 
 version = 'version_example' # str | 
 
-try: 
+try:
     api_response = api_instance.get_package(group, name, version)
     pprint(api_response)
 except ApiException as e:
@@ -337,7 +337,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -356,7 +356,7 @@ group = 'group_example' # str |
 name = 'name_example' # str | 
 version = 'version_example' # str | 
 
-try: 
+try:
     api_response = api_instance.get_package_filter(group, name, version)
     pprint(api_response)
 except ApiException as e:
@@ -391,7 +391,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -407,11 +407,11 @@ configuration.password = 'YOUR_PASSWORD'
 # create an instance of the API class
 api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
 path = 'path_example' # str | 
-p_limit = 3.4 # float | 
+p_limit = 8.14 # float | 
 _1_property = '_1_property_example' # str | 
 _1_property_value = '_1_property_value_example' # str | 
 
-try: 
+try:
     api_response = api_instance.get_query(path, p_limit, _1_property, _1_property_value)
     pprint(api_response)
 except ApiException as e:
@@ -447,7 +447,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -477,7 +477,7 @@ jcrcontentjcrtitle = 'jcrcontentjcrtitle_example' # str |  (optional)
 jcrcontentlog_level = 'jcrcontentlog_level_example' # str |  (optional)
 jcrcontentno_status_update = true # bool |  (optional)
 jcrcontentno_versioning = true # bool |  (optional)
-jcrcontentprotocol_connect_timeout = 3.4 # float |  (optional)
+jcrcontentprotocol_connect_timeout = 8.14 # float |  (optional)
 jcrcontentprotocol_http_connection_closed = true # bool |  (optional)
 jcrcontentprotocol_http_expired = 'jcrcontentprotocol_http_expired_example' # str |  (optional)
 jcrcontentprotocol_http_headers = ['jcrcontentprotocol_http_headers_example'] # list[str] |  (optional)
@@ -485,17 +485,17 @@ jcrcontentprotocol_http_headers_type_hint = 'jcrcontentprotocol_http_headers_typ
 jcrcontentprotocol_http_method = 'jcrcontentprotocol_http_method_example' # str |  (optional)
 jcrcontentprotocol_https_relaxed = true # bool |  (optional)
 jcrcontentprotocol_interface = 'jcrcontentprotocol_interface_example' # str |  (optional)
-jcrcontentprotocol_socket_timeout = 3.4 # float |  (optional)
+jcrcontentprotocol_socket_timeout = 8.14 # float |  (optional)
 jcrcontentprotocol_version = 'jcrcontentprotocol_version_example' # str |  (optional)
 jcrcontentproxy_ntlm_domain = 'jcrcontentproxy_ntlm_domain_example' # str |  (optional)
 jcrcontentproxy_ntlm_host = 'jcrcontentproxy_ntlm_host_example' # str |  (optional)
 jcrcontentproxy_host = 'jcrcontentproxy_host_example' # str |  (optional)
 jcrcontentproxy_password = 'jcrcontentproxy_password_example' # str |  (optional)
-jcrcontentproxy_port = 3.4 # float |  (optional)
+jcrcontentproxy_port = 8.14 # float |  (optional)
 jcrcontentproxy_user = 'jcrcontentproxy_user_example' # str |  (optional)
-jcrcontentqueue_batch_max_size = 3.4 # float |  (optional)
+jcrcontentqueue_batch_max_size = 8.14 # float |  (optional)
 jcrcontentqueue_batch_mode = 'jcrcontentqueue_batch_mode_example' # str |  (optional)
-jcrcontentqueue_batch_wait_time = 3.4 # float |  (optional)
+jcrcontentqueue_batch_wait_time = 8.14 # float |  (optional)
 jcrcontentretry_delay = 'jcrcontentretry_delay_example' # str |  (optional)
 jcrcontentreverse_replication = true # bool |  (optional)
 jcrcontentserialization_type = 'jcrcontentserialization_type_example' # str |  (optional)
@@ -515,7 +515,7 @@ jcrcontentuser_id = 'jcrcontentuser_id_example' # str |  (optional)
 jcrprimary_type = 'jcrprimary_type_example' # str |  (optional)
 operation = 'operation_example' # str |  (optional)
 
-try: 
+try:
     api_instance.post_agent(runmode, name, jcrcontentcqdistribute=jcrcontentcqdistribute, jcrcontentcqdistribute_type_hint=jcrcontentcqdistribute_type_hint, jcrcontentcqname=jcrcontentcqname, jcrcontentcqtemplate=jcrcontentcqtemplate, jcrcontentenabled=jcrcontentenabled, jcrcontentjcrdescription=jcrcontentjcrdescription, jcrcontentjcrlast_modified=jcrcontentjcrlast_modified, jcrcontentjcrlast_modified_by=jcrcontentjcrlast_modified_by, jcrcontentjcrmixin_types=jcrcontentjcrmixin_types, jcrcontentjcrtitle=jcrcontentjcrtitle, jcrcontentlog_level=jcrcontentlog_level, jcrcontentno_status_update=jcrcontentno_status_update, jcrcontentno_versioning=jcrcontentno_versioning, jcrcontentprotocol_connect_timeout=jcrcontentprotocol_connect_timeout, jcrcontentprotocol_http_connection_closed=jcrcontentprotocol_http_connection_closed, jcrcontentprotocol_http_expired=jcrcontentprotocol_http_expired, jcrcontentprotocol_http_headers=jcrcontentprotocol_http_headers, jcrcontentprotocol_http_headers_type_hint=jcrcontentprotocol_http_headers_type_hint, jcrcontentprotocol_http_method=jcrcontentprotocol_http_method, jcrcontentprotocol_https_relaxed=jcrcontentprotocol_https_relaxed, jcrcontentprotocol_interface=jcrcontentprotocol_interface, jcrcontentprotocol_socket_timeout=jcrcontentprotocol_socket_timeout, jcrcontentprotocol_version=jcrcontentprotocol_version, jcrcontentproxy_ntlm_domain=jcrcontentproxy_ntlm_domain, jcrcontentproxy_ntlm_host=jcrcontentproxy_ntlm_host, jcrcontentproxy_host=jcrcontentproxy_host, jcrcontentproxy_password=jcrcontentproxy_password, jcrcontentproxy_port=jcrcontentproxy_port, jcrcontentproxy_user=jcrcontentproxy_user, jcrcontentqueue_batch_max_size=jcrcontentqueue_batch_max_size, jcrcontentqueue_batch_mode=jcrcontentqueue_batch_mode, jcrcontentqueue_batch_wait_time=jcrcontentqueue_batch_wait_time, jcrcontentretry_delay=jcrcontentretry_delay, jcrcontentreverse_replication=jcrcontentreverse_replication, jcrcontentserialization_type=jcrcontentserialization_type, jcrcontentslingresource_type=jcrcontentslingresource_type, jcrcontentssl=jcrcontentssl, jcrcontenttransport_ntlm_domain=jcrcontenttransport_ntlm_domain, jcrcontenttransport_ntlm_host=jcrcontenttransport_ntlm_host, jcrcontenttransport_password=jcrcontenttransport_password, jcrcontenttransport_uri=jcrcontenttransport_uri, jcrcontenttransport_user=jcrcontenttransport_user, jcrcontenttrigger_distribute=jcrcontenttrigger_distribute, jcrcontenttrigger_modified=jcrcontenttrigger_modified, jcrcontenttrigger_on_off_time=jcrcontenttrigger_on_off_time, jcrcontenttrigger_receive=jcrcontenttrigger_receive, jcrcontenttrigger_specific=jcrcontenttrigger_specific, jcrcontentuser_id=jcrcontentuser_id, jcrprimary_type=jcrprimary_type, operation=operation)
 except ApiException as e:
     print("Exception when calling SlingApi->post_agent: %s\n" % e)
@@ -598,7 +598,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -620,7 +620,7 @@ create_group = 'create_group_example' # str |  (optional)
 reppassword = 'reppassword_example' # str |  (optional)
 profilegiven_name = 'profilegiven_name_example' # str |  (optional)
 
-try: 
+try:
     api_response = api_instance.post_authorizables(authorizable_id, intermediate_path, create_user=create_user, create_group=create_group, reppassword=reppassword, profilegiven_name=profilegiven_name)
     pprint(api_response)
 except ApiException as e:
@@ -658,7 +658,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -695,7 +695,7 @@ org_apache_felix_https_enable_type_hint = 'org_apache_felix_https_enable_type_hi
 org_osgi_service_http_port_secure = 'org_osgi_service_http_port_secure_example' # str |  (optional)
 org_osgi_service_http_port_secure_type_hint = 'org_osgi_service_http_port_secure_type_hint_example' # str |  (optional)
 
-try: 
+try:
     api_instance.post_config_apache_felix_jetty_based_http_service(runmode, org_apache_felix_https_nio=org_apache_felix_https_nio, org_apache_felix_https_nio_type_hint=org_apache_felix_https_nio_type_hint, org_apache_felix_https_keystore=org_apache_felix_https_keystore, org_apache_felix_https_keystore_type_hint=org_apache_felix_https_keystore_type_hint, org_apache_felix_https_keystore_password=org_apache_felix_https_keystore_password, org_apache_felix_https_keystore_password_type_hint=org_apache_felix_https_keystore_password_type_hint, org_apache_felix_https_keystore_key=org_apache_felix_https_keystore_key, org_apache_felix_https_keystore_key_type_hint=org_apache_felix_https_keystore_key_type_hint, org_apache_felix_https_keystore_key_password=org_apache_felix_https_keystore_key_password, org_apache_felix_https_keystore_key_password_type_hint=org_apache_felix_https_keystore_key_password_type_hint, org_apache_felix_https_truststore=org_apache_felix_https_truststore, org_apache_felix_https_truststore_type_hint=org_apache_felix_https_truststore_type_hint, org_apache_felix_https_truststore_password=org_apache_felix_https_truststore_password, org_apache_felix_https_truststore_password_type_hint=org_apache_felix_https_truststore_password_type_hint, org_apache_felix_https_clientcertificate=org_apache_felix_https_clientcertificate, org_apache_felix_https_clientcertificate_type_hint=org_apache_felix_https_clientcertificate_type_hint, org_apache_felix_https_enable=org_apache_felix_https_enable, org_apache_felix_https_enable_type_hint=org_apache_felix_https_enable_type_hint, org_osgi_service_http_port_secure=org_osgi_service_http_port_secure, org_osgi_service_http_port_secure_type_hint=org_osgi_service_http_port_secure_type_hint)
 except ApiException as e:
     print("Exception when calling SlingApi->post_config_apache_felix_jetty_based_http_service: %s\n" % e)
@@ -747,7 +747,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -768,7 +768,7 @@ alias_type_hint = 'alias_type_hint_example' # str |  (optional)
 dav_create_absolute_uri = true # bool |  (optional)
 dav_create_absolute_uri_type_hint = 'dav_create_absolute_uri_type_hint_example' # str |  (optional)
 
-try: 
+try:
     api_instance.post_config_apache_sling_dav_ex_servlet(runmode, alias=alias, alias_type_hint=alias_type_hint, dav_create_absolute_uri=dav_create_absolute_uri, dav_create_absolute_uri_type_hint=dav_create_absolute_uri_type_hint)
 except ApiException as e:
     print("Exception when calling SlingApi->post_config_apache_sling_dav_ex_servlet: %s\n" % e)
@@ -804,7 +804,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -829,7 +829,7 @@ enable_txt_type_hint = 'enable_txt_type_hint_example' # str |  (optional)
 enable_xml = true # bool |  (optional)
 enable_xml_type_hint = 'enable_xml_type_hint_example' # str |  (optional)
 
-try: 
+try:
     api_instance.post_config_apache_sling_get_servlet(runmode, json_maximumresults=json_maximumresults, json_maximumresults_type_hint=json_maximumresults_type_hint, enable_html=enable_html, enable_html_type_hint=enable_html_type_hint, enable_txt=enable_txt, enable_txt_type_hint=enable_txt_type_hint, enable_xml=enable_xml, enable_xml_type_hint=enable_xml_type_hint)
 except ApiException as e:
     print("Exception when calling SlingApi->post_config_apache_sling_get_servlet: %s\n" % e)
@@ -869,7 +869,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -892,7 +892,7 @@ allow_hosts_type_hint = 'allow_hosts_type_hint_example' # str |  (optional)
 allow_hosts_regexp = 'allow_hosts_regexp_example' # str |  (optional)
 allow_hosts_regexp_type_hint = 'allow_hosts_regexp_type_hint_example' # str |  (optional)
 
-try: 
+try:
     api_instance.post_config_apache_sling_referrer_filter(runmode, allow_empty=allow_empty, allow_empty_type_hint=allow_empty_type_hint, allow_hosts=allow_hosts, allow_hosts_type_hint=allow_hosts_type_hint, allow_hosts_regexp=allow_hosts_regexp, allow_hosts_regexp_type_hint=allow_hosts_regexp_type_hint)
 except ApiException as e:
     print("Exception when calling SlingApi->post_config_apache_sling_referrer_filter: %s\n" % e)
@@ -930,7 +930,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -949,7 +949,7 @@ path = 'path_example' # str |
 name = 'name_example' # str | 
 add_members = 'add_members_example' # str |  (optional)
 
-try: 
+try:
     api_instance.post_node_rw(path, name, add_members=add_members)
 except ApiException as e:
     print("Exception when calling SlingApi->post_node_rw: %s\n" % e)
@@ -983,7 +983,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -1002,7 +1002,7 @@ path = 'path_example' # str |
 jcrprimary_type = 'jcrprimary_type_example' # str | 
 name = 'name_example' # str | 
 
-try: 
+try:
     api_instance.post_path(path, jcrprimary_type, name)
 except ApiException as e:
     print("Exception when calling SlingApi->post_path: %s\n" % e)
@@ -1036,7 +1036,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -1052,11 +1052,11 @@ configuration.password = 'YOUR_PASSWORD'
 # create an instance of the API class
 api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
 path = 'path_example' # str | 
-p_limit = 3.4 # float | 
+p_limit = 8.14 # float | 
 _1_property = '_1_property_example' # str | 
 _1_property_value = '_1_property_value_example' # str | 
 
-try: 
+try:
     api_response = api_instance.post_query(path, p_limit, _1_property, _1_property_value)
     pprint(api_response)
 except ApiException as e:
@@ -1092,7 +1092,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -1111,7 +1111,7 @@ ignoredeactivated = true # bool |
 onlymodified = true # bool | 
 path = 'path_example' # str | 
 
-try: 
+try:
     api_instance.post_tree_activation(ignoredeactivated, onlymodified, path)
 except ApiException as e:
     print("Exception when calling SlingApi->post_tree_activation: %s\n" % e)
