@@ -34,7 +34,7 @@
   /**
    * Console service.
    * @module api/ConsoleApi
-   * @version 0.0.1
+   * @version 0.9.0
    */
 
   /**

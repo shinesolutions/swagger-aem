@@ -37,7 +37,7 @@
   /**
    * The InstallStatusStatus model module.
    * @module model/InstallStatusStatus
-   * @version 0.0.1
+   * @version 0.9.0
    */
 
   /**

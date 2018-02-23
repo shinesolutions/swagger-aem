@@ -34,7 +34,7 @@
   /**
    * Cq service.
    * @module api/CqApi
-   * @version 0.0.1
+   * @version 0.9.0
    */
 
   /**
