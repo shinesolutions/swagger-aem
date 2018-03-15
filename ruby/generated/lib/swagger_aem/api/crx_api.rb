@@ -20,8 +20,8 @@ module SwaggerAemClient
       @api_client = api_client
     end
 
-    # 
-    # 
+    #
+    #
     # @param [Hash] opts the optional parameters
     # @return [InstallStatus]
     def get_install_status(opts = {})
@@ -29,8 +29,8 @@ module SwaggerAemClient
       return data
     end
 
-    # 
-    # 
+    #
+    #
     # @param [Hash] opts the optional parameters
     # @return [Array<(InstallStatus, Fixnum, Hash)>] InstallStatus data, response status code and response headers
     def get_install_status_with_http_info(opts = {})
@@ -67,9 +67,56 @@ module SwaggerAemClient
       return data, status_code, headers
     end
 
-    # 
-    # 
-    # @param cmd 
+    #
+    #
+    # @param [Hash] opts the optional parameters
+    # @return [InstallStatus]
+    def get_crxde_status(opts = {})
+      data, _status_code, _headers = get_crxde_status_with_http_info(opts)
+      return data
+    end
+
+    #
+    #
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(InstallStatus, Fixnum, Hash)>] InstallStatus data, response status code and response headers
+    def get_crxde_status_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: CrxApi.get_crxde_status ..."
+      end
+      # resource path
+      local_var_path = "/crx/server/crx.default/jcr:root/.1.json"
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['text/plain'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = ['aemAuth']
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'String')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: CrxApi#get_crxde_status\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    #
+    #
+    # @param cmd
     # @param [Hash] opts the optional parameters
     # @return [String]
     def post_package_service(cmd, opts = {})
@@ -77,9 +124,9 @@ module SwaggerAemClient
       return data
     end
 
-    # 
-    # 
-    # @param cmd 
+    #
+    #
+    # @param cmd
     # @param [Hash] opts the optional parameters
     # @return [Array<(String, Fixnum, Hash)>] String data, response status code and response headers
     def post_package_service_with_http_info(cmd, opts = {})
@@ -121,36 +168,36 @@ module SwaggerAemClient
       return data, status_code, headers
     end
 
-    # 
-    # 
-    # @param path 
-    # @param cmd 
+    #
+    #
+    # @param path
+    # @param cmd
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :group_name 
-    # @option opts [String] :package_name 
-    # @option opts [String] :package_version 
-    # @option opts [String] :_charset_ 
-    # @option opts [BOOLEAN] :force 
-    # @option opts [BOOLEAN] :recursive 
-    # @option opts [File] :package 
+    # @option opts [String] :group_name
+    # @option opts [String] :package_name
+    # @option opts [String] :package_version
+    # @option opts [String] :_charset_
+    # @option opts [BOOLEAN] :force
+    # @option opts [BOOLEAN] :recursive
+    # @option opts [File] :package
     # @return [String]
     def post_package_service_json(path, cmd, opts = {})
       data, _status_code, _headers = post_package_service_json_with_http_info(path, cmd, opts)
       return data
     end
 
-    # 
-    # 
-    # @param path 
-    # @param cmd 
+    #
+    #
+    # @param path
+    # @param cmd
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :group_name 
-    # @option opts [String] :package_name 
-    # @option opts [String] :package_version 
-    # @option opts [String] :_charset_ 
-    # @option opts [BOOLEAN] :force 
-    # @option opts [BOOLEAN] :recursive 
-    # @option opts [File] :package 
+    # @option opts [String] :group_name
+    # @option opts [String] :package_name
+    # @option opts [String] :package_version
+    # @option opts [String] :_charset_
+    # @option opts [BOOLEAN] :force
+    # @option opts [BOOLEAN] :recursive
+    # @option opts [File] :package
     # @return [Array<(String, Fixnum, Hash)>] String data, response status code and response headers
     def post_package_service_json_with_http_info(path, cmd, opts = {})
       if @api_client.config.debugging
@@ -204,30 +251,30 @@ module SwaggerAemClient
       return data, status_code, headers
     end
 
-    # 
-    # 
-    # @param group_name 
-    # @param package_name 
-    # @param version 
-    # @param path 
+    #
+    #
+    # @param group_name
+    # @param package_name
+    # @param version
+    # @param path
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :filter 
-    # @option opts [String] :_charset_ 
+    # @option opts [String] :filter
+    # @option opts [String] :_charset_
     # @return [String]
     def post_package_update(group_name, package_name, version, path, opts = {})
       data, _status_code, _headers = post_package_update_with_http_info(group_name, package_name, version, path, opts)
       return data
     end
 
-    # 
-    # 
-    # @param group_name 
-    # @param package_name 
-    # @param version 
-    # @param path 
+    #
+    #
+    # @param group_name
+    # @param package_name
+    # @param version
+    # @param path
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :filter 
-    # @option opts [String] :_charset_ 
+    # @option opts [String] :filter
+    # @option opts [String] :_charset_
     # @return [Array<(String, Fixnum, Hash)>] String data, response status code and response headers
     def post_package_update_with_http_info(group_name, package_name, version, path, opts = {})
       if @api_client.config.debugging
@@ -285,11 +332,11 @@ module SwaggerAemClient
       return data, status_code, headers
     end
 
-    # 
-    # 
-    # @param old 
-    # @param plain 
-    # @param verify 
+    #
+    #
+    # @param old
+    # @param plain
+    # @param verify
     # @param [Hash] opts the optional parameters
     # @return [String]
     def post_set_password(old, plain, verify, opts = {})
@@ -297,11 +344,11 @@ module SwaggerAemClient
       return data
     end
 
-    # 
-    # 
-    # @param old 
-    # @param plain 
-    # @param verify 
+    #
+    #
+    # @param old
+    # @param plain
+    # @param verify
     # @param [Hash] opts the optional parameters
     # @return [Array<(String, Fixnum, Hash)>] String data, response status code and response headers
     def post_set_password_with_http_info(old, plain, verify, opts = {})
