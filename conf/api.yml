@@ -984,6 +984,22 @@ paths:
             type: string
       tags:
         - crx
+    /crx/server/crx.default/jcr:root/.1.json:
+      get:
+        operationId: getCrxdeStatus
+        produces:
+          - application/json
+        responses:
+          200:
+            description: 'CRXDE is enabled'
+          404:
+            description: 'CRXDE is disabled'
+          default:
+            description: 'Default response'
+            schema:
+              type: string
+        tags:
+          - crx
   /system/console/bundles/{name}:
     post:
       operationId: postBundle
