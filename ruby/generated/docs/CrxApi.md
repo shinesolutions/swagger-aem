@@ -4,11 +4,56 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**get_crxde_status**](CrxApi.md#get_crxde_status) | **GET** /crx/server/crx.default/jcr:root/.1.json | 
 [**get_install_status**](CrxApi.md#get_install_status) | **GET** /crx/packmgr/installstatus.jsp | 
 [**post_package_service**](CrxApi.md#post_package_service) | **POST** /crx/packmgr/service.jsp | 
 [**post_package_service_json**](CrxApi.md#post_package_service_json) | **POST** /crx/packmgr/service/.json/{path} | 
 [**post_package_update**](CrxApi.md#post_package_update) | **POST** /crx/packmgr/update.jsp | 
 [**post_set_password**](CrxApi.md#post_set_password) | **POST** /crx/explorer/ui/setpassword.jsp | 
+
+
+# **get_crxde_status**
+> String get_crxde_status
+
+
+
+### Example
+```ruby
+# load the gem
+require 'swagger_aem'
+# setup authorization
+SwaggerAemClient.configure do |config|
+  # Configure HTTP basic authorization: aemAuth
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = SwaggerAemClient::CrxApi.new
+
+begin
+  result = api_instance.get_crxde_status
+  p result
+rescue SwaggerAemClient::ApiError => e
+  puts "Exception when calling CrxApi->get_crxde_status: #{e}"
+end
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+**String**
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: plain/text
+
 
 
 # **get_install_status**
