@@ -6,6 +6,7 @@ describe 'Aem' do
     @cq = SwaggerAemClient::CqApi.new
     @custom = SwaggerAemClient::CustomApi.new
     @sling = SwaggerAemClient::SlingApi.new
+    @crx = SwaggerAemClient::CrxApi.new
   end
 
   after do
@@ -45,5 +46,17 @@ describe 'Aem' do
     end
 
   end
+
+  describe 'test get CRXDE Status page' do
+
+    it 'should succeed' do
+      data, status_code, headers = @crx.get_crxde_status_with_http_info()
+      expect(status_code).to eq(200)
+      json = JSON.parse(data)
+      expect(json['jcr:primaryType']).to eq('rep:root')
+    end
+
+  end
+
 
 end

@@ -32,6 +32,17 @@ describe 'CrxApi' do
     end
   end
 
+  # unit tests for get_crxde_status
+  # 
+  # 
+  # @param [Hash] opts the optional parameters
+  # @return [String]
+  describe 'get_crxde_status test' do
+    it "should work" do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for get_install_status
   # 
   # 
