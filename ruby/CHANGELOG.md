@@ -1,3 +1,6 @@
+### 1.2.1
+* Add crx#getCrxdeStatus operation
+
 ### 1.2.0
 * Add crx#getInstallStatus operation
 * Upgrade Swagger Codegen to 2.3.1
