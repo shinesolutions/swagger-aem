@@ -1,4 +1,4 @@
-### 1.2.2
+### 1.3.0
 * Add getCrxdeStatus operation
 
 ### 1.2.1
