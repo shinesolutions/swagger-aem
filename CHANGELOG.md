@@ -1,3 +1,6 @@
+### 1.2.2
+* Add getCrxdeStatus operation
+
 ### 1.2.1
 * Add string response schema to operations which response body is ignored
 * Add string type item to parameters with multi collectionFormat
