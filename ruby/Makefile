@@ -4,15 +4,15 @@ else
 	SWAGGER_CODEGEN = java -jar $(SWAGGER_CODEGEN_CLI_JAR)
 endif
 
-all: deps clean build install test-unit test-integration doc
-ci: deps clean build install test-unit doc
+all: clean deps build install test-unit test-integration doc
+ci: clean deps build install test-unit doc
 
 deps:
 	gem install bundler
-	bundle install
+	bundle install --binstubs
 
 clean:
-	rm -rf generated/
+	rm -rf generated/ Gemfile.lock
 
 build: clean
 	$(SWAGGER_CODEGEN) generate \
@@ -30,15 +30,15 @@ install:
 test-unit:
 	cd generated/ && \
 	  rm -f swagger_aem-*.gem && \
-	  rspec spec/
+	  bundle exec rspec spec/
 
 test-integration:
-	rspec test-integration/
+	bundle exec rspec test-integration/
 
 doc:
 	cd generated/ && \
 	  rm -f swagger_aem-*.gem && \
-    yard doc \
+	  bundle exec yard doc \
     --output-dir ../../doc/ruby/master/
 
 publish: install
