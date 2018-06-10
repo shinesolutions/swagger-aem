@@ -12,7 +12,7 @@ doc-publish:
 	gh-pages --dist doc/
 
 lint:
-	swagger validate conf/*.yml
+	swagger-cli validate conf/*.yml
 
 tools:
 	npm install -g bootprint bootprint-openapi gh-pages swagger-cli swaggy-c
