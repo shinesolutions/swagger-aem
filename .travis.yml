@@ -1,9 +1,10 @@
+sudo: false
 language: ruby
 rvm:
-  - 2.0
-  - 2.1
-  - 2.2
-  - 2.3
-  - 2.4
+  - "2.0"
+  - "2.1"
+  - "2.2"
+  - "2.3"
+  - "2.4"
 script:
   - cd ruby && SWAGGER_CODEGEN_CLI_JAR=`ls ../bin/swagger-codegen-cli-*.jar` make ci  && cd ..
