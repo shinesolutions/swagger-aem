@@ -2,4 +2,5 @@ source 'https://rubygems.org'
 
 gem 'rspec', :require => false
 gem 'typhoeus', '~> 1.0', '>= 1.0.1', :require => false
+gem 'vcr', '~> 3.0', :require => false
 gem 'yard', '0.9.12', :require => false
