@@ -36,11 +36,12 @@ test-unit:
 test-integration:
 	bundle exec rspec test-integration/
 
+# TODO: replace `yard` with `bundle exec yard` when generated Gemfile contains yard
 doc:
 	cd generated/ && \
 	  rm -f swagger_aem-*.gem && \
-	  bundle exec yard doc \
-    --output-dir ../../doc/ruby/master/
+	  yard doc \
+            --output-dir ../../doc/ruby/master/
 
 publish: install
 	cd generated/ && \
