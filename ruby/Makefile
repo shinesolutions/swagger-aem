@@ -24,6 +24,7 @@ build: clean
 install:
 	cd generated/ && \
 	  rm -f swagger_aem-*.gem && \
+		bundle install && \
 	  gem build swagger_aem.gemspec && \
 	  gem install `ls swagger_aem-*.gem`
 
