@@ -5,8 +5,8 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_aem_health_check**](CustomApi.md#get_aem_health_check) | **GET** /system/health | 
-[**post_config_aem_health_check_servlet**](CustomApi.md#post_config_aem_health_check_servlet) | **POST** /apps/system/config.{runmode}/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck | 
-[**post_config_aem_password_reset**](CustomApi.md#post_config_aem_password_reset) | **POST** /apps/system/config.{runmode}/com.shinesolutions.aem.passwordreset.Activator | 
+[**post_config_aem_health_check_servlet**](CustomApi.md#post_config_aem_health_check_servlet) | **POST** /apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck | 
+[**post_config_aem_password_reset**](CustomApi.md#post_config_aem_password_reset) | **POST** /apps/system/config/com.shinesolutions.aem.passwordreset.Activator | 
 
 
 # **get_aem_health_check**

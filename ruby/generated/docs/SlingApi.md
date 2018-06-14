@@ -4,20 +4,20 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**delete_agent**](SlingApi.md#delete_agent) | **DELETE** /etc/replication/agents.{runmode}/{name} | 
+[**delete_agent**](SlingApi.md#delete_agent) | **DELETE** /etc/replication/agents/{name} | 
 [**delete_node**](SlingApi.md#delete_node) | **DELETE** /{path}/{name} | 
-[**get_agent**](SlingApi.md#get_agent) | **GET** /etc/replication/agents.{runmode}/{name} | 
-[**get_agents**](SlingApi.md#get_agents) | **GET** /etc/replication/agents.{runmode}.-1.json | 
+[**get_agent**](SlingApi.md#get_agent) | **GET** /etc/replication/agents/{name} | 
+[**get_agents**](SlingApi.md#get_agents) | **GET** /etc/replication/agents.-1.json | 
 [**get_node**](SlingApi.md#get_node) | **GET** /{path}/{name} | 
 [**get_package**](SlingApi.md#get_package) | **GET** /etc/packages/{group}/{name}-{version}.zip | 
 [**get_package_filter**](SlingApi.md#get_package_filter) | **GET** /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json | 
 [**get_query**](SlingApi.md#get_query) | **GET** /bin/querybuilder.json | 
-[**post_agent**](SlingApi.md#post_agent) | **POST** /etc/replication/agents.{runmode}/{name} | 
+[**post_agent**](SlingApi.md#post_agent) | **POST** /etc/replication/agents/{name} | 
 [**post_authorizables**](SlingApi.md#post_authorizables) | **POST** /libs/granite/security/post/authorizables | 
-[**post_config_apache_felix_jetty_based_http_service**](SlingApi.md#post_config_apache_felix_jetty_based_http_service) | **POST** /apps/system/config.{runmode}/org.apache.felix.http | 
-[**post_config_apache_sling_dav_ex_servlet**](SlingApi.md#post_config_apache_sling_dav_ex_servlet) | **POST** /apps/system/config.{runmode}/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet | 
-[**post_config_apache_sling_get_servlet**](SlingApi.md#post_config_apache_sling_get_servlet) | **POST** /apps/system/config.{runmode}/org.apache.sling.servlets.get.DefaultGetServlet | 
-[**post_config_apache_sling_referrer_filter**](SlingApi.md#post_config_apache_sling_referrer_filter) | **POST** /apps/system/config.{runmode}/org.apache.sling.security.impl.ReferrerFilter | 
+[**post_config_apache_felix_jetty_based_http_service**](SlingApi.md#post_config_apache_felix_jetty_based_http_service) | **POST** /apps/system/config/org.apache.felix.http | 
+[**post_config_apache_sling_dav_ex_servlet**](SlingApi.md#post_config_apache_sling_dav_ex_servlet) | **POST** /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet | 
+[**post_config_apache_sling_get_servlet**](SlingApi.md#post_config_apache_sling_get_servlet) | **POST** /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet | 
+[**post_config_apache_sling_referrer_filter**](SlingApi.md#post_config_apache_sling_referrer_filter) | **POST** /apps/system/config/org.apache.sling.security.impl.ReferrerFilter | 
 [**post_node_rw**](SlingApi.md#post_node_rw) | **POST** /{path}/{name}.rw.html | 
 [**post_path**](SlingApi.md#post_path) | **POST** /{path}/ | 
 [**post_query**](SlingApi.md#post_query) | **POST** /bin/querybuilder.json | 
@@ -414,7 +414,7 @@ api_instance = SwaggerAemClient::SlingApi.new
 
 path = "path_example" # String | 
 
-p_limit = 8.14 # Float | 
+p_limit = 3.4 # Float | 
 
 _1_property = "_1_property_example" # String | 
 
@@ -489,7 +489,7 @@ opts = {
   jcrcontentlog_level: "jcrcontentlog_level_example", # String | 
   jcrcontentno_status_update: true, # BOOLEAN | 
   jcrcontentno_versioning: true, # BOOLEAN | 
-  jcrcontentprotocol_connect_timeout: 8.14, # Float | 
+  jcrcontentprotocol_connect_timeout: 3.4, # Float | 
   jcrcontentprotocol_http_connection_closed: true, # BOOLEAN | 
   jcrcontentprotocol_http_expired: "jcrcontentprotocol_http_expired_example", # String | 
   jcrcontentprotocol_http_headers: ["jcrcontentprotocol_http_headers_example"], # Array<String> | 
@@ -497,17 +497,17 @@ opts = {
   jcrcontentprotocol_http_method: "jcrcontentprotocol_http_method_example", # String | 
   jcrcontentprotocol_https_relaxed: true, # BOOLEAN | 
   jcrcontentprotocol_interface: "jcrcontentprotocol_interface_example", # String | 
-  jcrcontentprotocol_socket_timeout: 8.14, # Float | 
+  jcrcontentprotocol_socket_timeout: 3.4, # Float | 
   jcrcontentprotocol_version: "jcrcontentprotocol_version_example", # String | 
   jcrcontentproxy_ntlm_domain: "jcrcontentproxy_ntlm_domain_example", # String | 
   jcrcontentproxy_ntlm_host: "jcrcontentproxy_ntlm_host_example", # String | 
   jcrcontentproxy_host: "jcrcontentproxy_host_example", # String | 
   jcrcontentproxy_password: "jcrcontentproxy_password_example", # String | 
-  jcrcontentproxy_port: 8.14, # Float | 
+  jcrcontentproxy_port: 3.4, # Float | 
   jcrcontentproxy_user: "jcrcontentproxy_user_example", # String | 
-  jcrcontentqueue_batch_max_size: 8.14, # Float | 
+  jcrcontentqueue_batch_max_size: 3.4, # Float | 
   jcrcontentqueue_batch_mode: "jcrcontentqueue_batch_mode_example", # String | 
-  jcrcontentqueue_batch_wait_time: 8.14, # Float | 
+  jcrcontentqueue_batch_wait_time: 3.4, # Float | 
   jcrcontentretry_delay: "jcrcontentretry_delay_example", # String | 
   jcrcontentreverse_replication: true, # BOOLEAN | 
   jcrcontentserialization_type: "jcrcontentserialization_type_example", # String | 
@@ -1081,7 +1081,7 @@ api_instance = SwaggerAemClient::SlingApi.new
 
 path = "path_example" # String | 
 
-p_limit = 8.14 # Float | 
+p_limit = 3.4 # Float | 
 
 _1_property = "_1_property_example" # String | 
 
