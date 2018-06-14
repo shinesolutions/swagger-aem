@@ -1,3 +1,6 @@
+### 2.0.0
+* Remove runmode from config and agents path #32
+
 ### 1.3.0
 * Add getCrxdeStatus operation
 
