@@ -4,15 +4,15 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**delete_agent**](SlingApi.md#delete_agent) | **DELETE** /etc/replication/agents/{name} | 
+[**delete_agent**](SlingApi.md#delete_agent) | **DELETE** /etc/replication/agents.{runmode}/{name} | 
 [**delete_node**](SlingApi.md#delete_node) | **DELETE** /{path}/{name} | 
-[**get_agent**](SlingApi.md#get_agent) | **GET** /etc/replication/agents/{name} | 
-[**get_agents**](SlingApi.md#get_agents) | **GET** /etc/replication/agents.-1.json | 
+[**get_agent**](SlingApi.md#get_agent) | **GET** /etc/replication/agents.{runmode}/{name} | 
+[**get_agents**](SlingApi.md#get_agents) | **GET** /etc/replication/agents.{runmode}.-1.json | 
 [**get_node**](SlingApi.md#get_node) | **GET** /{path}/{name} | 
 [**get_package**](SlingApi.md#get_package) | **GET** /etc/packages/{group}/{name}-{version}.zip | 
 [**get_package_filter**](SlingApi.md#get_package_filter) | **GET** /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json | 
 [**get_query**](SlingApi.md#get_query) | **GET** /bin/querybuilder.json | 
-[**post_agent**](SlingApi.md#post_agent) | **POST** /etc/replication/agents/{name} | 
+[**post_agent**](SlingApi.md#post_agent) | **POST** /etc/replication/agents.{runmode}/{name} | 
 [**post_authorizables**](SlingApi.md#post_authorizables) | **POST** /libs/granite/security/post/authorizables | 
 [**post_config_apache_felix_jetty_based_http_service**](SlingApi.md#post_config_apache_felix_jetty_based_http_service) | **POST** /apps/system/config/org.apache.felix.http | 
 [**post_config_apache_sling_dav_ex_servlet**](SlingApi.md#post_config_apache_sling_dav_ex_servlet) | **POST** /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet | 

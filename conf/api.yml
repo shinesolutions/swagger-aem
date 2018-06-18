@@ -503,7 +503,7 @@ paths:
             type: string
       tags:
         - sling
-  /etc/replication/agents.-1.json:
+  /etc/replication/agents.{runmode}.-1.json:
     get:
       operationId: getAgents
       produces:
@@ -520,7 +520,7 @@ paths:
             type: string
       tags:
         - sling
-  /etc/replication/agents/{name}:
+  /etc/replication/agents.{runmode}/{name}:
     get:
       operationId: getAgent
       produces:

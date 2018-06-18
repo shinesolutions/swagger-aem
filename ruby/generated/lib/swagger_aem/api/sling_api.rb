@@ -50,7 +50,7 @@ module SwaggerAemClient
         fail ArgumentError, "Missing the required parameter 'name' when calling SlingApi.delete_agent"
       end
       # resource path
-      local_var_path = "/etc/replication/agents/{name}".sub('{' + 'runmode' + '}', runmode.to_s).sub('{' + 'name' + '}', name.to_s)
+      local_var_path = "/etc/replication/agents.{runmode}/{name}".sub('{' + 'runmode' + '}', runmode.to_s).sub('{' + 'name' + '}', name.to_s)
 
       # query parameters
       query_params = {}
@@ -166,7 +166,7 @@ module SwaggerAemClient
         fail ArgumentError, "Missing the required parameter 'name' when calling SlingApi.get_agent"
       end
       # resource path
-      local_var_path = "/etc/replication/agents/{name}".sub('{' + 'runmode' + '}', runmode.to_s).sub('{' + 'name' + '}', name.to_s)
+      local_var_path = "/etc/replication/agents.{runmode}/{name}".sub('{' + 'runmode' + '}', runmode.to_s).sub('{' + 'name' + '}', name.to_s)
 
       # query parameters
       query_params = {}
@@ -218,7 +218,7 @@ module SwaggerAemClient
         fail ArgumentError, "Missing the required parameter 'runmode' when calling SlingApi.get_agents"
       end
       # resource path
-      local_var_path = "/etc/replication/agents.-1.json".sub('{' + 'runmode' + '}', runmode.to_s)
+      local_var_path = "/etc/replication/agents.{runmode}.-1.json".sub('{' + 'runmode' + '}', runmode.to_s)
 
       # query parameters
       query_params = {}
@@ -640,7 +640,7 @@ module SwaggerAemClient
         fail ArgumentError, "Missing the required parameter 'name' when calling SlingApi.post_agent"
       end
       # resource path
-      local_var_path = "/etc/replication/agents/{name}".sub('{' + 'runmode' + '}', runmode.to_s).sub('{' + 'name' + '}', name.to_s)
+      local_var_path = "/etc/replication/agents.{runmode}/{name}".sub('{' + 'runmode' + '}', runmode.to_s).sub('{' + 'name' + '}', name.to_s)
 
       # query parameters
       query_params = {}
