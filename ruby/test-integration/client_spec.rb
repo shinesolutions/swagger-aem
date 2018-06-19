@@ -3,10 +3,15 @@ require_relative 'spec_helper'
 describe 'Client' do
   before do
     SwaggerAemClient.configure { |conf| [
-      conf.host = 'http://localhost:4502',
+      protocol = ENV['aem_protocol'] || 'http',
+      host = ENV['aem_host'] || 'localhost',
+      port = ENV['aem_port'] ? ENV['aem_port'].to_i : 4502,
+
+      conf.host = '%s://%s:%d' % [protocol, host, port],
       conf.username = 'someinexistingusername',
       conf.password = 'someinexistingpassword',
-      conf.debugging = false
+      conf.debugging = ENV['aem_debug'] ? ENV['aem_debug'] == 'true' : false,
+      conf.params_encoding = :multi
     ]}
     @sling = SwaggerAemClient::SlingApi.new
   end

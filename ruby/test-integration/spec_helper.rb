@@ -4,10 +4,15 @@ require 'json'
 
 def init_client
   SwaggerAemClient.configure { |conf| [
-    conf.host = 'http://localhost:4502',
-    conf.username = 'admin',
-    conf.password = 'admin',
-    conf.debugging = false,
+
+    protocol = ENV['aem_protocol'] || 'http',
+    host = ENV['aem_host'] || 'localhost',
+    port = ENV['aem_port'] ? ENV['aem_port'].to_i : 4502,
+
+    conf.host = '%s://%s:%d' % [protocol, host, port],
+    conf.username = ENV['aem_username'] || 'admin',
+    conf.password =  ENV['aem_password'] || 'admin',
+    conf.debugging = ENV['aem_debug'] ? ENV['aem_debug'] == 'true' : false,
     conf.params_encoding = :multi
   ]}
 end
