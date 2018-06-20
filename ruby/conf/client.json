@@ -1,7 +1,7 @@
 {
   "gemName": "swagger_aem",
   "moduleName": "SwaggerAemClient",
-  "gemVersion": "2.0.0.beta.2",
+  "gemVersion": "2.0.0.beta.3",
   "gemAuthor": "Shine Solutions",
   "gemAuthorEmail": "opensource@shinesolutions.com",
   "gemHomepage": "https://github.com/shinesolutions/swagger-aem/tree/master/ruby",
