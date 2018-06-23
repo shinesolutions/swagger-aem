@@ -11,5 +11,5 @@ Swagger Codegen version: 2.3.0-SNAPSHOT
 =end
 
 module SwaggerAemClient
-  VERSION = "2.0.0.beta.3"
+  VERSION = "2.0.0"
 end
