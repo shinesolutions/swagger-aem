@@ -31,7 +31,7 @@ describe 'ConfigProperty' do
       # ensure http OSGI config node exists
       begin
         data, status_code, headers = @sling.post_path_with_http_info(
-          path = 'apps/system/config.author',
+          path = 'apps/system/config',
           jcrprimary_type = 'sling:OsgiConfig',
           name = 'org.apache.felix.http'
         )
@@ -79,7 +79,7 @@ describe 'ConfigProperty' do
       # ensure http OSGI config node exists
       begin
         data, status_code, headers = @sling.post_path_with_http_info(
-          path = 'apps/system/config.author',
+          path = 'apps/system/config',
           jcrprimary_type = 'sling:OsgiConfig',
           name = 'org.apache.sling.servlets.get.DefaultGetServlet'
         )
@@ -115,7 +115,7 @@ describe 'ConfigProperty' do
       # ensure http OSGI config node exists
       begin
         data, status_code, headers = @sling.post_path_with_http_info(
-          path = 'apps/system/config.author',
+          path = 'apps/system/config',
           jcrprimary_type = 'sling:OsgiConfig',
           name = 'org.apache.sling.security.impl.ReferrerFilter'
         )
@@ -149,7 +149,7 @@ describe 'ConfigProperty' do
       # ensure http OSGI config node exists
       begin
         data, status_code, headers = @sling.post_path_with_http_info(
-          path = 'apps/system/config.author',
+          path = 'apps/system/config',
           jcrprimary_type = 'sling:OsgiConfig',
           name = 'org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet'
         )
@@ -181,7 +181,7 @@ describe 'ConfigProperty' do
       # ensure http OSGI config node exists
       begin
         data, status_code, headers = @sling.post_path_with_http_info(
-          path = 'apps/system/config.author',
+          path = 'apps/system/config',
           jcrprimary_type = 'sling:OsgiConfig',
           name = 'com.shinesolutions.aem.passwordreset.Activator'
         )
@@ -211,7 +211,7 @@ describe 'ConfigProperty' do
       # ensure http OSGI config node exists
       begin
         data, status_code, headers = @sling.post_path_with_http_info(
-          path = 'apps/system/config.author',
+          path = 'apps/system/config',
           jcrprimary_type = 'sling:OsgiConfig',
           name = 'com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck'
         )

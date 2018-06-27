@@ -67,10 +67,15 @@ describe 'User' do
 
     it 'should succeed created user password change' do
       SwaggerAemClient.configure { |conf| [
-        conf.host = 'http://localhost:4502',
+        protocol = ENV['aem_protocol'] || 'http',
+        host = ENV['aem_host'] || 'localhost',
+        port = ENV['aem_port'] ? ENV['aem_port'].to_i : 4502,
+
+        conf.host = '%s://%s:%d' % [protocol, host, port],
         conf.username = 'someuser',
         conf.password = 'somepassword',
-        conf.debugging = false
+        conf.debugging = ENV['aem_debug'] ? ENV['aem_debug'] == 'true' : false,
+        conf.params_encoding = :multi
       ]}
       crx = SwaggerAemClient::CrxApi.new
       data, status_code, headers = crx.post_set_password_with_http_info(

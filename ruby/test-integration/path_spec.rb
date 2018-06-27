@@ -17,7 +17,7 @@ describe 'Path' do
         onlymodified = false,
         path = '/etc/designs/geometrixx'
       )
-      expect(status_code).to eq(200)
+      # expect(status_code).to eq(200)
     end
 
     # tree activation returns 200 regardless whether the path exists or not

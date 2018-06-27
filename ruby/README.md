@@ -455,3 +455,10 @@ Development
 To regenerate the client with a custom Swagger Codegen:
 
     SWAGGER_CODEGEN_CLI_JAR=/path/to/swagger-codegen-cli.jar make build
+
+Testing
+-------
+
+Integration tests require an AEM instance with [Shine Solutions AEM Health Check](https://github.com/shinesolutions/aem-healthcheck) package installed.
+
+By default it uses AEM running on http://localhost:4502 with `admin` username and `admin` password. AEM instance parameters can be configured using environment variables `aem_protocol`, `aem_host`, `aem_port`, `aem_username`, `aem_password`, and `aem_debug`.
