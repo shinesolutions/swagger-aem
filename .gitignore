@@ -5,5 +5,7 @@ java/test-integration/target/
 javascript/generated/node_modules/
 ruby/.bundle
 ruby/bin
+ruby/Gemfile.lock
+ruby/generated/Gemfile.lock
 */log/
 *.pyc
