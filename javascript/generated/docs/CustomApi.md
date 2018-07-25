@@ -5,8 +5,8 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**getAemHealthCheck**](CustomApi.md#getAemHealthCheck) | **GET** /system/health | 
-[**postConfigAemHealthCheckServlet**](CustomApi.md#postConfigAemHealthCheckServlet) | **POST** /apps/system/config.{runmode}/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck | 
-[**postConfigAemPasswordReset**](CustomApi.md#postConfigAemPasswordReset) | **POST** /apps/system/config.{runmode}/com.shinesolutions.aem.passwordreset.Activator | 
+[**postConfigAemHealthCheckServlet**](CustomApi.md#postConfigAemHealthCheckServlet) | **POST** /apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck | 
+[**postConfigAemPasswordReset**](CustomApi.md#postConfigAemPasswordReset) | **POST** /apps/system/config/com.shinesolutions.aem.passwordreset.Activator | 
 
 
 <a name="getAemHealthCheck"></a>
@@ -17,29 +17,28 @@ Method | HTTP request | Description
 
 ### Example
 ```javascript
-var NodeSwaggerAem = require('node-swagger-aem');
-var defaultClient = NodeSwaggerAem.ApiClient.instance;
+import NodeSwaggerAem from 'node-swagger-aem';
+let defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
-var aemAuth = defaultClient.authentications['aemAuth'];
+let aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.CustomApi();
+let apiInstance = new NodeSwaggerAem.CustomApi();
 
-var opts = { 
+let opts = { 
   'tags': "tags_example", // String | 
   'combineTagsOr': true // Boolean | 
 };
 
-var callback = function(error, data, response) {
+apiInstance.getAemHealthCheck(opts, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully. Returned data: ' + data);
   }
-};
-apiInstance.getAemHealthCheck(opts, callback);
+});
 ```
 
 ### Parameters
@@ -70,31 +69,30 @@ Name | Type | Description  | Notes
 
 ### Example
 ```javascript
-var NodeSwaggerAem = require('node-swagger-aem');
-var defaultClient = NodeSwaggerAem.ApiClient.instance;
+import NodeSwaggerAem from 'node-swagger-aem';
+let defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
-var aemAuth = defaultClient.authentications['aemAuth'];
+let aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.CustomApi();
+let apiInstance = new NodeSwaggerAem.CustomApi();
 
-var runmode = "runmode_example"; // String | 
+let runmode = "runmode_example"; // String | 
 
-var opts = { 
+let opts = { 
   'bundlesIgnored': ["bundlesIgnored_example"], // [String] | 
   'bundlesIgnoredTypeHint': "bundlesIgnoredTypeHint_example" // String | 
 };
 
-var callback = function(error, data, response) {
+apiInstance.postConfigAemHealthCheckServlet(runmode, opts, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully.');
   }
-};
-apiInstance.postConfigAemHealthCheckServlet(runmode, opts, callback);
+});
 ```
 
 ### Parameters
@@ -126,31 +124,30 @@ null (empty response body)
 
 ### Example
 ```javascript
-var NodeSwaggerAem = require('node-swagger-aem');
-var defaultClient = NodeSwaggerAem.ApiClient.instance;
+import NodeSwaggerAem from 'node-swagger-aem';
+let defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
-var aemAuth = defaultClient.authentications['aemAuth'];
+let aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.CustomApi();
+let apiInstance = new NodeSwaggerAem.CustomApi();
 
-var runmode = "runmode_example"; // String | 
+let runmode = "runmode_example"; // String | 
 
-var opts = { 
+let opts = { 
   'pwdresetAuthorizables': ["pwdresetAuthorizables_example"], // [String] | 
   'pwdresetAuthorizablesTypeHint': "pwdresetAuthorizablesTypeHint_example" // String | 
 };
 
-var callback = function(error, data, response) {
+apiInstance.postConfigAemPasswordReset(runmode, opts, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully.');
   }
-};
-apiInstance.postConfigAemPasswordReset(runmode, opts, callback);
+});
 ```
 
 ### Parameters

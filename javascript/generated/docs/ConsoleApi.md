@@ -16,29 +16,28 @@ Method | HTTP request | Description
 
 ### Example
 ```javascript
-var NodeSwaggerAem = require('node-swagger-aem');
-var defaultClient = NodeSwaggerAem.ApiClient.instance;
+import NodeSwaggerAem from 'node-swagger-aem';
+let defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
-var aemAuth = defaultClient.authentications['aemAuth'];
+let aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.ConsoleApi();
+let apiInstance = new NodeSwaggerAem.ConsoleApi();
 
-var name = "name_example"; // String | 
+let name = "name_example"; // String | 
 
-var action = "action_example"; // String | 
+let action = "action_example"; // String | 
 
 
-var callback = function(error, data, response) {
+apiInstance.postBundle(name, action, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully.');
   }
-};
-apiInstance.postBundle(name, action, callback);
+});
 ```
 
 ### Parameters
@@ -69,27 +68,26 @@ null (empty response body)
 
 ### Example
 ```javascript
-var NodeSwaggerAem = require('node-swagger-aem');
-var defaultClient = NodeSwaggerAem.ApiClient.instance;
+import NodeSwaggerAem from 'node-swagger-aem';
+let defaultClient = NodeSwaggerAem.ApiClient.instance;
 
 // Configure HTTP basic authorization: aemAuth
-var aemAuth = defaultClient.authentications['aemAuth'];
+let aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.ConsoleApi();
+let apiInstance = new NodeSwaggerAem.ConsoleApi();
 
-var action = "action_example"; // String | 
+let action = "action_example"; // String | 
 
 
-var callback = function(error, data, response) {
+apiInstance.postJmxRepository(action, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully.');
   }
-};
-apiInstance.postJmxRepository(action, callback);
+});
 ```
 
 ### Parameters

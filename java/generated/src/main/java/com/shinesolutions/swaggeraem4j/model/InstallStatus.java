@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * InstallStatus
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-06-23T02:27:10.513Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-07-25T06:35:18.877Z")
 public class InstallStatus {
   @SerializedName("status")
   private InstallStatusStatus status = null;

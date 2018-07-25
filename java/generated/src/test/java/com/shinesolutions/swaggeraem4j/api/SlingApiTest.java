@@ -371,6 +371,26 @@ public class SlingApiTest {
      *          if the Api call fails
      */
     @Test
+    public void postNodeTest() throws ApiException {
+        String path = null;
+        String name = null;
+        String operation = null;
+        String deleteAuthorizable = null;
+        File file = null;
+        api.postNode(path, name, operation, deleteAuthorizable, file);
+
+        // TODO: test validations
+    }
+    
+    /**
+     * 
+     *
+     * 
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
     public void postNodeRwTest() throws ApiException {
         String path = null;
         String name = null;

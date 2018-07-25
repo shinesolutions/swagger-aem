@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 
-### Example
+### Example 
 ```python
 from __future__ import print_function
 import time
@@ -24,7 +24,7 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = swaggeraem.CqApi()
 
-try:
+try: 
     api_response = api_instance.get_login_page()
     pprint(api_response)
 except ApiException as e:
@@ -54,7 +54,7 @@ No authorization required
 
 
 
-### Example
+### Example 
 ```python
 from __future__ import print_function
 import time
@@ -72,7 +72,7 @@ api_instance = swaggeraem.CqApi(swaggeraem.ApiClient(configuration))
 authorizable_id = 'authorizable_id_example' # str | 
 changelog = 'changelog_example' # str | 
 
-try:
+try: 
     api_instance.post_cq_actions(authorizable_id, changelog)
 except ApiException as e:
     print("Exception when calling CqApi->post_cq_actions: %s\n" % e)

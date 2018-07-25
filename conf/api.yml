@@ -91,6 +91,38 @@ paths:
       responses:
         default:
           description: 'Default response'
+    post:
+      operationId: postNode
+      produces:
+        - text/plain
+      parameters:
+        - name: path
+          in: path
+          required: true
+          type: string
+        - name: name
+          in: path
+          required: true
+          type: string
+        - name: :operation
+          in: query
+          required: false
+          type: string
+        - name: deleteAuthorizable
+          in: query
+          required: false
+          type: string
+        - name: file
+          in: formData
+          required: false
+          type: file
+      consumes:
+        - multipart/form-data
+      tags:
+        - sling
+      responses:
+        default:
+          description: 'Default response'
     delete:
       operationId: deleteNode
       produces:
