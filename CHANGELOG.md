@@ -1,6 +1,7 @@
 ### 2.0.0
 * Remove runmode from config path #32
 * Add AEM client parameter override support to integration tests
+* Add postNode operation
 
 ### 1.3.0
 * Add getCrxdeStatus operation
