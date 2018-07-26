@@ -18,6 +18,7 @@ Method | HTTP request | Description
 [**post_config_apache_sling_dav_ex_servlet**](SlingApi.md#post_config_apache_sling_dav_ex_servlet) | **POST** /apps/system/config.{runmode}/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet | 
 [**post_config_apache_sling_get_servlet**](SlingApi.md#post_config_apache_sling_get_servlet) | **POST** /apps/system/config.{runmode}/org.apache.sling.servlets.get.DefaultGetServlet | 
 [**post_config_apache_sling_referrer_filter**](SlingApi.md#post_config_apache_sling_referrer_filter) | **POST** /apps/system/config.{runmode}/org.apache.sling.security.impl.ReferrerFilter | 
+[**post_node**](SlingApi.md#post_node) | **POST** /{path}/{name} | 
 [**post_node_rw**](SlingApi.md#post_node_rw) | **POST** /{path}/{name}.rw.html | 
 [**post_path**](SlingApi.md#post_path) | **POST** /{path}/ | 
 [**post_query**](SlingApi.md#post_query) | **POST** /bin/querybuilder.json | 
@@ -414,7 +415,7 @@ api_instance = SwaggerAemClient::SlingApi.new
 
 path = "path_example" # String | 
 
-p_limit = 8.14 # Float | 
+p_limit = 3.4 # Float | 
 
 _1_property = "_1_property_example" # String | 
 
@@ -489,7 +490,7 @@ opts = {
   jcrcontentlog_level: "jcrcontentlog_level_example", # String | 
   jcrcontentno_status_update: true, # BOOLEAN | 
   jcrcontentno_versioning: true, # BOOLEAN | 
-  jcrcontentprotocol_connect_timeout: 8.14, # Float | 
+  jcrcontentprotocol_connect_timeout: 3.4, # Float | 
   jcrcontentprotocol_http_connection_closed: true, # BOOLEAN | 
   jcrcontentprotocol_http_expired: "jcrcontentprotocol_http_expired_example", # String | 
   jcrcontentprotocol_http_headers: ["jcrcontentprotocol_http_headers_example"], # Array<String> | 
@@ -497,17 +498,17 @@ opts = {
   jcrcontentprotocol_http_method: "jcrcontentprotocol_http_method_example", # String | 
   jcrcontentprotocol_https_relaxed: true, # BOOLEAN | 
   jcrcontentprotocol_interface: "jcrcontentprotocol_interface_example", # String | 
-  jcrcontentprotocol_socket_timeout: 8.14, # Float | 
+  jcrcontentprotocol_socket_timeout: 3.4, # Float | 
   jcrcontentprotocol_version: "jcrcontentprotocol_version_example", # String | 
   jcrcontentproxy_ntlm_domain: "jcrcontentproxy_ntlm_domain_example", # String | 
   jcrcontentproxy_ntlm_host: "jcrcontentproxy_ntlm_host_example", # String | 
   jcrcontentproxy_host: "jcrcontentproxy_host_example", # String | 
   jcrcontentproxy_password: "jcrcontentproxy_password_example", # String | 
-  jcrcontentproxy_port: 8.14, # Float | 
+  jcrcontentproxy_port: 3.4, # Float | 
   jcrcontentproxy_user: "jcrcontentproxy_user_example", # String | 
-  jcrcontentqueue_batch_max_size: 8.14, # Float | 
+  jcrcontentqueue_batch_max_size: 3.4, # Float | 
   jcrcontentqueue_batch_mode: "jcrcontentqueue_batch_mode_example", # String | 
-  jcrcontentqueue_batch_wait_time: 8.14, # Float | 
+  jcrcontentqueue_batch_wait_time: 3.4, # Float | 
   jcrcontentretry_delay: "jcrcontentretry_delay_example", # String | 
   jcrcontentreverse_replication: true, # BOOLEAN | 
   jcrcontentserialization_type: "jcrcontentserialization_type_example", # String | 
@@ -950,6 +951,66 @@ nil (empty response body)
 
 
 
+# **post_node**
+> post_node(path, name, opts)
+
+
+
+### Example
+```ruby
+# load the gem
+require 'swagger_aem'
+# setup authorization
+SwaggerAemClient.configure do |config|
+  # Configure HTTP basic authorization: aemAuth
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = SwaggerAemClient::SlingApi.new
+
+path = "path_example" # String | 
+
+name = "name_example" # String | 
+
+opts = { 
+  operation: "operation_example", # String | 
+  delete_authorizable: "delete_authorizable_example", # String | 
+  file: File.new("/path/to/file.txt") # File | 
+}
+
+begin
+  api_instance.post_node(path, name, opts)
+rescue SwaggerAemClient::ApiError => e
+  puts "Exception when calling SlingApi->post_node: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **path** | **String**|  | 
+ **name** | **String**|  | 
+ **operation** | **String**|  | [optional] 
+ **delete_authorizable** | **String**|  | [optional] 
+ **file** | **File**|  | [optional] 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: text/plain
+
+
+
 # **post_node_rw**
 > post_node_rw(path, name, opts)
 
@@ -1081,7 +1142,7 @@ api_instance = SwaggerAemClient::SlingApi.new
 
 path = "path_example" # String | 
 
-p_limit = 8.14 # Float | 
+p_limit = 3.4 # Float | 
 
 _1_property = "_1_property_example" # String | 
 
