@@ -91,7 +91,7 @@ describe 'Node' do
 
     describe 'test node delete' do
 
-      it 'should succeed when node exists' do
+      it 'should succeed using deleteNode operation when node exists' do
 
         # ensure node exists prior to deletion
         data, status_code, headers = @sling.post_path_with_http_info(
@@ -106,6 +106,49 @@ describe 'Node' do
           name = 'somefolder'
         )
         expect(status_code).to eq(204)
+
+        # ensure node does not exist after deletion
+        begin
+          data, status_code, headers = @sling.get_node_with_http_info(
+            path = 'apps/system',
+            name = 'somefolder'
+          )
+          fail
+        rescue SwaggerAemClient::ApiError => err
+          expect(err.code).to eq(404)
+        end
+      end
+
+      it 'should succeed using postNode operation when node exists' do
+
+        # ensure node exists prior to deletion
+        data, status_code, headers = @sling.post_path_with_http_info(
+          path = 'apps/system',
+          jcrprimary_type = 'sling:Folder',
+          name = 'somefolder'
+        )
+        expect([200, 201]).to include(status_code)
+
+        data, status_code, headers = @sling.post_node_with_http_info(
+          path = 'apps/system',
+          name = 'somefolder',
+          {
+            :operation => 'delete',
+            :delete_authorizable => ''
+          }
+        )
+        expect(status_code).to eq(200)
+
+        # ensure node does not exist after deletion
+        begin
+          data, status_code, headers = @sling.get_node_with_http_info(
+            path = 'apps/system',
+            name = 'somefolder'
+          )
+          fail
+        rescue SwaggerAemClient::ApiError => err
+          expect(err.code).to eq(404)
+        end
       end
 
     end
