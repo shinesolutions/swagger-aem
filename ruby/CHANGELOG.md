@@ -1,3 +1,7 @@
+### 1.3.0
+* Add postNode operation
+* Add AEM client parameter override support to integration tests
+
 ### 1.2.1
 * Add crx#getCrxdeStatus operation
 
