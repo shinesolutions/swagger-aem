@@ -1118,6 +1118,75 @@ module SwaggerAemClient
     # @param path 
     # @param name 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :operation 
+    # @option opts [String] :delete_authorizable 
+    # @option opts [File] :file 
+    # @return [nil]
+    def post_node(path, name, opts = {})
+      post_node_with_http_info(path, name, opts)
+      return nil
+    end
+
+    # 
+    # 
+    # @param path 
+    # @param name 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :operation 
+    # @option opts [String] :delete_authorizable 
+    # @option opts [File] :file 
+    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    def post_node_with_http_info(path, name, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: SlingApi.post_node ..."
+      end
+      # verify the required parameter 'path' is set
+      if @api_client.config.client_side_validation && path.nil?
+        fail ArgumentError, "Missing the required parameter 'path' when calling SlingApi.post_node"
+      end
+      # verify the required parameter 'name' is set
+      if @api_client.config.client_side_validation && name.nil?
+        fail ArgumentError, "Missing the required parameter 'name' when calling SlingApi.post_node"
+      end
+      # resource path
+      local_var_path = "/{path}/{name}".sub('{' + 'path' + '}', path.to_s).sub('{' + 'name' + '}', name.to_s)
+
+      # query parameters
+      query_params = {}
+      query_params[:':operation'] = opts[:'operation'] if !opts[:'operation'].nil?
+      query_params[:'deleteAuthorizable'] = opts[:'delete_authorizable'] if !opts[:'delete_authorizable'].nil?
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['text/plain'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['multipart/form-data'])
+
+      # form parameters
+      form_params = {}
+      form_params["file"] = opts[:'file'] if !opts[:'file'].nil?
+
+      # http body (model)
+      post_body = nil
+      auth_names = ['aemAuth']
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: SlingApi#post_node\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # 
+    # 
+    # @param path 
+    # @param name 
+    # @param [Hash] opts the optional parameters
     # @option opts [String] :add_members 
     # @return [nil]
     def post_node_rw(path, name, opts = {})

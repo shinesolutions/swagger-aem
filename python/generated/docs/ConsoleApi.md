@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 
-### Example
+### Example 
 ```python
 from __future__ import print_function
 import time
@@ -31,7 +31,7 @@ api_instance = swaggeraem.ConsoleApi(swaggeraem.ApiClient(configuration))
 name = 'name_example' # str | 
 action = 'action_example' # str | 
 
-try:
+try: 
     api_instance.post_bundle(name, action)
 except ApiException as e:
     print("Exception when calling ConsoleApi->post_bundle: %s\n" % e)
@@ -64,7 +64,7 @@ void (empty response body)
 
 
 
-### Example
+### Example 
 ```python
 from __future__ import print_function
 import time
@@ -81,7 +81,7 @@ configuration.password = 'YOUR_PASSWORD'
 api_instance = swaggeraem.ConsoleApi(swaggeraem.ApiClient(configuration))
 action = 'action_example' # str | 
 
-try:
+try: 
     api_instance.post_jmx_repository(action)
 except ApiException as e:
     print("Exception when calling ConsoleApi->post_jmx_repository: %s\n" % e)

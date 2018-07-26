@@ -305,6 +305,22 @@ describe 'SlingApi' do
     end
   end
 
+  # unit tests for post_node
+  # 
+  # 
+  # @param path 
+  # @param name 
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :operation 
+  # @option opts [String] :delete_authorizable 
+  # @option opts [File] :file 
+  # @return [nil]
+  describe 'post_node test' do
+    it "should work" do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for post_node_rw
   # 
   # 

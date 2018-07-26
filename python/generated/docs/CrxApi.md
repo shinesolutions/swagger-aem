@@ -4,6 +4,7 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**get_crxde_status**](CrxApi.md#get_crxde_status) | **GET** /crx/server/crx.default/jcr:root/.1.json | 
 [**get_install_status**](CrxApi.md#get_install_status) | **GET** /crx/packmgr/installstatus.jsp | 
 [**post_package_service**](CrxApi.md#post_package_service) | **POST** /crx/packmgr/service.jsp | 
 [**post_package_service_json**](CrxApi.md#post_package_service_json) | **POST** /crx/packmgr/service/.json/{path} | 
@@ -11,12 +12,12 @@ Method | HTTP request | Description
 [**post_set_password**](CrxApi.md#post_set_password) | **POST** /crx/explorer/ui/setpassword.jsp | 
 
 
-# **get_install_status**
-> InstallStatus get_install_status()
+# **get_crxde_status**
+> str get_crxde_status()
 
 
 
-### Example
+### Example 
 ```python
 from __future__ import print_function
 import time
@@ -32,7 +33,53 @@ configuration.password = 'YOUR_PASSWORD'
 # create an instance of the API class
 api_instance = swaggeraem.CrxApi(swaggeraem.ApiClient(configuration))
 
-try:
+try: 
+    api_response = api_instance.get_crxde_status()
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CrxApi->get_crxde_status: %s\n" % e)
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+**str**
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: plain/text
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_install_status**
+> InstallStatus get_install_status()
+
+
+
+### Example 
+```python
+from __future__ import print_function
+import time
+import swaggeraem
+from swaggeraem.rest import ApiException
+from pprint import pprint
+
+# Configure HTTP basic authorization: aemAuth
+configuration = swaggeraem.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
+
+# create an instance of the API class
+api_instance = swaggeraem.CrxApi(swaggeraem.ApiClient(configuration))
+
+try: 
     api_response = api_instance.get_install_status()
     pprint(api_response)
 except ApiException as e:
@@ -62,7 +109,7 @@ This endpoint does not need any parameter.
 
 
 
-### Example
+### Example 
 ```python
 from __future__ import print_function
 import time
@@ -79,7 +126,7 @@ configuration.password = 'YOUR_PASSWORD'
 api_instance = swaggeraem.CrxApi(swaggeraem.ApiClient(configuration))
 cmd = 'cmd_example' # str | 
 
-try:
+try: 
     api_response = api_instance.post_package_service(cmd)
     pprint(api_response)
 except ApiException as e:
@@ -112,7 +159,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example
+### Example 
 ```python
 from __future__ import print_function
 import time
@@ -137,7 +184,7 @@ force = true # bool |  (optional)
 recursive = true # bool |  (optional)
 package = '/path/to/file.txt' # file |  (optional)
 
-try:
+try: 
     api_response = api_instance.post_package_service_json(path, cmd, group_name=group_name, package_name=package_name, package_version=package_version, charset_=charset_, force=force, recursive=recursive, package=package)
     pprint(api_response)
 except ApiException as e:
@@ -178,7 +225,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example
+### Example 
 ```python
 from __future__ import print_function
 import time
@@ -200,7 +247,7 @@ path = 'path_example' # str |
 filter = 'filter_example' # str |  (optional)
 charset_ = 'charset__example' # str |  (optional)
 
-try:
+try: 
     api_response = api_instance.post_package_update(group_name, package_name, version, path, filter=filter, charset_=charset_)
     pprint(api_response)
 except ApiException as e:
@@ -238,7 +285,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example
+### Example 
 ```python
 from __future__ import print_function
 import time
@@ -257,7 +304,7 @@ old = 'old_example' # str |
 plain = 'plain_example' # str | 
 verify = 'verify_example' # str | 
 
-try:
+try: 
     api_response = api_instance.post_set_password(old, plain, verify)
     pprint(api_response)
 except ApiException as e:
