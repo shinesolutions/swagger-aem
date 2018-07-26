@@ -1,3 +1,6 @@
+### 2.1.0
+* Update client with postNode operation
+
 ### 2.0.0
 * Update client with API 2.0.0 for AEM 6.4 support
 
