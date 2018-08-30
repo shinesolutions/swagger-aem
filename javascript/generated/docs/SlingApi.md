@@ -8,12 +8,18 @@ Method | HTTP request | Description
 [**deleteNode**](SlingApi.md#deleteNode) | **DELETE** /{path}/{name} | 
 [**getAgent**](SlingApi.md#getAgent) | **GET** /etc/replication/agents.{runmode}/{name} | 
 [**getAgents**](SlingApi.md#getAgents) | **GET** /etc/replication/agents.{runmode}.-1.json | 
+[**getAuthorizableKeystore**](SlingApi.md#getAuthorizableKeystore) | **GET** /{intermediatePath}/{authorizableId}.ks.json | 
+[**getKeystore**](SlingApi.md#getKeystore) | **GET** /{intermediatePath}/{authorizableId}/keystore/store.p12 | 
 [**getNode**](SlingApi.md#getNode) | **GET** /{path}/{name} | 
 [**getPackage**](SlingApi.md#getPackage) | **GET** /etc/packages/{group}/{name}-{version}.zip | 
 [**getPackageFilter**](SlingApi.md#getPackageFilter) | **GET** /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json | 
 [**getQuery**](SlingApi.md#getQuery) | **GET** /bin/querybuilder.json | 
+[**getTruststore**](SlingApi.md#getTruststore) | **GET** /etc/truststore/truststore.p12 | 
+[**getTruststoreInformations**](SlingApi.md#getTruststoreInformations) | **GET** /libs/granite/security/truststore.json | 
 [**postAgent**](SlingApi.md#postAgent) | **POST** /etc/replication/agents.{runmode}/{name} | 
+[**postAuthorizableKeystore**](SlingApi.md#postAuthorizableKeystore) | **POST** /{intermediatePath}/{authorizableId}.ks.html | 
 [**postAuthorizables**](SlingApi.md#postAuthorizables) | **POST** /libs/granite/security/post/authorizables | 
+[**postConfigAdobeGraniteSamlAuthenticationHandler**](SlingApi.md#postConfigAdobeGraniteSamlAuthenticationHandler) | **POST** /apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config | 
 [**postConfigApacheFelixJettyBasedHttpService**](SlingApi.md#postConfigApacheFelixJettyBasedHttpService) | **POST** /apps/system/config/org.apache.felix.http | 
 [**postConfigApacheSlingDavExServlet**](SlingApi.md#postConfigApacheSlingDavExServlet) | **POST** /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet | 
 [**postConfigApacheSlingGetServlet**](SlingApi.md#postConfigApacheSlingGetServlet) | **POST** /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet | 
@@ -23,6 +29,8 @@ Method | HTTP request | Description
 [**postPath**](SlingApi.md#postPath) | **POST** /{path}/ | 
 [**postQuery**](SlingApi.md#postQuery) | **POST** /bin/querybuilder.json | 
 [**postTreeActivation**](SlingApi.md#postTreeActivation) | **POST** /etc/replication/treeactivation.html | 
+[**postTruststore**](SlingApi.md#postTruststore) | **POST** /libs/granite/security/post/truststore | 
+[**postTruststorePKCS12**](SlingApi.md#postTruststorePKCS12) | **POST** /etc/truststore | 
 
 
 <a name="deleteAgent"></a>
@@ -229,6 +237,110 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+<a name="getAuthorizableKeystore"></a>
+# **getAuthorizableKeystore**
+> KeystoreInformations getAuthorizableKeystore(intermediatePath, authorizableId)
+
+
+
+### Example
+```javascript
+import NodeSwaggerAem from 'node-swagger-aem';
+let defaultClient = NodeSwaggerAem.ApiClient.instance;
+
+// Configure HTTP basic authorization: aemAuth
+let aemAuth = defaultClient.authentications['aemAuth'];
+aemAuth.username = 'YOUR USERNAME';
+aemAuth.password = 'YOUR PASSWORD';
+
+let apiInstance = new NodeSwaggerAem.SlingApi();
+
+let intermediatePath = "intermediatePath_example"; // String | 
+
+let authorizableId = "authorizableId_example"; // String | 
+
+
+apiInstance.getAuthorizableKeystore(intermediatePath, authorizableId, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **intermediatePath** | **String**|  | 
+ **authorizableId** | **String**|  | 
+
+### Return type
+
+[**KeystoreInformations**](KeystoreInformations.md)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain
+
+<a name="getKeystore"></a>
+# **getKeystore**
+> File getKeystore(intermediatePath, authorizableId)
+
+
+
+### Example
+```javascript
+import NodeSwaggerAem from 'node-swagger-aem';
+let defaultClient = NodeSwaggerAem.ApiClient.instance;
+
+// Configure HTTP basic authorization: aemAuth
+let aemAuth = defaultClient.authentications['aemAuth'];
+aemAuth.username = 'YOUR USERNAME';
+aemAuth.password = 'YOUR PASSWORD';
+
+let apiInstance = new NodeSwaggerAem.SlingApi();
+
+let intermediatePath = "intermediatePath_example"; // String | 
+
+let authorizableId = "authorizableId_example"; // String | 
+
+
+apiInstance.getKeystore(intermediatePath, authorizableId, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **intermediatePath** | **String**|  | 
+ **authorizableId** | **String**|  | 
+
+### Return type
+
+**File**
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/octet-stream
 
 <a name="getNode"></a>
 # **getNode**
@@ -450,6 +562,92 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+<a name="getTruststore"></a>
+# **getTruststore**
+> File getTruststore()
+
+
+
+### Example
+```javascript
+import NodeSwaggerAem from 'node-swagger-aem';
+let defaultClient = NodeSwaggerAem.ApiClient.instance;
+
+// Configure HTTP basic authorization: aemAuth
+let aemAuth = defaultClient.authentications['aemAuth'];
+aemAuth.username = 'YOUR USERNAME';
+aemAuth.password = 'YOUR PASSWORD';
+
+let apiInstance = new NodeSwaggerAem.SlingApi();
+
+apiInstance.getTruststore((error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+**File**
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/octet-stream
+
+<a name="getTruststoreInformations"></a>
+# **getTruststoreInformations**
+> TruststoreInformations getTruststoreInformations()
+
+
+
+### Example
+```javascript
+import NodeSwaggerAem from 'node-swagger-aem';
+let defaultClient = NodeSwaggerAem.ApiClient.instance;
+
+// Configure HTTP basic authorization: aemAuth
+let aemAuth = defaultClient.authentications['aemAuth'];
+aemAuth.username = 'YOUR USERNAME';
+aemAuth.password = 'YOUR PASSWORD';
+
+let apiInstance = new NodeSwaggerAem.SlingApi();
+
+apiInstance.getTruststoreInformations((error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**TruststoreInformations**](TruststoreInformations.md)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
 <a name="postAgent"></a>
 # **postAgent**
 > postAgent(runmode, name, opts)
@@ -604,6 +802,86 @@ null (empty response body)
  - **Content-Type**: Not defined
  - **Accept**: text/plain
 
+<a name="postAuthorizableKeystore"></a>
+# **postAuthorizableKeystore**
+> KeystoreInformations postAuthorizableKeystore(intermediatePath, authorizableId, opts)
+
+
+
+### Example
+```javascript
+import NodeSwaggerAem from 'node-swagger-aem';
+let defaultClient = NodeSwaggerAem.ApiClient.instance;
+
+// Configure HTTP basic authorization: aemAuth
+let aemAuth = defaultClient.authentications['aemAuth'];
+aemAuth.username = 'YOUR USERNAME';
+aemAuth.password = 'YOUR PASSWORD';
+
+let apiInstance = new NodeSwaggerAem.SlingApi();
+
+let intermediatePath = "intermediatePath_example"; // String | 
+
+let authorizableId = "authorizableId_example"; // String | 
+
+let opts = { 
+  'operation': "operation_example", // String | 
+  'currentPassword': "currentPassword_example", // String | 
+  'newPassword': "newPassword_example", // String | 
+  'rePassword': "rePassword_example", // String | 
+  'keyPassword': "keyPassword_example", // String | 
+  'keyStorePass': "keyStorePass_example", // String | 
+  'operation2': "operation_example", // String | 
+  'alias': "alias_example", // String | 
+  'newAlias': "newAlias_example", // String | 
+  'removeAlias': "removeAlias_example", // String | 
+  'certChain': "/path/to/file.txt", // File | 
+  'pk': "/path/to/file.txt", // File | 
+  'keyStore': "/path/to/file.txt" // File | 
+};
+
+apiInstance.postAuthorizableKeystore(intermediatePath, authorizableId, opts, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **intermediatePath** | **String**|  | 
+ **authorizableId** | **String**|  | 
+ **operation** | **String**|  | [optional] 
+ **currentPassword** | **String**|  | [optional] 
+ **newPassword** | **String**|  | [optional] 
+ **rePassword** | **String**|  | [optional] 
+ **keyPassword** | **String**|  | [optional] 
+ **keyStorePass** | **String**|  | [optional] 
+ **operation2** | **String**|  | [optional] 
+ **alias** | **String**|  | [optional] 
+ **newAlias** | **String**|  | [optional] 
+ **removeAlias** | **String**|  | [optional] 
+ **certChain** | **File**|  | [optional] 
+ **pk** | **File**|  | [optional] 
+ **keyStore** | **File**|  | [optional] 
+
+### Return type
+
+[**KeystoreInformations**](KeystoreInformations.md)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: text/plain
+
 <a name="postAuthorizables"></a>
 # **postAuthorizables**
 > &#39;String&#39; postAuthorizables(authorizableId, intermediatePath, opts)
@@ -665,6 +943,150 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: text/html
+
+<a name="postConfigAdobeGraniteSamlAuthenticationHandler"></a>
+# **postConfigAdobeGraniteSamlAuthenticationHandler**
+> postConfigAdobeGraniteSamlAuthenticationHandler(opts)
+
+
+
+### Example
+```javascript
+import NodeSwaggerAem from 'node-swagger-aem';
+let defaultClient = NodeSwaggerAem.ApiClient.instance;
+
+// Configure HTTP basic authorization: aemAuth
+let aemAuth = defaultClient.authentications['aemAuth'];
+aemAuth.username = 'YOUR USERNAME';
+aemAuth.password = 'YOUR PASSWORD';
+
+let apiInstance = new NodeSwaggerAem.SlingApi();
+
+let opts = { 
+  'keyStorePassword': "keyStorePassword_example", // String | 
+  'keyStorePasswordTypeHint': "keyStorePasswordTypeHint_example", // String | 
+  'serviceRanking': 56, // Number | 
+  'serviceRankingTypeHint': "serviceRankingTypeHint_example", // String | 
+  'idpHttpRedirect': true, // Boolean | 
+  'idpHttpRedirectTypeHint': "idpHttpRedirectTypeHint_example", // String | 
+  'createUser': true, // Boolean | 
+  'createUserTypeHint': "createUserTypeHint_example", // String | 
+  'defaultRedirectUrl': "defaultRedirectUrl_example", // String | 
+  'defaultRedirectUrlTypeHint': "defaultRedirectUrlTypeHint_example", // String | 
+  'userIDAttribute': "userIDAttribute_example", // String | 
+  'userIDAttributeTypeHint': "userIDAttributeTypeHint_example", // String | 
+  'defaultGroups': ["defaultGroups_example"], // [String] | 
+  'defaultGroupsTypeHint': "defaultGroupsTypeHint_example", // String | 
+  'idpCertAlias': "idpCertAlias_example", // String | 
+  'idpCertAliasTypeHint': "idpCertAliasTypeHint_example", // String | 
+  'addGroupMemberships': true, // Boolean | 
+  'addGroupMembershipsTypeHint': "addGroupMembershipsTypeHint_example", // String | 
+  'path': ["path_example"], // [String] | 
+  'pathTypeHint': "pathTypeHint_example", // String | 
+  'synchronizeAttributes': ["synchronizeAttributes_example"], // [String] | 
+  'synchronizeAttributesTypeHint': "synchronizeAttributesTypeHint_example", // String | 
+  'clockTolerance': 56, // Number | 
+  'clockToleranceTypeHint': "clockToleranceTypeHint_example", // String | 
+  'groupMembershipAttribute': "groupMembershipAttribute_example", // String | 
+  'groupMembershipAttributeTypeHint': "groupMembershipAttributeTypeHint_example", // String | 
+  'idpUrl': "idpUrl_example", // String | 
+  'idpUrlTypeHint': "idpUrlTypeHint_example", // String | 
+  'logoutUrl': "logoutUrl_example", // String | 
+  'logoutUrlTypeHint': "logoutUrlTypeHint_example", // String | 
+  'serviceProviderEntityId': "serviceProviderEntityId_example", // String | 
+  'serviceProviderEntityIdTypeHint': "serviceProviderEntityIdTypeHint_example", // String | 
+  'assertionConsumerServiceURL': "assertionConsumerServiceURL_example", // String | 
+  'assertionConsumerServiceURLTypeHint': "assertionConsumerServiceURLTypeHint_example", // String | 
+  'handleLogout': true, // Boolean | 
+  'handleLogoutTypeHint': "handleLogoutTypeHint_example", // String | 
+  'spPrivateKeyAlias': "spPrivateKeyAlias_example", // String | 
+  'spPrivateKeyAliasTypeHint': "spPrivateKeyAliasTypeHint_example", // String | 
+  'useEncryption': true, // Boolean | 
+  'useEncryptionTypeHint': "useEncryptionTypeHint_example", // String | 
+  'nameIdFormat': "nameIdFormat_example", // String | 
+  'nameIdFormatTypeHint': "nameIdFormatTypeHint_example", // String | 
+  'digestMethod': "digestMethod_example", // String | 
+  'digestMethodTypeHint': "digestMethodTypeHint_example", // String | 
+  'signatureMethod': "signatureMethod_example", // String | 
+  'signatureMethodTypeHint': "signatureMethodTypeHint_example", // String | 
+  'userIntermediatePath': "userIntermediatePath_example", // String | 
+  'userIntermediatePathTypeHint': "userIntermediatePathTypeHint_example" // String | 
+};
+
+apiInstance.postConfigAdobeGraniteSamlAuthenticationHandler(opts, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully.');
+  }
+});
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **keyStorePassword** | **String**|  | [optional] 
+ **keyStorePasswordTypeHint** | **String**|  | [optional] 
+ **serviceRanking** | **Number**|  | [optional] 
+ **serviceRankingTypeHint** | **String**|  | [optional] 
+ **idpHttpRedirect** | **Boolean**|  | [optional] 
+ **idpHttpRedirectTypeHint** | **String**|  | [optional] 
+ **createUser** | **Boolean**|  | [optional] 
+ **createUserTypeHint** | **String**|  | [optional] 
+ **defaultRedirectUrl** | **String**|  | [optional] 
+ **defaultRedirectUrlTypeHint** | **String**|  | [optional] 
+ **userIDAttribute** | **String**|  | [optional] 
+ **userIDAttributeTypeHint** | **String**|  | [optional] 
+ **defaultGroups** | [**[String]**](String.md)|  | [optional] 
+ **defaultGroupsTypeHint** | **String**|  | [optional] 
+ **idpCertAlias** | **String**|  | [optional] 
+ **idpCertAliasTypeHint** | **String**|  | [optional] 
+ **addGroupMemberships** | **Boolean**|  | [optional] 
+ **addGroupMembershipsTypeHint** | **String**|  | [optional] 
+ **path** | [**[String]**](String.md)|  | [optional] 
+ **pathTypeHint** | **String**|  | [optional] 
+ **synchronizeAttributes** | [**[String]**](String.md)|  | [optional] 
+ **synchronizeAttributesTypeHint** | **String**|  | [optional] 
+ **clockTolerance** | **Number**|  | [optional] 
+ **clockToleranceTypeHint** | **String**|  | [optional] 
+ **groupMembershipAttribute** | **String**|  | [optional] 
+ **groupMembershipAttributeTypeHint** | **String**|  | [optional] 
+ **idpUrl** | **String**|  | [optional] 
+ **idpUrlTypeHint** | **String**|  | [optional] 
+ **logoutUrl** | **String**|  | [optional] 
+ **logoutUrlTypeHint** | **String**|  | [optional] 
+ **serviceProviderEntityId** | **String**|  | [optional] 
+ **serviceProviderEntityIdTypeHint** | **String**|  | [optional] 
+ **assertionConsumerServiceURL** | **String**|  | [optional] 
+ **assertionConsumerServiceURLTypeHint** | **String**|  | [optional] 
+ **handleLogout** | **Boolean**|  | [optional] 
+ **handleLogoutTypeHint** | **String**|  | [optional] 
+ **spPrivateKeyAlias** | **String**|  | [optional] 
+ **spPrivateKeyAliasTypeHint** | **String**|  | [optional] 
+ **useEncryption** | **Boolean**|  | [optional] 
+ **useEncryptionTypeHint** | **String**|  | [optional] 
+ **nameIdFormat** | **String**|  | [optional] 
+ **nameIdFormatTypeHint** | **String**|  | [optional] 
+ **digestMethod** | **String**|  | [optional] 
+ **digestMethodTypeHint** | **String**|  | [optional] 
+ **signatureMethod** | **String**|  | [optional] 
+ **signatureMethodTypeHint** | **String**|  | [optional] 
+ **userIntermediatePath** | **String**|  | [optional] 
+ **userIntermediatePathTypeHint** | **String**|  | [optional] 
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain
 
 <a name="postConfigApacheFelixJettyBasedHttpService"></a>
 # **postConfigApacheFelixJettyBasedHttpService**
@@ -909,7 +1331,9 @@ let opts = {
   'allowHosts': "allowHosts_example", // String | 
   'allowHostsTypeHint': "allowHostsTypeHint_example", // String | 
   'allowHostsRegexp': "allowHostsRegexp_example", // String | 
-  'allowHostsRegexpTypeHint': "allowHostsRegexpTypeHint_example" // String | 
+  'allowHostsRegexpTypeHint': "allowHostsRegexpTypeHint_example", // String | 
+  'filterMethods': "filterMethods_example", // String | 
+  'filterMethodsTypeHint': "filterMethodsTypeHint_example" // String | 
 };
 
 apiInstance.postConfigApacheSlingReferrerFilter(runmode, opts, (error, data, response) => {
@@ -932,6 +1356,8 @@ Name | Type | Description  | Notes
  **allowHostsTypeHint** | **String**|  | [optional] 
  **allowHostsRegexp** | **String**|  | [optional] 
  **allowHostsRegexpTypeHint** | **String**|  | [optional] 
+ **filterMethods** | **String**|  | [optional] 
+ **filterMethodsTypeHint** | **String**|  | [optional] 
 
 ### Return type
 
@@ -1228,5 +1654,115 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: text/plain
+
+<a name="postTruststore"></a>
+# **postTruststore**
+> &#39;String&#39; postTruststore(opts)
+
+
+
+### Example
+```javascript
+import NodeSwaggerAem from 'node-swagger-aem';
+let defaultClient = NodeSwaggerAem.ApiClient.instance;
+
+// Configure HTTP basic authorization: aemAuth
+let aemAuth = defaultClient.authentications['aemAuth'];
+aemAuth.username = 'YOUR USERNAME';
+aemAuth.password = 'YOUR PASSWORD';
+
+let apiInstance = new NodeSwaggerAem.SlingApi();
+
+let opts = { 
+  'operation': "operation_example", // String | 
+  'newPassword': "newPassword_example", // String | 
+  'rePassword': "rePassword_example", // String | 
+  'keyStoreType': "keyStoreType_example", // String | 
+  'removeAlias': "removeAlias_example", // String | 
+  'certificate': "/path/to/file.txt" // File | 
+};
+
+apiInstance.postTruststore(opts, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **operation** | **String**|  | [optional] 
+ **newPassword** | **String**|  | [optional] 
+ **rePassword** | **String**|  | [optional] 
+ **keyStoreType** | **String**|  | [optional] 
+ **removeAlias** | **String**|  | [optional] 
+ **certificate** | **File**|  | [optional] 
+
+### Return type
+
+**&#39;String&#39;**
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: text/plain
+
+<a name="postTruststorePKCS12"></a>
+# **postTruststorePKCS12**
+> &#39;String&#39; postTruststorePKCS12(opts)
+
+
+
+### Example
+```javascript
+import NodeSwaggerAem from 'node-swagger-aem';
+let defaultClient = NodeSwaggerAem.ApiClient.instance;
+
+// Configure HTTP basic authorization: aemAuth
+let aemAuth = defaultClient.authentications['aemAuth'];
+aemAuth.username = 'YOUR USERNAME';
+aemAuth.password = 'YOUR PASSWORD';
+
+let apiInstance = new NodeSwaggerAem.SlingApi();
+
+let opts = { 
+  'truststoreP12': "/path/to/file.txt" // File | 
+};
+
+apiInstance.postTruststorePKCS12(opts, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **truststoreP12** | **File**|  | [optional] 
+
+### Return type
+
+**&#39;String&#39;**
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
  - **Accept**: text/plain
 
