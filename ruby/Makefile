@@ -10,6 +10,7 @@ ci: clean deps build install test-unit doc
 deps:
 	gem install bundler
 	bundle install --binstubs
+	cd generated && bundle install
 
 clean:
 	rm -rf generated/ Gemfile.lock
