@@ -1,3 +1,12 @@
+### 2.2.0
+* Add feature to manage AEM Truststore
+* Add feature to manage AEM Authorizable Keystore
+* Add feature to manage Certificates in AEM Truststore
+* Add feature to configure SAML Authentication
+
+### 2.1.0
+* 
+
 ### 2.0.0
 * Remove runmode from config path #32
 * Add AEM client parameter override support to integration tests

@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   title: Adobe Experience Manager (AEM) API
   description: Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
-  version: "2.0.0"
+  version: "2.2.0"
   contact:
     name: Shine Solutions
     url: http://shinesolutions.com
@@ -337,6 +337,14 @@ paths:
           required: false
           type: string
         - name: allow.hosts.regexp@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: filter.methods
+          in: query
+          required: false
+          type: string
+        - name: filter.methods@TypeHint
           in: query
           required: false
           type: string
@@ -1087,6 +1095,582 @@ paths:
             type: string
       tags:
         - custom
+  /apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config:
+    post:
+      operationId: postConfigAdobeGraniteSamlAuthenticationHandler
+      produces:
+        - text/plain
+      parameters:
+        - name: keyStorePassword
+          in: query
+          required: false
+          type: string
+        - name: keyStorePassword@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: service.ranking
+          in: query
+          required: false
+          type: integer
+        - name: service.ranking@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: idpHttpRedirect
+          in: query
+          required: false
+          type: boolean
+        - name: idpHttpRedirect@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: createUser
+          in: query
+          required: false
+          type: boolean
+        - name: createUser@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: defaultRedirectUrl
+          in: query
+          required: false
+          type: string
+        - name: defaultRedirectUrl@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: userIDAttribute
+          in: query
+          required: false
+          type: string
+        - name: userIDAttribute@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: defaultGroups
+          in: query
+          required: false
+          type: array
+          collectionFormat: multi
+          items:
+            type: string
+        - name: defaultGroups@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: idpCertAlias
+          in: query
+          required: false
+          type: string
+        - name: idpCertAlias@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: addGroupMemberships
+          in: query
+          required: false
+          type: boolean
+        - name: addGroupMemberships@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: path
+          in: query
+          required: false
+          type: array
+          collectionFormat: multi
+          items:
+            type: string
+        - name: path@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: synchronizeAttributes
+          in: query
+          required: false
+          type: array
+          collectionFormat: multi
+          items:
+            type: string
+        - name: synchronizeAttributes@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: clockTolerance
+          in: query
+          required: false
+          type: integer
+        - name: clockTolerance@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: groupMembershipAttribute
+          in: query
+          required: false
+          type: string
+        - name: groupMembershipAttribute@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: idpUrl
+          in: query
+          required: false
+          type: string
+        - name: idpUrl@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: logoutUrl
+          in: query
+          required: false
+          type: string
+        - name: logoutUrl@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: serviceProviderEntityId
+          in: query
+          required: false
+          type: string
+        - name: serviceProviderEntityId@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: assertionConsumerServiceURL
+          in: query
+          required: false
+          type: string
+        - name: assertionConsumerServiceURL@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: handleLogout
+          in: query
+          required: false
+          type: boolean
+        - name: handleLogout@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: spPrivateKeyAlias
+          in: query
+          required: false
+          type: string
+        - name: spPrivateKeyAlias@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: useEncryption
+          in: query
+          required: false
+          type: boolean
+        - name: useEncryption@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: nameIdFormat
+          in: query
+          required: false
+          type: string
+        - name: nameIdFormat@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: digestMethod
+          in: query
+          required: false
+          type: string
+        - name: digestMethod@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: signatureMethod
+          in: query
+          required: false
+          type: string
+        - name: signatureMethod@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: userIntermediatePath
+          in: query
+          required: false
+          type: string
+        - name: userIntermediatePath@TypeHint
+          in: query
+          required: false
+          type: string
+      tags:
+        - sling
+      responses:
+        default:
+          description: 'Default response'
+  /libs/granite/security/post/truststore:
+    post:
+      operationId: postTruststore
+      produces:
+        - text/plain
+      parameters:
+        - name: :operation
+          in: query
+          required: false
+          type: string
+        - name: newPassword
+          in: query
+          required: false
+          type: string
+        - name: rePassword
+          in: query
+          required: false
+          type: string
+        - name: keyStoreType
+          in: query
+          required: false
+          type: string
+        - name: removeAlias
+          in: query
+          required: false
+          type: string
+        - name: certificate
+          in: formData
+          required: false
+          type: file
+      consumes:
+        - multipart/form-data
+      responses:
+        default:
+          description: 'Default response'
+          schema:
+            type: string
+      tags:
+        - sling
+  /libs/granite/security/truststore.json:
+    get:
+      operationId: getTruststoreInformations
+      produces:
+        - application/json
+      responses:
+        200:
+          description: 'Retrieved AEM Truststore informations'
+          schema:
+            $ref: '#/definitions/TruststoreInformations'
+        default:
+          description: 'Default response'
+          schema:
+            type: string
+      tags:
+        - sling
+  /etc/truststore/truststore.p12:
+    get:
+      operationId: getTruststore
+      produces:
+        - application/octet-stream
+      responses:
+        default:
+          description: 'Default response'
+          schema:
+            type: file
+      tags:
+        - sling
+  /etc/truststore:
+    post:
+      operationId: postTruststorePKCS12
+      produces:
+        - text/plain
+      parameters:
+        - name: truststore.p12
+          in: formData
+          required: false
+          type: file
+      consumes:
+        - multipart/form-data
+      responses:
+        default:
+          description: 'Default response'
+          schema:
+            type: string
+      tags:
+        - sling
+  /system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler:
+    post:
+      operationId: postSamlConfiguration
+      produces:
+        - text/plain
+      parameters:
+        - name: post
+          in: query
+          required: false
+          type: boolean
+        - name: apply
+          in: query
+          required: false
+          type: boolean
+        - name: delete
+          in: query
+          required: false
+          type: boolean
+        - name: action
+          in: query
+          required: false
+          type: string
+        - name: $location
+          in: query
+          required: false
+          type: string
+        - name: path
+          in: query
+          required: false
+          type: array
+          collectionFormat: multi
+          items:
+            type: string
+        - name: service.ranking
+          in: query
+          required: false
+          type: long
+        - name: idpUrl
+          in: query
+          required: false
+          type: string
+        - name: idpCertAlias
+          in: query
+          required: false
+          type: string
+        - name: idpHttpRedirect
+          in: query
+          required: false
+          type: boolean
+        - name: serviceProviderEntityId
+          in: query
+          required: false
+          type: string
+        - name: assertionConsumerServiceURL
+          in: query
+          required: false
+          type: string
+        - name: spPrivateKeyAlias
+          in: query
+          required: false
+          type: string
+        - name: keyStorePassword
+          in: query
+          required: false
+          type: string
+        - name: defaultRedirectUrl
+          in: query
+          required: false
+          type: string
+        - name: userIDAttribute
+          in: query
+          required: false
+          type: string
+        - name: useEncryption
+          in: query
+          required: false
+          type: boolean
+        - name: createUser
+          in: query
+          required: false
+          type: boolean
+        - name: addGroupMemberships
+          in: query
+          required: false
+          type: boolean
+        - name: groupMembershipAttribute
+          in: query
+          required: false
+          type: string
+        - name: defaultGroups
+          in: query
+          required: false
+          type: array
+          collectionFormat: multi
+          items:
+            type: string
+        - name: nameIdFormat
+          in: query
+          required: false
+          type: string
+        - name: synchronizeAttributes
+          in: query
+          required: false
+          type: array
+          collectionFormat: multi
+          items:
+            type: string
+        - name: handleLogout
+          in: query
+          required: false
+          type: boolean
+        - name: logoutUrl
+          in: query
+          required: false
+          type: string
+        - name: clockTolerance
+          in: query
+          required: false
+          type: long
+        - name: digestMethod
+          in: query
+          required: false
+          type: string
+        - name: signatureMethod
+          in: query
+          required: false
+          type: string
+        - name: userIntermediatePath
+          in: query
+          required: false
+          type: string
+        - name: propertylist
+          in: query
+          required: false
+          type: array
+          collectionFormat: csv
+          items:
+            type: string
+      responses:
+        200:
+          description: 'Retrieved AEM SAML Configuration'
+          schema:
+            $ref: '#/definitions/SamlConfigurationInformations'
+        302:
+          description: 'Default response'
+          schema:
+            type: string
+        default:
+          description: 'Default response'
+          schema:
+            type: string
+      tags:
+        - console
+  /{intermediatePath}/{authorizableId}.ks.html:
+    post:
+      operationId: postAuthorizableKeystore
+      produces:
+        - text/plain
+      parameters:
+        - name: intermediatePath
+          in: path
+          required: true
+          type: string
+        - name: authorizableId
+          in: path
+          required: true
+          type: string
+        - name: :operation
+          in: query
+          required: false
+          type: string
+        - name: currentPassword
+          in: query
+          required: false
+          type: string
+        - name: newPassword
+          in: query
+          required: false
+          type: string
+        - name: rePassword
+          in: query
+          required: false
+          type: string
+        - name: keyPassword
+          in: query
+          required: false
+          type: string
+        - name: keyStorePass
+          in: query
+          required: false
+          type: string
+        - name: :operation
+          in: query
+          required: false
+          type: string
+        - name: alias
+          in: query
+          required: false
+          type: string
+        - name: newAlias
+          in: query
+          required: false
+          type: string
+        - name: removeAlias
+          in: query
+          required: false
+          type: string
+        - name: cert-chain
+          in: formData
+          required: false
+          type: file
+        - name: pk
+          in: formData
+          required: false
+          type: file
+        - name: keyStore
+          in: formData
+          required: false
+          type: file
+      consumes:
+        - multipart/form-data
+      tags:
+        - sling
+      responses:
+        200:
+          description: 'Retrieved Authorizable Keystore informations'
+          schema:
+            $ref: '#/definitions/KeystoreInformations'
+        default:
+          description: 'Default response'
+          schema:
+            type: string
+  /{intermediatePath}/{authorizableId}.ks.json:
+    get:
+      operationId: getAuthorizableKeystore
+      produces:
+        - text/plain
+      parameters:
+        - name: intermediatePath
+          in: path
+          required: true
+          type: string
+        - name: authorizableId
+          in: path
+          required: true
+          type: string
+      tags:
+        - sling
+      responses:
+        200:
+          description: 'Retrieved Authorizable Keystore informations'
+          schema:
+            $ref: '#/definitions/KeystoreInformations'
+        default:
+          description: 'Default response'
+          schema:
+            type: string
+  /{intermediatePath}/{authorizableId}/keystore/store.p12:
+    get:
+      operationId: getKeystore
+      produces:
+        - application/octet-stream
+      parameters:
+        - name: intermediatePath
+          in: path
+          required: true
+          type: string
+        - name: authorizableId
+          in: path
+          required: true
+          type: string
+      responses:
+        default:
+          description: 'Default response'
+          schema:
+            type: file
+      tags:
+        - sling
 definitions:
   InstallStatus:
     type: object
@@ -1098,3 +1682,314 @@ definitions:
             type: boolean
           itemCount:
             type: integer
+  KeystoreInformations:
+    type: object
+    properties:
+      aliases:
+        type: array
+        items:
+          $ref: '#/definitions/KeystoreItems'
+      exists:
+        type: boolean
+        description: "False if truststore don't exist"
+  TruststoreInformations:
+    type: object
+    properties:
+      aliases:
+        type: array
+        items:
+          $ref: '#/definitions/TruststoreItems'
+      exists:
+        type: boolean
+        description: "False if truststore don't exist"
+  KeystoreItems:
+    type: object
+    properties:
+      alias:
+        type: string
+        description: Keystore alias name
+      entryType:
+        type: string
+        description: e.g. "privateKey"
+      algorithm:
+        type: string
+        description: e.g. "RSA"
+      format:
+        type: string
+        description: e.g. "PKCS#8"
+      chain:
+        type: array
+        items:
+          $ref: '#/definitions/KeystoreChainItems'
+  KeystoreChainItems:
+    type: object
+    properties:
+      subject:
+        type: string
+        description: e.g. "CN=localhost"
+      issuer:
+        type: string
+        description: e.g. "CN=Admin"
+      notBefore:
+        type: string
+        description: e.g. "Sun Jul 01 12:00:00 AEST 2018"
+      notAfter:
+        type: string
+        description: e.g. "Sun Jun 30 23:59:50 AEST 2019"
+      serialNumber:
+        type: integer
+        description: '18165099476682912368'
+  TruststoreItems:
+    type: object
+    properties:
+      alias:
+        type: string
+        description: Truststore alias name
+      entryType:
+        type: string
+      subject:
+        type: string
+        description: e.g. "CN=localhost"
+      issuer:
+        type: string
+        description: e.g. "CN=Admin"
+      notBefore:
+        type: string
+        description: e.g. "Sun Jul 01 12:00:00 AEST 2018"
+      notAfter:
+        type: string
+        description: e.g. "Sun Jun 30 23:59:50 AEST 2019"
+      serialNumber:
+        type: integer
+        description: '18165099476682912368'
+  SamlConfigurationInformations:
+    type: object
+    properties:
+      pid:
+        description: Persistent Identity (PID)
+        type: string
+      title:
+        description: Title
+        type: string
+      description:
+        description: Title
+        type: string
+      bundle_location:
+        description: needed for configuration binding
+        type: string
+      service_location:
+        description: needed for configuraiton binding
+        type: string
+      properties:
+        type: object
+        items:
+          $ref: '#/definitions/SamlConfigurationProperties'
+  SamlConfigurationProperties:
+    type: object
+    properties:
+      path:
+        type: array
+        description: Repository path for which this authentication handler should be used by Sling. If this is empty, the authentication handler will be disabled.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsArray'
+      service.ranking:
+        type: array
+        description: OSGi Framework Service Ranking value to indicate the order in which to call this service. This is an int value where higher values designate higher precedence. Default value is 0.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsLong'
+      idpUrl:
+        type: array
+        description: URL of the IDP where the SAML Authentication Request should be sent to. If this property is empty the authentication handler is disabled. (idpUrl)
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
+      idpCertAlias:
+        type: array
+        description: The alias of the IdP's certificate in the global truststore. If this property is empty the authentication handler is disabled.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
+      idpHttpRedirect:
+        type: array
+        description: Use an HTTP Redirect to the IDP URL instead of sending an AuthnRequest-message to request credentials. Use this for IDP initiated authentication.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsBoolean'
+      serviceProviderEntityId:
+        type: array
+        description: ID which uniquely identifies this service provider with the identity provider. If this property is empty the authentication handler is disabled.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
+      assertionConsumerServiceURL:
+        type: array
+        description: The (optional) AssertionConsumerServiceURL attribute of an Authn request specifies the location to which a <Response> message MUST be sent to the requester.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
+      spPrivateKeyAlias:
+        type: array
+        description: The alias of the SP's private key in the key-store of the 'authentication-service' system user. If this property is empty the handler will not be able to sign or decrypt messages.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
+      keyStorePassword:
+        type: array
+        description: The password of the key-store of the 'authentication-service' system user.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
+      defaultRedirectUrl:
+        type: array
+        description: The default location to redirect to after successful authentication.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
+      userIDAttribute:
+        type: array
+        description: The name of the attribute containing the user ID used to authenticate and create the user in the CRX repository. Leave empty to use the Subject:NameId.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
+      useEncryption:
+        type: array
+        description: Whether or not this authentication handler expects encrypted SAML assertions. If this is enabled the SP's private key must be provided in the key-store of the 'authentication-service' system user (see SP Private Key Alias above).
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsBoolean'
+      createUser:
+        type: array
+        description: Whether or not to autocreate nonexisting users in the repository.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsBoolean'
+      addGroupMemberships:
+        type: array
+        description: Whether or not a user should be automatically added to CRX groups after successful authentication.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsBoolean'
+      groupMembershipAttribute:
+        type: array
+        description: The name of the attribute containing a list of CRX groups this user should be added to.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
+      defaultGroups:
+        type: array
+        description: A list of default CRX groups users are added to after successful authentication.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsArray'
+      nameIdFormat:
+        type: array
+        description: The value of the NameIDPolicy format parameter to send in the AuthnRequest message.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
+      synchronizeAttributes:
+        type: array
+        description: A list of attribute mappings (in the format \attributename=path/relative/to/user/node\) which should be stored in the repository on user-synchronization.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsArray'
+      handleLogout:
+        type: array
+        description: Whether or not logout (dropCredentials) requests will be processed by this handler.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsBoolean'
+      logoutUrl:
+        type: array
+        description: URL of the IDP where the SAML Logout Request should be sent to. If this property is empty the authentication handler won't handle logouts.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
+      clockTolerance:
+        type: array
+        description: Time tolerance in seconds to compensate clock skew between IDP and SP when validating Assertions.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsLong'
+      digestMethod:
+        type: array
+        description: The digest algorithm to use when signing a SAML message.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
+      signatureMethod:
+        type: array
+        description: The signature algorithm to use when signing a SAML message.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
+      userIntermediatePath:
+        type: array
+        description: User intermediate path to store created users.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
+  SamlConfigurationPropertyItemsArray:
+    type: object
+    properties:
+      name:
+        description: property name
+        type: string
+      optional:
+        description: True if optional
+        type: boolean
+      is_set:
+        description: True if property is set
+        type: boolean
+      type:
+        description: Property type, 1=String, 3=long, 11=boolean, 12=Password
+        type: integer
+      values:
+        description: Property value
+        type: array
+        items:
+          type: string
+      description:
+        description: Property description
+        type: string
+  SamlConfigurationPropertyItemsBoolean:
+    type: object
+    properties:
+      name:
+        description: property name
+        type: string
+      optional:
+        description: True if optional
+        type: boolean
+      is_set:
+        description: True if property is set
+        type: boolean
+      type:
+        description: Property type, 1=String, 3=long, 11=boolean, 12=Password
+        type: integer
+      values:
+        description: Property value
+        type: boolean
+      description:
+        description: Property description
+        type: string
+  SamlConfigurationPropertyItemsLong:
+    type: object
+    properties:
+      name:
+        description: property name
+        type: string
+      optional:
+        description: True if optional
+        type: boolean
+      is_set:
+        description: True if property is set
+        type: boolean
+      type:
+        description: Property type, 1=String, 3=long, 11=boolean, 12=Password
+        type: integer
+      values:
+        description: Property value
+        type: long
+      description:
+        description: Property description
+        type: string
+  SamlConfigurationPropertyItemsString:
+    type: object
+    properties:
+      name:
+        description: property name
+        type: string
+      optional:
+        description: True if optional
+        type: boolean
+      is_set:
+        description: True if property is set
+        type: boolean
+      type:
+        description: Property type, 1=String, 3=long, 11=boolean, 12=Password
+        type: integer
+      values:
+        description: Property value
+        type: string
+      description:
+        description: Property description
+        type: string

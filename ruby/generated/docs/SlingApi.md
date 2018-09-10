@@ -8,12 +8,18 @@ Method | HTTP request | Description
 [**delete_node**](SlingApi.md#delete_node) | **DELETE** /{path}/{name} | 
 [**get_agent**](SlingApi.md#get_agent) | **GET** /etc/replication/agents.{runmode}/{name} | 
 [**get_agents**](SlingApi.md#get_agents) | **GET** /etc/replication/agents.{runmode}.-1.json | 
+[**get_authorizable_keystore**](SlingApi.md#get_authorizable_keystore) | **GET** /{intermediatePath}/{authorizableId}.ks.json | 
+[**get_keystore**](SlingApi.md#get_keystore) | **GET** /{intermediatePath}/{authorizableId}/keystore/store.p12 | 
 [**get_node**](SlingApi.md#get_node) | **GET** /{path}/{name} | 
 [**get_package**](SlingApi.md#get_package) | **GET** /etc/packages/{group}/{name}-{version}.zip | 
 [**get_package_filter**](SlingApi.md#get_package_filter) | **GET** /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json | 
 [**get_query**](SlingApi.md#get_query) | **GET** /bin/querybuilder.json | 
+[**get_truststore**](SlingApi.md#get_truststore) | **GET** /etc/truststore/truststore.p12 | 
+[**get_truststore_informations**](SlingApi.md#get_truststore_informations) | **GET** /libs/granite/security/truststore.json | 
 [**post_agent**](SlingApi.md#post_agent) | **POST** /etc/replication/agents.{runmode}/{name} | 
+[**post_authorizable_keystore**](SlingApi.md#post_authorizable_keystore) | **POST** /{intermediatePath}/{authorizableId}.ks.html | 
 [**post_authorizables**](SlingApi.md#post_authorizables) | **POST** /libs/granite/security/post/authorizables | 
+[**post_config_adobe_granite_saml_authentication_handler**](SlingApi.md#post_config_adobe_granite_saml_authentication_handler) | **POST** /apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config | 
 [**post_config_apache_felix_jetty_based_http_service**](SlingApi.md#post_config_apache_felix_jetty_based_http_service) | **POST** /apps/system/config/org.apache.felix.http | 
 [**post_config_apache_sling_dav_ex_servlet**](SlingApi.md#post_config_apache_sling_dav_ex_servlet) | **POST** /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet | 
 [**post_config_apache_sling_get_servlet**](SlingApi.md#post_config_apache_sling_get_servlet) | **POST** /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet | 
@@ -23,6 +29,8 @@ Method | HTTP request | Description
 [**post_path**](SlingApi.md#post_path) | **POST** /{path}/ | 
 [**post_query**](SlingApi.md#post_query) | **POST** /bin/querybuilder.json | 
 [**post_tree_activation**](SlingApi.md#post_tree_activation) | **POST** /etc/replication/treeactivation.html | 
+[**post_truststore**](SlingApi.md#post_truststore) | **POST** /libs/granite/security/post/truststore | 
+[**post_truststore_pkcs12**](SlingApi.md#post_truststore_pkcs12) | **POST** /etc/truststore | 
 
 
 # **delete_agent**
@@ -231,6 +239,112 @@ Name | Type | Description  | Notes
 
 
 
+# **get_authorizable_keystore**
+> KeystoreInformations get_authorizable_keystore(intermediate_path, authorizable_id)
+
+
+
+### Example
+```ruby
+# load the gem
+require 'swagger_aem'
+# setup authorization
+SwaggerAemClient.configure do |config|
+  # Configure HTTP basic authorization: aemAuth
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = SwaggerAemClient::SlingApi.new
+
+intermediate_path = "intermediate_path_example" # String | 
+
+authorizable_id = "authorizable_id_example" # String | 
+
+
+begin
+  result = api_instance.get_authorizable_keystore(intermediate_path, authorizable_id)
+  p result
+rescue SwaggerAemClient::ApiError => e
+  puts "Exception when calling SlingApi->get_authorizable_keystore: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **intermediate_path** | **String**|  | 
+ **authorizable_id** | **String**|  | 
+
+### Return type
+
+[**KeystoreInformations**](KeystoreInformations.md)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain
+
+
+
+# **get_keystore**
+> File get_keystore(intermediate_path, authorizable_id)
+
+
+
+### Example
+```ruby
+# load the gem
+require 'swagger_aem'
+# setup authorization
+SwaggerAemClient.configure do |config|
+  # Configure HTTP basic authorization: aemAuth
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = SwaggerAemClient::SlingApi.new
+
+intermediate_path = "intermediate_path_example" # String | 
+
+authorizable_id = "authorizable_id_example" # String | 
+
+
+begin
+  result = api_instance.get_keystore(intermediate_path, authorizable_id)
+  p result
+rescue SwaggerAemClient::ApiError => e
+  puts "Exception when calling SlingApi->get_keystore: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **intermediate_path** | **String**|  | 
+ **authorizable_id** | **String**|  | 
+
+### Return type
+
+**File**
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/octet-stream
+
+
+
 # **get_node**
 > get_node(path, name)
 
@@ -415,7 +529,7 @@ api_instance = SwaggerAemClient::SlingApi.new
 
 path = "path_example" # String | 
 
-p_limit = 8.14 # Float | 
+p_limit = 3.4 # Float | 
 
 _1_property = "_1_property_example" # String | 
 
@@ -442,6 +556,94 @@ Name | Type | Description  | Notes
 ### Return type
 
 **String**
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+
+# **get_truststore**
+> File get_truststore
+
+
+
+### Example
+```ruby
+# load the gem
+require 'swagger_aem'
+# setup authorization
+SwaggerAemClient.configure do |config|
+  # Configure HTTP basic authorization: aemAuth
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = SwaggerAemClient::SlingApi.new
+
+begin
+  result = api_instance.get_truststore
+  p result
+rescue SwaggerAemClient::ApiError => e
+  puts "Exception when calling SlingApi->get_truststore: #{e}"
+end
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+**File**
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/octet-stream
+
+
+
+# **get_truststore_informations**
+> TruststoreInformations get_truststore_informations
+
+
+
+### Example
+```ruby
+# load the gem
+require 'swagger_aem'
+# setup authorization
+SwaggerAemClient.configure do |config|
+  # Configure HTTP basic authorization: aemAuth
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = SwaggerAemClient::SlingApi.new
+
+begin
+  result = api_instance.get_truststore_informations
+  p result
+rescue SwaggerAemClient::ApiError => e
+  puts "Exception when calling SlingApi->get_truststore_informations: #{e}"
+end
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**TruststoreInformations**](TruststoreInformations.md)
 
 ### Authorization
 
@@ -490,7 +692,7 @@ opts = {
   jcrcontentlog_level: "jcrcontentlog_level_example", # String | 
   jcrcontentno_status_update: true, # BOOLEAN | 
   jcrcontentno_versioning: true, # BOOLEAN | 
-  jcrcontentprotocol_connect_timeout: 8.14, # Float | 
+  jcrcontentprotocol_connect_timeout: 3.4, # Float | 
   jcrcontentprotocol_http_connection_closed: true, # BOOLEAN | 
   jcrcontentprotocol_http_expired: "jcrcontentprotocol_http_expired_example", # String | 
   jcrcontentprotocol_http_headers: ["jcrcontentprotocol_http_headers_example"], # Array<String> | 
@@ -498,17 +700,17 @@ opts = {
   jcrcontentprotocol_http_method: "jcrcontentprotocol_http_method_example", # String | 
   jcrcontentprotocol_https_relaxed: true, # BOOLEAN | 
   jcrcontentprotocol_interface: "jcrcontentprotocol_interface_example", # String | 
-  jcrcontentprotocol_socket_timeout: 8.14, # Float | 
+  jcrcontentprotocol_socket_timeout: 3.4, # Float | 
   jcrcontentprotocol_version: "jcrcontentprotocol_version_example", # String | 
   jcrcontentproxy_ntlm_domain: "jcrcontentproxy_ntlm_domain_example", # String | 
   jcrcontentproxy_ntlm_host: "jcrcontentproxy_ntlm_host_example", # String | 
   jcrcontentproxy_host: "jcrcontentproxy_host_example", # String | 
   jcrcontentproxy_password: "jcrcontentproxy_password_example", # String | 
-  jcrcontentproxy_port: 8.14, # Float | 
+  jcrcontentproxy_port: 3.4, # Float | 
   jcrcontentproxy_user: "jcrcontentproxy_user_example", # String | 
-  jcrcontentqueue_batch_max_size: 8.14, # Float | 
+  jcrcontentqueue_batch_max_size: 3.4, # Float | 
   jcrcontentqueue_batch_mode: "jcrcontentqueue_batch_mode_example", # String | 
-  jcrcontentqueue_batch_wait_time: 8.14, # Float | 
+  jcrcontentqueue_batch_wait_time: 3.4, # Float | 
   jcrcontentretry_delay: "jcrcontentretry_delay_example", # String | 
   jcrcontentreverse_replication: true, # BOOLEAN | 
   jcrcontentserialization_type: "jcrcontentserialization_type_example", # String | 
@@ -608,6 +810,87 @@ nil (empty response body)
 
 
 
+# **post_authorizable_keystore**
+> KeystoreInformations post_authorizable_keystore(intermediate_path, authorizable_id, opts)
+
+
+
+### Example
+```ruby
+# load the gem
+require 'swagger_aem'
+# setup authorization
+SwaggerAemClient.configure do |config|
+  # Configure HTTP basic authorization: aemAuth
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = SwaggerAemClient::SlingApi.new
+
+intermediate_path = "intermediate_path_example" # String | 
+
+authorizable_id = "authorizable_id_example" # String | 
+
+opts = { 
+  operation: "operation_example", # String | 
+  current_password: "current_password_example", # String | 
+  new_password: "new_password_example", # String | 
+  re_password: "re_password_example", # String | 
+  key_password: "key_password_example", # String | 
+  key_store_pass: "key_store_pass_example", # String | 
+  operation2: "operation_example", # String | 
+  _alias: "_alias_example", # String | 
+  new_alias: "new_alias_example", # String | 
+  remove_alias: "remove_alias_example", # String | 
+  cert_chain: File.new("/path/to/file.txt"), # File | 
+  pk: File.new("/path/to/file.txt"), # File | 
+  key_store: File.new("/path/to/file.txt") # File | 
+}
+
+begin
+  result = api_instance.post_authorizable_keystore(intermediate_path, authorizable_id, opts)
+  p result
+rescue SwaggerAemClient::ApiError => e
+  puts "Exception when calling SlingApi->post_authorizable_keystore: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **intermediate_path** | **String**|  | 
+ **authorizable_id** | **String**|  | 
+ **operation** | **String**|  | [optional] 
+ **current_password** | **String**|  | [optional] 
+ **new_password** | **String**|  | [optional] 
+ **re_password** | **String**|  | [optional] 
+ **key_password** | **String**|  | [optional] 
+ **key_store_pass** | **String**|  | [optional] 
+ **operation2** | **String**|  | [optional] 
+ **_alias** | **String**|  | [optional] 
+ **new_alias** | **String**|  | [optional] 
+ **remove_alias** | **String**|  | [optional] 
+ **cert_chain** | **File**|  | [optional] 
+ **pk** | **File**|  | [optional] 
+ **key_store** | **File**|  | [optional] 
+
+### Return type
+
+[**KeystoreInformations**](KeystoreInformations.md)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: text/plain
+
+
+
 # **post_authorizables**
 > String post_authorizables(authorizable_id, intermediate_path, opts)
 
@@ -668,6 +951,150 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: text/html
+
+
+
+# **post_config_adobe_granite_saml_authentication_handler**
+> post_config_adobe_granite_saml_authentication_handler(opts)
+
+
+
+### Example
+```ruby
+# load the gem
+require 'swagger_aem'
+# setup authorization
+SwaggerAemClient.configure do |config|
+  # Configure HTTP basic authorization: aemAuth
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = SwaggerAemClient::SlingApi.new
+
+opts = { 
+  key_store_password: "key_store_password_example", # String | 
+  key_store_password_type_hint: "key_store_password_type_hint_example", # String | 
+  service_ranking: 56, # Integer | 
+  service_ranking_type_hint: "service_ranking_type_hint_example", # String | 
+  idp_http_redirect: true, # BOOLEAN | 
+  idp_http_redirect_type_hint: "idp_http_redirect_type_hint_example", # String | 
+  create_user: true, # BOOLEAN | 
+  create_user_type_hint: "create_user_type_hint_example", # String | 
+  default_redirect_url: "default_redirect_url_example", # String | 
+  default_redirect_url_type_hint: "default_redirect_url_type_hint_example", # String | 
+  user_id_attribute: "user_id_attribute_example", # String | 
+  user_id_attribute_type_hint: "user_id_attribute_type_hint_example", # String | 
+  default_groups: ["default_groups_example"], # Array<String> | 
+  default_groups_type_hint: "default_groups_type_hint_example", # String | 
+  idp_cert_alias: "idp_cert_alias_example", # String | 
+  idp_cert_alias_type_hint: "idp_cert_alias_type_hint_example", # String | 
+  add_group_memberships: true, # BOOLEAN | 
+  add_group_memberships_type_hint: "add_group_memberships_type_hint_example", # String | 
+  path: ["path_example"], # Array<String> | 
+  path_type_hint: "path_type_hint_example", # String | 
+  synchronize_attributes: ["synchronize_attributes_example"], # Array<String> | 
+  synchronize_attributes_type_hint: "synchronize_attributes_type_hint_example", # String | 
+  clock_tolerance: 56, # Integer | 
+  clock_tolerance_type_hint: "clock_tolerance_type_hint_example", # String | 
+  group_membership_attribute: "group_membership_attribute_example", # String | 
+  group_membership_attribute_type_hint: "group_membership_attribute_type_hint_example", # String | 
+  idp_url: "idp_url_example", # String | 
+  idp_url_type_hint: "idp_url_type_hint_example", # String | 
+  logout_url: "logout_url_example", # String | 
+  logout_url_type_hint: "logout_url_type_hint_example", # String | 
+  service_provider_entity_id: "service_provider_entity_id_example", # String | 
+  service_provider_entity_id_type_hint: "service_provider_entity_id_type_hint_example", # String | 
+  assertion_consumer_service_url: "assertion_consumer_service_url_example", # String | 
+  assertion_consumer_service_url_type_hint: "assertion_consumer_service_url_type_hint_example", # String | 
+  handle_logout: true, # BOOLEAN | 
+  handle_logout_type_hint: "handle_logout_type_hint_example", # String | 
+  sp_private_key_alias: "sp_private_key_alias_example", # String | 
+  sp_private_key_alias_type_hint: "sp_private_key_alias_type_hint_example", # String | 
+  use_encryption: true, # BOOLEAN | 
+  use_encryption_type_hint: "use_encryption_type_hint_example", # String | 
+  name_id_format: "name_id_format_example", # String | 
+  name_id_format_type_hint: "name_id_format_type_hint_example", # String | 
+  digest_method: "digest_method_example", # String | 
+  digest_method_type_hint: "digest_method_type_hint_example", # String | 
+  signature_method: "signature_method_example", # String | 
+  signature_method_type_hint: "signature_method_type_hint_example", # String | 
+  user_intermediate_path: "user_intermediate_path_example", # String | 
+  user_intermediate_path_type_hint: "user_intermediate_path_type_hint_example" # String | 
+}
+
+begin
+  api_instance.post_config_adobe_granite_saml_authentication_handler(opts)
+rescue SwaggerAemClient::ApiError => e
+  puts "Exception when calling SlingApi->post_config_adobe_granite_saml_authentication_handler: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **key_store_password** | **String**|  | [optional] 
+ **key_store_password_type_hint** | **String**|  | [optional] 
+ **service_ranking** | **Integer**|  | [optional] 
+ **service_ranking_type_hint** | **String**|  | [optional] 
+ **idp_http_redirect** | **BOOLEAN**|  | [optional] 
+ **idp_http_redirect_type_hint** | **String**|  | [optional] 
+ **create_user** | **BOOLEAN**|  | [optional] 
+ **create_user_type_hint** | **String**|  | [optional] 
+ **default_redirect_url** | **String**|  | [optional] 
+ **default_redirect_url_type_hint** | **String**|  | [optional] 
+ **user_id_attribute** | **String**|  | [optional] 
+ **user_id_attribute_type_hint** | **String**|  | [optional] 
+ **default_groups** | [**Array&lt;String&gt;**](String.md)|  | [optional] 
+ **default_groups_type_hint** | **String**|  | [optional] 
+ **idp_cert_alias** | **String**|  | [optional] 
+ **idp_cert_alias_type_hint** | **String**|  | [optional] 
+ **add_group_memberships** | **BOOLEAN**|  | [optional] 
+ **add_group_memberships_type_hint** | **String**|  | [optional] 
+ **path** | [**Array&lt;String&gt;**](String.md)|  | [optional] 
+ **path_type_hint** | **String**|  | [optional] 
+ **synchronize_attributes** | [**Array&lt;String&gt;**](String.md)|  | [optional] 
+ **synchronize_attributes_type_hint** | **String**|  | [optional] 
+ **clock_tolerance** | **Integer**|  | [optional] 
+ **clock_tolerance_type_hint** | **String**|  | [optional] 
+ **group_membership_attribute** | **String**|  | [optional] 
+ **group_membership_attribute_type_hint** | **String**|  | [optional] 
+ **idp_url** | **String**|  | [optional] 
+ **idp_url_type_hint** | **String**|  | [optional] 
+ **logout_url** | **String**|  | [optional] 
+ **logout_url_type_hint** | **String**|  | [optional] 
+ **service_provider_entity_id** | **String**|  | [optional] 
+ **service_provider_entity_id_type_hint** | **String**|  | [optional] 
+ **assertion_consumer_service_url** | **String**|  | [optional] 
+ **assertion_consumer_service_url_type_hint** | **String**|  | [optional] 
+ **handle_logout** | **BOOLEAN**|  | [optional] 
+ **handle_logout_type_hint** | **String**|  | [optional] 
+ **sp_private_key_alias** | **String**|  | [optional] 
+ **sp_private_key_alias_type_hint** | **String**|  | [optional] 
+ **use_encryption** | **BOOLEAN**|  | [optional] 
+ **use_encryption_type_hint** | **String**|  | [optional] 
+ **name_id_format** | **String**|  | [optional] 
+ **name_id_format_type_hint** | **String**|  | [optional] 
+ **digest_method** | **String**|  | [optional] 
+ **digest_method_type_hint** | **String**|  | [optional] 
+ **signature_method** | **String**|  | [optional] 
+ **signature_method_type_hint** | **String**|  | [optional] 
+ **user_intermediate_path** | **String**|  | [optional] 
+ **user_intermediate_path_type_hint** | **String**|  | [optional] 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain
 
 
 
@@ -914,7 +1341,9 @@ opts = {
   allow_hosts: "allow_hosts_example", # String | 
   allow_hosts_type_hint: "allow_hosts_type_hint_example", # String | 
   allow_hosts_regexp: "allow_hosts_regexp_example", # String | 
-  allow_hosts_regexp_type_hint: "allow_hosts_regexp_type_hint_example" # String | 
+  allow_hosts_regexp_type_hint: "allow_hosts_regexp_type_hint_example", # String | 
+  filter_methods: "filter_methods_example", # String | 
+  filter_methods_type_hint: "filter_methods_type_hint_example" # String | 
 }
 
 begin
@@ -935,6 +1364,8 @@ Name | Type | Description  | Notes
  **allow_hosts_type_hint** | **String**|  | [optional] 
  **allow_hosts_regexp** | **String**|  | [optional] 
  **allow_hosts_regexp_type_hint** | **String**|  | [optional] 
+ **filter_methods** | **String**|  | [optional] 
+ **filter_methods_type_hint** | **String**|  | [optional] 
 
 ### Return type
 
@@ -1142,7 +1573,7 @@ api_instance = SwaggerAemClient::SlingApi.new
 
 path = "path_example" # String | 
 
-p_limit = 8.14 # Float | 
+p_limit = 3.4 # Float | 
 
 _1_property = "_1_property_example" # String | 
 
@@ -1232,6 +1663,118 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: text/plain
+
+
+
+# **post_truststore**
+> String post_truststore(opts)
+
+
+
+### Example
+```ruby
+# load the gem
+require 'swagger_aem'
+# setup authorization
+SwaggerAemClient.configure do |config|
+  # Configure HTTP basic authorization: aemAuth
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = SwaggerAemClient::SlingApi.new
+
+opts = { 
+  operation: "operation_example", # String | 
+  new_password: "new_password_example", # String | 
+  re_password: "re_password_example", # String | 
+  key_store_type: "key_store_type_example", # String | 
+  remove_alias: "remove_alias_example", # String | 
+  certificate: File.new("/path/to/file.txt") # File | 
+}
+
+begin
+  result = api_instance.post_truststore(opts)
+  p result
+rescue SwaggerAemClient::ApiError => e
+  puts "Exception when calling SlingApi->post_truststore: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **operation** | **String**|  | [optional] 
+ **new_password** | **String**|  | [optional] 
+ **re_password** | **String**|  | [optional] 
+ **key_store_type** | **String**|  | [optional] 
+ **remove_alias** | **String**|  | [optional] 
+ **certificate** | **File**|  | [optional] 
+
+### Return type
+
+**String**
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: text/plain
+
+
+
+# **post_truststore_pkcs12**
+> String post_truststore_pkcs12(opts)
+
+
+
+### Example
+```ruby
+# load the gem
+require 'swagger_aem'
+# setup authorization
+SwaggerAemClient.configure do |config|
+  # Configure HTTP basic authorization: aemAuth
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = SwaggerAemClient::SlingApi.new
+
+opts = { 
+  truststore_p12: File.new("/path/to/file.txt") # File | 
+}
+
+begin
+  result = api_instance.post_truststore_pkcs12(opts)
+  p result
+rescue SwaggerAemClient::ApiError => e
+  puts "Exception when calling SlingApi->post_truststore_pkcs12: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **truststore_p12** | **File**|  | [optional] 
+
+### Return type
+
+**String**
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
  - **Accept**: text/plain
 
 

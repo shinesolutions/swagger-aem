@@ -98,6 +98,7 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ConsoleApi* | [**postBundle**](docs/ConsoleApi.md#postBundle) | **POST** /system/console/bundles/{name} | 
 *ConsoleApi* | [**postJmxRepository**](docs/ConsoleApi.md#postJmxRepository) | **POST** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} | 
+*ConsoleApi* | [**postSamlConfiguration**](docs/ConsoleApi.md#postSamlConfiguration) | **POST** /system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler | 
 *CqApi* | [**getLoginPage**](docs/CqApi.md#getLoginPage) | **GET** /libs/granite/core/content/login.html | 
 *CqApi* | [**postCqActions**](docs/CqApi.md#postCqActions) | **POST** /.cqactions.html | 
 *CrxApi* | [**getCrxdeStatus**](docs/CrxApi.md#getCrxdeStatus) | **GET** /crx/server/crx.default/jcr:root/.1.json | 
@@ -113,12 +114,18 @@ Class | Method | HTTP request | Description
 *SlingApi* | [**deleteNode**](docs/SlingApi.md#deleteNode) | **DELETE** /{path}/{name} | 
 *SlingApi* | [**getAgent**](docs/SlingApi.md#getAgent) | **GET** /etc/replication/agents.{runmode}/{name} | 
 *SlingApi* | [**getAgents**](docs/SlingApi.md#getAgents) | **GET** /etc/replication/agents.{runmode}.-1.json | 
+*SlingApi* | [**getAuthorizableKeystore**](docs/SlingApi.md#getAuthorizableKeystore) | **GET** /{intermediatePath}/{authorizableId}.ks.json | 
+*SlingApi* | [**getKeystore**](docs/SlingApi.md#getKeystore) | **GET** /{intermediatePath}/{authorizableId}/keystore/store.p12 | 
 *SlingApi* | [**getNode**](docs/SlingApi.md#getNode) | **GET** /{path}/{name} | 
 *SlingApi* | [**getPackage**](docs/SlingApi.md#getPackage) | **GET** /etc/packages/{group}/{name}-{version}.zip | 
 *SlingApi* | [**getPackageFilter**](docs/SlingApi.md#getPackageFilter) | **GET** /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json | 
 *SlingApi* | [**getQuery**](docs/SlingApi.md#getQuery) | **GET** /bin/querybuilder.json | 
+*SlingApi* | [**getTruststore**](docs/SlingApi.md#getTruststore) | **GET** /etc/truststore/truststore.p12 | 
+*SlingApi* | [**getTruststoreInformations**](docs/SlingApi.md#getTruststoreInformations) | **GET** /libs/granite/security/truststore.json | 
 *SlingApi* | [**postAgent**](docs/SlingApi.md#postAgent) | **POST** /etc/replication/agents.{runmode}/{name} | 
+*SlingApi* | [**postAuthorizableKeystore**](docs/SlingApi.md#postAuthorizableKeystore) | **POST** /{intermediatePath}/{authorizableId}.ks.html | 
 *SlingApi* | [**postAuthorizables**](docs/SlingApi.md#postAuthorizables) | **POST** /libs/granite/security/post/authorizables | 
+*SlingApi* | [**postConfigAdobeGraniteSamlAuthenticationHandler**](docs/SlingApi.md#postConfigAdobeGraniteSamlAuthenticationHandler) | **POST** /apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config | 
 *SlingApi* | [**postConfigApacheFelixJettyBasedHttpService**](docs/SlingApi.md#postConfigApacheFelixJettyBasedHttpService) | **POST** /apps/system/config/org.apache.felix.http | 
 *SlingApi* | [**postConfigApacheSlingDavExServlet**](docs/SlingApi.md#postConfigApacheSlingDavExServlet) | **POST** /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet | 
 *SlingApi* | [**postConfigApacheSlingGetServlet**](docs/SlingApi.md#postConfigApacheSlingGetServlet) | **POST** /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet | 
@@ -128,12 +135,25 @@ Class | Method | HTTP request | Description
 *SlingApi* | [**postPath**](docs/SlingApi.md#postPath) | **POST** /{path}/ | 
 *SlingApi* | [**postQuery**](docs/SlingApi.md#postQuery) | **POST** /bin/querybuilder.json | 
 *SlingApi* | [**postTreeActivation**](docs/SlingApi.md#postTreeActivation) | **POST** /etc/replication/treeactivation.html | 
+*SlingApi* | [**postTruststore**](docs/SlingApi.md#postTruststore) | **POST** /libs/granite/security/post/truststore | 
+*SlingApi* | [**postTruststorePKCS12**](docs/SlingApi.md#postTruststorePKCS12) | **POST** /etc/truststore | 
 
 
 ## Documentation for Models
 
  - [InstallStatus](docs/InstallStatus.md)
  - [InstallStatusStatus](docs/InstallStatusStatus.md)
+ - [KeystoreChainItems](docs/KeystoreChainItems.md)
+ - [KeystoreInformations](docs/KeystoreInformations.md)
+ - [KeystoreItems](docs/KeystoreItems.md)
+ - [SamlConfigurationInformations](docs/SamlConfigurationInformations.md)
+ - [SamlConfigurationProperties](docs/SamlConfigurationProperties.md)
+ - [SamlConfigurationPropertyItemsArray](docs/SamlConfigurationPropertyItemsArray.md)
+ - [SamlConfigurationPropertyItemsBoolean](docs/SamlConfigurationPropertyItemsBoolean.md)
+ - [SamlConfigurationPropertyItemsLong](docs/SamlConfigurationPropertyItemsLong.md)
+ - [SamlConfigurationPropertyItemsString](docs/SamlConfigurationPropertyItemsString.md)
+ - [TruststoreInformations](docs/TruststoreInformations.md)
+ - [TruststoreItems](docs/TruststoreItems.md)
 
 
 ## Documentation for Authorization

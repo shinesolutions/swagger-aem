@@ -8,12 +8,18 @@ Method | HTTP request | Description
 [**deleteNode**](SlingApi.md#deleteNode) | **DELETE** /{path}/{name} | 
 [**getAgent**](SlingApi.md#getAgent) | **GET** /etc/replication/agents.{runmode}/{name} | 
 [**getAgents**](SlingApi.md#getAgents) | **GET** /etc/replication/agents.{runmode}.-1.json | 
+[**getAuthorizableKeystore**](SlingApi.md#getAuthorizableKeystore) | **GET** /{intermediatePath}/{authorizableId}.ks.json | 
+[**getKeystore**](SlingApi.md#getKeystore) | **GET** /{intermediatePath}/{authorizableId}/keystore/store.p12 | 
 [**getNode**](SlingApi.md#getNode) | **GET** /{path}/{name} | 
 [**getPackage**](SlingApi.md#getPackage) | **GET** /etc/packages/{group}/{name}-{version}.zip | 
 [**getPackageFilter**](SlingApi.md#getPackageFilter) | **GET** /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json | 
 [**getQuery**](SlingApi.md#getQuery) | **GET** /bin/querybuilder.json | 
+[**getTruststore**](SlingApi.md#getTruststore) | **GET** /etc/truststore/truststore.p12 | 
+[**getTruststoreInformations**](SlingApi.md#getTruststoreInformations) | **GET** /libs/granite/security/truststore.json | 
 [**postAgent**](SlingApi.md#postAgent) | **POST** /etc/replication/agents.{runmode}/{name} | 
+[**postAuthorizableKeystore**](SlingApi.md#postAuthorizableKeystore) | **POST** /{intermediatePath}/{authorizableId}.ks.html | 
 [**postAuthorizables**](SlingApi.md#postAuthorizables) | **POST** /libs/granite/security/post/authorizables | 
+[**postConfigAdobeGraniteSamlAuthenticationHandler**](SlingApi.md#postConfigAdobeGraniteSamlAuthenticationHandler) | **POST** /apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config | 
 [**postConfigApacheFelixJettyBasedHttpService**](SlingApi.md#postConfigApacheFelixJettyBasedHttpService) | **POST** /apps/system/config/org.apache.felix.http | 
 [**postConfigApacheSlingDavExServlet**](SlingApi.md#postConfigApacheSlingDavExServlet) | **POST** /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet | 
 [**postConfigApacheSlingGetServlet**](SlingApi.md#postConfigApacheSlingGetServlet) | **POST** /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet | 
@@ -23,6 +29,8 @@ Method | HTTP request | Description
 [**postPath**](SlingApi.md#postPath) | **POST** /{path}/ | 
 [**postQuery**](SlingApi.md#postQuery) | **POST** /bin/querybuilder.json | 
 [**postTreeActivation**](SlingApi.md#postTreeActivation) | **POST** /etc/replication/treeactivation.html | 
+[**postTruststore**](SlingApi.md#postTruststore) | **POST** /libs/granite/security/post/truststore | 
+[**postTruststorePKCS12**](SlingApi.md#postTruststorePKCS12) | **POST** /etc/truststore | 
 
 
 <a name="deleteAgent"></a>
@@ -235,6 +243,114 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+<a name="getAuthorizableKeystore"></a>
+# **getAuthorizableKeystore**
+> KeystoreInformations getAuthorizableKeystore(intermediatePath, authorizableId)
+
+
+
+### Example
+```java
+// Import classes:
+//import com.shinesolutions.swaggeraem4j.ApiClient;
+//import com.shinesolutions.swaggeraem4j.ApiException;
+//import com.shinesolutions.swaggeraem4j.Configuration;
+//import com.shinesolutions.swaggeraem4j.auth.*;
+//import com.shinesolutions.swaggeraem4j.api.SlingApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure HTTP basic authorization: aemAuth
+HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+aemAuth.setUsername("YOUR USERNAME");
+aemAuth.setPassword("YOUR PASSWORD");
+
+SlingApi apiInstance = new SlingApi();
+String intermediatePath = "intermediatePath_example"; // String | 
+String authorizableId = "authorizableId_example"; // String | 
+try {
+    KeystoreInformations result = apiInstance.getAuthorizableKeystore(intermediatePath, authorizableId);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling SlingApi#getAuthorizableKeystore");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **intermediatePath** | **String**|  |
+ **authorizableId** | **String**|  |
+
+### Return type
+
+[**KeystoreInformations**](KeystoreInformations.md)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain
+
+<a name="getKeystore"></a>
+# **getKeystore**
+> File getKeystore(intermediatePath, authorizableId)
+
+
+
+### Example
+```java
+// Import classes:
+//import com.shinesolutions.swaggeraem4j.ApiClient;
+//import com.shinesolutions.swaggeraem4j.ApiException;
+//import com.shinesolutions.swaggeraem4j.Configuration;
+//import com.shinesolutions.swaggeraem4j.auth.*;
+//import com.shinesolutions.swaggeraem4j.api.SlingApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure HTTP basic authorization: aemAuth
+HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+aemAuth.setUsername("YOUR USERNAME");
+aemAuth.setPassword("YOUR PASSWORD");
+
+SlingApi apiInstance = new SlingApi();
+String intermediatePath = "intermediatePath_example"; // String | 
+String authorizableId = "authorizableId_example"; // String | 
+try {
+    File result = apiInstance.getKeystore(intermediatePath, authorizableId);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling SlingApi#getKeystore");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **intermediatePath** | **String**|  |
+ **authorizableId** | **String**|  |
+
+### Return type
+
+[**File**](File.md)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/octet-stream
 
 <a name="getNode"></a>
 # **getNode**
@@ -459,6 +575,102 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+<a name="getTruststore"></a>
+# **getTruststore**
+> File getTruststore()
+
+
+
+### Example
+```java
+// Import classes:
+//import com.shinesolutions.swaggeraem4j.ApiClient;
+//import com.shinesolutions.swaggeraem4j.ApiException;
+//import com.shinesolutions.swaggeraem4j.Configuration;
+//import com.shinesolutions.swaggeraem4j.auth.*;
+//import com.shinesolutions.swaggeraem4j.api.SlingApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure HTTP basic authorization: aemAuth
+HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+aemAuth.setUsername("YOUR USERNAME");
+aemAuth.setPassword("YOUR PASSWORD");
+
+SlingApi apiInstance = new SlingApi();
+try {
+    File result = apiInstance.getTruststore();
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling SlingApi#getTruststore");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**File**](File.md)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/octet-stream
+
+<a name="getTruststoreInformations"></a>
+# **getTruststoreInformations**
+> TruststoreInformations getTruststoreInformations()
+
+
+
+### Example
+```java
+// Import classes:
+//import com.shinesolutions.swaggeraem4j.ApiClient;
+//import com.shinesolutions.swaggeraem4j.ApiException;
+//import com.shinesolutions.swaggeraem4j.Configuration;
+//import com.shinesolutions.swaggeraem4j.auth.*;
+//import com.shinesolutions.swaggeraem4j.api.SlingApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure HTTP basic authorization: aemAuth
+HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+aemAuth.setUsername("YOUR USERNAME");
+aemAuth.setPassword("YOUR PASSWORD");
+
+SlingApi apiInstance = new SlingApi();
+try {
+    TruststoreInformations result = apiInstance.getTruststoreInformations();
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling SlingApi#getTruststoreInformations");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**TruststoreInformations**](TruststoreInformations.md)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
 <a name="postAgent"></a>
 # **postAgent**
 > postAgent(runmode, name, jcrcontentcqdistribute, jcrcontentcqdistributeTypeHint, jcrcontentcqname, jcrcontentcqtemplate, jcrcontentenabled, jcrcontentjcrdescription, jcrcontentjcrlastModified, jcrcontentjcrlastModifiedBy, jcrcontentjcrmixinTypes, jcrcontentjcrtitle, jcrcontentlogLevel, jcrcontentnoStatusUpdate, jcrcontentnoVersioning, jcrcontentprotocolConnectTimeout, jcrcontentprotocolHTTPConnectionClosed, jcrcontentprotocolHTTPExpired, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentprotocolHTTPSRelaxed, jcrcontentprotocolInterface, jcrcontentprotocolSocketTimeout, jcrcontentprotocolVersion, jcrcontentproxyNTLMDomain, jcrcontentproxyNTLMHost, jcrcontentproxyHost, jcrcontentproxyPassword, jcrcontentproxyPort, jcrcontentproxyUser, jcrcontentqueueBatchMaxSize, jcrcontentqueueBatchMode, jcrcontentqueueBatchWaitTime, jcrcontentretryDelay, jcrcontentreverseReplication, jcrcontentserializationType, jcrcontentslingresourceType, jcrcontentssl, jcrcontenttransportNTLMDomain, jcrcontenttransportNTLMHost, jcrcontenttransportPassword, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttriggerDistribute, jcrcontenttriggerModified, jcrcontenttriggerOnOffTime, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentuserId, jcrprimaryType, operation)
@@ -612,6 +824,86 @@ null (empty response body)
  - **Content-Type**: Not defined
  - **Accept**: text/plain
 
+<a name="postAuthorizableKeystore"></a>
+# **postAuthorizableKeystore**
+> KeystoreInformations postAuthorizableKeystore(intermediatePath, authorizableId, operation, currentPassword, newPassword, rePassword, keyPassword, keyStorePass, operation2, alias, newAlias, removeAlias, certChain, pk, keyStore)
+
+
+
+### Example
+```java
+// Import classes:
+//import com.shinesolutions.swaggeraem4j.ApiClient;
+//import com.shinesolutions.swaggeraem4j.ApiException;
+//import com.shinesolutions.swaggeraem4j.Configuration;
+//import com.shinesolutions.swaggeraem4j.auth.*;
+//import com.shinesolutions.swaggeraem4j.api.SlingApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure HTTP basic authorization: aemAuth
+HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+aemAuth.setUsername("YOUR USERNAME");
+aemAuth.setPassword("YOUR PASSWORD");
+
+SlingApi apiInstance = new SlingApi();
+String intermediatePath = "intermediatePath_example"; // String | 
+String authorizableId = "authorizableId_example"; // String | 
+String operation = "operation_example"; // String | 
+String currentPassword = "currentPassword_example"; // String | 
+String newPassword = "newPassword_example"; // String | 
+String rePassword = "rePassword_example"; // String | 
+String keyPassword = "keyPassword_example"; // String | 
+String keyStorePass = "keyStorePass_example"; // String | 
+String operation2 = "operation_example"; // String | 
+String alias = "alias_example"; // String | 
+String newAlias = "newAlias_example"; // String | 
+String removeAlias = "removeAlias_example"; // String | 
+File certChain = new File("/path/to/file.txt"); // File | 
+File pk = new File("/path/to/file.txt"); // File | 
+File keyStore = new File("/path/to/file.txt"); // File | 
+try {
+    KeystoreInformations result = apiInstance.postAuthorizableKeystore(intermediatePath, authorizableId, operation, currentPassword, newPassword, rePassword, keyPassword, keyStorePass, operation2, alias, newAlias, removeAlias, certChain, pk, keyStore);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling SlingApi#postAuthorizableKeystore");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **intermediatePath** | **String**|  |
+ **authorizableId** | **String**|  |
+ **operation** | **String**|  | [optional]
+ **currentPassword** | **String**|  | [optional]
+ **newPassword** | **String**|  | [optional]
+ **rePassword** | **String**|  | [optional]
+ **keyPassword** | **String**|  | [optional]
+ **keyStorePass** | **String**|  | [optional]
+ **operation2** | **String**|  | [optional]
+ **alias** | **String**|  | [optional]
+ **newAlias** | **String**|  | [optional]
+ **removeAlias** | **String**|  | [optional]
+ **certChain** | **File**|  | [optional]
+ **pk** | **File**|  | [optional]
+ **keyStore** | **File**|  | [optional]
+
+### Return type
+
+[**KeystoreInformations**](KeystoreInformations.md)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: text/plain
+
 <a name="postAuthorizables"></a>
 # **postAuthorizables**
 > String postAuthorizables(authorizableId, intermediatePath, createUser, createGroup, reppassword, profilegivenName)
@@ -673,6 +965,151 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: text/html
+
+<a name="postConfigAdobeGraniteSamlAuthenticationHandler"></a>
+# **postConfigAdobeGraniteSamlAuthenticationHandler**
+> postConfigAdobeGraniteSamlAuthenticationHandler(keyStorePassword, keyStorePasswordTypeHint, serviceRanking, serviceRankingTypeHint, idpHttpRedirect, idpHttpRedirectTypeHint, createUser, createUserTypeHint, defaultRedirectUrl, defaultRedirectUrlTypeHint, userIDAttribute, userIDAttributeTypeHint, defaultGroups, defaultGroupsTypeHint, idpCertAlias, idpCertAliasTypeHint, addGroupMemberships, addGroupMembershipsTypeHint, path, pathTypeHint, synchronizeAttributes, synchronizeAttributesTypeHint, clockTolerance, clockToleranceTypeHint, groupMembershipAttribute, groupMembershipAttributeTypeHint, idpUrl, idpUrlTypeHint, logoutUrl, logoutUrlTypeHint, serviceProviderEntityId, serviceProviderEntityIdTypeHint, assertionConsumerServiceURL, assertionConsumerServiceURLTypeHint, handleLogout, handleLogoutTypeHint, spPrivateKeyAlias, spPrivateKeyAliasTypeHint, useEncryption, useEncryptionTypeHint, nameIdFormat, nameIdFormatTypeHint, digestMethod, digestMethodTypeHint, signatureMethod, signatureMethodTypeHint, userIntermediatePath, userIntermediatePathTypeHint)
+
+
+
+### Example
+```java
+// Import classes:
+//import com.shinesolutions.swaggeraem4j.ApiClient;
+//import com.shinesolutions.swaggeraem4j.ApiException;
+//import com.shinesolutions.swaggeraem4j.Configuration;
+//import com.shinesolutions.swaggeraem4j.auth.*;
+//import com.shinesolutions.swaggeraem4j.api.SlingApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure HTTP basic authorization: aemAuth
+HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+aemAuth.setUsername("YOUR USERNAME");
+aemAuth.setPassword("YOUR PASSWORD");
+
+SlingApi apiInstance = new SlingApi();
+String keyStorePassword = "keyStorePassword_example"; // String | 
+String keyStorePasswordTypeHint = "keyStorePasswordTypeHint_example"; // String | 
+Integer serviceRanking = 56; // Integer | 
+String serviceRankingTypeHint = "serviceRankingTypeHint_example"; // String | 
+Boolean idpHttpRedirect = true; // Boolean | 
+String idpHttpRedirectTypeHint = "idpHttpRedirectTypeHint_example"; // String | 
+Boolean createUser = true; // Boolean | 
+String createUserTypeHint = "createUserTypeHint_example"; // String | 
+String defaultRedirectUrl = "defaultRedirectUrl_example"; // String | 
+String defaultRedirectUrlTypeHint = "defaultRedirectUrlTypeHint_example"; // String | 
+String userIDAttribute = "userIDAttribute_example"; // String | 
+String userIDAttributeTypeHint = "userIDAttributeTypeHint_example"; // String | 
+List<String> defaultGroups = Arrays.asList("defaultGroups_example"); // List<String> | 
+String defaultGroupsTypeHint = "defaultGroupsTypeHint_example"; // String | 
+String idpCertAlias = "idpCertAlias_example"; // String | 
+String idpCertAliasTypeHint = "idpCertAliasTypeHint_example"; // String | 
+Boolean addGroupMemberships = true; // Boolean | 
+String addGroupMembershipsTypeHint = "addGroupMembershipsTypeHint_example"; // String | 
+List<String> path = Arrays.asList("path_example"); // List<String> | 
+String pathTypeHint = "pathTypeHint_example"; // String | 
+List<String> synchronizeAttributes = Arrays.asList("synchronizeAttributes_example"); // List<String> | 
+String synchronizeAttributesTypeHint = "synchronizeAttributesTypeHint_example"; // String | 
+Integer clockTolerance = 56; // Integer | 
+String clockToleranceTypeHint = "clockToleranceTypeHint_example"; // String | 
+String groupMembershipAttribute = "groupMembershipAttribute_example"; // String | 
+String groupMembershipAttributeTypeHint = "groupMembershipAttributeTypeHint_example"; // String | 
+String idpUrl = "idpUrl_example"; // String | 
+String idpUrlTypeHint = "idpUrlTypeHint_example"; // String | 
+String logoutUrl = "logoutUrl_example"; // String | 
+String logoutUrlTypeHint = "logoutUrlTypeHint_example"; // String | 
+String serviceProviderEntityId = "serviceProviderEntityId_example"; // String | 
+String serviceProviderEntityIdTypeHint = "serviceProviderEntityIdTypeHint_example"; // String | 
+String assertionConsumerServiceURL = "assertionConsumerServiceURL_example"; // String | 
+String assertionConsumerServiceURLTypeHint = "assertionConsumerServiceURLTypeHint_example"; // String | 
+Boolean handleLogout = true; // Boolean | 
+String handleLogoutTypeHint = "handleLogoutTypeHint_example"; // String | 
+String spPrivateKeyAlias = "spPrivateKeyAlias_example"; // String | 
+String spPrivateKeyAliasTypeHint = "spPrivateKeyAliasTypeHint_example"; // String | 
+Boolean useEncryption = true; // Boolean | 
+String useEncryptionTypeHint = "useEncryptionTypeHint_example"; // String | 
+String nameIdFormat = "nameIdFormat_example"; // String | 
+String nameIdFormatTypeHint = "nameIdFormatTypeHint_example"; // String | 
+String digestMethod = "digestMethod_example"; // String | 
+String digestMethodTypeHint = "digestMethodTypeHint_example"; // String | 
+String signatureMethod = "signatureMethod_example"; // String | 
+String signatureMethodTypeHint = "signatureMethodTypeHint_example"; // String | 
+String userIntermediatePath = "userIntermediatePath_example"; // String | 
+String userIntermediatePathTypeHint = "userIntermediatePathTypeHint_example"; // String | 
+try {
+    apiInstance.postConfigAdobeGraniteSamlAuthenticationHandler(keyStorePassword, keyStorePasswordTypeHint, serviceRanking, serviceRankingTypeHint, idpHttpRedirect, idpHttpRedirectTypeHint, createUser, createUserTypeHint, defaultRedirectUrl, defaultRedirectUrlTypeHint, userIDAttribute, userIDAttributeTypeHint, defaultGroups, defaultGroupsTypeHint, idpCertAlias, idpCertAliasTypeHint, addGroupMemberships, addGroupMembershipsTypeHint, path, pathTypeHint, synchronizeAttributes, synchronizeAttributesTypeHint, clockTolerance, clockToleranceTypeHint, groupMembershipAttribute, groupMembershipAttributeTypeHint, idpUrl, idpUrlTypeHint, logoutUrl, logoutUrlTypeHint, serviceProviderEntityId, serviceProviderEntityIdTypeHint, assertionConsumerServiceURL, assertionConsumerServiceURLTypeHint, handleLogout, handleLogoutTypeHint, spPrivateKeyAlias, spPrivateKeyAliasTypeHint, useEncryption, useEncryptionTypeHint, nameIdFormat, nameIdFormatTypeHint, digestMethod, digestMethodTypeHint, signatureMethod, signatureMethodTypeHint, userIntermediatePath, userIntermediatePathTypeHint);
+} catch (ApiException e) {
+    System.err.println("Exception when calling SlingApi#postConfigAdobeGraniteSamlAuthenticationHandler");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **keyStorePassword** | **String**|  | [optional]
+ **keyStorePasswordTypeHint** | **String**|  | [optional]
+ **serviceRanking** | **Integer**|  | [optional]
+ **serviceRankingTypeHint** | **String**|  | [optional]
+ **idpHttpRedirect** | **Boolean**|  | [optional]
+ **idpHttpRedirectTypeHint** | **String**|  | [optional]
+ **createUser** | **Boolean**|  | [optional]
+ **createUserTypeHint** | **String**|  | [optional]
+ **defaultRedirectUrl** | **String**|  | [optional]
+ **defaultRedirectUrlTypeHint** | **String**|  | [optional]
+ **userIDAttribute** | **String**|  | [optional]
+ **userIDAttributeTypeHint** | **String**|  | [optional]
+ **defaultGroups** | [**List&lt;String&gt;**](String.md)|  | [optional]
+ **defaultGroupsTypeHint** | **String**|  | [optional]
+ **idpCertAlias** | **String**|  | [optional]
+ **idpCertAliasTypeHint** | **String**|  | [optional]
+ **addGroupMemberships** | **Boolean**|  | [optional]
+ **addGroupMembershipsTypeHint** | **String**|  | [optional]
+ **path** | [**List&lt;String&gt;**](String.md)|  | [optional]
+ **pathTypeHint** | **String**|  | [optional]
+ **synchronizeAttributes** | [**List&lt;String&gt;**](String.md)|  | [optional]
+ **synchronizeAttributesTypeHint** | **String**|  | [optional]
+ **clockTolerance** | **Integer**|  | [optional]
+ **clockToleranceTypeHint** | **String**|  | [optional]
+ **groupMembershipAttribute** | **String**|  | [optional]
+ **groupMembershipAttributeTypeHint** | **String**|  | [optional]
+ **idpUrl** | **String**|  | [optional]
+ **idpUrlTypeHint** | **String**|  | [optional]
+ **logoutUrl** | **String**|  | [optional]
+ **logoutUrlTypeHint** | **String**|  | [optional]
+ **serviceProviderEntityId** | **String**|  | [optional]
+ **serviceProviderEntityIdTypeHint** | **String**|  | [optional]
+ **assertionConsumerServiceURL** | **String**|  | [optional]
+ **assertionConsumerServiceURLTypeHint** | **String**|  | [optional]
+ **handleLogout** | **Boolean**|  | [optional]
+ **handleLogoutTypeHint** | **String**|  | [optional]
+ **spPrivateKeyAlias** | **String**|  | [optional]
+ **spPrivateKeyAliasTypeHint** | **String**|  | [optional]
+ **useEncryption** | **Boolean**|  | [optional]
+ **useEncryptionTypeHint** | **String**|  | [optional]
+ **nameIdFormat** | **String**|  | [optional]
+ **nameIdFormatTypeHint** | **String**|  | [optional]
+ **digestMethod** | **String**|  | [optional]
+ **digestMethodTypeHint** | **String**|  | [optional]
+ **signatureMethod** | **String**|  | [optional]
+ **signatureMethodTypeHint** | **String**|  | [optional]
+ **userIntermediatePath** | **String**|  | [optional]
+ **userIntermediatePathTypeHint** | **String**|  | [optional]
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain
 
 <a name="postConfigApacheFelixJettyBasedHttpService"></a>
 # **postConfigApacheFelixJettyBasedHttpService**
@@ -893,7 +1330,7 @@ null (empty response body)
 
 <a name="postConfigApacheSlingReferrerFilter"></a>
 # **postConfigApacheSlingReferrerFilter**
-> postConfigApacheSlingReferrerFilter(runmode, allowEmpty, allowEmptyTypeHint, allowHosts, allowHostsTypeHint, allowHostsRegexp, allowHostsRegexpTypeHint)
+> postConfigApacheSlingReferrerFilter(runmode, allowEmpty, allowEmptyTypeHint, allowHosts, allowHostsTypeHint, allowHostsRegexp, allowHostsRegexpTypeHint, filterMethods, filterMethodsTypeHint)
 
 
 
@@ -921,8 +1358,10 @@ String allowHosts = "allowHosts_example"; // String |
 String allowHostsTypeHint = "allowHostsTypeHint_example"; // String | 
 String allowHostsRegexp = "allowHostsRegexp_example"; // String | 
 String allowHostsRegexpTypeHint = "allowHostsRegexpTypeHint_example"; // String | 
+String filterMethods = "filterMethods_example"; // String | 
+String filterMethodsTypeHint = "filterMethodsTypeHint_example"; // String | 
 try {
-    apiInstance.postConfigApacheSlingReferrerFilter(runmode, allowEmpty, allowEmptyTypeHint, allowHosts, allowHostsTypeHint, allowHostsRegexp, allowHostsRegexpTypeHint);
+    apiInstance.postConfigApacheSlingReferrerFilter(runmode, allowEmpty, allowEmptyTypeHint, allowHosts, allowHostsTypeHint, allowHostsRegexp, allowHostsRegexpTypeHint, filterMethods, filterMethodsTypeHint);
 } catch (ApiException e) {
     System.err.println("Exception when calling SlingApi#postConfigApacheSlingReferrerFilter");
     e.printStackTrace();
@@ -940,6 +1379,8 @@ Name | Type | Description  | Notes
  **allowHostsTypeHint** | **String**|  | [optional]
  **allowHostsRegexp** | **String**|  | [optional]
  **allowHostsRegexpTypeHint** | **String**|  | [optional]
+ **filterMethods** | **String**|  | [optional]
+ **filterMethodsTypeHint** | **String**|  | [optional]
 
 ### Return type
 
@@ -1234,5 +1675,119 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: text/plain
+
+<a name="postTruststore"></a>
+# **postTruststore**
+> String postTruststore(operation, newPassword, rePassword, keyStoreType, removeAlias, certificate)
+
+
+
+### Example
+```java
+// Import classes:
+//import com.shinesolutions.swaggeraem4j.ApiClient;
+//import com.shinesolutions.swaggeraem4j.ApiException;
+//import com.shinesolutions.swaggeraem4j.Configuration;
+//import com.shinesolutions.swaggeraem4j.auth.*;
+//import com.shinesolutions.swaggeraem4j.api.SlingApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure HTTP basic authorization: aemAuth
+HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+aemAuth.setUsername("YOUR USERNAME");
+aemAuth.setPassword("YOUR PASSWORD");
+
+SlingApi apiInstance = new SlingApi();
+String operation = "operation_example"; // String | 
+String newPassword = "newPassword_example"; // String | 
+String rePassword = "rePassword_example"; // String | 
+String keyStoreType = "keyStoreType_example"; // String | 
+String removeAlias = "removeAlias_example"; // String | 
+File certificate = new File("/path/to/file.txt"); // File | 
+try {
+    String result = apiInstance.postTruststore(operation, newPassword, rePassword, keyStoreType, removeAlias, certificate);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling SlingApi#postTruststore");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **operation** | **String**|  | [optional]
+ **newPassword** | **String**|  | [optional]
+ **rePassword** | **String**|  | [optional]
+ **keyStoreType** | **String**|  | [optional]
+ **removeAlias** | **String**|  | [optional]
+ **certificate** | **File**|  | [optional]
+
+### Return type
+
+**String**
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: text/plain
+
+<a name="postTruststorePKCS12"></a>
+# **postTruststorePKCS12**
+> String postTruststorePKCS12(truststoreP12)
+
+
+
+### Example
+```java
+// Import classes:
+//import com.shinesolutions.swaggeraem4j.ApiClient;
+//import com.shinesolutions.swaggeraem4j.ApiException;
+//import com.shinesolutions.swaggeraem4j.Configuration;
+//import com.shinesolutions.swaggeraem4j.auth.*;
+//import com.shinesolutions.swaggeraem4j.api.SlingApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure HTTP basic authorization: aemAuth
+HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+aemAuth.setUsername("YOUR USERNAME");
+aemAuth.setPassword("YOUR PASSWORD");
+
+SlingApi apiInstance = new SlingApi();
+File truststoreP12 = new File("/path/to/file.txt"); // File | 
+try {
+    String result = apiInstance.postTruststorePKCS12(truststoreP12);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling SlingApi#postTruststorePKCS12");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **truststoreP12** | **File**|  | [optional]
+
+### Return type
+
+**String**
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
  - **Accept**: text/plain
 
