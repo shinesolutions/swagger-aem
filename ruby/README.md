@@ -403,6 +403,41 @@ Sling API - Reverse replication agent:
       name = 'some-reverse-replication-agent'
     )
 
+Sling API - Truststore:
+
+    # create truststore
+    data, status_code, headers = @sling.post_truststore_with_http_info(
+      {
+        :new_password => 'somepassword',
+        :re_password  => 'somepassword',
+        :operation    => 'createStore'
+      }
+    )
+
+    # check truststore's exist
+    data, status_code, headers = @sling.get_truststore_informations_with_http_info
+
+    # download truststore
+    data, status_code, headers = @sling.get_truststore_with_http_info
+
+    # upload truststore
+    File.open("/path/to/sometruststore.p12", 'r') { |file|
+      data, status_code, headers = @sling.post_truststore_pkcs12_with_http_info(
+        {
+          :truststore_p12 => file
+        }
+      )
+    }
+
+    # delete truststore
+    data, status_code, headers = @sling.post_node_with_http_info(
+      path = '/etc/truststore/',
+      name = 'truststore.p12',
+      {
+        :operation => 'delete'
+      }
+    )
+
 Sling API - User:
 
     # create user
