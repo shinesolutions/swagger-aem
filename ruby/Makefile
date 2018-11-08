@@ -37,6 +37,13 @@ test-unit:
 test-integration:
 	bundle exec rspec test-integration/
 
+fixtures:
+	# based on AEM documentation at https://helpx.adobe.com/experience-manager/kt/platform-repository/using/ssl-wizard-technical-video-use.html#generate-key-cert
+	openssl genrsa -aes256 -out test-integration/fixtures/private_key.key 4096
+	openssl req -sha256 -new -key test-integration/fixtures/private_key.key -out test-integration/fixtures/cert_sign_request.csr -subj '/CN=localhost'
+	openssl x509 -req -days 365 -in test-integration/fixtures/cert_sign_request.csr -signkey test-integration/fixtures/private_key.key -out test-integration/fixtures/cert_chain.crt
+	openssl pkcs8 -topk8 -inform PEM -outform DER -in test-integration/fixtures/private_key.key -out test-integration/fixtures/private_key.der -nocrypt
+
 # TODO: replace `yard` with `bundle exec yard` when generated Gemfile contains yard
 doc:
 	cd generated/ && \
