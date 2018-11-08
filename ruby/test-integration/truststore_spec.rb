@@ -3,10 +3,7 @@ require_relative 'spec_helper'
 describe 'Truststore' do
   before do
     init_client
-    @cq = SwaggerAemClient::CqApi.new
-    @custom = SwaggerAemClient::CustomApi.new
     @sling = SwaggerAemClient::SlingApi.new
-    @crx = SwaggerAemClient::CrxApi.new
 
     # ensure truststore doesn't exist prior to testing
     begin
