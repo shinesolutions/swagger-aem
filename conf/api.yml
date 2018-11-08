@@ -1429,7 +1429,7 @@ paths:
         - name: service.ranking
           in: query
           required: false
-          type: long
+          type: integer
         - name: idpUrl
           in: query
           required: false
@@ -1511,7 +1511,7 @@ paths:
         - name: clockTolerance
           in: query
           required: false
-          type: long
+          type: integer
         - name: digestMethod
           in: query
           required: false
@@ -1581,10 +1581,6 @@ paths:
           required: false
           type: string
         - name: keyStorePass
-          in: query
-          required: false
-          type: string
-        - name: :operation
           in: query
           required: false
           type: string
@@ -1968,7 +1964,7 @@ definitions:
         type: integer
       values:
         description: Property value
-        type: long
+        type: integer
       description:
         description: Property description
         type: string
