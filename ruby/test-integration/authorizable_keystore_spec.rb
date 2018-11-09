@@ -112,6 +112,16 @@ describe 'Authorizable Keystore' do
         }
       }
 
+      # Check if Certalias exists in keystore
+      data, status_code, headers = @sling.get_authorizable_keystore_with_http_info(
+        intermediate_path = '/home/users/system',
+        authorizable_id = 'authentication-service'
+      )
+      data.aliases.each { |aliases|
+        @cert_alias_exists = true if aliases._alias.eql?('somecertchainalias')
+      }
+      expect(@cert_alias_exists).to eq(true)
+
       # download keystore
       data, status_code, headers = @sling.get_keystore_with_http_info(
         intermediate_path = '/home/users/system',
@@ -140,6 +150,16 @@ describe 'Authorizable Keystore' do
         expect(status_code).to eq(200)
       }
 
+      # Check if Certalias exists in keystore
+      data, status_code, headers = @sling.get_authorizable_keystore_with_http_info(
+        intermediate_path = '/home/users/system',
+        authorizable_id = 'authentication-service'
+      )
+      data.aliases.each { |aliases|
+        @cert_alias_exists = true if aliases._alias.eql?('somekeystorealias')
+      }
+      expect(@cert_alias_exists).to eq(true)
+
       download_data.delete
     end
 
@@ -164,6 +184,16 @@ describe 'Authorizable Keystore' do
         }
       }
 
+      # Check if Certalias exists in keystore
+      data, status_code, headers = @sling.get_authorizable_keystore_with_http_info(
+        intermediate_path = '/home/users/system',
+        authorizable_id = 'authentication-service'
+      )
+      data.aliases.each { |aliases|
+        @cert_alias_exists = true if aliases._alias.eql?('somecertchainalias')
+      }
+      expect(@cert_alias_exists).to eq(true)
+
       # delete the uploaded cert chain by specifying the alias
       data, status_code, headers = @sling.post_authorizable_keystore_with_http_info(
         intermediate_path = '/home/users/system',
@@ -173,6 +203,20 @@ describe 'Authorizable Keystore' do
         }
       )
       expect(status_code).to eq(200)
+
+      # Check if Certalias don't exist in keystore
+      data, status_code, headers = @sling.get_authorizable_keystore_with_http_info(
+        intermediate_path = '/home/users/system',
+        authorizable_id = 'authentication-service'
+      )
+      if data.aliases.size.eql?(0)
+        @cert_alias_exists = false
+      else
+        data.aliases.each { |aliases|
+          @cert_alias_exists = false unless aliases._alias.eql?('somecertchainalias')
+        }
+      end
+      expect(@cert_alias_exists).to eq(false)
     end
 
   end
