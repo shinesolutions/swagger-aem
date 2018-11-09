@@ -92,7 +92,7 @@ describe 'Authorizable Keystore' do
 
   end
 
-  describe 'test download and upload' do
+  describe 'test upload certificate chain then download the keystore and re-upload the keystore' do
 
     it 'should succeed' do
       # upload a cert chain to the keystore
@@ -134,7 +134,7 @@ describe 'Authorizable Keystore' do
             :key_store => file,
             :key_store_pass => 'somekeystorepassword',
             :_alias => 'somecertchainalias',
-            :key_password => 'someprivatekeypassword'
+            :key_password => 'somekeystorepassword'
           }
         )
         expect(status_code).to eq(200)

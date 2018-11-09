@@ -159,6 +159,75 @@ CRX API - User:
       verify = 'somenewpassword'
     )
 
+Sling API - Authorizable Keystore:
+
+    # create authorizable keystore
+    data, status_code, headers = @sling.post_authorizable_keystore_with_http_info(
+      intermediate_path = '/home/users/system',
+      authorizable_id = 'authentication-service',
+      {
+        :new_password => 'somekeystorepassword',
+        :re_password  => 'somekeystorepassword',
+        :operation    => 'createStore'
+      }
+    )
+
+    # get authorizable keystore
+    data, status_code, headers = @sling.get_authorizable_keystore_with_http_info(
+      intermediate_path = '/home/users/system',
+      authorizable_id = 'authentication-service'
+    )
+
+    # upload certificate chain and private key into an authorizable keystore
+    File.open("/path/to/cert_chain.crt", 'r') { |keystore_cert_chain_file|
+      File.open("/path/to/private_key.der", 'r') { |keystore_private_key_file|
+        data, status_code, headers = @sling.post_authorizable_keystore_with_http_info(
+          intermediate_path = '/home/users/system',
+          authorizable_id = 'authentication-service',
+          {
+            :_alias => 'somecertchainalias',
+            :cert_chain => keystore_cert_chain_file,
+            :pk => keystore_private_key_file
+          }
+        )
+        expect(status_code).to eq(200)
+      }
+    }
+
+    # download authorizable keystore
+    data, status_code, headers = @sling.get_keystore_with_http_info(
+      intermediate_path = '/home/users/system',
+      authorizable_id = 'authentication-service'
+    )
+
+    # re-upload the downloaded authorizable keystore
+    # NOTE: the parameters here are quite confusing
+    # - `key_password` is the password for the downloaded keystore
+    # - `key_store_pass` is the password for the existing keystore on AEM, which will then be overwritten by this keystore we're uploading
+    File.open("/path/to/somekeystore.pkcs12", 'r') { |file|
+      data, status_code, headers = @sling.post_authorizable_keystore_with_http_info(
+        intermediate_path = '/home/users/system',
+        authorizable_id = 'authentication-service',
+        {
+          :new_alias => 'somekeystorealias',
+          :key_store => file,
+          :key_store_pass => 'somekeystorepassword',
+          :_alias => 'somecertchainalias',
+          :key_password => 'somekeystorepassword'
+        }
+      )
+      expect(status_code).to eq(200)
+    }
+
+    # delete authorizable keystore
+    data, status_code, headers = @sling.post_node_with_http_info(
+      path = '/home/users/system/authentication-service/keystore',
+      name = 'store.p12',
+      {
+        :operation => 'delete'
+      }
+    )
+
 Sling API - Flush agent:
 
     # create flush agent
