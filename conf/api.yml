@@ -170,10 +170,6 @@ paths:
       produces:
         - text/plain
       parameters:
-        - name: runmode
-          in: path
-          required: true
-          type: string
         - name: org.apache.felix.https.nio
           in: query
           required: false
@@ -265,10 +261,6 @@ paths:
       produces:
         - text/plain
       parameters:
-        - name: runmode
-          in: path
-          required: true
-          type: string
         - name: json.maximumresults
           in: query
           required: false
@@ -312,10 +304,6 @@ paths:
       produces:
         - text/plain
       parameters:
-        - name: runmode
-          in: path
-          required: true
-          type: string
         - name: allow.empty
           in: query
           required: false
@@ -359,10 +347,6 @@ paths:
       produces:
         - text/plain
       parameters:
-        - name: runmode
-          in: path
-          required: true
-          type: string
         - name: alias
           in: query
           required: false
@@ -390,10 +374,6 @@ paths:
       produces:
         - text/plain
       parameters:
-        - name: runmode
-          in: path
-          required: true
-          type: string
         - name: pwdreset.authorizables
           in: query
           required: false
@@ -416,10 +396,6 @@ paths:
       produces:
         - text/plain
       parameters:
-        - name: runmode
-          in: path
-          required: true
-          type: string
         - name: bundles.ignored
           in: query
           required: false

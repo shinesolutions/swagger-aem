@@ -1,4 +1,5 @@
 ### 2.1.0
+* Remove runmode parameter on operations which require config path #32
 * Add feature to manage AEM Truststore
 * Add feature to manage AEM Authorizable Keystore
 * Add feature to manage Certificates in AEM Truststore
