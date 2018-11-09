@@ -24,8 +24,8 @@ describe 'Truststore' do
     # create truststore
     data, status_code, headers = @sling.post_truststore_with_http_info(
       {
-        :new_password => 'somepassword',
-        :re_password  => 'somepassword',
+        :new_password => 'sometruststorepassword',
+        :re_password  => 'sometruststorepassword',
         :operation    => 'createStore'
       }
     )
@@ -37,9 +37,32 @@ describe 'Truststore' do
 
   describe 'test create' do
 
-    it 'should succeed existence check' do
+    it 'should have aliases when it exists' do
       data, status_code, headers = @sling.get_truststore_informations_with_http_info
+      expect(data.aliases.size).to eq(0)
       expect(status_code).to eq(200)
+    end
+
+  end
+
+  describe 'test delete' do
+
+    it 'should error 404 when truststore does not exist' do
+      # delete authorizable keystore
+      data, status_code, headers = @sling.post_node_with_http_info(
+        path = '/etc/truststore/',
+        name = 'truststore.p12',
+        {
+          :operation => 'delete'
+        }
+      )
+      expect([200, 204]).to include(status_code)
+
+      begin
+        data, status_code, headers = @sling.get_truststore_with_http_info
+      rescue SwaggerAemClient::ApiError => err
+        expect(err.code).to eq(404)
+      end
     end
 
   end
