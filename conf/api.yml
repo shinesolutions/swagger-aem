@@ -1324,14 +1324,14 @@ paths:
         - sling
   /libs/granite/security/truststore.json:
     get:
-      operationId: getTruststoreInformations
+      operationId: getTruststoreInfo
       produces:
         - application/json
       responses:
         200:
-          description: 'Retrieved AEM Truststore informations'
+          description: 'Retrieved AEM Truststore info'
           schema:
-            $ref: '#/definitions/TruststoreInformations'
+            $ref: '#/definitions/TruststoreInfo'
         default:
           description: 'Default response'
           schema:
@@ -1511,7 +1511,7 @@ paths:
         200:
           description: 'Retrieved AEM SAML Configuration'
           schema:
-            $ref: '#/definitions/SamlConfigurationInformations'
+            $ref: '#/definitions/SamlConfigurationInfo'
         302:
           description: 'Default response'
           schema:
@@ -1590,9 +1590,9 @@ paths:
         - sling
       responses:
         200:
-          description: 'Retrieved Authorizable Keystore informations'
+          description: 'Retrieved Authorizable Keystore info'
           schema:
-            $ref: '#/definitions/KeystoreInformations'
+            $ref: '#/definitions/KeystoreInfo'
         default:
           description: 'Default response'
           schema:
@@ -1615,9 +1615,9 @@ paths:
         - sling
       responses:
         200:
-          description: 'Retrieved Authorizable Keystore informations'
+          description: 'Retrieved Authorizable Keystore info'
           schema:
-            $ref: '#/definitions/KeystoreInformations'
+            $ref: '#/definitions/KeystoreInfo'
         default:
           description: 'Default response'
           schema:
@@ -1654,7 +1654,7 @@ definitions:
             type: boolean
           itemCount:
             type: integer
-  KeystoreInformations:
+  KeystoreInfo:
     type: object
     properties:
       aliases:
@@ -1664,7 +1664,7 @@ definitions:
       exists:
         type: boolean
         description: "False if truststore don't exist"
-  TruststoreInformations:
+  TruststoreInfo:
     type: object
     properties:
       aliases:
@@ -1734,7 +1734,7 @@ definitions:
       serialNumber:
         type: integer
         description: '18165099476682912368'
-  SamlConfigurationInformations:
+  SamlConfigurationInfo:
     type: object
     properties:
       pid:
