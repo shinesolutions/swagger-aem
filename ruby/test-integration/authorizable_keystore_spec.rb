@@ -130,10 +130,10 @@ describe 'Authorizable Keystore' do
           intermediate_path = '/home/users/system',
           authorizable_id = 'authentication-service',
           {
-            :new_alias => 'somealias',
+            :new_alias => 'somekeystorealias',
             :key_store => file,
             :key_store_pass => 'somekeystorepassword',
-            :_alias => 'somealias',
+            :_alias => 'somecertchainalias',
             :key_password => 'someprivatekeypassword'
           }
         )
