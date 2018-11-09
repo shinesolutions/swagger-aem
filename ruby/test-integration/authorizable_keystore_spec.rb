@@ -26,8 +26,8 @@ describe 'Authorizable Keystore' do
       intermediate_path = '/home/users/system',
       authorizable_id = 'authentication-service',
       {
-        :new_password => 'somepassword',
-        :re_password  => 'somepassword',
+        :new_password => 'somekeystorepassword',
+        :re_password  => 'somekeystorepassword',
         :operation    => 'createStore'
       }
     )
@@ -39,12 +39,38 @@ describe 'Authorizable Keystore' do
 
   describe 'test create' do
 
-    it 'should succeed existence check' do
+    it 'should have aliases when it exists' do
       data, status_code, headers = @sling.get_authorizable_keystore_with_http_info(
         intermediate_path = '/home/users/system',
         authorizable_id = 'authentication-service'
       )
       expect(status_code).to eq(200)
+      expect(data.aliases.size).to eq(0)
+    end
+
+  end
+
+  describe 'test delete' do
+
+    it 'should not have aliases when it is deleted' do
+      # delete authorizable keystore
+      data, status_code, headers = @sling.post_node_with_http_info(
+        path = '/home/users/system/authentication-service/keystore',
+        name = 'store.p12',
+        {
+          :operation => 'delete'
+        }
+      )
+      expect([200, 204]).to include(status_code)
+
+      # get keystore info
+      data, status_code, headers = @sling.get_authorizable_keystore_with_http_info(
+        intermediate_path = '/home/users/system',
+        authorizable_id = 'authentication-service'
+      )
+      expect(status_code).to eq(200)
+      expect(data.exists).to eq(false)
+      expect(data.aliases).to eq(nil)
     end
 
   end
@@ -56,9 +82,9 @@ describe 'Authorizable Keystore' do
         intermediate_path = '/home/users/system',
         authorizable_id = 'authentication-service',
         {
-          :current_password => 'somepassword',
-          :new_password => 'somepassword',
-          :re_password => 'somepassword'
+          :current_password => 'somekeystorepassword',
+          :new_password => 'somenewkeystorepassword',
+          :re_password => 'somenewkeystorepassword'
         }
       )
       expect(status_code).to eq(200)
@@ -98,21 +124,21 @@ describe 'Authorizable Keystore' do
       expect(File.file? "#{@temp_dir}/somekeystore.pkcs12").to be(true)
       download_data = data
 
-      # # upload the downloaded keystore
-      # File.open("#{@temp_dir}/somekeystore.pkcs12", 'r') { |file|
-      #   data, status_code, headers = @sling.post_authorizable_keystore_with_http_info(
-      #     intermediate_path = '/home/users/system',
-      #     authorizable_id = 'authentication-service',
-      #     {
-      #       :new_alias => 'somealias',
-      #       :key_store => file,
-      #       :key_store_pass => 'somepassword',
-      #       :_alias => 'somecertchainalias',
-      #       :key_password => 'changeit'
-      #     }
-      #   )
-      #   expect(status_code).to eq(200)
-      # }
+      # upload the downloaded keystore
+      File.open("#{@temp_dir}/somekeystore.pkcs12", 'r') { |file|
+        data, status_code, headers = @sling.post_authorizable_keystore_with_http_info(
+          intermediate_path = '/home/users/system',
+          authorizable_id = 'authentication-service',
+          {
+            :new_alias => 'somealias',
+            :key_store => file,
+            :key_store_pass => 'somekeystorepassword',
+            :_alias => 'somealias',
+            :key_password => 'someprivatekeypassword'
+          }
+        )
+        expect(status_code).to eq(200)
+      }
 
       download_data.delete
     end
@@ -122,13 +148,14 @@ describe 'Authorizable Keystore' do
   describe 'test upload and delete certificate chain' do
 
     it 'should succeed' do
+      # upload the cert chain in fixtures (generated from `make fixtures`)
       File.open("./test-integration/fixtures/cert_chain.crt", 'r') { |keystore_cert_chain_file|
         File.open("./test-integration/fixtures/private_key.der", 'r') { |keystore_private_key_file|
           data, status_code, headers = @sling.post_authorizable_keystore_with_http_info(
             intermediate_path = '/home/users/system',
             authorizable_id = 'authentication-service',
             {
-              :_alias => 'somealias',
+              :_alias => 'somecertchainalias',
               :cert_chain => keystore_cert_chain_file,
               :pk => keystore_private_key_file
             }
@@ -137,11 +164,12 @@ describe 'Authorizable Keystore' do
         }
       }
 
+      # delete the uploaded cert chain by specifying the alias
       data, status_code, headers = @sling.post_authorizable_keystore_with_http_info(
         intermediate_path = '/home/users/system',
         authorizable_id = 'authentication-service',
         {
-          :remove_alias => 'somealias'
+          :remove_alias => 'somecertchainalias'
         }
       )
       expect(status_code).to eq(200)
