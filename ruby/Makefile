@@ -10,7 +10,6 @@ ci: clean deps build install test-unit doc
 deps:
 	gem install bundler
 	bundle install --binstubs
-	cd generated && bundle install
 
 clean:
 	rm -rf generated/ Gemfile.lock
@@ -21,6 +20,7 @@ build: clean
 		--lang ruby \
 		--output generated/ \
 		--config conf/client.json
+	cd generated && bundle install
 
 install:
 	cd generated/ && \
