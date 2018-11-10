@@ -63,7 +63,7 @@ Name | Type | Description  | Notes
 
 
 # **post_config_aem_health_check_servlet**
-> post_config_aem_health_check_servlet(runmode, opts)
+> post_config_aem_health_check_servlet(opts)
 
 
 
@@ -80,15 +80,13 @@ end
 
 api_instance = SwaggerAemClient::CustomApi.new
 
-runmode = "runmode_example" # String | 
-
 opts = { 
   bundles_ignored: ["bundles_ignored_example"], # Array<String> | 
   bundles_ignored_type_hint: "bundles_ignored_type_hint_example" # String | 
 }
 
 begin
-  api_instance.post_config_aem_health_check_servlet(runmode, opts)
+  api_instance.post_config_aem_health_check_servlet(opts)
 rescue SwaggerAemClient::ApiError => e
   puts "Exception when calling CustomApi->post_config_aem_health_check_servlet: #{e}"
 end
@@ -98,7 +96,6 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **runmode** | **String**|  | 
  **bundles_ignored** | [**Array&lt;String&gt;**](String.md)|  | [optional] 
  **bundles_ignored_type_hint** | **String**|  | [optional] 
 
@@ -118,7 +115,7 @@ nil (empty response body)
 
 
 # **post_config_aem_password_reset**
-> post_config_aem_password_reset(runmode, opts)
+> post_config_aem_password_reset(opts)
 
 
 
@@ -135,15 +132,13 @@ end
 
 api_instance = SwaggerAemClient::CustomApi.new
 
-runmode = "runmode_example" # String | 
-
 opts = { 
   pwdreset_authorizables: ["pwdreset_authorizables_example"], # Array<String> | 
   pwdreset_authorizables_type_hint: "pwdreset_authorizables_type_hint_example" # String | 
 }
 
 begin
-  api_instance.post_config_aem_password_reset(runmode, opts)
+  api_instance.post_config_aem_password_reset(opts)
 rescue SwaggerAemClient::ApiError => e
   puts "Exception when calling CustomApi->post_config_aem_password_reset: #{e}"
 end
@@ -153,7 +148,6 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **runmode** | **String**|  | 
  **pwdreset_authorizables** | [**Array&lt;String&gt;**](String.md)|  | [optional] 
  **pwdreset_authorizables_type_hint** | **String**|  | [optional] 
 

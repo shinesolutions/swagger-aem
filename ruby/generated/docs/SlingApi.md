@@ -15,7 +15,7 @@ Method | HTTP request | Description
 [**get_package_filter**](SlingApi.md#get_package_filter) | **GET** /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json | 
 [**get_query**](SlingApi.md#get_query) | **GET** /bin/querybuilder.json | 
 [**get_truststore**](SlingApi.md#get_truststore) | **GET** /etc/truststore/truststore.p12 | 
-[**get_truststore_informations**](SlingApi.md#get_truststore_informations) | **GET** /libs/granite/security/truststore.json | 
+[**get_truststore_info**](SlingApi.md#get_truststore_info) | **GET** /libs/granite/security/truststore.json | 
 [**post_agent**](SlingApi.md#post_agent) | **POST** /etc/replication/agents.{runmode}/{name} | 
 [**post_authorizable_keystore**](SlingApi.md#post_authorizable_keystore) | **POST** /{intermediatePath}/{authorizableId}.ks.html | 
 [**post_authorizables**](SlingApi.md#post_authorizables) | **POST** /libs/granite/security/post/authorizables | 
@@ -240,7 +240,7 @@ Name | Type | Description  | Notes
 
 
 # **get_authorizable_keystore**
-> KeystoreInformations get_authorizable_keystore(intermediate_path, authorizable_id)
+> KeystoreInfo get_authorizable_keystore(intermediate_path, authorizable_id)
 
 
 
@@ -279,7 +279,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KeystoreInformations**](KeystoreInformations.md)
+[**KeystoreInfo**](KeystoreInfo.md)
 
 ### Authorization
 
@@ -529,7 +529,7 @@ api_instance = SwaggerAemClient::SlingApi.new
 
 path = "path_example" # String | 
 
-p_limit = 3.4 # Float | 
+p_limit = 8.14 # Float | 
 
 _1_property = "_1_property_example" # String | 
 
@@ -612,8 +612,8 @@ This endpoint does not need any parameter.
 
 
 
-# **get_truststore_informations**
-> TruststoreInformations get_truststore_informations
+# **get_truststore_info**
+> TruststoreInfo get_truststore_info
 
 
 
@@ -631,10 +631,10 @@ end
 api_instance = SwaggerAemClient::SlingApi.new
 
 begin
-  result = api_instance.get_truststore_informations
+  result = api_instance.get_truststore_info
   p result
 rescue SwaggerAemClient::ApiError => e
-  puts "Exception when calling SlingApi->get_truststore_informations: #{e}"
+  puts "Exception when calling SlingApi->get_truststore_info: #{e}"
 end
 ```
 
@@ -643,7 +643,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**TruststoreInformations**](TruststoreInformations.md)
+[**TruststoreInfo**](TruststoreInfo.md)
 
 ### Authorization
 
@@ -692,7 +692,7 @@ opts = {
   jcrcontentlog_level: "jcrcontentlog_level_example", # String | 
   jcrcontentno_status_update: true, # BOOLEAN | 
   jcrcontentno_versioning: true, # BOOLEAN | 
-  jcrcontentprotocol_connect_timeout: 3.4, # Float | 
+  jcrcontentprotocol_connect_timeout: 8.14, # Float | 
   jcrcontentprotocol_http_connection_closed: true, # BOOLEAN | 
   jcrcontentprotocol_http_expired: "jcrcontentprotocol_http_expired_example", # String | 
   jcrcontentprotocol_http_headers: ["jcrcontentprotocol_http_headers_example"], # Array<String> | 
@@ -700,17 +700,17 @@ opts = {
   jcrcontentprotocol_http_method: "jcrcontentprotocol_http_method_example", # String | 
   jcrcontentprotocol_https_relaxed: true, # BOOLEAN | 
   jcrcontentprotocol_interface: "jcrcontentprotocol_interface_example", # String | 
-  jcrcontentprotocol_socket_timeout: 3.4, # Float | 
+  jcrcontentprotocol_socket_timeout: 8.14, # Float | 
   jcrcontentprotocol_version: "jcrcontentprotocol_version_example", # String | 
   jcrcontentproxy_ntlm_domain: "jcrcontentproxy_ntlm_domain_example", # String | 
   jcrcontentproxy_ntlm_host: "jcrcontentproxy_ntlm_host_example", # String | 
   jcrcontentproxy_host: "jcrcontentproxy_host_example", # String | 
   jcrcontentproxy_password: "jcrcontentproxy_password_example", # String | 
-  jcrcontentproxy_port: 3.4, # Float | 
+  jcrcontentproxy_port: 8.14, # Float | 
   jcrcontentproxy_user: "jcrcontentproxy_user_example", # String | 
-  jcrcontentqueue_batch_max_size: 3.4, # Float | 
+  jcrcontentqueue_batch_max_size: 8.14, # Float | 
   jcrcontentqueue_batch_mode: "jcrcontentqueue_batch_mode_example", # String | 
-  jcrcontentqueue_batch_wait_time: 3.4, # Float | 
+  jcrcontentqueue_batch_wait_time: 8.14, # Float | 
   jcrcontentretry_delay: "jcrcontentretry_delay_example", # String | 
   jcrcontentreverse_replication: true, # BOOLEAN | 
   jcrcontentserialization_type: "jcrcontentserialization_type_example", # String | 
@@ -811,7 +811,7 @@ nil (empty response body)
 
 
 # **post_authorizable_keystore**
-> KeystoreInformations post_authorizable_keystore(intermediate_path, authorizable_id, opts)
+> KeystoreInfo post_authorizable_keystore(intermediate_path, authorizable_id, opts)
 
 
 
@@ -839,7 +839,6 @@ opts = {
   re_password: "re_password_example", # String | 
   key_password: "key_password_example", # String | 
   key_store_pass: "key_store_pass_example", # String | 
-  operation2: "operation_example", # String | 
   _alias: "_alias_example", # String | 
   new_alias: "new_alias_example", # String | 
   remove_alias: "remove_alias_example", # String | 
@@ -868,7 +867,6 @@ Name | Type | Description  | Notes
  **re_password** | **String**|  | [optional] 
  **key_password** | **String**|  | [optional] 
  **key_store_pass** | **String**|  | [optional] 
- **operation2** | **String**|  | [optional] 
  **_alias** | **String**|  | [optional] 
  **new_alias** | **String**|  | [optional] 
  **remove_alias** | **String**|  | [optional] 
@@ -878,7 +876,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KeystoreInformations**](KeystoreInformations.md)
+[**KeystoreInfo**](KeystoreInfo.md)
 
 ### Authorization
 
@@ -1099,7 +1097,7 @@ nil (empty response body)
 
 
 # **post_config_apache_felix_jetty_based_http_service**
-> post_config_apache_felix_jetty_based_http_service(runmode, opts)
+> post_config_apache_felix_jetty_based_http_service(opts)
 
 
 
@@ -1115,8 +1113,6 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::SlingApi.new
-
-runmode = "runmode_example" # String | 
 
 opts = { 
   org_apache_felix_https_nio: true, # BOOLEAN | 
@@ -1142,7 +1138,7 @@ opts = {
 }
 
 begin
-  api_instance.post_config_apache_felix_jetty_based_http_service(runmode, opts)
+  api_instance.post_config_apache_felix_jetty_based_http_service(opts)
 rescue SwaggerAemClient::ApiError => e
   puts "Exception when calling SlingApi->post_config_apache_felix_jetty_based_http_service: #{e}"
 end
@@ -1152,7 +1148,6 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **runmode** | **String**|  | 
  **org_apache_felix_https_nio** | **BOOLEAN**|  | [optional] 
  **org_apache_felix_https_nio_type_hint** | **String**|  | [optional] 
  **org_apache_felix_https_keystore** | **String**|  | [optional] 
@@ -1190,7 +1185,7 @@ nil (empty response body)
 
 
 # **post_config_apache_sling_dav_ex_servlet**
-> post_config_apache_sling_dav_ex_servlet(runmode, opts)
+> post_config_apache_sling_dav_ex_servlet(opts)
 
 
 
@@ -1207,8 +1202,6 @@ end
 
 api_instance = SwaggerAemClient::SlingApi.new
 
-runmode = "runmode_example" # String | 
-
 opts = { 
   _alias: "_alias_example", # String | 
   alias_type_hint: "alias_type_hint_example", # String | 
@@ -1217,7 +1210,7 @@ opts = {
 }
 
 begin
-  api_instance.post_config_apache_sling_dav_ex_servlet(runmode, opts)
+  api_instance.post_config_apache_sling_dav_ex_servlet(opts)
 rescue SwaggerAemClient::ApiError => e
   puts "Exception when calling SlingApi->post_config_apache_sling_dav_ex_servlet: #{e}"
 end
@@ -1227,7 +1220,6 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **runmode** | **String**|  | 
  **_alias** | **String**|  | [optional] 
  **alias_type_hint** | **String**|  | [optional] 
  **dav_create_absolute_uri** | **BOOLEAN**|  | [optional] 
@@ -1249,7 +1241,7 @@ nil (empty response body)
 
 
 # **post_config_apache_sling_get_servlet**
-> post_config_apache_sling_get_servlet(runmode, opts)
+> post_config_apache_sling_get_servlet(opts)
 
 
 
@@ -1266,8 +1258,6 @@ end
 
 api_instance = SwaggerAemClient::SlingApi.new
 
-runmode = "runmode_example" # String | 
-
 opts = { 
   json_maximumresults: "json_maximumresults_example", # String | 
   json_maximumresults_type_hint: "json_maximumresults_type_hint_example", # String | 
@@ -1280,7 +1270,7 @@ opts = {
 }
 
 begin
-  api_instance.post_config_apache_sling_get_servlet(runmode, opts)
+  api_instance.post_config_apache_sling_get_servlet(opts)
 rescue SwaggerAemClient::ApiError => e
   puts "Exception when calling SlingApi->post_config_apache_sling_get_servlet: #{e}"
 end
@@ -1290,7 +1280,6 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **runmode** | **String**|  | 
  **json_maximumresults** | **String**|  | [optional] 
  **json_maximumresults_type_hint** | **String**|  | [optional] 
  **enable_html** | **BOOLEAN**|  | [optional] 
@@ -1316,7 +1305,7 @@ nil (empty response body)
 
 
 # **post_config_apache_sling_referrer_filter**
-> post_config_apache_sling_referrer_filter(runmode, opts)
+> post_config_apache_sling_referrer_filter(opts)
 
 
 
@@ -1333,8 +1322,6 @@ end
 
 api_instance = SwaggerAemClient::SlingApi.new
 
-runmode = "runmode_example" # String | 
-
 opts = { 
   allow_empty: true, # BOOLEAN | 
   allow_empty_type_hint: "allow_empty_type_hint_example", # String | 
@@ -1347,7 +1334,7 @@ opts = {
 }
 
 begin
-  api_instance.post_config_apache_sling_referrer_filter(runmode, opts)
+  api_instance.post_config_apache_sling_referrer_filter(opts)
 rescue SwaggerAemClient::ApiError => e
   puts "Exception when calling SlingApi->post_config_apache_sling_referrer_filter: #{e}"
 end
@@ -1357,7 +1344,6 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **runmode** | **String**|  | 
  **allow_empty** | **BOOLEAN**|  | [optional] 
  **allow_empty_type_hint** | **String**|  | [optional] 
  **allow_hosts** | **String**|  | [optional] 
@@ -1573,7 +1559,7 @@ api_instance = SwaggerAemClient::SlingApi.new
 
 path = "path_example" # String | 
 
-p_limit = 3.4 # Float | 
+p_limit = 8.14 # Float | 
 
 _1_property = "_1_property_example" # String | 
 

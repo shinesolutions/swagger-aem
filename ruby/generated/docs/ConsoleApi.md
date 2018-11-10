@@ -111,7 +111,7 @@ nil (empty response body)
 
 
 # **post_saml_configuration**
-> SamlConfigurationInformations post_saml_configuration(opts)
+> SamlConfigurationInfo post_saml_configuration(opts)
 
 
 
@@ -135,7 +135,7 @@ opts = {
   action: "action_example", # String | 
   location: "location_example", # String | 
   path: ["path_example"], # Array<String> | 
-  service_ranking: "service_ranking_example", # String | 
+  service_ranking: 56, # Integer | 
   idp_url: "idp_url_example", # String | 
   idp_cert_alias: "idp_cert_alias_example", # String | 
   idp_http_redirect: true, # BOOLEAN | 
@@ -154,7 +154,7 @@ opts = {
   synchronize_attributes: ["synchronize_attributes_example"], # Array<String> | 
   handle_logout: true, # BOOLEAN | 
   logout_url: "logout_url_example", # String | 
-  clock_tolerance: "clock_tolerance_example", # String | 
+  clock_tolerance: 56, # Integer | 
   digest_method: "digest_method_example", # String | 
   signature_method: "signature_method_example", # String | 
   user_intermediate_path: "user_intermediate_path_example", # String | 
@@ -179,7 +179,7 @@ Name | Type | Description  | Notes
  **action** | **String**|  | [optional] 
  **location** | **String**|  | [optional] 
  **path** | [**Array&lt;String&gt;**](String.md)|  | [optional] 
- **service_ranking** | **String**|  | [optional] 
+ **service_ranking** | **Integer**|  | [optional] 
  **idp_url** | **String**|  | [optional] 
  **idp_cert_alias** | **String**|  | [optional] 
  **idp_http_redirect** | **BOOLEAN**|  | [optional] 
@@ -198,7 +198,7 @@ Name | Type | Description  | Notes
  **synchronize_attributes** | [**Array&lt;String&gt;**](String.md)|  | [optional] 
  **handle_logout** | **BOOLEAN**|  | [optional] 
  **logout_url** | **String**|  | [optional] 
- **clock_tolerance** | **String**|  | [optional] 
+ **clock_tolerance** | **Integer**|  | [optional] 
  **digest_method** | **String**|  | [optional] 
  **signature_method** | **String**|  | [optional] 
  **user_intermediate_path** | **String**|  | [optional] 
@@ -206,7 +206,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SamlConfigurationInformations**](SamlConfigurationInformations.md)
+[**SamlConfigurationInfo**](SamlConfigurationInfo.md)
 
 ### Authorization
 
