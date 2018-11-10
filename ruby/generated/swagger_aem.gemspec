@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/shinesolutions/swagger-aem/tree/master/ruby"
   s.summary     = "Adobe Experience Manager (AEM) API Ruby Gem"
   s.description = "Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API"
-  s.license     = "Apache 2.0"
+  s.license     = "Apache-2.0"
   s.required_ruby_version = ">= 2.1"
 
   s.add_runtime_dependency 'typhoeus', '~> 1.0', '>= 1.0.1'
