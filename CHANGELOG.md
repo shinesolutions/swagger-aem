@@ -1,3 +1,6 @@
+### 2.2.0
+*
+
 ### 2.1.0
 * Remove runmode parameter on operations which require config path #32
 * Add feature to manage AEM Truststore
