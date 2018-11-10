@@ -1,5 +1,6 @@
 ### 2.2.0
 * Update client with API 2.1.0 for SAML support
+* Remove runmode param on OSGI config operations
 
 ### 2.1.0
 * Update client with postNode operation
