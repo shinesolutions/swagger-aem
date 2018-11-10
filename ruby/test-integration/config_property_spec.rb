@@ -43,7 +43,6 @@ describe 'ConfigProperty' do
       end
 
       data, status_code, headers = @sling.post_config_apache_felix_jetty_based_http_service_with_http_info(
-        runmode = 'author',
         opts = {
           :org_apache_felix_https_nio => true,
           :org_apache_felix_https_nio_type_hint => 'Boolean',
@@ -91,7 +90,6 @@ describe 'ConfigProperty' do
       end
 
       data, status_code, headers = @sling.post_config_apache_sling_get_servlet_with_http_info(
-        runmode = 'author',
         opts = {
           :json_maximumresults => '100',
           :json_maximumresults_type_hint => 'String',
@@ -127,7 +125,6 @@ describe 'ConfigProperty' do
       end
 
       data, status_code, headers = @sling.post_config_apache_sling_referrer_filter_with_http_info(
-        runmode = 'author',
         opts = {
           :allow_empty => false,
           :allow_empty_type_hint => 'Boolean',
@@ -161,7 +158,6 @@ describe 'ConfigProperty' do
       end
 
       data, status_code, headers = @sling.post_config_apache_sling_dav_ex_servlet_with_http_info(
-        runmode = 'author',
         opts = {
           :alias => '/crx/server',
           :alias_type_hint => 'String',
@@ -193,7 +189,6 @@ describe 'ConfigProperty' do
       end
 
       data, status_code, headers = @custom.post_config_aem_password_reset_with_http_info(
-        runmode = 'author',
         opts = {
           :pwdreset_authorizables => ['orchestrator', 'replicator', 'deployer'],
           :pwdreset_authorizables_type_hint => 'String[]',
@@ -223,7 +218,6 @@ describe 'ConfigProperty' do
       end
 
       data, status_code, headers = @custom.post_config_aem_health_check_servlet_with_http_info(
-        runmode = 'author',
         opts = {
           :bundles_ignored => ['com.day.cq.dam.dam-webdav-support'],
           :bundles_ignored_type_hint => 'String[]',

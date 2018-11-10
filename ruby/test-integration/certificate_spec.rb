@@ -50,7 +50,7 @@ describe 'Certificate' do
       }
 
       # retrieve truststore info, it should have the uploaded cert
-      data, status_code, headers = @sling.get_truststore_informations_with_http_info
+      data, status_code, headers = @sling.get_truststore_info_with_http_info
       expect(status_code).to eq(200)
       expect(data.aliases.size).to eq(1)
       cert_alias = data.aliases[0]._alias
@@ -64,7 +64,7 @@ describe 'Certificate' do
       expect(status_code).to eq(200)
 
       # retrieve truststore info, it should no longer have the uploaded cert
-      data, status_code, headers = @sling.get_truststore_informations_with_http_info
+      data, status_code, headers = @sling.get_truststore_info_with_http_info
       expect(status_code).to eq(200)
       expect(data.aliases.size).to eq(0)
     end

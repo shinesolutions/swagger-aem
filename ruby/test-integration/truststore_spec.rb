@@ -38,7 +38,7 @@ describe 'Truststore' do
   describe 'test create' do
 
     it 'should have aliases when it exists' do
-      data, status_code, headers = @sling.get_truststore_informations_with_http_info
+      data, status_code, headers = @sling.get_truststore_info_with_http_info
       expect(data.aliases.size).to eq(0)
       expect(status_code).to eq(200)
     end
