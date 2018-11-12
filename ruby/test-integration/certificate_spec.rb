@@ -5,7 +5,7 @@ describe 'Certificate' do
     init_client
     @sling = SwaggerAemClient::SlingApi.new
 
-    # ensure certificate doesn't exist prior to testing
+    # ensure truststore doesn't exist prior to testing
     begin
       data, status_code, headers = @sling.post_node_with_http_info(
         path = '/etc/truststore/',
@@ -21,7 +21,7 @@ describe 'Certificate' do
       expect([403, 404]).to include(err.code)
     end
 
-    # create certificate
+    # create trusttore
     data, status_code, headers = @sling.post_truststore_with_http_info(
       {
         :new_password => 'somepassword',

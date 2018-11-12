@@ -48,7 +48,7 @@ describe 'Truststore' do
   describe 'test delete' do
 
     it 'should error 404 when truststore does not exist' do
-      # delete authorizable keystore
+      # delete truststore
       data, status_code, headers = @sling.post_node_with_http_info(
         path = '/etc/truststore/',
         name = 'truststore.p12',
