@@ -45,4 +45,3 @@ describe 'TruststoreInfo' do
   end
 
 end
-
