@@ -7,6 +7,7 @@ describe 'Aem' do
     @custom = SwaggerAemClient::CustomApi.new
     @sling = SwaggerAemClient::SlingApi.new
     @crx = SwaggerAemClient::CrxApi.new
+    @console = SwaggerAemClient::ConsoleApi.new
   end
 
   after do
@@ -54,6 +55,16 @@ describe 'Aem' do
       expect(status_code).to eq(200)
       json = JSON.parse(data)
       expect(json['jcr:primaryType']).to eq('rep:root')
+    end
+
+  end
+
+  describe 'test get aem product info' do
+
+    it 'should succeed and contain readyness detection' do
+      data, status_code, headers = @console.get_aem_product_info_with_http_info()
+      expect(status_code).to eq(200)
+      expect(data.length).to be >= 1
     end
 
   end
