@@ -1522,6 +1522,21 @@ paths:
             type: string
       tags:
         - console
+  /system/console/status-productinfo.json:
+    get:
+      operationId: getAemProductInfo
+      produces:
+        - application/json
+      parameters:
+      responses:
+        default:
+          description: 'Default response'
+          schema:
+            type: array
+            items:
+              type: string
+      tags:
+        - console
   /{intermediatePath}/{authorizableId}.ks.html:
     post:
       operationId: postAuthorizableKeystore

@@ -1,5 +1,5 @@
 ### 2.2.0
-*
+* Add new API Call for getting AEM product informations #36
 
 ### 2.1.0
 * Remove runmode parameter on operations which require config path #32
