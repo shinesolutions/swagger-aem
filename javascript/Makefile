@@ -35,4 +35,4 @@ doc:
 	cd generated/ && \
 	  echo "TODO"
 
-.PHONY: all travis deps clean build install test-unit test-integration doc
+.PHONY: all deps clean build install test-unit test-integration doc

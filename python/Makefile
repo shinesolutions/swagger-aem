@@ -48,4 +48,4 @@ publish-test:
 	  python setup.py register -r pypitest && \
 		python setup.py sdist upload -r pypitest
 
-.PHONY: all travis deps clean build install test-unit test-integration doc publish publish-test
+.PHONY: all deps clean build install test-unit test-integration doc publish publish-test
