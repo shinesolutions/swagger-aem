@@ -1,22 +1,26 @@
 LANGS = java javascript python ruby
 
-ci: clean tools lint build-docker doc
+ci: clean deps lint build-docker doc
 
 clean:
 	rm -rf doc
+
+deps:
+	npm install -g bootprint bootprint-openapi gh-pages jsonlint swagger-cli swaggy-c
+	docker pull cliffano/swaggy-c
+
+lint:
+	swagger-cli validate conf/*.yml
+	jsonlint --quiet java/conf/client.json
+	jsonlint --quiet javascript/conf/client.json
+	jsonlint --quiet python/conf/client.json
+	jsonlint --quiet ruby/conf/client.json
 
 doc:
 	bootprint openapi conf/api.yml doc/api/master/
 
 doc-publish:
 	gh-pages --dist doc/
-
-lint:
-	swagger-cli validate conf/*.yml
-
-tools:
-	npm install -g bootprint bootprint-openapi gh-pages swagger-cli swaggy-c
-	docker pull cliffano/swaggy-c
 
 ################################################################################
 # Targets for generating API client for the supported languages.
@@ -61,4 +65,4 @@ build-docker:
 	  make $(LANGS) \
 	  SWAGGER_CODEGEN_CLI_JAR=/opt/swagger-codegen/repo/modules/swagger-codegen-cli/target/swagger-codegen-cli.jar
 
-.PHONY: ci clean doc doc-publish lint tools java javascript python ruby build build-docker
+.PHONY: ci clean deps lint doc doc-publish java javascript python ruby build build-docker

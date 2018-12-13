@@ -7,10 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Add Swagger CodeGen JSON style check to lint target
 
 ### Changed
 
 ### Removed
+- Remove empty parameters from getAemProductInfo operation
 
 ## [2.2.0] - 2018-12-13
 
