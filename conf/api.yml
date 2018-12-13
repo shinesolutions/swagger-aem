@@ -1527,7 +1527,6 @@ paths:
       operationId: getAemProductInfo
       produces:
         - application/json
-      parameters:
       responses:
         default:
           description: 'Default response'
