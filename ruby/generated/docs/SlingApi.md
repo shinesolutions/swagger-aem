@@ -529,7 +529,7 @@ api_instance = SwaggerAemClient::SlingApi.new
 
 path = "path_example" # String | 
 
-p_limit = 8.14 # Float | 
+p_limit = 3.4 # Float | 
 
 _1_property = "_1_property_example" # String | 
 
@@ -692,7 +692,7 @@ opts = {
   jcrcontentlog_level: "jcrcontentlog_level_example", # String | 
   jcrcontentno_status_update: true, # BOOLEAN | 
   jcrcontentno_versioning: true, # BOOLEAN | 
-  jcrcontentprotocol_connect_timeout: 8.14, # Float | 
+  jcrcontentprotocol_connect_timeout: 3.4, # Float | 
   jcrcontentprotocol_http_connection_closed: true, # BOOLEAN | 
   jcrcontentprotocol_http_expired: "jcrcontentprotocol_http_expired_example", # String | 
   jcrcontentprotocol_http_headers: ["jcrcontentprotocol_http_headers_example"], # Array<String> | 
@@ -700,17 +700,17 @@ opts = {
   jcrcontentprotocol_http_method: "jcrcontentprotocol_http_method_example", # String | 
   jcrcontentprotocol_https_relaxed: true, # BOOLEAN | 
   jcrcontentprotocol_interface: "jcrcontentprotocol_interface_example", # String | 
-  jcrcontentprotocol_socket_timeout: 8.14, # Float | 
+  jcrcontentprotocol_socket_timeout: 3.4, # Float | 
   jcrcontentprotocol_version: "jcrcontentprotocol_version_example", # String | 
   jcrcontentproxy_ntlm_domain: "jcrcontentproxy_ntlm_domain_example", # String | 
   jcrcontentproxy_ntlm_host: "jcrcontentproxy_ntlm_host_example", # String | 
   jcrcontentproxy_host: "jcrcontentproxy_host_example", # String | 
   jcrcontentproxy_password: "jcrcontentproxy_password_example", # String | 
-  jcrcontentproxy_port: 8.14, # Float | 
+  jcrcontentproxy_port: 3.4, # Float | 
   jcrcontentproxy_user: "jcrcontentproxy_user_example", # String | 
-  jcrcontentqueue_batch_max_size: 8.14, # Float | 
+  jcrcontentqueue_batch_max_size: 3.4, # Float | 
   jcrcontentqueue_batch_mode: "jcrcontentqueue_batch_mode_example", # String | 
-  jcrcontentqueue_batch_wait_time: 8.14, # Float | 
+  jcrcontentqueue_batch_wait_time: 3.4, # Float | 
   jcrcontentretry_delay: "jcrcontentretry_delay_example", # String | 
   jcrcontentreverse_replication: true, # BOOLEAN | 
   jcrcontentserialization_type: "jcrcontentserialization_type_example", # String | 
@@ -1559,7 +1559,7 @@ api_instance = SwaggerAemClient::SlingApi.new
 
 path = "path_example" # String | 
 
-p_limit = 8.14 # Float | 
+p_limit = 3.4 # Float | 
 
 _1_property = "_1_property_example" # String | 
 

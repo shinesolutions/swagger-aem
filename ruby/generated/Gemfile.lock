@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    swagger_aem (2.2.0)
+    swagger_aem (2.3.0)
       json (~> 2.1, >= 2.1.0)
       typhoeus (~> 1.0, >= 1.0.1)
 
@@ -66,4 +66,4 @@ DEPENDENCIES
   webmock (~> 1.24, >= 1.24.3)
 
 BUNDLED WITH
-   1.17.1
+   1.15.4
