@@ -1,19 +1,38 @@
-### 0.10.0
-* Update client with API 2.0.0 for AEM 6.4 support
+# Changelog
+All notable changes to this project will be documented in this file.
 
-### 0.9.3
-* Add Apache Sling DavEx Servlet OSGI config support #11
-* Fix missing getLoginPage operation response body
-* Add sling get agents support #16
-* Rearrange optional parameters postAgentWithHttpInfo method signature to be in alphabetical order
-* Add 22 optional parameters to agents support #22
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-### 0.9.2
-* Add operation parameter support to sling#postAgentWithHttpInfo
-* Add cq get login page support
+### [Unreleased]
 
-### 0.9.1
-* Add jcrcontentreverseReplication parameter support to sling#postAgentWithHttpInfo
+### Added
+- Add Apache Sling DavEx Servlet OSGI config support #11
+- Add sling get agents support #16
+- Add 22 optional parameters to agents support #22
 
-### 0.9.0
-* Initial version
+### Changed
+- Fix missing getLoginPage operation response body
+- Rearrange optional parameters postAgentWithHttpInfo method signature to be in alphabetical order
+
+### [0.10.0] - 2018-06-23
+
+### Changed
+- Update client with API 2.0.0 for AEM 6.4 support
+
+### [0.9.2] - 2016-11-07
+
+### Added
+- Add operation parameter support to sling#postAgentWithHttpInfo
+- Add cq get login page support
+
+### [0.9.1] - 2016-09-03
+
+### Added
+- Add jcrcontentreverseReplication parameter support to sling#postAgentWithHttpInfo
+
+### [0.9.0] - unknown
+
+### Added
+- Initial version
+
