@@ -10,6 +10,8 @@ This Ruby client returns raw HTTP response AS-IS. Check out [ruby_aem](https://g
 
 [Versions History](../docs/ruby/versions.md)
 
+swagger_aem is part of [AEM OpenCloud](https://aemopencloud.io) platform.
+
 Install
 -------
 

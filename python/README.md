@@ -9,6 +9,8 @@ This Python client returns raw HTTP response AS-IS. Check out [pythonaem](https:
 |-------------|------------------------|-------------------------|---------------------|---------------------------------------------------------------------------|
 | 0.9.0       | 6.0, 6.1, 6.2          | 2.6, 2.7                | 20160902            | [API](https://shinesolutions.github.io/swagger-aem/python/0.9.0/index.html) |
 
+swaggeraem is part of [AEM OpenCloud](https://aemopencloud.io) platform.
+
 Install
 -------
 

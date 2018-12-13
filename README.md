@@ -7,6 +7,8 @@ This specification is used to generate client libraries for Ruby, Python, node.j
 
 [Versions History](docs/versions.md)
 
+Swagger AEM is part of [AEM OpenCloud](https://aemopencloud.io) platform.
+
 Generated Clients
 -----------------
 

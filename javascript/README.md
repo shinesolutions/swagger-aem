@@ -9,6 +9,8 @@ This node.js client returns raw HTTP response AS-IS. Check out [node-aem](https:
 |------------------|------------------------|-------------------------|---------------------|---------------------------------------------------------------------------------|
 | 0.9.0            | 6.0, 6.1, 6.2          | 4.x, 6.x                | 20161104            | [API](https://shinesolutions.github.io/swagger-aem/javascript/0.9.0/index.html) |
 
+node-swagger-aem is part of [AEM OpenCloud](https://aemopencloud.io) platform.
+
 Install
 -------
 

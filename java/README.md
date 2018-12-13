@@ -7,6 +7,8 @@ This Java client returns raw HTTP response AS-IS. An abstraction layer with reso
 
 [Versions History](../docs/java/versions.md)
 
+swaggeraem4j is part of [AEM OpenCloud](https://aemopencloud.io) platform.
+
 Install
 -------
 
