@@ -57,4 +57,5 @@ Tagging should also be prefixed with:
 Presentations
 -------------
 
-* [Building An AEM API Clients Ecosystem](https://www.slideshare.net/cliffano/building-an-aem-api-clients-ecosystem/)
+* [Beyond AEM Curl Commands](https://www.slideshare.net/cliffano/beyond-aem-curl-commands) at [Adobe Immerse'18](https://immerse18.adobe-devs.adobeevents.com/)
+* [Building An AEM API Clients Ecosystem](https://www.slideshare.net/cliffano/building-an-aem-api-clients-ecosystem/) at [Adobe Experience Cloud Meetup - 5th Edition](https://www.meetup.com/Melbourne-Adobe-Experience-Cloud/events/249851899/)
