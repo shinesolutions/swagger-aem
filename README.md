@@ -14,7 +14,7 @@ Learn more about Swagger AEM:
 * [Contribution](https://github.com/shinesolutions/swagger-aem#contribution)
 * [Presentations](https://github.com/shinesolutions/swagger-aem/#presentations)
 
-Swagger AEM is part of [AEM OpenCloud](https://aemopencloud.io) platform.
+Swagger AEM is part of [AEM OpenCloud](https://aemopencloud.io) platform but it can be used as a stand-alone.
 
 Generated Clients
 -----------------
