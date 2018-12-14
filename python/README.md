@@ -5,14 +5,18 @@ swaggeraem is a Python client generated from [Swagger AEM specification](https:/
 
 This Python client returns raw HTTP response AS-IS. Check out [pythonaem](https://github.com/shinesolutions/ruby_aem) for an abstraction layer with resource-oriented API and convenient response handling.
 
-| swagger_aem | Supported AEM          | Supported Python        | Swagger Codegen CLI | Documentation                                                             |
-|-------------|------------------------|-------------------------|---------------------|---------------------------------------------------------------------------|
-| 0.9.0       | 6.0, 6.1, 6.2          | 2.6, 2.7                | 20160902            | [API](https://shinesolutions.github.io/swagger-aem/python/0.9.0/index.html) |
+Learn more about swaggeraem:
+
+* [Installation](https://github.com/shinesolutions/swagger-aem/tree/master/python#installation)
+* [Usage](https://github.com/shinesolutions/swagger-aem/tree/master/python#usage)
+* [Error Handling](https://github.com/shinesolutions/swagger-aem/tree/master/python#error-handling)
+* [Development](https://github.com/shinesolutions/swagger-aem/tree/master/python#development)
+* [Versions History](https://github.com/shinesolutions/swagger-aem/blob/master/docs/python/versions.md)
 
 swaggeraem is part of [AEM OpenCloud](https://aemopencloud.io) platform.
 
-Install
--------
+Installation
+------------
 
     pip install swaggeraem
 
@@ -264,7 +268,7 @@ Sling API - User:
       }
     ) -->
 
-Error handling
+Error Handling
 --------------
 
 Any API exception will be thrown as [ApiException](https://shinesolutions.github.io/swagger-aem/python/master/swaggeraem.html#swaggeraem.rest.ApiException) .

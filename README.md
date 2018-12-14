@@ -5,7 +5,14 @@ Swagger AEM is an OpenAPI specification for [Adobe Experience Manager (AEM)](htt
 
 This specification is used to generate client libraries for Ruby, Python, node.js, and Java using [Swagger Code Generator](https://github.com/swagger-api/swagger-codegen).
 
-[Versions History](docs/versions.md)
+Learn more about Swagger AEM:
+
+* [Generated Clients](https://github.com/shinesolutions/swagger-aem#generated-clients)
+* [Development](https://github.com/shinesolutions/swagger-aem#development)
+* [Testing](https://github.com/shinesolutions/swagger-aem#testing)
+* [Versions History](https://github.com/shinesolutions/swagger-aem/blob/master/docs/versions.md)
+* [Contribution](https://github.com/shinesolutions/swagger-aem#contribution)
+* [Presentations](https://github.com/shinesolutions/swagger-aem/#presentations)
 
 Swagger AEM is part of [AEM OpenCloud](https://aemopencloud.io) platform.
 
@@ -47,9 +54,7 @@ Tagging should also be prefixed with:
 * `api` when the release is for the OpenAPI specification, e.g. `api-1.0.0`
 * `ruby|python|javascript|java` when the release is for the generated client, e.g. `ruby-0.9.2`, `python-0.9.0`
 
-Others
-------
-
-Presentation:
+Presentations
+-------------
 
 * [Building An AEM API Clients Ecosystem](https://www.slideshare.net/cliffano/building-an-aem-api-clients-ecosystem/)

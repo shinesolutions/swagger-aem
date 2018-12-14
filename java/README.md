@@ -5,12 +5,18 @@ swaggeraem4j is a Java client generated from [Swagger AEM specification](https:/
 
 This Java client returns raw HTTP response AS-IS. An abstraction layer with resource-oriented API and convenient response handling (a la [ruby_aem](https://github.com/shinesolutions/ruby_aem)) is still a work in progress.
 
-[Versions History](../docs/java/versions.md)
+Learn more about swaggeraem4j:
+
+* [Installation](https://github.com/shinesolutions/swagger-aem/tree/master/java#installation)
+* [Usage](https://github.com/shinesolutions/swagger-aem/tree/master/java#usage)
+* [Error Handling](https://github.com/shinesolutions/swagger-aem/tree/master/java#error-handling)
+* [Development](https://github.com/shinesolutions/swagger-aem/tree/master/java#development)
+* [Versions History](https://github.com/shinesolutions/swagger-aem/blob/master/docs/java/versions.md)
 
 swaggeraem4j is part of [AEM OpenCloud](https://aemopencloud.io) platform.
 
-Install
--------
+Installation
+------------
 
 Maven:
 
@@ -386,7 +392,7 @@ Sling API - User:
 		String profilegivenName = "";
 		ApiResponse<String> response = sling.postAuthorizablesWithHttpInfo(id, intermediatePath, createUser, createGroup, reppassword, profilegivenName);
 
-Error handling
+Error Handling
 --------------
 
 Any API error will be thrown as [ApiException](https://shinesolutions.github.io/swagger-aem/java/master/com/shinesolutions/swaggeraem4j/ApiException.html) .

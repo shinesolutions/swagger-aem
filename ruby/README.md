@@ -8,12 +8,18 @@ swagger_aem is a Ruby client generated from [Swagger AEM specification](https://
 
 This Ruby client returns raw HTTP response AS-IS. Check out [ruby_aem](https://github.com/shinesolutions/ruby_aem) for an abstraction layer with resource-oriented API and convenient response handling.
 
-[Versions History](../docs/ruby/versions.md)
+Learn more about swagger_aem:
+
+* [Installation](https://github.com/shinesolutions/swagger-aem/tree/master/ruby#installation)
+* [Error Handling](https://github.com/shinesolutions/swagger-aem/tree/master/ruby#error-handling)
+* [Development](https://github.com/shinesolutions/swagger-aem/tree/master/ruby#development)
+* [Testing](https://github.com/shinesolutions/swagger-aem/tree/master/ruby#testing)
+* [Versions History](https://github.com/shinesolutions/swagger-aem/blob/master/docs/ruby/versions.md)
 
 swagger_aem is part of [AEM OpenCloud](https://aemopencloud.io) platform.
 
-Install
--------
+Installation
+------------
 
     gem install swagger_aem
 
@@ -539,7 +545,7 @@ Custom API - Get Health Check:
       }
     )
 
-Error handling
+Error Handling
 --------------
 
 Any API error will be thrown as [SwaggerAemClient::ApiError](https://shinesolutions.github.io/swagger-aem/ruby/master/SwaggerAemClient/ApiError.html) .
