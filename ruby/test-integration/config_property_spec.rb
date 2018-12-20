@@ -228,4 +228,43 @@ describe 'ConfigProperty' do
 
   end
 
+  describe 'test create Apache HTTP Components Proxy Configuration properties' do
+
+    it 'should succeed when path node already exists' do
+
+      # ensure http OSGI config node exists
+      begin
+        data, status_code, headers = @sling.post_path_with_http_info(
+          path = 'apps/system/config',
+          jcrprimary_type = 'sling:OsgiConfig',
+          name = 'org.apache.http.proxyconfigurator.config'
+        )
+        # create config when it does not exist
+        expect([200, 201]).to include(status_code)
+      rescue SwaggerAemClient::ApiError => err
+        # ignore when it already exists
+        expect(err.code).to eq(500)
+      end
+
+      data, status_code, headers = @sling.post_config_apache_http_components_proxy_configuration_with_http_info(
+        opts = {
+          :proxy_host => '192.168.1.1',
+          :proxy_host_type_hint => 'String',
+          :proxy_port => 8080,
+          :proxy_port_type_hint => 'Long',
+          :proxy_exceptions => ['localhost', '127.0.0.1', '*.shinesolutions.com'],
+          :proxy_exceptions_type_hint => 'String[]',
+          :proxy_user => 'proxytestuser',
+          :proxy_user_type_hint => 'String',
+          :proxy_password => 'changeit',
+          :proxy_password_type_hint => 'String',
+          :proxy_enabled => true,
+          :proxy_enabled_type_hint => 'Boolean',
+        }
+      )
+      expect([200, 201]).to include(status_code)
+    end
+
+  end
+
 end

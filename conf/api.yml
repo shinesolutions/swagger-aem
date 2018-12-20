@@ -1283,6 +1283,68 @@ paths:
       responses:
         default:
           description: 'Default response'
+  /apps/system/config/org.apache.http.proxyconfigurator.config:
+    post:
+      operationId: postConfigApacheHttpComponentsProxyConfiguration
+      produces:
+        - text/plain
+      parameters:
+        - name: proxy.host
+          in: query
+          required: false
+          type: string
+        - name: proxy.host@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: proxy.port
+          in: query
+          required: false
+          type: integer
+        - name: proxy.port@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: proxy.exceptions
+          in: query
+          required: false
+          type: array
+          collectionFormat: multi
+          items:
+            type: string
+        - name: proxy.exceptions@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: proxy.enabled
+          in: query
+          required: false
+          type: boolean
+        - name: proxy.enabled@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: proxy.user
+          in: query
+          required: false
+          type: string
+        - name: proxy.user@TypeHint
+          in: query
+          required: false
+          type: string
+        - name: proxy.password
+          in: query
+          required: false
+          type: string
+        - name: proxy.password@TypeHint
+          in: query
+          required: false
+          type: string
+      tags:
+        - sling
+      responses:
+        default:
+          description: 'Default response'
   /libs/granite/security/post/truststore:
     post:
       operationId: postTruststore
