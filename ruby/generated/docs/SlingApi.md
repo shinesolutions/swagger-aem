@@ -21,6 +21,7 @@ Method | HTTP request | Description
 [**post_authorizables**](SlingApi.md#post_authorizables) | **POST** /libs/granite/security/post/authorizables | 
 [**post_config_adobe_granite_saml_authentication_handler**](SlingApi.md#post_config_adobe_granite_saml_authentication_handler) | **POST** /apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config | 
 [**post_config_apache_felix_jetty_based_http_service**](SlingApi.md#post_config_apache_felix_jetty_based_http_service) | **POST** /apps/system/config/org.apache.felix.http | 
+[**post_config_apache_http_components_proxy_configuration**](SlingApi.md#post_config_apache_http_components_proxy_configuration) | **POST** /apps/system/config/org.apache.http.proxyconfigurator.config | 
 [**post_config_apache_sling_dav_ex_servlet**](SlingApi.md#post_config_apache_sling_dav_ex_servlet) | **POST** /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet | 
 [**post_config_apache_sling_get_servlet**](SlingApi.md#post_config_apache_sling_get_servlet) | **POST** /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet | 
 [**post_config_apache_sling_referrer_filter**](SlingApi.md#post_config_apache_sling_referrer_filter) | **POST** /apps/system/config/org.apache.sling.security.impl.ReferrerFilter | 
@@ -1168,6 +1169,78 @@ Name | Type | Description  | Notes
  **org_apache_felix_https_enable_type_hint** | **String**|  | [optional] 
  **org_osgi_service_http_port_secure** | **String**|  | [optional] 
  **org_osgi_service_http_port_secure_type_hint** | **String**|  | [optional] 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain
+
+
+
+# **post_config_apache_http_components_proxy_configuration**
+> post_config_apache_http_components_proxy_configuration(opts)
+
+
+
+### Example
+```ruby
+# load the gem
+require 'swagger_aem'
+# setup authorization
+SwaggerAemClient.configure do |config|
+  # Configure HTTP basic authorization: aemAuth
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = SwaggerAemClient::SlingApi.new
+
+opts = { 
+  proxy_host: "proxy_host_example", # String | 
+  proxy_host_type_hint: "proxy_host_type_hint_example", # String | 
+  proxy_port: 56, # Integer | 
+  proxy_port_type_hint: "proxy_port_type_hint_example", # String | 
+  proxy_exceptions: ["proxy_exceptions_example"], # Array<String> | 
+  proxy_exceptions_type_hint: "proxy_exceptions_type_hint_example", # String | 
+  proxy_enabled: true, # BOOLEAN | 
+  proxy_enabled_type_hint: "proxy_enabled_type_hint_example", # String | 
+  proxy_user: "proxy_user_example", # String | 
+  proxy_user_type_hint: "proxy_user_type_hint_example", # String | 
+  proxy_password: "proxy_password_example", # String | 
+  proxy_password_type_hint: "proxy_password_type_hint_example" # String | 
+}
+
+begin
+  api_instance.post_config_apache_http_components_proxy_configuration(opts)
+rescue SwaggerAemClient::ApiError => e
+  puts "Exception when calling SlingApi->post_config_apache_http_components_proxy_configuration: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **proxy_host** | **String**|  | [optional] 
+ **proxy_host_type_hint** | **String**|  | [optional] 
+ **proxy_port** | **Integer**|  | [optional] 
+ **proxy_port_type_hint** | **String**|  | [optional] 
+ **proxy_exceptions** | [**Array&lt;String&gt;**](String.md)|  | [optional] 
+ **proxy_exceptions_type_hint** | **String**|  | [optional] 
+ **proxy_enabled** | **BOOLEAN**|  | [optional] 
+ **proxy_enabled_type_hint** | **String**|  | [optional] 
+ **proxy_user** | **String**|  | [optional] 
+ **proxy_user_type_hint** | **String**|  | [optional] 
+ **proxy_password** | **String**|  | [optional] 
+ **proxy_password_type_hint** | **String**|  | [optional] 
 
 ### Return type
 
