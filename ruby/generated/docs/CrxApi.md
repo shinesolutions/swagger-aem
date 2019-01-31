@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_crxde_status**](CrxApi.md#get_crxde_status) | **GET** /crx/server/crx.default/jcr:root/.1.json | 
 [**get_install_status**](CrxApi.md#get_install_status) | **GET** /crx/packmgr/installstatus.jsp | 
+[**get_package_manager_servlet**](CrxApi.md#get_package_manager_servlet) | **GET** /crx/packmgr/service/script.html | 
 [**post_package_service**](CrxApi.md#post_package_service) | **POST** /crx/packmgr/service.jsp | 
 [**post_package_service_json**](CrxApi.md#post_package_service_json) | **POST** /crx/packmgr/service/.json/{path} | 
 [**post_package_update**](CrxApi.md#post_package_update) | **POST** /crx/packmgr/update.jsp | 
@@ -97,6 +98,49 @@ This endpoint does not need any parameter.
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+
+
+# **get_package_manager_servlet**
+> get_package_manager_servlet
+
+
+
+### Example
+```ruby
+# load the gem
+require 'swagger_aem'
+# setup authorization
+SwaggerAemClient.configure do |config|
+  # Configure HTTP basic authorization: aemAuth
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = SwaggerAemClient::CrxApi.new
+
+begin
+  api_instance.get_package_manager_servlet
+rescue SwaggerAemClient::ApiError => e
+  puts "Exception when calling CrxApi->get_package_manager_servlet: #{e}"
+end
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/html
 
 
 
