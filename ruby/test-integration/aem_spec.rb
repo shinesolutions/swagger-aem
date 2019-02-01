@@ -69,14 +69,15 @@ describe 'Aem' do
 
   end
 
-  # Since Swagger  doesn't recognise this page as non error page the integration test
-  # is disabled for the moment
-  # describe 'test get CRX Package Manager Servlet service state' do
-  #
-  #   it 'should succeed and contain readyness detection' do
-  #     data, status_code, headers = @crx.get_package_manager_servlet_with_http_info()
-  #     expect(status_code).to eq(405)
-  #   end
-  #
-  # end
+  describe 'test get CRX Package Manager Servlet service state' do
+
+    it 'should succeed and contain readyness detection' do
+      begin
+        @crx.get_package_manager_servlet_with_http_info()
+      rescue SwaggerAemClient::ApiError => err
+        expect([405]).to include(err.code)
+      end
+    end
+
+  end
 end
