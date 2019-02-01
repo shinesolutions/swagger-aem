@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    swagger_aem (2.4.0)
+    swagger_aem (2.5.0.pre.pre)
       json (~> 2.1, >= 2.1.0)
       typhoeus (~> 1.0, >= 1.0.1)
 
@@ -9,7 +9,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     ZenTest (4.11.2)
-    addressable (2.5.2)
+    addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
     autotest (4.4.6)
       ZenTest (>= 4.4.1)
@@ -20,7 +20,7 @@ GEM
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     diff-lcs (1.3)
-    ethon (0.11.0)
+    ethon (0.12.0)
       ffi (>= 1.3.0)
     ffi (1.10.0)
     hashdiff (0.3.8)

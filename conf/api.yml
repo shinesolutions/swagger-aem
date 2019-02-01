@@ -1000,6 +1000,24 @@ paths:
             type: string
       tags:
         - crx
+
+  /crx/packmgr/service/script.html:
+    get:
+      operationId: getPackageManagerServlet
+      produces:
+        - text/html
+      responses:
+        404:
+          description: 'Package Manager Servlet is disabled'
+          schema:
+            type: string
+        405:
+          description: 'Package Manager Servlet is active'
+          schema:
+            type: string
+      tags:
+        - crx
+
   /crx/server/crx.default/jcr:root/.1.json:
     get:
       operationId: getCrxdeStatus
