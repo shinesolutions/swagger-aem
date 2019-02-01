@@ -2,9 +2,9 @@ GEM
   remote: https://rubygems.org/
   specs:
     diff-lcs (1.3)
-    ethon (0.11.0)
+    ethon (0.12.0)
       ffi (>= 1.3.0)
-    ffi (1.9.25)
+    ffi (1.10.0)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
       rspec-expectations (~> 3.8.0)
@@ -31,4 +31,4 @@ DEPENDENCIES
   yard (= 0.9.12)
 
 BUNDLED WITH
-   1.17.1
+   2.0.1
