@@ -5,7 +5,7 @@ clean:
 	rm -rf generated/ Gemfile.lock
 
 deps:
-	gem install bundler
+	gem install bundler -v 1.17.3
 	bundle install --binstubs
 
 build: clean
