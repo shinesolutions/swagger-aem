@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Replace Swaggy-C with OpenAPI Generator for generating client code #31
+
+### Removed
+- Client generation support using Swagger-CodeGen jar
+
 ## [2.5.0] - 2019-02-01
 
 ### Added

@@ -1,26 +1,25 @@
-ifndef SWAGGER_CODEGEN_CLI_JAR
-	SWAGGER_CODEGEN = swagger-codegen
-else
-	SWAGGER_CODEGEN = java -jar $(SWAGGER_CODEGEN_CLI_JAR)
-endif
-
 all: clean deps build install test-unit test-integration doc
 ci: clean deps build install test-unit doc
+
+clean:
+	rm -rf generated/ Gemfile.lock
 
 deps:
 	gem install bundler
 	bundle install --binstubs
 
-clean:
-	rm -rf generated/ Gemfile.lock
-
 build: clean
-	$(SWAGGER_CODEGEN) generate \
-	  --input-spec ../conf/api.yml \
-		--lang ruby \
-		--output generated/ \
-		--config conf/client.json
-	cd generated && bundle install
+	mkdir -p generated/
+	docker \
+	  run \
+	  -v /Users/cliffano/dev/workspace-shine/swagger-aem/ruby/..:/local/ \
+	  openapitools/openapi-generator-cli \
+	  generate \
+	  --input-spec /local/conf/api.yml \
+	  --config /local/ruby/conf/client.json \
+	  --output /local/ruby/generated/ \
+	  --generator-name ruby;
+	cd generated/ && bundle install
 
 install:
 	cd generated/ && \
