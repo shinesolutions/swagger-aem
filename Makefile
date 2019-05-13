@@ -7,7 +7,8 @@ clean:
 	rm -rf doc
 
 deps:
-	npm install -g bootprint bootprint-openapi gh-pages jsonlint swagger-cli swaggy-c
+	npm install -g bootprint@1.0.2 bootprint-openapi@1.1.1 gh-pages@2.0.1 jsonlint@1.6.3 swagger-cli@2.2.1 swaggy-c@0.1.0
+	# TODO: migrate to openapitools/openapi-generator-cli:v<specific version> after upgrading OpenAPI spec to version 3
 	docker pull cliffano/swaggy-c
 
 lint:
