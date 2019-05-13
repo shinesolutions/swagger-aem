@@ -1,0 +1,15 @@
+{
+  "resources": [
+    {
+      "path": "conf/client.json",
+      "type": "json",
+      "params": {
+        "property": "gemVersion"
+      }
+    },
+    {
+      "path": "CHANGELOG.md",
+      "type": "keep-a-changelog"
+    }
+  ]
+}

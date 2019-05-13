@@ -57,4 +57,7 @@ publish: install
 	cd generated/ && \
 	  gem push `ls swagger_aem-*.gem`
 
-.PHONY: all ci deps clean build install test-unit test-integration fixtures doc publish
+release:
+	rtk release
+
+.PHONY: all ci deps clean build install test-unit test-integration fixtures doc publish release
