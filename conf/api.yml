@@ -1,19 +1,12 @@
-swagger: '2.0'
+openapi: 3.0.0
 info:
   title: Adobe Experience Manager (AEM) API
   description: Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
-  version: "2.5.0-pre"
+  version: 2.5.0-pre
   contact:
     name: Shine Solutions
     url: http://shinesolutions.com
     email: opensource@shinesolutions.com
-schemes:
-  - http
-  - https
-basePath: /
-securityDefinitions:
-  aemAuth:
-    type: basic
 security:
   - aemAuth: []
 paths:
@@ -21,2041 +14,2342 @@ paths:
     get:
       operationId: getLoginPage
       security: []
-      produces:
-        - text/html
       responses:
         default:
-          description: 'Default response'
-          schema:
-            type: string
+          description: Default response
+          content:
+            text/html:
+              schema:
+                type: string
       tags:
         - cq
   /.cqactions.html:
     post:
       operationId: postCqActions
-      produces:
-        - text/plain
       parameters:
         - name: authorizableId
           in: query
           required: true
-          type: string
+          schema:
+            type: string
         - name: changelog
           in: query
           required: true
-          type: string
+          schema:
+            type: string
       tags:
         - cq
       responses:
         default:
-          description: 'Default response'
-  /{path}/:
+          description: Default response
+  "/{path}/":
     post:
       operationId: postPath
-      produces:
-        - text/plain
       parameters:
         - name: path
           in: path
           required: true
-          type: string
+          schema:
+            type: string
         - name: jcr:primaryType
           in: query
           required: true
-          type: string
+          schema:
+            type: string
         - name: :name
           in: query
           required: true
-          type: string
+          schema:
+            type: string
       tags:
         - sling
       responses:
         default:
-          description: 'Default response'
-  /{path}/{name}:
+          description: Default response
+  "/{path}/{name}":
     get:
       operationId: getNode
-      produces:
-        - text/plain
       parameters:
         - name: path
           in: path
           required: true
-          type: string
+          schema:
+            type: string
         - name: name
           in: path
           required: true
-          type: string
+          schema:
+            type: string
       tags:
         - sling
       responses:
         default:
-          description: 'Default response'
+          description: Default response
     post:
       operationId: postNode
-      produces:
-        - text/plain
       parameters:
         - name: path
           in: path
           required: true
-          type: string
+          schema:
+            type: string
         - name: name
           in: path
           required: true
-          type: string
+          schema:
+            type: string
         - name: :operation
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: deleteAuthorizable
           in: query
           required: false
-          type: string
-        - name: file
-          in: formData
-          required: false
-          type: file
-      consumes:
-        - multipart/form-data
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
       tags:
         - sling
       responses:
         default:
-          description: 'Default response'
+          description: Default response
     delete:
       operationId: deleteNode
-      produces:
-        - text/plain
       parameters:
         - name: path
           in: path
           required: true
-          type: string
+          schema:
+            type: string
         - name: name
           in: path
           required: true
-          type: string
+          schema:
+            type: string
       tags:
         - sling
       responses:
         default:
-          description: 'Default response'
-  /{path}/{name}.rw.html:
+          description: Default response
+  "/{path}/{name}.rw.html":
     post:
       operationId: postNodeRw
-      produces:
-        - text/plain
       parameters:
         - name: path
           in: path
           required: true
-          type: string
+          schema:
+            type: string
         - name: name
           in: path
           required: true
-          type: string
+          schema:
+            type: string
         - name: addMembers
           in: query
           required: false
-          type: string
+          schema:
+            type: string
       tags:
         - sling
       responses:
         default:
-          description: 'Default response'
+          description: Default response
   /apps/system/config/org.apache.felix.http:
     post:
       operationId: postConfigApacheFelixJettyBasedHttpService
-      produces:
-        - text/plain
       parameters:
         - name: org.apache.felix.https.nio
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: org.apache.felix.https.nio@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: org.apache.felix.https.keystore
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: org.apache.felix.https.keystore@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: org.apache.felix.https.keystore.password
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: org.apache.felix.https.keystore.password@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: org.apache.felix.https.keystore.key
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: org.apache.felix.https.keystore.key@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: org.apache.felix.https.keystore.key.password
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: org.apache.felix.https.keystore.key.password@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: org.apache.felix.https.truststore
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: org.apache.felix.https.truststore@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: org.apache.felix.https.truststore.password
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: org.apache.felix.https.truststore.password@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: org.apache.felix.https.clientcertificate
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: org.apache.felix.https.clientcertificate@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: org.apache.felix.https.enable
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: org.apache.felix.https.enable@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: org.osgi.service.http.port.secure
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: org.osgi.service.http.port.secure@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
       tags:
         - sling
       responses:
         default:
-          description: 'Default response'
+          description: Default response
   /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet:
     post:
       operationId: postConfigApacheSlingGetServlet
-      produces:
-        - text/plain
       parameters:
         - name: json.maximumresults
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: json.maximumresults@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: enable.html
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: enable.html@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: enable.txt
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: enable.txt@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: enable.xml
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: enable.xml@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
       tags:
         - sling
       responses:
         default:
-          description: 'Default response'
+          description: Default response
   /apps/system/config/org.apache.sling.security.impl.ReferrerFilter:
     post:
       operationId: postConfigApacheSlingReferrerFilter
-      produces:
-        - text/plain
       parameters:
         - name: allow.empty
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: allow.empty@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: allow.hosts
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: allow.hosts@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: allow.hosts.regexp
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: allow.hosts.regexp@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: filter.methods
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: filter.methods@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
       tags:
         - sling
       responses:
         default:
-          description: 'Default response'
+          description: Default response
   /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet:
     post:
       operationId: postConfigApacheSlingDavExServlet
-      produces:
-        - text/plain
       parameters:
         - name: alias
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: alias@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: dav.create-absolute-uri
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: dav.create-absolute-uri@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
       tags:
         - sling
       responses:
         default:
-          description: 'Default response'
+          description: Default response
   /apps/system/config/com.shinesolutions.aem.passwordreset.Activator:
     post:
       operationId: postConfigAemPasswordReset
-      produces:
-        - text/plain
       parameters:
         - name: pwdreset.authorizables
           in: query
           required: false
-          type: array
-          collectionFormat: multi
-          items:
-            type: string
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
         - name: pwdreset.authorizables@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
       tags:
         - custom
       responses:
         default:
-          description: 'Default response'
+          description: Default response
   /apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck:
     post:
       operationId: postConfigAemHealthCheckServlet
-      produces:
-        - text/plain
       parameters:
         - name: bundles.ignored
           in: query
           required: false
-          type: array
-          collectionFormat: multi
-          items:
-            type: string
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
         - name: bundles.ignored@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
       tags:
         - custom
       responses:
         default:
-          description: 'Default response'
+          description: Default response
   /bin/querybuilder.json:
     get:
       operationId: getQuery
-      produces:
-        - application/json
       parameters:
         - name: path
           in: query
           required: true
-          type: string
+          schema:
+            type: string
         - name: p.limit
           in: query
           required: true
-          type: number
+          schema:
+            type: number
         - name: 1_property
           in: query
           required: true
-          type: string
+          schema:
+            type: string
         - name: 1_property.value
           in: query
           required: true
-          type: string
-      responses:
-        default:
-          description: 'Default response'
           schema:
             type: string
+      responses:
+        default:
+          description: Default response
+          content:
+            application/json:
+              schema:
+                type: string
       tags:
         - sling
     post:
       operationId: postQuery
-      produces:
-        - application/json
       parameters:
         - name: path
           in: query
           required: true
-          type: string
+          schema:
+            type: string
         - name: p.limit
           in: query
           required: true
-          type: number
+          schema:
+            type: number
         - name: 1_property
           in: query
           required: true
-          type: string
+          schema:
+            type: string
         - name: 1_property.value
           in: query
           required: true
-          type: string
-      responses:
-        default:
-          description: 'Default response'
           schema:
             type: string
+      responses:
+        default:
+          description: Default response
+          content:
+            application/json:
+              schema:
+                type: string
       tags:
         - sling
-  /etc/packages/{group}/{name}-{version}.zip:
+  "/etc/packages/{group}/{name}-{version}.zip":
     get:
       operationId: getPackage
-      produces:
-        - application/octet-stream
       parameters:
         - name: group
           in: path
           required: true
-          type: string
+          schema:
+            type: string
         - name: name
           in: path
           required: true
-          type: string
+          schema:
+            type: string
         - name: version
           in: path
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         default:
-          description: 'Default response'
-          schema:
-            type: file
+          description: Default response
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
       tags:
         - sling
-  /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json:
+  "/etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json":
     get:
       operationId: getPackageFilter
-      produces:
-        - application/json
       parameters:
         - name: group
           in: path
           required: true
-          type: string
+          schema:
+            type: string
         - name: name
           in: path
           required: true
-          type: string
+          schema:
+            type: string
         - name: version
           in: path
           required: true
-          type: string
-      responses:
-        default:
-          description: 'Default response'
           schema:
             type: string
+      responses:
+        default:
+          description: Default response
+          content:
+            application/json:
+              schema:
+                type: string
       tags:
         - sling
-  /etc/replication/agents.{runmode}.-1.json:
+  "/etc/replication/agents.{runmode}.-1.json":
     get:
       operationId: getAgents
-      produces:
-        - application/json
       parameters:
         - name: runmode
           in: path
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         default:
-          description: 'Default response'
+          description: Default response
+          content:
+            application/json:
+              schema:
+                type: string
+      tags:
+        - sling
+  "/etc/replication/agents.{runmode}/{name}":
+    get:
+      operationId: getAgent
+      parameters:
+        - name: runmode
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: name
+          in: path
+          required: true
           schema:
             type: string
       tags:
         - sling
-  /etc/replication/agents.{runmode}/{name}:
-    get:
-      operationId: getAgent
-      produces:
-        - text/plain
-      parameters:
-        - name: runmode
-          in: path
-          required: true
-          type: string
-        - name: name
-          in: path
-          required: true
-          type: string
-      tags:
-        - sling
       responses:
         default:
-          description: 'Default response'
+          description: Default response
     delete:
       operationId: deleteAgent
-      produces:
-        - text/plain
       parameters:
         - name: runmode
           in: path
           required: true
-          type: string
+          schema:
+            type: string
         - name: name
           in: path
           required: true
-          type: string
+          schema:
+            type: string
       tags:
         - sling
       responses:
         default:
-          description: 'Default response'
+          description: Default response
     post:
       operationId: postAgent
-      produces:
-        - text/plain
       parameters:
         - name: runmode
           in: path
           required: true
-          type: string
+          schema:
+            type: string
         - name: name
           in: path
           required: true
-          type: string
+          schema:
+            type: string
         - name: jcr:content/cq:distribute
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: jcr:content/cq:distribute@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: jcr:content/cq:name
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: jcr:content/cq:template
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: jcr:content/enabled
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: jcr:content/jcr:description
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: jcr:content/jcr:lastModified
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: jcr:content/jcr:lastModifiedBy
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: jcr:content/jcr:mixinTypes
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: jcr:content/jcr:title
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: jcr:content/logLevel
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: jcr:content/noStatusUpdate
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: jcr:content/noVersioning
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: jcr:content/protocolConnectTimeout
           in: query
           required: false
-          type: number
+          schema:
+            type: number
         - name: jcr:content/protocolHTTPConnectionClosed
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: jcr:content/protocolHTTPExpired
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: jcr:content/protocolHTTPHeaders
           in: query
           required: false
-          type: array
-          collectionFormat: multi
-          items:
-            type: string
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
         - name: jcr:content/protocolHTTPHeaders@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: jcr:content/protocolHTTPMethod
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: jcr:content/protocolHTTPSRelaxed
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: jcr:content/protocolInterface
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: jcr:content/protocolSocketTimeout
           in: query
           required: false
-          type: number
+          schema:
+            type: number
         - name: jcr:content/protocolVersion
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: jcr:content/proxyNTLMDomain
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: jcr:content/proxyNTLMHost
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: jcr:content/proxyHost
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: jcr:content/proxyPassword
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: jcr:content/proxyPort
           in: query
           required: false
-          type: number
+          schema:
+            type: number
         - name: jcr:content/proxyUser
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: jcr:content/queueBatchMaxSize
           in: query
           required: false
-          type: number
+          schema:
+            type: number
         - name: jcr:content/queueBatchMode
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: jcr:content/queueBatchWaitTime
           in: query
           required: false
-          type: number
+          schema:
+            type: number
         - name: jcr:content/retryDelay
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: jcr:content/reverseReplication
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: jcr:content/serializationType
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: jcr:content/sling:resourceType
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: jcr:content/ssl
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: jcr:content/transportNTLMDomain
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: jcr:content/transportNTLMHost
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: jcr:content/transportPassword
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: jcr:content/transportUri
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: jcr:content/transportUser
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: jcr:content/triggerDistribute
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: jcr:content/triggerModified
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: jcr:content/triggerOnOffTime
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: jcr:content/triggerReceive
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: jcr:content/triggerSpecific
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: jcr:content/userId
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: jcr:primaryType
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: :operation
           in: query
           required: false
-          type: string
+          schema:
+            type: string
       tags:
         - sling
       responses:
         default:
-          description: 'Default response'
+          description: Default response
   /etc/replication/treeactivation.html:
     post:
       operationId: postTreeActivation
-      produces:
-        - text/plain
       parameters:
         - name: ignoredeactivated
           in: query
           required: true
-          type: boolean
+          schema:
+            type: boolean
         - name: onlymodified
           in: query
           required: true
-          type: boolean
+          schema:
+            type: boolean
         - name: path
           in: query
           required: true
-          type: string
+          schema:
+            type: string
       tags:
         - sling
       responses:
         default:
-          description: 'Default response'
+          description: Default response
   /libs/granite/security/post/authorizables:
     post:
       operationId: postAuthorizables
-      produces:
-        - text/html
       parameters:
         - name: authorizableId
           in: query
           required: true
-          type: string
+          schema:
+            type: string
         - name: intermediatePath
           in: query
           required: true
-          type: string
+          schema:
+            type: string
         - name: createUser
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: createGroup
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: rep:password
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: profile/givenName
           in: query
           required: false
-          type: string
-      responses:
-        default:
-          description: 'Default response'
           schema:
             type: string
+      responses:
+        default:
+          description: Default response
+          content:
+            text/html:
+              schema:
+                type: string
       tags:
         - sling
   /crx/explorer/ui/setpassword.jsp:
     post:
       operationId: postSetPassword
-      produces:
-        - text/plain
       parameters:
         - name: old
           in: query
           required: true
-          type: string
+          schema:
+            type: string
         - name: plain
           in: query
           required: true
-          type: string
+          schema:
+            type: string
         - name: verify
           in: query
           required: true
-          type: string
-      responses:
-        default:
-          description: 'Default response'
           schema:
             type: string
+      responses:
+        default:
+          description: Default response
+          content:
+            text/plain:
+              schema:
+                type: string
       tags:
         - crx
   /crx/packmgr/installstatus.jsp:
     get:
       operationId: getInstallStatus
-      produces:
-        - application/json
       responses:
-        200:
-          description: 'Retrieved CRX package manager install status'
-          schema:
-            $ref: '#/definitions/InstallStatus'
+        "200":
+          description: Retrieved CRX package manager install status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InstallStatus"
         default:
-          description: 'Default response'
-          schema:
-            type: string
+          description: Default response
+          content:
+            application/json:
+              schema:
+                type: string
       tags:
         - crx
   /crx/packmgr/service.jsp:
     post:
       operationId: postPackageService
-      produces:
-        - text/xml
       parameters:
         - name: cmd
           in: query
           required: true
-          type: string
-      responses:
-        default:
-          description: 'Default response'
           schema:
             type: string
+      responses:
+        default:
+          description: Default response
+          content:
+            text/xml:
+              schema:
+                type: string
       tags:
         - crx
   /crx/packmgr/update.jsp:
     post:
       operationId: postPackageUpdate
-      produces:
-        - application/json
       parameters:
         - name: groupName
           in: query
           required: true
-          type: string
+          schema:
+            type: string
         - name: packageName
           in: query
           required: true
-          type: string
+          schema:
+            type: string
         - name: version
           in: query
           required: true
-          type: string
+          schema:
+            type: string
         - name: path
           in: query
           required: true
-          type: string
+          schema:
+            type: string
         - name: filter
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: _charset_
           in: query
           required: false
-          type: string
-      responses:
-        default:
-          description: 'Default response'
           schema:
             type: string
+      responses:
+        default:
+          description: Default response
+          content:
+            application/json:
+              schema:
+                type: string
       tags:
         - crx
-  /crx/packmgr/service/.json/{path}:
+  "/crx/packmgr/service/.json/{path}":
     post:
       operationId: postPackageServiceJson
-      produces:
-        - application/json
       parameters:
         - name: path
           in: path
           required: true
-          type: string
+          schema:
+            type: string
         - name: cmd
           in: query
           required: true
-          type: string
+          schema:
+            type: string
         - name: groupName
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: packageName
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: packageVersion
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: _charset_
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: force
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: recursive
           in: query
           required: false
-          type: boolean
-        - name: package
-          in: formData
-          required: false
-          type: file
-      consumes:
-        - multipart/form-data
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                package:
+                  type: string
+                  format: binary
       responses:
         default:
-          description: 'Default response'
-          schema:
-            type: string
+          description: Default response
+          content:
+            application/json:
+              schema:
+                type: string
       tags:
         - crx
-
   /crx/packmgr/service/script.html:
     get:
       operationId: getPackageManagerServlet
-      produces:
-        - text/html
       responses:
-        404:
-          description: 'Package Manager Servlet is disabled'
-          schema:
-            type: string
-        405:
-          description: 'Package Manager Servlet is active'
-          schema:
-            type: string
+        "404":
+          description: Package Manager Servlet is disabled
+          content:
+            text/html:
+              schema:
+                type: string
+        "405":
+          description: Package Manager Servlet is active
+          content:
+            text/html:
+              schema:
+                type: string
       tags:
         - crx
-
   /crx/server/crx.default/jcr:root/.1.json:
     get:
       operationId: getCrxdeStatus
-      produces:
-        - plain/text
       responses:
-        200:
-          description: 'CRXDE is enabled'
-          schema:
-            type: string
-        404:
-          description: 'CRXDE is disabled'
-          schema:
-            type: string
+        "200":
+          description: CRXDE is enabled
+          content:
+            plain/text:
+              schema:
+                type: string
+        "404":
+          description: CRXDE is disabled
+          content:
+            plain/text:
+              schema:
+                type: string
       tags:
         - crx
-  /system/console/bundles/{name}:
+  "/system/console/bundles/{name}":
     post:
       operationId: postBundle
-      produces:
-        - text/plain
       parameters:
         - name: name
           in: path
           required: true
-          type: string
+          schema:
+            type: string
         - name: action
           in: query
           required: true
-          type: string
+          schema:
+            type: string
       tags:
         - console
       responses:
         default:
-          description: 'Default response'
-  /system/console/jmx/com.adobe.granite:type=Repository/op/{action}:
+          description: Default response
+  "/system/console/jmx/com.adobe.granite:type=Repository/op/{action}":
     post:
       operationId: postJmxRepository
-      produces:
-        - text/plain
       parameters:
         - name: action
           in: path
           required: true
-          type: string
+          schema:
+            type: string
       tags:
         - console
       responses:
         default:
-          description: 'Default response'
+          description: Default response
   /system/health:
     get:
       operationId: getAemHealthCheck
-      produces:
-        - application/json
       parameters:
         - name: tags
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: combineTagsOr
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
       responses:
         default:
-          description: 'Default response'
-          schema:
-            type: string
+          description: Default response
+          content:
+            application/json:
+              schema:
+                type: string
       tags:
         - custom
   /apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config:
     post:
       operationId: postConfigAdobeGraniteSamlAuthenticationHandler
-      produces:
-        - text/plain
       parameters:
         - name: keyStorePassword
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: keyStorePassword@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: service.ranking
           in: query
           required: false
-          type: integer
+          schema:
+            type: integer
         - name: service.ranking@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: idpHttpRedirect
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: idpHttpRedirect@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: createUser
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: createUser@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: defaultRedirectUrl
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: defaultRedirectUrl@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: userIDAttribute
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: userIDAttribute@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: defaultGroups
           in: query
           required: false
-          type: array
-          collectionFormat: multi
-          items:
-            type: string
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
         - name: defaultGroups@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: idpCertAlias
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: idpCertAlias@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: addGroupMemberships
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: addGroupMemberships@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: path
           in: query
           required: false
-          type: array
-          collectionFormat: multi
-          items:
-            type: string
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
         - name: path@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: synchronizeAttributes
           in: query
           required: false
-          type: array
-          collectionFormat: multi
-          items:
-            type: string
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
         - name: synchronizeAttributes@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: clockTolerance
           in: query
           required: false
-          type: integer
+          schema:
+            type: integer
         - name: clockTolerance@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: groupMembershipAttribute
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: groupMembershipAttribute@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: idpUrl
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: idpUrl@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: logoutUrl
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: logoutUrl@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: serviceProviderEntityId
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: serviceProviderEntityId@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: assertionConsumerServiceURL
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: assertionConsumerServiceURL@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: handleLogout
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: handleLogout@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: spPrivateKeyAlias
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: spPrivateKeyAlias@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: useEncryption
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: useEncryption@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: nameIdFormat
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: nameIdFormat@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: digestMethod
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: digestMethod@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: signatureMethod
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: signatureMethod@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: userIntermediatePath
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: userIntermediatePath@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
       tags:
         - sling
       responses:
         default:
-          description: 'Default response'
+          description: Default response
   /apps/system/config/org.apache.http.proxyconfigurator.config:
     post:
       operationId: postConfigApacheHttpComponentsProxyConfiguration
-      produces:
-        - text/plain
       parameters:
         - name: proxy.host
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: proxy.host@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: proxy.port
           in: query
           required: false
-          type: integer
+          schema:
+            type: integer
         - name: proxy.port@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: proxy.exceptions
           in: query
           required: false
-          type: array
-          collectionFormat: multi
-          items:
-            type: string
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
         - name: proxy.exceptions@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: proxy.enabled
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: proxy.enabled@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: proxy.user
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: proxy.user@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: proxy.password
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: proxy.password@TypeHint
           in: query
           required: false
-          type: string
+          schema:
+            type: string
       tags:
         - sling
       responses:
         default:
-          description: 'Default response'
+          description: Default response
   /libs/granite/security/post/truststore:
     post:
       operationId: postTruststore
-      produces:
-        - text/plain
       parameters:
         - name: :operation
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: newPassword
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: rePassword
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: keyStoreType
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: removeAlias
           in: query
           required: false
-          type: string
-        - name: certificate
-          in: formData
-          required: false
-          type: file
-      consumes:
-        - multipart/form-data
-      responses:
-        default:
-          description: 'Default response'
           schema:
             type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                certificate:
+                  type: string
+                  format: binary
+      responses:
+        default:
+          description: Default response
+          content:
+            text/plain:
+              schema:
+                type: string
       tags:
         - sling
   /libs/granite/security/truststore.json:
     get:
       operationId: getTruststoreInfo
-      produces:
-        - application/json
       responses:
-        200:
-          description: 'Retrieved AEM Truststore info'
-          schema:
-            $ref: '#/definitions/TruststoreInfo'
+        "200":
+          description: Retrieved AEM Truststore info
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TruststoreInfo"
         default:
-          description: 'Default response'
-          schema:
-            type: string
+          description: Default response
+          content:
+            application/json:
+              schema:
+                type: string
       tags:
         - sling
   /etc/truststore/truststore.p12:
     get:
       operationId: getTruststore
-      produces:
-        - application/octet-stream
       responses:
         default:
-          description: 'Default response'
-          schema:
-            type: file
+          description: Default response
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
       tags:
         - sling
   /etc/truststore:
     post:
       operationId: postTruststorePKCS12
-      produces:
-        - text/plain
-      parameters:
-        - name: truststore.p12
-          in: formData
-          required: false
-          type: file
-      consumes:
-        - multipart/form-data
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                truststore.p12:
+                  type: string
+                  format: binary
       responses:
         default:
-          description: 'Default response'
-          schema:
-            type: string
+          description: Default response
+          content:
+            text/plain:
+              schema:
+                type: string
       tags:
         - sling
   /system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler:
     post:
       operationId: postSamlConfiguration
-      produces:
-        - text/plain
       parameters:
         - name: post
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: apply
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: delete
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: action
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: $location
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: path
           in: query
           required: false
-          type: array
-          collectionFormat: multi
-          items:
-            type: string
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
         - name: service.ranking
           in: query
           required: false
-          type: integer
+          schema:
+            type: integer
         - name: idpUrl
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: idpCertAlias
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: idpHttpRedirect
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: serviceProviderEntityId
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: assertionConsumerServiceURL
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: spPrivateKeyAlias
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: keyStorePassword
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: defaultRedirectUrl
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: userIDAttribute
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: useEncryption
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: createUser
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: addGroupMemberships
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: groupMembershipAttribute
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: defaultGroups
           in: query
           required: false
-          type: array
-          collectionFormat: multi
-          items:
-            type: string
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
         - name: nameIdFormat
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: synchronizeAttributes
           in: query
           required: false
-          type: array
-          collectionFormat: multi
-          items:
-            type: string
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
         - name: handleLogout
           in: query
           required: false
-          type: boolean
+          schema:
+            type: boolean
         - name: logoutUrl
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: clockTolerance
           in: query
           required: false
-          type: integer
+          schema:
+            type: integer
         - name: digestMethod
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: signatureMethod
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: userIntermediatePath
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: propertylist
           in: query
           required: false
-          type: array
-          collectionFormat: csv
-          items:
-            type: string
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
       responses:
-        200:
-          description: 'Retrieved AEM SAML Configuration'
-          schema:
-            $ref: '#/definitions/SamlConfigurationInfo'
-        302:
-          description: 'Default response'
-          schema:
-            type: string
+        "200":
+          description: Retrieved AEM SAML Configuration
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/SamlConfigurationInfo"
+        "302":
+          description: Default response
+          content:
+            text/plain:
+              schema:
+                type: string
         default:
-          description: 'Default response'
-          schema:
-            type: string
+          description: Default response
+          content:
+            text/plain:
+              schema:
+                type: string
       tags:
         - console
   /system/console/status-productinfo.json:
     get:
       operationId: getAemProductInfo
-      produces:
-        - application/json
       responses:
         default:
-          description: 'Default response'
-          schema:
-            type: array
-            items:
-              type: string
+          description: Default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
       tags:
         - console
-  /{intermediatePath}/{authorizableId}.ks.html:
+  "/{intermediatePath}/{authorizableId}.ks.html":
     post:
       operationId: postAuthorizableKeystore
-      produces:
-        - text/plain
       parameters:
         - name: intermediatePath
           in: path
           required: true
-          type: string
+          schema:
+            type: string
         - name: authorizableId
           in: path
           required: true
-          type: string
+          schema:
+            type: string
         - name: :operation
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: currentPassword
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: newPassword
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: rePassword
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: keyPassword
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: keyStorePass
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: alias
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: newAlias
           in: query
           required: false
-          type: string
+          schema:
+            type: string
         - name: removeAlias
           in: query
           required: false
-          type: string
-        - name: cert-chain
-          in: formData
-          required: false
-          type: file
-        - name: pk
-          in: formData
-          required: false
-          type: file
-        - name: keyStore
-          in: formData
-          required: false
-          type: file
-      consumes:
-        - multipart/form-data
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                cert-chain:
+                  type: string
+                  format: binary
+                pk:
+                  type: string
+                  format: binary
+                keyStore:
+                  type: string
+                  format: binary
       tags:
         - sling
       responses:
-        200:
-          description: 'Retrieved Authorizable Keystore info'
-          schema:
-            $ref: '#/definitions/KeystoreInfo'
+        "200":
+          description: Retrieved Authorizable Keystore info
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/KeystoreInfo"
         default:
-          description: 'Default response'
-          schema:
-            type: string
-  /{intermediatePath}/{authorizableId}.ks.json:
+          description: Default response
+          content:
+            text/plain:
+              schema:
+                type: string
+  "/{intermediatePath}/{authorizableId}.ks.json":
     get:
       operationId: getAuthorizableKeystore
-      produces:
-        - text/plain
       parameters:
         - name: intermediatePath
           in: path
           required: true
-          type: string
-        - name: authorizableId
-          in: path
-          required: true
-          type: string
-      tags:
-        - sling
-      responses:
-        200:
-          description: 'Retrieved Authorizable Keystore info'
-          schema:
-            $ref: '#/definitions/KeystoreInfo'
-        default:
-          description: 'Default response'
           schema:
             type: string
-  /{intermediatePath}/{authorizableId}/keystore/store.p12:
+        - name: authorizableId
+          in: path
+          required: true
+          schema:
+            type: string
+      tags:
+        - sling
+      responses:
+        "200":
+          description: Retrieved Authorizable Keystore info
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/KeystoreInfo"
+        default:
+          description: Default response
+          content:
+            text/plain:
+              schema:
+                type: string
+  "/{intermediatePath}/{authorizableId}/keystore/store.p12":
     get:
       operationId: getKeystore
-      produces:
-        - application/octet-stream
       parameters:
         - name: intermediatePath
           in: path
           required: true
-          type: string
+          schema:
+            type: string
         - name: authorizableId
           in: path
           required: true
-          type: string
+          schema:
+            type: string
       responses:
         default:
-          description: 'Default response'
-          schema:
-            type: file
+          description: Default response
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
       tags:
         - sling
-definitions:
-  InstallStatus:
-    type: object
-    properties:
-      status:
-        type: object
-        properties:
-          finished:
-            type: boolean
-          itemCount:
-            type: integer
-  KeystoreInfo:
-    type: object
-    properties:
-      aliases:
-        type: array
-        items:
-          $ref: '#/definitions/KeystoreItems'
-      exists:
-        type: boolean
-        description: "False if truststore don't exist"
-  TruststoreInfo:
-    type: object
-    properties:
-      aliases:
-        type: array
-        items:
-          $ref: '#/definitions/TruststoreItems'
-      exists:
-        type: boolean
-        description: "False if truststore don't exist"
-  KeystoreItems:
-    type: object
-    properties:
-      alias:
-        type: string
-        description: Keystore alias name
-      entryType:
-        type: string
-        description: e.g. "privateKey"
-      algorithm:
-        type: string
-        description: e.g. "RSA"
-      format:
-        type: string
-        description: e.g. "PKCS#8"
-      chain:
-        type: array
-        items:
-          $ref: '#/definitions/KeystoreChainItems'
-  KeystoreChainItems:
-    type: object
-    properties:
-      subject:
-        type: string
-        description: e.g. "CN=localhost"
-      issuer:
-        type: string
-        description: e.g. "CN=Admin"
-      notBefore:
-        type: string
-        description: e.g. "Sun Jul 01 12:00:00 AEST 2018"
-      notAfter:
-        type: string
-        description: e.g. "Sun Jun 30 23:59:50 AEST 2019"
-      serialNumber:
-        type: integer
-        description: '18165099476682912368'
-  TruststoreItems:
-    type: object
-    properties:
-      alias:
-        type: string
-        description: Truststore alias name
-      entryType:
-        type: string
-      subject:
-        type: string
-        description: e.g. "CN=localhost"
-      issuer:
-        type: string
-        description: e.g. "CN=Admin"
-      notBefore:
-        type: string
-        description: e.g. "Sun Jul 01 12:00:00 AEST 2018"
-      notAfter:
-        type: string
-        description: e.g. "Sun Jun 30 23:59:50 AEST 2019"
-      serialNumber:
-        type: integer
-        description: '18165099476682912368'
-  SamlConfigurationInfo:
-    type: object
-    properties:
-      pid:
-        description: Persistent Identity (PID)
-        type: string
-      title:
-        description: Title
-        type: string
-      description:
-        description: Title
-        type: string
-      bundle_location:
-        description: needed for configuration binding
-        type: string
-      service_location:
-        description: needed for configuraiton binding
-        type: string
+servers:
+  - url: /
+components:
+  securitySchemes:
+    aemAuth:
+      type: http
+      scheme: basic
+  schemas:
+    InstallStatus:
+      type: object
       properties:
-        type: object
-        items:
-          $ref: '#/definitions/SamlConfigurationProperties'
-  SamlConfigurationProperties:
-    type: object
-    properties:
-      path:
-        type: array
-        description: Repository path for which this authentication handler should be used by Sling. If this is empty, the authentication handler will be disabled.
-        items:
-          $ref: '#/definitions/SamlConfigurationPropertyItemsArray'
-      service.ranking:
-        type: array
-        description: OSGi Framework Service Ranking value to indicate the order in which to call this service. This is an int value where higher values designate higher precedence. Default value is 0.
-        items:
-          $ref: '#/definitions/SamlConfigurationPropertyItemsLong'
-      idpUrl:
-        type: array
-        description: URL of the IDP where the SAML Authentication Request should be sent to. If this property is empty the authentication handler is disabled. (idpUrl)
-        items:
-          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
-      idpCertAlias:
-        type: array
-        description: The alias of the IdP's certificate in the global truststore. If this property is empty the authentication handler is disabled.
-        items:
-          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
-      idpHttpRedirect:
-        type: array
-        description: Use an HTTP Redirect to the IDP URL instead of sending an AuthnRequest-message to request credentials. Use this for IDP initiated authentication.
-        items:
-          $ref: '#/definitions/SamlConfigurationPropertyItemsBoolean'
-      serviceProviderEntityId:
-        type: array
-        description: ID which uniquely identifies this service provider with the identity provider. If this property is empty the authentication handler is disabled.
-        items:
-          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
-      assertionConsumerServiceURL:
-        type: array
-        description: The (optional) AssertionConsumerServiceURL attribute of an Authn request specifies the location to which a <Response> message MUST be sent to the requester.
-        items:
-          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
-      spPrivateKeyAlias:
-        type: array
-        description: The alias of the SP's private key in the key-store of the 'authentication-service' system user. If this property is empty the handler will not be able to sign or decrypt messages.
-        items:
-          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
-      keyStorePassword:
-        type: array
-        description: The password of the key-store of the 'authentication-service' system user.
-        items:
-          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
-      defaultRedirectUrl:
-        type: array
-        description: The default location to redirect to after successful authentication.
-        items:
-          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
-      userIDAttribute:
-        type: array
-        description: The name of the attribute containing the user ID used to authenticate and create the user in the CRX repository. Leave empty to use the Subject:NameId.
-        items:
-          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
-      useEncryption:
-        type: array
-        description: Whether or not this authentication handler expects encrypted SAML assertions. If this is enabled the SP's private key must be provided in the key-store of the 'authentication-service' system user (see SP Private Key Alias above).
-        items:
-          $ref: '#/definitions/SamlConfigurationPropertyItemsBoolean'
-      createUser:
-        type: array
-        description: Whether or not to autocreate nonexisting users in the repository.
-        items:
-          $ref: '#/definitions/SamlConfigurationPropertyItemsBoolean'
-      addGroupMemberships:
-        type: array
-        description: Whether or not a user should be automatically added to CRX groups after successful authentication.
-        items:
-          $ref: '#/definitions/SamlConfigurationPropertyItemsBoolean'
-      groupMembershipAttribute:
-        type: array
-        description: The name of the attribute containing a list of CRX groups this user should be added to.
-        items:
-          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
-      defaultGroups:
-        type: array
-        description: A list of default CRX groups users are added to after successful authentication.
-        items:
-          $ref: '#/definitions/SamlConfigurationPropertyItemsArray'
-      nameIdFormat:
-        type: array
-        description: The value of the NameIDPolicy format parameter to send in the AuthnRequest message.
-        items:
-          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
-      synchronizeAttributes:
-        type: array
-        description: A list of attribute mappings (in the format \attributename=path/relative/to/user/node\) which should be stored in the repository on user-synchronization.
-        items:
-          $ref: '#/definitions/SamlConfigurationPropertyItemsArray'
-      handleLogout:
-        type: array
-        description: Whether or not logout (dropCredentials) requests will be processed by this handler.
-        items:
-          $ref: '#/definitions/SamlConfigurationPropertyItemsBoolean'
-      logoutUrl:
-        type: array
-        description: URL of the IDP where the SAML Logout Request should be sent to. If this property is empty the authentication handler won't handle logouts.
-        items:
-          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
-      clockTolerance:
-        type: array
-        description: Time tolerance in seconds to compensate clock skew between IDP and SP when validating Assertions.
-        items:
-          $ref: '#/definitions/SamlConfigurationPropertyItemsLong'
-      digestMethod:
-        type: array
-        description: The digest algorithm to use when signing a SAML message.
-        items:
-          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
-      signatureMethod:
-        type: array
-        description: The signature algorithm to use when signing a SAML message.
-        items:
-          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
-      userIntermediatePath:
-        type: array
-        description: User intermediate path to store created users.
-        items:
-          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
-  SamlConfigurationPropertyItemsArray:
-    type: object
-    properties:
-      name:
-        description: property name
-        type: string
-      optional:
-        description: True if optional
-        type: boolean
-      is_set:
-        description: True if property is set
-        type: boolean
-      type:
-        description: Property type, 1=String, 3=long, 11=boolean, 12=Password
-        type: integer
-      values:
-        description: Property value
-        type: array
-        items:
+        status:
+          type: object
+          properties:
+            finished:
+              type: boolean
+            itemCount:
+              type: integer
+    KeystoreInfo:
+      type: object
+      properties:
+        aliases:
+          type: array
+          items:
+            $ref: "#/components/schemas/KeystoreItems"
+        exists:
+          type: boolean
+          description: False if truststore don't exist
+    TruststoreInfo:
+      type: object
+      properties:
+        aliases:
+          type: array
+          items:
+            $ref: "#/components/schemas/TruststoreItems"
+        exists:
+          type: boolean
+          description: False if truststore don't exist
+    KeystoreItems:
+      type: object
+      properties:
+        alias:
           type: string
-      description:
-        description: Property description
-        type: string
-  SamlConfigurationPropertyItemsBoolean:
-    type: object
-    properties:
-      name:
-        description: property name
-        type: string
-      optional:
-        description: True if optional
-        type: boolean
-      is_set:
-        description: True if property is set
-        type: boolean
-      type:
-        description: Property type, 1=String, 3=long, 11=boolean, 12=Password
-        type: integer
-      values:
-        description: Property value
-        type: boolean
-      description:
-        description: Property description
-        type: string
-  SamlConfigurationPropertyItemsLong:
-    type: object
-    properties:
-      name:
-        description: property name
-        type: string
-      optional:
-        description: True if optional
-        type: boolean
-      is_set:
-        description: True if property is set
-        type: boolean
-      type:
-        description: Property type, 1=String, 3=long, 11=boolean, 12=Password
-        type: integer
-      values:
-        description: Property value
-        type: integer
-      description:
-        description: Property description
-        type: string
-  SamlConfigurationPropertyItemsString:
-    type: object
-    properties:
-      name:
-        description: property name
-        type: string
-      optional:
-        description: True if optional
-        type: boolean
-      is_set:
-        description: True if property is set
-        type: boolean
-      type:
-        description: Property type, 1=String, 3=long, 11=boolean, 12=Password
-        type: integer
-      values:
-        description: Property value
-        type: string
-      description:
-        description: Property description
-        type: string
+          description: Keystore alias name
+        entryType:
+          type: string
+          description: e.g. "privateKey"
+        algorithm:
+          type: string
+          description: e.g. "RSA"
+        format:
+          type: string
+          description: e.g. "PKCS#8"
+        chain:
+          type: array
+          items:
+            $ref: "#/components/schemas/KeystoreChainItems"
+    KeystoreChainItems:
+      type: object
+      properties:
+        subject:
+          type: string
+          description: e.g. "CN=localhost"
+        issuer:
+          type: string
+          description: e.g. "CN=Admin"
+        notBefore:
+          type: string
+          description: e.g. "Sun Jul 01 12:00:00 AEST 2018"
+        notAfter:
+          type: string
+          description: e.g. "Sun Jun 30 23:59:50 AEST 2019"
+        serialNumber:
+          type: integer
+          description: "18165099476682912368"
+    TruststoreItems:
+      type: object
+      properties:
+        alias:
+          type: string
+          description: Truststore alias name
+        entryType:
+          type: string
+        subject:
+          type: string
+          description: e.g. "CN=localhost"
+        issuer:
+          type: string
+          description: e.g. "CN=Admin"
+        notBefore:
+          type: string
+          description: e.g. "Sun Jul 01 12:00:00 AEST 2018"
+        notAfter:
+          type: string
+          description: e.g. "Sun Jun 30 23:59:50 AEST 2019"
+        serialNumber:
+          type: integer
+          description: "18165099476682912368"
+    SamlConfigurationInfo:
+      type: object
+      properties:
+        pid:
+          description: Persistent Identity (PID)
+          type: string
+        title:
+          description: Title
+          type: string
+        description:
+          description: Title
+          type: string
+        bundle_location:
+          description: needed for configuration binding
+          type: string
+        service_location:
+          description: needed for configuraiton binding
+          type: string
+        properties:
+          type: object
+          items:
+            $ref: "#/components/schemas/SamlConfigurationProperties"
+    SamlConfigurationProperties:
+      type: object
+      properties:
+        path:
+          type: array
+          description: Repository path for which this authentication handler should be used
+            by Sling. If this is empty, the authentication handler will be
+            disabled.
+          items:
+            $ref: "#/components/schemas/SamlConfigurationPropertyItemsArray"
+        service.ranking:
+          type: array
+          description: OSGi Framework Service Ranking value to indicate the order in which
+            to call this service. This is an int value where higher values
+            designate higher precedence. Default value is 0.
+          items:
+            $ref: "#/components/schemas/SamlConfigurationPropertyItemsLong"
+        idpUrl:
+          type: array
+          description: URL of the IDP where the SAML Authentication Request should be sent
+            to. If this property is empty the authentication handler is
+            disabled. (idpUrl)
+          items:
+            $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+        idpCertAlias:
+          type: array
+          description: The alias of the IdP's certificate in the global truststore. If this
+            property is empty the authentication handler is disabled.
+          items:
+            $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+        idpHttpRedirect:
+          type: array
+          description: Use an HTTP Redirect to the IDP URL instead of sending an
+            AuthnRequest-message to request credentials. Use this for IDP
+            initiated authentication.
+          items:
+            $ref: "#/components/schemas/SamlConfigurationPropertyItemsBoolean"
+        serviceProviderEntityId:
+          type: array
+          description: ID which uniquely identifies this service provider with the identity
+            provider. If this property is empty the authentication handler is
+            disabled.
+          items:
+            $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+        assertionConsumerServiceURL:
+          type: array
+          description: The (optional) AssertionConsumerServiceURL attribute of an Authn
+            request specifies the location to which a  message MUST be
+            sent to the requester.
+          items:
+            $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+        spPrivateKeyAlias:
+          type: array
+          description: The alias of the SP's private key in the key-store of the
+            'authentication-service' system user. If this property is empty the
+            handler will not be able to sign or decrypt messages.
+          items:
+            $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+        keyStorePassword:
+          type: array
+          description: The password of the key-store of the 'authentication-service' system
+            user.
+          items:
+            $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+        defaultRedirectUrl:
+          type: array
+          description: The default location to redirect to after successful authentication.
+          items:
+            $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+        userIDAttribute:
+          type: array
+          description: The name of the attribute containing the user ID used to
+            authenticate and create the user in the CRX repository. Leave empty
+            to use the Subject:NameId.
+          items:
+            $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+        useEncryption:
+          type: array
+          description: Whether or not this authentication handler expects encrypted SAML
+            assertions. If this is enabled the SP's private key must be provided
+            in the key-store of the 'authentication-service' system user (see SP
+            Private Key Alias above).
+          items:
+            $ref: "#/components/schemas/SamlConfigurationPropertyItemsBoolean"
+        createUser:
+          type: array
+          description: Whether or not to autocreate nonexisting users in the repository.
+          items:
+            $ref: "#/components/schemas/SamlConfigurationPropertyItemsBoolean"
+        addGroupMemberships:
+          type: array
+          description: Whether or not a user should be automatically added to CRX groups
+            after successful authentication.
+          items:
+            $ref: "#/components/schemas/SamlConfigurationPropertyItemsBoolean"
+        groupMembershipAttribute:
+          type: array
+          description: The name of the attribute containing a list of CRX groups this user
+            should be added to.
+          items:
+            $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+        defaultGroups:
+          type: array
+          description: A list of default CRX groups users are added to after successful
+            authentication.
+          items:
+            $ref: "#/components/schemas/SamlConfigurationPropertyItemsArray"
+        nameIdFormat:
+          type: array
+          description: The value of the NameIDPolicy format parameter to send in the
+            AuthnRequest message.
+          items:
+            $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+        synchronizeAttributes:
+          type: array
+          description: A list of attribute mappings (in the format
+            \attributename=path/relative/to/user/node\) which should be stored
+            in the repository on user-synchronization.
+          items:
+            $ref: "#/components/schemas/SamlConfigurationPropertyItemsArray"
+        handleLogout:
+          type: array
+          description: Whether or not logout (dropCredentials) requests will be processed
+            by this handler.
+          items:
+            $ref: "#/components/schemas/SamlConfigurationPropertyItemsBoolean"
+        logoutUrl:
+          type: array
+          description: URL of the IDP where the SAML Logout Request should be sent to. If
+            this property is empty the authentication handler won't handle
+            logouts.
+          items:
+            $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+        clockTolerance:
+          type: array
+          description: Time tolerance in seconds to compensate clock skew between IDP and
+            SP when validating Assertions.
+          items:
+            $ref: "#/components/schemas/SamlConfigurationPropertyItemsLong"
+        digestMethod:
+          type: array
+          description: The digest algorithm to use when signing a SAML message.
+          items:
+            $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+        signatureMethod:
+          type: array
+          description: The signature algorithm to use when signing a SAML message.
+          items:
+            $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+        userIntermediatePath:
+          type: array
+          description: User intermediate path to store created users.
+          items:
+            $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+    SamlConfigurationPropertyItemsArray:
+      type: object
+      properties:
+        name:
+          description: property name
+          type: string
+        optional:
+          description: True if optional
+          type: boolean
+        is_set:
+          description: True if property is set
+          type: boolean
+        type:
+          description: Property type, 1=String, 3=long, 11=boolean, 12=Password
+          type: integer
+        values:
+          description: Property value
+          type: array
+          items:
+            type: string
+        description:
+          description: Property description
+          type: string
+    SamlConfigurationPropertyItemsBoolean:
+      type: object
+      properties:
+        name:
+          description: property name
+          type: string
+        optional:
+          description: True if optional
+          type: boolean
+        is_set:
+          description: True if property is set
+          type: boolean
+        type:
+          description: Property type, 1=String, 3=long, 11=boolean, 12=Password
+          type: integer
+        values:
+          description: Property value
+          type: boolean
+        description:
+          description: Property description
+          type: string
+    SamlConfigurationPropertyItemsLong:
+      type: object
+      properties:
+        name:
+          description: property name
+          type: string
+        optional:
+          description: True if optional
+          type: boolean
+        is_set:
+          description: True if property is set
+          type: boolean
+        type:
+          description: Property type, 1=String, 3=long, 11=boolean, 12=Password
+          type: integer
+        values:
+          description: Property value
+          type: integer
+        description:
+          description: Property description
+          type: string
+    SamlConfigurationPropertyItemsString:
+      type: object
+      properties:
+        name:
+          description: property name
+          type: string
+        optional:
+          description: True if optional
+          type: boolean
+        is_set:
+          description: True if property is set
+          type: boolean
+        type:
+          description: Property type, 1=String, 3=long, 11=boolean, 12=Password
+          type: integer
+        values:
+          description: Property value
+          type: string
+        description:
+          description: Property description
+          type: string
