@@ -67,4 +67,7 @@ build-docker:
 	  make $(LANGS) \
 	  SWAGGER_CODEGEN_CLI_JAR=/opt/swagger-codegen/repo/modules/swagger-codegen-cli/target/swagger-codegen-cli.jar
 
-.PHONY: ci clean deps lint doc doc-publish java javascript python ruby build build-docker
+release:
+	rtk release
+
+.PHONY: ci clean deps lint doc doc-publish java javascript python ruby build build-docker release
