@@ -8,6 +8,6 @@ Name | Type | Description | Notes
 **description** | **String** | Title | [optional] 
 **bundle_location** | **String** | needed for configuration binding | [optional] 
 **service_location** | **String** | needed for configuraiton binding | [optional] 
-**properties** | **Object** |  | [optional] 
+**properties** | [**SamlConfigurationProperties**](SamlConfigurationProperties.md) |  | [optional] 
 
 

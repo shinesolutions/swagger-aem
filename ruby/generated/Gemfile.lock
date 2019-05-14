@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    swagger_aem (2.5.0)
+    swagger_aem (2.6.0)
       json (~> 2.1, >= 2.1.0)
       typhoeus (~> 1.0, >= 1.0.1)
 
@@ -23,8 +23,8 @@ GEM
     ethon (0.12.0)
       ffi (>= 1.3.0)
     ffi (1.10.0)
-    hashdiff (0.3.8)
-    json (2.1.0)
+    hashdiff (0.3.9)
+    json (2.2.0)
     public_suffix (3.0.3)
     rake (12.0.0)
     rspec (3.8.0)
@@ -33,14 +33,14 @@ GEM
       rspec-mocks (~> 3.8.0)
     rspec-core (3.8.0)
       rspec-support (~> 3.8.0)
-    rspec-expectations (3.8.2)
+    rspec-expectations (3.8.3)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
     rspec-mocks (3.8.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
-    safe_yaml (1.0.4)
+    safe_yaml (1.0.5)
     sys-uname (1.0.4)
       ffi (>= 1.0.0)
     typhoeus (1.3.1)
@@ -66,4 +66,4 @@ DEPENDENCIES
   webmock (~> 1.24, >= 1.24.3)
 
 BUNDLED WITH
-   1.15.4
+   2.0.1

@@ -26,9 +26,8 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::CustomApi.new
-
-opts = { 
-  tags: "tags_example", # String | 
+opts = {
+  tags: 'tags_example', # String | 
   combine_tags_or: true # BOOLEAN | 
 }
 
@@ -79,10 +78,9 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::CustomApi.new
-
-opts = { 
-  bundles_ignored: ["bundles_ignored_example"], # Array<String> | 
-  bundles_ignored_type_hint: "bundles_ignored_type_hint_example" # String | 
+opts = {
+  bundles_ignored: ['bundles_ignored_example'], # Array<String> | 
+  bundles_ignored_type_hint: 'bundles_ignored_type_hint_example' # String | 
 }
 
 begin
@@ -110,7 +108,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 
 
@@ -131,10 +129,9 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::CustomApi.new
-
-opts = { 
-  pwdreset_authorizables: ["pwdreset_authorizables_example"], # Array<String> | 
-  pwdreset_authorizables_type_hint: "pwdreset_authorizables_type_hint_example" # String | 
+opts = {
+  pwdreset_authorizables: ['pwdreset_authorizables_example'], # Array<String> | 
+  pwdreset_authorizables_type_hint: 'pwdreset_authorizables_type_hint_example' # String | 
 }
 
 begin
@@ -162,7 +159,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 
 

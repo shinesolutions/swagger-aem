@@ -63,11 +63,8 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::CqApi.new
-
-authorizable_id = "authorizable_id_example" # String | 
-
-changelog = "changelog_example" # String | 
-
+authorizable_id = 'authorizable_id_example' # String | 
+changelog = 'changelog_example' # String | 
 
 begin
   api_instance.post_cq_actions(authorizable_id, changelog)
@@ -94,7 +91,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 
 

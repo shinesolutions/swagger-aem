@@ -161,9 +161,7 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::CrxApi.new
-
-cmd = "cmd_example" # String | 
-
+cmd = 'cmd_example' # String | 
 
 begin
   result = api_instance.post_package_service(cmd)
@@ -211,19 +209,16 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::CrxApi.new
-
-path = "path_example" # String | 
-
-cmd = "cmd_example" # String | 
-
-opts = { 
-  group_name: "group_name_example", # String | 
-  package_name: "package_name_example", # String | 
-  package_version: "package_version_example", # String | 
-  _charset_: "_charset__example", # String | 
+path = 'path_example' # String | 
+cmd = 'cmd_example' # String | 
+opts = {
+  group_name: 'group_name_example', # String | 
+  package_name: 'package_name_example', # String | 
+  package_version: 'package_version_example', # String | 
+  _charset_: '_charset__example', # String | 
   force: true, # BOOLEAN | 
   recursive: true, # BOOLEAN | 
-  package: File.new("/path/to/file.txt") # File | 
+  package: File.new('/path/to/file') # File | 
 }
 
 begin
@@ -280,18 +275,13 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::CrxApi.new
-
-group_name = "group_name_example" # String | 
-
-package_name = "package_name_example" # String | 
-
-version = "version_example" # String | 
-
-path = "path_example" # String | 
-
-opts = { 
-  filter: "filter_example", # String | 
-  _charset_: "_charset__example" # String | 
+group_name = 'group_name_example' # String | 
+package_name = 'package_name_example' # String | 
+version = 'version_example' # String | 
+path = 'path_example' # String | 
+opts = {
+  filter: 'filter_example', # String | 
+  _charset_: '_charset__example' # String | 
 }
 
 begin
@@ -345,13 +335,9 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::CrxApi.new
-
-old = "old_example" # String | 
-
-plain = "plain_example" # String | 
-
-verify = "verify_example" # String | 
-
+old = 'old_example' # String | 
+plain = 'plain_example' # String | 
+verify = 'verify_example' # String | 
 
 begin
   result = api_instance.post_set_password(old, plain, verify)

@@ -71,11 +71,8 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::ConsoleApi.new
-
-name = "name_example" # String | 
-
-action = "action_example" # String | 
-
+name = 'name_example' # String | 
+action = 'action_example' # String | 
 
 begin
   api_instance.post_bundle(name, action)
@@ -102,7 +99,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 
 
@@ -123,9 +120,7 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::ConsoleApi.new
-
-action = "action_example" # String | 
-
+action = 'action_example' # String | 
 
 begin
   api_instance.post_jmx_repository(action)
@@ -151,7 +146,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 
 
@@ -172,38 +167,37 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::ConsoleApi.new
-
-opts = { 
+opts = {
   post: true, # BOOLEAN | 
   apply: true, # BOOLEAN | 
   delete: true, # BOOLEAN | 
-  action: "action_example", # String | 
-  location: "location_example", # String | 
-  path: ["path_example"], # Array<String> | 
+  action: 'action_example', # String | 
+  location: 'location_example', # String | 
+  path: ['path_example'], # Array<String> | 
   service_ranking: 56, # Integer | 
-  idp_url: "idp_url_example", # String | 
-  idp_cert_alias: "idp_cert_alias_example", # String | 
+  idp_url: 'idp_url_example', # String | 
+  idp_cert_alias: 'idp_cert_alias_example', # String | 
   idp_http_redirect: true, # BOOLEAN | 
-  service_provider_entity_id: "service_provider_entity_id_example", # String | 
-  assertion_consumer_service_url: "assertion_consumer_service_url_example", # String | 
-  sp_private_key_alias: "sp_private_key_alias_example", # String | 
-  key_store_password: "key_store_password_example", # String | 
-  default_redirect_url: "default_redirect_url_example", # String | 
-  user_id_attribute: "user_id_attribute_example", # String | 
+  service_provider_entity_id: 'service_provider_entity_id_example', # String | 
+  assertion_consumer_service_url: 'assertion_consumer_service_url_example', # String | 
+  sp_private_key_alias: 'sp_private_key_alias_example', # String | 
+  key_store_password: 'key_store_password_example', # String | 
+  default_redirect_url: 'default_redirect_url_example', # String | 
+  user_id_attribute: 'user_id_attribute_example', # String | 
   use_encryption: true, # BOOLEAN | 
   create_user: true, # BOOLEAN | 
   add_group_memberships: true, # BOOLEAN | 
-  group_membership_attribute: "group_membership_attribute_example", # String | 
-  default_groups: ["default_groups_example"], # Array<String> | 
-  name_id_format: "name_id_format_example", # String | 
-  synchronize_attributes: ["synchronize_attributes_example"], # Array<String> | 
+  group_membership_attribute: 'group_membership_attribute_example', # String | 
+  default_groups: ['default_groups_example'], # Array<String> | 
+  name_id_format: 'name_id_format_example', # String | 
+  synchronize_attributes: ['synchronize_attributes_example'], # Array<String> | 
   handle_logout: true, # BOOLEAN | 
-  logout_url: "logout_url_example", # String | 
+  logout_url: 'logout_url_example', # String | 
   clock_tolerance: 56, # Integer | 
-  digest_method: "digest_method_example", # String | 
-  signature_method: "signature_method_example", # String | 
-  user_intermediate_path: "user_intermediate_path_example", # String | 
-  propertylist: ["propertylist_example"] # Array<String> | 
+  digest_method: 'digest_method_example', # String | 
+  signature_method: 'signature_method_example', # String | 
+  user_intermediate_path: 'user_intermediate_path_example', # String | 
+  propertylist: ['propertylist_example'] # Array<String> | 
 }
 
 begin

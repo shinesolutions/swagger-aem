@@ -51,11 +51,8 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::SlingApi.new
-
-runmode = "runmode_example" # String | 
-
-name = "name_example" # String | 
-
+runmode = 'runmode_example' # String | 
+name = 'name_example' # String | 
 
 begin
   api_instance.delete_agent(runmode, name)
@@ -82,7 +79,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 
 
@@ -103,11 +100,8 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::SlingApi.new
-
-path = "path_example" # String | 
-
-name = "name_example" # String | 
-
+path = 'path_example' # String | 
+name = 'name_example' # String | 
 
 begin
   api_instance.delete_node(path, name)
@@ -134,7 +128,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 
 
@@ -155,11 +149,8 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::SlingApi.new
-
-runmode = "runmode_example" # String | 
-
-name = "name_example" # String | 
-
+runmode = 'runmode_example' # String | 
+name = 'name_example' # String | 
 
 begin
   api_instance.get_agent(runmode, name)
@@ -186,7 +177,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 
 
@@ -207,9 +198,7 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::SlingApi.new
-
-runmode = "runmode_example" # String | 
-
+runmode = 'runmode_example' # String | 
 
 begin
   result = api_instance.get_agents(runmode)
@@ -257,11 +246,8 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::SlingApi.new
-
-intermediate_path = "intermediate_path_example" # String | 
-
-authorizable_id = "authorizable_id_example" # String | 
-
+intermediate_path = 'intermediate_path_example' # String | 
+authorizable_id = 'authorizable_id_example' # String | 
 
 begin
   result = api_instance.get_authorizable_keystore(intermediate_path, authorizable_id)
@@ -310,11 +296,8 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::SlingApi.new
-
-intermediate_path = "intermediate_path_example" # String | 
-
-authorizable_id = "authorizable_id_example" # String | 
-
+intermediate_path = 'intermediate_path_example' # String | 
+authorizable_id = 'authorizable_id_example' # String | 
 
 begin
   result = api_instance.get_keystore(intermediate_path, authorizable_id)
@@ -363,11 +346,8 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::SlingApi.new
-
-path = "path_example" # String | 
-
-name = "name_example" # String | 
-
+path = 'path_example' # String | 
+name = 'name_example' # String | 
 
 begin
   api_instance.get_node(path, name)
@@ -394,7 +374,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 
 
@@ -415,13 +395,9 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::SlingApi.new
-
-group = "group_example" # String | 
-
-name = "name_example" # String | 
-
-version = "version_example" # String | 
-
+group = 'group_example' # String | 
+name = 'name_example' # String | 
+version = 'version_example' # String | 
 
 begin
   result = api_instance.get_package(group, name, version)
@@ -471,13 +447,9 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::SlingApi.new
-
-group = "group_example" # String | 
-
-name = "name_example" # String | 
-
-version = "version_example" # String | 
-
+group = 'group_example' # String | 
+name = 'name_example' # String | 
+version = 'version_example' # String | 
 
 begin
   result = api_instance.get_package_filter(group, name, version)
@@ -527,15 +499,10 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::SlingApi.new
-
-path = "path_example" # String | 
-
+path = 'path_example' # String | 
 p_limit = 3.4 # Float | 
-
-_1_property = "_1_property_example" # String | 
-
-_1_property_value = "_1_property_value_example" # String | 
-
+_1_property = '_1_property_example' # String | 
+_1_property_value = '_1_property_value_example' # String | 
 
 begin
   result = api_instance.get_query(path, p_limit, _1_property, _1_property_value)
@@ -674,62 +641,59 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::SlingApi.new
-
-runmode = "runmode_example" # String | 
-
-name = "name_example" # String | 
-
-opts = { 
+runmode = 'runmode_example' # String | 
+name = 'name_example' # String | 
+opts = {
   jcrcontentcqdistribute: true, # BOOLEAN | 
-  jcrcontentcqdistribute_type_hint: "jcrcontentcqdistribute_type_hint_example", # String | 
-  jcrcontentcqname: "jcrcontentcqname_example", # String | 
-  jcrcontentcqtemplate: "jcrcontentcqtemplate_example", # String | 
+  jcrcontentcqdistribute_type_hint: 'jcrcontentcqdistribute_type_hint_example', # String | 
+  jcrcontentcqname: 'jcrcontentcqname_example', # String | 
+  jcrcontentcqtemplate: 'jcrcontentcqtemplate_example', # String | 
   jcrcontentenabled: true, # BOOLEAN | 
-  jcrcontentjcrdescription: "jcrcontentjcrdescription_example", # String | 
-  jcrcontentjcrlast_modified: "jcrcontentjcrlast_modified_example", # String | 
-  jcrcontentjcrlast_modified_by: "jcrcontentjcrlast_modified_by_example", # String | 
-  jcrcontentjcrmixin_types: "jcrcontentjcrmixin_types_example", # String | 
-  jcrcontentjcrtitle: "jcrcontentjcrtitle_example", # String | 
-  jcrcontentlog_level: "jcrcontentlog_level_example", # String | 
+  jcrcontentjcrdescription: 'jcrcontentjcrdescription_example', # String | 
+  jcrcontentjcrlast_modified: 'jcrcontentjcrlast_modified_example', # String | 
+  jcrcontentjcrlast_modified_by: 'jcrcontentjcrlast_modified_by_example', # String | 
+  jcrcontentjcrmixin_types: 'jcrcontentjcrmixin_types_example', # String | 
+  jcrcontentjcrtitle: 'jcrcontentjcrtitle_example', # String | 
+  jcrcontentlog_level: 'jcrcontentlog_level_example', # String | 
   jcrcontentno_status_update: true, # BOOLEAN | 
   jcrcontentno_versioning: true, # BOOLEAN | 
   jcrcontentprotocol_connect_timeout: 3.4, # Float | 
   jcrcontentprotocol_http_connection_closed: true, # BOOLEAN | 
-  jcrcontentprotocol_http_expired: "jcrcontentprotocol_http_expired_example", # String | 
-  jcrcontentprotocol_http_headers: ["jcrcontentprotocol_http_headers_example"], # Array<String> | 
-  jcrcontentprotocol_http_headers_type_hint: "jcrcontentprotocol_http_headers_type_hint_example", # String | 
-  jcrcontentprotocol_http_method: "jcrcontentprotocol_http_method_example", # String | 
+  jcrcontentprotocol_http_expired: 'jcrcontentprotocol_http_expired_example', # String | 
+  jcrcontentprotocol_http_headers: ['jcrcontentprotocol_http_headers_example'], # Array<String> | 
+  jcrcontentprotocol_http_headers_type_hint: 'jcrcontentprotocol_http_headers_type_hint_example', # String | 
+  jcrcontentprotocol_http_method: 'jcrcontentprotocol_http_method_example', # String | 
   jcrcontentprotocol_https_relaxed: true, # BOOLEAN | 
-  jcrcontentprotocol_interface: "jcrcontentprotocol_interface_example", # String | 
+  jcrcontentprotocol_interface: 'jcrcontentprotocol_interface_example', # String | 
   jcrcontentprotocol_socket_timeout: 3.4, # Float | 
-  jcrcontentprotocol_version: "jcrcontentprotocol_version_example", # String | 
-  jcrcontentproxy_ntlm_domain: "jcrcontentproxy_ntlm_domain_example", # String | 
-  jcrcontentproxy_ntlm_host: "jcrcontentproxy_ntlm_host_example", # String | 
-  jcrcontentproxy_host: "jcrcontentproxy_host_example", # String | 
-  jcrcontentproxy_password: "jcrcontentproxy_password_example", # String | 
+  jcrcontentprotocol_version: 'jcrcontentprotocol_version_example', # String | 
+  jcrcontentproxy_ntlm_domain: 'jcrcontentproxy_ntlm_domain_example', # String | 
+  jcrcontentproxy_ntlm_host: 'jcrcontentproxy_ntlm_host_example', # String | 
+  jcrcontentproxy_host: 'jcrcontentproxy_host_example', # String | 
+  jcrcontentproxy_password: 'jcrcontentproxy_password_example', # String | 
   jcrcontentproxy_port: 3.4, # Float | 
-  jcrcontentproxy_user: "jcrcontentproxy_user_example", # String | 
+  jcrcontentproxy_user: 'jcrcontentproxy_user_example', # String | 
   jcrcontentqueue_batch_max_size: 3.4, # Float | 
-  jcrcontentqueue_batch_mode: "jcrcontentqueue_batch_mode_example", # String | 
+  jcrcontentqueue_batch_mode: 'jcrcontentqueue_batch_mode_example', # String | 
   jcrcontentqueue_batch_wait_time: 3.4, # Float | 
-  jcrcontentretry_delay: "jcrcontentretry_delay_example", # String | 
+  jcrcontentretry_delay: 'jcrcontentretry_delay_example', # String | 
   jcrcontentreverse_replication: true, # BOOLEAN | 
-  jcrcontentserialization_type: "jcrcontentserialization_type_example", # String | 
-  jcrcontentslingresource_type: "jcrcontentslingresource_type_example", # String | 
-  jcrcontentssl: "jcrcontentssl_example", # String | 
-  jcrcontenttransport_ntlm_domain: "jcrcontenttransport_ntlm_domain_example", # String | 
-  jcrcontenttransport_ntlm_host: "jcrcontenttransport_ntlm_host_example", # String | 
-  jcrcontenttransport_password: "jcrcontenttransport_password_example", # String | 
-  jcrcontenttransport_uri: "jcrcontenttransport_uri_example", # String | 
-  jcrcontenttransport_user: "jcrcontenttransport_user_example", # String | 
+  jcrcontentserialization_type: 'jcrcontentserialization_type_example', # String | 
+  jcrcontentslingresource_type: 'jcrcontentslingresource_type_example', # String | 
+  jcrcontentssl: 'jcrcontentssl_example', # String | 
+  jcrcontenttransport_ntlm_domain: 'jcrcontenttransport_ntlm_domain_example', # String | 
+  jcrcontenttransport_ntlm_host: 'jcrcontenttransport_ntlm_host_example', # String | 
+  jcrcontenttransport_password: 'jcrcontenttransport_password_example', # String | 
+  jcrcontenttransport_uri: 'jcrcontenttransport_uri_example', # String | 
+  jcrcontenttransport_user: 'jcrcontenttransport_user_example', # String | 
   jcrcontenttrigger_distribute: true, # BOOLEAN | 
   jcrcontenttrigger_modified: true, # BOOLEAN | 
   jcrcontenttrigger_on_off_time: true, # BOOLEAN | 
   jcrcontenttrigger_receive: true, # BOOLEAN | 
   jcrcontenttrigger_specific: true, # BOOLEAN | 
-  jcrcontentuser_id: "jcrcontentuser_id_example", # String | 
-  jcrprimary_type: "jcrprimary_type_example", # String | 
-  operation: "operation_example" # String | 
+  jcrcontentuser_id: 'jcrcontentuser_id_example', # String | 
+  jcrprimary_type: 'jcrprimary_type_example', # String | 
+  operation: 'operation_example' # String | 
 }
 
 begin
@@ -807,7 +771,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 
 
@@ -828,24 +792,21 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::SlingApi.new
-
-intermediate_path = "intermediate_path_example" # String | 
-
-authorizable_id = "authorizable_id_example" # String | 
-
-opts = { 
-  operation: "operation_example", # String | 
-  current_password: "current_password_example", # String | 
-  new_password: "new_password_example", # String | 
-  re_password: "re_password_example", # String | 
-  key_password: "key_password_example", # String | 
-  key_store_pass: "key_store_pass_example", # String | 
-  _alias: "_alias_example", # String | 
-  new_alias: "new_alias_example", # String | 
-  remove_alias: "remove_alias_example", # String | 
-  cert_chain: File.new("/path/to/file.txt"), # File | 
-  pk: File.new("/path/to/file.txt"), # File | 
-  key_store: File.new("/path/to/file.txt") # File | 
+intermediate_path = 'intermediate_path_example' # String | 
+authorizable_id = 'authorizable_id_example' # String | 
+opts = {
+  operation: 'operation_example', # String | 
+  current_password: 'current_password_example', # String | 
+  new_password: 'new_password_example', # String | 
+  re_password: 're_password_example', # String | 
+  key_password: 'key_password_example', # String | 
+  key_store_pass: 'key_store_pass_example', # String | 
+  _alias: '_alias_example', # String | 
+  new_alias: 'new_alias_example', # String | 
+  remove_alias: 'remove_alias_example', # String | 
+  cert_chain: File.new('/path/to/file'), # File | 
+  pk: File.new('/path/to/file'), # File | 
+  key_store: File.new('/path/to/file') # File | 
 }
 
 begin
@@ -907,16 +868,13 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::SlingApi.new
-
-authorizable_id = "authorizable_id_example" # String | 
-
-intermediate_path = "intermediate_path_example" # String | 
-
-opts = { 
-  create_user: "create_user_example", # String | 
-  create_group: "create_group_example", # String | 
-  reppassword: "reppassword_example", # String | 
-  profilegiven_name: "profilegiven_name_example" # String | 
+authorizable_id = 'authorizable_id_example' # String | 
+intermediate_path = 'intermediate_path_example' # String | 
+opts = {
+  create_user: 'create_user_example', # String | 
+  create_group: 'create_group_example', # String | 
+  reppassword: 'reppassword_example', # String | 
+  profilegiven_name: 'profilegiven_name_example' # String | 
 }
 
 begin
@@ -970,56 +928,55 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::SlingApi.new
-
-opts = { 
-  key_store_password: "key_store_password_example", # String | 
-  key_store_password_type_hint: "key_store_password_type_hint_example", # String | 
+opts = {
+  key_store_password: 'key_store_password_example', # String | 
+  key_store_password_type_hint: 'key_store_password_type_hint_example', # String | 
   service_ranking: 56, # Integer | 
-  service_ranking_type_hint: "service_ranking_type_hint_example", # String | 
+  service_ranking_type_hint: 'service_ranking_type_hint_example', # String | 
   idp_http_redirect: true, # BOOLEAN | 
-  idp_http_redirect_type_hint: "idp_http_redirect_type_hint_example", # String | 
+  idp_http_redirect_type_hint: 'idp_http_redirect_type_hint_example', # String | 
   create_user: true, # BOOLEAN | 
-  create_user_type_hint: "create_user_type_hint_example", # String | 
-  default_redirect_url: "default_redirect_url_example", # String | 
-  default_redirect_url_type_hint: "default_redirect_url_type_hint_example", # String | 
-  user_id_attribute: "user_id_attribute_example", # String | 
-  user_id_attribute_type_hint: "user_id_attribute_type_hint_example", # String | 
-  default_groups: ["default_groups_example"], # Array<String> | 
-  default_groups_type_hint: "default_groups_type_hint_example", # String | 
-  idp_cert_alias: "idp_cert_alias_example", # String | 
-  idp_cert_alias_type_hint: "idp_cert_alias_type_hint_example", # String | 
+  create_user_type_hint: 'create_user_type_hint_example', # String | 
+  default_redirect_url: 'default_redirect_url_example', # String | 
+  default_redirect_url_type_hint: 'default_redirect_url_type_hint_example', # String | 
+  user_id_attribute: 'user_id_attribute_example', # String | 
+  user_id_attribute_type_hint: 'user_id_attribute_type_hint_example', # String | 
+  default_groups: ['default_groups_example'], # Array<String> | 
+  default_groups_type_hint: 'default_groups_type_hint_example', # String | 
+  idp_cert_alias: 'idp_cert_alias_example', # String | 
+  idp_cert_alias_type_hint: 'idp_cert_alias_type_hint_example', # String | 
   add_group_memberships: true, # BOOLEAN | 
-  add_group_memberships_type_hint: "add_group_memberships_type_hint_example", # String | 
-  path: ["path_example"], # Array<String> | 
-  path_type_hint: "path_type_hint_example", # String | 
-  synchronize_attributes: ["synchronize_attributes_example"], # Array<String> | 
-  synchronize_attributes_type_hint: "synchronize_attributes_type_hint_example", # String | 
+  add_group_memberships_type_hint: 'add_group_memberships_type_hint_example', # String | 
+  path: ['path_example'], # Array<String> | 
+  path_type_hint: 'path_type_hint_example', # String | 
+  synchronize_attributes: ['synchronize_attributes_example'], # Array<String> | 
+  synchronize_attributes_type_hint: 'synchronize_attributes_type_hint_example', # String | 
   clock_tolerance: 56, # Integer | 
-  clock_tolerance_type_hint: "clock_tolerance_type_hint_example", # String | 
-  group_membership_attribute: "group_membership_attribute_example", # String | 
-  group_membership_attribute_type_hint: "group_membership_attribute_type_hint_example", # String | 
-  idp_url: "idp_url_example", # String | 
-  idp_url_type_hint: "idp_url_type_hint_example", # String | 
-  logout_url: "logout_url_example", # String | 
-  logout_url_type_hint: "logout_url_type_hint_example", # String | 
-  service_provider_entity_id: "service_provider_entity_id_example", # String | 
-  service_provider_entity_id_type_hint: "service_provider_entity_id_type_hint_example", # String | 
-  assertion_consumer_service_url: "assertion_consumer_service_url_example", # String | 
-  assertion_consumer_service_url_type_hint: "assertion_consumer_service_url_type_hint_example", # String | 
+  clock_tolerance_type_hint: 'clock_tolerance_type_hint_example', # String | 
+  group_membership_attribute: 'group_membership_attribute_example', # String | 
+  group_membership_attribute_type_hint: 'group_membership_attribute_type_hint_example', # String | 
+  idp_url: 'idp_url_example', # String | 
+  idp_url_type_hint: 'idp_url_type_hint_example', # String | 
+  logout_url: 'logout_url_example', # String | 
+  logout_url_type_hint: 'logout_url_type_hint_example', # String | 
+  service_provider_entity_id: 'service_provider_entity_id_example', # String | 
+  service_provider_entity_id_type_hint: 'service_provider_entity_id_type_hint_example', # String | 
+  assertion_consumer_service_url: 'assertion_consumer_service_url_example', # String | 
+  assertion_consumer_service_url_type_hint: 'assertion_consumer_service_url_type_hint_example', # String | 
   handle_logout: true, # BOOLEAN | 
-  handle_logout_type_hint: "handle_logout_type_hint_example", # String | 
-  sp_private_key_alias: "sp_private_key_alias_example", # String | 
-  sp_private_key_alias_type_hint: "sp_private_key_alias_type_hint_example", # String | 
+  handle_logout_type_hint: 'handle_logout_type_hint_example', # String | 
+  sp_private_key_alias: 'sp_private_key_alias_example', # String | 
+  sp_private_key_alias_type_hint: 'sp_private_key_alias_type_hint_example', # String | 
   use_encryption: true, # BOOLEAN | 
-  use_encryption_type_hint: "use_encryption_type_hint_example", # String | 
-  name_id_format: "name_id_format_example", # String | 
-  name_id_format_type_hint: "name_id_format_type_hint_example", # String | 
-  digest_method: "digest_method_example", # String | 
-  digest_method_type_hint: "digest_method_type_hint_example", # String | 
-  signature_method: "signature_method_example", # String | 
-  signature_method_type_hint: "signature_method_type_hint_example", # String | 
-  user_intermediate_path: "user_intermediate_path_example", # String | 
-  user_intermediate_path_type_hint: "user_intermediate_path_type_hint_example" # String | 
+  use_encryption_type_hint: 'use_encryption_type_hint_example', # String | 
+  name_id_format: 'name_id_format_example', # String | 
+  name_id_format_type_hint: 'name_id_format_type_hint_example', # String | 
+  digest_method: 'digest_method_example', # String | 
+  digest_method_type_hint: 'digest_method_type_hint_example', # String | 
+  signature_method: 'signature_method_example', # String | 
+  signature_method_type_hint: 'signature_method_type_hint_example', # String | 
+  user_intermediate_path: 'user_intermediate_path_example', # String | 
+  user_intermediate_path_type_hint: 'user_intermediate_path_type_hint_example' # String | 
 }
 
 begin
@@ -1093,7 +1050,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 
 
@@ -1114,28 +1071,27 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::SlingApi.new
-
-opts = { 
+opts = {
   org_apache_felix_https_nio: true, # BOOLEAN | 
-  org_apache_felix_https_nio_type_hint: "org_apache_felix_https_nio_type_hint_example", # String | 
-  org_apache_felix_https_keystore: "org_apache_felix_https_keystore_example", # String | 
-  org_apache_felix_https_keystore_type_hint: "org_apache_felix_https_keystore_type_hint_example", # String | 
-  org_apache_felix_https_keystore_password: "org_apache_felix_https_keystore_password_example", # String | 
-  org_apache_felix_https_keystore_password_type_hint: "org_apache_felix_https_keystore_password_type_hint_example", # String | 
-  org_apache_felix_https_keystore_key: "org_apache_felix_https_keystore_key_example", # String | 
-  org_apache_felix_https_keystore_key_type_hint: "org_apache_felix_https_keystore_key_type_hint_example", # String | 
-  org_apache_felix_https_keystore_key_password: "org_apache_felix_https_keystore_key_password_example", # String | 
-  org_apache_felix_https_keystore_key_password_type_hint: "org_apache_felix_https_keystore_key_password_type_hint_example", # String | 
-  org_apache_felix_https_truststore: "org_apache_felix_https_truststore_example", # String | 
-  org_apache_felix_https_truststore_type_hint: "org_apache_felix_https_truststore_type_hint_example", # String | 
-  org_apache_felix_https_truststore_password: "org_apache_felix_https_truststore_password_example", # String | 
-  org_apache_felix_https_truststore_password_type_hint: "org_apache_felix_https_truststore_password_type_hint_example", # String | 
-  org_apache_felix_https_clientcertificate: "org_apache_felix_https_clientcertificate_example", # String | 
-  org_apache_felix_https_clientcertificate_type_hint: "org_apache_felix_https_clientcertificate_type_hint_example", # String | 
+  org_apache_felix_https_nio_type_hint: 'org_apache_felix_https_nio_type_hint_example', # String | 
+  org_apache_felix_https_keystore: 'org_apache_felix_https_keystore_example', # String | 
+  org_apache_felix_https_keystore_type_hint: 'org_apache_felix_https_keystore_type_hint_example', # String | 
+  org_apache_felix_https_keystore_password: 'org_apache_felix_https_keystore_password_example', # String | 
+  org_apache_felix_https_keystore_password_type_hint: 'org_apache_felix_https_keystore_password_type_hint_example', # String | 
+  org_apache_felix_https_keystore_key: 'org_apache_felix_https_keystore_key_example', # String | 
+  org_apache_felix_https_keystore_key_type_hint: 'org_apache_felix_https_keystore_key_type_hint_example', # String | 
+  org_apache_felix_https_keystore_key_password: 'org_apache_felix_https_keystore_key_password_example', # String | 
+  org_apache_felix_https_keystore_key_password_type_hint: 'org_apache_felix_https_keystore_key_password_type_hint_example', # String | 
+  org_apache_felix_https_truststore: 'org_apache_felix_https_truststore_example', # String | 
+  org_apache_felix_https_truststore_type_hint: 'org_apache_felix_https_truststore_type_hint_example', # String | 
+  org_apache_felix_https_truststore_password: 'org_apache_felix_https_truststore_password_example', # String | 
+  org_apache_felix_https_truststore_password_type_hint: 'org_apache_felix_https_truststore_password_type_hint_example', # String | 
+  org_apache_felix_https_clientcertificate: 'org_apache_felix_https_clientcertificate_example', # String | 
+  org_apache_felix_https_clientcertificate_type_hint: 'org_apache_felix_https_clientcertificate_type_hint_example', # String | 
   org_apache_felix_https_enable: true, # BOOLEAN | 
-  org_apache_felix_https_enable_type_hint: "org_apache_felix_https_enable_type_hint_example", # String | 
-  org_osgi_service_http_port_secure: "org_osgi_service_http_port_secure_example", # String | 
-  org_osgi_service_http_port_secure_type_hint: "org_osgi_service_http_port_secure_type_hint_example" # String | 
+  org_apache_felix_https_enable_type_hint: 'org_apache_felix_https_enable_type_hint_example', # String | 
+  org_osgi_service_http_port_secure: 'org_osgi_service_http_port_secure_example', # String | 
+  org_osgi_service_http_port_secure_type_hint: 'org_osgi_service_http_port_secure_type_hint_example' # String | 
 }
 
 begin
@@ -1181,7 +1137,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 
 
@@ -1202,20 +1158,19 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::SlingApi.new
-
-opts = { 
-  proxy_host: "proxy_host_example", # String | 
-  proxy_host_type_hint: "proxy_host_type_hint_example", # String | 
+opts = {
+  proxy_host: 'proxy_host_example', # String | 
+  proxy_host_type_hint: 'proxy_host_type_hint_example', # String | 
   proxy_port: 56, # Integer | 
-  proxy_port_type_hint: "proxy_port_type_hint_example", # String | 
-  proxy_exceptions: ["proxy_exceptions_example"], # Array<String> | 
-  proxy_exceptions_type_hint: "proxy_exceptions_type_hint_example", # String | 
+  proxy_port_type_hint: 'proxy_port_type_hint_example', # String | 
+  proxy_exceptions: ['proxy_exceptions_example'], # Array<String> | 
+  proxy_exceptions_type_hint: 'proxy_exceptions_type_hint_example', # String | 
   proxy_enabled: true, # BOOLEAN | 
-  proxy_enabled_type_hint: "proxy_enabled_type_hint_example", # String | 
-  proxy_user: "proxy_user_example", # String | 
-  proxy_user_type_hint: "proxy_user_type_hint_example", # String | 
-  proxy_password: "proxy_password_example", # String | 
-  proxy_password_type_hint: "proxy_password_type_hint_example" # String | 
+  proxy_enabled_type_hint: 'proxy_enabled_type_hint_example', # String | 
+  proxy_user: 'proxy_user_example', # String | 
+  proxy_user_type_hint: 'proxy_user_type_hint_example', # String | 
+  proxy_password: 'proxy_password_example', # String | 
+  proxy_password_type_hint: 'proxy_password_type_hint_example' # String | 
 }
 
 begin
@@ -1253,7 +1208,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 
 
@@ -1274,12 +1229,11 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::SlingApi.new
-
-opts = { 
-  _alias: "_alias_example", # String | 
-  alias_type_hint: "alias_type_hint_example", # String | 
+opts = {
+  _alias: '_alias_example', # String | 
+  alias_type_hint: 'alias_type_hint_example', # String | 
   dav_create_absolute_uri: true, # BOOLEAN | 
-  dav_create_absolute_uri_type_hint: "dav_create_absolute_uri_type_hint_example" # String | 
+  dav_create_absolute_uri_type_hint: 'dav_create_absolute_uri_type_hint_example' # String | 
 }
 
 begin
@@ -1309,7 +1263,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 
 
@@ -1330,16 +1284,15 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::SlingApi.new
-
-opts = { 
-  json_maximumresults: "json_maximumresults_example", # String | 
-  json_maximumresults_type_hint: "json_maximumresults_type_hint_example", # String | 
+opts = {
+  json_maximumresults: 'json_maximumresults_example', # String | 
+  json_maximumresults_type_hint: 'json_maximumresults_type_hint_example', # String | 
   enable_html: true, # BOOLEAN | 
-  enable_html_type_hint: "enable_html_type_hint_example", # String | 
+  enable_html_type_hint: 'enable_html_type_hint_example', # String | 
   enable_txt: true, # BOOLEAN | 
-  enable_txt_type_hint: "enable_txt_type_hint_example", # String | 
+  enable_txt_type_hint: 'enable_txt_type_hint_example', # String | 
   enable_xml: true, # BOOLEAN | 
-  enable_xml_type_hint: "enable_xml_type_hint_example" # String | 
+  enable_xml_type_hint: 'enable_xml_type_hint_example' # String | 
 }
 
 begin
@@ -1373,7 +1326,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 
 
@@ -1394,16 +1347,15 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::SlingApi.new
-
-opts = { 
+opts = {
   allow_empty: true, # BOOLEAN | 
-  allow_empty_type_hint: "allow_empty_type_hint_example", # String | 
-  allow_hosts: "allow_hosts_example", # String | 
-  allow_hosts_type_hint: "allow_hosts_type_hint_example", # String | 
-  allow_hosts_regexp: "allow_hosts_regexp_example", # String | 
-  allow_hosts_regexp_type_hint: "allow_hosts_regexp_type_hint_example", # String | 
-  filter_methods: "filter_methods_example", # String | 
-  filter_methods_type_hint: "filter_methods_type_hint_example" # String | 
+  allow_empty_type_hint: 'allow_empty_type_hint_example', # String | 
+  allow_hosts: 'allow_hosts_example', # String | 
+  allow_hosts_type_hint: 'allow_hosts_type_hint_example', # String | 
+  allow_hosts_regexp: 'allow_hosts_regexp_example', # String | 
+  allow_hosts_regexp_type_hint: 'allow_hosts_regexp_type_hint_example', # String | 
+  filter_methods: 'filter_methods_example', # String | 
+  filter_methods_type_hint: 'filter_methods_type_hint_example' # String | 
 }
 
 begin
@@ -1437,7 +1389,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 
 
@@ -1458,15 +1410,12 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::SlingApi.new
-
-path = "path_example" # String | 
-
-name = "name_example" # String | 
-
-opts = { 
-  operation: "operation_example", # String | 
-  delete_authorizable: "delete_authorizable_example", # String | 
-  file: File.new("/path/to/file.txt") # File | 
+path = 'path_example' # String | 
+name = 'name_example' # String | 
+opts = {
+  operation: 'operation_example', # String | 
+  delete_authorizable: 'delete_authorizable_example', # String | 
+  file: File.new('/path/to/file') # File | 
 }
 
 begin
@@ -1497,7 +1446,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: multipart/form-data
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 
 
@@ -1518,13 +1467,10 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::SlingApi.new
-
-path = "path_example" # String | 
-
-name = "name_example" # String | 
-
-opts = { 
-  add_members: "add_members_example" # String | 
+path = 'path_example' # String | 
+name = 'name_example' # String | 
+opts = {
+  add_members: 'add_members_example' # String | 
 }
 
 begin
@@ -1553,7 +1499,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 
 
@@ -1574,13 +1520,9 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::SlingApi.new
-
-path = "path_example" # String | 
-
-jcrprimary_type = "jcrprimary_type_example" # String | 
-
-name = "name_example" # String | 
-
+path = 'path_example' # String | 
+jcrprimary_type = 'jcrprimary_type_example' # String | 
+name = 'name_example' # String | 
 
 begin
   api_instance.post_path(path, jcrprimary_type, name)
@@ -1608,7 +1550,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 
 
@@ -1629,15 +1571,10 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::SlingApi.new
-
-path = "path_example" # String | 
-
+path = 'path_example' # String | 
 p_limit = 3.4 # Float | 
-
-_1_property = "_1_property_example" # String | 
-
-_1_property_value = "_1_property_value_example" # String | 
-
+_1_property = '_1_property_example' # String | 
+_1_property_value = '_1_property_value_example' # String | 
 
 begin
   result = api_instance.post_query(path, p_limit, _1_property, _1_property_value)
@@ -1688,13 +1625,9 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::SlingApi.new
-
 ignoredeactivated = true # BOOLEAN | 
-
 onlymodified = true # BOOLEAN | 
-
-path = "path_example" # String | 
-
+path = 'path_example' # String | 
 
 begin
   api_instance.post_tree_activation(ignoredeactivated, onlymodified, path)
@@ -1722,7 +1655,7 @@ nil (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 
 
@@ -1743,14 +1676,13 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::SlingApi.new
-
-opts = { 
-  operation: "operation_example", # String | 
-  new_password: "new_password_example", # String | 
-  re_password: "re_password_example", # String | 
-  key_store_type: "key_store_type_example", # String | 
-  remove_alias: "remove_alias_example", # String | 
-  certificate: File.new("/path/to/file.txt") # File | 
+opts = {
+  operation: 'operation_example', # String | 
+  new_password: 'new_password_example', # String | 
+  re_password: 're_password_example', # String | 
+  key_store_type: 'key_store_type_example', # String | 
+  remove_alias: 'remove_alias_example', # String | 
+  certificate: File.new('/path/to/file') # File | 
 }
 
 begin
@@ -1804,9 +1736,8 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::SlingApi.new
-
-opts = { 
-  truststore_p12: File.new("/path/to/file.txt") # File | 
+opts = {
+  truststore_p12: File.new('/path/to/file') # File | 
 }
 
 begin
