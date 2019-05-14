@@ -2110,163 +2110,113 @@ components:
           description: needed for configuraiton binding
           type: string
         properties:
-          type: object
-          items:
-            $ref: "#/components/schemas/SamlConfigurationProperties"
+          $ref: "#/components/schemas/SamlConfigurationProperties"
     SamlConfigurationProperties:
       type: object
       properties:
         path:
-          type: array
           description: Repository path for which this authentication handler should be used
             by Sling. If this is empty, the authentication handler will be
             disabled.
-          items:
-            $ref: "#/components/schemas/SamlConfigurationPropertyItemsArray"
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsArray"
         service.ranking:
-          type: array
           description: OSGi Framework Service Ranking value to indicate the order in which
             to call this service. This is an int value where higher values
             designate higher precedence. Default value is 0.
-          items:
-            $ref: "#/components/schemas/SamlConfigurationPropertyItemsLong"
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsLong"
         idpUrl:
-          type: array
           description: URL of the IDP where the SAML Authentication Request should be sent
             to. If this property is empty the authentication handler is
             disabled. (idpUrl)
-          items:
-            $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
         idpCertAlias:
-          type: array
           description: The alias of the IdP's certificate in the global truststore. If this
             property is empty the authentication handler is disabled.
-          items:
-            $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
         idpHttpRedirect:
-          type: array
           description: Use an HTTP Redirect to the IDP URL instead of sending an
             AuthnRequest-message to request credentials. Use this for IDP
             initiated authentication.
-          items:
-            $ref: "#/components/schemas/SamlConfigurationPropertyItemsBoolean"
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsBoolean"
         serviceProviderEntityId:
-          type: array
           description: ID which uniquely identifies this service provider with the identity
             provider. If this property is empty the authentication handler is
             disabled.
-          items:
-            $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
         assertionConsumerServiceURL:
-          type: array
           description: The (optional) AssertionConsumerServiceURL attribute of an Authn
             request specifies the location to which a  message MUST be
             sent to the requester.
-          items:
-            $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
         spPrivateKeyAlias:
-          type: array
           description: The alias of the SP's private key in the key-store of the
             'authentication-service' system user. If this property is empty the
             handler will not be able to sign or decrypt messages.
-          items:
-            $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
         keyStorePassword:
-          type: array
           description: The password of the key-store of the 'authentication-service' system
             user.
-          items:
-            $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
         defaultRedirectUrl:
-          type: array
           description: The default location to redirect to after successful authentication.
-          items:
-            $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
         userIDAttribute:
-          type: array
           description: The name of the attribute containing the user ID used to
             authenticate and create the user in the CRX repository. Leave empty
             to use the Subject:NameId.
-          items:
-            $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
         useEncryption:
-          type: array
           description: Whether or not this authentication handler expects encrypted SAML
             assertions. If this is enabled the SP's private key must be provided
             in the key-store of the 'authentication-service' system user (see SP
             Private Key Alias above).
-          items:
-            $ref: "#/components/schemas/SamlConfigurationPropertyItemsBoolean"
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsBoolean"
         createUser:
-          type: array
           description: Whether or not to autocreate nonexisting users in the repository.
-          items:
-            $ref: "#/components/schemas/SamlConfigurationPropertyItemsBoolean"
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsBoolean"
         addGroupMemberships:
-          type: array
           description: Whether or not a user should be automatically added to CRX groups
             after successful authentication.
-          items:
-            $ref: "#/components/schemas/SamlConfigurationPropertyItemsBoolean"
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsBoolean"
         groupMembershipAttribute:
-          type: array
           description: The name of the attribute containing a list of CRX groups this user
             should be added to.
-          items:
-            $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
         defaultGroups:
-          type: array
           description: A list of default CRX groups users are added to after successful
             authentication.
-          items:
-            $ref: "#/components/schemas/SamlConfigurationPropertyItemsArray"
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsArray"
         nameIdFormat:
-          type: array
           description: The value of the NameIDPolicy format parameter to send in the
             AuthnRequest message.
-          items:
-            $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
         synchronizeAttributes:
-          type: array
           description: A list of attribute mappings (in the format
             \attributename=path/relative/to/user/node\) which should be stored
             in the repository on user-synchronization.
-          items:
-            $ref: "#/components/schemas/SamlConfigurationPropertyItemsArray"
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsArray"
         handleLogout:
-          type: array
           description: Whether or not logout (dropCredentials) requests will be processed
             by this handler.
-          items:
-            $ref: "#/components/schemas/SamlConfigurationPropertyItemsBoolean"
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsBoolean"
         logoutUrl:
-          type: array
           description: URL of the IDP where the SAML Logout Request should be sent to. If
             this property is empty the authentication handler won't handle
             logouts.
-          items:
-            $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
         clockTolerance:
-          type: array
           description: Time tolerance in seconds to compensate clock skew between IDP and
             SP when validating Assertions.
-          items:
-            $ref: "#/components/schemas/SamlConfigurationPropertyItemsLong"
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsLong"
         digestMethod:
-          type: array
           description: The digest algorithm to use when signing a SAML message.
-          items:
-            $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
         signatureMethod:
-          type: array
           description: The signature algorithm to use when signing a SAML message.
-          items:
-            $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
         userIntermediatePath:
-          type: array
           description: User intermediate path to store created users.
-          items:
-            $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
     SamlConfigurationPropertyItemsArray:
       type: object
       properties:
