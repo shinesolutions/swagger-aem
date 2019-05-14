@@ -24,7 +24,7 @@ describe 'Saml' do
         }
       )
       expect(status_code).to eq(200)
-      expect(data.properties[:idpCertAlias][:is_set]).to eq(false)
+      expect(data.properties.idp_cert_alias.is_set).to eq(false)
 
       # ensure saml osgi config doesn't exist prior to testing
       data, status_code, headers = @sling.delete_node_with_http_info(
@@ -47,7 +47,7 @@ describe 'Saml' do
       }
     )
     expect(status_code).to eq(200)
-    expect(data.properties[:idpCertAlias][:is_set]).to eq(true)
+    expect(data.properties.idp_cert_alias.is_set).to eq(true)
 
     # ensure saml configuraiton is deleted after testing
     data, status_code, headers = @console.post_saml_configuration_with_http_info(
@@ -67,7 +67,7 @@ describe 'Saml' do
       }
     )
     expect(status_code).to eq(200)
-    expect(data.properties[:idpCertAlias][:is_set]).to eq(false)
+    expect(data.properties.idp_cert_alias.is_set).to eq(false)
   end
 
   describe 'test create' do
@@ -80,7 +80,7 @@ describe 'Saml' do
         }
       )
       expect(status_code).to eq(200)
-      expect(data.properties[:idpCertAlias][:is_set]).to eq(false)
+      expect(data.properties.idp_cert_alias.is_set).to eq(false)
 
       # Creating empty SAML configuration as sling:OsgiConfig
       data, status_code, headers = @sling.post_path_with_http_info(
@@ -175,7 +175,7 @@ describe 'Saml' do
       )
       expect([200, 201]).to include(status_code)
 
-      while data.properties[:idpCertAlias][:is_set].eql? false
+      while data.properties.idp_cert_alias.is_set.eql? false
         data, status_code, headers = @console.post_saml_configuration_with_http_info(
           {
             :post => true
@@ -185,7 +185,7 @@ describe 'Saml' do
         sleep 2
       end
 
-      expect(data.properties[:idpCertAlias][:is_set]).to eq(true)
+      expect(data.properties.idp_cert_alias.is_set).to eq(true)
 
       # create saml
 
@@ -265,7 +265,7 @@ describe 'Saml' do
         }
       )
       expect(status_code).to eq(200)
-      expect(data.properties[:idpCertAlias][:is_set]).to eq(true)
+      expect(data.properties.idp_cert_alias.is_set).to eq(true)
     end
   end
 end
