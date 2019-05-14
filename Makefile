@@ -41,7 +41,7 @@ python:
 
 # generate Ruby API client
 ruby:
-	cd ruby && make clean deps build install test-unit doc && cd ..
+	cd ruby && make ci && cd ..
 
 release:
 	rtk release
