@@ -3,27 +3,26 @@ ci: clean deps build install test-unit doc
 
 clean:
 	rm -rf generated/ Gemfile.lock
+	mkdir -p generated/
 
 deps:
-	gem install bundler -v 1.17.3
+	gem install bundler --version=1.17.3
 	bundle install --binstubs
 
-build: clean
-	mkdir -p generated/
+build:
 	docker \
 	  run \
-	  -v /Users/cliffano/dev/workspace-shine/swagger-aem/ruby/..:/local/ \
+	  -v `pwd`/../:/local/ \
 	  openapitools/openapi-generator-cli \
 	  generate \
 	  --input-spec /local/conf/api.yml \
 	  --config /local/ruby/conf/client.json \
 	  --output /local/ruby/generated/ \
-	  --generator-name ruby;
-	cd generated/ && bundle install
+	  --generator-name ruby
 
 install:
 	cd generated/ && \
-	  rm -f swagger_aem-*.gem && \
+	  rm -f swagger_aem-*.gem Gemfile.lock && \
 		bundle install && \
 	  gem build swagger_aem.gemspec && \
 	  gem install `ls swagger_aem-*.gem`
