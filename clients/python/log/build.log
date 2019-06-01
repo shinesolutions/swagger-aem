@@ -1,0 +1,162 @@
+running bdist_egg
+running egg_info
+writing requirements to swaggeraem.egg-info/requires.txt
+writing swaggeraem.egg-info/PKG-INFO
+writing top-level names to swaggeraem.egg-info/top_level.txt
+writing dependency_links to swaggeraem.egg-info/dependency_links.txt
+reading manifest file 'swaggeraem.egg-info/SOURCES.txt'
+writing manifest file 'swaggeraem.egg-info/SOURCES.txt'
+installing library code to build/bdist.linux-x86_64/egg
+running install_lib
+running build_py
+creating build
+creating build/lib.linux-x86_64-2.7
+creating build/lib.linux-x86_64-2.7/swaggeraem
+copying swaggeraem/configuration.py -> build/lib.linux-x86_64-2.7/swaggeraem
+copying swaggeraem/rest.py -> build/lib.linux-x86_64-2.7/swaggeraem
+copying swaggeraem/__init__.py -> build/lib.linux-x86_64-2.7/swaggeraem
+copying swaggeraem/api_client.py -> build/lib.linux-x86_64-2.7/swaggeraem
+creating build/lib.linux-x86_64-2.7/test
+copying test/test_saml_configuration_info.py -> build/lib.linux-x86_64-2.7/test
+copying test/test_keystore_items.py -> build/lib.linux-x86_64-2.7/test
+copying test/test_keystore_info.py -> build/lib.linux-x86_64-2.7/test
+copying test/test_sling_api.py -> build/lib.linux-x86_64-2.7/test
+copying test/test_crx_api.py -> build/lib.linux-x86_64-2.7/test
+copying test/test_truststore_items.py -> build/lib.linux-x86_64-2.7/test
+copying test/test_saml_configuration_property_items_array.py -> build/lib.linux-x86_64-2.7/test
+copying test/__init__.py -> build/lib.linux-x86_64-2.7/test
+copying test/test_install_status_status.py -> build/lib.linux-x86_64-2.7/test
+copying test/test_saml_configuration_properties.py -> build/lib.linux-x86_64-2.7/test
+copying test/test_install_status.py -> build/lib.linux-x86_64-2.7/test
+copying test/test_custom_api.py -> build/lib.linux-x86_64-2.7/test
+copying test/test_saml_configuration_property_items_long.py -> build/lib.linux-x86_64-2.7/test
+copying test/test_keystore_chain_items.py -> build/lib.linux-x86_64-2.7/test
+copying test/test_console_api.py -> build/lib.linux-x86_64-2.7/test
+copying test/test_saml_configuration_property_items_string.py -> build/lib.linux-x86_64-2.7/test
+copying test/test_truststore_info.py -> build/lib.linux-x86_64-2.7/test
+copying test/test_cq_api.py -> build/lib.linux-x86_64-2.7/test
+copying test/test_saml_configuration_property_items_boolean.py -> build/lib.linux-x86_64-2.7/test
+creating build/lib.linux-x86_64-2.7/swaggeraem/apis
+copying swaggeraem/apis/custom_api.py -> build/lib.linux-x86_64-2.7/swaggeraem/apis
+copying swaggeraem/apis/__init__.py -> build/lib.linux-x86_64-2.7/swaggeraem/apis
+copying swaggeraem/apis/crx_api.py -> build/lib.linux-x86_64-2.7/swaggeraem/apis
+copying swaggeraem/apis/cq_api.py -> build/lib.linux-x86_64-2.7/swaggeraem/apis
+copying swaggeraem/apis/console_api.py -> build/lib.linux-x86_64-2.7/swaggeraem/apis
+copying swaggeraem/apis/sling_api.py -> build/lib.linux-x86_64-2.7/swaggeraem/apis
+creating build/lib.linux-x86_64-2.7/swaggeraem/models
+copying swaggeraem/models/keystore_chain_items.py -> build/lib.linux-x86_64-2.7/swaggeraem/models
+copying swaggeraem/models/keystore_info.py -> build/lib.linux-x86_64-2.7/swaggeraem/models
+copying swaggeraem/models/saml_configuration_property_items_array.py -> build/lib.linux-x86_64-2.7/swaggeraem/models
+copying swaggeraem/models/install_status.py -> build/lib.linux-x86_64-2.7/swaggeraem/models
+copying swaggeraem/models/saml_configuration_info.py -> build/lib.linux-x86_64-2.7/swaggeraem/models
+copying swaggeraem/models/__init__.py -> build/lib.linux-x86_64-2.7/swaggeraem/models
+copying swaggeraem/models/truststore_info.py -> build/lib.linux-x86_64-2.7/swaggeraem/models
+copying swaggeraem/models/truststore_items.py -> build/lib.linux-x86_64-2.7/swaggeraem/models
+copying swaggeraem/models/saml_configuration_property_items_long.py -> build/lib.linux-x86_64-2.7/swaggeraem/models
+copying swaggeraem/models/install_status_status.py -> build/lib.linux-x86_64-2.7/swaggeraem/models
+copying swaggeraem/models/saml_configuration_property_items_boolean.py -> build/lib.linux-x86_64-2.7/swaggeraem/models
+copying swaggeraem/models/keystore_items.py -> build/lib.linux-x86_64-2.7/swaggeraem/models
+copying swaggeraem/models/saml_configuration_property_items_string.py -> build/lib.linux-x86_64-2.7/swaggeraem/models
+copying swaggeraem/models/saml_configuration_properties.py -> build/lib.linux-x86_64-2.7/swaggeraem/models
+creating build/bdist.linux-x86_64
+creating build/bdist.linux-x86_64/egg
+creating build/bdist.linux-x86_64/egg/swaggeraem
+copying build/lib.linux-x86_64-2.7/swaggeraem/configuration.py -> build/bdist.linux-x86_64/egg/swaggeraem
+creating build/bdist.linux-x86_64/egg/swaggeraem/apis
+copying build/lib.linux-x86_64-2.7/swaggeraem/apis/custom_api.py -> build/bdist.linux-x86_64/egg/swaggeraem/apis
+copying build/lib.linux-x86_64-2.7/swaggeraem/apis/__init__.py -> build/bdist.linux-x86_64/egg/swaggeraem/apis
+copying build/lib.linux-x86_64-2.7/swaggeraem/apis/crx_api.py -> build/bdist.linux-x86_64/egg/swaggeraem/apis
+copying build/lib.linux-x86_64-2.7/swaggeraem/apis/cq_api.py -> build/bdist.linux-x86_64/egg/swaggeraem/apis
+copying build/lib.linux-x86_64-2.7/swaggeraem/apis/console_api.py -> build/bdist.linux-x86_64/egg/swaggeraem/apis
+copying build/lib.linux-x86_64-2.7/swaggeraem/apis/sling_api.py -> build/bdist.linux-x86_64/egg/swaggeraem/apis
+copying build/lib.linux-x86_64-2.7/swaggeraem/rest.py -> build/bdist.linux-x86_64/egg/swaggeraem
+copying build/lib.linux-x86_64-2.7/swaggeraem/__init__.py -> build/bdist.linux-x86_64/egg/swaggeraem
+creating build/bdist.linux-x86_64/egg/swaggeraem/models
+copying build/lib.linux-x86_64-2.7/swaggeraem/models/keystore_chain_items.py -> build/bdist.linux-x86_64/egg/swaggeraem/models
+copying build/lib.linux-x86_64-2.7/swaggeraem/models/keystore_info.py -> build/bdist.linux-x86_64/egg/swaggeraem/models
+copying build/lib.linux-x86_64-2.7/swaggeraem/models/saml_configuration_property_items_array.py -> build/bdist.linux-x86_64/egg/swaggeraem/models
+copying build/lib.linux-x86_64-2.7/swaggeraem/models/install_status.py -> build/bdist.linux-x86_64/egg/swaggeraem/models
+copying build/lib.linux-x86_64-2.7/swaggeraem/models/saml_configuration_info.py -> build/bdist.linux-x86_64/egg/swaggeraem/models
+copying build/lib.linux-x86_64-2.7/swaggeraem/models/__init__.py -> build/bdist.linux-x86_64/egg/swaggeraem/models
+copying build/lib.linux-x86_64-2.7/swaggeraem/models/truststore_info.py -> build/bdist.linux-x86_64/egg/swaggeraem/models
+copying build/lib.linux-x86_64-2.7/swaggeraem/models/truststore_items.py -> build/bdist.linux-x86_64/egg/swaggeraem/models
+copying build/lib.linux-x86_64-2.7/swaggeraem/models/saml_configuration_property_items_long.py -> build/bdist.linux-x86_64/egg/swaggeraem/models
+copying build/lib.linux-x86_64-2.7/swaggeraem/models/install_status_status.py -> build/bdist.linux-x86_64/egg/swaggeraem/models
+copying build/lib.linux-x86_64-2.7/swaggeraem/models/saml_configuration_property_items_boolean.py -> build/bdist.linux-x86_64/egg/swaggeraem/models
+copying build/lib.linux-x86_64-2.7/swaggeraem/models/keystore_items.py -> build/bdist.linux-x86_64/egg/swaggeraem/models
+copying build/lib.linux-x86_64-2.7/swaggeraem/models/saml_configuration_property_items_string.py -> build/bdist.linux-x86_64/egg/swaggeraem/models
+copying build/lib.linux-x86_64-2.7/swaggeraem/models/saml_configuration_properties.py -> build/bdist.linux-x86_64/egg/swaggeraem/models
+copying build/lib.linux-x86_64-2.7/swaggeraem/api_client.py -> build/bdist.linux-x86_64/egg/swaggeraem
+creating build/bdist.linux-x86_64/egg/test
+copying build/lib.linux-x86_64-2.7/test/test_saml_configuration_info.py -> build/bdist.linux-x86_64/egg/test
+copying build/lib.linux-x86_64-2.7/test/test_keystore_items.py -> build/bdist.linux-x86_64/egg/test
+copying build/lib.linux-x86_64-2.7/test/test_keystore_info.py -> build/bdist.linux-x86_64/egg/test
+copying build/lib.linux-x86_64-2.7/test/test_sling_api.py -> build/bdist.linux-x86_64/egg/test
+copying build/lib.linux-x86_64-2.7/test/test_crx_api.py -> build/bdist.linux-x86_64/egg/test
+copying build/lib.linux-x86_64-2.7/test/test_truststore_items.py -> build/bdist.linux-x86_64/egg/test
+copying build/lib.linux-x86_64-2.7/test/test_saml_configuration_property_items_array.py -> build/bdist.linux-x86_64/egg/test
+copying build/lib.linux-x86_64-2.7/test/__init__.py -> build/bdist.linux-x86_64/egg/test
+copying build/lib.linux-x86_64-2.7/test/test_install_status_status.py -> build/bdist.linux-x86_64/egg/test
+copying build/lib.linux-x86_64-2.7/test/test_saml_configuration_properties.py -> build/bdist.linux-x86_64/egg/test
+copying build/lib.linux-x86_64-2.7/test/test_install_status.py -> build/bdist.linux-x86_64/egg/test
+copying build/lib.linux-x86_64-2.7/test/test_custom_api.py -> build/bdist.linux-x86_64/egg/test
+copying build/lib.linux-x86_64-2.7/test/test_saml_configuration_property_items_long.py -> build/bdist.linux-x86_64/egg/test
+copying build/lib.linux-x86_64-2.7/test/test_keystore_chain_items.py -> build/bdist.linux-x86_64/egg/test
+copying build/lib.linux-x86_64-2.7/test/test_console_api.py -> build/bdist.linux-x86_64/egg/test
+copying build/lib.linux-x86_64-2.7/test/test_saml_configuration_property_items_string.py -> build/bdist.linux-x86_64/egg/test
+copying build/lib.linux-x86_64-2.7/test/test_truststore_info.py -> build/bdist.linux-x86_64/egg/test
+copying build/lib.linux-x86_64-2.7/test/test_cq_api.py -> build/bdist.linux-x86_64/egg/test
+copying build/lib.linux-x86_64-2.7/test/test_saml_configuration_property_items_boolean.py -> build/bdist.linux-x86_64/egg/test
+byte-compiling build/bdist.linux-x86_64/egg/swaggeraem/configuration.py to configuration.pyc
+byte-compiling build/bdist.linux-x86_64/egg/swaggeraem/apis/custom_api.py to custom_api.pyc
+byte-compiling build/bdist.linux-x86_64/egg/swaggeraem/apis/__init__.py to __init__.pyc
+byte-compiling build/bdist.linux-x86_64/egg/swaggeraem/apis/crx_api.py to crx_api.pyc
+byte-compiling build/bdist.linux-x86_64/egg/swaggeraem/apis/cq_api.py to cq_api.pyc
+byte-compiling build/bdist.linux-x86_64/egg/swaggeraem/apis/console_api.py to console_api.pyc
+byte-compiling build/bdist.linux-x86_64/egg/swaggeraem/apis/sling_api.py to sling_api.pyc
+byte-compiling build/bdist.linux-x86_64/egg/swaggeraem/rest.py to rest.pyc
+byte-compiling build/bdist.linux-x86_64/egg/swaggeraem/__init__.py to __init__.pyc
+byte-compiling build/bdist.linux-x86_64/egg/swaggeraem/models/keystore_chain_items.py to keystore_chain_items.pyc
+byte-compiling build/bdist.linux-x86_64/egg/swaggeraem/models/keystore_info.py to keystore_info.pyc
+byte-compiling build/bdist.linux-x86_64/egg/swaggeraem/models/saml_configuration_property_items_array.py to saml_configuration_property_items_array.pyc
+byte-compiling build/bdist.linux-x86_64/egg/swaggeraem/models/install_status.py to install_status.pyc
+byte-compiling build/bdist.linux-x86_64/egg/swaggeraem/models/saml_configuration_info.py to saml_configuration_info.pyc
+byte-compiling build/bdist.linux-x86_64/egg/swaggeraem/models/__init__.py to __init__.pyc
+byte-compiling build/bdist.linux-x86_64/egg/swaggeraem/models/truststore_info.py to truststore_info.pyc
+byte-compiling build/bdist.linux-x86_64/egg/swaggeraem/models/truststore_items.py to truststore_items.pyc
+byte-compiling build/bdist.linux-x86_64/egg/swaggeraem/models/saml_configuration_property_items_long.py to saml_configuration_property_items_long.pyc
+byte-compiling build/bdist.linux-x86_64/egg/swaggeraem/models/install_status_status.py to install_status_status.pyc
+byte-compiling build/bdist.linux-x86_64/egg/swaggeraem/models/saml_configuration_property_items_boolean.py to saml_configuration_property_items_boolean.pyc
+byte-compiling build/bdist.linux-x86_64/egg/swaggeraem/models/keystore_items.py to keystore_items.pyc
+byte-compiling build/bdist.linux-x86_64/egg/swaggeraem/models/saml_configuration_property_items_string.py to saml_configuration_property_items_string.pyc
+byte-compiling build/bdist.linux-x86_64/egg/swaggeraem/models/saml_configuration_properties.py to saml_configuration_properties.pyc
+byte-compiling build/bdist.linux-x86_64/egg/swaggeraem/api_client.py to api_client.pyc
+byte-compiling build/bdist.linux-x86_64/egg/test/test_saml_configuration_info.py to test_saml_configuration_info.pyc
+byte-compiling build/bdist.linux-x86_64/egg/test/test_keystore_items.py to test_keystore_items.pyc
+byte-compiling build/bdist.linux-x86_64/egg/test/test_keystore_info.py to test_keystore_info.pyc
+byte-compiling build/bdist.linux-x86_64/egg/test/test_sling_api.py to test_sling_api.pyc
+byte-compiling build/bdist.linux-x86_64/egg/test/test_crx_api.py to test_crx_api.pyc
+byte-compiling build/bdist.linux-x86_64/egg/test/test_truststore_items.py to test_truststore_items.pyc
+byte-compiling build/bdist.linux-x86_64/egg/test/test_saml_configuration_property_items_array.py to test_saml_configuration_property_items_array.pyc
+byte-compiling build/bdist.linux-x86_64/egg/test/__init__.py to __init__.pyc
+byte-compiling build/bdist.linux-x86_64/egg/test/test_install_status_status.py to test_install_status_status.pyc
+byte-compiling build/bdist.linux-x86_64/egg/test/test_saml_configuration_properties.py to test_saml_configuration_properties.pyc
+byte-compiling build/bdist.linux-x86_64/egg/test/test_install_status.py to test_install_status.pyc
+byte-compiling build/bdist.linux-x86_64/egg/test/test_custom_api.py to test_custom_api.pyc
+byte-compiling build/bdist.linux-x86_64/egg/test/test_saml_configuration_property_items_long.py to test_saml_configuration_property_items_long.pyc
+byte-compiling build/bdist.linux-x86_64/egg/test/test_keystore_chain_items.py to test_keystore_chain_items.pyc
+byte-compiling build/bdist.linux-x86_64/egg/test/test_console_api.py to test_console_api.pyc
+byte-compiling build/bdist.linux-x86_64/egg/test/test_saml_configuration_property_items_string.py to test_saml_configuration_property_items_string.pyc
+byte-compiling build/bdist.linux-x86_64/egg/test/test_truststore_info.py to test_truststore_info.pyc
+byte-compiling build/bdist.linux-x86_64/egg/test/test_cq_api.py to test_cq_api.pyc
+byte-compiling build/bdist.linux-x86_64/egg/test/test_saml_configuration_property_items_boolean.py to test_saml_configuration_property_items_boolean.pyc
+creating build/bdist.linux-x86_64/egg/EGG-INFO
+copying swaggeraem.egg-info/PKG-INFO -> build/bdist.linux-x86_64/egg/EGG-INFO
+copying swaggeraem.egg-info/SOURCES.txt -> build/bdist.linux-x86_64/egg/EGG-INFO
+copying swaggeraem.egg-info/dependency_links.txt -> build/bdist.linux-x86_64/egg/EGG-INFO
+copying swaggeraem.egg-info/requires.txt -> build/bdist.linux-x86_64/egg/EGG-INFO
+copying swaggeraem.egg-info/top_level.txt -> build/bdist.linux-x86_64/egg/EGG-INFO
+zip_safe flag not set; analyzing archive contents...
+creating dist
+creating 'dist/swaggeraem-0.9.1-py2.7.egg' and adding 'build/bdist.linux-x86_64/egg' to it
+removing 'build/bdist.linux-x86_64/egg' (and everything under it)

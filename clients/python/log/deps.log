@@ -1,0 +1,30 @@
+Collecting certifi>=14.05.14 (from -r requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/9f/e0/accfc1b56b57e9750eba272e24c4dddeac86852c2bebd1236674d7887e8a/certifi-2018.11.29-py2.py3-none-any.whl (154kB)
+Collecting six>=1.10 (from -r requirements.txt (line 2))
+  Downloading https://files.pythonhosted.org/packages/73/fb/00a976f728d0d1fecfe898238ce23f502a721c0ac0ecfedb80e0d88c64e9/six-1.12.0-py2.py3-none-any.whl
+Collecting python_dateutil>=2.5.3 (from -r requirements.txt (line 3))
+  Downloading https://files.pythonhosted.org/packages/74/68/d87d9b36af36f44254a8d512cbfc48369103a3b9e474be9bdfe536abfc45/python_dateutil-2.7.5-py2.py3-none-any.whl (225kB)
+Collecting setuptools>=21.0.0 (from -r requirements.txt (line 4))
+  Downloading https://files.pythonhosted.org/packages/14/43/4f6ccba67890ad39c3d5c736dd0de3b122bf252ee4e5b4ea3d900990d64d/setuptools-40.7.2-py2.py3-none-any.whl (574kB)
+Collecting urllib3>=1.15.1 (from -r requirements.txt (line 5))
+  Downloading https://files.pythonhosted.org/packages/62/00/ee1d7de624db8ba7090d1226aebefab96a2c71cd5cfa7629d6ad3f61b79e/urllib3-1.24.1-py2.py3-none-any.whl (118kB)
+Installing collected packages: certifi, six, python-dateutil, setuptools, urllib3
+  Found existing installation: setuptools 20.7.0
+    Not uninstalling setuptools at /usr/lib/python2.7/dist-packages, outside environment /usr
+Successfully installed certifi-2018.11.29 python-dateutil-2.7.5 setuptools-40.7.2 six-1.12.0 urllib3-1.24.1
+You are using pip version 8.1.1, however version 19.0.1 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+Collecting coverage>=4.0.3 (from -r test-requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/af/cf/e240715a50d64b0538a08a2be1ae4060fb25791e911cbe8fd2367b5deeaa/coverage-4.5.2-cp27-cp27mu-manylinux1_x86_64.whl (201kB)
+Collecting nose>=1.3.7 (from -r test-requirements.txt (line 2))
+  Downloading https://files.pythonhosted.org/packages/99/4f/13fb671119e65c4dce97c60e67d3fd9e6f7f809f2b307e2611f4701205cb/nose-1.3.7-py2-none-any.whl (154kB)
+Collecting pluggy>=0.3.1 (from -r test-requirements.txt (line 3))
+  Downloading https://files.pythonhosted.org/packages/2d/60/f58d9e8197f911f9405bf7e02227b43a2acc2c2f1a8cbb1be5ecf6bfd0b8/pluggy-0.8.1-py2.py3-none-any.whl
+Collecting py>=1.4.31 (from -r test-requirements.txt (line 4))
+  Downloading https://files.pythonhosted.org/packages/3e/c7/3da685ef117d42ac8d71af525208759742dd235f8094221fdaafcd3dba8f/py-1.7.0-py2.py3-none-any.whl (83kB)
+Collecting randomize>=0.13 (from -r test-requirements.txt (line 5))
+  Downloading https://files.pythonhosted.org/packages/00/de/bb4cc7e69c2d6625102937b868a2aee56ad1ea2a3b40c8fafdc793558ab7/randomize-0.14-py2.py3-none-any.whl
+Installing collected packages: coverage, nose, pluggy, py, randomize
+Successfully installed coverage-4.5.2 nose-1.3.7 pluggy-0.8.1 py-1.7.0 randomize-0.14
+You are using pip version 8.1.1, however version 19.0.1 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.

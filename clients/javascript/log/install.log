@@ -1,0 +1,10 @@
+node-swagger-aem@0.9.0 /opt/workspace/javascript/generated
+└─┬ babel-cli@6.26.0
+  ├── babel-core@6.26.3 
+  └─┬ babel-register@6.26.0
+    └── babel-core@6.26.3 
+
+npm WARN optional Skipping failed optional dependency /chokidar/fsevents:
+npm WARN notsup Not compatible with your operating system or architecture: fsevents@1.2.7
+npm WARN node-swagger-aem@0.9.0 No repository field.
+/usr/local/lib/node_modules/node-swagger-aem -> /opt/workspace/javascript/generated

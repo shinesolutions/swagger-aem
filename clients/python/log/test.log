@@ -1,0 +1,73 @@
+running test
+running egg_info
+creating swaggeraem.egg-info
+writing requirements to swaggeraem.egg-info/requires.txt
+writing swaggeraem.egg-info/PKG-INFO
+writing top-level names to swaggeraem.egg-info/top_level.txt
+writing dependency_links to swaggeraem.egg-info/dependency_links.txt
+writing manifest file 'swaggeraem.egg-info/SOURCES.txt'
+reading manifest file 'swaggeraem.egg-info/SOURCES.txt'
+writing manifest file 'swaggeraem.egg-info/SOURCES.txt'
+running build_ext
+testSamlConfigurationInfo (test.test_saml_configuration_info.TestSamlConfigurationInfo) ... ok
+testKeystoreItems (test.test_keystore_items.TestKeystoreItems) ... ok
+testKeystoreInfo (test.test_keystore_info.TestKeystoreInfo) ... ok
+test_delete_agent (test.test_sling_api.TestSlingApi) ... ok
+test_delete_node (test.test_sling_api.TestSlingApi) ... ok
+test_get_agent (test.test_sling_api.TestSlingApi) ... ok
+test_get_agents (test.test_sling_api.TestSlingApi) ... ok
+test_get_authorizable_keystore (test.test_sling_api.TestSlingApi) ... ok
+test_get_keystore (test.test_sling_api.TestSlingApi) ... ok
+test_get_node (test.test_sling_api.TestSlingApi) ... ok
+test_get_package (test.test_sling_api.TestSlingApi) ... ok
+test_get_package_filter (test.test_sling_api.TestSlingApi) ... ok
+test_get_query (test.test_sling_api.TestSlingApi) ... ok
+test_get_truststore (test.test_sling_api.TestSlingApi) ... ok
+test_get_truststore_info (test.test_sling_api.TestSlingApi) ... ok
+test_post_agent (test.test_sling_api.TestSlingApi) ... ok
+test_post_authorizable_keystore (test.test_sling_api.TestSlingApi) ... ok
+test_post_authorizables (test.test_sling_api.TestSlingApi) ... ok
+test_post_config_adobe_granite_saml_authentication_handler (test.test_sling_api.TestSlingApi) ... ok
+test_post_config_apache_felix_jetty_based_http_service (test.test_sling_api.TestSlingApi) ... ok
+test_post_config_apache_http_components_proxy_configuration (test.test_sling_api.TestSlingApi) ... ok
+test_post_config_apache_sling_dav_ex_servlet (test.test_sling_api.TestSlingApi) ... ok
+test_post_config_apache_sling_get_servlet (test.test_sling_api.TestSlingApi) ... ok
+test_post_config_apache_sling_referrer_filter (test.test_sling_api.TestSlingApi) ... ok
+test_post_node (test.test_sling_api.TestSlingApi) ... ok
+test_post_node_rw (test.test_sling_api.TestSlingApi) ... ok
+test_post_path (test.test_sling_api.TestSlingApi) ... ok
+test_post_query (test.test_sling_api.TestSlingApi) ... ok
+test_post_tree_activation (test.test_sling_api.TestSlingApi) ... ok
+test_post_truststore (test.test_sling_api.TestSlingApi) ... ok
+test_post_truststore_pkcs12 (test.test_sling_api.TestSlingApi) ... ok
+test_get_crxde_status (test.test_crx_api.TestCrxApi) ... ok
+test_get_install_status (test.test_crx_api.TestCrxApi) ... ok
+test_get_package_manager_servlet (test.test_crx_api.TestCrxApi) ... ok
+test_post_package_service (test.test_crx_api.TestCrxApi) ... ok
+test_post_package_service_json (test.test_crx_api.TestCrxApi) ... ok
+test_post_package_update (test.test_crx_api.TestCrxApi) ... ok
+test_post_set_password (test.test_crx_api.TestCrxApi) ... ok
+testTruststoreItems (test.test_truststore_items.TestTruststoreItems) ... ok
+testSamlConfigurationPropertyItemsArray (test.test_saml_configuration_property_items_array.TestSamlConfigurationPropertyItemsArray) ... ok
+testInstallStatusStatus (test.test_install_status_status.TestInstallStatusStatus) ... ok
+testSamlConfigurationProperties (test.test_saml_configuration_properties.TestSamlConfigurationProperties) ... ok
+testInstallStatus (test.test_install_status.TestInstallStatus) ... ok
+test_get_aem_health_check (test.test_custom_api.TestCustomApi) ... ok
+test_post_config_aem_health_check_servlet (test.test_custom_api.TestCustomApi) ... ok
+test_post_config_aem_password_reset (test.test_custom_api.TestCustomApi) ... ok
+testSamlConfigurationPropertyItemsLong (test.test_saml_configuration_property_items_long.TestSamlConfigurationPropertyItemsLong) ... ok
+testKeystoreChainItems (test.test_keystore_chain_items.TestKeystoreChainItems) ... ok
+test_get_aem_product_info (test.test_console_api.TestConsoleApi) ... ok
+test_post_bundle (test.test_console_api.TestConsoleApi) ... ok
+test_post_jmx_repository (test.test_console_api.TestConsoleApi) ... ok
+test_post_saml_configuration (test.test_console_api.TestConsoleApi) ... ok
+testSamlConfigurationPropertyItemsString (test.test_saml_configuration_property_items_string.TestSamlConfigurationPropertyItemsString) ... ok
+testTruststoreInfo (test.test_truststore_info.TestTruststoreInfo) ... ok
+test_get_login_page (test.test_cq_api.TestCqApi) ... ok
+test_post_cq_actions (test.test_cq_api.TestCqApi) ... ok
+testSamlConfigurationPropertyItemsBoolean (test.test_saml_configuration_property_items_boolean.TestSamlConfigurationPropertyItemsBoolean) ... ok
+
+----------------------------------------------------------------------
+Ran 57 tests in 0.202s
+
+OK

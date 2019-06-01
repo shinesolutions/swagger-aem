@@ -41,7 +41,7 @@ python:
 
 # generate Ruby API client
 ruby:
-	cd ruby && make ci && cd ..
+	cd clients/ruby && make ci && cd ..
 
 release:
 	rtk release

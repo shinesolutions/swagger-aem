@@ -1,0 +1,11 @@
+Processing /opt/workspace/python/generated
+Requirement already satisfied (use --upgrade to upgrade): urllib3>=1.15 in /usr/local/lib/python2.7/dist-packages (from swaggeraem===0.9.1)
+Requirement already satisfied (use --upgrade to upgrade): six>=1.10 in /usr/local/lib/python2.7/dist-packages (from swaggeraem===0.9.1)
+Requirement already satisfied (use --upgrade to upgrade): certifi in /usr/local/lib/python2.7/dist-packages (from swaggeraem===0.9.1)
+Requirement already satisfied (use --upgrade to upgrade): python-dateutil in /usr/local/lib/python2.7/dist-packages (from swaggeraem===0.9.1)
+Installing collected packages: swaggeraem
+  Running setup.py install for swaggeraem: started
+    Running setup.py install for swaggeraem: finished with status 'done'
+Successfully installed swaggeraem-0.9.1
+You are using pip version 8.1.1, however version 19.0.1 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.

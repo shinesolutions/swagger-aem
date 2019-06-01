@@ -1,0 +1,358 @@
+npm WARN deprecated babel@6.23.0: In 6.x, the babel package has been deprecated in favor of babel-cli. Check https://opencollective.com/babel to support the Babel maintainers
+WARN engine atob@2.1.2: wanted: {"node":">= 4.5.0"} (current: {"node":"4.2.6","npm":"3.5.2"})
+npm WARN deprecated babel-preset-es2015@6.24.1: 🙌  Thanks for using Babel: we recommend using babel-preset-env now: please read babeljs.io/env to update! 
+npm WARN deprecated jade@0.26.3: Jade has been renamed to pug, please install the latest version of pug instead of jade
+npm WARN deprecated minimatch@0.2.14: Please update to minimatch 3.0.2 or higher to avoid a RegExp DoS issue
+npm WARN deprecated graceful-fs@2.0.3: please upgrade to graceful-fs 4 for compatibility with current and future versions of Node.js
+npm WARN deprecated samsam@1.1.2: This package has been deprecated in favour of @sinonjs/samsam
+npm WARN deprecated formatio@1.1.1: This package is unmaintained. Use @sinonjs/formatio instead
+node-swagger-aem@0.9.0 /opt/workspace/javascript/generated
+├── babel@6.23.0 
+├─┬ babel-cli@6.26.0 
+│ ├─┬ babel-polyfill@6.26.0 
+│ │ ├── core-js@2.6.3 
+│ │ └── regenerator-runtime@0.10.5 
+│ ├─┬ babel-register@6.26.0 
+│ │ ├─┬ home-or-tmp@2.0.0 
+│ │ │ ├── os-homedir@1.0.2 
+│ │ │ └── os-tmpdir@1.0.2 
+│ │ ├── mkdirp@0.5.1 
+│ │ └── source-map-support@0.4.18 
+│ ├─┬ babel-runtime@6.26.0 
+│ │ └── regenerator-runtime@0.11.1 
+│ ├─┬ chokidar@1.7.0 
+│ │ ├─┬ anymatch@1.3.2 
+│ │ │ ├─┬ micromatch@2.3.11 
+│ │ │ │ ├─┬ arr-diff@2.0.0 
+│ │ │ │ │ └── arr-flatten@1.1.0 
+│ │ │ │ ├── array-unique@0.2.1 
+│ │ │ │ ├─┬ braces@1.8.5 
+│ │ │ │ │ ├─┬ expand-range@1.8.2 
+│ │ │ │ │ │ └─┬ fill-range@2.2.4 
+│ │ │ │ │ │   ├── is-number@2.1.0 
+│ │ │ │ │ │   ├── isobject@2.1.0 
+│ │ │ │ │ │   └─┬ randomatic@3.1.1 
+│ │ │ │ │ │     ├── is-number@4.0.0 
+│ │ │ │ │ │     ├── kind-of@6.0.2 
+│ │ │ │ │ │     └── math-random@1.0.4 
+│ │ │ │ │ ├── preserve@0.2.0 
+│ │ │ │ │ └── repeat-element@1.1.3 
+│ │ │ │ ├─┬ expand-brackets@0.1.5 
+│ │ │ │ │ └── is-posix-bracket@0.1.1 
+│ │ │ │ ├── extglob@0.3.2 
+│ │ │ │ ├── filename-regex@2.0.1 
+│ │ │ │ ├─┬ kind-of@3.2.2 
+│ │ │ │ │ └── is-buffer@1.1.6 
+│ │ │ │ ├─┬ object.omit@2.0.1 
+│ │ │ │ │ ├─┬ for-own@0.1.5 
+│ │ │ │ │ │ └── for-in@1.0.2 
+│ │ │ │ │ └── is-extendable@0.1.1 
+│ │ │ │ ├─┬ parse-glob@3.0.4 
+│ │ │ │ │ ├── glob-base@0.3.0 
+│ │ │ │ │ └── is-dotfile@1.0.3 
+│ │ │ │ └─┬ regex-cache@0.4.4 
+│ │ │ │   └─┬ is-equal-shallow@0.1.3 
+│ │ │ │     └── is-primitive@2.0.0 
+│ │ │ └─┬ normalize-path@2.1.1 
+│ │ │   └── remove-trailing-separator@1.1.0 
+│ │ ├── async-each@1.0.1 
+│ │ ├── glob-parent@2.0.0 
+│ │ ├── inherits@2.0.3 
+│ │ ├─┬ is-binary-path@1.0.1 
+│ │ │ └── binary-extensions@1.12.0 
+│ │ ├─┬ is-glob@2.0.1 
+│ │ │ └── is-extglob@1.0.0 
+│ │ └─┬ readdirp@2.2.1 
+│ │   └─┬ micromatch@3.1.10 
+│ │     ├── arr-diff@4.0.0 
+│ │     ├── array-unique@0.3.2 
+│ │     ├─┬ braces@2.3.2 
+│ │     │ ├── extend-shallow@2.0.1 
+│ │     │ ├─┬ fill-range@4.0.0 
+│ │     │ │ ├── extend-shallow@2.0.1 
+│ │     │ │ ├─┬ is-number@3.0.0 
+│ │     │ │ │ └── kind-of@3.2.2 
+│ │     │ │ ├── repeat-string@1.6.1 
+│ │     │ │ └─┬ to-regex-range@2.1.1 
+│ │     │ │   └── is-number@3.0.0 
+│ │     │ ├── isobject@3.0.1 
+│ │     │ ├─┬ snapdragon-node@2.1.1 
+│ │     │ │ ├─┬ define-property@1.0.0 
+│ │     │ │ │ └─┬ is-descriptor@1.0.2 
+│ │     │ │ │   ├── is-accessor-descriptor@1.0.0 
+│ │     │ │ │   ├── is-data-descriptor@1.0.0 
+│ │     │ │ │   └── kind-of@6.0.2 
+│ │     │ │ ├── isobject@3.0.1 
+│ │     │ │ └── snapdragon-util@3.0.1 
+│ │     │ └── split-string@3.1.0 
+│ │     ├─┬ define-property@2.0.2 
+│ │     │ ├─┬ is-descriptor@1.0.2 
+│ │     │ │ ├── is-accessor-descriptor@1.0.0 
+│ │     │ │ ├── is-data-descriptor@1.0.0 
+│ │     │ │ └── kind-of@6.0.2 
+│ │     │ └── isobject@3.0.1 
+│ │     ├─┬ extend-shallow@3.0.2 
+│ │     │ ├── assign-symbols@1.0.0 
+│ │     │ └─┬ is-extendable@1.0.1 
+│ │     │   └─┬ is-plain-object@2.0.4 
+│ │     │     └── isobject@3.0.1 
+│ │     ├─┬ extglob@2.0.4 
+│ │     │ ├─┬ define-property@1.0.0 
+│ │     │ │ └─┬ is-descriptor@1.0.2 
+│ │     │ │   ├── is-accessor-descriptor@1.0.0 
+│ │     │ │   └── is-data-descriptor@1.0.0 
+│ │     │ ├─┬ expand-brackets@2.1.4 
+│ │     │ │ ├─┬ define-property@0.2.5 
+│ │     │ │ │ └─┬ is-descriptor@0.1.6 
+│ │     │ │ │   ├─┬ is-accessor-descriptor@0.1.6 
+│ │     │ │ │   │ └── kind-of@3.2.2 
+│ │     │ │ │   ├─┬ is-data-descriptor@0.1.4 
+│ │     │ │ │   │ └── kind-of@3.2.2 
+│ │     │ │ │   └── kind-of@5.1.0 
+│ │     │ │ ├── extend-shallow@2.0.1 
+│ │     │ │ └── posix-character-classes@0.1.1 
+│ │     │ └── extend-shallow@2.0.1 
+│ │     ├─┬ fragment-cache@0.2.1 
+│ │     │ └── map-cache@0.2.2 
+│ │     ├── kind-of@6.0.2 
+│ │     ├─┬ nanomatch@1.2.13 
+│ │     │ ├── arr-diff@4.0.0 
+│ │     │ ├── array-unique@0.3.2 
+│ │     │ ├── is-windows@1.0.2 
+│ │     │ └── kind-of@6.0.2 
+│ │     ├─┬ object.pick@1.3.0 
+│ │     │ └── isobject@3.0.1 
+│ │     ├─┬ regex-not@1.0.2 
+│ │     │ └─┬ safe-regex@1.1.0 
+│ │     │   └── ret@0.1.15 
+│ │     ├─┬ snapdragon@0.8.2 
+│ │     │ ├─┬ base@0.11.2 
+│ │     │ │ ├─┬ cache-base@1.0.1 
+│ │     │ │ │ ├─┬ collection-visit@1.0.0 
+│ │     │ │ │ │ ├── map-visit@1.0.0 
+│ │     │ │ │ │ └─┬ object-visit@1.0.1 
+│ │     │ │ │ │   └── isobject@3.0.1 
+│ │     │ │ │ ├── get-value@2.0.6 
+│ │     │ │ │ ├─┬ has-value@1.0.0 
+│ │     │ │ │ │ ├─┬ has-values@1.0.0 
+│ │     │ │ │ │ │ ├─┬ is-number@3.0.0 
+│ │     │ │ │ │ │ │ └── kind-of@3.2.2 
+│ │     │ │ │ │ │ └── kind-of@4.0.0 
+│ │     │ │ │ │ └── isobject@3.0.1 
+│ │     │ │ │ ├── isobject@3.0.1 
+│ │     │ │ │ ├─┬ set-value@2.0.0 
+│ │     │ │ │ │ └── extend-shallow@2.0.1 
+│ │     │ │ │ ├── to-object-path@0.3.0 
+│ │     │ │ │ ├─┬ union-value@1.0.0 
+│ │     │ │ │ │ └─┬ set-value@0.4.3 
+│ │     │ │ │ │   └── extend-shallow@2.0.1 
+│ │     │ │ │ └─┬ unset-value@1.0.0 
+│ │     │ │ │   ├─┬ has-value@0.3.1 
+│ │     │ │ │   │ ├── has-values@0.1.4 
+│ │     │ │ │   │ └── isobject@2.1.0 
+│ │     │ │ │   └── isobject@3.0.1 
+│ │     │ │ ├─┬ class-utils@0.3.6 
+│ │     │ │ │ ├── arr-union@3.1.0 
+│ │     │ │ │ ├── define-property@0.2.5 
+│ │     │ │ │ ├── isobject@3.0.1 
+│ │     │ │ │ └─┬ static-extend@0.1.2 
+│ │     │ │ │   ├── define-property@0.2.5 
+│ │     │ │ │   └─┬ object-copy@0.1.0 
+│ │     │ │ │     ├── copy-descriptor@0.1.1 
+│ │     │ │ │     └── define-property@0.2.5 
+│ │     │ │ ├─┬ define-property@1.0.0 
+│ │     │ │ │ └─┬ is-descriptor@1.0.2 
+│ │     │ │ │   ├── is-accessor-descriptor@1.0.0 
+│ │     │ │ │   ├── is-data-descriptor@1.0.0 
+│ │     │ │ │   └── kind-of@6.0.2 
+│ │     │ │ ├── isobject@3.0.1 
+│ │     │ │ ├─┬ mixin-deep@1.3.1 
+│ │     │ │ │ └── is-extendable@1.0.1 
+│ │     │ │ └── pascalcase@0.1.1 
+│ │     │ ├─┬ define-property@0.2.5 
+│ │     │ │ └─┬ is-descriptor@0.1.6 
+│ │     │ │   ├── is-accessor-descriptor@0.1.6 
+│ │     │ │   ├── is-data-descriptor@0.1.4 
+│ │     │ │   └── kind-of@5.1.0 
+│ │     │ ├── extend-shallow@2.0.1 
+│ │     │ ├─┬ source-map-resolve@0.5.2 
+│ │     │ │ ├── atob@2.1.2 
+│ │     │ │ ├── decode-uri-component@0.2.0 
+│ │     │ │ ├── resolve-url@0.2.1 
+│ │     │ │ ├── source-map-url@0.4.0 
+│ │     │ │ └── urix@0.1.0 
+│ │     │ └── use@3.1.1 
+│ │     └── to-regex@3.0.2 
+│ ├── commander@2.19.0 
+│ ├─┬ convert-source-map@1.6.0 
+│ │ └── safe-buffer@5.1.2 
+│ ├── fs-readdir-recursive@1.1.0 
+│ ├─┬ glob@7.1.3 
+│ │ ├── fs.realpath@1.0.0 
+│ │ ├─┬ inflight@1.0.6 
+│ │ │ └── wrappy@1.0.2 
+│ │ └── once@1.4.0 
+│ ├── lodash@4.17.11 
+│ ├─┬ output-file-sync@1.1.2 
+│ │ ├── graceful-fs@4.1.15 
+│ │ └── object-assign@4.1.1 
+│ ├── path-is-absolute@1.0.1 
+│ ├── slash@1.0.0 
+│ ├── source-map@0.5.7 
+│ └─┬ v8flags@2.1.1 
+│   └── user-home@1.1.1 
+├─┬ babel-core@6.18.0 
+│ ├─┬ babel-code-frame@6.26.0 
+│ │ ├─┬ chalk@1.1.3 
+│ │ │ ├── ansi-styles@2.2.1 
+│ │ │ ├── escape-string-regexp@1.0.5 
+│ │ │ ├─┬ has-ansi@2.0.0 
+│ │ │ │ └── ansi-regex@2.1.1 
+│ │ │ ├── strip-ansi@3.0.1 
+│ │ │ └── supports-color@2.0.0 
+│ │ ├── esutils@2.0.2 
+│ │ └── js-tokens@3.0.2 
+│ ├─┬ babel-generator@6.26.1 
+│ │ ├─┬ detect-indent@4.0.0 
+│ │ │ └─┬ repeating@2.0.1 
+│ │ │   └─┬ is-finite@1.0.2 
+│ │ │     └── number-is-nan@1.0.1 
+│ │ ├── jsesc@1.3.0 
+│ │ └── trim-right@1.0.1 
+│ ├── babel-helpers@6.24.1 
+│ ├── babel-messages@6.23.0 
+│ ├── babel-template@6.26.0 
+│ ├─┬ babel-traverse@6.26.0 
+│ │ ├── globals@9.18.0 
+│ │ └─┬ invariant@2.2.4 
+│ │   └── loose-envify@1.4.0 
+│ ├─┬ babel-types@6.26.0 
+│ │ └── to-fast-properties@1.0.3 
+│ ├── babylon@6.18.0 
+│ ├─┬ debug@2.6.9 
+│ │ └── ms@2.0.0 
+│ ├── json5@0.5.1 
+│ ├─┬ minimatch@3.0.4 
+│ │ └─┬ brace-expansion@1.1.11 
+│ │   ├── balanced-match@1.0.0 
+│ │   └── concat-map@0.0.1 
+│ └── private@0.1.8 
+├─┬ babel-preset-es2015@6.24.1 
+│ ├── babel-plugin-check-es2015-constants@6.22.0 
+│ ├── babel-plugin-transform-es2015-arrow-functions@6.22.0 
+│ ├── babel-plugin-transform-es2015-block-scoped-functions@6.22.0 
+│ ├── babel-plugin-transform-es2015-block-scoping@6.26.0 
+│ ├─┬ babel-plugin-transform-es2015-classes@6.24.1 
+│ │ ├── babel-helper-define-map@6.26.0 
+│ │ ├── babel-helper-function-name@6.24.1 
+│ │ ├── babel-helper-optimise-call-expression@6.24.1 
+│ │ └── babel-helper-replace-supers@6.24.1 
+│ ├── babel-plugin-transform-es2015-computed-properties@6.24.1 
+│ ├── babel-plugin-transform-es2015-destructuring@6.23.0 
+│ ├── babel-plugin-transform-es2015-duplicate-keys@6.24.1 
+│ ├── babel-plugin-transform-es2015-for-of@6.23.0 
+│ ├── babel-plugin-transform-es2015-function-name@6.24.1 
+│ ├── babel-plugin-transform-es2015-literals@6.22.0 
+│ ├── babel-plugin-transform-es2015-modules-amd@6.24.1 
+│ ├─┬ babel-plugin-transform-es2015-modules-commonjs@6.26.2 
+│ │ └── babel-plugin-transform-strict-mode@6.24.1 
+│ ├─┬ babel-plugin-transform-es2015-modules-systemjs@6.24.1 
+│ │ └── babel-helper-hoist-variables@6.24.1 
+│ ├── babel-plugin-transform-es2015-modules-umd@6.24.1 
+│ ├── babel-plugin-transform-es2015-object-super@6.24.1 
+│ ├─┬ babel-plugin-transform-es2015-parameters@6.24.1 
+│ │ ├── babel-helper-call-delegate@6.24.1 
+│ │ └── babel-helper-get-function-arity@6.24.1 
+│ ├── babel-plugin-transform-es2015-shorthand-properties@6.24.1 
+│ ├── babel-plugin-transform-es2015-spread@6.22.0 
+│ ├─┬ babel-plugin-transform-es2015-sticky-regex@6.24.1 
+│ │ └── babel-helper-regex@6.26.0 
+│ ├── babel-plugin-transform-es2015-template-literals@6.22.0 
+│ ├── babel-plugin-transform-es2015-typeof-symbol@6.23.0 
+│ ├─┬ babel-plugin-transform-es2015-unicode-regex@6.24.1 
+│ │ └─┬ regexpu-core@2.0.0 
+│ │   ├── regenerate@1.4.0 
+│ │   ├── regjsgen@0.2.0 
+│ │   └─┬ regjsparser@0.1.5 
+│ │     └── jsesc@0.5.0 
+│ └─┬ babel-plugin-transform-regenerator@6.26.0 
+│   └── regenerator-transform@0.10.1 
+├─┬ babel-preset-stage-0@6.24.1 
+│ ├─┬ babel-plugin-transform-do-expressions@6.22.0 
+│ │ └── babel-plugin-syntax-do-expressions@6.13.0 
+│ ├─┬ babel-plugin-transform-function-bind@6.22.0 
+│ │ └── babel-plugin-syntax-function-bind@6.13.0 
+│ └─┬ babel-preset-stage-1@6.24.1 
+│   ├─┬ babel-plugin-transform-class-constructor-call@6.24.1 
+│   │ └── babel-plugin-syntax-class-constructor-call@6.18.0 
+│   ├─┬ babel-plugin-transform-export-extensions@6.22.0 
+│   │ └── babel-plugin-syntax-export-extensions@6.13.0 
+│   └─┬ babel-preset-stage-2@6.24.1 
+│     ├── babel-plugin-syntax-dynamic-import@6.18.0 
+│     ├─┬ babel-plugin-transform-class-properties@6.24.1 
+│     │ └── babel-plugin-syntax-class-properties@6.13.0 
+│     ├─┬ babel-plugin-transform-decorators@6.24.1 
+│     │ ├─┬ babel-helper-explode-class@6.24.1 
+│     │ │ └── babel-helper-bindify-decorators@6.24.1 
+│     │ └── babel-plugin-syntax-decorators@6.13.0 
+│     └─┬ babel-preset-stage-3@6.24.1 
+│       ├── babel-plugin-syntax-trailing-function-commas@6.22.0 
+│       ├─┬ babel-plugin-transform-async-generator-functions@6.24.1 
+│       │ ├── babel-helper-remap-async-to-generator@6.24.1 
+│       │ └── babel-plugin-syntax-async-generators@6.13.0 
+│       ├─┬ babel-plugin-transform-async-to-generator@6.24.1 
+│       │ └── babel-plugin-syntax-async-functions@6.13.0 
+│       ├─┬ babel-plugin-transform-exponentiation-operator@6.24.1 
+│       │ ├─┬ babel-helper-builder-binary-assignment-operator-visitor@6.24.1 
+│       │ │ └── babel-helper-explode-assignable-expression@6.24.1 
+│       │ └── babel-plugin-syntax-exponentiation-operator@6.13.0 
+│       └─┬ babel-plugin-transform-object-rest-spread@6.26.0 
+│         └── babel-plugin-syntax-object-rest-spread@6.13.0 
+├── expect.js@0.3.1 
+├─┬ mocha@2.3.4 
+│ ├── commander@2.3.0 
+│ ├─┬ debug@2.2.0 
+│ │ └── ms@0.7.1 
+│ ├── diff@1.4.0 
+│ ├── escape-string-regexp@1.0.2 
+│ ├─┬ glob@3.2.3 
+│ │ ├── graceful-fs@2.0.3 
+│ │ └─┬ minimatch@0.2.14 
+│ │   ├── lru-cache@2.7.3 
+│ │   └── sigmund@1.0.1 
+│ ├── growl@1.8.1 
+│ ├─┬ jade@0.26.3 
+│ │ ├── commander@0.6.1 
+│ │ └── mkdirp@0.3.0 
+│ ├─┬ mkdirp@0.5.0 
+│ │ └── minimist@0.0.8 
+│ └── supports-color@1.2.0 
+├─┬ sinon@1.17.3 
+│ ├── formatio@1.1.1 
+│ ├── lolex@1.3.2 
+│ ├── samsam@1.1.2 
+│ └── util@0.11.1 
+└─┬ superagent@3.5.2 
+  ├── component-emitter@1.2.1 
+  ├── cookiejar@2.1.2 
+  ├── extend@3.0.2 
+  ├─┬ form-data@2.3.3 
+  │ ├── asynckit@0.4.0 
+  │ ├─┬ combined-stream@1.0.7 
+  │ │ └── delayed-stream@1.0.0 
+  │ └─┬ mime-types@2.1.21 
+  │   └── mime-db@1.37.0 
+  ├── formidable@1.2.1 
+  ├── methods@1.1.2 
+  ├── mime@1.6.0 
+  ├── qs@6.6.0 
+  └─┬ readable-stream@2.3.6 
+    ├── core-util-is@1.0.2 
+    ├── isarray@1.0.0 
+    ├── process-nextick-args@2.0.0 
+    ├── string_decoder@1.1.1 
+    └── util-deprecate@1.0.2 
+
+npm WARN optional Skipping failed optional dependency /chokidar/fsevents:
+npm WARN notsup Not compatible with your operating system or architecture: fsevents@1.2.7
+npm WARN node-swagger-aem@0.9.0 No repository field.
