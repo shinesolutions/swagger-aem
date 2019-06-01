@@ -1,9 +1,9 @@
 .DS_Store
 doc
-java/generated/target/
-java/test-integration/target/
-javascript/generated/node_modules/
-ruby/.bundle
-ruby/bin
+clients/java/generated/target/
+clients/java/test-integration/target/
+clients/javascript/generated/node_modules/
+clients/ruby/.bundle
+clients/ruby/bin
 */log/
 *.pyc
