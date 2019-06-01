@@ -27,7 +27,7 @@ install:
 	  gem build swagger_aem.gemspec && \
 	  gem install `ls swagger_aem-*.gem`
 
-test-unit:
+test-unit: install
 	cd generated/ && \
 	  rm -f swagger_aem-*.gem && \
 	  bundle exec rspec spec/
