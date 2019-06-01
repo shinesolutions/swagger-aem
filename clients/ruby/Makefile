@@ -16,8 +16,8 @@ build:
 	  openapitools/openapi-generator-cli \
 	  generate \
 	  --input-spec /local/conf/api.yml \
-	  --config /local/ruby/conf/client.json \
-	  --output /local/ruby/generated/ \
+	  --config /local/clients/ruby/conf/client.json \
+	  --output /local/clients/ruby/generated/ \
 	  --generator-name ruby
 
 install:
