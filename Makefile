@@ -12,10 +12,10 @@ deps:
 
 lint:
 	swagger-cli validate conf/*.yml
-	jsonlint java/conf/client.json
-	jsonlint javascript/conf/client.json
-	jsonlint python/conf/client.json
-	jsonlint ruby/conf/client.json
+	jsonlint clients/java/conf/client.json
+	jsonlint clients/javascript/conf/client.json
+	jsonlint clients/python/conf/client.json
+	jsonlint clients/ruby/conf/client.json
 
 doc:
 	bootprint openapi conf/api.yml doc/api/master/

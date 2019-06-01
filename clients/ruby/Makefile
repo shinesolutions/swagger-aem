@@ -12,7 +12,7 @@ deps:
 build:
 	docker \
 	  run \
-	  -v `pwd`/../:/local/ \
+	  -v `pwd`/../../:/local/ \
 	  openapitools/openapi-generator-cli \
 	  generate \
 	  --input-spec /local/conf/api.yml \
