@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Added new API Call to retrieve Adobe Experience Manager Web Console
+Configuration
+
 ## [3.0.0] - 2019-05-14
 
 ### Changed
