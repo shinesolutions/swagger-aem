@@ -2255,7 +2255,7 @@ components:
         type:
           description: Property type, 1=String, 3=long, 11=boolean, 12=Password
           type: integer
-        values:
+        value:
           description: Property value
           type: boolean
         description:
@@ -2276,7 +2276,7 @@ components:
         type:
           description: Property type, 1=String, 3=long, 11=boolean, 12=Password
           type: integer
-        values:
+        value:
           description: Property value
           type: integer
         description:
@@ -2297,7 +2297,7 @@ components:
         type:
           description: Property type, 1=String, 3=long, 11=boolean, 12=Password
           type: integer
-        values:
+        value:
           description: Property value
           type: string
         description:
