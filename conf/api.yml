@@ -10,6 +10,20 @@ info:
 security:
   - aemAuth: []
 paths:
+  /system/console/configMgr:
+    get:
+      operationId: getConfigMgr
+      responses:
+        '200':
+          description: OK
+          content:
+            text/xml:
+              schema:
+                type: string
+        '5XX':
+          description: Unexpected error.
+      tags:
+        - console
   /libs/granite/core/content/login.html:
     get:
       operationId: getLoginPage
