@@ -11,5 +11,5 @@ OpenAPI Generator version: 3.2.1-SNAPSHOT
 =end
 
 module SwaggerAemClient
-  VERSION = '3.1.0-pre.0'
+  VERSION = '3.1.0'
 end
