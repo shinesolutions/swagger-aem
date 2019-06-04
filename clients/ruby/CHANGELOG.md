@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Add new operation getConfigMgr to console api
+
+### Fixed
+- Fix SAML response #41
+
 ## [3.0.0] - 2019-05-14
 
 ### Changed

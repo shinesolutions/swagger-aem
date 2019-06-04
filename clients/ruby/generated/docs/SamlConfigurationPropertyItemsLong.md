@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **optional** | **BOOLEAN** | True if optional | [optional] 
 **is_set** | **BOOLEAN** | True if property is set | [optional] 
 **type** | **Integer** | Property type, 1&#x3D;String, 3&#x3D;long, 11&#x3D;boolean, 12&#x3D;Password | [optional] 
-**values** | **Integer** | Property value | [optional] 
+**value** | **Integer** | Property value | [optional] 
 **description** | **String** | Property description | [optional] 
 
 

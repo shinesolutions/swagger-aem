@@ -80,6 +80,7 @@ All URIs are relative to *http://localhost*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *SwaggerAemClient::ConsoleApi* | [**get_aem_product_info**](docs/ConsoleApi.md#get_aem_product_info) | **GET** /system/console/status-productinfo.json | 
+*SwaggerAemClient::ConsoleApi* | [**get_config_mgr**](docs/ConsoleApi.md#get_config_mgr) | **GET** /system/console/configMgr | 
 *SwaggerAemClient::ConsoleApi* | [**post_bundle**](docs/ConsoleApi.md#post_bundle) | **POST** /system/console/bundles/{name} | 
 *SwaggerAemClient::ConsoleApi* | [**post_jmx_repository**](docs/ConsoleApi.md#post_jmx_repository) | **POST** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} | 
 *SwaggerAemClient::ConsoleApi* | [**post_saml_configuration**](docs/ConsoleApi.md#post_saml_configuration) | **POST** /system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler | 
