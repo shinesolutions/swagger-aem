@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**getCrxdeStatus**](CrxApi.md#getCrxdeStatus) | **GET** /crx/server/crx.default/jcr:root/.1.json | 
 [**getInstallStatus**](CrxApi.md#getInstallStatus) | **GET** /crx/packmgr/installstatus.jsp | 
+[**getPackageManagerServlet**](CrxApi.md#getPackageManagerServlet) | **GET** /crx/packmgr/service/script.html | 
 [**postPackageService**](CrxApi.md#postPackageService) | **POST** /crx/packmgr/service.jsp | 
 [**postPackageServiceJson**](CrxApi.md#postPackageServiceJson) | **POST** /crx/packmgr/service/.json/{path} | 
 [**postPackageUpdate**](CrxApi.md#postPackageUpdate) | **POST** /crx/packmgr/update.jsp | 
@@ -108,6 +109,53 @@ This endpoint does not need any parameter.
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+<a name="getPackageManagerServlet"></a>
+# **getPackageManagerServlet**
+> getPackageManagerServlet()
+
+
+
+### Example
+```java
+// Import classes:
+//import com.shinesolutions.swaggeraem4j.ApiClient;
+//import com.shinesolutions.swaggeraem4j.ApiException;
+//import com.shinesolutions.swaggeraem4j.Configuration;
+//import com.shinesolutions.swaggeraem4j.auth.*;
+//import com.shinesolutions.swaggeraem4j.api.CrxApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure HTTP basic authorization: aemAuth
+HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+aemAuth.setUsername("YOUR USERNAME");
+aemAuth.setPassword("YOUR PASSWORD");
+
+CrxApi apiInstance = new CrxApi();
+try {
+    apiInstance.getPackageManagerServlet();
+} catch (ApiException e) {
+    System.err.println("Exception when calling CrxApi#getPackageManagerServlet");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/html
+
 <a name="postPackageService"></a>
 # **postPackageService**
 > String postPackageService(cmd)
@@ -162,7 +210,7 @@ Name | Type | Description  | Notes
 
 <a name="postPackageServiceJson"></a>
 # **postPackageServiceJson**
-> String postPackageServiceJson(path, cmd, groupName, packageName, packageVersion, charset_, force, recursive, _package)
+> String postPackageServiceJson(path, cmd, groupName, packageName, packageVersion, charset, force, recursive, _package)
 
 
 
@@ -188,12 +236,12 @@ String cmd = "cmd_example"; // String |
 String groupName = "groupName_example"; // String | 
 String packageName = "packageName_example"; // String | 
 String packageVersion = "packageVersion_example"; // String | 
-String charset_ = "charset__example"; // String | 
+String charset = "charset_example"; // String | 
 Boolean force = true; // Boolean | 
 Boolean recursive = true; // Boolean | 
-File _package = new File("/path/to/file.txt"); // File | 
+File _package = new File("null"); // File | 
 try {
-    String result = apiInstance.postPackageServiceJson(path, cmd, groupName, packageName, packageVersion, charset_, force, recursive, _package);
+    String result = apiInstance.postPackageServiceJson(path, cmd, groupName, packageName, packageVersion, charset, force, recursive, _package);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling CrxApi#postPackageServiceJson");
@@ -210,10 +258,10 @@ Name | Type | Description  | Notes
  **groupName** | **String**|  | [optional]
  **packageName** | **String**|  | [optional]
  **packageVersion** | **String**|  | [optional]
- **charset_** | **String**|  | [optional]
+ **charset** | **String**|  | [optional]
  **force** | **Boolean**|  | [optional]
  **recursive** | **Boolean**|  | [optional]
- **_package** | **File**|  | [optional]
+ **_package** | **File**|  | [optional] [default to null]
 
 ### Return type
 
@@ -230,7 +278,7 @@ Name | Type | Description  | Notes
 
 <a name="postPackageUpdate"></a>
 # **postPackageUpdate**
-> String postPackageUpdate(groupName, packageName, version, path, filter, charset_)
+> String postPackageUpdate(groupName, packageName, version, path, filter, charset)
 
 
 
@@ -256,9 +304,9 @@ String packageName = "packageName_example"; // String |
 String version = "version_example"; // String | 
 String path = "path_example"; // String | 
 String filter = "filter_example"; // String | 
-String charset_ = "charset__example"; // String | 
+String charset = "charset_example"; // String | 
 try {
-    String result = apiInstance.postPackageUpdate(groupName, packageName, version, path, filter, charset_);
+    String result = apiInstance.postPackageUpdate(groupName, packageName, version, path, filter, charset);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling CrxApi#postPackageUpdate");
@@ -275,7 +323,7 @@ Name | Type | Description  | Notes
  **version** | **String**|  |
  **path** | **String**|  |
  **filter** | **String**|  | [optional]
- **charset_** | **String**|  | [optional]
+ **charset** | **String**|  | [optional]
 
 ### Return type
 

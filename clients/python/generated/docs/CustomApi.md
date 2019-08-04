@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -30,9 +30,9 @@ configuration.password = 'YOUR_PASSWORD'
 # create an instance of the API class
 api_instance = swaggeraem.CustomApi(swaggeraem.ApiClient(configuration))
 tags = 'tags_example' # str |  (optional)
-combine_tags_or = true # bool |  (optional)
+combine_tags_or = True # bool |  (optional)
 
-try: 
+try:
     api_response = api_instance.get_aem_health_check(tags=tags, combine_tags_or=combine_tags_or)
     pprint(api_response)
 except ApiException as e:
@@ -62,11 +62,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_config_aem_health_check_servlet**
-> post_config_aem_health_check_servlet(runmode, bundles_ignored=bundles_ignored, bundles_ignored_type_hint=bundles_ignored_type_hint)
+> post_config_aem_health_check_servlet(bundles_ignored=bundles_ignored, bundles_ignored_type_hint=bundles_ignored_type_hint)
 
 
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -81,12 +81,11 @@ configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
 api_instance = swaggeraem.CustomApi(swaggeraem.ApiClient(configuration))
-runmode = 'runmode_example' # str | 
 bundles_ignored = ['bundles_ignored_example'] # list[str] |  (optional)
 bundles_ignored_type_hint = 'bundles_ignored_type_hint_example' # str |  (optional)
 
-try: 
-    api_instance.post_config_aem_health_check_servlet(runmode, bundles_ignored=bundles_ignored, bundles_ignored_type_hint=bundles_ignored_type_hint)
+try:
+    api_instance.post_config_aem_health_check_servlet(bundles_ignored=bundles_ignored, bundles_ignored_type_hint=bundles_ignored_type_hint)
 except ApiException as e:
     print("Exception when calling CustomApi->post_config_aem_health_check_servlet: %s\n" % e)
 ```
@@ -95,7 +94,6 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **runmode** | **str**|  | 
  **bundles_ignored** | [**list[str]**](str.md)|  | [optional] 
  **bundles_ignored_type_hint** | **str**|  | [optional] 
 
@@ -110,16 +108,16 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_config_aem_password_reset**
-> post_config_aem_password_reset(runmode, pwdreset_authorizables=pwdreset_authorizables, pwdreset_authorizables_type_hint=pwdreset_authorizables_type_hint)
+> post_config_aem_password_reset(pwdreset_authorizables=pwdreset_authorizables, pwdreset_authorizables_type_hint=pwdreset_authorizables_type_hint)
 
 
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -134,12 +132,11 @@ configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
 api_instance = swaggeraem.CustomApi(swaggeraem.ApiClient(configuration))
-runmode = 'runmode_example' # str | 
 pwdreset_authorizables = ['pwdreset_authorizables_example'] # list[str] |  (optional)
 pwdreset_authorizables_type_hint = 'pwdreset_authorizables_type_hint_example' # str |  (optional)
 
-try: 
-    api_instance.post_config_aem_password_reset(runmode, pwdreset_authorizables=pwdreset_authorizables, pwdreset_authorizables_type_hint=pwdreset_authorizables_type_hint)
+try:
+    api_instance.post_config_aem_password_reset(pwdreset_authorizables=pwdreset_authorizables, pwdreset_authorizables_type_hint=pwdreset_authorizables_type_hint)
 except ApiException as e:
     print("Exception when calling CustomApi->post_config_aem_password_reset: %s\n" % e)
 ```
@@ -148,7 +145,6 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **runmode** | **str**|  | 
  **pwdreset_authorizables** | [**list[str]**](str.md)|  | [optional] 
  **pwdreset_authorizables_type_hint** | **str**|  | [optional] 
 
@@ -163,7 +159,7 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

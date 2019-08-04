@@ -1,0 +1,2641 @@
+h1. Adobe Experience Manager (AEM) API Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
+
+*Version:* 3.2.0-pre.0
+
+----
+
+{toc:printable=true|style=square|minLevel=2|maxLevel=3|type=list|outline=false|include=.*}
+
+h2. Endpoints
+
+    h3. getAemProductInfo
+    {status:colour=Yellow|title=get|subtle=false}
+    {code}
+    get /system/console/status-productinfo.json
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+
+
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+array[String]
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "array",
+        "items" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}
+        {code}
+    ----
+
+    h3. getConfigMgr
+    {status:colour=Yellow|title=get|subtle=false}
+    {code}
+    get /system/console/configMgr
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+
+
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 200
+        *Message:*     OK
+        {code:title=Response Type}
+String
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "OK",
+  "content" : {
+    "text/xml" : {
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}
+        {code}
+        *Status Code:* 5XX
+        *Message:*     Unexpected error.
+        {code:title=Response Type}
+
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Unexpected error."
+}
+        {code}
+    ----
+
+    h3. postBundle
+    {status:colour=Yellow|title=post|subtle=false}
+    {code}
+    post /system/console/bundles/{name}
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+        h5. Path Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |name | |(/) | |  |
+
+
+
+
+        h5. Query Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |action | |(/) | |  |
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response"
+}
+        {code}
+    ----
+
+    h3. postJmxRepository
+    {status:colour=Yellow|title=post|subtle=false}
+    {code}
+    post /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action}
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+        h5. Path Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |action | |(/) | |  |
+
+
+
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response"
+}
+        {code}
+    ----
+
+    h3. postSamlConfiguration
+    {status:colour=Yellow|title=post|subtle=false}
+    {code}
+    post /system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+
+
+
+        h5. Query Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |post | |(x) | |  |
+
+|apply | |(x) | |  |
+
+|delete | |(x) | |  |
+
+|action | |(x) | |  |
+
+|Dollarlocation | |(x) | |  |
+
+|path | |(x) | |  |
+
+|servicePeriodranking | |(x) | |  |
+
+|idpUrl | |(x) | |  |
+
+|idpCertAlias | |(x) | |  |
+
+|idpHttpRedirect | |(x) | |  |
+
+|serviceProviderEntityId | |(x) | |  |
+
+|assertionConsumerServiceURL | |(x) | |  |
+
+|spPrivateKeyAlias | |(x) | |  |
+
+|keyStorePassword | |(x) | |  |
+
+|defaultRedirectUrl | |(x) | |  |
+
+|userIDAttribute | |(x) | |  |
+
+|useEncryption | |(x) | |  |
+
+|createUser | |(x) | |  |
+
+|addGroupMemberships | |(x) | |  |
+
+|groupMembershipAttribute | |(x) | |  |
+
+|defaultGroups | |(x) | |  |
+
+|nameIdFormat | |(x) | |  |
+
+|synchronizeAttributes | |(x) | |  |
+
+|handleLogout | |(x) | |  |
+
+|logoutUrl | |(x) | |  |
+
+|clockTolerance | |(x) | |  |
+
+|digestMethod | |(x) | |  |
+
+|signatureMethod | |(x) | |  |
+
+|userIntermediatePath | |(x) | |  |
+
+|propertylist | |(x) | |  |
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 200
+        *Message:*     Retrieved AEM SAML Configuration
+        {code:title=Response Type}
+SamlConfigurationInfo
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Retrieved AEM SAML Configuration",
+  "content" : {
+    "text/plain" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/SamlConfigurationInfo"
+      }
+    }
+  }
+}
+        {code}
+        *Status Code:* 302
+        *Message:*     Default response
+        {code:title=Response Type}
+String
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response",
+  "content" : {
+    "text/plain" : {
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}
+        {code}
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+String
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response",
+  "content" : {
+    "text/plain" : {
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}
+        {code}
+    ----
+
+    h3. getLoginPage
+    {status:colour=Yellow|title=get|subtle=false}
+    {code}
+    get /libs/granite/core/content/login.html
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+
+
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+String
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response",
+  "content" : {
+    "text/html" : {
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}
+        {code}
+    ----
+
+    h3. postCqActions
+    {status:colour=Yellow|title=post|subtle=false}
+    {code}
+    post /.cqactions.html
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+
+
+
+        h5. Query Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |authorizableId | |(/) | |  |
+
+|changelog | |(/) | |  |
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response"
+}
+        {code}
+    ----
+
+    h3. getCrxdeStatus
+    {status:colour=Yellow|title=get|subtle=false}
+    {code}
+    get /crx/server/crx.default/jcr:root/.1.json
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+
+
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 200
+        *Message:*     CRXDE is enabled
+        {code:title=Response Type}
+String
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "CRXDE is enabled",
+  "content" : {
+    "plain/text" : {
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}
+        {code}
+        *Status Code:* 404
+        *Message:*     CRXDE is disabled
+        {code:title=Response Type}
+String
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "CRXDE is disabled",
+  "content" : {
+    "plain/text" : {
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}
+        {code}
+    ----
+
+    h3. getInstallStatus
+    {status:colour=Yellow|title=get|subtle=false}
+    {code}
+    get /crx/packmgr/installstatus.jsp
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+
+
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 200
+        *Message:*     Retrieved CRX package manager install status
+        {code:title=Response Type}
+InstallStatus
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Retrieved CRX package manager install status",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/InstallStatus"
+      }
+    }
+  }
+}
+        {code}
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+String
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}
+        {code}
+    ----
+
+    h3. getPackageManagerServlet
+    {status:colour=Yellow|title=get|subtle=false}
+    {code}
+    get /crx/packmgr/service/script.html
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+
+
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 404
+        *Message:*     Package Manager Servlet is disabled
+        {code:title=Response Type}
+String
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Package Manager Servlet is disabled",
+  "content" : {
+    "text/html" : {
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}
+        {code}
+        *Status Code:* 405
+        *Message:*     Package Manager Servlet is active
+        {code:title=Response Type}
+String
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Package Manager Servlet is active",
+  "content" : {
+    "text/html" : {
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}
+        {code}
+    ----
+
+    h3. postPackageService
+    {status:colour=Yellow|title=post|subtle=false}
+    {code}
+    post /crx/packmgr/service.jsp
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+
+
+
+        h5. Query Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |cmd | |(/) | |  |
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+String
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response",
+  "content" : {
+    "text/xml" : {
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}
+        {code}
+    ----
+
+    h3. postPackageServiceJson
+    {status:colour=Yellow|title=post|subtle=false}
+    {code}
+    post /crx/packmgr/service/.json/{path}
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+        h5. Path Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |path | |(/) | |  |
+
+
+
+
+        h5. Query Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |cmd | |(/) | |  |
+
+|groupName | |(x) | |  |
+
+|packageName | |(x) | |  |
+
+|packageVersion | |(x) | |  |
+
+|charset | |(x) | |  |
+
+|force | |(x) | |  |
+
+|recursive | |(x) | |  |
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+String
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}
+        {code}
+    ----
+
+    h3. postPackageUpdate
+    {status:colour=Yellow|title=post|subtle=false}
+    {code}
+    post /crx/packmgr/update.jsp
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+
+
+
+        h5. Query Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |groupName | |(/) | |  |
+
+|packageName | |(/) | |  |
+
+|version | |(/) | |  |
+
+|path | |(/) | |  |
+
+|filter | |(x) | |  |
+
+|charset | |(x) | |  |
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+String
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}
+        {code}
+    ----
+
+    h3. postSetPassword
+    {status:colour=Yellow|title=post|subtle=false}
+    {code}
+    post /crx/explorer/ui/setpassword.jsp
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+
+
+
+        h5. Query Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |old | |(/) | |  |
+
+|plain | |(/) | |  |
+
+|verify | |(/) | |  |
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+String
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response",
+  "content" : {
+    "text/plain" : {
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}
+        {code}
+    ----
+
+    h3. getAemHealthCheck
+    {status:colour=Yellow|title=get|subtle=false}
+    {code}
+    get /system/health
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+
+
+
+        h5. Query Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |tags | |(x) | |  |
+
+|combineTagsOr | |(x) | |  |
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+String
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}
+        {code}
+    ----
+
+    h3. postConfigAemHealthCheckServlet
+    {status:colour=Yellow|title=post|subtle=false}
+    {code}
+    post /apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+
+
+
+        h5. Query Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |bundlesPeriodignored | |(x) | |  |
+
+|bundlesPeriodignoredAtTypeHint | |(x) | |  |
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response"
+}
+        {code}
+    ----
+
+    h3. postConfigAemPasswordReset
+    {status:colour=Yellow|title=post|subtle=false}
+    {code}
+    post /apps/system/config/com.shinesolutions.aem.passwordreset.Activator
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+
+
+
+        h5. Query Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |pwdresetPeriodauthorizables | |(x) | |  |
+
+|pwdresetPeriodauthorizablesAtTypeHint | |(x) | |  |
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response"
+}
+        {code}
+    ----
+
+    h3. deleteAgent
+    {status:colour=Yellow|title=delete|subtle=false}
+    {code}
+    delete /etc/replication/agents.{runmode}/{name}
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+        h5. Path Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |runmode | |(/) | |  |
+
+|name | |(/) | |  |
+
+
+
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response"
+}
+        {code}
+    ----
+
+    h3. deleteNode
+    {status:colour=Yellow|title=delete|subtle=false}
+    {code}
+    delete /{path}/{name}
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+        h5. Path Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |path | |(/) | |  |
+
+|name | |(/) | |  |
+
+
+
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response"
+}
+        {code}
+    ----
+
+    h3. getAgent
+    {status:colour=Yellow|title=get|subtle=false}
+    {code}
+    get /etc/replication/agents.{runmode}/{name}
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+        h5. Path Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |runmode | |(/) | |  |
+
+|name | |(/) | |  |
+
+
+
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response"
+}
+        {code}
+    ----
+
+    h3. getAgents
+    {status:colour=Yellow|title=get|subtle=false}
+    {code}
+    get /etc/replication/agents.{runmode}.-1.json
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+        h5. Path Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |runmode | |(/) | |  |
+
+
+
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+String
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}
+        {code}
+    ----
+
+    h3. getAuthorizableKeystore
+    {status:colour=Yellow|title=get|subtle=false}
+    {code}
+    get /{intermediatePath}/{authorizableId}.ks.json
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+        h5. Path Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |intermediatePath | |(/) | |  |
+
+|authorizableId | |(/) | |  |
+
+
+
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 200
+        *Message:*     Retrieved Authorizable Keystore info
+        {code:title=Response Type}
+KeystoreInfo
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Retrieved Authorizable Keystore info",
+  "content" : {
+    "text/plain" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/KeystoreInfo"
+      }
+    }
+  }
+}
+        {code}
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+String
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response",
+  "content" : {
+    "text/plain" : {
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}
+        {code}
+    ----
+
+    h3. getKeystore
+    {status:colour=Yellow|title=get|subtle=false}
+    {code}
+    get /{intermediatePath}/{authorizableId}/keystore/store.p12
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+        h5. Path Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |intermediatePath | |(/) | |  |
+
+|authorizableId | |(/) | |  |
+
+
+
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+File
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response",
+  "content" : {
+    "application/octet-stream" : {
+      "schema" : {
+        "type" : "string",
+        "format" : "binary"
+      }
+    }
+  }
+}
+        {code}
+    ----
+
+    h3. getNode
+    {status:colour=Yellow|title=get|subtle=false}
+    {code}
+    get /{path}/{name}
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+        h5. Path Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |path | |(/) | |  |
+
+|name | |(/) | |  |
+
+
+
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response"
+}
+        {code}
+    ----
+
+    h3. getPackage
+    {status:colour=Yellow|title=get|subtle=false}
+    {code}
+    get /etc/packages/{group}/{name}-{version}.zip
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+        h5. Path Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |group | |(/) | |  |
+
+|name | |(/) | |  |
+
+|version | |(/) | |  |
+
+
+
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+File
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response",
+  "content" : {
+    "application/octet-stream" : {
+      "schema" : {
+        "type" : "string",
+        "format" : "binary"
+      }
+    }
+  }
+}
+        {code}
+    ----
+
+    h3. getPackageFilter
+    {status:colour=Yellow|title=get|subtle=false}
+    {code}
+    get /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+        h5. Path Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |group | |(/) | |  |
+
+|name | |(/) | |  |
+
+|version | |(/) | |  |
+
+
+
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+String
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}
+        {code}
+    ----
+
+    h3. getQuery
+    {status:colour=Yellow|title=get|subtle=false}
+    {code}
+    get /bin/querybuilder.json
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+
+
+
+        h5. Query Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |path | |(/) | |  |
+
+|pPeriodlimit | |(/) | |  |
+
+|1Property | |(/) | |  |
+
+|1PropertyPeriodvalue | |(/) | |  |
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+String
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}
+        {code}
+    ----
+
+    h3. getTruststore
+    {status:colour=Yellow|title=get|subtle=false}
+    {code}
+    get /etc/truststore/truststore.p12
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+
+
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+File
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response",
+  "content" : {
+    "application/octet-stream" : {
+      "schema" : {
+        "type" : "string",
+        "format" : "binary"
+      }
+    }
+  }
+}
+        {code}
+    ----
+
+    h3. getTruststoreInfo
+    {status:colour=Yellow|title=get|subtle=false}
+    {code}
+    get /libs/granite/security/truststore.json
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+
+
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 200
+        *Message:*     Retrieved AEM Truststore info
+        {code:title=Response Type}
+TruststoreInfo
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Retrieved AEM Truststore info",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/TruststoreInfo"
+      }
+    }
+  }
+}
+        {code}
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+String
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}
+        {code}
+    ----
+
+    h3. postAgent
+    {status:colour=Yellow|title=post|subtle=false}
+    {code}
+    post /etc/replication/agents.{runmode}/{name}
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+        h5. Path Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |runmode | |(/) | |  |
+
+|name | |(/) | |  |
+
+
+
+
+        h5. Query Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |jcrContentSlashcqDistribute | |(x) | |  |
+
+|jcrContentSlashcqDistributeAtTypeHint | |(x) | |  |
+
+|jcrContentSlashcqName | |(x) | |  |
+
+|jcrContentSlashcqTemplate | |(x) | |  |
+
+|jcrContentSlashenabled | |(x) | |  |
+
+|jcrContentSlashjcrDescription | |(x) | |  |
+
+|jcrContentSlashjcrLastModified | |(x) | |  |
+
+|jcrContentSlashjcrLastModifiedBy | |(x) | |  |
+
+|jcrContentSlashjcrMixinTypes | |(x) | |  |
+
+|jcrContentSlashjcrTitle | |(x) | |  |
+
+|jcrContentSlashlogLevel | |(x) | |  |
+
+|jcrContentSlashnoStatusUpdate | |(x) | |  |
+
+|jcrContentSlashnoVersioning | |(x) | |  |
+
+|jcrContentSlashprotocolConnectTimeout | |(x) | |  |
+
+|jcrContentSlashprotocolHTTPConnectionClosed | |(x) | |  |
+
+|jcrContentSlashprotocolHTTPExpired | |(x) | |  |
+
+|jcrContentSlashprotocolHTTPHeaders | |(x) | |  |
+
+|jcrContentSlashprotocolHTTPHeadersAtTypeHint | |(x) | |  |
+
+|jcrContentSlashprotocolHTTPMethod | |(x) | |  |
+
+|jcrContentSlashprotocolHTTPSRelaxed | |(x) | |  |
+
+|jcrContentSlashprotocolInterface | |(x) | |  |
+
+|jcrContentSlashprotocolSocketTimeout | |(x) | |  |
+
+|jcrContentSlashprotocolVersion | |(x) | |  |
+
+|jcrContentSlashproxyNTLMDomain | |(x) | |  |
+
+|jcrContentSlashproxyNTLMHost | |(x) | |  |
+
+|jcrContentSlashproxyHost | |(x) | |  |
+
+|jcrContentSlashproxyPassword | |(x) | |  |
+
+|jcrContentSlashproxyPort | |(x) | |  |
+
+|jcrContentSlashproxyUser | |(x) | |  |
+
+|jcrContentSlashqueueBatchMaxSize | |(x) | |  |
+
+|jcrContentSlashqueueBatchMode | |(x) | |  |
+
+|jcrContentSlashqueueBatchWaitTime | |(x) | |  |
+
+|jcrContentSlashretryDelay | |(x) | |  |
+
+|jcrContentSlashreverseReplication | |(x) | |  |
+
+|jcrContentSlashserializationType | |(x) | |  |
+
+|jcrContentSlashslingResourceType | |(x) | |  |
+
+|jcrContentSlashssl | |(x) | |  |
+
+|jcrContentSlashtransportNTLMDomain | |(x) | |  |
+
+|jcrContentSlashtransportNTLMHost | |(x) | |  |
+
+|jcrContentSlashtransportPassword | |(x) | |  |
+
+|jcrContentSlashtransportUri | |(x) | |  |
+
+|jcrContentSlashtransportUser | |(x) | |  |
+
+|jcrContentSlashtriggerDistribute | |(x) | |  |
+
+|jcrContentSlashtriggerModified | |(x) | |  |
+
+|jcrContentSlashtriggerOnOffTime | |(x) | |  |
+
+|jcrContentSlashtriggerReceive | |(x) | |  |
+
+|jcrContentSlashtriggerSpecific | |(x) | |  |
+
+|jcrContentSlashuserId | |(x) | |  |
+
+|jcrPrimaryType | |(x) | |  |
+
+|operation | |(x) | |  |
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response"
+}
+        {code}
+    ----
+
+    h3. postAuthorizableKeystore
+    {status:colour=Yellow|title=post|subtle=false}
+    {code}
+    post /{intermediatePath}/{authorizableId}.ks.html
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+        h5. Path Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |intermediatePath | |(/) | |  |
+
+|authorizableId | |(/) | |  |
+
+
+
+
+        h5. Query Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |operation | |(x) | |  |
+
+|currentPassword | |(x) | |  |
+
+|newPassword | |(x) | |  |
+
+|rePassword | |(x) | |  |
+
+|keyPassword | |(x) | |  |
+
+|keyStorePass | |(x) | |  |
+
+|alias | |(x) | |  |
+
+|newAlias | |(x) | |  |
+
+|removeAlias | |(x) | |  |
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 200
+        *Message:*     Retrieved Authorizable Keystore info
+        {code:title=Response Type}
+KeystoreInfo
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Retrieved Authorizable Keystore info",
+  "content" : {
+    "text/plain" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/KeystoreInfo"
+      }
+    }
+  }
+}
+        {code}
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+String
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response",
+  "content" : {
+    "text/plain" : {
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}
+        {code}
+    ----
+
+    h3. postAuthorizables
+    {status:colour=Yellow|title=post|subtle=false}
+    {code}
+    post /libs/granite/security/post/authorizables
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+
+
+
+        h5. Query Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |authorizableId | |(/) | |  |
+
+|intermediatePath | |(/) | |  |
+
+|createUser | |(x) | |  |
+
+|createGroup | |(x) | |  |
+
+|repPassword | |(x) | |  |
+
+|profileSlashgivenName | |(x) | |  |
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+String
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response",
+  "content" : {
+    "text/html" : {
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}
+        {code}
+    ----
+
+    h3. postConfigAdobeGraniteSamlAuthenticationHandler
+    {status:colour=Yellow|title=post|subtle=false}
+    {code}
+    post /apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+
+
+
+        h5. Query Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |keyStorePassword | |(x) | |  |
+
+|keyStorePasswordAtTypeHint | |(x) | |  |
+
+|servicePeriodranking | |(x) | |  |
+
+|servicePeriodrankingAtTypeHint | |(x) | |  |
+
+|idpHttpRedirect | |(x) | |  |
+
+|idpHttpRedirectAtTypeHint | |(x) | |  |
+
+|createUser | |(x) | |  |
+
+|createUserAtTypeHint | |(x) | |  |
+
+|defaultRedirectUrl | |(x) | |  |
+
+|defaultRedirectUrlAtTypeHint | |(x) | |  |
+
+|userIDAttribute | |(x) | |  |
+
+|userIDAttributeAtTypeHint | |(x) | |  |
+
+|defaultGroups | |(x) | |  |
+
+|defaultGroupsAtTypeHint | |(x) | |  |
+
+|idpCertAlias | |(x) | |  |
+
+|idpCertAliasAtTypeHint | |(x) | |  |
+
+|addGroupMemberships | |(x) | |  |
+
+|addGroupMembershipsAtTypeHint | |(x) | |  |
+
+|path | |(x) | |  |
+
+|pathAtTypeHint | |(x) | |  |
+
+|synchronizeAttributes | |(x) | |  |
+
+|synchronizeAttributesAtTypeHint | |(x) | |  |
+
+|clockTolerance | |(x) | |  |
+
+|clockToleranceAtTypeHint | |(x) | |  |
+
+|groupMembershipAttribute | |(x) | |  |
+
+|groupMembershipAttributeAtTypeHint | |(x) | |  |
+
+|idpUrl | |(x) | |  |
+
+|idpUrlAtTypeHint | |(x) | |  |
+
+|logoutUrl | |(x) | |  |
+
+|logoutUrlAtTypeHint | |(x) | |  |
+
+|serviceProviderEntityId | |(x) | |  |
+
+|serviceProviderEntityIdAtTypeHint | |(x) | |  |
+
+|assertionConsumerServiceURL | |(x) | |  |
+
+|assertionConsumerServiceURLAtTypeHint | |(x) | |  |
+
+|handleLogout | |(x) | |  |
+
+|handleLogoutAtTypeHint | |(x) | |  |
+
+|spPrivateKeyAlias | |(x) | |  |
+
+|spPrivateKeyAliasAtTypeHint | |(x) | |  |
+
+|useEncryption | |(x) | |  |
+
+|useEncryptionAtTypeHint | |(x) | |  |
+
+|nameIdFormat | |(x) | |  |
+
+|nameIdFormatAtTypeHint | |(x) | |  |
+
+|digestMethod | |(x) | |  |
+
+|digestMethodAtTypeHint | |(x) | |  |
+
+|signatureMethod | |(x) | |  |
+
+|signatureMethodAtTypeHint | |(x) | |  |
+
+|userIntermediatePath | |(x) | |  |
+
+|userIntermediatePathAtTypeHint | |(x) | |  |
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response"
+}
+        {code}
+    ----
+
+    h3. postConfigApacheFelixJettyBasedHttpService
+    {status:colour=Yellow|title=post|subtle=false}
+    {code}
+    post /apps/system/config/org.apache.felix.http
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+
+
+
+        h5. Query Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |orgPeriodapachePeriodfelixPeriodhttpsPeriodnio | |(x) | |  |
+
+|orgPeriodapachePeriodfelixPeriodhttpsPeriodnioAtTypeHint | |(x) | |  |
+
+|orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystore | |(x) | |  |
+
+|orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystoreAtTypeHint | |(x) | |  |
+
+|orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodpassword | |(x) | |  |
+
+|orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodpasswordAtTypeHint | |(x) | |  |
+
+|orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkey | |(x) | |  |
+
+|orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyAtTypeHint | |(x) | |  |
+
+|orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyPeriodpassword | |(x) | |  |
+
+|orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyPeriodpasswordAtTypeHint | |(x) | |  |
+
+|orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststore | |(x) | |  |
+
+|orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststoreAtTypeHint | |(x) | |  |
+
+|orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststorePeriodpassword | |(x) | |  |
+
+|orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststorePeriodpasswordAtTypeHint | |(x) | |  |
+
+|orgPeriodapachePeriodfelixPeriodhttpsPeriodclientcertificate | |(x) | |  |
+
+|orgPeriodapachePeriodfelixPeriodhttpsPeriodclientcertificateAtTypeHint | |(x) | |  |
+
+|orgPeriodapachePeriodfelixPeriodhttpsPeriodenable | |(x) | |  |
+
+|orgPeriodapachePeriodfelixPeriodhttpsPeriodenableAtTypeHint | |(x) | |  |
+
+|orgPeriodosgiPeriodservicePeriodhttpPeriodportPeriodsecure | |(x) | |  |
+
+|orgPeriodosgiPeriodservicePeriodhttpPeriodportPeriodsecureAtTypeHint | |(x) | |  |
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response"
+}
+        {code}
+    ----
+
+    h3. postConfigApacheHttpComponentsProxyConfiguration
+    {status:colour=Yellow|title=post|subtle=false}
+    {code}
+    post /apps/system/config/org.apache.http.proxyconfigurator.config
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+
+
+
+        h5. Query Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |proxyPeriodhost | |(x) | |  |
+
+|proxyPeriodhostAtTypeHint | |(x) | |  |
+
+|proxyPeriodport | |(x) | |  |
+
+|proxyPeriodportAtTypeHint | |(x) | |  |
+
+|proxyPeriodexceptions | |(x) | |  |
+
+|proxyPeriodexceptionsAtTypeHint | |(x) | |  |
+
+|proxyPeriodenabled | |(x) | |  |
+
+|proxyPeriodenabledAtTypeHint | |(x) | |  |
+
+|proxyPerioduser | |(x) | |  |
+
+|proxyPerioduserAtTypeHint | |(x) | |  |
+
+|proxyPeriodpassword | |(x) | |  |
+
+|proxyPeriodpasswordAtTypeHint | |(x) | |  |
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response"
+}
+        {code}
+    ----
+
+    h3. postConfigApacheSlingDavExServlet
+    {status:colour=Yellow|title=post|subtle=false}
+    {code}
+    post /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+
+
+
+        h5. Query Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |alias | |(x) | |  |
+
+|aliasAtTypeHint | |(x) | |  |
+
+|davPeriodcreateAbsoluteUri | |(x) | |  |
+
+|davPeriodcreateAbsoluteUriAtTypeHint | |(x) | |  |
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response"
+}
+        {code}
+    ----
+
+    h3. postConfigApacheSlingGetServlet
+    {status:colour=Yellow|title=post|subtle=false}
+    {code}
+    post /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+
+
+
+        h5. Query Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |jsonPeriodmaximumresults | |(x) | |  |
+
+|jsonPeriodmaximumresultsAtTypeHint | |(x) | |  |
+
+|enablePeriodhtml | |(x) | |  |
+
+|enablePeriodhtmlAtTypeHint | |(x) | |  |
+
+|enablePeriodtxt | |(x) | |  |
+
+|enablePeriodtxtAtTypeHint | |(x) | |  |
+
+|enablePeriodxml | |(x) | |  |
+
+|enablePeriodxmlAtTypeHint | |(x) | |  |
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response"
+}
+        {code}
+    ----
+
+    h3. postConfigApacheSlingReferrerFilter
+    {status:colour=Yellow|title=post|subtle=false}
+    {code}
+    post /apps/system/config/org.apache.sling.security.impl.ReferrerFilter
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+
+
+
+        h5. Query Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |allowPeriodempty | |(x) | |  |
+
+|allowPeriodemptyAtTypeHint | |(x) | |  |
+
+|allowPeriodhosts | |(x) | |  |
+
+|allowPeriodhostsAtTypeHint | |(x) | |  |
+
+|allowPeriodhostsPeriodregexp | |(x) | |  |
+
+|allowPeriodhostsPeriodregexpAtTypeHint | |(x) | |  |
+
+|filterPeriodmethods | |(x) | |  |
+
+|filterPeriodmethodsAtTypeHint | |(x) | |  |
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response"
+}
+        {code}
+    ----
+
+    h3. postNode
+    {status:colour=Yellow|title=post|subtle=false}
+    {code}
+    post /{path}/{name}
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+        h5. Path Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |path | |(/) | |  |
+
+|name | |(/) | |  |
+
+
+
+
+        h5. Query Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |operation | |(x) | |  |
+
+|deleteAuthorizable | |(x) | |  |
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response"
+}
+        {code}
+    ----
+
+    h3. postNodeRw
+    {status:colour=Yellow|title=post|subtle=false}
+    {code}
+    post /{path}/{name}.rw.html
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+        h5. Path Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |path | |(/) | |  |
+
+|name | |(/) | |  |
+
+
+
+
+        h5. Query Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |addMembers | |(x) | |  |
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response"
+}
+        {code}
+    ----
+
+    h3. postPath
+    {status:colour=Yellow|title=post|subtle=false}
+    {code}
+    post /{path}/
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+        h5. Path Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |path | |(/) | |  |
+
+
+
+
+        h5. Query Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |jcrPrimaryType | |(/) | |  |
+
+|name | |(/) | |  |
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response"
+}
+        {code}
+    ----
+
+    h3. postQuery
+    {status:colour=Yellow|title=post|subtle=false}
+    {code}
+    post /bin/querybuilder.json
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+
+
+
+        h5. Query Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |path | |(/) | |  |
+
+|pPeriodlimit | |(/) | |  |
+
+|1Property | |(/) | |  |
+
+|1PropertyPeriodvalue | |(/) | |  |
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+String
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}
+        {code}
+    ----
+
+    h3. postTreeActivation
+    {status:colour=Yellow|title=post|subtle=false}
+    {code}
+    post /etc/replication/treeactivation.html
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+
+
+
+        h5. Query Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |ignoredeactivated | |(/) | |  |
+
+|onlymodified | |(/) | |  |
+
+|path | |(/) | |  |
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response"
+}
+        {code}
+    ----
+
+    h3. postTruststore
+    {status:colour=Yellow|title=post|subtle=false}
+    {code}
+    post /libs/granite/security/post/truststore
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+
+
+
+        h5. Query Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |operation | |(x) | |  |
+
+|newPassword | |(x) | |  |
+
+|rePassword | |(x) | |  |
+
+|keyStoreType | |(x) | |  |
+
+|removeAlias | |(x) | |  |
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+String
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response",
+  "content" : {
+    "text/plain" : {
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}
+        {code}
+    ----
+
+    h3. postTruststorePKCS12
+    {status:colour=Yellow|title=post|subtle=false}
+    {code}
+    post /etc/truststore
+    {code}
+    *Summary:* 
+    *Description:* 
+
+
+    h4. Parameters
+
+
+
+
+
+
+
+    h4. Responses
+        *Status Code:* 0
+        *Message:*     Default response
+        {code:title=Response Type}
+String
+        {code}
+        See [#models]
+
+
+
+        {code:title=Response Schema |collapse=true}
+{
+  "description" : "Default response",
+  "content" : {
+    "text/plain" : {
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}
+        {code}
+    ----
+
+h2. Models
+
+        h3. InstallStatus
+        ||Field Name||Required||Type||Description||
+         |status | |InstallStatus_status | |
+        h3. InstallStatus_status
+        ||Field Name||Required||Type||Description||
+         |finished | |Boolean | |
+ |itemCount | |Integer | |
+        h3. KeystoreChainItems
+        ||Field Name||Required||Type||Description||
+         |subject | |String |e.g. \&quot;CN&#x3D;localhost\&quot; |
+ |issuer | |String |e.g. \&quot;CN&#x3D;Admin\&quot; |
+ |notBefore | |String |e.g. \&quot;Sun Jul 01 12:00:00 AEST 2018\&quot; |
+ |notAfter | |String |e.g. \&quot;Sun Jun 30 23:59:50 AEST 2019\&quot; |
+ |serialNumber | |Integer |18165099476682912368 |
+        h3. KeystoreInfo
+        ||Field Name||Required||Type||Description||
+         |aliases | |array[KeystoreItems] | |
+ |exists | |Boolean |False if truststore don&#39;t exist |
+        h3. KeystoreItems
+        ||Field Name||Required||Type||Description||
+         |alias | |String |Keystore alias name |
+ |entryType | |String |e.g. \&quot;privateKey\&quot; |
+ |algorithm | |String |e.g. \&quot;RSA\&quot; |
+ |format | |String |e.g. \&quot;PKCS#8\&quot; |
+ |chain | |array[KeystoreChainItems] | |
+        h3. SamlConfigurationInfo
+        ||Field Name||Required||Type||Description||
+         |pid | |String |Persistent Identity (PID) |
+ |title | |String |Title |
+ |description | |String |Title |
+ |bundleUnderscorelocation | |String |needed for configuration binding |
+ |serviceUnderscorelocation | |String |needed for configuraiton binding |
+ |properties | |SamlConfigurationProperties | |
+        h3. SamlConfigurationProperties
+        ||Field Name||Required||Type||Description||
+         |path | |SamlConfigurationPropertyItemsArray | |
+ |servicePeriodranking | |SamlConfigurationPropertyItemsLong | |
+ |idpUrl | |SamlConfigurationPropertyItemsString | |
+ |idpCertAlias | |SamlConfigurationPropertyItemsString | |
+ |idpHttpRedirect | |SamlConfigurationPropertyItemsBoolean | |
+ |serviceProviderEntityId | |SamlConfigurationPropertyItemsString | |
+ |assertionConsumerServiceURL | |SamlConfigurationPropertyItemsString | |
+ |spPrivateKeyAlias | |SamlConfigurationPropertyItemsString | |
+ |keyStorePassword | |SamlConfigurationPropertyItemsString | |
+ |defaultRedirectUrl | |SamlConfigurationPropertyItemsString | |
+ |userIDAttribute | |SamlConfigurationPropertyItemsString | |
+ |useEncryption | |SamlConfigurationPropertyItemsBoolean | |
+ |createUser | |SamlConfigurationPropertyItemsBoolean | |
+ |addGroupMemberships | |SamlConfigurationPropertyItemsBoolean | |
+ |groupMembershipAttribute | |SamlConfigurationPropertyItemsString | |
+ |defaultGroups | |SamlConfigurationPropertyItemsArray | |
+ |nameIdFormat | |SamlConfigurationPropertyItemsString | |
+ |synchronizeAttributes | |SamlConfigurationPropertyItemsArray | |
+ |handleLogout | |SamlConfigurationPropertyItemsBoolean | |
+ |logoutUrl | |SamlConfigurationPropertyItemsString | |
+ |clockTolerance | |SamlConfigurationPropertyItemsLong | |
+ |digestMethod | |SamlConfigurationPropertyItemsString | |
+ |signatureMethod | |SamlConfigurationPropertyItemsString | |
+ |userIntermediatePath | |SamlConfigurationPropertyItemsString | |
+        h3. SamlConfigurationPropertyItemsArray
+        ||Field Name||Required||Type||Description||
+         |name | |String |property name |
+ |optional | |Boolean |True if optional |
+ |isUnderscoreset | |Boolean |True if property is set |
+ |type | |Integer |Property type, 1&#x3D;String, 3&#x3D;long, 11&#x3D;boolean, 12&#x3D;Password |
+ |values | |array[String] |Property value |
+ |description | |String |Property description |
+        h3. SamlConfigurationPropertyItemsBoolean
+        ||Field Name||Required||Type||Description||
+         |name | |String |property name |
+ |optional | |Boolean |True if optional |
+ |isUnderscoreset | |Boolean |True if property is set |
+ |type | |Integer |Property type, 1&#x3D;String, 3&#x3D;long, 11&#x3D;boolean, 12&#x3D;Password |
+ |value | |Boolean |Property value |
+ |description | |String |Property description |
+        h3. SamlConfigurationPropertyItemsLong
+        ||Field Name||Required||Type||Description||
+         |name | |String |property name |
+ |optional | |Boolean |True if optional |
+ |isUnderscoreset | |Boolean |True if property is set |
+ |type | |Integer |Property type, 1&#x3D;String, 3&#x3D;long, 11&#x3D;boolean, 12&#x3D;Password |
+ |value | |Integer |Property value |
+ |description | |String |Property description |
+        h3. SamlConfigurationPropertyItemsString
+        ||Field Name||Required||Type||Description||
+         |name | |String |property name |
+ |optional | |Boolean |True if optional |
+ |isUnderscoreset | |Boolean |True if property is set |
+ |type | |Integer |Property type, 1&#x3D;String, 3&#x3D;long, 11&#x3D;boolean, 12&#x3D;Password |
+ |value | |String |Property value |
+ |description | |String |Property description |
+        h3. TruststoreInfo
+        ||Field Name||Required||Type||Description||
+         |aliases | |array[TruststoreItems] | |
+ |exists | |Boolean |False if truststore don&#39;t exist |
+        h3. TruststoreItems
+        ||Field Name||Required||Type||Description||
+         |alias | |String |Truststore alias name |
+ |entryType | |String | |
+ |subject | |String |e.g. \&quot;CN&#x3D;localhost\&quot; |
+ |issuer | |String |e.g. \&quot;CN&#x3D;Admin\&quot; |
+ |notBefore | |String |e.g. \&quot;Sun Jul 01 12:00:00 AEST 2018\&quot; |
+ |notAfter | |String |e.g. \&quot;Sun Jun 30 23:59:50 AEST 2019\&quot; |
+ |serialNumber | |Integer |18165099476682912368 |

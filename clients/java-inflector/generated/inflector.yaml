@@ -1,0 +1,24 @@
+controllerPackage: org.openapitools.controllers
+modelPackage:  org.openapitools.model
+swaggerUrl: ./src/main/swagger/swagger.yaml
+modelMappings:
+  # to enable explicit mappings, use this syntax:
+  DefinitionFromSwaggerSpecification: fully.qualified.path.to.Model
+  InstallStatus : org.openapitools.model.InstallStatus
+InstallStatusStatus : org.openapitools.model.InstallStatusStatus
+KeystoreChainItems : org.openapitools.model.KeystoreChainItems
+KeystoreInfo : org.openapitools.model.KeystoreInfo
+KeystoreItems : org.openapitools.model.KeystoreItems
+SamlConfigurationInfo : org.openapitools.model.SamlConfigurationInfo
+SamlConfigurationProperties : org.openapitools.model.SamlConfigurationProperties
+SamlConfigurationPropertyItemsArray : org.openapitools.model.SamlConfigurationPropertyItemsArray
+SamlConfigurationPropertyItemsBoolean : org.openapitools.model.SamlConfigurationPropertyItemsBoolean
+SamlConfigurationPropertyItemsLong : org.openapitools.model.SamlConfigurationPropertyItemsLong
+SamlConfigurationPropertyItemsString : org.openapitools.model.SamlConfigurationPropertyItemsString
+TruststoreInfo : org.openapitools.model.TruststoreInfo
+TruststoreItems : org.openapitools.model.TruststoreItems
+
+entityProcessors:
+  - json
+  - xml
+  - yaml

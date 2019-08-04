@@ -1,0 +1,11 @@
+export * from './consoleApi';
+import { ConsoleApi } from './consoleApi';
+export * from './cqApi';
+import { CqApi } from './cqApi';
+export * from './crxApi';
+import { CrxApi } from './crxApi';
+export * from './customApi';
+import { CustomApi } from './customApi';
+export * from './slingApi';
+import { SlingApi } from './slingApi';
+export const APIS = [ConsoleApi, CqApi, CrxApi, CustomApi, SlingApi];

@@ -1,0 +1,2640 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Adobe Experience Manager (AEM) API</title>
+    <style type="text/css">
+      body {
+	font-family: Trebuchet MS, sans-serif;
+	font-size: 15px;
+	color: #444;
+	margin-right: 24px;
+}
+
+h1	{
+	font-size: 25px;
+}
+h2	{
+	font-size: 20px;
+}
+h3	{
+	font-size: 16px;
+	font-weight: bold;
+}
+hr	{
+	height: 1px;
+	border: 0;
+	color: #ddd;
+	background-color: #ddd;
+}
+
+.app-desc {
+  clear: both;
+  margin-left: 20px;
+}
+.param-name {
+  width: 100%;
+}
+.license-info {
+  margin-left: 20px;
+}
+
+.license-url {
+  margin-left: 20px;
+}
+
+.model {
+  margin: 0 0 0px 20px;
+}
+
+.method {
+  margin-left: 20px;
+}
+
+.method-notes	{
+	margin: 10px 0 20px 0;
+	font-size: 90%;
+	color: #555;
+}
+
+pre {
+  padding: 10px;
+  margin-bottom: 2px;
+}
+
+.http-method {
+ text-transform: uppercase;
+}
+
+pre.get {
+  background-color: #0f6ab4;
+}
+
+pre.post {
+  background-color: #10a54a;
+}
+
+pre.put {
+  background-color: #c5862b;
+}
+
+pre.delete {
+  background-color: #a41e22;
+}
+
+.huge	{
+	color: #fff;
+}
+
+pre.example {
+  background-color: #f3f3f3;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+code {
+  white-space: pre;
+}
+
+.nickname {
+  font-weight: bold;
+}
+
+.method-path {
+  font-size: 1.5em;
+  background-color: #0f6ab4;
+}
+
+.up {
+  float:right;
+}
+
+.parameter {
+  width: 500px;
+}
+
+.param {
+  width: 500px;
+  padding: 10px 0 0 20px;
+  font-weight: bold;
+}
+
+.param-desc {
+  width: 700px;
+  padding: 0 0 0 20px;
+  color: #777;
+}
+
+.param-type {
+  font-style: italic;
+}
+
+.param-enum-header {
+width: 700px;
+padding: 0 0 0 60px;
+color: #777;
+font-weight: bold;
+}
+
+.param-enum {
+width: 700px;
+padding: 0 0 0 80px;
+color: #777;
+font-style: italic;
+}
+
+.field-label {
+  padding: 0;
+  margin: 0;
+  clear: both;
+}
+
+.field-items	{
+	padding: 0 0 15px 0;
+	margin-bottom: 15px;
+}
+
+.return-type {
+  clear: both;
+  padding-bottom: 10px;
+}
+
+.param-header {
+  font-weight: bold;
+}
+
+.method-tags {
+  text-align: right;
+}
+
+.method-tag {
+  background: none repeat scroll 0% 0% #24A600;
+  border-radius: 3px;
+  padding: 2px 10px;
+  margin: 2px;
+  color: #FFF;
+  display: inline-block;
+  text-decoration: none;
+}
+
+    </style>
+  </head>
+  <body>
+  <h1>Adobe Experience Manager (AEM) API</h1>
+    <div class="app-desc">Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API</div>
+    <div class="app-desc">More information: <a href="http://shinesolutions.com">http://shinesolutions.com</a></div>
+    <div class="app-desc">Contact Info: <a href="opensource@shinesolutions.com">opensource@shinesolutions.com</a></div>
+    <div class="app-desc">Version: 3.2.0-pre.0</div>
+    <div class="app-desc">BasePath:/</div>
+    <div class="license-info">All rights reserved</div>
+    <div class="license-url">http://apache.org/licenses/LICENSE-2.0.html</div>
+  <h2>Access</h2>
+    <ol>
+      <li>HTTP Basic Authentication</li>
+    </ol>
+
+  <h2><a name="__Methods">Methods</a></h2>
+  [ Jump to <a href="#__Models">Models</a> ]
+
+  <h3>Table of Contents </h3>
+  <div class="method-summary"></div>
+  <h4><a href="#Console">Console</a></h4>
+  <ul>
+  <li><a href="#getAemProductInfo"><code><span class="http-method">get</span> /system/console/status-productinfo.json</code></a></li>
+  <li><a href="#getConfigMgr"><code><span class="http-method">get</span> /system/console/configMgr</code></a></li>
+  <li><a href="#postBundle"><code><span class="http-method">post</span> /system/console/bundles/{name}</code></a></li>
+  <li><a href="#postJmxRepository"><code><span class="http-method">post</span> /system/console/jmx/com.adobe.granite:type=Repository/op/{action}</code></a></li>
+  <li><a href="#postSamlConfiguration"><code><span class="http-method">post</span> /system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler</code></a></li>
+  </ul>
+  <h4><a href="#Cq">Cq</a></h4>
+  <ul>
+  <li><a href="#getLoginPage"><code><span class="http-method">get</span> /libs/granite/core/content/login.html</code></a></li>
+  <li><a href="#postCqActions"><code><span class="http-method">post</span> /.cqactions.html</code></a></li>
+  </ul>
+  <h4><a href="#Crx">Crx</a></h4>
+  <ul>
+  <li><a href="#getCrxdeStatus"><code><span class="http-method">get</span> /crx/server/crx.default/jcr:root/.1.json</code></a></li>
+  <li><a href="#getInstallStatus"><code><span class="http-method">get</span> /crx/packmgr/installstatus.jsp</code></a></li>
+  <li><a href="#getPackageManagerServlet"><code><span class="http-method">get</span> /crx/packmgr/service/script.html</code></a></li>
+  <li><a href="#postPackageService"><code><span class="http-method">post</span> /crx/packmgr/service.jsp</code></a></li>
+  <li><a href="#postPackageServiceJson"><code><span class="http-method">post</span> /crx/packmgr/service/.json/{path}</code></a></li>
+  <li><a href="#postPackageUpdate"><code><span class="http-method">post</span> /crx/packmgr/update.jsp</code></a></li>
+  <li><a href="#postSetPassword"><code><span class="http-method">post</span> /crx/explorer/ui/setpassword.jsp</code></a></li>
+  </ul>
+  <h4><a href="#Custom">Custom</a></h4>
+  <ul>
+  <li><a href="#getAemHealthCheck"><code><span class="http-method">get</span> /system/health</code></a></li>
+  <li><a href="#postConfigAemHealthCheckServlet"><code><span class="http-method">post</span> /apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck</code></a></li>
+  <li><a href="#postConfigAemPasswordReset"><code><span class="http-method">post</span> /apps/system/config/com.shinesolutions.aem.passwordreset.Activator</code></a></li>
+  </ul>
+  <h4><a href="#Sling">Sling</a></h4>
+  <ul>
+  <li><a href="#deleteAgent"><code><span class="http-method">delete</span> /etc/replication/agents.{runmode}/{name}</code></a></li>
+  <li><a href="#deleteNode"><code><span class="http-method">delete</span> /{path}/{name}</code></a></li>
+  <li><a href="#getAgent"><code><span class="http-method">get</span> /etc/replication/agents.{runmode}/{name}</code></a></li>
+  <li><a href="#getAgents"><code><span class="http-method">get</span> /etc/replication/agents.{runmode}.-1.json</code></a></li>
+  <li><a href="#getAuthorizableKeystore"><code><span class="http-method">get</span> /{intermediatePath}/{authorizableId}.ks.json</code></a></li>
+  <li><a href="#getKeystore"><code><span class="http-method">get</span> /{intermediatePath}/{authorizableId}/keystore/store.p12</code></a></li>
+  <li><a href="#getNode"><code><span class="http-method">get</span> /{path}/{name}</code></a></li>
+  <li><a href="#getPackage"><code><span class="http-method">get</span> /etc/packages/{group}/{name}-{version}.zip</code></a></li>
+  <li><a href="#getPackageFilter"><code><span class="http-method">get</span> /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json</code></a></li>
+  <li><a href="#getQuery"><code><span class="http-method">get</span> /bin/querybuilder.json</code></a></li>
+  <li><a href="#getTruststore"><code><span class="http-method">get</span> /etc/truststore/truststore.p12</code></a></li>
+  <li><a href="#getTruststoreInfo"><code><span class="http-method">get</span> /libs/granite/security/truststore.json</code></a></li>
+  <li><a href="#postAgent"><code><span class="http-method">post</span> /etc/replication/agents.{runmode}/{name}</code></a></li>
+  <li><a href="#postAuthorizableKeystore"><code><span class="http-method">post</span> /{intermediatePath}/{authorizableId}.ks.html</code></a></li>
+  <li><a href="#postAuthorizables"><code><span class="http-method">post</span> /libs/granite/security/post/authorizables</code></a></li>
+  <li><a href="#postConfigAdobeGraniteSamlAuthenticationHandler"><code><span class="http-method">post</span> /apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config</code></a></li>
+  <li><a href="#postConfigApacheFelixJettyBasedHttpService"><code><span class="http-method">post</span> /apps/system/config/org.apache.felix.http</code></a></li>
+  <li><a href="#postConfigApacheHttpComponentsProxyConfiguration"><code><span class="http-method">post</span> /apps/system/config/org.apache.http.proxyconfigurator.config</code></a></li>
+  <li><a href="#postConfigApacheSlingDavExServlet"><code><span class="http-method">post</span> /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet</code></a></li>
+  <li><a href="#postConfigApacheSlingGetServlet"><code><span class="http-method">post</span> /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet</code></a></li>
+  <li><a href="#postConfigApacheSlingReferrerFilter"><code><span class="http-method">post</span> /apps/system/config/org.apache.sling.security.impl.ReferrerFilter</code></a></li>
+  <li><a href="#postNode"><code><span class="http-method">post</span> /{path}/{name}</code></a></li>
+  <li><a href="#postNodeRw"><code><span class="http-method">post</span> /{path}/{name}.rw.html</code></a></li>
+  <li><a href="#postPath"><code><span class="http-method">post</span> /{path}/</code></a></li>
+  <li><a href="#postQuery"><code><span class="http-method">post</span> /bin/querybuilder.json</code></a></li>
+  <li><a href="#postTreeActivation"><code><span class="http-method">post</span> /etc/replication/treeactivation.html</code></a></li>
+  <li><a href="#postTruststore"><code><span class="http-method">post</span> /libs/granite/security/post/truststore</code></a></li>
+  <li><a href="#postTruststorePKCS12"><code><span class="http-method">post</span> /etc/truststore</code></a></li>
+  </ul>
+
+  <h1><a name="Console">Console</a></h1>
+  <div class="method"><a name="getAemProductInfo"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /system/console/status-productinfo.json</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getAemProductInfo</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      array[String]
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getConfigMgr"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /system/console/configMgr</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getConfigMgr</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>text/xml</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#String">String</a>
+    <h4 class="field-label">5XX</h4>
+    Unexpected error.
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postBundle"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /system/console/bundles/{name}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postBundle</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">action (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postJmxRepository"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /system/console/jmx/com.adobe.granite:type=Repository/op/{action}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postJmxRepository</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">action (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postSamlConfiguration"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postSamlConfiguration</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">post (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">apply (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">delete (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">action (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">$location (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">path (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">service.ranking (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  format: int32</div><div class="param">idpUrl (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">idpCertAlias (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">idpHttpRedirect (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">serviceProviderEntityId (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">assertionConsumerServiceURL (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">spPrivateKeyAlias (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">keyStorePassword (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">defaultRedirectUrl (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">userIDAttribute (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">useEncryption (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">createUser (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">addGroupMemberships (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">groupMembershipAttribute (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">defaultGroups (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">nameIdFormat (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">synchronizeAttributes (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">handleLogout (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">logoutUrl (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">clockTolerance (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  format: int32</div><div class="param">digestMethod (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">signatureMethod (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">userIntermediatePath (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">propertylist (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#SamlConfigurationInfo">SamlConfigurationInfo</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: </div>
+    <pre class="example"><code></code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>text/plain</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Retrieved AEM SAML Configuration
+        <a href="#SamlConfigurationInfo">SamlConfigurationInfo</a>
+    <h4 class="field-label">302</h4>
+    Default response
+        <a href="#String">String</a>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Cq">Cq</a></h1>
+  <div class="method"><a name="getLoginPage"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /libs/granite/core/content/login.html</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getLoginPage</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>text/html</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postCqActions"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /.cqactions.html</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postCqActions</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">authorizableId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">changelog (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Crx">Crx</a></h1>
+  <div class="method"><a name="getCrxdeStatus"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /crx/server/crx.default/jcr:root/.1.json</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getCrxdeStatus</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>plain/text</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    CRXDE is enabled
+        <a href="#String">String</a>
+    <h4 class="field-label">404</h4>
+    CRXDE is disabled
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getInstallStatus"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /crx/packmgr/installstatus.jsp</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getInstallStatus</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#InstallStatus">InstallStatus</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "status" : {
+    "finished" : true,
+    "itemCount" : 0
+  }
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Retrieved CRX package manager install status
+        <a href="#InstallStatus">InstallStatus</a>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getPackageManagerServlet"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /crx/packmgr/service/script.html</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getPackageManagerServlet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>text/html</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">404</h4>
+    Package Manager Servlet is disabled
+        <a href="#String">String</a>
+    <h4 class="field-label">405</h4>
+    Package Manager Servlet is active
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postPackageService"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /crx/packmgr/service.jsp</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postPackageService</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">cmd (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>text/xml</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postPackageServiceJson"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /crx/packmgr/service/.json/{path}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postPackageServiceJson</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">path (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>multipart/form-data</code></li>
+    </ul>
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">cmd (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">groupName (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">packageName (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">packageVersion (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">_charset_ (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">force (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">recursive (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Form parameters</h3>
+    <div class="field-items">
+      <div class="param">package (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash;  default: null format: binary</div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postPackageUpdate"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /crx/packmgr/update.jsp</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postPackageUpdate</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">groupName (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">packageName (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">version (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">path (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">filter (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">_charset_ (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postSetPassword"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /crx/explorer/ui/setpassword.jsp</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postSetPassword</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">old (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">plain (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">verify (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>text/plain</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Custom">Custom</a></h1>
+  <div class="method"><a name="getAemHealthCheck"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /system/health</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getAemHealthCheck</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">tags (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">combineTagsOr (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postConfigAemHealthCheckServlet"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postConfigAemHealthCheckServlet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">bundles.ignored (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">bundles.ignored@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postConfigAemPasswordReset"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /apps/system/config/com.shinesolutions.aem.passwordreset.Activator</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postConfigAemPasswordReset</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">pwdreset.authorizables (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">pwdreset.authorizables@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Sling">Sling</a></h1>
+  <div class="method"><a name="deleteAgent"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /etc/replication/agents.{runmode}/{name}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">deleteAgent</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">runmode (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div><div class="param">name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deleteNode"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /{path}/{name}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">deleteNode</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">path (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div><div class="param">name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getAgent"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /etc/replication/agents.{runmode}/{name}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getAgent</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">runmode (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div><div class="param">name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getAgents"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /etc/replication/agents.{runmode}.-1.json</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getAgents</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">runmode (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getAuthorizableKeystore"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /{intermediatePath}/{authorizableId}.ks.json</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getAuthorizableKeystore</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">intermediatePath (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div><div class="param">authorizableId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#KeystoreInfo">KeystoreInfo</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: </div>
+    <pre class="example"><code></code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>text/plain</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Retrieved Authorizable Keystore info
+        <a href="#KeystoreInfo">KeystoreInfo</a>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getKeystore"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /{intermediatePath}/{authorizableId}/keystore/store.p12</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getKeystore</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">intermediatePath (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div><div class="param">authorizableId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      File
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/octet-stream</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#File">File</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getNode"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /{path}/{name}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getNode</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">path (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div><div class="param">name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getPackage"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /etc/packages/{group}/{name}-{version}.zip</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getPackage</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">group (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div><div class="param">name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div><div class="param">version (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      File
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/octet-stream</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#File">File</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getPackageFilter"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getPackageFilter</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">group (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div><div class="param">name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div><div class="param">version (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getQuery"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /bin/querybuilder.json</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getQuery</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">path (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">p.limit (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">1_property (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">1_property.value (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getTruststore"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /etc/truststore/truststore.p12</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getTruststore</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      File
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/octet-stream</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#File">File</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getTruststoreInfo"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /libs/granite/security/truststore.json</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getTruststoreInfo</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#TruststoreInfo">TruststoreInfo</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "aliases" : [ {
+    "entryType" : "entryType",
+    "notAfter" : "notAfter",
+    "serialNumber" : 0,
+    "subject" : "subject",
+    "alias" : "alias",
+    "issuer" : "issuer",
+    "notBefore" : "notBefore"
+  }, {
+    "entryType" : "entryType",
+    "notAfter" : "notAfter",
+    "serialNumber" : 0,
+    "subject" : "subject",
+    "alias" : "alias",
+    "issuer" : "issuer",
+    "notBefore" : "notBefore"
+  } ],
+  "exists" : true
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Retrieved AEM Truststore info
+        <a href="#TruststoreInfo">TruststoreInfo</a>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postAgent"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /etc/replication/agents.{runmode}/{name}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postAgent</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">runmode (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div><div class="param">name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">jcr:content/cq:distribute (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/cq:distribute@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/cq:name (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/cq:template (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/enabled (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/jcr:description (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/jcr:lastModified (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/jcr:lastModifiedBy (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/jcr:mixinTypes (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/jcr:title (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/logLevel (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/noStatusUpdate (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/noVersioning (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/protocolConnectTimeout (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/protocolHTTPConnectionClosed (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/protocolHTTPExpired (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/protocolHTTPHeaders (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/protocolHTTPHeaders@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/protocolHTTPMethod (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/protocolHTTPSRelaxed (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/protocolInterface (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/protocolSocketTimeout (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/protocolVersion (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/proxyNTLMDomain (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/proxyNTLMHost (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/proxyHost (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/proxyPassword (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/proxyPort (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/proxyUser (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/queueBatchMaxSize (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/queueBatchMode (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/queueBatchWaitTime (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/retryDelay (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/reverseReplication (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/serializationType (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/sling:resourceType (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/ssl (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/transportNTLMDomain (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/transportNTLMHost (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/transportPassword (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/transportUri (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/transportUser (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/triggerDistribute (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/triggerModified (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/triggerOnOffTime (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/triggerReceive (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/triggerSpecific (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/userId (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:primaryType (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">:operation (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postAuthorizableKeystore"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /{intermediatePath}/{authorizableId}.ks.html</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postAuthorizableKeystore</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">intermediatePath (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div><div class="param">authorizableId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>multipart/form-data</code></li>
+    </ul>
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">:operation (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">currentPassword (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">newPassword (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">rePassword (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">keyPassword (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">keyStorePass (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">alias (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">newAlias (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">removeAlias (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Form parameters</h3>
+    <div class="field-items">
+      <div class="param">cert-chain (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash;  default: null format: binary</div><div class="param">pk (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash;  default: null format: binary</div><div class="param">keyStore (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash;  default: null format: binary</div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#KeystoreInfo">KeystoreInfo</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: </div>
+    <pre class="example"><code></code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>text/plain</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Retrieved Authorizable Keystore info
+        <a href="#KeystoreInfo">KeystoreInfo</a>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postAuthorizables"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /libs/granite/security/post/authorizables</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postAuthorizables</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">authorizableId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">intermediatePath (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">createUser (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">createGroup (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">rep:password (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">profile/givenName (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>text/html</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postConfigAdobeGraniteSamlAuthenticationHandler"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postConfigAdobeGraniteSamlAuthenticationHandler</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">keyStorePassword (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">keyStorePassword@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">service.ranking (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  format: int32</div><div class="param">service.ranking@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">idpHttpRedirect (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">idpHttpRedirect@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">createUser (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">createUser@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">defaultRedirectUrl (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">defaultRedirectUrl@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">userIDAttribute (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">userIDAttribute@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">defaultGroups (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">defaultGroups@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">idpCertAlias (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">idpCertAlias@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">addGroupMemberships (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">addGroupMemberships@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">path (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">path@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">synchronizeAttributes (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">synchronizeAttributes@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">clockTolerance (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  format: int32</div><div class="param">clockTolerance@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">groupMembershipAttribute (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">groupMembershipAttribute@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">idpUrl (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">idpUrl@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">logoutUrl (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">logoutUrl@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">serviceProviderEntityId (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">serviceProviderEntityId@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">assertionConsumerServiceURL (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">assertionConsumerServiceURL@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">handleLogout (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">handleLogout@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">spPrivateKeyAlias (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">spPrivateKeyAlias@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">useEncryption (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">useEncryption@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">nameIdFormat (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">nameIdFormat@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">digestMethod (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">digestMethod@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">signatureMethod (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">signatureMethod@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">userIntermediatePath (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">userIntermediatePath@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postConfigApacheFelixJettyBasedHttpService"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /apps/system/config/org.apache.felix.http</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postConfigApacheFelixJettyBasedHttpService</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">org.apache.felix.https.nio (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.nio@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.keystore (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.keystore@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.keystore.password (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.keystore.password@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.keystore.key (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.keystore.key@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.keystore.key.password (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.keystore.key.password@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.truststore (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.truststore@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.truststore.password (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.truststore.password@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.clientcertificate (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.clientcertificate@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.enable (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.enable@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.osgi.service.http.port.secure (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.osgi.service.http.port.secure@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postConfigApacheHttpComponentsProxyConfiguration"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /apps/system/config/org.apache.http.proxyconfigurator.config</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postConfigApacheHttpComponentsProxyConfiguration</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">proxy.host (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">proxy.host@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">proxy.port (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  format: int32</div><div class="param">proxy.port@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">proxy.exceptions (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">proxy.exceptions@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">proxy.enabled (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">proxy.enabled@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">proxy.user (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">proxy.user@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">proxy.password (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">proxy.password@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postConfigApacheSlingDavExServlet"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postConfigApacheSlingDavExServlet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">alias (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">alias@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">dav.create-absolute-uri (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">dav.create-absolute-uri@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postConfigApacheSlingGetServlet"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postConfigApacheSlingGetServlet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">json.maximumresults (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">json.maximumresults@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">enable.html (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">enable.html@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">enable.txt (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">enable.txt@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">enable.xml (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">enable.xml@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postConfigApacheSlingReferrerFilter"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /apps/system/config/org.apache.sling.security.impl.ReferrerFilter</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postConfigApacheSlingReferrerFilter</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">allow.empty (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">allow.empty@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">allow.hosts (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">allow.hosts@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">allow.hosts.regexp (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">allow.hosts.regexp@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">filter.methods (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">filter.methods@TypeHint (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postNode"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /{path}/{name}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postNode</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">path (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div><div class="param">name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>multipart/form-data</code></li>
+    </ul>
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">:operation (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">deleteAuthorizable (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Form parameters</h3>
+    <div class="field-items">
+      <div class="param">file (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash;  default: null format: binary</div>
+    </div>  <!-- field-items -->
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postNodeRw"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /{path}/{name}.rw.html</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postNodeRw</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">path (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div><div class="param">name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">addMembers (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postPath"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /{path}/</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postPath</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">path (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">jcr:primaryType (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">:name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postQuery"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /bin/querybuilder.json</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postQuery</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">path (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">p.limit (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">1_property (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">1_property.value (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postTreeActivation"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /etc/replication/treeactivation.html</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postTreeActivation</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">ignoredeactivated (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">onlymodified (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">path (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postTruststore"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /libs/granite/security/post/truststore</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postTruststore</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>multipart/form-data</code></li>
+    </ul>
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">:operation (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">newPassword (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">rePassword (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">keyStoreType (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">removeAlias (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Form parameters</h3>
+    <div class="field-items">
+      <div class="param">certificate (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash;  default: null format: binary</div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>text/plain</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postTruststorePKCS12"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /etc/truststore</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postTruststorePKCS12</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>multipart/form-data</code></li>
+    </ul>
+
+
+
+
+    <h3 class="field-label">Form parameters</h3>
+    <div class="field-items">
+      <div class="param">truststore.p12 (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash;  default: null format: binary</div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>text/plain</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+
+  <h2><a name="__Models">Models</a></h2>
+  [ Jump to <a href="#__Methods">Methods</a> ]
+
+  <h3>Table of Contents</h3>
+  <ol>
+    <li><a href="#InstallStatus"><code>InstallStatus</code> - </a></li>
+    <li><a href="#InstallStatus_status"><code>InstallStatus_status</code> - </a></li>
+    <li><a href="#KeystoreChainItems"><code>KeystoreChainItems</code> - </a></li>
+    <li><a href="#KeystoreInfo"><code>KeystoreInfo</code> - </a></li>
+    <li><a href="#KeystoreItems"><code>KeystoreItems</code> - </a></li>
+    <li><a href="#SamlConfigurationInfo"><code>SamlConfigurationInfo</code> - </a></li>
+    <li><a href="#SamlConfigurationProperties"><code>SamlConfigurationProperties</code> - </a></li>
+    <li><a href="#SamlConfigurationPropertyItemsArray"><code>SamlConfigurationPropertyItemsArray</code> - </a></li>
+    <li><a href="#SamlConfigurationPropertyItemsBoolean"><code>SamlConfigurationPropertyItemsBoolean</code> - </a></li>
+    <li><a href="#SamlConfigurationPropertyItemsLong"><code>SamlConfigurationPropertyItemsLong</code> - </a></li>
+    <li><a href="#SamlConfigurationPropertyItemsString"><code>SamlConfigurationPropertyItemsString</code> - </a></li>
+    <li><a href="#TruststoreInfo"><code>TruststoreInfo</code> - </a></li>
+    <li><a href="#TruststoreItems"><code>TruststoreItems</code> - </a></li>
+  </ol>
+
+  <div class="model">
+    <h3><a name="InstallStatus"><code>InstallStatus</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">status (optional)</div><div class="param-desc"><span class="param-type"><a href="#InstallStatus_status">InstallStatus_status</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="InstallStatus_status"><code>InstallStatus_status</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">finished (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">itemCount (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int32</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="KeystoreChainItems"><code>KeystoreChainItems</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">subject (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> e.g. &quot;CN=localhost&quot; </div>
+<div class="param">issuer (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> e.g. &quot;CN=Admin&quot; </div>
+<div class="param">notBefore (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> e.g. &quot;Sun Jul 01 12:00:00 AEST 2018&quot; </div>
+<div class="param">notAfter (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> e.g. &quot;Sun Jun 30 23:59:50 AEST 2019&quot; </div>
+<div class="param">serialNumber (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> 18165099476682912368 format: int32</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="KeystoreInfo"><code>KeystoreInfo</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">aliases (optional)</div><div class="param-desc"><span class="param-type"><a href="#KeystoreItems">array[KeystoreItems]</a></span>  </div>
+<div class="param">exists (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> False if truststore don't exist </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="KeystoreItems"><code>KeystoreItems</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">alias (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Keystore alias name </div>
+<div class="param">entryType (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> e.g. &quot;privateKey&quot; </div>
+<div class="param">algorithm (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> e.g. &quot;RSA&quot; </div>
+<div class="param">format (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> e.g. &quot;PKCS#8&quot; </div>
+<div class="param">chain (optional)</div><div class="param-desc"><span class="param-type"><a href="#KeystoreChainItems">array[KeystoreChainItems]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="SamlConfigurationInfo"><code>SamlConfigurationInfo</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">pid (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Persistent Identity (PID) </div>
+<div class="param">title (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Title </div>
+<div class="param">description (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Title </div>
+<div class="param">bundleUnderscorelocation (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> needed for configuration binding </div>
+<div class="param">serviceUnderscorelocation (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> needed for configuraiton binding </div>
+<div class="param">properties (optional)</div><div class="param-desc"><span class="param-type"><a href="#SamlConfigurationProperties">SamlConfigurationProperties</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="SamlConfigurationProperties"><code>SamlConfigurationProperties</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">path (optional)</div><div class="param-desc"><span class="param-type"><a href="#SamlConfigurationPropertyItemsArray">SamlConfigurationPropertyItemsArray</a></span>  </div>
+<div class="param">servicePeriodranking (optional)</div><div class="param-desc"><span class="param-type"><a href="#SamlConfigurationPropertyItemsLong">SamlConfigurationPropertyItemsLong</a></span>  </div>
+<div class="param">idpUrl (optional)</div><div class="param-desc"><span class="param-type"><a href="#SamlConfigurationPropertyItemsString">SamlConfigurationPropertyItemsString</a></span>  </div>
+<div class="param">idpCertAlias (optional)</div><div class="param-desc"><span class="param-type"><a href="#SamlConfigurationPropertyItemsString">SamlConfigurationPropertyItemsString</a></span>  </div>
+<div class="param">idpHttpRedirect (optional)</div><div class="param-desc"><span class="param-type"><a href="#SamlConfigurationPropertyItemsBoolean">SamlConfigurationPropertyItemsBoolean</a></span>  </div>
+<div class="param">serviceProviderEntityId (optional)</div><div class="param-desc"><span class="param-type"><a href="#SamlConfigurationPropertyItemsString">SamlConfigurationPropertyItemsString</a></span>  </div>
+<div class="param">assertionConsumerServiceURL (optional)</div><div class="param-desc"><span class="param-type"><a href="#SamlConfigurationPropertyItemsString">SamlConfigurationPropertyItemsString</a></span>  </div>
+<div class="param">spPrivateKeyAlias (optional)</div><div class="param-desc"><span class="param-type"><a href="#SamlConfigurationPropertyItemsString">SamlConfigurationPropertyItemsString</a></span>  </div>
+<div class="param">keyStorePassword (optional)</div><div class="param-desc"><span class="param-type"><a href="#SamlConfigurationPropertyItemsString">SamlConfigurationPropertyItemsString</a></span>  </div>
+<div class="param">defaultRedirectUrl (optional)</div><div class="param-desc"><span class="param-type"><a href="#SamlConfigurationPropertyItemsString">SamlConfigurationPropertyItemsString</a></span>  </div>
+<div class="param">userIDAttribute (optional)</div><div class="param-desc"><span class="param-type"><a href="#SamlConfigurationPropertyItemsString">SamlConfigurationPropertyItemsString</a></span>  </div>
+<div class="param">useEncryption (optional)</div><div class="param-desc"><span class="param-type"><a href="#SamlConfigurationPropertyItemsBoolean">SamlConfigurationPropertyItemsBoolean</a></span>  </div>
+<div class="param">createUser (optional)</div><div class="param-desc"><span class="param-type"><a href="#SamlConfigurationPropertyItemsBoolean">SamlConfigurationPropertyItemsBoolean</a></span>  </div>
+<div class="param">addGroupMemberships (optional)</div><div class="param-desc"><span class="param-type"><a href="#SamlConfigurationPropertyItemsBoolean">SamlConfigurationPropertyItemsBoolean</a></span>  </div>
+<div class="param">groupMembershipAttribute (optional)</div><div class="param-desc"><span class="param-type"><a href="#SamlConfigurationPropertyItemsString">SamlConfigurationPropertyItemsString</a></span>  </div>
+<div class="param">defaultGroups (optional)</div><div class="param-desc"><span class="param-type"><a href="#SamlConfigurationPropertyItemsArray">SamlConfigurationPropertyItemsArray</a></span>  </div>
+<div class="param">nameIdFormat (optional)</div><div class="param-desc"><span class="param-type"><a href="#SamlConfigurationPropertyItemsString">SamlConfigurationPropertyItemsString</a></span>  </div>
+<div class="param">synchronizeAttributes (optional)</div><div class="param-desc"><span class="param-type"><a href="#SamlConfigurationPropertyItemsArray">SamlConfigurationPropertyItemsArray</a></span>  </div>
+<div class="param">handleLogout (optional)</div><div class="param-desc"><span class="param-type"><a href="#SamlConfigurationPropertyItemsBoolean">SamlConfigurationPropertyItemsBoolean</a></span>  </div>
+<div class="param">logoutUrl (optional)</div><div class="param-desc"><span class="param-type"><a href="#SamlConfigurationPropertyItemsString">SamlConfigurationPropertyItemsString</a></span>  </div>
+<div class="param">clockTolerance (optional)</div><div class="param-desc"><span class="param-type"><a href="#SamlConfigurationPropertyItemsLong">SamlConfigurationPropertyItemsLong</a></span>  </div>
+<div class="param">digestMethod (optional)</div><div class="param-desc"><span class="param-type"><a href="#SamlConfigurationPropertyItemsString">SamlConfigurationPropertyItemsString</a></span>  </div>
+<div class="param">signatureMethod (optional)</div><div class="param-desc"><span class="param-type"><a href="#SamlConfigurationPropertyItemsString">SamlConfigurationPropertyItemsString</a></span>  </div>
+<div class="param">userIntermediatePath (optional)</div><div class="param-desc"><span class="param-type"><a href="#SamlConfigurationPropertyItemsString">SamlConfigurationPropertyItemsString</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="SamlConfigurationPropertyItemsArray"><code>SamlConfigurationPropertyItemsArray</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> property name </div>
+<div class="param">optional (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> True if optional </div>
+<div class="param">isUnderscoreset (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> True if property is set </div>
+<div class="param">type (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Property type, 1=String, 3=long, 11=boolean, 12=Password format: int32</div>
+<div class="param">values (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span> Property value </div>
+<div class="param">description (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Property description </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="SamlConfigurationPropertyItemsBoolean"><code>SamlConfigurationPropertyItemsBoolean</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> property name </div>
+<div class="param">optional (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> True if optional </div>
+<div class="param">isUnderscoreset (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> True if property is set </div>
+<div class="param">type (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Property type, 1=String, 3=long, 11=boolean, 12=Password format: int32</div>
+<div class="param">value (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> Property value </div>
+<div class="param">description (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Property description </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="SamlConfigurationPropertyItemsLong"><code>SamlConfigurationPropertyItemsLong</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> property name </div>
+<div class="param">optional (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> True if optional </div>
+<div class="param">isUnderscoreset (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> True if property is set </div>
+<div class="param">type (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Property type, 1=String, 3=long, 11=boolean, 12=Password format: int32</div>
+<div class="param">value (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Property value format: int32</div>
+<div class="param">description (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Property description </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="SamlConfigurationPropertyItemsString"><code>SamlConfigurationPropertyItemsString</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> property name </div>
+<div class="param">optional (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> True if optional </div>
+<div class="param">isUnderscoreset (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> True if property is set </div>
+<div class="param">type (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Property type, 1=String, 3=long, 11=boolean, 12=Password format: int32</div>
+<div class="param">value (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Property value </div>
+<div class="param">description (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Property description </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="TruststoreInfo"><code>TruststoreInfo</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">aliases (optional)</div><div class="param-desc"><span class="param-type"><a href="#TruststoreItems">array[TruststoreItems]</a></span>  </div>
+<div class="param">exists (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> False if truststore don't exist </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="TruststoreItems"><code>TruststoreItems</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">alias (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Truststore alias name </div>
+<div class="param">entryType (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">subject (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> e.g. &quot;CN=localhost&quot; </div>
+<div class="param">issuer (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> e.g. &quot;CN=Admin&quot; </div>
+<div class="param">notBefore (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> e.g. &quot;Sun Jul 01 12:00:00 AEST 2018&quot; </div>
+<div class="param">notAfter (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> e.g. &quot;Sun Jun 30 23:59:50 AEST 2019&quot; </div>
+<div class="param">serialNumber (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> 18165099476682912368 format: int32</div>
+    </div>  <!-- field-items -->
+  </div>
+  </body>
+</html>

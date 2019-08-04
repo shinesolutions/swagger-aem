@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Add client generation for all languages supported by OpenAPI Generator
+
 ## [3.1.0] - 2019-06-04
 
 ### Changed

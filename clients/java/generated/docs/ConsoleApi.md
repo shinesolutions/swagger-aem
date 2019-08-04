@@ -4,10 +4,108 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**getAemProductInfo**](ConsoleApi.md#getAemProductInfo) | **GET** /system/console/status-productinfo.json | 
+[**getConfigMgr**](ConsoleApi.md#getConfigMgr) | **GET** /system/console/configMgr | 
 [**postBundle**](ConsoleApi.md#postBundle) | **POST** /system/console/bundles/{name} | 
 [**postJmxRepository**](ConsoleApi.md#postJmxRepository) | **POST** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} | 
 [**postSamlConfiguration**](ConsoleApi.md#postSamlConfiguration) | **POST** /system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler | 
 
+
+<a name="getAemProductInfo"></a>
+# **getAemProductInfo**
+> List&lt;String&gt; getAemProductInfo()
+
+
+
+### Example
+```java
+// Import classes:
+//import com.shinesolutions.swaggeraem4j.ApiClient;
+//import com.shinesolutions.swaggeraem4j.ApiException;
+//import com.shinesolutions.swaggeraem4j.Configuration;
+//import com.shinesolutions.swaggeraem4j.auth.*;
+//import com.shinesolutions.swaggeraem4j.api.ConsoleApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure HTTP basic authorization: aemAuth
+HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+aemAuth.setUsername("YOUR USERNAME");
+aemAuth.setPassword("YOUR PASSWORD");
+
+ConsoleApi apiInstance = new ConsoleApi();
+try {
+    List<String> result = apiInstance.getAemProductInfo();
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling ConsoleApi#getAemProductInfo");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+**List&lt;String&gt;**
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="getConfigMgr"></a>
+# **getConfigMgr**
+> String getConfigMgr()
+
+
+
+### Example
+```java
+// Import classes:
+//import com.shinesolutions.swaggeraem4j.ApiClient;
+//import com.shinesolutions.swaggeraem4j.ApiException;
+//import com.shinesolutions.swaggeraem4j.Configuration;
+//import com.shinesolutions.swaggeraem4j.auth.*;
+//import com.shinesolutions.swaggeraem4j.api.ConsoleApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure HTTP basic authorization: aemAuth
+HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+aemAuth.setUsername("YOUR USERNAME");
+aemAuth.setPassword("YOUR PASSWORD");
+
+ConsoleApi apiInstance = new ConsoleApi();
+try {
+    String result = apiInstance.getConfigMgr();
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling ConsoleApi#getConfigMgr");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+**String**
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/xml
 
 <a name="postBundle"></a>
 # **postBundle**
@@ -60,7 +158,7 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 <a name="postJmxRepository"></a>
 # **postJmxRepository**
@@ -111,11 +209,11 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 <a name="postSamlConfiguration"></a>
 # **postSamlConfiguration**
-> SamlConfigurationInformations postSamlConfiguration(post, apply, delete, action, location, path, serviceRanking, idpUrl, idpCertAlias, idpHttpRedirect, serviceProviderEntityId, assertionConsumerServiceURL, spPrivateKeyAlias, keyStorePassword, defaultRedirectUrl, userIDAttribute, useEncryption, createUser, addGroupMemberships, groupMembershipAttribute, defaultGroups, nameIdFormat, synchronizeAttributes, handleLogout, logoutUrl, clockTolerance, digestMethod, signatureMethod, userIntermediatePath, propertylist)
+> SamlConfigurationInfo postSamlConfiguration(post, apply, delete, action, $location, path, serviceRanking, idpUrl, idpCertAlias, idpHttpRedirect, serviceProviderEntityId, assertionConsumerServiceURL, spPrivateKeyAlias, keyStorePassword, defaultRedirectUrl, userIDAttribute, useEncryption, createUser, addGroupMemberships, groupMembershipAttribute, defaultGroups, nameIdFormat, synchronizeAttributes, handleLogout, logoutUrl, clockTolerance, digestMethod, signatureMethod, userIntermediatePath, propertylist)
 
 
 
@@ -140,9 +238,9 @@ Boolean post = true; // Boolean |
 Boolean apply = true; // Boolean | 
 Boolean delete = true; // Boolean | 
 String action = "action_example"; // String | 
-String location = "location_example"; // String | 
+String $location = "$location_example"; // String | 
 List<String> path = Arrays.asList("path_example"); // List<String> | 
-String serviceRanking = "serviceRanking_example"; // String | 
+Integer serviceRanking = 56; // Integer | 
 String idpUrl = "idpUrl_example"; // String | 
 String idpCertAlias = "idpCertAlias_example"; // String | 
 Boolean idpHttpRedirect = true; // Boolean | 
@@ -161,13 +259,13 @@ String nameIdFormat = "nameIdFormat_example"; // String |
 List<String> synchronizeAttributes = Arrays.asList("synchronizeAttributes_example"); // List<String> | 
 Boolean handleLogout = true; // Boolean | 
 String logoutUrl = "logoutUrl_example"; // String | 
-String clockTolerance = "clockTolerance_example"; // String | 
+Integer clockTolerance = 56; // Integer | 
 String digestMethod = "digestMethod_example"; // String | 
 String signatureMethod = "signatureMethod_example"; // String | 
 String userIntermediatePath = "userIntermediatePath_example"; // String | 
 List<String> propertylist = Arrays.asList("propertylist_example"); // List<String> | 
 try {
-    SamlConfigurationInformations result = apiInstance.postSamlConfiguration(post, apply, delete, action, location, path, serviceRanking, idpUrl, idpCertAlias, idpHttpRedirect, serviceProviderEntityId, assertionConsumerServiceURL, spPrivateKeyAlias, keyStorePassword, defaultRedirectUrl, userIDAttribute, useEncryption, createUser, addGroupMemberships, groupMembershipAttribute, defaultGroups, nameIdFormat, synchronizeAttributes, handleLogout, logoutUrl, clockTolerance, digestMethod, signatureMethod, userIntermediatePath, propertylist);
+    SamlConfigurationInfo result = apiInstance.postSamlConfiguration(post, apply, delete, action, $location, path, serviceRanking, idpUrl, idpCertAlias, idpHttpRedirect, serviceProviderEntityId, assertionConsumerServiceURL, spPrivateKeyAlias, keyStorePassword, defaultRedirectUrl, userIDAttribute, useEncryption, createUser, addGroupMemberships, groupMembershipAttribute, defaultGroups, nameIdFormat, synchronizeAttributes, handleLogout, logoutUrl, clockTolerance, digestMethod, signatureMethod, userIntermediatePath, propertylist);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling ConsoleApi#postSamlConfiguration");
@@ -183,9 +281,9 @@ Name | Type | Description  | Notes
  **apply** | **Boolean**|  | [optional]
  **delete** | **Boolean**|  | [optional]
  **action** | **String**|  | [optional]
- **location** | **String**|  | [optional]
+ **$location** | **String**|  | [optional]
  **path** | [**List&lt;String&gt;**](String.md)|  | [optional]
- **serviceRanking** | **String**|  | [optional]
+ **serviceRanking** | **Integer**|  | [optional]
  **idpUrl** | **String**|  | [optional]
  **idpCertAlias** | **String**|  | [optional]
  **idpHttpRedirect** | **Boolean**|  | [optional]
@@ -204,7 +302,7 @@ Name | Type | Description  | Notes
  **synchronizeAttributes** | [**List&lt;String&gt;**](String.md)|  | [optional]
  **handleLogout** | **Boolean**|  | [optional]
  **logoutUrl** | **String**|  | [optional]
- **clockTolerance** | **String**|  | [optional]
+ **clockTolerance** | **Integer**|  | [optional]
  **digestMethod** | **String**|  | [optional]
  **signatureMethod** | **String**|  | [optional]
  **userIntermediatePath** | **String**|  | [optional]
@@ -212,7 +310,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SamlConfigurationInformations**](SamlConfigurationInformations.md)
+[**SamlConfigurationInfo**](SamlConfigurationInfo.md)
 
 ### Authorization
 

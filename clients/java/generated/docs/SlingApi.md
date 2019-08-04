@@ -15,12 +15,13 @@ Method | HTTP request | Description
 [**getPackageFilter**](SlingApi.md#getPackageFilter) | **GET** /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json | 
 [**getQuery**](SlingApi.md#getQuery) | **GET** /bin/querybuilder.json | 
 [**getTruststore**](SlingApi.md#getTruststore) | **GET** /etc/truststore/truststore.p12 | 
-[**getTruststoreInformations**](SlingApi.md#getTruststoreInformations) | **GET** /libs/granite/security/truststore.json | 
+[**getTruststoreInfo**](SlingApi.md#getTruststoreInfo) | **GET** /libs/granite/security/truststore.json | 
 [**postAgent**](SlingApi.md#postAgent) | **POST** /etc/replication/agents.{runmode}/{name} | 
 [**postAuthorizableKeystore**](SlingApi.md#postAuthorizableKeystore) | **POST** /{intermediatePath}/{authorizableId}.ks.html | 
 [**postAuthorizables**](SlingApi.md#postAuthorizables) | **POST** /libs/granite/security/post/authorizables | 
 [**postConfigAdobeGraniteSamlAuthenticationHandler**](SlingApi.md#postConfigAdobeGraniteSamlAuthenticationHandler) | **POST** /apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config | 
 [**postConfigApacheFelixJettyBasedHttpService**](SlingApi.md#postConfigApacheFelixJettyBasedHttpService) | **POST** /apps/system/config/org.apache.felix.http | 
+[**postConfigApacheHttpComponentsProxyConfiguration**](SlingApi.md#postConfigApacheHttpComponentsProxyConfiguration) | **POST** /apps/system/config/org.apache.http.proxyconfigurator.config | 
 [**postConfigApacheSlingDavExServlet**](SlingApi.md#postConfigApacheSlingDavExServlet) | **POST** /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet | 
 [**postConfigApacheSlingGetServlet**](SlingApi.md#postConfigApacheSlingGetServlet) | **POST** /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet | 
 [**postConfigApacheSlingReferrerFilter**](SlingApi.md#postConfigApacheSlingReferrerFilter) | **POST** /apps/system/config/org.apache.sling.security.impl.ReferrerFilter | 
@@ -84,7 +85,7 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 <a name="deleteNode"></a>
 # **deleteNode**
@@ -137,7 +138,7 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 <a name="getAgent"></a>
 # **getAgent**
@@ -190,7 +191,7 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 <a name="getAgents"></a>
 # **getAgents**
@@ -246,7 +247,7 @@ Name | Type | Description  | Notes
 
 <a name="getAuthorizableKeystore"></a>
 # **getAuthorizableKeystore**
-> KeystoreInformations getAuthorizableKeystore(intermediatePath, authorizableId)
+> KeystoreInfo getAuthorizableKeystore(intermediatePath, authorizableId)
 
 
 
@@ -270,7 +271,7 @@ SlingApi apiInstance = new SlingApi();
 String intermediatePath = "intermediatePath_example"; // String | 
 String authorizableId = "authorizableId_example"; // String | 
 try {
-    KeystoreInformations result = apiInstance.getAuthorizableKeystore(intermediatePath, authorizableId);
+    KeystoreInfo result = apiInstance.getAuthorizableKeystore(intermediatePath, authorizableId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling SlingApi#getAuthorizableKeystore");
@@ -287,7 +288,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KeystoreInformations**](KeystoreInformations.md)
+[**KeystoreInfo**](KeystoreInfo.md)
 
 ### Authorization
 
@@ -403,7 +404,7 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 <a name="getPackage"></a>
 # **getPackage**
@@ -519,7 +520,7 @@ Name | Type | Description  | Notes
 
 <a name="getQuery"></a>
 # **getQuery**
-> String getQuery(path, pLimit, _1Property, _1PropertyValue)
+> String getQuery(path, pLimit, _1property, _1propertyValue)
 
 
 
@@ -542,10 +543,10 @@ aemAuth.setPassword("YOUR PASSWORD");
 SlingApi apiInstance = new SlingApi();
 String path = "path_example"; // String | 
 BigDecimal pLimit = new BigDecimal(); // BigDecimal | 
-String _1Property = "_1Property_example"; // String | 
-String _1PropertyValue = "_1PropertyValue_example"; // String | 
+String _1property = "_1property_example"; // String | 
+String _1propertyValue = "_1propertyValue_example"; // String | 
 try {
-    String result = apiInstance.getQuery(path, pLimit, _1Property, _1PropertyValue);
+    String result = apiInstance.getQuery(path, pLimit, _1property, _1propertyValue);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling SlingApi#getQuery");
@@ -559,8 +560,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path** | **String**|  |
  **pLimit** | **BigDecimal**|  |
- **_1Property** | **String**|  |
- **_1PropertyValue** | **String**|  |
+ **_1property** | **String**|  |
+ **_1propertyValue** | **String**|  |
 
 ### Return type
 
@@ -623,9 +624,9 @@ This endpoint does not need any parameter.
  - **Content-Type**: Not defined
  - **Accept**: application/octet-stream
 
-<a name="getTruststoreInformations"></a>
-# **getTruststoreInformations**
-> TruststoreInformations getTruststoreInformations()
+<a name="getTruststoreInfo"></a>
+# **getTruststoreInfo**
+> TruststoreInfo getTruststoreInfo()
 
 
 
@@ -647,10 +648,10 @@ aemAuth.setPassword("YOUR PASSWORD");
 
 SlingApi apiInstance = new SlingApi();
 try {
-    TruststoreInformations result = apiInstance.getTruststoreInformations();
+    TruststoreInfo result = apiInstance.getTruststoreInfo();
     System.out.println(result);
 } catch (ApiException e) {
-    System.err.println("Exception when calling SlingApi#getTruststoreInformations");
+    System.err.println("Exception when calling SlingApi#getTruststoreInfo");
     e.printStackTrace();
 }
 ```
@@ -660,7 +661,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**TruststoreInformations**](TruststoreInformations.md)
+[**TruststoreInfo**](TruststoreInfo.md)
 
 ### Authorization
 
@@ -673,7 +674,7 @@ This endpoint does not need any parameter.
 
 <a name="postAgent"></a>
 # **postAgent**
-> postAgent(runmode, name, jcrcontentcqdistribute, jcrcontentcqdistributeTypeHint, jcrcontentcqname, jcrcontentcqtemplate, jcrcontentenabled, jcrcontentjcrdescription, jcrcontentjcrlastModified, jcrcontentjcrlastModifiedBy, jcrcontentjcrmixinTypes, jcrcontentjcrtitle, jcrcontentlogLevel, jcrcontentnoStatusUpdate, jcrcontentnoVersioning, jcrcontentprotocolConnectTimeout, jcrcontentprotocolHTTPConnectionClosed, jcrcontentprotocolHTTPExpired, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentprotocolHTTPSRelaxed, jcrcontentprotocolInterface, jcrcontentprotocolSocketTimeout, jcrcontentprotocolVersion, jcrcontentproxyNTLMDomain, jcrcontentproxyNTLMHost, jcrcontentproxyHost, jcrcontentproxyPassword, jcrcontentproxyPort, jcrcontentproxyUser, jcrcontentqueueBatchMaxSize, jcrcontentqueueBatchMode, jcrcontentqueueBatchWaitTime, jcrcontentretryDelay, jcrcontentreverseReplication, jcrcontentserializationType, jcrcontentslingresourceType, jcrcontentssl, jcrcontenttransportNTLMDomain, jcrcontenttransportNTLMHost, jcrcontenttransportPassword, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttriggerDistribute, jcrcontenttriggerModified, jcrcontenttriggerOnOffTime, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentuserId, jcrprimaryType, operation)
+> postAgent(runmode, name, jcrColonContentSlashCqColonDistribute, jcrColonContentSlashCqColonDistributeAtTypeHint, jcrColonContentSlashCqColonName, jcrColonContentSlashCqColonTemplate, jcrColonContentSlashEnabled, jcrColonContentSlashJcrColonDescription, jcrColonContentSlashJcrColonLastModified, jcrColonContentSlashJcrColonLastModifiedBy, jcrColonContentSlashJcrColonMixinTypes, jcrColonContentSlashJcrColonTitle, jcrColonContentSlashLogLevel, jcrColonContentSlashNoStatusUpdate, jcrColonContentSlashNoVersioning, jcrColonContentSlashProtocolConnectTimeout, jcrColonContentSlashProtocolHTTPConnectionClosed, jcrColonContentSlashProtocolHTTPExpired, jcrColonContentSlashProtocolHTTPHeaders, jcrColonContentSlashProtocolHTTPHeadersAtTypeHint, jcrColonContentSlashProtocolHTTPMethod, jcrColonContentSlashProtocolHTTPSRelaxed, jcrColonContentSlashProtocolInterface, jcrColonContentSlashProtocolSocketTimeout, jcrColonContentSlashProtocolVersion, jcrColonContentSlashProxyNTLMDomain, jcrColonContentSlashProxyNTLMHost, jcrColonContentSlashProxyHost, jcrColonContentSlashProxyPassword, jcrColonContentSlashProxyPort, jcrColonContentSlashProxyUser, jcrColonContentSlashQueueBatchMaxSize, jcrColonContentSlashQueueBatchMode, jcrColonContentSlashQueueBatchWaitTime, jcrColonContentSlashRetryDelay, jcrColonContentSlashReverseReplication, jcrColonContentSlashSerializationType, jcrColonContentSlashSlingColonResourceType, jcrColonContentSlashSsl, jcrColonContentSlashTransportNTLMDomain, jcrColonContentSlashTransportNTLMHost, jcrColonContentSlashTransportPassword, jcrColonContentSlashTransportUri, jcrColonContentSlashTransportUser, jcrColonContentSlashTriggerDistribute, jcrColonContentSlashTriggerModified, jcrColonContentSlashTriggerOnOffTime, jcrColonContentSlashTriggerReceive, jcrColonContentSlashTriggerSpecific, jcrColonContentSlashUserId, jcrColonPrimaryType, colonOperation)
 
 
 
@@ -696,58 +697,58 @@ aemAuth.setPassword("YOUR PASSWORD");
 SlingApi apiInstance = new SlingApi();
 String runmode = "runmode_example"; // String | 
 String name = "name_example"; // String | 
-Boolean jcrcontentcqdistribute = true; // Boolean | 
-String jcrcontentcqdistributeTypeHint = "jcrcontentcqdistributeTypeHint_example"; // String | 
-String jcrcontentcqname = "jcrcontentcqname_example"; // String | 
-String jcrcontentcqtemplate = "jcrcontentcqtemplate_example"; // String | 
-Boolean jcrcontentenabled = true; // Boolean | 
-String jcrcontentjcrdescription = "jcrcontentjcrdescription_example"; // String | 
-String jcrcontentjcrlastModified = "jcrcontentjcrlastModified_example"; // String | 
-String jcrcontentjcrlastModifiedBy = "jcrcontentjcrlastModifiedBy_example"; // String | 
-String jcrcontentjcrmixinTypes = "jcrcontentjcrmixinTypes_example"; // String | 
-String jcrcontentjcrtitle = "jcrcontentjcrtitle_example"; // String | 
-String jcrcontentlogLevel = "jcrcontentlogLevel_example"; // String | 
-Boolean jcrcontentnoStatusUpdate = true; // Boolean | 
-Boolean jcrcontentnoVersioning = true; // Boolean | 
-BigDecimal jcrcontentprotocolConnectTimeout = new BigDecimal(); // BigDecimal | 
-Boolean jcrcontentprotocolHTTPConnectionClosed = true; // Boolean | 
-String jcrcontentprotocolHTTPExpired = "jcrcontentprotocolHTTPExpired_example"; // String | 
-List<String> jcrcontentprotocolHTTPHeaders = Arrays.asList("jcrcontentprotocolHTTPHeaders_example"); // List<String> | 
-String jcrcontentprotocolHTTPHeadersTypeHint = "jcrcontentprotocolHTTPHeadersTypeHint_example"; // String | 
-String jcrcontentprotocolHTTPMethod = "jcrcontentprotocolHTTPMethod_example"; // String | 
-Boolean jcrcontentprotocolHTTPSRelaxed = true; // Boolean | 
-String jcrcontentprotocolInterface = "jcrcontentprotocolInterface_example"; // String | 
-BigDecimal jcrcontentprotocolSocketTimeout = new BigDecimal(); // BigDecimal | 
-String jcrcontentprotocolVersion = "jcrcontentprotocolVersion_example"; // String | 
-String jcrcontentproxyNTLMDomain = "jcrcontentproxyNTLMDomain_example"; // String | 
-String jcrcontentproxyNTLMHost = "jcrcontentproxyNTLMHost_example"; // String | 
-String jcrcontentproxyHost = "jcrcontentproxyHost_example"; // String | 
-String jcrcontentproxyPassword = "jcrcontentproxyPassword_example"; // String | 
-BigDecimal jcrcontentproxyPort = new BigDecimal(); // BigDecimal | 
-String jcrcontentproxyUser = "jcrcontentproxyUser_example"; // String | 
-BigDecimal jcrcontentqueueBatchMaxSize = new BigDecimal(); // BigDecimal | 
-String jcrcontentqueueBatchMode = "jcrcontentqueueBatchMode_example"; // String | 
-BigDecimal jcrcontentqueueBatchWaitTime = new BigDecimal(); // BigDecimal | 
-String jcrcontentretryDelay = "jcrcontentretryDelay_example"; // String | 
-Boolean jcrcontentreverseReplication = true; // Boolean | 
-String jcrcontentserializationType = "jcrcontentserializationType_example"; // String | 
-String jcrcontentslingresourceType = "jcrcontentslingresourceType_example"; // String | 
-String jcrcontentssl = "jcrcontentssl_example"; // String | 
-String jcrcontenttransportNTLMDomain = "jcrcontenttransportNTLMDomain_example"; // String | 
-String jcrcontenttransportNTLMHost = "jcrcontenttransportNTLMHost_example"; // String | 
-String jcrcontenttransportPassword = "jcrcontenttransportPassword_example"; // String | 
-String jcrcontenttransportUri = "jcrcontenttransportUri_example"; // String | 
-String jcrcontenttransportUser = "jcrcontenttransportUser_example"; // String | 
-Boolean jcrcontenttriggerDistribute = true; // Boolean | 
-Boolean jcrcontenttriggerModified = true; // Boolean | 
-Boolean jcrcontenttriggerOnOffTime = true; // Boolean | 
-Boolean jcrcontenttriggerReceive = true; // Boolean | 
-Boolean jcrcontenttriggerSpecific = true; // Boolean | 
-String jcrcontentuserId = "jcrcontentuserId_example"; // String | 
-String jcrprimaryType = "jcrprimaryType_example"; // String | 
-String operation = "operation_example"; // String | 
+Boolean jcrColonContentSlashCqColonDistribute = true; // Boolean | 
+String jcrColonContentSlashCqColonDistributeAtTypeHint = "jcrColonContentSlashCqColonDistributeAtTypeHint_example"; // String | 
+String jcrColonContentSlashCqColonName = "jcrColonContentSlashCqColonName_example"; // String | 
+String jcrColonContentSlashCqColonTemplate = "jcrColonContentSlashCqColonTemplate_example"; // String | 
+Boolean jcrColonContentSlashEnabled = true; // Boolean | 
+String jcrColonContentSlashJcrColonDescription = "jcrColonContentSlashJcrColonDescription_example"; // String | 
+String jcrColonContentSlashJcrColonLastModified = "jcrColonContentSlashJcrColonLastModified_example"; // String | 
+String jcrColonContentSlashJcrColonLastModifiedBy = "jcrColonContentSlashJcrColonLastModifiedBy_example"; // String | 
+String jcrColonContentSlashJcrColonMixinTypes = "jcrColonContentSlashJcrColonMixinTypes_example"; // String | 
+String jcrColonContentSlashJcrColonTitle = "jcrColonContentSlashJcrColonTitle_example"; // String | 
+String jcrColonContentSlashLogLevel = "jcrColonContentSlashLogLevel_example"; // String | 
+Boolean jcrColonContentSlashNoStatusUpdate = true; // Boolean | 
+Boolean jcrColonContentSlashNoVersioning = true; // Boolean | 
+BigDecimal jcrColonContentSlashProtocolConnectTimeout = new BigDecimal(); // BigDecimal | 
+Boolean jcrColonContentSlashProtocolHTTPConnectionClosed = true; // Boolean | 
+String jcrColonContentSlashProtocolHTTPExpired = "jcrColonContentSlashProtocolHTTPExpired_example"; // String | 
+List<String> jcrColonContentSlashProtocolHTTPHeaders = Arrays.asList("jcrColonContentSlashProtocolHTTPHeaders_example"); // List<String> | 
+String jcrColonContentSlashProtocolHTTPHeadersAtTypeHint = "jcrColonContentSlashProtocolHTTPHeadersAtTypeHint_example"; // String | 
+String jcrColonContentSlashProtocolHTTPMethod = "jcrColonContentSlashProtocolHTTPMethod_example"; // String | 
+Boolean jcrColonContentSlashProtocolHTTPSRelaxed = true; // Boolean | 
+String jcrColonContentSlashProtocolInterface = "jcrColonContentSlashProtocolInterface_example"; // String | 
+BigDecimal jcrColonContentSlashProtocolSocketTimeout = new BigDecimal(); // BigDecimal | 
+String jcrColonContentSlashProtocolVersion = "jcrColonContentSlashProtocolVersion_example"; // String | 
+String jcrColonContentSlashProxyNTLMDomain = "jcrColonContentSlashProxyNTLMDomain_example"; // String | 
+String jcrColonContentSlashProxyNTLMHost = "jcrColonContentSlashProxyNTLMHost_example"; // String | 
+String jcrColonContentSlashProxyHost = "jcrColonContentSlashProxyHost_example"; // String | 
+String jcrColonContentSlashProxyPassword = "jcrColonContentSlashProxyPassword_example"; // String | 
+BigDecimal jcrColonContentSlashProxyPort = new BigDecimal(); // BigDecimal | 
+String jcrColonContentSlashProxyUser = "jcrColonContentSlashProxyUser_example"; // String | 
+BigDecimal jcrColonContentSlashQueueBatchMaxSize = new BigDecimal(); // BigDecimal | 
+String jcrColonContentSlashQueueBatchMode = "jcrColonContentSlashQueueBatchMode_example"; // String | 
+BigDecimal jcrColonContentSlashQueueBatchWaitTime = new BigDecimal(); // BigDecimal | 
+String jcrColonContentSlashRetryDelay = "jcrColonContentSlashRetryDelay_example"; // String | 
+Boolean jcrColonContentSlashReverseReplication = true; // Boolean | 
+String jcrColonContentSlashSerializationType = "jcrColonContentSlashSerializationType_example"; // String | 
+String jcrColonContentSlashSlingColonResourceType = "jcrColonContentSlashSlingColonResourceType_example"; // String | 
+String jcrColonContentSlashSsl = "jcrColonContentSlashSsl_example"; // String | 
+String jcrColonContentSlashTransportNTLMDomain = "jcrColonContentSlashTransportNTLMDomain_example"; // String | 
+String jcrColonContentSlashTransportNTLMHost = "jcrColonContentSlashTransportNTLMHost_example"; // String | 
+String jcrColonContentSlashTransportPassword = "jcrColonContentSlashTransportPassword_example"; // String | 
+String jcrColonContentSlashTransportUri = "jcrColonContentSlashTransportUri_example"; // String | 
+String jcrColonContentSlashTransportUser = "jcrColonContentSlashTransportUser_example"; // String | 
+Boolean jcrColonContentSlashTriggerDistribute = true; // Boolean | 
+Boolean jcrColonContentSlashTriggerModified = true; // Boolean | 
+Boolean jcrColonContentSlashTriggerOnOffTime = true; // Boolean | 
+Boolean jcrColonContentSlashTriggerReceive = true; // Boolean | 
+Boolean jcrColonContentSlashTriggerSpecific = true; // Boolean | 
+String jcrColonContentSlashUserId = "jcrColonContentSlashUserId_example"; // String | 
+String jcrColonPrimaryType = "jcrColonPrimaryType_example"; // String | 
+String colonOperation = "colonOperation_example"; // String | 
 try {
-    apiInstance.postAgent(runmode, name, jcrcontentcqdistribute, jcrcontentcqdistributeTypeHint, jcrcontentcqname, jcrcontentcqtemplate, jcrcontentenabled, jcrcontentjcrdescription, jcrcontentjcrlastModified, jcrcontentjcrlastModifiedBy, jcrcontentjcrmixinTypes, jcrcontentjcrtitle, jcrcontentlogLevel, jcrcontentnoStatusUpdate, jcrcontentnoVersioning, jcrcontentprotocolConnectTimeout, jcrcontentprotocolHTTPConnectionClosed, jcrcontentprotocolHTTPExpired, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentprotocolHTTPSRelaxed, jcrcontentprotocolInterface, jcrcontentprotocolSocketTimeout, jcrcontentprotocolVersion, jcrcontentproxyNTLMDomain, jcrcontentproxyNTLMHost, jcrcontentproxyHost, jcrcontentproxyPassword, jcrcontentproxyPort, jcrcontentproxyUser, jcrcontentqueueBatchMaxSize, jcrcontentqueueBatchMode, jcrcontentqueueBatchWaitTime, jcrcontentretryDelay, jcrcontentreverseReplication, jcrcontentserializationType, jcrcontentslingresourceType, jcrcontentssl, jcrcontenttransportNTLMDomain, jcrcontenttransportNTLMHost, jcrcontenttransportPassword, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttriggerDistribute, jcrcontenttriggerModified, jcrcontenttriggerOnOffTime, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentuserId, jcrprimaryType, operation);
+    apiInstance.postAgent(runmode, name, jcrColonContentSlashCqColonDistribute, jcrColonContentSlashCqColonDistributeAtTypeHint, jcrColonContentSlashCqColonName, jcrColonContentSlashCqColonTemplate, jcrColonContentSlashEnabled, jcrColonContentSlashJcrColonDescription, jcrColonContentSlashJcrColonLastModified, jcrColonContentSlashJcrColonLastModifiedBy, jcrColonContentSlashJcrColonMixinTypes, jcrColonContentSlashJcrColonTitle, jcrColonContentSlashLogLevel, jcrColonContentSlashNoStatusUpdate, jcrColonContentSlashNoVersioning, jcrColonContentSlashProtocolConnectTimeout, jcrColonContentSlashProtocolHTTPConnectionClosed, jcrColonContentSlashProtocolHTTPExpired, jcrColonContentSlashProtocolHTTPHeaders, jcrColonContentSlashProtocolHTTPHeadersAtTypeHint, jcrColonContentSlashProtocolHTTPMethod, jcrColonContentSlashProtocolHTTPSRelaxed, jcrColonContentSlashProtocolInterface, jcrColonContentSlashProtocolSocketTimeout, jcrColonContentSlashProtocolVersion, jcrColonContentSlashProxyNTLMDomain, jcrColonContentSlashProxyNTLMHost, jcrColonContentSlashProxyHost, jcrColonContentSlashProxyPassword, jcrColonContentSlashProxyPort, jcrColonContentSlashProxyUser, jcrColonContentSlashQueueBatchMaxSize, jcrColonContentSlashQueueBatchMode, jcrColonContentSlashQueueBatchWaitTime, jcrColonContentSlashRetryDelay, jcrColonContentSlashReverseReplication, jcrColonContentSlashSerializationType, jcrColonContentSlashSlingColonResourceType, jcrColonContentSlashSsl, jcrColonContentSlashTransportNTLMDomain, jcrColonContentSlashTransportNTLMHost, jcrColonContentSlashTransportPassword, jcrColonContentSlashTransportUri, jcrColonContentSlashTransportUser, jcrColonContentSlashTriggerDistribute, jcrColonContentSlashTriggerModified, jcrColonContentSlashTriggerOnOffTime, jcrColonContentSlashTriggerReceive, jcrColonContentSlashTriggerSpecific, jcrColonContentSlashUserId, jcrColonPrimaryType, colonOperation);
 } catch (ApiException e) {
     System.err.println("Exception when calling SlingApi#postAgent");
     e.printStackTrace();
@@ -760,56 +761,56 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **runmode** | **String**|  |
  **name** | **String**|  |
- **jcrcontentcqdistribute** | **Boolean**|  | [optional]
- **jcrcontentcqdistributeTypeHint** | **String**|  | [optional]
- **jcrcontentcqname** | **String**|  | [optional]
- **jcrcontentcqtemplate** | **String**|  | [optional]
- **jcrcontentenabled** | **Boolean**|  | [optional]
- **jcrcontentjcrdescription** | **String**|  | [optional]
- **jcrcontentjcrlastModified** | **String**|  | [optional]
- **jcrcontentjcrlastModifiedBy** | **String**|  | [optional]
- **jcrcontentjcrmixinTypes** | **String**|  | [optional]
- **jcrcontentjcrtitle** | **String**|  | [optional]
- **jcrcontentlogLevel** | **String**|  | [optional]
- **jcrcontentnoStatusUpdate** | **Boolean**|  | [optional]
- **jcrcontentnoVersioning** | **Boolean**|  | [optional]
- **jcrcontentprotocolConnectTimeout** | **BigDecimal**|  | [optional]
- **jcrcontentprotocolHTTPConnectionClosed** | **Boolean**|  | [optional]
- **jcrcontentprotocolHTTPExpired** | **String**|  | [optional]
- **jcrcontentprotocolHTTPHeaders** | [**List&lt;String&gt;**](String.md)|  | [optional]
- **jcrcontentprotocolHTTPHeadersTypeHint** | **String**|  | [optional]
- **jcrcontentprotocolHTTPMethod** | **String**|  | [optional]
- **jcrcontentprotocolHTTPSRelaxed** | **Boolean**|  | [optional]
- **jcrcontentprotocolInterface** | **String**|  | [optional]
- **jcrcontentprotocolSocketTimeout** | **BigDecimal**|  | [optional]
- **jcrcontentprotocolVersion** | **String**|  | [optional]
- **jcrcontentproxyNTLMDomain** | **String**|  | [optional]
- **jcrcontentproxyNTLMHost** | **String**|  | [optional]
- **jcrcontentproxyHost** | **String**|  | [optional]
- **jcrcontentproxyPassword** | **String**|  | [optional]
- **jcrcontentproxyPort** | **BigDecimal**|  | [optional]
- **jcrcontentproxyUser** | **String**|  | [optional]
- **jcrcontentqueueBatchMaxSize** | **BigDecimal**|  | [optional]
- **jcrcontentqueueBatchMode** | **String**|  | [optional]
- **jcrcontentqueueBatchWaitTime** | **BigDecimal**|  | [optional]
- **jcrcontentretryDelay** | **String**|  | [optional]
- **jcrcontentreverseReplication** | **Boolean**|  | [optional]
- **jcrcontentserializationType** | **String**|  | [optional]
- **jcrcontentslingresourceType** | **String**|  | [optional]
- **jcrcontentssl** | **String**|  | [optional]
- **jcrcontenttransportNTLMDomain** | **String**|  | [optional]
- **jcrcontenttransportNTLMHost** | **String**|  | [optional]
- **jcrcontenttransportPassword** | **String**|  | [optional]
- **jcrcontenttransportUri** | **String**|  | [optional]
- **jcrcontenttransportUser** | **String**|  | [optional]
- **jcrcontenttriggerDistribute** | **Boolean**|  | [optional]
- **jcrcontenttriggerModified** | **Boolean**|  | [optional]
- **jcrcontenttriggerOnOffTime** | **Boolean**|  | [optional]
- **jcrcontenttriggerReceive** | **Boolean**|  | [optional]
- **jcrcontenttriggerSpecific** | **Boolean**|  | [optional]
- **jcrcontentuserId** | **String**|  | [optional]
- **jcrprimaryType** | **String**|  | [optional]
- **operation** | **String**|  | [optional]
+ **jcrColonContentSlashCqColonDistribute** | **Boolean**|  | [optional]
+ **jcrColonContentSlashCqColonDistributeAtTypeHint** | **String**|  | [optional]
+ **jcrColonContentSlashCqColonName** | **String**|  | [optional]
+ **jcrColonContentSlashCqColonTemplate** | **String**|  | [optional]
+ **jcrColonContentSlashEnabled** | **Boolean**|  | [optional]
+ **jcrColonContentSlashJcrColonDescription** | **String**|  | [optional]
+ **jcrColonContentSlashJcrColonLastModified** | **String**|  | [optional]
+ **jcrColonContentSlashJcrColonLastModifiedBy** | **String**|  | [optional]
+ **jcrColonContentSlashJcrColonMixinTypes** | **String**|  | [optional]
+ **jcrColonContentSlashJcrColonTitle** | **String**|  | [optional]
+ **jcrColonContentSlashLogLevel** | **String**|  | [optional]
+ **jcrColonContentSlashNoStatusUpdate** | **Boolean**|  | [optional]
+ **jcrColonContentSlashNoVersioning** | **Boolean**|  | [optional]
+ **jcrColonContentSlashProtocolConnectTimeout** | **BigDecimal**|  | [optional]
+ **jcrColonContentSlashProtocolHTTPConnectionClosed** | **Boolean**|  | [optional]
+ **jcrColonContentSlashProtocolHTTPExpired** | **String**|  | [optional]
+ **jcrColonContentSlashProtocolHTTPHeaders** | [**List&lt;String&gt;**](String.md)|  | [optional]
+ **jcrColonContentSlashProtocolHTTPHeadersAtTypeHint** | **String**|  | [optional]
+ **jcrColonContentSlashProtocolHTTPMethod** | **String**|  | [optional]
+ **jcrColonContentSlashProtocolHTTPSRelaxed** | **Boolean**|  | [optional]
+ **jcrColonContentSlashProtocolInterface** | **String**|  | [optional]
+ **jcrColonContentSlashProtocolSocketTimeout** | **BigDecimal**|  | [optional]
+ **jcrColonContentSlashProtocolVersion** | **String**|  | [optional]
+ **jcrColonContentSlashProxyNTLMDomain** | **String**|  | [optional]
+ **jcrColonContentSlashProxyNTLMHost** | **String**|  | [optional]
+ **jcrColonContentSlashProxyHost** | **String**|  | [optional]
+ **jcrColonContentSlashProxyPassword** | **String**|  | [optional]
+ **jcrColonContentSlashProxyPort** | **BigDecimal**|  | [optional]
+ **jcrColonContentSlashProxyUser** | **String**|  | [optional]
+ **jcrColonContentSlashQueueBatchMaxSize** | **BigDecimal**|  | [optional]
+ **jcrColonContentSlashQueueBatchMode** | **String**|  | [optional]
+ **jcrColonContentSlashQueueBatchWaitTime** | **BigDecimal**|  | [optional]
+ **jcrColonContentSlashRetryDelay** | **String**|  | [optional]
+ **jcrColonContentSlashReverseReplication** | **Boolean**|  | [optional]
+ **jcrColonContentSlashSerializationType** | **String**|  | [optional]
+ **jcrColonContentSlashSlingColonResourceType** | **String**|  | [optional]
+ **jcrColonContentSlashSsl** | **String**|  | [optional]
+ **jcrColonContentSlashTransportNTLMDomain** | **String**|  | [optional]
+ **jcrColonContentSlashTransportNTLMHost** | **String**|  | [optional]
+ **jcrColonContentSlashTransportPassword** | **String**|  | [optional]
+ **jcrColonContentSlashTransportUri** | **String**|  | [optional]
+ **jcrColonContentSlashTransportUser** | **String**|  | [optional]
+ **jcrColonContentSlashTriggerDistribute** | **Boolean**|  | [optional]
+ **jcrColonContentSlashTriggerModified** | **Boolean**|  | [optional]
+ **jcrColonContentSlashTriggerOnOffTime** | **Boolean**|  | [optional]
+ **jcrColonContentSlashTriggerReceive** | **Boolean**|  | [optional]
+ **jcrColonContentSlashTriggerSpecific** | **Boolean**|  | [optional]
+ **jcrColonContentSlashUserId** | **String**|  | [optional]
+ **jcrColonPrimaryType** | **String**|  | [optional]
+ **colonOperation** | **String**|  | [optional]
 
 ### Return type
 
@@ -822,11 +823,11 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 <a name="postAuthorizableKeystore"></a>
 # **postAuthorizableKeystore**
-> KeystoreInformations postAuthorizableKeystore(intermediatePath, authorizableId, operation, currentPassword, newPassword, rePassword, keyPassword, keyStorePass, operation2, alias, newAlias, removeAlias, certChain, pk, keyStore)
+> KeystoreInfo postAuthorizableKeystore(intermediatePath, authorizableId, colonOperation, currentPassword, newPassword, rePassword, keyPassword, keyStorePass, alias, newAlias, removeAlias, certChain, pk, keyStore)
 
 
 
@@ -849,21 +850,20 @@ aemAuth.setPassword("YOUR PASSWORD");
 SlingApi apiInstance = new SlingApi();
 String intermediatePath = "intermediatePath_example"; // String | 
 String authorizableId = "authorizableId_example"; // String | 
-String operation = "operation_example"; // String | 
+String colonOperation = "colonOperation_example"; // String | 
 String currentPassword = "currentPassword_example"; // String | 
 String newPassword = "newPassword_example"; // String | 
 String rePassword = "rePassword_example"; // String | 
 String keyPassword = "keyPassword_example"; // String | 
 String keyStorePass = "keyStorePass_example"; // String | 
-String operation2 = "operation_example"; // String | 
 String alias = "alias_example"; // String | 
 String newAlias = "newAlias_example"; // String | 
 String removeAlias = "removeAlias_example"; // String | 
-File certChain = new File("/path/to/file.txt"); // File | 
-File pk = new File("/path/to/file.txt"); // File | 
-File keyStore = new File("/path/to/file.txt"); // File | 
+File certChain = new File("null"); // File | 
+File pk = new File("null"); // File | 
+File keyStore = new File("null"); // File | 
 try {
-    KeystoreInformations result = apiInstance.postAuthorizableKeystore(intermediatePath, authorizableId, operation, currentPassword, newPassword, rePassword, keyPassword, keyStorePass, operation2, alias, newAlias, removeAlias, certChain, pk, keyStore);
+    KeystoreInfo result = apiInstance.postAuthorizableKeystore(intermediatePath, authorizableId, colonOperation, currentPassword, newPassword, rePassword, keyPassword, keyStorePass, alias, newAlias, removeAlias, certChain, pk, keyStore);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling SlingApi#postAuthorizableKeystore");
@@ -877,23 +877,22 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **intermediatePath** | **String**|  |
  **authorizableId** | **String**|  |
- **operation** | **String**|  | [optional]
+ **colonOperation** | **String**|  | [optional]
  **currentPassword** | **String**|  | [optional]
  **newPassword** | **String**|  | [optional]
  **rePassword** | **String**|  | [optional]
  **keyPassword** | **String**|  | [optional]
  **keyStorePass** | **String**|  | [optional]
- **operation2** | **String**|  | [optional]
  **alias** | **String**|  | [optional]
  **newAlias** | **String**|  | [optional]
  **removeAlias** | **String**|  | [optional]
- **certChain** | **File**|  | [optional]
- **pk** | **File**|  | [optional]
- **keyStore** | **File**|  | [optional]
+ **certChain** | **File**|  | [optional] [default to null]
+ **pk** | **File**|  | [optional] [default to null]
+ **keyStore** | **File**|  | [optional] [default to null]
 
 ### Return type
 
-[**KeystoreInformations**](KeystoreInformations.md)
+[**KeystoreInfo**](KeystoreInfo.md)
 
 ### Authorization
 
@@ -906,7 +905,7 @@ Name | Type | Description  | Notes
 
 <a name="postAuthorizables"></a>
 # **postAuthorizables**
-> String postAuthorizables(authorizableId, intermediatePath, createUser, createGroup, reppassword, profilegivenName)
+> String postAuthorizables(authorizableId, intermediatePath, createUser, createGroup, repColonPassword, profileSlashGivenName)
 
 
 
@@ -931,10 +930,10 @@ String authorizableId = "authorizableId_example"; // String |
 String intermediatePath = "intermediatePath_example"; // String | 
 String createUser = "createUser_example"; // String | 
 String createGroup = "createGroup_example"; // String | 
-String reppassword = "reppassword_example"; // String | 
-String profilegivenName = "profilegivenName_example"; // String | 
+String repColonPassword = "repColonPassword_example"; // String | 
+String profileSlashGivenName = "profileSlashGivenName_example"; // String | 
 try {
-    String result = apiInstance.postAuthorizables(authorizableId, intermediatePath, createUser, createGroup, reppassword, profilegivenName);
+    String result = apiInstance.postAuthorizables(authorizableId, intermediatePath, createUser, createGroup, repColonPassword, profileSlashGivenName);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling SlingApi#postAuthorizables");
@@ -950,8 +949,8 @@ Name | Type | Description  | Notes
  **intermediatePath** | **String**|  |
  **createUser** | **String**|  | [optional]
  **createGroup** | **String**|  | [optional]
- **reppassword** | **String**|  | [optional]
- **profilegivenName** | **String**|  | [optional]
+ **repColonPassword** | **String**|  | [optional]
+ **profileSlashGivenName** | **String**|  | [optional]
 
 ### Return type
 
@@ -968,7 +967,7 @@ Name | Type | Description  | Notes
 
 <a name="postConfigAdobeGraniteSamlAuthenticationHandler"></a>
 # **postConfigAdobeGraniteSamlAuthenticationHandler**
-> postConfigAdobeGraniteSamlAuthenticationHandler(keyStorePassword, keyStorePasswordTypeHint, serviceRanking, serviceRankingTypeHint, idpHttpRedirect, idpHttpRedirectTypeHint, createUser, createUserTypeHint, defaultRedirectUrl, defaultRedirectUrlTypeHint, userIDAttribute, userIDAttributeTypeHint, defaultGroups, defaultGroupsTypeHint, idpCertAlias, idpCertAliasTypeHint, addGroupMemberships, addGroupMembershipsTypeHint, path, pathTypeHint, synchronizeAttributes, synchronizeAttributesTypeHint, clockTolerance, clockToleranceTypeHint, groupMembershipAttribute, groupMembershipAttributeTypeHint, idpUrl, idpUrlTypeHint, logoutUrl, logoutUrlTypeHint, serviceProviderEntityId, serviceProviderEntityIdTypeHint, assertionConsumerServiceURL, assertionConsumerServiceURLTypeHint, handleLogout, handleLogoutTypeHint, spPrivateKeyAlias, spPrivateKeyAliasTypeHint, useEncryption, useEncryptionTypeHint, nameIdFormat, nameIdFormatTypeHint, digestMethod, digestMethodTypeHint, signatureMethod, signatureMethodTypeHint, userIntermediatePath, userIntermediatePathTypeHint)
+> postConfigAdobeGraniteSamlAuthenticationHandler(keyStorePassword, keyStorePasswordAtTypeHint, serviceRanking, serviceRankingAtTypeHint, idpHttpRedirect, idpHttpRedirectAtTypeHint, createUser, createUserAtTypeHint, defaultRedirectUrl, defaultRedirectUrlAtTypeHint, userIDAttribute, userIDAttributeAtTypeHint, defaultGroups, defaultGroupsAtTypeHint, idpCertAlias, idpCertAliasAtTypeHint, addGroupMemberships, addGroupMembershipsAtTypeHint, path, pathAtTypeHint, synchronizeAttributes, synchronizeAttributesAtTypeHint, clockTolerance, clockToleranceAtTypeHint, groupMembershipAttribute, groupMembershipAttributeAtTypeHint, idpUrl, idpUrlAtTypeHint, logoutUrl, logoutUrlAtTypeHint, serviceProviderEntityId, serviceProviderEntityIdAtTypeHint, assertionConsumerServiceURL, assertionConsumerServiceURLAtTypeHint, handleLogout, handleLogoutAtTypeHint, spPrivateKeyAlias, spPrivateKeyAliasAtTypeHint, useEncryption, useEncryptionAtTypeHint, nameIdFormat, nameIdFormatAtTypeHint, digestMethod, digestMethodAtTypeHint, signatureMethod, signatureMethodAtTypeHint, userIntermediatePath, userIntermediatePathAtTypeHint)
 
 
 
@@ -990,55 +989,55 @@ aemAuth.setPassword("YOUR PASSWORD");
 
 SlingApi apiInstance = new SlingApi();
 String keyStorePassword = "keyStorePassword_example"; // String | 
-String keyStorePasswordTypeHint = "keyStorePasswordTypeHint_example"; // String | 
+String keyStorePasswordAtTypeHint = "keyStorePasswordAtTypeHint_example"; // String | 
 Integer serviceRanking = 56; // Integer | 
-String serviceRankingTypeHint = "serviceRankingTypeHint_example"; // String | 
+String serviceRankingAtTypeHint = "serviceRankingAtTypeHint_example"; // String | 
 Boolean idpHttpRedirect = true; // Boolean | 
-String idpHttpRedirectTypeHint = "idpHttpRedirectTypeHint_example"; // String | 
+String idpHttpRedirectAtTypeHint = "idpHttpRedirectAtTypeHint_example"; // String | 
 Boolean createUser = true; // Boolean | 
-String createUserTypeHint = "createUserTypeHint_example"; // String | 
+String createUserAtTypeHint = "createUserAtTypeHint_example"; // String | 
 String defaultRedirectUrl = "defaultRedirectUrl_example"; // String | 
-String defaultRedirectUrlTypeHint = "defaultRedirectUrlTypeHint_example"; // String | 
+String defaultRedirectUrlAtTypeHint = "defaultRedirectUrlAtTypeHint_example"; // String | 
 String userIDAttribute = "userIDAttribute_example"; // String | 
-String userIDAttributeTypeHint = "userIDAttributeTypeHint_example"; // String | 
+String userIDAttributeAtTypeHint = "userIDAttributeAtTypeHint_example"; // String | 
 List<String> defaultGroups = Arrays.asList("defaultGroups_example"); // List<String> | 
-String defaultGroupsTypeHint = "defaultGroupsTypeHint_example"; // String | 
+String defaultGroupsAtTypeHint = "defaultGroupsAtTypeHint_example"; // String | 
 String idpCertAlias = "idpCertAlias_example"; // String | 
-String idpCertAliasTypeHint = "idpCertAliasTypeHint_example"; // String | 
+String idpCertAliasAtTypeHint = "idpCertAliasAtTypeHint_example"; // String | 
 Boolean addGroupMemberships = true; // Boolean | 
-String addGroupMembershipsTypeHint = "addGroupMembershipsTypeHint_example"; // String | 
+String addGroupMembershipsAtTypeHint = "addGroupMembershipsAtTypeHint_example"; // String | 
 List<String> path = Arrays.asList("path_example"); // List<String> | 
-String pathTypeHint = "pathTypeHint_example"; // String | 
+String pathAtTypeHint = "pathAtTypeHint_example"; // String | 
 List<String> synchronizeAttributes = Arrays.asList("synchronizeAttributes_example"); // List<String> | 
-String synchronizeAttributesTypeHint = "synchronizeAttributesTypeHint_example"; // String | 
+String synchronizeAttributesAtTypeHint = "synchronizeAttributesAtTypeHint_example"; // String | 
 Integer clockTolerance = 56; // Integer | 
-String clockToleranceTypeHint = "clockToleranceTypeHint_example"; // String | 
+String clockToleranceAtTypeHint = "clockToleranceAtTypeHint_example"; // String | 
 String groupMembershipAttribute = "groupMembershipAttribute_example"; // String | 
-String groupMembershipAttributeTypeHint = "groupMembershipAttributeTypeHint_example"; // String | 
+String groupMembershipAttributeAtTypeHint = "groupMembershipAttributeAtTypeHint_example"; // String | 
 String idpUrl = "idpUrl_example"; // String | 
-String idpUrlTypeHint = "idpUrlTypeHint_example"; // String | 
+String idpUrlAtTypeHint = "idpUrlAtTypeHint_example"; // String | 
 String logoutUrl = "logoutUrl_example"; // String | 
-String logoutUrlTypeHint = "logoutUrlTypeHint_example"; // String | 
+String logoutUrlAtTypeHint = "logoutUrlAtTypeHint_example"; // String | 
 String serviceProviderEntityId = "serviceProviderEntityId_example"; // String | 
-String serviceProviderEntityIdTypeHint = "serviceProviderEntityIdTypeHint_example"; // String | 
+String serviceProviderEntityIdAtTypeHint = "serviceProviderEntityIdAtTypeHint_example"; // String | 
 String assertionConsumerServiceURL = "assertionConsumerServiceURL_example"; // String | 
-String assertionConsumerServiceURLTypeHint = "assertionConsumerServiceURLTypeHint_example"; // String | 
+String assertionConsumerServiceURLAtTypeHint = "assertionConsumerServiceURLAtTypeHint_example"; // String | 
 Boolean handleLogout = true; // Boolean | 
-String handleLogoutTypeHint = "handleLogoutTypeHint_example"; // String | 
+String handleLogoutAtTypeHint = "handleLogoutAtTypeHint_example"; // String | 
 String spPrivateKeyAlias = "spPrivateKeyAlias_example"; // String | 
-String spPrivateKeyAliasTypeHint = "spPrivateKeyAliasTypeHint_example"; // String | 
+String spPrivateKeyAliasAtTypeHint = "spPrivateKeyAliasAtTypeHint_example"; // String | 
 Boolean useEncryption = true; // Boolean | 
-String useEncryptionTypeHint = "useEncryptionTypeHint_example"; // String | 
+String useEncryptionAtTypeHint = "useEncryptionAtTypeHint_example"; // String | 
 String nameIdFormat = "nameIdFormat_example"; // String | 
-String nameIdFormatTypeHint = "nameIdFormatTypeHint_example"; // String | 
+String nameIdFormatAtTypeHint = "nameIdFormatAtTypeHint_example"; // String | 
 String digestMethod = "digestMethod_example"; // String | 
-String digestMethodTypeHint = "digestMethodTypeHint_example"; // String | 
+String digestMethodAtTypeHint = "digestMethodAtTypeHint_example"; // String | 
 String signatureMethod = "signatureMethod_example"; // String | 
-String signatureMethodTypeHint = "signatureMethodTypeHint_example"; // String | 
+String signatureMethodAtTypeHint = "signatureMethodAtTypeHint_example"; // String | 
 String userIntermediatePath = "userIntermediatePath_example"; // String | 
-String userIntermediatePathTypeHint = "userIntermediatePathTypeHint_example"; // String | 
+String userIntermediatePathAtTypeHint = "userIntermediatePathAtTypeHint_example"; // String | 
 try {
-    apiInstance.postConfigAdobeGraniteSamlAuthenticationHandler(keyStorePassword, keyStorePasswordTypeHint, serviceRanking, serviceRankingTypeHint, idpHttpRedirect, idpHttpRedirectTypeHint, createUser, createUserTypeHint, defaultRedirectUrl, defaultRedirectUrlTypeHint, userIDAttribute, userIDAttributeTypeHint, defaultGroups, defaultGroupsTypeHint, idpCertAlias, idpCertAliasTypeHint, addGroupMemberships, addGroupMembershipsTypeHint, path, pathTypeHint, synchronizeAttributes, synchronizeAttributesTypeHint, clockTolerance, clockToleranceTypeHint, groupMembershipAttribute, groupMembershipAttributeTypeHint, idpUrl, idpUrlTypeHint, logoutUrl, logoutUrlTypeHint, serviceProviderEntityId, serviceProviderEntityIdTypeHint, assertionConsumerServiceURL, assertionConsumerServiceURLTypeHint, handleLogout, handleLogoutTypeHint, spPrivateKeyAlias, spPrivateKeyAliasTypeHint, useEncryption, useEncryptionTypeHint, nameIdFormat, nameIdFormatTypeHint, digestMethod, digestMethodTypeHint, signatureMethod, signatureMethodTypeHint, userIntermediatePath, userIntermediatePathTypeHint);
+    apiInstance.postConfigAdobeGraniteSamlAuthenticationHandler(keyStorePassword, keyStorePasswordAtTypeHint, serviceRanking, serviceRankingAtTypeHint, idpHttpRedirect, idpHttpRedirectAtTypeHint, createUser, createUserAtTypeHint, defaultRedirectUrl, defaultRedirectUrlAtTypeHint, userIDAttribute, userIDAttributeAtTypeHint, defaultGroups, defaultGroupsAtTypeHint, idpCertAlias, idpCertAliasAtTypeHint, addGroupMemberships, addGroupMembershipsAtTypeHint, path, pathAtTypeHint, synchronizeAttributes, synchronizeAttributesAtTypeHint, clockTolerance, clockToleranceAtTypeHint, groupMembershipAttribute, groupMembershipAttributeAtTypeHint, idpUrl, idpUrlAtTypeHint, logoutUrl, logoutUrlAtTypeHint, serviceProviderEntityId, serviceProviderEntityIdAtTypeHint, assertionConsumerServiceURL, assertionConsumerServiceURLAtTypeHint, handleLogout, handleLogoutAtTypeHint, spPrivateKeyAlias, spPrivateKeyAliasAtTypeHint, useEncryption, useEncryptionAtTypeHint, nameIdFormat, nameIdFormatAtTypeHint, digestMethod, digestMethodAtTypeHint, signatureMethod, signatureMethodAtTypeHint, userIntermediatePath, userIntermediatePathAtTypeHint);
 } catch (ApiException e) {
     System.err.println("Exception when calling SlingApi#postConfigAdobeGraniteSamlAuthenticationHandler");
     e.printStackTrace();
@@ -1050,53 +1049,53 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **keyStorePassword** | **String**|  | [optional]
- **keyStorePasswordTypeHint** | **String**|  | [optional]
+ **keyStorePasswordAtTypeHint** | **String**|  | [optional]
  **serviceRanking** | **Integer**|  | [optional]
- **serviceRankingTypeHint** | **String**|  | [optional]
+ **serviceRankingAtTypeHint** | **String**|  | [optional]
  **idpHttpRedirect** | **Boolean**|  | [optional]
- **idpHttpRedirectTypeHint** | **String**|  | [optional]
+ **idpHttpRedirectAtTypeHint** | **String**|  | [optional]
  **createUser** | **Boolean**|  | [optional]
- **createUserTypeHint** | **String**|  | [optional]
+ **createUserAtTypeHint** | **String**|  | [optional]
  **defaultRedirectUrl** | **String**|  | [optional]
- **defaultRedirectUrlTypeHint** | **String**|  | [optional]
+ **defaultRedirectUrlAtTypeHint** | **String**|  | [optional]
  **userIDAttribute** | **String**|  | [optional]
- **userIDAttributeTypeHint** | **String**|  | [optional]
+ **userIDAttributeAtTypeHint** | **String**|  | [optional]
  **defaultGroups** | [**List&lt;String&gt;**](String.md)|  | [optional]
- **defaultGroupsTypeHint** | **String**|  | [optional]
+ **defaultGroupsAtTypeHint** | **String**|  | [optional]
  **idpCertAlias** | **String**|  | [optional]
- **idpCertAliasTypeHint** | **String**|  | [optional]
+ **idpCertAliasAtTypeHint** | **String**|  | [optional]
  **addGroupMemberships** | **Boolean**|  | [optional]
- **addGroupMembershipsTypeHint** | **String**|  | [optional]
+ **addGroupMembershipsAtTypeHint** | **String**|  | [optional]
  **path** | [**List&lt;String&gt;**](String.md)|  | [optional]
- **pathTypeHint** | **String**|  | [optional]
+ **pathAtTypeHint** | **String**|  | [optional]
  **synchronizeAttributes** | [**List&lt;String&gt;**](String.md)|  | [optional]
- **synchronizeAttributesTypeHint** | **String**|  | [optional]
+ **synchronizeAttributesAtTypeHint** | **String**|  | [optional]
  **clockTolerance** | **Integer**|  | [optional]
- **clockToleranceTypeHint** | **String**|  | [optional]
+ **clockToleranceAtTypeHint** | **String**|  | [optional]
  **groupMembershipAttribute** | **String**|  | [optional]
- **groupMembershipAttributeTypeHint** | **String**|  | [optional]
+ **groupMembershipAttributeAtTypeHint** | **String**|  | [optional]
  **idpUrl** | **String**|  | [optional]
- **idpUrlTypeHint** | **String**|  | [optional]
+ **idpUrlAtTypeHint** | **String**|  | [optional]
  **logoutUrl** | **String**|  | [optional]
- **logoutUrlTypeHint** | **String**|  | [optional]
+ **logoutUrlAtTypeHint** | **String**|  | [optional]
  **serviceProviderEntityId** | **String**|  | [optional]
- **serviceProviderEntityIdTypeHint** | **String**|  | [optional]
+ **serviceProviderEntityIdAtTypeHint** | **String**|  | [optional]
  **assertionConsumerServiceURL** | **String**|  | [optional]
- **assertionConsumerServiceURLTypeHint** | **String**|  | [optional]
+ **assertionConsumerServiceURLAtTypeHint** | **String**|  | [optional]
  **handleLogout** | **Boolean**|  | [optional]
- **handleLogoutTypeHint** | **String**|  | [optional]
+ **handleLogoutAtTypeHint** | **String**|  | [optional]
  **spPrivateKeyAlias** | **String**|  | [optional]
- **spPrivateKeyAliasTypeHint** | **String**|  | [optional]
+ **spPrivateKeyAliasAtTypeHint** | **String**|  | [optional]
  **useEncryption** | **Boolean**|  | [optional]
- **useEncryptionTypeHint** | **String**|  | [optional]
+ **useEncryptionAtTypeHint** | **String**|  | [optional]
  **nameIdFormat** | **String**|  | [optional]
- **nameIdFormatTypeHint** | **String**|  | [optional]
+ **nameIdFormatAtTypeHint** | **String**|  | [optional]
  **digestMethod** | **String**|  | [optional]
- **digestMethodTypeHint** | **String**|  | [optional]
+ **digestMethodAtTypeHint** | **String**|  | [optional]
  **signatureMethod** | **String**|  | [optional]
- **signatureMethodTypeHint** | **String**|  | [optional]
+ **signatureMethodAtTypeHint** | **String**|  | [optional]
  **userIntermediatePath** | **String**|  | [optional]
- **userIntermediatePathTypeHint** | **String**|  | [optional]
+ **userIntermediatePathAtTypeHint** | **String**|  | [optional]
 
 ### Return type
 
@@ -1109,11 +1108,11 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 <a name="postConfigApacheFelixJettyBasedHttpService"></a>
 # **postConfigApacheFelixJettyBasedHttpService**
-> postConfigApacheFelixJettyBasedHttpService(runmode, orgApacheFelixHttpsNio, orgApacheFelixHttpsNioTypeHint, orgApacheFelixHttpsKeystore, orgApacheFelixHttpsKeystoreTypeHint, orgApacheFelixHttpsKeystorePassword, orgApacheFelixHttpsKeystorePasswordTypeHint, orgApacheFelixHttpsKeystoreKey, orgApacheFelixHttpsKeystoreKeyTypeHint, orgApacheFelixHttpsKeystoreKeyPassword, orgApacheFelixHttpsKeystoreKeyPasswordTypeHint, orgApacheFelixHttpsTruststore, orgApacheFelixHttpsTruststoreTypeHint, orgApacheFelixHttpsTruststorePassword, orgApacheFelixHttpsTruststorePasswordTypeHint, orgApacheFelixHttpsClientcertificate, orgApacheFelixHttpsClientcertificateTypeHint, orgApacheFelixHttpsEnable, orgApacheFelixHttpsEnableTypeHint, orgOsgiServiceHttpPortSecure, orgOsgiServiceHttpPortSecureTypeHint)
+> postConfigApacheFelixJettyBasedHttpService(orgApacheFelixHttpsNio, orgApacheFelixHttpsNioAtTypeHint, orgApacheFelixHttpsKeystore, orgApacheFelixHttpsKeystoreAtTypeHint, orgApacheFelixHttpsKeystorePassword, orgApacheFelixHttpsKeystorePasswordAtTypeHint, orgApacheFelixHttpsKeystoreKey, orgApacheFelixHttpsKeystoreKeyAtTypeHint, orgApacheFelixHttpsKeystoreKeyPassword, orgApacheFelixHttpsKeystoreKeyPasswordAtTypeHint, orgApacheFelixHttpsTruststore, orgApacheFelixHttpsTruststoreAtTypeHint, orgApacheFelixHttpsTruststorePassword, orgApacheFelixHttpsTruststorePasswordAtTypeHint, orgApacheFelixHttpsClientcertificate, orgApacheFelixHttpsClientcertificateAtTypeHint, orgApacheFelixHttpsEnable, orgApacheFelixHttpsEnableAtTypeHint, orgOsgiServiceHttpPortSecure, orgOsgiServiceHttpPortSecureAtTypeHint)
 
 
 
@@ -1134,29 +1133,28 @@ aemAuth.setUsername("YOUR USERNAME");
 aemAuth.setPassword("YOUR PASSWORD");
 
 SlingApi apiInstance = new SlingApi();
-String runmode = "runmode_example"; // String | 
 Boolean orgApacheFelixHttpsNio = true; // Boolean | 
-String orgApacheFelixHttpsNioTypeHint = "orgApacheFelixHttpsNioTypeHint_example"; // String | 
+String orgApacheFelixHttpsNioAtTypeHint = "orgApacheFelixHttpsNioAtTypeHint_example"; // String | 
 String orgApacheFelixHttpsKeystore = "orgApacheFelixHttpsKeystore_example"; // String | 
-String orgApacheFelixHttpsKeystoreTypeHint = "orgApacheFelixHttpsKeystoreTypeHint_example"; // String | 
+String orgApacheFelixHttpsKeystoreAtTypeHint = "orgApacheFelixHttpsKeystoreAtTypeHint_example"; // String | 
 String orgApacheFelixHttpsKeystorePassword = "orgApacheFelixHttpsKeystorePassword_example"; // String | 
-String orgApacheFelixHttpsKeystorePasswordTypeHint = "orgApacheFelixHttpsKeystorePasswordTypeHint_example"; // String | 
+String orgApacheFelixHttpsKeystorePasswordAtTypeHint = "orgApacheFelixHttpsKeystorePasswordAtTypeHint_example"; // String | 
 String orgApacheFelixHttpsKeystoreKey = "orgApacheFelixHttpsKeystoreKey_example"; // String | 
-String orgApacheFelixHttpsKeystoreKeyTypeHint = "orgApacheFelixHttpsKeystoreKeyTypeHint_example"; // String | 
+String orgApacheFelixHttpsKeystoreKeyAtTypeHint = "orgApacheFelixHttpsKeystoreKeyAtTypeHint_example"; // String | 
 String orgApacheFelixHttpsKeystoreKeyPassword = "orgApacheFelixHttpsKeystoreKeyPassword_example"; // String | 
-String orgApacheFelixHttpsKeystoreKeyPasswordTypeHint = "orgApacheFelixHttpsKeystoreKeyPasswordTypeHint_example"; // String | 
+String orgApacheFelixHttpsKeystoreKeyPasswordAtTypeHint = "orgApacheFelixHttpsKeystoreKeyPasswordAtTypeHint_example"; // String | 
 String orgApacheFelixHttpsTruststore = "orgApacheFelixHttpsTruststore_example"; // String | 
-String orgApacheFelixHttpsTruststoreTypeHint = "orgApacheFelixHttpsTruststoreTypeHint_example"; // String | 
+String orgApacheFelixHttpsTruststoreAtTypeHint = "orgApacheFelixHttpsTruststoreAtTypeHint_example"; // String | 
 String orgApacheFelixHttpsTruststorePassword = "orgApacheFelixHttpsTruststorePassword_example"; // String | 
-String orgApacheFelixHttpsTruststorePasswordTypeHint = "orgApacheFelixHttpsTruststorePasswordTypeHint_example"; // String | 
+String orgApacheFelixHttpsTruststorePasswordAtTypeHint = "orgApacheFelixHttpsTruststorePasswordAtTypeHint_example"; // String | 
 String orgApacheFelixHttpsClientcertificate = "orgApacheFelixHttpsClientcertificate_example"; // String | 
-String orgApacheFelixHttpsClientcertificateTypeHint = "orgApacheFelixHttpsClientcertificateTypeHint_example"; // String | 
+String orgApacheFelixHttpsClientcertificateAtTypeHint = "orgApacheFelixHttpsClientcertificateAtTypeHint_example"; // String | 
 Boolean orgApacheFelixHttpsEnable = true; // Boolean | 
-String orgApacheFelixHttpsEnableTypeHint = "orgApacheFelixHttpsEnableTypeHint_example"; // String | 
+String orgApacheFelixHttpsEnableAtTypeHint = "orgApacheFelixHttpsEnableAtTypeHint_example"; // String | 
 String orgOsgiServiceHttpPortSecure = "orgOsgiServiceHttpPortSecure_example"; // String | 
-String orgOsgiServiceHttpPortSecureTypeHint = "orgOsgiServiceHttpPortSecureTypeHint_example"; // String | 
+String orgOsgiServiceHttpPortSecureAtTypeHint = "orgOsgiServiceHttpPortSecureAtTypeHint_example"; // String | 
 try {
-    apiInstance.postConfigApacheFelixJettyBasedHttpService(runmode, orgApacheFelixHttpsNio, orgApacheFelixHttpsNioTypeHint, orgApacheFelixHttpsKeystore, orgApacheFelixHttpsKeystoreTypeHint, orgApacheFelixHttpsKeystorePassword, orgApacheFelixHttpsKeystorePasswordTypeHint, orgApacheFelixHttpsKeystoreKey, orgApacheFelixHttpsKeystoreKeyTypeHint, orgApacheFelixHttpsKeystoreKeyPassword, orgApacheFelixHttpsKeystoreKeyPasswordTypeHint, orgApacheFelixHttpsTruststore, orgApacheFelixHttpsTruststoreTypeHint, orgApacheFelixHttpsTruststorePassword, orgApacheFelixHttpsTruststorePasswordTypeHint, orgApacheFelixHttpsClientcertificate, orgApacheFelixHttpsClientcertificateTypeHint, orgApacheFelixHttpsEnable, orgApacheFelixHttpsEnableTypeHint, orgOsgiServiceHttpPortSecure, orgOsgiServiceHttpPortSecureTypeHint);
+    apiInstance.postConfigApacheFelixJettyBasedHttpService(orgApacheFelixHttpsNio, orgApacheFelixHttpsNioAtTypeHint, orgApacheFelixHttpsKeystore, orgApacheFelixHttpsKeystoreAtTypeHint, orgApacheFelixHttpsKeystorePassword, orgApacheFelixHttpsKeystorePasswordAtTypeHint, orgApacheFelixHttpsKeystoreKey, orgApacheFelixHttpsKeystoreKeyAtTypeHint, orgApacheFelixHttpsKeystoreKeyPassword, orgApacheFelixHttpsKeystoreKeyPasswordAtTypeHint, orgApacheFelixHttpsTruststore, orgApacheFelixHttpsTruststoreAtTypeHint, orgApacheFelixHttpsTruststorePassword, orgApacheFelixHttpsTruststorePasswordAtTypeHint, orgApacheFelixHttpsClientcertificate, orgApacheFelixHttpsClientcertificateAtTypeHint, orgApacheFelixHttpsEnable, orgApacheFelixHttpsEnableAtTypeHint, orgOsgiServiceHttpPortSecure, orgOsgiServiceHttpPortSecureAtTypeHint);
 } catch (ApiException e) {
     System.err.println("Exception when calling SlingApi#postConfigApacheFelixJettyBasedHttpService");
     e.printStackTrace();
@@ -1167,27 +1165,26 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **runmode** | **String**|  |
  **orgApacheFelixHttpsNio** | **Boolean**|  | [optional]
- **orgApacheFelixHttpsNioTypeHint** | **String**|  | [optional]
+ **orgApacheFelixHttpsNioAtTypeHint** | **String**|  | [optional]
  **orgApacheFelixHttpsKeystore** | **String**|  | [optional]
- **orgApacheFelixHttpsKeystoreTypeHint** | **String**|  | [optional]
+ **orgApacheFelixHttpsKeystoreAtTypeHint** | **String**|  | [optional]
  **orgApacheFelixHttpsKeystorePassword** | **String**|  | [optional]
- **orgApacheFelixHttpsKeystorePasswordTypeHint** | **String**|  | [optional]
+ **orgApacheFelixHttpsKeystorePasswordAtTypeHint** | **String**|  | [optional]
  **orgApacheFelixHttpsKeystoreKey** | **String**|  | [optional]
- **orgApacheFelixHttpsKeystoreKeyTypeHint** | **String**|  | [optional]
+ **orgApacheFelixHttpsKeystoreKeyAtTypeHint** | **String**|  | [optional]
  **orgApacheFelixHttpsKeystoreKeyPassword** | **String**|  | [optional]
- **orgApacheFelixHttpsKeystoreKeyPasswordTypeHint** | **String**|  | [optional]
+ **orgApacheFelixHttpsKeystoreKeyPasswordAtTypeHint** | **String**|  | [optional]
  **orgApacheFelixHttpsTruststore** | **String**|  | [optional]
- **orgApacheFelixHttpsTruststoreTypeHint** | **String**|  | [optional]
+ **orgApacheFelixHttpsTruststoreAtTypeHint** | **String**|  | [optional]
  **orgApacheFelixHttpsTruststorePassword** | **String**|  | [optional]
- **orgApacheFelixHttpsTruststorePasswordTypeHint** | **String**|  | [optional]
+ **orgApacheFelixHttpsTruststorePasswordAtTypeHint** | **String**|  | [optional]
  **orgApacheFelixHttpsClientcertificate** | **String**|  | [optional]
- **orgApacheFelixHttpsClientcertificateTypeHint** | **String**|  | [optional]
+ **orgApacheFelixHttpsClientcertificateAtTypeHint** | **String**|  | [optional]
  **orgApacheFelixHttpsEnable** | **Boolean**|  | [optional]
- **orgApacheFelixHttpsEnableTypeHint** | **String**|  | [optional]
+ **orgApacheFelixHttpsEnableAtTypeHint** | **String**|  | [optional]
  **orgOsgiServiceHttpPortSecure** | **String**|  | [optional]
- **orgOsgiServiceHttpPortSecureTypeHint** | **String**|  | [optional]
+ **orgOsgiServiceHttpPortSecureAtTypeHint** | **String**|  | [optional]
 
 ### Return type
 
@@ -1200,11 +1197,11 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
-<a name="postConfigApacheSlingDavExServlet"></a>
-# **postConfigApacheSlingDavExServlet**
-> postConfigApacheSlingDavExServlet(runmode, alias, aliasTypeHint, davCreateAbsoluteUri, davCreateAbsoluteUriTypeHint)
+<a name="postConfigApacheHttpComponentsProxyConfiguration"></a>
+# **postConfigApacheHttpComponentsProxyConfiguration**
+> postConfigApacheHttpComponentsProxyConfiguration(proxyHost, proxyHostAtTypeHint, proxyPort, proxyPortAtTypeHint, proxyExceptions, proxyExceptionsAtTypeHint, proxyEnabled, proxyEnabledAtTypeHint, proxyUser, proxyUserAtTypeHint, proxyPassword, proxyPasswordAtTypeHint)
 
 
 
@@ -1225,13 +1222,85 @@ aemAuth.setUsername("YOUR USERNAME");
 aemAuth.setPassword("YOUR PASSWORD");
 
 SlingApi apiInstance = new SlingApi();
-String runmode = "runmode_example"; // String | 
-String alias = "alias_example"; // String | 
-String aliasTypeHint = "aliasTypeHint_example"; // String | 
-Boolean davCreateAbsoluteUri = true; // Boolean | 
-String davCreateAbsoluteUriTypeHint = "davCreateAbsoluteUriTypeHint_example"; // String | 
+String proxyHost = "proxyHost_example"; // String | 
+String proxyHostAtTypeHint = "proxyHostAtTypeHint_example"; // String | 
+Integer proxyPort = 56; // Integer | 
+String proxyPortAtTypeHint = "proxyPortAtTypeHint_example"; // String | 
+List<String> proxyExceptions = Arrays.asList("proxyExceptions_example"); // List<String> | 
+String proxyExceptionsAtTypeHint = "proxyExceptionsAtTypeHint_example"; // String | 
+Boolean proxyEnabled = true; // Boolean | 
+String proxyEnabledAtTypeHint = "proxyEnabledAtTypeHint_example"; // String | 
+String proxyUser = "proxyUser_example"; // String | 
+String proxyUserAtTypeHint = "proxyUserAtTypeHint_example"; // String | 
+String proxyPassword = "proxyPassword_example"; // String | 
+String proxyPasswordAtTypeHint = "proxyPasswordAtTypeHint_example"; // String | 
 try {
-    apiInstance.postConfigApacheSlingDavExServlet(runmode, alias, aliasTypeHint, davCreateAbsoluteUri, davCreateAbsoluteUriTypeHint);
+    apiInstance.postConfigApacheHttpComponentsProxyConfiguration(proxyHost, proxyHostAtTypeHint, proxyPort, proxyPortAtTypeHint, proxyExceptions, proxyExceptionsAtTypeHint, proxyEnabled, proxyEnabledAtTypeHint, proxyUser, proxyUserAtTypeHint, proxyPassword, proxyPasswordAtTypeHint);
+} catch (ApiException e) {
+    System.err.println("Exception when calling SlingApi#postConfigApacheHttpComponentsProxyConfiguration");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **proxyHost** | **String**|  | [optional]
+ **proxyHostAtTypeHint** | **String**|  | [optional]
+ **proxyPort** | **Integer**|  | [optional]
+ **proxyPortAtTypeHint** | **String**|  | [optional]
+ **proxyExceptions** | [**List&lt;String&gt;**](String.md)|  | [optional]
+ **proxyExceptionsAtTypeHint** | **String**|  | [optional]
+ **proxyEnabled** | **Boolean**|  | [optional]
+ **proxyEnabledAtTypeHint** | **String**|  | [optional]
+ **proxyUser** | **String**|  | [optional]
+ **proxyUserAtTypeHint** | **String**|  | [optional]
+ **proxyPassword** | **String**|  | [optional]
+ **proxyPasswordAtTypeHint** | **String**|  | [optional]
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+<a name="postConfigApacheSlingDavExServlet"></a>
+# **postConfigApacheSlingDavExServlet**
+> postConfigApacheSlingDavExServlet(alias, aliasAtTypeHint, davCreateAbsoluteUri, davCreateAbsoluteUriAtTypeHint)
+
+
+
+### Example
+```java
+// Import classes:
+//import com.shinesolutions.swaggeraem4j.ApiClient;
+//import com.shinesolutions.swaggeraem4j.ApiException;
+//import com.shinesolutions.swaggeraem4j.Configuration;
+//import com.shinesolutions.swaggeraem4j.auth.*;
+//import com.shinesolutions.swaggeraem4j.api.SlingApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure HTTP basic authorization: aemAuth
+HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+aemAuth.setUsername("YOUR USERNAME");
+aemAuth.setPassword("YOUR PASSWORD");
+
+SlingApi apiInstance = new SlingApi();
+String alias = "alias_example"; // String | 
+String aliasAtTypeHint = "aliasAtTypeHint_example"; // String | 
+Boolean davCreateAbsoluteUri = true; // Boolean | 
+String davCreateAbsoluteUriAtTypeHint = "davCreateAbsoluteUriAtTypeHint_example"; // String | 
+try {
+    apiInstance.postConfigApacheSlingDavExServlet(alias, aliasAtTypeHint, davCreateAbsoluteUri, davCreateAbsoluteUriAtTypeHint);
 } catch (ApiException e) {
     System.err.println("Exception when calling SlingApi#postConfigApacheSlingDavExServlet");
     e.printStackTrace();
@@ -1242,11 +1311,10 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **runmode** | **String**|  |
  **alias** | **String**|  | [optional]
- **aliasTypeHint** | **String**|  | [optional]
+ **aliasAtTypeHint** | **String**|  | [optional]
  **davCreateAbsoluteUri** | **Boolean**|  | [optional]
- **davCreateAbsoluteUriTypeHint** | **String**|  | [optional]
+ **davCreateAbsoluteUriAtTypeHint** | **String**|  | [optional]
 
 ### Return type
 
@@ -1259,11 +1327,11 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 <a name="postConfigApacheSlingGetServlet"></a>
 # **postConfigApacheSlingGetServlet**
-> postConfigApacheSlingGetServlet(runmode, jsonMaximumresults, jsonMaximumresultsTypeHint, enableHtml, enableHtmlTypeHint, enableTxt, enableTxtTypeHint, enableXml, enableXmlTypeHint)
+> postConfigApacheSlingGetServlet(jsonMaximumresults, jsonMaximumresultsAtTypeHint, enableHtml, enableHtmlAtTypeHint, enableTxt, enableTxtAtTypeHint, enableXml, enableXmlAtTypeHint)
 
 
 
@@ -1284,17 +1352,16 @@ aemAuth.setUsername("YOUR USERNAME");
 aemAuth.setPassword("YOUR PASSWORD");
 
 SlingApi apiInstance = new SlingApi();
-String runmode = "runmode_example"; // String | 
 String jsonMaximumresults = "jsonMaximumresults_example"; // String | 
-String jsonMaximumresultsTypeHint = "jsonMaximumresultsTypeHint_example"; // String | 
+String jsonMaximumresultsAtTypeHint = "jsonMaximumresultsAtTypeHint_example"; // String | 
 Boolean enableHtml = true; // Boolean | 
-String enableHtmlTypeHint = "enableHtmlTypeHint_example"; // String | 
+String enableHtmlAtTypeHint = "enableHtmlAtTypeHint_example"; // String | 
 Boolean enableTxt = true; // Boolean | 
-String enableTxtTypeHint = "enableTxtTypeHint_example"; // String | 
+String enableTxtAtTypeHint = "enableTxtAtTypeHint_example"; // String | 
 Boolean enableXml = true; // Boolean | 
-String enableXmlTypeHint = "enableXmlTypeHint_example"; // String | 
+String enableXmlAtTypeHint = "enableXmlAtTypeHint_example"; // String | 
 try {
-    apiInstance.postConfigApacheSlingGetServlet(runmode, jsonMaximumresults, jsonMaximumresultsTypeHint, enableHtml, enableHtmlTypeHint, enableTxt, enableTxtTypeHint, enableXml, enableXmlTypeHint);
+    apiInstance.postConfigApacheSlingGetServlet(jsonMaximumresults, jsonMaximumresultsAtTypeHint, enableHtml, enableHtmlAtTypeHint, enableTxt, enableTxtAtTypeHint, enableXml, enableXmlAtTypeHint);
 } catch (ApiException e) {
     System.err.println("Exception when calling SlingApi#postConfigApacheSlingGetServlet");
     e.printStackTrace();
@@ -1305,15 +1372,14 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **runmode** | **String**|  |
  **jsonMaximumresults** | **String**|  | [optional]
- **jsonMaximumresultsTypeHint** | **String**|  | [optional]
+ **jsonMaximumresultsAtTypeHint** | **String**|  | [optional]
  **enableHtml** | **Boolean**|  | [optional]
- **enableHtmlTypeHint** | **String**|  | [optional]
+ **enableHtmlAtTypeHint** | **String**|  | [optional]
  **enableTxt** | **Boolean**|  | [optional]
- **enableTxtTypeHint** | **String**|  | [optional]
+ **enableTxtAtTypeHint** | **String**|  | [optional]
  **enableXml** | **Boolean**|  | [optional]
- **enableXmlTypeHint** | **String**|  | [optional]
+ **enableXmlAtTypeHint** | **String**|  | [optional]
 
 ### Return type
 
@@ -1326,11 +1392,11 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 <a name="postConfigApacheSlingReferrerFilter"></a>
 # **postConfigApacheSlingReferrerFilter**
-> postConfigApacheSlingReferrerFilter(runmode, allowEmpty, allowEmptyTypeHint, allowHosts, allowHostsTypeHint, allowHostsRegexp, allowHostsRegexpTypeHint, filterMethods, filterMethodsTypeHint)
+> postConfigApacheSlingReferrerFilter(allowEmpty, allowEmptyAtTypeHint, allowHosts, allowHostsAtTypeHint, allowHostsRegexp, allowHostsRegexpAtTypeHint, filterMethods, filterMethodsAtTypeHint)
 
 
 
@@ -1351,17 +1417,16 @@ aemAuth.setUsername("YOUR USERNAME");
 aemAuth.setPassword("YOUR PASSWORD");
 
 SlingApi apiInstance = new SlingApi();
-String runmode = "runmode_example"; // String | 
 Boolean allowEmpty = true; // Boolean | 
-String allowEmptyTypeHint = "allowEmptyTypeHint_example"; // String | 
+String allowEmptyAtTypeHint = "allowEmptyAtTypeHint_example"; // String | 
 String allowHosts = "allowHosts_example"; // String | 
-String allowHostsTypeHint = "allowHostsTypeHint_example"; // String | 
+String allowHostsAtTypeHint = "allowHostsAtTypeHint_example"; // String | 
 String allowHostsRegexp = "allowHostsRegexp_example"; // String | 
-String allowHostsRegexpTypeHint = "allowHostsRegexpTypeHint_example"; // String | 
+String allowHostsRegexpAtTypeHint = "allowHostsRegexpAtTypeHint_example"; // String | 
 String filterMethods = "filterMethods_example"; // String | 
-String filterMethodsTypeHint = "filterMethodsTypeHint_example"; // String | 
+String filterMethodsAtTypeHint = "filterMethodsAtTypeHint_example"; // String | 
 try {
-    apiInstance.postConfigApacheSlingReferrerFilter(runmode, allowEmpty, allowEmptyTypeHint, allowHosts, allowHostsTypeHint, allowHostsRegexp, allowHostsRegexpTypeHint, filterMethods, filterMethodsTypeHint);
+    apiInstance.postConfigApacheSlingReferrerFilter(allowEmpty, allowEmptyAtTypeHint, allowHosts, allowHostsAtTypeHint, allowHostsRegexp, allowHostsRegexpAtTypeHint, filterMethods, filterMethodsAtTypeHint);
 } catch (ApiException e) {
     System.err.println("Exception when calling SlingApi#postConfigApacheSlingReferrerFilter");
     e.printStackTrace();
@@ -1372,15 +1437,14 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **runmode** | **String**|  |
  **allowEmpty** | **Boolean**|  | [optional]
- **allowEmptyTypeHint** | **String**|  | [optional]
+ **allowEmptyAtTypeHint** | **String**|  | [optional]
  **allowHosts** | **String**|  | [optional]
- **allowHostsTypeHint** | **String**|  | [optional]
+ **allowHostsAtTypeHint** | **String**|  | [optional]
  **allowHostsRegexp** | **String**|  | [optional]
- **allowHostsRegexpTypeHint** | **String**|  | [optional]
+ **allowHostsRegexpAtTypeHint** | **String**|  | [optional]
  **filterMethods** | **String**|  | [optional]
- **filterMethodsTypeHint** | **String**|  | [optional]
+ **filterMethodsAtTypeHint** | **String**|  | [optional]
 
 ### Return type
 
@@ -1393,11 +1457,11 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 <a name="postNode"></a>
 # **postNode**
-> postNode(path, name, operation, deleteAuthorizable, file)
+> postNode(path, name, colonOperation, deleteAuthorizable, file)
 
 
 
@@ -1420,11 +1484,11 @@ aemAuth.setPassword("YOUR PASSWORD");
 SlingApi apiInstance = new SlingApi();
 String path = "path_example"; // String | 
 String name = "name_example"; // String | 
-String operation = "operation_example"; // String | 
+String colonOperation = "colonOperation_example"; // String | 
 String deleteAuthorizable = "deleteAuthorizable_example"; // String | 
-File file = new File("/path/to/file.txt"); // File | 
+File file = new File("null"); // File | 
 try {
-    apiInstance.postNode(path, name, operation, deleteAuthorizable, file);
+    apiInstance.postNode(path, name, colonOperation, deleteAuthorizable, file);
 } catch (ApiException e) {
     System.err.println("Exception when calling SlingApi#postNode");
     e.printStackTrace();
@@ -1437,9 +1501,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path** | **String**|  |
  **name** | **String**|  |
- **operation** | **String**|  | [optional]
+ **colonOperation** | **String**|  | [optional]
  **deleteAuthorizable** | **String**|  | [optional]
- **file** | **File**|  | [optional]
+ **file** | **File**|  | [optional] [default to null]
 
 ### Return type
 
@@ -1452,7 +1516,7 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: multipart/form-data
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 <a name="postNodeRw"></a>
 # **postNodeRw**
@@ -1507,11 +1571,11 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 <a name="postPath"></a>
 # **postPath**
-> postPath(path, jcrprimaryType, name)
+> postPath(path, jcrColonPrimaryType, colonName)
 
 
 
@@ -1533,10 +1597,10 @@ aemAuth.setPassword("YOUR PASSWORD");
 
 SlingApi apiInstance = new SlingApi();
 String path = "path_example"; // String | 
-String jcrprimaryType = "jcrprimaryType_example"; // String | 
-String name = "name_example"; // String | 
+String jcrColonPrimaryType = "jcrColonPrimaryType_example"; // String | 
+String colonName = "colonName_example"; // String | 
 try {
-    apiInstance.postPath(path, jcrprimaryType, name);
+    apiInstance.postPath(path, jcrColonPrimaryType, colonName);
 } catch (ApiException e) {
     System.err.println("Exception when calling SlingApi#postPath");
     e.printStackTrace();
@@ -1548,8 +1612,8 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path** | **String**|  |
- **jcrprimaryType** | **String**|  |
- **name** | **String**|  |
+ **jcrColonPrimaryType** | **String**|  |
+ **colonName** | **String**|  |
 
 ### Return type
 
@@ -1562,11 +1626,11 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 <a name="postQuery"></a>
 # **postQuery**
-> String postQuery(path, pLimit, _1Property, _1PropertyValue)
+> String postQuery(path, pLimit, _1property, _1propertyValue)
 
 
 
@@ -1589,10 +1653,10 @@ aemAuth.setPassword("YOUR PASSWORD");
 SlingApi apiInstance = new SlingApi();
 String path = "path_example"; // String | 
 BigDecimal pLimit = new BigDecimal(); // BigDecimal | 
-String _1Property = "_1Property_example"; // String | 
-String _1PropertyValue = "_1PropertyValue_example"; // String | 
+String _1property = "_1property_example"; // String | 
+String _1propertyValue = "_1propertyValue_example"; // String | 
 try {
-    String result = apiInstance.postQuery(path, pLimit, _1Property, _1PropertyValue);
+    String result = apiInstance.postQuery(path, pLimit, _1property, _1propertyValue);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling SlingApi#postQuery");
@@ -1606,8 +1670,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path** | **String**|  |
  **pLimit** | **BigDecimal**|  |
- **_1Property** | **String**|  |
- **_1PropertyValue** | **String**|  |
+ **_1property** | **String**|  |
+ **_1propertyValue** | **String**|  |
 
 ### Return type
 
@@ -1675,11 +1739,11 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 <a name="postTruststore"></a>
 # **postTruststore**
-> String postTruststore(operation, newPassword, rePassword, keyStoreType, removeAlias, certificate)
+> String postTruststore(colonOperation, newPassword, rePassword, keyStoreType, removeAlias, certificate)
 
 
 
@@ -1700,14 +1764,14 @@ aemAuth.setUsername("YOUR USERNAME");
 aemAuth.setPassword("YOUR PASSWORD");
 
 SlingApi apiInstance = new SlingApi();
-String operation = "operation_example"; // String | 
+String colonOperation = "colonOperation_example"; // String | 
 String newPassword = "newPassword_example"; // String | 
 String rePassword = "rePassword_example"; // String | 
 String keyStoreType = "keyStoreType_example"; // String | 
 String removeAlias = "removeAlias_example"; // String | 
-File certificate = new File("/path/to/file.txt"); // File | 
+File certificate = new File("null"); // File | 
 try {
-    String result = apiInstance.postTruststore(operation, newPassword, rePassword, keyStoreType, removeAlias, certificate);
+    String result = apiInstance.postTruststore(colonOperation, newPassword, rePassword, keyStoreType, removeAlias, certificate);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling SlingApi#postTruststore");
@@ -1719,12 +1783,12 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **operation** | **String**|  | [optional]
+ **colonOperation** | **String**|  | [optional]
  **newPassword** | **String**|  | [optional]
  **rePassword** | **String**|  | [optional]
  **keyStoreType** | **String**|  | [optional]
  **removeAlias** | **String**|  | [optional]
- **certificate** | **File**|  | [optional]
+ **certificate** | **File**|  | [optional] [default to null]
 
 ### Return type
 
@@ -1762,7 +1826,7 @@ aemAuth.setUsername("YOUR USERNAME");
 aemAuth.setPassword("YOUR PASSWORD");
 
 SlingApi apiInstance = new SlingApi();
-File truststoreP12 = new File("/path/to/file.txt"); // File | 
+File truststoreP12 = new File("null"); // File | 
 try {
     String result = apiInstance.postTruststorePKCS12(truststoreP12);
     System.out.println(result);
@@ -1776,7 +1840,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **truststoreP12** | **File**|  | [optional]
+ **truststoreP12** | **File**|  | [optional] [default to null]
 
 ### Return type
 

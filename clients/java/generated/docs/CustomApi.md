@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 <a name="postConfigAemHealthCheckServlet"></a>
 # **postConfigAemHealthCheckServlet**
-> postConfigAemHealthCheckServlet(runmode, bundlesIgnored, bundlesIgnoredTypeHint)
+> postConfigAemHealthCheckServlet(bundlesIgnored, bundlesIgnoredAtTypeHint)
 
 
 
@@ -86,11 +86,10 @@ aemAuth.setUsername("YOUR USERNAME");
 aemAuth.setPassword("YOUR PASSWORD");
 
 CustomApi apiInstance = new CustomApi();
-String runmode = "runmode_example"; // String | 
 List<String> bundlesIgnored = Arrays.asList("bundlesIgnored_example"); // List<String> | 
-String bundlesIgnoredTypeHint = "bundlesIgnoredTypeHint_example"; // String | 
+String bundlesIgnoredAtTypeHint = "bundlesIgnoredAtTypeHint_example"; // String | 
 try {
-    apiInstance.postConfigAemHealthCheckServlet(runmode, bundlesIgnored, bundlesIgnoredTypeHint);
+    apiInstance.postConfigAemHealthCheckServlet(bundlesIgnored, bundlesIgnoredAtTypeHint);
 } catch (ApiException e) {
     System.err.println("Exception when calling CustomApi#postConfigAemHealthCheckServlet");
     e.printStackTrace();
@@ -101,9 +100,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **runmode** | **String**|  |
  **bundlesIgnored** | [**List&lt;String&gt;**](String.md)|  | [optional]
- **bundlesIgnoredTypeHint** | **String**|  | [optional]
+ **bundlesIgnoredAtTypeHint** | **String**|  | [optional]
 
 ### Return type
 
@@ -116,11 +114,11 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 
 <a name="postConfigAemPasswordReset"></a>
 # **postConfigAemPasswordReset**
-> postConfigAemPasswordReset(runmode, pwdresetAuthorizables, pwdresetAuthorizablesTypeHint)
+> postConfigAemPasswordReset(pwdresetAuthorizables, pwdresetAuthorizablesAtTypeHint)
 
 
 
@@ -141,11 +139,10 @@ aemAuth.setUsername("YOUR USERNAME");
 aemAuth.setPassword("YOUR PASSWORD");
 
 CustomApi apiInstance = new CustomApi();
-String runmode = "runmode_example"; // String | 
 List<String> pwdresetAuthorizables = Arrays.asList("pwdresetAuthorizables_example"); // List<String> | 
-String pwdresetAuthorizablesTypeHint = "pwdresetAuthorizablesTypeHint_example"; // String | 
+String pwdresetAuthorizablesAtTypeHint = "pwdresetAuthorizablesAtTypeHint_example"; // String | 
 try {
-    apiInstance.postConfigAemPasswordReset(runmode, pwdresetAuthorizables, pwdresetAuthorizablesTypeHint);
+    apiInstance.postConfigAemPasswordReset(pwdresetAuthorizables, pwdresetAuthorizablesAtTypeHint);
 } catch (ApiException e) {
     System.err.println("Exception when calling CustomApi#postConfigAemPasswordReset");
     e.printStackTrace();
@@ -156,9 +153,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **runmode** | **String**|  |
  **pwdresetAuthorizables** | [**List&lt;String&gt;**](String.md)|  | [optional]
- **pwdresetAuthorizablesTypeHint** | **String**|  | [optional]
+ **pwdresetAuthorizablesAtTypeHint** | **String**|  | [optional]
 
 ### Return type
 
@@ -171,5 +167,5 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: Not defined
 

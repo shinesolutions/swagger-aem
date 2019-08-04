@@ -1,0 +1,20 @@
+{
+  "name": "adobe-experience-manager-aem-api",
+  "version": "3.2.0-pre.0",
+  "description": "Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API",
+  "main": "index.js",
+  "scripts": {
+    "prestart": "npm install",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "openapi-tools"
+  ],
+  "license": "Unlicense",
+  "private": true,
+  "dependencies": {
+    "connect": "^3.2.0",
+    "js-yaml": "^3.3.0",
+    "swagger-tools": "0.10.1"
+  }
+}

@@ -1,0 +1,65 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+GET     /api                        controllers.ApiDocController.api
+
+
+#Functions for Console API
+GET     //system/console/status-productinfo.json                     controllers.ConsoleApiController.getAemProductInfo()
+GET     //system/console/configMgr                     controllers.ConsoleApiController.getConfigMgr()
+POST     //system/console/bundles/:name                     controllers.ConsoleApiController.postBundle(name: String)
+POST     //system/console/jmx/com.adobe.granite:type=Repository/op/:action                     controllers.ConsoleApiController.postJmxRepository(action: String)
+POST     //system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler                     controllers.ConsoleApiController.postSamlConfiguration()
+
+#Functions for Cq API
+GET     //libs/granite/core/content/login.html                     controllers.CqApiController.getLoginPage()
+POST     //.cqactions.html                     controllers.CqApiController.postCqActions()
+
+#Functions for Crx API
+GET     //crx/server/crx.default/jcr:root/.1.json                     controllers.CrxApiController.getCrxdeStatus()
+GET     //crx/packmgr/installstatus.jsp                     controllers.CrxApiController.getInstallStatus()
+GET     //crx/packmgr/service/script.html                     controllers.CrxApiController.getPackageManagerServlet()
+POST     //crx/packmgr/service.jsp                     controllers.CrxApiController.postPackageService()
+POST     //crx/packmgr/service/.json/:path                     controllers.CrxApiController.postPackageServiceJson(path: String)
+POST     //crx/packmgr/update.jsp                     controllers.CrxApiController.postPackageUpdate()
+POST     //crx/explorer/ui/setpassword.jsp                     controllers.CrxApiController.postSetPassword()
+
+#Functions for Custom API
+GET     //system/health                     controllers.CustomApiController.getAemHealthCheck()
+POST     //apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck                     controllers.CustomApiController.postConfigAemHealthCheckServlet()
+POST     //apps/system/config/com.shinesolutions.aem.passwordreset.Activator                     controllers.CustomApiController.postConfigAemPasswordReset()
+
+#Functions for Sling API
+DELETE     //etc/replication/agents.:runmode/:name                     controllers.SlingApiController.deleteAgent(runmode: String, name: String)
+DELETE     //:path/:name                     controllers.SlingApiController.deleteNode(path: String, name: String)
+GET     //etc/replication/agents.:runmode/:name                     controllers.SlingApiController.getAgent(runmode: String, name: String)
+GET     //etc/replication/agents.:runmode.-1.json                     controllers.SlingApiController.getAgents(runmode: String)
+GET     //:intermediatePath/:authorizableId.ks.json                     controllers.SlingApiController.getAuthorizableKeystore(intermediatePath: String, authorizableId: String)
+GET     //:intermediatePath/:authorizableId/keystore/store.p12                     controllers.SlingApiController.getKeystore(intermediatePath: String, authorizableId: String)
+GET     //:path/:name                     controllers.SlingApiController.getNode(path: String, name: String)
+GET     //etc/packages/:group/:name-:version.zip                     controllers.SlingApiController.getPackage(group: String, name: String, version: String)
+GET     //etc/packages/:group/:name-:version.zip/jcr:content/vlt:definition/filter.tidy.2.json                     controllers.SlingApiController.getPackageFilter(group: String, name: String, version: String)
+GET     //bin/querybuilder.json                     controllers.SlingApiController.getQuery()
+GET     //etc/truststore/truststore.p12                     controllers.SlingApiController.getTruststore()
+GET     //libs/granite/security/truststore.json                     controllers.SlingApiController.getTruststoreInfo()
+POST     //etc/replication/agents.:runmode/:name                     controllers.SlingApiController.postAgent(runmode: String, name: String)
+POST     //:intermediatePath/:authorizableId.ks.html                     controllers.SlingApiController.postAuthorizableKeystore(intermediatePath: String, authorizableId: String)
+POST     //libs/granite/security/post/authorizables                     controllers.SlingApiController.postAuthorizables()
+POST     //apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config                     controllers.SlingApiController.postConfigAdobeGraniteSamlAuthenticationHandler()
+POST     //apps/system/config/org.apache.felix.http                     controllers.SlingApiController.postConfigApacheFelixJettyBasedHttpService()
+POST     //apps/system/config/org.apache.http.proxyconfigurator.config                     controllers.SlingApiController.postConfigApacheHttpComponentsProxyConfiguration()
+POST     //apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet                     controllers.SlingApiController.postConfigApacheSlingDavExServlet()
+POST     //apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet                     controllers.SlingApiController.postConfigApacheSlingGetServlet()
+POST     //apps/system/config/org.apache.sling.security.impl.ReferrerFilter                     controllers.SlingApiController.postConfigApacheSlingReferrerFilter()
+POST     //:path/:name                     controllers.SlingApiController.postNode(path: String, name: String)
+POST     //:path/:name.rw.html                     controllers.SlingApiController.postNodeRw(path: String, name: String)
+POST     //:path/                     controllers.SlingApiController.postPath(path: String)
+POST     //bin/querybuilder.json                     controllers.SlingApiController.postQuery()
+POST     //etc/replication/treeactivation.html                     controllers.SlingApiController.postTreeActivation()
+POST     //libs/granite/security/post/truststore                     controllers.SlingApiController.postTruststore()
+POST     //etc/truststore                     controllers.SlingApiController.postTruststorePKCS12()
+
+# Map static resources from the /public folder to the /assets URL path
+GET /assets/*file           controllers.Assets.at(file)
+GET /versionedAssets/*file  controllers.Assets.versioned(file)
