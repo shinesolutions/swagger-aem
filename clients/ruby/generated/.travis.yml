@@ -1,0 +1,11 @@
+language: ruby
+cache: bundler
+rvm:
+  - 2.3
+  - 2.4
+  - 2.5
+script:
+  - bundle install --path vendor/bundle
+  - bundle exec rspec
+  - gem build swagger_aem.gemspec
+  - gem install ./swagger_aem-3.2.0.gem

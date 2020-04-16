@@ -13,12 +13,15 @@ Method | HTTP request | Description
 [**post_set_password**](CrxApi.md#post_set_password) | **POST** /crx/explorer/ui/setpassword.jsp | 
 
 
-# **get_crxde_status**
+
+## get_crxde_status
+
 > String get_crxde_status
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -40,6 +43,7 @@ end
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -52,17 +56,18 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: plain/text
+- **Content-Type**: Not defined
+- **Accept**: plain/text
 
 
+## get_install_status
 
-# **get_install_status**
 > InstallStatus get_install_status
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -84,6 +89,7 @@ end
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -96,17 +102,18 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_package_manager_servlet
 
-# **get_package_manager_servlet**
 > get_package_manager_servlet
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -127,6 +134,7 @@ end
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -139,17 +147,18 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/html
+- **Content-Type**: Not defined
+- **Accept**: text/html
 
 
+## post_package_service
 
-# **post_package_service**
 > String post_package_service(cmd)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -173,6 +182,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cmd** | **String**|  | 
@@ -187,17 +197,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/xml
+- **Content-Type**: Not defined
+- **Accept**: text/xml
 
 
+## post_package_service_json
 
-# **post_package_service_json**
 > String post_package_service_json(path, cmd, opts)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -216,8 +227,8 @@ opts = {
   package_name: 'package_name_example', # String | 
   package_version: 'package_version_example', # String | 
   _charset_: '_charset__example', # String | 
-  force: true, # BOOLEAN | 
-  recursive: true, # BOOLEAN | 
+  force: true, # Boolean | 
+  recursive: true, # Boolean | 
   package: File.new('/path/to/file') # File | 
 }
 
@@ -231,6 +242,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path** | **String**|  | 
@@ -239,8 +251,8 @@ Name | Type | Description  | Notes
  **package_name** | **String**|  | [optional] 
  **package_version** | **String**|  | [optional] 
  **_charset_** | **String**|  | [optional] 
- **force** | **BOOLEAN**|  | [optional] 
- **recursive** | **BOOLEAN**|  | [optional] 
+ **force** | **Boolean**|  | [optional] 
+ **recursive** | **Boolean**|  | [optional] 
  **package** | **File**|  | [optional] 
 
 ### Return type
@@ -253,17 +265,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
+- **Content-Type**: multipart/form-data
+- **Accept**: application/json
 
 
+## post_package_update
 
-# **post_package_update**
 > String post_package_update(group_name, package_name, version, path, opts)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -294,6 +307,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **group_name** | **String**|  | 
@@ -313,17 +327,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## post_set_password
 
-# **post_set_password**
 > String post_set_password(old, plain, verify)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -349,6 +364,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **old** | **String**|  | 
@@ -365,8 +381,6 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/plain
-
-
+- **Content-Type**: Not defined
+- **Accept**: text/plain
 

@@ -25,6 +25,7 @@ Method | HTTP request | Description
 [**post_config_apache_sling_dav_ex_servlet**](SlingApi.md#post_config_apache_sling_dav_ex_servlet) | **POST** /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet | 
 [**post_config_apache_sling_get_servlet**](SlingApi.md#post_config_apache_sling_get_servlet) | **POST** /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet | 
 [**post_config_apache_sling_referrer_filter**](SlingApi.md#post_config_apache_sling_referrer_filter) | **POST** /apps/system/config/org.apache.sling.security.impl.ReferrerFilter | 
+[**post_config_property**](SlingApi.md#post_config_property) | **POST** /apps/system/config/{configNodeName} | 
 [**post_node**](SlingApi.md#post_node) | **POST** /{path}/{name} | 
 [**post_node_rw**](SlingApi.md#post_node_rw) | **POST** /{path}/{name}.rw.html | 
 [**post_path**](SlingApi.md#post_path) | **POST** /{path}/ | 
@@ -34,12 +35,15 @@ Method | HTTP request | Description
 [**post_truststore_pkcs12**](SlingApi.md#post_truststore_pkcs12) | **POST** /etc/truststore | 
 
 
-# **delete_agent**
+
+## delete_agent
+
 > delete_agent(runmode, name)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -63,6 +67,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **runmode** | **String**|  | 
@@ -78,17 +83,18 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 
+## delete_node
 
-# **delete_node**
 > delete_node(path, name)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -112,6 +118,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path** | **String**|  | 
@@ -127,17 +134,18 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 
+## get_agent
 
-# **get_agent**
 > get_agent(runmode, name)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -161,6 +169,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **runmode** | **String**|  | 
@@ -176,17 +185,18 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 
+## get_agents
 
-# **get_agents**
 > String get_agents(runmode)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -210,6 +220,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **runmode** | **String**|  | 
@@ -224,17 +235,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_authorizable_keystore
 
-# **get_authorizable_keystore**
 > KeystoreInfo get_authorizable_keystore(intermediate_path, authorizable_id)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -259,6 +271,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **intermediate_path** | **String**|  | 
@@ -274,17 +287,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/plain
+- **Content-Type**: Not defined
+- **Accept**: text/plain
 
 
+## get_keystore
 
-# **get_keystore**
 > File get_keystore(intermediate_path, authorizable_id)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -309,6 +323,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **intermediate_path** | **String**|  | 
@@ -324,17 +339,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/octet-stream
+- **Content-Type**: Not defined
+- **Accept**: application/octet-stream
 
 
+## get_node
 
-# **get_node**
 > get_node(path, name)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -358,6 +374,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path** | **String**|  | 
@@ -373,17 +390,18 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 
+## get_package
 
-# **get_package**
 > File get_package(group, name, version)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -409,6 +427,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **group** | **String**|  | 
@@ -425,17 +444,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/octet-stream
+- **Content-Type**: Not defined
+- **Accept**: application/octet-stream
 
 
+## get_package_filter
 
-# **get_package_filter**
 > String get_package_filter(group, name, version)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -461,6 +481,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **group** | **String**|  | 
@@ -477,17 +498,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_query
 
-# **get_query**
 > String get_query(path, p_limit, _1_property, _1_property_value)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -514,6 +536,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path** | **String**|  | 
@@ -531,17 +554,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## get_truststore
 
-# **get_truststore**
 > File get_truststore
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -563,6 +587,7 @@ end
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -575,17 +600,18 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/octet-stream
+- **Content-Type**: Not defined
+- **Accept**: application/octet-stream
 
 
+## get_truststore_info
 
-# **get_truststore_info**
 > TruststoreInfo get_truststore_info
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -607,6 +633,7 @@ end
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -619,17 +646,18 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## post_agent
 
-# **post_agent**
 > post_agent(runmode, name, opts)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -644,54 +672,54 @@ api_instance = SwaggerAemClient::SlingApi.new
 runmode = 'runmode_example' # String | 
 name = 'name_example' # String | 
 opts = {
-  jcrcontentcqdistribute: true, # BOOLEAN | 
-  jcrcontentcqdistribute_type_hint: 'jcrcontentcqdistribute_type_hint_example', # String | 
-  jcrcontentcqname: 'jcrcontentcqname_example', # String | 
-  jcrcontentcqtemplate: 'jcrcontentcqtemplate_example', # String | 
-  jcrcontentenabled: true, # BOOLEAN | 
-  jcrcontentjcrdescription: 'jcrcontentjcrdescription_example', # String | 
-  jcrcontentjcrlast_modified: 'jcrcontentjcrlast_modified_example', # String | 
-  jcrcontentjcrlast_modified_by: 'jcrcontentjcrlast_modified_by_example', # String | 
-  jcrcontentjcrmixin_types: 'jcrcontentjcrmixin_types_example', # String | 
-  jcrcontentjcrtitle: 'jcrcontentjcrtitle_example', # String | 
-  jcrcontentlog_level: 'jcrcontentlog_level_example', # String | 
-  jcrcontentno_status_update: true, # BOOLEAN | 
-  jcrcontentno_versioning: true, # BOOLEAN | 
-  jcrcontentprotocol_connect_timeout: 3.4, # Float | 
-  jcrcontentprotocol_http_connection_closed: true, # BOOLEAN | 
-  jcrcontentprotocol_http_expired: 'jcrcontentprotocol_http_expired_example', # String | 
-  jcrcontentprotocol_http_headers: ['jcrcontentprotocol_http_headers_example'], # Array<String> | 
-  jcrcontentprotocol_http_headers_type_hint: 'jcrcontentprotocol_http_headers_type_hint_example', # String | 
-  jcrcontentprotocol_http_method: 'jcrcontentprotocol_http_method_example', # String | 
-  jcrcontentprotocol_https_relaxed: true, # BOOLEAN | 
-  jcrcontentprotocol_interface: 'jcrcontentprotocol_interface_example', # String | 
-  jcrcontentprotocol_socket_timeout: 3.4, # Float | 
-  jcrcontentprotocol_version: 'jcrcontentprotocol_version_example', # String | 
-  jcrcontentproxy_ntlm_domain: 'jcrcontentproxy_ntlm_domain_example', # String | 
-  jcrcontentproxy_ntlm_host: 'jcrcontentproxy_ntlm_host_example', # String | 
-  jcrcontentproxy_host: 'jcrcontentproxy_host_example', # String | 
-  jcrcontentproxy_password: 'jcrcontentproxy_password_example', # String | 
-  jcrcontentproxy_port: 3.4, # Float | 
-  jcrcontentproxy_user: 'jcrcontentproxy_user_example', # String | 
-  jcrcontentqueue_batch_max_size: 3.4, # Float | 
-  jcrcontentqueue_batch_mode: 'jcrcontentqueue_batch_mode_example', # String | 
-  jcrcontentqueue_batch_wait_time: 3.4, # Float | 
-  jcrcontentretry_delay: 'jcrcontentretry_delay_example', # String | 
-  jcrcontentreverse_replication: true, # BOOLEAN | 
-  jcrcontentserialization_type: 'jcrcontentserialization_type_example', # String | 
-  jcrcontentslingresource_type: 'jcrcontentslingresource_type_example', # String | 
-  jcrcontentssl: 'jcrcontentssl_example', # String | 
-  jcrcontenttransport_ntlm_domain: 'jcrcontenttransport_ntlm_domain_example', # String | 
-  jcrcontenttransport_ntlm_host: 'jcrcontenttransport_ntlm_host_example', # String | 
-  jcrcontenttransport_password: 'jcrcontenttransport_password_example', # String | 
-  jcrcontenttransport_uri: 'jcrcontenttransport_uri_example', # String | 
-  jcrcontenttransport_user: 'jcrcontenttransport_user_example', # String | 
-  jcrcontenttrigger_distribute: true, # BOOLEAN | 
-  jcrcontenttrigger_modified: true, # BOOLEAN | 
-  jcrcontenttrigger_on_off_time: true, # BOOLEAN | 
-  jcrcontenttrigger_receive: true, # BOOLEAN | 
-  jcrcontenttrigger_specific: true, # BOOLEAN | 
-  jcrcontentuser_id: 'jcrcontentuser_id_example', # String | 
+  jcrcontent_cqdistribute: true, # Boolean | 
+  jcrcontent_cqdistribute_type_hint: 'jcrcontent_cqdistribute_type_hint_example', # String | 
+  jcrcontent_cqname: 'jcrcontent_cqname_example', # String | 
+  jcrcontent_cqtemplate: 'jcrcontent_cqtemplate_example', # String | 
+  jcrcontent_enabled: true, # Boolean | 
+  jcrcontent_jcrdescription: 'jcrcontent_jcrdescription_example', # String | 
+  jcrcontent_jcrlast_modified: 'jcrcontent_jcrlast_modified_example', # String | 
+  jcrcontent_jcrlast_modified_by: 'jcrcontent_jcrlast_modified_by_example', # String | 
+  jcrcontent_jcrmixin_types: 'jcrcontent_jcrmixin_types_example', # String | 
+  jcrcontent_jcrtitle: 'jcrcontent_jcrtitle_example', # String | 
+  jcrcontent_log_level: 'jcrcontent_log_level_example', # String | 
+  jcrcontent_no_status_update: true, # Boolean | 
+  jcrcontent_no_versioning: true, # Boolean | 
+  jcrcontent_protocol_connect_timeout: 3.4, # Float | 
+  jcrcontent_protocol_http_connection_closed: true, # Boolean | 
+  jcrcontent_protocol_http_expired: 'jcrcontent_protocol_http_expired_example', # String | 
+  jcrcontent_protocol_http_headers: ['jcrcontent_protocol_http_headers_example'], # Array<String> | 
+  jcrcontent_protocol_http_headers_type_hint: 'jcrcontent_protocol_http_headers_type_hint_example', # String | 
+  jcrcontent_protocol_http_method: 'jcrcontent_protocol_http_method_example', # String | 
+  jcrcontent_protocol_https_relaxed: true, # Boolean | 
+  jcrcontent_protocol_interface: 'jcrcontent_protocol_interface_example', # String | 
+  jcrcontent_protocol_socket_timeout: 3.4, # Float | 
+  jcrcontent_protocol_version: 'jcrcontent_protocol_version_example', # String | 
+  jcrcontent_proxy_ntlm_domain: 'jcrcontent_proxy_ntlm_domain_example', # String | 
+  jcrcontent_proxy_ntlm_host: 'jcrcontent_proxy_ntlm_host_example', # String | 
+  jcrcontent_proxy_host: 'jcrcontent_proxy_host_example', # String | 
+  jcrcontent_proxy_password: 'jcrcontent_proxy_password_example', # String | 
+  jcrcontent_proxy_port: 3.4, # Float | 
+  jcrcontent_proxy_user: 'jcrcontent_proxy_user_example', # String | 
+  jcrcontent_queue_batch_max_size: 3.4, # Float | 
+  jcrcontent_queue_batch_mode: 'jcrcontent_queue_batch_mode_example', # String | 
+  jcrcontent_queue_batch_wait_time: 3.4, # Float | 
+  jcrcontent_retry_delay: 'jcrcontent_retry_delay_example', # String | 
+  jcrcontent_reverse_replication: true, # Boolean | 
+  jcrcontent_serialization_type: 'jcrcontent_serialization_type_example', # String | 
+  jcrcontent_slingresource_type: 'jcrcontent_slingresource_type_example', # String | 
+  jcrcontent_ssl: 'jcrcontent_ssl_example', # String | 
+  jcrcontent_transport_ntlm_domain: 'jcrcontent_transport_ntlm_domain_example', # String | 
+  jcrcontent_transport_ntlm_host: 'jcrcontent_transport_ntlm_host_example', # String | 
+  jcrcontent_transport_password: 'jcrcontent_transport_password_example', # String | 
+  jcrcontent_transport_uri: 'jcrcontent_transport_uri_example', # String | 
+  jcrcontent_transport_user: 'jcrcontent_transport_user_example', # String | 
+  jcrcontent_trigger_distribute: true, # Boolean | 
+  jcrcontent_trigger_modified: true, # Boolean | 
+  jcrcontent_trigger_on_off_time: true, # Boolean | 
+  jcrcontent_trigger_receive: true, # Boolean | 
+  jcrcontent_trigger_specific: true, # Boolean | 
+  jcrcontent_user_id: 'jcrcontent_user_id_example', # String | 
   jcrprimary_type: 'jcrprimary_type_example', # String | 
   operation: 'operation_example' # String | 
 }
@@ -705,58 +733,59 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **runmode** | **String**|  | 
  **name** | **String**|  | 
- **jcrcontentcqdistribute** | **BOOLEAN**|  | [optional] 
- **jcrcontentcqdistribute_type_hint** | **String**|  | [optional] 
- **jcrcontentcqname** | **String**|  | [optional] 
- **jcrcontentcqtemplate** | **String**|  | [optional] 
- **jcrcontentenabled** | **BOOLEAN**|  | [optional] 
- **jcrcontentjcrdescription** | **String**|  | [optional] 
- **jcrcontentjcrlast_modified** | **String**|  | [optional] 
- **jcrcontentjcrlast_modified_by** | **String**|  | [optional] 
- **jcrcontentjcrmixin_types** | **String**|  | [optional] 
- **jcrcontentjcrtitle** | **String**|  | [optional] 
- **jcrcontentlog_level** | **String**|  | [optional] 
- **jcrcontentno_status_update** | **BOOLEAN**|  | [optional] 
- **jcrcontentno_versioning** | **BOOLEAN**|  | [optional] 
- **jcrcontentprotocol_connect_timeout** | **Float**|  | [optional] 
- **jcrcontentprotocol_http_connection_closed** | **BOOLEAN**|  | [optional] 
- **jcrcontentprotocol_http_expired** | **String**|  | [optional] 
- **jcrcontentprotocol_http_headers** | [**Array&lt;String&gt;**](String.md)|  | [optional] 
- **jcrcontentprotocol_http_headers_type_hint** | **String**|  | [optional] 
- **jcrcontentprotocol_http_method** | **String**|  | [optional] 
- **jcrcontentprotocol_https_relaxed** | **BOOLEAN**|  | [optional] 
- **jcrcontentprotocol_interface** | **String**|  | [optional] 
- **jcrcontentprotocol_socket_timeout** | **Float**|  | [optional] 
- **jcrcontentprotocol_version** | **String**|  | [optional] 
- **jcrcontentproxy_ntlm_domain** | **String**|  | [optional] 
- **jcrcontentproxy_ntlm_host** | **String**|  | [optional] 
- **jcrcontentproxy_host** | **String**|  | [optional] 
- **jcrcontentproxy_password** | **String**|  | [optional] 
- **jcrcontentproxy_port** | **Float**|  | [optional] 
- **jcrcontentproxy_user** | **String**|  | [optional] 
- **jcrcontentqueue_batch_max_size** | **Float**|  | [optional] 
- **jcrcontentqueue_batch_mode** | **String**|  | [optional] 
- **jcrcontentqueue_batch_wait_time** | **Float**|  | [optional] 
- **jcrcontentretry_delay** | **String**|  | [optional] 
- **jcrcontentreverse_replication** | **BOOLEAN**|  | [optional] 
- **jcrcontentserialization_type** | **String**|  | [optional] 
- **jcrcontentslingresource_type** | **String**|  | [optional] 
- **jcrcontentssl** | **String**|  | [optional] 
- **jcrcontenttransport_ntlm_domain** | **String**|  | [optional] 
- **jcrcontenttransport_ntlm_host** | **String**|  | [optional] 
- **jcrcontenttransport_password** | **String**|  | [optional] 
- **jcrcontenttransport_uri** | **String**|  | [optional] 
- **jcrcontenttransport_user** | **String**|  | [optional] 
- **jcrcontenttrigger_distribute** | **BOOLEAN**|  | [optional] 
- **jcrcontenttrigger_modified** | **BOOLEAN**|  | [optional] 
- **jcrcontenttrigger_on_off_time** | **BOOLEAN**|  | [optional] 
- **jcrcontenttrigger_receive** | **BOOLEAN**|  | [optional] 
- **jcrcontenttrigger_specific** | **BOOLEAN**|  | [optional] 
- **jcrcontentuser_id** | **String**|  | [optional] 
+ **jcrcontent_cqdistribute** | **Boolean**|  | [optional] 
+ **jcrcontent_cqdistribute_type_hint** | **String**|  | [optional] 
+ **jcrcontent_cqname** | **String**|  | [optional] 
+ **jcrcontent_cqtemplate** | **String**|  | [optional] 
+ **jcrcontent_enabled** | **Boolean**|  | [optional] 
+ **jcrcontent_jcrdescription** | **String**|  | [optional] 
+ **jcrcontent_jcrlast_modified** | **String**|  | [optional] 
+ **jcrcontent_jcrlast_modified_by** | **String**|  | [optional] 
+ **jcrcontent_jcrmixin_types** | **String**|  | [optional] 
+ **jcrcontent_jcrtitle** | **String**|  | [optional] 
+ **jcrcontent_log_level** | **String**|  | [optional] 
+ **jcrcontent_no_status_update** | **Boolean**|  | [optional] 
+ **jcrcontent_no_versioning** | **Boolean**|  | [optional] 
+ **jcrcontent_protocol_connect_timeout** | **Float**|  | [optional] 
+ **jcrcontent_protocol_http_connection_closed** | **Boolean**|  | [optional] 
+ **jcrcontent_protocol_http_expired** | **String**|  | [optional] 
+ **jcrcontent_protocol_http_headers** | [**Array&lt;String&gt;**](String.md)|  | [optional] 
+ **jcrcontent_protocol_http_headers_type_hint** | **String**|  | [optional] 
+ **jcrcontent_protocol_http_method** | **String**|  | [optional] 
+ **jcrcontent_protocol_https_relaxed** | **Boolean**|  | [optional] 
+ **jcrcontent_protocol_interface** | **String**|  | [optional] 
+ **jcrcontent_protocol_socket_timeout** | **Float**|  | [optional] 
+ **jcrcontent_protocol_version** | **String**|  | [optional] 
+ **jcrcontent_proxy_ntlm_domain** | **String**|  | [optional] 
+ **jcrcontent_proxy_ntlm_host** | **String**|  | [optional] 
+ **jcrcontent_proxy_host** | **String**|  | [optional] 
+ **jcrcontent_proxy_password** | **String**|  | [optional] 
+ **jcrcontent_proxy_port** | **Float**|  | [optional] 
+ **jcrcontent_proxy_user** | **String**|  | [optional] 
+ **jcrcontent_queue_batch_max_size** | **Float**|  | [optional] 
+ **jcrcontent_queue_batch_mode** | **String**|  | [optional] 
+ **jcrcontent_queue_batch_wait_time** | **Float**|  | [optional] 
+ **jcrcontent_retry_delay** | **String**|  | [optional] 
+ **jcrcontent_reverse_replication** | **Boolean**|  | [optional] 
+ **jcrcontent_serialization_type** | **String**|  | [optional] 
+ **jcrcontent_slingresource_type** | **String**|  | [optional] 
+ **jcrcontent_ssl** | **String**|  | [optional] 
+ **jcrcontent_transport_ntlm_domain** | **String**|  | [optional] 
+ **jcrcontent_transport_ntlm_host** | **String**|  | [optional] 
+ **jcrcontent_transport_password** | **String**|  | [optional] 
+ **jcrcontent_transport_uri** | **String**|  | [optional] 
+ **jcrcontent_transport_user** | **String**|  | [optional] 
+ **jcrcontent_trigger_distribute** | **Boolean**|  | [optional] 
+ **jcrcontent_trigger_modified** | **Boolean**|  | [optional] 
+ **jcrcontent_trigger_on_off_time** | **Boolean**|  | [optional] 
+ **jcrcontent_trigger_receive** | **Boolean**|  | [optional] 
+ **jcrcontent_trigger_specific** | **Boolean**|  | [optional] 
+ **jcrcontent_user_id** | **String**|  | [optional] 
  **jcrprimary_type** | **String**|  | [optional] 
  **operation** | **String**|  | [optional] 
 
@@ -770,17 +799,18 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 
+## post_authorizable_keystore
 
-# **post_authorizable_keystore**
 > KeystoreInfo post_authorizable_keystore(intermediate_path, authorizable_id, opts)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -819,6 +849,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **intermediate_path** | **String**|  | 
@@ -846,17 +877,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: multipart/form-data
- - **Accept**: text/plain
+- **Content-Type**: multipart/form-data
+- **Accept**: text/plain
 
 
+## post_authorizables
 
-# **post_authorizables**
 > String post_authorizables(authorizable_id, intermediate_path, opts)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -874,7 +906,7 @@ opts = {
   create_user: 'create_user_example', # String | 
   create_group: 'create_group_example', # String | 
   reppassword: 'reppassword_example', # String | 
-  profilegiven_name: 'profilegiven_name_example' # String | 
+  profile_given_name: 'profile_given_name_example' # String | 
 }
 
 begin
@@ -887,6 +919,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorizable_id** | **String**|  | 
@@ -894,7 +927,7 @@ Name | Type | Description  | Notes
  **create_user** | **String**|  | [optional] 
  **create_group** | **String**|  | [optional] 
  **reppassword** | **String**|  | [optional] 
- **profilegiven_name** | **String**|  | [optional] 
+ **profile_given_name** | **String**|  | [optional] 
 
 ### Return type
 
@@ -906,17 +939,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/html
+- **Content-Type**: Not defined
+- **Accept**: text/html
 
 
+## post_config_adobe_granite_saml_authentication_handler
 
-# **post_config_adobe_granite_saml_authentication_handler**
 > post_config_adobe_granite_saml_authentication_handler(opts)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -933,9 +967,9 @@ opts = {
   key_store_password_type_hint: 'key_store_password_type_hint_example', # String | 
   service_ranking: 56, # Integer | 
   service_ranking_type_hint: 'service_ranking_type_hint_example', # String | 
-  idp_http_redirect: true, # BOOLEAN | 
+  idp_http_redirect: true, # Boolean | 
   idp_http_redirect_type_hint: 'idp_http_redirect_type_hint_example', # String | 
-  create_user: true, # BOOLEAN | 
+  create_user: true, # Boolean | 
   create_user_type_hint: 'create_user_type_hint_example', # String | 
   default_redirect_url: 'default_redirect_url_example', # String | 
   default_redirect_url_type_hint: 'default_redirect_url_type_hint_example', # String | 
@@ -945,7 +979,7 @@ opts = {
   default_groups_type_hint: 'default_groups_type_hint_example', # String | 
   idp_cert_alias: 'idp_cert_alias_example', # String | 
   idp_cert_alias_type_hint: 'idp_cert_alias_type_hint_example', # String | 
-  add_group_memberships: true, # BOOLEAN | 
+  add_group_memberships: true, # Boolean | 
   add_group_memberships_type_hint: 'add_group_memberships_type_hint_example', # String | 
   path: ['path_example'], # Array<String> | 
   path_type_hint: 'path_type_hint_example', # String | 
@@ -963,11 +997,11 @@ opts = {
   service_provider_entity_id_type_hint: 'service_provider_entity_id_type_hint_example', # String | 
   assertion_consumer_service_url: 'assertion_consumer_service_url_example', # String | 
   assertion_consumer_service_url_type_hint: 'assertion_consumer_service_url_type_hint_example', # String | 
-  handle_logout: true, # BOOLEAN | 
+  handle_logout: true, # Boolean | 
   handle_logout_type_hint: 'handle_logout_type_hint_example', # String | 
   sp_private_key_alias: 'sp_private_key_alias_example', # String | 
   sp_private_key_alias_type_hint: 'sp_private_key_alias_type_hint_example', # String | 
-  use_encryption: true, # BOOLEAN | 
+  use_encryption: true, # Boolean | 
   use_encryption_type_hint: 'use_encryption_type_hint_example', # String | 
   name_id_format: 'name_id_format_example', # String | 
   name_id_format_type_hint: 'name_id_format_type_hint_example', # String | 
@@ -988,15 +1022,16 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **key_store_password** | **String**|  | [optional] 
  **key_store_password_type_hint** | **String**|  | [optional] 
  **service_ranking** | **Integer**|  | [optional] 
  **service_ranking_type_hint** | **String**|  | [optional] 
- **idp_http_redirect** | **BOOLEAN**|  | [optional] 
+ **idp_http_redirect** | **Boolean**|  | [optional] 
  **idp_http_redirect_type_hint** | **String**|  | [optional] 
- **create_user** | **BOOLEAN**|  | [optional] 
+ **create_user** | **Boolean**|  | [optional] 
  **create_user_type_hint** | **String**|  | [optional] 
  **default_redirect_url** | **String**|  | [optional] 
  **default_redirect_url_type_hint** | **String**|  | [optional] 
@@ -1006,7 +1041,7 @@ Name | Type | Description  | Notes
  **default_groups_type_hint** | **String**|  | [optional] 
  **idp_cert_alias** | **String**|  | [optional] 
  **idp_cert_alias_type_hint** | **String**|  | [optional] 
- **add_group_memberships** | **BOOLEAN**|  | [optional] 
+ **add_group_memberships** | **Boolean**|  | [optional] 
  **add_group_memberships_type_hint** | **String**|  | [optional] 
  **path** | [**Array&lt;String&gt;**](String.md)|  | [optional] 
  **path_type_hint** | **String**|  | [optional] 
@@ -1024,11 +1059,11 @@ Name | Type | Description  | Notes
  **service_provider_entity_id_type_hint** | **String**|  | [optional] 
  **assertion_consumer_service_url** | **String**|  | [optional] 
  **assertion_consumer_service_url_type_hint** | **String**|  | [optional] 
- **handle_logout** | **BOOLEAN**|  | [optional] 
+ **handle_logout** | **Boolean**|  | [optional] 
  **handle_logout_type_hint** | **String**|  | [optional] 
  **sp_private_key_alias** | **String**|  | [optional] 
  **sp_private_key_alias_type_hint** | **String**|  | [optional] 
- **use_encryption** | **BOOLEAN**|  | [optional] 
+ **use_encryption** | **Boolean**|  | [optional] 
  **use_encryption_type_hint** | **String**|  | [optional] 
  **name_id_format** | **String**|  | [optional] 
  **name_id_format_type_hint** | **String**|  | [optional] 
@@ -1049,17 +1084,18 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 
+## post_config_apache_felix_jetty_based_http_service
 
-# **post_config_apache_felix_jetty_based_http_service**
 > post_config_apache_felix_jetty_based_http_service(opts)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -1072,7 +1108,7 @@ end
 
 api_instance = SwaggerAemClient::SlingApi.new
 opts = {
-  org_apache_felix_https_nio: true, # BOOLEAN | 
+  org_apache_felix_https_nio: true, # Boolean | 
   org_apache_felix_https_nio_type_hint: 'org_apache_felix_https_nio_type_hint_example', # String | 
   org_apache_felix_https_keystore: 'org_apache_felix_https_keystore_example', # String | 
   org_apache_felix_https_keystore_type_hint: 'org_apache_felix_https_keystore_type_hint_example', # String | 
@@ -1088,7 +1124,7 @@ opts = {
   org_apache_felix_https_truststore_password_type_hint: 'org_apache_felix_https_truststore_password_type_hint_example', # String | 
   org_apache_felix_https_clientcertificate: 'org_apache_felix_https_clientcertificate_example', # String | 
   org_apache_felix_https_clientcertificate_type_hint: 'org_apache_felix_https_clientcertificate_type_hint_example', # String | 
-  org_apache_felix_https_enable: true, # BOOLEAN | 
+  org_apache_felix_https_enable: true, # Boolean | 
   org_apache_felix_https_enable_type_hint: 'org_apache_felix_https_enable_type_hint_example', # String | 
   org_osgi_service_http_port_secure: 'org_osgi_service_http_port_secure_example', # String | 
   org_osgi_service_http_port_secure_type_hint: 'org_osgi_service_http_port_secure_type_hint_example' # String | 
@@ -1103,9 +1139,10 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **org_apache_felix_https_nio** | **BOOLEAN**|  | [optional] 
+ **org_apache_felix_https_nio** | **Boolean**|  | [optional] 
  **org_apache_felix_https_nio_type_hint** | **String**|  | [optional] 
  **org_apache_felix_https_keystore** | **String**|  | [optional] 
  **org_apache_felix_https_keystore_type_hint** | **String**|  | [optional] 
@@ -1121,7 +1158,7 @@ Name | Type | Description  | Notes
  **org_apache_felix_https_truststore_password_type_hint** | **String**|  | [optional] 
  **org_apache_felix_https_clientcertificate** | **String**|  | [optional] 
  **org_apache_felix_https_clientcertificate_type_hint** | **String**|  | [optional] 
- **org_apache_felix_https_enable** | **BOOLEAN**|  | [optional] 
+ **org_apache_felix_https_enable** | **Boolean**|  | [optional] 
  **org_apache_felix_https_enable_type_hint** | **String**|  | [optional] 
  **org_osgi_service_http_port_secure** | **String**|  | [optional] 
  **org_osgi_service_http_port_secure_type_hint** | **String**|  | [optional] 
@@ -1136,17 +1173,18 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 
+## post_config_apache_http_components_proxy_configuration
 
-# **post_config_apache_http_components_proxy_configuration**
 > post_config_apache_http_components_proxy_configuration(opts)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -1165,7 +1203,7 @@ opts = {
   proxy_port_type_hint: 'proxy_port_type_hint_example', # String | 
   proxy_exceptions: ['proxy_exceptions_example'], # Array<String> | 
   proxy_exceptions_type_hint: 'proxy_exceptions_type_hint_example', # String | 
-  proxy_enabled: true, # BOOLEAN | 
+  proxy_enabled: true, # Boolean | 
   proxy_enabled_type_hint: 'proxy_enabled_type_hint_example', # String | 
   proxy_user: 'proxy_user_example', # String | 
   proxy_user_type_hint: 'proxy_user_type_hint_example', # String | 
@@ -1182,6 +1220,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **proxy_host** | **String**|  | [optional] 
@@ -1190,7 +1229,7 @@ Name | Type | Description  | Notes
  **proxy_port_type_hint** | **String**|  | [optional] 
  **proxy_exceptions** | [**Array&lt;String&gt;**](String.md)|  | [optional] 
  **proxy_exceptions_type_hint** | **String**|  | [optional] 
- **proxy_enabled** | **BOOLEAN**|  | [optional] 
+ **proxy_enabled** | **Boolean**|  | [optional] 
  **proxy_enabled_type_hint** | **String**|  | [optional] 
  **proxy_user** | **String**|  | [optional] 
  **proxy_user_type_hint** | **String**|  | [optional] 
@@ -1207,17 +1246,18 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 
+## post_config_apache_sling_dav_ex_servlet
 
-# **post_config_apache_sling_dav_ex_servlet**
 > post_config_apache_sling_dav_ex_servlet(opts)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -1232,7 +1272,7 @@ api_instance = SwaggerAemClient::SlingApi.new
 opts = {
   _alias: '_alias_example', # String | 
   alias_type_hint: 'alias_type_hint_example', # String | 
-  dav_create_absolute_uri: true, # BOOLEAN | 
+  dav_create_absolute_uri: true, # Boolean | 
   dav_create_absolute_uri_type_hint: 'dav_create_absolute_uri_type_hint_example' # String | 
 }
 
@@ -1245,11 +1285,12 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **_alias** | **String**|  | [optional] 
  **alias_type_hint** | **String**|  | [optional] 
- **dav_create_absolute_uri** | **BOOLEAN**|  | [optional] 
+ **dav_create_absolute_uri** | **Boolean**|  | [optional] 
  **dav_create_absolute_uri_type_hint** | **String**|  | [optional] 
 
 ### Return type
@@ -1262,17 +1303,18 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 
+## post_config_apache_sling_get_servlet
 
-# **post_config_apache_sling_get_servlet**
 > post_config_apache_sling_get_servlet(opts)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -1287,11 +1329,11 @@ api_instance = SwaggerAemClient::SlingApi.new
 opts = {
   json_maximumresults: 'json_maximumresults_example', # String | 
   json_maximumresults_type_hint: 'json_maximumresults_type_hint_example', # String | 
-  enable_html: true, # BOOLEAN | 
+  enable_html: true, # Boolean | 
   enable_html_type_hint: 'enable_html_type_hint_example', # String | 
-  enable_txt: true, # BOOLEAN | 
+  enable_txt: true, # Boolean | 
   enable_txt_type_hint: 'enable_txt_type_hint_example', # String | 
-  enable_xml: true, # BOOLEAN | 
+  enable_xml: true, # Boolean | 
   enable_xml_type_hint: 'enable_xml_type_hint_example' # String | 
 }
 
@@ -1304,15 +1346,16 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **json_maximumresults** | **String**|  | [optional] 
  **json_maximumresults_type_hint** | **String**|  | [optional] 
- **enable_html** | **BOOLEAN**|  | [optional] 
+ **enable_html** | **Boolean**|  | [optional] 
  **enable_html_type_hint** | **String**|  | [optional] 
- **enable_txt** | **BOOLEAN**|  | [optional] 
+ **enable_txt** | **Boolean**|  | [optional] 
  **enable_txt_type_hint** | **String**|  | [optional] 
- **enable_xml** | **BOOLEAN**|  | [optional] 
+ **enable_xml** | **Boolean**|  | [optional] 
  **enable_xml_type_hint** | **String**|  | [optional] 
 
 ### Return type
@@ -1325,17 +1368,18 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 
+## post_config_apache_sling_referrer_filter
 
-# **post_config_apache_sling_referrer_filter**
 > post_config_apache_sling_referrer_filter(opts)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -1348,7 +1392,7 @@ end
 
 api_instance = SwaggerAemClient::SlingApi.new
 opts = {
-  allow_empty: true, # BOOLEAN | 
+  allow_empty: true, # Boolean | 
   allow_empty_type_hint: 'allow_empty_type_hint_example', # String | 
   allow_hosts: 'allow_hosts_example', # String | 
   allow_hosts_type_hint: 'allow_hosts_type_hint_example', # String | 
@@ -1367,9 +1411,10 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **allow_empty** | **BOOLEAN**|  | [optional] 
+ **allow_empty** | **Boolean**|  | [optional] 
  **allow_empty_type_hint** | **String**|  | [optional] 
  **allow_hosts** | **String**|  | [optional] 
  **allow_hosts_type_hint** | **String**|  | [optional] 
@@ -1388,17 +1433,67 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
+
+
+## post_config_property
+
+> post_config_property(config_node_name)
 
 
 
-# **post_node**
+### Example
+
+```ruby
+# load the gem
+require 'swagger_aem'
+# setup authorization
+SwaggerAemClient.configure do |config|
+  # Configure HTTP basic authorization: aemAuth
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = SwaggerAemClient::SlingApi.new
+config_node_name = 'config_node_name_example' # String | 
+
+begin
+  api_instance.post_config_property(config_node_name)
+rescue SwaggerAemClient::ApiError => e
+  puts "Exception when calling SlingApi->post_config_property: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **config_node_name** | **String**|  | 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
+
+
+## post_node
+
 > post_node(path, name, opts)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -1427,6 +1522,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path** | **String**|  | 
@@ -1445,17 +1541,18 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: multipart/form-data
- - **Accept**: Not defined
+- **Content-Type**: multipart/form-data
+- **Accept**: Not defined
 
 
+## post_node_rw
 
-# **post_node_rw**
 > post_node_rw(path, name, opts)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -1482,6 +1579,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path** | **String**|  | 
@@ -1498,17 +1596,18 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 
+## post_path
 
-# **post_path**
 > post_path(path, jcrprimary_type, name)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -1533,6 +1632,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path** | **String**|  | 
@@ -1549,17 +1649,18 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 
+## post_query
 
-# **post_query**
 > String post_query(path, p_limit, _1_property, _1_property_value)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -1586,6 +1687,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path** | **String**|  | 
@@ -1603,17 +1705,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## post_tree_activation
 
-# **post_tree_activation**
 > post_tree_activation(ignoredeactivated, onlymodified, path)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -1625,8 +1728,8 @@ SwaggerAemClient.configure do |config|
 end
 
 api_instance = SwaggerAemClient::SlingApi.new
-ignoredeactivated = true # BOOLEAN | 
-onlymodified = true # BOOLEAN | 
+ignoredeactivated = true # Boolean | 
+onlymodified = true # Boolean | 
 path = 'path_example' # String | 
 
 begin
@@ -1638,10 +1741,11 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ignoredeactivated** | **BOOLEAN**|  | 
- **onlymodified** | **BOOLEAN**|  | 
+ **ignoredeactivated** | **Boolean**|  | 
+ **onlymodified** | **Boolean**|  | 
  **path** | **String**|  | 
 
 ### Return type
@@ -1654,17 +1758,18 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 
+## post_truststore
 
-# **post_truststore**
 > String post_truststore(opts)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -1695,6 +1800,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **operation** | **String**|  | [optional] 
@@ -1714,17 +1820,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: multipart/form-data
- - **Accept**: text/plain
+- **Content-Type**: multipart/form-data
+- **Accept**: text/plain
 
 
+## post_truststore_pkcs12
 
-# **post_truststore_pkcs12**
 > String post_truststore_pkcs12(opts)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -1750,6 +1857,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **truststore_p12** | **File**|  | [optional] 
@@ -1764,8 +1872,6 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: multipart/form-data
- - **Accept**: text/plain
-
-
+- **Content-Type**: multipart/form-data
+- **Accept**: text/plain
 

@@ -13,46 +13,20 @@ OpenAPI Generator version: 4.3.1-SNAPSHOT
 require 'date'
 
 module SwaggerAemClient
-  class SamlConfigurationPropertyItemsString
-    # property name
-    attr_accessor :name
-
-    # True if optional
-    attr_accessor :optional
-
-    # True if property is set
-    attr_accessor :is_set
-
-    # Property type, 1=String, 3=long, 11=boolean, 12=Password
-    attr_accessor :type
-
-    # Property value
-    attr_accessor :value
-
-    # Property description
-    attr_accessor :description
+  class InlineObject3
+    attr_accessor :truststore_p12
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'name' => :'name',
-        :'optional' => :'optional',
-        :'is_set' => :'is_set',
-        :'type' => :'type',
-        :'value' => :'value',
-        :'description' => :'description'
+        :'truststore_p12' => :'truststore.p12'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'name' => :'String',
-        :'optional' => :'Boolean',
-        :'is_set' => :'Boolean',
-        :'type' => :'Integer',
-        :'value' => :'String',
-        :'description' => :'String'
+        :'truststore_p12' => :'File'
       }
     end
 
@@ -66,39 +40,19 @@ module SwaggerAemClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `SwaggerAemClient::SamlConfigurationPropertyItemsString` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `SwaggerAemClient::InlineObject3` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `SwaggerAemClient::SamlConfigurationPropertyItemsString`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `SwaggerAemClient::InlineObject3`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
-      end
-
-      if attributes.key?(:'optional')
-        self.optional = attributes[:'optional']
-      end
-
-      if attributes.key?(:'is_set')
-        self.is_set = attributes[:'is_set']
-      end
-
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
-      end
-
-      if attributes.key?(:'value')
-        self.value = attributes[:'value']
-      end
-
-      if attributes.key?(:'description')
-        self.description = attributes[:'description']
+      if attributes.key?(:'truststore_p12')
+        self.truststore_p12 = attributes[:'truststore_p12']
       end
     end
 
@@ -120,12 +74,7 @@ module SwaggerAemClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          name == o.name &&
-          optional == o.optional &&
-          is_set == o.is_set &&
-          type == o.type &&
-          value == o.value &&
-          description == o.description
+          truststore_p12 == o.truststore_p12
     end
 
     # @see the `==` method
@@ -137,7 +86,7 @@ module SwaggerAemClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, optional, is_set, type, value, description].hash
+      [truststore_p12].hash
     end
 
     # Builds the object from hash

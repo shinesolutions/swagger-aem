@@ -8,12 +8,15 @@ Method | HTTP request | Description
 [**post_cq_actions**](CqApi.md#post_cq_actions) | **POST** /.cqactions.html | 
 
 
-# **get_login_page**
+
+## get_login_page
+
 > String get_login_page
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -29,6 +32,7 @@ end
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -41,17 +45,18 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/html
+- **Content-Type**: Not defined
+- **Accept**: text/html
 
 
+## post_cq_actions
 
-# **post_cq_actions**
 > post_cq_actions(authorizable_id, changelog)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -75,6 +80,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorizable_id** | **String**|  | 
@@ -90,8 +96,6 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
-
-
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 

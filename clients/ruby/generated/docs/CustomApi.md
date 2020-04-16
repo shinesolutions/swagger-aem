@@ -9,12 +9,15 @@ Method | HTTP request | Description
 [**post_config_aem_password_reset**](CustomApi.md#post_config_aem_password_reset) | **POST** /apps/system/config/com.shinesolutions.aem.passwordreset.Activator | 
 
 
-# **get_aem_health_check**
+
+## get_aem_health_check
+
 > String get_aem_health_check(opts)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -28,7 +31,7 @@ end
 api_instance = SwaggerAemClient::CustomApi.new
 opts = {
   tags: 'tags_example', # String | 
-  combine_tags_or: true # BOOLEAN | 
+  combine_tags_or: true # Boolean | 
 }
 
 begin
@@ -41,10 +44,11 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **tags** | **String**|  | [optional] 
- **combine_tags_or** | **BOOLEAN**|  | [optional] 
+ **combine_tags_or** | **Boolean**|  | [optional] 
 
 ### Return type
 
@@ -56,17 +60,18 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
+## post_config_aem_health_check_servlet
 
-# **post_config_aem_health_check_servlet**
 > post_config_aem_health_check_servlet(opts)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -92,6 +97,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **bundles_ignored** | [**Array&lt;String&gt;**](String.md)|  | [optional] 
@@ -107,17 +113,18 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 
+## post_config_aem_password_reset
 
-# **post_config_aem_password_reset**
 > post_config_aem_password_reset(opts)
 
 
 
 ### Example
+
 ```ruby
 # load the gem
 require 'swagger_aem'
@@ -143,6 +150,7 @@ end
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **pwdreset_authorizables** | [**Array&lt;String&gt;**](String.md)|  | [optional] 
@@ -158,8 +166,6 @@ nil (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
-
-
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
