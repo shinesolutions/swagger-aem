@@ -178,6 +178,20 @@ paths:
       responses:
         default:
           description: Default response
+  /apps/system/config/{configNodeName}:
+    post:
+      operationId: postConfigProperty
+      parameters:
+        - name: configNodeName
+          in: path
+          required: true
+          schema:
+            type: string
+      tags:
+        - sling
+      responses:
+        default:
+          description: Default response
   /apps/system/config/org.apache.felix.http:
     post:
       operationId: postConfigApacheFelixJettyBasedHttpService
