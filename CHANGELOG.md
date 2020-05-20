@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
-- Add support for enabling ssl via granite "/puppet-aem-resources/issues/" [#92]
+- Add new API call to configure SSL via Granite
 
 ## 3.2.0 - 2020-04-16
 ### Added
