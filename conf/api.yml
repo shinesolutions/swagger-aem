@@ -2021,6 +2021,61 @@ paths:
                 format: binary
       tags:
         - sling
+  "/libs/granite/security/post/sslSetup.html":
+    post:
+      operationId: sslSetup
+      parameters:
+        - name: keystorePassword
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: keystorePasswordConfirm
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: truststorePassword
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: truststorePasswordConfirm
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: httpsHostname
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: httpsPort
+          in: query
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                privatekeyFile:
+                  type: string
+                  format: binary
+                certificateFile:
+                  type: string
+                  format: binary
+      responses:
+        default:
+          description: Default response
+          content:
+            text/plain:
+              schema:
+                type: string
+      tags:
+        - granite
 servers:
   - url: /
 components:
