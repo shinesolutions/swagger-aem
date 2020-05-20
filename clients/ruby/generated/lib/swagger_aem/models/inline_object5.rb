@@ -13,40 +13,24 @@ OpenAPI Generator version: 4.3.1-SNAPSHOT
 require 'date'
 
 module SwaggerAemClient
-  class KeystoreItems
-    # Keystore alias name
-    attr_accessor :_alias
+  class InlineObject5
+    attr_accessor :privatekey_file
 
-    # e.g. \"privateKey\"
-    attr_accessor :entry_type
-
-    # e.g. \"RSA\"
-    attr_accessor :algorithm
-
-    # e.g. \"PKCS#8\"
-    attr_accessor :format
-
-    attr_accessor :chain
+    attr_accessor :certificate_file
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'_alias' => :'alias',
-        :'entry_type' => :'entryType',
-        :'algorithm' => :'algorithm',
-        :'format' => :'format',
-        :'chain' => :'chain'
+        :'privatekey_file' => :'privatekeyFile',
+        :'certificate_file' => :'certificateFile'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'_alias' => :'String',
-        :'entry_type' => :'String',
-        :'algorithm' => :'String',
-        :'format' => :'String',
-        :'chain' => :'Array<KeystoreChainItems>'
+        :'privatekey_file' => :'File',
+        :'certificate_file' => :'File'
       }
     end
 
@@ -60,37 +44,23 @@ module SwaggerAemClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `SwaggerAemClient::KeystoreItems` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `SwaggerAemClient::InlineObject5` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `SwaggerAemClient::KeystoreItems`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `SwaggerAemClient::InlineObject5`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'_alias')
-        self._alias = attributes[:'_alias']
+      if attributes.key?(:'privatekey_file')
+        self.privatekey_file = attributes[:'privatekey_file']
       end
 
-      if attributes.key?(:'entry_type')
-        self.entry_type = attributes[:'entry_type']
-      end
-
-      if attributes.key?(:'algorithm')
-        self.algorithm = attributes[:'algorithm']
-      end
-
-      if attributes.key?(:'format')
-        self.format = attributes[:'format']
-      end
-
-      if attributes.key?(:'chain')
-        if (value = attributes[:'chain']).is_a?(Array)
-          self.chain = value
-        end
+      if attributes.key?(:'certificate_file')
+        self.certificate_file = attributes[:'certificate_file']
       end
     end
 
@@ -112,11 +82,8 @@ module SwaggerAemClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          _alias == o._alias &&
-          entry_type == o.entry_type &&
-          algorithm == o.algorithm &&
-          format == o.format &&
-          chain == o.chain
+          privatekey_file == o.privatekey_file &&
+          certificate_file == o.certificate_file
     end
 
     # @see the `==` method
@@ -128,7 +95,7 @@ module SwaggerAemClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [_alias, entry_type, algorithm, format, chain].hash
+      [privatekey_file, certificate_file].hash
     end
 
     # Builds the object from hash
