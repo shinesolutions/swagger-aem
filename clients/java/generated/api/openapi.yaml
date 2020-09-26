@@ -7,7 +7,7 @@ info:
   description: Swagger AEM is an OpenAPI specification for Adobe Experience Manager
     (AEM) API
   title: Adobe Experience Manager (AEM) API
-  version: 3.4.0-pre.0
+  version: 3.4.0
 servers:
 - url: /
 security:
