@@ -28,7 +28,7 @@ describe 'Saml' do
 
       # ensure saml osgi config doesn't exist prior to testing
       data, status_code, headers = @sling.delete_node_with_http_info(
-        path = '/apps/system/config',
+        path = 'apps/system/config',
         name = 'com.adobe.granite.auth.saml.SamlAuthenticationHandler.config'
       )
       # delete node when it exists
@@ -84,7 +84,7 @@ describe 'Saml' do
 
       # Creating empty SAML configuration as sling:OsgiConfig
       data, status_code, headers = @sling.post_path_with_http_info(
-        path = '/apps/system/config',
+        path = 'apps/system/config',
         jcrprimary_type = 'sling:OsgiConfig',
         name = 'com.adobe.granite.auth.saml.SamlAuthenticationHandler.config'
       )
@@ -93,7 +93,7 @@ describe 'Saml' do
       # Check if empty SAML configuration exists
       begin
         data, status_code, headers = @sling.get_node_with_http_info(
-          path = '/apps/system/config',
+          path = 'apps/system/config',
           name = 'com.adobe.granite.auth.saml.SamlAuthenticationHandler.config'
         )
         fail
@@ -104,7 +104,7 @@ describe 'Saml' do
 
       begin
         data, status_code, headers = @sling.get_node_with_http_info(
-          path = '/apps/system/config',
+          path = 'apps/system/config',
           name = 'com.adobe.granite.auth.saml.SamlAuthenticationHandler.config'
         )
         fail
@@ -154,7 +154,6 @@ describe 'Saml' do
           :service_provider_entity_id_type_hint => 'String',
           :handle_logout => true,
           :handle_logout_type_hint => 'Boolean',
-          :sp_private_key_alias => '',
           :sp_private_key_alias_type_hint => 'String',
           :use_encryption => false,
           :use_encryption_type_hint => 'Boolean',

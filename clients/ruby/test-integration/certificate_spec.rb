@@ -8,7 +8,7 @@ describe 'Certificate' do
     # ensure truststore doesn't exist prior to testing
     begin
       data, status_code, headers = @sling.post_node_with_http_info(
-        path = '/etc/truststore/',
+        path = 'etc/truststore',
         name = 'truststore.p12',
         {
           :operation => 'delete'

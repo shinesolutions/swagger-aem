@@ -134,7 +134,7 @@ describe 'Node' do
           name = 'somefolder',
           {
             :operation => 'delete',
-            :delete_authorizable => ''
+            :delete_authorizable => 'somefolder'
           }
         )
         expect(status_code).to eq(200)
