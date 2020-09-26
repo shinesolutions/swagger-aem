@@ -7,7 +7,7 @@ clean:
 
 deps:
 	npm install -g bootprint@1.0.2 bootprint-openapi@1.1.1 gh-pages@2.0.1 jsonlint@1.6.3 swagger-cli@2.2.1 swaggy-c@0.1.0
-	docker pull openapitools/openapi-generator-cli:v3.3.4
+	docker pull openapitools/openapi-generator-cli:v4.3.1
 
 lint:
 	swagger-cli validate conf/*.yml
@@ -50,7 +50,7 @@ generate:
 	  docker \
 		  run \
 		  --rm \
-		  -v ${PWD}:/local openapitools/openapi-generator-cli \
+		  -v ${PWD}:/local openapitools/openapi-generator-cli:v4.3.1 \
 		  generate \
 		  --input-spec /local/conf/api.yml \
 			--config /local/clients/$$lang/conf/client.json \
