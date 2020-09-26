@@ -11,34 +11,35 @@ Method | HTTP request | Description
 [**postSamlConfiguration**](ConsoleApi.md#postSamlConfiguration) | **POST** /system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler | 
 
 
-<a name="getAemProductInfo"></a>
-# **getAemProductInfo**
+
+## getAemProductInfo
+
 > [String] getAemProductInfo()
 
 
 
 ### Example
-```javascript
-var NodeSwaggerAem = require('node-swagger-aem');
-var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
+```javascript
+import NodeSwaggerAem from 'node-swagger-aem';
+let defaultClient = NodeSwaggerAem.ApiClient.instance;
 // Configure HTTP basic authorization: aemAuth
-var aemAuth = defaultClient.authentications['aemAuth'];
+let aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.ConsoleApi();
-var callback = function(error, data, response) {
+let apiInstance = new NodeSwaggerAem.ConsoleApi();
+apiInstance.getAemProductInfo((error, data, response) => {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully. Returned data: ' + data);
   }
-};
-apiInstance.getAemProductInfo(callback);
+});
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -51,37 +52,38 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-<a name="getConfigMgr"></a>
-# **getConfigMgr**
+
+## getConfigMgr
+
 > String getConfigMgr()
 
 
 
 ### Example
-```javascript
-var NodeSwaggerAem = require('node-swagger-aem');
-var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
+```javascript
+import NodeSwaggerAem from 'node-swagger-aem';
+let defaultClient = NodeSwaggerAem.ApiClient.instance;
 // Configure HTTP basic authorization: aemAuth
-var aemAuth = defaultClient.authentications['aemAuth'];
+let aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.ConsoleApi();
-var callback = function(error, data, response) {
+let apiInstance = new NodeSwaggerAem.ConsoleApi();
+apiInstance.getConfigMgr((error, data, response) => {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully. Returned data: ' + data);
   }
-};
-apiInstance.getConfigMgr(callback);
+});
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -94,39 +96,40 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/xml
+- **Content-Type**: Not defined
+- **Accept**: text/xml
 
-<a name="postBundle"></a>
-# **postBundle**
+
+## postBundle
+
 > postBundle(name, action)
 
 
 
 ### Example
-```javascript
-var NodeSwaggerAem = require('node-swagger-aem');
-var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
+```javascript
+import NodeSwaggerAem from 'node-swagger-aem';
+let defaultClient = NodeSwaggerAem.ApiClient.instance;
 // Configure HTTP basic authorization: aemAuth
-var aemAuth = defaultClient.authentications['aemAuth'];
+let aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.ConsoleApi();
-var name = "name_example"; // String | 
-var action = "action_example"; // String | 
-var callback = function(error, data, response) {
+let apiInstance = new NodeSwaggerAem.ConsoleApi();
+let name = "name_example"; // String | 
+let action = "action_example"; // String | 
+apiInstance.postBundle(name, action, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully.');
   }
-};
-apiInstance.postBundle(name, action, callback);
+});
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -143,38 +146,39 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
-<a name="postJmxRepository"></a>
-# **postJmxRepository**
+
+## postJmxRepository
+
 > postJmxRepository(action)
 
 
 
 ### Example
-```javascript
-var NodeSwaggerAem = require('node-swagger-aem');
-var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
+```javascript
+import NodeSwaggerAem from 'node-swagger-aem';
+let defaultClient = NodeSwaggerAem.ApiClient.instance;
 // Configure HTTP basic authorization: aemAuth
-var aemAuth = defaultClient.authentications['aemAuth'];
+let aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.ConsoleApi();
-var action = "action_example"; // String | 
-var callback = function(error, data, response) {
+let apiInstance = new NodeSwaggerAem.ConsoleApi();
+let action = "action_example"; // String | 
+apiInstance.postJmxRepository(action, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully.');
   }
-};
-apiInstance.postJmxRepository(action, callback);
+});
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -190,33 +194,34 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
-<a name="postSamlConfiguration"></a>
-# **postSamlConfiguration**
+
+## postSamlConfiguration
+
 > SamlConfigurationInfo postSamlConfiguration(opts)
 
 
 
 ### Example
-```javascript
-var NodeSwaggerAem = require('node-swagger-aem');
-var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
+```javascript
+import NodeSwaggerAem from 'node-swagger-aem';
+let defaultClient = NodeSwaggerAem.ApiClient.instance;
 // Configure HTTP basic authorization: aemAuth
-var aemAuth = defaultClient.authentications['aemAuth'];
+let aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.ConsoleApi();
-var opts = {
+let apiInstance = new NodeSwaggerAem.ConsoleApi();
+let opts = {
   'post': true, // Boolean | 
   'apply': true, // Boolean | 
   '_delete': true, // Boolean | 
   'action': "action_example", // String | 
   'location': "location_example", // String | 
-  'path': ["inner_example"], // [String] | 
+  'path': ["null"], // [String] | 
   'serviceRanking': 56, // Number | 
   'idpUrl': "idpUrl_example", // String | 
   'idpCertAlias': "idpCertAlias_example", // String | 
@@ -231,28 +236,28 @@ var opts = {
   'createUser': true, // Boolean | 
   'addGroupMemberships': true, // Boolean | 
   'groupMembershipAttribute': "groupMembershipAttribute_example", // String | 
-  'defaultGroups': ["inner_example"], // [String] | 
+  'defaultGroups': ["null"], // [String] | 
   'nameIdFormat': "nameIdFormat_example", // String | 
-  'synchronizeAttributes': ["inner_example"], // [String] | 
+  'synchronizeAttributes': ["null"], // [String] | 
   'handleLogout': true, // Boolean | 
   'logoutUrl': "logoutUrl_example", // String | 
   'clockTolerance': 56, // Number | 
   'digestMethod': "digestMethod_example", // String | 
   'signatureMethod': "signatureMethod_example", // String | 
   'userIntermediatePath': "userIntermediatePath_example", // String | 
-  'propertylist': ["inner_example"] // [String] | 
+  'propertylist': ["null"] // [String] | 
 };
-var callback = function(error, data, response) {
+apiInstance.postSamlConfiguration(opts, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully. Returned data: ' + data);
   }
-};
-apiInstance.postSamlConfiguration(opts, callback);
+});
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -297,6 +302,6 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/plain
+- **Content-Type**: Not defined
+- **Accept**: text/plain
 

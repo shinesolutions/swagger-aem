@@ -12,21 +12,20 @@
  */
 
 import ApiClient from '../ApiClient';
-import InstallStatusStatus from './InstallStatusStatus';
 
 /**
- * The InstallStatus model module.
- * @module model/InstallStatus
+ * The InlineObject1 model module.
+ * @module model/InlineObject1
  * @version 0.9.0
  */
-class InstallStatus {
+class InlineObject1 {
     /**
-     * Constructs a new <code>InstallStatus</code>.
-     * @alias module:model/InstallStatus
+     * Constructs a new <code>InlineObject1</code>.
+     * @alias module:model/InlineObject1
      */
     constructor() { 
         
-        InstallStatus.initialize(this);
+        InlineObject1.initialize(this);
     }
 
     /**
@@ -38,18 +37,18 @@ class InstallStatus {
     }
 
     /**
-     * Constructs a <code>InstallStatus</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>InlineObject1</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/InstallStatus} obj Optional instance to populate.
-     * @return {module:model/InstallStatus} The populated <code>InstallStatus</code> instance.
+     * @param {module:model/InlineObject1} obj Optional instance to populate.
+     * @return {module:model/InlineObject1} The populated <code>InlineObject1</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new InstallStatus();
+            obj = obj || new InlineObject1();
 
-            if (data.hasOwnProperty('status')) {
-                obj['status'] = InstallStatusStatus.constructFromObject(data['status']);
+            if (data.hasOwnProperty('package')) {
+                obj['package'] = ApiClient.convertToType(data['package'], File);
             }
         }
         return obj;
@@ -59,14 +58,14 @@ class InstallStatus {
 }
 
 /**
- * @member {module:model/InstallStatusStatus} status
+ * @member {File} package
  */
-InstallStatus.prototype['status'] = undefined;
+InlineObject1.prototype['package'] = undefined;
 
 
 
 
 
 
-export default InstallStatus;
+export default InlineObject1;
 

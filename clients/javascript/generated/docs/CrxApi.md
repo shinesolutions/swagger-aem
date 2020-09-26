@@ -13,34 +13,35 @@ Method | HTTP request | Description
 [**postSetPassword**](CrxApi.md#postSetPassword) | **POST** /crx/explorer/ui/setpassword.jsp | 
 
 
-<a name="getCrxdeStatus"></a>
-# **getCrxdeStatus**
+
+## getCrxdeStatus
+
 > String getCrxdeStatus()
 
 
 
 ### Example
-```javascript
-var NodeSwaggerAem = require('node-swagger-aem');
-var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
+```javascript
+import NodeSwaggerAem from 'node-swagger-aem';
+let defaultClient = NodeSwaggerAem.ApiClient.instance;
 // Configure HTTP basic authorization: aemAuth
-var aemAuth = defaultClient.authentications['aemAuth'];
+let aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.CrxApi();
-var callback = function(error, data, response) {
+let apiInstance = new NodeSwaggerAem.CrxApi();
+apiInstance.getCrxdeStatus((error, data, response) => {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully. Returned data: ' + data);
   }
-};
-apiInstance.getCrxdeStatus(callback);
+});
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -53,37 +54,38 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: plain/text
+- **Content-Type**: Not defined
+- **Accept**: plain/text
 
-<a name="getInstallStatus"></a>
-# **getInstallStatus**
+
+## getInstallStatus
+
 > InstallStatus getInstallStatus()
 
 
 
 ### Example
-```javascript
-var NodeSwaggerAem = require('node-swagger-aem');
-var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
+```javascript
+import NodeSwaggerAem from 'node-swagger-aem';
+let defaultClient = NodeSwaggerAem.ApiClient.instance;
 // Configure HTTP basic authorization: aemAuth
-var aemAuth = defaultClient.authentications['aemAuth'];
+let aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.CrxApi();
-var callback = function(error, data, response) {
+let apiInstance = new NodeSwaggerAem.CrxApi();
+apiInstance.getInstallStatus((error, data, response) => {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully. Returned data: ' + data);
   }
-};
-apiInstance.getInstallStatus(callback);
+});
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -96,37 +98,38 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-<a name="getPackageManagerServlet"></a>
-# **getPackageManagerServlet**
+
+## getPackageManagerServlet
+
 > getPackageManagerServlet()
 
 
 
 ### Example
-```javascript
-var NodeSwaggerAem = require('node-swagger-aem');
-var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
+```javascript
+import NodeSwaggerAem from 'node-swagger-aem';
+let defaultClient = NodeSwaggerAem.ApiClient.instance;
 // Configure HTTP basic authorization: aemAuth
-var aemAuth = defaultClient.authentications['aemAuth'];
+let aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.CrxApi();
-var callback = function(error, data, response) {
+let apiInstance = new NodeSwaggerAem.CrxApi();
+apiInstance.getPackageManagerServlet((error, data, response) => {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully.');
   }
-};
-apiInstance.getPackageManagerServlet(callback);
+});
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -139,38 +142,39 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/html
+- **Content-Type**: Not defined
+- **Accept**: text/html
 
-<a name="postPackageService"></a>
-# **postPackageService**
+
+## postPackageService
+
 > String postPackageService(cmd)
 
 
 
 ### Example
-```javascript
-var NodeSwaggerAem = require('node-swagger-aem');
-var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
+```javascript
+import NodeSwaggerAem from 'node-swagger-aem';
+let defaultClient = NodeSwaggerAem.ApiClient.instance;
 // Configure HTTP basic authorization: aemAuth
-var aemAuth = defaultClient.authentications['aemAuth'];
+let aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.CrxApi();
-var cmd = "cmd_example"; // String | 
-var callback = function(error, data, response) {
+let apiInstance = new NodeSwaggerAem.CrxApi();
+let cmd = "cmd_example"; // String | 
+apiInstance.postPackageService(cmd, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully. Returned data: ' + data);
   }
-};
-apiInstance.postPackageService(cmd, callback);
+});
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -186,29 +190,30 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/xml
+- **Content-Type**: Not defined
+- **Accept**: text/xml
 
-<a name="postPackageServiceJson"></a>
-# **postPackageServiceJson**
+
+## postPackageServiceJson
+
 > String postPackageServiceJson(path, cmd, opts)
 
 
 
 ### Example
-```javascript
-var NodeSwaggerAem = require('node-swagger-aem');
-var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
+```javascript
+import NodeSwaggerAem from 'node-swagger-aem';
+let defaultClient = NodeSwaggerAem.ApiClient.instance;
 // Configure HTTP basic authorization: aemAuth
-var aemAuth = defaultClient.authentications['aemAuth'];
+let aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.CrxApi();
-var path = "path_example"; // String | 
-var cmd = "cmd_example"; // String | 
-var opts = {
+let apiInstance = new NodeSwaggerAem.CrxApi();
+let path = "path_example"; // String | 
+let cmd = "cmd_example"; // String | 
+let opts = {
   'groupName': "groupName_example", // String | 
   'packageName': "packageName_example", // String | 
   'packageVersion': "packageVersion_example", // String | 
@@ -217,17 +222,17 @@ var opts = {
   'recursive': true, // Boolean | 
   '_package': "/path/to/file" // File | 
 };
-var callback = function(error, data, response) {
+apiInstance.postPackageServiceJson(path, cmd, opts, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully. Returned data: ' + data);
   }
-};
-apiInstance.postPackageServiceJson(path, cmd, opts, callback);
+});
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -251,45 +256,46 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
+- **Content-Type**: multipart/form-data
+- **Accept**: application/json
 
-<a name="postPackageUpdate"></a>
-# **postPackageUpdate**
+
+## postPackageUpdate
+
 > String postPackageUpdate(groupName, packageName, version, path, opts)
 
 
 
 ### Example
-```javascript
-var NodeSwaggerAem = require('node-swagger-aem');
-var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
+```javascript
+import NodeSwaggerAem from 'node-swagger-aem';
+let defaultClient = NodeSwaggerAem.ApiClient.instance;
 // Configure HTTP basic authorization: aemAuth
-var aemAuth = defaultClient.authentications['aemAuth'];
+let aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.CrxApi();
-var groupName = "groupName_example"; // String | 
-var packageName = "packageName_example"; // String | 
-var version = "version_example"; // String | 
-var path = "path_example"; // String | 
-var opts = {
+let apiInstance = new NodeSwaggerAem.CrxApi();
+let groupName = "groupName_example"; // String | 
+let packageName = "packageName_example"; // String | 
+let version = "version_example"; // String | 
+let path = "path_example"; // String | 
+let opts = {
   'filter': "filter_example", // String | 
   'charset': "charset_example" // String | 
 };
-var callback = function(error, data, response) {
+apiInstance.postPackageUpdate(groupName, packageName, version, path, opts, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully. Returned data: ' + data);
   }
-};
-apiInstance.postPackageUpdate(groupName, packageName, version, path, opts, callback);
+});
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -310,40 +316,41 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-<a name="postSetPassword"></a>
-# **postSetPassword**
+
+## postSetPassword
+
 > String postSetPassword(old, plain, verify)
 
 
 
 ### Example
-```javascript
-var NodeSwaggerAem = require('node-swagger-aem');
-var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
+```javascript
+import NodeSwaggerAem from 'node-swagger-aem';
+let defaultClient = NodeSwaggerAem.ApiClient.instance;
 // Configure HTTP basic authorization: aemAuth
-var aemAuth = defaultClient.authentications['aemAuth'];
+let aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.CrxApi();
-var old = "old_example"; // String | 
-var plain = "plain_example"; // String | 
-var verify = "verify_example"; // String | 
-var callback = function(error, data, response) {
+let apiInstance = new NodeSwaggerAem.CrxApi();
+let old = "old_example"; // String | 
+let plain = "plain_example"; // String | 
+let verify = "verify_example"; // String | 
+apiInstance.postSetPassword(old, plain, verify, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully. Returned data: ' + data);
   }
-};
-apiInstance.postSetPassword(old, plain, verify, callback);
+});
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -361,6 +368,6 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/plain
+- **Content-Type**: Not defined
+- **Accept**: text/plain
 

@@ -12,21 +12,20 @@
  */
 
 import ApiClient from '../ApiClient';
-import InstallStatusStatus from './InstallStatusStatus';
 
 /**
- * The InstallStatus model module.
- * @module model/InstallStatus
+ * The InlineObject5 model module.
+ * @module model/InlineObject5
  * @version 0.9.0
  */
-class InstallStatus {
+class InlineObject5 {
     /**
-     * Constructs a new <code>InstallStatus</code>.
-     * @alias module:model/InstallStatus
+     * Constructs a new <code>InlineObject5</code>.
+     * @alias module:model/InlineObject5
      */
     constructor() { 
         
-        InstallStatus.initialize(this);
+        InlineObject5.initialize(this);
     }
 
     /**
@@ -38,18 +37,21 @@ class InstallStatus {
     }
 
     /**
-     * Constructs a <code>InstallStatus</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>InlineObject5</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/InstallStatus} obj Optional instance to populate.
-     * @return {module:model/InstallStatus} The populated <code>InstallStatus</code> instance.
+     * @param {module:model/InlineObject5} obj Optional instance to populate.
+     * @return {module:model/InlineObject5} The populated <code>InlineObject5</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new InstallStatus();
+            obj = obj || new InlineObject5();
 
-            if (data.hasOwnProperty('status')) {
-                obj['status'] = InstallStatusStatus.constructFromObject(data['status']);
+            if (data.hasOwnProperty('privatekeyFile')) {
+                obj['privatekeyFile'] = ApiClient.convertToType(data['privatekeyFile'], File);
+            }
+            if (data.hasOwnProperty('certificateFile')) {
+                obj['certificateFile'] = ApiClient.convertToType(data['certificateFile'], File);
             }
         }
         return obj;
@@ -59,14 +61,19 @@ class InstallStatus {
 }
 
 /**
- * @member {module:model/InstallStatusStatus} status
+ * @member {File} privatekeyFile
  */
-InstallStatus.prototype['status'] = undefined;
+InlineObject5.prototype['privatekeyFile'] = undefined;
+
+/**
+ * @member {File} certificateFile
+ */
+InlineObject5.prototype['certificateFile'] = undefined;
 
 
 
 
 
 
-export default InstallStatus;
+export default InlineObject5;
 

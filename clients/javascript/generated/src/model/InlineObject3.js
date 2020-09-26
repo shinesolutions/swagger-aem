@@ -12,21 +12,20 @@
  */
 
 import ApiClient from '../ApiClient';
-import InstallStatusStatus from './InstallStatusStatus';
 
 /**
- * The InstallStatus model module.
- * @module model/InstallStatus
+ * The InlineObject3 model module.
+ * @module model/InlineObject3
  * @version 0.9.0
  */
-class InstallStatus {
+class InlineObject3 {
     /**
-     * Constructs a new <code>InstallStatus</code>.
-     * @alias module:model/InstallStatus
+     * Constructs a new <code>InlineObject3</code>.
+     * @alias module:model/InlineObject3
      */
     constructor() { 
         
-        InstallStatus.initialize(this);
+        InlineObject3.initialize(this);
     }
 
     /**
@@ -38,18 +37,18 @@ class InstallStatus {
     }
 
     /**
-     * Constructs a <code>InstallStatus</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>InlineObject3</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/InstallStatus} obj Optional instance to populate.
-     * @return {module:model/InstallStatus} The populated <code>InstallStatus</code> instance.
+     * @param {module:model/InlineObject3} obj Optional instance to populate.
+     * @return {module:model/InlineObject3} The populated <code>InlineObject3</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new InstallStatus();
+            obj = obj || new InlineObject3();
 
-            if (data.hasOwnProperty('status')) {
-                obj['status'] = InstallStatusStatus.constructFromObject(data['status']);
+            if (data.hasOwnProperty('truststore.p12')) {
+                obj['truststore.p12'] = ApiClient.convertToType(data['truststore.p12'], File);
             }
         }
         return obj;
@@ -59,14 +58,14 @@ class InstallStatus {
 }
 
 /**
- * @member {module:model/InstallStatusStatus} status
+ * @member {File} truststore.p12
  */
-InstallStatus.prototype['status'] = undefined;
+InlineObject3.prototype['truststore.p12'] = undefined;
 
 
 
 
 
 
-export default InstallStatus;
+export default InlineObject3;
 

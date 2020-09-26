@@ -8,28 +8,30 @@ Method | HTTP request | Description
 [**postCqActions**](CqApi.md#postCqActions) | **POST** /.cqactions.html | 
 
 
-<a name="getLoginPage"></a>
-# **getLoginPage**
+
+## getLoginPage
+
 > String getLoginPage()
 
 
 
 ### Example
-```javascript
-var NodeSwaggerAem = require('node-swagger-aem');
 
-var apiInstance = new NodeSwaggerAem.CqApi();
-var callback = function(error, data, response) {
+```javascript
+import NodeSwaggerAem from 'node-swagger-aem';
+
+let apiInstance = new NodeSwaggerAem.CqApi();
+apiInstance.getLoginPage((error, data, response) => {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully. Returned data: ' + data);
   }
-};
-apiInstance.getLoginPage(callback);
+});
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -42,39 +44,40 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/html
+- **Content-Type**: Not defined
+- **Accept**: text/html
 
-<a name="postCqActions"></a>
-# **postCqActions**
+
+## postCqActions
+
 > postCqActions(authorizableId, changelog)
 
 
 
 ### Example
-```javascript
-var NodeSwaggerAem = require('node-swagger-aem');
-var defaultClient = NodeSwaggerAem.ApiClient.instance;
 
+```javascript
+import NodeSwaggerAem from 'node-swagger-aem';
+let defaultClient = NodeSwaggerAem.ApiClient.instance;
 // Configure HTTP basic authorization: aemAuth
-var aemAuth = defaultClient.authentications['aemAuth'];
+let aemAuth = defaultClient.authentications['aemAuth'];
 aemAuth.username = 'YOUR USERNAME';
 aemAuth.password = 'YOUR PASSWORD';
 
-var apiInstance = new NodeSwaggerAem.CqApi();
-var authorizableId = "authorizableId_example"; // String | 
-var changelog = "changelog_example"; // String | 
-var callback = function(error, data, response) {
+let apiInstance = new NodeSwaggerAem.CqApi();
+let authorizableId = "authorizableId_example"; // String | 
+let changelog = "changelog_example"; // String | 
+apiInstance.postCqActions(authorizableId, changelog, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully.');
   }
-};
-apiInstance.postCqActions(authorizableId, changelog, callback);
+});
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -91,6 +94,6 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 

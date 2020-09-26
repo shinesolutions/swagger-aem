@@ -1,9 +1,9 @@
-# NodeSwaggerAem.InstallStatus
+# NodeSwaggerAem.InlineObject3
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | [**InstallStatusStatus**](InstallStatusStatus.md) |  | [optional] 
+**truststoreP12** | **File** |  | [optional] 
 
 
