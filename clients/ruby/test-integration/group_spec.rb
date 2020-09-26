@@ -21,7 +21,7 @@ describe 'Group' do
       authorizable_id = 'somegroup',
       intermediate_path = '/home/groups/s',
       {
-        :create_group => '',
+        :create_group => 'true',
         :profilegiven_name => 'somegroup'
       }
     )
@@ -73,7 +73,7 @@ describe 'Group' do
         authorizable_id = 'somemembergroup',
         intermediate_path = '/home/groups/s',
         {
-          :create_group => '',
+          :create_group => 'true',
           :profilegiven_name => 'somemembergroup'
         }
       )

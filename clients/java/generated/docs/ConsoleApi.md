@@ -20,26 +20,35 @@ Method | HTTP request | Description
 ### Example
 ```java
 // Import classes:
-//import com.shinesolutions.swaggeraem4j.ApiClient;
-//import com.shinesolutions.swaggeraem4j.ApiException;
-//import com.shinesolutions.swaggeraem4j.Configuration;
-//import com.shinesolutions.swaggeraem4j.auth.*;
-//import com.shinesolutions.swaggeraem4j.api.ConsoleApi;
+import com.shinesolutions.swaggeraem4j.ApiClient;
+import com.shinesolutions.swaggeraem4j.ApiException;
+import com.shinesolutions.swaggeraem4j.Configuration;
+import com.shinesolutions.swaggeraem4j.auth.*;
+import com.shinesolutions.swaggeraem4j.models.*;
+import com.shinesolutions.swaggeraem4j.api.ConsoleApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost");
+    
+    // Configure HTTP basic authorization: aemAuth
+    HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+    aemAuth.setUsername("YOUR USERNAME");
+    aemAuth.setPassword("YOUR PASSWORD");
 
-// Configure HTTP basic authorization: aemAuth
-HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
-aemAuth.setUsername("YOUR USERNAME");
-aemAuth.setPassword("YOUR PASSWORD");
-
-ConsoleApi apiInstance = new ConsoleApi();
-try {
-    List<String> result = apiInstance.getAemProductInfo();
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling ConsoleApi#getAemProductInfo");
-    e.printStackTrace();
+    ConsoleApi apiInstance = new ConsoleApi(defaultClient);
+    try {
+      List<String> result = apiInstance.getAemProductInfo();
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ConsoleApi#getAemProductInfo");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -59,6 +68,11 @@ This endpoint does not need any parameter.
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 <a name="getConfigMgr"></a>
 # **getConfigMgr**
 > String getConfigMgr()
@@ -68,26 +82,35 @@ This endpoint does not need any parameter.
 ### Example
 ```java
 // Import classes:
-//import com.shinesolutions.swaggeraem4j.ApiClient;
-//import com.shinesolutions.swaggeraem4j.ApiException;
-//import com.shinesolutions.swaggeraem4j.Configuration;
-//import com.shinesolutions.swaggeraem4j.auth.*;
-//import com.shinesolutions.swaggeraem4j.api.ConsoleApi;
+import com.shinesolutions.swaggeraem4j.ApiClient;
+import com.shinesolutions.swaggeraem4j.ApiException;
+import com.shinesolutions.swaggeraem4j.Configuration;
+import com.shinesolutions.swaggeraem4j.auth.*;
+import com.shinesolutions.swaggeraem4j.models.*;
+import com.shinesolutions.swaggeraem4j.api.ConsoleApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost");
+    
+    // Configure HTTP basic authorization: aemAuth
+    HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+    aemAuth.setUsername("YOUR USERNAME");
+    aemAuth.setPassword("YOUR PASSWORD");
 
-// Configure HTTP basic authorization: aemAuth
-HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
-aemAuth.setUsername("YOUR USERNAME");
-aemAuth.setPassword("YOUR PASSWORD");
-
-ConsoleApi apiInstance = new ConsoleApi();
-try {
-    String result = apiInstance.getConfigMgr();
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling ConsoleApi#getConfigMgr");
-    e.printStackTrace();
+    ConsoleApi apiInstance = new ConsoleApi(defaultClient);
+    try {
+      String result = apiInstance.getConfigMgr();
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ConsoleApi#getConfigMgr");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -107,6 +130,12 @@ This endpoint does not need any parameter.
  - **Content-Type**: Not defined
  - **Accept**: text/xml
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**5XX** | Unexpected error. |  -  |
+
 <a name="postBundle"></a>
 # **postBundle**
 > postBundle(name, action)
@@ -116,27 +145,36 @@ This endpoint does not need any parameter.
 ### Example
 ```java
 // Import classes:
-//import com.shinesolutions.swaggeraem4j.ApiClient;
-//import com.shinesolutions.swaggeraem4j.ApiException;
-//import com.shinesolutions.swaggeraem4j.Configuration;
-//import com.shinesolutions.swaggeraem4j.auth.*;
-//import com.shinesolutions.swaggeraem4j.api.ConsoleApi;
+import com.shinesolutions.swaggeraem4j.ApiClient;
+import com.shinesolutions.swaggeraem4j.ApiException;
+import com.shinesolutions.swaggeraem4j.Configuration;
+import com.shinesolutions.swaggeraem4j.auth.*;
+import com.shinesolutions.swaggeraem4j.models.*;
+import com.shinesolutions.swaggeraem4j.api.ConsoleApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost");
+    
+    // Configure HTTP basic authorization: aemAuth
+    HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+    aemAuth.setUsername("YOUR USERNAME");
+    aemAuth.setPassword("YOUR PASSWORD");
 
-// Configure HTTP basic authorization: aemAuth
-HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
-aemAuth.setUsername("YOUR USERNAME");
-aemAuth.setPassword("YOUR PASSWORD");
-
-ConsoleApi apiInstance = new ConsoleApi();
-String name = "name_example"; // String | 
-String action = "action_example"; // String | 
-try {
-    apiInstance.postBundle(name, action);
-} catch (ApiException e) {
-    System.err.println("Exception when calling ConsoleApi#postBundle");
-    e.printStackTrace();
+    ConsoleApi apiInstance = new ConsoleApi(defaultClient);
+    String name = "name_example"; // String | 
+    String action = "action_example"; // String | 
+    try {
+      apiInstance.postBundle(name, action);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ConsoleApi#postBundle");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -160,6 +198,11 @@ null (empty response body)
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 <a name="postJmxRepository"></a>
 # **postJmxRepository**
 > postJmxRepository(action)
@@ -169,26 +212,35 @@ null (empty response body)
 ### Example
 ```java
 // Import classes:
-//import com.shinesolutions.swaggeraem4j.ApiClient;
-//import com.shinesolutions.swaggeraem4j.ApiException;
-//import com.shinesolutions.swaggeraem4j.Configuration;
-//import com.shinesolutions.swaggeraem4j.auth.*;
-//import com.shinesolutions.swaggeraem4j.api.ConsoleApi;
+import com.shinesolutions.swaggeraem4j.ApiClient;
+import com.shinesolutions.swaggeraem4j.ApiException;
+import com.shinesolutions.swaggeraem4j.Configuration;
+import com.shinesolutions.swaggeraem4j.auth.*;
+import com.shinesolutions.swaggeraem4j.models.*;
+import com.shinesolutions.swaggeraem4j.api.ConsoleApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost");
+    
+    // Configure HTTP basic authorization: aemAuth
+    HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+    aemAuth.setUsername("YOUR USERNAME");
+    aemAuth.setPassword("YOUR PASSWORD");
 
-// Configure HTTP basic authorization: aemAuth
-HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
-aemAuth.setUsername("YOUR USERNAME");
-aemAuth.setPassword("YOUR PASSWORD");
-
-ConsoleApi apiInstance = new ConsoleApi();
-String action = "action_example"; // String | 
-try {
-    apiInstance.postJmxRepository(action);
-} catch (ApiException e) {
-    System.err.println("Exception when calling ConsoleApi#postJmxRepository");
-    e.printStackTrace();
+    ConsoleApi apiInstance = new ConsoleApi(defaultClient);
+    String action = "action_example"; // String | 
+    try {
+      apiInstance.postJmxRepository(action);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ConsoleApi#postJmxRepository");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -211,6 +263,11 @@ null (empty response body)
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 <a name="postSamlConfiguration"></a>
 # **postSamlConfiguration**
 > SamlConfigurationInfo postSamlConfiguration(post, apply, delete, action, $location, path, serviceRanking, idpUrl, idpCertAlias, idpHttpRedirect, serviceProviderEntityId, assertionConsumerServiceURL, spPrivateKeyAlias, keyStorePassword, defaultRedirectUrl, userIDAttribute, useEncryption, createUser, addGroupMemberships, groupMembershipAttribute, defaultGroups, nameIdFormat, synchronizeAttributes, handleLogout, logoutUrl, clockTolerance, digestMethod, signatureMethod, userIntermediatePath, propertylist)
@@ -220,56 +277,65 @@ null (empty response body)
 ### Example
 ```java
 // Import classes:
-//import com.shinesolutions.swaggeraem4j.ApiClient;
-//import com.shinesolutions.swaggeraem4j.ApiException;
-//import com.shinesolutions.swaggeraem4j.Configuration;
-//import com.shinesolutions.swaggeraem4j.auth.*;
-//import com.shinesolutions.swaggeraem4j.api.ConsoleApi;
+import com.shinesolutions.swaggeraem4j.ApiClient;
+import com.shinesolutions.swaggeraem4j.ApiException;
+import com.shinesolutions.swaggeraem4j.Configuration;
+import com.shinesolutions.swaggeraem4j.auth.*;
+import com.shinesolutions.swaggeraem4j.models.*;
+import com.shinesolutions.swaggeraem4j.api.ConsoleApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost");
+    
+    // Configure HTTP basic authorization: aemAuth
+    HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+    aemAuth.setUsername("YOUR USERNAME");
+    aemAuth.setPassword("YOUR PASSWORD");
 
-// Configure HTTP basic authorization: aemAuth
-HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
-aemAuth.setUsername("YOUR USERNAME");
-aemAuth.setPassword("YOUR PASSWORD");
-
-ConsoleApi apiInstance = new ConsoleApi();
-Boolean post = true; // Boolean | 
-Boolean apply = true; // Boolean | 
-Boolean delete = true; // Boolean | 
-String action = "action_example"; // String | 
-String $location = "$location_example"; // String | 
-List<String> path = Arrays.asList("path_example"); // List<String> | 
-Integer serviceRanking = 56; // Integer | 
-String idpUrl = "idpUrl_example"; // String | 
-String idpCertAlias = "idpCertAlias_example"; // String | 
-Boolean idpHttpRedirect = true; // Boolean | 
-String serviceProviderEntityId = "serviceProviderEntityId_example"; // String | 
-String assertionConsumerServiceURL = "assertionConsumerServiceURL_example"; // String | 
-String spPrivateKeyAlias = "spPrivateKeyAlias_example"; // String | 
-String keyStorePassword = "keyStorePassword_example"; // String | 
-String defaultRedirectUrl = "defaultRedirectUrl_example"; // String | 
-String userIDAttribute = "userIDAttribute_example"; // String | 
-Boolean useEncryption = true; // Boolean | 
-Boolean createUser = true; // Boolean | 
-Boolean addGroupMemberships = true; // Boolean | 
-String groupMembershipAttribute = "groupMembershipAttribute_example"; // String | 
-List<String> defaultGroups = Arrays.asList("defaultGroups_example"); // List<String> | 
-String nameIdFormat = "nameIdFormat_example"; // String | 
-List<String> synchronizeAttributes = Arrays.asList("synchronizeAttributes_example"); // List<String> | 
-Boolean handleLogout = true; // Boolean | 
-String logoutUrl = "logoutUrl_example"; // String | 
-Integer clockTolerance = 56; // Integer | 
-String digestMethod = "digestMethod_example"; // String | 
-String signatureMethod = "signatureMethod_example"; // String | 
-String userIntermediatePath = "userIntermediatePath_example"; // String | 
-List<String> propertylist = Arrays.asList("propertylist_example"); // List<String> | 
-try {
-    SamlConfigurationInfo result = apiInstance.postSamlConfiguration(post, apply, delete, action, $location, path, serviceRanking, idpUrl, idpCertAlias, idpHttpRedirect, serviceProviderEntityId, assertionConsumerServiceURL, spPrivateKeyAlias, keyStorePassword, defaultRedirectUrl, userIDAttribute, useEncryption, createUser, addGroupMemberships, groupMembershipAttribute, defaultGroups, nameIdFormat, synchronizeAttributes, handleLogout, logoutUrl, clockTolerance, digestMethod, signatureMethod, userIntermediatePath, propertylist);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling ConsoleApi#postSamlConfiguration");
-    e.printStackTrace();
+    ConsoleApi apiInstance = new ConsoleApi(defaultClient);
+    Boolean post = true; // Boolean | 
+    Boolean apply = true; // Boolean | 
+    Boolean delete = true; // Boolean | 
+    String action = "action_example"; // String | 
+    String $location = "$location_example"; // String | 
+    List<String> path = Arrays.asList(); // List<String> | 
+    Integer serviceRanking = 56; // Integer | 
+    String idpUrl = "idpUrl_example"; // String | 
+    String idpCertAlias = "idpCertAlias_example"; // String | 
+    Boolean idpHttpRedirect = true; // Boolean | 
+    String serviceProviderEntityId = "serviceProviderEntityId_example"; // String | 
+    String assertionConsumerServiceURL = "assertionConsumerServiceURL_example"; // String | 
+    String spPrivateKeyAlias = "spPrivateKeyAlias_example"; // String | 
+    String keyStorePassword = "keyStorePassword_example"; // String | 
+    String defaultRedirectUrl = "defaultRedirectUrl_example"; // String | 
+    String userIDAttribute = "userIDAttribute_example"; // String | 
+    Boolean useEncryption = true; // Boolean | 
+    Boolean createUser = true; // Boolean | 
+    Boolean addGroupMemberships = true; // Boolean | 
+    String groupMembershipAttribute = "groupMembershipAttribute_example"; // String | 
+    List<String> defaultGroups = Arrays.asList(); // List<String> | 
+    String nameIdFormat = "nameIdFormat_example"; // String | 
+    List<String> synchronizeAttributes = Arrays.asList(); // List<String> | 
+    Boolean handleLogout = true; // Boolean | 
+    String logoutUrl = "logoutUrl_example"; // String | 
+    Integer clockTolerance = 56; // Integer | 
+    String digestMethod = "digestMethod_example"; // String | 
+    String signatureMethod = "signatureMethod_example"; // String | 
+    String userIntermediatePath = "userIntermediatePath_example"; // String | 
+    List<String> propertylist = Arrays.asList(); // List<String> | 
+    try {
+      SamlConfigurationInfo result = apiInstance.postSamlConfiguration(post, apply, delete, action, $location, path, serviceRanking, idpUrl, idpCertAlias, idpHttpRedirect, serviceProviderEntityId, assertionConsumerServiceURL, spPrivateKeyAlias, keyStorePassword, defaultRedirectUrl, userIDAttribute, useEncryption, createUser, addGroupMemberships, groupMembershipAttribute, defaultGroups, nameIdFormat, synchronizeAttributes, handleLogout, logoutUrl, clockTolerance, digestMethod, signatureMethod, userIntermediatePath, propertylist);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ConsoleApi#postSamlConfiguration");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -320,4 +386,11 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Retrieved AEM SAML Configuration |  -  |
+**302** | Default response |  -  |
+**0** | Default response |  -  |
 

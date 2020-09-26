@@ -1,7 +1,9 @@
 
+
 # TruststoreItems
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **alias** | **String** | Truststore alias name |  [optional]

@@ -1,6 +1,7 @@
 # NodeSwaggerAem.KeystoreChainItems
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **subject** | **String** | e.g. \&quot;CN&#x3D;localhost\&quot; | [optional] 

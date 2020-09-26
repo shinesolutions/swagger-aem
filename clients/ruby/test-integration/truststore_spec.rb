@@ -8,7 +8,7 @@ describe 'Truststore' do
     # ensure truststore doesn't exist prior to testing
     begin
       data, status_code, headers = @sling.post_node_with_http_info(
-        path = '/etc/truststore/',
+        path = 'etc/truststore',
         name = 'truststore.p12',
         {
           :operation => 'delete'
@@ -50,7 +50,7 @@ describe 'Truststore' do
     it 'should error 404 when truststore does not exist' do
       # delete truststore
       data, status_code, headers = @sling.post_node_with_http_info(
-        path = '/etc/truststore/',
+        path = 'etc/truststore',
         name = 'truststore.p12',
         {
           :operation => 'delete'

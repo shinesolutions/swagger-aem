@@ -22,7 +22,7 @@ describe 'User' do
       authorizable_id = 'someuser',
       intermediate_path = '/home/users/s',
       {
-        :create_user => '',
+        :create_user => 'true',
         :reppassword => 'somepassword'
       }
     )
@@ -103,7 +103,7 @@ describe 'User' do
         authorizable_id = 'somegroup',
         intermediate_path = '/home/groups/s',
         {
-          :create_group => '',
+          :create_group => 'true',
           :profilegiven_name => 'somegroup'
         }
       )

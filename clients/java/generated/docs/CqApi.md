@@ -17,17 +17,29 @@ Method | HTTP request | Description
 ### Example
 ```java
 // Import classes:
-//import com.shinesolutions.swaggeraem4j.ApiException;
-//import com.shinesolutions.swaggeraem4j.api.CqApi;
+import com.shinesolutions.swaggeraem4j.ApiClient;
+import com.shinesolutions.swaggeraem4j.ApiException;
+import com.shinesolutions.swaggeraem4j.Configuration;
+import com.shinesolutions.swaggeraem4j.models.*;
+import com.shinesolutions.swaggeraem4j.api.CqApi;
 
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost");
 
-CqApi apiInstance = new CqApi();
-try {
-    String result = apiInstance.getLoginPage();
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling CqApi#getLoginPage");
-    e.printStackTrace();
+    CqApi apiInstance = new CqApi(defaultClient);
+    try {
+      String result = apiInstance.getLoginPage();
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling CqApi#getLoginPage");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -47,6 +59,11 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: text/html
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 <a name="postCqActions"></a>
 # **postCqActions**
 > postCqActions(authorizableId, changelog)
@@ -56,27 +73,36 @@ No authorization required
 ### Example
 ```java
 // Import classes:
-//import com.shinesolutions.swaggeraem4j.ApiClient;
-//import com.shinesolutions.swaggeraem4j.ApiException;
-//import com.shinesolutions.swaggeraem4j.Configuration;
-//import com.shinesolutions.swaggeraem4j.auth.*;
-//import com.shinesolutions.swaggeraem4j.api.CqApi;
+import com.shinesolutions.swaggeraem4j.ApiClient;
+import com.shinesolutions.swaggeraem4j.ApiException;
+import com.shinesolutions.swaggeraem4j.Configuration;
+import com.shinesolutions.swaggeraem4j.auth.*;
+import com.shinesolutions.swaggeraem4j.models.*;
+import com.shinesolutions.swaggeraem4j.api.CqApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost");
+    
+    // Configure HTTP basic authorization: aemAuth
+    HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+    aemAuth.setUsername("YOUR USERNAME");
+    aemAuth.setPassword("YOUR PASSWORD");
 
-// Configure HTTP basic authorization: aemAuth
-HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
-aemAuth.setUsername("YOUR USERNAME");
-aemAuth.setPassword("YOUR PASSWORD");
-
-CqApi apiInstance = new CqApi();
-String authorizableId = "authorizableId_example"; // String | 
-String changelog = "changelog_example"; // String | 
-try {
-    apiInstance.postCqActions(authorizableId, changelog);
-} catch (ApiException e) {
-    System.err.println("Exception when calling CqApi#postCqActions");
-    e.printStackTrace();
+    CqApi apiInstance = new CqApi(defaultClient);
+    String authorizableId = "authorizableId_example"; // String | 
+    String changelog = "changelog_example"; // String | 
+    try {
+      apiInstance.postCqActions(authorizableId, changelog);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling CqApi#postCqActions");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -99,4 +125,9 @@ null (empty response body)
 
  - **Content-Type**: Not defined
  - **Accept**: Not defined
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
 

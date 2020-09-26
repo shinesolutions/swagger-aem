@@ -17,26 +17,41 @@ Method | HTTP request | Description
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.ConsoleApi(swaggeraem.ApiClient(configuration))
-
-try:
-    api_response = api_instance.get_aem_product_info()
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling ConsoleApi->get_aem_product_info: %s\n" % e)
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.ConsoleApi(api_client)
+    
+    try:
+        api_response = api_instance.get_aem_product_info()
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling ConsoleApi->get_aem_product_info: %s\n" % e)
 ```
 
 ### Parameters
@@ -55,6 +70,11 @@ This endpoint does not need any parameter.
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_config_mgr**
@@ -63,26 +83,41 @@ This endpoint does not need any parameter.
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.ConsoleApi(swaggeraem.ApiClient(configuration))
-
-try:
-    api_response = api_instance.get_config_mgr()
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling ConsoleApi->get_config_mgr: %s\n" % e)
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.ConsoleApi(api_client)
+    
+    try:
+        api_response = api_instance.get_config_mgr()
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling ConsoleApi->get_config_mgr: %s\n" % e)
 ```
 
 ### Parameters
@@ -101,6 +136,12 @@ This endpoint does not need any parameter.
  - **Content-Type**: Not defined
  - **Accept**: text/xml
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**5XX** | Unexpected error. |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_bundle**
@@ -109,27 +150,42 @@ This endpoint does not need any parameter.
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.ConsoleApi(swaggeraem.ApiClient(configuration))
-name = 'name_example' # str | 
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.ConsoleApi(api_client)
+    name = 'name_example' # str | 
 action = 'action_example' # str | 
 
-try:
-    api_instance.post_bundle(name, action)
-except ApiException as e:
-    print("Exception when calling ConsoleApi->post_bundle: %s\n" % e)
+    try:
+        api_instance.post_bundle(name, action)
+    except ApiException as e:
+        print("Exception when calling ConsoleApi->post_bundle: %s\n" % e)
 ```
 
 ### Parameters
@@ -152,6 +208,11 @@ void (empty response body)
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_jmx_repository**
@@ -160,26 +221,41 @@ void (empty response body)
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.ConsoleApi(swaggeraem.ApiClient(configuration))
-action = 'action_example' # str | 
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.ConsoleApi(api_client)
+    action = 'action_example' # str | 
 
-try:
-    api_instance.post_jmx_repository(action)
-except ApiException as e:
-    print("Exception when calling ConsoleApi->post_jmx_repository: %s\n" % e)
+    try:
+        api_instance.post_jmx_repository(action)
+    except ApiException as e:
+        print("Exception when calling ConsoleApi->post_jmx_repository: %s\n" % e)
 ```
 
 ### Parameters
@@ -201,6 +277,11 @@ void (empty response body)
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_saml_configuration**
@@ -209,21 +290,36 @@ void (empty response body)
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.ConsoleApi(swaggeraem.ApiClient(configuration))
-post = True # bool |  (optional)
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.ConsoleApi(api_client)
+    post = True # bool |  (optional)
 apply = True # bool |  (optional)
 delete = True # bool |  (optional)
 action = 'action_example' # str |  (optional)
@@ -254,11 +350,11 @@ signature_method = 'signature_method_example' # str |  (optional)
 user_intermediate_path = 'user_intermediate_path_example' # str |  (optional)
 propertylist = ['propertylist_example'] # list[str] |  (optional)
 
-try:
-    api_response = api_instance.post_saml_configuration(post=post, apply=apply, delete=delete, action=action, location=location, path=path, service_ranking=service_ranking, idp_url=idp_url, idp_cert_alias=idp_cert_alias, idp_http_redirect=idp_http_redirect, service_provider_entity_id=service_provider_entity_id, assertion_consumer_service_url=assertion_consumer_service_url, sp_private_key_alias=sp_private_key_alias, key_store_password=key_store_password, default_redirect_url=default_redirect_url, user_id_attribute=user_id_attribute, use_encryption=use_encryption, create_user=create_user, add_group_memberships=add_group_memberships, group_membership_attribute=group_membership_attribute, default_groups=default_groups, name_id_format=name_id_format, synchronize_attributes=synchronize_attributes, handle_logout=handle_logout, logout_url=logout_url, clock_tolerance=clock_tolerance, digest_method=digest_method, signature_method=signature_method, user_intermediate_path=user_intermediate_path, propertylist=propertylist)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling ConsoleApi->post_saml_configuration: %s\n" % e)
+    try:
+        api_response = api_instance.post_saml_configuration(post=post, apply=apply, delete=delete, action=action, location=location, path=path, service_ranking=service_ranking, idp_url=idp_url, idp_cert_alias=idp_cert_alias, idp_http_redirect=idp_http_redirect, service_provider_entity_id=service_provider_entity_id, assertion_consumer_service_url=assertion_consumer_service_url, sp_private_key_alias=sp_private_key_alias, key_store_password=key_store_password, default_redirect_url=default_redirect_url, user_id_attribute=user_id_attribute, use_encryption=use_encryption, create_user=create_user, add_group_memberships=add_group_memberships, group_membership_attribute=group_membership_attribute, default_groups=default_groups, name_id_format=name_id_format, synchronize_attributes=synchronize_attributes, handle_logout=handle_logout, logout_url=logout_url, clock_tolerance=clock_tolerance, digest_method=digest_method, signature_method=signature_method, user_intermediate_path=user_intermediate_path, propertylist=propertylist)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling ConsoleApi->post_saml_configuration: %s\n" % e)
 ```
 
 ### Parameters
@@ -308,6 +404,13 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: text/plain
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Retrieved AEM SAML Configuration |  -  |
+**302** | Default response |  -  |
+**0** | Default response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

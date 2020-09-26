@@ -1,6 +1,7 @@
 # NodeSwaggerAem.SamlConfigurationProperties
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **path** | [**SamlConfigurationPropertyItemsArray**](SamlConfigurationPropertyItemsArray.md) |  | [optional] 

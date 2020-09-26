@@ -14,21 +14,30 @@ Method | HTTP request | Description
 
 
 ### Example
+
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.CqApi()
 
-try:
-    api_response = api_instance.get_login_page()
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CqApi->get_login_page: %s\n" % e)
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.CqApi(api_client)
+    
+    try:
+        api_response = api_instance.get_login_page()
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CqApi->get_login_page: %s\n" % e)
 ```
 
 ### Parameters
@@ -47,6 +56,11 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: text/html
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_cq_actions**
@@ -55,27 +69,42 @@ No authorization required
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.CqApi(swaggeraem.ApiClient(configuration))
-authorizable_id = 'authorizable_id_example' # str | 
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.CqApi(api_client)
+    authorizable_id = 'authorizable_id_example' # str | 
 changelog = 'changelog_example' # str | 
 
-try:
-    api_instance.post_cq_actions(authorizable_id, changelog)
-except ApiException as e:
-    print("Exception when calling CqApi->post_cq_actions: %s\n" % e)
+    try:
+        api_instance.post_cq_actions(authorizable_id, changelog)
+    except ApiException as e:
+        print("Exception when calling CqApi->post_cq_actions: %s\n" % e)
 ```
 
 ### Parameters
@@ -97,6 +126,11 @@ void (empty response body)
 
  - **Content-Type**: Not defined
  - **Accept**: Not defined
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

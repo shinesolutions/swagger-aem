@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Upgrade OpenAPI Generator to v4.3.1
+
 ## 3.3.0 - 2020-05-20
 ### Added
 - Add new API call to configure SSL via Granite

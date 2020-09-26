@@ -128,9 +128,9 @@ describe 'ConfigProperty' do
         opts = {
           :allow_empty => false,
           :allow_empty_type_hint => 'Boolean',
-          :allow_hosts => '',
+          :allow_hosts => '*',
           :allow_hosts_type_hint => 'String',
-          :allow_hosts_regexp => '',
+          :allow_hosts_regexp => '*',
           :allow_hosts_regexp_type_hint => 'String'
         }
       )

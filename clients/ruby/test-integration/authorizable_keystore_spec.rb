@@ -8,7 +8,7 @@ describe 'Authorizable Keystore' do
     # ensure authorizable keystore doesn't exist prior to testing
     begin
       data, status_code, headers = @sling.post_node_with_http_info(
-        path = '/home/users/system/authentication-service/keystore',
+        path = 'home/users/system/authentication-service/keystore',
         name = 'store.p12',
         {
           :operation => 'delete'
@@ -55,7 +55,7 @@ describe 'Authorizable Keystore' do
     it 'should not have aliases when it is deleted' do
       # delete authorizable keystore
       data, status_code, headers = @sling.post_node_with_http_info(
-        path = '/home/users/system/authentication-service/keystore',
+        path = 'home/users/system/authentication-service/keystore',
         name = 'store.p12',
         {
           :operation => 'delete'
@@ -97,8 +97,8 @@ describe 'Authorizable Keystore' do
     it 'should succeed' do
       # upload a cert chain to the keystore
       # this cert chain is needed otherwise uploading an empty keystore wouldn't work
-      File.open("./test-integration/fixtures/cert_chain.crt", 'r') { |keystore_cert_chain_file|
-        File.open("./test-integration/fixtures/private_key.der", 'r') { |keystore_private_key_file|
+      File.open("./test-integration/fixtures/cert_chain_authorizable_keystore.crt", 'r') { |keystore_cert_chain_file|
+        File.open("./test-integration/fixtures/privae_key_authorizable_keystore.der", 'r') { |keystore_private_key_file|
           data, status_code, headers = @sling.post_authorizable_keystore_with_http_info(
             intermediate_path = '/home/users/system',
             authorizable_id = 'authentication-service',
@@ -124,7 +124,7 @@ describe 'Authorizable Keystore' do
 
       # download keystore
       data, status_code, headers = @sling.get_keystore_with_http_info(
-        intermediate_path = '/home/users/system',
+        intermediate_path = 'home/users/system',
         authorizable_id = 'authentication-service'
       )
       expect(status_code).to eq(200)
@@ -169,8 +169,8 @@ describe 'Authorizable Keystore' do
 
     it 'should succeed' do
       # upload the cert chain in fixtures (generated from `make fixtures`)
-      File.open("./test-integration/fixtures/cert_chain.crt", 'r') { |keystore_cert_chain_file|
-        File.open("./test-integration/fixtures/private_key.der", 'r') { |keystore_private_key_file|
+      File.open("./test-integration/fixtures/cert_chain_authorizable_keystore.crt", 'r') { |keystore_cert_chain_file|
+        File.open("./test-integration/fixtures/privae_key_authorizable_keystore.der", 'r') { |keystore_private_key_file|
           data, status_code, headers = @sling.post_authorizable_keystore_with_http_info(
             intermediate_path = '/home/users/system',
             authorizable_id = 'authentication-service',
