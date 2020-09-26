@@ -18,28 +18,37 @@ Method | HTTP request | Description
 ### Example
 ```java
 // Import classes:
-//import com.shinesolutions.swaggeraem4j.ApiClient;
-//import com.shinesolutions.swaggeraem4j.ApiException;
-//import com.shinesolutions.swaggeraem4j.Configuration;
-//import com.shinesolutions.swaggeraem4j.auth.*;
-//import com.shinesolutions.swaggeraem4j.api.CustomApi;
+import com.shinesolutions.swaggeraem4j.ApiClient;
+import com.shinesolutions.swaggeraem4j.ApiException;
+import com.shinesolutions.swaggeraem4j.Configuration;
+import com.shinesolutions.swaggeraem4j.auth.*;
+import com.shinesolutions.swaggeraem4j.models.*;
+import com.shinesolutions.swaggeraem4j.api.CustomApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost");
+    
+    // Configure HTTP basic authorization: aemAuth
+    HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+    aemAuth.setUsername("YOUR USERNAME");
+    aemAuth.setPassword("YOUR PASSWORD");
 
-// Configure HTTP basic authorization: aemAuth
-HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
-aemAuth.setUsername("YOUR USERNAME");
-aemAuth.setPassword("YOUR PASSWORD");
-
-CustomApi apiInstance = new CustomApi();
-String tags = "tags_example"; // String | 
-Boolean combineTagsOr = true; // Boolean | 
-try {
-    String result = apiInstance.getAemHealthCheck(tags, combineTagsOr);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling CustomApi#getAemHealthCheck");
-    e.printStackTrace();
+    CustomApi apiInstance = new CustomApi(defaultClient);
+    String tags = "tags_example"; // String | 
+    Boolean combineTagsOr = true; // Boolean | 
+    try {
+      String result = apiInstance.getAemHealthCheck(tags, combineTagsOr);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling CustomApi#getAemHealthCheck");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -63,6 +72,11 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 <a name="postConfigAemHealthCheckServlet"></a>
 # **postConfigAemHealthCheckServlet**
 > postConfigAemHealthCheckServlet(bundlesIgnored, bundlesIgnoredAtTypeHint)
@@ -72,27 +86,36 @@ Name | Type | Description  | Notes
 ### Example
 ```java
 // Import classes:
-//import com.shinesolutions.swaggeraem4j.ApiClient;
-//import com.shinesolutions.swaggeraem4j.ApiException;
-//import com.shinesolutions.swaggeraem4j.Configuration;
-//import com.shinesolutions.swaggeraem4j.auth.*;
-//import com.shinesolutions.swaggeraem4j.api.CustomApi;
+import com.shinesolutions.swaggeraem4j.ApiClient;
+import com.shinesolutions.swaggeraem4j.ApiException;
+import com.shinesolutions.swaggeraem4j.Configuration;
+import com.shinesolutions.swaggeraem4j.auth.*;
+import com.shinesolutions.swaggeraem4j.models.*;
+import com.shinesolutions.swaggeraem4j.api.CustomApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost");
+    
+    // Configure HTTP basic authorization: aemAuth
+    HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+    aemAuth.setUsername("YOUR USERNAME");
+    aemAuth.setPassword("YOUR PASSWORD");
 
-// Configure HTTP basic authorization: aemAuth
-HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
-aemAuth.setUsername("YOUR USERNAME");
-aemAuth.setPassword("YOUR PASSWORD");
-
-CustomApi apiInstance = new CustomApi();
-List<String> bundlesIgnored = Arrays.asList("bundlesIgnored_example"); // List<String> | 
-String bundlesIgnoredAtTypeHint = "bundlesIgnoredAtTypeHint_example"; // String | 
-try {
-    apiInstance.postConfigAemHealthCheckServlet(bundlesIgnored, bundlesIgnoredAtTypeHint);
-} catch (ApiException e) {
-    System.err.println("Exception when calling CustomApi#postConfigAemHealthCheckServlet");
-    e.printStackTrace();
+    CustomApi apiInstance = new CustomApi(defaultClient);
+    List<String> bundlesIgnored = Arrays.asList(); // List<String> | 
+    String bundlesIgnoredAtTypeHint = "bundlesIgnoredAtTypeHint_example"; // String | 
+    try {
+      apiInstance.postConfigAemHealthCheckServlet(bundlesIgnored, bundlesIgnoredAtTypeHint);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling CustomApi#postConfigAemHealthCheckServlet");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -116,6 +139,11 @@ null (empty response body)
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 <a name="postConfigAemPasswordReset"></a>
 # **postConfigAemPasswordReset**
 > postConfigAemPasswordReset(pwdresetAuthorizables, pwdresetAuthorizablesAtTypeHint)
@@ -125,27 +153,36 @@ null (empty response body)
 ### Example
 ```java
 // Import classes:
-//import com.shinesolutions.swaggeraem4j.ApiClient;
-//import com.shinesolutions.swaggeraem4j.ApiException;
-//import com.shinesolutions.swaggeraem4j.Configuration;
-//import com.shinesolutions.swaggeraem4j.auth.*;
-//import com.shinesolutions.swaggeraem4j.api.CustomApi;
+import com.shinesolutions.swaggeraem4j.ApiClient;
+import com.shinesolutions.swaggeraem4j.ApiException;
+import com.shinesolutions.swaggeraem4j.Configuration;
+import com.shinesolutions.swaggeraem4j.auth.*;
+import com.shinesolutions.swaggeraem4j.models.*;
+import com.shinesolutions.swaggeraem4j.api.CustomApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost");
+    
+    // Configure HTTP basic authorization: aemAuth
+    HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+    aemAuth.setUsername("YOUR USERNAME");
+    aemAuth.setPassword("YOUR PASSWORD");
 
-// Configure HTTP basic authorization: aemAuth
-HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
-aemAuth.setUsername("YOUR USERNAME");
-aemAuth.setPassword("YOUR PASSWORD");
-
-CustomApi apiInstance = new CustomApi();
-List<String> pwdresetAuthorizables = Arrays.asList("pwdresetAuthorizables_example"); // List<String> | 
-String pwdresetAuthorizablesAtTypeHint = "pwdresetAuthorizablesAtTypeHint_example"; // String | 
-try {
-    apiInstance.postConfigAemPasswordReset(pwdresetAuthorizables, pwdresetAuthorizablesAtTypeHint);
-} catch (ApiException e) {
-    System.err.println("Exception when calling CustomApi#postConfigAemPasswordReset");
-    e.printStackTrace();
+    CustomApi apiInstance = new CustomApi(defaultClient);
+    List<String> pwdresetAuthorizables = Arrays.asList(); // List<String> | 
+    String pwdresetAuthorizablesAtTypeHint = "pwdresetAuthorizablesAtTypeHint_example"; // String | 
+    try {
+      apiInstance.postConfigAemPasswordReset(pwdresetAuthorizables, pwdresetAuthorizablesAtTypeHint);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling CustomApi#postConfigAemPasswordReset");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
@@ -168,4 +205,9 @@ null (empty response body)
 
  - **Content-Type**: Not defined
  - **Accept**: Not defined
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
 

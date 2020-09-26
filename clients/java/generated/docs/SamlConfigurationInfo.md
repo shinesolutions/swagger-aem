@@ -1,7 +1,9 @@
 
+
 # SamlConfigurationInfo
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **pid** | **String** | Persistent Identity (PID) |  [optional]
