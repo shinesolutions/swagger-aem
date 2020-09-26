@@ -25,6 +25,7 @@ Method | HTTP request | Description
 [**post_config_apache_sling_dav_ex_servlet**](SlingApi.md#post_config_apache_sling_dav_ex_servlet) | **POST** /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet | 
 [**post_config_apache_sling_get_servlet**](SlingApi.md#post_config_apache_sling_get_servlet) | **POST** /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet | 
 [**post_config_apache_sling_referrer_filter**](SlingApi.md#post_config_apache_sling_referrer_filter) | **POST** /apps/system/config/org.apache.sling.security.impl.ReferrerFilter | 
+[**post_config_property**](SlingApi.md#post_config_property) | **POST** /apps/system/config/{configNodeName} | 
 [**post_node**](SlingApi.md#post_node) | **POST** /{path}/{name} | 
 [**post_node_rw**](SlingApi.md#post_node_rw) | **POST** /{path}/{name}.rw.html | 
 [**post_path**](SlingApi.md#post_path) | **POST** /{path}/ | 
@@ -40,27 +41,42 @@ Method | HTTP request | Description
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
-runmode = 'runmode_example' # str | 
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.SlingApi(api_client)
+    runmode = 'runmode_example' # str | 
 name = 'name_example' # str | 
 
-try:
-    api_instance.delete_agent(runmode, name)
-except ApiException as e:
-    print("Exception when calling SlingApi->delete_agent: %s\n" % e)
+    try:
+        api_instance.delete_agent(runmode, name)
+    except ApiException as e:
+        print("Exception when calling SlingApi->delete_agent: %s\n" % e)
 ```
 
 ### Parameters
@@ -83,6 +99,11 @@ void (empty response body)
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_node**
@@ -91,27 +112,42 @@ void (empty response body)
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
-path = 'path_example' # str | 
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.SlingApi(api_client)
+    path = 'path_example' # str | 
 name = 'name_example' # str | 
 
-try:
-    api_instance.delete_node(path, name)
-except ApiException as e:
-    print("Exception when calling SlingApi->delete_node: %s\n" % e)
+    try:
+        api_instance.delete_node(path, name)
+    except ApiException as e:
+        print("Exception when calling SlingApi->delete_node: %s\n" % e)
 ```
 
 ### Parameters
@@ -134,6 +170,11 @@ void (empty response body)
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_agent**
@@ -142,27 +183,42 @@ void (empty response body)
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
-runmode = 'runmode_example' # str | 
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.SlingApi(api_client)
+    runmode = 'runmode_example' # str | 
 name = 'name_example' # str | 
 
-try:
-    api_instance.get_agent(runmode, name)
-except ApiException as e:
-    print("Exception when calling SlingApi->get_agent: %s\n" % e)
+    try:
+        api_instance.get_agent(runmode, name)
+    except ApiException as e:
+        print("Exception when calling SlingApi->get_agent: %s\n" % e)
 ```
 
 ### Parameters
@@ -185,6 +241,11 @@ void (empty response body)
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_agents**
@@ -193,27 +254,42 @@ void (empty response body)
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
-runmode = 'runmode_example' # str | 
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.SlingApi(api_client)
+    runmode = 'runmode_example' # str | 
 
-try:
-    api_response = api_instance.get_agents(runmode)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SlingApi->get_agents: %s\n" % e)
+    try:
+        api_response = api_instance.get_agents(runmode)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling SlingApi->get_agents: %s\n" % e)
 ```
 
 ### Parameters
@@ -235,6 +311,11 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_authorizable_keystore**
@@ -243,28 +324,43 @@ Name | Type | Description  | Notes
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
-intermediate_path = 'intermediate_path_example' # str | 
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.SlingApi(api_client)
+    intermediate_path = 'intermediate_path_example' # str | 
 authorizable_id = 'authorizable_id_example' # str | 
 
-try:
-    api_response = api_instance.get_authorizable_keystore(intermediate_path, authorizable_id)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SlingApi->get_authorizable_keystore: %s\n" % e)
+    try:
+        api_response = api_instance.get_authorizable_keystore(intermediate_path, authorizable_id)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling SlingApi->get_authorizable_keystore: %s\n" % e)
 ```
 
 ### Parameters
@@ -287,6 +383,12 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: text/plain
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Retrieved Authorizable Keystore info |  -  |
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_keystore**
@@ -295,28 +397,43 @@ Name | Type | Description  | Notes
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
-intermediate_path = 'intermediate_path_example' # str | 
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.SlingApi(api_client)
+    intermediate_path = 'intermediate_path_example' # str | 
 authorizable_id = 'authorizable_id_example' # str | 
 
-try:
-    api_response = api_instance.get_keystore(intermediate_path, authorizable_id)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SlingApi->get_keystore: %s\n" % e)
+    try:
+        api_response = api_instance.get_keystore(intermediate_path, authorizable_id)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling SlingApi->get_keystore: %s\n" % e)
 ```
 
 ### Parameters
@@ -339,6 +456,11 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/octet-stream
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_node**
@@ -347,27 +469,42 @@ Name | Type | Description  | Notes
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
-path = 'path_example' # str | 
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.SlingApi(api_client)
+    path = 'path_example' # str | 
 name = 'name_example' # str | 
 
-try:
-    api_instance.get_node(path, name)
-except ApiException as e:
-    print("Exception when calling SlingApi->get_node: %s\n" % e)
+    try:
+        api_instance.get_node(path, name)
+    except ApiException as e:
+        print("Exception when calling SlingApi->get_node: %s\n" % e)
 ```
 
 ### Parameters
@@ -390,6 +527,11 @@ void (empty response body)
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_package**
@@ -398,29 +540,44 @@ void (empty response body)
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
-group = 'group_example' # str | 
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.SlingApi(api_client)
+    group = 'group_example' # str | 
 name = 'name_example' # str | 
 version = 'version_example' # str | 
 
-try:
-    api_response = api_instance.get_package(group, name, version)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SlingApi->get_package: %s\n" % e)
+    try:
+        api_response = api_instance.get_package(group, name, version)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling SlingApi->get_package: %s\n" % e)
 ```
 
 ### Parameters
@@ -444,6 +601,11 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/octet-stream
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_package_filter**
@@ -452,29 +614,44 @@ Name | Type | Description  | Notes
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
-group = 'group_example' # str | 
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.SlingApi(api_client)
+    group = 'group_example' # str | 
 name = 'name_example' # str | 
 version = 'version_example' # str | 
 
-try:
-    api_response = api_instance.get_package_filter(group, name, version)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SlingApi->get_package_filter: %s\n" % e)
+    try:
+        api_response = api_instance.get_package_filter(group, name, version)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling SlingApi->get_package_filter: %s\n" % e)
 ```
 
 ### Parameters
@@ -498,6 +675,11 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_query**
@@ -506,30 +688,45 @@ Name | Type | Description  | Notes
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
-path = 'path_example' # str | 
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.SlingApi(api_client)
+    path = 'path_example' # str | 
 p_limit = 3.4 # float | 
 _1_property = '_1_property_example' # str | 
 _1_property_value = '_1_property_value_example' # str | 
 
-try:
-    api_response = api_instance.get_query(path, p_limit, _1_property, _1_property_value)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SlingApi->get_query: %s\n" % e)
+    try:
+        api_response = api_instance.get_query(path, p_limit, _1_property, _1_property_value)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling SlingApi->get_query: %s\n" % e)
 ```
 
 ### Parameters
@@ -554,6 +751,11 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_truststore**
@@ -562,26 +764,41 @@ Name | Type | Description  | Notes
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
-
-try:
-    api_response = api_instance.get_truststore()
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SlingApi->get_truststore: %s\n" % e)
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.SlingApi(api_client)
+    
+    try:
+        api_response = api_instance.get_truststore()
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling SlingApi->get_truststore: %s\n" % e)
 ```
 
 ### Parameters
@@ -600,6 +817,11 @@ This endpoint does not need any parameter.
  - **Content-Type**: Not defined
  - **Accept**: application/octet-stream
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_truststore_info**
@@ -608,26 +830,41 @@ This endpoint does not need any parameter.
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
-
-try:
-    api_response = api_instance.get_truststore_info()
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SlingApi->get_truststore_info: %s\n" % e)
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.SlingApi(api_client)
+    
+    try:
+        api_response = api_instance.get_truststore_info()
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling SlingApi->get_truststore_info: %s\n" % e)
 ```
 
 ### Parameters
@@ -646,85 +883,106 @@ This endpoint does not need any parameter.
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Retrieved AEM Truststore info |  -  |
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_agent**
-> post_agent(runmode, name, jcrcontentcqdistribute=jcrcontentcqdistribute, jcrcontentcqdistribute_type_hint=jcrcontentcqdistribute_type_hint, jcrcontentcqname=jcrcontentcqname, jcrcontentcqtemplate=jcrcontentcqtemplate, jcrcontentenabled=jcrcontentenabled, jcrcontentjcrdescription=jcrcontentjcrdescription, jcrcontentjcrlast_modified=jcrcontentjcrlast_modified, jcrcontentjcrlast_modified_by=jcrcontentjcrlast_modified_by, jcrcontentjcrmixin_types=jcrcontentjcrmixin_types, jcrcontentjcrtitle=jcrcontentjcrtitle, jcrcontentlog_level=jcrcontentlog_level, jcrcontentno_status_update=jcrcontentno_status_update, jcrcontentno_versioning=jcrcontentno_versioning, jcrcontentprotocol_connect_timeout=jcrcontentprotocol_connect_timeout, jcrcontentprotocol_http_connection_closed=jcrcontentprotocol_http_connection_closed, jcrcontentprotocol_http_expired=jcrcontentprotocol_http_expired, jcrcontentprotocol_http_headers=jcrcontentprotocol_http_headers, jcrcontentprotocol_http_headers_type_hint=jcrcontentprotocol_http_headers_type_hint, jcrcontentprotocol_http_method=jcrcontentprotocol_http_method, jcrcontentprotocol_https_relaxed=jcrcontentprotocol_https_relaxed, jcrcontentprotocol_interface=jcrcontentprotocol_interface, jcrcontentprotocol_socket_timeout=jcrcontentprotocol_socket_timeout, jcrcontentprotocol_version=jcrcontentprotocol_version, jcrcontentproxy_ntlm_domain=jcrcontentproxy_ntlm_domain, jcrcontentproxy_ntlm_host=jcrcontentproxy_ntlm_host, jcrcontentproxy_host=jcrcontentproxy_host, jcrcontentproxy_password=jcrcontentproxy_password, jcrcontentproxy_port=jcrcontentproxy_port, jcrcontentproxy_user=jcrcontentproxy_user, jcrcontentqueue_batch_max_size=jcrcontentqueue_batch_max_size, jcrcontentqueue_batch_mode=jcrcontentqueue_batch_mode, jcrcontentqueue_batch_wait_time=jcrcontentqueue_batch_wait_time, jcrcontentretry_delay=jcrcontentretry_delay, jcrcontentreverse_replication=jcrcontentreverse_replication, jcrcontentserialization_type=jcrcontentserialization_type, jcrcontentslingresource_type=jcrcontentslingresource_type, jcrcontentssl=jcrcontentssl, jcrcontenttransport_ntlm_domain=jcrcontenttransport_ntlm_domain, jcrcontenttransport_ntlm_host=jcrcontenttransport_ntlm_host, jcrcontenttransport_password=jcrcontenttransport_password, jcrcontenttransport_uri=jcrcontenttransport_uri, jcrcontenttransport_user=jcrcontenttransport_user, jcrcontenttrigger_distribute=jcrcontenttrigger_distribute, jcrcontenttrigger_modified=jcrcontenttrigger_modified, jcrcontenttrigger_on_off_time=jcrcontenttrigger_on_off_time, jcrcontenttrigger_receive=jcrcontenttrigger_receive, jcrcontenttrigger_specific=jcrcontenttrigger_specific, jcrcontentuser_id=jcrcontentuser_id, jcrprimary_type=jcrprimary_type, operation=operation)
+> post_agent(runmode, name, jcrcontent_cqdistribute=jcrcontent_cqdistribute, jcrcontent_cqdistribute_type_hint=jcrcontent_cqdistribute_type_hint, jcrcontent_cqname=jcrcontent_cqname, jcrcontent_cqtemplate=jcrcontent_cqtemplate, jcrcontent_enabled=jcrcontent_enabled, jcrcontent_jcrdescription=jcrcontent_jcrdescription, jcrcontent_jcrlast_modified=jcrcontent_jcrlast_modified, jcrcontent_jcrlast_modified_by=jcrcontent_jcrlast_modified_by, jcrcontent_jcrmixin_types=jcrcontent_jcrmixin_types, jcrcontent_jcrtitle=jcrcontent_jcrtitle, jcrcontent_log_level=jcrcontent_log_level, jcrcontent_no_status_update=jcrcontent_no_status_update, jcrcontent_no_versioning=jcrcontent_no_versioning, jcrcontent_protocol_connect_timeout=jcrcontent_protocol_connect_timeout, jcrcontent_protocol_http_connection_closed=jcrcontent_protocol_http_connection_closed, jcrcontent_protocol_http_expired=jcrcontent_protocol_http_expired, jcrcontent_protocol_http_headers=jcrcontent_protocol_http_headers, jcrcontent_protocol_http_headers_type_hint=jcrcontent_protocol_http_headers_type_hint, jcrcontent_protocol_http_method=jcrcontent_protocol_http_method, jcrcontent_protocol_https_relaxed=jcrcontent_protocol_https_relaxed, jcrcontent_protocol_interface=jcrcontent_protocol_interface, jcrcontent_protocol_socket_timeout=jcrcontent_protocol_socket_timeout, jcrcontent_protocol_version=jcrcontent_protocol_version, jcrcontent_proxy_ntlm_domain=jcrcontent_proxy_ntlm_domain, jcrcontent_proxy_ntlm_host=jcrcontent_proxy_ntlm_host, jcrcontent_proxy_host=jcrcontent_proxy_host, jcrcontent_proxy_password=jcrcontent_proxy_password, jcrcontent_proxy_port=jcrcontent_proxy_port, jcrcontent_proxy_user=jcrcontent_proxy_user, jcrcontent_queue_batch_max_size=jcrcontent_queue_batch_max_size, jcrcontent_queue_batch_mode=jcrcontent_queue_batch_mode, jcrcontent_queue_batch_wait_time=jcrcontent_queue_batch_wait_time, jcrcontent_retry_delay=jcrcontent_retry_delay, jcrcontent_reverse_replication=jcrcontent_reverse_replication, jcrcontent_serialization_type=jcrcontent_serialization_type, jcrcontent_slingresource_type=jcrcontent_slingresource_type, jcrcontent_ssl=jcrcontent_ssl, jcrcontent_transport_ntlm_domain=jcrcontent_transport_ntlm_domain, jcrcontent_transport_ntlm_host=jcrcontent_transport_ntlm_host, jcrcontent_transport_password=jcrcontent_transport_password, jcrcontent_transport_uri=jcrcontent_transport_uri, jcrcontent_transport_user=jcrcontent_transport_user, jcrcontent_trigger_distribute=jcrcontent_trigger_distribute, jcrcontent_trigger_modified=jcrcontent_trigger_modified, jcrcontent_trigger_on_off_time=jcrcontent_trigger_on_off_time, jcrcontent_trigger_receive=jcrcontent_trigger_receive, jcrcontent_trigger_specific=jcrcontent_trigger_specific, jcrcontent_user_id=jcrcontent_user_id, jcrprimary_type=jcrprimary_type, operation=operation)
 
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
-runmode = 'runmode_example' # str | 
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.SlingApi(api_client)
+    runmode = 'runmode_example' # str | 
 name = 'name_example' # str | 
-jcrcontentcqdistribute = True # bool |  (optional)
-jcrcontentcqdistribute_type_hint = 'jcrcontentcqdistribute_type_hint_example' # str |  (optional)
-jcrcontentcqname = 'jcrcontentcqname_example' # str |  (optional)
-jcrcontentcqtemplate = 'jcrcontentcqtemplate_example' # str |  (optional)
-jcrcontentenabled = True # bool |  (optional)
-jcrcontentjcrdescription = 'jcrcontentjcrdescription_example' # str |  (optional)
-jcrcontentjcrlast_modified = 'jcrcontentjcrlast_modified_example' # str |  (optional)
-jcrcontentjcrlast_modified_by = 'jcrcontentjcrlast_modified_by_example' # str |  (optional)
-jcrcontentjcrmixin_types = 'jcrcontentjcrmixin_types_example' # str |  (optional)
-jcrcontentjcrtitle = 'jcrcontentjcrtitle_example' # str |  (optional)
-jcrcontentlog_level = 'jcrcontentlog_level_example' # str |  (optional)
-jcrcontentno_status_update = True # bool |  (optional)
-jcrcontentno_versioning = True # bool |  (optional)
-jcrcontentprotocol_connect_timeout = 3.4 # float |  (optional)
-jcrcontentprotocol_http_connection_closed = True # bool |  (optional)
-jcrcontentprotocol_http_expired = 'jcrcontentprotocol_http_expired_example' # str |  (optional)
-jcrcontentprotocol_http_headers = ['jcrcontentprotocol_http_headers_example'] # list[str] |  (optional)
-jcrcontentprotocol_http_headers_type_hint = 'jcrcontentprotocol_http_headers_type_hint_example' # str |  (optional)
-jcrcontentprotocol_http_method = 'jcrcontentprotocol_http_method_example' # str |  (optional)
-jcrcontentprotocol_https_relaxed = True # bool |  (optional)
-jcrcontentprotocol_interface = 'jcrcontentprotocol_interface_example' # str |  (optional)
-jcrcontentprotocol_socket_timeout = 3.4 # float |  (optional)
-jcrcontentprotocol_version = 'jcrcontentprotocol_version_example' # str |  (optional)
-jcrcontentproxy_ntlm_domain = 'jcrcontentproxy_ntlm_domain_example' # str |  (optional)
-jcrcontentproxy_ntlm_host = 'jcrcontentproxy_ntlm_host_example' # str |  (optional)
-jcrcontentproxy_host = 'jcrcontentproxy_host_example' # str |  (optional)
-jcrcontentproxy_password = 'jcrcontentproxy_password_example' # str |  (optional)
-jcrcontentproxy_port = 3.4 # float |  (optional)
-jcrcontentproxy_user = 'jcrcontentproxy_user_example' # str |  (optional)
-jcrcontentqueue_batch_max_size = 3.4 # float |  (optional)
-jcrcontentqueue_batch_mode = 'jcrcontentqueue_batch_mode_example' # str |  (optional)
-jcrcontentqueue_batch_wait_time = 3.4 # float |  (optional)
-jcrcontentretry_delay = 'jcrcontentretry_delay_example' # str |  (optional)
-jcrcontentreverse_replication = True # bool |  (optional)
-jcrcontentserialization_type = 'jcrcontentserialization_type_example' # str |  (optional)
-jcrcontentslingresource_type = 'jcrcontentslingresource_type_example' # str |  (optional)
-jcrcontentssl = 'jcrcontentssl_example' # str |  (optional)
-jcrcontenttransport_ntlm_domain = 'jcrcontenttransport_ntlm_domain_example' # str |  (optional)
-jcrcontenttransport_ntlm_host = 'jcrcontenttransport_ntlm_host_example' # str |  (optional)
-jcrcontenttransport_password = 'jcrcontenttransport_password_example' # str |  (optional)
-jcrcontenttransport_uri = 'jcrcontenttransport_uri_example' # str |  (optional)
-jcrcontenttransport_user = 'jcrcontenttransport_user_example' # str |  (optional)
-jcrcontenttrigger_distribute = True # bool |  (optional)
-jcrcontenttrigger_modified = True # bool |  (optional)
-jcrcontenttrigger_on_off_time = True # bool |  (optional)
-jcrcontenttrigger_receive = True # bool |  (optional)
-jcrcontenttrigger_specific = True # bool |  (optional)
-jcrcontentuser_id = 'jcrcontentuser_id_example' # str |  (optional)
+jcrcontent_cqdistribute = True # bool |  (optional)
+jcrcontent_cqdistribute_type_hint = 'jcrcontent_cqdistribute_type_hint_example' # str |  (optional)
+jcrcontent_cqname = 'jcrcontent_cqname_example' # str |  (optional)
+jcrcontent_cqtemplate = 'jcrcontent_cqtemplate_example' # str |  (optional)
+jcrcontent_enabled = True # bool |  (optional)
+jcrcontent_jcrdescription = 'jcrcontent_jcrdescription_example' # str |  (optional)
+jcrcontent_jcrlast_modified = 'jcrcontent_jcrlast_modified_example' # str |  (optional)
+jcrcontent_jcrlast_modified_by = 'jcrcontent_jcrlast_modified_by_example' # str |  (optional)
+jcrcontent_jcrmixin_types = 'jcrcontent_jcrmixin_types_example' # str |  (optional)
+jcrcontent_jcrtitle = 'jcrcontent_jcrtitle_example' # str |  (optional)
+jcrcontent_log_level = 'jcrcontent_log_level_example' # str |  (optional)
+jcrcontent_no_status_update = True # bool |  (optional)
+jcrcontent_no_versioning = True # bool |  (optional)
+jcrcontent_protocol_connect_timeout = 3.4 # float |  (optional)
+jcrcontent_protocol_http_connection_closed = True # bool |  (optional)
+jcrcontent_protocol_http_expired = 'jcrcontent_protocol_http_expired_example' # str |  (optional)
+jcrcontent_protocol_http_headers = ['jcrcontent_protocol_http_headers_example'] # list[str] |  (optional)
+jcrcontent_protocol_http_headers_type_hint = 'jcrcontent_protocol_http_headers_type_hint_example' # str |  (optional)
+jcrcontent_protocol_http_method = 'jcrcontent_protocol_http_method_example' # str |  (optional)
+jcrcontent_protocol_https_relaxed = True # bool |  (optional)
+jcrcontent_protocol_interface = 'jcrcontent_protocol_interface_example' # str |  (optional)
+jcrcontent_protocol_socket_timeout = 3.4 # float |  (optional)
+jcrcontent_protocol_version = 'jcrcontent_protocol_version_example' # str |  (optional)
+jcrcontent_proxy_ntlm_domain = 'jcrcontent_proxy_ntlm_domain_example' # str |  (optional)
+jcrcontent_proxy_ntlm_host = 'jcrcontent_proxy_ntlm_host_example' # str |  (optional)
+jcrcontent_proxy_host = 'jcrcontent_proxy_host_example' # str |  (optional)
+jcrcontent_proxy_password = 'jcrcontent_proxy_password_example' # str |  (optional)
+jcrcontent_proxy_port = 3.4 # float |  (optional)
+jcrcontent_proxy_user = 'jcrcontent_proxy_user_example' # str |  (optional)
+jcrcontent_queue_batch_max_size = 3.4 # float |  (optional)
+jcrcontent_queue_batch_mode = 'jcrcontent_queue_batch_mode_example' # str |  (optional)
+jcrcontent_queue_batch_wait_time = 3.4 # float |  (optional)
+jcrcontent_retry_delay = 'jcrcontent_retry_delay_example' # str |  (optional)
+jcrcontent_reverse_replication = True # bool |  (optional)
+jcrcontent_serialization_type = 'jcrcontent_serialization_type_example' # str |  (optional)
+jcrcontent_slingresource_type = 'jcrcontent_slingresource_type_example' # str |  (optional)
+jcrcontent_ssl = 'jcrcontent_ssl_example' # str |  (optional)
+jcrcontent_transport_ntlm_domain = 'jcrcontent_transport_ntlm_domain_example' # str |  (optional)
+jcrcontent_transport_ntlm_host = 'jcrcontent_transport_ntlm_host_example' # str |  (optional)
+jcrcontent_transport_password = 'jcrcontent_transport_password_example' # str |  (optional)
+jcrcontent_transport_uri = 'jcrcontent_transport_uri_example' # str |  (optional)
+jcrcontent_transport_user = 'jcrcontent_transport_user_example' # str |  (optional)
+jcrcontent_trigger_distribute = True # bool |  (optional)
+jcrcontent_trigger_modified = True # bool |  (optional)
+jcrcontent_trigger_on_off_time = True # bool |  (optional)
+jcrcontent_trigger_receive = True # bool |  (optional)
+jcrcontent_trigger_specific = True # bool |  (optional)
+jcrcontent_user_id = 'jcrcontent_user_id_example' # str |  (optional)
 jcrprimary_type = 'jcrprimary_type_example' # str |  (optional)
 operation = 'operation_example' # str |  (optional)
 
-try:
-    api_instance.post_agent(runmode, name, jcrcontentcqdistribute=jcrcontentcqdistribute, jcrcontentcqdistribute_type_hint=jcrcontentcqdistribute_type_hint, jcrcontentcqname=jcrcontentcqname, jcrcontentcqtemplate=jcrcontentcqtemplate, jcrcontentenabled=jcrcontentenabled, jcrcontentjcrdescription=jcrcontentjcrdescription, jcrcontentjcrlast_modified=jcrcontentjcrlast_modified, jcrcontentjcrlast_modified_by=jcrcontentjcrlast_modified_by, jcrcontentjcrmixin_types=jcrcontentjcrmixin_types, jcrcontentjcrtitle=jcrcontentjcrtitle, jcrcontentlog_level=jcrcontentlog_level, jcrcontentno_status_update=jcrcontentno_status_update, jcrcontentno_versioning=jcrcontentno_versioning, jcrcontentprotocol_connect_timeout=jcrcontentprotocol_connect_timeout, jcrcontentprotocol_http_connection_closed=jcrcontentprotocol_http_connection_closed, jcrcontentprotocol_http_expired=jcrcontentprotocol_http_expired, jcrcontentprotocol_http_headers=jcrcontentprotocol_http_headers, jcrcontentprotocol_http_headers_type_hint=jcrcontentprotocol_http_headers_type_hint, jcrcontentprotocol_http_method=jcrcontentprotocol_http_method, jcrcontentprotocol_https_relaxed=jcrcontentprotocol_https_relaxed, jcrcontentprotocol_interface=jcrcontentprotocol_interface, jcrcontentprotocol_socket_timeout=jcrcontentprotocol_socket_timeout, jcrcontentprotocol_version=jcrcontentprotocol_version, jcrcontentproxy_ntlm_domain=jcrcontentproxy_ntlm_domain, jcrcontentproxy_ntlm_host=jcrcontentproxy_ntlm_host, jcrcontentproxy_host=jcrcontentproxy_host, jcrcontentproxy_password=jcrcontentproxy_password, jcrcontentproxy_port=jcrcontentproxy_port, jcrcontentproxy_user=jcrcontentproxy_user, jcrcontentqueue_batch_max_size=jcrcontentqueue_batch_max_size, jcrcontentqueue_batch_mode=jcrcontentqueue_batch_mode, jcrcontentqueue_batch_wait_time=jcrcontentqueue_batch_wait_time, jcrcontentretry_delay=jcrcontentretry_delay, jcrcontentreverse_replication=jcrcontentreverse_replication, jcrcontentserialization_type=jcrcontentserialization_type, jcrcontentslingresource_type=jcrcontentslingresource_type, jcrcontentssl=jcrcontentssl, jcrcontenttransport_ntlm_domain=jcrcontenttransport_ntlm_domain, jcrcontenttransport_ntlm_host=jcrcontenttransport_ntlm_host, jcrcontenttransport_password=jcrcontenttransport_password, jcrcontenttransport_uri=jcrcontenttransport_uri, jcrcontenttransport_user=jcrcontenttransport_user, jcrcontenttrigger_distribute=jcrcontenttrigger_distribute, jcrcontenttrigger_modified=jcrcontenttrigger_modified, jcrcontenttrigger_on_off_time=jcrcontenttrigger_on_off_time, jcrcontenttrigger_receive=jcrcontenttrigger_receive, jcrcontenttrigger_specific=jcrcontenttrigger_specific, jcrcontentuser_id=jcrcontentuser_id, jcrprimary_type=jcrprimary_type, operation=operation)
-except ApiException as e:
-    print("Exception when calling SlingApi->post_agent: %s\n" % e)
+    try:
+        api_instance.post_agent(runmode, name, jcrcontent_cqdistribute=jcrcontent_cqdistribute, jcrcontent_cqdistribute_type_hint=jcrcontent_cqdistribute_type_hint, jcrcontent_cqname=jcrcontent_cqname, jcrcontent_cqtemplate=jcrcontent_cqtemplate, jcrcontent_enabled=jcrcontent_enabled, jcrcontent_jcrdescription=jcrcontent_jcrdescription, jcrcontent_jcrlast_modified=jcrcontent_jcrlast_modified, jcrcontent_jcrlast_modified_by=jcrcontent_jcrlast_modified_by, jcrcontent_jcrmixin_types=jcrcontent_jcrmixin_types, jcrcontent_jcrtitle=jcrcontent_jcrtitle, jcrcontent_log_level=jcrcontent_log_level, jcrcontent_no_status_update=jcrcontent_no_status_update, jcrcontent_no_versioning=jcrcontent_no_versioning, jcrcontent_protocol_connect_timeout=jcrcontent_protocol_connect_timeout, jcrcontent_protocol_http_connection_closed=jcrcontent_protocol_http_connection_closed, jcrcontent_protocol_http_expired=jcrcontent_protocol_http_expired, jcrcontent_protocol_http_headers=jcrcontent_protocol_http_headers, jcrcontent_protocol_http_headers_type_hint=jcrcontent_protocol_http_headers_type_hint, jcrcontent_protocol_http_method=jcrcontent_protocol_http_method, jcrcontent_protocol_https_relaxed=jcrcontent_protocol_https_relaxed, jcrcontent_protocol_interface=jcrcontent_protocol_interface, jcrcontent_protocol_socket_timeout=jcrcontent_protocol_socket_timeout, jcrcontent_protocol_version=jcrcontent_protocol_version, jcrcontent_proxy_ntlm_domain=jcrcontent_proxy_ntlm_domain, jcrcontent_proxy_ntlm_host=jcrcontent_proxy_ntlm_host, jcrcontent_proxy_host=jcrcontent_proxy_host, jcrcontent_proxy_password=jcrcontent_proxy_password, jcrcontent_proxy_port=jcrcontent_proxy_port, jcrcontent_proxy_user=jcrcontent_proxy_user, jcrcontent_queue_batch_max_size=jcrcontent_queue_batch_max_size, jcrcontent_queue_batch_mode=jcrcontent_queue_batch_mode, jcrcontent_queue_batch_wait_time=jcrcontent_queue_batch_wait_time, jcrcontent_retry_delay=jcrcontent_retry_delay, jcrcontent_reverse_replication=jcrcontent_reverse_replication, jcrcontent_serialization_type=jcrcontent_serialization_type, jcrcontent_slingresource_type=jcrcontent_slingresource_type, jcrcontent_ssl=jcrcontent_ssl, jcrcontent_transport_ntlm_domain=jcrcontent_transport_ntlm_domain, jcrcontent_transport_ntlm_host=jcrcontent_transport_ntlm_host, jcrcontent_transport_password=jcrcontent_transport_password, jcrcontent_transport_uri=jcrcontent_transport_uri, jcrcontent_transport_user=jcrcontent_transport_user, jcrcontent_trigger_distribute=jcrcontent_trigger_distribute, jcrcontent_trigger_modified=jcrcontent_trigger_modified, jcrcontent_trigger_on_off_time=jcrcontent_trigger_on_off_time, jcrcontent_trigger_receive=jcrcontent_trigger_receive, jcrcontent_trigger_specific=jcrcontent_trigger_specific, jcrcontent_user_id=jcrcontent_user_id, jcrprimary_type=jcrprimary_type, operation=operation)
+    except ApiException as e:
+        print("Exception when calling SlingApi->post_agent: %s\n" % e)
 ```
 
 ### Parameters
@@ -733,54 +991,54 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **runmode** | **str**|  | 
  **name** | **str**|  | 
- **jcrcontentcqdistribute** | **bool**|  | [optional] 
- **jcrcontentcqdistribute_type_hint** | **str**|  | [optional] 
- **jcrcontentcqname** | **str**|  | [optional] 
- **jcrcontentcqtemplate** | **str**|  | [optional] 
- **jcrcontentenabled** | **bool**|  | [optional] 
- **jcrcontentjcrdescription** | **str**|  | [optional] 
- **jcrcontentjcrlast_modified** | **str**|  | [optional] 
- **jcrcontentjcrlast_modified_by** | **str**|  | [optional] 
- **jcrcontentjcrmixin_types** | **str**|  | [optional] 
- **jcrcontentjcrtitle** | **str**|  | [optional] 
- **jcrcontentlog_level** | **str**|  | [optional] 
- **jcrcontentno_status_update** | **bool**|  | [optional] 
- **jcrcontentno_versioning** | **bool**|  | [optional] 
- **jcrcontentprotocol_connect_timeout** | **float**|  | [optional] 
- **jcrcontentprotocol_http_connection_closed** | **bool**|  | [optional] 
- **jcrcontentprotocol_http_expired** | **str**|  | [optional] 
- **jcrcontentprotocol_http_headers** | [**list[str]**](str.md)|  | [optional] 
- **jcrcontentprotocol_http_headers_type_hint** | **str**|  | [optional] 
- **jcrcontentprotocol_http_method** | **str**|  | [optional] 
- **jcrcontentprotocol_https_relaxed** | **bool**|  | [optional] 
- **jcrcontentprotocol_interface** | **str**|  | [optional] 
- **jcrcontentprotocol_socket_timeout** | **float**|  | [optional] 
- **jcrcontentprotocol_version** | **str**|  | [optional] 
- **jcrcontentproxy_ntlm_domain** | **str**|  | [optional] 
- **jcrcontentproxy_ntlm_host** | **str**|  | [optional] 
- **jcrcontentproxy_host** | **str**|  | [optional] 
- **jcrcontentproxy_password** | **str**|  | [optional] 
- **jcrcontentproxy_port** | **float**|  | [optional] 
- **jcrcontentproxy_user** | **str**|  | [optional] 
- **jcrcontentqueue_batch_max_size** | **float**|  | [optional] 
- **jcrcontentqueue_batch_mode** | **str**|  | [optional] 
- **jcrcontentqueue_batch_wait_time** | **float**|  | [optional] 
- **jcrcontentretry_delay** | **str**|  | [optional] 
- **jcrcontentreverse_replication** | **bool**|  | [optional] 
- **jcrcontentserialization_type** | **str**|  | [optional] 
- **jcrcontentslingresource_type** | **str**|  | [optional] 
- **jcrcontentssl** | **str**|  | [optional] 
- **jcrcontenttransport_ntlm_domain** | **str**|  | [optional] 
- **jcrcontenttransport_ntlm_host** | **str**|  | [optional] 
- **jcrcontenttransport_password** | **str**|  | [optional] 
- **jcrcontenttransport_uri** | **str**|  | [optional] 
- **jcrcontenttransport_user** | **str**|  | [optional] 
- **jcrcontenttrigger_distribute** | **bool**|  | [optional] 
- **jcrcontenttrigger_modified** | **bool**|  | [optional] 
- **jcrcontenttrigger_on_off_time** | **bool**|  | [optional] 
- **jcrcontenttrigger_receive** | **bool**|  | [optional] 
- **jcrcontenttrigger_specific** | **bool**|  | [optional] 
- **jcrcontentuser_id** | **str**|  | [optional] 
+ **jcrcontent_cqdistribute** | **bool**|  | [optional] 
+ **jcrcontent_cqdistribute_type_hint** | **str**|  | [optional] 
+ **jcrcontent_cqname** | **str**|  | [optional] 
+ **jcrcontent_cqtemplate** | **str**|  | [optional] 
+ **jcrcontent_enabled** | **bool**|  | [optional] 
+ **jcrcontent_jcrdescription** | **str**|  | [optional] 
+ **jcrcontent_jcrlast_modified** | **str**|  | [optional] 
+ **jcrcontent_jcrlast_modified_by** | **str**|  | [optional] 
+ **jcrcontent_jcrmixin_types** | **str**|  | [optional] 
+ **jcrcontent_jcrtitle** | **str**|  | [optional] 
+ **jcrcontent_log_level** | **str**|  | [optional] 
+ **jcrcontent_no_status_update** | **bool**|  | [optional] 
+ **jcrcontent_no_versioning** | **bool**|  | [optional] 
+ **jcrcontent_protocol_connect_timeout** | **float**|  | [optional] 
+ **jcrcontent_protocol_http_connection_closed** | **bool**|  | [optional] 
+ **jcrcontent_protocol_http_expired** | **str**|  | [optional] 
+ **jcrcontent_protocol_http_headers** | [**list[str]**](str.md)|  | [optional] 
+ **jcrcontent_protocol_http_headers_type_hint** | **str**|  | [optional] 
+ **jcrcontent_protocol_http_method** | **str**|  | [optional] 
+ **jcrcontent_protocol_https_relaxed** | **bool**|  | [optional] 
+ **jcrcontent_protocol_interface** | **str**|  | [optional] 
+ **jcrcontent_protocol_socket_timeout** | **float**|  | [optional] 
+ **jcrcontent_protocol_version** | **str**|  | [optional] 
+ **jcrcontent_proxy_ntlm_domain** | **str**|  | [optional] 
+ **jcrcontent_proxy_ntlm_host** | **str**|  | [optional] 
+ **jcrcontent_proxy_host** | **str**|  | [optional] 
+ **jcrcontent_proxy_password** | **str**|  | [optional] 
+ **jcrcontent_proxy_port** | **float**|  | [optional] 
+ **jcrcontent_proxy_user** | **str**|  | [optional] 
+ **jcrcontent_queue_batch_max_size** | **float**|  | [optional] 
+ **jcrcontent_queue_batch_mode** | **str**|  | [optional] 
+ **jcrcontent_queue_batch_wait_time** | **float**|  | [optional] 
+ **jcrcontent_retry_delay** | **str**|  | [optional] 
+ **jcrcontent_reverse_replication** | **bool**|  | [optional] 
+ **jcrcontent_serialization_type** | **str**|  | [optional] 
+ **jcrcontent_slingresource_type** | **str**|  | [optional] 
+ **jcrcontent_ssl** | **str**|  | [optional] 
+ **jcrcontent_transport_ntlm_domain** | **str**|  | [optional] 
+ **jcrcontent_transport_ntlm_host** | **str**|  | [optional] 
+ **jcrcontent_transport_password** | **str**|  | [optional] 
+ **jcrcontent_transport_uri** | **str**|  | [optional] 
+ **jcrcontent_transport_user** | **str**|  | [optional] 
+ **jcrcontent_trigger_distribute** | **bool**|  | [optional] 
+ **jcrcontent_trigger_modified** | **bool**|  | [optional] 
+ **jcrcontent_trigger_on_off_time** | **bool**|  | [optional] 
+ **jcrcontent_trigger_receive** | **bool**|  | [optional] 
+ **jcrcontent_trigger_specific** | **bool**|  | [optional] 
+ **jcrcontent_user_id** | **str**|  | [optional] 
  **jcrprimary_type** | **str**|  | [optional] 
  **operation** | **str**|  | [optional] 
 
@@ -797,6 +1055,11 @@ void (empty response body)
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_authorizable_keystore**
@@ -805,21 +1068,36 @@ void (empty response body)
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
-intermediate_path = 'intermediate_path_example' # str | 
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.SlingApi(api_client)
+    intermediate_path = 'intermediate_path_example' # str | 
 authorizable_id = 'authorizable_id_example' # str | 
 operation = 'operation_example' # str |  (optional)
 current_password = 'current_password_example' # str |  (optional)
@@ -834,11 +1112,11 @@ cert_chain = '/path/to/file' # file |  (optional)
 pk = '/path/to/file' # file |  (optional)
 key_store = '/path/to/file' # file |  (optional)
 
-try:
-    api_response = api_instance.post_authorizable_keystore(intermediate_path, authorizable_id, operation=operation, current_password=current_password, new_password=new_password, re_password=re_password, key_password=key_password, key_store_pass=key_store_pass, alias=alias, new_alias=new_alias, remove_alias=remove_alias, cert_chain=cert_chain, pk=pk, key_store=key_store)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SlingApi->post_authorizable_keystore: %s\n" % e)
+    try:
+        api_response = api_instance.post_authorizable_keystore(intermediate_path, authorizable_id, operation=operation, current_password=current_password, new_password=new_password, re_password=re_password, key_password=key_password, key_store_pass=key_store_pass, alias=alias, new_alias=new_alias, remove_alias=remove_alias, cert_chain=cert_chain, pk=pk, key_store=key_store)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling SlingApi->post_authorizable_keystore: %s\n" % e)
 ```
 
 ### Parameters
@@ -873,40 +1151,61 @@ Name | Type | Description  | Notes
  - **Content-Type**: multipart/form-data
  - **Accept**: text/plain
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Retrieved Authorizable Keystore info |  -  |
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_authorizables**
-> str post_authorizables(authorizable_id, intermediate_path, create_user=create_user, create_group=create_group, reppassword=reppassword, profilegiven_name=profilegiven_name)
+> str post_authorizables(authorizable_id, intermediate_path, create_user=create_user, create_group=create_group, reppassword=reppassword, profile_given_name=profile_given_name)
 
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
-authorizable_id = 'authorizable_id_example' # str | 
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.SlingApi(api_client)
+    authorizable_id = 'authorizable_id_example' # str | 
 intermediate_path = 'intermediate_path_example' # str | 
 create_user = 'create_user_example' # str |  (optional)
 create_group = 'create_group_example' # str |  (optional)
 reppassword = 'reppassword_example' # str |  (optional)
-profilegiven_name = 'profilegiven_name_example' # str |  (optional)
+profile_given_name = 'profile_given_name_example' # str |  (optional)
 
-try:
-    api_response = api_instance.post_authorizables(authorizable_id, intermediate_path, create_user=create_user, create_group=create_group, reppassword=reppassword, profilegiven_name=profilegiven_name)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SlingApi->post_authorizables: %s\n" % e)
+    try:
+        api_response = api_instance.post_authorizables(authorizable_id, intermediate_path, create_user=create_user, create_group=create_group, reppassword=reppassword, profile_given_name=profile_given_name)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling SlingApi->post_authorizables: %s\n" % e)
 ```
 
 ### Parameters
@@ -918,7 +1217,7 @@ Name | Type | Description  | Notes
  **create_user** | **str**|  | [optional] 
  **create_group** | **str**|  | [optional] 
  **reppassword** | **str**|  | [optional] 
- **profilegiven_name** | **str**|  | [optional] 
+ **profile_given_name** | **str**|  | [optional] 
 
 ### Return type
 
@@ -933,6 +1232,11 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: text/html
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_config_adobe_granite_saml_authentication_handler**
@@ -941,21 +1245,36 @@ Name | Type | Description  | Notes
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
-key_store_password = 'key_store_password_example' # str |  (optional)
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.SlingApi(api_client)
+    key_store_password = 'key_store_password_example' # str |  (optional)
 key_store_password_type_hint = 'key_store_password_type_hint_example' # str |  (optional)
 service_ranking = 56 # int |  (optional)
 service_ranking_type_hint = 'service_ranking_type_hint_example' # str |  (optional)
@@ -1004,10 +1323,10 @@ signature_method_type_hint = 'signature_method_type_hint_example' # str |  (opti
 user_intermediate_path = 'user_intermediate_path_example' # str |  (optional)
 user_intermediate_path_type_hint = 'user_intermediate_path_type_hint_example' # str |  (optional)
 
-try:
-    api_instance.post_config_adobe_granite_saml_authentication_handler(key_store_password=key_store_password, key_store_password_type_hint=key_store_password_type_hint, service_ranking=service_ranking, service_ranking_type_hint=service_ranking_type_hint, idp_http_redirect=idp_http_redirect, idp_http_redirect_type_hint=idp_http_redirect_type_hint, create_user=create_user, create_user_type_hint=create_user_type_hint, default_redirect_url=default_redirect_url, default_redirect_url_type_hint=default_redirect_url_type_hint, user_id_attribute=user_id_attribute, user_id_attribute_type_hint=user_id_attribute_type_hint, default_groups=default_groups, default_groups_type_hint=default_groups_type_hint, idp_cert_alias=idp_cert_alias, idp_cert_alias_type_hint=idp_cert_alias_type_hint, add_group_memberships=add_group_memberships, add_group_memberships_type_hint=add_group_memberships_type_hint, path=path, path_type_hint=path_type_hint, synchronize_attributes=synchronize_attributes, synchronize_attributes_type_hint=synchronize_attributes_type_hint, clock_tolerance=clock_tolerance, clock_tolerance_type_hint=clock_tolerance_type_hint, group_membership_attribute=group_membership_attribute, group_membership_attribute_type_hint=group_membership_attribute_type_hint, idp_url=idp_url, idp_url_type_hint=idp_url_type_hint, logout_url=logout_url, logout_url_type_hint=logout_url_type_hint, service_provider_entity_id=service_provider_entity_id, service_provider_entity_id_type_hint=service_provider_entity_id_type_hint, assertion_consumer_service_url=assertion_consumer_service_url, assertion_consumer_service_url_type_hint=assertion_consumer_service_url_type_hint, handle_logout=handle_logout, handle_logout_type_hint=handle_logout_type_hint, sp_private_key_alias=sp_private_key_alias, sp_private_key_alias_type_hint=sp_private_key_alias_type_hint, use_encryption=use_encryption, use_encryption_type_hint=use_encryption_type_hint, name_id_format=name_id_format, name_id_format_type_hint=name_id_format_type_hint, digest_method=digest_method, digest_method_type_hint=digest_method_type_hint, signature_method=signature_method, signature_method_type_hint=signature_method_type_hint, user_intermediate_path=user_intermediate_path, user_intermediate_path_type_hint=user_intermediate_path_type_hint)
-except ApiException as e:
-    print("Exception when calling SlingApi->post_config_adobe_granite_saml_authentication_handler: %s\n" % e)
+    try:
+        api_instance.post_config_adobe_granite_saml_authentication_handler(key_store_password=key_store_password, key_store_password_type_hint=key_store_password_type_hint, service_ranking=service_ranking, service_ranking_type_hint=service_ranking_type_hint, idp_http_redirect=idp_http_redirect, idp_http_redirect_type_hint=idp_http_redirect_type_hint, create_user=create_user, create_user_type_hint=create_user_type_hint, default_redirect_url=default_redirect_url, default_redirect_url_type_hint=default_redirect_url_type_hint, user_id_attribute=user_id_attribute, user_id_attribute_type_hint=user_id_attribute_type_hint, default_groups=default_groups, default_groups_type_hint=default_groups_type_hint, idp_cert_alias=idp_cert_alias, idp_cert_alias_type_hint=idp_cert_alias_type_hint, add_group_memberships=add_group_memberships, add_group_memberships_type_hint=add_group_memberships_type_hint, path=path, path_type_hint=path_type_hint, synchronize_attributes=synchronize_attributes, synchronize_attributes_type_hint=synchronize_attributes_type_hint, clock_tolerance=clock_tolerance, clock_tolerance_type_hint=clock_tolerance_type_hint, group_membership_attribute=group_membership_attribute, group_membership_attribute_type_hint=group_membership_attribute_type_hint, idp_url=idp_url, idp_url_type_hint=idp_url_type_hint, logout_url=logout_url, logout_url_type_hint=logout_url_type_hint, service_provider_entity_id=service_provider_entity_id, service_provider_entity_id_type_hint=service_provider_entity_id_type_hint, assertion_consumer_service_url=assertion_consumer_service_url, assertion_consumer_service_url_type_hint=assertion_consumer_service_url_type_hint, handle_logout=handle_logout, handle_logout_type_hint=handle_logout_type_hint, sp_private_key_alias=sp_private_key_alias, sp_private_key_alias_type_hint=sp_private_key_alias_type_hint, use_encryption=use_encryption, use_encryption_type_hint=use_encryption_type_hint, name_id_format=name_id_format, name_id_format_type_hint=name_id_format_type_hint, digest_method=digest_method, digest_method_type_hint=digest_method_type_hint, signature_method=signature_method, signature_method_type_hint=signature_method_type_hint, user_intermediate_path=user_intermediate_path, user_intermediate_path_type_hint=user_intermediate_path_type_hint)
+    except ApiException as e:
+        print("Exception when calling SlingApi->post_config_adobe_granite_saml_authentication_handler: %s\n" % e)
 ```
 
 ### Parameters
@@ -1076,6 +1395,11 @@ void (empty response body)
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_config_apache_felix_jetty_based_http_service**
@@ -1084,21 +1408,36 @@ void (empty response body)
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
-org_apache_felix_https_nio = True # bool |  (optional)
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.SlingApi(api_client)
+    org_apache_felix_https_nio = True # bool |  (optional)
 org_apache_felix_https_nio_type_hint = 'org_apache_felix_https_nio_type_hint_example' # str |  (optional)
 org_apache_felix_https_keystore = 'org_apache_felix_https_keystore_example' # str |  (optional)
 org_apache_felix_https_keystore_type_hint = 'org_apache_felix_https_keystore_type_hint_example' # str |  (optional)
@@ -1119,10 +1458,10 @@ org_apache_felix_https_enable_type_hint = 'org_apache_felix_https_enable_type_hi
 org_osgi_service_http_port_secure = 'org_osgi_service_http_port_secure_example' # str |  (optional)
 org_osgi_service_http_port_secure_type_hint = 'org_osgi_service_http_port_secure_type_hint_example' # str |  (optional)
 
-try:
-    api_instance.post_config_apache_felix_jetty_based_http_service(org_apache_felix_https_nio=org_apache_felix_https_nio, org_apache_felix_https_nio_type_hint=org_apache_felix_https_nio_type_hint, org_apache_felix_https_keystore=org_apache_felix_https_keystore, org_apache_felix_https_keystore_type_hint=org_apache_felix_https_keystore_type_hint, org_apache_felix_https_keystore_password=org_apache_felix_https_keystore_password, org_apache_felix_https_keystore_password_type_hint=org_apache_felix_https_keystore_password_type_hint, org_apache_felix_https_keystore_key=org_apache_felix_https_keystore_key, org_apache_felix_https_keystore_key_type_hint=org_apache_felix_https_keystore_key_type_hint, org_apache_felix_https_keystore_key_password=org_apache_felix_https_keystore_key_password, org_apache_felix_https_keystore_key_password_type_hint=org_apache_felix_https_keystore_key_password_type_hint, org_apache_felix_https_truststore=org_apache_felix_https_truststore, org_apache_felix_https_truststore_type_hint=org_apache_felix_https_truststore_type_hint, org_apache_felix_https_truststore_password=org_apache_felix_https_truststore_password, org_apache_felix_https_truststore_password_type_hint=org_apache_felix_https_truststore_password_type_hint, org_apache_felix_https_clientcertificate=org_apache_felix_https_clientcertificate, org_apache_felix_https_clientcertificate_type_hint=org_apache_felix_https_clientcertificate_type_hint, org_apache_felix_https_enable=org_apache_felix_https_enable, org_apache_felix_https_enable_type_hint=org_apache_felix_https_enable_type_hint, org_osgi_service_http_port_secure=org_osgi_service_http_port_secure, org_osgi_service_http_port_secure_type_hint=org_osgi_service_http_port_secure_type_hint)
-except ApiException as e:
-    print("Exception when calling SlingApi->post_config_apache_felix_jetty_based_http_service: %s\n" % e)
+    try:
+        api_instance.post_config_apache_felix_jetty_based_http_service(org_apache_felix_https_nio=org_apache_felix_https_nio, org_apache_felix_https_nio_type_hint=org_apache_felix_https_nio_type_hint, org_apache_felix_https_keystore=org_apache_felix_https_keystore, org_apache_felix_https_keystore_type_hint=org_apache_felix_https_keystore_type_hint, org_apache_felix_https_keystore_password=org_apache_felix_https_keystore_password, org_apache_felix_https_keystore_password_type_hint=org_apache_felix_https_keystore_password_type_hint, org_apache_felix_https_keystore_key=org_apache_felix_https_keystore_key, org_apache_felix_https_keystore_key_type_hint=org_apache_felix_https_keystore_key_type_hint, org_apache_felix_https_keystore_key_password=org_apache_felix_https_keystore_key_password, org_apache_felix_https_keystore_key_password_type_hint=org_apache_felix_https_keystore_key_password_type_hint, org_apache_felix_https_truststore=org_apache_felix_https_truststore, org_apache_felix_https_truststore_type_hint=org_apache_felix_https_truststore_type_hint, org_apache_felix_https_truststore_password=org_apache_felix_https_truststore_password, org_apache_felix_https_truststore_password_type_hint=org_apache_felix_https_truststore_password_type_hint, org_apache_felix_https_clientcertificate=org_apache_felix_https_clientcertificate, org_apache_felix_https_clientcertificate_type_hint=org_apache_felix_https_clientcertificate_type_hint, org_apache_felix_https_enable=org_apache_felix_https_enable, org_apache_felix_https_enable_type_hint=org_apache_felix_https_enable_type_hint, org_osgi_service_http_port_secure=org_osgi_service_http_port_secure, org_osgi_service_http_port_secure_type_hint=org_osgi_service_http_port_secure_type_hint)
+    except ApiException as e:
+        print("Exception when calling SlingApi->post_config_apache_felix_jetty_based_http_service: %s\n" % e)
 ```
 
 ### Parameters
@@ -1163,6 +1502,11 @@ void (empty response body)
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_config_apache_http_components_proxy_configuration**
@@ -1171,21 +1515,36 @@ void (empty response body)
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
-proxy_host = 'proxy_host_example' # str |  (optional)
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.SlingApi(api_client)
+    proxy_host = 'proxy_host_example' # str |  (optional)
 proxy_host_type_hint = 'proxy_host_type_hint_example' # str |  (optional)
 proxy_port = 56 # int |  (optional)
 proxy_port_type_hint = 'proxy_port_type_hint_example' # str |  (optional)
@@ -1198,10 +1557,10 @@ proxy_user_type_hint = 'proxy_user_type_hint_example' # str |  (optional)
 proxy_password = 'proxy_password_example' # str |  (optional)
 proxy_password_type_hint = 'proxy_password_type_hint_example' # str |  (optional)
 
-try:
-    api_instance.post_config_apache_http_components_proxy_configuration(proxy_host=proxy_host, proxy_host_type_hint=proxy_host_type_hint, proxy_port=proxy_port, proxy_port_type_hint=proxy_port_type_hint, proxy_exceptions=proxy_exceptions, proxy_exceptions_type_hint=proxy_exceptions_type_hint, proxy_enabled=proxy_enabled, proxy_enabled_type_hint=proxy_enabled_type_hint, proxy_user=proxy_user, proxy_user_type_hint=proxy_user_type_hint, proxy_password=proxy_password, proxy_password_type_hint=proxy_password_type_hint)
-except ApiException as e:
-    print("Exception when calling SlingApi->post_config_apache_http_components_proxy_configuration: %s\n" % e)
+    try:
+        api_instance.post_config_apache_http_components_proxy_configuration(proxy_host=proxy_host, proxy_host_type_hint=proxy_host_type_hint, proxy_port=proxy_port, proxy_port_type_hint=proxy_port_type_hint, proxy_exceptions=proxy_exceptions, proxy_exceptions_type_hint=proxy_exceptions_type_hint, proxy_enabled=proxy_enabled, proxy_enabled_type_hint=proxy_enabled_type_hint, proxy_user=proxy_user, proxy_user_type_hint=proxy_user_type_hint, proxy_password=proxy_password, proxy_password_type_hint=proxy_password_type_hint)
+    except ApiException as e:
+        print("Exception when calling SlingApi->post_config_apache_http_components_proxy_configuration: %s\n" % e)
 ```
 
 ### Parameters
@@ -1234,6 +1593,11 @@ void (empty response body)
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_config_apache_sling_dav_ex_servlet**
@@ -1242,29 +1606,44 @@ void (empty response body)
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
-alias = 'alias_example' # str |  (optional)
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.SlingApi(api_client)
+    alias = 'alias_example' # str |  (optional)
 alias_type_hint = 'alias_type_hint_example' # str |  (optional)
 dav_create_absolute_uri = True # bool |  (optional)
 dav_create_absolute_uri_type_hint = 'dav_create_absolute_uri_type_hint_example' # str |  (optional)
 
-try:
-    api_instance.post_config_apache_sling_dav_ex_servlet(alias=alias, alias_type_hint=alias_type_hint, dav_create_absolute_uri=dav_create_absolute_uri, dav_create_absolute_uri_type_hint=dav_create_absolute_uri_type_hint)
-except ApiException as e:
-    print("Exception when calling SlingApi->post_config_apache_sling_dav_ex_servlet: %s\n" % e)
+    try:
+        api_instance.post_config_apache_sling_dav_ex_servlet(alias=alias, alias_type_hint=alias_type_hint, dav_create_absolute_uri=dav_create_absolute_uri, dav_create_absolute_uri_type_hint=dav_create_absolute_uri_type_hint)
+    except ApiException as e:
+        print("Exception when calling SlingApi->post_config_apache_sling_dav_ex_servlet: %s\n" % e)
 ```
 
 ### Parameters
@@ -1289,6 +1668,11 @@ void (empty response body)
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_config_apache_sling_get_servlet**
@@ -1297,21 +1681,36 @@ void (empty response body)
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
-json_maximumresults = 'json_maximumresults_example' # str |  (optional)
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.SlingApi(api_client)
+    json_maximumresults = 'json_maximumresults_example' # str |  (optional)
 json_maximumresults_type_hint = 'json_maximumresults_type_hint_example' # str |  (optional)
 enable_html = True # bool |  (optional)
 enable_html_type_hint = 'enable_html_type_hint_example' # str |  (optional)
@@ -1320,10 +1719,10 @@ enable_txt_type_hint = 'enable_txt_type_hint_example' # str |  (optional)
 enable_xml = True # bool |  (optional)
 enable_xml_type_hint = 'enable_xml_type_hint_example' # str |  (optional)
 
-try:
-    api_instance.post_config_apache_sling_get_servlet(json_maximumresults=json_maximumresults, json_maximumresults_type_hint=json_maximumresults_type_hint, enable_html=enable_html, enable_html_type_hint=enable_html_type_hint, enable_txt=enable_txt, enable_txt_type_hint=enable_txt_type_hint, enable_xml=enable_xml, enable_xml_type_hint=enable_xml_type_hint)
-except ApiException as e:
-    print("Exception when calling SlingApi->post_config_apache_sling_get_servlet: %s\n" % e)
+    try:
+        api_instance.post_config_apache_sling_get_servlet(json_maximumresults=json_maximumresults, json_maximumresults_type_hint=json_maximumresults_type_hint, enable_html=enable_html, enable_html_type_hint=enable_html_type_hint, enable_txt=enable_txt, enable_txt_type_hint=enable_txt_type_hint, enable_xml=enable_xml, enable_xml_type_hint=enable_xml_type_hint)
+    except ApiException as e:
+        print("Exception when calling SlingApi->post_config_apache_sling_get_servlet: %s\n" % e)
 ```
 
 ### Parameters
@@ -1352,6 +1751,11 @@ void (empty response body)
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_config_apache_sling_referrer_filter**
@@ -1360,21 +1764,36 @@ void (empty response body)
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
-allow_empty = True # bool |  (optional)
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.SlingApi(api_client)
+    allow_empty = True # bool |  (optional)
 allow_empty_type_hint = 'allow_empty_type_hint_example' # str |  (optional)
 allow_hosts = 'allow_hosts_example' # str |  (optional)
 allow_hosts_type_hint = 'allow_hosts_type_hint_example' # str |  (optional)
@@ -1383,10 +1802,10 @@ allow_hosts_regexp_type_hint = 'allow_hosts_regexp_type_hint_example' # str |  (
 filter_methods = 'filter_methods_example' # str |  (optional)
 filter_methods_type_hint = 'filter_methods_type_hint_example' # str |  (optional)
 
-try:
-    api_instance.post_config_apache_sling_referrer_filter(allow_empty=allow_empty, allow_empty_type_hint=allow_empty_type_hint, allow_hosts=allow_hosts, allow_hosts_type_hint=allow_hosts_type_hint, allow_hosts_regexp=allow_hosts_regexp, allow_hosts_regexp_type_hint=allow_hosts_regexp_type_hint, filter_methods=filter_methods, filter_methods_type_hint=filter_methods_type_hint)
-except ApiException as e:
-    print("Exception when calling SlingApi->post_config_apache_sling_referrer_filter: %s\n" % e)
+    try:
+        api_instance.post_config_apache_sling_referrer_filter(allow_empty=allow_empty, allow_empty_type_hint=allow_empty_type_hint, allow_hosts=allow_hosts, allow_hosts_type_hint=allow_hosts_type_hint, allow_hosts_regexp=allow_hosts_regexp, allow_hosts_regexp_type_hint=allow_hosts_regexp_type_hint, filter_methods=filter_methods, filter_methods_type_hint=filter_methods_type_hint)
+    except ApiException as e:
+        print("Exception when calling SlingApi->post_config_apache_sling_referrer_filter: %s\n" % e)
 ```
 
 ### Parameters
@@ -1415,6 +1834,80 @@ void (empty response body)
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **post_config_property**
+> post_config_property(config_node_name)
+
+
+
+### Example
+
+* Basic Authentication (aemAuth):
+```python
+from __future__ import print_function
+import time
+import swaggeraem
+from swaggeraem.rest import ApiException
+from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: aemAuth
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
+
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.SlingApi(api_client)
+    config_node_name = 'config_node_name_example' # str | 
+
+    try:
+        api_instance.post_config_property(config_node_name)
+    except ApiException as e:
+        print("Exception when calling SlingApi->post_config_property: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **config_node_name** | **str**|  | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_node**
@@ -1423,30 +1916,45 @@ void (empty response body)
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
-path = 'path_example' # str | 
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.SlingApi(api_client)
+    path = 'path_example' # str | 
 name = 'name_example' # str | 
 operation = 'operation_example' # str |  (optional)
 delete_authorizable = 'delete_authorizable_example' # str |  (optional)
 file = '/path/to/file' # file |  (optional)
 
-try:
-    api_instance.post_node(path, name, operation=operation, delete_authorizable=delete_authorizable, file=file)
-except ApiException as e:
-    print("Exception when calling SlingApi->post_node: %s\n" % e)
+    try:
+        api_instance.post_node(path, name, operation=operation, delete_authorizable=delete_authorizable, file=file)
+    except ApiException as e:
+        print("Exception when calling SlingApi->post_node: %s\n" % e)
 ```
 
 ### Parameters
@@ -1472,6 +1980,11 @@ void (empty response body)
  - **Content-Type**: multipart/form-data
  - **Accept**: Not defined
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_node_rw**
@@ -1480,28 +1993,43 @@ void (empty response body)
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
-path = 'path_example' # str | 
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.SlingApi(api_client)
+    path = 'path_example' # str | 
 name = 'name_example' # str | 
 add_members = 'add_members_example' # str |  (optional)
 
-try:
-    api_instance.post_node_rw(path, name, add_members=add_members)
-except ApiException as e:
-    print("Exception when calling SlingApi->post_node_rw: %s\n" % e)
+    try:
+        api_instance.post_node_rw(path, name, add_members=add_members)
+    except ApiException as e:
+        print("Exception when calling SlingApi->post_node_rw: %s\n" % e)
 ```
 
 ### Parameters
@@ -1525,6 +2053,11 @@ void (empty response body)
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_path**
@@ -1533,28 +2066,43 @@ void (empty response body)
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
-path = 'path_example' # str | 
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.SlingApi(api_client)
+    path = 'path_example' # str | 
 jcrprimary_type = 'jcrprimary_type_example' # str | 
 name = 'name_example' # str | 
 
-try:
-    api_instance.post_path(path, jcrprimary_type, name)
-except ApiException as e:
-    print("Exception when calling SlingApi->post_path: %s\n" % e)
+    try:
+        api_instance.post_path(path, jcrprimary_type, name)
+    except ApiException as e:
+        print("Exception when calling SlingApi->post_path: %s\n" % e)
 ```
 
 ### Parameters
@@ -1578,6 +2126,11 @@ void (empty response body)
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_query**
@@ -1586,30 +2139,45 @@ void (empty response body)
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
-path = 'path_example' # str | 
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.SlingApi(api_client)
+    path = 'path_example' # str | 
 p_limit = 3.4 # float | 
 _1_property = '_1_property_example' # str | 
 _1_property_value = '_1_property_value_example' # str | 
 
-try:
-    api_response = api_instance.post_query(path, p_limit, _1_property, _1_property_value)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SlingApi->post_query: %s\n" % e)
+    try:
+        api_response = api_instance.post_query(path, p_limit, _1_property, _1_property_value)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling SlingApi->post_query: %s\n" % e)
 ```
 
 ### Parameters
@@ -1634,6 +2202,11 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_tree_activation**
@@ -1642,28 +2215,43 @@ Name | Type | Description  | Notes
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
-ignoredeactivated = True # bool | 
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.SlingApi(api_client)
+    ignoredeactivated = True # bool | 
 onlymodified = True # bool | 
 path = 'path_example' # str | 
 
-try:
-    api_instance.post_tree_activation(ignoredeactivated, onlymodified, path)
-except ApiException as e:
-    print("Exception when calling SlingApi->post_tree_activation: %s\n" % e)
+    try:
+        api_instance.post_tree_activation(ignoredeactivated, onlymodified, path)
+    except ApiException as e:
+        print("Exception when calling SlingApi->post_tree_activation: %s\n" % e)
 ```
 
 ### Parameters
@@ -1687,6 +2275,11 @@ void (empty response body)
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_truststore**
@@ -1695,32 +2288,47 @@ void (empty response body)
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
-operation = 'operation_example' # str |  (optional)
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.SlingApi(api_client)
+    operation = 'operation_example' # str |  (optional)
 new_password = 'new_password_example' # str |  (optional)
 re_password = 're_password_example' # str |  (optional)
 key_store_type = 'key_store_type_example' # str |  (optional)
 remove_alias = 'remove_alias_example' # str |  (optional)
 certificate = '/path/to/file' # file |  (optional)
 
-try:
-    api_response = api_instance.post_truststore(operation=operation, new_password=new_password, re_password=re_password, key_store_type=key_store_type, remove_alias=remove_alias, certificate=certificate)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SlingApi->post_truststore: %s\n" % e)
+    try:
+        api_response = api_instance.post_truststore(operation=operation, new_password=new_password, re_password=re_password, key_store_type=key_store_type, remove_alias=remove_alias, certificate=certificate)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling SlingApi->post_truststore: %s\n" % e)
 ```
 
 ### Parameters
@@ -1747,6 +2355,11 @@ Name | Type | Description  | Notes
  - **Content-Type**: multipart/form-data
  - **Accept**: text/plain
 
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_truststore_pkcs12**
@@ -1755,27 +2368,42 @@ Name | Type | Description  | Notes
 
 
 ### Example
+
+* Basic Authentication (aemAuth):
 ```python
 from __future__ import print_function
 import time
 import swaggeraem
 from swaggeraem.rest import ApiException
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = swaggeraem.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
 # Configure HTTP basic authorization: aemAuth
-configuration = swaggeraem.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+configuration = swaggeraem.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
 
-# create an instance of the API class
-api_instance = swaggeraem.SlingApi(swaggeraem.ApiClient(configuration))
-truststore_p12 = '/path/to/file' # file |  (optional)
+# Enter a context with an instance of the API client
+with swaggeraem.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = swaggeraem.SlingApi(api_client)
+    truststore_p12 = '/path/to/file' # file |  (optional)
 
-try:
-    api_response = api_instance.post_truststore_pkcs12(truststore_p12=truststore_p12)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SlingApi->post_truststore_pkcs12: %s\n" % e)
+    try:
+        api_response = api_instance.post_truststore_pkcs12(truststore_p12=truststore_p12)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling SlingApi->post_truststore_pkcs12: %s\n" % e)
 ```
 
 ### Parameters
@@ -1796,6 +2424,11 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: multipart/form-data
  - **Accept**: text/plain
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | Default response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
