@@ -1,3 +1,5 @@
+[![Build Status](https://github.com/shinesolutions/swagger-aem/workflows/CI/badge.svg)](https://github.com/shinesolutions/swagger-aem/actions?query=workflow%3ACI)
+
 Swagger AEM
 -----------
 
