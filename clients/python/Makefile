@@ -1,23 +1,11 @@
-ifndef SWAGGER_CODEGEN_CLI_JAR
-	SWAGGER_CODEGEN = swagger-codegen
-else
-	SWAGGER_CODEGEN = java -jar $(SWAGGER_CODEGEN_CLI_JAR)
-endif
-
-all: deps clean build install test-unit test-integration doc
+all: clean deps build install test-unit test-integration doc
+ci: clean deps build install test-unit doc
 
 deps:
 	pip install -r requirements-dev.txt
 
 clean:
-	rm -rf generated/
-
-build:
-	$(SWAGGER_CODEGEN) generate \
-	  --input-spec ../conf/api.yml \
-		--lang python \
-		--output generated/ \
-		--config conf/client.json
+	
 
 install:
 	cd generated/ && \
