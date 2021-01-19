@@ -27,7 +27,7 @@ Generated Clients
 | Ruby       | [swagger_aem](https://rubygems.org/gems/swagger_aem) [![Published Version](https://badge.fury.io/rb/swagger_aem.svg)](https://rubygems.org/gems/swagger_aem)                                                                                                            | [README](https://github.com/shinesolutions/swagger-aem/blob/master/ruby/README.md) [CHANGELOG](https://github.com/shinesolutions/swagger-aem/blob/master/ruby/CHANGELOG.md)             | [![swagger_aem Build Status](https://img.shields.io/travis/shinesolutions/swagger-aem.svg)](http://travis-ci.org/shinesolutions/swagger-aem) |
 | Python     | [swaggeraem](https://pypi.python.org/pypi/swaggeraem) [![Published Version](https://badge.fury.io/py/swaggeraem.svg)](https://pypi.python.org/pypi/swaggeraem)                                                                                                          | [README](https://github.com/shinesolutions/swagger-aem/blob/master/python/README.md) [CHANGELOG](https://github.com/shinesolutions/swagger-aem/blob/master/python/CHANGELOG.md)         |                                                                                                                                              |
 | Java       | [swaggeraem4j](http://mvnrepository.com/artifact/com.shinesolutions/swaggeraem4j) [![Published Version](https://maven-badges.herokuapp.com/maven-central/com.shinesolutions/swaggeraem4j/badge.svg)](http://mvnrepository.com/artifact/com.shinesolutions/swaggeraem4j) | [README](https://github.com/shinesolutions/swagger-aem/blob/master/java/README.md) [CHANGELOG](https://github.com/shinesolutions/swagger-aem/blob/master/java/CHANGELOG.md)             |                                                                                                                                              |
-| JavaScript | Work in progress                                                                                                                                                                                                                                                        | [README](https://github.com/shinesolutions/swagger-aem/blob/master/javascript/README.md) [CHANGELOG](https://github.com/shinesolutions/swagger-aem/blob/master/javascript/CHANGELOG.md) |                                                                                                                                              |
+
 
 Development
 -----------
@@ -57,12 +57,12 @@ Frequently Asked Questions
 Contribution
 ------------
 
-Since swagger-aem contains multiple languages, add a `[ruby|python|javascript|java]` prefix to language-specific commits, this will help with filtering full commits log.
+Since swagger-aem contains multiple languages, add a `[ruby|python|java]` prefix to language-specific commits, this will help with filtering full commits log.
 
 Tagging should also be prefixed with:
 
 * `api` when the release is for the OpenAPI specification, e.g. `api-1.0.0`
-* `ruby|python|javascript|java` when the release is for the generated client, e.g. `ruby-0.9.2`, `python-0.9.0`
+* `ruby|python|java` when the release is for the generated client, e.g. `ruby-0.9.2`, `python-0.9.0`
 
 Presentations
 -------------
