@@ -33,15 +33,15 @@ release:
 
 # generate Java API client
 java:
-	$(call build, java, java-clean java-gen java-deps java-test java-build java-install)
+	cd clients/java && make ci && cd ..
 
 # generate JavaScript/node.js API client
 javascript:
-	$(call build, javascript, javascript-clean javascript-gen javascript-deps javascript-install)
+	cd clients/javascript && make ci && cd ..
 
 # generate Python API client
 python:
-	$(call build, python, python-clean python-gen python-deps python-test python-build python-install)
+	cd clients/python && make ci && cd ..
 
 # generate Ruby API client
 ruby:
