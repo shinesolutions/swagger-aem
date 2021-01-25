@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Changed
+- Upgrade OpenAPI Generator to v5.0.0
 - Modify client generation to use openapi-generator-cli jar
 
 ## 3.4.0 - 2020-09-26
