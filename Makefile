@@ -2,7 +2,7 @@ LANGS = ada ada-server android apache2 apex aspnetcore bash clojure cwiki cpp-qt
 
 LANGS = python ruby
 
-ci: clean deps lint generate ruby doc
+ci: clean deps lint generate doc
 
 clean:
 	rm -rf doc
