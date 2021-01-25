@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **get_aem_health_check**
-> str get_aem_health_check(tags=tags, combine_tags_or=combine_tags_or)
+> str get_aem_health_check()
 
 
 
@@ -18,10 +18,9 @@ Method | HTTP request | Description
 
 * Basic Authentication (aemAuth):
 ```python
-from __future__ import print_function
 import time
 import swaggeraem
-from swaggeraem.rest import ApiException
+from swaggeraem.api import custom_api
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
@@ -43,14 +42,16 @@ configuration = swaggeraem.Configuration(
 # Enter a context with an instance of the API client
 with swaggeraem.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = swaggeraem.CustomApi(api_client)
-    tags = 'tags_example' # str |  (optional)
-combine_tags_or = True # bool |  (optional)
+    api_instance = custom_api.CustomApi(api_client)
+    tags = "tags_example" # str |  (optional)
+    combine_tags_or = True # bool |  (optional)
 
+    # example passing only required values which don't have defaults set
+    # and optional values
     try:
         api_response = api_instance.get_aem_health_check(tags=tags, combine_tags_or=combine_tags_or)
         pprint(api_response)
-    except ApiException as e:
+    except swaggeraem.ApiException as e:
         print("Exception when calling CustomApi->get_aem_health_check: %s\n" % e)
 ```
 
@@ -58,8 +59,8 @@ combine_tags_or = True # bool |  (optional)
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tags** | **str**|  | [optional] 
- **combine_tags_or** | **bool**|  | [optional] 
+ **tags** | **str**|  | [optional]
+ **combine_tags_or** | **bool**|  | [optional]
 
 ### Return type
 
@@ -82,7 +83,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_config_aem_health_check_servlet**
-> post_config_aem_health_check_servlet(bundles_ignored=bundles_ignored, bundles_ignored_type_hint=bundles_ignored_type_hint)
+> post_config_aem_health_check_servlet()
 
 
 
@@ -90,10 +91,9 @@ Name | Type | Description  | Notes
 
 * Basic Authentication (aemAuth):
 ```python
-from __future__ import print_function
 import time
 import swaggeraem
-from swaggeraem.rest import ApiException
+from swaggeraem.api import custom_api
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
@@ -115,13 +115,17 @@ configuration = swaggeraem.Configuration(
 # Enter a context with an instance of the API client
 with swaggeraem.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = swaggeraem.CustomApi(api_client)
-    bundles_ignored = ['bundles_ignored_example'] # list[str] |  (optional)
-bundles_ignored_type_hint = 'bundles_ignored_type_hint_example' # str |  (optional)
+    api_instance = custom_api.CustomApi(api_client)
+    bundles_ignored = [
+        "bundles.ignored_example",
+    ] # [str] |  (optional)
+    bundles_ignored_type_hint = "bundles.ignored@TypeHint_example" # str |  (optional)
 
+    # example passing only required values which don't have defaults set
+    # and optional values
     try:
         api_instance.post_config_aem_health_check_servlet(bundles_ignored=bundles_ignored, bundles_ignored_type_hint=bundles_ignored_type_hint)
-    except ApiException as e:
+    except swaggeraem.ApiException as e:
         print("Exception when calling CustomApi->post_config_aem_health_check_servlet: %s\n" % e)
 ```
 
@@ -129,8 +133,8 @@ bundles_ignored_type_hint = 'bundles_ignored_type_hint_example' # str |  (option
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **bundles_ignored** | [**list[str]**](str.md)|  | [optional] 
- **bundles_ignored_type_hint** | **str**|  | [optional] 
+ **bundles_ignored** | **[str]**|  | [optional]
+ **bundles_ignored_type_hint** | **str**|  | [optional]
 
 ### Return type
 
@@ -153,7 +157,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_config_aem_password_reset**
-> post_config_aem_password_reset(pwdreset_authorizables=pwdreset_authorizables, pwdreset_authorizables_type_hint=pwdreset_authorizables_type_hint)
+> post_config_aem_password_reset()
 
 
 
@@ -161,10 +165,9 @@ void (empty response body)
 
 * Basic Authentication (aemAuth):
 ```python
-from __future__ import print_function
 import time
 import swaggeraem
-from swaggeraem.rest import ApiException
+from swaggeraem.api import custom_api
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
@@ -186,13 +189,17 @@ configuration = swaggeraem.Configuration(
 # Enter a context with an instance of the API client
 with swaggeraem.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = swaggeraem.CustomApi(api_client)
-    pwdreset_authorizables = ['pwdreset_authorizables_example'] # list[str] |  (optional)
-pwdreset_authorizables_type_hint = 'pwdreset_authorizables_type_hint_example' # str |  (optional)
+    api_instance = custom_api.CustomApi(api_client)
+    pwdreset_authorizables = [
+        "pwdreset.authorizables_example",
+    ] # [str] |  (optional)
+    pwdreset_authorizables_type_hint = "pwdreset.authorizables@TypeHint_example" # str |  (optional)
 
+    # example passing only required values which don't have defaults set
+    # and optional values
     try:
         api_instance.post_config_aem_password_reset(pwdreset_authorizables=pwdreset_authorizables, pwdreset_authorizables_type_hint=pwdreset_authorizables_type_hint)
-    except ApiException as e:
+    except swaggeraem.ApiException as e:
         print("Exception when calling CustomApi->post_config_aem_password_reset: %s\n" % e)
 ```
 
@@ -200,8 +207,8 @@ pwdreset_authorizables_type_hint = 'pwdreset_authorizables_type_hint_example' # 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pwdreset_authorizables** | [**list[str]**](str.md)|  | [optional] 
- **pwdreset_authorizables_type_hint** | **str**|  | [optional] 
+ **pwdreset_authorizables** | **[str]**|  | [optional]
+ **pwdreset_authorizables_type_hint** | **str**|  | [optional]
 
 ### Return type
 

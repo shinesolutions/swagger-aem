@@ -16,10 +16,9 @@ Method | HTTP request | Description
 ### Example
 
 ```python
-from __future__ import print_function
 import time
 import swaggeraem
-from swaggeraem.rest import ApiException
+from swaggeraem.api import cq_api
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
@@ -31,12 +30,13 @@ configuration = swaggeraem.Configuration(
 # Enter a context with an instance of the API client
 with swaggeraem.ApiClient() as api_client:
     # Create an instance of the API class
-    api_instance = swaggeraem.CqApi(api_client)
-    
+    api_instance = cq_api.CqApi(api_client)
+
+    # example, this endpoint has no required or optional parameters
     try:
         api_response = api_instance.get_login_page()
         pprint(api_response)
-    except ApiException as e:
+    except swaggeraem.ApiException as e:
         print("Exception when calling CqApi->get_login_page: %s\n" % e)
 ```
 
@@ -72,10 +72,9 @@ No authorization required
 
 * Basic Authentication (aemAuth):
 ```python
-from __future__ import print_function
 import time
 import swaggeraem
-from swaggeraem.rest import ApiException
+from swaggeraem.api import cq_api
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
@@ -97,13 +96,14 @@ configuration = swaggeraem.Configuration(
 # Enter a context with an instance of the API client
 with swaggeraem.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = swaggeraem.CqApi(api_client)
-    authorizable_id = 'authorizable_id_example' # str | 
-changelog = 'changelog_example' # str | 
+    api_instance = cq_api.CqApi(api_client)
+    authorizable_id = "authorizableId_example" # str | 
+    changelog = "changelog_example" # str | 
 
+    # example passing only required values which don't have defaults set
     try:
         api_instance.post_cq_actions(authorizable_id, changelog)
-    except ApiException as e:
+    except swaggeraem.ApiException as e:
         print("Exception when calling CqApi->post_cq_actions: %s\n" % e)
 ```
 
@@ -111,8 +111,8 @@ changelog = 'changelog_example' # str |
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorizable_id** | **str**|  | 
- **changelog** | **str**|  | 
+ **authorizable_id** | **str**|  |
+ **changelog** | **str**|  |
 
 ### Return type
 

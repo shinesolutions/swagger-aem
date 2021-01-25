@@ -1,5 +1,3 @@
-# coding: utf-8
-
 """
     Adobe Experience Manager (AEM) API
 
@@ -11,17 +9,18 @@
 """
 
 
-from __future__ import absolute_import
-
 import re  # noqa: F401
+import sys  # noqa: F401
 
-# python 2 and python 3 compatibility library
-import six
-
-from swaggeraem.api_client import ApiClient
-from swaggeraem.exceptions import (  # noqa: F401
-    ApiTypeError,
-    ApiValueError
+from swaggeraem.api_client import ApiClient, Endpoint
+from swaggeraem.model_utils import (  # noqa: F401
+    check_allowed_values,
+    check_validations,
+    date,
+    datetime,
+    file_type,
+    none_type,
+    validate_and_convert_types
 )
 
 
@@ -37,173 +36,184 @@ class GraniteApi(object):
             api_client = ApiClient()
         self.api_client = api_client
 
-    def ssl_setup(self, keystore_password, keystore_password_confirm, truststore_password, truststore_password_confirm, https_hostname, https_port, **kwargs):  # noqa: E501
-        """ssl_setup  # noqa: E501
+        def __ssl_setup(
+            self,
+            keystore_password,
+            keystore_password_confirm,
+            truststore_password,
+            truststore_password_confirm,
+            https_hostname,
+            https_port,
+            **kwargs
+        ):
+            """ssl_setup  # noqa: E501
 
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.ssl_setup(keystore_password, keystore_password_confirm, truststore_password, truststore_password_confirm, https_hostname, https_port, async_req=True)
-        >>> result = thread.get()
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        :param async_req bool: execute request asynchronously
-        :param str keystore_password: (required)
-        :param str keystore_password_confirm: (required)
-        :param str truststore_password: (required)
-        :param str truststore_password_confirm: (required)
-        :param str https_hostname: (required)
-        :param str https_port: (required)
-        :param file privatekey_file:
-        :param file certificate_file:
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: str
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.ssl_setup_with_http_info(keystore_password, keystore_password_confirm, truststore_password, truststore_password_confirm, https_hostname, https_port, **kwargs)  # noqa: E501
+            >>> thread = api.ssl_setup(keystore_password, keystore_password_confirm, truststore_password, truststore_password_confirm, https_hostname, https_port, async_req=True)
+            >>> result = thread.get()
 
-    def ssl_setup_with_http_info(self, keystore_password, keystore_password_confirm, truststore_password, truststore_password_confirm, https_hostname, https_port, **kwargs):  # noqa: E501
-        """ssl_setup  # noqa: E501
+            Args:
+                keystore_password (str):
+                keystore_password_confirm (str):
+                truststore_password (str):
+                truststore_password_confirm (str):
+                https_hostname (str):
+                https_port (str):
 
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.ssl_setup_with_http_info(keystore_password, keystore_password_confirm, truststore_password, truststore_password_confirm, https_hostname, https_port, async_req=True)
-        >>> result = thread.get()
+            Keyword Args:
+                privatekey_file (file_type): [optional]
+                certificate_file (file_type): [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        :param async_req bool: execute request asynchronously
-        :param str keystore_password: (required)
-        :param str keystore_password_confirm: (required)
-        :param str truststore_password: (required)
-        :param str truststore_password_confirm: (required)
-        :param str https_hostname: (required)
-        :param str https_port: (required)
-        :param file privatekey_file:
-        :param file certificate_file:
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(str, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
+            Returns:
+                str
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['keystore_password'] = \
+                keystore_password
+            kwargs['keystore_password_confirm'] = \
+                keystore_password_confirm
+            kwargs['truststore_password'] = \
+                truststore_password
+            kwargs['truststore_password_confirm'] = \
+                truststore_password_confirm
+            kwargs['https_hostname'] = \
+                https_hostname
+            kwargs['https_port'] = \
+                https_port
+            return self.call_with_http_info(**kwargs)
 
-        local_var_params = locals()
-
-        all_params = [
-            'keystore_password',
-            'keystore_password_confirm',
-            'truststore_password',
-            'truststore_password_confirm',
-            'https_hostname',
-            'https_port',
-            'privatekey_file',
-            'certificate_file'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.ssl_setup = Endpoint(
+            settings={
+                'response_type': (str,),
+                'auth': [
+                    'aemAuth'
+                ],
+                'endpoint_path': '/libs/granite/security/post/sslSetup.html',
+                'operation_id': 'ssl_setup',
+                'http_method': 'POST',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'keystore_password',
+                    'keystore_password_confirm',
+                    'truststore_password',
+                    'truststore_password_confirm',
+                    'https_hostname',
+                    'https_port',
+                    'privatekey_file',
+                    'certificate_file',
+                ],
+                'required': [
+                    'keystore_password',
+                    'keystore_password_confirm',
+                    'truststore_password',
+                    'truststore_password_confirm',
+                    'https_hostname',
+                    'https_port',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'keystore_password':
+                        (str,),
+                    'keystore_password_confirm':
+                        (str,),
+                    'truststore_password':
+                        (str,),
+                    'truststore_password_confirm':
+                        (str,),
+                    'https_hostname':
+                        (str,),
+                    'https_port':
+                        (str,),
+                    'privatekey_file':
+                        (file_type,),
+                    'certificate_file':
+                        (file_type,),
+                },
+                'attribute_map': {
+                    'keystore_password': 'keystorePassword',
+                    'keystore_password_confirm': 'keystorePasswordConfirm',
+                    'truststore_password': 'truststorePassword',
+                    'truststore_password_confirm': 'truststorePasswordConfirm',
+                    'https_hostname': 'httpsHostname',
+                    'https_port': 'httpsPort',
+                    'privatekey_file': 'privatekeyFile',
+                    'certificate_file': 'certificateFile',
+                },
+                'location_map': {
+                    'keystore_password': 'query',
+                    'keystore_password_confirm': 'query',
+                    'truststore_password': 'query',
+                    'truststore_password_confirm': 'query',
+                    'https_hostname': 'query',
+                    'https_port': 'query',
+                    'privatekey_file': 'form',
+                    'certificate_file': 'form',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'text/plain'
+                ],
+                'content_type': [
+                    'multipart/form-data'
+                ]
+            },
+            api_client=api_client,
+            callable=__ssl_setup
         )
-
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method ssl_setup" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'keystore_password' is set
-        if self.api_client.client_side_validation and ('keystore_password' not in local_var_params or  # noqa: E501
-                                                        local_var_params['keystore_password'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `keystore_password` when calling `ssl_setup`")  # noqa: E501
-        # verify the required parameter 'keystore_password_confirm' is set
-        if self.api_client.client_side_validation and ('keystore_password_confirm' not in local_var_params or  # noqa: E501
-                                                        local_var_params['keystore_password_confirm'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `keystore_password_confirm` when calling `ssl_setup`")  # noqa: E501
-        # verify the required parameter 'truststore_password' is set
-        if self.api_client.client_side_validation and ('truststore_password' not in local_var_params or  # noqa: E501
-                                                        local_var_params['truststore_password'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `truststore_password` when calling `ssl_setup`")  # noqa: E501
-        # verify the required parameter 'truststore_password_confirm' is set
-        if self.api_client.client_side_validation and ('truststore_password_confirm' not in local_var_params or  # noqa: E501
-                                                        local_var_params['truststore_password_confirm'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `truststore_password_confirm` when calling `ssl_setup`")  # noqa: E501
-        # verify the required parameter 'https_hostname' is set
-        if self.api_client.client_side_validation and ('https_hostname' not in local_var_params or  # noqa: E501
-                                                        local_var_params['https_hostname'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `https_hostname` when calling `ssl_setup`")  # noqa: E501
-        # verify the required parameter 'https_port' is set
-        if self.api_client.client_side_validation and ('https_port' not in local_var_params or  # noqa: E501
-                                                        local_var_params['https_port'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `https_port` when calling `ssl_setup`")  # noqa: E501
-
-        collection_formats = {}
-
-        path_params = {}
-
-        query_params = []
-        if 'keystore_password' in local_var_params and local_var_params['keystore_password'] is not None:  # noqa: E501
-            query_params.append(('keystorePassword', local_var_params['keystore_password']))  # noqa: E501
-        if 'keystore_password_confirm' in local_var_params and local_var_params['keystore_password_confirm'] is not None:  # noqa: E501
-            query_params.append(('keystorePasswordConfirm', local_var_params['keystore_password_confirm']))  # noqa: E501
-        if 'truststore_password' in local_var_params and local_var_params['truststore_password'] is not None:  # noqa: E501
-            query_params.append(('truststorePassword', local_var_params['truststore_password']))  # noqa: E501
-        if 'truststore_password_confirm' in local_var_params and local_var_params['truststore_password_confirm'] is not None:  # noqa: E501
-            query_params.append(('truststorePasswordConfirm', local_var_params['truststore_password_confirm']))  # noqa: E501
-        if 'https_hostname' in local_var_params and local_var_params['https_hostname'] is not None:  # noqa: E501
-            query_params.append(('httpsHostname', local_var_params['https_hostname']))  # noqa: E501
-        if 'https_port' in local_var_params and local_var_params['https_port'] is not None:  # noqa: E501
-            query_params.append(('httpsPort', local_var_params['https_port']))  # noqa: E501
-
-        header_params = {}
-
-        form_params = []
-        local_var_files = {}
-        if 'privatekey_file' in local_var_params:
-            local_var_files['privatekeyFile'] = local_var_params['privatekey_file']  # noqa: E501
-        if 'certificate_file' in local_var_params:
-            local_var_files['certificateFile'] = local_var_params['certificate_file']  # noqa: E501
-
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['text/plain'])  # noqa: E501
-
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['multipart/form-data'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['aemAuth']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/libs/granite/security/post/sslSetup.html', 'POST',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='str',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)

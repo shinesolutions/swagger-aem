@@ -1,5 +1,3 @@
-# coding: utf-8
-
 # flake8: noqa
 
 """
@@ -13,44 +11,18 @@
 """
 
 
-from __future__ import absolute_import
-
-__version__ = "0.9.1"
-
-# import apis into sdk package
-from swaggeraem.api.console_api import ConsoleApi
-from swaggeraem.api.cq_api import CqApi
-from swaggeraem.api.crx_api import CrxApi
-from swaggeraem.api.custom_api import CustomApi
-from swaggeraem.api.granite_api import GraniteApi
-from swaggeraem.api.sling_api import SlingApi
+__version__ = "1.0.0"
 
 # import ApiClient
 from swaggeraem.api_client import ApiClient
+
+# import Configuration
 from swaggeraem.configuration import Configuration
+
+# import exceptions
 from swaggeraem.exceptions import OpenApiException
+from swaggeraem.exceptions import ApiAttributeError
 from swaggeraem.exceptions import ApiTypeError
 from swaggeraem.exceptions import ApiValueError
 from swaggeraem.exceptions import ApiKeyError
 from swaggeraem.exceptions import ApiException
-# import models into sdk package
-from swaggeraem.models.inline_object import InlineObject
-from swaggeraem.models.inline_object1 import InlineObject1
-from swaggeraem.models.inline_object2 import InlineObject2
-from swaggeraem.models.inline_object3 import InlineObject3
-from swaggeraem.models.inline_object4 import InlineObject4
-from swaggeraem.models.inline_object5 import InlineObject5
-from swaggeraem.models.install_status import InstallStatus
-from swaggeraem.models.install_status_status import InstallStatusStatus
-from swaggeraem.models.keystore_chain_items import KeystoreChainItems
-from swaggeraem.models.keystore_info import KeystoreInfo
-from swaggeraem.models.keystore_items import KeystoreItems
-from swaggeraem.models.saml_configuration_info import SamlConfigurationInfo
-from swaggeraem.models.saml_configuration_properties import SamlConfigurationProperties
-from swaggeraem.models.saml_configuration_property_items_array import SamlConfigurationPropertyItemsArray
-from swaggeraem.models.saml_configuration_property_items_boolean import SamlConfigurationPropertyItemsBoolean
-from swaggeraem.models.saml_configuration_property_items_long import SamlConfigurationPropertyItemsLong
-from swaggeraem.models.saml_configuration_property_items_string import SamlConfigurationPropertyItemsString
-from swaggeraem.models.truststore_info import TruststoreInfo
-from swaggeraem.models.truststore_items import TruststoreItems
-

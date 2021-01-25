@@ -22,10 +22,9 @@ Method | HTTP request | Description
 
 * Basic Authentication (aemAuth):
 ```python
-from __future__ import print_function
 import time
 import swaggeraem
-from swaggeraem.rest import ApiException
+from swaggeraem.api import crx_api
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
@@ -47,12 +46,13 @@ configuration = swaggeraem.Configuration(
 # Enter a context with an instance of the API client
 with swaggeraem.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = swaggeraem.CrxApi(api_client)
-    
+    api_instance = crx_api.CrxApi(api_client)
+
+    # example, this endpoint has no required or optional parameters
     try:
         api_response = api_instance.get_crxde_status()
         pprint(api_response)
-    except ApiException as e:
+    except swaggeraem.ApiException as e:
         print("Exception when calling CrxApi->get_crxde_status: %s\n" % e)
 ```
 
@@ -89,10 +89,10 @@ This endpoint does not need any parameter.
 
 * Basic Authentication (aemAuth):
 ```python
-from __future__ import print_function
 import time
 import swaggeraem
-from swaggeraem.rest import ApiException
+from swaggeraem.api import crx_api
+from swaggeraem.model.install_status import InstallStatus
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
@@ -114,12 +114,13 @@ configuration = swaggeraem.Configuration(
 # Enter a context with an instance of the API client
 with swaggeraem.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = swaggeraem.CrxApi(api_client)
-    
+    api_instance = crx_api.CrxApi(api_client)
+
+    # example, this endpoint has no required or optional parameters
     try:
         api_response = api_instance.get_install_status()
         pprint(api_response)
-    except ApiException as e:
+    except swaggeraem.ApiException as e:
         print("Exception when calling CrxApi->get_install_status: %s\n" % e)
 ```
 
@@ -156,10 +157,9 @@ This endpoint does not need any parameter.
 
 * Basic Authentication (aemAuth):
 ```python
-from __future__ import print_function
 import time
 import swaggeraem
-from swaggeraem.rest import ApiException
+from swaggeraem.api import crx_api
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
@@ -181,11 +181,12 @@ configuration = swaggeraem.Configuration(
 # Enter a context with an instance of the API client
 with swaggeraem.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = swaggeraem.CrxApi(api_client)
-    
+    api_instance = crx_api.CrxApi(api_client)
+
+    # example, this endpoint has no required or optional parameters
     try:
         api_instance.get_package_manager_servlet()
-    except ApiException as e:
+    except swaggeraem.ApiException as e:
         print("Exception when calling CrxApi->get_package_manager_servlet: %s\n" % e)
 ```
 
@@ -222,10 +223,9 @@ void (empty response body)
 
 * Basic Authentication (aemAuth):
 ```python
-from __future__ import print_function
 import time
 import swaggeraem
-from swaggeraem.rest import ApiException
+from swaggeraem.api import crx_api
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
@@ -247,13 +247,14 @@ configuration = swaggeraem.Configuration(
 # Enter a context with an instance of the API client
 with swaggeraem.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = swaggeraem.CrxApi(api_client)
-    cmd = 'cmd_example' # str | 
+    api_instance = crx_api.CrxApi(api_client)
+    cmd = "cmd_example" # str | 
 
+    # example passing only required values which don't have defaults set
     try:
         api_response = api_instance.post_package_service(cmd)
         pprint(api_response)
-    except ApiException as e:
+    except swaggeraem.ApiException as e:
         print("Exception when calling CrxApi->post_package_service: %s\n" % e)
 ```
 
@@ -261,7 +262,7 @@ with swaggeraem.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cmd** | **str**|  | 
+ **cmd** | **str**|  |
 
 ### Return type
 
@@ -284,7 +285,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_package_service_json**
-> str post_package_service_json(path, cmd, group_name=group_name, package_name=package_name, package_version=package_version, charset_=charset_, force=force, recursive=recursive, package=package)
+> str post_package_service_json(path, cmd)
 
 
 
@@ -292,10 +293,9 @@ Name | Type | Description  | Notes
 
 * Basic Authentication (aemAuth):
 ```python
-from __future__ import print_function
 import time
 import swaggeraem
-from swaggeraem.rest import ApiException
+from swaggeraem.api import crx_api
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
@@ -317,21 +317,30 @@ configuration = swaggeraem.Configuration(
 # Enter a context with an instance of the API client
 with swaggeraem.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = swaggeraem.CrxApi(api_client)
-    path = 'path_example' # str | 
-cmd = 'cmd_example' # str | 
-group_name = 'group_name_example' # str |  (optional)
-package_name = 'package_name_example' # str |  (optional)
-package_version = 'package_version_example' # str |  (optional)
-charset_ = 'charset__example' # str |  (optional)
-force = True # bool |  (optional)
-recursive = True # bool |  (optional)
-package = '/path/to/file' # file |  (optional)
+    api_instance = crx_api.CrxApi(api_client)
+    path = "path_example" # str | 
+    cmd = "cmd_example" # str | 
+    group_name = "groupName_example" # str |  (optional)
+    package_name = "packageName_example" # str |  (optional)
+    package_version = "packageVersion_example" # str |  (optional)
+    charset_ = "_charset__example" # str |  (optional)
+    force = True # bool |  (optional)
+    recursive = True # bool |  (optional)
+    package = open('/path/to/file', 'rb') # file_type |  (optional)
 
+    # example passing only required values which don't have defaults set
+    try:
+        api_response = api_instance.post_package_service_json(path, cmd)
+        pprint(api_response)
+    except swaggeraem.ApiException as e:
+        print("Exception when calling CrxApi->post_package_service_json: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
     try:
         api_response = api_instance.post_package_service_json(path, cmd, group_name=group_name, package_name=package_name, package_version=package_version, charset_=charset_, force=force, recursive=recursive, package=package)
         pprint(api_response)
-    except ApiException as e:
+    except swaggeraem.ApiException as e:
         print("Exception when calling CrxApi->post_package_service_json: %s\n" % e)
 ```
 
@@ -339,15 +348,15 @@ package = '/path/to/file' # file |  (optional)
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **path** | **str**|  | 
- **cmd** | **str**|  | 
- **group_name** | **str**|  | [optional] 
- **package_name** | **str**|  | [optional] 
- **package_version** | **str**|  | [optional] 
- **charset_** | **str**|  | [optional] 
- **force** | **bool**|  | [optional] 
- **recursive** | **bool**|  | [optional] 
- **package** | **file**|  | [optional] 
+ **path** | **str**|  |
+ **cmd** | **str**|  |
+ **group_name** | **str**|  | [optional]
+ **package_name** | **str**|  | [optional]
+ **package_version** | **str**|  | [optional]
+ **charset_** | **str**|  | [optional]
+ **force** | **bool**|  | [optional]
+ **recursive** | **bool**|  | [optional]
+ **package** | **file_type**|  | [optional]
 
 ### Return type
 
@@ -370,7 +379,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_package_update**
-> str post_package_update(group_name, package_name, version, path, filter=filter, charset_=charset_)
+> str post_package_update(group_name, package_name, version, path)
 
 
 
@@ -378,10 +387,9 @@ Name | Type | Description  | Notes
 
 * Basic Authentication (aemAuth):
 ```python
-from __future__ import print_function
 import time
 import swaggeraem
-from swaggeraem.rest import ApiException
+from swaggeraem.api import crx_api
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
@@ -403,18 +411,27 @@ configuration = swaggeraem.Configuration(
 # Enter a context with an instance of the API client
 with swaggeraem.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = swaggeraem.CrxApi(api_client)
-    group_name = 'group_name_example' # str | 
-package_name = 'package_name_example' # str | 
-version = 'version_example' # str | 
-path = 'path_example' # str | 
-filter = 'filter_example' # str |  (optional)
-charset_ = 'charset__example' # str |  (optional)
+    api_instance = crx_api.CrxApi(api_client)
+    group_name = "groupName_example" # str | 
+    package_name = "packageName_example" # str | 
+    version = "version_example" # str | 
+    path = "path_example" # str | 
+    filter = "filter_example" # str |  (optional)
+    charset_ = "_charset__example" # str |  (optional)
 
+    # example passing only required values which don't have defaults set
+    try:
+        api_response = api_instance.post_package_update(group_name, package_name, version, path)
+        pprint(api_response)
+    except swaggeraem.ApiException as e:
+        print("Exception when calling CrxApi->post_package_update: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
     try:
         api_response = api_instance.post_package_update(group_name, package_name, version, path, filter=filter, charset_=charset_)
         pprint(api_response)
-    except ApiException as e:
+    except swaggeraem.ApiException as e:
         print("Exception when calling CrxApi->post_package_update: %s\n" % e)
 ```
 
@@ -422,12 +439,12 @@ charset_ = 'charset__example' # str |  (optional)
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **group_name** | **str**|  | 
- **package_name** | **str**|  | 
- **version** | **str**|  | 
- **path** | **str**|  | 
- **filter** | **str**|  | [optional] 
- **charset_** | **str**|  | [optional] 
+ **group_name** | **str**|  |
+ **package_name** | **str**|  |
+ **version** | **str**|  |
+ **path** | **str**|  |
+ **filter** | **str**|  | [optional]
+ **charset_** | **str**|  | [optional]
 
 ### Return type
 
@@ -458,10 +475,9 @@ Name | Type | Description  | Notes
 
 * Basic Authentication (aemAuth):
 ```python
-from __future__ import print_function
 import time
 import swaggeraem
-from swaggeraem.rest import ApiException
+from swaggeraem.api import crx_api
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
@@ -483,15 +499,16 @@ configuration = swaggeraem.Configuration(
 # Enter a context with an instance of the API client
 with swaggeraem.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = swaggeraem.CrxApi(api_client)
-    old = 'old_example' # str | 
-plain = 'plain_example' # str | 
-verify = 'verify_example' # str | 
+    api_instance = crx_api.CrxApi(api_client)
+    old = "old_example" # str | 
+    plain = "plain_example" # str | 
+    verify = "verify_example" # str | 
 
+    # example passing only required values which don't have defaults set
     try:
         api_response = api_instance.post_set_password(old, plain, verify)
         pprint(api_response)
-    except ApiException as e:
+    except swaggeraem.ApiException as e:
         print("Exception when calling CrxApi->post_set_password: %s\n" % e)
 ```
 
@@ -499,9 +516,9 @@ verify = 'verify_example' # str |
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **old** | **str**|  | 
- **plain** | **str**|  | 
- **verify** | **str**|  | 
+ **old** | **str**|  |
+ **plain** | **str**|  |
+ **verify** | **str**|  |
 
 ### Return type
 

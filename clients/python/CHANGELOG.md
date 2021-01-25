@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Upgrade to Python 3
+- Generate client with OpenAPI Generator 5.0.0
 
 ## [0.9.1] - 2020-01-19
 

@@ -1,5 +1,3 @@
-# coding: utf-8
-
 """
     Adobe Experience Manager (AEM) API
 
@@ -11,17 +9,18 @@
 """
 
 
-from __future__ import absolute_import
-
 import re  # noqa: F401
+import sys  # noqa: F401
 
-# python 2 and python 3 compatibility library
-import six
-
-from swaggeraem.api_client import ApiClient
-from swaggeraem.exceptions import (  # noqa: F401
-    ApiTypeError,
-    ApiValueError
+from swaggeraem.api_client import ApiClient, Endpoint
+from swaggeraem.model_utils import (  # noqa: F401
+    check_allowed_values,
+    check_validations,
+    date,
+    datetime,
+    file_type,
+    none_type,
+    validate_and_convert_types
 )
 
 
@@ -37,335 +36,354 @@ class CustomApi(object):
             api_client = ApiClient()
         self.api_client = api_client
 
-    def get_aem_health_check(self, **kwargs):  # noqa: E501
-        """get_aem_health_check  # noqa: E501
+        def __get_aem_health_check(
+            self,
+            **kwargs
+        ):
+            """get_aem_health_check  # noqa: E501
 
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_aem_health_check(async_req=True)
-        >>> result = thread.get()
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        :param async_req bool: execute request asynchronously
-        :param str tags:
-        :param bool combine_tags_or:
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: str
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.get_aem_health_check_with_http_info(**kwargs)  # noqa: E501
+            >>> thread = api.get_aem_health_check(async_req=True)
+            >>> result = thread.get()
 
-    def get_aem_health_check_with_http_info(self, **kwargs):  # noqa: E501
-        """get_aem_health_check  # noqa: E501
 
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_aem_health_check_with_http_info(async_req=True)
-        >>> result = thread.get()
+            Keyword Args:
+                tags (str): [optional]
+                combine_tags_or (bool): [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        :param async_req bool: execute request asynchronously
-        :param str tags:
-        :param bool combine_tags_or:
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(str, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
+            Returns:
+                str
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            return self.call_with_http_info(**kwargs)
 
-        local_var_params = locals()
-
-        all_params = [
-            'tags',
-            'combine_tags_or'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.get_aem_health_check = Endpoint(
+            settings={
+                'response_type': (str,),
+                'auth': [
+                    'aemAuth'
+                ],
+                'endpoint_path': '/system/health',
+                'operation_id': 'get_aem_health_check',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'tags',
+                    'combine_tags_or',
+                ],
+                'required': [],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'tags':
+                        (str,),
+                    'combine_tags_or':
+                        (bool,),
+                },
+                'attribute_map': {
+                    'tags': 'tags',
+                    'combine_tags_or': 'combineTagsOr',
+                },
+                'location_map': {
+                    'tags': 'query',
+                    'combine_tags_or': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__get_aem_health_check
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method get_aem_health_check" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
+        def __post_config_aem_health_check_servlet(
+            self,
+            **kwargs
+        ):
+            """post_config_aem_health_check_servlet  # noqa: E501
 
-        collection_formats = {}
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
+            >>> thread = api.post_config_aem_health_check_servlet(async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'tags' in local_var_params and local_var_params['tags'] is not None:  # noqa: E501
-            query_params.append(('tags', local_var_params['tags']))  # noqa: E501
-        if 'combine_tags_or' in local_var_params and local_var_params['combine_tags_or'] is not None:  # noqa: E501
-            query_params.append(('combineTagsOr', local_var_params['combine_tags_or']))  # noqa: E501
 
-        header_params = {}
+            Keyword Args:
+                bundles_ignored ([str]): [optional]
+                bundles_ignored_type_hint (str): [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                None
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['aemAuth']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/system/health', 'GET',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='str',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def post_config_aem_health_check_servlet(self, **kwargs):  # noqa: E501
-        """post_config_aem_health_check_servlet  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.post_config_aem_health_check_servlet(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param list[str] bundles_ignored:
-        :param str bundles_ignored_type_hint:
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: None
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.post_config_aem_health_check_servlet_with_http_info(**kwargs)  # noqa: E501
-
-    def post_config_aem_health_check_servlet_with_http_info(self, **kwargs):  # noqa: E501
-        """post_config_aem_health_check_servlet  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.post_config_aem_health_check_servlet_with_http_info(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param list[str] bundles_ignored:
-        :param str bundles_ignored_type_hint:
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: None
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'bundles_ignored',
-            'bundles_ignored_type_hint'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.post_config_aem_health_check_servlet = Endpoint(
+            settings={
+                'response_type': None,
+                'auth': [
+                    'aemAuth'
+                ],
+                'endpoint_path': '/apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck',
+                'operation_id': 'post_config_aem_health_check_servlet',
+                'http_method': 'POST',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'bundles_ignored',
+                    'bundles_ignored_type_hint',
+                ],
+                'required': [],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'bundles_ignored':
+                        ([str],),
+                    'bundles_ignored_type_hint':
+                        (str,),
+                },
+                'attribute_map': {
+                    'bundles_ignored': 'bundles.ignored',
+                    'bundles_ignored_type_hint': 'bundles.ignored@TypeHint',
+                },
+                'location_map': {
+                    'bundles_ignored': 'query',
+                    'bundles_ignored_type_hint': 'query',
+                },
+                'collection_format_map': {
+                    'bundles_ignored': 'multi',
+                }
+            },
+            headers_map={
+                'accept': [],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__post_config_aem_health_check_servlet
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method post_config_aem_health_check_servlet" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
+        def __post_config_aem_password_reset(
+            self,
+            **kwargs
+        ):
+            """post_config_aem_password_reset  # noqa: E501
 
-        collection_formats = {}
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
+            >>> thread = api.post_config_aem_password_reset(async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'bundles_ignored' in local_var_params and local_var_params['bundles_ignored'] is not None:  # noqa: E501
-            query_params.append(('bundles.ignored', local_var_params['bundles_ignored']))  # noqa: E501
-            collection_formats['bundles.ignored'] = 'multi'  # noqa: E501
-        if 'bundles_ignored_type_hint' in local_var_params and local_var_params['bundles_ignored_type_hint'] is not None:  # noqa: E501
-            query_params.append(('bundles.ignored@TypeHint', local_var_params['bundles_ignored_type_hint']))  # noqa: E501
 
-        header_params = {}
+            Keyword Args:
+                pwdreset_authorizables ([str]): [optional]
+                pwdreset_authorizables_type_hint (str): [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                None
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        # Authentication setting
-        auth_settings = ['aemAuth']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck', 'POST',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type=None,  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def post_config_aem_password_reset(self, **kwargs):  # noqa: E501
-        """post_config_aem_password_reset  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.post_config_aem_password_reset(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param list[str] pwdreset_authorizables:
-        :param str pwdreset_authorizables_type_hint:
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: None
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.post_config_aem_password_reset_with_http_info(**kwargs)  # noqa: E501
-
-    def post_config_aem_password_reset_with_http_info(self, **kwargs):  # noqa: E501
-        """post_config_aem_password_reset  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.post_config_aem_password_reset_with_http_info(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param list[str] pwdreset_authorizables:
-        :param str pwdreset_authorizables_type_hint:
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: None
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'pwdreset_authorizables',
-            'pwdreset_authorizables_type_hint'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.post_config_aem_password_reset = Endpoint(
+            settings={
+                'response_type': None,
+                'auth': [
+                    'aemAuth'
+                ],
+                'endpoint_path': '/apps/system/config/com.shinesolutions.aem.passwordreset.Activator',
+                'operation_id': 'post_config_aem_password_reset',
+                'http_method': 'POST',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'pwdreset_authorizables',
+                    'pwdreset_authorizables_type_hint',
+                ],
+                'required': [],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'pwdreset_authorizables':
+                        ([str],),
+                    'pwdreset_authorizables_type_hint':
+                        (str,),
+                },
+                'attribute_map': {
+                    'pwdreset_authorizables': 'pwdreset.authorizables',
+                    'pwdreset_authorizables_type_hint': 'pwdreset.authorizables@TypeHint',
+                },
+                'location_map': {
+                    'pwdreset_authorizables': 'query',
+                    'pwdreset_authorizables_type_hint': 'query',
+                },
+                'collection_format_map': {
+                    'pwdreset_authorizables': 'multi',
+                }
+            },
+            headers_map={
+                'accept': [],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__post_config_aem_password_reset
         )
-
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method post_config_aem_password_reset" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-
-        collection_formats = {}
-
-        path_params = {}
-
-        query_params = []
-        if 'pwdreset_authorizables' in local_var_params and local_var_params['pwdreset_authorizables'] is not None:  # noqa: E501
-            query_params.append(('pwdreset.authorizables', local_var_params['pwdreset_authorizables']))  # noqa: E501
-            collection_formats['pwdreset.authorizables'] = 'multi'  # noqa: E501
-        if 'pwdreset_authorizables_type_hint' in local_var_params and local_var_params['pwdreset_authorizables_type_hint'] is not None:  # noqa: E501
-            query_params.append(('pwdreset.authorizables@TypeHint', local_var_params['pwdreset_authorizables_type_hint']))  # noqa: E501
-
-        header_params = {}
-
-        form_params = []
-        local_var_files = {}
-
-        body_params = None
-        # Authentication setting
-        auth_settings = ['aemAuth']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/apps/system/config/com.shinesolutions.aem.passwordreset.Activator', 'POST',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type=None,  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)

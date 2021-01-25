@@ -1,5 +1,3 @@
-# coding: utf-8
-
 """
     Adobe Experience Manager (AEM) API
 
@@ -11,18 +9,20 @@
 """
 
 
-from __future__ import absolute_import
-
 import re  # noqa: F401
+import sys  # noqa: F401
 
-# python 2 and python 3 compatibility library
-import six
-
-from swaggeraem.api_client import ApiClient
-from swaggeraem.exceptions import (  # noqa: F401
-    ApiTypeError,
-    ApiValueError
+from swaggeraem.api_client import ApiClient, Endpoint
+from swaggeraem.model_utils import (  # noqa: F401
+    check_allowed_values,
+    check_validations,
+    date,
+    datetime,
+    file_type,
+    none_type,
+    validate_and_convert_types
 )
+from swaggeraem.model.install_status import InstallStatus
 
 
 class CrxApi(object):
@@ -37,862 +37,908 @@ class CrxApi(object):
             api_client = ApiClient()
         self.api_client = api_client
 
-    def get_crxde_status(self, **kwargs):  # noqa: E501
-        """get_crxde_status  # noqa: E501
+        def __get_crxde_status(
+            self,
+            **kwargs
+        ):
+            """get_crxde_status  # noqa: E501
 
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_crxde_status(async_req=True)
-        >>> result = thread.get()
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        :param async_req bool: execute request asynchronously
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: str
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.get_crxde_status_with_http_info(**kwargs)  # noqa: E501
+            >>> thread = api.get_crxde_status(async_req=True)
+            >>> result = thread.get()
 
-    def get_crxde_status_with_http_info(self, **kwargs):  # noqa: E501
-        """get_crxde_status  # noqa: E501
 
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_crxde_status_with_http_info(async_req=True)
-        >>> result = thread.get()
+            Keyword Args:
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        :param async_req bool: execute request asynchronously
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(str, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
+            Returns:
+                str
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            return self.call_with_http_info(**kwargs)
 
-        local_var_params = locals()
-
-        all_params = [
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.get_crxde_status = Endpoint(
+            settings={
+                'response_type': (str,),
+                'auth': [
+                    'aemAuth'
+                ],
+                'endpoint_path': '/crx/server/crx.default/jcr:root/.1.json',
+                'operation_id': 'get_crxde_status',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                ],
+                'required': [],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                },
+                'attribute_map': {
+                },
+                'location_map': {
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'plain/text'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__get_crxde_status
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method get_crxde_status" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
+        def __get_install_status(
+            self,
+            **kwargs
+        ):
+            """get_install_status  # noqa: E501
 
-        collection_formats = {}
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
+            >>> thread = api.get_install_status(async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
 
-        header_params = {}
+            Keyword Args:
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                InstallStatus
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['plain/text'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['aemAuth']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/crx/server/crx.default/jcr:root/.1.json', 'GET',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='str',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def get_install_status(self, **kwargs):  # noqa: E501
-        """get_install_status  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_install_status(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: InstallStatus
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.get_install_status_with_http_info(**kwargs)  # noqa: E501
-
-    def get_install_status_with_http_info(self, **kwargs):  # noqa: E501
-        """get_install_status  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_install_status_with_http_info(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(InstallStatus, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.get_install_status = Endpoint(
+            settings={
+                'response_type': (InstallStatus,),
+                'auth': [
+                    'aemAuth'
+                ],
+                'endpoint_path': '/crx/packmgr/installstatus.jsp',
+                'operation_id': 'get_install_status',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                ],
+                'required': [],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                },
+                'attribute_map': {
+                },
+                'location_map': {
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__get_install_status
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method get_install_status" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
+        def __get_package_manager_servlet(
+            self,
+            **kwargs
+        ):
+            """get_package_manager_servlet  # noqa: E501
 
-        collection_formats = {}
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
+            >>> thread = api.get_package_manager_servlet(async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
 
-        header_params = {}
+            Keyword Args:
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                None
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['aemAuth']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/crx/packmgr/installstatus.jsp', 'GET',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='InstallStatus',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def get_package_manager_servlet(self, **kwargs):  # noqa: E501
-        """get_package_manager_servlet  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_package_manager_servlet(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: None
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.get_package_manager_servlet_with_http_info(**kwargs)  # noqa: E501
-
-    def get_package_manager_servlet_with_http_info(self, **kwargs):  # noqa: E501
-        """get_package_manager_servlet  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_package_manager_servlet_with_http_info(async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: None
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.get_package_manager_servlet = Endpoint(
+            settings={
+                'response_type': None,
+                'auth': [
+                    'aemAuth'
+                ],
+                'endpoint_path': '/crx/packmgr/service/script.html',
+                'operation_id': 'get_package_manager_servlet',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                ],
+                'required': [],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                },
+                'attribute_map': {
+                },
+                'location_map': {
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'text/html'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__get_package_manager_servlet
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method get_package_manager_servlet" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
+        def __post_package_service(
+            self,
+            cmd,
+            **kwargs
+        ):
+            """post_package_service  # noqa: E501
 
-        collection_formats = {}
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
+            >>> thread = api.post_package_service(cmd, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
+            Args:
+                cmd (str):
 
-        header_params = {}
+            Keyword Args:
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                str
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['cmd'] = \
+                cmd
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['text/html'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['aemAuth']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/crx/packmgr/service/script.html', 'GET',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type=None,  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def post_package_service(self, cmd, **kwargs):  # noqa: E501
-        """post_package_service  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.post_package_service(cmd, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str cmd: (required)
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: str
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.post_package_service_with_http_info(cmd, **kwargs)  # noqa: E501
-
-    def post_package_service_with_http_info(self, cmd, **kwargs):  # noqa: E501
-        """post_package_service  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.post_package_service_with_http_info(cmd, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str cmd: (required)
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(str, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'cmd'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.post_package_service = Endpoint(
+            settings={
+                'response_type': (str,),
+                'auth': [
+                    'aemAuth'
+                ],
+                'endpoint_path': '/crx/packmgr/service.jsp',
+                'operation_id': 'post_package_service',
+                'http_method': 'POST',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'cmd',
+                ],
+                'required': [
+                    'cmd',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'cmd':
+                        (str,),
+                },
+                'attribute_map': {
+                    'cmd': 'cmd',
+                },
+                'location_map': {
+                    'cmd': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'text/xml'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__post_package_service
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method post_package_service" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'cmd' is set
-        if self.api_client.client_side_validation and ('cmd' not in local_var_params or  # noqa: E501
-                                                        local_var_params['cmd'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `cmd` when calling `post_package_service`")  # noqa: E501
+        def __post_package_service_json(
+            self,
+            path,
+            cmd,
+            **kwargs
+        ):
+            """post_package_service_json  # noqa: E501
 
-        collection_formats = {}
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
+            >>> thread = api.post_package_service_json(path, cmd, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'cmd' in local_var_params and local_var_params['cmd'] is not None:  # noqa: E501
-            query_params.append(('cmd', local_var_params['cmd']))  # noqa: E501
+            Args:
+                path (str):
+                cmd (str):
 
-        header_params = {}
+            Keyword Args:
+                group_name (str): [optional]
+                package_name (str): [optional]
+                package_version (str): [optional]
+                charset_ (str): [optional]
+                force (bool): [optional]
+                recursive (bool): [optional]
+                package (file_type): [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                str
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['path'] = \
+                path
+            kwargs['cmd'] = \
+                cmd
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['text/xml'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['aemAuth']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/crx/packmgr/service.jsp', 'POST',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='str',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def post_package_service_json(self, path, cmd, **kwargs):  # noqa: E501
-        """post_package_service_json  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.post_package_service_json(path, cmd, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str path: (required)
-        :param str cmd: (required)
-        :param str group_name:
-        :param str package_name:
-        :param str package_version:
-        :param str charset_:
-        :param bool force:
-        :param bool recursive:
-        :param file package:
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: str
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.post_package_service_json_with_http_info(path, cmd, **kwargs)  # noqa: E501
-
-    def post_package_service_json_with_http_info(self, path, cmd, **kwargs):  # noqa: E501
-        """post_package_service_json  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.post_package_service_json_with_http_info(path, cmd, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str path: (required)
-        :param str cmd: (required)
-        :param str group_name:
-        :param str package_name:
-        :param str package_version:
-        :param str charset_:
-        :param bool force:
-        :param bool recursive:
-        :param file package:
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(str, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'path',
-            'cmd',
-            'group_name',
-            'package_name',
-            'package_version',
-            'charset_',
-            'force',
-            'recursive',
-            'package'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.post_package_service_json = Endpoint(
+            settings={
+                'response_type': (str,),
+                'auth': [
+                    'aemAuth'
+                ],
+                'endpoint_path': '/crx/packmgr/service/.json/{path}',
+                'operation_id': 'post_package_service_json',
+                'http_method': 'POST',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'path',
+                    'cmd',
+                    'group_name',
+                    'package_name',
+                    'package_version',
+                    'charset_',
+                    'force',
+                    'recursive',
+                    'package',
+                ],
+                'required': [
+                    'path',
+                    'cmd',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'path':
+                        (str,),
+                    'cmd':
+                        (str,),
+                    'group_name':
+                        (str,),
+                    'package_name':
+                        (str,),
+                    'package_version':
+                        (str,),
+                    'charset_':
+                        (str,),
+                    'force':
+                        (bool,),
+                    'recursive':
+                        (bool,),
+                    'package':
+                        (file_type,),
+                },
+                'attribute_map': {
+                    'path': 'path',
+                    'cmd': 'cmd',
+                    'group_name': 'groupName',
+                    'package_name': 'packageName',
+                    'package_version': 'packageVersion',
+                    'charset_': '_charset_',
+                    'force': 'force',
+                    'recursive': 'recursive',
+                    'package': 'package',
+                },
+                'location_map': {
+                    'path': 'path',
+                    'cmd': 'query',
+                    'group_name': 'query',
+                    'package_name': 'query',
+                    'package_version': 'query',
+                    'charset_': 'query',
+                    'force': 'query',
+                    'recursive': 'query',
+                    'package': 'form',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [
+                    'multipart/form-data'
+                ]
+            },
+            api_client=api_client,
+            callable=__post_package_service_json
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method post_package_service_json" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'path' is set
-        if self.api_client.client_side_validation and ('path' not in local_var_params or  # noqa: E501
-                                                        local_var_params['path'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `path` when calling `post_package_service_json`")  # noqa: E501
-        # verify the required parameter 'cmd' is set
-        if self.api_client.client_side_validation and ('cmd' not in local_var_params or  # noqa: E501
-                                                        local_var_params['cmd'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `cmd` when calling `post_package_service_json`")  # noqa: E501
+        def __post_package_update(
+            self,
+            group_name,
+            package_name,
+            version,
+            path,
+            **kwargs
+        ):
+            """post_package_update  # noqa: E501
 
-        collection_formats = {}
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
-        if 'path' in local_var_params:
-            path_params['path'] = local_var_params['path']  # noqa: E501
+            >>> thread = api.post_package_update(group_name, package_name, version, path, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'cmd' in local_var_params and local_var_params['cmd'] is not None:  # noqa: E501
-            query_params.append(('cmd', local_var_params['cmd']))  # noqa: E501
-        if 'group_name' in local_var_params and local_var_params['group_name'] is not None:  # noqa: E501
-            query_params.append(('groupName', local_var_params['group_name']))  # noqa: E501
-        if 'package_name' in local_var_params and local_var_params['package_name'] is not None:  # noqa: E501
-            query_params.append(('packageName', local_var_params['package_name']))  # noqa: E501
-        if 'package_version' in local_var_params and local_var_params['package_version'] is not None:  # noqa: E501
-            query_params.append(('packageVersion', local_var_params['package_version']))  # noqa: E501
-        if 'charset_' in local_var_params and local_var_params['charset_'] is not None:  # noqa: E501
-            query_params.append(('_charset_', local_var_params['charset_']))  # noqa: E501
-        if 'force' in local_var_params and local_var_params['force'] is not None:  # noqa: E501
-            query_params.append(('force', local_var_params['force']))  # noqa: E501
-        if 'recursive' in local_var_params and local_var_params['recursive'] is not None:  # noqa: E501
-            query_params.append(('recursive', local_var_params['recursive']))  # noqa: E501
+            Args:
+                group_name (str):
+                package_name (str):
+                version (str):
+                path (str):
 
-        header_params = {}
+            Keyword Args:
+                filter (str): [optional]
+                charset_ (str): [optional]
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
-        if 'package' in local_var_params:
-            local_var_files['package'] = local_var_params['package']  # noqa: E501
+            Returns:
+                str
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['group_name'] = \
+                group_name
+            kwargs['package_name'] = \
+                package_name
+            kwargs['version'] = \
+                version
+            kwargs['path'] = \
+                path
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
-
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['multipart/form-data'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['aemAuth']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/crx/packmgr/service/.json/{path}', 'POST',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='str',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def post_package_update(self, group_name, package_name, version, path, **kwargs):  # noqa: E501
-        """post_package_update  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.post_package_update(group_name, package_name, version, path, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str group_name: (required)
-        :param str package_name: (required)
-        :param str version: (required)
-        :param str path: (required)
-        :param str filter:
-        :param str charset_:
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: str
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.post_package_update_with_http_info(group_name, package_name, version, path, **kwargs)  # noqa: E501
-
-    def post_package_update_with_http_info(self, group_name, package_name, version, path, **kwargs):  # noqa: E501
-        """post_package_update  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.post_package_update_with_http_info(group_name, package_name, version, path, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str group_name: (required)
-        :param str package_name: (required)
-        :param str version: (required)
-        :param str path: (required)
-        :param str filter:
-        :param str charset_:
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(str, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'group_name',
-            'package_name',
-            'version',
-            'path',
-            'filter',
-            'charset_'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.post_package_update = Endpoint(
+            settings={
+                'response_type': (str,),
+                'auth': [
+                    'aemAuth'
+                ],
+                'endpoint_path': '/crx/packmgr/update.jsp',
+                'operation_id': 'post_package_update',
+                'http_method': 'POST',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'group_name',
+                    'package_name',
+                    'version',
+                    'path',
+                    'filter',
+                    'charset_',
+                ],
+                'required': [
+                    'group_name',
+                    'package_name',
+                    'version',
+                    'path',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'group_name':
+                        (str,),
+                    'package_name':
+                        (str,),
+                    'version':
+                        (str,),
+                    'path':
+                        (str,),
+                    'filter':
+                        (str,),
+                    'charset_':
+                        (str,),
+                },
+                'attribute_map': {
+                    'group_name': 'groupName',
+                    'package_name': 'packageName',
+                    'version': 'version',
+                    'path': 'path',
+                    'filter': 'filter',
+                    'charset_': '_charset_',
+                },
+                'location_map': {
+                    'group_name': 'query',
+                    'package_name': 'query',
+                    'version': 'query',
+                    'path': 'query',
+                    'filter': 'query',
+                    'charset_': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__post_package_update
         )
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method post_package_update" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'group_name' is set
-        if self.api_client.client_side_validation and ('group_name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['group_name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `group_name` when calling `post_package_update`")  # noqa: E501
-        # verify the required parameter 'package_name' is set
-        if self.api_client.client_side_validation and ('package_name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['package_name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `package_name` when calling `post_package_update`")  # noqa: E501
-        # verify the required parameter 'version' is set
-        if self.api_client.client_side_validation and ('version' not in local_var_params or  # noqa: E501
-                                                        local_var_params['version'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `version` when calling `post_package_update`")  # noqa: E501
-        # verify the required parameter 'path' is set
-        if self.api_client.client_side_validation and ('path' not in local_var_params or  # noqa: E501
-                                                        local_var_params['path'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `path` when calling `post_package_update`")  # noqa: E501
+        def __post_set_password(
+            self,
+            old,
+            plain,
+            verify,
+            **kwargs
+        ):
+            """post_set_password  # noqa: E501
 
-        collection_formats = {}
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
 
-        path_params = {}
+            >>> thread = api.post_set_password(old, plain, verify, async_req=True)
+            >>> result = thread.get()
 
-        query_params = []
-        if 'group_name' in local_var_params and local_var_params['group_name'] is not None:  # noqa: E501
-            query_params.append(('groupName', local_var_params['group_name']))  # noqa: E501
-        if 'package_name' in local_var_params and local_var_params['package_name'] is not None:  # noqa: E501
-            query_params.append(('packageName', local_var_params['package_name']))  # noqa: E501
-        if 'version' in local_var_params and local_var_params['version'] is not None:  # noqa: E501
-            query_params.append(('version', local_var_params['version']))  # noqa: E501
-        if 'path' in local_var_params and local_var_params['path'] is not None:  # noqa: E501
-            query_params.append(('path', local_var_params['path']))  # noqa: E501
-        if 'filter' in local_var_params and local_var_params['filter'] is not None:  # noqa: E501
-            query_params.append(('filter', local_var_params['filter']))  # noqa: E501
-        if 'charset_' in local_var_params and local_var_params['charset_'] is not None:  # noqa: E501
-            query_params.append(('_charset_', local_var_params['charset_']))  # noqa: E501
+            Args:
+                old (str):
+                plain (str):
+                verify (str):
 
-        header_params = {}
+            Keyword Args:
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
 
-        form_params = []
-        local_var_files = {}
+            Returns:
+                str
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['old'] = \
+                old
+            kwargs['plain'] = \
+                plain
+            kwargs['verify'] = \
+                verify
+            return self.call_with_http_info(**kwargs)
 
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['aemAuth']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/crx/packmgr/update.jsp', 'POST',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='str',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def post_set_password(self, old, plain, verify, **kwargs):  # noqa: E501
-        """post_set_password  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.post_set_password(old, plain, verify, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str old: (required)
-        :param str plain: (required)
-        :param str verify: (required)
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: str
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.post_set_password_with_http_info(old, plain, verify, **kwargs)  # noqa: E501
-
-    def post_set_password_with_http_info(self, old, plain, verify, **kwargs):  # noqa: E501
-        """post_set_password  # noqa: E501
-
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.post_set_password_with_http_info(old, plain, verify, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str old: (required)
-        :param str plain: (required)
-        :param str verify: (required)
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(str, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = [
-            'old',
-            'plain',
-            'verify'
-        ]
-        all_params.extend(
-            [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout'
-            ]
+        self.post_set_password = Endpoint(
+            settings={
+                'response_type': (str,),
+                'auth': [
+                    'aemAuth'
+                ],
+                'endpoint_path': '/crx/explorer/ui/setpassword.jsp',
+                'operation_id': 'post_set_password',
+                'http_method': 'POST',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'old',
+                    'plain',
+                    'verify',
+                ],
+                'required': [
+                    'old',
+                    'plain',
+                    'verify',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'old':
+                        (str,),
+                    'plain':
+                        (str,),
+                    'verify':
+                        (str,),
+                },
+                'attribute_map': {
+                    'old': 'old',
+                    'plain': 'plain',
+                    'verify': 'verify',
+                },
+                'location_map': {
+                    'old': 'query',
+                    'plain': 'query',
+                    'verify': 'query',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'text/plain'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__post_set_password
         )
-
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method post_set_password" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'old' is set
-        if self.api_client.client_side_validation and ('old' not in local_var_params or  # noqa: E501
-                                                        local_var_params['old'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `old` when calling `post_set_password`")  # noqa: E501
-        # verify the required parameter 'plain' is set
-        if self.api_client.client_side_validation and ('plain' not in local_var_params or  # noqa: E501
-                                                        local_var_params['plain'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `plain` when calling `post_set_password`")  # noqa: E501
-        # verify the required parameter 'verify' is set
-        if self.api_client.client_side_validation and ('verify' not in local_var_params or  # noqa: E501
-                                                        local_var_params['verify'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `verify` when calling `post_set_password`")  # noqa: E501
-
-        collection_formats = {}
-
-        path_params = {}
-
-        query_params = []
-        if 'old' in local_var_params and local_var_params['old'] is not None:  # noqa: E501
-            query_params.append(('old', local_var_params['old']))  # noqa: E501
-        if 'plain' in local_var_params and local_var_params['plain'] is not None:  # noqa: E501
-            query_params.append(('plain', local_var_params['plain']))  # noqa: E501
-        if 'verify' in local_var_params and local_var_params['verify'] is not None:  # noqa: E501
-            query_params.append(('verify', local_var_params['verify']))  # noqa: E501
-
-        header_params = {}
-
-        form_params = []
-        local_var_files = {}
-
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['text/plain'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['aemAuth']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/crx/explorer/ui/setpassword.jsp', 'POST',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='str',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)

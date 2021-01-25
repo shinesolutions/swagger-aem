@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **entry_type** | **str** | e.g. \&quot;privateKey\&quot; | [optional] 
 **algorithm** | **str** | e.g. \&quot;RSA\&quot; | [optional] 
 **format** | **str** | e.g. \&quot;PKCS#8\&quot; | [optional] 
-**chain** | [**list[KeystoreChainItems]**](KeystoreChainItems.md) |  | [optional] 
+**chain** | [**[KeystoreChainItems]**](KeystoreChainItems.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

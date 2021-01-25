@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **ssl_setup**
-> str ssl_setup(keystore_password, keystore_password_confirm, truststore_password, truststore_password_confirm, https_hostname, https_port, privatekey_file=privatekey_file, certificate_file=certificate_file)
+> str ssl_setup(keystore_password, keystore_password_confirm, truststore_password, truststore_password_confirm, https_hostname, https_port)
 
 
 
@@ -16,10 +16,9 @@ Method | HTTP request | Description
 
 * Basic Authentication (aemAuth):
 ```python
-from __future__ import print_function
 import time
 import swaggeraem
-from swaggeraem.rest import ApiException
+from swaggeraem.api import granite_api
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
@@ -41,20 +40,29 @@ configuration = swaggeraem.Configuration(
 # Enter a context with an instance of the API client
 with swaggeraem.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = swaggeraem.GraniteApi(api_client)
-    keystore_password = 'keystore_password_example' # str | 
-keystore_password_confirm = 'keystore_password_confirm_example' # str | 
-truststore_password = 'truststore_password_example' # str | 
-truststore_password_confirm = 'truststore_password_confirm_example' # str | 
-https_hostname = 'https_hostname_example' # str | 
-https_port = 'https_port_example' # str | 
-privatekey_file = '/path/to/file' # file |  (optional)
-certificate_file = '/path/to/file' # file |  (optional)
+    api_instance = granite_api.GraniteApi(api_client)
+    keystore_password = "keystorePassword_example" # str | 
+    keystore_password_confirm = "keystorePasswordConfirm_example" # str | 
+    truststore_password = "truststorePassword_example" # str | 
+    truststore_password_confirm = "truststorePasswordConfirm_example" # str | 
+    https_hostname = "httpsHostname_example" # str | 
+    https_port = "httpsPort_example" # str | 
+    privatekey_file = open('/path/to/file', 'rb') # file_type |  (optional)
+    certificate_file = open('/path/to/file', 'rb') # file_type |  (optional)
 
+    # example passing only required values which don't have defaults set
+    try:
+        api_response = api_instance.ssl_setup(keystore_password, keystore_password_confirm, truststore_password, truststore_password_confirm, https_hostname, https_port)
+        pprint(api_response)
+    except swaggeraem.ApiException as e:
+        print("Exception when calling GraniteApi->ssl_setup: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
     try:
         api_response = api_instance.ssl_setup(keystore_password, keystore_password_confirm, truststore_password, truststore_password_confirm, https_hostname, https_port, privatekey_file=privatekey_file, certificate_file=certificate_file)
         pprint(api_response)
-    except ApiException as e:
+    except swaggeraem.ApiException as e:
         print("Exception when calling GraniteApi->ssl_setup: %s\n" % e)
 ```
 
@@ -62,14 +70,14 @@ certificate_file = '/path/to/file' # file |  (optional)
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **keystore_password** | **str**|  | 
- **keystore_password_confirm** | **str**|  | 
- **truststore_password** | **str**|  | 
- **truststore_password_confirm** | **str**|  | 
- **https_hostname** | **str**|  | 
- **https_port** | **str**|  | 
- **privatekey_file** | **file**|  | [optional] 
- **certificate_file** | **file**|  | [optional] 
+ **keystore_password** | **str**|  |
+ **keystore_password_confirm** | **str**|  |
+ **truststore_password** | **str**|  |
+ **truststore_password_confirm** | **str**|  |
+ **https_hostname** | **str**|  |
+ **https_port** | **str**|  |
+ **privatekey_file** | **file_type**|  | [optional]
+ **certificate_file** | **file_type**|  | [optional]
 
 ### Return type
 
