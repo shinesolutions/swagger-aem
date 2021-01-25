@@ -7,3 +7,4 @@ clients/ruby/.bundle
 clients/ruby/bin
 */log/
 *.pyc
+stage
