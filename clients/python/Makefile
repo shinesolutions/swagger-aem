@@ -1,12 +1,11 @@
-all: clean deps build install test-unit test-integration doc
-ci: clean deps build install test-unit doc
+all: deps clean install test-unit test-integration doc
+ci: deps clean install test-unit doc
 
 deps:
 	pip install -r requirements-dev.txt
 
 clean:
 	
-
 install:
 	cd generated/ && \
 	  python setup.py install
@@ -37,4 +36,4 @@ publish-test:
 	  python setup.py register -r pypitest && \
 	  python setup.py sdist upload -r pypitest
 
-.PHONY: all deps clean build install test-unit test-integration doc publish publish-test
+.PHONY: all deps clean install test-unit test-integration doc publish publish-test

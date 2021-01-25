@@ -46,4 +46,4 @@ publish: install
 release:
 	rtk release
 
-.PHONY: all ci deps clean build install test-unit test-integration fixtures doc publish release
+.PHONY: all ci deps clean install test-unit test-integration fixtures doc publish release
