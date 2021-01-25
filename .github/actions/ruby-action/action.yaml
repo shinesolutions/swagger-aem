@@ -1,0 +1,4 @@
+name: 'Ruby'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
