@@ -152,6 +152,7 @@ class RESTClientObject(object):
                         request_body = json.dumps(body)
                     r = self.pool_manager.request(
                         method, url,
+                        redirect=False,
                         body=request_body,
                         preload_content=_preload_content,
                         timeout=timeout,
@@ -159,6 +160,7 @@ class RESTClientObject(object):
                 elif headers['Content-Type'] == 'application/x-www-form-urlencoded':  # noqa: E501
                     r = self.pool_manager.request(
                         method, url,
+                        redirect=False,
                         fields=post_params,
                         encode_multipart=False,
                         preload_content=_preload_content,
@@ -171,6 +173,7 @@ class RESTClientObject(object):
                     del headers['Content-Type']
                     r = self.pool_manager.request(
                         method, url,
+                        redirect=False,
                         fields=post_params,
                         encode_multipart=True,
                         preload_content=_preload_content,
@@ -183,6 +186,7 @@ class RESTClientObject(object):
                     request_body = body
                     r = self.pool_manager.request(
                         method, url,
+                        redirect=False,
                         body=request_body,
                         preload_content=_preload_content,
                         timeout=timeout,
@@ -196,6 +200,7 @@ class RESTClientObject(object):
             # For `GET`, `HEAD`
             else:
                 r = self.pool_manager.request(method, url,
+                                              redirect=False,
                                               fields=query_params,
                                               preload_content=_preload_content,
                                               timeout=timeout,

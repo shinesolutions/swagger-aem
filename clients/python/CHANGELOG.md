@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Replace async with async_req as api_client.call_api keyword argument
+- Disable redirect on all urllib3 pool manager's request calls
 
 ## 1.0.0 - 2021-02-08
 ### Changed
