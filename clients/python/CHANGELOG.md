@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Replace async with async_req as api_client.call_api keyword argument
+
 ## 1.0.0 - 2021-02-08
 ### Changed
 - Upgrade to Python 3
