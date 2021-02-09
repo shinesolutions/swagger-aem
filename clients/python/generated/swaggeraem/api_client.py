@@ -317,6 +317,8 @@ class ApiClient(object):
         except ValueError:
             received_data = response.data
 
+        received_data = response.data
+
         # store our data under the key of 'received_data' so users have some
         # context if they are deserializing a string and the data type is wrong
         deserialized_data = validate_and_convert_types(

@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Change get_aem_health_check_with_http_info api call response type param from 'str' string to (str,) tuple
+- Change response type deserialization to not enforce json.loads which will result in dict but GET method needs str
 
 ## 1.1.0 - 2021-02-08
 ### Changed
