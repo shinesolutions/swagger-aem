@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Change get_aem_health_check_with_http_info api call response type param from 'str' string to (str,) tuple
+
 ## 1.1.0 - 2021-02-08
 ### Changed
 - Replace async with async_req as api_client.call_api keyword argument
