@@ -11,21 +11,21 @@ stage:
 	mkdir -p stage
 
 deps: stage
-	npm install -g bootprint@1.0.2 bootprint-openapi@1.1.1 gh-pages@2.0.1 jsonlint@1.6.3 swagger-cli@2.2.1 swaggy-c@0.1.0
+	npm install .
 	wget https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/5.1.0/openapi-generator-cli-5.1.0.jar -O stage/openapi-generator-cli.jar
 
 lint:
-	swagger-cli validate conf/*.yml
-	jsonlint clients/java/conf/client.json
-	jsonlint clients/javascript/conf/client.json
-	jsonlint clients/python/conf/client.json
-	jsonlint clients/ruby/conf/client.json
+	node_modules/.bin/swagger-cli validate conf/*.yml
+	node_modules/.bin/jsonlint clients/java/conf/client.json
+	node_modules/.bin/jsonlint clients/javascript/conf/client.json
+	node_modules/.bin/jsonlint clients/python/conf/client.json
+	node_modules/.bin/jsonlint clients/ruby/conf/client.json
 
 doc:
-	bootprint openapi conf/api.yml doc/api/master/
+	node_modules/.bin/bootprint openapi conf/api.yml doc/api/master/
 
 doc-publish:
-	gh-pages --dist doc/
+	node_modules/.bin/gh-pages --dist doc/
 
 release:
 	rtk release
