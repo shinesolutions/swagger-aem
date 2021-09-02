@@ -56,4 +56,32 @@ describe 'Bundle' do
     end
 
   end
+
+  describe 'test bundle info' do
+
+    it 'should return Active when bundle was started' do
+      data, status_code, headers = @console.post_bundle_with_http_info(
+        name = 'com.adobe.cq.social.cq-social-forum',
+        action = 'start'
+      )
+      expect(status_code).to eq(200)
+      data, status_code, headers = @console.get_bundle_info_with_http_info(
+        name = 'com.adobe.cq.social.cq-social-forum'
+      )
+      expect(data.data[0].state).to eq('Active')
+    end
+  
+    it 'should return Resolved when bundle was stopped' do
+      data, status_code, headers = @console.post_bundle_with_http_info(
+        name = 'com.adobe.cq.social.cq-social-forum',
+        action = 'stop'
+      )
+      expect(status_code).to eq(200)
+      data, status_code, headers = @console.get_bundle_info_with_http_info(
+        name = 'com.adobe.cq.social.cq-social-forum'
+      )
+      expect(data.data[0].state).to eq('Resolved')
+    end
+  end
+
 end
