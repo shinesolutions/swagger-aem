@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Fix doc target output dir path
+- Fix gem install error due to openapi-generator 4.3.1 having rubocop 0.66.0 dep which breaks gem install due to psych 4.1 incompat
 
 ## [3.4.0] - 2020-09-26
 
