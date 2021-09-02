@@ -71,6 +71,64 @@ module SwaggerAemClient
       return data, status_code, headers
     end
 
+    # @param name [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [BundleInfo]
+    def get_bundle_info(name, opts = {})
+      data, _status_code, _headers = get_bundle_info_with_http_info(name, opts)
+      data
+    end
+
+    # @param name [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(BundleInfo, Integer, Hash)>] BundleInfo data, response status code and response headers
+    def get_bundle_info_with_http_info(name, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConsoleApi.get_bundle_info ...'
+      end
+      # verify the required parameter 'name' is set
+      if @api_client.config.client_side_validation && name.nil?
+        fail ArgumentError, "Missing the required parameter 'name' when calling ConsoleApi.get_bundle_info"
+      end
+      # resource path
+      local_var_path = '/system/console/bundles/{name}.json'.sub('{' + 'name' + '}', CGI.escape(name.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:body] 
+
+      # return_type
+      return_type = opts[:return_type] || 'BundleInfo' 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['aemAuth']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConsoleApi#get_bundle_info\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # @param [Hash] opts the optional parameters
     # @return [String]
     def get_config_mgr(opts = {})

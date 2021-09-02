@@ -17,6 +17,9 @@ require 'swagger_aem/version'
 require 'swagger_aem/configuration'
 
 # Models
+require 'swagger_aem/models/bundle_data'
+require 'swagger_aem/models/bundle_data_prop'
+require 'swagger_aem/models/bundle_info'
 require 'swagger_aem/models/inline_object'
 require 'swagger_aem/models/inline_object1'
 require 'swagger_aem/models/inline_object2'

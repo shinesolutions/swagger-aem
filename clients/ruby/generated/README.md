@@ -82,6 +82,7 @@ All URIs are relative to *http://localhost*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *SwaggerAemClient::ConsoleApi* | [**get_aem_product_info**](docs/ConsoleApi.md#get_aem_product_info) | **GET** /system/console/status-productinfo.json | 
+*SwaggerAemClient::ConsoleApi* | [**get_bundle_info**](docs/ConsoleApi.md#get_bundle_info) | **GET** /system/console/bundles/{name}.json | 
 *SwaggerAemClient::ConsoleApi* | [**get_config_mgr**](docs/ConsoleApi.md#get_config_mgr) | **GET** /system/console/configMgr | 
 *SwaggerAemClient::ConsoleApi* | [**post_bundle**](docs/ConsoleApi.md#post_bundle) | **POST** /system/console/bundles/{name} | 
 *SwaggerAemClient::ConsoleApi* | [**post_jmx_repository**](docs/ConsoleApi.md#post_jmx_repository) | **POST** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} | 
@@ -132,6 +133,9 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
+ - [SwaggerAemClient::BundleData](docs/BundleData.md)
+ - [SwaggerAemClient::BundleDataProp](docs/BundleDataProp.md)
+ - [SwaggerAemClient::BundleInfo](docs/BundleInfo.md)
  - [SwaggerAemClient::InlineObject](docs/InlineObject.md)
  - [SwaggerAemClient::InlineObject1](docs/InlineObject1.md)
  - [SwaggerAemClient::InlineObject2](docs/InlineObject2.md)
