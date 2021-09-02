@@ -1,4 +1,5 @@
 {
+  "tagFormat": "api-{version}",
   "resources": [
     {
       "path": "conf/api.yml",

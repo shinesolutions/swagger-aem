@@ -1,4 +1,5 @@
 {
+  "tagFormat": "ruby-{version}",
   "resources": [
     {
       "path": "conf/client.json",
