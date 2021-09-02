@@ -1192,6 +1192,30 @@ paths:
                 type: string
       tags:
         - crx
+  "/system/console/bundles/{name}.json":
+    get:
+      operationId: getBundleInfo
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      tags:
+        - console
+      responses:
+        "200":
+          description: Retrieved bundle info
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BundleInfo"
+        default:
+          description: Default response
+          content:
+            application/json:
+              schema:
+                type: string
   "/system/console/bundles/{name}":
     post:
       operationId: postBundle
@@ -2386,3 +2410,57 @@ components:
         description:
           description: Property description
           type: string
+    BundleInfo:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status description of all bundles
+        s:
+          type: array
+          items:
+            type: integer
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/BundleData"
+    BundleData:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Bundle ID
+        name:
+          type: string
+          description: Bundle name
+        fragment:
+          type: boolean
+          description: Is bundle a fragment
+        stateRaw:
+          type: integer
+          description: Numeric raw bundle state value
+        state:
+          type: string
+          description: Bundle state value
+        version:
+          type: string
+          description: Bundle version
+        symbolicName:
+          type: string
+          description: Bundle symbolic name
+        category:
+          type: string
+          description: Bundle category
+        props:
+          type: array
+          items:
+            $ref: "#/components/schemas/BundleDataProp"
+    BundleDataProp:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Bundle data key
+        value:
+          type: string
+          description: Bundle data value
