@@ -1,16 +1,16 @@
 {
-    "resources": [
-      {
-        "path": "conf/client.json",
-        "type": "json",
-        "params": {
-          "property": "packageVersion"
-        }
-      },
-      {
-        "path": "CHANGELOG.md",
-        "type": "keep-a-changelog"
+  "tagFormat": "python-{version}",
+  "resources": [
+    {
+      "path": "conf/client.json",
+      "type": "json",
+      "params": {
+        "property": "packageVersion"
       }
-    ],
-    "tagFormat": "python-{version}",
-  }
+    },
+    {
+      "path": "CHANGELOG.md",
+      "type": "keep-a-changelog"
+    }
+  ]
+}
