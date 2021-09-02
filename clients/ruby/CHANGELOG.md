@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Modify integration tests to handle AEM 6.5 which defaults to disabled crx/de
+
 ## [3.4.0] - 2020-09-26
 
 ### Changed

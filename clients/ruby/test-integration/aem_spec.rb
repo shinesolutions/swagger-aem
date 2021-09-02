@@ -51,10 +51,15 @@ describe 'Aem' do
   describe 'test get CRXDE Status page' do
 
     it 'should succeed' do
-      data, status_code, headers = @crx.get_crxde_status_with_http_info()
-      expect(status_code).to eq(200)
-      json = JSON.parse(data)
-      expect(json['jcr:primaryType']).to eq('rep:root')
+      begin
+        data, status_code, headers = @crx.get_crxde_status_with_http_info()
+        expect(status_code).to be_in(200, 404)
+        json = JSON.parse(data)
+        expect(json['jcr:primaryType']).to eq('rep:root')
+      rescue SwaggerAemClient::ApiError => err
+        expect([404]).to include(err.code)
+        expect(err.response_body).to include('<head><title>404 Resource at \'/crx/server/crx.default/jcr:root/.1.json\' not found: No resource found</title></head>')
+      end
     end
 
   end
