@@ -1,9 +1,9 @@
 ---
-name: Ruby
+name: CI Ruby
 on: [push, pull_request, workflow_dispatch]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - uses: ./.github/actions/ruby-action
+    - uses: ./.github/actions/ci-ruby-action
