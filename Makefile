@@ -12,7 +12,15 @@ stage:
 
 deps: stage
 	npm install .
+	wget https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/5.2.1/openapi-generator-cli-5.2.1.jar -O stage/openapi-generator-cli.jar
+
+deps-python: stage
+	npm install .
 	wget https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/5.1.0/openapi-generator-cli-5.1.0.jar -O stage/openapi-generator-cli.jar
+
+deps-ruby: stage
+	npm install .
+	wget https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/4.3.1/openapi-generator-cli-4.3.1.jar -O stage/openapi-generator-cli.jar
 
 lint:
 	node_modules/.bin/swagger-cli validate conf/*.yml

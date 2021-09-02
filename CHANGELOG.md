@@ -7,10 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Introduce deps-python and deps-ruby for language specific openapi-generator dependency version
+
 ### Changed
 - Upgrade OpenAPI Generator to v5.1.0
 - Modify client generation to use openapi-generator-cli jar
 - Move node.js build dependencies from Makefile target to package.json
+- Set default deps target to download latest openapi-generator
 
 ## 3.4.0 - 2020-09-26
 ### Changed
