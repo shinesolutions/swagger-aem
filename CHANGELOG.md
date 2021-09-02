@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add deps-python and deps-ruby targets for language specific openapi-generator dependency version
 - Add openapi-generator-version target
 - Add getBundleInfo operation
+- Add ci-python, ci-ruby, generate-python, generate-ruby targets for language specific CI builds
 
 ### Changed
 - Upgrade OpenAPI Generator to v5.1.0
