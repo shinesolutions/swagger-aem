@@ -2,10 +2,10 @@ LANGS = ada ada-server android apache2 apex aspnetcore bash clojure cwiki cpp-qt
 
 LANGS = python ruby
 
-ci: clean deps lint generate doc
+ci: clean deps openapi-generator-version lint generate doc
 
 clean:
-	rm -rf doc
+	rm -rf doc stage
 
 stage:
 	mkdir -p stage
@@ -21,6 +21,9 @@ deps-python: stage
 deps-ruby: stage
 	npm install .
 	wget https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/4.3.1/openapi-generator-cli-4.3.1.jar -O stage/openapi-generator-cli.jar
+
+openapi-generator-version:
+	java -jar stage/openapi-generator-cli.jar --version
 
 lint:
 	node_modules/.bin/swagger-cli validate conf/*.yml
@@ -67,4 +70,4 @@ generate:
 		  --output clients/$$lang/generated/; \
 	done
 
-.PHONY: ci clean stage deps lint doc doc-publish release generate $(LANGS)
+.PHONY: ci clean stage deps deps-python deps-ruby openapi-generator-version lint doc doc-publish release generate $(LANGS)
