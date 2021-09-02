@@ -37,7 +37,7 @@ doc:
 	cd generated/ && \
 	  rm -f swagger_aem-*.gem && \
 	  yard doc \
-            --output-dir ../../doc/ruby/master/
+            --output-dir ../../../doc/ruby/master/
 
 publish: install
 	cd generated/ && \

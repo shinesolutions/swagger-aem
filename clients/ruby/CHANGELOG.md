@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Changed
+- Generate client with spec 3.5.0
 - Modify integration tests to handle AEM 6.5 which defaults to disabled crx/de
+
+### Fixed
+- Fix doc target output dir path
 
 ## [3.4.0] - 2020-09-26
 
