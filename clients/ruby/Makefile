@@ -43,7 +43,15 @@ publish: install
 	cd generated/ && \
 	  gem push `ls swagger_aem-*.gem`
 
-release:
-	rtk release
+release-major:
+	rtk release --release-increment-type major
 
-.PHONY: all ci deps clean install test-unit test-integration fixtures doc publish release
+release-minor:
+	rtk release --release-increment-type minor
+
+release-patch:
+	rtk release --release-increment-type patch
+
+release: release-minor
+
+.PHONY: all ci deps clean install test-unit test-integration fixtures doc publish release release-major release-minor release-patch

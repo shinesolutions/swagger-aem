@@ -38,8 +38,16 @@ doc:
 doc-publish:
 	node_modules/.bin/gh-pages --dist doc/
 
-release:
-	rtk release
+release-major:
+	rtk release --release-increment-type major
+
+release-minor:
+	rtk release --release-increment-type minor
+
+release-patch:
+	rtk release --release-increment-type patch
+
+release: release-minor
 
 ################################################################################
 # Targets for generating API client for the supported languages.
@@ -86,4 +94,4 @@ generate-ruby:
 		--output clients/ruby/generated/
 
 
-.PHONY: ci ci-python ci-ruby clean stage deps deps-python deps-ruby openapi-generator-version lint doc doc-publish release generate generate-python generate-ruby $(LANGS)
+.PHONY: ci ci-python ci-ruby clean stage deps deps-python deps-ruby openapi-generator-version lint doc doc-publish release release-major release-minor release-patch generate generate-python generate-ruby $(LANGS)

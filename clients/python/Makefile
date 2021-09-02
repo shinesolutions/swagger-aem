@@ -38,4 +38,15 @@ publish-test:
 	  python3 setup.py register -r pypitest && \
 	  python3 setup.py sdist upload -r pypitest
 
-.PHONY: all deps clean install test-unit test-integration doc publish publish-test
+release-major:
+	rtk release --release-increment-type major
+
+release-minor:
+	rtk release --release-increment-type minor
+
+release-patch:
+	rtk release --release-increment-type patch
+
+release: release-minor
+
+.PHONY: all deps clean install test-unit test-integration doc publish publish-test release release-major release-minor release-patch
