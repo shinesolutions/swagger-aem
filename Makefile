@@ -70,16 +70,6 @@ python:
 ruby:
 	cd clients/ruby && make ci && cd ..
 
-genxyz:
-	for lang in ${LANGS} ; do \
-		pwd; \
-		mkdir -p clients/$$lang/conf/; \
-		echo "{}" >> clients/$$lang/conf/client.json; \
-		cd clients/$$lang; \
-		pwd; \
-		cd ../..; \
-	done
-
 generate:
 	for lang in ${LANGS} ; do \
 		java -jar stage/openapi-generator-cli.jar generate \
