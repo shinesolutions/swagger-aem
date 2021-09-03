@@ -674,7 +674,7 @@ public class Example {
 
     SlingApi apiInstance = new SlingApi(defaultClient);
     String path = "path_example"; // String | 
-    BigDecimal pLimit = new BigDecimal(); // BigDecimal | 
+    BigDecimal pLimit = new BigDecimal(78); // BigDecimal | 
     String _1property = "_1property_example"; // String | 
     String _1propertyValue = "_1propertyValue_example"; // String | 
     try {
@@ -885,7 +885,7 @@ public class Example {
     String jcrColonContentLogLevel = "jcrColonContentLogLevel_example"; // String | 
     Boolean jcrColonContentNoStatusUpdate = true; // Boolean | 
     Boolean jcrColonContentNoVersioning = true; // Boolean | 
-    BigDecimal jcrColonContentProtocolConnectTimeout = new BigDecimal(); // BigDecimal | 
+    BigDecimal jcrColonContentProtocolConnectTimeout = new BigDecimal(78); // BigDecimal | 
     Boolean jcrColonContentProtocolHTTPConnectionClosed = true; // Boolean | 
     String jcrColonContentProtocolHTTPExpired = "jcrColonContentProtocolHTTPExpired_example"; // String | 
     List<String> jcrColonContentProtocolHTTPHeaders = Arrays.asList(); // List<String> | 
@@ -893,17 +893,17 @@ public class Example {
     String jcrColonContentProtocolHTTPMethod = "jcrColonContentProtocolHTTPMethod_example"; // String | 
     Boolean jcrColonContentProtocolHTTPSRelaxed = true; // Boolean | 
     String jcrColonContentProtocolInterface = "jcrColonContentProtocolInterface_example"; // String | 
-    BigDecimal jcrColonContentProtocolSocketTimeout = new BigDecimal(); // BigDecimal | 
+    BigDecimal jcrColonContentProtocolSocketTimeout = new BigDecimal(78); // BigDecimal | 
     String jcrColonContentProtocolVersion = "jcrColonContentProtocolVersion_example"; // String | 
     String jcrColonContentProxyNTLMDomain = "jcrColonContentProxyNTLMDomain_example"; // String | 
     String jcrColonContentProxyNTLMHost = "jcrColonContentProxyNTLMHost_example"; // String | 
     String jcrColonContentProxyHost = "jcrColonContentProxyHost_example"; // String | 
     String jcrColonContentProxyPassword = "jcrColonContentProxyPassword_example"; // String | 
-    BigDecimal jcrColonContentProxyPort = new BigDecimal(); // BigDecimal | 
+    BigDecimal jcrColonContentProxyPort = new BigDecimal(78); // BigDecimal | 
     String jcrColonContentProxyUser = "jcrColonContentProxyUser_example"; // String | 
-    BigDecimal jcrColonContentQueueBatchMaxSize = new BigDecimal(); // BigDecimal | 
+    BigDecimal jcrColonContentQueueBatchMaxSize = new BigDecimal(78); // BigDecimal | 
     String jcrColonContentQueueBatchMode = "jcrColonContentQueueBatchMode_example"; // String | 
-    BigDecimal jcrColonContentQueueBatchWaitTime = new BigDecimal(); // BigDecimal | 
+    BigDecimal jcrColonContentQueueBatchWaitTime = new BigDecimal(78); // BigDecimal | 
     String jcrColonContentRetryDelay = "jcrColonContentRetryDelay_example"; // String | 
     Boolean jcrColonContentReverseReplication = true; // Boolean | 
     String jcrColonContentSerializationType = "jcrColonContentSerializationType_example"; // String | 
@@ -2061,7 +2061,7 @@ public class Example {
 
     SlingApi apiInstance = new SlingApi(defaultClient);
     String path = "path_example"; // String | 
-    BigDecimal pLimit = new BigDecimal(); // BigDecimal | 
+    BigDecimal pLimit = new BigDecimal(78); // BigDecimal | 
     String _1property = "_1property_example"; // String | 
     String _1propertyValue = "_1propertyValue_example"; // String | 
     try {

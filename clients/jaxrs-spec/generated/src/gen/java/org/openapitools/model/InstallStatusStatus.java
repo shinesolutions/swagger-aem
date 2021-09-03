@@ -1,18 +1,22 @@
 package org.openapitools.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
-
 
 import io.swagger.annotations.*;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 
-public class InstallStatusStatus   {
+
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2021-09-03T15:26:06.461+10:00[Australia/Melbourne]")public class InstallStatusStatus   {
   
-  private @Valid Boolean finished = null;
-  private @Valid Integer itemCount = null;
+  private @Valid Boolean finished;
+  private @Valid Integer itemCount;
 
   /**
    **/
@@ -22,16 +26,19 @@ public class InstallStatusStatus   {
   }
 
   
+
+  
   @ApiModelProperty(value = "")
   @JsonProperty("finished")
   public Boolean getFinished() {
     return finished;
   }
+
   public void setFinished(Boolean finished) {
     this.finished = finished;
   }
 
-  /**
+/**
    **/
   public InstallStatusStatus itemCount(Integer itemCount) {
     this.itemCount = itemCount;
@@ -39,18 +46,21 @@ public class InstallStatusStatus   {
   }
 
   
+
+  
   @ApiModelProperty(value = "")
   @JsonProperty("itemCount")
   public Integer getItemCount() {
     return itemCount;
   }
+
   public void setItemCount(Integer itemCount) {
     this.itemCount = itemCount;
   }
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -58,8 +68,8 @@ public class InstallStatusStatus   {
       return false;
     }
     InstallStatusStatus installStatusStatus = (InstallStatusStatus) o;
-    return Objects.equals(finished, installStatusStatus.finished) &&
-        Objects.equals(itemCount, installStatusStatus.itemCount);
+    return Objects.equals(this.finished, installStatusStatus.finished) &&
+        Objects.equals(this.itemCount, installStatusStatus.itemCount);
   }
 
   @Override
@@ -82,11 +92,13 @@ public class InstallStatusStatus   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }
     return o.toString().replace("\n", "\n    ");
   }
+
+
 }
 

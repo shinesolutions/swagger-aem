@@ -28,7 +28,6 @@ namespace Example
     {
         public void main()
         {
-            
             var apiInstance = new CqApi();
 
             try
@@ -83,7 +82,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";

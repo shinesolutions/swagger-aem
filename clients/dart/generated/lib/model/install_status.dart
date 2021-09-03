@@ -1,34 +1,69 @@
+//
+// AUTO-GENERATED FILE, DO NOT MODIFY!
+//
+// @dart=2.0
+
+// ignore_for_file: unused_element, unused_import
+// ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: lines_longer_than_80_chars
+
 part of openapi.api;
 
 class InstallStatus {
-  
-  InstallStatusStatus status = null;
-  InstallStatus();
+  /// Returns a new [InstallStatus] instance.
+  InstallStatus({
+    this.status,
+  });
+
+  InstallStatusStatus status;
 
   @override
-  String toString() {
-    return 'InstallStatus[status=$status, ]';
-  }
+  bool operator ==(Object other) => identical(this, other) || other is InstallStatus &&
+     other.status == status;
 
-  InstallStatus.fromJson(Map<String, dynamic> json) {
-    if (json == null) return;
-    status = new InstallStatusStatus.fromJson(json['status']);
-  }
+  @override
+  int get hashCode =>
+    (status == null ? 0 : status.hashCode);
+
+  @override
+  String toString() => 'InstallStatus[status=$status]';
 
   Map<String, dynamic> toJson() {
-    return {
-      'status': status
-    };
+    final json = <String, dynamic>{};
+    if (status != null) {
+      json[r'status'] = status;
+    }
+    return json;
   }
 
-  static List<InstallStatus> listFromJson(List<dynamic> json) {
-    return json == null ? new List<InstallStatus>() : json.map((value) => new InstallStatus.fromJson(value)).toList();
+  /// Returns a new [InstallStatus] instance and imports its values from
+  /// [json] if it's non-null, null if [json] is null.
+  static InstallStatus fromJson(Map<String, dynamic> json) => json == null
+    ? null
+    : InstallStatus(
+        status: InstallStatusStatus.fromJson(json[r'status']),
+    );
+
+  static List<InstallStatus> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
+    json == null || json.isEmpty
+      ? true == emptyIsNull ? null : <InstallStatus>[]
+      : json.map((dynamic value) => InstallStatus.fromJson(value)).toList(growable: true == growable);
+
+  static Map<String, InstallStatus> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, InstallStatus>{};
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = InstallStatus.fromJson(value));
+    }
+    return map;
   }
 
-  static Map<String, InstallStatus> mapFromJson(Map<String, Map<String, dynamic>> json) {
-    var map = new Map<String, InstallStatus>();
-    if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new InstallStatus.fromJson(value));
+  // maps a json object with a list of InstallStatus-objects as value to a dart map
+  static Map<String, List<InstallStatus>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
+    final map = <String, List<InstallStatus>>{};
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = InstallStatus.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
+      });
     }
     return map;
   }

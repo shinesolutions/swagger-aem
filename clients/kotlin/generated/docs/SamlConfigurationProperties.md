@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **path** | [**SamlConfigurationPropertyItemsArray**](SamlConfigurationPropertyItemsArray.md) |  |  [optional]
-**servicePeriodranking** | [**SamlConfigurationPropertyItemsLong**](SamlConfigurationPropertyItemsLong.md) |  |  [optional]
+**serviceRanking** | [**SamlConfigurationPropertyItemsLong**](SamlConfigurationPropertyItemsLong.md) |  |  [optional]
 **idpUrl** | [**SamlConfigurationPropertyItemsString**](SamlConfigurationPropertyItemsString.md) |  |  [optional]
 **idpCertAlias** | [**SamlConfigurationPropertyItemsString**](SamlConfigurationPropertyItemsString.md) |  |  [optional]
 **idpHttpRedirect** | [**SamlConfigurationPropertyItemsBoolean**](SamlConfigurationPropertyItemsBoolean.md) |  |  [optional]

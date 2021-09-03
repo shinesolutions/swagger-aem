@@ -6,17 +6,17 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.openapitools.model.InstallStatusStatus;
+import org.openapitools.jackson.nullable.JsonNullable;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
  * InstallStatus
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-08-04T23:44:43.219Z[GMT]")
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-09-03T15:28:35.636+10:00[Australia/Melbourne]")
 public class InstallStatus   {
   @JsonProperty("status")
-  private InstallStatusStatus status = null;
+  private InstallStatusStatus status;
 
   public InstallStatus status(InstallStatusStatus status) {
     this.status = status;
@@ -26,7 +26,7 @@ public class InstallStatus   {
   /**
    * Get status
    * @return status
-  **/
+  */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -41,7 +41,7 @@ public class InstallStatus   {
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -71,7 +71,7 @@ public class InstallStatus   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

@@ -14,8 +14,8 @@ defmodule AdobeExperienceManager(AEM)API.Model.TruststoreInfo do
   ]
 
   @type t :: %__MODULE__{
-    :"aliases" => [TruststoreItems],
-    :"exists" => boolean()
+    :"aliases" => [AdobeExperienceManager(AEM)API.Model.TruststoreItems.t] | nil,
+    :"exists" => boolean() | nil
   }
 end
 

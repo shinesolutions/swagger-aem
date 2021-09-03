@@ -2,6 +2,8 @@ package org.openapitools.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.openapitools.model.SamlConfigurationProperties;
 import javax.validation.constraints.*;
 
@@ -12,20 +14,19 @@ import java.util.Objects;
 import javax.xml.bind.annotation.*;
 
 
-
 public class SamlConfigurationInfo   {
   
-  private String pid = null;
+  private String pid;
 
-  private String title = null;
+  private String title;
 
-  private String description = null;
+  private String description;
 
-  private String bundleLocation = null;
+  private String bundleLocation;
 
-  private String serviceLocation = null;
+  private String serviceLocation;
 
-  private SamlConfigurationProperties properties = null;
+  private SamlConfigurationProperties properties;
 
 
   /**
@@ -143,7 +144,7 @@ public class SamlConfigurationInfo   {
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -183,7 +184,7 @@ public class SamlConfigurationInfo   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

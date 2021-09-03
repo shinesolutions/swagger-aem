@@ -9,9 +9,8 @@ import org.openapitools.model.KeystoreItems;
 
 @Canonical
 class KeystoreInfo {
+    
     List<KeystoreItems> aliases = new ArrayList<KeystoreItems>()
-
     /* False if truststore don't exist */
-    Boolean exists = null
-
+    Boolean exists
 }

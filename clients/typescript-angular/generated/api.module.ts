@@ -2,26 +2,21 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import { Configuration } from './configuration';
 import { HttpClient } from '@angular/common/http';
 
-
 import { ConsoleService } from './api/console.service';
 import { CqService } from './api/cq.service';
 import { CrxService } from './api/crx.service';
 import { CustomService } from './api/custom.service';
+import { GraniteService } from './api/granite.service';
 import { SlingService } from './api/sling.service';
 
 @NgModule({
   imports:      [],
   declarations: [],
   exports:      [],
-  providers: [
-    ConsoleService,
-    CqService,
-    CrxService,
-    CustomService,
-    SlingService ]
+  providers: []
 })
 export class ApiModule {
-    public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders {
+    public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders<ApiModule> {
         return {
             ngModule: ApiModule,
             providers: [ { provide: Configuration, useFactory: configurationFactory } ]

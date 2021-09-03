@@ -3,7 +3,7 @@ package org.openapitools.apis
 import java.io._
 import org.openapitools._
 import org.openapitools.models._
-import java.math.BigDecimal
+import org.openapitools.models.BigDecimal
 import java.io.File
 import org.openapitools.models.KeystoreInfo
 import org.openapitools.models.TruststoreInfo
@@ -18,6 +18,7 @@ import com.twitter.util.Future
 import com.twitter.io.Buf
 import io.finch._, items._
 import java.io.File
+import java.nio.file.Files
 import java.time._
 
 object SlingApi {
@@ -47,6 +48,7 @@ object SlingApi {
         postConfigApacheSlingDavExServlet(da) :+:
         postConfigApacheSlingGetServlet(da) :+:
         postConfigApacheSlingReferrerFilter(da) :+:
+        postConfigProperty(da) :+:
         postNode(da) :+:
         postNodeRw(da) :+:
         postPath(da) :+:
@@ -374,6 +376,20 @@ object SlingApi {
         * 
         * @return An endpoint representing a Unit
         */
+        private def postConfigProperty(da: DataAccessor): Endpoint[Unit] =
+        post("apps" :: "system" :: "config" :: string) { (configNodeName: String) =>
+          da.Sling_postConfigProperty(configNodeName) match {
+            case Left(error) => checkError(error)
+            case Right(data) => Ok(data)
+          }
+        } handle {
+          case e: Exception => BadRequest(e)
+        }
+
+        /**
+        * 
+        * @return An endpoint representing a Unit
+        */
         private def postNode(da: DataAccessor): Endpoint[Unit] =
         post(string :: string :: paramOption(":operation") :: paramOption("deleteAuthorizable") :: fileUpload("file")) { (path: String, name: String, operation: Option[String], deleteAuthorizable: Option[String], file: FileUpload) =>
           da.Sling_postNode(path, name, operation, deleteAuthorizable, file) match {
@@ -480,7 +496,7 @@ object SlingApi {
     }
 
     private def bytesToFile(input: Array[Byte]): java.io.File = {
-      val file = File.createTempFile("tmpSlingApi", null)
+      val file = Files.createTempFile("tmpSlingApi", null).toFile
       val output = new FileOutputStream(file)
       output.write(input)
       file

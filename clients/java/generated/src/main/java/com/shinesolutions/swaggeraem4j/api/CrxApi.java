@@ -78,6 +78,7 @@ public class CrxApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "plain/text"
         };
@@ -183,6 +184,7 @@ public class CrxApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -288,6 +290,7 @@ public class CrxApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "text/html"
         };
@@ -386,13 +389,14 @@ public class CrxApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (cmd != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("cmd", cmd));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             "text/xml"
         };
@@ -509,6 +513,14 @@ public class CrxApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (_package != null) {
+            localVarFormParams.put("package", _package);
+        }
+
         if (cmd != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("cmd", cmd));
         }
@@ -535,13 +547,6 @@ public class CrxApi {
 
         if (recursive != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("recursive", recursive));
-        }
-
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-        if (_package != null) {
-            localVarFormParams.put("package", _package);
         }
 
         final String[] localVarAccepts = {
@@ -685,6 +690,10 @@ public class CrxApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (groupName != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("groupName", groupName));
         }
@@ -709,9 +718,6 @@ public class CrxApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("_charset_", charset));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -851,6 +857,10 @@ public class CrxApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (old != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("old", old));
         }
@@ -863,9 +873,6 @@ public class CrxApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("verify", verify));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             "text/plain"
         };

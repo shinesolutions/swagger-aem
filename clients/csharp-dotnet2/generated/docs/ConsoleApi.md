@@ -5,6 +5,7 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetAemProductInfo**](ConsoleApi.md#getaemproductinfo) | **GET** /system/console/status-productinfo.json | 
+[**GetBundleInfo**](ConsoleApi.md#getbundleinfo) | **GET** /system/console/bundles/{name}.json | 
 [**GetConfigMgr**](ConsoleApi.md#getconfigmgr) | **GET** /system/console/configMgr | 
 [**PostBundle**](ConsoleApi.md#postbundle) | **POST** /system/console/bundles/{name} | 
 [**PostJmxRepository**](ConsoleApi.md#postjmxrepository) | **POST** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} | 
@@ -31,7 +32,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -70,6 +70,68 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a name="getbundleinfo"></a>
+# **GetBundleInfo**
+> BundleInfo GetBundleInfo (string name)
+
+
+
+### Example
+```csharp
+using System;
+using System.Diagnostics;
+using Org.OpenAPITools.Api;
+using Org.OpenAPITools.Client;
+using Org.OpenAPITools.Model;
+
+namespace Example
+{
+    public class GetBundleInfoExample
+    {
+        public void main()
+        {
+            // Configure HTTP basic authorization: aemAuth
+            Configuration.Default.Username = "YOUR_USERNAME";
+            Configuration.Default.Password = "YOUR_PASSWORD";
+
+            var apiInstance = new ConsoleApi();
+            var name = name_example;  // string | 
+
+            try
+            {
+                BundleInfo result = apiInstance.GetBundleInfo(name);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling ConsoleApi.GetBundleInfo: " + e.Message );
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**|  | 
+
+### Return type
+
+[**BundleInfo**](BundleInfo.md)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a name="getconfigmgr"></a>
 # **GetConfigMgr**
 > string GetConfigMgr ()
@@ -90,7 +152,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -149,7 +210,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -213,7 +273,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -275,7 +334,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";

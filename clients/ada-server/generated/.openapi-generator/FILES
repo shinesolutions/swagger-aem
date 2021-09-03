@@ -1,0 +1,13 @@
+.properties
+README.md
+config.gpr
+defaultpackage.gpr
+src/-server.adb
+src/-servers.adb
+src/-servers.ads
+src/.ads
+src/model/-models.adb
+src/model/-models.ads
+src/server/-skeletons.adb
+src/server/-skeletons.ads
+web/swagger/openapi.json

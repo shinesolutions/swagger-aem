@@ -69,6 +69,7 @@ _()
     # It's modelled as an associative array for efficient key lookup
     declare -A operations
     operations["getAemProductInfo"]=1
+    operations["getBundleInfo"]=1
     operations["getConfigMgr"]=1
     operations["postBundle"]=1
     operations["postJmxRepository"]=1
@@ -85,6 +86,7 @@ _()
     operations["getAemHealthCheck"]=1
     operations["postConfigAemHealthCheckServlet"]=1
     operations["postConfigAemPasswordReset"]=1
+    operations["sslSetup"]=1
     operations["deleteAgent"]=1
     operations["deleteNode"]=1
     operations["getAgent"]=1
@@ -106,6 +108,7 @@ _()
     operations["postConfigApacheSlingDavExServlet"]=1
     operations["postConfigApacheSlingGetServlet"]=1
     operations["postConfigApacheSlingReferrerFilter"]=1
+    operations["postConfigProperty"]=1
     operations["postNode"]=1
     operations["postNodeRw"]=1
     operations["postPath"]=1
@@ -118,6 +121,7 @@ _()
     # Only include path, query and header parameters
     declare -A operation_parameters
     operation_parameters["getAemProductInfo"]=""
+    operation_parameters["getBundleInfo"]="name= "
     operation_parameters["getConfigMgr"]=""
     operation_parameters["postBundle"]="name= action= "
     operation_parameters["postJmxRepository"]="action= "
@@ -134,6 +138,7 @@ _()
     operation_parameters["getAemHealthCheck"]="tags= combineTagsOr= "
     operation_parameters["postConfigAemHealthCheckServlet"]="bundles.ignored= bundles.ignored@TypeHint= "
     operation_parameters["postConfigAemPasswordReset"]="pwdreset.authorizables= pwdreset.authorizables@TypeHint= "
+    operation_parameters["sslSetup"]="keystorePassword= keystorePasswordConfirm= truststorePassword= truststorePasswordConfirm= httpsHostname= httpsPort= "
     operation_parameters["deleteAgent"]="runmode= name= "
     operation_parameters["deleteNode"]="path= name= "
     operation_parameters["getAgent"]="runmode= name= "
@@ -155,6 +160,7 @@ _()
     operation_parameters["postConfigApacheSlingDavExServlet"]="alias= alias@TypeHint= dav.create-absolute-uri= dav.create-absolute-uri@TypeHint= "
     operation_parameters["postConfigApacheSlingGetServlet"]="json.maximumresults= json.maximumresults@TypeHint= enable.html= enable.html@TypeHint= enable.txt= enable.txt@TypeHint= enable.xml= enable.xml@TypeHint= "
     operation_parameters["postConfigApacheSlingReferrerFilter"]="allow.empty= allow.empty@TypeHint= allow.hosts= allow.hosts@TypeHint= allow.hosts.regexp= allow.hosts.regexp@TypeHint= filter.methods= filter.methods@TypeHint= "
+    operation_parameters["postConfigProperty"]="configNodeName= "
     operation_parameters["postNode"]="path= name= :operation= deleteAuthorizable= "
     operation_parameters["postNodeRw"]="path= name= addMembers= "
     operation_parameters["postPath"]="path= jcr:primaryType= :name= "

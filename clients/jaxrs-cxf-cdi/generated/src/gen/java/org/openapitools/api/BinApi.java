@@ -13,19 +13,20 @@ import javax.inject.Inject;
 import io.swagger.annotations.*;
 import java.io.InputStream;
 
+import org.apache.cxf.jaxrs.ext.PATCH;
 import org.apache.cxf.jaxrs.ext.multipart.Attachment;
 import org.apache.cxf.jaxrs.ext.multipart.Multipart;
 
 import java.util.Map;
 import java.util.List;
 import javax.validation.constraints.*;
-@Path("/bin")
+@Path("/bin/querybuilder.json")
 @RequestScoped
 
 @Api(description = "the bin API")
 
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSCXFCDIServerCodegen", date = "2019-08-04T23:41:53.293Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSCXFCDIServerCodegen", date = "2021-09-03T15:25:48.597+10:00[Australia/Melbourne]")
 
 public class BinApi  {
 
@@ -35,12 +36,13 @@ public class BinApi  {
 
 
     @GET
-    @Path("/querybuilder.json")
+    
     
     @Produces({ "application/json" })
     @ApiOperation(value = "", notes = "", response = String.class, authorizations = {
+        
         @Authorization(value = "aemAuth")
-    }, tags={ "sling",  })
+         }, tags={ "sling" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = String.class) })
     public Response getQuery( @NotNull @ApiParam(value = "",required=true)  @QueryParam("path") String path,  @NotNull @ApiParam(value = "",required=true)  @QueryParam("p.limit") BigDecimal pLimit,  @NotNull @ApiParam(value = "",required=true)  @QueryParam("1_property") String _1property,  @NotNull @ApiParam(value = "",required=true)  @QueryParam("1_property.value") String _1propertyValue) {
@@ -48,12 +50,13 @@ public class BinApi  {
     }
 
     @POST
-    @Path("/querybuilder.json")
+    
     
     @Produces({ "application/json" })
     @ApiOperation(value = "", notes = "", response = String.class, authorizations = {
+        
         @Authorization(value = "aemAuth")
-    }, tags={ "sling" })
+         }, tags={ "sling" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = String.class) })
     public Response postQuery( @NotNull @ApiParam(value = "",required=true)  @QueryParam("path") String path,  @NotNull @ApiParam(value = "",required=true)  @QueryParam("p.limit") BigDecimal pLimit,  @NotNull @ApiParam(value = "",required=true)  @QueryParam("1_property") String _1property,  @NotNull @ApiParam(value = "",required=true)  @QueryParam("1_property.value") String _1propertyValue) {

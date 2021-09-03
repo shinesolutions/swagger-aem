@@ -18,11 +18,11 @@ class SamlConfigurationInfo {
     /** @var string $description Title*/
     private $description;
 
-    /** @var string $bundle_location needed for configuration binding*/
-    private $bundle_location;
+    /** @var string $bundleLocation needed for configuration binding*/
+    private $bundleLocation;
 
-    /** @var string $service_location needed for configuraiton binding*/
-    private $service_location;
+    /** @var string $serviceLocation needed for configuraiton binding*/
+    private $serviceLocation;
 
     /** @var \app\Models\SamlConfigurationProperties $properties */
     private $properties;

@@ -1,6 +1,7 @@
 import connexion
 import six
 
+from openapi_server.models.bundle_info import BundleInfo  # noqa: E501
 from openapi_server.models.saml_configuration_info import SamlConfigurationInfo  # noqa: E501
 from openapi_server import util
 
@@ -12,6 +13,19 @@ def get_aem_product_info():  # noqa: E501
 
 
     :rtype: List[str]
+    """
+    return 'do some magic!'
+
+
+def get_bundle_info(name):  # noqa: E501
+    """get_bundle_info
+
+     # noqa: E501
+
+    :param name: 
+    :type name: str
+
+    :rtype: BundleInfo
     """
     return 'do some magic!'
 

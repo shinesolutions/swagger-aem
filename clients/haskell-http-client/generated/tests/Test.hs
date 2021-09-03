@@ -17,9 +17,12 @@ import AdobeExperienceManager(AEM).MimeTypes
 
 main :: IO ()
 main =
-  hspec $ modifyMaxSize (const 5) $ do
+  hspec $ modifyMaxSize (const 10) $ do
     describe "JSON instances" $ do
       pure ()
+      propMimeEq MimeJSON (Proxy :: Proxy BundleData)
+      propMimeEq MimeJSON (Proxy :: Proxy BundleDataProp)
+      propMimeEq MimeJSON (Proxy :: Proxy BundleInfo)
       propMimeEq MimeJSON (Proxy :: Proxy InstallStatus)
       propMimeEq MimeJSON (Proxy :: Proxy InstallStatusStatus)
       propMimeEq MimeJSON (Proxy :: Proxy KeystoreChainItems)

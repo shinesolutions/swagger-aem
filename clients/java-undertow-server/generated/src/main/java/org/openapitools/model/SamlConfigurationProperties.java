@@ -1,3 +1,13 @@
+/*
+ * Adobe Experience Manager (AEM) API
+ *
+ * Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
+ *
+ * OpenAPI document version: 3.5.0-pre.0
+ * Maintained by: opensource@shinesolutions.com
+ *
+ * AUTO-GENERATED FILE, DO NOT MODIFY!
+ */
 package org.openapitools.model;
 
 import java.util.Objects;
@@ -14,36 +24,36 @@ import org.openapitools.model.SamlConfigurationPropertyItemsString;
 
 
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaUndertowServerCodegen", date = "2019-08-04T23:41:39.991Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaUndertowServerCodegen", date = "2021-09-03T15:25:36.220+10:00[Australia/Melbourne]")
 public class SamlConfigurationProperties   {
   
-  private SamlConfigurationPropertyItemsArray path = null;
-  private SamlConfigurationPropertyItemsLong serviceRanking = null;
-  private SamlConfigurationPropertyItemsString idpUrl = null;
-  private SamlConfigurationPropertyItemsString idpCertAlias = null;
-  private SamlConfigurationPropertyItemsBoolean idpHttpRedirect = null;
-  private SamlConfigurationPropertyItemsString serviceProviderEntityId = null;
-  private SamlConfigurationPropertyItemsString assertionConsumerServiceURL = null;
-  private SamlConfigurationPropertyItemsString spPrivateKeyAlias = null;
-  private SamlConfigurationPropertyItemsString keyStorePassword = null;
-  private SamlConfigurationPropertyItemsString defaultRedirectUrl = null;
-  private SamlConfigurationPropertyItemsString userIDAttribute = null;
-  private SamlConfigurationPropertyItemsBoolean useEncryption = null;
-  private SamlConfigurationPropertyItemsBoolean createUser = null;
-  private SamlConfigurationPropertyItemsBoolean addGroupMemberships = null;
-  private SamlConfigurationPropertyItemsString groupMembershipAttribute = null;
-  private SamlConfigurationPropertyItemsArray defaultGroups = null;
-  private SamlConfigurationPropertyItemsString nameIdFormat = null;
-  private SamlConfigurationPropertyItemsArray synchronizeAttributes = null;
-  private SamlConfigurationPropertyItemsBoolean handleLogout = null;
-  private SamlConfigurationPropertyItemsString logoutUrl = null;
-  private SamlConfigurationPropertyItemsLong clockTolerance = null;
-  private SamlConfigurationPropertyItemsString digestMethod = null;
-  private SamlConfigurationPropertyItemsString signatureMethod = null;
-  private SamlConfigurationPropertyItemsString userIntermediatePath = null;
+  private SamlConfigurationPropertyItemsArray path;
+  private SamlConfigurationPropertyItemsLong serviceRanking;
+  private SamlConfigurationPropertyItemsString idpUrl;
+  private SamlConfigurationPropertyItemsString idpCertAlias;
+  private SamlConfigurationPropertyItemsBoolean idpHttpRedirect;
+  private SamlConfigurationPropertyItemsString serviceProviderEntityId;
+  private SamlConfigurationPropertyItemsString assertionConsumerServiceURL;
+  private SamlConfigurationPropertyItemsString spPrivateKeyAlias;
+  private SamlConfigurationPropertyItemsString keyStorePassword;
+  private SamlConfigurationPropertyItemsString defaultRedirectUrl;
+  private SamlConfigurationPropertyItemsString userIDAttribute;
+  private SamlConfigurationPropertyItemsBoolean useEncryption;
+  private SamlConfigurationPropertyItemsBoolean createUser;
+  private SamlConfigurationPropertyItemsBoolean addGroupMemberships;
+  private SamlConfigurationPropertyItemsString groupMembershipAttribute;
+  private SamlConfigurationPropertyItemsArray defaultGroups;
+  private SamlConfigurationPropertyItemsString nameIdFormat;
+  private SamlConfigurationPropertyItemsArray synchronizeAttributes;
+  private SamlConfigurationPropertyItemsBoolean handleLogout;
+  private SamlConfigurationPropertyItemsString logoutUrl;
+  private SamlConfigurationPropertyItemsLong clockTolerance;
+  private SamlConfigurationPropertyItemsString digestMethod;
+  private SamlConfigurationPropertyItemsString signatureMethod;
+  private SamlConfigurationPropertyItemsString userIntermediatePath;
 
   /**
-   **/
+   */
   public SamlConfigurationProperties path(SamlConfigurationPropertyItemsArray path) {
     this.path = path;
     return this;
@@ -60,7 +70,7 @@ public class SamlConfigurationProperties   {
   }
 
   /**
-   **/
+   */
   public SamlConfigurationProperties serviceRanking(SamlConfigurationPropertyItemsLong serviceRanking) {
     this.serviceRanking = serviceRanking;
     return this;
@@ -77,7 +87,7 @@ public class SamlConfigurationProperties   {
   }
 
   /**
-   **/
+   */
   public SamlConfigurationProperties idpUrl(SamlConfigurationPropertyItemsString idpUrl) {
     this.idpUrl = idpUrl;
     return this;
@@ -94,7 +104,7 @@ public class SamlConfigurationProperties   {
   }
 
   /**
-   **/
+   */
   public SamlConfigurationProperties idpCertAlias(SamlConfigurationPropertyItemsString idpCertAlias) {
     this.idpCertAlias = idpCertAlias;
     return this;
@@ -111,7 +121,7 @@ public class SamlConfigurationProperties   {
   }
 
   /**
-   **/
+   */
   public SamlConfigurationProperties idpHttpRedirect(SamlConfigurationPropertyItemsBoolean idpHttpRedirect) {
     this.idpHttpRedirect = idpHttpRedirect;
     return this;
@@ -128,7 +138,7 @@ public class SamlConfigurationProperties   {
   }
 
   /**
-   **/
+   */
   public SamlConfigurationProperties serviceProviderEntityId(SamlConfigurationPropertyItemsString serviceProviderEntityId) {
     this.serviceProviderEntityId = serviceProviderEntityId;
     return this;
@@ -145,7 +155,7 @@ public class SamlConfigurationProperties   {
   }
 
   /**
-   **/
+   */
   public SamlConfigurationProperties assertionConsumerServiceURL(SamlConfigurationPropertyItemsString assertionConsumerServiceURL) {
     this.assertionConsumerServiceURL = assertionConsumerServiceURL;
     return this;
@@ -162,7 +172,7 @@ public class SamlConfigurationProperties   {
   }
 
   /**
-   **/
+   */
   public SamlConfigurationProperties spPrivateKeyAlias(SamlConfigurationPropertyItemsString spPrivateKeyAlias) {
     this.spPrivateKeyAlias = spPrivateKeyAlias;
     return this;
@@ -179,7 +189,7 @@ public class SamlConfigurationProperties   {
   }
 
   /**
-   **/
+   */
   public SamlConfigurationProperties keyStorePassword(SamlConfigurationPropertyItemsString keyStorePassword) {
     this.keyStorePassword = keyStorePassword;
     return this;
@@ -196,7 +206,7 @@ public class SamlConfigurationProperties   {
   }
 
   /**
-   **/
+   */
   public SamlConfigurationProperties defaultRedirectUrl(SamlConfigurationPropertyItemsString defaultRedirectUrl) {
     this.defaultRedirectUrl = defaultRedirectUrl;
     return this;
@@ -213,7 +223,7 @@ public class SamlConfigurationProperties   {
   }
 
   /**
-   **/
+   */
   public SamlConfigurationProperties userIDAttribute(SamlConfigurationPropertyItemsString userIDAttribute) {
     this.userIDAttribute = userIDAttribute;
     return this;
@@ -230,7 +240,7 @@ public class SamlConfigurationProperties   {
   }
 
   /**
-   **/
+   */
   public SamlConfigurationProperties useEncryption(SamlConfigurationPropertyItemsBoolean useEncryption) {
     this.useEncryption = useEncryption;
     return this;
@@ -247,7 +257,7 @@ public class SamlConfigurationProperties   {
   }
 
   /**
-   **/
+   */
   public SamlConfigurationProperties createUser(SamlConfigurationPropertyItemsBoolean createUser) {
     this.createUser = createUser;
     return this;
@@ -264,7 +274,7 @@ public class SamlConfigurationProperties   {
   }
 
   /**
-   **/
+   */
   public SamlConfigurationProperties addGroupMemberships(SamlConfigurationPropertyItemsBoolean addGroupMemberships) {
     this.addGroupMemberships = addGroupMemberships;
     return this;
@@ -281,7 +291,7 @@ public class SamlConfigurationProperties   {
   }
 
   /**
-   **/
+   */
   public SamlConfigurationProperties groupMembershipAttribute(SamlConfigurationPropertyItemsString groupMembershipAttribute) {
     this.groupMembershipAttribute = groupMembershipAttribute;
     return this;
@@ -298,7 +308,7 @@ public class SamlConfigurationProperties   {
   }
 
   /**
-   **/
+   */
   public SamlConfigurationProperties defaultGroups(SamlConfigurationPropertyItemsArray defaultGroups) {
     this.defaultGroups = defaultGroups;
     return this;
@@ -315,7 +325,7 @@ public class SamlConfigurationProperties   {
   }
 
   /**
-   **/
+   */
   public SamlConfigurationProperties nameIdFormat(SamlConfigurationPropertyItemsString nameIdFormat) {
     this.nameIdFormat = nameIdFormat;
     return this;
@@ -332,7 +342,7 @@ public class SamlConfigurationProperties   {
   }
 
   /**
-   **/
+   */
   public SamlConfigurationProperties synchronizeAttributes(SamlConfigurationPropertyItemsArray synchronizeAttributes) {
     this.synchronizeAttributes = synchronizeAttributes;
     return this;
@@ -349,7 +359,7 @@ public class SamlConfigurationProperties   {
   }
 
   /**
-   **/
+   */
   public SamlConfigurationProperties handleLogout(SamlConfigurationPropertyItemsBoolean handleLogout) {
     this.handleLogout = handleLogout;
     return this;
@@ -366,7 +376,7 @@ public class SamlConfigurationProperties   {
   }
 
   /**
-   **/
+   */
   public SamlConfigurationProperties logoutUrl(SamlConfigurationPropertyItemsString logoutUrl) {
     this.logoutUrl = logoutUrl;
     return this;
@@ -383,7 +393,7 @@ public class SamlConfigurationProperties   {
   }
 
   /**
-   **/
+   */
   public SamlConfigurationProperties clockTolerance(SamlConfigurationPropertyItemsLong clockTolerance) {
     this.clockTolerance = clockTolerance;
     return this;
@@ -400,7 +410,7 @@ public class SamlConfigurationProperties   {
   }
 
   /**
-   **/
+   */
   public SamlConfigurationProperties digestMethod(SamlConfigurationPropertyItemsString digestMethod) {
     this.digestMethod = digestMethod;
     return this;
@@ -417,7 +427,7 @@ public class SamlConfigurationProperties   {
   }
 
   /**
-   **/
+   */
   public SamlConfigurationProperties signatureMethod(SamlConfigurationPropertyItemsString signatureMethod) {
     this.signatureMethod = signatureMethod;
     return this;
@@ -434,7 +444,7 @@ public class SamlConfigurationProperties   {
   }
 
   /**
-   **/
+   */
   public SamlConfigurationProperties userIntermediatePath(SamlConfigurationPropertyItemsString userIntermediatePath) {
     this.userIntermediatePath = userIntermediatePath;
     return this;
@@ -452,7 +462,7 @@ public class SamlConfigurationProperties   {
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -528,7 +538,7 @@ public class SamlConfigurationProperties   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

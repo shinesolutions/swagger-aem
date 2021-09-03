@@ -19,8 +19,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Cq do
   - opts (KeywordList): [optional] Optional parameters
   ## Returns
 
-  {:ok, %AdobeExperienceManager(AEM)API.Model.String.t{}} on success
-  {:error, info} on failure
+  {:ok, String.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec get_login_page(Tesla.Env.client, keyword()) :: {:ok, String.t} | {:error, Tesla.Env.t}
   def get_login_page(connection, _opts \\ []) do
@@ -29,7 +29,9 @@ defmodule AdobeExperienceManager(AEM)API.Api.Cq do
     |> url("/libs/granite/core/content/login.html")
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -42,8 +44,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Cq do
   - opts (KeywordList): [optional] Optional parameters
   ## Returns
 
-  {:ok, %{}} on success
-  {:error, info} on failure
+  {:ok, nil} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec post_cq_actions(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def post_cq_actions(connection, authorizable_id, changelog, _opts \\ []) do
@@ -52,8 +54,11 @@ defmodule AdobeExperienceManager(AEM)API.Api.Cq do
     |> url("/.cqactions.html")
     |> add_param(:query, :"authorizableId", authorizable_id)
     |> add_param(:query, :"changelog", changelog)
+    |> ensure_body()
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 end

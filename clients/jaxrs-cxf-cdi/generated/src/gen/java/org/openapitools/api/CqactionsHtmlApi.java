@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import io.swagger.annotations.*;
 import java.io.InputStream;
 
+import org.apache.cxf.jaxrs.ext.PATCH;
 import org.apache.cxf.jaxrs.ext.multipart.Attachment;
 import org.apache.cxf.jaxrs.ext.multipart.Multipart;
 
@@ -24,7 +25,7 @@ import javax.validation.constraints.*;
 @Api(description = "the .cqactions.html API")
 
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSCXFCDIServerCodegen", date = "2019-08-04T23:41:53.293Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSCXFCDIServerCodegen", date = "2021-09-03T15:25:48.597+10:00[Australia/Melbourne]")
 
 public class CqactionsHtmlApi  {
 
@@ -38,8 +39,9 @@ public class CqactionsHtmlApi  {
     
     
     @ApiOperation(value = "", notes = "", response = Void.class, authorizations = {
+        
         @Authorization(value = "aemAuth")
-    }, tags={ "cq" })
+         }, tags={ "cq" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = Void.class) })
     public Response postCqActions( @NotNull @ApiParam(value = "",required=true)  @QueryParam("authorizableId") String authorizableId,  @NotNull @ApiParam(value = "",required=true)  @QueryParam("changelog") String changelog) {

@@ -1,6 +1,6 @@
 # CqApi
 
-All URIs are relative to */*
+All URIs are relative to **
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -8,16 +8,19 @@ Method | HTTP request | Description
 [**postCqActions**](CqApi.md#postCqActions) | **POST** /.cqactions.html | 
 
 
-## **getLoginPage**
+
+## getLoginPage
 
 
 
 ### Example
+
 ```bash
  getLoginPage
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -30,26 +33,29 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not Applicable
- - **Accept**: text/html
+- **Content-Type**: Not Applicable
+- **Accept**: text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-## **postCqActions**
+
+## postCqActions
 
 
 
 ### Example
+
 ```bash
  postCqActions  authorizableId=value  changelog=value
 ```
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorizableId** | **string** |  |
- **changelog** | **string** |  |
+ **authorizableId** | **string** |  | [default to null]
+ **changelog** | **string** |  | [default to null]
 
 ### Return type
 
@@ -61,8 +67,8 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not Applicable
- - **Accept**: Not Applicable
+- **Content-Type**: Not Applicable
+- **Accept**: Not Applicable
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

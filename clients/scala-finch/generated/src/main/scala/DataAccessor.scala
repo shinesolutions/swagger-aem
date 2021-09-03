@@ -22,6 +22,12 @@ trait DataAccessor {
 
         /**
         * 
+        * @return A BundleInfo
+        */
+        def Console_getBundleInfo(name: String): Either[CommonError,BundleInfo] = Left(TODO)
+
+        /**
+        * 
         * @return A String
         */
         def Console_getConfigMgr(): Either[CommonError,String] = Left(TODO)
@@ -115,6 +121,12 @@ trait DataAccessor {
         * @return A Unit
         */
         def Custom_postConfigAemPasswordReset(pwdresetPeriodauthorizables: Seq[String], pwdresetPeriodauthorizablesAtTypeHint: Option[String]): Either[CommonError,Unit] = Left(TODO)
+
+        /**
+        * 
+        * @return A String
+        */
+        def Granite_sslSetup(keystorePassword: String, keystorePasswordConfirm: String, truststorePassword: String, truststorePasswordConfirm: String, httpsHostname: String, httpsPort: String, privatekeyFile: FileUpload, certificateFile: FileUpload): Either[CommonError,String] = Left(TODO)
 
         /**
         * 
@@ -241,6 +253,12 @@ trait DataAccessor {
         * @return A Unit
         */
         def Sling_postConfigApacheSlingReferrerFilter(allowPeriodempty: Option[Boolean], allowPeriodemptyAtTypeHint: Option[String], allowPeriodhosts: Option[String], allowPeriodhostsAtTypeHint: Option[String], allowPeriodhostsPeriodregexp: Option[String], allowPeriodhostsPeriodregexpAtTypeHint: Option[String], filterPeriodmethods: Option[String], filterPeriodmethodsAtTypeHint: Option[String]): Either[CommonError,Unit] = Left(TODO)
+
+        /**
+        * 
+        * @return A Unit
+        */
+        def Sling_postConfigProperty(configNodeName: String): Either[CommonError,Unit] = Left(TODO)
 
         /**
         * 

@@ -95,6 +95,7 @@ declare -a result_color_table=( "$WHITE" "$WHITE" "$GREEN" "$YELLOW" "$WHITE" "$
 # 0 - optional
 # 1 - required
 declare -A operation_parameters_minimum_occurrences
+operation_parameters_minimum_occurrences["getBundleInfo:::name"]=1
 operation_parameters_minimum_occurrences["postBundle:::name"]=1
 operation_parameters_minimum_occurrences["postBundle:::action"]=1
 operation_parameters_minimum_occurrences["postJmxRepository:::action"]=1
@@ -155,6 +156,14 @@ operation_parameters_minimum_occurrences["postConfigAemHealthCheckServlet:::bund
 operation_parameters_minimum_occurrences["postConfigAemHealthCheckServlet:::bundles.ignored@TypeHint"]=0
 operation_parameters_minimum_occurrences["postConfigAemPasswordReset:::pwdreset.authorizables"]=0
 operation_parameters_minimum_occurrences["postConfigAemPasswordReset:::pwdreset.authorizables@TypeHint"]=0
+operation_parameters_minimum_occurrences["sslSetup:::keystorePassword"]=1
+operation_parameters_minimum_occurrences["sslSetup:::keystorePasswordConfirm"]=1
+operation_parameters_minimum_occurrences["sslSetup:::truststorePassword"]=1
+operation_parameters_minimum_occurrences["sslSetup:::truststorePasswordConfirm"]=1
+operation_parameters_minimum_occurrences["sslSetup:::httpsHostname"]=1
+operation_parameters_minimum_occurrences["sslSetup:::httpsPort"]=1
+operation_parameters_minimum_occurrences["sslSetup:::privatekeyFile"]=0
+operation_parameters_minimum_occurrences["sslSetup:::certificateFile"]=0
 operation_parameters_minimum_occurrences["deleteAgent:::runmode"]=1
 operation_parameters_minimum_occurrences["deleteAgent:::name"]=1
 operation_parameters_minimum_occurrences["deleteNode:::path"]=1
@@ -350,6 +359,7 @@ operation_parameters_minimum_occurrences["postConfigApacheSlingReferrerFilter:::
 operation_parameters_minimum_occurrences["postConfigApacheSlingReferrerFilter:::allow.hosts.regexp@TypeHint"]=0
 operation_parameters_minimum_occurrences["postConfigApacheSlingReferrerFilter:::filter.methods"]=0
 operation_parameters_minimum_occurrences["postConfigApacheSlingReferrerFilter:::filter.methods@TypeHint"]=0
+operation_parameters_minimum_occurrences["postConfigProperty:::configNodeName"]=1
 operation_parameters_minimum_occurrences["postNode:::path"]=1
 operation_parameters_minimum_occurrences["postNode:::name"]=1
 operation_parameters_minimum_occurrences["postNode::::operation"]=0
@@ -383,6 +393,7 @@ operation_parameters_minimum_occurrences["postTruststorePKCS12:::truststore.p12"
 # N - N values
 # 0 - unlimited
 declare -A operation_parameters_maximum_occurrences
+operation_parameters_maximum_occurrences["getBundleInfo:::name"]=0
 operation_parameters_maximum_occurrences["postBundle:::name"]=0
 operation_parameters_maximum_occurrences["postBundle:::action"]=0
 operation_parameters_maximum_occurrences["postJmxRepository:::action"]=0
@@ -443,6 +454,14 @@ operation_parameters_maximum_occurrences["postConfigAemHealthCheckServlet:::bund
 operation_parameters_maximum_occurrences["postConfigAemHealthCheckServlet:::bundles.ignored@TypeHint"]=0
 operation_parameters_maximum_occurrences["postConfigAemPasswordReset:::pwdreset.authorizables"]=0
 operation_parameters_maximum_occurrences["postConfigAemPasswordReset:::pwdreset.authorizables@TypeHint"]=0
+operation_parameters_maximum_occurrences["sslSetup:::keystorePassword"]=0
+operation_parameters_maximum_occurrences["sslSetup:::keystorePasswordConfirm"]=0
+operation_parameters_maximum_occurrences["sslSetup:::truststorePassword"]=0
+operation_parameters_maximum_occurrences["sslSetup:::truststorePasswordConfirm"]=0
+operation_parameters_maximum_occurrences["sslSetup:::httpsHostname"]=0
+operation_parameters_maximum_occurrences["sslSetup:::httpsPort"]=0
+operation_parameters_maximum_occurrences["sslSetup:::privatekeyFile"]=0
+operation_parameters_maximum_occurrences["sslSetup:::certificateFile"]=0
 operation_parameters_maximum_occurrences["deleteAgent:::runmode"]=0
 operation_parameters_maximum_occurrences["deleteAgent:::name"]=0
 operation_parameters_maximum_occurrences["deleteNode:::path"]=0
@@ -638,6 +657,7 @@ operation_parameters_maximum_occurrences["postConfigApacheSlingReferrerFilter:::
 operation_parameters_maximum_occurrences["postConfigApacheSlingReferrerFilter:::allow.hosts.regexp@TypeHint"]=0
 operation_parameters_maximum_occurrences["postConfigApacheSlingReferrerFilter:::filter.methods"]=0
 operation_parameters_maximum_occurrences["postConfigApacheSlingReferrerFilter:::filter.methods@TypeHint"]=0
+operation_parameters_maximum_occurrences["postConfigProperty:::configNodeName"]=0
 operation_parameters_maximum_occurrences["postNode:::path"]=0
 operation_parameters_maximum_occurrences["postNode:::name"]=0
 operation_parameters_maximum_occurrences["postNode::::operation"]=0
@@ -668,6 +688,7 @@ operation_parameters_maximum_occurrences["postTruststorePKCS12:::truststore.p12"
 # The type of collection for specifying multiple values for parameter:
 # - multi, csv, ssv, tsv
 declare -A operation_parameters_collection_type
+operation_parameters_collection_type["getBundleInfo:::name"]=""
 operation_parameters_collection_type["postBundle:::name"]=""
 operation_parameters_collection_type["postBundle:::action"]=""
 operation_parameters_collection_type["postJmxRepository:::action"]=""
@@ -728,6 +749,14 @@ operation_parameters_collection_type["postConfigAemHealthCheckServlet:::bundles.
 operation_parameters_collection_type["postConfigAemHealthCheckServlet:::bundles.ignored@TypeHint"]=""
 operation_parameters_collection_type["postConfigAemPasswordReset:::pwdreset.authorizables"]="multi"
 operation_parameters_collection_type["postConfigAemPasswordReset:::pwdreset.authorizables@TypeHint"]=""
+operation_parameters_collection_type["sslSetup:::keystorePassword"]=""
+operation_parameters_collection_type["sslSetup:::keystorePasswordConfirm"]=""
+operation_parameters_collection_type["sslSetup:::truststorePassword"]=""
+operation_parameters_collection_type["sslSetup:::truststorePasswordConfirm"]=""
+operation_parameters_collection_type["sslSetup:::httpsHostname"]=""
+operation_parameters_collection_type["sslSetup:::httpsPort"]=""
+operation_parameters_collection_type["sslSetup:::privatekeyFile"]=""
+operation_parameters_collection_type["sslSetup:::certificateFile"]=""
 operation_parameters_collection_type["deleteAgent:::runmode"]=""
 operation_parameters_collection_type["deleteAgent:::name"]=""
 operation_parameters_collection_type["deleteNode:::path"]=""
@@ -923,6 +952,7 @@ operation_parameters_collection_type["postConfigApacheSlingReferrerFilter:::allo
 operation_parameters_collection_type["postConfigApacheSlingReferrerFilter:::allow.hosts.regexp@TypeHint"]=""
 operation_parameters_collection_type["postConfigApacheSlingReferrerFilter:::filter.methods"]=""
 operation_parameters_collection_type["postConfigApacheSlingReferrerFilter:::filter.methods@TypeHint"]=""
+operation_parameters_collection_type["postConfigProperty:::configNodeName"]=""
 operation_parameters_collection_type["postNode:::path"]=""
 operation_parameters_collection_type["postNode:::name"]=""
 operation_parameters_collection_type["postNode::::operation"]=""
@@ -1040,7 +1070,7 @@ url_escape() {
        -e 's/(/%28/g' \
        -e 's/)/%29/g' \
        -e 's/:/%3A/g' \
-       -e 's/\t/%09/g' \
+       -e 's/\\t/%09/g' \
        -e 's/?/%3F/g' <<<"$raw_url");
 
     echo "$value"
@@ -1174,18 +1204,16 @@ build_request_path() {
 
     local query_request_part=""
 
-    local count=0
     for qparam in "${query_params[@]}"; do
+        if [[ "${operation_parameters[$qparam]}" == "" ]]; then
+            continue
+        fi
+
         # Get the array of parameter values
         local parameter_value=""
         local parameter_values
         mapfile -t parameter_values < <(sed -e 's/'":::"'/\n/g' <<<"${operation_parameters[$qparam]}")
 
-        if [[ -n "${parameter_values[*]}" ]]; then
-            if [[ $((count++)) -gt 0 ]]; then
-                query_request_part+="&"
-            fi
-        fi
 
 
         #
@@ -1253,6 +1281,9 @@ build_request_path() {
         fi
 
         if [[ -n "${parameter_value}" ]]; then
+            if [[ -n "${query_request_part}" ]]; then
+                query_request_part+="&"
+            fi
             query_request_part+="${parameter_value}"
         fi
 
@@ -1277,7 +1308,7 @@ build_request_path() {
 print_help() {
 cat <<EOF
 
-${BOLD}${WHITE}Adobe Experience Manager (AEM) API command line client (API version 3.2.0-pre.0)${OFF}
+${BOLD}${WHITE}Adobe Experience Manager (AEM) API command line client (API version 3.5.0-pre.0)${OFF}
 
 ${BOLD}${WHITE}Usage${OFF}
 
@@ -1314,6 +1345,7 @@ EOF
     echo -e "${BOLD}${WHITE}[console]${OFF}"
 read -r -d '' ops <<EOF
   ${CYAN}getAemProductInfo${OFF}; (AUTH)
+  ${CYAN}getBundleInfo${OFF}; (AUTH)
   ${CYAN}getConfigMgr${OFF}; (AUTH)
   ${CYAN}postBundle${OFF}; (AUTH)
   ${CYAN}postJmxRepository${OFF}; (AUTH)
@@ -1348,6 +1380,12 @@ read -r -d '' ops <<EOF
 EOF
 echo "  $ops" | column -t -s ';'
     echo ""
+    echo -e "${BOLD}${WHITE}[granite]${OFF}"
+read -r -d '' ops <<EOF
+  ${CYAN}sslSetup${OFF}; (AUTH)
+EOF
+echo "  $ops" | column -t -s ';'
+    echo ""
     echo -e "${BOLD}${WHITE}[sling]${OFF}"
 read -r -d '' ops <<EOF
   ${CYAN}deleteAgent${OFF}; (AUTH)
@@ -1371,6 +1409,7 @@ read -r -d '' ops <<EOF
   ${CYAN}postConfigApacheSlingDavExServlet${OFF}; (AUTH)
   ${CYAN}postConfigApacheSlingGetServlet${OFF}; (AUTH)
   ${CYAN}postConfigApacheSlingReferrerFilter${OFF}; (AUTH)
+  ${CYAN}postConfigProperty${OFF}; (AUTH)
   ${CYAN}postNode${OFF}; (AUTH)
   ${CYAN}postNodeRw${OFF}; (AUTH)
   ${CYAN}postPath${OFF}; (AUTH)
@@ -1407,7 +1446,7 @@ echo -e "              \\t\\t\\t\\t(e.g. 'https://localhost')"
 ##############################################################################
 print_about() {
     echo ""
-    echo -e "${BOLD}${WHITE}Adobe Experience Manager (AEM) API command line client (API version 3.2.0-pre.0)${OFF}"
+    echo -e "${BOLD}${WHITE}Adobe Experience Manager (AEM) API command line client (API version 3.5.0-pre.0)${OFF}"
     echo ""
     echo -e "License: "
     echo -e "Contact: opensource@shinesolutions.com"
@@ -1427,7 +1466,7 @@ echo "$appdescription" | paste -sd' ' | fold -sw 80
 ##############################################################################
 print_version() {
     echo ""
-    echo -e "${BOLD}Adobe Experience Manager (AEM) API command line client (API version 3.2.0-pre.0)${OFF}"
+    echo -e "${BOLD}Adobe Experience Manager (AEM) API command line client (API version 3.5.0-pre.0)${OFF}"
     echo ""
 }
 
@@ -1442,6 +1481,24 @@ print_getAemProductInfo_help() {
     echo -e ""
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
+    code=0
+    echo -e "${result_color_table[${code:0:1}]}  0;Default response${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+}
+##############################################################################
+#
+# Print help for getBundleInfo operation
+#
+##############################################################################
+print_getBundleInfo_help() {
+    echo ""
+    echo -e "${BOLD}${WHITE}getBundleInfo - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e ""
+    echo -e "${BOLD}${WHITE}Parameters${OFF}"
+    echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo ""
+    echo -e "${BOLD}${WHITE}Responses${OFF}"
+    code=200
+    echo -e "${result_color_table[${code:0:1}]}  200;Retrieved bundle info${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
     code=0
     echo -e "${result_color_table[${code:0:1}]}  0;Default response${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
 }
@@ -1471,8 +1528,8 @@ print_postBundle_help() {
     echo -e "${BOLD}${WHITE}postBundle - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}action${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} - ${YELLOW} Specify as: action=value${OFF}" \
+    echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}action${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: action=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
@@ -1489,7 +1546,7 @@ print_postJmxRepository_help() {
     echo -e "${BOLD}${WHITE}postJmxRepository - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}action${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: action=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}action${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: action=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
     code=0
@@ -1505,65 +1562,65 @@ print_postSamlConfiguration_help() {
     echo -e "${BOLD}${WHITE}postSamlConfiguration - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}post${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: post=value${OFF}" \
+    echo -e "  * ${GREEN}post${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: post=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}apply${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: apply=value${OFF}" \
+    echo -e "  * ${GREEN}apply${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: apply=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}delete${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: delete=value${OFF}" \
+    echo -e "  * ${GREEN}delete${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: delete=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}action${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: action=value${OFF}" \
+    echo -e "  * ${GREEN}action${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: action=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}$location${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: $location=value${OFF}" \
+    echo -e "  * ${GREEN}$location${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: $location=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}path${OFF} ${BLUE}[array[string]]${OFF}${OFF} - ${YELLOW} Specify as: path=value1 path=value2 path=...${OFF}" \
+    echo -e "  * ${GREEN}path${OFF} ${BLUE}[array[string]]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: path=value1 path=value2 path=...${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}service.ranking${OFF} ${BLUE}[integer]${OFF}${OFF} - ${YELLOW} Specify as: service.ranking=value${OFF}" \
+    echo -e "  * ${GREEN}service.ranking${OFF} ${BLUE}[integer]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: service.ranking=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}idpUrl${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: idpUrl=value${OFF}" \
+    echo -e "  * ${GREEN}idpUrl${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: idpUrl=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}idpCertAlias${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: idpCertAlias=value${OFF}" \
+    echo -e "  * ${GREEN}idpCertAlias${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: idpCertAlias=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}idpHttpRedirect${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: idpHttpRedirect=value${OFF}" \
+    echo -e "  * ${GREEN}idpHttpRedirect${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: idpHttpRedirect=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}serviceProviderEntityId${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: serviceProviderEntityId=value${OFF}" \
+    echo -e "  * ${GREEN}serviceProviderEntityId${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: serviceProviderEntityId=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}assertionConsumerServiceURL${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: assertionConsumerServiceURL=value${OFF}" \
+    echo -e "  * ${GREEN}assertionConsumerServiceURL${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: assertionConsumerServiceURL=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}spPrivateKeyAlias${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: spPrivateKeyAlias=value${OFF}" \
+    echo -e "  * ${GREEN}spPrivateKeyAlias${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: spPrivateKeyAlias=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}keyStorePassword${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: keyStorePassword=value${OFF}" \
+    echo -e "  * ${GREEN}keyStorePassword${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: keyStorePassword=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}defaultRedirectUrl${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: defaultRedirectUrl=value${OFF}" \
+    echo -e "  * ${GREEN}defaultRedirectUrl${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: defaultRedirectUrl=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}userIDAttribute${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: userIDAttribute=value${OFF}" \
+    echo -e "  * ${GREEN}userIDAttribute${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: userIDAttribute=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}useEncryption${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: useEncryption=value${OFF}" \
+    echo -e "  * ${GREEN}useEncryption${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: useEncryption=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}createUser${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: createUser=value${OFF}" \
+    echo -e "  * ${GREEN}createUser${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: createUser=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}addGroupMemberships${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: addGroupMemberships=value${OFF}" \
+    echo -e "  * ${GREEN}addGroupMemberships${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: addGroupMemberships=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}groupMembershipAttribute${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: groupMembershipAttribute=value${OFF}" \
+    echo -e "  * ${GREEN}groupMembershipAttribute${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: groupMembershipAttribute=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}defaultGroups${OFF} ${BLUE}[array[string]]${OFF}${OFF} - ${YELLOW} Specify as: defaultGroups=value1 defaultGroups=value2 defaultGroups=...${OFF}" \
+    echo -e "  * ${GREEN}defaultGroups${OFF} ${BLUE}[array[string]]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: defaultGroups=value1 defaultGroups=value2 defaultGroups=...${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}nameIdFormat${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: nameIdFormat=value${OFF}" \
+    echo -e "  * ${GREEN}nameIdFormat${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: nameIdFormat=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}synchronizeAttributes${OFF} ${BLUE}[array[string]]${OFF}${OFF} - ${YELLOW} Specify as: synchronizeAttributes=value1 synchronizeAttributes=value2 synchronizeAttributes=...${OFF}" \
+    echo -e "  * ${GREEN}synchronizeAttributes${OFF} ${BLUE}[array[string]]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: synchronizeAttributes=value1 synchronizeAttributes=value2 synchronizeAttributes=...${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}handleLogout${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: handleLogout=value${OFF}" \
+    echo -e "  * ${GREEN}handleLogout${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: handleLogout=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}logoutUrl${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: logoutUrl=value${OFF}" \
+    echo -e "  * ${GREEN}logoutUrl${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: logoutUrl=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}clockTolerance${OFF} ${BLUE}[integer]${OFF}${OFF} - ${YELLOW} Specify as: clockTolerance=value${OFF}" \
+    echo -e "  * ${GREEN}clockTolerance${OFF} ${BLUE}[integer]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: clockTolerance=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}digestMethod${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: digestMethod=value${OFF}" \
+    echo -e "  * ${GREEN}digestMethod${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: digestMethod=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}signatureMethod${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: signatureMethod=value${OFF}" \
+    echo -e "  * ${GREEN}signatureMethod${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: signatureMethod=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}userIntermediatePath${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: userIntermediatePath=value${OFF}" \
+    echo -e "  * ${GREEN}userIntermediatePath${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: userIntermediatePath=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}propertylist${OFF} ${BLUE}[array[string]]${OFF}${OFF} - ${YELLOW} Specify as: propertylist="value1,value2,..."${OFF}" \
+    echo -e "  * ${GREEN}propertylist${OFF} ${BLUE}[array[string]]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: propertylist="value1,value2,..."${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
@@ -1598,9 +1655,9 @@ print_postCqActions_help() {
     echo -e "${BOLD}${WHITE}postCqActions - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}authorizableId${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} - ${YELLOW} Specify as: authorizableId=value${OFF}" \
+    echo -e "  * ${GREEN}authorizableId${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: authorizableId=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}changelog${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} - ${YELLOW} Specify as: changelog=value${OFF}" \
+    echo -e "  * ${GREEN}changelog${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: changelog=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
@@ -1665,7 +1722,7 @@ print_postPackageService_help() {
     echo -e "${BOLD}${WHITE}postPackageService - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}cmd${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} - ${YELLOW} Specify as: cmd=value${OFF}" \
+    echo -e "  * ${GREEN}cmd${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: cmd=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
@@ -1682,20 +1739,20 @@ print_postPackageServiceJson_help() {
     echo -e "${BOLD}${WHITE}postPackageServiceJson - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}path${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: path=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}cmd${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} - ${YELLOW} Specify as: cmd=value${OFF}" \
+    echo -e "  * ${GREEN}path${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: path=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}cmd${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: cmd=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}groupName${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: groupName=value${OFF}" \
+    echo -e "  * ${GREEN}groupName${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: groupName=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}packageName${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: packageName=value${OFF}" \
+    echo -e "  * ${GREEN}packageName${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: packageName=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}packageVersion${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: packageVersion=value${OFF}" \
+    echo -e "  * ${GREEN}packageVersion${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: packageVersion=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}_charset_${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: _charset_=value${OFF}" \
+    echo -e "  * ${GREEN}_charset_${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: _charset_=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}force${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: force=value${OFF}" \
+    echo -e "  * ${GREEN}force${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: force=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}recursive${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: recursive=value${OFF}" \
+    echo -e "  * ${GREEN}recursive${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: recursive=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
@@ -1712,17 +1769,17 @@ print_postPackageUpdate_help() {
     echo -e "${BOLD}${WHITE}postPackageUpdate - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}groupName${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} - ${YELLOW} Specify as: groupName=value${OFF}" \
+    echo -e "  * ${GREEN}groupName${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: groupName=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}packageName${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} - ${YELLOW} Specify as: packageName=value${OFF}" \
+    echo -e "  * ${GREEN}packageName${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: packageName=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}version${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} - ${YELLOW} Specify as: version=value${OFF}" \
+    echo -e "  * ${GREEN}version${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: version=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}path${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} - ${YELLOW} Specify as: path=value${OFF}" \
+    echo -e "  * ${GREEN}path${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: path=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}filter${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: filter=value${OFF}" \
+    echo -e "  * ${GREEN}filter${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: filter=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}_charset_${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: _charset_=value${OFF}" \
+    echo -e "  * ${GREEN}_charset_${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: _charset_=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
@@ -1739,11 +1796,11 @@ print_postSetPassword_help() {
     echo -e "${BOLD}${WHITE}postSetPassword - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}old${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} - ${YELLOW} Specify as: old=value${OFF}" \
+    echo -e "  * ${GREEN}old${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: old=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}plain${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} - ${YELLOW} Specify as: plain=value${OFF}" \
+    echo -e "  * ${GREEN}plain${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: plain=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}verify${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} - ${YELLOW} Specify as: verify=value${OFF}" \
+    echo -e "  * ${GREEN}verify${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: verify=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
@@ -1760,9 +1817,9 @@ print_getAemHealthCheck_help() {
     echo -e "${BOLD}${WHITE}getAemHealthCheck - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}tags${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: tags=value${OFF}" \
+    echo -e "  * ${GREEN}tags${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: tags=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}combineTagsOr${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: combineTagsOr=value${OFF}" \
+    echo -e "  * ${GREEN}combineTagsOr${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: combineTagsOr=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
@@ -1779,9 +1836,9 @@ print_postConfigAemHealthCheckServlet_help() {
     echo -e "${BOLD}${WHITE}postConfigAemHealthCheckServlet - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}bundles.ignored${OFF} ${BLUE}[array[string]]${OFF}${OFF} - ${YELLOW} Specify as: bundles.ignored=value1 bundles.ignored=value2 bundles.ignored=...${OFF}" \
+    echo -e "  * ${GREEN}bundles.ignored${OFF} ${BLUE}[array[string]]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: bundles.ignored=value1 bundles.ignored=value2 bundles.ignored=...${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}bundles.ignored@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: bundles.ignored@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}bundles.ignored@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: bundles.ignored@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
@@ -1798,9 +1855,36 @@ print_postConfigAemPasswordReset_help() {
     echo -e "${BOLD}${WHITE}postConfigAemPasswordReset - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}pwdreset.authorizables${OFF} ${BLUE}[array[string]]${OFF}${OFF} - ${YELLOW} Specify as: pwdreset.authorizables=value1 pwdreset.authorizables=value2 pwdreset.authorizables=...${OFF}" \
+    echo -e "  * ${GREEN}pwdreset.authorizables${OFF} ${BLUE}[array[string]]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: pwdreset.authorizables=value1 pwdreset.authorizables=value2 pwdreset.authorizables=...${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}pwdreset.authorizables@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: pwdreset.authorizables@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}pwdreset.authorizables@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: pwdreset.authorizables@TypeHint=value${OFF}" \
+        | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo ""
+    echo -e "${BOLD}${WHITE}Responses${OFF}"
+    code=0
+    echo -e "${result_color_table[${code:0:1}]}  0;Default response${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+}
+##############################################################################
+#
+# Print help for sslSetup operation
+#
+##############################################################################
+print_sslSetup_help() {
+    echo ""
+    echo -e "${BOLD}${WHITE}sslSetup - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e ""
+    echo -e "${BOLD}${WHITE}Parameters${OFF}"
+    echo -e "  * ${GREEN}keystorePassword${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: keystorePassword=value${OFF}" \
+        | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}keystorePasswordConfirm${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: keystorePasswordConfirm=value${OFF}" \
+        | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}truststorePassword${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: truststorePassword=value${OFF}" \
+        | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}truststorePasswordConfirm${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: truststorePasswordConfirm=value${OFF}" \
+        | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}httpsHostname${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: httpsHostname=value${OFF}" \
+        | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}httpsPort${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: httpsPort=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
@@ -1817,8 +1901,8 @@ print_deleteAgent_help() {
     echo -e "${BOLD}${WHITE}deleteAgent - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}runmode${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: runmode=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}runmode${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: runmode=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
     code=0
@@ -1834,8 +1918,8 @@ print_deleteNode_help() {
     echo -e "${BOLD}${WHITE}deleteNode - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}path${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: path=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}path${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: path=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
     code=0
@@ -1851,8 +1935,8 @@ print_getAgent_help() {
     echo -e "${BOLD}${WHITE}getAgent - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}runmode${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: runmode=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}runmode${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: runmode=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
     code=0
@@ -1868,7 +1952,7 @@ print_getAgents_help() {
     echo -e "${BOLD}${WHITE}getAgents - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}runmode${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: runmode=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}runmode${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: runmode=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
     code=0
@@ -1884,8 +1968,8 @@ print_getAuthorizableKeystore_help() {
     echo -e "${BOLD}${WHITE}getAuthorizableKeystore - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}intermediatePath${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: intermediatePath=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}authorizableId${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: authorizableId=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}intermediatePath${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: intermediatePath=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}authorizableId${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: authorizableId=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
     code=200
@@ -1903,8 +1987,8 @@ print_getKeystore_help() {
     echo -e "${BOLD}${WHITE}getKeystore - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}intermediatePath${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: intermediatePath=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}authorizableId${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: authorizableId=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}intermediatePath${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: intermediatePath=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}authorizableId${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: authorizableId=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
     code=0
@@ -1920,8 +2004,8 @@ print_getNode_help() {
     echo -e "${BOLD}${WHITE}getNode - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}path${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: path=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}path${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: path=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
     code=0
@@ -1937,9 +2021,9 @@ print_getPackage_help() {
     echo -e "${BOLD}${WHITE}getPackage - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}group${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: group=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}version${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: version=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}group${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: group=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}version${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: version=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
     code=0
@@ -1955,9 +2039,9 @@ print_getPackageFilter_help() {
     echo -e "${BOLD}${WHITE}getPackageFilter - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}group${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: group=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}version${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: version=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}group${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: group=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}version${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: version=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
     code=0
@@ -1973,13 +2057,13 @@ print_getQuery_help() {
     echo -e "${BOLD}${WHITE}getQuery - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}path${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} - ${YELLOW} Specify as: path=value${OFF}" \
+    echo -e "  * ${GREEN}path${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: path=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}p.limit${OFF} ${BLUE}[integer]${OFF} ${RED}(required)${OFF}${OFF} - ${YELLOW} Specify as: p.limit=value${OFF}" \
+    echo -e "  * ${GREEN}p.limit${OFF} ${BLUE}[integer]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: p.limit=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}1_property${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} - ${YELLOW} Specify as: 1_property=value${OFF}" \
+    echo -e "  * ${GREEN}1_property${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: 1_property=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}1_property.value${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} - ${YELLOW} Specify as: 1_property.value=value${OFF}" \
+    echo -e "  * ${GREEN}1_property.value${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: 1_property.value=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
@@ -2026,107 +2110,107 @@ print_postAgent_help() {
     echo -e "${BOLD}${WHITE}postAgent - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}runmode${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: runmode=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/cq:distribute${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/cq:distribute=value${OFF}" \
+    echo -e "  * ${GREEN}runmode${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: runmode=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}jcr:content/cq:distribute${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/cq:distribute=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/cq:distribute@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/cq:distribute@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/cq:distribute@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/cq:distribute@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/cq:name${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/cq:name=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/cq:name${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/cq:name=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/cq:template${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/cq:template=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/cq:template${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/cq:template=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/enabled${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/enabled=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/enabled${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/enabled=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/jcr:description${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/jcr:description=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/jcr:description${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/jcr:description=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/jcr:lastModified${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/jcr:lastModified=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/jcr:lastModified${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/jcr:lastModified=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/jcr:lastModifiedBy${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/jcr:lastModifiedBy=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/jcr:lastModifiedBy${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/jcr:lastModifiedBy=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/jcr:mixinTypes${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/jcr:mixinTypes=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/jcr:mixinTypes${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/jcr:mixinTypes=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/jcr:title${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/jcr:title=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/jcr:title${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/jcr:title=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/logLevel${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/logLevel=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/logLevel${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/logLevel=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/noStatusUpdate${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/noStatusUpdate=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/noStatusUpdate${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/noStatusUpdate=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/noVersioning${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/noVersioning=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/noVersioning${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/noVersioning=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/protocolConnectTimeout${OFF} ${BLUE}[integer]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/protocolConnectTimeout=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/protocolConnectTimeout${OFF} ${BLUE}[integer]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/protocolConnectTimeout=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/protocolHTTPConnectionClosed${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/protocolHTTPConnectionClosed=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/protocolHTTPConnectionClosed${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/protocolHTTPConnectionClosed=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/protocolHTTPExpired${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/protocolHTTPExpired=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/protocolHTTPExpired${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/protocolHTTPExpired=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/protocolHTTPHeaders${OFF} ${BLUE}[array[string]]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/protocolHTTPHeaders=value1 jcr:content/protocolHTTPHeaders=value2 jcr:content/protocolHTTPHeaders=...${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/protocolHTTPHeaders${OFF} ${BLUE}[array[string]]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/protocolHTTPHeaders=value1 jcr:content/protocolHTTPHeaders=value2 jcr:content/protocolHTTPHeaders=...${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/protocolHTTPHeaders@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/protocolHTTPHeaders@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/protocolHTTPHeaders@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/protocolHTTPHeaders@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/protocolHTTPMethod${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/protocolHTTPMethod=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/protocolHTTPMethod${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/protocolHTTPMethod=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/protocolHTTPSRelaxed${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/protocolHTTPSRelaxed=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/protocolHTTPSRelaxed${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/protocolHTTPSRelaxed=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/protocolInterface${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/protocolInterface=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/protocolInterface${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/protocolInterface=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/protocolSocketTimeout${OFF} ${BLUE}[integer]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/protocolSocketTimeout=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/protocolSocketTimeout${OFF} ${BLUE}[integer]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/protocolSocketTimeout=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/protocolVersion${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/protocolVersion=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/protocolVersion${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/protocolVersion=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/proxyNTLMDomain${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/proxyNTLMDomain=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/proxyNTLMDomain${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/proxyNTLMDomain=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/proxyNTLMHost${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/proxyNTLMHost=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/proxyNTLMHost${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/proxyNTLMHost=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/proxyHost${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/proxyHost=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/proxyHost${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/proxyHost=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/proxyPassword${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/proxyPassword=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/proxyPassword${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/proxyPassword=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/proxyPort${OFF} ${BLUE}[integer]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/proxyPort=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/proxyPort${OFF} ${BLUE}[integer]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/proxyPort=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/proxyUser${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/proxyUser=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/proxyUser${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/proxyUser=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/queueBatchMaxSize${OFF} ${BLUE}[integer]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/queueBatchMaxSize=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/queueBatchMaxSize${OFF} ${BLUE}[integer]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/queueBatchMaxSize=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/queueBatchMode${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/queueBatchMode=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/queueBatchMode${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/queueBatchMode=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/queueBatchWaitTime${OFF} ${BLUE}[integer]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/queueBatchWaitTime=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/queueBatchWaitTime${OFF} ${BLUE}[integer]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/queueBatchWaitTime=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/retryDelay${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/retryDelay=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/retryDelay${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/retryDelay=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/reverseReplication${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/reverseReplication=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/reverseReplication${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/reverseReplication=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/serializationType${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/serializationType=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/serializationType${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/serializationType=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/sling:resourceType${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/sling:resourceType=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/sling:resourceType${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/sling:resourceType=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/ssl${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/ssl=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/ssl${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/ssl=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/transportNTLMDomain${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/transportNTLMDomain=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/transportNTLMDomain${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/transportNTLMDomain=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/transportNTLMHost${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/transportNTLMHost=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/transportNTLMHost${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/transportNTLMHost=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/transportPassword${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/transportPassword=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/transportPassword${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/transportPassword=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/transportUri${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/transportUri=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/transportUri${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/transportUri=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/transportUser${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/transportUser=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/transportUser${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/transportUser=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/triggerDistribute${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/triggerDistribute=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/triggerDistribute${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/triggerDistribute=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/triggerModified${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/triggerModified=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/triggerModified${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/triggerModified=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/triggerOnOffTime${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/triggerOnOffTime=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/triggerOnOffTime${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/triggerOnOffTime=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/triggerReceive${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/triggerReceive=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/triggerReceive${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/triggerReceive=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/triggerSpecific${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/triggerSpecific=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/triggerSpecific${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/triggerSpecific=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:content/userId${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:content/userId=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:content/userId${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:content/userId=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:primaryType${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: jcr:primaryType=value${OFF}" \
+    echo -e "  * ${GREEN}jcr:primaryType${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:primaryType=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}:operation${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: :operation=value${OFF}" \
+    echo -e "  * ${GREEN}:operation${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: :operation=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
@@ -2143,25 +2227,25 @@ print_postAuthorizableKeystore_help() {
     echo -e "${BOLD}${WHITE}postAuthorizableKeystore - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}intermediatePath${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: intermediatePath=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}authorizableId${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: authorizableId=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}:operation${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: :operation=value${OFF}" \
+    echo -e "  * ${GREEN}intermediatePath${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: intermediatePath=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}authorizableId${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: authorizableId=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}:operation${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: :operation=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}currentPassword${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: currentPassword=value${OFF}" \
+    echo -e "  * ${GREEN}currentPassword${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: currentPassword=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}newPassword${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: newPassword=value${OFF}" \
+    echo -e "  * ${GREEN}newPassword${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: newPassword=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}rePassword${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: rePassword=value${OFF}" \
+    echo -e "  * ${GREEN}rePassword${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: rePassword=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}keyPassword${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: keyPassword=value${OFF}" \
+    echo -e "  * ${GREEN}keyPassword${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: keyPassword=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}keyStorePass${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: keyStorePass=value${OFF}" \
+    echo -e "  * ${GREEN}keyStorePass${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: keyStorePass=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}alias${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: alias=value${OFF}" \
+    echo -e "  * ${GREEN}alias${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: alias=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}newAlias${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: newAlias=value${OFF}" \
+    echo -e "  * ${GREEN}newAlias${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: newAlias=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}removeAlias${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: removeAlias=value${OFF}" \
+    echo -e "  * ${GREEN}removeAlias${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: removeAlias=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
@@ -2180,17 +2264,17 @@ print_postAuthorizables_help() {
     echo -e "${BOLD}${WHITE}postAuthorizables - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}authorizableId${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} - ${YELLOW} Specify as: authorizableId=value${OFF}" \
+    echo -e "  * ${GREEN}authorizableId${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: authorizableId=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}intermediatePath${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} - ${YELLOW} Specify as: intermediatePath=value${OFF}" \
+    echo -e "  * ${GREEN}intermediatePath${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: intermediatePath=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}createUser${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: createUser=value${OFF}" \
+    echo -e "  * ${GREEN}createUser${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: createUser=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}createGroup${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: createGroup=value${OFF}" \
+    echo -e "  * ${GREEN}createGroup${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: createGroup=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}rep:password${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: rep:password=value${OFF}" \
+    echo -e "  * ${GREEN}rep:password${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: rep:password=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}profile/givenName${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: profile/givenName=value${OFF}" \
+    echo -e "  * ${GREEN}profile/givenName${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: profile/givenName=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
@@ -2207,101 +2291,101 @@ print_postConfigAdobeGraniteSamlAuthenticationHandler_help() {
     echo -e "${BOLD}${WHITE}postConfigAdobeGraniteSamlAuthenticationHandler - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}keyStorePassword${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: keyStorePassword=value${OFF}" \
+    echo -e "  * ${GREEN}keyStorePassword${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: keyStorePassword=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}keyStorePassword@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: keyStorePassword@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}keyStorePassword@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: keyStorePassword@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}service.ranking${OFF} ${BLUE}[integer]${OFF}${OFF} - ${YELLOW} Specify as: service.ranking=value${OFF}" \
+    echo -e "  * ${GREEN}service.ranking${OFF} ${BLUE}[integer]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: service.ranking=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}service.ranking@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: service.ranking@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}service.ranking@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: service.ranking@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}idpHttpRedirect${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: idpHttpRedirect=value${OFF}" \
+    echo -e "  * ${GREEN}idpHttpRedirect${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: idpHttpRedirect=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}idpHttpRedirect@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: idpHttpRedirect@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}idpHttpRedirect@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: idpHttpRedirect@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}createUser${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: createUser=value${OFF}" \
+    echo -e "  * ${GREEN}createUser${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: createUser=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}createUser@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: createUser@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}createUser@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: createUser@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}defaultRedirectUrl${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: defaultRedirectUrl=value${OFF}" \
+    echo -e "  * ${GREEN}defaultRedirectUrl${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: defaultRedirectUrl=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}defaultRedirectUrl@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: defaultRedirectUrl@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}defaultRedirectUrl@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: defaultRedirectUrl@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}userIDAttribute${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: userIDAttribute=value${OFF}" \
+    echo -e "  * ${GREEN}userIDAttribute${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: userIDAttribute=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}userIDAttribute@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: userIDAttribute@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}userIDAttribute@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: userIDAttribute@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}defaultGroups${OFF} ${BLUE}[array[string]]${OFF}${OFF} - ${YELLOW} Specify as: defaultGroups=value1 defaultGroups=value2 defaultGroups=...${OFF}" \
+    echo -e "  * ${GREEN}defaultGroups${OFF} ${BLUE}[array[string]]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: defaultGroups=value1 defaultGroups=value2 defaultGroups=...${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}defaultGroups@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: defaultGroups@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}defaultGroups@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: defaultGroups@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}idpCertAlias${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: idpCertAlias=value${OFF}" \
+    echo -e "  * ${GREEN}idpCertAlias${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: idpCertAlias=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}idpCertAlias@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: idpCertAlias@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}idpCertAlias@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: idpCertAlias@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}addGroupMemberships${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: addGroupMemberships=value${OFF}" \
+    echo -e "  * ${GREEN}addGroupMemberships${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: addGroupMemberships=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}addGroupMemberships@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: addGroupMemberships@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}addGroupMemberships@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: addGroupMemberships@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}path${OFF} ${BLUE}[array[string]]${OFF}${OFF} - ${YELLOW} Specify as: path=value1 path=value2 path=...${OFF}" \
+    echo -e "  * ${GREEN}path${OFF} ${BLUE}[array[string]]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: path=value1 path=value2 path=...${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}path@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: path@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}path@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: path@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}synchronizeAttributes${OFF} ${BLUE}[array[string]]${OFF}${OFF} - ${YELLOW} Specify as: synchronizeAttributes=value1 synchronizeAttributes=value2 synchronizeAttributes=...${OFF}" \
+    echo -e "  * ${GREEN}synchronizeAttributes${OFF} ${BLUE}[array[string]]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: synchronizeAttributes=value1 synchronizeAttributes=value2 synchronizeAttributes=...${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}synchronizeAttributes@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: synchronizeAttributes@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}synchronizeAttributes@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: synchronizeAttributes@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}clockTolerance${OFF} ${BLUE}[integer]${OFF}${OFF} - ${YELLOW} Specify as: clockTolerance=value${OFF}" \
+    echo -e "  * ${GREEN}clockTolerance${OFF} ${BLUE}[integer]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: clockTolerance=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}clockTolerance@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: clockTolerance@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}clockTolerance@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: clockTolerance@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}groupMembershipAttribute${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: groupMembershipAttribute=value${OFF}" \
+    echo -e "  * ${GREEN}groupMembershipAttribute${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: groupMembershipAttribute=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}groupMembershipAttribute@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: groupMembershipAttribute@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}groupMembershipAttribute@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: groupMembershipAttribute@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}idpUrl${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: idpUrl=value${OFF}" \
+    echo -e "  * ${GREEN}idpUrl${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: idpUrl=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}idpUrl@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: idpUrl@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}idpUrl@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: idpUrl@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}logoutUrl${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: logoutUrl=value${OFF}" \
+    echo -e "  * ${GREEN}logoutUrl${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: logoutUrl=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}logoutUrl@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: logoutUrl@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}logoutUrl@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: logoutUrl@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}serviceProviderEntityId${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: serviceProviderEntityId=value${OFF}" \
+    echo -e "  * ${GREEN}serviceProviderEntityId${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: serviceProviderEntityId=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}serviceProviderEntityId@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: serviceProviderEntityId@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}serviceProviderEntityId@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: serviceProviderEntityId@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}assertionConsumerServiceURL${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: assertionConsumerServiceURL=value${OFF}" \
+    echo -e "  * ${GREEN}assertionConsumerServiceURL${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: assertionConsumerServiceURL=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}assertionConsumerServiceURL@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: assertionConsumerServiceURL@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}assertionConsumerServiceURL@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: assertionConsumerServiceURL@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}handleLogout${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: handleLogout=value${OFF}" \
+    echo -e "  * ${GREEN}handleLogout${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: handleLogout=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}handleLogout@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: handleLogout@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}handleLogout@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: handleLogout@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}spPrivateKeyAlias${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: spPrivateKeyAlias=value${OFF}" \
+    echo -e "  * ${GREEN}spPrivateKeyAlias${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: spPrivateKeyAlias=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}spPrivateKeyAlias@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: spPrivateKeyAlias@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}spPrivateKeyAlias@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: spPrivateKeyAlias@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}useEncryption${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: useEncryption=value${OFF}" \
+    echo -e "  * ${GREEN}useEncryption${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: useEncryption=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}useEncryption@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: useEncryption@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}useEncryption@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: useEncryption@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}nameIdFormat${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: nameIdFormat=value${OFF}" \
+    echo -e "  * ${GREEN}nameIdFormat${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: nameIdFormat=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}nameIdFormat@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: nameIdFormat@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}nameIdFormat@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: nameIdFormat@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}digestMethod${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: digestMethod=value${OFF}" \
+    echo -e "  * ${GREEN}digestMethod${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: digestMethod=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}digestMethod@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: digestMethod@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}digestMethod@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: digestMethod@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}signatureMethod${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: signatureMethod=value${OFF}" \
+    echo -e "  * ${GREEN}signatureMethod${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: signatureMethod=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}signatureMethod@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: signatureMethod@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}signatureMethod@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: signatureMethod@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}userIntermediatePath${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: userIntermediatePath=value${OFF}" \
+    echo -e "  * ${GREEN}userIntermediatePath${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: userIntermediatePath=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}userIntermediatePath@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: userIntermediatePath@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}userIntermediatePath@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: userIntermediatePath@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
@@ -2318,45 +2402,45 @@ print_postConfigApacheFelixJettyBasedHttpService_help() {
     echo -e "${BOLD}${WHITE}postConfigApacheFelixJettyBasedHttpService - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}org.apache.felix.https.nio${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: org.apache.felix.https.nio=value${OFF}" \
+    echo -e "  * ${GREEN}org.apache.felix.https.nio${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: org.apache.felix.https.nio=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}org.apache.felix.https.nio@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: org.apache.felix.https.nio@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}org.apache.felix.https.nio@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: org.apache.felix.https.nio@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}org.apache.felix.https.keystore${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: org.apache.felix.https.keystore=value${OFF}" \
+    echo -e "  * ${GREEN}org.apache.felix.https.keystore${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: org.apache.felix.https.keystore=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}org.apache.felix.https.keystore@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: org.apache.felix.https.keystore@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}org.apache.felix.https.keystore@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: org.apache.felix.https.keystore@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}org.apache.felix.https.keystore.password${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: org.apache.felix.https.keystore.password=value${OFF}" \
+    echo -e "  * ${GREEN}org.apache.felix.https.keystore.password${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: org.apache.felix.https.keystore.password=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}org.apache.felix.https.keystore.password@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: org.apache.felix.https.keystore.password@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}org.apache.felix.https.keystore.password@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: org.apache.felix.https.keystore.password@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}org.apache.felix.https.keystore.key${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: org.apache.felix.https.keystore.key=value${OFF}" \
+    echo -e "  * ${GREEN}org.apache.felix.https.keystore.key${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: org.apache.felix.https.keystore.key=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}org.apache.felix.https.keystore.key@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: org.apache.felix.https.keystore.key@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}org.apache.felix.https.keystore.key@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: org.apache.felix.https.keystore.key@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}org.apache.felix.https.keystore.key.password${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: org.apache.felix.https.keystore.key.password=value${OFF}" \
+    echo -e "  * ${GREEN}org.apache.felix.https.keystore.key.password${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: org.apache.felix.https.keystore.key.password=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}org.apache.felix.https.keystore.key.password@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: org.apache.felix.https.keystore.key.password@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}org.apache.felix.https.keystore.key.password@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: org.apache.felix.https.keystore.key.password@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}org.apache.felix.https.truststore${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: org.apache.felix.https.truststore=value${OFF}" \
+    echo -e "  * ${GREEN}org.apache.felix.https.truststore${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: org.apache.felix.https.truststore=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}org.apache.felix.https.truststore@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: org.apache.felix.https.truststore@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}org.apache.felix.https.truststore@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: org.apache.felix.https.truststore@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}org.apache.felix.https.truststore.password${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: org.apache.felix.https.truststore.password=value${OFF}" \
+    echo -e "  * ${GREEN}org.apache.felix.https.truststore.password${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: org.apache.felix.https.truststore.password=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}org.apache.felix.https.truststore.password@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: org.apache.felix.https.truststore.password@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}org.apache.felix.https.truststore.password@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: org.apache.felix.https.truststore.password@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}org.apache.felix.https.clientcertificate${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: org.apache.felix.https.clientcertificate=value${OFF}" \
+    echo -e "  * ${GREEN}org.apache.felix.https.clientcertificate${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: org.apache.felix.https.clientcertificate=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}org.apache.felix.https.clientcertificate@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: org.apache.felix.https.clientcertificate@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}org.apache.felix.https.clientcertificate@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: org.apache.felix.https.clientcertificate@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}org.apache.felix.https.enable${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: org.apache.felix.https.enable=value${OFF}" \
+    echo -e "  * ${GREEN}org.apache.felix.https.enable${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: org.apache.felix.https.enable=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}org.apache.felix.https.enable@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: org.apache.felix.https.enable@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}org.apache.felix.https.enable@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: org.apache.felix.https.enable@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}org.osgi.service.http.port.secure${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: org.osgi.service.http.port.secure=value${OFF}" \
+    echo -e "  * ${GREEN}org.osgi.service.http.port.secure${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: org.osgi.service.http.port.secure=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}org.osgi.service.http.port.secure@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: org.osgi.service.http.port.secure@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}org.osgi.service.http.port.secure@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: org.osgi.service.http.port.secure@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
@@ -2373,29 +2457,29 @@ print_postConfigApacheHttpComponentsProxyConfiguration_help() {
     echo -e "${BOLD}${WHITE}postConfigApacheHttpComponentsProxyConfiguration - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}proxy.host${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: proxy.host=value${OFF}" \
+    echo -e "  * ${GREEN}proxy.host${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: proxy.host=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}proxy.host@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: proxy.host@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}proxy.host@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: proxy.host@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}proxy.port${OFF} ${BLUE}[integer]${OFF}${OFF} - ${YELLOW} Specify as: proxy.port=value${OFF}" \
+    echo -e "  * ${GREEN}proxy.port${OFF} ${BLUE}[integer]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: proxy.port=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}proxy.port@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: proxy.port@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}proxy.port@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: proxy.port@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}proxy.exceptions${OFF} ${BLUE}[array[string]]${OFF}${OFF} - ${YELLOW} Specify as: proxy.exceptions=value1 proxy.exceptions=value2 proxy.exceptions=...${OFF}" \
+    echo -e "  * ${GREEN}proxy.exceptions${OFF} ${BLUE}[array[string]]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: proxy.exceptions=value1 proxy.exceptions=value2 proxy.exceptions=...${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}proxy.exceptions@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: proxy.exceptions@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}proxy.exceptions@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: proxy.exceptions@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}proxy.enabled${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: proxy.enabled=value${OFF}" \
+    echo -e "  * ${GREEN}proxy.enabled${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: proxy.enabled=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}proxy.enabled@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: proxy.enabled@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}proxy.enabled@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: proxy.enabled@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}proxy.user${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: proxy.user=value${OFF}" \
+    echo -e "  * ${GREEN}proxy.user${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: proxy.user=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}proxy.user@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: proxy.user@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}proxy.user@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: proxy.user@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}proxy.password${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: proxy.password=value${OFF}" \
+    echo -e "  * ${GREEN}proxy.password${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: proxy.password=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}proxy.password@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: proxy.password@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}proxy.password@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: proxy.password@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
@@ -2412,13 +2496,13 @@ print_postConfigApacheSlingDavExServlet_help() {
     echo -e "${BOLD}${WHITE}postConfigApacheSlingDavExServlet - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}alias${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: alias=value${OFF}" \
+    echo -e "  * ${GREEN}alias${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: alias=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}alias@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: alias@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}alias@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: alias@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}dav.create-absolute-uri${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: dav.create-absolute-uri=value${OFF}" \
+    echo -e "  * ${GREEN}dav.create-absolute-uri${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: dav.create-absolute-uri=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}dav.create-absolute-uri@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: dav.create-absolute-uri@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}dav.create-absolute-uri@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: dav.create-absolute-uri@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
@@ -2435,21 +2519,21 @@ print_postConfigApacheSlingGetServlet_help() {
     echo -e "${BOLD}${WHITE}postConfigApacheSlingGetServlet - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}json.maximumresults${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: json.maximumresults=value${OFF}" \
+    echo -e "  * ${GREEN}json.maximumresults${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: json.maximumresults=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}json.maximumresults@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: json.maximumresults@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}json.maximumresults@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: json.maximumresults@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}enable.html${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: enable.html=value${OFF}" \
+    echo -e "  * ${GREEN}enable.html${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: enable.html=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}enable.html@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: enable.html@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}enable.html@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: enable.html@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}enable.txt${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: enable.txt=value${OFF}" \
+    echo -e "  * ${GREEN}enable.txt${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: enable.txt=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}enable.txt@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: enable.txt@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}enable.txt@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: enable.txt@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}enable.xml${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: enable.xml=value${OFF}" \
+    echo -e "  * ${GREEN}enable.xml${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: enable.xml=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}enable.xml@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: enable.xml@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}enable.xml@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: enable.xml@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
@@ -2466,22 +2550,38 @@ print_postConfigApacheSlingReferrerFilter_help() {
     echo -e "${BOLD}${WHITE}postConfigApacheSlingReferrerFilter - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}allow.empty${OFF} ${BLUE}[boolean]${OFF}${OFF} - ${YELLOW} Specify as: allow.empty=value${OFF}" \
+    echo -e "  * ${GREEN}allow.empty${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: allow.empty=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}allow.empty@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: allow.empty@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}allow.empty@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: allow.empty@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}allow.hosts${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: allow.hosts=value${OFF}" \
+    echo -e "  * ${GREEN}allow.hosts${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: allow.hosts=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}allow.hosts@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: allow.hosts@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}allow.hosts@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: allow.hosts@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}allow.hosts.regexp${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: allow.hosts.regexp=value${OFF}" \
+    echo -e "  * ${GREEN}allow.hosts.regexp${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: allow.hosts.regexp=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}allow.hosts.regexp@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: allow.hosts.regexp@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}allow.hosts.regexp@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: allow.hosts.regexp@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}filter.methods${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: filter.methods=value${OFF}" \
+    echo -e "  * ${GREEN}filter.methods${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: filter.methods=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}filter.methods@TypeHint${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: filter.methods@TypeHint=value${OFF}" \
+    echo -e "  * ${GREEN}filter.methods@TypeHint${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: filter.methods@TypeHint=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo ""
+    echo -e "${BOLD}${WHITE}Responses${OFF}"
+    code=0
+    echo -e "${result_color_table[${code:0:1}]}  0;Default response${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+}
+##############################################################################
+#
+# Print help for postConfigProperty operation
+#
+##############################################################################
+print_postConfigProperty_help() {
+    echo ""
+    echo -e "${BOLD}${WHITE}postConfigProperty - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e ""
+    echo -e "${BOLD}${WHITE}Parameters${OFF}"
+    echo -e "  * ${GREEN}configNodeName${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: configNodeName=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
     code=0
@@ -2497,11 +2597,11 @@ print_postNode_help() {
     echo -e "${BOLD}${WHITE}postNode - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}path${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: path=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}:operation${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: :operation=value${OFF}" \
+    echo -e "  * ${GREEN}path${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: path=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}:operation${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: :operation=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}deleteAuthorizable${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: deleteAuthorizable=value${OFF}" \
+    echo -e "  * ${GREEN}deleteAuthorizable${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: deleteAuthorizable=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
@@ -2518,9 +2618,9 @@ print_postNodeRw_help() {
     echo -e "${BOLD}${WHITE}postNodeRw - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}path${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: path=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}addMembers${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: addMembers=value${OFF}" \
+    echo -e "  * ${GREEN}path${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: path=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}addMembers${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: addMembers=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
@@ -2537,10 +2637,10 @@ print_postPath_help() {
     echo -e "${BOLD}${WHITE}postPath - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}path${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} -  ${YELLOW}Specify as: path=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}jcr:primaryType${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} - ${YELLOW} Specify as: jcr:primaryType=value${OFF}" \
+    echo -e "  * ${GREEN}path${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: path=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}jcr:primaryType${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: jcr:primaryType=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}:name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} - ${YELLOW} Specify as: :name=value${OFF}" \
+    echo -e "  * ${GREEN}:name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: :name=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
@@ -2557,13 +2657,13 @@ print_postQuery_help() {
     echo -e "${BOLD}${WHITE}postQuery - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}path${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} - ${YELLOW} Specify as: path=value${OFF}" \
+    echo -e "  * ${GREEN}path${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: path=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}p.limit${OFF} ${BLUE}[integer]${OFF} ${RED}(required)${OFF}${OFF} - ${YELLOW} Specify as: p.limit=value${OFF}" \
+    echo -e "  * ${GREEN}p.limit${OFF} ${BLUE}[integer]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: p.limit=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}1_property${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} - ${YELLOW} Specify as: 1_property=value${OFF}" \
+    echo -e "  * ${GREEN}1_property${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: 1_property=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}1_property.value${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} - ${YELLOW} Specify as: 1_property.value=value${OFF}" \
+    echo -e "  * ${GREEN}1_property.value${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: 1_property.value=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
@@ -2580,11 +2680,11 @@ print_postTreeActivation_help() {
     echo -e "${BOLD}${WHITE}postTreeActivation - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}ignoredeactivated${OFF} ${BLUE}[boolean]${OFF} ${RED}(required)${OFF}${OFF} - ${YELLOW} Specify as: ignoredeactivated=value${OFF}" \
+    echo -e "  * ${GREEN}ignoredeactivated${OFF} ${BLUE}[boolean]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: ignoredeactivated=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}onlymodified${OFF} ${BLUE}[boolean]${OFF} ${RED}(required)${OFF}${OFF} - ${YELLOW} Specify as: onlymodified=value${OFF}" \
+    echo -e "  * ${GREEN}onlymodified${OFF} ${BLUE}[boolean]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: onlymodified=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}path${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF}${OFF} - ${YELLOW} Specify as: path=value${OFF}" \
+    echo -e "  * ${GREEN}path${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: path=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
@@ -2601,15 +2701,15 @@ print_postTruststore_help() {
     echo -e "${BOLD}${WHITE}postTruststore - ${OFF}${BLUE}(AUTH - BASIC)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}:operation${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: :operation=value${OFF}" \
+    echo -e "  * ${GREEN}:operation${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: :operation=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}newPassword${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: newPassword=value${OFF}" \
+    echo -e "  * ${GREEN}newPassword${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: newPassword=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}rePassword${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: rePassword=value${OFF}" \
+    echo -e "  * ${GREEN}rePassword${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: rePassword=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}keyStoreType${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: keyStoreType=value${OFF}" \
+    echo -e "  * ${GREEN}keyStoreType${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: keyStoreType=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}removeAlias${OFF} ${BLUE}[string]${OFF}${OFF} - ${YELLOW} Specify as: removeAlias=value${OFF}" \
+    echo -e "  * ${GREEN}removeAlias${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: removeAlias=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
@@ -2647,7 +2747,43 @@ call_getAemProductInfo() {
     local query_parameter_names=(  )
     local path
 
-    if ! path=$(build_request_path "//system/console/status-productinfo.json" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/system/console/status-productinfo.json" path_parameter_names query_parameter_names); then
+        ERROR_MSG=$path
+        exit 1
+    fi
+    local method="GET"
+    local headers_curl
+    headers_curl=$(header_arguments_to_curl)
+    if [[ -n $header_accept ]]; then
+        headers_curl="${headers_curl} -H 'Accept: ${header_accept}'"
+    fi
+
+    local basic_auth_option=""
+    if [[ -n $basic_auth_credential ]]; then
+        basic_auth_option="-u ${basic_auth_credential}"
+    fi
+    if [[ "$print_curl" = true ]]; then
+        echo "curl ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\""
+    else
+        eval "curl ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\""
+    fi
+}
+
+##############################################################################
+#
+# Call getBundleInfo operation
+#
+##############################################################################
+call_getBundleInfo() {
+    # ignore error about 'path_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local path_parameter_names=(name)
+    # ignore error about 'query_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local query_parameter_names=(  )
+    local path
+
+    if ! path=$(build_request_path "/system/console/bundles/{name}.json" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -2683,7 +2819,7 @@ call_getConfigMgr() {
     local query_parameter_names=(  )
     local path
 
-    if ! path=$(build_request_path "//system/console/configMgr" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/system/console/configMgr" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -2719,7 +2855,7 @@ call_postBundle() {
     local query_parameter_names=(action  )
     local path
 
-    if ! path=$(build_request_path "//system/console/bundles/{name}" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/system/console/bundles/{name}" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -2755,7 +2891,7 @@ call_postJmxRepository() {
     local query_parameter_names=(  )
     local path
 
-    if ! path=$(build_request_path "//system/console/jmx/com.adobe.granite:type=Repository/op/{action}" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/system/console/jmx/com.adobe.granite:type=Repository/op/{action}" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -2791,7 +2927,7 @@ call_postSamlConfiguration() {
     local query_parameter_names=(post apply delete action $location path service.ranking idpUrl idpCertAlias idpHttpRedirect serviceProviderEntityId assertionConsumerServiceURL spPrivateKeyAlias keyStorePassword defaultRedirectUrl userIDAttribute useEncryption createUser addGroupMemberships groupMembershipAttribute defaultGroups nameIdFormat synchronizeAttributes handleLogout logoutUrl clockTolerance digestMethod signatureMethod userIntermediatePath propertylist  )
     local path
 
-    if ! path=$(build_request_path "//system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -2827,7 +2963,7 @@ call_getLoginPage() {
     local query_parameter_names=()
     local path
 
-    if ! path=$(build_request_path "//libs/granite/core/content/login.html" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/libs/granite/core/content/login.html" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -2863,7 +2999,7 @@ call_postCqActions() {
     local query_parameter_names=(authorizableId changelog  )
     local path
 
-    if ! path=$(build_request_path "//.cqactions.html" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/.cqactions.html" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -2899,7 +3035,7 @@ call_getCrxdeStatus() {
     local query_parameter_names=(  )
     local path
 
-    if ! path=$(build_request_path "//crx/server/crx.default/jcr:root/.1.json" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/crx/server/crx.default/jcr:root/.1.json" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -2935,7 +3071,7 @@ call_getInstallStatus() {
     local query_parameter_names=(  )
     local path
 
-    if ! path=$(build_request_path "//crx/packmgr/installstatus.jsp" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/crx/packmgr/installstatus.jsp" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -2971,7 +3107,7 @@ call_getPackageManagerServlet() {
     local query_parameter_names=(  )
     local path
 
-    if ! path=$(build_request_path "//crx/packmgr/service/script.html" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/crx/packmgr/service/script.html" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -3007,7 +3143,7 @@ call_postPackageService() {
     local query_parameter_names=(cmd  )
     local path
 
-    if ! path=$(build_request_path "//crx/packmgr/service.jsp" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/crx/packmgr/service.jsp" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -3043,7 +3179,7 @@ call_postPackageServiceJson() {
     local query_parameter_names=(cmd groupName packageName packageVersion _charset_ force recursive  )
     local path
 
-    if ! path=$(build_request_path "//crx/packmgr/service/.json/{path}" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/crx/packmgr/service/.json/{path}" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -3079,7 +3215,7 @@ call_postPackageUpdate() {
     local query_parameter_names=(groupName packageName version path filter _charset_  )
     local path
 
-    if ! path=$(build_request_path "//crx/packmgr/update.jsp" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/crx/packmgr/update.jsp" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -3115,7 +3251,7 @@ call_postSetPassword() {
     local query_parameter_names=(old plain verify  )
     local path
 
-    if ! path=$(build_request_path "//crx/explorer/ui/setpassword.jsp" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/crx/explorer/ui/setpassword.jsp" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -3151,7 +3287,7 @@ call_getAemHealthCheck() {
     local query_parameter_names=(tags combineTagsOr  )
     local path
 
-    if ! path=$(build_request_path "//system/health" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/system/health" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -3187,7 +3323,7 @@ call_postConfigAemHealthCheckServlet() {
     local query_parameter_names=(bundles.ignored bundles.ignored@TypeHint  )
     local path
 
-    if ! path=$(build_request_path "//apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -3223,7 +3359,43 @@ call_postConfigAemPasswordReset() {
     local query_parameter_names=(pwdreset.authorizables pwdreset.authorizables@TypeHint  )
     local path
 
-    if ! path=$(build_request_path "//apps/system/config/com.shinesolutions.aem.passwordreset.Activator" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/apps/system/config/com.shinesolutions.aem.passwordreset.Activator" path_parameter_names query_parameter_names); then
+        ERROR_MSG=$path
+        exit 1
+    fi
+    local method="POST"
+    local headers_curl
+    headers_curl=$(header_arguments_to_curl)
+    if [[ -n $header_accept ]]; then
+        headers_curl="${headers_curl} -H 'Accept: ${header_accept}'"
+    fi
+
+    local basic_auth_option=""
+    if [[ -n $basic_auth_credential ]]; then
+        basic_auth_option="-u ${basic_auth_credential}"
+    fi
+    if [[ "$print_curl" = true ]]; then
+        echo "curl ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\""
+    else
+        eval "curl ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\""
+    fi
+}
+
+##############################################################################
+#
+# Call sslSetup operation
+#
+##############################################################################
+call_sslSetup() {
+    # ignore error about 'path_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local path_parameter_names=()
+    # ignore error about 'query_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local query_parameter_names=(keystorePassword keystorePasswordConfirm truststorePassword truststorePasswordConfirm httpsHostname httpsPort  )
+    local path
+
+    if ! path=$(build_request_path "/libs/granite/security/post/sslSetup.html" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -3259,7 +3431,7 @@ call_deleteAgent() {
     local query_parameter_names=(  )
     local path
 
-    if ! path=$(build_request_path "//etc/replication/agents.{runmode}/{name}" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/etc/replication/agents.{runmode}/{name}" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -3295,7 +3467,7 @@ call_deleteNode() {
     local query_parameter_names=(  )
     local path
 
-    if ! path=$(build_request_path "//{path}/{name}" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/{path}/{name}" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -3331,7 +3503,7 @@ call_getAgent() {
     local query_parameter_names=(  )
     local path
 
-    if ! path=$(build_request_path "//etc/replication/agents.{runmode}/{name}" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/etc/replication/agents.{runmode}/{name}" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -3367,7 +3539,7 @@ call_getAgents() {
     local query_parameter_names=(  )
     local path
 
-    if ! path=$(build_request_path "//etc/replication/agents.{runmode}.-1.json" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/etc/replication/agents.{runmode}.-1.json" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -3403,7 +3575,7 @@ call_getAuthorizableKeystore() {
     local query_parameter_names=(  )
     local path
 
-    if ! path=$(build_request_path "//{intermediatePath}/{authorizableId}.ks.json" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/{intermediatePath}/{authorizableId}.ks.json" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -3439,7 +3611,7 @@ call_getKeystore() {
     local query_parameter_names=(  )
     local path
 
-    if ! path=$(build_request_path "//{intermediatePath}/{authorizableId}/keystore/store.p12" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/{intermediatePath}/{authorizableId}/keystore/store.p12" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -3475,7 +3647,7 @@ call_getNode() {
     local query_parameter_names=(  )
     local path
 
-    if ! path=$(build_request_path "//{path}/{name}" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/{path}/{name}" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -3511,7 +3683,7 @@ call_getPackage() {
     local query_parameter_names=(  )
     local path
 
-    if ! path=$(build_request_path "//etc/packages/{group}/{name}-{version}.zip" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/etc/packages/{group}/{name}-{version}.zip" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -3547,7 +3719,7 @@ call_getPackageFilter() {
     local query_parameter_names=(  )
     local path
 
-    if ! path=$(build_request_path "//etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -3583,7 +3755,7 @@ call_getQuery() {
     local query_parameter_names=(path p.limit 1_property 1_property.value  )
     local path
 
-    if ! path=$(build_request_path "//bin/querybuilder.json" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/bin/querybuilder.json" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -3619,7 +3791,7 @@ call_getTruststore() {
     local query_parameter_names=(  )
     local path
 
-    if ! path=$(build_request_path "//etc/truststore/truststore.p12" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/etc/truststore/truststore.p12" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -3655,7 +3827,7 @@ call_getTruststoreInfo() {
     local query_parameter_names=(  )
     local path
 
-    if ! path=$(build_request_path "//libs/granite/security/truststore.json" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/libs/granite/security/truststore.json" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -3691,7 +3863,7 @@ call_postAgent() {
     local query_parameter_names=(jcr:content/cq:distribute jcr:content/cq:distribute@TypeHint jcr:content/cq:name jcr:content/cq:template jcr:content/enabled jcr:content/jcr:description jcr:content/jcr:lastModified jcr:content/jcr:lastModifiedBy jcr:content/jcr:mixinTypes jcr:content/jcr:title jcr:content/logLevel jcr:content/noStatusUpdate jcr:content/noVersioning jcr:content/protocolConnectTimeout jcr:content/protocolHTTPConnectionClosed jcr:content/protocolHTTPExpired jcr:content/protocolHTTPHeaders jcr:content/protocolHTTPHeaders@TypeHint jcr:content/protocolHTTPMethod jcr:content/protocolHTTPSRelaxed jcr:content/protocolInterface jcr:content/protocolSocketTimeout jcr:content/protocolVersion jcr:content/proxyNTLMDomain jcr:content/proxyNTLMHost jcr:content/proxyHost jcr:content/proxyPassword jcr:content/proxyPort jcr:content/proxyUser jcr:content/queueBatchMaxSize jcr:content/queueBatchMode jcr:content/queueBatchWaitTime jcr:content/retryDelay jcr:content/reverseReplication jcr:content/serializationType jcr:content/sling:resourceType jcr:content/ssl jcr:content/transportNTLMDomain jcr:content/transportNTLMHost jcr:content/transportPassword jcr:content/transportUri jcr:content/transportUser jcr:content/triggerDistribute jcr:content/triggerModified jcr:content/triggerOnOffTime jcr:content/triggerReceive jcr:content/triggerSpecific jcr:content/userId jcr:primaryType :operation  )
     local path
 
-    if ! path=$(build_request_path "//etc/replication/agents.{runmode}/{name}" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/etc/replication/agents.{runmode}/{name}" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -3727,7 +3899,7 @@ call_postAuthorizableKeystore() {
     local query_parameter_names=(:operation currentPassword newPassword rePassword keyPassword keyStorePass alias newAlias removeAlias  )
     local path
 
-    if ! path=$(build_request_path "//{intermediatePath}/{authorizableId}.ks.html" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/{intermediatePath}/{authorizableId}.ks.html" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -3763,7 +3935,7 @@ call_postAuthorizables() {
     local query_parameter_names=(authorizableId intermediatePath createUser createGroup rep:password profile/givenName  )
     local path
 
-    if ! path=$(build_request_path "//libs/granite/security/post/authorizables" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/libs/granite/security/post/authorizables" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -3799,7 +3971,7 @@ call_postConfigAdobeGraniteSamlAuthenticationHandler() {
     local query_parameter_names=(keyStorePassword keyStorePassword@TypeHint service.ranking service.ranking@TypeHint idpHttpRedirect idpHttpRedirect@TypeHint createUser createUser@TypeHint defaultRedirectUrl defaultRedirectUrl@TypeHint userIDAttribute userIDAttribute@TypeHint defaultGroups defaultGroups@TypeHint idpCertAlias idpCertAlias@TypeHint addGroupMemberships addGroupMemberships@TypeHint path path@TypeHint synchronizeAttributes synchronizeAttributes@TypeHint clockTolerance clockTolerance@TypeHint groupMembershipAttribute groupMembershipAttribute@TypeHint idpUrl idpUrl@TypeHint logoutUrl logoutUrl@TypeHint serviceProviderEntityId serviceProviderEntityId@TypeHint assertionConsumerServiceURL assertionConsumerServiceURL@TypeHint handleLogout handleLogout@TypeHint spPrivateKeyAlias spPrivateKeyAlias@TypeHint useEncryption useEncryption@TypeHint nameIdFormat nameIdFormat@TypeHint digestMethod digestMethod@TypeHint signatureMethod signatureMethod@TypeHint userIntermediatePath userIntermediatePath@TypeHint  )
     local path
 
-    if ! path=$(build_request_path "//apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -3835,7 +4007,7 @@ call_postConfigApacheFelixJettyBasedHttpService() {
     local query_parameter_names=(org.apache.felix.https.nio org.apache.felix.https.nio@TypeHint org.apache.felix.https.keystore org.apache.felix.https.keystore@TypeHint org.apache.felix.https.keystore.password org.apache.felix.https.keystore.password@TypeHint org.apache.felix.https.keystore.key org.apache.felix.https.keystore.key@TypeHint org.apache.felix.https.keystore.key.password org.apache.felix.https.keystore.key.password@TypeHint org.apache.felix.https.truststore org.apache.felix.https.truststore@TypeHint org.apache.felix.https.truststore.password org.apache.felix.https.truststore.password@TypeHint org.apache.felix.https.clientcertificate org.apache.felix.https.clientcertificate@TypeHint org.apache.felix.https.enable org.apache.felix.https.enable@TypeHint org.osgi.service.http.port.secure org.osgi.service.http.port.secure@TypeHint  )
     local path
 
-    if ! path=$(build_request_path "//apps/system/config/org.apache.felix.http" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/apps/system/config/org.apache.felix.http" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -3871,7 +4043,7 @@ call_postConfigApacheHttpComponentsProxyConfiguration() {
     local query_parameter_names=(proxy.host proxy.host@TypeHint proxy.port proxy.port@TypeHint proxy.exceptions proxy.exceptions@TypeHint proxy.enabled proxy.enabled@TypeHint proxy.user proxy.user@TypeHint proxy.password proxy.password@TypeHint  )
     local path
 
-    if ! path=$(build_request_path "//apps/system/config/org.apache.http.proxyconfigurator.config" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/apps/system/config/org.apache.http.proxyconfigurator.config" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -3907,7 +4079,7 @@ call_postConfigApacheSlingDavExServlet() {
     local query_parameter_names=(alias alias@TypeHint dav.create-absolute-uri dav.create-absolute-uri@TypeHint  )
     local path
 
-    if ! path=$(build_request_path "//apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -3943,7 +4115,7 @@ call_postConfigApacheSlingGetServlet() {
     local query_parameter_names=(json.maximumresults json.maximumresults@TypeHint enable.html enable.html@TypeHint enable.txt enable.txt@TypeHint enable.xml enable.xml@TypeHint  )
     local path
 
-    if ! path=$(build_request_path "//apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -3979,7 +4151,43 @@ call_postConfigApacheSlingReferrerFilter() {
     local query_parameter_names=(allow.empty allow.empty@TypeHint allow.hosts allow.hosts@TypeHint allow.hosts.regexp allow.hosts.regexp@TypeHint filter.methods filter.methods@TypeHint  )
     local path
 
-    if ! path=$(build_request_path "//apps/system/config/org.apache.sling.security.impl.ReferrerFilter" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/apps/system/config/org.apache.sling.security.impl.ReferrerFilter" path_parameter_names query_parameter_names); then
+        ERROR_MSG=$path
+        exit 1
+    fi
+    local method="POST"
+    local headers_curl
+    headers_curl=$(header_arguments_to_curl)
+    if [[ -n $header_accept ]]; then
+        headers_curl="${headers_curl} -H 'Accept: ${header_accept}'"
+    fi
+
+    local basic_auth_option=""
+    if [[ -n $basic_auth_credential ]]; then
+        basic_auth_option="-u ${basic_auth_credential}"
+    fi
+    if [[ "$print_curl" = true ]]; then
+        echo "curl ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\""
+    else
+        eval "curl ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\""
+    fi
+}
+
+##############################################################################
+#
+# Call postConfigProperty operation
+#
+##############################################################################
+call_postConfigProperty() {
+    # ignore error about 'path_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local path_parameter_names=(configNodeName)
+    # ignore error about 'query_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local query_parameter_names=(  )
+    local path
+
+    if ! path=$(build_request_path "/apps/system/config/{configNodeName}" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -4015,7 +4223,7 @@ call_postNode() {
     local query_parameter_names=(:operation deleteAuthorizable  )
     local path
 
-    if ! path=$(build_request_path "//{path}/{name}" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/{path}/{name}" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -4051,7 +4259,7 @@ call_postNodeRw() {
     local query_parameter_names=(addMembers  )
     local path
 
-    if ! path=$(build_request_path "//{path}/{name}.rw.html" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/{path}/{name}.rw.html" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -4087,7 +4295,7 @@ call_postPath() {
     local query_parameter_names=(jcr:primaryType :name  )
     local path
 
-    if ! path=$(build_request_path "//{path}/" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/{path}/" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -4123,7 +4331,7 @@ call_postQuery() {
     local query_parameter_names=(path p.limit 1_property 1_property.value  )
     local path
 
-    if ! path=$(build_request_path "//bin/querybuilder.json" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/bin/querybuilder.json" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -4159,7 +4367,7 @@ call_postTreeActivation() {
     local query_parameter_names=(ignoredeactivated onlymodified path  )
     local path
 
-    if ! path=$(build_request_path "//etc/replication/treeactivation.html" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/etc/replication/treeactivation.html" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -4195,7 +4403,7 @@ call_postTruststore() {
     local query_parameter_names=(:operation newPassword rePassword keyStoreType removeAlias  )
     local path
 
-    if ! path=$(build_request_path "//libs/granite/security/post/truststore" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/libs/granite/security/post/truststore" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -4231,7 +4439,7 @@ call_postTruststorePKCS12() {
     local query_parameter_names=(  )
     local path
 
-    if ! path=$(build_request_path "//etc/truststore" path_parameter_names query_parameter_names); then
+    if ! path=$(build_request_path "/etc/truststore" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -4353,6 +4561,9 @@ case $key in
     getAemProductInfo)
     operation="getAemProductInfo"
     ;;
+    getBundleInfo)
+    operation="getBundleInfo"
+    ;;
     getConfigMgr)
     operation="getConfigMgr"
     ;;
@@ -4400,6 +4611,9 @@ case $key in
     ;;
     postConfigAemPasswordReset)
     operation="postConfigAemPasswordReset"
+    ;;
+    sslSetup)
+    operation="sslSetup"
     ;;
     deleteAgent)
     operation="deleteAgent"
@@ -4464,6 +4678,9 @@ case $key in
     postConfigApacheSlingReferrerFilter)
     operation="postConfigApacheSlingReferrerFilter"
     ;;
+    postConfigProperty)
+    operation="postConfigProperty"
+    ;;
     postNode)
     operation="postNode"
     ;;
@@ -4503,7 +4720,7 @@ case $key in
         body_parameters[${body_key}]=${body_value}
     fi
     ;;
-    +\([^=]\):*)
+    +([^=]):*)
     # Parse header arguments and convert them into curl
     # only after the operation argument
     if [[ "$operation" ]]; then
@@ -4565,6 +4782,9 @@ case $operation in
     getAemProductInfo)
     call_getAemProductInfo
     ;;
+    getBundleInfo)
+    call_getBundleInfo
+    ;;
     getConfigMgr)
     call_getConfigMgr
     ;;
@@ -4612,6 +4832,9 @@ case $operation in
     ;;
     postConfigAemPasswordReset)
     call_postConfigAemPasswordReset
+    ;;
+    sslSetup)
+    call_sslSetup
     ;;
     deleteAgent)
     call_deleteAgent
@@ -4675,6 +4898,9 @@ case $operation in
     ;;
     postConfigApacheSlingReferrerFilter)
     call_postConfigApacheSlingReferrerFilter
+    ;;
+    postConfigProperty)
+    call_postConfigProperty
     ;;
     postNode)
     call_postNode

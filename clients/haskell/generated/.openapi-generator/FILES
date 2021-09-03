@@ -1,0 +1,6 @@
+README.md
+Setup.hs
+adobe-experience-manager-(aem).cabal
+lib/AdobeExperienceManager(AEM)/API.hs
+lib/AdobeExperienceManager(AEM)/Types.hs
+stack.yaml

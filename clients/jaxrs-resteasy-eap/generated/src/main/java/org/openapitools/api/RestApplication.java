@@ -10,13 +10,12 @@ import org.openapitools.api.impl.CqactionsHtmlApiServiceImpl;
 import org.openapitools.api.impl.AppsApiServiceImpl;
 import org.openapitools.api.impl.BinApiServiceImpl;
 import org.openapitools.api.impl.CrxApiServiceImpl;
+import org.openapitools.api.impl.DefaultApiServiceImpl;
 import org.openapitools.api.impl.EtcApiServiceImpl;
 import org.openapitools.api.impl.LibsApiServiceImpl;
 import org.openapitools.api.impl.SystemApiServiceImpl;
-import org.openapitools.api.impl.IntermediatePathApiServiceImpl;
-import org.openapitools.api.impl.PathApiServiceImpl;
 
-@ApplicationPath("/")
+@ApplicationPath("")
 public class RestApplication extends Application {
 
 
@@ -26,11 +25,10 @@ public class RestApplication extends Application {
         resources.add(AppsApiServiceImpl.class);
         resources.add(BinApiServiceImpl.class);
         resources.add(CrxApiServiceImpl.class);
+        resources.add(DefaultApiServiceImpl.class);
         resources.add(EtcApiServiceImpl.class);
         resources.add(LibsApiServiceImpl.class);
         resources.add(SystemApiServiceImpl.class);
-        resources.add(IntermediatePathApiServiceImpl.class);
-        resources.add(PathApiServiceImpl.class);
 
         return resources;
     }

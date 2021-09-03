@@ -1,3 +1,13 @@
+/*
+ * Adobe Experience Manager (AEM) API
+ *
+ * Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
+ *
+ * OpenAPI document version: 3.5.0-pre.0
+ * Maintained by: opensource@shinesolutions.com
+ *
+ * AUTO-GENERATED FILE, DO NOT MODIFY!
+ */
 package org.openapitools.model;
 
 import java.util.Objects;
@@ -11,19 +21,19 @@ import org.openapitools.model.SamlConfigurationProperties;
 
 
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaUndertowServerCodegen", date = "2019-08-04T23:41:39.991Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaUndertowServerCodegen", date = "2021-09-03T15:25:36.220+10:00[Australia/Melbourne]")
 public class SamlConfigurationInfo   {
   
-  private String pid = null;
-  private String title = null;
-  private String description = null;
-  private String bundleLocation = null;
-  private String serviceLocation = null;
-  private SamlConfigurationProperties properties = null;
+  private String pid;
+  private String title;
+  private String description;
+  private String bundleLocation;
+  private String serviceLocation;
+  private SamlConfigurationProperties properties;
 
   /**
    * Persistent Identity (PID)
-   **/
+   */
   public SamlConfigurationInfo pid(String pid) {
     this.pid = pid;
     return this;
@@ -41,7 +51,7 @@ public class SamlConfigurationInfo   {
 
   /**
    * Title
-   **/
+   */
   public SamlConfigurationInfo title(String title) {
     this.title = title;
     return this;
@@ -59,7 +69,7 @@ public class SamlConfigurationInfo   {
 
   /**
    * Title
-   **/
+   */
   public SamlConfigurationInfo description(String description) {
     this.description = description;
     return this;
@@ -77,7 +87,7 @@ public class SamlConfigurationInfo   {
 
   /**
    * needed for configuration binding
-   **/
+   */
   public SamlConfigurationInfo bundleLocation(String bundleLocation) {
     this.bundleLocation = bundleLocation;
     return this;
@@ -95,7 +105,7 @@ public class SamlConfigurationInfo   {
 
   /**
    * needed for configuraiton binding
-   **/
+   */
   public SamlConfigurationInfo serviceLocation(String serviceLocation) {
     this.serviceLocation = serviceLocation;
     return this;
@@ -112,7 +122,7 @@ public class SamlConfigurationInfo   {
   }
 
   /**
-   **/
+   */
   public SamlConfigurationInfo properties(SamlConfigurationProperties properties) {
     this.properties = properties;
     return this;
@@ -130,7 +140,7 @@ public class SamlConfigurationInfo   {
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -170,7 +180,7 @@ public class SamlConfigurationInfo   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

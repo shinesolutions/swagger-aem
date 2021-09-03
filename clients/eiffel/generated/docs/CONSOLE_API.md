@@ -5,6 +5,7 @@ All URIs are relative to *http://localhost*
 Feature | HTTP request | Description
 ------------- | ------------- | -------------
 [**aem_product_info**](CONSOLE_API.md#aem_product_info) | **Get** /system/console/status-productinfo.json | 
+[**bundle_info**](CONSOLE_API.md#bundle_info) | **Get** /system/console/bundles/{name}.json | 
 [**config_mgr**](CONSOLE_API.md#config_mgr) | **Get** /system/console/configMgr | 
 [**post_bundle**](CONSOLE_API.md#post_bundle) | **Post** /system/console/bundles/{name} | 
 [**post_jmx_repository**](CONSOLE_API.md#post_jmx_repository) | **Post** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} | 
@@ -24,6 +25,34 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**LIST [STRING_32]**](STRING_32.md)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **bundle_info**
+> bundle_info (name: STRING_32 ): detachable BUNDLE_INFO
+	
+
+
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **STRING_32**|  | [default to null]
+
+### Return type
+
+[**BUNDLE_INFO**](BundleInfo.md)
 
 ### Authorization
 
@@ -72,8 +101,8 @@ This endpoint does not need any parameter.
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | **STRING_32**|  | 
- **action** | **STRING_32**|  | 
+ **name** | **STRING_32**|  | [default to null]
+ **action** | **STRING_32**|  | [default to null]
 
 ### Return type
 
@@ -101,7 +130,7 @@ Name | Type | Description  | Notes
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **action** | **STRING_32**|  | 
+ **action** | **STRING_32**|  | [default to null]
 
 ### Return type
 
@@ -129,36 +158,36 @@ Name | Type | Description  | Notes
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **post** | **BOOLEAN**|  | [optional] 
- **apply** | **BOOLEAN**|  | [optional] 
- **delete** | **BOOLEAN**|  | [optional] 
- **action** | **STRING_32**|  | [optional] 
- **location** | **STRING_32**|  | [optional] 
- **path** | [**LIST [STRING_32]**](STRING_32.md)|  | [optional] 
- **service_ranking** | **INTEGER_32**|  | [optional] 
- **idp_url** | **STRING_32**|  | [optional] 
- **idp_cert_alias** | **STRING_32**|  | [optional] 
- **idp_http_redirect** | **BOOLEAN**|  | [optional] 
- **service_provider_entity_id** | **STRING_32**|  | [optional] 
- **assertion_consumer_service_ur_l** | **STRING_32**|  | [optional] 
- **sp_private_key_alias** | **STRING_32**|  | [optional] 
- **key_store_password** | **STRING_32**|  | [optional] 
- **default_redirect_url** | **STRING_32**|  | [optional] 
- **user_id_attribute** | **STRING_32**|  | [optional] 
- **use_encryption** | **BOOLEAN**|  | [optional] 
- **create_user** | **BOOLEAN**|  | [optional] 
- **add_group_memberships** | **BOOLEAN**|  | [optional] 
- **group_membership_attribute** | **STRING_32**|  | [optional] 
- **default_groups** | [**LIST [STRING_32]**](STRING_32.md)|  | [optional] 
- **name_id_format** | **STRING_32**|  | [optional] 
- **synchronize_attributes** | [**LIST [STRING_32]**](STRING_32.md)|  | [optional] 
- **handle_logout** | **BOOLEAN**|  | [optional] 
- **logout_url** | **STRING_32**|  | [optional] 
- **clock_tolerance** | **INTEGER_32**|  | [optional] 
- **digest_method** | **STRING_32**|  | [optional] 
- **signature_method** | **STRING_32**|  | [optional] 
- **user_intermediate_path** | **STRING_32**|  | [optional] 
- **propertylist** | [**LIST [STRING_32]**](STRING_32.md)|  | [optional] 
+ **post** | **BOOLEAN**|  | [optional] [default to null]
+ **apply** | **BOOLEAN**|  | [optional] [default to null]
+ **delete** | **BOOLEAN**|  | [optional] [default to null]
+ **action** | **STRING_32**|  | [optional] [default to null]
+ **location** | **STRING_32**|  | [optional] [default to null]
+ **path** | [**LIST [STRING_32]**](STRING_32.md)|  | [optional] [default to null]
+ **service_ranking** | **INTEGER_32**|  | [optional] [default to null]
+ **idp_url** | **STRING_32**|  | [optional] [default to null]
+ **idp_cert_alias** | **STRING_32**|  | [optional] [default to null]
+ **idp_http_redirect** | **BOOLEAN**|  | [optional] [default to null]
+ **service_provider_entity_id** | **STRING_32**|  | [optional] [default to null]
+ **assertion_consumer_service_ur_l** | **STRING_32**|  | [optional] [default to null]
+ **sp_private_key_alias** | **STRING_32**|  | [optional] [default to null]
+ **key_store_password** | **STRING_32**|  | [optional] [default to null]
+ **default_redirect_url** | **STRING_32**|  | [optional] [default to null]
+ **user_id_attribute** | **STRING_32**|  | [optional] [default to null]
+ **use_encryption** | **BOOLEAN**|  | [optional] [default to null]
+ **create_user** | **BOOLEAN**|  | [optional] [default to null]
+ **add_group_memberships** | **BOOLEAN**|  | [optional] [default to null]
+ **group_membership_attribute** | **STRING_32**|  | [optional] [default to null]
+ **default_groups** | [**LIST [STRING_32]**](STRING_32.md)|  | [optional] [default to null]
+ **name_id_format** | **STRING_32**|  | [optional] [default to null]
+ **synchronize_attributes** | [**LIST [STRING_32]**](STRING_32.md)|  | [optional] [default to null]
+ **handle_logout** | **BOOLEAN**|  | [optional] [default to null]
+ **logout_url** | **STRING_32**|  | [optional] [default to null]
+ **clock_tolerance** | **INTEGER_32**|  | [optional] [default to null]
+ **digest_method** | **STRING_32**|  | [optional] [default to null]
+ **signature_method** | **STRING_32**|  | [optional] [default to null]
+ **user_intermediate_path** | **STRING_32**|  | [optional] [default to null]
+ **propertylist** | [**LIST [STRING_32]**](STRING_32.md)|  | [optional] [default to null]
 
 ### Return type
 

@@ -3,6 +3,9 @@
 # flake8: noqa
 from __future__ import absolute_import
 # import models into model package
+from openapi_server.models.bundle_data import BundleData
+from openapi_server.models.bundle_data_prop import BundleDataProp
+from openapi_server.models.bundle_info import BundleInfo
 from openapi_server.models.install_status import InstallStatus
 from openapi_server.models.install_status_status import InstallStatusStatus
 from openapi_server.models.keystore_chain_items import KeystoreChainItems

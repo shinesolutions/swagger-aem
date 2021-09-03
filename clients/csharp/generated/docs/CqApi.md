@@ -8,15 +8,17 @@ Method | HTTP request | Description
 [**PostCqActions**](CqApi.md#postcqactions) | **POST** /.cqactions.html | 
 
 
-<a name="getloginpage"></a>
-# **GetLoginPage**
+
+## GetLoginPage
+
 > string GetLoginPage ()
 
 
 
 ### Example
+
 ```csharp
-using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Org.OpenAPITools.Api;
 using Org.OpenAPITools.Client;
@@ -26,18 +28,21 @@ namespace Example
 {
     public class GetLoginPageExample
     {
-        public void main()
+        public static void Main()
         {
-            var apiInstance = new CqApi();
+            Configuration.Default.BasePath = "http://localhost";
+            var apiInstance = new CqApi(Configuration.Default);
 
             try
             {
                 string result = apiInstance.GetLoginPage();
                 Debug.WriteLine(result);
             }
-            catch (Exception e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling CqApi.GetLoginPage: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
             }
         }
     }
@@ -45,6 +50,7 @@ namespace Example
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -57,20 +63,31 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/html
+- **Content-Type**: Not defined
+- **Accept**: text/html
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="postcqactions"></a>
-# **PostCqActions**
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **0** | Default response |  -  |
+
+[[Back to top]](#)
+[[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PostCqActions
+
 > void PostCqActions (string authorizableId, string changelog)
 
 
 
 ### Example
+
 ```csharp
-using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Org.OpenAPITools.Api;
 using Org.OpenAPITools.Client;
@@ -80,13 +97,14 @@ namespace Example
 {
     public class PostCqActionsExample
     {
-        public void main()
+        public static void Main()
         {
+            Configuration.Default.BasePath = "http://localhost";
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
 
-            var apiInstance = new CqApi();
+            var apiInstance = new CqApi(Configuration.Default);
             var authorizableId = authorizableId_example;  // string | 
             var changelog = changelog_example;  // string | 
 
@@ -94,9 +112,11 @@ namespace Example
             {
                 apiInstance.PostCqActions(authorizableId, changelog);
             }
-            catch (Exception e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling CqApi.PostCqActions: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
             }
         }
     }
@@ -104,6 +124,7 @@ namespace Example
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -120,8 +141,17 @@ void (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **0** | Default response |  -  |
+
+[[Back to top]](#)
+[[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 

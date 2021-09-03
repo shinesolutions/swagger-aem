@@ -15,7 +15,7 @@ class InstallStatusStatus(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, finished: bool=None, item_count: int=None):  # noqa: E501
+    def __init__(self, finished=None, item_count=None):  # noqa: E501
         """InstallStatusStatus - a model defined in OpenAPI
 
         :param finished: The finished of this InstallStatusStatus.  # noqa: E501
@@ -48,7 +48,7 @@ class InstallStatusStatus(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def finished(self) -> bool:
+    def finished(self):
         """Gets the finished of this InstallStatusStatus.
 
 
@@ -58,7 +58,7 @@ class InstallStatusStatus(Model):
         return self._finished
 
     @finished.setter
-    def finished(self, finished: bool):
+    def finished(self, finished):
         """Sets the finished of this InstallStatusStatus.
 
 
@@ -69,7 +69,7 @@ class InstallStatusStatus(Model):
         self._finished = finished
 
     @property
-    def item_count(self) -> int:
+    def item_count(self):
         """Gets the item_count of this InstallStatusStatus.
 
 
@@ -79,7 +79,7 @@ class InstallStatusStatus(Model):
         return self._item_count
 
     @item_count.setter
-    def item_count(self, item_count: int):
+    def item_count(self, item_count):
         """Sets the item_count of this InstallStatusStatus.
 
 

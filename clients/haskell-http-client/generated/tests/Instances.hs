@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports -fno-warn-unused-matches #-}
 
 module Instances where
 
@@ -86,138 +86,228 @@ hasNoDups = go Set.empty
 
 instance ApproxEq TI.Day where
   (=~) = (==)
+    
+arbitraryReduced :: Arbitrary a => Int -> Gen a
+arbitraryReduced n = resize (n `div` 2) arbitrary
+
+arbitraryReducedMaybe :: Arbitrary a => Int -> Gen (Maybe a)
+arbitraryReducedMaybe 0 = elements [Nothing]
+arbitraryReducedMaybe n = arbitraryReduced n
+
+arbitraryReducedMaybeValue :: Int -> Gen (Maybe A.Value)
+arbitraryReducedMaybeValue 0 = elements [Nothing]
+arbitraryReducedMaybeValue n = do
+  generated <- arbitraryReduced n
+  if generated == Just A.Null
+    then return Nothing
+    else return generated
 
 -- * Models
  
+instance Arbitrary BundleData where
+  arbitrary = sized genBundleData
+
+genBundleData :: Int -> Gen BundleData
+genBundleData n =
+  BundleData
+    <$> arbitraryReducedMaybe n -- bundleDataId :: Maybe Int
+    <*> arbitraryReducedMaybe n -- bundleDataName :: Maybe Text
+    <*> arbitraryReducedMaybe n -- bundleDataFragment :: Maybe Bool
+    <*> arbitraryReducedMaybe n -- bundleDataStateRaw :: Maybe Int
+    <*> arbitraryReducedMaybe n -- bundleDataState :: Maybe Text
+    <*> arbitraryReducedMaybe n -- bundleDataVersion :: Maybe Text
+    <*> arbitraryReducedMaybe n -- bundleDataSymbolicName :: Maybe Text
+    <*> arbitraryReducedMaybe n -- bundleDataCategory :: Maybe Text
+    <*> arbitraryReducedMaybe n -- bundleDataProps :: Maybe [BundleDataProp]
+  
+instance Arbitrary BundleDataProp where
+  arbitrary = sized genBundleDataProp
+
+genBundleDataProp :: Int -> Gen BundleDataProp
+genBundleDataProp n =
+  BundleDataProp
+    <$> arbitraryReducedMaybe n -- bundleDataPropKey :: Maybe Text
+    <*> arbitraryReducedMaybe n -- bundleDataPropValue :: Maybe Text
+  
+instance Arbitrary BundleInfo where
+  arbitrary = sized genBundleInfo
+
+genBundleInfo :: Int -> Gen BundleInfo
+genBundleInfo n =
+  BundleInfo
+    <$> arbitraryReducedMaybe n -- bundleInfoStatus :: Maybe Text
+    <*> arbitraryReducedMaybe n -- bundleInfoS :: Maybe [Int]
+    <*> arbitraryReducedMaybe n -- bundleInfoData :: Maybe [BundleData]
+  
 instance Arbitrary InstallStatus where
-  arbitrary =
-    InstallStatus
-      <$> arbitrary -- installStatusStatus :: Maybe InstallStatusStatus
-    
+  arbitrary = sized genInstallStatus
+
+genInstallStatus :: Int -> Gen InstallStatus
+genInstallStatus n =
+  InstallStatus
+    <$> arbitraryReducedMaybe n -- installStatusStatus :: Maybe InstallStatusStatus
+  
 instance Arbitrary InstallStatusStatus where
-  arbitrary =
-    InstallStatusStatus
-      <$> arbitrary -- installStatusStatusFinished :: Maybe Bool
-      <*> arbitrary -- installStatusStatusItemCount :: Maybe Int
-    
+  arbitrary = sized genInstallStatusStatus
+
+genInstallStatusStatus :: Int -> Gen InstallStatusStatus
+genInstallStatusStatus n =
+  InstallStatusStatus
+    <$> arbitraryReducedMaybe n -- installStatusStatusFinished :: Maybe Bool
+    <*> arbitraryReducedMaybe n -- installStatusStatusItemCount :: Maybe Int
+  
 instance Arbitrary KeystoreChainItems where
-  arbitrary =
-    KeystoreChainItems
-      <$> arbitrary -- keystoreChainItemsSubject :: Maybe Text
-      <*> arbitrary -- keystoreChainItemsIssuer :: Maybe Text
-      <*> arbitrary -- keystoreChainItemsNotBefore :: Maybe Text
-      <*> arbitrary -- keystoreChainItemsNotAfter :: Maybe Text
-      <*> arbitrary -- keystoreChainItemsSerialNumber :: Maybe Int
-    
+  arbitrary = sized genKeystoreChainItems
+
+genKeystoreChainItems :: Int -> Gen KeystoreChainItems
+genKeystoreChainItems n =
+  KeystoreChainItems
+    <$> arbitraryReducedMaybe n -- keystoreChainItemsSubject :: Maybe Text
+    <*> arbitraryReducedMaybe n -- keystoreChainItemsIssuer :: Maybe Text
+    <*> arbitraryReducedMaybe n -- keystoreChainItemsNotBefore :: Maybe Text
+    <*> arbitraryReducedMaybe n -- keystoreChainItemsNotAfter :: Maybe Text
+    <*> arbitraryReducedMaybe n -- keystoreChainItemsSerialNumber :: Maybe Int
+  
 instance Arbitrary KeystoreInfo where
-  arbitrary =
-    KeystoreInfo
-      <$> arbitrary -- keystoreInfoAliases :: Maybe [KeystoreItems]
-      <*> arbitrary -- keystoreInfoExists :: Maybe Bool
-    
+  arbitrary = sized genKeystoreInfo
+
+genKeystoreInfo :: Int -> Gen KeystoreInfo
+genKeystoreInfo n =
+  KeystoreInfo
+    <$> arbitraryReducedMaybe n -- keystoreInfoAliases :: Maybe [KeystoreItems]
+    <*> arbitraryReducedMaybe n -- keystoreInfoExists :: Maybe Bool
+  
 instance Arbitrary KeystoreItems where
-  arbitrary =
-    KeystoreItems
-      <$> arbitrary -- keystoreItemsAlias :: Maybe Text
-      <*> arbitrary -- keystoreItemsEntryType :: Maybe Text
-      <*> arbitrary -- keystoreItemsAlgorithm :: Maybe Text
-      <*> arbitrary -- keystoreItemsFormat :: Maybe Text
-      <*> arbitrary -- keystoreItemsChain :: Maybe [KeystoreChainItems]
-    
+  arbitrary = sized genKeystoreItems
+
+genKeystoreItems :: Int -> Gen KeystoreItems
+genKeystoreItems n =
+  KeystoreItems
+    <$> arbitraryReducedMaybe n -- keystoreItemsAlias :: Maybe Text
+    <*> arbitraryReducedMaybe n -- keystoreItemsEntryType :: Maybe Text
+    <*> arbitraryReducedMaybe n -- keystoreItemsAlgorithm :: Maybe Text
+    <*> arbitraryReducedMaybe n -- keystoreItemsFormat :: Maybe Text
+    <*> arbitraryReducedMaybe n -- keystoreItemsChain :: Maybe [KeystoreChainItems]
+  
 instance Arbitrary SamlConfigurationInfo where
-  arbitrary =
-    SamlConfigurationInfo
-      <$> arbitrary -- samlConfigurationInfoPid :: Maybe Text
-      <*> arbitrary -- samlConfigurationInfoTitle :: Maybe Text
-      <*> arbitrary -- samlConfigurationInfoDescription :: Maybe Text
-      <*> arbitrary -- samlConfigurationInfoBundleLocation :: Maybe Text
-      <*> arbitrary -- samlConfigurationInfoServiceLocation :: Maybe Text
-      <*> arbitrary -- samlConfigurationInfoProperties :: Maybe SamlConfigurationProperties
-    
+  arbitrary = sized genSamlConfigurationInfo
+
+genSamlConfigurationInfo :: Int -> Gen SamlConfigurationInfo
+genSamlConfigurationInfo n =
+  SamlConfigurationInfo
+    <$> arbitraryReducedMaybe n -- samlConfigurationInfoPid :: Maybe Text
+    <*> arbitraryReducedMaybe n -- samlConfigurationInfoTitle :: Maybe Text
+    <*> arbitraryReducedMaybe n -- samlConfigurationInfoDescription :: Maybe Text
+    <*> arbitraryReducedMaybe n -- samlConfigurationInfoBundleLocation :: Maybe Text
+    <*> arbitraryReducedMaybe n -- samlConfigurationInfoServiceLocation :: Maybe Text
+    <*> arbitraryReducedMaybe n -- samlConfigurationInfoProperties :: Maybe SamlConfigurationProperties
+  
 instance Arbitrary SamlConfigurationProperties where
-  arbitrary =
-    SamlConfigurationProperties
-      <$> arbitrary -- samlConfigurationPropertiesPath :: Maybe SamlConfigurationPropertyItemsArray
-      <*> arbitrary -- samlConfigurationPropertiesServiceRanking :: Maybe SamlConfigurationPropertyItemsLong
-      <*> arbitrary -- samlConfigurationPropertiesIdpUrl :: Maybe SamlConfigurationPropertyItemsString
-      <*> arbitrary -- samlConfigurationPropertiesIdpCertAlias :: Maybe SamlConfigurationPropertyItemsString
-      <*> arbitrary -- samlConfigurationPropertiesIdpHttpRedirect :: Maybe SamlConfigurationPropertyItemsBoolean
-      <*> arbitrary -- samlConfigurationPropertiesServiceProviderEntityId :: Maybe SamlConfigurationPropertyItemsString
-      <*> arbitrary -- samlConfigurationPropertiesAssertionConsumerServiceUrl :: Maybe SamlConfigurationPropertyItemsString
-      <*> arbitrary -- samlConfigurationPropertiesSpPrivateKeyAlias :: Maybe SamlConfigurationPropertyItemsString
-      <*> arbitrary -- samlConfigurationPropertiesKeyStorePassword :: Maybe SamlConfigurationPropertyItemsString
-      <*> arbitrary -- samlConfigurationPropertiesDefaultRedirectUrl :: Maybe SamlConfigurationPropertyItemsString
-      <*> arbitrary -- samlConfigurationPropertiesUserIdAttribute :: Maybe SamlConfigurationPropertyItemsString
-      <*> arbitrary -- samlConfigurationPropertiesUseEncryption :: Maybe SamlConfigurationPropertyItemsBoolean
-      <*> arbitrary -- samlConfigurationPropertiesCreateUser :: Maybe SamlConfigurationPropertyItemsBoolean
-      <*> arbitrary -- samlConfigurationPropertiesAddGroupMemberships :: Maybe SamlConfigurationPropertyItemsBoolean
-      <*> arbitrary -- samlConfigurationPropertiesGroupMembershipAttribute :: Maybe SamlConfigurationPropertyItemsString
-      <*> arbitrary -- samlConfigurationPropertiesDefaultGroups :: Maybe SamlConfigurationPropertyItemsArray
-      <*> arbitrary -- samlConfigurationPropertiesNameIdFormat :: Maybe SamlConfigurationPropertyItemsString
-      <*> arbitrary -- samlConfigurationPropertiesSynchronizeAttributes :: Maybe SamlConfigurationPropertyItemsArray
-      <*> arbitrary -- samlConfigurationPropertiesHandleLogout :: Maybe SamlConfigurationPropertyItemsBoolean
-      <*> arbitrary -- samlConfigurationPropertiesLogoutUrl :: Maybe SamlConfigurationPropertyItemsString
-      <*> arbitrary -- samlConfigurationPropertiesClockTolerance :: Maybe SamlConfigurationPropertyItemsLong
-      <*> arbitrary -- samlConfigurationPropertiesDigestMethod :: Maybe SamlConfigurationPropertyItemsString
-      <*> arbitrary -- samlConfigurationPropertiesSignatureMethod :: Maybe SamlConfigurationPropertyItemsString
-      <*> arbitrary -- samlConfigurationPropertiesUserIntermediatePath :: Maybe SamlConfigurationPropertyItemsString
-    
+  arbitrary = sized genSamlConfigurationProperties
+
+genSamlConfigurationProperties :: Int -> Gen SamlConfigurationProperties
+genSamlConfigurationProperties n =
+  SamlConfigurationProperties
+    <$> arbitraryReducedMaybe n -- samlConfigurationPropertiesPath :: Maybe SamlConfigurationPropertyItemsArray
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertiesServiceRanking :: Maybe SamlConfigurationPropertyItemsLong
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertiesIdpUrl :: Maybe SamlConfigurationPropertyItemsString
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertiesIdpCertAlias :: Maybe SamlConfigurationPropertyItemsString
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertiesIdpHttpRedirect :: Maybe SamlConfigurationPropertyItemsBoolean
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertiesServiceProviderEntityId :: Maybe SamlConfigurationPropertyItemsString
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertiesAssertionConsumerServiceUrl :: Maybe SamlConfigurationPropertyItemsString
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertiesSpPrivateKeyAlias :: Maybe SamlConfigurationPropertyItemsString
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertiesKeyStorePassword :: Maybe SamlConfigurationPropertyItemsString
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertiesDefaultRedirectUrl :: Maybe SamlConfigurationPropertyItemsString
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertiesUserIdAttribute :: Maybe SamlConfigurationPropertyItemsString
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertiesUseEncryption :: Maybe SamlConfigurationPropertyItemsBoolean
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertiesCreateUser :: Maybe SamlConfigurationPropertyItemsBoolean
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertiesAddGroupMemberships :: Maybe SamlConfigurationPropertyItemsBoolean
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertiesGroupMembershipAttribute :: Maybe SamlConfigurationPropertyItemsString
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertiesDefaultGroups :: Maybe SamlConfigurationPropertyItemsArray
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertiesNameIdFormat :: Maybe SamlConfigurationPropertyItemsString
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertiesSynchronizeAttributes :: Maybe SamlConfigurationPropertyItemsArray
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertiesHandleLogout :: Maybe SamlConfigurationPropertyItemsBoolean
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertiesLogoutUrl :: Maybe SamlConfigurationPropertyItemsString
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertiesClockTolerance :: Maybe SamlConfigurationPropertyItemsLong
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertiesDigestMethod :: Maybe SamlConfigurationPropertyItemsString
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertiesSignatureMethod :: Maybe SamlConfigurationPropertyItemsString
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertiesUserIntermediatePath :: Maybe SamlConfigurationPropertyItemsString
+  
 instance Arbitrary SamlConfigurationPropertyItemsArray where
-  arbitrary =
-    SamlConfigurationPropertyItemsArray
-      <$> arbitrary -- samlConfigurationPropertyItemsArrayName :: Maybe Text
-      <*> arbitrary -- samlConfigurationPropertyItemsArrayOptional :: Maybe Bool
-      <*> arbitrary -- samlConfigurationPropertyItemsArrayIsSet :: Maybe Bool
-      <*> arbitrary -- samlConfigurationPropertyItemsArrayType :: Maybe Int
-      <*> arbitrary -- samlConfigurationPropertyItemsArrayValues :: Maybe [Text]
-      <*> arbitrary -- samlConfigurationPropertyItemsArrayDescription :: Maybe Text
-    
+  arbitrary = sized genSamlConfigurationPropertyItemsArray
+
+genSamlConfigurationPropertyItemsArray :: Int -> Gen SamlConfigurationPropertyItemsArray
+genSamlConfigurationPropertyItemsArray n =
+  SamlConfigurationPropertyItemsArray
+    <$> arbitraryReducedMaybe n -- samlConfigurationPropertyItemsArrayName :: Maybe Text
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertyItemsArrayOptional :: Maybe Bool
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertyItemsArrayIsSet :: Maybe Bool
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertyItemsArrayType :: Maybe Int
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertyItemsArrayValues :: Maybe [Text]
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertyItemsArrayDescription :: Maybe Text
+  
 instance Arbitrary SamlConfigurationPropertyItemsBoolean where
-  arbitrary =
-    SamlConfigurationPropertyItemsBoolean
-      <$> arbitrary -- samlConfigurationPropertyItemsBooleanName :: Maybe Text
-      <*> arbitrary -- samlConfigurationPropertyItemsBooleanOptional :: Maybe Bool
-      <*> arbitrary -- samlConfigurationPropertyItemsBooleanIsSet :: Maybe Bool
-      <*> arbitrary -- samlConfigurationPropertyItemsBooleanType :: Maybe Int
-      <*> arbitrary -- samlConfigurationPropertyItemsBooleanValue :: Maybe Bool
-      <*> arbitrary -- samlConfigurationPropertyItemsBooleanDescription :: Maybe Text
-    
+  arbitrary = sized genSamlConfigurationPropertyItemsBoolean
+
+genSamlConfigurationPropertyItemsBoolean :: Int -> Gen SamlConfigurationPropertyItemsBoolean
+genSamlConfigurationPropertyItemsBoolean n =
+  SamlConfigurationPropertyItemsBoolean
+    <$> arbitraryReducedMaybe n -- samlConfigurationPropertyItemsBooleanName :: Maybe Text
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertyItemsBooleanOptional :: Maybe Bool
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertyItemsBooleanIsSet :: Maybe Bool
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertyItemsBooleanType :: Maybe Int
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertyItemsBooleanValue :: Maybe Bool
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertyItemsBooleanDescription :: Maybe Text
+  
 instance Arbitrary SamlConfigurationPropertyItemsLong where
-  arbitrary =
-    SamlConfigurationPropertyItemsLong
-      <$> arbitrary -- samlConfigurationPropertyItemsLongName :: Maybe Text
-      <*> arbitrary -- samlConfigurationPropertyItemsLongOptional :: Maybe Bool
-      <*> arbitrary -- samlConfigurationPropertyItemsLongIsSet :: Maybe Bool
-      <*> arbitrary -- samlConfigurationPropertyItemsLongType :: Maybe Int
-      <*> arbitrary -- samlConfigurationPropertyItemsLongValue :: Maybe Int
-      <*> arbitrary -- samlConfigurationPropertyItemsLongDescription :: Maybe Text
-    
+  arbitrary = sized genSamlConfigurationPropertyItemsLong
+
+genSamlConfigurationPropertyItemsLong :: Int -> Gen SamlConfigurationPropertyItemsLong
+genSamlConfigurationPropertyItemsLong n =
+  SamlConfigurationPropertyItemsLong
+    <$> arbitraryReducedMaybe n -- samlConfigurationPropertyItemsLongName :: Maybe Text
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertyItemsLongOptional :: Maybe Bool
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertyItemsLongIsSet :: Maybe Bool
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertyItemsLongType :: Maybe Int
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertyItemsLongValue :: Maybe Int
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertyItemsLongDescription :: Maybe Text
+  
 instance Arbitrary SamlConfigurationPropertyItemsString where
-  arbitrary =
-    SamlConfigurationPropertyItemsString
-      <$> arbitrary -- samlConfigurationPropertyItemsStringName :: Maybe Text
-      <*> arbitrary -- samlConfigurationPropertyItemsStringOptional :: Maybe Bool
-      <*> arbitrary -- samlConfigurationPropertyItemsStringIsSet :: Maybe Bool
-      <*> arbitrary -- samlConfigurationPropertyItemsStringType :: Maybe Int
-      <*> arbitrary -- samlConfigurationPropertyItemsStringValue :: Maybe Text
-      <*> arbitrary -- samlConfigurationPropertyItemsStringDescription :: Maybe Text
-    
+  arbitrary = sized genSamlConfigurationPropertyItemsString
+
+genSamlConfigurationPropertyItemsString :: Int -> Gen SamlConfigurationPropertyItemsString
+genSamlConfigurationPropertyItemsString n =
+  SamlConfigurationPropertyItemsString
+    <$> arbitraryReducedMaybe n -- samlConfigurationPropertyItemsStringName :: Maybe Text
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertyItemsStringOptional :: Maybe Bool
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertyItemsStringIsSet :: Maybe Bool
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertyItemsStringType :: Maybe Int
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertyItemsStringValue :: Maybe Text
+    <*> arbitraryReducedMaybe n -- samlConfigurationPropertyItemsStringDescription :: Maybe Text
+  
 instance Arbitrary TruststoreInfo where
-  arbitrary =
-    TruststoreInfo
-      <$> arbitrary -- truststoreInfoAliases :: Maybe [TruststoreItems]
-      <*> arbitrary -- truststoreInfoExists :: Maybe Bool
-    
+  arbitrary = sized genTruststoreInfo
+
+genTruststoreInfo :: Int -> Gen TruststoreInfo
+genTruststoreInfo n =
+  TruststoreInfo
+    <$> arbitraryReducedMaybe n -- truststoreInfoAliases :: Maybe [TruststoreItems]
+    <*> arbitraryReducedMaybe n -- truststoreInfoExists :: Maybe Bool
+  
 instance Arbitrary TruststoreItems where
-  arbitrary =
-    TruststoreItems
-      <$> arbitrary -- truststoreItemsAlias :: Maybe Text
-      <*> arbitrary -- truststoreItemsEntryType :: Maybe Text
-      <*> arbitrary -- truststoreItemsSubject :: Maybe Text
-      <*> arbitrary -- truststoreItemsIssuer :: Maybe Text
-      <*> arbitrary -- truststoreItemsNotBefore :: Maybe Text
-      <*> arbitrary -- truststoreItemsNotAfter :: Maybe Text
-      <*> arbitrary -- truststoreItemsSerialNumber :: Maybe Int
-    
+  arbitrary = sized genTruststoreItems
+
+genTruststoreItems :: Int -> Gen TruststoreItems
+genTruststoreItems n =
+  TruststoreItems
+    <$> arbitraryReducedMaybe n -- truststoreItemsAlias :: Maybe Text
+    <*> arbitraryReducedMaybe n -- truststoreItemsEntryType :: Maybe Text
+    <*> arbitraryReducedMaybe n -- truststoreItemsSubject :: Maybe Text
+    <*> arbitraryReducedMaybe n -- truststoreItemsIssuer :: Maybe Text
+    <*> arbitraryReducedMaybe n -- truststoreItemsNotBefore :: Maybe Text
+    <*> arbitraryReducedMaybe n -- truststoreItemsNotAfter :: Maybe Text
+    <*> arbitraryReducedMaybe n -- truststoreItemsSerialNumber :: Maybe Int
+  
+
 
 

@@ -8,13 +8,15 @@ Method | HTTP request | Description
 [**postCqActions**](CqApi.md#postCqActions) | **POST** /.cqactions.html | 
 
 
-<a name="getLoginPage"></a>
-# **getLoginPage**
+
+## getLoginPage
+
 > String getLoginPage()
 
 
 
 ### Example
+
 ```java
 // Import classes:
 //import org.openapitools.client.api.CqApi;
@@ -30,6 +32,7 @@ try {
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -42,23 +45,25 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/html
+- **Content-Type**: Not defined
+- **Accept**: text/html
 
-<a name="postCqActions"></a>
-# **postCqActions**
+
+## postCqActions
+
 > postCqActions(authorizableId, changelog)
 
 
 
 ### Example
+
 ```java
 // Import classes:
 //import org.openapitools.client.api.CqApi;
 
 CqApi apiInstance = new CqApi();
-String authorizableId = "authorizableId_example"; // String | 
-String changelog = "changelog_example"; // String | 
+String authorizableId = null; // String | 
+String changelog = null; // String | 
 try {
     apiInstance.postCqActions(authorizableId, changelog);
 } catch (ApiException e) {
@@ -69,10 +74,11 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorizableId** | **String**|  |
- **changelog** | **String**|  |
+ **authorizableId** | **String**|  | [default to null]
+ **changelog** | **String**|  | [default to null]
 
 ### Return type
 
@@ -84,6 +90,6 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 

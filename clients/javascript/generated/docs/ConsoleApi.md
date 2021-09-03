@@ -5,6 +5,7 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**getAemProductInfo**](ConsoleApi.md#getAemProductInfo) | **GET** /system/console/status-productinfo.json | 
+[**getBundleInfo**](ConsoleApi.md#getBundleInfo) | **GET** /system/console/bundles/{name}.json | 
 [**getConfigMgr**](ConsoleApi.md#getConfigMgr) | **GET** /system/console/configMgr | 
 [**postBundle**](ConsoleApi.md#postBundle) | **POST** /system/console/bundles/{name} | 
 [**postJmxRepository**](ConsoleApi.md#postJmxRepository) | **POST** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} | 
@@ -45,6 +46,54 @@ This endpoint does not need any parameter.
 ### Return type
 
 **[String]**
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## getBundleInfo
+
+> BundleInfo getBundleInfo(name)
+
+
+
+### Example
+
+```javascript
+import NodeSwaggerAem from 'node-swagger-aem';
+let defaultClient = NodeSwaggerAem.ApiClient.instance;
+// Configure HTTP basic authorization: aemAuth
+let aemAuth = defaultClient.authentications['aemAuth'];
+aemAuth.username = 'YOUR USERNAME';
+aemAuth.password = 'YOUR PASSWORD';
+
+let apiInstance = new NodeSwaggerAem.ConsoleApi();
+let name = "name_example"; // String | 
+apiInstance.getBundleInfo(name, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **String**|  | 
+
+### Return type
+
+[**BundleInfo**](BundleInfo.md)
 
 ### Authorization
 

@@ -13,7 +13,7 @@ defmodule AdobeExperienceManager(AEM)API.Model.InstallStatus do
   ]
 
   @type t :: %__MODULE__{
-    :"status" => InstallStatusStatus
+    :"status" => AdobeExperienceManager(AEM)API.Model.InstallStatusStatus.t | nil
   }
 end
 

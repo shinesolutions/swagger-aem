@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.server.api.model.KeystoreChainItems;
 
-@JsonInclude(JsonInclude.Include.NON_NULL) 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class KeystoreItems   {
   
-  private String alias = null;
-  private String entryType = null;
-  private String algorithm = null;
-  private String format = null;
+  private String alias;
+  private String entryType;
+  private String algorithm;
+  private String format;
   private List<KeystoreChainItems> chain = new ArrayList<>();
 
   public KeystoreItems () {

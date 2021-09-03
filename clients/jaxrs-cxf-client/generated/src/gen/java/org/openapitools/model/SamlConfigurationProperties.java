@@ -18,76 +18,76 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class SamlConfigurationProperties  {
   
   @ApiModelProperty(value = "")
-  private SamlConfigurationPropertyItemsArray path = null;
+  private SamlConfigurationPropertyItemsArray path;
 
   @ApiModelProperty(value = "")
-  private SamlConfigurationPropertyItemsLong serviceRanking = null;
+  private SamlConfigurationPropertyItemsLong serviceRanking;
 
   @ApiModelProperty(value = "")
-  private SamlConfigurationPropertyItemsString idpUrl = null;
+  private SamlConfigurationPropertyItemsString idpUrl;
 
   @ApiModelProperty(value = "")
-  private SamlConfigurationPropertyItemsString idpCertAlias = null;
+  private SamlConfigurationPropertyItemsString idpCertAlias;
 
   @ApiModelProperty(value = "")
-  private SamlConfigurationPropertyItemsBoolean idpHttpRedirect = null;
+  private SamlConfigurationPropertyItemsBoolean idpHttpRedirect;
 
   @ApiModelProperty(value = "")
-  private SamlConfigurationPropertyItemsString serviceProviderEntityId = null;
+  private SamlConfigurationPropertyItemsString serviceProviderEntityId;
 
   @ApiModelProperty(value = "")
-  private SamlConfigurationPropertyItemsString assertionConsumerServiceURL = null;
+  private SamlConfigurationPropertyItemsString assertionConsumerServiceURL;
 
   @ApiModelProperty(value = "")
-  private SamlConfigurationPropertyItemsString spPrivateKeyAlias = null;
+  private SamlConfigurationPropertyItemsString spPrivateKeyAlias;
 
   @ApiModelProperty(value = "")
-  private SamlConfigurationPropertyItemsString keyStorePassword = null;
+  private SamlConfigurationPropertyItemsString keyStorePassword;
 
   @ApiModelProperty(value = "")
-  private SamlConfigurationPropertyItemsString defaultRedirectUrl = null;
+  private SamlConfigurationPropertyItemsString defaultRedirectUrl;
 
   @ApiModelProperty(value = "")
-  private SamlConfigurationPropertyItemsString userIDAttribute = null;
+  private SamlConfigurationPropertyItemsString userIDAttribute;
 
   @ApiModelProperty(value = "")
-  private SamlConfigurationPropertyItemsBoolean useEncryption = null;
+  private SamlConfigurationPropertyItemsBoolean useEncryption;
 
   @ApiModelProperty(value = "")
-  private SamlConfigurationPropertyItemsBoolean createUser = null;
+  private SamlConfigurationPropertyItemsBoolean createUser;
 
   @ApiModelProperty(value = "")
-  private SamlConfigurationPropertyItemsBoolean addGroupMemberships = null;
+  private SamlConfigurationPropertyItemsBoolean addGroupMemberships;
 
   @ApiModelProperty(value = "")
-  private SamlConfigurationPropertyItemsString groupMembershipAttribute = null;
+  private SamlConfigurationPropertyItemsString groupMembershipAttribute;
 
   @ApiModelProperty(value = "")
-  private SamlConfigurationPropertyItemsArray defaultGroups = null;
+  private SamlConfigurationPropertyItemsArray defaultGroups;
 
   @ApiModelProperty(value = "")
-  private SamlConfigurationPropertyItemsString nameIdFormat = null;
+  private SamlConfigurationPropertyItemsString nameIdFormat;
 
   @ApiModelProperty(value = "")
-  private SamlConfigurationPropertyItemsArray synchronizeAttributes = null;
+  private SamlConfigurationPropertyItemsArray synchronizeAttributes;
 
   @ApiModelProperty(value = "")
-  private SamlConfigurationPropertyItemsBoolean handleLogout = null;
+  private SamlConfigurationPropertyItemsBoolean handleLogout;
 
   @ApiModelProperty(value = "")
-  private SamlConfigurationPropertyItemsString logoutUrl = null;
+  private SamlConfigurationPropertyItemsString logoutUrl;
 
   @ApiModelProperty(value = "")
-  private SamlConfigurationPropertyItemsLong clockTolerance = null;
+  private SamlConfigurationPropertyItemsLong clockTolerance;
 
   @ApiModelProperty(value = "")
-  private SamlConfigurationPropertyItemsString digestMethod = null;
+  private SamlConfigurationPropertyItemsString digestMethod;
 
   @ApiModelProperty(value = "")
-  private SamlConfigurationPropertyItemsString signatureMethod = null;
+  private SamlConfigurationPropertyItemsString signatureMethod;
 
   @ApiModelProperty(value = "")
-  private SamlConfigurationPropertyItemsString userIntermediatePath = null;
+  private SamlConfigurationPropertyItemsString userIntermediatePath;
  /**
    * Get path
    * @return path
@@ -558,7 +558,7 @@ public class SamlConfigurationProperties  {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private static String toIndentedString(java.lang.Object o) {
+  private static String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

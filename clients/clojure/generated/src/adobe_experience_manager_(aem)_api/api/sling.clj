@@ -1,10 +1,31 @@
 (ns adobe-experience-manager-(aem)-api.api.sling
-  (:require [adobe-experience-manager-(aem)-api.core :refer [call-api check-required-params with-collection-format]])
+  (:require [adobe-experience-manager-(aem)-api.core :refer [call-api check-required-params with-collection-format *api-context*]]
+            [clojure.spec.alpha :as s]
+            [spec-tools.core :as st]
+            [orchestra.core :refer [defn-spec]]
+            [adobe-experience-manager-(aem)-api.specs.truststore-items :refer :all]
+            [adobe-experience-manager-(aem)-api.specs.saml-configuration-property-items-string :refer :all]
+            [adobe-experience-manager-(aem)-api.specs.install-status-status :refer :all]
+            [adobe-experience-manager-(aem)-api.specs.bundle-data :refer :all]
+            [adobe-experience-manager-(aem)-api.specs.saml-configuration-property-items-long :refer :all]
+            [adobe-experience-manager-(aem)-api.specs.install-status :refer :all]
+            [adobe-experience-manager-(aem)-api.specs.saml-configuration-properties :refer :all]
+            [adobe-experience-manager-(aem)-api.specs.saml-configuration-info :refer :all]
+            [adobe-experience-manager-(aem)-api.specs.saml-configuration-property-items-array :refer :all]
+            [adobe-experience-manager-(aem)-api.specs.saml-configuration-property-items-boolean :refer :all]
+            [adobe-experience-manager-(aem)-api.specs.bundle-data-prop :refer :all]
+            [adobe-experience-manager-(aem)-api.specs.keystore-info :refer :all]
+            [adobe-experience-manager-(aem)-api.specs.keystore-chain-items :refer :all]
+            [adobe-experience-manager-(aem)-api.specs.bundle-info :refer :all]
+            [adobe-experience-manager-(aem)-api.specs.keystore-items :refer :all]
+            [adobe-experience-manager-(aem)-api.specs.truststore-info :refer :all]
+            )
   (:import (java.io File)))
 
-(defn delete-agent-with-http-info
+
+(defn-spec delete-agent-with-http-info any?
   ""
-  [runmode name ]
+  [runmode string?, name string?]
   (check-required-params runmode name)
   (call-api "/etc/replication/agents.{runmode}/{name}" :delete
             {:path-params   {"runmode" runmode "name" name }
@@ -15,14 +36,18 @@
              :accepts       []
              :auth-names    ["aemAuth"]}))
 
-(defn delete-agent
+(defn-spec delete-agent any?
   ""
-  [runmode name ]
-  (:data (delete-agent-with-http-info runmode name)))
+  [runmode string?, name string?]
+  (let [res (:data (delete-agent-with-http-info runmode name))]
+    (if (:decode-models *api-context*)
+       (st/decode any? res st/string-transformer)
+       res)))
 
-(defn delete-node-with-http-info
+
+(defn-spec delete-node-with-http-info any?
   ""
-  [path name ]
+  [path string?, name string?]
   (check-required-params path name)
   (call-api "/{path}/{name}" :delete
             {:path-params   {"path" path "name" name }
@@ -33,14 +58,18 @@
              :accepts       []
              :auth-names    ["aemAuth"]}))
 
-(defn delete-node
+(defn-spec delete-node any?
   ""
-  [path name ]
-  (:data (delete-node-with-http-info path name)))
+  [path string?, name string?]
+  (let [res (:data (delete-node-with-http-info path name))]
+    (if (:decode-models *api-context*)
+       (st/decode any? res st/string-transformer)
+       res)))
 
-(defn get-agent-with-http-info
+
+(defn-spec get-agent-with-http-info any?
   ""
-  [runmode name ]
+  [runmode string?, name string?]
   (check-required-params runmode name)
   (call-api "/etc/replication/agents.{runmode}/{name}" :get
             {:path-params   {"runmode" runmode "name" name }
@@ -51,14 +80,18 @@
              :accepts       []
              :auth-names    ["aemAuth"]}))
 
-(defn get-agent
+(defn-spec get-agent any?
   ""
-  [runmode name ]
-  (:data (get-agent-with-http-info runmode name)))
+  [runmode string?, name string?]
+  (let [res (:data (get-agent-with-http-info runmode name))]
+    (if (:decode-models *api-context*)
+       (st/decode any? res st/string-transformer)
+       res)))
 
-(defn get-agents-with-http-info
+
+(defn-spec get-agents-with-http-info any?
   ""
-  [runmode ]
+  [runmode string?]
   (check-required-params runmode)
   (call-api "/etc/replication/agents.{runmode}.-1.json" :get
             {:path-params   {"runmode" runmode }
@@ -69,17 +102,21 @@
              :accepts       ["application/json"]
              :auth-names    ["aemAuth"]}))
 
-(defn get-agents
+(defn-spec get-agents string?
   ""
-  [runmode ]
-  (:data (get-agents-with-http-info runmode)))
+  [runmode string?]
+  (let [res (:data (get-agents-with-http-info runmode))]
+    (if (:decode-models *api-context*)
+       (st/decode string? res st/string-transformer)
+       res)))
 
-(defn get-authorizable-keystore-with-http-info
+
+(defn-spec get-authorizable-keystore-with-http-info any?
   ""
-  [intermediate-path authorizable-id ]
-  (check-required-params intermediate-path authorizable-id)
+  [intermediatePath string?, authorizableId string?]
+  (check-required-params intermediatePath authorizableId)
   (call-api "/{intermediatePath}/{authorizableId}.ks.json" :get
-            {:path-params   {"intermediatePath" intermediate-path "authorizableId" authorizable-id }
+            {:path-params   {"intermediatePath" intermediatePath "authorizableId" authorizableId }
              :header-params {}
              :query-params  {}
              :form-params   {}
@@ -87,17 +124,21 @@
              :accepts       ["text/plain"]
              :auth-names    ["aemAuth"]}))
 
-(defn get-authorizable-keystore
+(defn-spec get-authorizable-keystore keystore-info-spec
   ""
-  [intermediate-path authorizable-id ]
-  (:data (get-authorizable-keystore-with-http-info intermediate-path authorizable-id)))
+  [intermediatePath string?, authorizableId string?]
+  (let [res (:data (get-authorizable-keystore-with-http-info intermediatePath authorizableId))]
+    (if (:decode-models *api-context*)
+       (st/decode keystore-info-spec res st/string-transformer)
+       res)))
 
-(defn get-keystore-with-http-info
+
+(defn-spec get-keystore-with-http-info any?
   ""
-  [intermediate-path authorizable-id ]
-  (check-required-params intermediate-path authorizable-id)
+  [intermediatePath string?, authorizableId string?]
+  (check-required-params intermediatePath authorizableId)
   (call-api "/{intermediatePath}/{authorizableId}/keystore/store.p12" :get
-            {:path-params   {"intermediatePath" intermediate-path "authorizableId" authorizable-id }
+            {:path-params   {"intermediatePath" intermediatePath "authorizableId" authorizableId }
              :header-params {}
              :query-params  {}
              :form-params   {}
@@ -105,14 +146,18 @@
              :accepts       ["application/octet-stream"]
              :auth-names    ["aemAuth"]}))
 
-(defn get-keystore
+(defn-spec get-keystore any?
   ""
-  [intermediate-path authorizable-id ]
-  (:data (get-keystore-with-http-info intermediate-path authorizable-id)))
+  [intermediatePath string?, authorizableId string?]
+  (let [res (:data (get-keystore-with-http-info intermediatePath authorizableId))]
+    (if (:decode-models *api-context*)
+       (st/decode any? res st/string-transformer)
+       res)))
 
-(defn get-node-with-http-info
+
+(defn-spec get-node-with-http-info any?
   ""
-  [path name ]
+  [path string?, name string?]
   (check-required-params path name)
   (call-api "/{path}/{name}" :get
             {:path-params   {"path" path "name" name }
@@ -123,14 +168,18 @@
              :accepts       []
              :auth-names    ["aemAuth"]}))
 
-(defn get-node
+(defn-spec get-node any?
   ""
-  [path name ]
-  (:data (get-node-with-http-info path name)))
+  [path string?, name string?]
+  (let [res (:data (get-node-with-http-info path name))]
+    (if (:decode-models *api-context*)
+       (st/decode any? res st/string-transformer)
+       res)))
 
-(defn get-package-with-http-info
+
+(defn-spec get-package-with-http-info any?
   ""
-  [group name version ]
+  [group string?, name string?, version string?]
   (check-required-params group name version)
   (call-api "/etc/packages/{group}/{name}-{version}.zip" :get
             {:path-params   {"group" group "name" name "version" version }
@@ -141,14 +190,18 @@
              :accepts       ["application/octet-stream"]
              :auth-names    ["aemAuth"]}))
 
-(defn get-package
+(defn-spec get-package any?
   ""
-  [group name version ]
-  (:data (get-package-with-http-info group name version)))
+  [group string?, name string?, version string?]
+  (let [res (:data (get-package-with-http-info group name version))]
+    (if (:decode-models *api-context*)
+       (st/decode any? res st/string-transformer)
+       res)))
 
-(defn get-package-filter-with-http-info
+
+(defn-spec get-package-filter-with-http-info any?
   ""
-  [group name version ]
+  [group string?, name string?, version string?]
   (check-required-params group name version)
   (call-api "/etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json" :get
             {:path-params   {"group" group "name" name "version" version }
@@ -159,30 +212,38 @@
              :accepts       ["application/json"]
              :auth-names    ["aemAuth"]}))
 
-(defn get-package-filter
+(defn-spec get-package-filter string?
   ""
-  [group name version ]
-  (:data (get-package-filter-with-http-info group name version)))
+  [group string?, name string?, version string?]
+  (let [res (:data (get-package-filter-with-http-info group name version))]
+    (if (:decode-models *api-context*)
+       (st/decode string? res st/string-transformer)
+       res)))
 
-(defn get-query-with-http-info
+
+(defn-spec get-query-with-http-info any?
   ""
-  [path plimit 1-property 1-propertyvalue ]
-  (check-required-params path plimit 1-property 1-propertyvalue)
+  [path string?, plimit float?, 1_property string?, 1_propertyvalue string?]
+  (check-required-params path plimit 1_property 1_propertyvalue)
   (call-api "/bin/querybuilder.json" :get
             {:path-params   {}
              :header-params {}
-             :query-params  {"path" path "p.limit" plimit "1_property" 1-property "1_property.value" 1-propertyvalue }
+             :query-params  {"path" path "p.limit" plimit "1_property" 1_property "1_property.value" 1_propertyvalue }
              :form-params   {}
              :content-types []
              :accepts       ["application/json"]
              :auth-names    ["aemAuth"]}))
 
-(defn get-query
+(defn-spec get-query string?
   ""
-  [path plimit 1-property 1-propertyvalue ]
-  (:data (get-query-with-http-info path plimit 1-property 1-propertyvalue)))
+  [path string?, plimit float?, 1_property string?, 1_propertyvalue string?]
+  (let [res (:data (get-query-with-http-info path plimit 1_property 1_propertyvalue))]
+    (if (:decode-models *api-context*)
+       (st/decode string? res st/string-transformer)
+       res)))
 
-(defn get-truststore-with-http-info
+
+(defn-spec get-truststore-with-http-info any?
   ""
   []
   (call-api "/etc/truststore/truststore.p12" :get
@@ -194,12 +255,16 @@
              :accepts       ["application/octet-stream"]
              :auth-names    ["aemAuth"]}))
 
-(defn get-truststore
+(defn-spec get-truststore any?
   ""
   []
-  (:data (get-truststore-with-http-info)))
+  (let [res (:data (get-truststore-with-http-info))]
+    (if (:decode-models *api-context*)
+       (st/decode any? res st/string-transformer)
+       res)))
 
-(defn get-truststore-info-with-http-info
+
+(defn-spec get-truststore-info-with-http-info any?
   ""
   []
   (call-api "/libs/granite/security/truststore.json" :get
@@ -211,264 +276,342 @@
              :accepts       ["application/json"]
              :auth-names    ["aemAuth"]}))
 
-(defn get-truststore-info
+(defn-spec get-truststore-info truststore-info-spec
   ""
   []
-  (:data (get-truststore-info-with-http-info)))
+  (let [res (:data (get-truststore-info-with-http-info))]
+    (if (:decode-models *api-context*)
+       (st/decode truststore-info-spec res st/string-transformer)
+       res)))
 
-(defn post-agent-with-http-info
+
+(defn-spec post-agent-with-http-info any?
   ""
-  ([runmode name ] (post-agent-with-http-info runmode name nil))
-  ([runmode name {:keys [jcrcontentcqdistribute jcrcontentcqdistribute-type-hint jcrcontentcqname jcrcontentcqtemplate jcrcontentenabled jcrcontentjcrdescription jcrcontentjcrlast-modified jcrcontentjcrlast-modified-by jcrcontentjcrmixin-types jcrcontentjcrtitle jcrcontentlog-level jcrcontentno-status-update jcrcontentno-versioning jcrcontentprotocol-connect-timeout jcrcontentprotocol-http-connection-closed jcrcontentprotocol-http-expired jcrcontentprotocol-http-headers jcrcontentprotocol-http-headers-type-hint jcrcontentprotocol-http-method jcrcontentprotocol-https-relaxed jcrcontentprotocol-interface jcrcontentprotocol-socket-timeout jcrcontentprotocol-version jcrcontentproxy-ntlm-domain jcrcontentproxy-ntlm-host jcrcontentproxy-host jcrcontentproxy-password jcrcontentproxy-port jcrcontentproxy-user jcrcontentqueue-batch-max-size jcrcontentqueue-batch-mode jcrcontentqueue-batch-wait-time jcrcontentretry-delay jcrcontentreverse-replication jcrcontentserialization-type jcrcontentslingresource-type jcrcontentssl jcrcontenttransport-ntlm-domain jcrcontenttransport-ntlm-host jcrcontenttransport-password jcrcontenttransport-uri jcrcontenttransport-user jcrcontenttrigger-distribute jcrcontenttrigger-modified jcrcontenttrigger-on-off-time jcrcontenttrigger-receive jcrcontenttrigger-specific jcrcontentuser-id jcrprimary-type operation ]}]
+  ([runmode string?, name string?, ] (post-agent-with-http-info runmode name nil))
+  ([runmode string?, name string?, {:keys [jcrcontentcqdistribute jcrcontentcqdistributeTypeHint jcrcontentcqname jcrcontentcqtemplate jcrcontentenabled jcrcontentjcrdescription jcrcontentjcrlastModified jcrcontentjcrlastModifiedBy jcrcontentjcrmixinTypes jcrcontentjcrtitle jcrcontentlogLevel jcrcontentnoStatusUpdate jcrcontentnoVersioning jcrcontentprotocolConnectTimeout jcrcontentprotocolHTTPConnectionClosed jcrcontentprotocolHTTPExpired jcrcontentprotocolHTTPHeaders jcrcontentprotocolHTTPHeadersTypeHint jcrcontentprotocolHTTPMethod jcrcontentprotocolHTTPSRelaxed jcrcontentprotocolInterface jcrcontentprotocolSocketTimeout jcrcontentprotocolVersion jcrcontentproxyNTLMDomain jcrcontentproxyNTLMHost jcrcontentproxyHost jcrcontentproxyPassword jcrcontentproxyPort jcrcontentproxyUser jcrcontentqueueBatchMaxSize jcrcontentqueueBatchMode jcrcontentqueueBatchWaitTime jcrcontentretryDelay jcrcontentreverseReplication jcrcontentserializationType jcrcontentslingresourceType jcrcontentssl jcrcontenttransportNTLMDomain jcrcontenttransportNTLMHost jcrcontenttransportPassword jcrcontenttransportUri jcrcontenttransportUser jcrcontenttriggerDistribute jcrcontenttriggerModified jcrcontenttriggerOnOffTime jcrcontenttriggerReceive jcrcontenttriggerSpecific jcrcontentuserId jcrprimaryType operation]} (s/map-of keyword? any?)]
    (check-required-params runmode name)
    (call-api "/etc/replication/agents.{runmode}/{name}" :post
              {:path-params   {"runmode" runmode "name" name }
               :header-params {}
-              :query-params  {"jcr:content/cq:distribute" jcrcontentcqdistribute "jcr:content/cq:distribute@TypeHint" jcrcontentcqdistribute-type-hint "jcr:content/cq:name" jcrcontentcqname "jcr:content/cq:template" jcrcontentcqtemplate "jcr:content/enabled" jcrcontentenabled "jcr:content/jcr:description" jcrcontentjcrdescription "jcr:content/jcr:lastModified" jcrcontentjcrlast-modified "jcr:content/jcr:lastModifiedBy" jcrcontentjcrlast-modified-by "jcr:content/jcr:mixinTypes" jcrcontentjcrmixin-types "jcr:content/jcr:title" jcrcontentjcrtitle "jcr:content/logLevel" jcrcontentlog-level "jcr:content/noStatusUpdate" jcrcontentno-status-update "jcr:content/noVersioning" jcrcontentno-versioning "jcr:content/protocolConnectTimeout" jcrcontentprotocol-connect-timeout "jcr:content/protocolHTTPConnectionClosed" jcrcontentprotocol-http-connection-closed "jcr:content/protocolHTTPExpired" jcrcontentprotocol-http-expired "jcr:content/protocolHTTPHeaders" (with-collection-format jcrcontentprotocol-http-headers :multi) "jcr:content/protocolHTTPHeaders@TypeHint" jcrcontentprotocol-http-headers-type-hint "jcr:content/protocolHTTPMethod" jcrcontentprotocol-http-method "jcr:content/protocolHTTPSRelaxed" jcrcontentprotocol-https-relaxed "jcr:content/protocolInterface" jcrcontentprotocol-interface "jcr:content/protocolSocketTimeout" jcrcontentprotocol-socket-timeout "jcr:content/protocolVersion" jcrcontentprotocol-version "jcr:content/proxyNTLMDomain" jcrcontentproxy-ntlm-domain "jcr:content/proxyNTLMHost" jcrcontentproxy-ntlm-host "jcr:content/proxyHost" jcrcontentproxy-host "jcr:content/proxyPassword" jcrcontentproxy-password "jcr:content/proxyPort" jcrcontentproxy-port "jcr:content/proxyUser" jcrcontentproxy-user "jcr:content/queueBatchMaxSize" jcrcontentqueue-batch-max-size "jcr:content/queueBatchMode" jcrcontentqueue-batch-mode "jcr:content/queueBatchWaitTime" jcrcontentqueue-batch-wait-time "jcr:content/retryDelay" jcrcontentretry-delay "jcr:content/reverseReplication" jcrcontentreverse-replication "jcr:content/serializationType" jcrcontentserialization-type "jcr:content/sling:resourceType" jcrcontentslingresource-type "jcr:content/ssl" jcrcontentssl "jcr:content/transportNTLMDomain" jcrcontenttransport-ntlm-domain "jcr:content/transportNTLMHost" jcrcontenttransport-ntlm-host "jcr:content/transportPassword" jcrcontenttransport-password "jcr:content/transportUri" jcrcontenttransport-uri "jcr:content/transportUser" jcrcontenttransport-user "jcr:content/triggerDistribute" jcrcontenttrigger-distribute "jcr:content/triggerModified" jcrcontenttrigger-modified "jcr:content/triggerOnOffTime" jcrcontenttrigger-on-off-time "jcr:content/triggerReceive" jcrcontenttrigger-receive "jcr:content/triggerSpecific" jcrcontenttrigger-specific "jcr:content/userId" jcrcontentuser-id "jcr:primaryType" jcrprimary-type ":operation" operation }
+              :query-params  {"jcr:content/cq:distribute" jcrcontentcqdistribute "jcr:content/cq:distribute@TypeHint" jcrcontentcqdistributeTypeHint "jcr:content/cq:name" jcrcontentcqname "jcr:content/cq:template" jcrcontentcqtemplate "jcr:content/enabled" jcrcontentenabled "jcr:content/jcr:description" jcrcontentjcrdescription "jcr:content/jcr:lastModified" jcrcontentjcrlastModified "jcr:content/jcr:lastModifiedBy" jcrcontentjcrlastModifiedBy "jcr:content/jcr:mixinTypes" jcrcontentjcrmixinTypes "jcr:content/jcr:title" jcrcontentjcrtitle "jcr:content/logLevel" jcrcontentlogLevel "jcr:content/noStatusUpdate" jcrcontentnoStatusUpdate "jcr:content/noVersioning" jcrcontentnoVersioning "jcr:content/protocolConnectTimeout" jcrcontentprotocolConnectTimeout "jcr:content/protocolHTTPConnectionClosed" jcrcontentprotocolHTTPConnectionClosed "jcr:content/protocolHTTPExpired" jcrcontentprotocolHTTPExpired "jcr:content/protocolHTTPHeaders" (with-collection-format jcrcontentprotocolHTTPHeaders :multi) "jcr:content/protocolHTTPHeaders@TypeHint" jcrcontentprotocolHTTPHeadersTypeHint "jcr:content/protocolHTTPMethod" jcrcontentprotocolHTTPMethod "jcr:content/protocolHTTPSRelaxed" jcrcontentprotocolHTTPSRelaxed "jcr:content/protocolInterface" jcrcontentprotocolInterface "jcr:content/protocolSocketTimeout" jcrcontentprotocolSocketTimeout "jcr:content/protocolVersion" jcrcontentprotocolVersion "jcr:content/proxyNTLMDomain" jcrcontentproxyNTLMDomain "jcr:content/proxyNTLMHost" jcrcontentproxyNTLMHost "jcr:content/proxyHost" jcrcontentproxyHost "jcr:content/proxyPassword" jcrcontentproxyPassword "jcr:content/proxyPort" jcrcontentproxyPort "jcr:content/proxyUser" jcrcontentproxyUser "jcr:content/queueBatchMaxSize" jcrcontentqueueBatchMaxSize "jcr:content/queueBatchMode" jcrcontentqueueBatchMode "jcr:content/queueBatchWaitTime" jcrcontentqueueBatchWaitTime "jcr:content/retryDelay" jcrcontentretryDelay "jcr:content/reverseReplication" jcrcontentreverseReplication "jcr:content/serializationType" jcrcontentserializationType "jcr:content/sling:resourceType" jcrcontentslingresourceType "jcr:content/ssl" jcrcontentssl "jcr:content/transportNTLMDomain" jcrcontenttransportNTLMDomain "jcr:content/transportNTLMHost" jcrcontenttransportNTLMHost "jcr:content/transportPassword" jcrcontenttransportPassword "jcr:content/transportUri" jcrcontenttransportUri "jcr:content/transportUser" jcrcontenttransportUser "jcr:content/triggerDistribute" jcrcontenttriggerDistribute "jcr:content/triggerModified" jcrcontenttriggerModified "jcr:content/triggerOnOffTime" jcrcontenttriggerOnOffTime "jcr:content/triggerReceive" jcrcontenttriggerReceive "jcr:content/triggerSpecific" jcrcontenttriggerSpecific "jcr:content/userId" jcrcontentuserId "jcr:primaryType" jcrprimaryType ":operation" operation }
               :form-params   {}
               :content-types []
               :accepts       []
               :auth-names    ["aemAuth"]})))
 
-(defn post-agent
+(defn-spec post-agent any?
   ""
-  ([runmode name ] (post-agent runmode name nil))
-  ([runmode name optional-params]
-   (:data (post-agent-with-http-info runmode name optional-params))))
+  ([runmode string?, name string?, ] (post-agent runmode name nil))
+  ([runmode string?, name string?, optional-params any?]
+   (let [res (:data (post-agent-with-http-info runmode name optional-params))]
+     (if (:decode-models *api-context*)
+        (st/decode any? res st/string-transformer)
+        res))))
 
-(defn post-authorizable-keystore-with-http-info
+
+(defn-spec post-authorizable-keystore-with-http-info any?
   ""
-  ([intermediate-path authorizable-id ] (post-authorizable-keystore-with-http-info intermediate-path authorizable-id nil))
-  ([intermediate-path authorizable-id {:keys [operation current-password new-password re-password key-password key-store-pass alias new-alias remove-alias ^File cert-chain ^File pk ^File key-store ]}]
-   (check-required-params intermediate-path authorizable-id)
+  ([intermediatePath string?, authorizableId string?, ] (post-authorizable-keystore-with-http-info intermediatePath authorizableId nil))
+  ([intermediatePath string?, authorizableId string?, {:keys [operation currentPassword newPassword rePassword keyPassword keyStorePass alias newAlias removeAlias ^File cert-chain ^File pk ^File keyStore]} (s/map-of keyword? any?)]
+   (check-required-params intermediatePath authorizableId)
    (call-api "/{intermediatePath}/{authorizableId}.ks.html" :post
-             {:path-params   {"intermediatePath" intermediate-path "authorizableId" authorizable-id }
+             {:path-params   {"intermediatePath" intermediatePath "authorizableId" authorizableId }
               :header-params {}
-              :query-params  {":operation" operation "currentPassword" current-password "newPassword" new-password "rePassword" re-password "keyPassword" key-password "keyStorePass" key-store-pass "alias" alias "newAlias" new-alias "removeAlias" remove-alias }
-              :form-params   {"cert-chain" cert-chain "pk" pk "keyStore" key-store }
+              :query-params  {":operation" operation "currentPassword" currentPassword "newPassword" newPassword "rePassword" rePassword "keyPassword" keyPassword "keyStorePass" keyStorePass "alias" alias "newAlias" newAlias "removeAlias" removeAlias }
+              :form-params   {"cert-chain" cert-chain "pk" pk "keyStore" keyStore }
               :content-types ["multipart/form-data"]
               :accepts       ["text/plain"]
               :auth-names    ["aemAuth"]})))
 
-(defn post-authorizable-keystore
+(defn-spec post-authorizable-keystore keystore-info-spec
   ""
-  ([intermediate-path authorizable-id ] (post-authorizable-keystore intermediate-path authorizable-id nil))
-  ([intermediate-path authorizable-id optional-params]
-   (:data (post-authorizable-keystore-with-http-info intermediate-path authorizable-id optional-params))))
+  ([intermediatePath string?, authorizableId string?, ] (post-authorizable-keystore intermediatePath authorizableId nil))
+  ([intermediatePath string?, authorizableId string?, optional-params any?]
+   (let [res (:data (post-authorizable-keystore-with-http-info intermediatePath authorizableId optional-params))]
+     (if (:decode-models *api-context*)
+        (st/decode keystore-info-spec res st/string-transformer)
+        res))))
 
-(defn post-authorizables-with-http-info
+
+(defn-spec post-authorizables-with-http-info any?
   ""
-  ([authorizable-id intermediate-path ] (post-authorizables-with-http-info authorizable-id intermediate-path nil))
-  ([authorizable-id intermediate-path {:keys [create-user create-group reppassword profilegiven-name ]}]
-   (check-required-params authorizable-id intermediate-path)
+  ([authorizableId string?, intermediatePath string?, ] (post-authorizables-with-http-info authorizableId intermediatePath nil))
+  ([authorizableId string?, intermediatePath string?, {:keys [createUser createGroup reppassword profilegivenName]} (s/map-of keyword? any?)]
+   (check-required-params authorizableId intermediatePath)
    (call-api "/libs/granite/security/post/authorizables" :post
              {:path-params   {}
               :header-params {}
-              :query-params  {"authorizableId" authorizable-id "intermediatePath" intermediate-path "createUser" create-user "createGroup" create-group "rep:password" reppassword "profile/givenName" profilegiven-name }
+              :query-params  {"authorizableId" authorizableId "intermediatePath" intermediatePath "createUser" createUser "createGroup" createGroup "rep:password" reppassword "profile/givenName" profilegivenName }
               :form-params   {}
               :content-types []
               :accepts       ["text/html"]
               :auth-names    ["aemAuth"]})))
 
-(defn post-authorizables
+(defn-spec post-authorizables string?
   ""
-  ([authorizable-id intermediate-path ] (post-authorizables authorizable-id intermediate-path nil))
-  ([authorizable-id intermediate-path optional-params]
-   (:data (post-authorizables-with-http-info authorizable-id intermediate-path optional-params))))
+  ([authorizableId string?, intermediatePath string?, ] (post-authorizables authorizableId intermediatePath nil))
+  ([authorizableId string?, intermediatePath string?, optional-params any?]
+   (let [res (:data (post-authorizables-with-http-info authorizableId intermediatePath optional-params))]
+     (if (:decode-models *api-context*)
+        (st/decode string? res st/string-transformer)
+        res))))
 
-(defn post-config-adobe-granite-saml-authentication-handler-with-http-info
+
+(defn-spec post-config-adobe-granite-saml-authentication-handler-with-http-info any?
   ""
   ([] (post-config-adobe-granite-saml-authentication-handler-with-http-info nil))
-  ([{:keys [key-store-password key-store-password-type-hint serviceranking serviceranking-type-hint idp-http-redirect idp-http-redirect-type-hint create-user create-user-type-hint default-redirect-url default-redirect-url-type-hint user-id-attribute user-id-attribute-type-hint default-groups default-groups-type-hint idp-cert-alias idp-cert-alias-type-hint add-group-memberships add-group-memberships-type-hint path path-type-hint synchronize-attributes synchronize-attributes-type-hint clock-tolerance clock-tolerance-type-hint group-membership-attribute group-membership-attribute-type-hint idp-url idp-url-type-hint logout-url logout-url-type-hint service-provider-entity-id service-provider-entity-id-type-hint assertion-consumer-service-url assertion-consumer-service-url-type-hint handle-logout handle-logout-type-hint sp-private-key-alias sp-private-key-alias-type-hint use-encryption use-encryption-type-hint name-id-format name-id-format-type-hint digest-method digest-method-type-hint signature-method signature-method-type-hint user-intermediate-path user-intermediate-path-type-hint ]}]
+  ([{:keys [keyStorePassword keyStorePasswordTypeHint serviceranking servicerankingTypeHint idpHttpRedirect idpHttpRedirectTypeHint createUser createUserTypeHint defaultRedirectUrl defaultRedirectUrlTypeHint userIDAttribute userIDAttributeTypeHint defaultGroups defaultGroupsTypeHint idpCertAlias idpCertAliasTypeHint addGroupMemberships addGroupMembershipsTypeHint path pathTypeHint synchronizeAttributes synchronizeAttributesTypeHint clockTolerance clockToleranceTypeHint groupMembershipAttribute groupMembershipAttributeTypeHint idpUrl idpUrlTypeHint logoutUrl logoutUrlTypeHint serviceProviderEntityId serviceProviderEntityIdTypeHint assertionConsumerServiceURL assertionConsumerServiceURLTypeHint handleLogout handleLogoutTypeHint spPrivateKeyAlias spPrivateKeyAliasTypeHint useEncryption useEncryptionTypeHint nameIdFormat nameIdFormatTypeHint digestMethod digestMethodTypeHint signatureMethod signatureMethodTypeHint userIntermediatePath userIntermediatePathTypeHint]} (s/map-of keyword? any?)]
    (call-api "/apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config" :post
              {:path-params   {}
               :header-params {}
-              :query-params  {"keyStorePassword" key-store-password "keyStorePassword@TypeHint" key-store-password-type-hint "service.ranking" serviceranking "service.ranking@TypeHint" serviceranking-type-hint "idpHttpRedirect" idp-http-redirect "idpHttpRedirect@TypeHint" idp-http-redirect-type-hint "createUser" create-user "createUser@TypeHint" create-user-type-hint "defaultRedirectUrl" default-redirect-url "defaultRedirectUrl@TypeHint" default-redirect-url-type-hint "userIDAttribute" user-id-attribute "userIDAttribute@TypeHint" user-id-attribute-type-hint "defaultGroups" (with-collection-format default-groups :multi) "defaultGroups@TypeHint" default-groups-type-hint "idpCertAlias" idp-cert-alias "idpCertAlias@TypeHint" idp-cert-alias-type-hint "addGroupMemberships" add-group-memberships "addGroupMemberships@TypeHint" add-group-memberships-type-hint "path" (with-collection-format path :multi) "path@TypeHint" path-type-hint "synchronizeAttributes" (with-collection-format synchronize-attributes :multi) "synchronizeAttributes@TypeHint" synchronize-attributes-type-hint "clockTolerance" clock-tolerance "clockTolerance@TypeHint" clock-tolerance-type-hint "groupMembershipAttribute" group-membership-attribute "groupMembershipAttribute@TypeHint" group-membership-attribute-type-hint "idpUrl" idp-url "idpUrl@TypeHint" idp-url-type-hint "logoutUrl" logout-url "logoutUrl@TypeHint" logout-url-type-hint "serviceProviderEntityId" service-provider-entity-id "serviceProviderEntityId@TypeHint" service-provider-entity-id-type-hint "assertionConsumerServiceURL" assertion-consumer-service-url "assertionConsumerServiceURL@TypeHint" assertion-consumer-service-url-type-hint "handleLogout" handle-logout "handleLogout@TypeHint" handle-logout-type-hint "spPrivateKeyAlias" sp-private-key-alias "spPrivateKeyAlias@TypeHint" sp-private-key-alias-type-hint "useEncryption" use-encryption "useEncryption@TypeHint" use-encryption-type-hint "nameIdFormat" name-id-format "nameIdFormat@TypeHint" name-id-format-type-hint "digestMethod" digest-method "digestMethod@TypeHint" digest-method-type-hint "signatureMethod" signature-method "signatureMethod@TypeHint" signature-method-type-hint "userIntermediatePath" user-intermediate-path "userIntermediatePath@TypeHint" user-intermediate-path-type-hint }
+              :query-params  {"keyStorePassword" keyStorePassword "keyStorePassword@TypeHint" keyStorePasswordTypeHint "service.ranking" serviceranking "service.ranking@TypeHint" servicerankingTypeHint "idpHttpRedirect" idpHttpRedirect "idpHttpRedirect@TypeHint" idpHttpRedirectTypeHint "createUser" createUser "createUser@TypeHint" createUserTypeHint "defaultRedirectUrl" defaultRedirectUrl "defaultRedirectUrl@TypeHint" defaultRedirectUrlTypeHint "userIDAttribute" userIDAttribute "userIDAttribute@TypeHint" userIDAttributeTypeHint "defaultGroups" (with-collection-format defaultGroups :multi) "defaultGroups@TypeHint" defaultGroupsTypeHint "idpCertAlias" idpCertAlias "idpCertAlias@TypeHint" idpCertAliasTypeHint "addGroupMemberships" addGroupMemberships "addGroupMemberships@TypeHint" addGroupMembershipsTypeHint "path" (with-collection-format path :multi) "path@TypeHint" pathTypeHint "synchronizeAttributes" (with-collection-format synchronizeAttributes :multi) "synchronizeAttributes@TypeHint" synchronizeAttributesTypeHint "clockTolerance" clockTolerance "clockTolerance@TypeHint" clockToleranceTypeHint "groupMembershipAttribute" groupMembershipAttribute "groupMembershipAttribute@TypeHint" groupMembershipAttributeTypeHint "idpUrl" idpUrl "idpUrl@TypeHint" idpUrlTypeHint "logoutUrl" logoutUrl "logoutUrl@TypeHint" logoutUrlTypeHint "serviceProviderEntityId" serviceProviderEntityId "serviceProviderEntityId@TypeHint" serviceProviderEntityIdTypeHint "assertionConsumerServiceURL" assertionConsumerServiceURL "assertionConsumerServiceURL@TypeHint" assertionConsumerServiceURLTypeHint "handleLogout" handleLogout "handleLogout@TypeHint" handleLogoutTypeHint "spPrivateKeyAlias" spPrivateKeyAlias "spPrivateKeyAlias@TypeHint" spPrivateKeyAliasTypeHint "useEncryption" useEncryption "useEncryption@TypeHint" useEncryptionTypeHint "nameIdFormat" nameIdFormat "nameIdFormat@TypeHint" nameIdFormatTypeHint "digestMethod" digestMethod "digestMethod@TypeHint" digestMethodTypeHint "signatureMethod" signatureMethod "signatureMethod@TypeHint" signatureMethodTypeHint "userIntermediatePath" userIntermediatePath "userIntermediatePath@TypeHint" userIntermediatePathTypeHint }
               :form-params   {}
               :content-types []
               :accepts       []
               :auth-names    ["aemAuth"]})))
 
-(defn post-config-adobe-granite-saml-authentication-handler
+(defn-spec post-config-adobe-granite-saml-authentication-handler any?
   ""
   ([] (post-config-adobe-granite-saml-authentication-handler nil))
-  ([optional-params]
-   (:data (post-config-adobe-granite-saml-authentication-handler-with-http-info optional-params))))
+  ([optional-params any?]
+   (let [res (:data (post-config-adobe-granite-saml-authentication-handler-with-http-info optional-params))]
+     (if (:decode-models *api-context*)
+        (st/decode any? res st/string-transformer)
+        res))))
 
-(defn post-config-apache-felix-jetty-based-http-service-with-http-info
+
+(defn-spec post-config-apache-felix-jetty-based-http-service-with-http-info any?
   ""
   ([] (post-config-apache-felix-jetty-based-http-service-with-http-info nil))
-  ([{:keys [orgapachefelixhttpsnio orgapachefelixhttpsnio-type-hint orgapachefelixhttpskeystore orgapachefelixhttpskeystore-type-hint orgapachefelixhttpskeystorepassword orgapachefelixhttpskeystorepassword-type-hint orgapachefelixhttpskeystorekey orgapachefelixhttpskeystorekey-type-hint orgapachefelixhttpskeystorekeypassword orgapachefelixhttpskeystorekeypassword-type-hint orgapachefelixhttpstruststore orgapachefelixhttpstruststore-type-hint orgapachefelixhttpstruststorepassword orgapachefelixhttpstruststorepassword-type-hint orgapachefelixhttpsclientcertificate orgapachefelixhttpsclientcertificate-type-hint orgapachefelixhttpsenable orgapachefelixhttpsenable-type-hint orgosgiservicehttpportsecure orgosgiservicehttpportsecure-type-hint ]}]
+  ([{:keys [orgapachefelixhttpsnio orgapachefelixhttpsnioTypeHint orgapachefelixhttpskeystore orgapachefelixhttpskeystoreTypeHint orgapachefelixhttpskeystorepassword orgapachefelixhttpskeystorepasswordTypeHint orgapachefelixhttpskeystorekey orgapachefelixhttpskeystorekeyTypeHint orgapachefelixhttpskeystorekeypassword orgapachefelixhttpskeystorekeypasswordTypeHint orgapachefelixhttpstruststore orgapachefelixhttpstruststoreTypeHint orgapachefelixhttpstruststorepassword orgapachefelixhttpstruststorepasswordTypeHint orgapachefelixhttpsclientcertificate orgapachefelixhttpsclientcertificateTypeHint orgapachefelixhttpsenable orgapachefelixhttpsenableTypeHint orgosgiservicehttpportsecure orgosgiservicehttpportsecureTypeHint]} (s/map-of keyword? any?)]
    (call-api "/apps/system/config/org.apache.felix.http" :post
              {:path-params   {}
               :header-params {}
-              :query-params  {"org.apache.felix.https.nio" orgapachefelixhttpsnio "org.apache.felix.https.nio@TypeHint" orgapachefelixhttpsnio-type-hint "org.apache.felix.https.keystore" orgapachefelixhttpskeystore "org.apache.felix.https.keystore@TypeHint" orgapachefelixhttpskeystore-type-hint "org.apache.felix.https.keystore.password" orgapachefelixhttpskeystorepassword "org.apache.felix.https.keystore.password@TypeHint" orgapachefelixhttpskeystorepassword-type-hint "org.apache.felix.https.keystore.key" orgapachefelixhttpskeystorekey "org.apache.felix.https.keystore.key@TypeHint" orgapachefelixhttpskeystorekey-type-hint "org.apache.felix.https.keystore.key.password" orgapachefelixhttpskeystorekeypassword "org.apache.felix.https.keystore.key.password@TypeHint" orgapachefelixhttpskeystorekeypassword-type-hint "org.apache.felix.https.truststore" orgapachefelixhttpstruststore "org.apache.felix.https.truststore@TypeHint" orgapachefelixhttpstruststore-type-hint "org.apache.felix.https.truststore.password" orgapachefelixhttpstruststorepassword "org.apache.felix.https.truststore.password@TypeHint" orgapachefelixhttpstruststorepassword-type-hint "org.apache.felix.https.clientcertificate" orgapachefelixhttpsclientcertificate "org.apache.felix.https.clientcertificate@TypeHint" orgapachefelixhttpsclientcertificate-type-hint "org.apache.felix.https.enable" orgapachefelixhttpsenable "org.apache.felix.https.enable@TypeHint" orgapachefelixhttpsenable-type-hint "org.osgi.service.http.port.secure" orgosgiservicehttpportsecure "org.osgi.service.http.port.secure@TypeHint" orgosgiservicehttpportsecure-type-hint }
+              :query-params  {"org.apache.felix.https.nio" orgapachefelixhttpsnio "org.apache.felix.https.nio@TypeHint" orgapachefelixhttpsnioTypeHint "org.apache.felix.https.keystore" orgapachefelixhttpskeystore "org.apache.felix.https.keystore@TypeHint" orgapachefelixhttpskeystoreTypeHint "org.apache.felix.https.keystore.password" orgapachefelixhttpskeystorepassword "org.apache.felix.https.keystore.password@TypeHint" orgapachefelixhttpskeystorepasswordTypeHint "org.apache.felix.https.keystore.key" orgapachefelixhttpskeystorekey "org.apache.felix.https.keystore.key@TypeHint" orgapachefelixhttpskeystorekeyTypeHint "org.apache.felix.https.keystore.key.password" orgapachefelixhttpskeystorekeypassword "org.apache.felix.https.keystore.key.password@TypeHint" orgapachefelixhttpskeystorekeypasswordTypeHint "org.apache.felix.https.truststore" orgapachefelixhttpstruststore "org.apache.felix.https.truststore@TypeHint" orgapachefelixhttpstruststoreTypeHint "org.apache.felix.https.truststore.password" orgapachefelixhttpstruststorepassword "org.apache.felix.https.truststore.password@TypeHint" orgapachefelixhttpstruststorepasswordTypeHint "org.apache.felix.https.clientcertificate" orgapachefelixhttpsclientcertificate "org.apache.felix.https.clientcertificate@TypeHint" orgapachefelixhttpsclientcertificateTypeHint "org.apache.felix.https.enable" orgapachefelixhttpsenable "org.apache.felix.https.enable@TypeHint" orgapachefelixhttpsenableTypeHint "org.osgi.service.http.port.secure" orgosgiservicehttpportsecure "org.osgi.service.http.port.secure@TypeHint" orgosgiservicehttpportsecureTypeHint }
               :form-params   {}
               :content-types []
               :accepts       []
               :auth-names    ["aemAuth"]})))
 
-(defn post-config-apache-felix-jetty-based-http-service
+(defn-spec post-config-apache-felix-jetty-based-http-service any?
   ""
   ([] (post-config-apache-felix-jetty-based-http-service nil))
-  ([optional-params]
-   (:data (post-config-apache-felix-jetty-based-http-service-with-http-info optional-params))))
+  ([optional-params any?]
+   (let [res (:data (post-config-apache-felix-jetty-based-http-service-with-http-info optional-params))]
+     (if (:decode-models *api-context*)
+        (st/decode any? res st/string-transformer)
+        res))))
 
-(defn post-config-apache-http-components-proxy-configuration-with-http-info
+
+(defn-spec post-config-apache-http-components-proxy-configuration-with-http-info any?
   ""
   ([] (post-config-apache-http-components-proxy-configuration-with-http-info nil))
-  ([{:keys [proxyhost proxyhost-type-hint proxyport proxyport-type-hint proxyexceptions proxyexceptions-type-hint proxyenabled proxyenabled-type-hint proxyuser proxyuser-type-hint proxypassword proxypassword-type-hint ]}]
+  ([{:keys [proxyhost proxyhostTypeHint proxyport proxyportTypeHint proxyexceptions proxyexceptionsTypeHint proxyenabled proxyenabledTypeHint proxyuser proxyuserTypeHint proxypassword proxypasswordTypeHint]} (s/map-of keyword? any?)]
    (call-api "/apps/system/config/org.apache.http.proxyconfigurator.config" :post
              {:path-params   {}
               :header-params {}
-              :query-params  {"proxy.host" proxyhost "proxy.host@TypeHint" proxyhost-type-hint "proxy.port" proxyport "proxy.port@TypeHint" proxyport-type-hint "proxy.exceptions" (with-collection-format proxyexceptions :multi) "proxy.exceptions@TypeHint" proxyexceptions-type-hint "proxy.enabled" proxyenabled "proxy.enabled@TypeHint" proxyenabled-type-hint "proxy.user" proxyuser "proxy.user@TypeHint" proxyuser-type-hint "proxy.password" proxypassword "proxy.password@TypeHint" proxypassword-type-hint }
+              :query-params  {"proxy.host" proxyhost "proxy.host@TypeHint" proxyhostTypeHint "proxy.port" proxyport "proxy.port@TypeHint" proxyportTypeHint "proxy.exceptions" (with-collection-format proxyexceptions :multi) "proxy.exceptions@TypeHint" proxyexceptionsTypeHint "proxy.enabled" proxyenabled "proxy.enabled@TypeHint" proxyenabledTypeHint "proxy.user" proxyuser "proxy.user@TypeHint" proxyuserTypeHint "proxy.password" proxypassword "proxy.password@TypeHint" proxypasswordTypeHint }
               :form-params   {}
               :content-types []
               :accepts       []
               :auth-names    ["aemAuth"]})))
 
-(defn post-config-apache-http-components-proxy-configuration
+(defn-spec post-config-apache-http-components-proxy-configuration any?
   ""
   ([] (post-config-apache-http-components-proxy-configuration nil))
-  ([optional-params]
-   (:data (post-config-apache-http-components-proxy-configuration-with-http-info optional-params))))
+  ([optional-params any?]
+   (let [res (:data (post-config-apache-http-components-proxy-configuration-with-http-info optional-params))]
+     (if (:decode-models *api-context*)
+        (st/decode any? res st/string-transformer)
+        res))))
 
-(defn post-config-apache-sling-dav-ex-servlet-with-http-info
+
+(defn-spec post-config-apache-sling-dav-ex-servlet-with-http-info any?
   ""
   ([] (post-config-apache-sling-dav-ex-servlet-with-http-info nil))
-  ([{:keys [alias alias-type-hint davcreate-absolute-uri davcreate-absolute-uri-type-hint ]}]
+  ([{:keys [alias aliasTypeHint davcreate-absolute-uri davcreate-absolute-uriTypeHint]} (s/map-of keyword? any?)]
    (call-api "/apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet" :post
              {:path-params   {}
               :header-params {}
-              :query-params  {"alias" alias "alias@TypeHint" alias-type-hint "dav.create-absolute-uri" davcreate-absolute-uri "dav.create-absolute-uri@TypeHint" davcreate-absolute-uri-type-hint }
+              :query-params  {"alias" alias "alias@TypeHint" aliasTypeHint "dav.create-absolute-uri" davcreate-absolute-uri "dav.create-absolute-uri@TypeHint" davcreate-absolute-uriTypeHint }
               :form-params   {}
               :content-types []
               :accepts       []
               :auth-names    ["aemAuth"]})))
 
-(defn post-config-apache-sling-dav-ex-servlet
+(defn-spec post-config-apache-sling-dav-ex-servlet any?
   ""
   ([] (post-config-apache-sling-dav-ex-servlet nil))
-  ([optional-params]
-   (:data (post-config-apache-sling-dav-ex-servlet-with-http-info optional-params))))
+  ([optional-params any?]
+   (let [res (:data (post-config-apache-sling-dav-ex-servlet-with-http-info optional-params))]
+     (if (:decode-models *api-context*)
+        (st/decode any? res st/string-transformer)
+        res))))
 
-(defn post-config-apache-sling-get-servlet-with-http-info
+
+(defn-spec post-config-apache-sling-get-servlet-with-http-info any?
   ""
   ([] (post-config-apache-sling-get-servlet-with-http-info nil))
-  ([{:keys [jsonmaximumresults jsonmaximumresults-type-hint enablehtml enablehtml-type-hint enabletxt enabletxt-type-hint enablexml enablexml-type-hint ]}]
+  ([{:keys [jsonmaximumresults jsonmaximumresultsTypeHint enablehtml enablehtmlTypeHint enabletxt enabletxtTypeHint enablexml enablexmlTypeHint]} (s/map-of keyword? any?)]
    (call-api "/apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet" :post
              {:path-params   {}
               :header-params {}
-              :query-params  {"json.maximumresults" jsonmaximumresults "json.maximumresults@TypeHint" jsonmaximumresults-type-hint "enable.html" enablehtml "enable.html@TypeHint" enablehtml-type-hint "enable.txt" enabletxt "enable.txt@TypeHint" enabletxt-type-hint "enable.xml" enablexml "enable.xml@TypeHint" enablexml-type-hint }
+              :query-params  {"json.maximumresults" jsonmaximumresults "json.maximumresults@TypeHint" jsonmaximumresultsTypeHint "enable.html" enablehtml "enable.html@TypeHint" enablehtmlTypeHint "enable.txt" enabletxt "enable.txt@TypeHint" enabletxtTypeHint "enable.xml" enablexml "enable.xml@TypeHint" enablexmlTypeHint }
               :form-params   {}
               :content-types []
               :accepts       []
               :auth-names    ["aemAuth"]})))
 
-(defn post-config-apache-sling-get-servlet
+(defn-spec post-config-apache-sling-get-servlet any?
   ""
   ([] (post-config-apache-sling-get-servlet nil))
-  ([optional-params]
-   (:data (post-config-apache-sling-get-servlet-with-http-info optional-params))))
+  ([optional-params any?]
+   (let [res (:data (post-config-apache-sling-get-servlet-with-http-info optional-params))]
+     (if (:decode-models *api-context*)
+        (st/decode any? res st/string-transformer)
+        res))))
 
-(defn post-config-apache-sling-referrer-filter-with-http-info
+
+(defn-spec post-config-apache-sling-referrer-filter-with-http-info any?
   ""
   ([] (post-config-apache-sling-referrer-filter-with-http-info nil))
-  ([{:keys [allowempty allowempty-type-hint allowhosts allowhosts-type-hint allowhostsregexp allowhostsregexp-type-hint filtermethods filtermethods-type-hint ]}]
+  ([{:keys [allowempty allowemptyTypeHint allowhosts allowhostsTypeHint allowhostsregexp allowhostsregexpTypeHint filtermethods filtermethodsTypeHint]} (s/map-of keyword? any?)]
    (call-api "/apps/system/config/org.apache.sling.security.impl.ReferrerFilter" :post
              {:path-params   {}
               :header-params {}
-              :query-params  {"allow.empty" allowempty "allow.empty@TypeHint" allowempty-type-hint "allow.hosts" allowhosts "allow.hosts@TypeHint" allowhosts-type-hint "allow.hosts.regexp" allowhostsregexp "allow.hosts.regexp@TypeHint" allowhostsregexp-type-hint "filter.methods" filtermethods "filter.methods@TypeHint" filtermethods-type-hint }
+              :query-params  {"allow.empty" allowempty "allow.empty@TypeHint" allowemptyTypeHint "allow.hosts" allowhosts "allow.hosts@TypeHint" allowhostsTypeHint "allow.hosts.regexp" allowhostsregexp "allow.hosts.regexp@TypeHint" allowhostsregexpTypeHint "filter.methods" filtermethods "filter.methods@TypeHint" filtermethodsTypeHint }
               :form-params   {}
               :content-types []
               :accepts       []
               :auth-names    ["aemAuth"]})))
 
-(defn post-config-apache-sling-referrer-filter
+(defn-spec post-config-apache-sling-referrer-filter any?
   ""
   ([] (post-config-apache-sling-referrer-filter nil))
-  ([optional-params]
-   (:data (post-config-apache-sling-referrer-filter-with-http-info optional-params))))
+  ([optional-params any?]
+   (let [res (:data (post-config-apache-sling-referrer-filter-with-http-info optional-params))]
+     (if (:decode-models *api-context*)
+        (st/decode any? res st/string-transformer)
+        res))))
 
-(defn post-node-with-http-info
-  ""
-  ([path name ] (post-node-with-http-info path name nil))
-  ([path name {:keys [operation delete-authorizable ^File file ]}]
-   (check-required-params path name)
-   (call-api "/{path}/{name}" :post
-             {:path-params   {"path" path "name" name }
-              :header-params {}
-              :query-params  {":operation" operation "deleteAuthorizable" delete-authorizable }
-              :form-params   {"file" file }
-              :content-types ["multipart/form-data"]
-              :accepts       []
-              :auth-names    ["aemAuth"]})))
 
-(defn post-node
+(defn-spec post-config-property-with-http-info any?
   ""
-  ([path name ] (post-node path name nil))
-  ([path name optional-params]
-   (:data (post-node-with-http-info path name optional-params))))
-
-(defn post-node-rw-with-http-info
-  ""
-  ([path name ] (post-node-rw-with-http-info path name nil))
-  ([path name {:keys [add-members ]}]
-   (check-required-params path name)
-   (call-api "/{path}/{name}.rw.html" :post
-             {:path-params   {"path" path "name" name }
-              :header-params {}
-              :query-params  {"addMembers" add-members }
-              :form-params   {}
-              :content-types []
-              :accepts       []
-              :auth-names    ["aemAuth"]})))
-
-(defn post-node-rw
-  ""
-  ([path name ] (post-node-rw path name nil))
-  ([path name optional-params]
-   (:data (post-node-rw-with-http-info path name optional-params))))
-
-(defn post-path-with-http-info
-  ""
-  [path jcrprimary-type name ]
-  (check-required-params path jcrprimary-type name)
-  (call-api "/{path}/" :post
-            {:path-params   {"path" path }
+  [configNodeName string?]
+  (check-required-params configNodeName)
+  (call-api "/apps/system/config/{configNodeName}" :post
+            {:path-params   {"configNodeName" configNodeName }
              :header-params {}
-             :query-params  {"jcr:primaryType" jcrprimary-type ":name" name }
+             :query-params  {}
              :form-params   {}
              :content-types []
              :accepts       []
              :auth-names    ["aemAuth"]}))
 
-(defn post-path
+(defn-spec post-config-property any?
   ""
-  [path jcrprimary-type name ]
-  (:data (post-path-with-http-info path jcrprimary-type name)))
+  [configNodeName string?]
+  (let [res (:data (post-config-property-with-http-info configNodeName))]
+    (if (:decode-models *api-context*)
+       (st/decode any? res st/string-transformer)
+       res)))
 
-(defn post-query-with-http-info
+
+(defn-spec post-node-with-http-info any?
   ""
-  [path plimit 1-property 1-propertyvalue ]
-  (check-required-params path plimit 1-property 1-propertyvalue)
+  ([path string?, name string?, ] (post-node-with-http-info path name nil))
+  ([path string?, name string?, {:keys [operation deleteAuthorizable ^File file]} (s/map-of keyword? any?)]
+   (check-required-params path name)
+   (call-api "/{path}/{name}" :post
+             {:path-params   {"path" path "name" name }
+              :header-params {}
+              :query-params  {":operation" operation "deleteAuthorizable" deleteAuthorizable }
+              :form-params   {"file" file }
+              :content-types ["multipart/form-data"]
+              :accepts       []
+              :auth-names    ["aemAuth"]})))
+
+(defn-spec post-node any?
+  ""
+  ([path string?, name string?, ] (post-node path name nil))
+  ([path string?, name string?, optional-params any?]
+   (let [res (:data (post-node-with-http-info path name optional-params))]
+     (if (:decode-models *api-context*)
+        (st/decode any? res st/string-transformer)
+        res))))
+
+
+(defn-spec post-node-rw-with-http-info any?
+  ""
+  ([path string?, name string?, ] (post-node-rw-with-http-info path name nil))
+  ([path string?, name string?, {:keys [addMembers]} (s/map-of keyword? any?)]
+   (check-required-params path name)
+   (call-api "/{path}/{name}.rw.html" :post
+             {:path-params   {"path" path "name" name }
+              :header-params {}
+              :query-params  {"addMembers" addMembers }
+              :form-params   {}
+              :content-types []
+              :accepts       []
+              :auth-names    ["aemAuth"]})))
+
+(defn-spec post-node-rw any?
+  ""
+  ([path string?, name string?, ] (post-node-rw path name nil))
+  ([path string?, name string?, optional-params any?]
+   (let [res (:data (post-node-rw-with-http-info path name optional-params))]
+     (if (:decode-models *api-context*)
+        (st/decode any? res st/string-transformer)
+        res))))
+
+
+(defn-spec post-path-with-http-info any?
+  ""
+  [path string?, jcrprimaryType string?, name string?]
+  (check-required-params path jcrprimaryType name)
+  (call-api "/{path}/" :post
+            {:path-params   {"path" path }
+             :header-params {}
+             :query-params  {"jcr:primaryType" jcrprimaryType ":name" name }
+             :form-params   {}
+             :content-types []
+             :accepts       []
+             :auth-names    ["aemAuth"]}))
+
+(defn-spec post-path any?
+  ""
+  [path string?, jcrprimaryType string?, name string?]
+  (let [res (:data (post-path-with-http-info path jcrprimaryType name))]
+    (if (:decode-models *api-context*)
+       (st/decode any? res st/string-transformer)
+       res)))
+
+
+(defn-spec post-query-with-http-info any?
+  ""
+  [path string?, plimit float?, 1_property string?, 1_propertyvalue string?]
+  (check-required-params path plimit 1_property 1_propertyvalue)
   (call-api "/bin/querybuilder.json" :post
             {:path-params   {}
              :header-params {}
-             :query-params  {"path" path "p.limit" plimit "1_property" 1-property "1_property.value" 1-propertyvalue }
+             :query-params  {"path" path "p.limit" plimit "1_property" 1_property "1_property.value" 1_propertyvalue }
              :form-params   {}
              :content-types []
              :accepts       ["application/json"]
              :auth-names    ["aemAuth"]}))
 
-(defn post-query
+(defn-spec post-query string?
   ""
-  [path plimit 1-property 1-propertyvalue ]
-  (:data (post-query-with-http-info path plimit 1-property 1-propertyvalue)))
+  [path string?, plimit float?, 1_property string?, 1_propertyvalue string?]
+  (let [res (:data (post-query-with-http-info path plimit 1_property 1_propertyvalue))]
+    (if (:decode-models *api-context*)
+       (st/decode string? res st/string-transformer)
+       res)))
 
-(defn post-tree-activation-with-http-info
+
+(defn-spec post-tree-activation-with-http-info any?
   ""
-  [ignoredeactivated onlymodified path ]
+  [ignoredeactivated boolean?, onlymodified boolean?, path string?]
   (check-required-params ignoredeactivated onlymodified path)
   (call-api "/etc/replication/treeactivation.html" :post
             {:path-params   {}
@@ -479,34 +622,42 @@
              :accepts       []
              :auth-names    ["aemAuth"]}))
 
-(defn post-tree-activation
+(defn-spec post-tree-activation any?
   ""
-  [ignoredeactivated onlymodified path ]
-  (:data (post-tree-activation-with-http-info ignoredeactivated onlymodified path)))
+  [ignoredeactivated boolean?, onlymodified boolean?, path string?]
+  (let [res (:data (post-tree-activation-with-http-info ignoredeactivated onlymodified path))]
+    (if (:decode-models *api-context*)
+       (st/decode any? res st/string-transformer)
+       res)))
 
-(defn post-truststore-with-http-info
+
+(defn-spec post-truststore-with-http-info any?
   ""
   ([] (post-truststore-with-http-info nil))
-  ([{:keys [operation new-password re-password key-store-type remove-alias ^File certificate ]}]
+  ([{:keys [operation newPassword rePassword keyStoreType removeAlias ^File certificate]} (s/map-of keyword? any?)]
    (call-api "/libs/granite/security/post/truststore" :post
              {:path-params   {}
               :header-params {}
-              :query-params  {":operation" operation "newPassword" new-password "rePassword" re-password "keyStoreType" key-store-type "removeAlias" remove-alias }
+              :query-params  {":operation" operation "newPassword" newPassword "rePassword" rePassword "keyStoreType" keyStoreType "removeAlias" removeAlias }
               :form-params   {"certificate" certificate }
               :content-types ["multipart/form-data"]
               :accepts       ["text/plain"]
               :auth-names    ["aemAuth"]})))
 
-(defn post-truststore
+(defn-spec post-truststore string?
   ""
   ([] (post-truststore nil))
-  ([optional-params]
-   (:data (post-truststore-with-http-info optional-params))))
+  ([optional-params any?]
+   (let [res (:data (post-truststore-with-http-info optional-params))]
+     (if (:decode-models *api-context*)
+        (st/decode string? res st/string-transformer)
+        res))))
 
-(defn post-truststore-pkcs12-with-http-info
+
+(defn-spec post-truststore-pkcs12-with-http-info any?
   ""
   ([] (post-truststore-pkcs12-with-http-info nil))
-  ([{:keys [^File truststorep12 ]}]
+  ([{:keys [^File truststorep12]} (s/map-of keyword? any?)]
    (call-api "/etc/truststore" :post
              {:path-params   {}
               :header-params {}
@@ -516,9 +667,13 @@
               :accepts       ["text/plain"]
               :auth-names    ["aemAuth"]})))
 
-(defn post-truststore-pkcs12
+(defn-spec post-truststore-pkcs12 string?
   ""
   ([] (post-truststore-pkcs12 nil))
-  ([optional-params]
-   (:data (post-truststore-pkcs12-with-http-info optional-params))))
+  ([optional-params any?]
+   (let [res (:data (post-truststore-pkcs12-with-http-info optional-params))]
+     (if (:decode-models *api-context*)
+        (st/decode string? res st/string-transformer)
+        res))))
+
 

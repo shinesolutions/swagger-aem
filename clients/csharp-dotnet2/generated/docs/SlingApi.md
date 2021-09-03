@@ -25,6 +25,7 @@ Method | HTTP request | Description
 [**PostConfigApacheSlingDavExServlet**](SlingApi.md#postconfigapacheslingdavexservlet) | **POST** /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet | 
 [**PostConfigApacheSlingGetServlet**](SlingApi.md#postconfigapacheslinggetservlet) | **POST** /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet | 
 [**PostConfigApacheSlingReferrerFilter**](SlingApi.md#postconfigapacheslingreferrerfilter) | **POST** /apps/system/config/org.apache.sling.security.impl.ReferrerFilter | 
+[**PostConfigProperty**](SlingApi.md#postconfigproperty) | **POST** /apps/system/config/{configNodeName} | 
 [**PostNode**](SlingApi.md#postnode) | **POST** /{path}/{name} | 
 [**PostNodeRw**](SlingApi.md#postnoderw) | **POST** /{path}/{name}.rw.html | 
 [**PostPath**](SlingApi.md#postpath) | **POST** /{path}/ | 
@@ -54,7 +55,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -118,7 +118,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -182,7 +181,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -246,7 +244,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -309,7 +306,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -374,7 +370,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -439,7 +434,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -503,7 +497,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -570,7 +563,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -637,14 +629,13 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
 
             var apiInstance = new SlingApi();
             var path = path_example;  // string | 
-            var pLimit = 1.2;  // decimal? | 
+            var pLimit = 8.14;  // decimal? | 
             var _1property = _1property_example;  // string | 
             var _1propertyValue = _1propertyValue_example;  // string | 
 
@@ -706,7 +697,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -765,7 +755,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -806,7 +795,7 @@ This endpoint does not need any parameter.
 
 <a name="postagent"></a>
 # **PostAgent**
-> void PostAgent (string runmode, string name, bool? jcrcontentcqdistribute, string jcrcontentcqdistributeTypeHint, string jcrcontentcqname, string jcrcontentcqtemplate, bool? jcrcontentenabled, string jcrcontentjcrdescription, string jcrcontentjcrlastModified, string jcrcontentjcrlastModifiedBy, string jcrcontentjcrmixinTypes, string jcrcontentjcrtitle, string jcrcontentlogLevel, bool? jcrcontentnoStatusUpdate, bool? jcrcontentnoVersioning, decimal? jcrcontentprotocolConnectTimeout, bool? jcrcontentprotocolHTTPConnectionClosed, string jcrcontentprotocolHTTPExpired, List<string> jcrcontentprotocolHTTPHeaders, string jcrcontentprotocolHTTPHeadersTypeHint, string jcrcontentprotocolHTTPMethod, bool? jcrcontentprotocolHTTPSRelaxed, string jcrcontentprotocolInterface, decimal? jcrcontentprotocolSocketTimeout, string jcrcontentprotocolVersion, string jcrcontentproxyNTLMDomain, string jcrcontentproxyNTLMHost, string jcrcontentproxyHost, string jcrcontentproxyPassword, decimal? jcrcontentproxyPort, string jcrcontentproxyUser, decimal? jcrcontentqueueBatchMaxSize, string jcrcontentqueueBatchMode, decimal? jcrcontentqueueBatchWaitTime, string jcrcontentretryDelay, bool? jcrcontentreverseReplication, string jcrcontentserializationType, string jcrcontentslingresourceType, string jcrcontentssl, string jcrcontenttransportNTLMDomain, string jcrcontenttransportNTLMHost, string jcrcontenttransportPassword, string jcrcontenttransportUri, string jcrcontenttransportUser, bool? jcrcontenttriggerDistribute, bool? jcrcontenttriggerModified, bool? jcrcontenttriggerOnOffTime, bool? jcrcontenttriggerReceive, bool? jcrcontenttriggerSpecific, string jcrcontentuserId, string jcrprimaryType, string operation)
+> void PostAgent (string runmode, string name, bool? jcrcontentCqdistribute, string jcrcontentCqdistributeTypeHint, string jcrcontentCqname, string jcrcontentCqtemplate, bool? jcrcontentEnabled, string jcrcontentJcrdescription, string jcrcontentJcrlastModified, string jcrcontentJcrlastModifiedBy, string jcrcontentJcrmixinTypes, string jcrcontentJcrtitle, string jcrcontentLogLevel, bool? jcrcontentNoStatusUpdate, bool? jcrcontentNoVersioning, decimal? jcrcontentProtocolConnectTimeout, bool? jcrcontentProtocolHTTPConnectionClosed, string jcrcontentProtocolHTTPExpired, List<string> jcrcontentProtocolHTTPHeaders, string jcrcontentProtocolHTTPHeadersTypeHint, string jcrcontentProtocolHTTPMethod, bool? jcrcontentProtocolHTTPSRelaxed, string jcrcontentProtocolInterface, decimal? jcrcontentProtocolSocketTimeout, string jcrcontentProtocolVersion, string jcrcontentProxyNTLMDomain, string jcrcontentProxyNTLMHost, string jcrcontentProxyHost, string jcrcontentProxyPassword, decimal? jcrcontentProxyPort, string jcrcontentProxyUser, decimal? jcrcontentQueueBatchMaxSize, string jcrcontentQueueBatchMode, decimal? jcrcontentQueueBatchWaitTime, string jcrcontentRetryDelay, bool? jcrcontentReverseReplication, string jcrcontentSerializationType, string jcrcontentSlingresourceType, string jcrcontentSsl, string jcrcontentTransportNTLMDomain, string jcrcontentTransportNTLMHost, string jcrcontentTransportPassword, string jcrcontentTransportUri, string jcrcontentTransportUser, bool? jcrcontentTriggerDistribute, bool? jcrcontentTriggerModified, bool? jcrcontentTriggerOnOffTime, bool? jcrcontentTriggerReceive, bool? jcrcontentTriggerSpecific, string jcrcontentUserId, string jcrprimaryType, string operation)
 
 
 
@@ -824,7 +813,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -832,60 +820,60 @@ namespace Example
             var apiInstance = new SlingApi();
             var runmode = runmode_example;  // string | 
             var name = name_example;  // string | 
-            var jcrcontentcqdistribute = true;  // bool? |  (optional) 
-            var jcrcontentcqdistributeTypeHint = jcrcontentcqdistributeTypeHint_example;  // string |  (optional) 
-            var jcrcontentcqname = jcrcontentcqname_example;  // string |  (optional) 
-            var jcrcontentcqtemplate = jcrcontentcqtemplate_example;  // string |  (optional) 
-            var jcrcontentenabled = true;  // bool? |  (optional) 
-            var jcrcontentjcrdescription = jcrcontentjcrdescription_example;  // string |  (optional) 
-            var jcrcontentjcrlastModified = jcrcontentjcrlastModified_example;  // string |  (optional) 
-            var jcrcontentjcrlastModifiedBy = jcrcontentjcrlastModifiedBy_example;  // string |  (optional) 
-            var jcrcontentjcrmixinTypes = jcrcontentjcrmixinTypes_example;  // string |  (optional) 
-            var jcrcontentjcrtitle = jcrcontentjcrtitle_example;  // string |  (optional) 
-            var jcrcontentlogLevel = jcrcontentlogLevel_example;  // string |  (optional) 
-            var jcrcontentnoStatusUpdate = true;  // bool? |  (optional) 
-            var jcrcontentnoVersioning = true;  // bool? |  (optional) 
-            var jcrcontentprotocolConnectTimeout = 1.2;  // decimal? |  (optional) 
-            var jcrcontentprotocolHTTPConnectionClosed = true;  // bool? |  (optional) 
-            var jcrcontentprotocolHTTPExpired = jcrcontentprotocolHTTPExpired_example;  // string |  (optional) 
-            var jcrcontentprotocolHTTPHeaders = new List<string>(); // List<string> |  (optional) 
-            var jcrcontentprotocolHTTPHeadersTypeHint = jcrcontentprotocolHTTPHeadersTypeHint_example;  // string |  (optional) 
-            var jcrcontentprotocolHTTPMethod = jcrcontentprotocolHTTPMethod_example;  // string |  (optional) 
-            var jcrcontentprotocolHTTPSRelaxed = true;  // bool? |  (optional) 
-            var jcrcontentprotocolInterface = jcrcontentprotocolInterface_example;  // string |  (optional) 
-            var jcrcontentprotocolSocketTimeout = 1.2;  // decimal? |  (optional) 
-            var jcrcontentprotocolVersion = jcrcontentprotocolVersion_example;  // string |  (optional) 
-            var jcrcontentproxyNTLMDomain = jcrcontentproxyNTLMDomain_example;  // string |  (optional) 
-            var jcrcontentproxyNTLMHost = jcrcontentproxyNTLMHost_example;  // string |  (optional) 
-            var jcrcontentproxyHost = jcrcontentproxyHost_example;  // string |  (optional) 
-            var jcrcontentproxyPassword = jcrcontentproxyPassword_example;  // string |  (optional) 
-            var jcrcontentproxyPort = 1.2;  // decimal? |  (optional) 
-            var jcrcontentproxyUser = jcrcontentproxyUser_example;  // string |  (optional) 
-            var jcrcontentqueueBatchMaxSize = 1.2;  // decimal? |  (optional) 
-            var jcrcontentqueueBatchMode = jcrcontentqueueBatchMode_example;  // string |  (optional) 
-            var jcrcontentqueueBatchWaitTime = 1.2;  // decimal? |  (optional) 
-            var jcrcontentretryDelay = jcrcontentretryDelay_example;  // string |  (optional) 
-            var jcrcontentreverseReplication = true;  // bool? |  (optional) 
-            var jcrcontentserializationType = jcrcontentserializationType_example;  // string |  (optional) 
-            var jcrcontentslingresourceType = jcrcontentslingresourceType_example;  // string |  (optional) 
-            var jcrcontentssl = jcrcontentssl_example;  // string |  (optional) 
-            var jcrcontenttransportNTLMDomain = jcrcontenttransportNTLMDomain_example;  // string |  (optional) 
-            var jcrcontenttransportNTLMHost = jcrcontenttransportNTLMHost_example;  // string |  (optional) 
-            var jcrcontenttransportPassword = jcrcontenttransportPassword_example;  // string |  (optional) 
-            var jcrcontenttransportUri = jcrcontenttransportUri_example;  // string |  (optional) 
-            var jcrcontenttransportUser = jcrcontenttransportUser_example;  // string |  (optional) 
-            var jcrcontenttriggerDistribute = true;  // bool? |  (optional) 
-            var jcrcontenttriggerModified = true;  // bool? |  (optional) 
-            var jcrcontenttriggerOnOffTime = true;  // bool? |  (optional) 
-            var jcrcontenttriggerReceive = true;  // bool? |  (optional) 
-            var jcrcontenttriggerSpecific = true;  // bool? |  (optional) 
-            var jcrcontentuserId = jcrcontentuserId_example;  // string |  (optional) 
+            var jcrcontentCqdistribute = true;  // bool? |  (optional) 
+            var jcrcontentCqdistributeTypeHint = jcrcontentCqdistributeTypeHint_example;  // string |  (optional) 
+            var jcrcontentCqname = jcrcontentCqname_example;  // string |  (optional) 
+            var jcrcontentCqtemplate = jcrcontentCqtemplate_example;  // string |  (optional) 
+            var jcrcontentEnabled = true;  // bool? |  (optional) 
+            var jcrcontentJcrdescription = jcrcontentJcrdescription_example;  // string |  (optional) 
+            var jcrcontentJcrlastModified = jcrcontentJcrlastModified_example;  // string |  (optional) 
+            var jcrcontentJcrlastModifiedBy = jcrcontentJcrlastModifiedBy_example;  // string |  (optional) 
+            var jcrcontentJcrmixinTypes = jcrcontentJcrmixinTypes_example;  // string |  (optional) 
+            var jcrcontentJcrtitle = jcrcontentJcrtitle_example;  // string |  (optional) 
+            var jcrcontentLogLevel = jcrcontentLogLevel_example;  // string |  (optional) 
+            var jcrcontentNoStatusUpdate = true;  // bool? |  (optional) 
+            var jcrcontentNoVersioning = true;  // bool? |  (optional) 
+            var jcrcontentProtocolConnectTimeout = 8.14;  // decimal? |  (optional) 
+            var jcrcontentProtocolHTTPConnectionClosed = true;  // bool? |  (optional) 
+            var jcrcontentProtocolHTTPExpired = jcrcontentProtocolHTTPExpired_example;  // string |  (optional) 
+            var jcrcontentProtocolHTTPHeaders = new List<string>(); // List<string> |  (optional) 
+            var jcrcontentProtocolHTTPHeadersTypeHint = jcrcontentProtocolHTTPHeadersTypeHint_example;  // string |  (optional) 
+            var jcrcontentProtocolHTTPMethod = jcrcontentProtocolHTTPMethod_example;  // string |  (optional) 
+            var jcrcontentProtocolHTTPSRelaxed = true;  // bool? |  (optional) 
+            var jcrcontentProtocolInterface = jcrcontentProtocolInterface_example;  // string |  (optional) 
+            var jcrcontentProtocolSocketTimeout = 8.14;  // decimal? |  (optional) 
+            var jcrcontentProtocolVersion = jcrcontentProtocolVersion_example;  // string |  (optional) 
+            var jcrcontentProxyNTLMDomain = jcrcontentProxyNTLMDomain_example;  // string |  (optional) 
+            var jcrcontentProxyNTLMHost = jcrcontentProxyNTLMHost_example;  // string |  (optional) 
+            var jcrcontentProxyHost = jcrcontentProxyHost_example;  // string |  (optional) 
+            var jcrcontentProxyPassword = jcrcontentProxyPassword_example;  // string |  (optional) 
+            var jcrcontentProxyPort = 8.14;  // decimal? |  (optional) 
+            var jcrcontentProxyUser = jcrcontentProxyUser_example;  // string |  (optional) 
+            var jcrcontentQueueBatchMaxSize = 8.14;  // decimal? |  (optional) 
+            var jcrcontentQueueBatchMode = jcrcontentQueueBatchMode_example;  // string |  (optional) 
+            var jcrcontentQueueBatchWaitTime = 8.14;  // decimal? |  (optional) 
+            var jcrcontentRetryDelay = jcrcontentRetryDelay_example;  // string |  (optional) 
+            var jcrcontentReverseReplication = true;  // bool? |  (optional) 
+            var jcrcontentSerializationType = jcrcontentSerializationType_example;  // string |  (optional) 
+            var jcrcontentSlingresourceType = jcrcontentSlingresourceType_example;  // string |  (optional) 
+            var jcrcontentSsl = jcrcontentSsl_example;  // string |  (optional) 
+            var jcrcontentTransportNTLMDomain = jcrcontentTransportNTLMDomain_example;  // string |  (optional) 
+            var jcrcontentTransportNTLMHost = jcrcontentTransportNTLMHost_example;  // string |  (optional) 
+            var jcrcontentTransportPassword = jcrcontentTransportPassword_example;  // string |  (optional) 
+            var jcrcontentTransportUri = jcrcontentTransportUri_example;  // string |  (optional) 
+            var jcrcontentTransportUser = jcrcontentTransportUser_example;  // string |  (optional) 
+            var jcrcontentTriggerDistribute = true;  // bool? |  (optional) 
+            var jcrcontentTriggerModified = true;  // bool? |  (optional) 
+            var jcrcontentTriggerOnOffTime = true;  // bool? |  (optional) 
+            var jcrcontentTriggerReceive = true;  // bool? |  (optional) 
+            var jcrcontentTriggerSpecific = true;  // bool? |  (optional) 
+            var jcrcontentUserId = jcrcontentUserId_example;  // string |  (optional) 
             var jcrprimaryType = jcrprimaryType_example;  // string |  (optional) 
             var operation = operation_example;  // string |  (optional) 
 
             try
             {
-                apiInstance.PostAgent(runmode, name, jcrcontentcqdistribute, jcrcontentcqdistributeTypeHint, jcrcontentcqname, jcrcontentcqtemplate, jcrcontentenabled, jcrcontentjcrdescription, jcrcontentjcrlastModified, jcrcontentjcrlastModifiedBy, jcrcontentjcrmixinTypes, jcrcontentjcrtitle, jcrcontentlogLevel, jcrcontentnoStatusUpdate, jcrcontentnoVersioning, jcrcontentprotocolConnectTimeout, jcrcontentprotocolHTTPConnectionClosed, jcrcontentprotocolHTTPExpired, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentprotocolHTTPSRelaxed, jcrcontentprotocolInterface, jcrcontentprotocolSocketTimeout, jcrcontentprotocolVersion, jcrcontentproxyNTLMDomain, jcrcontentproxyNTLMHost, jcrcontentproxyHost, jcrcontentproxyPassword, jcrcontentproxyPort, jcrcontentproxyUser, jcrcontentqueueBatchMaxSize, jcrcontentqueueBatchMode, jcrcontentqueueBatchWaitTime, jcrcontentretryDelay, jcrcontentreverseReplication, jcrcontentserializationType, jcrcontentslingresourceType, jcrcontentssl, jcrcontenttransportNTLMDomain, jcrcontenttransportNTLMHost, jcrcontenttransportPassword, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttriggerDistribute, jcrcontenttriggerModified, jcrcontenttriggerOnOffTime, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentuserId, jcrprimaryType, operation);
+                apiInstance.PostAgent(runmode, name, jcrcontentCqdistribute, jcrcontentCqdistributeTypeHint, jcrcontentCqname, jcrcontentCqtemplate, jcrcontentEnabled, jcrcontentJcrdescription, jcrcontentJcrlastModified, jcrcontentJcrlastModifiedBy, jcrcontentJcrmixinTypes, jcrcontentJcrtitle, jcrcontentLogLevel, jcrcontentNoStatusUpdate, jcrcontentNoVersioning, jcrcontentProtocolConnectTimeout, jcrcontentProtocolHTTPConnectionClosed, jcrcontentProtocolHTTPExpired, jcrcontentProtocolHTTPHeaders, jcrcontentProtocolHTTPHeadersTypeHint, jcrcontentProtocolHTTPMethod, jcrcontentProtocolHTTPSRelaxed, jcrcontentProtocolInterface, jcrcontentProtocolSocketTimeout, jcrcontentProtocolVersion, jcrcontentProxyNTLMDomain, jcrcontentProxyNTLMHost, jcrcontentProxyHost, jcrcontentProxyPassword, jcrcontentProxyPort, jcrcontentProxyUser, jcrcontentQueueBatchMaxSize, jcrcontentQueueBatchMode, jcrcontentQueueBatchWaitTime, jcrcontentRetryDelay, jcrcontentReverseReplication, jcrcontentSerializationType, jcrcontentSlingresourceType, jcrcontentSsl, jcrcontentTransportNTLMDomain, jcrcontentTransportNTLMHost, jcrcontentTransportPassword, jcrcontentTransportUri, jcrcontentTransportUser, jcrcontentTriggerDistribute, jcrcontentTriggerModified, jcrcontentTriggerOnOffTime, jcrcontentTriggerReceive, jcrcontentTriggerSpecific, jcrcontentUserId, jcrprimaryType, operation);
             }
             catch (Exception e)
             {
@@ -902,54 +890,54 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **runmode** | **string**|  | 
  **name** | **string**|  | 
- **jcrcontentcqdistribute** | **bool?**|  | [optional] 
- **jcrcontentcqdistributeTypeHint** | **string**|  | [optional] 
- **jcrcontentcqname** | **string**|  | [optional] 
- **jcrcontentcqtemplate** | **string**|  | [optional] 
- **jcrcontentenabled** | **bool?**|  | [optional] 
- **jcrcontentjcrdescription** | **string**|  | [optional] 
- **jcrcontentjcrlastModified** | **string**|  | [optional] 
- **jcrcontentjcrlastModifiedBy** | **string**|  | [optional] 
- **jcrcontentjcrmixinTypes** | **string**|  | [optional] 
- **jcrcontentjcrtitle** | **string**|  | [optional] 
- **jcrcontentlogLevel** | **string**|  | [optional] 
- **jcrcontentnoStatusUpdate** | **bool?**|  | [optional] 
- **jcrcontentnoVersioning** | **bool?**|  | [optional] 
- **jcrcontentprotocolConnectTimeout** | **decimal?**|  | [optional] 
- **jcrcontentprotocolHTTPConnectionClosed** | **bool?**|  | [optional] 
- **jcrcontentprotocolHTTPExpired** | **string**|  | [optional] 
- **jcrcontentprotocolHTTPHeaders** | [**List<string>**](string.md)|  | [optional] 
- **jcrcontentprotocolHTTPHeadersTypeHint** | **string**|  | [optional] 
- **jcrcontentprotocolHTTPMethod** | **string**|  | [optional] 
- **jcrcontentprotocolHTTPSRelaxed** | **bool?**|  | [optional] 
- **jcrcontentprotocolInterface** | **string**|  | [optional] 
- **jcrcontentprotocolSocketTimeout** | **decimal?**|  | [optional] 
- **jcrcontentprotocolVersion** | **string**|  | [optional] 
- **jcrcontentproxyNTLMDomain** | **string**|  | [optional] 
- **jcrcontentproxyNTLMHost** | **string**|  | [optional] 
- **jcrcontentproxyHost** | **string**|  | [optional] 
- **jcrcontentproxyPassword** | **string**|  | [optional] 
- **jcrcontentproxyPort** | **decimal?**|  | [optional] 
- **jcrcontentproxyUser** | **string**|  | [optional] 
- **jcrcontentqueueBatchMaxSize** | **decimal?**|  | [optional] 
- **jcrcontentqueueBatchMode** | **string**|  | [optional] 
- **jcrcontentqueueBatchWaitTime** | **decimal?**|  | [optional] 
- **jcrcontentretryDelay** | **string**|  | [optional] 
- **jcrcontentreverseReplication** | **bool?**|  | [optional] 
- **jcrcontentserializationType** | **string**|  | [optional] 
- **jcrcontentslingresourceType** | **string**|  | [optional] 
- **jcrcontentssl** | **string**|  | [optional] 
- **jcrcontenttransportNTLMDomain** | **string**|  | [optional] 
- **jcrcontenttransportNTLMHost** | **string**|  | [optional] 
- **jcrcontenttransportPassword** | **string**|  | [optional] 
- **jcrcontenttransportUri** | **string**|  | [optional] 
- **jcrcontenttransportUser** | **string**|  | [optional] 
- **jcrcontenttriggerDistribute** | **bool?**|  | [optional] 
- **jcrcontenttriggerModified** | **bool?**|  | [optional] 
- **jcrcontenttriggerOnOffTime** | **bool?**|  | [optional] 
- **jcrcontenttriggerReceive** | **bool?**|  | [optional] 
- **jcrcontenttriggerSpecific** | **bool?**|  | [optional] 
- **jcrcontentuserId** | **string**|  | [optional] 
+ **jcrcontentCqdistribute** | **bool?**|  | [optional] 
+ **jcrcontentCqdistributeTypeHint** | **string**|  | [optional] 
+ **jcrcontentCqname** | **string**|  | [optional] 
+ **jcrcontentCqtemplate** | **string**|  | [optional] 
+ **jcrcontentEnabled** | **bool?**|  | [optional] 
+ **jcrcontentJcrdescription** | **string**|  | [optional] 
+ **jcrcontentJcrlastModified** | **string**|  | [optional] 
+ **jcrcontentJcrlastModifiedBy** | **string**|  | [optional] 
+ **jcrcontentJcrmixinTypes** | **string**|  | [optional] 
+ **jcrcontentJcrtitle** | **string**|  | [optional] 
+ **jcrcontentLogLevel** | **string**|  | [optional] 
+ **jcrcontentNoStatusUpdate** | **bool?**|  | [optional] 
+ **jcrcontentNoVersioning** | **bool?**|  | [optional] 
+ **jcrcontentProtocolConnectTimeout** | **decimal?**|  | [optional] 
+ **jcrcontentProtocolHTTPConnectionClosed** | **bool?**|  | [optional] 
+ **jcrcontentProtocolHTTPExpired** | **string**|  | [optional] 
+ **jcrcontentProtocolHTTPHeaders** | [**List<string>**](string.md)|  | [optional] 
+ **jcrcontentProtocolHTTPHeadersTypeHint** | **string**|  | [optional] 
+ **jcrcontentProtocolHTTPMethod** | **string**|  | [optional] 
+ **jcrcontentProtocolHTTPSRelaxed** | **bool?**|  | [optional] 
+ **jcrcontentProtocolInterface** | **string**|  | [optional] 
+ **jcrcontentProtocolSocketTimeout** | **decimal?**|  | [optional] 
+ **jcrcontentProtocolVersion** | **string**|  | [optional] 
+ **jcrcontentProxyNTLMDomain** | **string**|  | [optional] 
+ **jcrcontentProxyNTLMHost** | **string**|  | [optional] 
+ **jcrcontentProxyHost** | **string**|  | [optional] 
+ **jcrcontentProxyPassword** | **string**|  | [optional] 
+ **jcrcontentProxyPort** | **decimal?**|  | [optional] 
+ **jcrcontentProxyUser** | **string**|  | [optional] 
+ **jcrcontentQueueBatchMaxSize** | **decimal?**|  | [optional] 
+ **jcrcontentQueueBatchMode** | **string**|  | [optional] 
+ **jcrcontentQueueBatchWaitTime** | **decimal?**|  | [optional] 
+ **jcrcontentRetryDelay** | **string**|  | [optional] 
+ **jcrcontentReverseReplication** | **bool?**|  | [optional] 
+ **jcrcontentSerializationType** | **string**|  | [optional] 
+ **jcrcontentSlingresourceType** | **string**|  | [optional] 
+ **jcrcontentSsl** | **string**|  | [optional] 
+ **jcrcontentTransportNTLMDomain** | **string**|  | [optional] 
+ **jcrcontentTransportNTLMHost** | **string**|  | [optional] 
+ **jcrcontentTransportPassword** | **string**|  | [optional] 
+ **jcrcontentTransportUri** | **string**|  | [optional] 
+ **jcrcontentTransportUser** | **string**|  | [optional] 
+ **jcrcontentTriggerDistribute** | **bool?**|  | [optional] 
+ **jcrcontentTriggerModified** | **bool?**|  | [optional] 
+ **jcrcontentTriggerOnOffTime** | **bool?**|  | [optional] 
+ **jcrcontentTriggerReceive** | **bool?**|  | [optional] 
+ **jcrcontentTriggerSpecific** | **bool?**|  | [optional] 
+ **jcrcontentUserId** | **string**|  | [optional] 
  **jcrprimaryType** | **string**|  | [optional] 
  **operation** | **string**|  | [optional] 
 
@@ -988,7 +976,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -1059,7 +1046,7 @@ Name | Type | Description  | Notes
 
 <a name="postauthorizables"></a>
 # **PostAuthorizables**
-> string PostAuthorizables (string authorizableId, string intermediatePath, string createUser, string createGroup, string reppassword, string profilegivenName)
+> string PostAuthorizables (string authorizableId, string intermediatePath, string createUser, string createGroup, string reppassword, string profileGivenName)
 
 
 
@@ -1077,7 +1064,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -1088,11 +1074,11 @@ namespace Example
             var createUser = createUser_example;  // string |  (optional) 
             var createGroup = createGroup_example;  // string |  (optional) 
             var reppassword = reppassword_example;  // string |  (optional) 
-            var profilegivenName = profilegivenName_example;  // string |  (optional) 
+            var profileGivenName = profileGivenName_example;  // string |  (optional) 
 
             try
             {
-                string result = apiInstance.PostAuthorizables(authorizableId, intermediatePath, createUser, createGroup, reppassword, profilegivenName);
+                string result = apiInstance.PostAuthorizables(authorizableId, intermediatePath, createUser, createGroup, reppassword, profileGivenName);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -1113,7 +1099,7 @@ Name | Type | Description  | Notes
  **createUser** | **string**|  | [optional] 
  **createGroup** | **string**|  | [optional] 
  **reppassword** | **string**|  | [optional] 
- **profilegivenName** | **string**|  | [optional] 
+ **profileGivenName** | **string**|  | [optional] 
 
 ### Return type
 
@@ -1150,7 +1136,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -1306,7 +1291,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -1406,7 +1390,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -1490,7 +1473,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -1558,7 +1540,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -1634,7 +1615,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -1690,6 +1670,67 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a name="postconfigproperty"></a>
+# **PostConfigProperty**
+> void PostConfigProperty (string configNodeName)
+
+
+
+### Example
+```csharp
+using System;
+using System.Diagnostics;
+using Org.OpenAPITools.Api;
+using Org.OpenAPITools.Client;
+using Org.OpenAPITools.Model;
+
+namespace Example
+{
+    public class PostConfigPropertyExample
+    {
+        public void main()
+        {
+            // Configure HTTP basic authorization: aemAuth
+            Configuration.Default.Username = "YOUR_USERNAME";
+            Configuration.Default.Password = "YOUR_PASSWORD";
+
+            var apiInstance = new SlingApi();
+            var configNodeName = configNodeName_example;  // string | 
+
+            try
+            {
+                apiInstance.PostConfigProperty(configNodeName);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling SlingApi.PostConfigProperty: " + e.Message );
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **configNodeName** | **string**|  | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a name="postnode"></a>
 # **PostNode**
 > void PostNode (string path, string name, string operation, string deleteAuthorizable, System.IO.Stream file)
@@ -1710,7 +1751,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -1780,7 +1820,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -1846,7 +1885,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -1912,14 +1950,13 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
 
             var apiInstance = new SlingApi();
             var path = path_example;  // string | 
-            var pLimit = 1.2;  // decimal? | 
+            var pLimit = 8.14;  // decimal? | 
             var _1property = _1property_example;  // string | 
             var _1propertyValue = _1propertyValue_example;  // string | 
 
@@ -1981,7 +2018,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -2047,7 +2083,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -2120,7 +2155,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";

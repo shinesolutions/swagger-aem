@@ -1,45 +1,46 @@
-#![allow(unused_extern_crates)]
-extern crate tokio_core;
-extern crate native_tls;
-extern crate hyper_tls;
-extern crate openssl;
-extern crate mime;
-extern crate chrono;
-extern crate url;
-
-
-
-use hyper;
-use hyper::header::{Headers, ContentType};
-use hyper::Uri;
-use self::url::percent_encoding::{utf8_percent_encode, PATH_SEGMENT_ENCODE_SET, QUERY_ENCODE_SET};
-use futures;
-use futures::{Future, Stream};
-use futures::{future, stream};
-use self::tokio_core::reactor::Handle;
+use async_trait::async_trait;
+use futures::{Stream, future, future::BoxFuture, stream, future::TryFutureExt, future::FutureExt, stream::StreamExt};
+use hyper::header::{HeaderName, HeaderValue, CONTENT_TYPE};
+use hyper::{Body, Request, Response, service::Service, Uri};
+use percent_encoding::{utf8_percent_encode, AsciiSet};
 use std::borrow::Cow;
-use std::io::{Read, Error, ErrorKind};
-use std::error;
+use std::convert::TryInto;
+use std::io::{ErrorKind, Read};
+use std::error::Error;
+use std::future::Future;
 use std::fmt;
+use std::marker::PhantomData;
 use std::path::Path;
-use std::sync::Arc;
+use std::sync::{Arc, Mutex};
 use std::str;
 use std::str::FromStr;
+use std::string::ToString;
+use std::task::{Context, Poll};
+use swagger::{ApiError, AuthData, BodyExt, Connector, DropContextService, Has, XSpanIdString};
+use url::form_urlencoded;
 
-use mimetypes;
+use mime::Mime;
+use std::io::Cursor;
+use multipart::client::lazy::Multipart;
 
-use serde_json;
+use crate::models;
+use crate::header;
 
+/// https://url.spec.whatwg.org/#fragment-percent-encode-set
+#[allow(dead_code)]
+const FRAGMENT_ENCODE_SET: &AsciiSet = &percent_encoding::CONTROLS
+    .add(b' ').add(b'"').add(b'<').add(b'>').add(b'`');
 
-#[allow(unused_imports)]
-use std::collections::{HashMap, BTreeMap};
-#[allow(unused_imports)]
-use swagger;
+/// This encode set is used for object IDs
+///
+/// Aside from the special characters defined in the `PATH_SEGMENT_ENCODE_SET`,
+/// the vertical bar (|) is encoded.
+#[allow(dead_code)]
+const ID_ENCODE_SET: &AsciiSet = &FRAGMENT_ENCODE_SET.add(b'|');
 
-use swagger::{ApiError, XSpanId, XSpanIdString, Has, AuthData};
-
-use {Api,
+use crate::{Api,
      GetAemProductInfoResponse,
+     GetBundleInfoResponse,
      GetConfigMgrResponse,
      PostBundleResponse,
      PostJmxRepositoryResponse,
@@ -56,6 +57,7 @@ use {Api,
      GetAemHealthCheckResponse,
      PostConfigAemHealthCheckServletResponse,
      PostConfigAemPasswordResetResponse,
+     SslSetupResponse,
      DeleteAgentResponse,
      DeleteNodeResponse,
      GetAgentResponse,
@@ -77,6 +79,7 @@ use {Api,
      PostConfigApacheSlingDavExServletResponse,
      PostConfigApacheSlingGetServletResponse,
      PostConfigApacheSlingReferrerFilterResponse,
+     PostConfigPropertyResponse,
      PostNodeResponse,
      PostNodeRwResponse,
      PostPathResponse,
@@ -85,22 +88,13 @@ use {Api,
      PostTruststoreResponse,
      PostTruststorePKCS12Response
      };
-use models;
-
-define_encode_set! {
-    /// This encode set is used for object IDs
-    ///
-    /// Aside from the special characters defined in the `PATH_SEGMENT_ENCODE_SET`,
-    /// the vertical bar (|) is encoded.
-    pub ID_ENCODE_SET = [PATH_SEGMENT_ENCODE_SET] | {'|'}
-}
 
 /// Convert input into a base path, e.g. "http://example:123". Also checks the scheme as it goes.
-fn into_base_path(input: &str, correct_scheme: Option<&'static str>) -> Result<String, ClientInitError> {
+fn into_base_path(input: impl TryInto<Uri, Error=hyper::http::uri::InvalidUri>, correct_scheme: Option<&'static str>) -> Result<String, ClientInitError> {
     // First convert to Uri, since a base path is a subset of Uri.
-    let uri = Uri::from_str(input)?;
+    let uri = input.try_into()?;
 
-    let scheme = uri.scheme().ok_or(ClientInitError::InvalidScheme)?;
+    let scheme = uri.scheme_str().ok_or(ClientInitError::InvalidScheme)?;
 
     // Check the scheme if necessary
     if let Some(correct_scheme) = correct_scheme {
@@ -110,4013 +104,6260 @@ fn into_base_path(input: &str, correct_scheme: Option<&'static str>) -> Result<S
     }
 
     let host = uri.host().ok_or_else(|| ClientInitError::MissingHost)?;
-    let port = uri.port().map(|x| format!(":{}", x)).unwrap_or_default();
-    Ok(format!("{}://{}{}", scheme, host, port))
+    let port = uri.port_u16().map(|x| format!(":{}", x)).unwrap_or_default();
+    Ok(format!("{}://{}{}{}", scheme, host, port, uri.path().trim_end_matches('/')))
 }
 
 /// A client that implements the API by making HTTP calls out to a server.
-pub struct Client<F> where
-  F: Future<Item=hyper::Response, Error=hyper::Error> + 'static {
-    client_service: Arc<Box<hyper::client::Service<Request=hyper::Request<hyper::Body>, Response=hyper::Response, Error=hyper::Error, Future=F>>>,
+pub struct Client<S, C> where
+    S: Service<
+           (Request<Body>, C),
+           Response=Response<Body>> + Clone + Sync + Send + 'static,
+    S::Future: Send + 'static,
+    S::Error: Into<crate::ServiceError> + fmt::Display,
+    C: Clone + Send + Sync + 'static
+{
+    /// Inner service
+    client_service: S,
+
+    /// Base path of the API
     base_path: String,
+
+    /// Marker
+    marker: PhantomData<fn(C)>,
 }
 
-impl<F> fmt::Debug for Client<F> where
-   F: Future<Item=hyper::Response, Error=hyper::Error>  + 'static {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+impl<S, C> fmt::Debug for Client<S, C> where
+    S: Service<
+           (Request<Body>, C),
+           Response=Response<Body>> + Clone + Sync + Send + 'static,
+    S::Future: Send + 'static,
+    S::Error: Into<crate::ServiceError> + fmt::Display,
+    C: Clone + Send + Sync + 'static
+{
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "Client {{ base_path: {} }}", self.base_path)
     }
 }
 
-impl<F> Clone for Client<F> where
-   F: Future<Item=hyper::Response, Error=hyper::Error>  + 'static {
+impl<S, C> Clone for Client<S, C> where
+    S: Service<
+           (Request<Body>, C),
+           Response=Response<Body>> + Clone + Sync + Send + 'static,
+    S::Future: Send + 'static,
+    S::Error: Into<crate::ServiceError> + fmt::Display,
+    C: Clone + Send + Sync + 'static
+{
     fn clone(&self) -> Self {
-        Client {
+        Self {
             client_service: self.client_service.clone(),
-            base_path: self.base_path.clone()
+            base_path: self.base_path.clone(),
+            marker: PhantomData,
         }
     }
 }
 
-impl Client<hyper::client::FutureResponse> {
-
-    /// Create an HTTP client.
-    ///
-    /// # Arguments
-    /// * `handle` - tokio reactor handle to use for execution
-    /// * `base_path` - base path of the client API, i.e. "www.my-api-implementation.com"
-    pub fn try_new_http(handle: Handle, base_path: &str) -> Result<Client<hyper::client::FutureResponse>, ClientInitError> {
-        let http_connector = swagger::http_connector();
-        Self::try_new_with_connector::<hyper::client::HttpConnector>(
-            handle,
-            base_path,
-            Some("http"),
-            http_connector,
-        )
-    }
-
-    /// Create a client with a TLS connection to the server.
-    ///
-    /// # Arguments
-    /// * `handle` - tokio reactor handle to use for execution
-    /// * `base_path` - base path of the client API, i.e. "www.my-api-implementation.com"
-    /// * `ca_certificate` - Path to CA certificate used to authenticate the server
-    pub fn try_new_https<CA>(
-        handle: Handle,
-        base_path: &str,
-        ca_certificate: CA,
-    ) -> Result<Client<hyper::client::FutureResponse>, ClientInitError>
-    where
-        CA: AsRef<Path>,
-    {
-        let https_connector = swagger::https_connector(ca_certificate);
-        Self::try_new_with_connector::<hyper_tls::HttpsConnector<hyper::client::HttpConnector>>(
-            handle,
-            base_path,
-            Some("https"),
-            https_connector,
-        )
-    }
-
-    /// Create a client with a mutually authenticated TLS connection to the server.
-    ///
-    /// # Arguments
-    /// * `handle` - tokio reactor handle to use for execution
-    /// * `base_path` - base path of the client API, i.e. "www.my-api-implementation.com"
-    /// * `ca_certificate` - Path to CA certificate used to authenticate the server
-    /// * `client_key` - Path to the client private key
-    /// * `client_certificate` - Path to the client's public certificate associated with the private key
-    pub fn try_new_https_mutual<CA, K, C>(
-        handle: Handle,
-        base_path: &str,
-        ca_certificate: CA,
-        client_key: K,
-        client_certificate: C,
-    ) -> Result<Client<hyper::client::FutureResponse>, ClientInitError>
-    where
-        CA: AsRef<Path>,
-        K: AsRef<Path>,
-        C: AsRef<Path>,
-    {
-        let https_connector =
-            swagger::https_mutual_connector(ca_certificate, client_key, client_certificate);
-        Self::try_new_with_connector::<hyper_tls::HttpsConnector<hyper::client::HttpConnector>>(
-            handle,
-            base_path,
-            Some("https"),
-            https_connector,
-        )
-    }
-
+impl<Connector, C> Client<DropContextService<hyper::client::Client<Connector, Body>, C>, C> where
+    Connector: hyper::client::connect::Connect + Clone + Send + Sync + 'static,
+    C: Clone + Send + Sync + 'static,
+{
     /// Create a client with a custom implementation of hyper::client::Connect.
     ///
     /// Intended for use with custom implementations of connect for e.g. protocol logging
     /// or similar functionality which requires wrapping the transport layer. When wrapping a TCP connection,
-    /// this function should be used in conjunction with
-    /// `swagger::{http_connector, https_connector, https_mutual_connector}`.
+    /// this function should be used in conjunction with `swagger::Connector::builder()`.
     ///
     /// For ordinary tcp connections, prefer the use of `try_new_http`, `try_new_https`
     /// and `try_new_https_mutual`, to avoid introducing a dependency on the underlying transport layer.
     ///
     /// # Arguments
     ///
-    /// * `handle` - tokio reactor handle to use for execution
-    /// * `base_path` - base path of the client API, i.e. "www.my-api-implementation.com"
+    /// * `base_path` - base path of the client API, i.e. "http://www.my-api-implementation.com"
     /// * `protocol` - Which protocol to use when constructing the request url, e.g. `Some("http")`
-    /// * `connector_fn` - Function which returns an implementation of `hyper::client::Connect`
-    pub fn try_new_with_connector<C>(
-        handle: Handle,
+    /// * `connector` - Implementation of `hyper::client::Connect` to use for the client
+    pub fn try_new_with_connector(
         base_path: &str,
         protocol: Option<&'static str>,
-        connector_fn: Box<Fn(&Handle) -> C + Send + Sync>,
-    ) -> Result<Client<hyper::client::FutureResponse>, ClientInitError>
-    where
-        C: hyper::client::Connect + hyper::client::Service,
+        connector: Connector,
+    ) -> Result<Self, ClientInitError>
     {
-        let connector = connector_fn(&handle);
-        let client_service = Box::new(hyper::Client::configure().connector(connector).build(
-            &handle,
-        ));
+        let client_service = hyper::client::Client::builder().build(connector);
+        let client_service = DropContextService::new(client_service);
 
-        Ok(Client {
-            client_service: Arc::new(client_service),
+        Ok(Self {
+            client_service,
             base_path: into_base_path(base_path, protocol)?,
-        })
-    }
-
-    /// Constructor for creating a `Client` by passing in a pre-made `hyper` client.
-    ///
-    /// One should avoid relying on this function if possible, since it adds a dependency on the underlying transport
-    /// implementation, which it would be better to abstract away. Therefore, using this function may lead to a loss of
-    /// code generality, which may make it harder to move the application to a serverless environment, for example.
-    ///
-    /// The reason for this function's existence is to support legacy test code, which did mocking at the hyper layer.
-    /// This is not a recommended way to write new tests. If other reasons are found for using this function, they
-    /// should be mentioned here.
-    #[deprecated(note="Use try_new_with_client_service instead")]
-    pub fn try_new_with_hyper_client(
-        hyper_client: Arc<Box<hyper::client::Service<Request=hyper::Request<hyper::Body>, Response=hyper::Response, Error=hyper::Error, Future=hyper::client::FutureResponse>>>,
-        handle: Handle,
-        base_path: &str
-    ) -> Result<Client<hyper::client::FutureResponse>, ClientInitError>
-    {
-        Ok(Client {
-            client_service: hyper_client,
-            base_path: into_base_path(base_path, None)?,
+            marker: PhantomData,
         })
     }
 }
 
-impl<F> Client<F> where
-    F: Future<Item=hyper::Response, Error=hyper::Error>  + 'static
+#[derive(Debug, Clone)]
+pub enum HyperClient {
+    Http(hyper::client::Client<hyper::client::HttpConnector, Body>),
+    Https(hyper::client::Client<HttpsConnector, Body>),
+}
+
+impl Service<Request<Body>> for HyperClient {
+    type Response = Response<Body>;
+    type Error = hyper::Error;
+    type Future = hyper::client::ResponseFuture;
+
+    fn poll_ready(&mut self, cx: &mut Context) -> Poll<Result<(), Self::Error>> {
+       match self {
+          HyperClient::Http(client) => client.poll_ready(cx),
+          HyperClient::Https(client) => client.poll_ready(cx),
+       }
+    }
+
+    fn call(&mut self, req: Request<Body>) -> Self::Future {
+       match self {
+          HyperClient::Http(client) => client.call(req),
+          HyperClient::Https(client) => client.call(req)
+       }
+    }
+}
+
+impl<C> Client<DropContextService<HyperClient, C>, C> where
+    C: Clone + Send + Sync + 'static,
 {
-    /// Constructor for creating a `Client` by passing in a pre-made `hyper` client Service.
+    /// Create an HTTP client.
+    ///
+    /// # Arguments
+    /// * `base_path` - base path of the client API, i.e. "http://www.my-api-implementation.com"
+    pub fn try_new(
+        base_path: &str,
+    ) -> Result<Self, ClientInitError> {
+        let uri = Uri::from_str(base_path)?;
+
+        let scheme = uri.scheme_str().ok_or(ClientInitError::InvalidScheme)?;
+        let scheme = scheme.to_ascii_lowercase();
+
+        let connector = Connector::builder();
+
+        let client_service = match scheme.as_str() {
+            "http" => {
+                HyperClient::Http(hyper::client::Client::builder().build(connector.build()))
+            },
+            "https" => {
+                let connector = connector.https()
+                   .build()
+                   .map_err(|e| ClientInitError::SslError(e))?;
+                HyperClient::Https(hyper::client::Client::builder().build(connector))
+            },
+            _ => {
+                return Err(ClientInitError::InvalidScheme);
+            }
+        };
+
+        let client_service = DropContextService::new(client_service);
+
+        Ok(Self {
+            client_service,
+            base_path: into_base_path(base_path, None)?,
+            marker: PhantomData,
+        })
+    }
+}
+
+impl<C> Client<DropContextService<hyper::client::Client<hyper::client::HttpConnector, Body>, C>, C> where
+    C: Clone + Send + Sync + 'static
+{
+    /// Create an HTTP client.
+    ///
+    /// # Arguments
+    /// * `base_path` - base path of the client API, i.e. "http://www.my-api-implementation.com"
+    pub fn try_new_http(
+        base_path: &str,
+    ) -> Result<Self, ClientInitError> {
+        let http_connector = Connector::builder().build();
+
+        Self::try_new_with_connector(base_path, Some("http"), http_connector)
+    }
+}
+
+#[cfg(any(target_os = "macos", target_os = "windows", target_os = "ios"))]
+type HttpsConnector = hyper_tls::HttpsConnector<hyper::client::HttpConnector>;
+
+#[cfg(not(any(target_os = "macos", target_os = "windows", target_os = "ios")))]
+type HttpsConnector = hyper_openssl::HttpsConnector<hyper::client::HttpConnector>;
+
+impl<C> Client<DropContextService<hyper::client::Client<HttpsConnector, Body>, C>, C> where
+    C: Clone + Send + Sync + 'static
+{
+    /// Create a client with a TLS connection to the server
+    ///
+    /// # Arguments
+    /// * `base_path` - base path of the client API, i.e. "https://www.my-api-implementation.com"
+    pub fn try_new_https(base_path: &str) -> Result<Self, ClientInitError>
+    {
+        let https_connector = Connector::builder()
+            .https()
+            .build()
+            .map_err(|e| ClientInitError::SslError(e))?;
+        Self::try_new_with_connector(base_path, Some("https"), https_connector)
+    }
+
+    /// Create a client with a TLS connection to the server using a pinned certificate
+    ///
+    /// # Arguments
+    /// * `base_path` - base path of the client API, i.e. "https://www.my-api-implementation.com"
+    /// * `ca_certificate` - Path to CA certificate used to authenticate the server
+    #[cfg(not(any(target_os = "macos", target_os = "windows", target_os = "ios")))]
+    pub fn try_new_https_pinned<CA>(
+        base_path: &str,
+        ca_certificate: CA,
+    ) -> Result<Self, ClientInitError>
+    where
+        CA: AsRef<Path>,
+    {
+        let https_connector = Connector::builder()
+            .https()
+            .pin_server_certificate(ca_certificate)
+            .build()
+            .map_err(|e| ClientInitError::SslError(e))?;
+        Self::try_new_with_connector(base_path, Some("https"), https_connector)
+    }
+
+    /// Create a client with a mutually authenticated TLS connection to the server.
+    ///
+    /// # Arguments
+    /// * `base_path` - base path of the client API, i.e. "https://www.my-api-implementation.com"
+    /// * `ca_certificate` - Path to CA certificate used to authenticate the server
+    /// * `client_key` - Path to the client private key
+    /// * `client_certificate` - Path to the client's public certificate associated with the private key
+    #[cfg(not(any(target_os = "macos", target_os = "windows", target_os = "ios")))]
+    pub fn try_new_https_mutual<CA, K, D>(
+        base_path: &str,
+        ca_certificate: CA,
+        client_key: K,
+        client_certificate: D,
+    ) -> Result<Self, ClientInitError>
+    where
+        CA: AsRef<Path>,
+        K: AsRef<Path>,
+        D: AsRef<Path>,
+    {
+        let https_connector = Connector::builder()
+            .https()
+            .pin_server_certificate(ca_certificate)
+            .client_authentication(client_key, client_certificate)
+            .build()
+            .map_err(|e| ClientInitError::SslError(e))?;
+        Self::try_new_with_connector(base_path, Some("https"), https_connector)
+    }
+}
+
+impl<S, C> Client<S, C> where
+    S: Service<
+           (Request<Body>, C),
+           Response=Response<Body>> + Clone + Sync + Send + 'static,
+    S::Future: Send + 'static,
+    S::Error: Into<crate::ServiceError> + fmt::Display,
+    C: Clone + Send + Sync + 'static
+{
+    /// Constructor for creating a `Client` by passing in a pre-made `hyper::service::Service` /
+    /// `tower::Service`
     ///
     /// This allows adding custom wrappers around the underlying transport, for example for logging.
-    pub fn try_new_with_client_service(client_service: Arc<Box<hyper::client::Service<Request=hyper::Request<hyper::Body>, Response=hyper::Response, Error=hyper::Error, Future=F>>>,
-                                       handle: Handle,
-                                       base_path: &str)
-                                    -> Result<Client<F>, ClientInitError>
+    pub fn try_new_with_client_service(
+        client_service: S,
+        base_path: &str,
+    ) -> Result<Self, ClientInitError>
     {
-        Ok(Client {
-            client_service: client_service,
+        Ok(Self {
+            client_service,
             base_path: into_base_path(base_path, None)?,
+            marker: PhantomData,
         })
     }
 }
 
-impl<F, C> Api<C> for Client<F> where
-    F: Future<Item=hyper::Response, Error=hyper::Error>  + 'static,
-    C: Has<XSpanIdString> + Has<Option<AuthData>>{
-
-    fn get_aem_product_info(&self, context: &C) -> Box<Future<Item=GetAemProductInfoResponse, Error=ApiError>> {
-
-
-        let uri = format!(
-            "{}//system/console/status-productinfo.json",
-            self.base_path
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Get, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 serde_json::from_str::<Vec<String>>(body)
-                                                     .map_err(|e| e.into())
-
-                                             ))
-                        .map(move |body|
-                            GetAemProductInfoResponse::DefaultResponse(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn get_config_mgr(&self, context: &C) -> Box<Future<Item=GetConfigMgrResponse, Error=ApiError>> {
-
-
-        let uri = format!(
-            "{}//system/console/configMgr",
-            self.base_path
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Get, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                200 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 serde_json::from_str::<String>(body)
-                                                     .map_err(|e| e.into())
-
-                                             ))
-                        .map(move |body|
-                            GetConfigMgrResponse::OK(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                5XX => {
-                    let body = response.body();
-                    Box::new(
-
-                        future::ok(
-                            GetConfigMgrResponse::UnexpectedError
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn post_bundle(&self, param_name: String, param_action: String, context: &C) -> Box<Future<Item=PostBundleResponse, Error=ApiError>> {
-
-        // Query parameters
-        let query_action = format!("action={action}&", action=param_action.to_string());
-
-
-        let uri = format!(
-            "{}//system/console/bundles/{name}?{action}",
-            self.base_path, name=utf8_percent_encode(&param_name.to_string(), ID_ENCODE_SET),
-            action=utf8_percent_encode(&query_action, QUERY_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Post, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-
-                        future::ok(
-                            PostBundleResponse::DefaultResponse
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn post_jmx_repository(&self, param_action: String, context: &C) -> Box<Future<Item=PostJmxRepositoryResponse, Error=ApiError>> {
-
-
-        let uri = format!(
-            "{}//system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action}",
-            self.base_path, action=utf8_percent_encode(&param_action.to_string(), ID_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Post, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-
-                        future::ok(
-                            PostJmxRepositoryResponse::DefaultResponse
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn post_saml_configuration(&self, param_post: Option<bool>, param_apply: Option<bool>, param_delete: Option<bool>, param_action: Option<String>, param_location: Option<String>, param_path: Option<&Vec<String>>, param_service_ranking: Option<i32>, param_idp_url: Option<String>, param_idp_cert_alias: Option<String>, param_idp_http_redirect: Option<bool>, param_service_provider_entity_id: Option<String>, param_assertion_consumer_service_url: Option<String>, param_sp_private_key_alias: Option<String>, param_key_store_password: Option<String>, param_default_redirect_url: Option<String>, param_user_id_attribute: Option<String>, param_use_encryption: Option<bool>, param_create_user: Option<bool>, param_add_group_memberships: Option<bool>, param_group_membership_attribute: Option<String>, param_default_groups: Option<&Vec<String>>, param_name_id_format: Option<String>, param_synchronize_attributes: Option<&Vec<String>>, param_handle_logout: Option<bool>, param_logout_url: Option<String>, param_clock_tolerance: Option<i32>, param_digest_method: Option<String>, param_signature_method: Option<String>, param_user_intermediate_path: Option<String>, param_propertylist: Option<&Vec<String>>, context: &C) -> Box<Future<Item=PostSamlConfigurationResponse, Error=ApiError>> {
-
-        // Query parameters
-        let query_post = param_post.map_or_else(String::new, |query| format!("post={post}&", post=query.to_string()));
-        let query_apply = param_apply.map_or_else(String::new, |query| format!("apply={apply}&", apply=query.to_string()));
-        let query_delete = param_delete.map_or_else(String::new, |query| format!("delete={delete}&", delete=query.to_string()));
-        let query_action = param_action.map_or_else(String::new, |query| format!("action={action}&", action=query.to_string()));
-        let query_location = param_location.map_or_else(String::new, |query| format!("$location={location}&", location=query.to_string()));
-        let query_path = param_path.map_or_else(String::new, |query| format!("path={path}&", path=query.join(",")));
-        let query_service_ranking = param_service_ranking.map_or_else(String::new, |query| format!("service.ranking={service_ranking}&", service_ranking=query.to_string()));
-        let query_idp_url = param_idp_url.map_or_else(String::new, |query| format!("idpUrl={idp_url}&", idp_url=query.to_string()));
-        let query_idp_cert_alias = param_idp_cert_alias.map_or_else(String::new, |query| format!("idpCertAlias={idp_cert_alias}&", idp_cert_alias=query.to_string()));
-        let query_idp_http_redirect = param_idp_http_redirect.map_or_else(String::new, |query| format!("idpHttpRedirect={idp_http_redirect}&", idp_http_redirect=query.to_string()));
-        let query_service_provider_entity_id = param_service_provider_entity_id.map_or_else(String::new, |query| format!("serviceProviderEntityId={service_provider_entity_id}&", service_provider_entity_id=query.to_string()));
-        let query_assertion_consumer_service_url = param_assertion_consumer_service_url.map_or_else(String::new, |query| format!("assertionConsumerServiceURL={assertion_consumer_service_url}&", assertion_consumer_service_url=query.to_string()));
-        let query_sp_private_key_alias = param_sp_private_key_alias.map_or_else(String::new, |query| format!("spPrivateKeyAlias={sp_private_key_alias}&", sp_private_key_alias=query.to_string()));
-        let query_key_store_password = param_key_store_password.map_or_else(String::new, |query| format!("keyStorePassword={key_store_password}&", key_store_password=query.to_string()));
-        let query_default_redirect_url = param_default_redirect_url.map_or_else(String::new, |query| format!("defaultRedirectUrl={default_redirect_url}&", default_redirect_url=query.to_string()));
-        let query_user_id_attribute = param_user_id_attribute.map_or_else(String::new, |query| format!("userIDAttribute={user_id_attribute}&", user_id_attribute=query.to_string()));
-        let query_use_encryption = param_use_encryption.map_or_else(String::new, |query| format!("useEncryption={use_encryption}&", use_encryption=query.to_string()));
-        let query_create_user = param_create_user.map_or_else(String::new, |query| format!("createUser={create_user}&", create_user=query.to_string()));
-        let query_add_group_memberships = param_add_group_memberships.map_or_else(String::new, |query| format!("addGroupMemberships={add_group_memberships}&", add_group_memberships=query.to_string()));
-        let query_group_membership_attribute = param_group_membership_attribute.map_or_else(String::new, |query| format!("groupMembershipAttribute={group_membership_attribute}&", group_membership_attribute=query.to_string()));
-        let query_default_groups = param_default_groups.map_or_else(String::new, |query| format!("defaultGroups={default_groups}&", default_groups=query.join(",")));
-        let query_name_id_format = param_name_id_format.map_or_else(String::new, |query| format!("nameIdFormat={name_id_format}&", name_id_format=query.to_string()));
-        let query_synchronize_attributes = param_synchronize_attributes.map_or_else(String::new, |query| format!("synchronizeAttributes={synchronize_attributes}&", synchronize_attributes=query.join(",")));
-        let query_handle_logout = param_handle_logout.map_or_else(String::new, |query| format!("handleLogout={handle_logout}&", handle_logout=query.to_string()));
-        let query_logout_url = param_logout_url.map_or_else(String::new, |query| format!("logoutUrl={logout_url}&", logout_url=query.to_string()));
-        let query_clock_tolerance = param_clock_tolerance.map_or_else(String::new, |query| format!("clockTolerance={clock_tolerance}&", clock_tolerance=query.to_string()));
-        let query_digest_method = param_digest_method.map_or_else(String::new, |query| format!("digestMethod={digest_method}&", digest_method=query.to_string()));
-        let query_signature_method = param_signature_method.map_or_else(String::new, |query| format!("signatureMethod={signature_method}&", signature_method=query.to_string()));
-        let query_user_intermediate_path = param_user_intermediate_path.map_or_else(String::new, |query| format!("userIntermediatePath={user_intermediate_path}&", user_intermediate_path=query.to_string()));
-        let query_propertylist = param_propertylist.map_or_else(String::new, |query| format!("propertylist={propertylist}&", propertylist=query.join(",")));
-
-
-        let uri = format!(
-            "{}//system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler?{post}{apply}{delete}{action}{location}{path}{service_ranking}{idp_url}{idp_cert_alias}{idp_http_redirect}{service_provider_entity_id}{assertion_consumer_service_url}{sp_private_key_alias}{key_store_password}{default_redirect_url}{user_id_attribute}{use_encryption}{create_user}{add_group_memberships}{group_membership_attribute}{default_groups}{name_id_format}{synchronize_attributes}{handle_logout}{logout_url}{clock_tolerance}{digest_method}{signature_method}{user_intermediate_path}{propertylist}",
-            self.base_path,
-            post=utf8_percent_encode(&query_post, QUERY_ENCODE_SET),
-            apply=utf8_percent_encode(&query_apply, QUERY_ENCODE_SET),
-            delete=utf8_percent_encode(&query_delete, QUERY_ENCODE_SET),
-            action=utf8_percent_encode(&query_action, QUERY_ENCODE_SET),
-            location=utf8_percent_encode(&query_location, QUERY_ENCODE_SET),
-            path=utf8_percent_encode(&query_path, QUERY_ENCODE_SET),
-            service_ranking=utf8_percent_encode(&query_service_ranking, QUERY_ENCODE_SET),
-            idp_url=utf8_percent_encode(&query_idp_url, QUERY_ENCODE_SET),
-            idp_cert_alias=utf8_percent_encode(&query_idp_cert_alias, QUERY_ENCODE_SET),
-            idp_http_redirect=utf8_percent_encode(&query_idp_http_redirect, QUERY_ENCODE_SET),
-            service_provider_entity_id=utf8_percent_encode(&query_service_provider_entity_id, QUERY_ENCODE_SET),
-            assertion_consumer_service_url=utf8_percent_encode(&query_assertion_consumer_service_url, QUERY_ENCODE_SET),
-            sp_private_key_alias=utf8_percent_encode(&query_sp_private_key_alias, QUERY_ENCODE_SET),
-            key_store_password=utf8_percent_encode(&query_key_store_password, QUERY_ENCODE_SET),
-            default_redirect_url=utf8_percent_encode(&query_default_redirect_url, QUERY_ENCODE_SET),
-            user_id_attribute=utf8_percent_encode(&query_user_id_attribute, QUERY_ENCODE_SET),
-            use_encryption=utf8_percent_encode(&query_use_encryption, QUERY_ENCODE_SET),
-            create_user=utf8_percent_encode(&query_create_user, QUERY_ENCODE_SET),
-            add_group_memberships=utf8_percent_encode(&query_add_group_memberships, QUERY_ENCODE_SET),
-            group_membership_attribute=utf8_percent_encode(&query_group_membership_attribute, QUERY_ENCODE_SET),
-            default_groups=utf8_percent_encode(&query_default_groups, QUERY_ENCODE_SET),
-            name_id_format=utf8_percent_encode(&query_name_id_format, QUERY_ENCODE_SET),
-            synchronize_attributes=utf8_percent_encode(&query_synchronize_attributes, QUERY_ENCODE_SET),
-            handle_logout=utf8_percent_encode(&query_handle_logout, QUERY_ENCODE_SET),
-            logout_url=utf8_percent_encode(&query_logout_url, QUERY_ENCODE_SET),
-            clock_tolerance=utf8_percent_encode(&query_clock_tolerance, QUERY_ENCODE_SET),
-            digest_method=utf8_percent_encode(&query_digest_method, QUERY_ENCODE_SET),
-            signature_method=utf8_percent_encode(&query_signature_method, QUERY_ENCODE_SET),
-            user_intermediate_path=utf8_percent_encode(&query_user_intermediate_path, QUERY_ENCODE_SET),
-            propertylist=utf8_percent_encode(&query_propertylist, QUERY_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Post, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                200 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 Ok(body.to_string())
-
-                                             ))
-                        .map(move |body|
-                            PostSamlConfigurationResponse::RetrievedAEMSAMLConfiguration(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                302 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 Ok(body.to_string())
-
-                                             ))
-                        .map(move |body|
-                            PostSamlConfigurationResponse::DefaultResponse(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                0 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 Ok(body.to_string())
-
-                                             ))
-                        .map(move |body|
-                            PostSamlConfigurationResponse::DefaultResponse(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn get_login_page(&self, context: &C) -> Box<Future<Item=GetLoginPageResponse, Error=ApiError>> {
-
-
-        let uri = format!(
-            "{}//libs/granite/core/content/login.html",
-            self.base_path
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Get, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 serde_json::from_str::<String>(body)
-                                                     .map_err(|e| e.into())
-
-                                             ))
-                        .map(move |body|
-                            GetLoginPageResponse::DefaultResponse(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn post_cq_actions(&self, param_authorizable_id: String, param_changelog: String, context: &C) -> Box<Future<Item=PostCqActionsResponse, Error=ApiError>> {
-
-        // Query parameters
-        let query_authorizable_id = format!("authorizableId={authorizable_id}&", authorizable_id=param_authorizable_id.to_string());
-        let query_changelog = format!("changelog={changelog}&", changelog=param_changelog.to_string());
-
-
-        let uri = format!(
-            "{}//.cqactions.html?{authorizable_id}{changelog}",
-            self.base_path,
-            authorizable_id=utf8_percent_encode(&query_authorizable_id, QUERY_ENCODE_SET),
-            changelog=utf8_percent_encode(&query_changelog, QUERY_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Post, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-
-                        future::ok(
-                            PostCqActionsResponse::DefaultResponse
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn get_crxde_status(&self, context: &C) -> Box<Future<Item=GetCrxdeStatusResponse, Error=ApiError>> {
-
-
-        let uri = format!(
-            "{}//crx/server/crx.default/jcr:root/.1.json",
-            self.base_path
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Get, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                200 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 serde_json::from_str::<String>(body)
-                                                     .map_err(|e| e.into())
-
-                                             ))
-                        .map(move |body|
-                            GetCrxdeStatusResponse::CRXDEIsEnabled(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                404 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 serde_json::from_str::<String>(body)
-                                                     .map_err(|e| e.into())
-
-                                             ))
-                        .map(move |body|
-                            GetCrxdeStatusResponse::CRXDEIsDisabled(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn get_install_status(&self, context: &C) -> Box<Future<Item=GetInstallStatusResponse, Error=ApiError>> {
-
-
-        let uri = format!(
-            "{}//crx/packmgr/installstatus.jsp",
-            self.base_path
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Get, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                200 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 serde_json::from_str::<models::InstallStatus>(body)
-                                                     .map_err(|e| e.into())
-
-                                             ))
-                        .map(move |body|
-                            GetInstallStatusResponse::RetrievedCRXPackageManagerInstallStatus(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                0 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 serde_json::from_str::<String>(body)
-                                                     .map_err(|e| e.into())
-
-                                             ))
-                        .map(move |body|
-                            GetInstallStatusResponse::DefaultResponse(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn get_package_manager_servlet(&self, context: &C) -> Box<Future<Item=GetPackageManagerServletResponse, Error=ApiError>> {
-
-
-        let uri = format!(
-            "{}//crx/packmgr/service/script.html",
-            self.base_path
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Get, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                404 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 serde_json::from_str::<String>(body)
-                                                     .map_err(|e| e.into())
-
-                                             ))
-                        .map(move |body|
-                            GetPackageManagerServletResponse::PackageManagerServletIsDisabled(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                405 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 serde_json::from_str::<String>(body)
-                                                     .map_err(|e| e.into())
-
-                                             ))
-                        .map(move |body|
-                            GetPackageManagerServletResponse::PackageManagerServletIsActive(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn post_package_service(&self, param_cmd: String, context: &C) -> Box<Future<Item=PostPackageServiceResponse, Error=ApiError>> {
-
-        // Query parameters
-        let query_cmd = format!("cmd={cmd}&", cmd=param_cmd.to_string());
-
-
-        let uri = format!(
-            "{}//crx/packmgr/service.jsp?{cmd}",
-            self.base_path,
-            cmd=utf8_percent_encode(&query_cmd, QUERY_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Post, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 serde_json::from_str::<String>(body)
-                                                     .map_err(|e| e.into())
-
-                                             ))
-                        .map(move |body|
-                            PostPackageServiceResponse::DefaultResponse(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn post_package_service_json(&self, param_path: String, param_cmd: String, param_group_name: Option<String>, param_package_name: Option<String>, param_package_version: Option<String>, param__charset_: Option<String>, param_force: Option<bool>, param_recursive: Option<bool>, param_package: Option<swagger::ByteArray>, context: &C) -> Box<Future<Item=PostPackageServiceJsonResponse, Error=ApiError>> {
-
-        // Query parameters
-        let query_cmd = format!("cmd={cmd}&", cmd=param_cmd.to_string());
-        let query_group_name = param_group_name.map_or_else(String::new, |query| format!("groupName={group_name}&", group_name=query.to_string()));
-        let query_package_name = param_package_name.map_or_else(String::new, |query| format!("packageName={package_name}&", package_name=query.to_string()));
-        let query_package_version = param_package_version.map_or_else(String::new, |query| format!("packageVersion={package_version}&", package_version=query.to_string()));
-        let query__charset_ = param__charset_.map_or_else(String::new, |query| format!("_charset_={_charset_}&", _charset_=query.to_string()));
-        let query_force = param_force.map_or_else(String::new, |query| format!("force={force}&", force=query.to_string()));
-        let query_recursive = param_recursive.map_or_else(String::new, |query| format!("recursive={recursive}&", recursive=query.to_string()));
-
-
-        let uri = format!(
-            "{}//crx/packmgr/service/.json/{path}?{cmd}{group_name}{package_name}{package_version}{_charset_}{force}{recursive}",
-            self.base_path, path=utf8_percent_encode(&param_path.to_string(), ID_ENCODE_SET),
-            cmd=utf8_percent_encode(&query_cmd, QUERY_ENCODE_SET),
-            group_name=utf8_percent_encode(&query_group_name, QUERY_ENCODE_SET),
-            package_name=utf8_percent_encode(&query_package_name, QUERY_ENCODE_SET),
-            package_version=utf8_percent_encode(&query_package_version, QUERY_ENCODE_SET),
-            _charset_=utf8_percent_encode(&query__charset_, QUERY_ENCODE_SET),
-            force=utf8_percent_encode(&query_force, QUERY_ENCODE_SET),
-            recursive=utf8_percent_encode(&query_recursive, QUERY_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Post, uri);
-
-        let params = &[
-            ("package", param_package.map(|param| format!("{:?}", param))),
-        ];
-        let body = serde_urlencoded::to_string(params).expect("impossible to fail to serialize");
-
-        request.headers_mut().set(ContentType(mimetypes::requests::POST_PACKAGE_SERVICE_JSON.clone()));
-        request.set_body(body.into_bytes());
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 serde_json::from_str::<String>(body)
-                                                     .map_err(|e| e.into())
-
-                                             ))
-                        .map(move |body|
-                            PostPackageServiceJsonResponse::DefaultResponse(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn post_package_update(&self, param_group_name: String, param_package_name: String, param_version: String, param_path: String, param_filter: Option<String>, param__charset_: Option<String>, context: &C) -> Box<Future<Item=PostPackageUpdateResponse, Error=ApiError>> {
-
-        // Query parameters
-        let query_group_name = format!("groupName={group_name}&", group_name=param_group_name.to_string());
-        let query_package_name = format!("packageName={package_name}&", package_name=param_package_name.to_string());
-        let query_version = format!("version={version}&", version=param_version.to_string());
-        let query_path = format!("path={path}&", path=param_path.to_string());
-        let query_filter = param_filter.map_or_else(String::new, |query| format!("filter={filter}&", filter=query.to_string()));
-        let query__charset_ = param__charset_.map_or_else(String::new, |query| format!("_charset_={_charset_}&", _charset_=query.to_string()));
-
-
-        let uri = format!(
-            "{}//crx/packmgr/update.jsp?{group_name}{package_name}{version}{path}{filter}{_charset_}",
-            self.base_path,
-            group_name=utf8_percent_encode(&query_group_name, QUERY_ENCODE_SET),
-            package_name=utf8_percent_encode(&query_package_name, QUERY_ENCODE_SET),
-            version=utf8_percent_encode(&query_version, QUERY_ENCODE_SET),
-            path=utf8_percent_encode(&query_path, QUERY_ENCODE_SET),
-            filter=utf8_percent_encode(&query_filter, QUERY_ENCODE_SET),
-            _charset_=utf8_percent_encode(&query__charset_, QUERY_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Post, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 serde_json::from_str::<String>(body)
-                                                     .map_err(|e| e.into())
-
-                                             ))
-                        .map(move |body|
-                            PostPackageUpdateResponse::DefaultResponse(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn post_set_password(&self, param_old: String, param_plain: String, param_verify: String, context: &C) -> Box<Future<Item=PostSetPasswordResponse, Error=ApiError>> {
-
-        // Query parameters
-        let query_old = format!("old={old}&", old=param_old.to_string());
-        let query_plain = format!("plain={plain}&", plain=param_plain.to_string());
-        let query_verify = format!("verify={verify}&", verify=param_verify.to_string());
-
-
-        let uri = format!(
-            "{}//crx/explorer/ui/setpassword.jsp?{old}{plain}{verify}",
-            self.base_path,
-            old=utf8_percent_encode(&query_old, QUERY_ENCODE_SET),
-            plain=utf8_percent_encode(&query_plain, QUERY_ENCODE_SET),
-            verify=utf8_percent_encode(&query_verify, QUERY_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Post, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 Ok(body.to_string())
-
-                                             ))
-                        .map(move |body|
-                            PostSetPasswordResponse::DefaultResponse(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn get_aem_health_check(&self, param_tags: Option<String>, param_combine_tags_or: Option<bool>, context: &C) -> Box<Future<Item=GetAemHealthCheckResponse, Error=ApiError>> {
-
-        // Query parameters
-        let query_tags = param_tags.map_or_else(String::new, |query| format!("tags={tags}&", tags=query.to_string()));
-        let query_combine_tags_or = param_combine_tags_or.map_or_else(String::new, |query| format!("combineTagsOr={combine_tags_or}&", combine_tags_or=query.to_string()));
-
-
-        let uri = format!(
-            "{}//system/health?{tags}{combine_tags_or}",
-            self.base_path,
-            tags=utf8_percent_encode(&query_tags, QUERY_ENCODE_SET),
-            combine_tags_or=utf8_percent_encode(&query_combine_tags_or, QUERY_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Get, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 serde_json::from_str::<String>(body)
-                                                     .map_err(|e| e.into())
-
-                                             ))
-                        .map(move |body|
-                            GetAemHealthCheckResponse::DefaultResponse(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn post_config_aem_health_check_servlet(&self, param_bundles_ignored: Option<&Vec<String>>, param_bundles_ignored_type_hint: Option<String>, context: &C) -> Box<Future<Item=PostConfigAemHealthCheckServletResponse, Error=ApiError>> {
-
-        // Query parameters
-        let query_bundles_ignored = param_bundles_ignored.map_or_else(String::new, |query| format!("bundles.ignored={bundles_ignored}&", bundles_ignored=query.join(",")));
-        let query_bundles_ignored_type_hint = param_bundles_ignored_type_hint.map_or_else(String::new, |query| format!("bundles.ignored@TypeHint={bundles_ignored_type_hint}&", bundles_ignored_type_hint=query.to_string()));
-
-
-        let uri = format!(
-            "{}//apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck?{bundles_ignored}{bundles_ignored_type_hint}",
-            self.base_path,
-            bundles_ignored=utf8_percent_encode(&query_bundles_ignored, QUERY_ENCODE_SET),
-            bundles_ignored_type_hint=utf8_percent_encode(&query_bundles_ignored_type_hint, QUERY_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Post, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-
-                        future::ok(
-                            PostConfigAemHealthCheckServletResponse::DefaultResponse
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn post_config_aem_password_reset(&self, param_pwdreset_authorizables: Option<&Vec<String>>, param_pwdreset_authorizables_type_hint: Option<String>, context: &C) -> Box<Future<Item=PostConfigAemPasswordResetResponse, Error=ApiError>> {
-
-        // Query parameters
-        let query_pwdreset_authorizables = param_pwdreset_authorizables.map_or_else(String::new, |query| format!("pwdreset.authorizables={pwdreset_authorizables}&", pwdreset_authorizables=query.join(",")));
-        let query_pwdreset_authorizables_type_hint = param_pwdreset_authorizables_type_hint.map_or_else(String::new, |query| format!("pwdreset.authorizables@TypeHint={pwdreset_authorizables_type_hint}&", pwdreset_authorizables_type_hint=query.to_string()));
-
-
-        let uri = format!(
-            "{}//apps/system/config/com.shinesolutions.aem.passwordreset.Activator?{pwdreset_authorizables}{pwdreset_authorizables_type_hint}",
-            self.base_path,
-            pwdreset_authorizables=utf8_percent_encode(&query_pwdreset_authorizables, QUERY_ENCODE_SET),
-            pwdreset_authorizables_type_hint=utf8_percent_encode(&query_pwdreset_authorizables_type_hint, QUERY_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Post, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-
-                        future::ok(
-                            PostConfigAemPasswordResetResponse::DefaultResponse
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn delete_agent(&self, param_runmode: String, param_name: String, context: &C) -> Box<Future<Item=DeleteAgentResponse, Error=ApiError>> {
-
-
-        let uri = format!(
-            "{}//etc/replication/agents.{runmode}/{name}",
-            self.base_path, runmode=utf8_percent_encode(&param_runmode.to_string(), ID_ENCODE_SET), name=utf8_percent_encode(&param_name.to_string(), ID_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Delete, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-
-                        future::ok(
-                            DeleteAgentResponse::DefaultResponse
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn delete_node(&self, param_path: String, param_name: String, context: &C) -> Box<Future<Item=DeleteNodeResponse, Error=ApiError>> {
-
-
-        let uri = format!(
-            "{}//{path}/{name}",
-            self.base_path, path=utf8_percent_encode(&param_path.to_string(), ID_ENCODE_SET), name=utf8_percent_encode(&param_name.to_string(), ID_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Delete, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-
-                        future::ok(
-                            DeleteNodeResponse::DefaultResponse
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn get_agent(&self, param_runmode: String, param_name: String, context: &C) -> Box<Future<Item=GetAgentResponse, Error=ApiError>> {
-
-
-        let uri = format!(
-            "{}//etc/replication/agents.{runmode}/{name}",
-            self.base_path, runmode=utf8_percent_encode(&param_runmode.to_string(), ID_ENCODE_SET), name=utf8_percent_encode(&param_name.to_string(), ID_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Get, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-
-                        future::ok(
-                            GetAgentResponse::DefaultResponse
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn get_agents(&self, param_runmode: String, context: &C) -> Box<Future<Item=GetAgentsResponse, Error=ApiError>> {
-
-
-        let uri = format!(
-            "{}//etc/replication/agents.{runmode}.-1.json",
-            self.base_path, runmode=utf8_percent_encode(&param_runmode.to_string(), ID_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Get, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 serde_json::from_str::<String>(body)
-                                                     .map_err(|e| e.into())
-
-                                             ))
-                        .map(move |body|
-                            GetAgentsResponse::DefaultResponse(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn get_authorizable_keystore(&self, param_intermediate_path: String, param_authorizable_id: String, context: &C) -> Box<Future<Item=GetAuthorizableKeystoreResponse, Error=ApiError>> {
-
-
-        let uri = format!(
-            "{}//{intermediatePath}/{authorizableId}.ks.json",
-            self.base_path, intermediatePath=utf8_percent_encode(&param_intermediate_path.to_string(), ID_ENCODE_SET), authorizableId=utf8_percent_encode(&param_authorizable_id.to_string(), ID_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Get, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                200 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 Ok(body.to_string())
-
-                                             ))
-                        .map(move |body|
-                            GetAuthorizableKeystoreResponse::RetrievedAuthorizableKeystoreInfo(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                0 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 Ok(body.to_string())
-
-                                             ))
-                        .map(move |body|
-                            GetAuthorizableKeystoreResponse::DefaultResponse(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn get_keystore(&self, param_intermediate_path: String, param_authorizable_id: String, context: &C) -> Box<Future<Item=GetKeystoreResponse, Error=ApiError>> {
-
-
-        let uri = format!(
-            "{}//{intermediatePath}/{authorizableId}/keystore/store.p12",
-            self.base_path, intermediatePath=utf8_percent_encode(&param_intermediate_path.to_string(), ID_ENCODE_SET), authorizableId=utf8_percent_encode(&param_authorizable_id.to_string(), ID_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Get, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 serde_json::from_str::<swagger::ByteArray>(body)
-                                                     .map_err(|e| e.into())
-
-                                             ))
-                        .map(move |body|
-                            GetKeystoreResponse::DefaultResponse(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn get_node(&self, param_path: String, param_name: String, context: &C) -> Box<Future<Item=GetNodeResponse, Error=ApiError>> {
-
-
-        let uri = format!(
-            "{}//{path}/{name}",
-            self.base_path, path=utf8_percent_encode(&param_path.to_string(), ID_ENCODE_SET), name=utf8_percent_encode(&param_name.to_string(), ID_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Get, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-
-                        future::ok(
-                            GetNodeResponse::DefaultResponse
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn get_package(&self, param_group: String, param_name: String, param_version: String, context: &C) -> Box<Future<Item=GetPackageResponse, Error=ApiError>> {
-
-
-        let uri = format!(
-            "{}//etc/packages/{group}/{name}-{version}.zip",
-            self.base_path, group=utf8_percent_encode(&param_group.to_string(), ID_ENCODE_SET), name=utf8_percent_encode(&param_name.to_string(), ID_ENCODE_SET), version=utf8_percent_encode(&param_version.to_string(), ID_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Get, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 serde_json::from_str::<swagger::ByteArray>(body)
-                                                     .map_err(|e| e.into())
-
-                                             ))
-                        .map(move |body|
-                            GetPackageResponse::DefaultResponse(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn get_package_filter(&self, param_group: String, param_name: String, param_version: String, context: &C) -> Box<Future<Item=GetPackageFilterResponse, Error=ApiError>> {
-
-
-        let uri = format!(
-            "{}//etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json",
-            self.base_path, group=utf8_percent_encode(&param_group.to_string(), ID_ENCODE_SET), name=utf8_percent_encode(&param_name.to_string(), ID_ENCODE_SET), version=utf8_percent_encode(&param_version.to_string(), ID_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Get, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 serde_json::from_str::<String>(body)
-                                                     .map_err(|e| e.into())
-
-                                             ))
-                        .map(move |body|
-                            GetPackageFilterResponse::DefaultResponse(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn get_query(&self, param_path: String, param_p_limit: f64, param__1_property: String, param__1_property_value: String, context: &C) -> Box<Future<Item=GetQueryResponse, Error=ApiError>> {
-
-        // Query parameters
-        let query_path = format!("path={path}&", path=param_path.to_string());
-        let query_p_limit = format!("p.limit={p_limit}&", p_limit=param_p_limit.to_string());
-        let query__1_property = format!("1_property={_1_property}&", _1_property=param__1_property.to_string());
-        let query__1_property_value = format!("1_property.value={_1_property_value}&", _1_property_value=param__1_property_value.to_string());
-
-
-        let uri = format!(
-            "{}//bin/querybuilder.json?{path}{p_limit}{_1_property}{_1_property_value}",
-            self.base_path,
-            path=utf8_percent_encode(&query_path, QUERY_ENCODE_SET),
-            p_limit=utf8_percent_encode(&query_p_limit, QUERY_ENCODE_SET),
-            _1_property=utf8_percent_encode(&query__1_property, QUERY_ENCODE_SET),
-            _1_property_value=utf8_percent_encode(&query__1_property_value, QUERY_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Get, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 serde_json::from_str::<String>(body)
-                                                     .map_err(|e| e.into())
-
-                                             ))
-                        .map(move |body|
-                            GetQueryResponse::DefaultResponse(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn get_truststore(&self, context: &C) -> Box<Future<Item=GetTruststoreResponse, Error=ApiError>> {
-
-
-        let uri = format!(
-            "{}//etc/truststore/truststore.p12",
-            self.base_path
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Get, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 serde_json::from_str::<swagger::ByteArray>(body)
-                                                     .map_err(|e| e.into())
-
-                                             ))
-                        .map(move |body|
-                            GetTruststoreResponse::DefaultResponse(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn get_truststore_info(&self, context: &C) -> Box<Future<Item=GetTruststoreInfoResponse, Error=ApiError>> {
-
-
-        let uri = format!(
-            "{}//libs/granite/security/truststore.json",
-            self.base_path
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Get, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                200 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 serde_json::from_str::<models::TruststoreInfo>(body)
-                                                     .map_err(|e| e.into())
-
-                                             ))
-                        .map(move |body|
-                            GetTruststoreInfoResponse::RetrievedAEMTruststoreInfo(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                0 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 serde_json::from_str::<String>(body)
-                                                     .map_err(|e| e.into())
-
-                                             ))
-                        .map(move |body|
-                            GetTruststoreInfoResponse::DefaultResponse(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn post_agent(&self, param_runmode: String, param_name: String, param_jcrcontentcqdistribute: Option<bool>, param_jcrcontentcqdistribute_type_hint: Option<String>, param_jcrcontentcqname: Option<String>, param_jcrcontentcqtemplate: Option<String>, param_jcrcontentenabled: Option<bool>, param_jcrcontentjcrdescription: Option<String>, param_jcrcontentjcrlast_modified: Option<String>, param_jcrcontentjcrlast_modified_by: Option<String>, param_jcrcontentjcrmixin_types: Option<String>, param_jcrcontentjcrtitle: Option<String>, param_jcrcontentlog_level: Option<String>, param_jcrcontentno_status_update: Option<bool>, param_jcrcontentno_versioning: Option<bool>, param_jcrcontentprotocol_connect_timeout: Option<f64>, param_jcrcontentprotocol_http_connection_closed: Option<bool>, param_jcrcontentprotocol_http_expired: Option<String>, param_jcrcontentprotocol_http_headers: Option<&Vec<String>>, param_jcrcontentprotocol_http_headers_type_hint: Option<String>, param_jcrcontentprotocol_http_method: Option<String>, param_jcrcontentprotocol_https_relaxed: Option<bool>, param_jcrcontentprotocol_interface: Option<String>, param_jcrcontentprotocol_socket_timeout: Option<f64>, param_jcrcontentprotocol_version: Option<String>, param_jcrcontentproxy_ntlm_domain: Option<String>, param_jcrcontentproxy_ntlm_host: Option<String>, param_jcrcontentproxy_host: Option<String>, param_jcrcontentproxy_password: Option<String>, param_jcrcontentproxy_port: Option<f64>, param_jcrcontentproxy_user: Option<String>, param_jcrcontentqueue_batch_max_size: Option<f64>, param_jcrcontentqueue_batch_mode: Option<String>, param_jcrcontentqueue_batch_wait_time: Option<f64>, param_jcrcontentretry_delay: Option<String>, param_jcrcontentreverse_replication: Option<bool>, param_jcrcontentserialization_type: Option<String>, param_jcrcontentslingresource_type: Option<String>, param_jcrcontentssl: Option<String>, param_jcrcontenttransport_ntlm_domain: Option<String>, param_jcrcontenttransport_ntlm_host: Option<String>, param_jcrcontenttransport_password: Option<String>, param_jcrcontenttransport_uri: Option<String>, param_jcrcontenttransport_user: Option<String>, param_jcrcontenttrigger_distribute: Option<bool>, param_jcrcontenttrigger_modified: Option<bool>, param_jcrcontenttrigger_on_off_time: Option<bool>, param_jcrcontenttrigger_receive: Option<bool>, param_jcrcontenttrigger_specific: Option<bool>, param_jcrcontentuser_id: Option<String>, param_jcrprimary_type: Option<String>, param_operation: Option<String>, context: &C) -> Box<Future<Item=PostAgentResponse, Error=ApiError>> {
-
-        // Query parameters
-        let query_jcrcontentcqdistribute = param_jcrcontentcqdistribute.map_or_else(String::new, |query| format!("jcr:content/cq:distribute={jcrcontentcqdistribute}&", jcrcontentcqdistribute=query.to_string()));
-        let query_jcrcontentcqdistribute_type_hint = param_jcrcontentcqdistribute_type_hint.map_or_else(String::new, |query| format!("jcr:content/cq:distribute@TypeHint={jcrcontentcqdistribute_type_hint}&", jcrcontentcqdistribute_type_hint=query.to_string()));
-        let query_jcrcontentcqname = param_jcrcontentcqname.map_or_else(String::new, |query| format!("jcr:content/cq:name={jcrcontentcqname}&", jcrcontentcqname=query.to_string()));
-        let query_jcrcontentcqtemplate = param_jcrcontentcqtemplate.map_or_else(String::new, |query| format!("jcr:content/cq:template={jcrcontentcqtemplate}&", jcrcontentcqtemplate=query.to_string()));
-        let query_jcrcontentenabled = param_jcrcontentenabled.map_or_else(String::new, |query| format!("jcr:content/enabled={jcrcontentenabled}&", jcrcontentenabled=query.to_string()));
-        let query_jcrcontentjcrdescription = param_jcrcontentjcrdescription.map_or_else(String::new, |query| format!("jcr:content/jcr:description={jcrcontentjcrdescription}&", jcrcontentjcrdescription=query.to_string()));
-        let query_jcrcontentjcrlast_modified = param_jcrcontentjcrlast_modified.map_or_else(String::new, |query| format!("jcr:content/jcr:lastModified={jcrcontentjcrlast_modified}&", jcrcontentjcrlast_modified=query.to_string()));
-        let query_jcrcontentjcrlast_modified_by = param_jcrcontentjcrlast_modified_by.map_or_else(String::new, |query| format!("jcr:content/jcr:lastModifiedBy={jcrcontentjcrlast_modified_by}&", jcrcontentjcrlast_modified_by=query.to_string()));
-        let query_jcrcontentjcrmixin_types = param_jcrcontentjcrmixin_types.map_or_else(String::new, |query| format!("jcr:content/jcr:mixinTypes={jcrcontentjcrmixin_types}&", jcrcontentjcrmixin_types=query.to_string()));
-        let query_jcrcontentjcrtitle = param_jcrcontentjcrtitle.map_or_else(String::new, |query| format!("jcr:content/jcr:title={jcrcontentjcrtitle}&", jcrcontentjcrtitle=query.to_string()));
-        let query_jcrcontentlog_level = param_jcrcontentlog_level.map_or_else(String::new, |query| format!("jcr:content/logLevel={jcrcontentlog_level}&", jcrcontentlog_level=query.to_string()));
-        let query_jcrcontentno_status_update = param_jcrcontentno_status_update.map_or_else(String::new, |query| format!("jcr:content/noStatusUpdate={jcrcontentno_status_update}&", jcrcontentno_status_update=query.to_string()));
-        let query_jcrcontentno_versioning = param_jcrcontentno_versioning.map_or_else(String::new, |query| format!("jcr:content/noVersioning={jcrcontentno_versioning}&", jcrcontentno_versioning=query.to_string()));
-        let query_jcrcontentprotocol_connect_timeout = param_jcrcontentprotocol_connect_timeout.map_or_else(String::new, |query| format!("jcr:content/protocolConnectTimeout={jcrcontentprotocol_connect_timeout}&", jcrcontentprotocol_connect_timeout=query.to_string()));
-        let query_jcrcontentprotocol_http_connection_closed = param_jcrcontentprotocol_http_connection_closed.map_or_else(String::new, |query| format!("jcr:content/protocolHTTPConnectionClosed={jcrcontentprotocol_http_connection_closed}&", jcrcontentprotocol_http_connection_closed=query.to_string()));
-        let query_jcrcontentprotocol_http_expired = param_jcrcontentprotocol_http_expired.map_or_else(String::new, |query| format!("jcr:content/protocolHTTPExpired={jcrcontentprotocol_http_expired}&", jcrcontentprotocol_http_expired=query.to_string()));
-        let query_jcrcontentprotocol_http_headers = param_jcrcontentprotocol_http_headers.map_or_else(String::new, |query| format!("jcr:content/protocolHTTPHeaders={jcrcontentprotocol_http_headers}&", jcrcontentprotocol_http_headers=query.join(",")));
-        let query_jcrcontentprotocol_http_headers_type_hint = param_jcrcontentprotocol_http_headers_type_hint.map_or_else(String::new, |query| format!("jcr:content/protocolHTTPHeaders@TypeHint={jcrcontentprotocol_http_headers_type_hint}&", jcrcontentprotocol_http_headers_type_hint=query.to_string()));
-        let query_jcrcontentprotocol_http_method = param_jcrcontentprotocol_http_method.map_or_else(String::new, |query| format!("jcr:content/protocolHTTPMethod={jcrcontentprotocol_http_method}&", jcrcontentprotocol_http_method=query.to_string()));
-        let query_jcrcontentprotocol_https_relaxed = param_jcrcontentprotocol_https_relaxed.map_or_else(String::new, |query| format!("jcr:content/protocolHTTPSRelaxed={jcrcontentprotocol_https_relaxed}&", jcrcontentprotocol_https_relaxed=query.to_string()));
-        let query_jcrcontentprotocol_interface = param_jcrcontentprotocol_interface.map_or_else(String::new, |query| format!("jcr:content/protocolInterface={jcrcontentprotocol_interface}&", jcrcontentprotocol_interface=query.to_string()));
-        let query_jcrcontentprotocol_socket_timeout = param_jcrcontentprotocol_socket_timeout.map_or_else(String::new, |query| format!("jcr:content/protocolSocketTimeout={jcrcontentprotocol_socket_timeout}&", jcrcontentprotocol_socket_timeout=query.to_string()));
-        let query_jcrcontentprotocol_version = param_jcrcontentprotocol_version.map_or_else(String::new, |query| format!("jcr:content/protocolVersion={jcrcontentprotocol_version}&", jcrcontentprotocol_version=query.to_string()));
-        let query_jcrcontentproxy_ntlm_domain = param_jcrcontentproxy_ntlm_domain.map_or_else(String::new, |query| format!("jcr:content/proxyNTLMDomain={jcrcontentproxy_ntlm_domain}&", jcrcontentproxy_ntlm_domain=query.to_string()));
-        let query_jcrcontentproxy_ntlm_host = param_jcrcontentproxy_ntlm_host.map_or_else(String::new, |query| format!("jcr:content/proxyNTLMHost={jcrcontentproxy_ntlm_host}&", jcrcontentproxy_ntlm_host=query.to_string()));
-        let query_jcrcontentproxy_host = param_jcrcontentproxy_host.map_or_else(String::new, |query| format!("jcr:content/proxyHost={jcrcontentproxy_host}&", jcrcontentproxy_host=query.to_string()));
-        let query_jcrcontentproxy_password = param_jcrcontentproxy_password.map_or_else(String::new, |query| format!("jcr:content/proxyPassword={jcrcontentproxy_password}&", jcrcontentproxy_password=query.to_string()));
-        let query_jcrcontentproxy_port = param_jcrcontentproxy_port.map_or_else(String::new, |query| format!("jcr:content/proxyPort={jcrcontentproxy_port}&", jcrcontentproxy_port=query.to_string()));
-        let query_jcrcontentproxy_user = param_jcrcontentproxy_user.map_or_else(String::new, |query| format!("jcr:content/proxyUser={jcrcontentproxy_user}&", jcrcontentproxy_user=query.to_string()));
-        let query_jcrcontentqueue_batch_max_size = param_jcrcontentqueue_batch_max_size.map_or_else(String::new, |query| format!("jcr:content/queueBatchMaxSize={jcrcontentqueue_batch_max_size}&", jcrcontentqueue_batch_max_size=query.to_string()));
-        let query_jcrcontentqueue_batch_mode = param_jcrcontentqueue_batch_mode.map_or_else(String::new, |query| format!("jcr:content/queueBatchMode={jcrcontentqueue_batch_mode}&", jcrcontentqueue_batch_mode=query.to_string()));
-        let query_jcrcontentqueue_batch_wait_time = param_jcrcontentqueue_batch_wait_time.map_or_else(String::new, |query| format!("jcr:content/queueBatchWaitTime={jcrcontentqueue_batch_wait_time}&", jcrcontentqueue_batch_wait_time=query.to_string()));
-        let query_jcrcontentretry_delay = param_jcrcontentretry_delay.map_or_else(String::new, |query| format!("jcr:content/retryDelay={jcrcontentretry_delay}&", jcrcontentretry_delay=query.to_string()));
-        let query_jcrcontentreverse_replication = param_jcrcontentreverse_replication.map_or_else(String::new, |query| format!("jcr:content/reverseReplication={jcrcontentreverse_replication}&", jcrcontentreverse_replication=query.to_string()));
-        let query_jcrcontentserialization_type = param_jcrcontentserialization_type.map_or_else(String::new, |query| format!("jcr:content/serializationType={jcrcontentserialization_type}&", jcrcontentserialization_type=query.to_string()));
-        let query_jcrcontentslingresource_type = param_jcrcontentslingresource_type.map_or_else(String::new, |query| format!("jcr:content/sling:resourceType={jcrcontentslingresource_type}&", jcrcontentslingresource_type=query.to_string()));
-        let query_jcrcontentssl = param_jcrcontentssl.map_or_else(String::new, |query| format!("jcr:content/ssl={jcrcontentssl}&", jcrcontentssl=query.to_string()));
-        let query_jcrcontenttransport_ntlm_domain = param_jcrcontenttransport_ntlm_domain.map_or_else(String::new, |query| format!("jcr:content/transportNTLMDomain={jcrcontenttransport_ntlm_domain}&", jcrcontenttransport_ntlm_domain=query.to_string()));
-        let query_jcrcontenttransport_ntlm_host = param_jcrcontenttransport_ntlm_host.map_or_else(String::new, |query| format!("jcr:content/transportNTLMHost={jcrcontenttransport_ntlm_host}&", jcrcontenttransport_ntlm_host=query.to_string()));
-        let query_jcrcontenttransport_password = param_jcrcontenttransport_password.map_or_else(String::new, |query| format!("jcr:content/transportPassword={jcrcontenttransport_password}&", jcrcontenttransport_password=query.to_string()));
-        let query_jcrcontenttransport_uri = param_jcrcontenttransport_uri.map_or_else(String::new, |query| format!("jcr:content/transportUri={jcrcontenttransport_uri}&", jcrcontenttransport_uri=query.to_string()));
-        let query_jcrcontenttransport_user = param_jcrcontenttransport_user.map_or_else(String::new, |query| format!("jcr:content/transportUser={jcrcontenttransport_user}&", jcrcontenttransport_user=query.to_string()));
-        let query_jcrcontenttrigger_distribute = param_jcrcontenttrigger_distribute.map_or_else(String::new, |query| format!("jcr:content/triggerDistribute={jcrcontenttrigger_distribute}&", jcrcontenttrigger_distribute=query.to_string()));
-        let query_jcrcontenttrigger_modified = param_jcrcontenttrigger_modified.map_or_else(String::new, |query| format!("jcr:content/triggerModified={jcrcontenttrigger_modified}&", jcrcontenttrigger_modified=query.to_string()));
-        let query_jcrcontenttrigger_on_off_time = param_jcrcontenttrigger_on_off_time.map_or_else(String::new, |query| format!("jcr:content/triggerOnOffTime={jcrcontenttrigger_on_off_time}&", jcrcontenttrigger_on_off_time=query.to_string()));
-        let query_jcrcontenttrigger_receive = param_jcrcontenttrigger_receive.map_or_else(String::new, |query| format!("jcr:content/triggerReceive={jcrcontenttrigger_receive}&", jcrcontenttrigger_receive=query.to_string()));
-        let query_jcrcontenttrigger_specific = param_jcrcontenttrigger_specific.map_or_else(String::new, |query| format!("jcr:content/triggerSpecific={jcrcontenttrigger_specific}&", jcrcontenttrigger_specific=query.to_string()));
-        let query_jcrcontentuser_id = param_jcrcontentuser_id.map_or_else(String::new, |query| format!("jcr:content/userId={jcrcontentuser_id}&", jcrcontentuser_id=query.to_string()));
-        let query_jcrprimary_type = param_jcrprimary_type.map_or_else(String::new, |query| format!("jcr:primaryType={jcrprimary_type}&", jcrprimary_type=query.to_string()));
-        let query_operation = param_operation.map_or_else(String::new, |query| format!(":operation={operation}&", operation=query.to_string()));
-
-
-        let uri = format!(
-            "{}//etc/replication/agents.{runmode}/{name}?{jcrcontentcqdistribute}{jcrcontentcqdistribute_type_hint}{jcrcontentcqname}{jcrcontentcqtemplate}{jcrcontentenabled}{jcrcontentjcrdescription}{jcrcontentjcrlast_modified}{jcrcontentjcrlast_modified_by}{jcrcontentjcrmixin_types}{jcrcontentjcrtitle}{jcrcontentlog_level}{jcrcontentno_status_update}{jcrcontentno_versioning}{jcrcontentprotocol_connect_timeout}{jcrcontentprotocol_http_connection_closed}{jcrcontentprotocol_http_expired}{jcrcontentprotocol_http_headers}{jcrcontentprotocol_http_headers_type_hint}{jcrcontentprotocol_http_method}{jcrcontentprotocol_https_relaxed}{jcrcontentprotocol_interface}{jcrcontentprotocol_socket_timeout}{jcrcontentprotocol_version}{jcrcontentproxy_ntlm_domain}{jcrcontentproxy_ntlm_host}{jcrcontentproxy_host}{jcrcontentproxy_password}{jcrcontentproxy_port}{jcrcontentproxy_user}{jcrcontentqueue_batch_max_size}{jcrcontentqueue_batch_mode}{jcrcontentqueue_batch_wait_time}{jcrcontentretry_delay}{jcrcontentreverse_replication}{jcrcontentserialization_type}{jcrcontentslingresource_type}{jcrcontentssl}{jcrcontenttransport_ntlm_domain}{jcrcontenttransport_ntlm_host}{jcrcontenttransport_password}{jcrcontenttransport_uri}{jcrcontenttransport_user}{jcrcontenttrigger_distribute}{jcrcontenttrigger_modified}{jcrcontenttrigger_on_off_time}{jcrcontenttrigger_receive}{jcrcontenttrigger_specific}{jcrcontentuser_id}{jcrprimary_type}{operation}",
-            self.base_path, runmode=utf8_percent_encode(&param_runmode.to_string(), ID_ENCODE_SET), name=utf8_percent_encode(&param_name.to_string(), ID_ENCODE_SET),
-            jcrcontentcqdistribute=utf8_percent_encode(&query_jcrcontentcqdistribute, QUERY_ENCODE_SET),
-            jcrcontentcqdistribute_type_hint=utf8_percent_encode(&query_jcrcontentcqdistribute_type_hint, QUERY_ENCODE_SET),
-            jcrcontentcqname=utf8_percent_encode(&query_jcrcontentcqname, QUERY_ENCODE_SET),
-            jcrcontentcqtemplate=utf8_percent_encode(&query_jcrcontentcqtemplate, QUERY_ENCODE_SET),
-            jcrcontentenabled=utf8_percent_encode(&query_jcrcontentenabled, QUERY_ENCODE_SET),
-            jcrcontentjcrdescription=utf8_percent_encode(&query_jcrcontentjcrdescription, QUERY_ENCODE_SET),
-            jcrcontentjcrlast_modified=utf8_percent_encode(&query_jcrcontentjcrlast_modified, QUERY_ENCODE_SET),
-            jcrcontentjcrlast_modified_by=utf8_percent_encode(&query_jcrcontentjcrlast_modified_by, QUERY_ENCODE_SET),
-            jcrcontentjcrmixin_types=utf8_percent_encode(&query_jcrcontentjcrmixin_types, QUERY_ENCODE_SET),
-            jcrcontentjcrtitle=utf8_percent_encode(&query_jcrcontentjcrtitle, QUERY_ENCODE_SET),
-            jcrcontentlog_level=utf8_percent_encode(&query_jcrcontentlog_level, QUERY_ENCODE_SET),
-            jcrcontentno_status_update=utf8_percent_encode(&query_jcrcontentno_status_update, QUERY_ENCODE_SET),
-            jcrcontentno_versioning=utf8_percent_encode(&query_jcrcontentno_versioning, QUERY_ENCODE_SET),
-            jcrcontentprotocol_connect_timeout=utf8_percent_encode(&query_jcrcontentprotocol_connect_timeout, QUERY_ENCODE_SET),
-            jcrcontentprotocol_http_connection_closed=utf8_percent_encode(&query_jcrcontentprotocol_http_connection_closed, QUERY_ENCODE_SET),
-            jcrcontentprotocol_http_expired=utf8_percent_encode(&query_jcrcontentprotocol_http_expired, QUERY_ENCODE_SET),
-            jcrcontentprotocol_http_headers=utf8_percent_encode(&query_jcrcontentprotocol_http_headers, QUERY_ENCODE_SET),
-            jcrcontentprotocol_http_headers_type_hint=utf8_percent_encode(&query_jcrcontentprotocol_http_headers_type_hint, QUERY_ENCODE_SET),
-            jcrcontentprotocol_http_method=utf8_percent_encode(&query_jcrcontentprotocol_http_method, QUERY_ENCODE_SET),
-            jcrcontentprotocol_https_relaxed=utf8_percent_encode(&query_jcrcontentprotocol_https_relaxed, QUERY_ENCODE_SET),
-            jcrcontentprotocol_interface=utf8_percent_encode(&query_jcrcontentprotocol_interface, QUERY_ENCODE_SET),
-            jcrcontentprotocol_socket_timeout=utf8_percent_encode(&query_jcrcontentprotocol_socket_timeout, QUERY_ENCODE_SET),
-            jcrcontentprotocol_version=utf8_percent_encode(&query_jcrcontentprotocol_version, QUERY_ENCODE_SET),
-            jcrcontentproxy_ntlm_domain=utf8_percent_encode(&query_jcrcontentproxy_ntlm_domain, QUERY_ENCODE_SET),
-            jcrcontentproxy_ntlm_host=utf8_percent_encode(&query_jcrcontentproxy_ntlm_host, QUERY_ENCODE_SET),
-            jcrcontentproxy_host=utf8_percent_encode(&query_jcrcontentproxy_host, QUERY_ENCODE_SET),
-            jcrcontentproxy_password=utf8_percent_encode(&query_jcrcontentproxy_password, QUERY_ENCODE_SET),
-            jcrcontentproxy_port=utf8_percent_encode(&query_jcrcontentproxy_port, QUERY_ENCODE_SET),
-            jcrcontentproxy_user=utf8_percent_encode(&query_jcrcontentproxy_user, QUERY_ENCODE_SET),
-            jcrcontentqueue_batch_max_size=utf8_percent_encode(&query_jcrcontentqueue_batch_max_size, QUERY_ENCODE_SET),
-            jcrcontentqueue_batch_mode=utf8_percent_encode(&query_jcrcontentqueue_batch_mode, QUERY_ENCODE_SET),
-            jcrcontentqueue_batch_wait_time=utf8_percent_encode(&query_jcrcontentqueue_batch_wait_time, QUERY_ENCODE_SET),
-            jcrcontentretry_delay=utf8_percent_encode(&query_jcrcontentretry_delay, QUERY_ENCODE_SET),
-            jcrcontentreverse_replication=utf8_percent_encode(&query_jcrcontentreverse_replication, QUERY_ENCODE_SET),
-            jcrcontentserialization_type=utf8_percent_encode(&query_jcrcontentserialization_type, QUERY_ENCODE_SET),
-            jcrcontentslingresource_type=utf8_percent_encode(&query_jcrcontentslingresource_type, QUERY_ENCODE_SET),
-            jcrcontentssl=utf8_percent_encode(&query_jcrcontentssl, QUERY_ENCODE_SET),
-            jcrcontenttransport_ntlm_domain=utf8_percent_encode(&query_jcrcontenttransport_ntlm_domain, QUERY_ENCODE_SET),
-            jcrcontenttransport_ntlm_host=utf8_percent_encode(&query_jcrcontenttransport_ntlm_host, QUERY_ENCODE_SET),
-            jcrcontenttransport_password=utf8_percent_encode(&query_jcrcontenttransport_password, QUERY_ENCODE_SET),
-            jcrcontenttransport_uri=utf8_percent_encode(&query_jcrcontenttransport_uri, QUERY_ENCODE_SET),
-            jcrcontenttransport_user=utf8_percent_encode(&query_jcrcontenttransport_user, QUERY_ENCODE_SET),
-            jcrcontenttrigger_distribute=utf8_percent_encode(&query_jcrcontenttrigger_distribute, QUERY_ENCODE_SET),
-            jcrcontenttrigger_modified=utf8_percent_encode(&query_jcrcontenttrigger_modified, QUERY_ENCODE_SET),
-            jcrcontenttrigger_on_off_time=utf8_percent_encode(&query_jcrcontenttrigger_on_off_time, QUERY_ENCODE_SET),
-            jcrcontenttrigger_receive=utf8_percent_encode(&query_jcrcontenttrigger_receive, QUERY_ENCODE_SET),
-            jcrcontenttrigger_specific=utf8_percent_encode(&query_jcrcontenttrigger_specific, QUERY_ENCODE_SET),
-            jcrcontentuser_id=utf8_percent_encode(&query_jcrcontentuser_id, QUERY_ENCODE_SET),
-            jcrprimary_type=utf8_percent_encode(&query_jcrprimary_type, QUERY_ENCODE_SET),
-            operation=utf8_percent_encode(&query_operation, QUERY_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Post, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-
-                        future::ok(
-                            PostAgentResponse::DefaultResponse
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn post_authorizable_keystore(&self, param_intermediate_path: String, param_authorizable_id: String, param_operation: Option<String>, param_current_password: Option<String>, param_new_password: Option<String>, param_re_password: Option<String>, param_key_password: Option<String>, param_key_store_pass: Option<String>, param_alias: Option<String>, param_new_alias: Option<String>, param_remove_alias: Option<String>, param_cert_chain: Option<swagger::ByteArray>, param_pk: Option<swagger::ByteArray>, param_key_store: Option<swagger::ByteArray>, context: &C) -> Box<Future<Item=PostAuthorizableKeystoreResponse, Error=ApiError>> {
-
-        // Query parameters
-        let query_operation = param_operation.map_or_else(String::new, |query| format!(":operation={operation}&", operation=query.to_string()));
-        let query_current_password = param_current_password.map_or_else(String::new, |query| format!("currentPassword={current_password}&", current_password=query.to_string()));
-        let query_new_password = param_new_password.map_or_else(String::new, |query| format!("newPassword={new_password}&", new_password=query.to_string()));
-        let query_re_password = param_re_password.map_or_else(String::new, |query| format!("rePassword={re_password}&", re_password=query.to_string()));
-        let query_key_password = param_key_password.map_or_else(String::new, |query| format!("keyPassword={key_password}&", key_password=query.to_string()));
-        let query_key_store_pass = param_key_store_pass.map_or_else(String::new, |query| format!("keyStorePass={key_store_pass}&", key_store_pass=query.to_string()));
-        let query_alias = param_alias.map_or_else(String::new, |query| format!("alias={alias}&", alias=query.to_string()));
-        let query_new_alias = param_new_alias.map_or_else(String::new, |query| format!("newAlias={new_alias}&", new_alias=query.to_string()));
-        let query_remove_alias = param_remove_alias.map_or_else(String::new, |query| format!("removeAlias={remove_alias}&", remove_alias=query.to_string()));
-
-
-        let uri = format!(
-            "{}//{intermediatePath}/{authorizableId}.ks.html?{operation}{current_password}{new_password}{re_password}{key_password}{key_store_pass}{alias}{new_alias}{remove_alias}",
-            self.base_path, intermediatePath=utf8_percent_encode(&param_intermediate_path.to_string(), ID_ENCODE_SET), authorizableId=utf8_percent_encode(&param_authorizable_id.to_string(), ID_ENCODE_SET),
-            operation=utf8_percent_encode(&query_operation, QUERY_ENCODE_SET),
-            current_password=utf8_percent_encode(&query_current_password, QUERY_ENCODE_SET),
-            new_password=utf8_percent_encode(&query_new_password, QUERY_ENCODE_SET),
-            re_password=utf8_percent_encode(&query_re_password, QUERY_ENCODE_SET),
-            key_password=utf8_percent_encode(&query_key_password, QUERY_ENCODE_SET),
-            key_store_pass=utf8_percent_encode(&query_key_store_pass, QUERY_ENCODE_SET),
-            alias=utf8_percent_encode(&query_alias, QUERY_ENCODE_SET),
-            new_alias=utf8_percent_encode(&query_new_alias, QUERY_ENCODE_SET),
-            remove_alias=utf8_percent_encode(&query_remove_alias, QUERY_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Post, uri);
-
-        let params = &[
-            ("cert-chain", param_cert_chain.map(|param| format!("{:?}", param))),
-            ("pk", param_pk.map(|param| format!("{:?}", param))),
-            ("keyStore", param_key_store.map(|param| format!("{:?}", param))),
-        ];
-        let body = serde_urlencoded::to_string(params).expect("impossible to fail to serialize");
-
-        request.headers_mut().set(ContentType(mimetypes::requests::POST_AUTHORIZABLE_KEYSTORE.clone()));
-        request.set_body(body.into_bytes());
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                200 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 Ok(body.to_string())
-
-                                             ))
-                        .map(move |body|
-                            PostAuthorizableKeystoreResponse::RetrievedAuthorizableKeystoreInfo(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                0 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 Ok(body.to_string())
-
-                                             ))
-                        .map(move |body|
-                            PostAuthorizableKeystoreResponse::DefaultResponse(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn post_authorizables(&self, param_authorizable_id: String, param_intermediate_path: String, param_create_user: Option<String>, param_create_group: Option<String>, param_reppassword: Option<String>, param_profilegiven_name: Option<String>, context: &C) -> Box<Future<Item=PostAuthorizablesResponse, Error=ApiError>> {
-
-        // Query parameters
-        let query_authorizable_id = format!("authorizableId={authorizable_id}&", authorizable_id=param_authorizable_id.to_string());
-        let query_intermediate_path = format!("intermediatePath={intermediate_path}&", intermediate_path=param_intermediate_path.to_string());
-        let query_create_user = param_create_user.map_or_else(String::new, |query| format!("createUser={create_user}&", create_user=query.to_string()));
-        let query_create_group = param_create_group.map_or_else(String::new, |query| format!("createGroup={create_group}&", create_group=query.to_string()));
-        let query_reppassword = param_reppassword.map_or_else(String::new, |query| format!("rep:password={reppassword}&", reppassword=query.to_string()));
-        let query_profilegiven_name = param_profilegiven_name.map_or_else(String::new, |query| format!("profile/givenName={profilegiven_name}&", profilegiven_name=query.to_string()));
-
-
-        let uri = format!(
-            "{}//libs/granite/security/post/authorizables?{authorizable_id}{intermediate_path}{create_user}{create_group}{reppassword}{profilegiven_name}",
-            self.base_path,
-            authorizable_id=utf8_percent_encode(&query_authorizable_id, QUERY_ENCODE_SET),
-            intermediate_path=utf8_percent_encode(&query_intermediate_path, QUERY_ENCODE_SET),
-            create_user=utf8_percent_encode(&query_create_user, QUERY_ENCODE_SET),
-            create_group=utf8_percent_encode(&query_create_group, QUERY_ENCODE_SET),
-            reppassword=utf8_percent_encode(&query_reppassword, QUERY_ENCODE_SET),
-            profilegiven_name=utf8_percent_encode(&query_profilegiven_name, QUERY_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Post, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 serde_json::from_str::<String>(body)
-                                                     .map_err(|e| e.into())
-
-                                             ))
-                        .map(move |body|
-                            PostAuthorizablesResponse::DefaultResponse(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn post_config_adobe_granite_saml_authentication_handler(&self, param_key_store_password: Option<String>, param_key_store_password_type_hint: Option<String>, param_service_ranking: Option<i32>, param_service_ranking_type_hint: Option<String>, param_idp_http_redirect: Option<bool>, param_idp_http_redirect_type_hint: Option<String>, param_create_user: Option<bool>, param_create_user_type_hint: Option<String>, param_default_redirect_url: Option<String>, param_default_redirect_url_type_hint: Option<String>, param_user_id_attribute: Option<String>, param_user_id_attribute_type_hint: Option<String>, param_default_groups: Option<&Vec<String>>, param_default_groups_type_hint: Option<String>, param_idp_cert_alias: Option<String>, param_idp_cert_alias_type_hint: Option<String>, param_add_group_memberships: Option<bool>, param_add_group_memberships_type_hint: Option<String>, param_path: Option<&Vec<String>>, param_path_type_hint: Option<String>, param_synchronize_attributes: Option<&Vec<String>>, param_synchronize_attributes_type_hint: Option<String>, param_clock_tolerance: Option<i32>, param_clock_tolerance_type_hint: Option<String>, param_group_membership_attribute: Option<String>, param_group_membership_attribute_type_hint: Option<String>, param_idp_url: Option<String>, param_idp_url_type_hint: Option<String>, param_logout_url: Option<String>, param_logout_url_type_hint: Option<String>, param_service_provider_entity_id: Option<String>, param_service_provider_entity_id_type_hint: Option<String>, param_assertion_consumer_service_url: Option<String>, param_assertion_consumer_service_url_type_hint: Option<String>, param_handle_logout: Option<bool>, param_handle_logout_type_hint: Option<String>, param_sp_private_key_alias: Option<String>, param_sp_private_key_alias_type_hint: Option<String>, param_use_encryption: Option<bool>, param_use_encryption_type_hint: Option<String>, param_name_id_format: Option<String>, param_name_id_format_type_hint: Option<String>, param_digest_method: Option<String>, param_digest_method_type_hint: Option<String>, param_signature_method: Option<String>, param_signature_method_type_hint: Option<String>, param_user_intermediate_path: Option<String>, param_user_intermediate_path_type_hint: Option<String>, context: &C) -> Box<Future<Item=PostConfigAdobeGraniteSamlAuthenticationHandlerResponse, Error=ApiError>> {
-
-        // Query parameters
-        let query_key_store_password = param_key_store_password.map_or_else(String::new, |query| format!("keyStorePassword={key_store_password}&", key_store_password=query.to_string()));
-        let query_key_store_password_type_hint = param_key_store_password_type_hint.map_or_else(String::new, |query| format!("keyStorePassword@TypeHint={key_store_password_type_hint}&", key_store_password_type_hint=query.to_string()));
-        let query_service_ranking = param_service_ranking.map_or_else(String::new, |query| format!("service.ranking={service_ranking}&", service_ranking=query.to_string()));
-        let query_service_ranking_type_hint = param_service_ranking_type_hint.map_or_else(String::new, |query| format!("service.ranking@TypeHint={service_ranking_type_hint}&", service_ranking_type_hint=query.to_string()));
-        let query_idp_http_redirect = param_idp_http_redirect.map_or_else(String::new, |query| format!("idpHttpRedirect={idp_http_redirect}&", idp_http_redirect=query.to_string()));
-        let query_idp_http_redirect_type_hint = param_idp_http_redirect_type_hint.map_or_else(String::new, |query| format!("idpHttpRedirect@TypeHint={idp_http_redirect_type_hint}&", idp_http_redirect_type_hint=query.to_string()));
-        let query_create_user = param_create_user.map_or_else(String::new, |query| format!("createUser={create_user}&", create_user=query.to_string()));
-        let query_create_user_type_hint = param_create_user_type_hint.map_or_else(String::new, |query| format!("createUser@TypeHint={create_user_type_hint}&", create_user_type_hint=query.to_string()));
-        let query_default_redirect_url = param_default_redirect_url.map_or_else(String::new, |query| format!("defaultRedirectUrl={default_redirect_url}&", default_redirect_url=query.to_string()));
-        let query_default_redirect_url_type_hint = param_default_redirect_url_type_hint.map_or_else(String::new, |query| format!("defaultRedirectUrl@TypeHint={default_redirect_url_type_hint}&", default_redirect_url_type_hint=query.to_string()));
-        let query_user_id_attribute = param_user_id_attribute.map_or_else(String::new, |query| format!("userIDAttribute={user_id_attribute}&", user_id_attribute=query.to_string()));
-        let query_user_id_attribute_type_hint = param_user_id_attribute_type_hint.map_or_else(String::new, |query| format!("userIDAttribute@TypeHint={user_id_attribute_type_hint}&", user_id_attribute_type_hint=query.to_string()));
-        let query_default_groups = param_default_groups.map_or_else(String::new, |query| format!("defaultGroups={default_groups}&", default_groups=query.join(",")));
-        let query_default_groups_type_hint = param_default_groups_type_hint.map_or_else(String::new, |query| format!("defaultGroups@TypeHint={default_groups_type_hint}&", default_groups_type_hint=query.to_string()));
-        let query_idp_cert_alias = param_idp_cert_alias.map_or_else(String::new, |query| format!("idpCertAlias={idp_cert_alias}&", idp_cert_alias=query.to_string()));
-        let query_idp_cert_alias_type_hint = param_idp_cert_alias_type_hint.map_or_else(String::new, |query| format!("idpCertAlias@TypeHint={idp_cert_alias_type_hint}&", idp_cert_alias_type_hint=query.to_string()));
-        let query_add_group_memberships = param_add_group_memberships.map_or_else(String::new, |query| format!("addGroupMemberships={add_group_memberships}&", add_group_memberships=query.to_string()));
-        let query_add_group_memberships_type_hint = param_add_group_memberships_type_hint.map_or_else(String::new, |query| format!("addGroupMemberships@TypeHint={add_group_memberships_type_hint}&", add_group_memberships_type_hint=query.to_string()));
-        let query_path = param_path.map_or_else(String::new, |query| format!("path={path}&", path=query.join(",")));
-        let query_path_type_hint = param_path_type_hint.map_or_else(String::new, |query| format!("path@TypeHint={path_type_hint}&", path_type_hint=query.to_string()));
-        let query_synchronize_attributes = param_synchronize_attributes.map_or_else(String::new, |query| format!("synchronizeAttributes={synchronize_attributes}&", synchronize_attributes=query.join(",")));
-        let query_synchronize_attributes_type_hint = param_synchronize_attributes_type_hint.map_or_else(String::new, |query| format!("synchronizeAttributes@TypeHint={synchronize_attributes_type_hint}&", synchronize_attributes_type_hint=query.to_string()));
-        let query_clock_tolerance = param_clock_tolerance.map_or_else(String::new, |query| format!("clockTolerance={clock_tolerance}&", clock_tolerance=query.to_string()));
-        let query_clock_tolerance_type_hint = param_clock_tolerance_type_hint.map_or_else(String::new, |query| format!("clockTolerance@TypeHint={clock_tolerance_type_hint}&", clock_tolerance_type_hint=query.to_string()));
-        let query_group_membership_attribute = param_group_membership_attribute.map_or_else(String::new, |query| format!("groupMembershipAttribute={group_membership_attribute}&", group_membership_attribute=query.to_string()));
-        let query_group_membership_attribute_type_hint = param_group_membership_attribute_type_hint.map_or_else(String::new, |query| format!("groupMembershipAttribute@TypeHint={group_membership_attribute_type_hint}&", group_membership_attribute_type_hint=query.to_string()));
-        let query_idp_url = param_idp_url.map_or_else(String::new, |query| format!("idpUrl={idp_url}&", idp_url=query.to_string()));
-        let query_idp_url_type_hint = param_idp_url_type_hint.map_or_else(String::new, |query| format!("idpUrl@TypeHint={idp_url_type_hint}&", idp_url_type_hint=query.to_string()));
-        let query_logout_url = param_logout_url.map_or_else(String::new, |query| format!("logoutUrl={logout_url}&", logout_url=query.to_string()));
-        let query_logout_url_type_hint = param_logout_url_type_hint.map_or_else(String::new, |query| format!("logoutUrl@TypeHint={logout_url_type_hint}&", logout_url_type_hint=query.to_string()));
-        let query_service_provider_entity_id = param_service_provider_entity_id.map_or_else(String::new, |query| format!("serviceProviderEntityId={service_provider_entity_id}&", service_provider_entity_id=query.to_string()));
-        let query_service_provider_entity_id_type_hint = param_service_provider_entity_id_type_hint.map_or_else(String::new, |query| format!("serviceProviderEntityId@TypeHint={service_provider_entity_id_type_hint}&", service_provider_entity_id_type_hint=query.to_string()));
-        let query_assertion_consumer_service_url = param_assertion_consumer_service_url.map_or_else(String::new, |query| format!("assertionConsumerServiceURL={assertion_consumer_service_url}&", assertion_consumer_service_url=query.to_string()));
-        let query_assertion_consumer_service_url_type_hint = param_assertion_consumer_service_url_type_hint.map_or_else(String::new, |query| format!("assertionConsumerServiceURL@TypeHint={assertion_consumer_service_url_type_hint}&", assertion_consumer_service_url_type_hint=query.to_string()));
-        let query_handle_logout = param_handle_logout.map_or_else(String::new, |query| format!("handleLogout={handle_logout}&", handle_logout=query.to_string()));
-        let query_handle_logout_type_hint = param_handle_logout_type_hint.map_or_else(String::new, |query| format!("handleLogout@TypeHint={handle_logout_type_hint}&", handle_logout_type_hint=query.to_string()));
-        let query_sp_private_key_alias = param_sp_private_key_alias.map_or_else(String::new, |query| format!("spPrivateKeyAlias={sp_private_key_alias}&", sp_private_key_alias=query.to_string()));
-        let query_sp_private_key_alias_type_hint = param_sp_private_key_alias_type_hint.map_or_else(String::new, |query| format!("spPrivateKeyAlias@TypeHint={sp_private_key_alias_type_hint}&", sp_private_key_alias_type_hint=query.to_string()));
-        let query_use_encryption = param_use_encryption.map_or_else(String::new, |query| format!("useEncryption={use_encryption}&", use_encryption=query.to_string()));
-        let query_use_encryption_type_hint = param_use_encryption_type_hint.map_or_else(String::new, |query| format!("useEncryption@TypeHint={use_encryption_type_hint}&", use_encryption_type_hint=query.to_string()));
-        let query_name_id_format = param_name_id_format.map_or_else(String::new, |query| format!("nameIdFormat={name_id_format}&", name_id_format=query.to_string()));
-        let query_name_id_format_type_hint = param_name_id_format_type_hint.map_or_else(String::new, |query| format!("nameIdFormat@TypeHint={name_id_format_type_hint}&", name_id_format_type_hint=query.to_string()));
-        let query_digest_method = param_digest_method.map_or_else(String::new, |query| format!("digestMethod={digest_method}&", digest_method=query.to_string()));
-        let query_digest_method_type_hint = param_digest_method_type_hint.map_or_else(String::new, |query| format!("digestMethod@TypeHint={digest_method_type_hint}&", digest_method_type_hint=query.to_string()));
-        let query_signature_method = param_signature_method.map_or_else(String::new, |query| format!("signatureMethod={signature_method}&", signature_method=query.to_string()));
-        let query_signature_method_type_hint = param_signature_method_type_hint.map_or_else(String::new, |query| format!("signatureMethod@TypeHint={signature_method_type_hint}&", signature_method_type_hint=query.to_string()));
-        let query_user_intermediate_path = param_user_intermediate_path.map_or_else(String::new, |query| format!("userIntermediatePath={user_intermediate_path}&", user_intermediate_path=query.to_string()));
-        let query_user_intermediate_path_type_hint = param_user_intermediate_path_type_hint.map_or_else(String::new, |query| format!("userIntermediatePath@TypeHint={user_intermediate_path_type_hint}&", user_intermediate_path_type_hint=query.to_string()));
-
-
-        let uri = format!(
-            "{}//apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config?{key_store_password}{key_store_password_type_hint}{service_ranking}{service_ranking_type_hint}{idp_http_redirect}{idp_http_redirect_type_hint}{create_user}{create_user_type_hint}{default_redirect_url}{default_redirect_url_type_hint}{user_id_attribute}{user_id_attribute_type_hint}{default_groups}{default_groups_type_hint}{idp_cert_alias}{idp_cert_alias_type_hint}{add_group_memberships}{add_group_memberships_type_hint}{path}{path_type_hint}{synchronize_attributes}{synchronize_attributes_type_hint}{clock_tolerance}{clock_tolerance_type_hint}{group_membership_attribute}{group_membership_attribute_type_hint}{idp_url}{idp_url_type_hint}{logout_url}{logout_url_type_hint}{service_provider_entity_id}{service_provider_entity_id_type_hint}{assertion_consumer_service_url}{assertion_consumer_service_url_type_hint}{handle_logout}{handle_logout_type_hint}{sp_private_key_alias}{sp_private_key_alias_type_hint}{use_encryption}{use_encryption_type_hint}{name_id_format}{name_id_format_type_hint}{digest_method}{digest_method_type_hint}{signature_method}{signature_method_type_hint}{user_intermediate_path}{user_intermediate_path_type_hint}",
-            self.base_path,
-            key_store_password=utf8_percent_encode(&query_key_store_password, QUERY_ENCODE_SET),
-            key_store_password_type_hint=utf8_percent_encode(&query_key_store_password_type_hint, QUERY_ENCODE_SET),
-            service_ranking=utf8_percent_encode(&query_service_ranking, QUERY_ENCODE_SET),
-            service_ranking_type_hint=utf8_percent_encode(&query_service_ranking_type_hint, QUERY_ENCODE_SET),
-            idp_http_redirect=utf8_percent_encode(&query_idp_http_redirect, QUERY_ENCODE_SET),
-            idp_http_redirect_type_hint=utf8_percent_encode(&query_idp_http_redirect_type_hint, QUERY_ENCODE_SET),
-            create_user=utf8_percent_encode(&query_create_user, QUERY_ENCODE_SET),
-            create_user_type_hint=utf8_percent_encode(&query_create_user_type_hint, QUERY_ENCODE_SET),
-            default_redirect_url=utf8_percent_encode(&query_default_redirect_url, QUERY_ENCODE_SET),
-            default_redirect_url_type_hint=utf8_percent_encode(&query_default_redirect_url_type_hint, QUERY_ENCODE_SET),
-            user_id_attribute=utf8_percent_encode(&query_user_id_attribute, QUERY_ENCODE_SET),
-            user_id_attribute_type_hint=utf8_percent_encode(&query_user_id_attribute_type_hint, QUERY_ENCODE_SET),
-            default_groups=utf8_percent_encode(&query_default_groups, QUERY_ENCODE_SET),
-            default_groups_type_hint=utf8_percent_encode(&query_default_groups_type_hint, QUERY_ENCODE_SET),
-            idp_cert_alias=utf8_percent_encode(&query_idp_cert_alias, QUERY_ENCODE_SET),
-            idp_cert_alias_type_hint=utf8_percent_encode(&query_idp_cert_alias_type_hint, QUERY_ENCODE_SET),
-            add_group_memberships=utf8_percent_encode(&query_add_group_memberships, QUERY_ENCODE_SET),
-            add_group_memberships_type_hint=utf8_percent_encode(&query_add_group_memberships_type_hint, QUERY_ENCODE_SET),
-            path=utf8_percent_encode(&query_path, QUERY_ENCODE_SET),
-            path_type_hint=utf8_percent_encode(&query_path_type_hint, QUERY_ENCODE_SET),
-            synchronize_attributes=utf8_percent_encode(&query_synchronize_attributes, QUERY_ENCODE_SET),
-            synchronize_attributes_type_hint=utf8_percent_encode(&query_synchronize_attributes_type_hint, QUERY_ENCODE_SET),
-            clock_tolerance=utf8_percent_encode(&query_clock_tolerance, QUERY_ENCODE_SET),
-            clock_tolerance_type_hint=utf8_percent_encode(&query_clock_tolerance_type_hint, QUERY_ENCODE_SET),
-            group_membership_attribute=utf8_percent_encode(&query_group_membership_attribute, QUERY_ENCODE_SET),
-            group_membership_attribute_type_hint=utf8_percent_encode(&query_group_membership_attribute_type_hint, QUERY_ENCODE_SET),
-            idp_url=utf8_percent_encode(&query_idp_url, QUERY_ENCODE_SET),
-            idp_url_type_hint=utf8_percent_encode(&query_idp_url_type_hint, QUERY_ENCODE_SET),
-            logout_url=utf8_percent_encode(&query_logout_url, QUERY_ENCODE_SET),
-            logout_url_type_hint=utf8_percent_encode(&query_logout_url_type_hint, QUERY_ENCODE_SET),
-            service_provider_entity_id=utf8_percent_encode(&query_service_provider_entity_id, QUERY_ENCODE_SET),
-            service_provider_entity_id_type_hint=utf8_percent_encode(&query_service_provider_entity_id_type_hint, QUERY_ENCODE_SET),
-            assertion_consumer_service_url=utf8_percent_encode(&query_assertion_consumer_service_url, QUERY_ENCODE_SET),
-            assertion_consumer_service_url_type_hint=utf8_percent_encode(&query_assertion_consumer_service_url_type_hint, QUERY_ENCODE_SET),
-            handle_logout=utf8_percent_encode(&query_handle_logout, QUERY_ENCODE_SET),
-            handle_logout_type_hint=utf8_percent_encode(&query_handle_logout_type_hint, QUERY_ENCODE_SET),
-            sp_private_key_alias=utf8_percent_encode(&query_sp_private_key_alias, QUERY_ENCODE_SET),
-            sp_private_key_alias_type_hint=utf8_percent_encode(&query_sp_private_key_alias_type_hint, QUERY_ENCODE_SET),
-            use_encryption=utf8_percent_encode(&query_use_encryption, QUERY_ENCODE_SET),
-            use_encryption_type_hint=utf8_percent_encode(&query_use_encryption_type_hint, QUERY_ENCODE_SET),
-            name_id_format=utf8_percent_encode(&query_name_id_format, QUERY_ENCODE_SET),
-            name_id_format_type_hint=utf8_percent_encode(&query_name_id_format_type_hint, QUERY_ENCODE_SET),
-            digest_method=utf8_percent_encode(&query_digest_method, QUERY_ENCODE_SET),
-            digest_method_type_hint=utf8_percent_encode(&query_digest_method_type_hint, QUERY_ENCODE_SET),
-            signature_method=utf8_percent_encode(&query_signature_method, QUERY_ENCODE_SET),
-            signature_method_type_hint=utf8_percent_encode(&query_signature_method_type_hint, QUERY_ENCODE_SET),
-            user_intermediate_path=utf8_percent_encode(&query_user_intermediate_path, QUERY_ENCODE_SET),
-            user_intermediate_path_type_hint=utf8_percent_encode(&query_user_intermediate_path_type_hint, QUERY_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Post, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-
-                        future::ok(
-                            PostConfigAdobeGraniteSamlAuthenticationHandlerResponse::DefaultResponse
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn post_config_apache_felix_jetty_based_http_service(&self, param_org_apache_felix_https_nio: Option<bool>, param_org_apache_felix_https_nio_type_hint: Option<String>, param_org_apache_felix_https_keystore: Option<String>, param_org_apache_felix_https_keystore_type_hint: Option<String>, param_org_apache_felix_https_keystore_password: Option<String>, param_org_apache_felix_https_keystore_password_type_hint: Option<String>, param_org_apache_felix_https_keystore_key: Option<String>, param_org_apache_felix_https_keystore_key_type_hint: Option<String>, param_org_apache_felix_https_keystore_key_password: Option<String>, param_org_apache_felix_https_keystore_key_password_type_hint: Option<String>, param_org_apache_felix_https_truststore: Option<String>, param_org_apache_felix_https_truststore_type_hint: Option<String>, param_org_apache_felix_https_truststore_password: Option<String>, param_org_apache_felix_https_truststore_password_type_hint: Option<String>, param_org_apache_felix_https_clientcertificate: Option<String>, param_org_apache_felix_https_clientcertificate_type_hint: Option<String>, param_org_apache_felix_https_enable: Option<bool>, param_org_apache_felix_https_enable_type_hint: Option<String>, param_org_osgi_service_http_port_secure: Option<String>, param_org_osgi_service_http_port_secure_type_hint: Option<String>, context: &C) -> Box<Future<Item=PostConfigApacheFelixJettyBasedHttpServiceResponse, Error=ApiError>> {
-
-        // Query parameters
-        let query_org_apache_felix_https_nio = param_org_apache_felix_https_nio.map_or_else(String::new, |query| format!("org.apache.felix.https.nio={org_apache_felix_https_nio}&", org_apache_felix_https_nio=query.to_string()));
-        let query_org_apache_felix_https_nio_type_hint = param_org_apache_felix_https_nio_type_hint.map_or_else(String::new, |query| format!("org.apache.felix.https.nio@TypeHint={org_apache_felix_https_nio_type_hint}&", org_apache_felix_https_nio_type_hint=query.to_string()));
-        let query_org_apache_felix_https_keystore = param_org_apache_felix_https_keystore.map_or_else(String::new, |query| format!("org.apache.felix.https.keystore={org_apache_felix_https_keystore}&", org_apache_felix_https_keystore=query.to_string()));
-        let query_org_apache_felix_https_keystore_type_hint = param_org_apache_felix_https_keystore_type_hint.map_or_else(String::new, |query| format!("org.apache.felix.https.keystore@TypeHint={org_apache_felix_https_keystore_type_hint}&", org_apache_felix_https_keystore_type_hint=query.to_string()));
-        let query_org_apache_felix_https_keystore_password = param_org_apache_felix_https_keystore_password.map_or_else(String::new, |query| format!("org.apache.felix.https.keystore.password={org_apache_felix_https_keystore_password}&", org_apache_felix_https_keystore_password=query.to_string()));
-        let query_org_apache_felix_https_keystore_password_type_hint = param_org_apache_felix_https_keystore_password_type_hint.map_or_else(String::new, |query| format!("org.apache.felix.https.keystore.password@TypeHint={org_apache_felix_https_keystore_password_type_hint}&", org_apache_felix_https_keystore_password_type_hint=query.to_string()));
-        let query_org_apache_felix_https_keystore_key = param_org_apache_felix_https_keystore_key.map_or_else(String::new, |query| format!("org.apache.felix.https.keystore.key={org_apache_felix_https_keystore_key}&", org_apache_felix_https_keystore_key=query.to_string()));
-        let query_org_apache_felix_https_keystore_key_type_hint = param_org_apache_felix_https_keystore_key_type_hint.map_or_else(String::new, |query| format!("org.apache.felix.https.keystore.key@TypeHint={org_apache_felix_https_keystore_key_type_hint}&", org_apache_felix_https_keystore_key_type_hint=query.to_string()));
-        let query_org_apache_felix_https_keystore_key_password = param_org_apache_felix_https_keystore_key_password.map_or_else(String::new, |query| format!("org.apache.felix.https.keystore.key.password={org_apache_felix_https_keystore_key_password}&", org_apache_felix_https_keystore_key_password=query.to_string()));
-        let query_org_apache_felix_https_keystore_key_password_type_hint = param_org_apache_felix_https_keystore_key_password_type_hint.map_or_else(String::new, |query| format!("org.apache.felix.https.keystore.key.password@TypeHint={org_apache_felix_https_keystore_key_password_type_hint}&", org_apache_felix_https_keystore_key_password_type_hint=query.to_string()));
-        let query_org_apache_felix_https_truststore = param_org_apache_felix_https_truststore.map_or_else(String::new, |query| format!("org.apache.felix.https.truststore={org_apache_felix_https_truststore}&", org_apache_felix_https_truststore=query.to_string()));
-        let query_org_apache_felix_https_truststore_type_hint = param_org_apache_felix_https_truststore_type_hint.map_or_else(String::new, |query| format!("org.apache.felix.https.truststore@TypeHint={org_apache_felix_https_truststore_type_hint}&", org_apache_felix_https_truststore_type_hint=query.to_string()));
-        let query_org_apache_felix_https_truststore_password = param_org_apache_felix_https_truststore_password.map_or_else(String::new, |query| format!("org.apache.felix.https.truststore.password={org_apache_felix_https_truststore_password}&", org_apache_felix_https_truststore_password=query.to_string()));
-        let query_org_apache_felix_https_truststore_password_type_hint = param_org_apache_felix_https_truststore_password_type_hint.map_or_else(String::new, |query| format!("org.apache.felix.https.truststore.password@TypeHint={org_apache_felix_https_truststore_password_type_hint}&", org_apache_felix_https_truststore_password_type_hint=query.to_string()));
-        let query_org_apache_felix_https_clientcertificate = param_org_apache_felix_https_clientcertificate.map_or_else(String::new, |query| format!("org.apache.felix.https.clientcertificate={org_apache_felix_https_clientcertificate}&", org_apache_felix_https_clientcertificate=query.to_string()));
-        let query_org_apache_felix_https_clientcertificate_type_hint = param_org_apache_felix_https_clientcertificate_type_hint.map_or_else(String::new, |query| format!("org.apache.felix.https.clientcertificate@TypeHint={org_apache_felix_https_clientcertificate_type_hint}&", org_apache_felix_https_clientcertificate_type_hint=query.to_string()));
-        let query_org_apache_felix_https_enable = param_org_apache_felix_https_enable.map_or_else(String::new, |query| format!("org.apache.felix.https.enable={org_apache_felix_https_enable}&", org_apache_felix_https_enable=query.to_string()));
-        let query_org_apache_felix_https_enable_type_hint = param_org_apache_felix_https_enable_type_hint.map_or_else(String::new, |query| format!("org.apache.felix.https.enable@TypeHint={org_apache_felix_https_enable_type_hint}&", org_apache_felix_https_enable_type_hint=query.to_string()));
-        let query_org_osgi_service_http_port_secure = param_org_osgi_service_http_port_secure.map_or_else(String::new, |query| format!("org.osgi.service.http.port.secure={org_osgi_service_http_port_secure}&", org_osgi_service_http_port_secure=query.to_string()));
-        let query_org_osgi_service_http_port_secure_type_hint = param_org_osgi_service_http_port_secure_type_hint.map_or_else(String::new, |query| format!("org.osgi.service.http.port.secure@TypeHint={org_osgi_service_http_port_secure_type_hint}&", org_osgi_service_http_port_secure_type_hint=query.to_string()));
-
-
-        let uri = format!(
-            "{}//apps/system/config/org.apache.felix.http?{org_apache_felix_https_nio}{org_apache_felix_https_nio_type_hint}{org_apache_felix_https_keystore}{org_apache_felix_https_keystore_type_hint}{org_apache_felix_https_keystore_password}{org_apache_felix_https_keystore_password_type_hint}{org_apache_felix_https_keystore_key}{org_apache_felix_https_keystore_key_type_hint}{org_apache_felix_https_keystore_key_password}{org_apache_felix_https_keystore_key_password_type_hint}{org_apache_felix_https_truststore}{org_apache_felix_https_truststore_type_hint}{org_apache_felix_https_truststore_password}{org_apache_felix_https_truststore_password_type_hint}{org_apache_felix_https_clientcertificate}{org_apache_felix_https_clientcertificate_type_hint}{org_apache_felix_https_enable}{org_apache_felix_https_enable_type_hint}{org_osgi_service_http_port_secure}{org_osgi_service_http_port_secure_type_hint}",
-            self.base_path,
-            org_apache_felix_https_nio=utf8_percent_encode(&query_org_apache_felix_https_nio, QUERY_ENCODE_SET),
-            org_apache_felix_https_nio_type_hint=utf8_percent_encode(&query_org_apache_felix_https_nio_type_hint, QUERY_ENCODE_SET),
-            org_apache_felix_https_keystore=utf8_percent_encode(&query_org_apache_felix_https_keystore, QUERY_ENCODE_SET),
-            org_apache_felix_https_keystore_type_hint=utf8_percent_encode(&query_org_apache_felix_https_keystore_type_hint, QUERY_ENCODE_SET),
-            org_apache_felix_https_keystore_password=utf8_percent_encode(&query_org_apache_felix_https_keystore_password, QUERY_ENCODE_SET),
-            org_apache_felix_https_keystore_password_type_hint=utf8_percent_encode(&query_org_apache_felix_https_keystore_password_type_hint, QUERY_ENCODE_SET),
-            org_apache_felix_https_keystore_key=utf8_percent_encode(&query_org_apache_felix_https_keystore_key, QUERY_ENCODE_SET),
-            org_apache_felix_https_keystore_key_type_hint=utf8_percent_encode(&query_org_apache_felix_https_keystore_key_type_hint, QUERY_ENCODE_SET),
-            org_apache_felix_https_keystore_key_password=utf8_percent_encode(&query_org_apache_felix_https_keystore_key_password, QUERY_ENCODE_SET),
-            org_apache_felix_https_keystore_key_password_type_hint=utf8_percent_encode(&query_org_apache_felix_https_keystore_key_password_type_hint, QUERY_ENCODE_SET),
-            org_apache_felix_https_truststore=utf8_percent_encode(&query_org_apache_felix_https_truststore, QUERY_ENCODE_SET),
-            org_apache_felix_https_truststore_type_hint=utf8_percent_encode(&query_org_apache_felix_https_truststore_type_hint, QUERY_ENCODE_SET),
-            org_apache_felix_https_truststore_password=utf8_percent_encode(&query_org_apache_felix_https_truststore_password, QUERY_ENCODE_SET),
-            org_apache_felix_https_truststore_password_type_hint=utf8_percent_encode(&query_org_apache_felix_https_truststore_password_type_hint, QUERY_ENCODE_SET),
-            org_apache_felix_https_clientcertificate=utf8_percent_encode(&query_org_apache_felix_https_clientcertificate, QUERY_ENCODE_SET),
-            org_apache_felix_https_clientcertificate_type_hint=utf8_percent_encode(&query_org_apache_felix_https_clientcertificate_type_hint, QUERY_ENCODE_SET),
-            org_apache_felix_https_enable=utf8_percent_encode(&query_org_apache_felix_https_enable, QUERY_ENCODE_SET),
-            org_apache_felix_https_enable_type_hint=utf8_percent_encode(&query_org_apache_felix_https_enable_type_hint, QUERY_ENCODE_SET),
-            org_osgi_service_http_port_secure=utf8_percent_encode(&query_org_osgi_service_http_port_secure, QUERY_ENCODE_SET),
-            org_osgi_service_http_port_secure_type_hint=utf8_percent_encode(&query_org_osgi_service_http_port_secure_type_hint, QUERY_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Post, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-
-                        future::ok(
-                            PostConfigApacheFelixJettyBasedHttpServiceResponse::DefaultResponse
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn post_config_apache_http_components_proxy_configuration(&self, param_proxy_host: Option<String>, param_proxy_host_type_hint: Option<String>, param_proxy_port: Option<i32>, param_proxy_port_type_hint: Option<String>, param_proxy_exceptions: Option<&Vec<String>>, param_proxy_exceptions_type_hint: Option<String>, param_proxy_enabled: Option<bool>, param_proxy_enabled_type_hint: Option<String>, param_proxy_user: Option<String>, param_proxy_user_type_hint: Option<String>, param_proxy_password: Option<String>, param_proxy_password_type_hint: Option<String>, context: &C) -> Box<Future<Item=PostConfigApacheHttpComponentsProxyConfigurationResponse, Error=ApiError>> {
-
-        // Query parameters
-        let query_proxy_host = param_proxy_host.map_or_else(String::new, |query| format!("proxy.host={proxy_host}&", proxy_host=query.to_string()));
-        let query_proxy_host_type_hint = param_proxy_host_type_hint.map_or_else(String::new, |query| format!("proxy.host@TypeHint={proxy_host_type_hint}&", proxy_host_type_hint=query.to_string()));
-        let query_proxy_port = param_proxy_port.map_or_else(String::new, |query| format!("proxy.port={proxy_port}&", proxy_port=query.to_string()));
-        let query_proxy_port_type_hint = param_proxy_port_type_hint.map_or_else(String::new, |query| format!("proxy.port@TypeHint={proxy_port_type_hint}&", proxy_port_type_hint=query.to_string()));
-        let query_proxy_exceptions = param_proxy_exceptions.map_or_else(String::new, |query| format!("proxy.exceptions={proxy_exceptions}&", proxy_exceptions=query.join(",")));
-        let query_proxy_exceptions_type_hint = param_proxy_exceptions_type_hint.map_or_else(String::new, |query| format!("proxy.exceptions@TypeHint={proxy_exceptions_type_hint}&", proxy_exceptions_type_hint=query.to_string()));
-        let query_proxy_enabled = param_proxy_enabled.map_or_else(String::new, |query| format!("proxy.enabled={proxy_enabled}&", proxy_enabled=query.to_string()));
-        let query_proxy_enabled_type_hint = param_proxy_enabled_type_hint.map_or_else(String::new, |query| format!("proxy.enabled@TypeHint={proxy_enabled_type_hint}&", proxy_enabled_type_hint=query.to_string()));
-        let query_proxy_user = param_proxy_user.map_or_else(String::new, |query| format!("proxy.user={proxy_user}&", proxy_user=query.to_string()));
-        let query_proxy_user_type_hint = param_proxy_user_type_hint.map_or_else(String::new, |query| format!("proxy.user@TypeHint={proxy_user_type_hint}&", proxy_user_type_hint=query.to_string()));
-        let query_proxy_password = param_proxy_password.map_or_else(String::new, |query| format!("proxy.password={proxy_password}&", proxy_password=query.to_string()));
-        let query_proxy_password_type_hint = param_proxy_password_type_hint.map_or_else(String::new, |query| format!("proxy.password@TypeHint={proxy_password_type_hint}&", proxy_password_type_hint=query.to_string()));
-
-
-        let uri = format!(
-            "{}//apps/system/config/org.apache.http.proxyconfigurator.config?{proxy_host}{proxy_host_type_hint}{proxy_port}{proxy_port_type_hint}{proxy_exceptions}{proxy_exceptions_type_hint}{proxy_enabled}{proxy_enabled_type_hint}{proxy_user}{proxy_user_type_hint}{proxy_password}{proxy_password_type_hint}",
-            self.base_path,
-            proxy_host=utf8_percent_encode(&query_proxy_host, QUERY_ENCODE_SET),
-            proxy_host_type_hint=utf8_percent_encode(&query_proxy_host_type_hint, QUERY_ENCODE_SET),
-            proxy_port=utf8_percent_encode(&query_proxy_port, QUERY_ENCODE_SET),
-            proxy_port_type_hint=utf8_percent_encode(&query_proxy_port_type_hint, QUERY_ENCODE_SET),
-            proxy_exceptions=utf8_percent_encode(&query_proxy_exceptions, QUERY_ENCODE_SET),
-            proxy_exceptions_type_hint=utf8_percent_encode(&query_proxy_exceptions_type_hint, QUERY_ENCODE_SET),
-            proxy_enabled=utf8_percent_encode(&query_proxy_enabled, QUERY_ENCODE_SET),
-            proxy_enabled_type_hint=utf8_percent_encode(&query_proxy_enabled_type_hint, QUERY_ENCODE_SET),
-            proxy_user=utf8_percent_encode(&query_proxy_user, QUERY_ENCODE_SET),
-            proxy_user_type_hint=utf8_percent_encode(&query_proxy_user_type_hint, QUERY_ENCODE_SET),
-            proxy_password=utf8_percent_encode(&query_proxy_password, QUERY_ENCODE_SET),
-            proxy_password_type_hint=utf8_percent_encode(&query_proxy_password_type_hint, QUERY_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Post, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-
-                        future::ok(
-                            PostConfigApacheHttpComponentsProxyConfigurationResponse::DefaultResponse
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn post_config_apache_sling_dav_ex_servlet(&self, param_alias: Option<String>, param_alias_type_hint: Option<String>, param_dav_create_absolute_uri: Option<bool>, param_dav_create_absolute_uri_type_hint: Option<String>, context: &C) -> Box<Future<Item=PostConfigApacheSlingDavExServletResponse, Error=ApiError>> {
-
-        // Query parameters
-        let query_alias = param_alias.map_or_else(String::new, |query| format!("alias={alias}&", alias=query.to_string()));
-        let query_alias_type_hint = param_alias_type_hint.map_or_else(String::new, |query| format!("alias@TypeHint={alias_type_hint}&", alias_type_hint=query.to_string()));
-        let query_dav_create_absolute_uri = param_dav_create_absolute_uri.map_or_else(String::new, |query| format!("dav.create-absolute-uri={dav_create_absolute_uri}&", dav_create_absolute_uri=query.to_string()));
-        let query_dav_create_absolute_uri_type_hint = param_dav_create_absolute_uri_type_hint.map_or_else(String::new, |query| format!("dav.create-absolute-uri@TypeHint={dav_create_absolute_uri_type_hint}&", dav_create_absolute_uri_type_hint=query.to_string()));
-
-
-        let uri = format!(
-            "{}//apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet?{alias}{alias_type_hint}{dav_create_absolute_uri}{dav_create_absolute_uri_type_hint}",
-            self.base_path,
-            alias=utf8_percent_encode(&query_alias, QUERY_ENCODE_SET),
-            alias_type_hint=utf8_percent_encode(&query_alias_type_hint, QUERY_ENCODE_SET),
-            dav_create_absolute_uri=utf8_percent_encode(&query_dav_create_absolute_uri, QUERY_ENCODE_SET),
-            dav_create_absolute_uri_type_hint=utf8_percent_encode(&query_dav_create_absolute_uri_type_hint, QUERY_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Post, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-
-                        future::ok(
-                            PostConfigApacheSlingDavExServletResponse::DefaultResponse
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn post_config_apache_sling_get_servlet(&self, param_json_maximumresults: Option<String>, param_json_maximumresults_type_hint: Option<String>, param_enable_html: Option<bool>, param_enable_html_type_hint: Option<String>, param_enable_txt: Option<bool>, param_enable_txt_type_hint: Option<String>, param_enable_xml: Option<bool>, param_enable_xml_type_hint: Option<String>, context: &C) -> Box<Future<Item=PostConfigApacheSlingGetServletResponse, Error=ApiError>> {
-
-        // Query parameters
-        let query_json_maximumresults = param_json_maximumresults.map_or_else(String::new, |query| format!("json.maximumresults={json_maximumresults}&", json_maximumresults=query.to_string()));
-        let query_json_maximumresults_type_hint = param_json_maximumresults_type_hint.map_or_else(String::new, |query| format!("json.maximumresults@TypeHint={json_maximumresults_type_hint}&", json_maximumresults_type_hint=query.to_string()));
-        let query_enable_html = param_enable_html.map_or_else(String::new, |query| format!("enable.html={enable_html}&", enable_html=query.to_string()));
-        let query_enable_html_type_hint = param_enable_html_type_hint.map_or_else(String::new, |query| format!("enable.html@TypeHint={enable_html_type_hint}&", enable_html_type_hint=query.to_string()));
-        let query_enable_txt = param_enable_txt.map_or_else(String::new, |query| format!("enable.txt={enable_txt}&", enable_txt=query.to_string()));
-        let query_enable_txt_type_hint = param_enable_txt_type_hint.map_or_else(String::new, |query| format!("enable.txt@TypeHint={enable_txt_type_hint}&", enable_txt_type_hint=query.to_string()));
-        let query_enable_xml = param_enable_xml.map_or_else(String::new, |query| format!("enable.xml={enable_xml}&", enable_xml=query.to_string()));
-        let query_enable_xml_type_hint = param_enable_xml_type_hint.map_or_else(String::new, |query| format!("enable.xml@TypeHint={enable_xml_type_hint}&", enable_xml_type_hint=query.to_string()));
-
-
-        let uri = format!(
-            "{}//apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet?{json_maximumresults}{json_maximumresults_type_hint}{enable_html}{enable_html_type_hint}{enable_txt}{enable_txt_type_hint}{enable_xml}{enable_xml_type_hint}",
-            self.base_path,
-            json_maximumresults=utf8_percent_encode(&query_json_maximumresults, QUERY_ENCODE_SET),
-            json_maximumresults_type_hint=utf8_percent_encode(&query_json_maximumresults_type_hint, QUERY_ENCODE_SET),
-            enable_html=utf8_percent_encode(&query_enable_html, QUERY_ENCODE_SET),
-            enable_html_type_hint=utf8_percent_encode(&query_enable_html_type_hint, QUERY_ENCODE_SET),
-            enable_txt=utf8_percent_encode(&query_enable_txt, QUERY_ENCODE_SET),
-            enable_txt_type_hint=utf8_percent_encode(&query_enable_txt_type_hint, QUERY_ENCODE_SET),
-            enable_xml=utf8_percent_encode(&query_enable_xml, QUERY_ENCODE_SET),
-            enable_xml_type_hint=utf8_percent_encode(&query_enable_xml_type_hint, QUERY_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Post, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-
-                        future::ok(
-                            PostConfigApacheSlingGetServletResponse::DefaultResponse
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn post_config_apache_sling_referrer_filter(&self, param_allow_empty: Option<bool>, param_allow_empty_type_hint: Option<String>, param_allow_hosts: Option<String>, param_allow_hosts_type_hint: Option<String>, param_allow_hosts_regexp: Option<String>, param_allow_hosts_regexp_type_hint: Option<String>, param_filter_methods: Option<String>, param_filter_methods_type_hint: Option<String>, context: &C) -> Box<Future<Item=PostConfigApacheSlingReferrerFilterResponse, Error=ApiError>> {
-
-        // Query parameters
-        let query_allow_empty = param_allow_empty.map_or_else(String::new, |query| format!("allow.empty={allow_empty}&", allow_empty=query.to_string()));
-        let query_allow_empty_type_hint = param_allow_empty_type_hint.map_or_else(String::new, |query| format!("allow.empty@TypeHint={allow_empty_type_hint}&", allow_empty_type_hint=query.to_string()));
-        let query_allow_hosts = param_allow_hosts.map_or_else(String::new, |query| format!("allow.hosts={allow_hosts}&", allow_hosts=query.to_string()));
-        let query_allow_hosts_type_hint = param_allow_hosts_type_hint.map_or_else(String::new, |query| format!("allow.hosts@TypeHint={allow_hosts_type_hint}&", allow_hosts_type_hint=query.to_string()));
-        let query_allow_hosts_regexp = param_allow_hosts_regexp.map_or_else(String::new, |query| format!("allow.hosts.regexp={allow_hosts_regexp}&", allow_hosts_regexp=query.to_string()));
-        let query_allow_hosts_regexp_type_hint = param_allow_hosts_regexp_type_hint.map_or_else(String::new, |query| format!("allow.hosts.regexp@TypeHint={allow_hosts_regexp_type_hint}&", allow_hosts_regexp_type_hint=query.to_string()));
-        let query_filter_methods = param_filter_methods.map_or_else(String::new, |query| format!("filter.methods={filter_methods}&", filter_methods=query.to_string()));
-        let query_filter_methods_type_hint = param_filter_methods_type_hint.map_or_else(String::new, |query| format!("filter.methods@TypeHint={filter_methods_type_hint}&", filter_methods_type_hint=query.to_string()));
-
-
-        let uri = format!(
-            "{}//apps/system/config/org.apache.sling.security.impl.ReferrerFilter?{allow_empty}{allow_empty_type_hint}{allow_hosts}{allow_hosts_type_hint}{allow_hosts_regexp}{allow_hosts_regexp_type_hint}{filter_methods}{filter_methods_type_hint}",
-            self.base_path,
-            allow_empty=utf8_percent_encode(&query_allow_empty, QUERY_ENCODE_SET),
-            allow_empty_type_hint=utf8_percent_encode(&query_allow_empty_type_hint, QUERY_ENCODE_SET),
-            allow_hosts=utf8_percent_encode(&query_allow_hosts, QUERY_ENCODE_SET),
-            allow_hosts_type_hint=utf8_percent_encode(&query_allow_hosts_type_hint, QUERY_ENCODE_SET),
-            allow_hosts_regexp=utf8_percent_encode(&query_allow_hosts_regexp, QUERY_ENCODE_SET),
-            allow_hosts_regexp_type_hint=utf8_percent_encode(&query_allow_hosts_regexp_type_hint, QUERY_ENCODE_SET),
-            filter_methods=utf8_percent_encode(&query_filter_methods, QUERY_ENCODE_SET),
-            filter_methods_type_hint=utf8_percent_encode(&query_filter_methods_type_hint, QUERY_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Post, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-
-                        future::ok(
-                            PostConfigApacheSlingReferrerFilterResponse::DefaultResponse
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn post_node(&self, param_path: String, param_name: String, param_operation: Option<String>, param_delete_authorizable: Option<String>, param_file: Option<swagger::ByteArray>, context: &C) -> Box<Future<Item=PostNodeResponse, Error=ApiError>> {
-
-        // Query parameters
-        let query_operation = param_operation.map_or_else(String::new, |query| format!(":operation={operation}&", operation=query.to_string()));
-        let query_delete_authorizable = param_delete_authorizable.map_or_else(String::new, |query| format!("deleteAuthorizable={delete_authorizable}&", delete_authorizable=query.to_string()));
-
-
-        let uri = format!(
-            "{}//{path}/{name}?{operation}{delete_authorizable}",
-            self.base_path, path=utf8_percent_encode(&param_path.to_string(), ID_ENCODE_SET), name=utf8_percent_encode(&param_name.to_string(), ID_ENCODE_SET),
-            operation=utf8_percent_encode(&query_operation, QUERY_ENCODE_SET),
-            delete_authorizable=utf8_percent_encode(&query_delete_authorizable, QUERY_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Post, uri);
-
-        let params = &[
-            ("file", param_file.map(|param| format!("{:?}", param))),
-        ];
-        let body = serde_urlencoded::to_string(params).expect("impossible to fail to serialize");
-
-        request.headers_mut().set(ContentType(mimetypes::requests::POST_NODE.clone()));
-        request.set_body(body.into_bytes());
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-
-                        future::ok(
-                            PostNodeResponse::DefaultResponse
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn post_node_rw(&self, param_path: String, param_name: String, param_add_members: Option<String>, context: &C) -> Box<Future<Item=PostNodeRwResponse, Error=ApiError>> {
-
-        // Query parameters
-        let query_add_members = param_add_members.map_or_else(String::new, |query| format!("addMembers={add_members}&", add_members=query.to_string()));
-
-
-        let uri = format!(
-            "{}//{path}/{name}.rw.html?{add_members}",
-            self.base_path, path=utf8_percent_encode(&param_path.to_string(), ID_ENCODE_SET), name=utf8_percent_encode(&param_name.to_string(), ID_ENCODE_SET),
-            add_members=utf8_percent_encode(&query_add_members, QUERY_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Post, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-
-                        future::ok(
-                            PostNodeRwResponse::DefaultResponse
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn post_path(&self, param_path: String, param_jcrprimary_type: String, param_name: String, context: &C) -> Box<Future<Item=PostPathResponse, Error=ApiError>> {
-
-        // Query parameters
-        let query_jcrprimary_type = format!("jcr:primaryType={jcrprimary_type}&", jcrprimary_type=param_jcrprimary_type.to_string());
-        let query_name = format!(":name={name}&", name=param_name.to_string());
-
-
-        let uri = format!(
-            "{}//{path}/?{jcrprimary_type}{name}",
-            self.base_path, path=utf8_percent_encode(&param_path.to_string(), ID_ENCODE_SET),
-            jcrprimary_type=utf8_percent_encode(&query_jcrprimary_type, QUERY_ENCODE_SET),
-            name=utf8_percent_encode(&query_name, QUERY_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Post, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-
-                        future::ok(
-                            PostPathResponse::DefaultResponse
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn post_query(&self, param_path: String, param_p_limit: f64, param__1_property: String, param__1_property_value: String, context: &C) -> Box<Future<Item=PostQueryResponse, Error=ApiError>> {
-
-        // Query parameters
-        let query_path = format!("path={path}&", path=param_path.to_string());
-        let query_p_limit = format!("p.limit={p_limit}&", p_limit=param_p_limit.to_string());
-        let query__1_property = format!("1_property={_1_property}&", _1_property=param__1_property.to_string());
-        let query__1_property_value = format!("1_property.value={_1_property_value}&", _1_property_value=param__1_property_value.to_string());
-
-
-        let uri = format!(
-            "{}//bin/querybuilder.json?{path}{p_limit}{_1_property}{_1_property_value}",
-            self.base_path,
-            path=utf8_percent_encode(&query_path, QUERY_ENCODE_SET),
-            p_limit=utf8_percent_encode(&query_p_limit, QUERY_ENCODE_SET),
-            _1_property=utf8_percent_encode(&query__1_property, QUERY_ENCODE_SET),
-            _1_property_value=utf8_percent_encode(&query__1_property_value, QUERY_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Post, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 serde_json::from_str::<String>(body)
-                                                     .map_err(|e| e.into())
-
-                                             ))
-                        .map(move |body|
-                            PostQueryResponse::DefaultResponse(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn post_tree_activation(&self, param_ignoredeactivated: bool, param_onlymodified: bool, param_path: String, context: &C) -> Box<Future<Item=PostTreeActivationResponse, Error=ApiError>> {
-
-        // Query parameters
-        let query_ignoredeactivated = format!("ignoredeactivated={ignoredeactivated}&", ignoredeactivated=param_ignoredeactivated.to_string());
-        let query_onlymodified = format!("onlymodified={onlymodified}&", onlymodified=param_onlymodified.to_string());
-        let query_path = format!("path={path}&", path=param_path.to_string());
-
-
-        let uri = format!(
-            "{}//etc/replication/treeactivation.html?{ignoredeactivated}{onlymodified}{path}",
-            self.base_path,
-            ignoredeactivated=utf8_percent_encode(&query_ignoredeactivated, QUERY_ENCODE_SET),
-            onlymodified=utf8_percent_encode(&query_onlymodified, QUERY_ENCODE_SET),
-            path=utf8_percent_encode(&query_path, QUERY_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Post, uri);
-
-
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-
-                        future::ok(
-                            PostTreeActivationResponse::DefaultResponse
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn post_truststore(&self, param_operation: Option<String>, param_new_password: Option<String>, param_re_password: Option<String>, param_key_store_type: Option<String>, param_remove_alias: Option<String>, param_certificate: Option<swagger::ByteArray>, context: &C) -> Box<Future<Item=PostTruststoreResponse, Error=ApiError>> {
-
-        // Query parameters
-        let query_operation = param_operation.map_or_else(String::new, |query| format!(":operation={operation}&", operation=query.to_string()));
-        let query_new_password = param_new_password.map_or_else(String::new, |query| format!("newPassword={new_password}&", new_password=query.to_string()));
-        let query_re_password = param_re_password.map_or_else(String::new, |query| format!("rePassword={re_password}&", re_password=query.to_string()));
-        let query_key_store_type = param_key_store_type.map_or_else(String::new, |query| format!("keyStoreType={key_store_type}&", key_store_type=query.to_string()));
-        let query_remove_alias = param_remove_alias.map_or_else(String::new, |query| format!("removeAlias={remove_alias}&", remove_alias=query.to_string()));
-
-
-        let uri = format!(
-            "{}//libs/granite/security/post/truststore?{operation}{new_password}{re_password}{key_store_type}{remove_alias}",
-            self.base_path,
-            operation=utf8_percent_encode(&query_operation, QUERY_ENCODE_SET),
-            new_password=utf8_percent_encode(&query_new_password, QUERY_ENCODE_SET),
-            re_password=utf8_percent_encode(&query_re_password, QUERY_ENCODE_SET),
-            key_store_type=utf8_percent_encode(&query_key_store_type, QUERY_ENCODE_SET),
-            remove_alias=utf8_percent_encode(&query_remove_alias, QUERY_ENCODE_SET)
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Post, uri);
-
-        let params = &[
-            ("certificate", param_certificate.map(|param| format!("{:?}", param))),
-        ];
-        let body = serde_urlencoded::to_string(params).expect("impossible to fail to serialize");
-
-        request.headers_mut().set(ContentType(mimetypes::requests::POST_TRUSTSTORE.clone()));
-        request.set_body(body.into_bytes());
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 Ok(body.to_string())
-
-                                             ))
-                        .map(move |body|
-                            PostTruststoreResponse::DefaultResponse(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-    fn post_truststore_pkcs12(&self, param_truststore_p12: Option<swagger::ByteArray>, context: &C) -> Box<Future<Item=PostTruststorePKCS12Response, Error=ApiError>> {
-
-
-        let uri = format!(
-            "{}//etc/truststore",
-            self.base_path
-        );
-
-        let uri = match Uri::from_str(&uri) {
-            Ok(uri) => uri,
-            Err(err) => return Box::new(futures::done(Err(ApiError(format!("Unable to build URI: {}", err))))),
-        };
-
-        let mut request = hyper::Request::new(hyper::Method::Post, uri);
-
-        let params = &[
-            ("truststore.p12", param_truststore_p12.map(|param| format!("{:?}", param))),
-        ];
-        let body = serde_urlencoded::to_string(params).expect("impossible to fail to serialize");
-
-        request.headers_mut().set(ContentType(mimetypes::requests::POST_TRUSTSTORE_PKCS12.clone()));
-        request.set_body(body.into_bytes());
-
-        request.headers_mut().set(XSpanId((context as &Has<XSpanIdString>).get().0.clone()));
-        (context as &Has<Option<AuthData>>).get().as_ref().map(|auth_data| {
-            if let &AuthData::Basic(ref basic_header) = auth_data {
-                request.headers_mut().set(hyper::header::Authorization(
-                    basic_header.clone(),
-                ))
-            }
-        });
-
-        Box::new(self.client_service.call(request)
-                             .map_err(|e| ApiError(format!("No response received: {}", e)))
-                             .and_then(|mut response| {
-            match response.status().as_u16() {
-                0 => {
-                    let body = response.body();
-                    Box::new(
-                        body
-                        .concat2()
-                        .map_err(|e| ApiError(format!("Failed to read response: {}", e)))
-                        .and_then(|body| str::from_utf8(&body)
-                                             .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))
-                                             .and_then(|body|
-
-                                                 Ok(body.to_string())
-
-                                             ))
-                        .map(move |body|
-                            PostTruststorePKCS12Response::DefaultResponse(body)
-                        )
-                    ) as Box<Future<Item=_, Error=_>>
-                },
-                code => {
-                    let headers = response.headers().clone();
-                    Box::new(response.body()
-                            .take(100)
-                            .concat2()
-                            .then(move |body|
-                                future::err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
-                                    code,
-                                    headers,
-                                    match body {
-                                        Ok(ref body) => match str::from_utf8(body) {
-                                            Ok(body) => Cow::from(body),
-                                            Err(e) => Cow::from(format!("<Body was not UTF8: {:?}>", e)),
-                                        },
-                                        Err(e) => Cow::from(format!("<Failed to read body: {}>", e)),
-                                    })))
-                            )
-                    ) as Box<Future<Item=_, Error=_>>
-                }
-            }
-        }))
-
-    }
-
-}
-
+/// Error type failing to create a Client
 #[derive(Debug)]
 pub enum ClientInitError {
+    /// Invalid URL Scheme
     InvalidScheme,
-    InvalidUri(hyper::error::UriError),
+
+    /// Invalid URI
+    InvalidUri(hyper::http::uri::InvalidUri),
+
+    /// Missing Hostname
     MissingHost,
-    SslError(openssl::error::ErrorStack)
+
+    /// SSL Connection Error
+    #[cfg(any(target_os = "macos", target_os = "windows", target_os = "ios"))]
+    SslError(native_tls::Error),
+
+    /// SSL Connection Error
+    #[cfg(not(any(target_os = "macos", target_os = "windows", target_os = "ios")))]
+    SslError(openssl::error::ErrorStack),
 }
 
-impl From<hyper::error::UriError> for ClientInitError {
-    fn from(err: hyper::error::UriError) -> ClientInitError {
+impl From<hyper::http::uri::InvalidUri> for ClientInitError {
+    fn from(err: hyper::http::uri::InvalidUri) -> ClientInitError {
         ClientInitError::InvalidUri(err)
     }
 }
 
-impl From<openssl::error::ErrorStack> for ClientInitError {
-    fn from(err: openssl::error::ErrorStack) -> ClientInitError {
-        ClientInitError::SslError(err)
-    }
-}
-
 impl fmt::Display for ClientInitError {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        (self as &fmt::Debug).fmt(f)
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let s: &dyn fmt::Debug = self;
+        s.fmt(f)
     }
 }
 
-impl error::Error for ClientInitError {
+impl Error for ClientInitError {
     fn description(&self) -> &str {
         "Failed to produce a hyper client."
     }
+}
+
+#[async_trait]
+impl<S, C> Api<C> for Client<S, C> where
+    S: Service<
+       (Request<Body>, C),
+       Response=Response<Body>> + Clone + Sync + Send + 'static,
+    S::Future: Send + 'static,
+    S::Error: Into<crate::ServiceError> + fmt::Display,
+    C: Has<XSpanIdString> + Has<Option<AuthData>> + Clone + Send + Sync + 'static,
+{
+    fn poll_ready(&self, cx: &mut Context) -> Poll<Result<(), crate::ServiceError>> {
+        match self.client_service.clone().poll_ready(cx) {
+            Poll::Ready(Err(e)) => Poll::Ready(Err(e.into())),
+            Poll::Ready(Ok(o)) => Poll::Ready(Ok(o)),
+            Poll::Pending => Poll::Pending,
+        }
+    }
+
+    async fn get_aem_product_info(
+        &self,
+        context: &C) -> Result<GetAemProductInfoResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/system/console/status-productinfo.json",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<Vec<String>>(body)?;
+                Ok(GetAemProductInfoResponse::DefaultResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn get_bundle_info(
+        &self,
+        param_name: String,
+        context: &C) -> Result<GetBundleInfoResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/system/console/bundles/{name}.json",
+            self.base_path
+            ,name=utf8_percent_encode(&param_name.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::BundleInfo>(body)?;
+                Ok(GetBundleInfoResponse::RetrievedBundleInfo
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<String>(body)?;
+                Ok(GetBundleInfoResponse::DefaultResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn get_config_mgr(
+        &self,
+        context: &C) -> Result<GetConfigMgrResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/system/console/configMgr",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                // ToDo: this will move to swagger-rs and become a standard From conversion trait
+                // once https://github.com/RReverser/serde-xml-rs/pull/45 is accepted upstream
+                let body = serde_xml_rs::from_str::<String>(body)
+                    .map_err(|e| ApiError(format!("Response body did not match the schema: {}", e)))?;
+                Ok(GetConfigMgrResponse::OK
+                    (body)
+                )
+            }
+            5XX => {
+                let body = response.into_body();
+                Ok(
+                    GetConfigMgrResponse::UnexpectedError
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn post_bundle(
+        &self,
+        param_name: String,
+        param_action: String,
+        context: &C) -> Result<PostBundleResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/system/console/bundles/{name}",
+            self.base_path
+            ,name=utf8_percent_encode(&param_name.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+                query_string.append_pair("action",
+                    &param_action.to_string());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                Ok(
+                    PostBundleResponse::DefaultResponse
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn post_jmx_repository(
+        &self,
+        param_action: String,
+        context: &C) -> Result<PostJmxRepositoryResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action}",
+            self.base_path
+            ,action=utf8_percent_encode(&param_action.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                Ok(
+                    PostJmxRepositoryResponse::DefaultResponse
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn post_saml_configuration(
+        &self,
+        param_post: Option<bool>,
+        param_apply: Option<bool>,
+        param_delete: Option<bool>,
+        param_action: Option<String>,
+        param_location: Option<String>,
+        param_path: Option<&Vec<String>>,
+        param_service_ranking: Option<i32>,
+        param_idp_url: Option<String>,
+        param_idp_cert_alias: Option<String>,
+        param_idp_http_redirect: Option<bool>,
+        param_service_provider_entity_id: Option<String>,
+        param_assertion_consumer_service_url: Option<String>,
+        param_sp_private_key_alias: Option<String>,
+        param_key_store_password: Option<String>,
+        param_default_redirect_url: Option<String>,
+        param_user_id_attribute: Option<String>,
+        param_use_encryption: Option<bool>,
+        param_create_user: Option<bool>,
+        param_add_group_memberships: Option<bool>,
+        param_group_membership_attribute: Option<String>,
+        param_default_groups: Option<&Vec<String>>,
+        param_name_id_format: Option<String>,
+        param_synchronize_attributes: Option<&Vec<String>>,
+        param_handle_logout: Option<bool>,
+        param_logout_url: Option<String>,
+        param_clock_tolerance: Option<i32>,
+        param_digest_method: Option<String>,
+        param_signature_method: Option<String>,
+        param_user_intermediate_path: Option<String>,
+        param_propertylist: Option<&Vec<String>>,
+        context: &C) -> Result<PostSamlConfigurationResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            if let Some(param_post) = param_post {
+                query_string.append_pair("post",
+                    &param_post.to_string());
+            }
+            if let Some(param_apply) = param_apply {
+                query_string.append_pair("apply",
+                    &param_apply.to_string());
+            }
+            if let Some(param_delete) = param_delete {
+                query_string.append_pair("delete",
+                    &param_delete.to_string());
+            }
+            if let Some(param_action) = param_action {
+                query_string.append_pair("action",
+                    &param_action.to_string());
+            }
+            if let Some(param_location) = param_location {
+                query_string.append_pair("$location",
+                    &param_location.to_string());
+            }
+            if let Some(param_path) = param_path {
+                query_string.append_pair("path",
+                    &param_path.iter().map(ToString::to_string).collect::<Vec<String>>().join(","));
+            }
+            if let Some(param_service_ranking) = param_service_ranking {
+                query_string.append_pair("service.ranking",
+                    &param_service_ranking.to_string());
+            }
+            if let Some(param_idp_url) = param_idp_url {
+                query_string.append_pair("idpUrl",
+                    &param_idp_url.to_string());
+            }
+            if let Some(param_idp_cert_alias) = param_idp_cert_alias {
+                query_string.append_pair("idpCertAlias",
+                    &param_idp_cert_alias.to_string());
+            }
+            if let Some(param_idp_http_redirect) = param_idp_http_redirect {
+                query_string.append_pair("idpHttpRedirect",
+                    &param_idp_http_redirect.to_string());
+            }
+            if let Some(param_service_provider_entity_id) = param_service_provider_entity_id {
+                query_string.append_pair("serviceProviderEntityId",
+                    &param_service_provider_entity_id.to_string());
+            }
+            if let Some(param_assertion_consumer_service_url) = param_assertion_consumer_service_url {
+                query_string.append_pair("assertionConsumerServiceURL",
+                    &param_assertion_consumer_service_url.to_string());
+            }
+            if let Some(param_sp_private_key_alias) = param_sp_private_key_alias {
+                query_string.append_pair("spPrivateKeyAlias",
+                    &param_sp_private_key_alias.to_string());
+            }
+            if let Some(param_key_store_password) = param_key_store_password {
+                query_string.append_pair("keyStorePassword",
+                    &param_key_store_password.to_string());
+            }
+            if let Some(param_default_redirect_url) = param_default_redirect_url {
+                query_string.append_pair("defaultRedirectUrl",
+                    &param_default_redirect_url.to_string());
+            }
+            if let Some(param_user_id_attribute) = param_user_id_attribute {
+                query_string.append_pair("userIDAttribute",
+                    &param_user_id_attribute.to_string());
+            }
+            if let Some(param_use_encryption) = param_use_encryption {
+                query_string.append_pair("useEncryption",
+                    &param_use_encryption.to_string());
+            }
+            if let Some(param_create_user) = param_create_user {
+                query_string.append_pair("createUser",
+                    &param_create_user.to_string());
+            }
+            if let Some(param_add_group_memberships) = param_add_group_memberships {
+                query_string.append_pair("addGroupMemberships",
+                    &param_add_group_memberships.to_string());
+            }
+            if let Some(param_group_membership_attribute) = param_group_membership_attribute {
+                query_string.append_pair("groupMembershipAttribute",
+                    &param_group_membership_attribute.to_string());
+            }
+            if let Some(param_default_groups) = param_default_groups {
+                query_string.append_pair("defaultGroups",
+                    &param_default_groups.iter().map(ToString::to_string).collect::<Vec<String>>().join(","));
+            }
+            if let Some(param_name_id_format) = param_name_id_format {
+                query_string.append_pair("nameIdFormat",
+                    &param_name_id_format.to_string());
+            }
+            if let Some(param_synchronize_attributes) = param_synchronize_attributes {
+                query_string.append_pair("synchronizeAttributes",
+                    &param_synchronize_attributes.iter().map(ToString::to_string).collect::<Vec<String>>().join(","));
+            }
+            if let Some(param_handle_logout) = param_handle_logout {
+                query_string.append_pair("handleLogout",
+                    &param_handle_logout.to_string());
+            }
+            if let Some(param_logout_url) = param_logout_url {
+                query_string.append_pair("logoutUrl",
+                    &param_logout_url.to_string());
+            }
+            if let Some(param_clock_tolerance) = param_clock_tolerance {
+                query_string.append_pair("clockTolerance",
+                    &param_clock_tolerance.to_string());
+            }
+            if let Some(param_digest_method) = param_digest_method {
+                query_string.append_pair("digestMethod",
+                    &param_digest_method.to_string());
+            }
+            if let Some(param_signature_method) = param_signature_method {
+                query_string.append_pair("signatureMethod",
+                    &param_signature_method.to_string());
+            }
+            if let Some(param_user_intermediate_path) = param_user_intermediate_path {
+                query_string.append_pair("userIntermediatePath",
+                    &param_user_intermediate_path.to_string());
+            }
+            if let Some(param_propertylist) = param_propertylist {
+                query_string.append_pair("propertylist",
+                    &param_propertylist.iter().map(ToString::to_string).collect::<Vec<String>>().join(","));
+            }
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = body.to_string();
+                Ok(PostSamlConfigurationResponse::RetrievedAEMSAMLConfiguration
+                    (body)
+                )
+            }
+            302 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = body.to_string();
+                Ok(PostSamlConfigurationResponse::DefaultResponse
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = body.to_string();
+                Ok(PostSamlConfigurationResponse::DefaultResponse_2
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn get_login_page(
+        &self,
+        context: &C) -> Result<GetLoginPageResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/libs/granite/core/content/login.html",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = body.to_string();
+                Ok(GetLoginPageResponse::DefaultResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn post_cq_actions(
+        &self,
+        param_authorizable_id: String,
+        param_changelog: String,
+        context: &C) -> Result<PostCqActionsResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/.cqactions.html",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+                query_string.append_pair("authorizableId",
+                    &param_authorizable_id.to_string());
+                query_string.append_pair("changelog",
+                    &param_changelog.to_string());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                Ok(
+                    PostCqActionsResponse::DefaultResponse
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn get_crxde_status(
+        &self,
+        context: &C) -> Result<GetCrxdeStatusResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/crx/server/crx.default/jcr:root/.1.json",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = body.to_string();
+                Ok(GetCrxdeStatusResponse::CRXDEIsEnabled
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = body.to_string();
+                Ok(GetCrxdeStatusResponse::CRXDEIsDisabled
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn get_install_status(
+        &self,
+        context: &C) -> Result<GetInstallStatusResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/crx/packmgr/installstatus.jsp",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InstallStatus>(body)?;
+                Ok(GetInstallStatusResponse::RetrievedCRXPackageManagerInstallStatus
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<String>(body)?;
+                Ok(GetInstallStatusResponse::DefaultResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn get_package_manager_servlet(
+        &self,
+        context: &C) -> Result<GetPackageManagerServletResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/crx/packmgr/service/script.html",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = body.to_string();
+                Ok(GetPackageManagerServletResponse::PackageManagerServletIsDisabled
+                    (body)
+                )
+            }
+            405 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = body.to_string();
+                Ok(GetPackageManagerServletResponse::PackageManagerServletIsActive
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn post_package_service(
+        &self,
+        param_cmd: String,
+        context: &C) -> Result<PostPackageServiceResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/crx/packmgr/service.jsp",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+                query_string.append_pair("cmd",
+                    &param_cmd.to_string());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                // ToDo: this will move to swagger-rs and become a standard From conversion trait
+                // once https://github.com/RReverser/serde-xml-rs/pull/45 is accepted upstream
+                let body = serde_xml_rs::from_str::<String>(body)
+                    .map_err(|e| ApiError(format!("Response body did not match the schema: {}", e)))?;
+                Ok(PostPackageServiceResponse::DefaultResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn post_package_service_json(
+        &self,
+        param_path: String,
+        param_cmd: String,
+        param_group_name: Option<String>,
+        param_package_name: Option<String>,
+        param_package_version: Option<String>,
+        param__charset_: Option<String>,
+        param_force: Option<bool>,
+        param_recursive: Option<bool>,
+        param_package: Option<swagger::ByteArray>,
+        context: &C) -> Result<PostPackageServiceJsonResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/crx/packmgr/service/.json/{path}",
+            self.base_path
+            ,path=utf8_percent_encode(&param_path.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+                query_string.append_pair("cmd",
+                    &param_cmd.to_string());
+            if let Some(param_group_name) = param_group_name {
+                query_string.append_pair("groupName",
+                    &param_group_name.to_string());
+            }
+            if let Some(param_package_name) = param_package_name {
+                query_string.append_pair("packageName",
+                    &param_package_name.to_string());
+            }
+            if let Some(param_package_version) = param_package_version {
+                query_string.append_pair("packageVersion",
+                    &param_package_version.to_string());
+            }
+            if let Some(param__charset_) = param__charset_ {
+                query_string.append_pair("_charset_",
+                    &param__charset_.to_string());
+            }
+            if let Some(param_force) = param_force {
+                query_string.append_pair("force",
+                    &param_force.to_string());
+            }
+            if let Some(param_recursive) = param_recursive {
+                query_string.append_pair("recursive",
+                    &param_recursive.to_string());
+            }
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let (body_string, multipart_header) = {
+            let mut multipart = Multipart::new();
+
+            // For each parameter, encode as appropriate and add to the multipart body as a stream.
+
+            let package_str = match serde_json::to_string(&param_package) {
+                Ok(str) => str,
+                Err(e) => return Err(ApiError(format!("Unable to serialize package to string: {}", e))),
+            };
+
+            let package_vec = package_str.as_bytes().to_vec();
+            let package_mime = mime_0_2::Mime::from_str("application/json").expect("impossible to fail to parse");
+            let package_cursor = Cursor::new(package_vec);
+
+            multipart.add_stream("package",  package_cursor,  None as Option<&str>, Some(package_mime));
+
+
+            let mut fields = match multipart.prepare() {
+                Ok(fields) => fields,
+                Err(err) => return Err(ApiError(format!("Unable to build request: {}", err))),
+            };
+
+            let mut body_string = String::new();
+
+            match fields.read_to_string(&mut body_string) {
+                Ok(_) => (),
+                Err(err) => return Err(ApiError(format!("Unable to build body: {}", err))),
+            }
+
+            let boundary = fields.boundary();
+
+            let multipart_header = format!("multipart/form-data;boundary={}", boundary);
+
+            (body_string, multipart_header)
+        };
+
+        *request.body_mut() = Body::from(body_string);
+
+        request.headers_mut().insert(CONTENT_TYPE, match HeaderValue::from_str(&multipart_header) {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create header: {} - {}", multipart_header, e)))
+        });
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<String>(body)?;
+                Ok(PostPackageServiceJsonResponse::DefaultResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn post_package_update(
+        &self,
+        param_group_name: String,
+        param_package_name: String,
+        param_version: String,
+        param_path: String,
+        param_filter: Option<String>,
+        param__charset_: Option<String>,
+        context: &C) -> Result<PostPackageUpdateResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/crx/packmgr/update.jsp",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+                query_string.append_pair("groupName",
+                    &param_group_name.to_string());
+                query_string.append_pair("packageName",
+                    &param_package_name.to_string());
+                query_string.append_pair("version",
+                    &param_version.to_string());
+                query_string.append_pair("path",
+                    &param_path.to_string());
+            if let Some(param_filter) = param_filter {
+                query_string.append_pair("filter",
+                    &param_filter.to_string());
+            }
+            if let Some(param__charset_) = param__charset_ {
+                query_string.append_pair("_charset_",
+                    &param__charset_.to_string());
+            }
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<String>(body)?;
+                Ok(PostPackageUpdateResponse::DefaultResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn post_set_password(
+        &self,
+        param_old: String,
+        param_plain: String,
+        param_verify: String,
+        context: &C) -> Result<PostSetPasswordResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/crx/explorer/ui/setpassword.jsp",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+                query_string.append_pair("old",
+                    &param_old.to_string());
+                query_string.append_pair("plain",
+                    &param_plain.to_string());
+                query_string.append_pair("verify",
+                    &param_verify.to_string());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = body.to_string();
+                Ok(PostSetPasswordResponse::DefaultResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn get_aem_health_check(
+        &self,
+        param_tags: Option<String>,
+        param_combine_tags_or: Option<bool>,
+        context: &C) -> Result<GetAemHealthCheckResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/system/health",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            if let Some(param_tags) = param_tags {
+                query_string.append_pair("tags",
+                    &param_tags.to_string());
+            }
+            if let Some(param_combine_tags_or) = param_combine_tags_or {
+                query_string.append_pair("combineTagsOr",
+                    &param_combine_tags_or.to_string());
+            }
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<String>(body)?;
+                Ok(GetAemHealthCheckResponse::DefaultResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn post_config_aem_health_check_servlet(
+        &self,
+        param_bundles_ignored: Option<&Vec<String>>,
+        param_bundles_ignored_type_hint: Option<String>,
+        context: &C) -> Result<PostConfigAemHealthCheckServletResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            if let Some(param_bundles_ignored) = param_bundles_ignored {
+                query_string.append_pair("bundles.ignored",
+                    &param_bundles_ignored.iter().map(ToString::to_string).collect::<Vec<String>>().join(","));
+            }
+            if let Some(param_bundles_ignored_type_hint) = param_bundles_ignored_type_hint {
+                query_string.append_pair("bundles.ignored@TypeHint",
+                    &param_bundles_ignored_type_hint.to_string());
+            }
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                Ok(
+                    PostConfigAemHealthCheckServletResponse::DefaultResponse
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn post_config_aem_password_reset(
+        &self,
+        param_pwdreset_authorizables: Option<&Vec<String>>,
+        param_pwdreset_authorizables_type_hint: Option<String>,
+        context: &C) -> Result<PostConfigAemPasswordResetResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/apps/system/config/com.shinesolutions.aem.passwordreset.Activator",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            if let Some(param_pwdreset_authorizables) = param_pwdreset_authorizables {
+                query_string.append_pair("pwdreset.authorizables",
+                    &param_pwdreset_authorizables.iter().map(ToString::to_string).collect::<Vec<String>>().join(","));
+            }
+            if let Some(param_pwdreset_authorizables_type_hint) = param_pwdreset_authorizables_type_hint {
+                query_string.append_pair("pwdreset.authorizables@TypeHint",
+                    &param_pwdreset_authorizables_type_hint.to_string());
+            }
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                Ok(
+                    PostConfigAemPasswordResetResponse::DefaultResponse
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn ssl_setup(
+        &self,
+        param_keystore_password: String,
+        param_keystore_password_confirm: String,
+        param_truststore_password: String,
+        param_truststore_password_confirm: String,
+        param_https_hostname: String,
+        param_https_port: String,
+        param_privatekey_file: Option<swagger::ByteArray>,
+        param_certificate_file: Option<swagger::ByteArray>,
+        context: &C) -> Result<SslSetupResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/libs/granite/security/post/sslSetup.html",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+                query_string.append_pair("keystorePassword",
+                    &param_keystore_password.to_string());
+                query_string.append_pair("keystorePasswordConfirm",
+                    &param_keystore_password_confirm.to_string());
+                query_string.append_pair("truststorePassword",
+                    &param_truststore_password.to_string());
+                query_string.append_pair("truststorePasswordConfirm",
+                    &param_truststore_password_confirm.to_string());
+                query_string.append_pair("httpsHostname",
+                    &param_https_hostname.to_string());
+                query_string.append_pair("httpsPort",
+                    &param_https_port.to_string());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let (body_string, multipart_header) = {
+            let mut multipart = Multipart::new();
+
+            // For each parameter, encode as appropriate and add to the multipart body as a stream.
+
+            let privatekey_file_str = match serde_json::to_string(&param_privatekey_file) {
+                Ok(str) => str,
+                Err(e) => return Err(ApiError(format!("Unable to serialize privatekey_file to string: {}", e))),
+            };
+
+            let privatekey_file_vec = privatekey_file_str.as_bytes().to_vec();
+            let privatekey_file_mime = mime_0_2::Mime::from_str("application/json").expect("impossible to fail to parse");
+            let privatekey_file_cursor = Cursor::new(privatekey_file_vec);
+
+            multipart.add_stream("privatekey_file",  privatekey_file_cursor,  None as Option<&str>, Some(privatekey_file_mime));
+
+
+            let certificate_file_str = match serde_json::to_string(&param_certificate_file) {
+                Ok(str) => str,
+                Err(e) => return Err(ApiError(format!("Unable to serialize certificate_file to string: {}", e))),
+            };
+
+            let certificate_file_vec = certificate_file_str.as_bytes().to_vec();
+            let certificate_file_mime = mime_0_2::Mime::from_str("application/json").expect("impossible to fail to parse");
+            let certificate_file_cursor = Cursor::new(certificate_file_vec);
+
+            multipart.add_stream("certificate_file",  certificate_file_cursor,  None as Option<&str>, Some(certificate_file_mime));
+
+
+            let mut fields = match multipart.prepare() {
+                Ok(fields) => fields,
+                Err(err) => return Err(ApiError(format!("Unable to build request: {}", err))),
+            };
+
+            let mut body_string = String::new();
+
+            match fields.read_to_string(&mut body_string) {
+                Ok(_) => (),
+                Err(err) => return Err(ApiError(format!("Unable to build body: {}", err))),
+            }
+
+            let boundary = fields.boundary();
+
+            let multipart_header = format!("multipart/form-data;boundary={}", boundary);
+
+            (body_string, multipart_header)
+        };
+
+        *request.body_mut() = Body::from(body_string);
+
+        request.headers_mut().insert(CONTENT_TYPE, match HeaderValue::from_str(&multipart_header) {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create header: {} - {}", multipart_header, e)))
+        });
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = body.to_string();
+                Ok(SslSetupResponse::DefaultResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn delete_agent(
+        &self,
+        param_runmode: String,
+        param_name: String,
+        context: &C) -> Result<DeleteAgentResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/etc/replication/agents.{runmode}/{name}",
+            self.base_path
+            ,runmode=utf8_percent_encode(&param_runmode.to_string(), ID_ENCODE_SET)
+            ,name=utf8_percent_encode(&param_name.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("DELETE")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                Ok(
+                    DeleteAgentResponse::DefaultResponse
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn delete_node(
+        &self,
+        param_path: String,
+        param_name: String,
+        context: &C) -> Result<DeleteNodeResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/{path}/{name}",
+            self.base_path
+            ,path=utf8_percent_encode(&param_path.to_string(), ID_ENCODE_SET)
+            ,name=utf8_percent_encode(&param_name.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("DELETE")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                Ok(
+                    DeleteNodeResponse::DefaultResponse
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn get_agent(
+        &self,
+        param_runmode: String,
+        param_name: String,
+        context: &C) -> Result<GetAgentResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/etc/replication/agents.{runmode}/{name}",
+            self.base_path
+            ,runmode=utf8_percent_encode(&param_runmode.to_string(), ID_ENCODE_SET)
+            ,name=utf8_percent_encode(&param_name.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                Ok(
+                    GetAgentResponse::DefaultResponse
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn get_agents(
+        &self,
+        param_runmode: String,
+        context: &C) -> Result<GetAgentsResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/etc/replication/agents.{runmode}.-1.json",
+            self.base_path
+            ,runmode=utf8_percent_encode(&param_runmode.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<String>(body)?;
+                Ok(GetAgentsResponse::DefaultResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn get_authorizable_keystore(
+        &self,
+        param_intermediate_path: String,
+        param_authorizable_id: String,
+        context: &C) -> Result<GetAuthorizableKeystoreResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/{intermediate_path}/{authorizable_id}.ks.json",
+            self.base_path
+            ,intermediate_path=utf8_percent_encode(&param_intermediate_path.to_string(), ID_ENCODE_SET)
+            ,authorizable_id=utf8_percent_encode(&param_authorizable_id.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = body.to_string();
+                Ok(GetAuthorizableKeystoreResponse::RetrievedAuthorizableKeystoreInfo
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = body.to_string();
+                Ok(GetAuthorizableKeystoreResponse::DefaultResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn get_keystore(
+        &self,
+        param_intermediate_path: String,
+        param_authorizable_id: String,
+        context: &C) -> Result<GetKeystoreResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/{intermediate_path}/{authorizable_id}/keystore/store.p12",
+            self.base_path
+            ,intermediate_path=utf8_percent_encode(&param_intermediate_path.to_string(), ID_ENCODE_SET)
+            ,authorizable_id=utf8_percent_encode(&param_authorizable_id.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = swagger::ByteArray(body.to_vec());
+                Ok(GetKeystoreResponse::DefaultResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn get_node(
+        &self,
+        param_path: String,
+        param_name: String,
+        context: &C) -> Result<GetNodeResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/{path}/{name}",
+            self.base_path
+            ,path=utf8_percent_encode(&param_path.to_string(), ID_ENCODE_SET)
+            ,name=utf8_percent_encode(&param_name.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                Ok(
+                    GetNodeResponse::DefaultResponse
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn get_package(
+        &self,
+        param_group: String,
+        param_name: String,
+        param_version: String,
+        context: &C) -> Result<GetPackageResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/etc/packages/{group}/{name}-{version}.zip",
+            self.base_path
+            ,group=utf8_percent_encode(&param_group.to_string(), ID_ENCODE_SET)
+            ,name=utf8_percent_encode(&param_name.to_string(), ID_ENCODE_SET)
+            ,version=utf8_percent_encode(&param_version.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = swagger::ByteArray(body.to_vec());
+                Ok(GetPackageResponse::DefaultResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn get_package_filter(
+        &self,
+        param_group: String,
+        param_name: String,
+        param_version: String,
+        context: &C) -> Result<GetPackageFilterResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json",
+            self.base_path
+            ,group=utf8_percent_encode(&param_group.to_string(), ID_ENCODE_SET)
+            ,name=utf8_percent_encode(&param_name.to_string(), ID_ENCODE_SET)
+            ,version=utf8_percent_encode(&param_version.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<String>(body)?;
+                Ok(GetPackageFilterResponse::DefaultResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn get_query(
+        &self,
+        param_path: String,
+        param_p_limit: f64,
+        param_param_1_property: String,
+        param_param_1_property_value: String,
+        context: &C) -> Result<GetQueryResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/bin/querybuilder.json",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+                query_string.append_pair("path",
+                    &param_path.to_string());
+                query_string.append_pair("p.limit",
+                    &param_p_limit.to_string());
+                query_string.append_pair("1_property",
+                    &param_param_1_property.to_string());
+                query_string.append_pair("1_property.value",
+                    &param_param_1_property_value.to_string());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<String>(body)?;
+                Ok(GetQueryResponse::DefaultResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn get_truststore(
+        &self,
+        context: &C) -> Result<GetTruststoreResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/etc/truststore/truststore.p12",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = swagger::ByteArray(body.to_vec());
+                Ok(GetTruststoreResponse::DefaultResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn get_truststore_info(
+        &self,
+        context: &C) -> Result<GetTruststoreInfoResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/libs/granite/security/truststore.json",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::TruststoreInfo>(body)?;
+                Ok(GetTruststoreInfoResponse::RetrievedAEMTruststoreInfo
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<String>(body)?;
+                Ok(GetTruststoreInfoResponse::DefaultResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn post_agent(
+        &self,
+        param_runmode: String,
+        param_name: String,
+        param_jcrcontent_cqdistribute: Option<bool>,
+        param_jcrcontent_cqdistribute_type_hint: Option<String>,
+        param_jcrcontent_cqname: Option<String>,
+        param_jcrcontent_cqtemplate: Option<String>,
+        param_jcrcontent_enabled: Option<bool>,
+        param_jcrcontent_jcrdescription: Option<String>,
+        param_jcrcontent_jcrlast_modified: Option<String>,
+        param_jcrcontent_jcrlast_modified_by: Option<String>,
+        param_jcrcontent_jcrmixin_types: Option<String>,
+        param_jcrcontent_jcrtitle: Option<String>,
+        param_jcrcontent_log_level: Option<String>,
+        param_jcrcontent_no_status_update: Option<bool>,
+        param_jcrcontent_no_versioning: Option<bool>,
+        param_jcrcontent_protocol_connect_timeout: Option<f64>,
+        param_jcrcontent_protocol_http_connection_closed: Option<bool>,
+        param_jcrcontent_protocol_http_expired: Option<String>,
+        param_jcrcontent_protocol_http_headers: Option<&Vec<String>>,
+        param_jcrcontent_protocol_http_headers_type_hint: Option<String>,
+        param_jcrcontent_protocol_http_method: Option<String>,
+        param_jcrcontent_protocol_https_relaxed: Option<bool>,
+        param_jcrcontent_protocol_interface: Option<String>,
+        param_jcrcontent_protocol_socket_timeout: Option<f64>,
+        param_jcrcontent_protocol_version: Option<String>,
+        param_jcrcontent_proxy_ntlm_domain: Option<String>,
+        param_jcrcontent_proxy_ntlm_host: Option<String>,
+        param_jcrcontent_proxy_host: Option<String>,
+        param_jcrcontent_proxy_password: Option<String>,
+        param_jcrcontent_proxy_port: Option<f64>,
+        param_jcrcontent_proxy_user: Option<String>,
+        param_jcrcontent_queue_batch_max_size: Option<f64>,
+        param_jcrcontent_queue_batch_mode: Option<String>,
+        param_jcrcontent_queue_batch_wait_time: Option<f64>,
+        param_jcrcontent_retry_delay: Option<String>,
+        param_jcrcontent_reverse_replication: Option<bool>,
+        param_jcrcontent_serialization_type: Option<String>,
+        param_jcrcontent_slingresource_type: Option<String>,
+        param_jcrcontent_ssl: Option<String>,
+        param_jcrcontent_transport_ntlm_domain: Option<String>,
+        param_jcrcontent_transport_ntlm_host: Option<String>,
+        param_jcrcontent_transport_password: Option<String>,
+        param_jcrcontent_transport_uri: Option<String>,
+        param_jcrcontent_transport_user: Option<String>,
+        param_jcrcontent_trigger_distribute: Option<bool>,
+        param_jcrcontent_trigger_modified: Option<bool>,
+        param_jcrcontent_trigger_on_off_time: Option<bool>,
+        param_jcrcontent_trigger_receive: Option<bool>,
+        param_jcrcontent_trigger_specific: Option<bool>,
+        param_jcrcontent_user_id: Option<String>,
+        param_jcrprimary_type: Option<String>,
+        param_operation: Option<String>,
+        context: &C) -> Result<PostAgentResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/etc/replication/agents.{runmode}/{name}",
+            self.base_path
+            ,runmode=utf8_percent_encode(&param_runmode.to_string(), ID_ENCODE_SET)
+            ,name=utf8_percent_encode(&param_name.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            if let Some(param_jcrcontent_cqdistribute) = param_jcrcontent_cqdistribute {
+                query_string.append_pair("jcr:content/cq:distribute",
+                    &param_jcrcontent_cqdistribute.to_string());
+            }
+            if let Some(param_jcrcontent_cqdistribute_type_hint) = param_jcrcontent_cqdistribute_type_hint {
+                query_string.append_pair("jcr:content/cq:distribute@TypeHint",
+                    &param_jcrcontent_cqdistribute_type_hint.to_string());
+            }
+            if let Some(param_jcrcontent_cqname) = param_jcrcontent_cqname {
+                query_string.append_pair("jcr:content/cq:name",
+                    &param_jcrcontent_cqname.to_string());
+            }
+            if let Some(param_jcrcontent_cqtemplate) = param_jcrcontent_cqtemplate {
+                query_string.append_pair("jcr:content/cq:template",
+                    &param_jcrcontent_cqtemplate.to_string());
+            }
+            if let Some(param_jcrcontent_enabled) = param_jcrcontent_enabled {
+                query_string.append_pair("jcr:content/enabled",
+                    &param_jcrcontent_enabled.to_string());
+            }
+            if let Some(param_jcrcontent_jcrdescription) = param_jcrcontent_jcrdescription {
+                query_string.append_pair("jcr:content/jcr:description",
+                    &param_jcrcontent_jcrdescription.to_string());
+            }
+            if let Some(param_jcrcontent_jcrlast_modified) = param_jcrcontent_jcrlast_modified {
+                query_string.append_pair("jcr:content/jcr:lastModified",
+                    &param_jcrcontent_jcrlast_modified.to_string());
+            }
+            if let Some(param_jcrcontent_jcrlast_modified_by) = param_jcrcontent_jcrlast_modified_by {
+                query_string.append_pair("jcr:content/jcr:lastModifiedBy",
+                    &param_jcrcontent_jcrlast_modified_by.to_string());
+            }
+            if let Some(param_jcrcontent_jcrmixin_types) = param_jcrcontent_jcrmixin_types {
+                query_string.append_pair("jcr:content/jcr:mixinTypes",
+                    &param_jcrcontent_jcrmixin_types.to_string());
+            }
+            if let Some(param_jcrcontent_jcrtitle) = param_jcrcontent_jcrtitle {
+                query_string.append_pair("jcr:content/jcr:title",
+                    &param_jcrcontent_jcrtitle.to_string());
+            }
+            if let Some(param_jcrcontent_log_level) = param_jcrcontent_log_level {
+                query_string.append_pair("jcr:content/logLevel",
+                    &param_jcrcontent_log_level.to_string());
+            }
+            if let Some(param_jcrcontent_no_status_update) = param_jcrcontent_no_status_update {
+                query_string.append_pair("jcr:content/noStatusUpdate",
+                    &param_jcrcontent_no_status_update.to_string());
+            }
+            if let Some(param_jcrcontent_no_versioning) = param_jcrcontent_no_versioning {
+                query_string.append_pair("jcr:content/noVersioning",
+                    &param_jcrcontent_no_versioning.to_string());
+            }
+            if let Some(param_jcrcontent_protocol_connect_timeout) = param_jcrcontent_protocol_connect_timeout {
+                query_string.append_pair("jcr:content/protocolConnectTimeout",
+                    &param_jcrcontent_protocol_connect_timeout.to_string());
+            }
+            if let Some(param_jcrcontent_protocol_http_connection_closed) = param_jcrcontent_protocol_http_connection_closed {
+                query_string.append_pair("jcr:content/protocolHTTPConnectionClosed",
+                    &param_jcrcontent_protocol_http_connection_closed.to_string());
+            }
+            if let Some(param_jcrcontent_protocol_http_expired) = param_jcrcontent_protocol_http_expired {
+                query_string.append_pair("jcr:content/protocolHTTPExpired",
+                    &param_jcrcontent_protocol_http_expired.to_string());
+            }
+            if let Some(param_jcrcontent_protocol_http_headers) = param_jcrcontent_protocol_http_headers {
+                query_string.append_pair("jcr:content/protocolHTTPHeaders",
+                    &param_jcrcontent_protocol_http_headers.iter().map(ToString::to_string).collect::<Vec<String>>().join(","));
+            }
+            if let Some(param_jcrcontent_protocol_http_headers_type_hint) = param_jcrcontent_protocol_http_headers_type_hint {
+                query_string.append_pair("jcr:content/protocolHTTPHeaders@TypeHint",
+                    &param_jcrcontent_protocol_http_headers_type_hint.to_string());
+            }
+            if let Some(param_jcrcontent_protocol_http_method) = param_jcrcontent_protocol_http_method {
+                query_string.append_pair("jcr:content/protocolHTTPMethod",
+                    &param_jcrcontent_protocol_http_method.to_string());
+            }
+            if let Some(param_jcrcontent_protocol_https_relaxed) = param_jcrcontent_protocol_https_relaxed {
+                query_string.append_pair("jcr:content/protocolHTTPSRelaxed",
+                    &param_jcrcontent_protocol_https_relaxed.to_string());
+            }
+            if let Some(param_jcrcontent_protocol_interface) = param_jcrcontent_protocol_interface {
+                query_string.append_pair("jcr:content/protocolInterface",
+                    &param_jcrcontent_protocol_interface.to_string());
+            }
+            if let Some(param_jcrcontent_protocol_socket_timeout) = param_jcrcontent_protocol_socket_timeout {
+                query_string.append_pair("jcr:content/protocolSocketTimeout",
+                    &param_jcrcontent_protocol_socket_timeout.to_string());
+            }
+            if let Some(param_jcrcontent_protocol_version) = param_jcrcontent_protocol_version {
+                query_string.append_pair("jcr:content/protocolVersion",
+                    &param_jcrcontent_protocol_version.to_string());
+            }
+            if let Some(param_jcrcontent_proxy_ntlm_domain) = param_jcrcontent_proxy_ntlm_domain {
+                query_string.append_pair("jcr:content/proxyNTLMDomain",
+                    &param_jcrcontent_proxy_ntlm_domain.to_string());
+            }
+            if let Some(param_jcrcontent_proxy_ntlm_host) = param_jcrcontent_proxy_ntlm_host {
+                query_string.append_pair("jcr:content/proxyNTLMHost",
+                    &param_jcrcontent_proxy_ntlm_host.to_string());
+            }
+            if let Some(param_jcrcontent_proxy_host) = param_jcrcontent_proxy_host {
+                query_string.append_pair("jcr:content/proxyHost",
+                    &param_jcrcontent_proxy_host.to_string());
+            }
+            if let Some(param_jcrcontent_proxy_password) = param_jcrcontent_proxy_password {
+                query_string.append_pair("jcr:content/proxyPassword",
+                    &param_jcrcontent_proxy_password.to_string());
+            }
+            if let Some(param_jcrcontent_proxy_port) = param_jcrcontent_proxy_port {
+                query_string.append_pair("jcr:content/proxyPort",
+                    &param_jcrcontent_proxy_port.to_string());
+            }
+            if let Some(param_jcrcontent_proxy_user) = param_jcrcontent_proxy_user {
+                query_string.append_pair("jcr:content/proxyUser",
+                    &param_jcrcontent_proxy_user.to_string());
+            }
+            if let Some(param_jcrcontent_queue_batch_max_size) = param_jcrcontent_queue_batch_max_size {
+                query_string.append_pair("jcr:content/queueBatchMaxSize",
+                    &param_jcrcontent_queue_batch_max_size.to_string());
+            }
+            if let Some(param_jcrcontent_queue_batch_mode) = param_jcrcontent_queue_batch_mode {
+                query_string.append_pair("jcr:content/queueBatchMode",
+                    &param_jcrcontent_queue_batch_mode.to_string());
+            }
+            if let Some(param_jcrcontent_queue_batch_wait_time) = param_jcrcontent_queue_batch_wait_time {
+                query_string.append_pair("jcr:content/queueBatchWaitTime",
+                    &param_jcrcontent_queue_batch_wait_time.to_string());
+            }
+            if let Some(param_jcrcontent_retry_delay) = param_jcrcontent_retry_delay {
+                query_string.append_pair("jcr:content/retryDelay",
+                    &param_jcrcontent_retry_delay.to_string());
+            }
+            if let Some(param_jcrcontent_reverse_replication) = param_jcrcontent_reverse_replication {
+                query_string.append_pair("jcr:content/reverseReplication",
+                    &param_jcrcontent_reverse_replication.to_string());
+            }
+            if let Some(param_jcrcontent_serialization_type) = param_jcrcontent_serialization_type {
+                query_string.append_pair("jcr:content/serializationType",
+                    &param_jcrcontent_serialization_type.to_string());
+            }
+            if let Some(param_jcrcontent_slingresource_type) = param_jcrcontent_slingresource_type {
+                query_string.append_pair("jcr:content/sling:resourceType",
+                    &param_jcrcontent_slingresource_type.to_string());
+            }
+            if let Some(param_jcrcontent_ssl) = param_jcrcontent_ssl {
+                query_string.append_pair("jcr:content/ssl",
+                    &param_jcrcontent_ssl.to_string());
+            }
+            if let Some(param_jcrcontent_transport_ntlm_domain) = param_jcrcontent_transport_ntlm_domain {
+                query_string.append_pair("jcr:content/transportNTLMDomain",
+                    &param_jcrcontent_transport_ntlm_domain.to_string());
+            }
+            if let Some(param_jcrcontent_transport_ntlm_host) = param_jcrcontent_transport_ntlm_host {
+                query_string.append_pair("jcr:content/transportNTLMHost",
+                    &param_jcrcontent_transport_ntlm_host.to_string());
+            }
+            if let Some(param_jcrcontent_transport_password) = param_jcrcontent_transport_password {
+                query_string.append_pair("jcr:content/transportPassword",
+                    &param_jcrcontent_transport_password.to_string());
+            }
+            if let Some(param_jcrcontent_transport_uri) = param_jcrcontent_transport_uri {
+                query_string.append_pair("jcr:content/transportUri",
+                    &param_jcrcontent_transport_uri.to_string());
+            }
+            if let Some(param_jcrcontent_transport_user) = param_jcrcontent_transport_user {
+                query_string.append_pair("jcr:content/transportUser",
+                    &param_jcrcontent_transport_user.to_string());
+            }
+            if let Some(param_jcrcontent_trigger_distribute) = param_jcrcontent_trigger_distribute {
+                query_string.append_pair("jcr:content/triggerDistribute",
+                    &param_jcrcontent_trigger_distribute.to_string());
+            }
+            if let Some(param_jcrcontent_trigger_modified) = param_jcrcontent_trigger_modified {
+                query_string.append_pair("jcr:content/triggerModified",
+                    &param_jcrcontent_trigger_modified.to_string());
+            }
+            if let Some(param_jcrcontent_trigger_on_off_time) = param_jcrcontent_trigger_on_off_time {
+                query_string.append_pair("jcr:content/triggerOnOffTime",
+                    &param_jcrcontent_trigger_on_off_time.to_string());
+            }
+            if let Some(param_jcrcontent_trigger_receive) = param_jcrcontent_trigger_receive {
+                query_string.append_pair("jcr:content/triggerReceive",
+                    &param_jcrcontent_trigger_receive.to_string());
+            }
+            if let Some(param_jcrcontent_trigger_specific) = param_jcrcontent_trigger_specific {
+                query_string.append_pair("jcr:content/triggerSpecific",
+                    &param_jcrcontent_trigger_specific.to_string());
+            }
+            if let Some(param_jcrcontent_user_id) = param_jcrcontent_user_id {
+                query_string.append_pair("jcr:content/userId",
+                    &param_jcrcontent_user_id.to_string());
+            }
+            if let Some(param_jcrprimary_type) = param_jcrprimary_type {
+                query_string.append_pair("jcr:primaryType",
+                    &param_jcrprimary_type.to_string());
+            }
+            if let Some(param_operation) = param_operation {
+                query_string.append_pair(":operation",
+                    &param_operation.to_string());
+            }
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                Ok(
+                    PostAgentResponse::DefaultResponse
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn post_authorizable_keystore(
+        &self,
+        param_intermediate_path: String,
+        param_authorizable_id: String,
+        param_operation: Option<String>,
+        param_current_password: Option<String>,
+        param_new_password: Option<String>,
+        param_re_password: Option<String>,
+        param_key_password: Option<String>,
+        param_key_store_pass: Option<String>,
+        param_alias: Option<String>,
+        param_new_alias: Option<String>,
+        param_remove_alias: Option<String>,
+        param_cert_chain: Option<swagger::ByteArray>,
+        param_pk: Option<swagger::ByteArray>,
+        param_key_store: Option<swagger::ByteArray>,
+        context: &C) -> Result<PostAuthorizableKeystoreResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/{intermediate_path}/{authorizable_id}.ks.html",
+            self.base_path
+            ,intermediate_path=utf8_percent_encode(&param_intermediate_path.to_string(), ID_ENCODE_SET)
+            ,authorizable_id=utf8_percent_encode(&param_authorizable_id.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            if let Some(param_operation) = param_operation {
+                query_string.append_pair(":operation",
+                    &param_operation.to_string());
+            }
+            if let Some(param_current_password) = param_current_password {
+                query_string.append_pair("currentPassword",
+                    &param_current_password.to_string());
+            }
+            if let Some(param_new_password) = param_new_password {
+                query_string.append_pair("newPassword",
+                    &param_new_password.to_string());
+            }
+            if let Some(param_re_password) = param_re_password {
+                query_string.append_pair("rePassword",
+                    &param_re_password.to_string());
+            }
+            if let Some(param_key_password) = param_key_password {
+                query_string.append_pair("keyPassword",
+                    &param_key_password.to_string());
+            }
+            if let Some(param_key_store_pass) = param_key_store_pass {
+                query_string.append_pair("keyStorePass",
+                    &param_key_store_pass.to_string());
+            }
+            if let Some(param_alias) = param_alias {
+                query_string.append_pair("alias",
+                    &param_alias.to_string());
+            }
+            if let Some(param_new_alias) = param_new_alias {
+                query_string.append_pair("newAlias",
+                    &param_new_alias.to_string());
+            }
+            if let Some(param_remove_alias) = param_remove_alias {
+                query_string.append_pair("removeAlias",
+                    &param_remove_alias.to_string());
+            }
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let (body_string, multipart_header) = {
+            let mut multipart = Multipart::new();
+
+            // For each parameter, encode as appropriate and add to the multipart body as a stream.
+
+            let cert_chain_str = match serde_json::to_string(&param_cert_chain) {
+                Ok(str) => str,
+                Err(e) => return Err(ApiError(format!("Unable to serialize cert_chain to string: {}", e))),
+            };
+
+            let cert_chain_vec = cert_chain_str.as_bytes().to_vec();
+            let cert_chain_mime = mime_0_2::Mime::from_str("application/json").expect("impossible to fail to parse");
+            let cert_chain_cursor = Cursor::new(cert_chain_vec);
+
+            multipart.add_stream("cert_chain",  cert_chain_cursor,  None as Option<&str>, Some(cert_chain_mime));
+
+
+            let pk_str = match serde_json::to_string(&param_pk) {
+                Ok(str) => str,
+                Err(e) => return Err(ApiError(format!("Unable to serialize pk to string: {}", e))),
+            };
+
+            let pk_vec = pk_str.as_bytes().to_vec();
+            let pk_mime = mime_0_2::Mime::from_str("application/json").expect("impossible to fail to parse");
+            let pk_cursor = Cursor::new(pk_vec);
+
+            multipart.add_stream("pk",  pk_cursor,  None as Option<&str>, Some(pk_mime));
+
+
+            let key_store_str = match serde_json::to_string(&param_key_store) {
+                Ok(str) => str,
+                Err(e) => return Err(ApiError(format!("Unable to serialize key_store to string: {}", e))),
+            };
+
+            let key_store_vec = key_store_str.as_bytes().to_vec();
+            let key_store_mime = mime_0_2::Mime::from_str("application/json").expect("impossible to fail to parse");
+            let key_store_cursor = Cursor::new(key_store_vec);
+
+            multipart.add_stream("key_store",  key_store_cursor,  None as Option<&str>, Some(key_store_mime));
+
+
+            let mut fields = match multipart.prepare() {
+                Ok(fields) => fields,
+                Err(err) => return Err(ApiError(format!("Unable to build request: {}", err))),
+            };
+
+            let mut body_string = String::new();
+
+            match fields.read_to_string(&mut body_string) {
+                Ok(_) => (),
+                Err(err) => return Err(ApiError(format!("Unable to build body: {}", err))),
+            }
+
+            let boundary = fields.boundary();
+
+            let multipart_header = format!("multipart/form-data;boundary={}", boundary);
+
+            (body_string, multipart_header)
+        };
+
+        *request.body_mut() = Body::from(body_string);
+
+        request.headers_mut().insert(CONTENT_TYPE, match HeaderValue::from_str(&multipart_header) {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create header: {} - {}", multipart_header, e)))
+        });
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = body.to_string();
+                Ok(PostAuthorizableKeystoreResponse::RetrievedAuthorizableKeystoreInfo
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = body.to_string();
+                Ok(PostAuthorizableKeystoreResponse::DefaultResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn post_authorizables(
+        &self,
+        param_authorizable_id: String,
+        param_intermediate_path: String,
+        param_create_user: Option<String>,
+        param_create_group: Option<String>,
+        param_reppassword: Option<String>,
+        param_profile_given_name: Option<String>,
+        context: &C) -> Result<PostAuthorizablesResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/libs/granite/security/post/authorizables",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+                query_string.append_pair("authorizableId",
+                    &param_authorizable_id.to_string());
+                query_string.append_pair("intermediatePath",
+                    &param_intermediate_path.to_string());
+            if let Some(param_create_user) = param_create_user {
+                query_string.append_pair("createUser",
+                    &param_create_user.to_string());
+            }
+            if let Some(param_create_group) = param_create_group {
+                query_string.append_pair("createGroup",
+                    &param_create_group.to_string());
+            }
+            if let Some(param_reppassword) = param_reppassword {
+                query_string.append_pair("rep:password",
+                    &param_reppassword.to_string());
+            }
+            if let Some(param_profile_given_name) = param_profile_given_name {
+                query_string.append_pair("profile/givenName",
+                    &param_profile_given_name.to_string());
+            }
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = body.to_string();
+                Ok(PostAuthorizablesResponse::DefaultResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn post_config_adobe_granite_saml_authentication_handler(
+        &self,
+        param_key_store_password: Option<String>,
+        param_key_store_password_type_hint: Option<String>,
+        param_service_ranking: Option<i32>,
+        param_service_ranking_type_hint: Option<String>,
+        param_idp_http_redirect: Option<bool>,
+        param_idp_http_redirect_type_hint: Option<String>,
+        param_create_user: Option<bool>,
+        param_create_user_type_hint: Option<String>,
+        param_default_redirect_url: Option<String>,
+        param_default_redirect_url_type_hint: Option<String>,
+        param_user_id_attribute: Option<String>,
+        param_user_id_attribute_type_hint: Option<String>,
+        param_default_groups: Option<&Vec<String>>,
+        param_default_groups_type_hint: Option<String>,
+        param_idp_cert_alias: Option<String>,
+        param_idp_cert_alias_type_hint: Option<String>,
+        param_add_group_memberships: Option<bool>,
+        param_add_group_memberships_type_hint: Option<String>,
+        param_path: Option<&Vec<String>>,
+        param_path_type_hint: Option<String>,
+        param_synchronize_attributes: Option<&Vec<String>>,
+        param_synchronize_attributes_type_hint: Option<String>,
+        param_clock_tolerance: Option<i32>,
+        param_clock_tolerance_type_hint: Option<String>,
+        param_group_membership_attribute: Option<String>,
+        param_group_membership_attribute_type_hint: Option<String>,
+        param_idp_url: Option<String>,
+        param_idp_url_type_hint: Option<String>,
+        param_logout_url: Option<String>,
+        param_logout_url_type_hint: Option<String>,
+        param_service_provider_entity_id: Option<String>,
+        param_service_provider_entity_id_type_hint: Option<String>,
+        param_assertion_consumer_service_url: Option<String>,
+        param_assertion_consumer_service_url_type_hint: Option<String>,
+        param_handle_logout: Option<bool>,
+        param_handle_logout_type_hint: Option<String>,
+        param_sp_private_key_alias: Option<String>,
+        param_sp_private_key_alias_type_hint: Option<String>,
+        param_use_encryption: Option<bool>,
+        param_use_encryption_type_hint: Option<String>,
+        param_name_id_format: Option<String>,
+        param_name_id_format_type_hint: Option<String>,
+        param_digest_method: Option<String>,
+        param_digest_method_type_hint: Option<String>,
+        param_signature_method: Option<String>,
+        param_signature_method_type_hint: Option<String>,
+        param_user_intermediate_path: Option<String>,
+        param_user_intermediate_path_type_hint: Option<String>,
+        context: &C) -> Result<PostConfigAdobeGraniteSamlAuthenticationHandlerResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            if let Some(param_key_store_password) = param_key_store_password {
+                query_string.append_pair("keyStorePassword",
+                    &param_key_store_password.to_string());
+            }
+            if let Some(param_key_store_password_type_hint) = param_key_store_password_type_hint {
+                query_string.append_pair("keyStorePassword@TypeHint",
+                    &param_key_store_password_type_hint.to_string());
+            }
+            if let Some(param_service_ranking) = param_service_ranking {
+                query_string.append_pair("service.ranking",
+                    &param_service_ranking.to_string());
+            }
+            if let Some(param_service_ranking_type_hint) = param_service_ranking_type_hint {
+                query_string.append_pair("service.ranking@TypeHint",
+                    &param_service_ranking_type_hint.to_string());
+            }
+            if let Some(param_idp_http_redirect) = param_idp_http_redirect {
+                query_string.append_pair("idpHttpRedirect",
+                    &param_idp_http_redirect.to_string());
+            }
+            if let Some(param_idp_http_redirect_type_hint) = param_idp_http_redirect_type_hint {
+                query_string.append_pair("idpHttpRedirect@TypeHint",
+                    &param_idp_http_redirect_type_hint.to_string());
+            }
+            if let Some(param_create_user) = param_create_user {
+                query_string.append_pair("createUser",
+                    &param_create_user.to_string());
+            }
+            if let Some(param_create_user_type_hint) = param_create_user_type_hint {
+                query_string.append_pair("createUser@TypeHint",
+                    &param_create_user_type_hint.to_string());
+            }
+            if let Some(param_default_redirect_url) = param_default_redirect_url {
+                query_string.append_pair("defaultRedirectUrl",
+                    &param_default_redirect_url.to_string());
+            }
+            if let Some(param_default_redirect_url_type_hint) = param_default_redirect_url_type_hint {
+                query_string.append_pair("defaultRedirectUrl@TypeHint",
+                    &param_default_redirect_url_type_hint.to_string());
+            }
+            if let Some(param_user_id_attribute) = param_user_id_attribute {
+                query_string.append_pair("userIDAttribute",
+                    &param_user_id_attribute.to_string());
+            }
+            if let Some(param_user_id_attribute_type_hint) = param_user_id_attribute_type_hint {
+                query_string.append_pair("userIDAttribute@TypeHint",
+                    &param_user_id_attribute_type_hint.to_string());
+            }
+            if let Some(param_default_groups) = param_default_groups {
+                query_string.append_pair("defaultGroups",
+                    &param_default_groups.iter().map(ToString::to_string).collect::<Vec<String>>().join(","));
+            }
+            if let Some(param_default_groups_type_hint) = param_default_groups_type_hint {
+                query_string.append_pair("defaultGroups@TypeHint",
+                    &param_default_groups_type_hint.to_string());
+            }
+            if let Some(param_idp_cert_alias) = param_idp_cert_alias {
+                query_string.append_pair("idpCertAlias",
+                    &param_idp_cert_alias.to_string());
+            }
+            if let Some(param_idp_cert_alias_type_hint) = param_idp_cert_alias_type_hint {
+                query_string.append_pair("idpCertAlias@TypeHint",
+                    &param_idp_cert_alias_type_hint.to_string());
+            }
+            if let Some(param_add_group_memberships) = param_add_group_memberships {
+                query_string.append_pair("addGroupMemberships",
+                    &param_add_group_memberships.to_string());
+            }
+            if let Some(param_add_group_memberships_type_hint) = param_add_group_memberships_type_hint {
+                query_string.append_pair("addGroupMemberships@TypeHint",
+                    &param_add_group_memberships_type_hint.to_string());
+            }
+            if let Some(param_path) = param_path {
+                query_string.append_pair("path",
+                    &param_path.iter().map(ToString::to_string).collect::<Vec<String>>().join(","));
+            }
+            if let Some(param_path_type_hint) = param_path_type_hint {
+                query_string.append_pair("path@TypeHint",
+                    &param_path_type_hint.to_string());
+            }
+            if let Some(param_synchronize_attributes) = param_synchronize_attributes {
+                query_string.append_pair("synchronizeAttributes",
+                    &param_synchronize_attributes.iter().map(ToString::to_string).collect::<Vec<String>>().join(","));
+            }
+            if let Some(param_synchronize_attributes_type_hint) = param_synchronize_attributes_type_hint {
+                query_string.append_pair("synchronizeAttributes@TypeHint",
+                    &param_synchronize_attributes_type_hint.to_string());
+            }
+            if let Some(param_clock_tolerance) = param_clock_tolerance {
+                query_string.append_pair("clockTolerance",
+                    &param_clock_tolerance.to_string());
+            }
+            if let Some(param_clock_tolerance_type_hint) = param_clock_tolerance_type_hint {
+                query_string.append_pair("clockTolerance@TypeHint",
+                    &param_clock_tolerance_type_hint.to_string());
+            }
+            if let Some(param_group_membership_attribute) = param_group_membership_attribute {
+                query_string.append_pair("groupMembershipAttribute",
+                    &param_group_membership_attribute.to_string());
+            }
+            if let Some(param_group_membership_attribute_type_hint) = param_group_membership_attribute_type_hint {
+                query_string.append_pair("groupMembershipAttribute@TypeHint",
+                    &param_group_membership_attribute_type_hint.to_string());
+            }
+            if let Some(param_idp_url) = param_idp_url {
+                query_string.append_pair("idpUrl",
+                    &param_idp_url.to_string());
+            }
+            if let Some(param_idp_url_type_hint) = param_idp_url_type_hint {
+                query_string.append_pair("idpUrl@TypeHint",
+                    &param_idp_url_type_hint.to_string());
+            }
+            if let Some(param_logout_url) = param_logout_url {
+                query_string.append_pair("logoutUrl",
+                    &param_logout_url.to_string());
+            }
+            if let Some(param_logout_url_type_hint) = param_logout_url_type_hint {
+                query_string.append_pair("logoutUrl@TypeHint",
+                    &param_logout_url_type_hint.to_string());
+            }
+            if let Some(param_service_provider_entity_id) = param_service_provider_entity_id {
+                query_string.append_pair("serviceProviderEntityId",
+                    &param_service_provider_entity_id.to_string());
+            }
+            if let Some(param_service_provider_entity_id_type_hint) = param_service_provider_entity_id_type_hint {
+                query_string.append_pair("serviceProviderEntityId@TypeHint",
+                    &param_service_provider_entity_id_type_hint.to_string());
+            }
+            if let Some(param_assertion_consumer_service_url) = param_assertion_consumer_service_url {
+                query_string.append_pair("assertionConsumerServiceURL",
+                    &param_assertion_consumer_service_url.to_string());
+            }
+            if let Some(param_assertion_consumer_service_url_type_hint) = param_assertion_consumer_service_url_type_hint {
+                query_string.append_pair("assertionConsumerServiceURL@TypeHint",
+                    &param_assertion_consumer_service_url_type_hint.to_string());
+            }
+            if let Some(param_handle_logout) = param_handle_logout {
+                query_string.append_pair("handleLogout",
+                    &param_handle_logout.to_string());
+            }
+            if let Some(param_handle_logout_type_hint) = param_handle_logout_type_hint {
+                query_string.append_pair("handleLogout@TypeHint",
+                    &param_handle_logout_type_hint.to_string());
+            }
+            if let Some(param_sp_private_key_alias) = param_sp_private_key_alias {
+                query_string.append_pair("spPrivateKeyAlias",
+                    &param_sp_private_key_alias.to_string());
+            }
+            if let Some(param_sp_private_key_alias_type_hint) = param_sp_private_key_alias_type_hint {
+                query_string.append_pair("spPrivateKeyAlias@TypeHint",
+                    &param_sp_private_key_alias_type_hint.to_string());
+            }
+            if let Some(param_use_encryption) = param_use_encryption {
+                query_string.append_pair("useEncryption",
+                    &param_use_encryption.to_string());
+            }
+            if let Some(param_use_encryption_type_hint) = param_use_encryption_type_hint {
+                query_string.append_pair("useEncryption@TypeHint",
+                    &param_use_encryption_type_hint.to_string());
+            }
+            if let Some(param_name_id_format) = param_name_id_format {
+                query_string.append_pair("nameIdFormat",
+                    &param_name_id_format.to_string());
+            }
+            if let Some(param_name_id_format_type_hint) = param_name_id_format_type_hint {
+                query_string.append_pair("nameIdFormat@TypeHint",
+                    &param_name_id_format_type_hint.to_string());
+            }
+            if let Some(param_digest_method) = param_digest_method {
+                query_string.append_pair("digestMethod",
+                    &param_digest_method.to_string());
+            }
+            if let Some(param_digest_method_type_hint) = param_digest_method_type_hint {
+                query_string.append_pair("digestMethod@TypeHint",
+                    &param_digest_method_type_hint.to_string());
+            }
+            if let Some(param_signature_method) = param_signature_method {
+                query_string.append_pair("signatureMethod",
+                    &param_signature_method.to_string());
+            }
+            if let Some(param_signature_method_type_hint) = param_signature_method_type_hint {
+                query_string.append_pair("signatureMethod@TypeHint",
+                    &param_signature_method_type_hint.to_string());
+            }
+            if let Some(param_user_intermediate_path) = param_user_intermediate_path {
+                query_string.append_pair("userIntermediatePath",
+                    &param_user_intermediate_path.to_string());
+            }
+            if let Some(param_user_intermediate_path_type_hint) = param_user_intermediate_path_type_hint {
+                query_string.append_pair("userIntermediatePath@TypeHint",
+                    &param_user_intermediate_path_type_hint.to_string());
+            }
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                Ok(
+                    PostConfigAdobeGraniteSamlAuthenticationHandlerResponse::DefaultResponse
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn post_config_apache_felix_jetty_based_http_service(
+        &self,
+        param_org_apache_felix_https_nio: Option<bool>,
+        param_org_apache_felix_https_nio_type_hint: Option<String>,
+        param_org_apache_felix_https_keystore: Option<String>,
+        param_org_apache_felix_https_keystore_type_hint: Option<String>,
+        param_org_apache_felix_https_keystore_password: Option<String>,
+        param_org_apache_felix_https_keystore_password_type_hint: Option<String>,
+        param_org_apache_felix_https_keystore_key: Option<String>,
+        param_org_apache_felix_https_keystore_key_type_hint: Option<String>,
+        param_org_apache_felix_https_keystore_key_password: Option<String>,
+        param_org_apache_felix_https_keystore_key_password_type_hint: Option<String>,
+        param_org_apache_felix_https_truststore: Option<String>,
+        param_org_apache_felix_https_truststore_type_hint: Option<String>,
+        param_org_apache_felix_https_truststore_password: Option<String>,
+        param_org_apache_felix_https_truststore_password_type_hint: Option<String>,
+        param_org_apache_felix_https_clientcertificate: Option<String>,
+        param_org_apache_felix_https_clientcertificate_type_hint: Option<String>,
+        param_org_apache_felix_https_enable: Option<bool>,
+        param_org_apache_felix_https_enable_type_hint: Option<String>,
+        param_org_osgi_service_http_port_secure: Option<String>,
+        param_org_osgi_service_http_port_secure_type_hint: Option<String>,
+        context: &C) -> Result<PostConfigApacheFelixJettyBasedHttpServiceResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/apps/system/config/org.apache.felix.http",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            if let Some(param_org_apache_felix_https_nio) = param_org_apache_felix_https_nio {
+                query_string.append_pair("org.apache.felix.https.nio",
+                    &param_org_apache_felix_https_nio.to_string());
+            }
+            if let Some(param_org_apache_felix_https_nio_type_hint) = param_org_apache_felix_https_nio_type_hint {
+                query_string.append_pair("org.apache.felix.https.nio@TypeHint",
+                    &param_org_apache_felix_https_nio_type_hint.to_string());
+            }
+            if let Some(param_org_apache_felix_https_keystore) = param_org_apache_felix_https_keystore {
+                query_string.append_pair("org.apache.felix.https.keystore",
+                    &param_org_apache_felix_https_keystore.to_string());
+            }
+            if let Some(param_org_apache_felix_https_keystore_type_hint) = param_org_apache_felix_https_keystore_type_hint {
+                query_string.append_pair("org.apache.felix.https.keystore@TypeHint",
+                    &param_org_apache_felix_https_keystore_type_hint.to_string());
+            }
+            if let Some(param_org_apache_felix_https_keystore_password) = param_org_apache_felix_https_keystore_password {
+                query_string.append_pair("org.apache.felix.https.keystore.password",
+                    &param_org_apache_felix_https_keystore_password.to_string());
+            }
+            if let Some(param_org_apache_felix_https_keystore_password_type_hint) = param_org_apache_felix_https_keystore_password_type_hint {
+                query_string.append_pair("org.apache.felix.https.keystore.password@TypeHint",
+                    &param_org_apache_felix_https_keystore_password_type_hint.to_string());
+            }
+            if let Some(param_org_apache_felix_https_keystore_key) = param_org_apache_felix_https_keystore_key {
+                query_string.append_pair("org.apache.felix.https.keystore.key",
+                    &param_org_apache_felix_https_keystore_key.to_string());
+            }
+            if let Some(param_org_apache_felix_https_keystore_key_type_hint) = param_org_apache_felix_https_keystore_key_type_hint {
+                query_string.append_pair("org.apache.felix.https.keystore.key@TypeHint",
+                    &param_org_apache_felix_https_keystore_key_type_hint.to_string());
+            }
+            if let Some(param_org_apache_felix_https_keystore_key_password) = param_org_apache_felix_https_keystore_key_password {
+                query_string.append_pair("org.apache.felix.https.keystore.key.password",
+                    &param_org_apache_felix_https_keystore_key_password.to_string());
+            }
+            if let Some(param_org_apache_felix_https_keystore_key_password_type_hint) = param_org_apache_felix_https_keystore_key_password_type_hint {
+                query_string.append_pair("org.apache.felix.https.keystore.key.password@TypeHint",
+                    &param_org_apache_felix_https_keystore_key_password_type_hint.to_string());
+            }
+            if let Some(param_org_apache_felix_https_truststore) = param_org_apache_felix_https_truststore {
+                query_string.append_pair("org.apache.felix.https.truststore",
+                    &param_org_apache_felix_https_truststore.to_string());
+            }
+            if let Some(param_org_apache_felix_https_truststore_type_hint) = param_org_apache_felix_https_truststore_type_hint {
+                query_string.append_pair("org.apache.felix.https.truststore@TypeHint",
+                    &param_org_apache_felix_https_truststore_type_hint.to_string());
+            }
+            if let Some(param_org_apache_felix_https_truststore_password) = param_org_apache_felix_https_truststore_password {
+                query_string.append_pair("org.apache.felix.https.truststore.password",
+                    &param_org_apache_felix_https_truststore_password.to_string());
+            }
+            if let Some(param_org_apache_felix_https_truststore_password_type_hint) = param_org_apache_felix_https_truststore_password_type_hint {
+                query_string.append_pair("org.apache.felix.https.truststore.password@TypeHint",
+                    &param_org_apache_felix_https_truststore_password_type_hint.to_string());
+            }
+            if let Some(param_org_apache_felix_https_clientcertificate) = param_org_apache_felix_https_clientcertificate {
+                query_string.append_pair("org.apache.felix.https.clientcertificate",
+                    &param_org_apache_felix_https_clientcertificate.to_string());
+            }
+            if let Some(param_org_apache_felix_https_clientcertificate_type_hint) = param_org_apache_felix_https_clientcertificate_type_hint {
+                query_string.append_pair("org.apache.felix.https.clientcertificate@TypeHint",
+                    &param_org_apache_felix_https_clientcertificate_type_hint.to_string());
+            }
+            if let Some(param_org_apache_felix_https_enable) = param_org_apache_felix_https_enable {
+                query_string.append_pair("org.apache.felix.https.enable",
+                    &param_org_apache_felix_https_enable.to_string());
+            }
+            if let Some(param_org_apache_felix_https_enable_type_hint) = param_org_apache_felix_https_enable_type_hint {
+                query_string.append_pair("org.apache.felix.https.enable@TypeHint",
+                    &param_org_apache_felix_https_enable_type_hint.to_string());
+            }
+            if let Some(param_org_osgi_service_http_port_secure) = param_org_osgi_service_http_port_secure {
+                query_string.append_pair("org.osgi.service.http.port.secure",
+                    &param_org_osgi_service_http_port_secure.to_string());
+            }
+            if let Some(param_org_osgi_service_http_port_secure_type_hint) = param_org_osgi_service_http_port_secure_type_hint {
+                query_string.append_pair("org.osgi.service.http.port.secure@TypeHint",
+                    &param_org_osgi_service_http_port_secure_type_hint.to_string());
+            }
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                Ok(
+                    PostConfigApacheFelixJettyBasedHttpServiceResponse::DefaultResponse
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn post_config_apache_http_components_proxy_configuration(
+        &self,
+        param_proxy_host: Option<String>,
+        param_proxy_host_type_hint: Option<String>,
+        param_proxy_port: Option<i32>,
+        param_proxy_port_type_hint: Option<String>,
+        param_proxy_exceptions: Option<&Vec<String>>,
+        param_proxy_exceptions_type_hint: Option<String>,
+        param_proxy_enabled: Option<bool>,
+        param_proxy_enabled_type_hint: Option<String>,
+        param_proxy_user: Option<String>,
+        param_proxy_user_type_hint: Option<String>,
+        param_proxy_password: Option<String>,
+        param_proxy_password_type_hint: Option<String>,
+        context: &C) -> Result<PostConfigApacheHttpComponentsProxyConfigurationResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/apps/system/config/org.apache.http.proxyconfigurator.config",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            if let Some(param_proxy_host) = param_proxy_host {
+                query_string.append_pair("proxy.host",
+                    &param_proxy_host.to_string());
+            }
+            if let Some(param_proxy_host_type_hint) = param_proxy_host_type_hint {
+                query_string.append_pair("proxy.host@TypeHint",
+                    &param_proxy_host_type_hint.to_string());
+            }
+            if let Some(param_proxy_port) = param_proxy_port {
+                query_string.append_pair("proxy.port",
+                    &param_proxy_port.to_string());
+            }
+            if let Some(param_proxy_port_type_hint) = param_proxy_port_type_hint {
+                query_string.append_pair("proxy.port@TypeHint",
+                    &param_proxy_port_type_hint.to_string());
+            }
+            if let Some(param_proxy_exceptions) = param_proxy_exceptions {
+                query_string.append_pair("proxy.exceptions",
+                    &param_proxy_exceptions.iter().map(ToString::to_string).collect::<Vec<String>>().join(","));
+            }
+            if let Some(param_proxy_exceptions_type_hint) = param_proxy_exceptions_type_hint {
+                query_string.append_pair("proxy.exceptions@TypeHint",
+                    &param_proxy_exceptions_type_hint.to_string());
+            }
+            if let Some(param_proxy_enabled) = param_proxy_enabled {
+                query_string.append_pair("proxy.enabled",
+                    &param_proxy_enabled.to_string());
+            }
+            if let Some(param_proxy_enabled_type_hint) = param_proxy_enabled_type_hint {
+                query_string.append_pair("proxy.enabled@TypeHint",
+                    &param_proxy_enabled_type_hint.to_string());
+            }
+            if let Some(param_proxy_user) = param_proxy_user {
+                query_string.append_pair("proxy.user",
+                    &param_proxy_user.to_string());
+            }
+            if let Some(param_proxy_user_type_hint) = param_proxy_user_type_hint {
+                query_string.append_pair("proxy.user@TypeHint",
+                    &param_proxy_user_type_hint.to_string());
+            }
+            if let Some(param_proxy_password) = param_proxy_password {
+                query_string.append_pair("proxy.password",
+                    &param_proxy_password.to_string());
+            }
+            if let Some(param_proxy_password_type_hint) = param_proxy_password_type_hint {
+                query_string.append_pair("proxy.password@TypeHint",
+                    &param_proxy_password_type_hint.to_string());
+            }
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                Ok(
+                    PostConfigApacheHttpComponentsProxyConfigurationResponse::DefaultResponse
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn post_config_apache_sling_dav_ex_servlet(
+        &self,
+        param_alias: Option<String>,
+        param_alias_type_hint: Option<String>,
+        param_dav_create_absolute_uri: Option<bool>,
+        param_dav_create_absolute_uri_type_hint: Option<String>,
+        context: &C) -> Result<PostConfigApacheSlingDavExServletResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            if let Some(param_alias) = param_alias {
+                query_string.append_pair("alias",
+                    &param_alias.to_string());
+            }
+            if let Some(param_alias_type_hint) = param_alias_type_hint {
+                query_string.append_pair("alias@TypeHint",
+                    &param_alias_type_hint.to_string());
+            }
+            if let Some(param_dav_create_absolute_uri) = param_dav_create_absolute_uri {
+                query_string.append_pair("dav.create-absolute-uri",
+                    &param_dav_create_absolute_uri.to_string());
+            }
+            if let Some(param_dav_create_absolute_uri_type_hint) = param_dav_create_absolute_uri_type_hint {
+                query_string.append_pair("dav.create-absolute-uri@TypeHint",
+                    &param_dav_create_absolute_uri_type_hint.to_string());
+            }
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                Ok(
+                    PostConfigApacheSlingDavExServletResponse::DefaultResponse
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn post_config_apache_sling_get_servlet(
+        &self,
+        param_json_maximumresults: Option<String>,
+        param_json_maximumresults_type_hint: Option<String>,
+        param_enable_html: Option<bool>,
+        param_enable_html_type_hint: Option<String>,
+        param_enable_txt: Option<bool>,
+        param_enable_txt_type_hint: Option<String>,
+        param_enable_xml: Option<bool>,
+        param_enable_xml_type_hint: Option<String>,
+        context: &C) -> Result<PostConfigApacheSlingGetServletResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            if let Some(param_json_maximumresults) = param_json_maximumresults {
+                query_string.append_pair("json.maximumresults",
+                    &param_json_maximumresults.to_string());
+            }
+            if let Some(param_json_maximumresults_type_hint) = param_json_maximumresults_type_hint {
+                query_string.append_pair("json.maximumresults@TypeHint",
+                    &param_json_maximumresults_type_hint.to_string());
+            }
+            if let Some(param_enable_html) = param_enable_html {
+                query_string.append_pair("enable.html",
+                    &param_enable_html.to_string());
+            }
+            if let Some(param_enable_html_type_hint) = param_enable_html_type_hint {
+                query_string.append_pair("enable.html@TypeHint",
+                    &param_enable_html_type_hint.to_string());
+            }
+            if let Some(param_enable_txt) = param_enable_txt {
+                query_string.append_pair("enable.txt",
+                    &param_enable_txt.to_string());
+            }
+            if let Some(param_enable_txt_type_hint) = param_enable_txt_type_hint {
+                query_string.append_pair("enable.txt@TypeHint",
+                    &param_enable_txt_type_hint.to_string());
+            }
+            if let Some(param_enable_xml) = param_enable_xml {
+                query_string.append_pair("enable.xml",
+                    &param_enable_xml.to_string());
+            }
+            if let Some(param_enable_xml_type_hint) = param_enable_xml_type_hint {
+                query_string.append_pair("enable.xml@TypeHint",
+                    &param_enable_xml_type_hint.to_string());
+            }
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                Ok(
+                    PostConfigApacheSlingGetServletResponse::DefaultResponse
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn post_config_apache_sling_referrer_filter(
+        &self,
+        param_allow_empty: Option<bool>,
+        param_allow_empty_type_hint: Option<String>,
+        param_allow_hosts: Option<String>,
+        param_allow_hosts_type_hint: Option<String>,
+        param_allow_hosts_regexp: Option<String>,
+        param_allow_hosts_regexp_type_hint: Option<String>,
+        param_filter_methods: Option<String>,
+        param_filter_methods_type_hint: Option<String>,
+        context: &C) -> Result<PostConfigApacheSlingReferrerFilterResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/apps/system/config/org.apache.sling.security.impl.ReferrerFilter",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            if let Some(param_allow_empty) = param_allow_empty {
+                query_string.append_pair("allow.empty",
+                    &param_allow_empty.to_string());
+            }
+            if let Some(param_allow_empty_type_hint) = param_allow_empty_type_hint {
+                query_string.append_pair("allow.empty@TypeHint",
+                    &param_allow_empty_type_hint.to_string());
+            }
+            if let Some(param_allow_hosts) = param_allow_hosts {
+                query_string.append_pair("allow.hosts",
+                    &param_allow_hosts.to_string());
+            }
+            if let Some(param_allow_hosts_type_hint) = param_allow_hosts_type_hint {
+                query_string.append_pair("allow.hosts@TypeHint",
+                    &param_allow_hosts_type_hint.to_string());
+            }
+            if let Some(param_allow_hosts_regexp) = param_allow_hosts_regexp {
+                query_string.append_pair("allow.hosts.regexp",
+                    &param_allow_hosts_regexp.to_string());
+            }
+            if let Some(param_allow_hosts_regexp_type_hint) = param_allow_hosts_regexp_type_hint {
+                query_string.append_pair("allow.hosts.regexp@TypeHint",
+                    &param_allow_hosts_regexp_type_hint.to_string());
+            }
+            if let Some(param_filter_methods) = param_filter_methods {
+                query_string.append_pair("filter.methods",
+                    &param_filter_methods.to_string());
+            }
+            if let Some(param_filter_methods_type_hint) = param_filter_methods_type_hint {
+                query_string.append_pair("filter.methods@TypeHint",
+                    &param_filter_methods_type_hint.to_string());
+            }
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                Ok(
+                    PostConfigApacheSlingReferrerFilterResponse::DefaultResponse
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn post_config_property(
+        &self,
+        param_config_node_name: String,
+        context: &C) -> Result<PostConfigPropertyResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/apps/system/config/{config_node_name}",
+            self.base_path
+            ,config_node_name=utf8_percent_encode(&param_config_node_name.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                Ok(
+                    PostConfigPropertyResponse::DefaultResponse
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn post_node(
+        &self,
+        param_path: String,
+        param_name: String,
+        param_operation: Option<String>,
+        param_delete_authorizable: Option<String>,
+        param_file: Option<swagger::ByteArray>,
+        context: &C) -> Result<PostNodeResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/{path}/{name}",
+            self.base_path
+            ,path=utf8_percent_encode(&param_path.to_string(), ID_ENCODE_SET)
+            ,name=utf8_percent_encode(&param_name.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            if let Some(param_operation) = param_operation {
+                query_string.append_pair(":operation",
+                    &param_operation.to_string());
+            }
+            if let Some(param_delete_authorizable) = param_delete_authorizable {
+                query_string.append_pair("deleteAuthorizable",
+                    &param_delete_authorizable.to_string());
+            }
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let (body_string, multipart_header) = {
+            let mut multipart = Multipart::new();
+
+            // For each parameter, encode as appropriate and add to the multipart body as a stream.
+
+            let file_str = match serde_json::to_string(&param_file) {
+                Ok(str) => str,
+                Err(e) => return Err(ApiError(format!("Unable to serialize file to string: {}", e))),
+            };
+
+            let file_vec = file_str.as_bytes().to_vec();
+            let file_mime = mime_0_2::Mime::from_str("application/json").expect("impossible to fail to parse");
+            let file_cursor = Cursor::new(file_vec);
+
+            multipart.add_stream("file",  file_cursor,  None as Option<&str>, Some(file_mime));
+
+
+            let mut fields = match multipart.prepare() {
+                Ok(fields) => fields,
+                Err(err) => return Err(ApiError(format!("Unable to build request: {}", err))),
+            };
+
+            let mut body_string = String::new();
+
+            match fields.read_to_string(&mut body_string) {
+                Ok(_) => (),
+                Err(err) => return Err(ApiError(format!("Unable to build body: {}", err))),
+            }
+
+            let boundary = fields.boundary();
+
+            let multipart_header = format!("multipart/form-data;boundary={}", boundary);
+
+            (body_string, multipart_header)
+        };
+
+        *request.body_mut() = Body::from(body_string);
+
+        request.headers_mut().insert(CONTENT_TYPE, match HeaderValue::from_str(&multipart_header) {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create header: {} - {}", multipart_header, e)))
+        });
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                Ok(
+                    PostNodeResponse::DefaultResponse
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn post_node_rw(
+        &self,
+        param_path: String,
+        param_name: String,
+        param_add_members: Option<String>,
+        context: &C) -> Result<PostNodeRwResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/{path}/{name}.rw.html",
+            self.base_path
+            ,path=utf8_percent_encode(&param_path.to_string(), ID_ENCODE_SET)
+            ,name=utf8_percent_encode(&param_name.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            if let Some(param_add_members) = param_add_members {
+                query_string.append_pair("addMembers",
+                    &param_add_members.to_string());
+            }
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                Ok(
+                    PostNodeRwResponse::DefaultResponse
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn post_path(
+        &self,
+        param_path: String,
+        param_jcrprimary_type: String,
+        param_name: String,
+        context: &C) -> Result<PostPathResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/{path}/",
+            self.base_path
+            ,path=utf8_percent_encode(&param_path.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+                query_string.append_pair("jcr:primaryType",
+                    &param_jcrprimary_type.to_string());
+                query_string.append_pair(":name",
+                    &param_name.to_string());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                Ok(
+                    PostPathResponse::DefaultResponse
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn post_query(
+        &self,
+        param_path: String,
+        param_p_limit: f64,
+        param_param_1_property: String,
+        param_param_1_property_value: String,
+        context: &C) -> Result<PostQueryResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/bin/querybuilder.json",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+                query_string.append_pair("path",
+                    &param_path.to_string());
+                query_string.append_pair("p.limit",
+                    &param_p_limit.to_string());
+                query_string.append_pair("1_property",
+                    &param_param_1_property.to_string());
+                query_string.append_pair("1_property.value",
+                    &param_param_1_property_value.to_string());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<String>(body)?;
+                Ok(PostQueryResponse::DefaultResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn post_tree_activation(
+        &self,
+        param_ignoredeactivated: bool,
+        param_onlymodified: bool,
+        param_path: String,
+        context: &C) -> Result<PostTreeActivationResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/etc/replication/treeactivation.html",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+                query_string.append_pair("ignoredeactivated",
+                    &param_ignoredeactivated.to_string());
+                query_string.append_pair("onlymodified",
+                    &param_onlymodified.to_string());
+                query_string.append_pair("path",
+                    &param_path.to_string());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                Ok(
+                    PostTreeActivationResponse::DefaultResponse
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn post_truststore(
+        &self,
+        param_operation: Option<String>,
+        param_new_password: Option<String>,
+        param_re_password: Option<String>,
+        param_key_store_type: Option<String>,
+        param_remove_alias: Option<String>,
+        param_certificate: Option<swagger::ByteArray>,
+        context: &C) -> Result<PostTruststoreResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/libs/granite/security/post/truststore",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            if let Some(param_operation) = param_operation {
+                query_string.append_pair(":operation",
+                    &param_operation.to_string());
+            }
+            if let Some(param_new_password) = param_new_password {
+                query_string.append_pair("newPassword",
+                    &param_new_password.to_string());
+            }
+            if let Some(param_re_password) = param_re_password {
+                query_string.append_pair("rePassword",
+                    &param_re_password.to_string());
+            }
+            if let Some(param_key_store_type) = param_key_store_type {
+                query_string.append_pair("keyStoreType",
+                    &param_key_store_type.to_string());
+            }
+            if let Some(param_remove_alias) = param_remove_alias {
+                query_string.append_pair("removeAlias",
+                    &param_remove_alias.to_string());
+            }
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let (body_string, multipart_header) = {
+            let mut multipart = Multipart::new();
+
+            // For each parameter, encode as appropriate and add to the multipart body as a stream.
+
+            let certificate_str = match serde_json::to_string(&param_certificate) {
+                Ok(str) => str,
+                Err(e) => return Err(ApiError(format!("Unable to serialize certificate to string: {}", e))),
+            };
+
+            let certificate_vec = certificate_str.as_bytes().to_vec();
+            let certificate_mime = mime_0_2::Mime::from_str("application/json").expect("impossible to fail to parse");
+            let certificate_cursor = Cursor::new(certificate_vec);
+
+            multipart.add_stream("certificate",  certificate_cursor,  None as Option<&str>, Some(certificate_mime));
+
+
+            let mut fields = match multipart.prepare() {
+                Ok(fields) => fields,
+                Err(err) => return Err(ApiError(format!("Unable to build request: {}", err))),
+            };
+
+            let mut body_string = String::new();
+
+            match fields.read_to_string(&mut body_string) {
+                Ok(_) => (),
+                Err(err) => return Err(ApiError(format!("Unable to build body: {}", err))),
+            }
+
+            let boundary = fields.boundary();
+
+            let multipart_header = format!("multipart/form-data;boundary={}", boundary);
+
+            (body_string, multipart_header)
+        };
+
+        *request.body_mut() = Body::from(body_string);
+
+        request.headers_mut().insert(CONTENT_TYPE, match HeaderValue::from_str(&multipart_header) {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create header: {} - {}", multipart_header, e)))
+        });
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = body.to_string();
+                Ok(PostTruststoreResponse::DefaultResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn post_truststore_pkcs12(
+        &self,
+        param_truststore_p12: Option<swagger::ByteArray>,
+        context: &C) -> Result<PostTruststorePKCS12Response, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/etc/truststore",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let (body_string, multipart_header) = {
+            let mut multipart = Multipart::new();
+
+            // For each parameter, encode as appropriate and add to the multipart body as a stream.
+
+            let truststore_p12_str = match serde_json::to_string(&param_truststore_p12) {
+                Ok(str) => str,
+                Err(e) => return Err(ApiError(format!("Unable to serialize truststore_p12 to string: {}", e))),
+            };
+
+            let truststore_p12_vec = truststore_p12_str.as_bytes().to_vec();
+            let truststore_p12_mime = mime_0_2::Mime::from_str("application/json").expect("impossible to fail to parse");
+            let truststore_p12_cursor = Cursor::new(truststore_p12_vec);
+
+            multipart.add_stream("truststore_p12",  truststore_p12_cursor,  None as Option<&str>, Some(truststore_p12_mime));
+
+
+            let mut fields = match multipart.prepare() {
+                Ok(fields) => fields,
+                Err(err) => return Err(ApiError(format!("Unable to build request: {}", err))),
+            };
+
+            let mut body_string = String::new();
+
+            match fields.read_to_string(&mut body_string) {
+                Ok(_) => (),
+                Err(err) => return Err(ApiError(format!("Unable to build body: {}", err))),
+            }
+
+            let boundary = fields.boundary();
+
+            let multipart_header = format!("multipart/form-data;boundary={}", boundary);
+
+            (body_string, multipart_header)
+        };
+
+        *request.body_mut() = Body::from(body_string);
+
+        request.headers_mut().insert(CONTENT_TYPE, match HeaderValue::from_str(&multipart_header) {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create header: {} - {}", multipart_header, e)))
+        });
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.clone().to_string().as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        if let Some(auth_data) = Has::<Option<AuthData>>::get(context).as_ref() {
+            // Currently only authentication with Basic and Bearer are supported
+            match auth_data {
+                &AuthData::Basic(ref basic_header) => {
+                    let auth = swagger::auth::Header(basic_header.clone());
+                    let header = match HeaderValue::from_str(&format!("{}", auth)) {
+                        Ok(h) => h,
+                        Err(e) => return Err(ApiError(format!("Unable to create Authorization header: {}", e)))
+                    };
+                    request.headers_mut().insert(
+                        hyper::header::AUTHORIZATION,
+                        header);
+                },
+                _ => {}
+            }
+        }
+
+        let mut response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .to_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = body.to_string();
+                Ok(PostTruststorePKCS12Response::DefaultResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .to_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
 }

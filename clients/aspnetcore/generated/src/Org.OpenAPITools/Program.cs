@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore;
+using Microsoft.Extensions.Hosting;
 
 namespace Org.OpenAPITools
 {
@@ -14,18 +14,20 @@ namespace Org.OpenAPITools
         /// <param name="args"></param>
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
         /// <summary>
-        /// Build Web Host
+        /// Create the host builder.
         /// </summary>
         /// <param name="args"></param>
-        /// <returns>Webhost</returns>
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()                
-                .UseUrls("http://0.0.0.0:8080/")
-                .Build();
+        /// <returns>IHostBuilder</returns>
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                   webBuilder.UseStartup<Startup>()
+                             .UseUrls("http://0.0.0.0:8080/");
+                });
     }
 }

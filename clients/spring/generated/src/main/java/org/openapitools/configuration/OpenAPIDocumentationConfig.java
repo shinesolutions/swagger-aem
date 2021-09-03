@@ -17,8 +17,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.servlet.ServletContext;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-08-04T23:44:43.219Z[GMT]")
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-09-03T15:28:35.636+10:00[Australia/Melbourne]")
 @Configuration
 @EnableSwagger2
 public class OpenAPIDocumentationConfig {
@@ -30,13 +29,13 @@ public class OpenAPIDocumentationConfig {
             .license("")
             .licenseUrl("http://unlicense.org")
             .termsOfServiceUrl("http://shinesolutions.com")
-            .version("3.2.0-pre.0")
+            .version("3.5.0-pre.0")
             .contact(new Contact("","", "opensource@shinesolutions.com"))
             .build();
     }
 
     @Bean
-    public Docket customImplementation(ServletContext servletContext, @Value("${openapi.adobeExperienceManagerAEM.base-path:/}") String basePath) {
+    public Docket customImplementation(ServletContext servletContext, @Value("${openapi.adobeExperienceManagerAEM.base-path:}") String basePath) {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                     .apis(RequestHandlerSelectors.basePackage("org.openapitools.api"))

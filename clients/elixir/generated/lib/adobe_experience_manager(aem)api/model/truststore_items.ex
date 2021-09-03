@@ -19,13 +19,13 @@ defmodule AdobeExperienceManager(AEM)API.Model.TruststoreItems do
   ]
 
   @type t :: %__MODULE__{
-    :"alias" => String.t,
-    :"entryType" => String.t,
-    :"subject" => String.t,
-    :"issuer" => String.t,
-    :"notBefore" => String.t,
-    :"notAfter" => String.t,
-    :"serialNumber" => integer()
+    :"alias" => String.t | nil,
+    :"entryType" => String.t | nil,
+    :"subject" => String.t | nil,
+    :"issuer" => String.t | nil,
+    :"notBefore" => String.t | nil,
+    :"notAfter" => String.t | nil,
+    :"serialNumber" => integer() | nil
   }
 end
 

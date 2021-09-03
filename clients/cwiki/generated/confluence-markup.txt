@@ -1,42 +1,41 @@
-h1. Adobe Experience Manager (AEM) API Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
+h1. Adobe Experience Manager (AEM) API
 
-*Version:* 3.2.0-pre.0
+Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
+
+*Version:* 3.5.0-pre.0
 
 ----
 
+{expand:Table of Contents - Click to expand}
 {toc:printable=true|style=square|minLevel=2|maxLevel=3|type=list|outline=false|include=.*}
+{expand}
 
 h2. Endpoints
 
-    h3. getAemProductInfo
-    {status:colour=Yellow|title=get|subtle=false}
-    {code}
-    get /system/console/status-productinfo.json
-    {code}
-    *Summary:* 
-    *Description:* 
 
+h3. getAemProductInfo
+{panel:title=getAemProductInfo|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
 
-    h4. Parameters
-
-
-
-
-
-
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-array[String]
-        {code}
-        See [#models]
+	|| HttpMethod | {status:colour=Yellow|title=get|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/system/console/status-productinfo.json{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    || Produces | {noformat:nopanel=true}application/json{noformat} |
+----
+h4. Parameters
 
 
 
-        {code:title=Response Schema |collapse=true}
-{
+----
+h4. Responses
+
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type | array[String] |
+    	|| Response Model | [array[String] Model|#array[String]ModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response",
   "content" : {
     "application/json" : {
@@ -48,39 +47,94 @@ array[String]
       }
     }
   }
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. getConfigMgr
-    {status:colour=Yellow|title=get|subtle=false}
-    {code}
-    get /system/console/configMgr
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
+{panel}
 
 
 
+h3. getBundleInfo
+{panel:title=getBundleInfo|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=get|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/system/console/bundles/{name}.json{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    || Produces | {noformat:nopanel=true}application/json{noformat} |
+----
+h4. Parameters
+h5. Path Parameters
+        ||Name||Description||Type||Required||Default||Pattern||Enum||
+        |name | | String | (/) |null |  |  |
 
 
 
+----
+h4. Responses
 
-    h4. Responses
-        *Status Code:* 200
-        *Message:*     OK
-        {code:title=Response Type}
-String
-        {code}
-        See [#models]
+    	|| Status Code | {status:colour=Green|title=200|subtle=false} |
+    	|| Message | Retrieved bundle info |
+    	|| Response Type | BundleInfo |
+    	|| Response Model | [BundleInfo Model|#BundleInfoModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
+  "description" : "Retrieved bundle info",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/BundleInfo"
+      }
+    }
+  }
+}{code} |
+       
+
+
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type | String |
+    	|| Response Model | [String Model|#StringModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
+  "description" : "Default response",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}{code} |
+       
+
+{panel}
 
 
 
-        {code:title=Response Schema |collapse=true}
-{
+h3. getConfigMgr
+{panel:title=getConfigMgr|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=get|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/system/console/configMgr{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    || Produces | {noformat:nopanel=true}text/xml{noformat} |
+----
+h4. Parameters
+
+
+
+----
+h4. Responses
+
+    	|| Status Code | {status:colour=Green|title=200|subtle=false} |
+    	|| Message | OK |
+    	|| Response Type | String |
+    	|| Response Model | [String Model|#StringModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "OK",
   "content" : {
     "text/xml" : {
@@ -89,195 +143,120 @@ String
       }
     }
   }
-}
-        {code}
-        *Status Code:* 5XX
-        *Message:*     Unexpected error.
-        {code:title=Response Type}
-
-        {code}
-        See [#models]
+}{code} |
+       
 
 
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=5XX|subtle=false} |
+    	|| Message | Unexpected error. |
+    	|| Response Type |  |
+    	|| Response Model | [ Model|#ModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Unexpected error."
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. postBundle
-    {status:colour=Yellow|title=post|subtle=false}
-    {code}
-    post /system/console/bundles/{name}
-    {code}
-    *Summary:* 
-    *Description:* 
+{panel}
 
 
-    h4. Parameters
-        h5. Path Parameters
+
+h3. postBundle
+{panel:title=postBundle|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=post|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/system/console/bundles/{name}{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    
+----
+h4. Parameters
+h5. Path Parameters
+        ||Name||Description||Type||Required||Default||Pattern||Enum||
+        |name | | String | (/) |null |  |  |
+
+
+
+h5. Query Parameters
         ||Name||Description||Required||Default||Pattern||
-        |name | |(/) | |  |
+        |action | | String | (/) |null |  |  |
+----
+h4. Responses
 
-
-
-
-        h5. Query Parameters
-        ||Name||Description||Required||Default||Pattern||
-        |action | |(/) | |  |
-
-
-
-
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type |  |
+    	|| Response Model | [ Model|#ModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response"
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. postJmxRepository
-    {status:colour=Yellow|title=post|subtle=false}
-    {code}
-    post /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action}
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
-        h5. Path Parameters
-        ||Name||Description||Required||Default||Pattern||
-        |action | |(/) | |  |
+{panel}
 
 
 
+h3. postJmxRepository
+{panel:title=postJmxRepository|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=post|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action}{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    
+----
+h4. Parameters
+h5. Path Parameters
+        ||Name||Description||Type||Required||Default||Pattern||Enum||
+        |action | | String | (/) |null |  |  |
 
 
 
+----
+h4. Responses
 
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type |  |
+    	|| Response Model | [ Model|#ModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response"
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. postSamlConfiguration
-    {status:colour=Yellow|title=post|subtle=false}
-    {code}
-    post /system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
+{panel}
 
 
 
-        h5. Query Parameters
+h3. postSamlConfiguration
+{panel:title=postSamlConfiguration|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=post|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    || Produces | {noformat:nopanel=true}text/plain{noformat} |
+----
+h4. Parameters
+
+
+
+h5. Query Parameters
         ||Name||Description||Required||Default||Pattern||
-        |post | |(x) | |  |
+        |post | | Boolean | (x) |null |  |  ||apply | | Boolean | (x) |null |  |  ||delete | | Boolean | (x) |null |  |  ||action | | String | (x) |null |  |  ||$location | | String | (x) |null |  |  ||path | | array[String] | (x) |null |  |  ||service.ranking | | Integer | (x) |null |  |  ||idpUrl | | String | (x) |null |  |  ||idpCertAlias | | String | (x) |null |  |  ||idpHttpRedirect | | Boolean | (x) |null |  |  ||serviceProviderEntityId | | String | (x) |null |  |  ||assertionConsumerServiceURL | | String | (x) |null |  |  ||spPrivateKeyAlias | | String | (x) |null |  |  ||keyStorePassword | | String | (x) |null |  |  ||defaultRedirectUrl | | String | (x) |null |  |  ||userIDAttribute | | String | (x) |null |  |  ||useEncryption | | Boolean | (x) |null |  |  ||createUser | | Boolean | (x) |null |  |  ||addGroupMemberships | | Boolean | (x) |null |  |  ||groupMembershipAttribute | | String | (x) |null |  |  ||defaultGroups | | array[String] | (x) |null |  |  ||nameIdFormat | | String | (x) |null |  |  ||synchronizeAttributes | | array[String] | (x) |null |  |  ||handleLogout | | Boolean | (x) |null |  |  ||logoutUrl | | String | (x) |null |  |  ||clockTolerance | | Integer | (x) |null |  |  ||digestMethod | | String | (x) |null |  |  ||signatureMethod | | String | (x) |null |  |  ||userIntermediatePath | | String | (x) |null |  |  ||propertylist | | array[String] | (x) |null |  |  |
+----
+h4. Responses
 
-|apply | |(x) | |  |
-
-|delete | |(x) | |  |
-
-|action | |(x) | |  |
-
-|Dollarlocation | |(x) | |  |
-
-|path | |(x) | |  |
-
-|servicePeriodranking | |(x) | |  |
-
-|idpUrl | |(x) | |  |
-
-|idpCertAlias | |(x) | |  |
-
-|idpHttpRedirect | |(x) | |  |
-
-|serviceProviderEntityId | |(x) | |  |
-
-|assertionConsumerServiceURL | |(x) | |  |
-
-|spPrivateKeyAlias | |(x) | |  |
-
-|keyStorePassword | |(x) | |  |
-
-|defaultRedirectUrl | |(x) | |  |
-
-|userIDAttribute | |(x) | |  |
-
-|useEncryption | |(x) | |  |
-
-|createUser | |(x) | |  |
-
-|addGroupMemberships | |(x) | |  |
-
-|groupMembershipAttribute | |(x) | |  |
-
-|defaultGroups | |(x) | |  |
-
-|nameIdFormat | |(x) | |  |
-
-|synchronizeAttributes | |(x) | |  |
-
-|handleLogout | |(x) | |  |
-
-|logoutUrl | |(x) | |  |
-
-|clockTolerance | |(x) | |  |
-
-|digestMethod | |(x) | |  |
-
-|signatureMethod | |(x) | |  |
-
-|userIntermediatePath | |(x) | |  |
-
-|propertylist | |(x) | |  |
-
-
-
-
-
-    h4. Responses
-        *Status Code:* 200
-        *Message:*     Retrieved AEM SAML Configuration
-        {code:title=Response Type}
-SamlConfigurationInfo
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=200|subtle=false} |
+    	|| Message | Retrieved AEM SAML Configuration |
+    	|| Response Type | SamlConfigurationInfo |
+    	|| Response Model | [SamlConfigurationInfo Model|#SamlConfigurationInfoModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Retrieved AEM SAML Configuration",
   "content" : {
     "text/plain" : {
@@ -286,19 +265,15 @@ SamlConfigurationInfo
       }
     }
   }
-}
-        {code}
-        *Status Code:* 302
-        *Message:*     Default response
-        {code:title=Response Type}
-String
-        {code}
-        See [#models]
+}{code} |
+       
 
 
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=302|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type | String |
+    	|| Response Model | [String Model|#StringModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response",
   "content" : {
     "text/plain" : {
@@ -307,19 +282,15 @@ String
       }
     }
   }
-}
-        {code}
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-String
-        {code}
-        See [#models]
+}{code} |
+       
 
 
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type | String |
+    	|| Response Model | [String Model|#StringModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response",
   "content" : {
     "text/plain" : {
@@ -328,39 +299,36 @@ String
       }
     }
   }
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. getLoginPage
-    {status:colour=Yellow|title=get|subtle=false}
-    {code}
-    get /libs/granite/core/content/login.html
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
+{panel}
 
 
 
+h3. getLoginPage
+{panel:title=getLoginPage|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=get|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/libs/granite/core/content/login.html{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    || Produces | {noformat:nopanel=true}text/html{noformat} |
+----
+h4. Parameters
 
 
 
+----
+h4. Responses
 
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-String
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type | String |
+    	|| Response Model | [String Model|#StringModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response",
   "content" : {
     "text/html" : {
@@ -369,79 +337,70 @@ String
       }
     }
   }
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. postCqActions
-    {status:colour=Yellow|title=post|subtle=false}
-    {code}
-    post /.cqactions.html
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
+{panel}
 
 
 
-        h5. Query Parameters
+h3. postCqActions
+{panel:title=postCqActions|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=post|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/.cqactions.html{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    
+----
+h4. Parameters
+
+
+
+h5. Query Parameters
         ||Name||Description||Required||Default||Pattern||
-        |authorizableId | |(/) | |  |
+        |authorizableId | | String | (/) |null |  |  ||changelog | | String | (/) |null |  |  |
+----
+h4. Responses
 
-|changelog | |(/) | |  |
-
-
-
-
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type |  |
+    	|| Response Model | [ Model|#ModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response"
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. getCrxdeStatus
-    {status:colour=Yellow|title=get|subtle=false}
-    {code}
-    get /crx/server/crx.default/jcr:root/.1.json
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
+{panel}
 
 
 
+h3. getCrxdeStatus
+{panel:title=getCrxdeStatus|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=get|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/crx/server/crx.default/jcr:root/.1.json{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    || Produces | {noformat:nopanel=true}plain/text{noformat} |
+----
+h4. Parameters
 
 
 
+----
+h4. Responses
 
-    h4. Responses
-        *Status Code:* 200
-        *Message:*     CRXDE is enabled
-        {code:title=Response Type}
-String
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=200|subtle=false} |
+    	|| Message | CRXDE is enabled |
+    	|| Response Type | String |
+    	|| Response Model | [String Model|#StringModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "CRXDE is enabled",
   "content" : {
     "plain/text" : {
@@ -450,19 +409,15 @@ String
       }
     }
   }
-}
-        {code}
-        *Status Code:* 404
-        *Message:*     CRXDE is disabled
-        {code:title=Response Type}
-String
-        {code}
-        See [#models]
+}{code} |
+       
 
 
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=404|subtle=false} |
+    	|| Message | CRXDE is disabled |
+    	|| Response Type | String |
+    	|| Response Model | [String Model|#StringModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "CRXDE is disabled",
   "content" : {
     "plain/text" : {
@@ -471,39 +426,36 @@ String
       }
     }
   }
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. getInstallStatus
-    {status:colour=Yellow|title=get|subtle=false}
-    {code}
-    get /crx/packmgr/installstatus.jsp
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
+{panel}
 
 
 
+h3. getInstallStatus
+{panel:title=getInstallStatus|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=get|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/crx/packmgr/installstatus.jsp{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    || Produces | {noformat:nopanel=true}application/json{noformat} |
+----
+h4. Parameters
 
 
 
+----
+h4. Responses
 
-    h4. Responses
-        *Status Code:* 200
-        *Message:*     Retrieved CRX package manager install status
-        {code:title=Response Type}
-InstallStatus
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=200|subtle=false} |
+    	|| Message | Retrieved CRX package manager install status |
+    	|| Response Type | InstallStatus |
+    	|| Response Model | [InstallStatus Model|#InstallStatusModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Retrieved CRX package manager install status",
   "content" : {
     "application/json" : {
@@ -512,19 +464,15 @@ InstallStatus
       }
     }
   }
-}
-        {code}
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-String
-        {code}
-        See [#models]
+}{code} |
+       
 
 
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type | String |
+    	|| Response Model | [String Model|#StringModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response",
   "content" : {
     "application/json" : {
@@ -533,39 +481,36 @@ String
       }
     }
   }
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. getPackageManagerServlet
-    {status:colour=Yellow|title=get|subtle=false}
-    {code}
-    get /crx/packmgr/service/script.html
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
+{panel}
 
 
 
+h3. getPackageManagerServlet
+{panel:title=getPackageManagerServlet|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=get|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/crx/packmgr/service/script.html{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    || Produces | {noformat:nopanel=true}text/html{noformat} |
+----
+h4. Parameters
 
 
 
+----
+h4. Responses
 
-    h4. Responses
-        *Status Code:* 404
-        *Message:*     Package Manager Servlet is disabled
-        {code:title=Response Type}
-String
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=404|subtle=false} |
+    	|| Message | Package Manager Servlet is disabled |
+    	|| Response Type | String |
+    	|| Response Model | [String Model|#StringModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Package Manager Servlet is disabled",
   "content" : {
     "text/html" : {
@@ -574,19 +519,15 @@ String
       }
     }
   }
-}
-        {code}
-        *Status Code:* 405
-        *Message:*     Package Manager Servlet is active
-        {code:title=Response Type}
-String
-        {code}
-        See [#models]
+}{code} |
+       
 
 
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=405|subtle=false} |
+    	|| Message | Package Manager Servlet is active |
+    	|| Response Type | String |
+    	|| Response Model | [String Model|#StringModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Package Manager Servlet is active",
   "content" : {
     "text/html" : {
@@ -595,43 +536,39 @@ String
       }
     }
   }
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. postPackageService
-    {status:colour=Yellow|title=post|subtle=false}
-    {code}
-    post /crx/packmgr/service.jsp
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
+{panel}
 
 
 
-        h5. Query Parameters
+h3. postPackageService
+{panel:title=postPackageService|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=post|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/crx/packmgr/service.jsp{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    || Produces | {noformat:nopanel=true}text/xml{noformat} |
+----
+h4. Parameters
+
+
+
+h5. Query Parameters
         ||Name||Description||Required||Default||Pattern||
-        |cmd | |(/) | |  |
+        |cmd | | String | (/) |null |  |  |
+----
+h4. Responses
 
-
-
-
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-String
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type | String |
+    	|| Response Model | [String Model|#StringModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response",
   "content" : {
     "text/xml" : {
@@ -640,59 +577,42 @@ String
       }
     }
   }
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. postPackageServiceJson
-    {status:colour=Yellow|title=post|subtle=false}
-    {code}
-    post /crx/packmgr/service/.json/{path}
-    {code}
-    *Summary:* 
-    *Description:* 
+{panel}
 
 
-    h4. Parameters
-        h5. Path Parameters
+
+h3. postPackageServiceJson
+{panel:title=postPackageServiceJson|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=post|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/crx/packmgr/service/.json/{path}{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    || Produces | {noformat:nopanel=true}application/json{noformat} |
+----
+h4. Parameters
+h5. Path Parameters
+        ||Name||Description||Type||Required||Default||Pattern||Enum||
+        |path | | String | (/) |null |  |  |
+
+
+
+h5. Query Parameters
         ||Name||Description||Required||Default||Pattern||
-        |path | |(/) | |  |
+        |cmd | | String | (/) |null |  |  ||groupName | | String | (x) |null |  |  ||packageName | | String | (x) |null |  |  ||packageVersion | | String | (x) |null |  |  ||_charset_ | | String | (x) |null |  |  ||force | | Boolean | (x) |null |  |  ||recursive | | Boolean | (x) |null |  |  |
+----
+h4. Responses
 
-
-
-
-        h5. Query Parameters
-        ||Name||Description||Required||Default||Pattern||
-        |cmd | |(/) | |  |
-
-|groupName | |(x) | |  |
-
-|packageName | |(x) | |  |
-
-|packageVersion | |(x) | |  |
-
-|charset | |(x) | |  |
-
-|force | |(x) | |  |
-
-|recursive | |(x) | |  |
-
-
-
-
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-String
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type | String |
+    	|| Response Model | [String Model|#StringModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response",
   "content" : {
     "application/json" : {
@@ -701,53 +621,39 @@ String
       }
     }
   }
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. postPackageUpdate
-    {status:colour=Yellow|title=post|subtle=false}
-    {code}
-    post /crx/packmgr/update.jsp
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
+{panel}
 
 
 
-        h5. Query Parameters
+h3. postPackageUpdate
+{panel:title=postPackageUpdate|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=post|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/crx/packmgr/update.jsp{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    || Produces | {noformat:nopanel=true}application/json{noformat} |
+----
+h4. Parameters
+
+
+
+h5. Query Parameters
         ||Name||Description||Required||Default||Pattern||
-        |groupName | |(/) | |  |
+        |groupName | | String | (/) |null |  |  ||packageName | | String | (/) |null |  |  ||version | | String | (/) |null |  |  ||path | | String | (/) |null |  |  ||filter | | String | (x) |null |  |  ||_charset_ | | String | (x) |null |  |  |
+----
+h4. Responses
 
-|packageName | |(/) | |  |
-
-|version | |(/) | |  |
-
-|path | |(/) | |  |
-
-|filter | |(x) | |  |
-
-|charset | |(x) | |  |
-
-
-
-
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-String
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type | String |
+    	|| Response Model | [String Model|#StringModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response",
   "content" : {
     "application/json" : {
@@ -756,47 +662,39 @@ String
       }
     }
   }
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. postSetPassword
-    {status:colour=Yellow|title=post|subtle=false}
-    {code}
-    post /crx/explorer/ui/setpassword.jsp
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
+{panel}
 
 
 
-        h5. Query Parameters
+h3. postSetPassword
+{panel:title=postSetPassword|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=post|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/crx/explorer/ui/setpassword.jsp{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    || Produces | {noformat:nopanel=true}text/plain{noformat} |
+----
+h4. Parameters
+
+
+
+h5. Query Parameters
         ||Name||Description||Required||Default||Pattern||
-        |old | |(/) | |  |
+        |old | | String | (/) |null |  |  ||plain | | String | (/) |null |  |  ||verify | | String | (/) |null |  |  |
+----
+h4. Responses
 
-|plain | |(/) | |  |
-
-|verify | |(/) | |  |
-
-
-
-
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-String
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type | String |
+    	|| Response Model | [String Model|#StringModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response",
   "content" : {
     "text/plain" : {
@@ -805,45 +703,39 @@ String
       }
     }
   }
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. getAemHealthCheck
-    {status:colour=Yellow|title=get|subtle=false}
-    {code}
-    get /system/health
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
+{panel}
 
 
 
-        h5. Query Parameters
+h3. getAemHealthCheck
+{panel:title=getAemHealthCheck|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=get|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/system/health{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    || Produces | {noformat:nopanel=true}application/json{noformat} |
+----
+h4. Parameters
+
+
+
+h5. Query Parameters
         ||Name||Description||Required||Default||Pattern||
-        |tags | |(x) | |  |
+        |tags | | String | (x) |null |  |  ||combineTagsOr | | Boolean | (x) |null |  |  |
+----
+h4. Responses
 
-|combineTagsOr | |(x) | |  |
-
-
-
-
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-String
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type | String |
+    	|| Response Model | [String Model|#StringModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response",
   "content" : {
     "application/json" : {
@@ -852,243 +744,250 @@ String
       }
     }
   }
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. postConfigAemHealthCheckServlet
-    {status:colour=Yellow|title=post|subtle=false}
-    {code}
-    post /apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
+{panel}
 
 
 
-        h5. Query Parameters
+h3. postConfigAemHealthCheckServlet
+{panel:title=postConfigAemHealthCheckServlet|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=post|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    
+----
+h4. Parameters
+
+
+
+h5. Query Parameters
         ||Name||Description||Required||Default||Pattern||
-        |bundlesPeriodignored | |(x) | |  |
+        |bundles.ignored | | array[String] | (x) |null |  |  ||bundles.ignored@TypeHint | | String | (x) |null |  |  |
+----
+h4. Responses
 
-|bundlesPeriodignoredAtTypeHint | |(x) | |  |
-
-
-
-
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type |  |
+    	|| Response Model | [ Model|#ModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response"
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. postConfigAemPasswordReset
-    {status:colour=Yellow|title=post|subtle=false}
-    {code}
-    post /apps/system/config/com.shinesolutions.aem.passwordreset.Activator
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
+{panel}
 
 
 
-        h5. Query Parameters
+h3. postConfigAemPasswordReset
+{panel:title=postConfigAemPasswordReset|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=post|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/apps/system/config/com.shinesolutions.aem.passwordreset.Activator{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    
+----
+h4. Parameters
+
+
+
+h5. Query Parameters
         ||Name||Description||Required||Default||Pattern||
-        |pwdresetPeriodauthorizables | |(x) | |  |
+        |pwdreset.authorizables | | array[String] | (x) |null |  |  ||pwdreset.authorizables@TypeHint | | String | (x) |null |  |  |
+----
+h4. Responses
 
-|pwdresetPeriodauthorizablesAtTypeHint | |(x) | |  |
-
-
-
-
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type |  |
+    	|| Response Model | [ Model|#ModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response"
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. deleteAgent
-    {status:colour=Yellow|title=delete|subtle=false}
-    {code}
-    delete /etc/replication/agents.{runmode}/{name}
-    {code}
-    *Summary:* 
-    *Description:* 
+{panel}
 
 
-    h4. Parameters
-        h5. Path Parameters
+
+h3. sslSetup
+{panel:title=sslSetup|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=post|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/libs/granite/security/post/sslSetup.html{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    || Produces | {noformat:nopanel=true}text/plain{noformat} |
+----
+h4. Parameters
+
+
+
+h5. Query Parameters
         ||Name||Description||Required||Default||Pattern||
-        |runmode | |(/) | |  |
+        |keystorePassword | | String | (/) |null |  |  ||keystorePasswordConfirm | | String | (/) |null |  |  ||truststorePassword | | String | (/) |null |  |  ||truststorePasswordConfirm | | String | (/) |null |  |  ||httpsHostname | | String | (/) |null |  |  ||httpsPort | | String | (/) |null |  |  |
+----
+h4. Responses
 
-|name | |(/) | |  |
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type | String |
+    	|| Response Model | [String Model|#StringModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
+  "description" : "Default response",
+  "content" : {
+    "text/plain" : {
+      "schema" : {
+        "type" : "string"
+      }
+    }
+  }
+}{code} |
+       
+
+{panel}
 
 
 
+h3. deleteAgent
+{panel:title=deleteAgent|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=delete|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/etc/replication/agents.{runmode}/{name}{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    
+----
+h4. Parameters
+h5. Path Parameters
+        ||Name||Description||Type||Required||Default||Pattern||Enum||
+        |runmode | | String | (/) |null |  |  ||name | | String | (/) |null |  |  |
 
 
 
+----
+h4. Responses
 
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type |  |
+    	|| Response Model | [ Model|#ModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response"
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. deleteNode
-    {status:colour=Yellow|title=delete|subtle=false}
-    {code}
-    delete /{path}/{name}
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
-        h5. Path Parameters
-        ||Name||Description||Required||Default||Pattern||
-        |path | |(/) | |  |
-
-|name | |(/) | |  |
+{panel}
 
 
 
+h3. deleteNode
+{panel:title=deleteNode|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=delete|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/{path}/{name}{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    
+----
+h4. Parameters
+h5. Path Parameters
+        ||Name||Description||Type||Required||Default||Pattern||Enum||
+        |path | | String | (/) |null |  |  ||name | | String | (/) |null |  |  |
 
 
 
+----
+h4. Responses
 
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type |  |
+    	|| Response Model | [ Model|#ModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response"
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. getAgent
-    {status:colour=Yellow|title=get|subtle=false}
-    {code}
-    get /etc/replication/agents.{runmode}/{name}
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
-        h5. Path Parameters
-        ||Name||Description||Required||Default||Pattern||
-        |runmode | |(/) | |  |
-
-|name | |(/) | |  |
+{panel}
 
 
 
+h3. getAgent
+{panel:title=getAgent|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=get|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/etc/replication/agents.{runmode}/{name}{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    
+----
+h4. Parameters
+h5. Path Parameters
+        ||Name||Description||Type||Required||Default||Pattern||Enum||
+        |runmode | | String | (/) |null |  |  ||name | | String | (/) |null |  |  |
 
 
 
+----
+h4. Responses
 
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type |  |
+    	|| Response Model | [ Model|#ModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response"
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. getAgents
-    {status:colour=Yellow|title=get|subtle=false}
-    {code}
-    get /etc/replication/agents.{runmode}.-1.json
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
-        h5. Path Parameters
-        ||Name||Description||Required||Default||Pattern||
-        |runmode | |(/) | |  |
+{panel}
 
 
 
+h3. getAgents
+{panel:title=getAgents|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=get|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/etc/replication/agents.{runmode}.-1.json{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    || Produces | {noformat:nopanel=true}application/json{noformat} |
+----
+h4. Parameters
+h5. Path Parameters
+        ||Name||Description||Type||Required||Default||Pattern||Enum||
+        |runmode | | String | (/) |null |  |  |
 
 
 
+----
+h4. Responses
 
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-String
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type | String |
+    	|| Response Model | [String Model|#StringModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response",
   "content" : {
     "application/json" : {
@@ -1097,45 +996,39 @@ String
       }
     }
   }
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. getAuthorizableKeystore
-    {status:colour=Yellow|title=get|subtle=false}
-    {code}
-    get /{intermediatePath}/{authorizableId}.ks.json
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
-        h5. Path Parameters
-        ||Name||Description||Required||Default||Pattern||
-        |intermediatePath | |(/) | |  |
-
-|authorizableId | |(/) | |  |
+{panel}
 
 
 
+h3. getAuthorizableKeystore
+{panel:title=getAuthorizableKeystore|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=get|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/{intermediatePath}/{authorizableId}.ks.json{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    || Produces | {noformat:nopanel=true}text/plain{noformat} |
+----
+h4. Parameters
+h5. Path Parameters
+        ||Name||Description||Type||Required||Default||Pattern||Enum||
+        |intermediatePath | | String | (/) |null |  |  ||authorizableId | | String | (/) |null |  |  |
 
 
 
+----
+h4. Responses
 
-
-    h4. Responses
-        *Status Code:* 200
-        *Message:*     Retrieved Authorizable Keystore info
-        {code:title=Response Type}
-KeystoreInfo
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=200|subtle=false} |
+    	|| Message | Retrieved Authorizable Keystore info |
+    	|| Response Type | KeystoreInfo |
+    	|| Response Model | [KeystoreInfo Model|#KeystoreInfoModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Retrieved Authorizable Keystore info",
   "content" : {
     "text/plain" : {
@@ -1144,19 +1037,15 @@ KeystoreInfo
       }
     }
   }
-}
-        {code}
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-String
-        {code}
-        See [#models]
+}{code} |
+       
 
 
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type | String |
+    	|| Response Model | [String Model|#StringModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response",
   "content" : {
     "text/plain" : {
@@ -1165,45 +1054,39 @@ String
       }
     }
   }
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. getKeystore
-    {status:colour=Yellow|title=get|subtle=false}
-    {code}
-    get /{intermediatePath}/{authorizableId}/keystore/store.p12
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
-        h5. Path Parameters
-        ||Name||Description||Required||Default||Pattern||
-        |intermediatePath | |(/) | |  |
-
-|authorizableId | |(/) | |  |
+{panel}
 
 
 
+h3. getKeystore
+{panel:title=getKeystore|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=get|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/{intermediatePath}/{authorizableId}/keystore/store.p12{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    || Produces | {noformat:nopanel=true}application/octet-stream{noformat} |
+----
+h4. Parameters
+h5. Path Parameters
+        ||Name||Description||Type||Required||Default||Pattern||Enum||
+        |intermediatePath | | String | (/) |null |  |  ||authorizableId | | String | (/) |null |  |  |
 
 
 
+----
+h4. Responses
 
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-File
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type | File |
+    	|| Response Model | [File Model|#FileModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response",
   "content" : {
     "application/octet-stream" : {
@@ -1213,87 +1096,73 @@ File
       }
     }
   }
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. getNode
-    {status:colour=Yellow|title=get|subtle=false}
-    {code}
-    get /{path}/{name}
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
-        h5. Path Parameters
-        ||Name||Description||Required||Default||Pattern||
-        |path | |(/) | |  |
-
-|name | |(/) | |  |
+{panel}
 
 
 
+h3. getNode
+{panel:title=getNode|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=get|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/{path}/{name}{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    
+----
+h4. Parameters
+h5. Path Parameters
+        ||Name||Description||Type||Required||Default||Pattern||Enum||
+        |path | | String | (/) |null |  |  ||name | | String | (/) |null |  |  |
 
 
 
+----
+h4. Responses
 
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type |  |
+    	|| Response Model | [ Model|#ModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response"
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. getPackage
-    {status:colour=Yellow|title=get|subtle=false}
-    {code}
-    get /etc/packages/{group}/{name}-{version}.zip
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
-        h5. Path Parameters
-        ||Name||Description||Required||Default||Pattern||
-        |group | |(/) | |  |
-
-|name | |(/) | |  |
-
-|version | |(/) | |  |
+{panel}
 
 
 
+h3. getPackage
+{panel:title=getPackage|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=get|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/etc/packages/{group}/{name}-{version}.zip{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    || Produces | {noformat:nopanel=true}application/octet-stream{noformat} |
+----
+h4. Parameters
+h5. Path Parameters
+        ||Name||Description||Type||Required||Default||Pattern||Enum||
+        |group | | String | (/) |null |  |  ||name | | String | (/) |null |  |  ||version | | String | (/) |null |  |  |
 
 
 
+----
+h4. Responses
 
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-File
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type | File |
+    	|| Response Model | [File Model|#FileModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response",
   "content" : {
     "application/octet-stream" : {
@@ -1303,47 +1172,39 @@ File
       }
     }
   }
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. getPackageFilter
-    {status:colour=Yellow|title=get|subtle=false}
-    {code}
-    get /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
-        h5. Path Parameters
-        ||Name||Description||Required||Default||Pattern||
-        |group | |(/) | |  |
-
-|name | |(/) | |  |
-
-|version | |(/) | |  |
+{panel}
 
 
 
+h3. getPackageFilter
+{panel:title=getPackageFilter|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=get|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    || Produces | {noformat:nopanel=true}application/json{noformat} |
+----
+h4. Parameters
+h5. Path Parameters
+        ||Name||Description||Type||Required||Default||Pattern||Enum||
+        |group | | String | (/) |null |  |  ||name | | String | (/) |null |  |  ||version | | String | (/) |null |  |  |
 
 
 
+----
+h4. Responses
 
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-String
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type | String |
+    	|| Response Model | [String Model|#StringModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response",
   "content" : {
     "application/json" : {
@@ -1352,49 +1213,39 @@ String
       }
     }
   }
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. getQuery
-    {status:colour=Yellow|title=get|subtle=false}
-    {code}
-    get /bin/querybuilder.json
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
+{panel}
 
 
 
-        h5. Query Parameters
+h3. getQuery
+{panel:title=getQuery|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=get|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/bin/querybuilder.json{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    || Produces | {noformat:nopanel=true}application/json{noformat} |
+----
+h4. Parameters
+
+
+
+h5. Query Parameters
         ||Name||Description||Required||Default||Pattern||
-        |path | |(/) | |  |
+        |path | | String | (/) |null |  |  ||p.limit | | BigDecimal | (/) |null |  |  ||1_property | | String | (/) |null |  |  ||1_property.value | | String | (/) |null |  |  |
+----
+h4. Responses
 
-|pPeriodlimit | |(/) | |  |
-
-|1Property | |(/) | |  |
-
-|1PropertyPeriodvalue | |(/) | |  |
-
-
-
-
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-String
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type | String |
+    	|| Response Model | [String Model|#StringModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response",
   "content" : {
     "application/json" : {
@@ -1403,39 +1254,36 @@ String
       }
     }
   }
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. getTruststore
-    {status:colour=Yellow|title=get|subtle=false}
-    {code}
-    get /etc/truststore/truststore.p12
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
+{panel}
 
 
 
+h3. getTruststore
+{panel:title=getTruststore|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=get|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/etc/truststore/truststore.p12{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    || Produces | {noformat:nopanel=true}application/octet-stream{noformat} |
+----
+h4. Parameters
 
 
 
+----
+h4. Responses
 
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-File
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type | File |
+    	|| Response Model | [File Model|#FileModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response",
   "content" : {
     "application/octet-stream" : {
@@ -1445,39 +1293,36 @@ File
       }
     }
   }
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. getTruststoreInfo
-    {status:colour=Yellow|title=get|subtle=false}
-    {code}
-    get /libs/granite/security/truststore.json
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
+{panel}
 
 
 
+h3. getTruststoreInfo
+{panel:title=getTruststoreInfo|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=get|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/libs/granite/security/truststore.json{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    || Produces | {noformat:nopanel=true}application/json{noformat} |
+----
+h4. Parameters
 
 
 
+----
+h4. Responses
 
-    h4. Responses
-        *Status Code:* 200
-        *Message:*     Retrieved AEM Truststore info
-        {code:title=Response Type}
-TruststoreInfo
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=200|subtle=false} |
+    	|| Message | Retrieved AEM Truststore info |
+    	|| Response Type | TruststoreInfo |
+    	|| Response Model | [TruststoreInfo Model|#TruststoreInfoModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Retrieved AEM Truststore info",
   "content" : {
     "application/json" : {
@@ -1486,19 +1331,15 @@ TruststoreInfo
       }
     }
   }
-}
-        {code}
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-String
-        {code}
-        See [#models]
+}{code} |
+       
 
 
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type | String |
+    	|| Response Model | [String Model|#StringModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response",
   "content" : {
     "application/json" : {
@@ -1507,207 +1348,79 @@ String
       }
     }
   }
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. postAgent
-    {status:colour=Yellow|title=post|subtle=false}
-    {code}
-    post /etc/replication/agents.{runmode}/{name}
-    {code}
-    *Summary:* 
-    *Description:* 
+{panel}
 
 
-    h4. Parameters
-        h5. Path Parameters
+
+h3. postAgent
+{panel:title=postAgent|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=post|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/etc/replication/agents.{runmode}/{name}{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    
+----
+h4. Parameters
+h5. Path Parameters
+        ||Name||Description||Type||Required||Default||Pattern||Enum||
+        |runmode | | String | (/) |null |  |  ||name | | String | (/) |null |  |  |
+
+
+
+h5. Query Parameters
         ||Name||Description||Required||Default||Pattern||
-        |runmode | |(/) | |  |
+        |jcr:content/cq:distribute | | Boolean | (x) |null |  |  ||jcr:content/cq:distribute@TypeHint | | String | (x) |null |  |  ||jcr:content/cq:name | | String | (x) |null |  |  ||jcr:content/cq:template | | String | (x) |null |  |  ||jcr:content/enabled | | Boolean | (x) |null |  |  ||jcr:content/jcr:description | | String | (x) |null |  |  ||jcr:content/jcr:lastModified | | String | (x) |null |  |  ||jcr:content/jcr:lastModifiedBy | | String | (x) |null |  |  ||jcr:content/jcr:mixinTypes | | String | (x) |null |  |  ||jcr:content/jcr:title | | String | (x) |null |  |  ||jcr:content/logLevel | | String | (x) |null |  |  ||jcr:content/noStatusUpdate | | Boolean | (x) |null |  |  ||jcr:content/noVersioning | | Boolean | (x) |null |  |  ||jcr:content/protocolConnectTimeout | | BigDecimal | (x) |null |  |  ||jcr:content/protocolHTTPConnectionClosed | | Boolean | (x) |null |  |  ||jcr:content/protocolHTTPExpired | | String | (x) |null |  |  ||jcr:content/protocolHTTPHeaders | | array[String] | (x) |null |  |  ||jcr:content/protocolHTTPHeaders@TypeHint | | String | (x) |null |  |  ||jcr:content/protocolHTTPMethod | | String | (x) |null |  |  ||jcr:content/protocolHTTPSRelaxed | | Boolean | (x) |null |  |  ||jcr:content/protocolInterface | | String | (x) |null |  |  ||jcr:content/protocolSocketTimeout | | BigDecimal | (x) |null |  |  ||jcr:content/protocolVersion | | String | (x) |null |  |  ||jcr:content/proxyNTLMDomain | | String | (x) |null |  |  ||jcr:content/proxyNTLMHost | | String | (x) |null |  |  ||jcr:content/proxyHost | | String | (x) |null |  |  ||jcr:content/proxyPassword | | String | (x) |null |  |  ||jcr:content/proxyPort | | BigDecimal | (x) |null |  |  ||jcr:content/proxyUser | | String | (x) |null |  |  ||jcr:content/queueBatchMaxSize | | BigDecimal | (x) |null |  |  ||jcr:content/queueBatchMode | | String | (x) |null |  |  ||jcr:content/queueBatchWaitTime | | BigDecimal | (x) |null |  |  ||jcr:content/retryDelay | | String | (x) |null |  |  ||jcr:content/reverseReplication | | Boolean | (x) |null |  |  ||jcr:content/serializationType | | String | (x) |null |  |  ||jcr:content/sling:resourceType | | String | (x) |null |  |  ||jcr:content/ssl | | String | (x) |null |  |  ||jcr:content/transportNTLMDomain | | String | (x) |null |  |  ||jcr:content/transportNTLMHost | | String | (x) |null |  |  ||jcr:content/transportPassword | | String | (x) |null |  |  ||jcr:content/transportUri | | String | (x) |null |  |  ||jcr:content/transportUser | | String | (x) |null |  |  ||jcr:content/triggerDistribute | | Boolean | (x) |null |  |  ||jcr:content/triggerModified | | Boolean | (x) |null |  |  ||jcr:content/triggerOnOffTime | | Boolean | (x) |null |  |  ||jcr:content/triggerReceive | | Boolean | (x) |null |  |  ||jcr:content/triggerSpecific | | Boolean | (x) |null |  |  ||jcr:content/userId | | String | (x) |null |  |  ||jcr:primaryType | | String | (x) |null |  |  ||:operation | | String | (x) |null |  |  |
+----
+h4. Responses
 
-|name | |(/) | |  |
-
-
-
-
-        h5. Query Parameters
-        ||Name||Description||Required||Default||Pattern||
-        |jcrContentSlashcqDistribute | |(x) | |  |
-
-|jcrContentSlashcqDistributeAtTypeHint | |(x) | |  |
-
-|jcrContentSlashcqName | |(x) | |  |
-
-|jcrContentSlashcqTemplate | |(x) | |  |
-
-|jcrContentSlashenabled | |(x) | |  |
-
-|jcrContentSlashjcrDescription | |(x) | |  |
-
-|jcrContentSlashjcrLastModified | |(x) | |  |
-
-|jcrContentSlashjcrLastModifiedBy | |(x) | |  |
-
-|jcrContentSlashjcrMixinTypes | |(x) | |  |
-
-|jcrContentSlashjcrTitle | |(x) | |  |
-
-|jcrContentSlashlogLevel | |(x) | |  |
-
-|jcrContentSlashnoStatusUpdate | |(x) | |  |
-
-|jcrContentSlashnoVersioning | |(x) | |  |
-
-|jcrContentSlashprotocolConnectTimeout | |(x) | |  |
-
-|jcrContentSlashprotocolHTTPConnectionClosed | |(x) | |  |
-
-|jcrContentSlashprotocolHTTPExpired | |(x) | |  |
-
-|jcrContentSlashprotocolHTTPHeaders | |(x) | |  |
-
-|jcrContentSlashprotocolHTTPHeadersAtTypeHint | |(x) | |  |
-
-|jcrContentSlashprotocolHTTPMethod | |(x) | |  |
-
-|jcrContentSlashprotocolHTTPSRelaxed | |(x) | |  |
-
-|jcrContentSlashprotocolInterface | |(x) | |  |
-
-|jcrContentSlashprotocolSocketTimeout | |(x) | |  |
-
-|jcrContentSlashprotocolVersion | |(x) | |  |
-
-|jcrContentSlashproxyNTLMDomain | |(x) | |  |
-
-|jcrContentSlashproxyNTLMHost | |(x) | |  |
-
-|jcrContentSlashproxyHost | |(x) | |  |
-
-|jcrContentSlashproxyPassword | |(x) | |  |
-
-|jcrContentSlashproxyPort | |(x) | |  |
-
-|jcrContentSlashproxyUser | |(x) | |  |
-
-|jcrContentSlashqueueBatchMaxSize | |(x) | |  |
-
-|jcrContentSlashqueueBatchMode | |(x) | |  |
-
-|jcrContentSlashqueueBatchWaitTime | |(x) | |  |
-
-|jcrContentSlashretryDelay | |(x) | |  |
-
-|jcrContentSlashreverseReplication | |(x) | |  |
-
-|jcrContentSlashserializationType | |(x) | |  |
-
-|jcrContentSlashslingResourceType | |(x) | |  |
-
-|jcrContentSlashssl | |(x) | |  |
-
-|jcrContentSlashtransportNTLMDomain | |(x) | |  |
-
-|jcrContentSlashtransportNTLMHost | |(x) | |  |
-
-|jcrContentSlashtransportPassword | |(x) | |  |
-
-|jcrContentSlashtransportUri | |(x) | |  |
-
-|jcrContentSlashtransportUser | |(x) | |  |
-
-|jcrContentSlashtriggerDistribute | |(x) | |  |
-
-|jcrContentSlashtriggerModified | |(x) | |  |
-
-|jcrContentSlashtriggerOnOffTime | |(x) | |  |
-
-|jcrContentSlashtriggerReceive | |(x) | |  |
-
-|jcrContentSlashtriggerSpecific | |(x) | |  |
-
-|jcrContentSlashuserId | |(x) | |  |
-
-|jcrPrimaryType | |(x) | |  |
-
-|operation | |(x) | |  |
-
-
-
-
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type |  |
+    	|| Response Model | [ Model|#ModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response"
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. postAuthorizableKeystore
-    {status:colour=Yellow|title=post|subtle=false}
-    {code}
-    post /{intermediatePath}/{authorizableId}.ks.html
-    {code}
-    *Summary:* 
-    *Description:* 
+{panel}
 
 
-    h4. Parameters
-        h5. Path Parameters
+
+h3. postAuthorizableKeystore
+{panel:title=postAuthorizableKeystore|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=post|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/{intermediatePath}/{authorizableId}.ks.html{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    || Produces | {noformat:nopanel=true}text/plain{noformat} |
+----
+h4. Parameters
+h5. Path Parameters
+        ||Name||Description||Type||Required||Default||Pattern||Enum||
+        |intermediatePath | | String | (/) |null |  |  ||authorizableId | | String | (/) |null |  |  |
+
+
+
+h5. Query Parameters
         ||Name||Description||Required||Default||Pattern||
-        |intermediatePath | |(/) | |  |
+        |:operation | | String | (x) |null |  |  ||currentPassword | | String | (x) |null |  |  ||newPassword | | String | (x) |null |  |  ||rePassword | | String | (x) |null |  |  ||keyPassword | | String | (x) |null |  |  ||keyStorePass | | String | (x) |null |  |  ||alias | | String | (x) |null |  |  ||newAlias | | String | (x) |null |  |  ||removeAlias | | String | (x) |null |  |  |
+----
+h4. Responses
 
-|authorizableId | |(/) | |  |
-
-
-
-
-        h5. Query Parameters
-        ||Name||Description||Required||Default||Pattern||
-        |operation | |(x) | |  |
-
-|currentPassword | |(x) | |  |
-
-|newPassword | |(x) | |  |
-
-|rePassword | |(x) | |  |
-
-|keyPassword | |(x) | |  |
-
-|keyStorePass | |(x) | |  |
-
-|alias | |(x) | |  |
-
-|newAlias | |(x) | |  |
-
-|removeAlias | |(x) | |  |
-
-
-
-
-
-    h4. Responses
-        *Status Code:* 200
-        *Message:*     Retrieved Authorizable Keystore info
-        {code:title=Response Type}
-KeystoreInfo
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=200|subtle=false} |
+    	|| Message | Retrieved Authorizable Keystore info |
+    	|| Response Type | KeystoreInfo |
+    	|| Response Model | [KeystoreInfo Model|#KeystoreInfoModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Retrieved Authorizable Keystore info",
   "content" : {
     "text/plain" : {
@@ -1716,19 +1429,15 @@ KeystoreInfo
       }
     }
   }
-}
-        {code}
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-String
-        {code}
-        See [#models]
+}{code} |
+       
 
 
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type | String |
+    	|| Response Model | [String Model|#StringModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response",
   "content" : {
     "text/plain" : {
@@ -1737,53 +1446,39 @@ String
       }
     }
   }
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. postAuthorizables
-    {status:colour=Yellow|title=post|subtle=false}
-    {code}
-    post /libs/granite/security/post/authorizables
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
+{panel}
 
 
 
-        h5. Query Parameters
+h3. postAuthorizables
+{panel:title=postAuthorizables|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=post|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/libs/granite/security/post/authorizables{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    || Produces | {noformat:nopanel=true}text/html{noformat} |
+----
+h4. Parameters
+
+
+
+h5. Query Parameters
         ||Name||Description||Required||Default||Pattern||
-        |authorizableId | |(/) | |  |
+        |authorizableId | | String | (/) |null |  |  ||intermediatePath | | String | (/) |null |  |  ||createUser | | String | (x) |null |  |  ||createGroup | | String | (x) |null |  |  ||rep:password | | String | (x) |null |  |  ||profile/givenName | | String | (x) |null |  |  |
+----
+h4. Responses
 
-|intermediatePath | |(/) | |  |
-
-|createUser | |(x) | |  |
-
-|createGroup | |(x) | |  |
-
-|repPassword | |(x) | |  |
-
-|profileSlashgivenName | |(x) | |  |
-
-
-
-
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-String
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type | String |
+    	|| Response Model | [String Model|#StringModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response",
   "content" : {
     "text/html" : {
@@ -1792,599 +1487,388 @@ String
       }
     }
   }
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. postConfigAdobeGraniteSamlAuthenticationHandler
-    {status:colour=Yellow|title=post|subtle=false}
-    {code}
-    post /apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
+{panel}
 
 
 
-        h5. Query Parameters
+h3. postConfigAdobeGraniteSamlAuthenticationHandler
+{panel:title=postConfigAdobeGraniteSamlAuthenticationHandler|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=post|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    
+----
+h4. Parameters
+
+
+
+h5. Query Parameters
         ||Name||Description||Required||Default||Pattern||
-        |keyStorePassword | |(x) | |  |
+        |keyStorePassword | | String | (x) |null |  |  ||keyStorePassword@TypeHint | | String | (x) |null |  |  ||service.ranking | | Integer | (x) |null |  |  ||service.ranking@TypeHint | | String | (x) |null |  |  ||idpHttpRedirect | | Boolean | (x) |null |  |  ||idpHttpRedirect@TypeHint | | String | (x) |null |  |  ||createUser | | Boolean | (x) |null |  |  ||createUser@TypeHint | | String | (x) |null |  |  ||defaultRedirectUrl | | String | (x) |null |  |  ||defaultRedirectUrl@TypeHint | | String | (x) |null |  |  ||userIDAttribute | | String | (x) |null |  |  ||userIDAttribute@TypeHint | | String | (x) |null |  |  ||defaultGroups | | array[String] | (x) |null |  |  ||defaultGroups@TypeHint | | String | (x) |null |  |  ||idpCertAlias | | String | (x) |null |  |  ||idpCertAlias@TypeHint | | String | (x) |null |  |  ||addGroupMemberships | | Boolean | (x) |null |  |  ||addGroupMemberships@TypeHint | | String | (x) |null |  |  ||path | | array[String] | (x) |null |  |  ||path@TypeHint | | String | (x) |null |  |  ||synchronizeAttributes | | array[String] | (x) |null |  |  ||synchronizeAttributes@TypeHint | | String | (x) |null |  |  ||clockTolerance | | Integer | (x) |null |  |  ||clockTolerance@TypeHint | | String | (x) |null |  |  ||groupMembershipAttribute | | String | (x) |null |  |  ||groupMembershipAttribute@TypeHint | | String | (x) |null |  |  ||idpUrl | | String | (x) |null |  |  ||idpUrl@TypeHint | | String | (x) |null |  |  ||logoutUrl | | String | (x) |null |  |  ||logoutUrl@TypeHint | | String | (x) |null |  |  ||serviceProviderEntityId | | String | (x) |null |  |  ||serviceProviderEntityId@TypeHint | | String | (x) |null |  |  ||assertionConsumerServiceURL | | String | (x) |null |  |  ||assertionConsumerServiceURL@TypeHint | | String | (x) |null |  |  ||handleLogout | | Boolean | (x) |null |  |  ||handleLogout@TypeHint | | String | (x) |null |  |  ||spPrivateKeyAlias | | String | (x) |null |  |  ||spPrivateKeyAlias@TypeHint | | String | (x) |null |  |  ||useEncryption | | Boolean | (x) |null |  |  ||useEncryption@TypeHint | | String | (x) |null |  |  ||nameIdFormat | | String | (x) |null |  |  ||nameIdFormat@TypeHint | | String | (x) |null |  |  ||digestMethod | | String | (x) |null |  |  ||digestMethod@TypeHint | | String | (x) |null |  |  ||signatureMethod | | String | (x) |null |  |  ||signatureMethod@TypeHint | | String | (x) |null |  |  ||userIntermediatePath | | String | (x) |null |  |  ||userIntermediatePath@TypeHint | | String | (x) |null |  |  |
+----
+h4. Responses
 
-|keyStorePasswordAtTypeHint | |(x) | |  |
-
-|servicePeriodranking | |(x) | |  |
-
-|servicePeriodrankingAtTypeHint | |(x) | |  |
-
-|idpHttpRedirect | |(x) | |  |
-
-|idpHttpRedirectAtTypeHint | |(x) | |  |
-
-|createUser | |(x) | |  |
-
-|createUserAtTypeHint | |(x) | |  |
-
-|defaultRedirectUrl | |(x) | |  |
-
-|defaultRedirectUrlAtTypeHint | |(x) | |  |
-
-|userIDAttribute | |(x) | |  |
-
-|userIDAttributeAtTypeHint | |(x) | |  |
-
-|defaultGroups | |(x) | |  |
-
-|defaultGroupsAtTypeHint | |(x) | |  |
-
-|idpCertAlias | |(x) | |  |
-
-|idpCertAliasAtTypeHint | |(x) | |  |
-
-|addGroupMemberships | |(x) | |  |
-
-|addGroupMembershipsAtTypeHint | |(x) | |  |
-
-|path | |(x) | |  |
-
-|pathAtTypeHint | |(x) | |  |
-
-|synchronizeAttributes | |(x) | |  |
-
-|synchronizeAttributesAtTypeHint | |(x) | |  |
-
-|clockTolerance | |(x) | |  |
-
-|clockToleranceAtTypeHint | |(x) | |  |
-
-|groupMembershipAttribute | |(x) | |  |
-
-|groupMembershipAttributeAtTypeHint | |(x) | |  |
-
-|idpUrl | |(x) | |  |
-
-|idpUrlAtTypeHint | |(x) | |  |
-
-|logoutUrl | |(x) | |  |
-
-|logoutUrlAtTypeHint | |(x) | |  |
-
-|serviceProviderEntityId | |(x) | |  |
-
-|serviceProviderEntityIdAtTypeHint | |(x) | |  |
-
-|assertionConsumerServiceURL | |(x) | |  |
-
-|assertionConsumerServiceURLAtTypeHint | |(x) | |  |
-
-|handleLogout | |(x) | |  |
-
-|handleLogoutAtTypeHint | |(x) | |  |
-
-|spPrivateKeyAlias | |(x) | |  |
-
-|spPrivateKeyAliasAtTypeHint | |(x) | |  |
-
-|useEncryption | |(x) | |  |
-
-|useEncryptionAtTypeHint | |(x) | |  |
-
-|nameIdFormat | |(x) | |  |
-
-|nameIdFormatAtTypeHint | |(x) | |  |
-
-|digestMethod | |(x) | |  |
-
-|digestMethodAtTypeHint | |(x) | |  |
-
-|signatureMethod | |(x) | |  |
-
-|signatureMethodAtTypeHint | |(x) | |  |
-
-|userIntermediatePath | |(x) | |  |
-
-|userIntermediatePathAtTypeHint | |(x) | |  |
-
-
-
-
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type |  |
+    	|| Response Model | [ Model|#ModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response"
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. postConfigApacheFelixJettyBasedHttpService
-    {status:colour=Yellow|title=post|subtle=false}
-    {code}
-    post /apps/system/config/org.apache.felix.http
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
+{panel}
 
 
 
-        h5. Query Parameters
+h3. postConfigApacheFelixJettyBasedHttpService
+{panel:title=postConfigApacheFelixJettyBasedHttpService|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=post|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/apps/system/config/org.apache.felix.http{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    
+----
+h4. Parameters
+
+
+
+h5. Query Parameters
         ||Name||Description||Required||Default||Pattern||
-        |orgPeriodapachePeriodfelixPeriodhttpsPeriodnio | |(x) | |  |
+        |org.apache.felix.https.nio | | Boolean | (x) |null |  |  ||org.apache.felix.https.nio@TypeHint | | String | (x) |null |  |  ||org.apache.felix.https.keystore | | String | (x) |null |  |  ||org.apache.felix.https.keystore@TypeHint | | String | (x) |null |  |  ||org.apache.felix.https.keystore.password | | String | (x) |null |  |  ||org.apache.felix.https.keystore.password@TypeHint | | String | (x) |null |  |  ||org.apache.felix.https.keystore.key | | String | (x) |null |  |  ||org.apache.felix.https.keystore.key@TypeHint | | String | (x) |null |  |  ||org.apache.felix.https.keystore.key.password | | String | (x) |null |  |  ||org.apache.felix.https.keystore.key.password@TypeHint | | String | (x) |null |  |  ||org.apache.felix.https.truststore | | String | (x) |null |  |  ||org.apache.felix.https.truststore@TypeHint | | String | (x) |null |  |  ||org.apache.felix.https.truststore.password | | String | (x) |null |  |  ||org.apache.felix.https.truststore.password@TypeHint | | String | (x) |null |  |  ||org.apache.felix.https.clientcertificate | | String | (x) |null |  |  ||org.apache.felix.https.clientcertificate@TypeHint | | String | (x) |null |  |  ||org.apache.felix.https.enable | | Boolean | (x) |null |  |  ||org.apache.felix.https.enable@TypeHint | | String | (x) |null |  |  ||org.osgi.service.http.port.secure | | String | (x) |null |  |  ||org.osgi.service.http.port.secure@TypeHint | | String | (x) |null |  |  |
+----
+h4. Responses
 
-|orgPeriodapachePeriodfelixPeriodhttpsPeriodnioAtTypeHint | |(x) | |  |
-
-|orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystore | |(x) | |  |
-
-|orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystoreAtTypeHint | |(x) | |  |
-
-|orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodpassword | |(x) | |  |
-
-|orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodpasswordAtTypeHint | |(x) | |  |
-
-|orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkey | |(x) | |  |
-
-|orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyAtTypeHint | |(x) | |  |
-
-|orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyPeriodpassword | |(x) | |  |
-
-|orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyPeriodpasswordAtTypeHint | |(x) | |  |
-
-|orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststore | |(x) | |  |
-
-|orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststoreAtTypeHint | |(x) | |  |
-
-|orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststorePeriodpassword | |(x) | |  |
-
-|orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststorePeriodpasswordAtTypeHint | |(x) | |  |
-
-|orgPeriodapachePeriodfelixPeriodhttpsPeriodclientcertificate | |(x) | |  |
-
-|orgPeriodapachePeriodfelixPeriodhttpsPeriodclientcertificateAtTypeHint | |(x) | |  |
-
-|orgPeriodapachePeriodfelixPeriodhttpsPeriodenable | |(x) | |  |
-
-|orgPeriodapachePeriodfelixPeriodhttpsPeriodenableAtTypeHint | |(x) | |  |
-
-|orgPeriodosgiPeriodservicePeriodhttpPeriodportPeriodsecure | |(x) | |  |
-
-|orgPeriodosgiPeriodservicePeriodhttpPeriodportPeriodsecureAtTypeHint | |(x) | |  |
-
-
-
-
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type |  |
+    	|| Response Model | [ Model|#ModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response"
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. postConfigApacheHttpComponentsProxyConfiguration
-    {status:colour=Yellow|title=post|subtle=false}
-    {code}
-    post /apps/system/config/org.apache.http.proxyconfigurator.config
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
+{panel}
 
 
 
-        h5. Query Parameters
+h3. postConfigApacheHttpComponentsProxyConfiguration
+{panel:title=postConfigApacheHttpComponentsProxyConfiguration|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=post|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/apps/system/config/org.apache.http.proxyconfigurator.config{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    
+----
+h4. Parameters
+
+
+
+h5. Query Parameters
         ||Name||Description||Required||Default||Pattern||
-        |proxyPeriodhost | |(x) | |  |
+        |proxy.host | | String | (x) |null |  |  ||proxy.host@TypeHint | | String | (x) |null |  |  ||proxy.port | | Integer | (x) |null |  |  ||proxy.port@TypeHint | | String | (x) |null |  |  ||proxy.exceptions | | array[String] | (x) |null |  |  ||proxy.exceptions@TypeHint | | String | (x) |null |  |  ||proxy.enabled | | Boolean | (x) |null |  |  ||proxy.enabled@TypeHint | | String | (x) |null |  |  ||proxy.user | | String | (x) |null |  |  ||proxy.user@TypeHint | | String | (x) |null |  |  ||proxy.password | | String | (x) |null |  |  ||proxy.password@TypeHint | | String | (x) |null |  |  |
+----
+h4. Responses
 
-|proxyPeriodhostAtTypeHint | |(x) | |  |
-
-|proxyPeriodport | |(x) | |  |
-
-|proxyPeriodportAtTypeHint | |(x) | |  |
-
-|proxyPeriodexceptions | |(x) | |  |
-
-|proxyPeriodexceptionsAtTypeHint | |(x) | |  |
-
-|proxyPeriodenabled | |(x) | |  |
-
-|proxyPeriodenabledAtTypeHint | |(x) | |  |
-
-|proxyPerioduser | |(x) | |  |
-
-|proxyPerioduserAtTypeHint | |(x) | |  |
-
-|proxyPeriodpassword | |(x) | |  |
-
-|proxyPeriodpasswordAtTypeHint | |(x) | |  |
-
-
-
-
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type |  |
+    	|| Response Model | [ Model|#ModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response"
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. postConfigApacheSlingDavExServlet
-    {status:colour=Yellow|title=post|subtle=false}
-    {code}
-    post /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
+{panel}
 
 
 
-        h5. Query Parameters
+h3. postConfigApacheSlingDavExServlet
+{panel:title=postConfigApacheSlingDavExServlet|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=post|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    
+----
+h4. Parameters
+
+
+
+h5. Query Parameters
         ||Name||Description||Required||Default||Pattern||
-        |alias | |(x) | |  |
+        |alias | | String | (x) |null |  |  ||alias@TypeHint | | String | (x) |null |  |  ||dav.create-absolute-uri | | Boolean | (x) |null |  |  ||dav.create-absolute-uri@TypeHint | | String | (x) |null |  |  |
+----
+h4. Responses
 
-|aliasAtTypeHint | |(x) | |  |
-
-|davPeriodcreateAbsoluteUri | |(x) | |  |
-
-|davPeriodcreateAbsoluteUriAtTypeHint | |(x) | |  |
-
-
-
-
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type |  |
+    	|| Response Model | [ Model|#ModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response"
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. postConfigApacheSlingGetServlet
-    {status:colour=Yellow|title=post|subtle=false}
-    {code}
-    post /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
+{panel}
 
 
 
-        h5. Query Parameters
+h3. postConfigApacheSlingGetServlet
+{panel:title=postConfigApacheSlingGetServlet|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=post|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    
+----
+h4. Parameters
+
+
+
+h5. Query Parameters
         ||Name||Description||Required||Default||Pattern||
-        |jsonPeriodmaximumresults | |(x) | |  |
+        |json.maximumresults | | String | (x) |null |  |  ||json.maximumresults@TypeHint | | String | (x) |null |  |  ||enable.html | | Boolean | (x) |null |  |  ||enable.html@TypeHint | | String | (x) |null |  |  ||enable.txt | | Boolean | (x) |null |  |  ||enable.txt@TypeHint | | String | (x) |null |  |  ||enable.xml | | Boolean | (x) |null |  |  ||enable.xml@TypeHint | | String | (x) |null |  |  |
+----
+h4. Responses
 
-|jsonPeriodmaximumresultsAtTypeHint | |(x) | |  |
-
-|enablePeriodhtml | |(x) | |  |
-
-|enablePeriodhtmlAtTypeHint | |(x) | |  |
-
-|enablePeriodtxt | |(x) | |  |
-
-|enablePeriodtxtAtTypeHint | |(x) | |  |
-
-|enablePeriodxml | |(x) | |  |
-
-|enablePeriodxmlAtTypeHint | |(x) | |  |
-
-
-
-
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type |  |
+    	|| Response Model | [ Model|#ModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response"
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. postConfigApacheSlingReferrerFilter
-    {status:colour=Yellow|title=post|subtle=false}
-    {code}
-    post /apps/system/config/org.apache.sling.security.impl.ReferrerFilter
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
+{panel}
 
 
 
-        h5. Query Parameters
+h3. postConfigApacheSlingReferrerFilter
+{panel:title=postConfigApacheSlingReferrerFilter|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=post|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/apps/system/config/org.apache.sling.security.impl.ReferrerFilter{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    
+----
+h4. Parameters
+
+
+
+h5. Query Parameters
         ||Name||Description||Required||Default||Pattern||
-        |allowPeriodempty | |(x) | |  |
+        |allow.empty | | Boolean | (x) |null |  |  ||allow.empty@TypeHint | | String | (x) |null |  |  ||allow.hosts | | String | (x) |null |  |  ||allow.hosts@TypeHint | | String | (x) |null |  |  ||allow.hosts.regexp | | String | (x) |null |  |  ||allow.hosts.regexp@TypeHint | | String | (x) |null |  |  ||filter.methods | | String | (x) |null |  |  ||filter.methods@TypeHint | | String | (x) |null |  |  |
+----
+h4. Responses
 
-|allowPeriodemptyAtTypeHint | |(x) | |  |
-
-|allowPeriodhosts | |(x) | |  |
-
-|allowPeriodhostsAtTypeHint | |(x) | |  |
-
-|allowPeriodhostsPeriodregexp | |(x) | |  |
-
-|allowPeriodhostsPeriodregexpAtTypeHint | |(x) | |  |
-
-|filterPeriodmethods | |(x) | |  |
-
-|filterPeriodmethodsAtTypeHint | |(x) | |  |
-
-
-
-
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type |  |
+    	|| Response Model | [ Model|#ModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response"
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. postNode
-    {status:colour=Yellow|title=post|subtle=false}
-    {code}
-    post /{path}/{name}
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
-        h5. Path Parameters
-        ||Name||Description||Required||Default||Pattern||
-        |path | |(/) | |  |
-
-|name | |(/) | |  |
+{panel}
 
 
 
+h3. postConfigProperty
+{panel:title=postConfigProperty|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
 
-        h5. Query Parameters
-        ||Name||Description||Required||Default||Pattern||
-        |operation | |(x) | |  |
-
-|deleteAuthorizable | |(x) | |  |
-
-
-
-
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-
-        {code}
-        See [#models]
+	|| HttpMethod | {status:colour=Yellow|title=post|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/apps/system/config/{configNodeName}{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    
+----
+h4. Parameters
+h5. Path Parameters
+        ||Name||Description||Type||Required||Default||Pattern||Enum||
+        |configNodeName | | String | (/) |null |  |  |
 
 
 
-        {code:title=Response Schema |collapse=true}
-{
+----
+h4. Responses
+
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type |  |
+    	|| Response Model | [ Model|#ModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response"
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. postNodeRw
-    {status:colour=Yellow|title=post|subtle=false}
-    {code}
-    post /{path}/{name}.rw.html
-    {code}
-    *Summary:* 
-    *Description:* 
+{panel}
 
 
-    h4. Parameters
-        h5. Path Parameters
+
+h3. postNode
+{panel:title=postNode|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=post|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/{path}/{name}{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    
+----
+h4. Parameters
+h5. Path Parameters
+        ||Name||Description||Type||Required||Default||Pattern||Enum||
+        |path | | String | (/) |null |  |  ||name | | String | (/) |null |  |  |
+
+
+
+h5. Query Parameters
         ||Name||Description||Required||Default||Pattern||
-        |path | |(/) | |  |
+        |:operation | | String | (x) |null |  |  ||deleteAuthorizable | | String | (x) |null |  |  |
+----
+h4. Responses
 
-|name | |(/) | |  |
-
-
-
-
-        h5. Query Parameters
-        ||Name||Description||Required||Default||Pattern||
-        |addMembers | |(x) | |  |
-
-
-
-
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type |  |
+    	|| Response Model | [ Model|#ModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response"
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. postPath
-    {status:colour=Yellow|title=post|subtle=false}
-    {code}
-    post /{path}/
-    {code}
-    *Summary:* 
-    *Description:* 
+{panel}
 
 
-    h4. Parameters
-        h5. Path Parameters
+
+h3. postNodeRw
+{panel:title=postNodeRw|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=post|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/{path}/{name}.rw.html{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    
+----
+h4. Parameters
+h5. Path Parameters
+        ||Name||Description||Type||Required||Default||Pattern||Enum||
+        |path | | String | (/) |null |  |  ||name | | String | (/) |null |  |  |
+
+
+
+h5. Query Parameters
         ||Name||Description||Required||Default||Pattern||
-        |path | |(/) | |  |
+        |addMembers | | String | (x) |null |  |  |
+----
+h4. Responses
 
-
-
-
-        h5. Query Parameters
-        ||Name||Description||Required||Default||Pattern||
-        |jcrPrimaryType | |(/) | |  |
-
-|name | |(/) | |  |
-
-
-
-
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type |  |
+    	|| Response Model | [ Model|#ModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response"
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. postQuery
-    {status:colour=Yellow|title=post|subtle=false}
-    {code}
-    post /bin/querybuilder.json
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
+{panel}
 
 
 
-        h5. Query Parameters
+h3. postPath
+{panel:title=postPath|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=post|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/{path}/{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    
+----
+h4. Parameters
+h5. Path Parameters
+        ||Name||Description||Type||Required||Default||Pattern||Enum||
+        |path | | String | (/) |null |  |  |
+
+
+
+h5. Query Parameters
         ||Name||Description||Required||Default||Pattern||
-        |path | |(/) | |  |
+        |jcr:primaryType | | String | (/) |null |  |  ||:name | | String | (/) |null |  |  |
+----
+h4. Responses
 
-|pPeriodlimit | |(/) | |  |
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type |  |
+    	|| Response Model | [ Model|#ModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
+  "description" : "Default response"
+}{code} |
+       
 
-|1Property | |(/) | |  |
-
-|1PropertyPeriodvalue | |(/) | |  |
-
-
-
-
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-String
-        {code}
-        See [#models]
+{panel}
 
 
 
-        {code:title=Response Schema |collapse=true}
-{
+h3. postQuery
+{panel:title=postQuery|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=post|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/bin/querybuilder.json{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    || Produces | {noformat:nopanel=true}application/json{noformat} |
+----
+h4. Parameters
+
+
+
+h5. Query Parameters
+        ||Name||Description||Required||Default||Pattern||
+        |path | | String | (/) |null |  |  ||p.limit | | BigDecimal | (/) |null |  |  ||1_property | | String | (/) |null |  |  ||1_property.value | | String | (/) |null |  |  |
+----
+h4. Responses
+
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type | String |
+    	|| Response Model | [String Model|#StringModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response",
   "content" : {
     "application/json" : {
@@ -2393,93 +1877,73 @@ String
       }
     }
   }
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. postTreeActivation
-    {status:colour=Yellow|title=post|subtle=false}
-    {code}
-    post /etc/replication/treeactivation.html
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
+{panel}
 
 
 
-        h5. Query Parameters
+h3. postTreeActivation
+{panel:title=postTreeActivation|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=post|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/etc/replication/treeactivation.html{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    
+----
+h4. Parameters
+
+
+
+h5. Query Parameters
         ||Name||Description||Required||Default||Pattern||
-        |ignoredeactivated | |(/) | |  |
+        |ignoredeactivated | | Boolean | (/) |null |  |  ||onlymodified | | Boolean | (/) |null |  |  ||path | | String | (/) |null |  |  |
+----
+h4. Responses
 
-|onlymodified | |(/) | |  |
-
-|path | |(/) | |  |
-
-
-
-
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type |  |
+    	|| Response Model | [ Model|#ModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response"
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. postTruststore
-    {status:colour=Yellow|title=post|subtle=false}
-    {code}
-    post /libs/granite/security/post/truststore
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
+{panel}
 
 
 
-        h5. Query Parameters
+h3. postTruststore
+{panel:title=postTruststore|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=post|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/libs/granite/security/post/truststore{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    || Produces | {noformat:nopanel=true}text/plain{noformat} |
+----
+h4. Parameters
+
+
+
+h5. Query Parameters
         ||Name||Description||Required||Default||Pattern||
-        |operation | |(x) | |  |
+        |:operation | | String | (x) |null |  |  ||newPassword | | String | (x) |null |  |  ||rePassword | | String | (x) |null |  |  ||keyStoreType | | String | (x) |null |  |  ||removeAlias | | String | (x) |null |  |  |
+----
+h4. Responses
 
-|newPassword | |(x) | |  |
-
-|rePassword | |(x) | |  |
-
-|keyStoreType | |(x) | |  |
-
-|removeAlias | |(x) | |  |
-
-
-
-
-
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-String
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type | String |
+    	|| Response Model | [String Model|#StringModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response",
   "content" : {
     "text/plain" : {
@@ -2488,39 +1952,36 @@ String
       }
     }
   }
-}
-        {code}
-    ----
+}{code} |
+       
 
-    h3. postTruststorePKCS12
-    {status:colour=Yellow|title=post|subtle=false}
-    {code}
-    post /etc/truststore
-    {code}
-    *Summary:* 
-    *Description:* 
-
-
-    h4. Parameters
+{panel}
 
 
 
+h3. postTruststorePKCS12
+{panel:title=postTruststorePKCS12|borderStyle=solid|borderColor=#003b6f|titleBGColor=#003b6f|titleColor=#a6b8c7|bgColor=#ffffff}
+    
+    *Description:* *No Description*
+
+	|| HttpMethod | {status:colour=Yellow|title=post|subtle=false} |
+    || Protocol | {noformat:nopanel=true}http{noformat} |
+    || Path | {noformat:nopanel=true}/etc/truststore{noformat} |
+    || Base Path | {noformat:nopanel=true}http://localhost{noformat} |
+    || Produces | {noformat:nopanel=true}text/plain{noformat} |
+----
+h4. Parameters
 
 
 
+----
+h4. Responses
 
-    h4. Responses
-        *Status Code:* 0
-        *Message:*     Default response
-        {code:title=Response Type}
-String
-        {code}
-        See [#models]
-
-
-
-        {code:title=Response Schema |collapse=true}
-{
+    	|| Status Code | {status:colour=Green|title=0|subtle=false} |
+    	|| Message | Default response |
+    	|| Response Type | String |
+    	|| Response Model | [String Model|#StringModelAnchor|Jump to model] |
+    	|| Response Schema | {code:collapse=true}{
   "description" : "Default response",
   "content" : {
     "text/plain" : {
@@ -2529,113 +1990,232 @@ String
       }
     }
   }
-}
-        {code}
-    ----
+}{code} |
+       
 
+{panel}
+
+
+{anchor:models}
 h2. Models
 
+        {anchor:BundleDataModelAnchor}
+        h3. BundleData
+
+        
+        
+        
+        ||Field Name||Required||Type||Description||Enum||
+         |id |(x) |{noformat:nopanel=true}Integer{noformat} |Bundle ID |  |
+         |name |(x) |{noformat:nopanel=true}String{noformat} |Bundle name |  |
+         |fragment |(x) |{noformat:nopanel=true}Boolean{noformat} |Is bundle a fragment |  |
+         |stateRaw |(x) |{noformat:nopanel=true}Integer{noformat} |Numeric raw bundle state value |  |
+         |state |(x) |{noformat:nopanel=true}String{noformat} |Bundle state value |  |
+         |version |(x) |{noformat:nopanel=true}String{noformat} |Bundle version |  |
+         |symbolicName |(x) |{noformat:nopanel=true}String{noformat} |Bundle symbolic name |  |
+         |category |(x) |{noformat:nopanel=true}String{noformat} |Bundle category |  |
+         |props |(x) |{noformat:nopanel=true}array[BundleDataProp]{noformat} | |  |
+         
+        {anchor:BundleDataPropModelAnchor}
+        h3. BundleDataProp
+
+        
+        
+        
+        ||Field Name||Required||Type||Description||Enum||
+         |key |(x) |{noformat:nopanel=true}String{noformat} |Bundle data key |  |
+         |value |(x) |{noformat:nopanel=true}String{noformat} |Bundle data value |  |
+         
+        {anchor:BundleInfoModelAnchor}
+        h3. BundleInfo
+
+        
+        
+        
+        ||Field Name||Required||Type||Description||Enum||
+         |status |(x) |{noformat:nopanel=true}String{noformat} |Status description of all bundles |  |
+         |s |(x) |{noformat:nopanel=true}array[Integer]{noformat} | |  |
+         |data |(x) |{noformat:nopanel=true}array[BundleData]{noformat} | |  |
+         
+        {anchor:InstallStatusModelAnchor}
         h3. InstallStatus
-        ||Field Name||Required||Type||Description||
-         |status | |InstallStatus_status | |
-        h3. InstallStatus_status
-        ||Field Name||Required||Type||Description||
-         |finished | |Boolean | |
- |itemCount | |Integer | |
+
+        
+        
+        
+        ||Field Name||Required||Type||Description||Enum||
+         |status |(x) |{noformat:nopanel=true}InstallStatus_status{noformat} | |  |
+         
+        {anchor:InstallStatusStatusModelAnchor}
+        h3. InstallStatusStatus
+
+        
+        
+        
+        ||Field Name||Required||Type||Description||Enum||
+         |finished |(x) |{noformat:nopanel=true}Boolean{noformat} | |  |
+         |itemCount |(x) |{noformat:nopanel=true}Integer{noformat} | |  |
+         
+        {anchor:KeystoreChainItemsModelAnchor}
         h3. KeystoreChainItems
-        ||Field Name||Required||Type||Description||
-         |subject | |String |e.g. \&quot;CN&#x3D;localhost\&quot; |
- |issuer | |String |e.g. \&quot;CN&#x3D;Admin\&quot; |
- |notBefore | |String |e.g. \&quot;Sun Jul 01 12:00:00 AEST 2018\&quot; |
- |notAfter | |String |e.g. \&quot;Sun Jun 30 23:59:50 AEST 2019\&quot; |
- |serialNumber | |Integer |18165099476682912368 |
+
+        
+        
+        
+        ||Field Name||Required||Type||Description||Enum||
+         |subject |(x) |{noformat:nopanel=true}String{noformat} |e.g. &quot;CN&#x3D;localhost&quot; |  |
+         |issuer |(x) |{noformat:nopanel=true}String{noformat} |e.g. &quot;CN&#x3D;Admin&quot; |  |
+         |notBefore |(x) |{noformat:nopanel=true}String{noformat} |e.g. &quot;Sun Jul 01 12:00:00 AEST 2018&quot; |  |
+         |notAfter |(x) |{noformat:nopanel=true}String{noformat} |e.g. &quot;Sun Jun 30 23:59:50 AEST 2019&quot; |  |
+         |serialNumber |(x) |{noformat:nopanel=true}Integer{noformat} |18165099476682912368 |  |
+         
+        {anchor:KeystoreInfoModelAnchor}
         h3. KeystoreInfo
-        ||Field Name||Required||Type||Description||
-         |aliases | |array[KeystoreItems] | |
- |exists | |Boolean |False if truststore don&#39;t exist |
+
+        
+        
+        
+        ||Field Name||Required||Type||Description||Enum||
+         |aliases |(x) |{noformat:nopanel=true}array[KeystoreItems]{noformat} | |  |
+         |exists |(x) |{noformat:nopanel=true}Boolean{noformat} |False if truststore don&#39;t exist |  |
+         
+        {anchor:KeystoreItemsModelAnchor}
         h3. KeystoreItems
-        ||Field Name||Required||Type||Description||
-         |alias | |String |Keystore alias name |
- |entryType | |String |e.g. \&quot;privateKey\&quot; |
- |algorithm | |String |e.g. \&quot;RSA\&quot; |
- |format | |String |e.g. \&quot;PKCS#8\&quot; |
- |chain | |array[KeystoreChainItems] | |
+
+        
+        
+        
+        ||Field Name||Required||Type||Description||Enum||
+         |alias |(x) |{noformat:nopanel=true}String{noformat} |Keystore alias name |  |
+         |entryType |(x) |{noformat:nopanel=true}String{noformat} |e.g. &quot;privateKey&quot; |  |
+         |algorithm |(x) |{noformat:nopanel=true}String{noformat} |e.g. &quot;RSA&quot; |  |
+         |format |(x) |{noformat:nopanel=true}String{noformat} |e.g. &quot;PKCS#8&quot; |  |
+         |chain |(x) |{noformat:nopanel=true}array[KeystoreChainItems]{noformat} | |  |
+         
+        {anchor:SamlConfigurationInfoModelAnchor}
         h3. SamlConfigurationInfo
-        ||Field Name||Required||Type||Description||
-         |pid | |String |Persistent Identity (PID) |
- |title | |String |Title |
- |description | |String |Title |
- |bundleUnderscorelocation | |String |needed for configuration binding |
- |serviceUnderscorelocation | |String |needed for configuraiton binding |
- |properties | |SamlConfigurationProperties | |
+
+        
+        
+        
+        ||Field Name||Required||Type||Description||Enum||
+         |pid |(x) |{noformat:nopanel=true}String{noformat} |Persistent Identity (PID) |  |
+         |title |(x) |{noformat:nopanel=true}String{noformat} |Title |  |
+         |description |(x) |{noformat:nopanel=true}String{noformat} |Title |  |
+         |bundle_location |(x) |{noformat:nopanel=true}String{noformat} |needed for configuration binding |  |
+         |service_location |(x) |{noformat:nopanel=true}String{noformat} |needed for configuraiton binding |  |
+         |properties |(x) |{noformat:nopanel=true}SamlConfigurationProperties{noformat} | |  |
+         
+        {anchor:SamlConfigurationPropertiesModelAnchor}
         h3. SamlConfigurationProperties
-        ||Field Name||Required||Type||Description||
-         |path | |SamlConfigurationPropertyItemsArray | |
- |servicePeriodranking | |SamlConfigurationPropertyItemsLong | |
- |idpUrl | |SamlConfigurationPropertyItemsString | |
- |idpCertAlias | |SamlConfigurationPropertyItemsString | |
- |idpHttpRedirect | |SamlConfigurationPropertyItemsBoolean | |
- |serviceProviderEntityId | |SamlConfigurationPropertyItemsString | |
- |assertionConsumerServiceURL | |SamlConfigurationPropertyItemsString | |
- |spPrivateKeyAlias | |SamlConfigurationPropertyItemsString | |
- |keyStorePassword | |SamlConfigurationPropertyItemsString | |
- |defaultRedirectUrl | |SamlConfigurationPropertyItemsString | |
- |userIDAttribute | |SamlConfigurationPropertyItemsString | |
- |useEncryption | |SamlConfigurationPropertyItemsBoolean | |
- |createUser | |SamlConfigurationPropertyItemsBoolean | |
- |addGroupMemberships | |SamlConfigurationPropertyItemsBoolean | |
- |groupMembershipAttribute | |SamlConfigurationPropertyItemsString | |
- |defaultGroups | |SamlConfigurationPropertyItemsArray | |
- |nameIdFormat | |SamlConfigurationPropertyItemsString | |
- |synchronizeAttributes | |SamlConfigurationPropertyItemsArray | |
- |handleLogout | |SamlConfigurationPropertyItemsBoolean | |
- |logoutUrl | |SamlConfigurationPropertyItemsString | |
- |clockTolerance | |SamlConfigurationPropertyItemsLong | |
- |digestMethod | |SamlConfigurationPropertyItemsString | |
- |signatureMethod | |SamlConfigurationPropertyItemsString | |
- |userIntermediatePath | |SamlConfigurationPropertyItemsString | |
+
+        
+        
+        
+        ||Field Name||Required||Type||Description||Enum||
+         |path |(x) |{noformat:nopanel=true}SamlConfigurationPropertyItemsArray{noformat} | |  |
+         |service.ranking |(x) |{noformat:nopanel=true}SamlConfigurationPropertyItemsLong{noformat} | |  |
+         |idpUrl |(x) |{noformat:nopanel=true}SamlConfigurationPropertyItemsString{noformat} | |  |
+         |idpCertAlias |(x) |{noformat:nopanel=true}SamlConfigurationPropertyItemsString{noformat} | |  |
+         |idpHttpRedirect |(x) |{noformat:nopanel=true}SamlConfigurationPropertyItemsBoolean{noformat} | |  |
+         |serviceProviderEntityId |(x) |{noformat:nopanel=true}SamlConfigurationPropertyItemsString{noformat} | |  |
+         |assertionConsumerServiceURL |(x) |{noformat:nopanel=true}SamlConfigurationPropertyItemsString{noformat} | |  |
+         |spPrivateKeyAlias |(x) |{noformat:nopanel=true}SamlConfigurationPropertyItemsString{noformat} | |  |
+         |keyStorePassword |(x) |{noformat:nopanel=true}SamlConfigurationPropertyItemsString{noformat} | |  |
+         |defaultRedirectUrl |(x) |{noformat:nopanel=true}SamlConfigurationPropertyItemsString{noformat} | |  |
+         |userIDAttribute |(x) |{noformat:nopanel=true}SamlConfigurationPropertyItemsString{noformat} | |  |
+         |useEncryption |(x) |{noformat:nopanel=true}SamlConfigurationPropertyItemsBoolean{noformat} | |  |
+         |createUser |(x) |{noformat:nopanel=true}SamlConfigurationPropertyItemsBoolean{noformat} | |  |
+         |addGroupMemberships |(x) |{noformat:nopanel=true}SamlConfigurationPropertyItemsBoolean{noformat} | |  |
+         |groupMembershipAttribute |(x) |{noformat:nopanel=true}SamlConfigurationPropertyItemsString{noformat} | |  |
+         |defaultGroups |(x) |{noformat:nopanel=true}SamlConfigurationPropertyItemsArray{noformat} | |  |
+         |nameIdFormat |(x) |{noformat:nopanel=true}SamlConfigurationPropertyItemsString{noformat} | |  |
+         |synchronizeAttributes |(x) |{noformat:nopanel=true}SamlConfigurationPropertyItemsArray{noformat} | |  |
+         |handleLogout |(x) |{noformat:nopanel=true}SamlConfigurationPropertyItemsBoolean{noformat} | |  |
+         |logoutUrl |(x) |{noformat:nopanel=true}SamlConfigurationPropertyItemsString{noformat} | |  |
+         |clockTolerance |(x) |{noformat:nopanel=true}SamlConfigurationPropertyItemsLong{noformat} | |  |
+         |digestMethod |(x) |{noformat:nopanel=true}SamlConfigurationPropertyItemsString{noformat} | |  |
+         |signatureMethod |(x) |{noformat:nopanel=true}SamlConfigurationPropertyItemsString{noformat} | |  |
+         |userIntermediatePath |(x) |{noformat:nopanel=true}SamlConfigurationPropertyItemsString{noformat} | |  |
+         
+        {anchor:SamlConfigurationPropertyItemsArrayModelAnchor}
         h3. SamlConfigurationPropertyItemsArray
-        ||Field Name||Required||Type||Description||
-         |name | |String |property name |
- |optional | |Boolean |True if optional |
- |isUnderscoreset | |Boolean |True if property is set |
- |type | |Integer |Property type, 1&#x3D;String, 3&#x3D;long, 11&#x3D;boolean, 12&#x3D;Password |
- |values | |array[String] |Property value |
- |description | |String |Property description |
+
+        
+        
+        
+        ||Field Name||Required||Type||Description||Enum||
+         |name |(x) |{noformat:nopanel=true}String{noformat} |property name |  |
+         |optional |(x) |{noformat:nopanel=true}Boolean{noformat} |True if optional |  |
+         |is_set |(x) |{noformat:nopanel=true}Boolean{noformat} |True if property is set |  |
+         |type |(x) |{noformat:nopanel=true}Integer{noformat} |Property type, 1&#x3D;String, 3&#x3D;long, 11&#x3D;boolean, 12&#x3D;Password |  |
+         |values |(x) |{noformat:nopanel=true}array[String]{noformat} |Property value |  |
+         |description |(x) |{noformat:nopanel=true}String{noformat} |Property description |  |
+         
+        {anchor:SamlConfigurationPropertyItemsBooleanModelAnchor}
         h3. SamlConfigurationPropertyItemsBoolean
-        ||Field Name||Required||Type||Description||
-         |name | |String |property name |
- |optional | |Boolean |True if optional |
- |isUnderscoreset | |Boolean |True if property is set |
- |type | |Integer |Property type, 1&#x3D;String, 3&#x3D;long, 11&#x3D;boolean, 12&#x3D;Password |
- |value | |Boolean |Property value |
- |description | |String |Property description |
+
+        
+        
+        
+        ||Field Name||Required||Type||Description||Enum||
+         |name |(x) |{noformat:nopanel=true}String{noformat} |property name |  |
+         |optional |(x) |{noformat:nopanel=true}Boolean{noformat} |True if optional |  |
+         |is_set |(x) |{noformat:nopanel=true}Boolean{noformat} |True if property is set |  |
+         |type |(x) |{noformat:nopanel=true}Integer{noformat} |Property type, 1&#x3D;String, 3&#x3D;long, 11&#x3D;boolean, 12&#x3D;Password |  |
+         |value |(x) |{noformat:nopanel=true}Boolean{noformat} |Property value |  |
+         |description |(x) |{noformat:nopanel=true}String{noformat} |Property description |  |
+         
+        {anchor:SamlConfigurationPropertyItemsLongModelAnchor}
         h3. SamlConfigurationPropertyItemsLong
-        ||Field Name||Required||Type||Description||
-         |name | |String |property name |
- |optional | |Boolean |True if optional |
- |isUnderscoreset | |Boolean |True if property is set |
- |type | |Integer |Property type, 1&#x3D;String, 3&#x3D;long, 11&#x3D;boolean, 12&#x3D;Password |
- |value | |Integer |Property value |
- |description | |String |Property description |
+
+        
+        
+        
+        ||Field Name||Required||Type||Description||Enum||
+         |name |(x) |{noformat:nopanel=true}String{noformat} |property name |  |
+         |optional |(x) |{noformat:nopanel=true}Boolean{noformat} |True if optional |  |
+         |is_set |(x) |{noformat:nopanel=true}Boolean{noformat} |True if property is set |  |
+         |type |(x) |{noformat:nopanel=true}Integer{noformat} |Property type, 1&#x3D;String, 3&#x3D;long, 11&#x3D;boolean, 12&#x3D;Password |  |
+         |value |(x) |{noformat:nopanel=true}Integer{noformat} |Property value |  |
+         |description |(x) |{noformat:nopanel=true}String{noformat} |Property description |  |
+         
+        {anchor:SamlConfigurationPropertyItemsStringModelAnchor}
         h3. SamlConfigurationPropertyItemsString
-        ||Field Name||Required||Type||Description||
-         |name | |String |property name |
- |optional | |Boolean |True if optional |
- |isUnderscoreset | |Boolean |True if property is set |
- |type | |Integer |Property type, 1&#x3D;String, 3&#x3D;long, 11&#x3D;boolean, 12&#x3D;Password |
- |value | |String |Property value |
- |description | |String |Property description |
+
+        
+        
+        
+        ||Field Name||Required||Type||Description||Enum||
+         |name |(x) |{noformat:nopanel=true}String{noformat} |property name |  |
+         |optional |(x) |{noformat:nopanel=true}Boolean{noformat} |True if optional |  |
+         |is_set |(x) |{noformat:nopanel=true}Boolean{noformat} |True if property is set |  |
+         |type |(x) |{noformat:nopanel=true}Integer{noformat} |Property type, 1&#x3D;String, 3&#x3D;long, 11&#x3D;boolean, 12&#x3D;Password |  |
+         |value |(x) |{noformat:nopanel=true}String{noformat} |Property value |  |
+         |description |(x) |{noformat:nopanel=true}String{noformat} |Property description |  |
+         
+        {anchor:TruststoreInfoModelAnchor}
         h3. TruststoreInfo
-        ||Field Name||Required||Type||Description||
-         |aliases | |array[TruststoreItems] | |
- |exists | |Boolean |False if truststore don&#39;t exist |
+
+        
+        
+        
+        ||Field Name||Required||Type||Description||Enum||
+         |aliases |(x) |{noformat:nopanel=true}array[TruststoreItems]{noformat} | |  |
+         |exists |(x) |{noformat:nopanel=true}Boolean{noformat} |False if truststore don&#39;t exist |  |
+         
+        {anchor:TruststoreItemsModelAnchor}
         h3. TruststoreItems
-        ||Field Name||Required||Type||Description||
-         |alias | |String |Truststore alias name |
- |entryType | |String | |
- |subject | |String |e.g. \&quot;CN&#x3D;localhost\&quot; |
- |issuer | |String |e.g. \&quot;CN&#x3D;Admin\&quot; |
- |notBefore | |String |e.g. \&quot;Sun Jul 01 12:00:00 AEST 2018\&quot; |
- |notAfter | |String |e.g. \&quot;Sun Jun 30 23:59:50 AEST 2019\&quot; |
- |serialNumber | |Integer |18165099476682912368 |
+
+        
+        
+        
+        ||Field Name||Required||Type||Description||Enum||
+         |alias |(x) |{noformat:nopanel=true}String{noformat} |Truststore alias name |  |
+         |entryType |(x) |{noformat:nopanel=true}String{noformat} | |  |
+         |subject |(x) |{noformat:nopanel=true}String{noformat} |e.g. &quot;CN&#x3D;localhost&quot; |  |
+         |issuer |(x) |{noformat:nopanel=true}String{noformat} |e.g. &quot;CN&#x3D;Admin&quot; |  |
+         |notBefore |(x) |{noformat:nopanel=true}String{noformat} |e.g. &quot;Sun Jul 01 12:00:00 AEST 2018&quot; |  |
+         |notAfter |(x) |{noformat:nopanel=true}String{noformat} |e.g. &quot;Sun Jun 30 23:59:50 AEST 2019&quot; |  |
+         |serialNumber |(x) |{noformat:nopanel=true}Integer{noformat} |18165099476682912368 |  |
+         

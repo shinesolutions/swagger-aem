@@ -47,7 +47,10 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -88,7 +91,10 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -128,7 +134,10 @@ null (empty response body)
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -173,7 +182,10 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -226,7 +238,7 @@ Name | Type | Description  | Notes
  **charset** | **kotlin.String**|  | [optional]
  **force** | **kotlin.Boolean**|  | [optional]
  **recursive** | **kotlin.Boolean**|  | [optional]
- **&#x60;package&#x60;** | **java.io.File**|  | [optional] [default to null]
+ **&#x60;package&#x60;** | **java.io.File**|  | [optional]
 
 ### Return type
 
@@ -234,7 +246,10 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -289,7 +304,10 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -338,7 +356,10 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 

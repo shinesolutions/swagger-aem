@@ -11,8 +11,8 @@ defmodule AdobeExperienceManager(AEM)API.Connection do
 
   # Add any middleware here (authentication)
   plug Tesla.Middleware.BaseUrl, "http://localhost"
-  plug Tesla.Middleware.Headers, %{"User-Agent" => "Elixir"}
-  plug Tesla.Middleware.EncodeJson
+  plug Tesla.Middleware.Headers, [{"user-agent", "Elixir"}]
+  plug Tesla.Middleware.EncodeJson, engine: Poison
 
   @doc """
   Configure a client connection using Basic authentication.
@@ -28,7 +28,7 @@ defmodule AdobeExperienceManager(AEM)API.Connection do
   """
   @spec new(String.t, String.t) :: Tesla.Env.client
   def new(username, password) do
-    Tesla.build_client([
+    Tesla.client([
       {Tesla.Middleware.BasicAuth, %{username: username, password: password}}
     ])
   end
@@ -41,6 +41,6 @@ defmodule AdobeExperienceManager(AEM)API.Connection do
   """
   @spec new() :: Tesla.Env.client
   def new do
-    Tesla.build_client([])
+    Tesla.client([])
   end
 end

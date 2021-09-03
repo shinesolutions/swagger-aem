@@ -9,20 +9,22 @@ Method | HTTP request | Description
 [**postConfigAemPasswordReset**](CustomApi.md#postConfigAemPasswordReset) | **POST** /apps/system/config/com.shinesolutions.aem.passwordreset.Activator | 
 
 
-<a name="getAemHealthCheck"></a>
-# **getAemHealthCheck**
+
+## getAemHealthCheck
+
 > String getAemHealthCheck(tags, combineTagsOr)
 
 
 
 ### Example
+
 ```java
 // Import classes:
 //import org.openapitools.client.api.CustomApi;
 
 CustomApi apiInstance = new CustomApi();
-String tags = "tags_example"; // String | 
-Boolean combineTagsOr = true; // Boolean | 
+String tags = null; // String | 
+Boolean combineTagsOr = null; // Boolean | 
 try {
     String result = apiInstance.getAemHealthCheck(tags, combineTagsOr);
     System.out.println(result);
@@ -34,10 +36,11 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tags** | **String**|  | [optional]
- **combineTagsOr** | **Boolean**|  | [optional]
+ **tags** | **String**|  | [optional] [default to null]
+ **combineTagsOr** | **Boolean**|  | [optional] [default to null]
 
 ### Return type
 
@@ -49,23 +52,25 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-<a name="postConfigAemHealthCheckServlet"></a>
-# **postConfigAemHealthCheckServlet**
+
+## postConfigAemHealthCheckServlet
+
 > postConfigAemHealthCheckServlet(bundlesIgnored, bundlesIgnoredTypeHint)
 
 
 
 ### Example
+
 ```java
 // Import classes:
 //import org.openapitools.client.api.CustomApi;
 
 CustomApi apiInstance = new CustomApi();
-List<String> bundlesIgnored = Arrays.asList("bundlesIgnored_example"); // List<String> | 
-String bundlesIgnoredTypeHint = "bundlesIgnoredTypeHint_example"; // String | 
+List<String> bundlesIgnored = null; // List<String> | 
+String bundlesIgnoredTypeHint = null; // String | 
 try {
     apiInstance.postConfigAemHealthCheckServlet(bundlesIgnored, bundlesIgnoredTypeHint);
 } catch (ApiException e) {
@@ -76,10 +81,11 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **bundlesIgnored** | [**List&lt;String&gt;**](String.md)|  | [optional]
- **bundlesIgnoredTypeHint** | **String**|  | [optional]
+ **bundlesIgnored** | [**List&lt;String&gt;**](String.md)|  | [optional] [default to null]
+ **bundlesIgnoredTypeHint** | **String**|  | [optional] [default to null]
 
 ### Return type
 
@@ -91,23 +97,25 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
-<a name="postConfigAemPasswordReset"></a>
-# **postConfigAemPasswordReset**
+
+## postConfigAemPasswordReset
+
 > postConfigAemPasswordReset(pwdresetAuthorizables, pwdresetAuthorizablesTypeHint)
 
 
 
 ### Example
+
 ```java
 // Import classes:
 //import org.openapitools.client.api.CustomApi;
 
 CustomApi apiInstance = new CustomApi();
-List<String> pwdresetAuthorizables = Arrays.asList("pwdresetAuthorizables_example"); // List<String> | 
-String pwdresetAuthorizablesTypeHint = "pwdresetAuthorizablesTypeHint_example"; // String | 
+List<String> pwdresetAuthorizables = null; // List<String> | 
+String pwdresetAuthorizablesTypeHint = null; // String | 
 try {
     apiInstance.postConfigAemPasswordReset(pwdresetAuthorizables, pwdresetAuthorizablesTypeHint);
 } catch (ApiException e) {
@@ -118,10 +126,11 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pwdresetAuthorizables** | [**List&lt;String&gt;**](String.md)|  | [optional]
- **pwdresetAuthorizablesTypeHint** | **String**|  | [optional]
+ **pwdresetAuthorizables** | [**List&lt;String&gt;**](String.md)|  | [optional] [default to null]
+ **pwdresetAuthorizablesTypeHint** | **String**|  | [optional] [default to null]
 
 ### Return type
 
@@ -133,6 +142,6 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 

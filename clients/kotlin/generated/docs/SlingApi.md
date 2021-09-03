@@ -25,6 +25,7 @@ Method | HTTP request | Description
 [**postConfigApacheSlingDavExServlet**](SlingApi.md#postConfigApacheSlingDavExServlet) | **POST** /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet | 
 [**postConfigApacheSlingGetServlet**](SlingApi.md#postConfigApacheSlingGetServlet) | **POST** /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet | 
 [**postConfigApacheSlingReferrerFilter**](SlingApi.md#postConfigApacheSlingReferrerFilter) | **POST** /apps/system/config/org.apache.sling.security.impl.ReferrerFilter | 
+[**postConfigProperty**](SlingApi.md#postConfigProperty) | **POST** /apps/system/config/{configNodeName} | 
 [**postNode**](SlingApi.md#postNode) | **POST** /{path}/{name} | 
 [**postNodeRw**](SlingApi.md#postNodeRw) | **POST** /{path}/{name}.rw.html | 
 [**postPath**](SlingApi.md#postPath) | **POST** /{path}/ | 
@@ -73,7 +74,10 @@ null (empty response body)
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -119,7 +123,10 @@ null (empty response body)
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -165,7 +172,10 @@ null (empty response body)
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -210,7 +220,10 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -257,7 +270,10 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -304,7 +320,10 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -350,7 +369,10 @@ null (empty response body)
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -399,7 +421,10 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -448,7 +473,10 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -457,7 +485,7 @@ Name | Type | Description  | Notes
 
 <a name="getQuery"></a>
 # **getQuery**
-> kotlin.String getQuery(path, pPeriodlimit, 1Property, 1PropertyPeriodvalue)
+> kotlin.String getQuery(path, pLimit, `1property`, `1propertyValue`)
 
 
 
@@ -469,11 +497,11 @@ Name | Type | Description  | Notes
 
 val apiInstance = SlingApi()
 val path : kotlin.String = path_example // kotlin.String | 
-val pPeriodlimit : java.math.BigDecimal = 1.2 // java.math.BigDecimal | 
-val 1Property : kotlin.String = 1Property_example // kotlin.String | 
-val 1PropertyPeriodvalue : kotlin.String = 1PropertyPeriodvalue_example // kotlin.String | 
+val pLimit : java.math.BigDecimal = 8.14 // java.math.BigDecimal | 
+val `1property` : kotlin.String = `1property`_example // kotlin.String | 
+val `1propertyValue` : kotlin.String = `1propertyValue`_example // kotlin.String | 
 try {
-    val result : kotlin.String = apiInstance.getQuery(path, pPeriodlimit, 1Property, 1PropertyPeriodvalue)
+    val result : kotlin.String = apiInstance.getQuery(path, pLimit, `1property`, `1propertyValue`)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling SlingApi#getQuery")
@@ -489,9 +517,9 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path** | **kotlin.String**|  |
- **pPeriodlimit** | **java.math.BigDecimal**|  |
- **1Property** | **kotlin.String**|  |
- **1PropertyPeriodvalue** | **kotlin.String**|  |
+ **pLimit** | **java.math.BigDecimal**|  |
+ **&#x60;1property&#x60;** | **kotlin.String**|  |
+ **&#x60;1propertyValue&#x60;** | **kotlin.String**|  |
 
 ### Return type
 
@@ -499,7 +527,10 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -540,7 +571,10 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -581,7 +615,10 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -590,7 +627,7 @@ This endpoint does not need any parameter.
 
 <a name="postAgent"></a>
 # **postAgent**
-> postAgent(runmode, name, jcrContentSlashcqDistribute, jcrContentSlashcqDistributeAtTypeHint, jcrContentSlashcqName, jcrContentSlashcqTemplate, jcrContentSlashenabled, jcrContentSlashjcrDescription, jcrContentSlashjcrLastModified, jcrContentSlashjcrLastModifiedBy, jcrContentSlashjcrMixinTypes, jcrContentSlashjcrTitle, jcrContentSlashlogLevel, jcrContentSlashnoStatusUpdate, jcrContentSlashnoVersioning, jcrContentSlashprotocolConnectTimeout, jcrContentSlashprotocolHTTPConnectionClosed, jcrContentSlashprotocolHTTPExpired, jcrContentSlashprotocolHTTPHeaders, jcrContentSlashprotocolHTTPHeadersAtTypeHint, jcrContentSlashprotocolHTTPMethod, jcrContentSlashprotocolHTTPSRelaxed, jcrContentSlashprotocolInterface, jcrContentSlashprotocolSocketTimeout, jcrContentSlashprotocolVersion, jcrContentSlashproxyNTLMDomain, jcrContentSlashproxyNTLMHost, jcrContentSlashproxyHost, jcrContentSlashproxyPassword, jcrContentSlashproxyPort, jcrContentSlashproxyUser, jcrContentSlashqueueBatchMaxSize, jcrContentSlashqueueBatchMode, jcrContentSlashqueueBatchWaitTime, jcrContentSlashretryDelay, jcrContentSlashreverseReplication, jcrContentSlashserializationType, jcrContentSlashslingResourceType, jcrContentSlashssl, jcrContentSlashtransportNTLMDomain, jcrContentSlashtransportNTLMHost, jcrContentSlashtransportPassword, jcrContentSlashtransportUri, jcrContentSlashtransportUser, jcrContentSlashtriggerDistribute, jcrContentSlashtriggerModified, jcrContentSlashtriggerOnOffTime, jcrContentSlashtriggerReceive, jcrContentSlashtriggerSpecific, jcrContentSlashuserId, jcrPrimaryType, operation)
+> postAgent(runmode, name, jcrColonContentCqColonDistribute, jcrColonContentCqColonDistributeAtTypeHint, jcrColonContentCqColonName, jcrColonContentCqColonTemplate, jcrColonContentEnabled, jcrColonContentJcrColonDescription, jcrColonContentJcrColonLastModified, jcrColonContentJcrColonLastModifiedBy, jcrColonContentJcrColonMixinTypes, jcrColonContentJcrColonTitle, jcrColonContentLogLevel, jcrColonContentNoStatusUpdate, jcrColonContentNoVersioning, jcrColonContentProtocolConnectTimeout, jcrColonContentProtocolHTTPConnectionClosed, jcrColonContentProtocolHTTPExpired, jcrColonContentProtocolHTTPHeaders, jcrColonContentProtocolHTTPHeadersAtTypeHint, jcrColonContentProtocolHTTPMethod, jcrColonContentProtocolHTTPSRelaxed, jcrColonContentProtocolInterface, jcrColonContentProtocolSocketTimeout, jcrColonContentProtocolVersion, jcrColonContentProxyNTLMDomain, jcrColonContentProxyNTLMHost, jcrColonContentProxyHost, jcrColonContentProxyPassword, jcrColonContentProxyPort, jcrColonContentProxyUser, jcrColonContentQueueBatchMaxSize, jcrColonContentQueueBatchMode, jcrColonContentQueueBatchWaitTime, jcrColonContentRetryDelay, jcrColonContentReverseReplication, jcrColonContentSerializationType, jcrColonContentSlingColonResourceType, jcrColonContentSsl, jcrColonContentTransportNTLMDomain, jcrColonContentTransportNTLMHost, jcrColonContentTransportPassword, jcrColonContentTransportUri, jcrColonContentTransportUser, jcrColonContentTriggerDistribute, jcrColonContentTriggerModified, jcrColonContentTriggerOnOffTime, jcrColonContentTriggerReceive, jcrColonContentTriggerSpecific, jcrColonContentUserId, jcrColonPrimaryType, colonOperation)
 
 
 
@@ -603,58 +640,58 @@ This endpoint does not need any parameter.
 val apiInstance = SlingApi()
 val runmode : kotlin.String = runmode_example // kotlin.String | 
 val name : kotlin.String = name_example // kotlin.String | 
-val jcrContentSlashcqDistribute : kotlin.Boolean = true // kotlin.Boolean | 
-val jcrContentSlashcqDistributeAtTypeHint : kotlin.String = jcrContentSlashcqDistributeAtTypeHint_example // kotlin.String | 
-val jcrContentSlashcqName : kotlin.String = jcrContentSlashcqName_example // kotlin.String | 
-val jcrContentSlashcqTemplate : kotlin.String = jcrContentSlashcqTemplate_example // kotlin.String | 
-val jcrContentSlashenabled : kotlin.Boolean = true // kotlin.Boolean | 
-val jcrContentSlashjcrDescription : kotlin.String = jcrContentSlashjcrDescription_example // kotlin.String | 
-val jcrContentSlashjcrLastModified : kotlin.String = jcrContentSlashjcrLastModified_example // kotlin.String | 
-val jcrContentSlashjcrLastModifiedBy : kotlin.String = jcrContentSlashjcrLastModifiedBy_example // kotlin.String | 
-val jcrContentSlashjcrMixinTypes : kotlin.String = jcrContentSlashjcrMixinTypes_example // kotlin.String | 
-val jcrContentSlashjcrTitle : kotlin.String = jcrContentSlashjcrTitle_example // kotlin.String | 
-val jcrContentSlashlogLevel : kotlin.String = jcrContentSlashlogLevel_example // kotlin.String | 
-val jcrContentSlashnoStatusUpdate : kotlin.Boolean = true // kotlin.Boolean | 
-val jcrContentSlashnoVersioning : kotlin.Boolean = true // kotlin.Boolean | 
-val jcrContentSlashprotocolConnectTimeout : java.math.BigDecimal = 1.2 // java.math.BigDecimal | 
-val jcrContentSlashprotocolHTTPConnectionClosed : kotlin.Boolean = true // kotlin.Boolean | 
-val jcrContentSlashprotocolHTTPExpired : kotlin.String = jcrContentSlashprotocolHTTPExpired_example // kotlin.String | 
-val jcrContentSlashprotocolHTTPHeaders : kotlin.Array<kotlin.String> =  // kotlin.Array<kotlin.String> | 
-val jcrContentSlashprotocolHTTPHeadersAtTypeHint : kotlin.String = jcrContentSlashprotocolHTTPHeadersAtTypeHint_example // kotlin.String | 
-val jcrContentSlashprotocolHTTPMethod : kotlin.String = jcrContentSlashprotocolHTTPMethod_example // kotlin.String | 
-val jcrContentSlashprotocolHTTPSRelaxed : kotlin.Boolean = true // kotlin.Boolean | 
-val jcrContentSlashprotocolInterface : kotlin.String = jcrContentSlashprotocolInterface_example // kotlin.String | 
-val jcrContentSlashprotocolSocketTimeout : java.math.BigDecimal = 1.2 // java.math.BigDecimal | 
-val jcrContentSlashprotocolVersion : kotlin.String = jcrContentSlashprotocolVersion_example // kotlin.String | 
-val jcrContentSlashproxyNTLMDomain : kotlin.String = jcrContentSlashproxyNTLMDomain_example // kotlin.String | 
-val jcrContentSlashproxyNTLMHost : kotlin.String = jcrContentSlashproxyNTLMHost_example // kotlin.String | 
-val jcrContentSlashproxyHost : kotlin.String = jcrContentSlashproxyHost_example // kotlin.String | 
-val jcrContentSlashproxyPassword : kotlin.String = jcrContentSlashproxyPassword_example // kotlin.String | 
-val jcrContentSlashproxyPort : java.math.BigDecimal = 1.2 // java.math.BigDecimal | 
-val jcrContentSlashproxyUser : kotlin.String = jcrContentSlashproxyUser_example // kotlin.String | 
-val jcrContentSlashqueueBatchMaxSize : java.math.BigDecimal = 1.2 // java.math.BigDecimal | 
-val jcrContentSlashqueueBatchMode : kotlin.String = jcrContentSlashqueueBatchMode_example // kotlin.String | 
-val jcrContentSlashqueueBatchWaitTime : java.math.BigDecimal = 1.2 // java.math.BigDecimal | 
-val jcrContentSlashretryDelay : kotlin.String = jcrContentSlashretryDelay_example // kotlin.String | 
-val jcrContentSlashreverseReplication : kotlin.Boolean = true // kotlin.Boolean | 
-val jcrContentSlashserializationType : kotlin.String = jcrContentSlashserializationType_example // kotlin.String | 
-val jcrContentSlashslingResourceType : kotlin.String = jcrContentSlashslingResourceType_example // kotlin.String | 
-val jcrContentSlashssl : kotlin.String = jcrContentSlashssl_example // kotlin.String | 
-val jcrContentSlashtransportNTLMDomain : kotlin.String = jcrContentSlashtransportNTLMDomain_example // kotlin.String | 
-val jcrContentSlashtransportNTLMHost : kotlin.String = jcrContentSlashtransportNTLMHost_example // kotlin.String | 
-val jcrContentSlashtransportPassword : kotlin.String = jcrContentSlashtransportPassword_example // kotlin.String | 
-val jcrContentSlashtransportUri : kotlin.String = jcrContentSlashtransportUri_example // kotlin.String | 
-val jcrContentSlashtransportUser : kotlin.String = jcrContentSlashtransportUser_example // kotlin.String | 
-val jcrContentSlashtriggerDistribute : kotlin.Boolean = true // kotlin.Boolean | 
-val jcrContentSlashtriggerModified : kotlin.Boolean = true // kotlin.Boolean | 
-val jcrContentSlashtriggerOnOffTime : kotlin.Boolean = true // kotlin.Boolean | 
-val jcrContentSlashtriggerReceive : kotlin.Boolean = true // kotlin.Boolean | 
-val jcrContentSlashtriggerSpecific : kotlin.Boolean = true // kotlin.Boolean | 
-val jcrContentSlashuserId : kotlin.String = jcrContentSlashuserId_example // kotlin.String | 
-val jcrPrimaryType : kotlin.String = jcrPrimaryType_example // kotlin.String | 
-val operation : kotlin.String = operation_example // kotlin.String | 
+val jcrColonContentCqColonDistribute : kotlin.Boolean = true // kotlin.Boolean | 
+val jcrColonContentCqColonDistributeAtTypeHint : kotlin.String = jcrColonContentCqColonDistributeAtTypeHint_example // kotlin.String | 
+val jcrColonContentCqColonName : kotlin.String = jcrColonContentCqColonName_example // kotlin.String | 
+val jcrColonContentCqColonTemplate : kotlin.String = jcrColonContentCqColonTemplate_example // kotlin.String | 
+val jcrColonContentEnabled : kotlin.Boolean = true // kotlin.Boolean | 
+val jcrColonContentJcrColonDescription : kotlin.String = jcrColonContentJcrColonDescription_example // kotlin.String | 
+val jcrColonContentJcrColonLastModified : kotlin.String = jcrColonContentJcrColonLastModified_example // kotlin.String | 
+val jcrColonContentJcrColonLastModifiedBy : kotlin.String = jcrColonContentJcrColonLastModifiedBy_example // kotlin.String | 
+val jcrColonContentJcrColonMixinTypes : kotlin.String = jcrColonContentJcrColonMixinTypes_example // kotlin.String | 
+val jcrColonContentJcrColonTitle : kotlin.String = jcrColonContentJcrColonTitle_example // kotlin.String | 
+val jcrColonContentLogLevel : kotlin.String = jcrColonContentLogLevel_example // kotlin.String | 
+val jcrColonContentNoStatusUpdate : kotlin.Boolean = true // kotlin.Boolean | 
+val jcrColonContentNoVersioning : kotlin.Boolean = true // kotlin.Boolean | 
+val jcrColonContentProtocolConnectTimeout : java.math.BigDecimal = 8.14 // java.math.BigDecimal | 
+val jcrColonContentProtocolHTTPConnectionClosed : kotlin.Boolean = true // kotlin.Boolean | 
+val jcrColonContentProtocolHTTPExpired : kotlin.String = jcrColonContentProtocolHTTPExpired_example // kotlin.String | 
+val jcrColonContentProtocolHTTPHeaders : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
+val jcrColonContentProtocolHTTPHeadersAtTypeHint : kotlin.String = jcrColonContentProtocolHTTPHeadersAtTypeHint_example // kotlin.String | 
+val jcrColonContentProtocolHTTPMethod : kotlin.String = jcrColonContentProtocolHTTPMethod_example // kotlin.String | 
+val jcrColonContentProtocolHTTPSRelaxed : kotlin.Boolean = true // kotlin.Boolean | 
+val jcrColonContentProtocolInterface : kotlin.String = jcrColonContentProtocolInterface_example // kotlin.String | 
+val jcrColonContentProtocolSocketTimeout : java.math.BigDecimal = 8.14 // java.math.BigDecimal | 
+val jcrColonContentProtocolVersion : kotlin.String = jcrColonContentProtocolVersion_example // kotlin.String | 
+val jcrColonContentProxyNTLMDomain : kotlin.String = jcrColonContentProxyNTLMDomain_example // kotlin.String | 
+val jcrColonContentProxyNTLMHost : kotlin.String = jcrColonContentProxyNTLMHost_example // kotlin.String | 
+val jcrColonContentProxyHost : kotlin.String = jcrColonContentProxyHost_example // kotlin.String | 
+val jcrColonContentProxyPassword : kotlin.String = jcrColonContentProxyPassword_example // kotlin.String | 
+val jcrColonContentProxyPort : java.math.BigDecimal = 8.14 // java.math.BigDecimal | 
+val jcrColonContentProxyUser : kotlin.String = jcrColonContentProxyUser_example // kotlin.String | 
+val jcrColonContentQueueBatchMaxSize : java.math.BigDecimal = 8.14 // java.math.BigDecimal | 
+val jcrColonContentQueueBatchMode : kotlin.String = jcrColonContentQueueBatchMode_example // kotlin.String | 
+val jcrColonContentQueueBatchWaitTime : java.math.BigDecimal = 8.14 // java.math.BigDecimal | 
+val jcrColonContentRetryDelay : kotlin.String = jcrColonContentRetryDelay_example // kotlin.String | 
+val jcrColonContentReverseReplication : kotlin.Boolean = true // kotlin.Boolean | 
+val jcrColonContentSerializationType : kotlin.String = jcrColonContentSerializationType_example // kotlin.String | 
+val jcrColonContentSlingColonResourceType : kotlin.String = jcrColonContentSlingColonResourceType_example // kotlin.String | 
+val jcrColonContentSsl : kotlin.String = jcrColonContentSsl_example // kotlin.String | 
+val jcrColonContentTransportNTLMDomain : kotlin.String = jcrColonContentTransportNTLMDomain_example // kotlin.String | 
+val jcrColonContentTransportNTLMHost : kotlin.String = jcrColonContentTransportNTLMHost_example // kotlin.String | 
+val jcrColonContentTransportPassword : kotlin.String = jcrColonContentTransportPassword_example // kotlin.String | 
+val jcrColonContentTransportUri : kotlin.String = jcrColonContentTransportUri_example // kotlin.String | 
+val jcrColonContentTransportUser : kotlin.String = jcrColonContentTransportUser_example // kotlin.String | 
+val jcrColonContentTriggerDistribute : kotlin.Boolean = true // kotlin.Boolean | 
+val jcrColonContentTriggerModified : kotlin.Boolean = true // kotlin.Boolean | 
+val jcrColonContentTriggerOnOffTime : kotlin.Boolean = true // kotlin.Boolean | 
+val jcrColonContentTriggerReceive : kotlin.Boolean = true // kotlin.Boolean | 
+val jcrColonContentTriggerSpecific : kotlin.Boolean = true // kotlin.Boolean | 
+val jcrColonContentUserId : kotlin.String = jcrColonContentUserId_example // kotlin.String | 
+val jcrColonPrimaryType : kotlin.String = jcrColonPrimaryType_example // kotlin.String | 
+val colonOperation : kotlin.String = colonOperation_example // kotlin.String | 
 try {
-    apiInstance.postAgent(runmode, name, jcrContentSlashcqDistribute, jcrContentSlashcqDistributeAtTypeHint, jcrContentSlashcqName, jcrContentSlashcqTemplate, jcrContentSlashenabled, jcrContentSlashjcrDescription, jcrContentSlashjcrLastModified, jcrContentSlashjcrLastModifiedBy, jcrContentSlashjcrMixinTypes, jcrContentSlashjcrTitle, jcrContentSlashlogLevel, jcrContentSlashnoStatusUpdate, jcrContentSlashnoVersioning, jcrContentSlashprotocolConnectTimeout, jcrContentSlashprotocolHTTPConnectionClosed, jcrContentSlashprotocolHTTPExpired, jcrContentSlashprotocolHTTPHeaders, jcrContentSlashprotocolHTTPHeadersAtTypeHint, jcrContentSlashprotocolHTTPMethod, jcrContentSlashprotocolHTTPSRelaxed, jcrContentSlashprotocolInterface, jcrContentSlashprotocolSocketTimeout, jcrContentSlashprotocolVersion, jcrContentSlashproxyNTLMDomain, jcrContentSlashproxyNTLMHost, jcrContentSlashproxyHost, jcrContentSlashproxyPassword, jcrContentSlashproxyPort, jcrContentSlashproxyUser, jcrContentSlashqueueBatchMaxSize, jcrContentSlashqueueBatchMode, jcrContentSlashqueueBatchWaitTime, jcrContentSlashretryDelay, jcrContentSlashreverseReplication, jcrContentSlashserializationType, jcrContentSlashslingResourceType, jcrContentSlashssl, jcrContentSlashtransportNTLMDomain, jcrContentSlashtransportNTLMHost, jcrContentSlashtransportPassword, jcrContentSlashtransportUri, jcrContentSlashtransportUser, jcrContentSlashtriggerDistribute, jcrContentSlashtriggerModified, jcrContentSlashtriggerOnOffTime, jcrContentSlashtriggerReceive, jcrContentSlashtriggerSpecific, jcrContentSlashuserId, jcrPrimaryType, operation)
+    apiInstance.postAgent(runmode, name, jcrColonContentCqColonDistribute, jcrColonContentCqColonDistributeAtTypeHint, jcrColonContentCqColonName, jcrColonContentCqColonTemplate, jcrColonContentEnabled, jcrColonContentJcrColonDescription, jcrColonContentJcrColonLastModified, jcrColonContentJcrColonLastModifiedBy, jcrColonContentJcrColonMixinTypes, jcrColonContentJcrColonTitle, jcrColonContentLogLevel, jcrColonContentNoStatusUpdate, jcrColonContentNoVersioning, jcrColonContentProtocolConnectTimeout, jcrColonContentProtocolHTTPConnectionClosed, jcrColonContentProtocolHTTPExpired, jcrColonContentProtocolHTTPHeaders, jcrColonContentProtocolHTTPHeadersAtTypeHint, jcrColonContentProtocolHTTPMethod, jcrColonContentProtocolHTTPSRelaxed, jcrColonContentProtocolInterface, jcrColonContentProtocolSocketTimeout, jcrColonContentProtocolVersion, jcrColonContentProxyNTLMDomain, jcrColonContentProxyNTLMHost, jcrColonContentProxyHost, jcrColonContentProxyPassword, jcrColonContentProxyPort, jcrColonContentProxyUser, jcrColonContentQueueBatchMaxSize, jcrColonContentQueueBatchMode, jcrColonContentQueueBatchWaitTime, jcrColonContentRetryDelay, jcrColonContentReverseReplication, jcrColonContentSerializationType, jcrColonContentSlingColonResourceType, jcrColonContentSsl, jcrColonContentTransportNTLMDomain, jcrColonContentTransportNTLMHost, jcrColonContentTransportPassword, jcrColonContentTransportUri, jcrColonContentTransportUser, jcrColonContentTriggerDistribute, jcrColonContentTriggerModified, jcrColonContentTriggerOnOffTime, jcrColonContentTriggerReceive, jcrColonContentTriggerSpecific, jcrColonContentUserId, jcrColonPrimaryType, colonOperation)
 } catch (e: ClientException) {
     println("4xx response calling SlingApi#postAgent")
     e.printStackTrace()
@@ -670,56 +707,56 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **runmode** | **kotlin.String**|  |
  **name** | **kotlin.String**|  |
- **jcrContentSlashcqDistribute** | **kotlin.Boolean**|  | [optional]
- **jcrContentSlashcqDistributeAtTypeHint** | **kotlin.String**|  | [optional]
- **jcrContentSlashcqName** | **kotlin.String**|  | [optional]
- **jcrContentSlashcqTemplate** | **kotlin.String**|  | [optional]
- **jcrContentSlashenabled** | **kotlin.Boolean**|  | [optional]
- **jcrContentSlashjcrDescription** | **kotlin.String**|  | [optional]
- **jcrContentSlashjcrLastModified** | **kotlin.String**|  | [optional]
- **jcrContentSlashjcrLastModifiedBy** | **kotlin.String**|  | [optional]
- **jcrContentSlashjcrMixinTypes** | **kotlin.String**|  | [optional]
- **jcrContentSlashjcrTitle** | **kotlin.String**|  | [optional]
- **jcrContentSlashlogLevel** | **kotlin.String**|  | [optional]
- **jcrContentSlashnoStatusUpdate** | **kotlin.Boolean**|  | [optional]
- **jcrContentSlashnoVersioning** | **kotlin.Boolean**|  | [optional]
- **jcrContentSlashprotocolConnectTimeout** | **java.math.BigDecimal**|  | [optional]
- **jcrContentSlashprotocolHTTPConnectionClosed** | **kotlin.Boolean**|  | [optional]
- **jcrContentSlashprotocolHTTPExpired** | **kotlin.String**|  | [optional]
- **jcrContentSlashprotocolHTTPHeaders** | [**kotlin.Array&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional]
- **jcrContentSlashprotocolHTTPHeadersAtTypeHint** | **kotlin.String**|  | [optional]
- **jcrContentSlashprotocolHTTPMethod** | **kotlin.String**|  | [optional]
- **jcrContentSlashprotocolHTTPSRelaxed** | **kotlin.Boolean**|  | [optional]
- **jcrContentSlashprotocolInterface** | **kotlin.String**|  | [optional]
- **jcrContentSlashprotocolSocketTimeout** | **java.math.BigDecimal**|  | [optional]
- **jcrContentSlashprotocolVersion** | **kotlin.String**|  | [optional]
- **jcrContentSlashproxyNTLMDomain** | **kotlin.String**|  | [optional]
- **jcrContentSlashproxyNTLMHost** | **kotlin.String**|  | [optional]
- **jcrContentSlashproxyHost** | **kotlin.String**|  | [optional]
- **jcrContentSlashproxyPassword** | **kotlin.String**|  | [optional]
- **jcrContentSlashproxyPort** | **java.math.BigDecimal**|  | [optional]
- **jcrContentSlashproxyUser** | **kotlin.String**|  | [optional]
- **jcrContentSlashqueueBatchMaxSize** | **java.math.BigDecimal**|  | [optional]
- **jcrContentSlashqueueBatchMode** | **kotlin.String**|  | [optional]
- **jcrContentSlashqueueBatchWaitTime** | **java.math.BigDecimal**|  | [optional]
- **jcrContentSlashretryDelay** | **kotlin.String**|  | [optional]
- **jcrContentSlashreverseReplication** | **kotlin.Boolean**|  | [optional]
- **jcrContentSlashserializationType** | **kotlin.String**|  | [optional]
- **jcrContentSlashslingResourceType** | **kotlin.String**|  | [optional]
- **jcrContentSlashssl** | **kotlin.String**|  | [optional]
- **jcrContentSlashtransportNTLMDomain** | **kotlin.String**|  | [optional]
- **jcrContentSlashtransportNTLMHost** | **kotlin.String**|  | [optional]
- **jcrContentSlashtransportPassword** | **kotlin.String**|  | [optional]
- **jcrContentSlashtransportUri** | **kotlin.String**|  | [optional]
- **jcrContentSlashtransportUser** | **kotlin.String**|  | [optional]
- **jcrContentSlashtriggerDistribute** | **kotlin.Boolean**|  | [optional]
- **jcrContentSlashtriggerModified** | **kotlin.Boolean**|  | [optional]
- **jcrContentSlashtriggerOnOffTime** | **kotlin.Boolean**|  | [optional]
- **jcrContentSlashtriggerReceive** | **kotlin.Boolean**|  | [optional]
- **jcrContentSlashtriggerSpecific** | **kotlin.Boolean**|  | [optional]
- **jcrContentSlashuserId** | **kotlin.String**|  | [optional]
- **jcrPrimaryType** | **kotlin.String**|  | [optional]
- **operation** | **kotlin.String**|  | [optional]
+ **jcrColonContentCqColonDistribute** | **kotlin.Boolean**|  | [optional]
+ **jcrColonContentCqColonDistributeAtTypeHint** | **kotlin.String**|  | [optional]
+ **jcrColonContentCqColonName** | **kotlin.String**|  | [optional]
+ **jcrColonContentCqColonTemplate** | **kotlin.String**|  | [optional]
+ **jcrColonContentEnabled** | **kotlin.Boolean**|  | [optional]
+ **jcrColonContentJcrColonDescription** | **kotlin.String**|  | [optional]
+ **jcrColonContentJcrColonLastModified** | **kotlin.String**|  | [optional]
+ **jcrColonContentJcrColonLastModifiedBy** | **kotlin.String**|  | [optional]
+ **jcrColonContentJcrColonMixinTypes** | **kotlin.String**|  | [optional]
+ **jcrColonContentJcrColonTitle** | **kotlin.String**|  | [optional]
+ **jcrColonContentLogLevel** | **kotlin.String**|  | [optional]
+ **jcrColonContentNoStatusUpdate** | **kotlin.Boolean**|  | [optional]
+ **jcrColonContentNoVersioning** | **kotlin.Boolean**|  | [optional]
+ **jcrColonContentProtocolConnectTimeout** | **java.math.BigDecimal**|  | [optional]
+ **jcrColonContentProtocolHTTPConnectionClosed** | **kotlin.Boolean**|  | [optional]
+ **jcrColonContentProtocolHTTPExpired** | **kotlin.String**|  | [optional]
+ **jcrColonContentProtocolHTTPHeaders** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional]
+ **jcrColonContentProtocolHTTPHeadersAtTypeHint** | **kotlin.String**|  | [optional]
+ **jcrColonContentProtocolHTTPMethod** | **kotlin.String**|  | [optional]
+ **jcrColonContentProtocolHTTPSRelaxed** | **kotlin.Boolean**|  | [optional]
+ **jcrColonContentProtocolInterface** | **kotlin.String**|  | [optional]
+ **jcrColonContentProtocolSocketTimeout** | **java.math.BigDecimal**|  | [optional]
+ **jcrColonContentProtocolVersion** | **kotlin.String**|  | [optional]
+ **jcrColonContentProxyNTLMDomain** | **kotlin.String**|  | [optional]
+ **jcrColonContentProxyNTLMHost** | **kotlin.String**|  | [optional]
+ **jcrColonContentProxyHost** | **kotlin.String**|  | [optional]
+ **jcrColonContentProxyPassword** | **kotlin.String**|  | [optional]
+ **jcrColonContentProxyPort** | **java.math.BigDecimal**|  | [optional]
+ **jcrColonContentProxyUser** | **kotlin.String**|  | [optional]
+ **jcrColonContentQueueBatchMaxSize** | **java.math.BigDecimal**|  | [optional]
+ **jcrColonContentQueueBatchMode** | **kotlin.String**|  | [optional]
+ **jcrColonContentQueueBatchWaitTime** | **java.math.BigDecimal**|  | [optional]
+ **jcrColonContentRetryDelay** | **kotlin.String**|  | [optional]
+ **jcrColonContentReverseReplication** | **kotlin.Boolean**|  | [optional]
+ **jcrColonContentSerializationType** | **kotlin.String**|  | [optional]
+ **jcrColonContentSlingColonResourceType** | **kotlin.String**|  | [optional]
+ **jcrColonContentSsl** | **kotlin.String**|  | [optional]
+ **jcrColonContentTransportNTLMDomain** | **kotlin.String**|  | [optional]
+ **jcrColonContentTransportNTLMHost** | **kotlin.String**|  | [optional]
+ **jcrColonContentTransportPassword** | **kotlin.String**|  | [optional]
+ **jcrColonContentTransportUri** | **kotlin.String**|  | [optional]
+ **jcrColonContentTransportUser** | **kotlin.String**|  | [optional]
+ **jcrColonContentTriggerDistribute** | **kotlin.Boolean**|  | [optional]
+ **jcrColonContentTriggerModified** | **kotlin.Boolean**|  | [optional]
+ **jcrColonContentTriggerOnOffTime** | **kotlin.Boolean**|  | [optional]
+ **jcrColonContentTriggerReceive** | **kotlin.Boolean**|  | [optional]
+ **jcrColonContentTriggerSpecific** | **kotlin.Boolean**|  | [optional]
+ **jcrColonContentUserId** | **kotlin.String**|  | [optional]
+ **jcrColonPrimaryType** | **kotlin.String**|  | [optional]
+ **colonOperation** | **kotlin.String**|  | [optional]
 
 ### Return type
 
@@ -727,7 +764,10 @@ null (empty response body)
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -736,7 +776,7 @@ null (empty response body)
 
 <a name="postAuthorizableKeystore"></a>
 # **postAuthorizableKeystore**
-> KeystoreInfo postAuthorizableKeystore(intermediatePath, authorizableId, operation, currentPassword, newPassword, rePassword, keyPassword, keyStorePass, alias, newAlias, removeAlias, certChain, pk, keyStore)
+> KeystoreInfo postAuthorizableKeystore(intermediatePath, authorizableId, colonOperation, currentPassword, newPassword, rePassword, keyPassword, keyStorePass, alias, newAlias, removeAlias, certChain, pk, keyStore)
 
 
 
@@ -749,7 +789,7 @@ null (empty response body)
 val apiInstance = SlingApi()
 val intermediatePath : kotlin.String = intermediatePath_example // kotlin.String | 
 val authorizableId : kotlin.String = authorizableId_example // kotlin.String | 
-val operation : kotlin.String = operation_example // kotlin.String | 
+val colonOperation : kotlin.String = colonOperation_example // kotlin.String | 
 val currentPassword : kotlin.String = currentPassword_example // kotlin.String | 
 val newPassword : kotlin.String = newPassword_example // kotlin.String | 
 val rePassword : kotlin.String = rePassword_example // kotlin.String | 
@@ -762,7 +802,7 @@ val certChain : java.io.File = BINARY_DATA_HERE // java.io.File |
 val pk : java.io.File = BINARY_DATA_HERE // java.io.File | 
 val keyStore : java.io.File = BINARY_DATA_HERE // java.io.File | 
 try {
-    val result : KeystoreInfo = apiInstance.postAuthorizableKeystore(intermediatePath, authorizableId, operation, currentPassword, newPassword, rePassword, keyPassword, keyStorePass, alias, newAlias, removeAlias, certChain, pk, keyStore)
+    val result : KeystoreInfo = apiInstance.postAuthorizableKeystore(intermediatePath, authorizableId, colonOperation, currentPassword, newPassword, rePassword, keyPassword, keyStorePass, alias, newAlias, removeAlias, certChain, pk, keyStore)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling SlingApi#postAuthorizableKeystore")
@@ -779,7 +819,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **intermediatePath** | **kotlin.String**|  |
  **authorizableId** | **kotlin.String**|  |
- **operation** | **kotlin.String**|  | [optional]
+ **colonOperation** | **kotlin.String**|  | [optional]
  **currentPassword** | **kotlin.String**|  | [optional]
  **newPassword** | **kotlin.String**|  | [optional]
  **rePassword** | **kotlin.String**|  | [optional]
@@ -788,9 +828,9 @@ Name | Type | Description  | Notes
  **alias** | **kotlin.String**|  | [optional]
  **newAlias** | **kotlin.String**|  | [optional]
  **removeAlias** | **kotlin.String**|  | [optional]
- **certChain** | **java.io.File**|  | [optional] [default to null]
- **pk** | **java.io.File**|  | [optional] [default to null]
- **keyStore** | **java.io.File**|  | [optional] [default to null]
+ **certChain** | **java.io.File**|  | [optional]
+ **pk** | **java.io.File**|  | [optional]
+ **keyStore** | **java.io.File**|  | [optional]
 
 ### Return type
 
@@ -798,7 +838,10 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -807,7 +850,7 @@ Name | Type | Description  | Notes
 
 <a name="postAuthorizables"></a>
 # **postAuthorizables**
-> kotlin.String postAuthorizables(authorizableId, intermediatePath, createUser, createGroup, repPassword, profileSlashgivenName)
+> kotlin.String postAuthorizables(authorizableId, intermediatePath, createUser, createGroup, repColonPassword, profileGivenName)
 
 
 
@@ -822,10 +865,10 @@ val authorizableId : kotlin.String = authorizableId_example // kotlin.String |
 val intermediatePath : kotlin.String = intermediatePath_example // kotlin.String | 
 val createUser : kotlin.String = createUser_example // kotlin.String | 
 val createGroup : kotlin.String = createGroup_example // kotlin.String | 
-val repPassword : kotlin.String = repPassword_example // kotlin.String | 
-val profileSlashgivenName : kotlin.String = profileSlashgivenName_example // kotlin.String | 
+val repColonPassword : kotlin.String = repColonPassword_example // kotlin.String | 
+val profileGivenName : kotlin.String = profileGivenName_example // kotlin.String | 
 try {
-    val result : kotlin.String = apiInstance.postAuthorizables(authorizableId, intermediatePath, createUser, createGroup, repPassword, profileSlashgivenName)
+    val result : kotlin.String = apiInstance.postAuthorizables(authorizableId, intermediatePath, createUser, createGroup, repColonPassword, profileGivenName)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling SlingApi#postAuthorizables")
@@ -844,8 +887,8 @@ Name | Type | Description  | Notes
  **intermediatePath** | **kotlin.String**|  |
  **createUser** | **kotlin.String**|  | [optional]
  **createGroup** | **kotlin.String**|  | [optional]
- **repPassword** | **kotlin.String**|  | [optional]
- **profileSlashgivenName** | **kotlin.String**|  | [optional]
+ **repColonPassword** | **kotlin.String**|  | [optional]
+ **profileGivenName** | **kotlin.String**|  | [optional]
 
 ### Return type
 
@@ -853,7 +896,10 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -862,7 +908,7 @@ Name | Type | Description  | Notes
 
 <a name="postConfigAdobeGraniteSamlAuthenticationHandler"></a>
 # **postConfigAdobeGraniteSamlAuthenticationHandler**
-> postConfigAdobeGraniteSamlAuthenticationHandler(keyStorePassword, keyStorePasswordAtTypeHint, servicePeriodranking, servicePeriodrankingAtTypeHint, idpHttpRedirect, idpHttpRedirectAtTypeHint, createUser, createUserAtTypeHint, defaultRedirectUrl, defaultRedirectUrlAtTypeHint, userIDAttribute, userIDAttributeAtTypeHint, defaultGroups, defaultGroupsAtTypeHint, idpCertAlias, idpCertAliasAtTypeHint, addGroupMemberships, addGroupMembershipsAtTypeHint, path, pathAtTypeHint, synchronizeAttributes, synchronizeAttributesAtTypeHint, clockTolerance, clockToleranceAtTypeHint, groupMembershipAttribute, groupMembershipAttributeAtTypeHint, idpUrl, idpUrlAtTypeHint, logoutUrl, logoutUrlAtTypeHint, serviceProviderEntityId, serviceProviderEntityIdAtTypeHint, assertionConsumerServiceURL, assertionConsumerServiceURLAtTypeHint, handleLogout, handleLogoutAtTypeHint, spPrivateKeyAlias, spPrivateKeyAliasAtTypeHint, useEncryption, useEncryptionAtTypeHint, nameIdFormat, nameIdFormatAtTypeHint, digestMethod, digestMethodAtTypeHint, signatureMethod, signatureMethodAtTypeHint, userIntermediatePath, userIntermediatePathAtTypeHint)
+> postConfigAdobeGraniteSamlAuthenticationHandler(keyStorePassword, keyStorePasswordAtTypeHint, serviceRanking, serviceRankingAtTypeHint, idpHttpRedirect, idpHttpRedirectAtTypeHint, createUser, createUserAtTypeHint, defaultRedirectUrl, defaultRedirectUrlAtTypeHint, userIDAttribute, userIDAttributeAtTypeHint, defaultGroups, defaultGroupsAtTypeHint, idpCertAlias, idpCertAliasAtTypeHint, addGroupMemberships, addGroupMembershipsAtTypeHint, path, pathAtTypeHint, synchronizeAttributes, synchronizeAttributesAtTypeHint, clockTolerance, clockToleranceAtTypeHint, groupMembershipAttribute, groupMembershipAttributeAtTypeHint, idpUrl, idpUrlAtTypeHint, logoutUrl, logoutUrlAtTypeHint, serviceProviderEntityId, serviceProviderEntityIdAtTypeHint, assertionConsumerServiceURL, assertionConsumerServiceURLAtTypeHint, handleLogout, handleLogoutAtTypeHint, spPrivateKeyAlias, spPrivateKeyAliasAtTypeHint, useEncryption, useEncryptionAtTypeHint, nameIdFormat, nameIdFormatAtTypeHint, digestMethod, digestMethodAtTypeHint, signatureMethod, signatureMethodAtTypeHint, userIntermediatePath, userIntermediatePathAtTypeHint)
 
 
 
@@ -875,8 +921,8 @@ Name | Type | Description  | Notes
 val apiInstance = SlingApi()
 val keyStorePassword : kotlin.String = keyStorePassword_example // kotlin.String | 
 val keyStorePasswordAtTypeHint : kotlin.String = keyStorePasswordAtTypeHint_example // kotlin.String | 
-val servicePeriodranking : kotlin.Int = 56 // kotlin.Int | 
-val servicePeriodrankingAtTypeHint : kotlin.String = servicePeriodrankingAtTypeHint_example // kotlin.String | 
+val serviceRanking : kotlin.Int = 56 // kotlin.Int | 
+val serviceRankingAtTypeHint : kotlin.String = serviceRankingAtTypeHint_example // kotlin.String | 
 val idpHttpRedirect : kotlin.Boolean = true // kotlin.Boolean | 
 val idpHttpRedirectAtTypeHint : kotlin.String = idpHttpRedirectAtTypeHint_example // kotlin.String | 
 val createUser : kotlin.Boolean = true // kotlin.Boolean | 
@@ -885,15 +931,15 @@ val defaultRedirectUrl : kotlin.String = defaultRedirectUrl_example // kotlin.St
 val defaultRedirectUrlAtTypeHint : kotlin.String = defaultRedirectUrlAtTypeHint_example // kotlin.String | 
 val userIDAttribute : kotlin.String = userIDAttribute_example // kotlin.String | 
 val userIDAttributeAtTypeHint : kotlin.String = userIDAttributeAtTypeHint_example // kotlin.String | 
-val defaultGroups : kotlin.Array<kotlin.String> =  // kotlin.Array<kotlin.String> | 
+val defaultGroups : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
 val defaultGroupsAtTypeHint : kotlin.String = defaultGroupsAtTypeHint_example // kotlin.String | 
 val idpCertAlias : kotlin.String = idpCertAlias_example // kotlin.String | 
 val idpCertAliasAtTypeHint : kotlin.String = idpCertAliasAtTypeHint_example // kotlin.String | 
 val addGroupMemberships : kotlin.Boolean = true // kotlin.Boolean | 
 val addGroupMembershipsAtTypeHint : kotlin.String = addGroupMembershipsAtTypeHint_example // kotlin.String | 
-val path : kotlin.Array<kotlin.String> =  // kotlin.Array<kotlin.String> | 
+val path : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
 val pathAtTypeHint : kotlin.String = pathAtTypeHint_example // kotlin.String | 
-val synchronizeAttributes : kotlin.Array<kotlin.String> =  // kotlin.Array<kotlin.String> | 
+val synchronizeAttributes : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
 val synchronizeAttributesAtTypeHint : kotlin.String = synchronizeAttributesAtTypeHint_example // kotlin.String | 
 val clockTolerance : kotlin.Int = 56 // kotlin.Int | 
 val clockToleranceAtTypeHint : kotlin.String = clockToleranceAtTypeHint_example // kotlin.String | 
@@ -922,7 +968,7 @@ val signatureMethodAtTypeHint : kotlin.String = signatureMethodAtTypeHint_exampl
 val userIntermediatePath : kotlin.String = userIntermediatePath_example // kotlin.String | 
 val userIntermediatePathAtTypeHint : kotlin.String = userIntermediatePathAtTypeHint_example // kotlin.String | 
 try {
-    apiInstance.postConfigAdobeGraniteSamlAuthenticationHandler(keyStorePassword, keyStorePasswordAtTypeHint, servicePeriodranking, servicePeriodrankingAtTypeHint, idpHttpRedirect, idpHttpRedirectAtTypeHint, createUser, createUserAtTypeHint, defaultRedirectUrl, defaultRedirectUrlAtTypeHint, userIDAttribute, userIDAttributeAtTypeHint, defaultGroups, defaultGroupsAtTypeHint, idpCertAlias, idpCertAliasAtTypeHint, addGroupMemberships, addGroupMembershipsAtTypeHint, path, pathAtTypeHint, synchronizeAttributes, synchronizeAttributesAtTypeHint, clockTolerance, clockToleranceAtTypeHint, groupMembershipAttribute, groupMembershipAttributeAtTypeHint, idpUrl, idpUrlAtTypeHint, logoutUrl, logoutUrlAtTypeHint, serviceProviderEntityId, serviceProviderEntityIdAtTypeHint, assertionConsumerServiceURL, assertionConsumerServiceURLAtTypeHint, handleLogout, handleLogoutAtTypeHint, spPrivateKeyAlias, spPrivateKeyAliasAtTypeHint, useEncryption, useEncryptionAtTypeHint, nameIdFormat, nameIdFormatAtTypeHint, digestMethod, digestMethodAtTypeHint, signatureMethod, signatureMethodAtTypeHint, userIntermediatePath, userIntermediatePathAtTypeHint)
+    apiInstance.postConfigAdobeGraniteSamlAuthenticationHandler(keyStorePassword, keyStorePasswordAtTypeHint, serviceRanking, serviceRankingAtTypeHint, idpHttpRedirect, idpHttpRedirectAtTypeHint, createUser, createUserAtTypeHint, defaultRedirectUrl, defaultRedirectUrlAtTypeHint, userIDAttribute, userIDAttributeAtTypeHint, defaultGroups, defaultGroupsAtTypeHint, idpCertAlias, idpCertAliasAtTypeHint, addGroupMemberships, addGroupMembershipsAtTypeHint, path, pathAtTypeHint, synchronizeAttributes, synchronizeAttributesAtTypeHint, clockTolerance, clockToleranceAtTypeHint, groupMembershipAttribute, groupMembershipAttributeAtTypeHint, idpUrl, idpUrlAtTypeHint, logoutUrl, logoutUrlAtTypeHint, serviceProviderEntityId, serviceProviderEntityIdAtTypeHint, assertionConsumerServiceURL, assertionConsumerServiceURLAtTypeHint, handleLogout, handleLogoutAtTypeHint, spPrivateKeyAlias, spPrivateKeyAliasAtTypeHint, useEncryption, useEncryptionAtTypeHint, nameIdFormat, nameIdFormatAtTypeHint, digestMethod, digestMethodAtTypeHint, signatureMethod, signatureMethodAtTypeHint, userIntermediatePath, userIntermediatePathAtTypeHint)
 } catch (e: ClientException) {
     println("4xx response calling SlingApi#postConfigAdobeGraniteSamlAuthenticationHandler")
     e.printStackTrace()
@@ -938,8 +984,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **keyStorePassword** | **kotlin.String**|  | [optional]
  **keyStorePasswordAtTypeHint** | **kotlin.String**|  | [optional]
- **servicePeriodranking** | **kotlin.Int**|  | [optional]
- **servicePeriodrankingAtTypeHint** | **kotlin.String**|  | [optional]
+ **serviceRanking** | **kotlin.Int**|  | [optional]
+ **serviceRankingAtTypeHint** | **kotlin.String**|  | [optional]
  **idpHttpRedirect** | **kotlin.Boolean**|  | [optional]
  **idpHttpRedirectAtTypeHint** | **kotlin.String**|  | [optional]
  **createUser** | **kotlin.Boolean**|  | [optional]
@@ -948,15 +994,15 @@ Name | Type | Description  | Notes
  **defaultRedirectUrlAtTypeHint** | **kotlin.String**|  | [optional]
  **userIDAttribute** | **kotlin.String**|  | [optional]
  **userIDAttributeAtTypeHint** | **kotlin.String**|  | [optional]
- **defaultGroups** | [**kotlin.Array&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional]
+ **defaultGroups** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional]
  **defaultGroupsAtTypeHint** | **kotlin.String**|  | [optional]
  **idpCertAlias** | **kotlin.String**|  | [optional]
  **idpCertAliasAtTypeHint** | **kotlin.String**|  | [optional]
  **addGroupMemberships** | **kotlin.Boolean**|  | [optional]
  **addGroupMembershipsAtTypeHint** | **kotlin.String**|  | [optional]
- **path** | [**kotlin.Array&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional]
+ **path** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional]
  **pathAtTypeHint** | **kotlin.String**|  | [optional]
- **synchronizeAttributes** | [**kotlin.Array&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional]
+ **synchronizeAttributes** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional]
  **synchronizeAttributesAtTypeHint** | **kotlin.String**|  | [optional]
  **clockTolerance** | **kotlin.Int**|  | [optional]
  **clockToleranceAtTypeHint** | **kotlin.String**|  | [optional]
@@ -991,7 +1037,10 @@ null (empty response body)
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -1000,7 +1049,7 @@ null (empty response body)
 
 <a name="postConfigApacheFelixJettyBasedHttpService"></a>
 # **postConfigApacheFelixJettyBasedHttpService**
-> postConfigApacheFelixJettyBasedHttpService(orgPeriodapachePeriodfelixPeriodhttpsPeriodnio, orgPeriodapachePeriodfelixPeriodhttpsPeriodnioAtTypeHint, orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystore, orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystoreAtTypeHint, orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodpassword, orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodpasswordAtTypeHint, orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkey, orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyAtTypeHint, orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyPeriodpassword, orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyPeriodpasswordAtTypeHint, orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststore, orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststoreAtTypeHint, orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststorePeriodpassword, orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststorePeriodpasswordAtTypeHint, orgPeriodapachePeriodfelixPeriodhttpsPeriodclientcertificate, orgPeriodapachePeriodfelixPeriodhttpsPeriodclientcertificateAtTypeHint, orgPeriodapachePeriodfelixPeriodhttpsPeriodenable, orgPeriodapachePeriodfelixPeriodhttpsPeriodenableAtTypeHint, orgPeriodosgiPeriodservicePeriodhttpPeriodportPeriodsecure, orgPeriodosgiPeriodservicePeriodhttpPeriodportPeriodsecureAtTypeHint)
+> postConfigApacheFelixJettyBasedHttpService(orgApacheFelixHttpsNio, orgApacheFelixHttpsNioAtTypeHint, orgApacheFelixHttpsKeystore, orgApacheFelixHttpsKeystoreAtTypeHint, orgApacheFelixHttpsKeystorePassword, orgApacheFelixHttpsKeystorePasswordAtTypeHint, orgApacheFelixHttpsKeystoreKey, orgApacheFelixHttpsKeystoreKeyAtTypeHint, orgApacheFelixHttpsKeystoreKeyPassword, orgApacheFelixHttpsKeystoreKeyPasswordAtTypeHint, orgApacheFelixHttpsTruststore, orgApacheFelixHttpsTruststoreAtTypeHint, orgApacheFelixHttpsTruststorePassword, orgApacheFelixHttpsTruststorePasswordAtTypeHint, orgApacheFelixHttpsClientcertificate, orgApacheFelixHttpsClientcertificateAtTypeHint, orgApacheFelixHttpsEnable, orgApacheFelixHttpsEnableAtTypeHint, orgOsgiServiceHttpPortSecure, orgOsgiServiceHttpPortSecureAtTypeHint)
 
 
 
@@ -1011,28 +1060,28 @@ null (empty response body)
 //import org.openapitools.client.models.*
 
 val apiInstance = SlingApi()
-val orgPeriodapachePeriodfelixPeriodhttpsPeriodnio : kotlin.Boolean = true // kotlin.Boolean | 
-val orgPeriodapachePeriodfelixPeriodhttpsPeriodnioAtTypeHint : kotlin.String = orgPeriodapachePeriodfelixPeriodhttpsPeriodnioAtTypeHint_example // kotlin.String | 
-val orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystore : kotlin.String = orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystore_example // kotlin.String | 
-val orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystoreAtTypeHint : kotlin.String = orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystoreAtTypeHint_example // kotlin.String | 
-val orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodpassword : kotlin.String = orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodpassword_example // kotlin.String | 
-val orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodpasswordAtTypeHint : kotlin.String = orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodpasswordAtTypeHint_example // kotlin.String | 
-val orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkey : kotlin.String = orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkey_example // kotlin.String | 
-val orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyAtTypeHint : kotlin.String = orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyAtTypeHint_example // kotlin.String | 
-val orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyPeriodpassword : kotlin.String = orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyPeriodpassword_example // kotlin.String | 
-val orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyPeriodpasswordAtTypeHint : kotlin.String = orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyPeriodpasswordAtTypeHint_example // kotlin.String | 
-val orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststore : kotlin.String = orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststore_example // kotlin.String | 
-val orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststoreAtTypeHint : kotlin.String = orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststoreAtTypeHint_example // kotlin.String | 
-val orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststorePeriodpassword : kotlin.String = orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststorePeriodpassword_example // kotlin.String | 
-val orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststorePeriodpasswordAtTypeHint : kotlin.String = orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststorePeriodpasswordAtTypeHint_example // kotlin.String | 
-val orgPeriodapachePeriodfelixPeriodhttpsPeriodclientcertificate : kotlin.String = orgPeriodapachePeriodfelixPeriodhttpsPeriodclientcertificate_example // kotlin.String | 
-val orgPeriodapachePeriodfelixPeriodhttpsPeriodclientcertificateAtTypeHint : kotlin.String = orgPeriodapachePeriodfelixPeriodhttpsPeriodclientcertificateAtTypeHint_example // kotlin.String | 
-val orgPeriodapachePeriodfelixPeriodhttpsPeriodenable : kotlin.Boolean = true // kotlin.Boolean | 
-val orgPeriodapachePeriodfelixPeriodhttpsPeriodenableAtTypeHint : kotlin.String = orgPeriodapachePeriodfelixPeriodhttpsPeriodenableAtTypeHint_example // kotlin.String | 
-val orgPeriodosgiPeriodservicePeriodhttpPeriodportPeriodsecure : kotlin.String = orgPeriodosgiPeriodservicePeriodhttpPeriodportPeriodsecure_example // kotlin.String | 
-val orgPeriodosgiPeriodservicePeriodhttpPeriodportPeriodsecureAtTypeHint : kotlin.String = orgPeriodosgiPeriodservicePeriodhttpPeriodportPeriodsecureAtTypeHint_example // kotlin.String | 
+val orgApacheFelixHttpsNio : kotlin.Boolean = true // kotlin.Boolean | 
+val orgApacheFelixHttpsNioAtTypeHint : kotlin.String = orgApacheFelixHttpsNioAtTypeHint_example // kotlin.String | 
+val orgApacheFelixHttpsKeystore : kotlin.String = orgApacheFelixHttpsKeystore_example // kotlin.String | 
+val orgApacheFelixHttpsKeystoreAtTypeHint : kotlin.String = orgApacheFelixHttpsKeystoreAtTypeHint_example // kotlin.String | 
+val orgApacheFelixHttpsKeystorePassword : kotlin.String = orgApacheFelixHttpsKeystorePassword_example // kotlin.String | 
+val orgApacheFelixHttpsKeystorePasswordAtTypeHint : kotlin.String = orgApacheFelixHttpsKeystorePasswordAtTypeHint_example // kotlin.String | 
+val orgApacheFelixHttpsKeystoreKey : kotlin.String = orgApacheFelixHttpsKeystoreKey_example // kotlin.String | 
+val orgApacheFelixHttpsKeystoreKeyAtTypeHint : kotlin.String = orgApacheFelixHttpsKeystoreKeyAtTypeHint_example // kotlin.String | 
+val orgApacheFelixHttpsKeystoreKeyPassword : kotlin.String = orgApacheFelixHttpsKeystoreKeyPassword_example // kotlin.String | 
+val orgApacheFelixHttpsKeystoreKeyPasswordAtTypeHint : kotlin.String = orgApacheFelixHttpsKeystoreKeyPasswordAtTypeHint_example // kotlin.String | 
+val orgApacheFelixHttpsTruststore : kotlin.String = orgApacheFelixHttpsTruststore_example // kotlin.String | 
+val orgApacheFelixHttpsTruststoreAtTypeHint : kotlin.String = orgApacheFelixHttpsTruststoreAtTypeHint_example // kotlin.String | 
+val orgApacheFelixHttpsTruststorePassword : kotlin.String = orgApacheFelixHttpsTruststorePassword_example // kotlin.String | 
+val orgApacheFelixHttpsTruststorePasswordAtTypeHint : kotlin.String = orgApacheFelixHttpsTruststorePasswordAtTypeHint_example // kotlin.String | 
+val orgApacheFelixHttpsClientcertificate : kotlin.String = orgApacheFelixHttpsClientcertificate_example // kotlin.String | 
+val orgApacheFelixHttpsClientcertificateAtTypeHint : kotlin.String = orgApacheFelixHttpsClientcertificateAtTypeHint_example // kotlin.String | 
+val orgApacheFelixHttpsEnable : kotlin.Boolean = true // kotlin.Boolean | 
+val orgApacheFelixHttpsEnableAtTypeHint : kotlin.String = orgApacheFelixHttpsEnableAtTypeHint_example // kotlin.String | 
+val orgOsgiServiceHttpPortSecure : kotlin.String = orgOsgiServiceHttpPortSecure_example // kotlin.String | 
+val orgOsgiServiceHttpPortSecureAtTypeHint : kotlin.String = orgOsgiServiceHttpPortSecureAtTypeHint_example // kotlin.String | 
 try {
-    apiInstance.postConfigApacheFelixJettyBasedHttpService(orgPeriodapachePeriodfelixPeriodhttpsPeriodnio, orgPeriodapachePeriodfelixPeriodhttpsPeriodnioAtTypeHint, orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystore, orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystoreAtTypeHint, orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodpassword, orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodpasswordAtTypeHint, orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkey, orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyAtTypeHint, orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyPeriodpassword, orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyPeriodpasswordAtTypeHint, orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststore, orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststoreAtTypeHint, orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststorePeriodpassword, orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststorePeriodpasswordAtTypeHint, orgPeriodapachePeriodfelixPeriodhttpsPeriodclientcertificate, orgPeriodapachePeriodfelixPeriodhttpsPeriodclientcertificateAtTypeHint, orgPeriodapachePeriodfelixPeriodhttpsPeriodenable, orgPeriodapachePeriodfelixPeriodhttpsPeriodenableAtTypeHint, orgPeriodosgiPeriodservicePeriodhttpPeriodportPeriodsecure, orgPeriodosgiPeriodservicePeriodhttpPeriodportPeriodsecureAtTypeHint)
+    apiInstance.postConfigApacheFelixJettyBasedHttpService(orgApacheFelixHttpsNio, orgApacheFelixHttpsNioAtTypeHint, orgApacheFelixHttpsKeystore, orgApacheFelixHttpsKeystoreAtTypeHint, orgApacheFelixHttpsKeystorePassword, orgApacheFelixHttpsKeystorePasswordAtTypeHint, orgApacheFelixHttpsKeystoreKey, orgApacheFelixHttpsKeystoreKeyAtTypeHint, orgApacheFelixHttpsKeystoreKeyPassword, orgApacheFelixHttpsKeystoreKeyPasswordAtTypeHint, orgApacheFelixHttpsTruststore, orgApacheFelixHttpsTruststoreAtTypeHint, orgApacheFelixHttpsTruststorePassword, orgApacheFelixHttpsTruststorePasswordAtTypeHint, orgApacheFelixHttpsClientcertificate, orgApacheFelixHttpsClientcertificateAtTypeHint, orgApacheFelixHttpsEnable, orgApacheFelixHttpsEnableAtTypeHint, orgOsgiServiceHttpPortSecure, orgOsgiServiceHttpPortSecureAtTypeHint)
 } catch (e: ClientException) {
     println("4xx response calling SlingApi#postConfigApacheFelixJettyBasedHttpService")
     e.printStackTrace()
@@ -1046,26 +1095,26 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **orgPeriodapachePeriodfelixPeriodhttpsPeriodnio** | **kotlin.Boolean**|  | [optional]
- **orgPeriodapachePeriodfelixPeriodhttpsPeriodnioAtTypeHint** | **kotlin.String**|  | [optional]
- **orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystore** | **kotlin.String**|  | [optional]
- **orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystoreAtTypeHint** | **kotlin.String**|  | [optional]
- **orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodpassword** | **kotlin.String**|  | [optional]
- **orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodpasswordAtTypeHint** | **kotlin.String**|  | [optional]
- **orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkey** | **kotlin.String**|  | [optional]
- **orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyAtTypeHint** | **kotlin.String**|  | [optional]
- **orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyPeriodpassword** | **kotlin.String**|  | [optional]
- **orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyPeriodpasswordAtTypeHint** | **kotlin.String**|  | [optional]
- **orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststore** | **kotlin.String**|  | [optional]
- **orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststoreAtTypeHint** | **kotlin.String**|  | [optional]
- **orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststorePeriodpassword** | **kotlin.String**|  | [optional]
- **orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststorePeriodpasswordAtTypeHint** | **kotlin.String**|  | [optional]
- **orgPeriodapachePeriodfelixPeriodhttpsPeriodclientcertificate** | **kotlin.String**|  | [optional]
- **orgPeriodapachePeriodfelixPeriodhttpsPeriodclientcertificateAtTypeHint** | **kotlin.String**|  | [optional]
- **orgPeriodapachePeriodfelixPeriodhttpsPeriodenable** | **kotlin.Boolean**|  | [optional]
- **orgPeriodapachePeriodfelixPeriodhttpsPeriodenableAtTypeHint** | **kotlin.String**|  | [optional]
- **orgPeriodosgiPeriodservicePeriodhttpPeriodportPeriodsecure** | **kotlin.String**|  | [optional]
- **orgPeriodosgiPeriodservicePeriodhttpPeriodportPeriodsecureAtTypeHint** | **kotlin.String**|  | [optional]
+ **orgApacheFelixHttpsNio** | **kotlin.Boolean**|  | [optional]
+ **orgApacheFelixHttpsNioAtTypeHint** | **kotlin.String**|  | [optional]
+ **orgApacheFelixHttpsKeystore** | **kotlin.String**|  | [optional]
+ **orgApacheFelixHttpsKeystoreAtTypeHint** | **kotlin.String**|  | [optional]
+ **orgApacheFelixHttpsKeystorePassword** | **kotlin.String**|  | [optional]
+ **orgApacheFelixHttpsKeystorePasswordAtTypeHint** | **kotlin.String**|  | [optional]
+ **orgApacheFelixHttpsKeystoreKey** | **kotlin.String**|  | [optional]
+ **orgApacheFelixHttpsKeystoreKeyAtTypeHint** | **kotlin.String**|  | [optional]
+ **orgApacheFelixHttpsKeystoreKeyPassword** | **kotlin.String**|  | [optional]
+ **orgApacheFelixHttpsKeystoreKeyPasswordAtTypeHint** | **kotlin.String**|  | [optional]
+ **orgApacheFelixHttpsTruststore** | **kotlin.String**|  | [optional]
+ **orgApacheFelixHttpsTruststoreAtTypeHint** | **kotlin.String**|  | [optional]
+ **orgApacheFelixHttpsTruststorePassword** | **kotlin.String**|  | [optional]
+ **orgApacheFelixHttpsTruststorePasswordAtTypeHint** | **kotlin.String**|  | [optional]
+ **orgApacheFelixHttpsClientcertificate** | **kotlin.String**|  | [optional]
+ **orgApacheFelixHttpsClientcertificateAtTypeHint** | **kotlin.String**|  | [optional]
+ **orgApacheFelixHttpsEnable** | **kotlin.Boolean**|  | [optional]
+ **orgApacheFelixHttpsEnableAtTypeHint** | **kotlin.String**|  | [optional]
+ **orgOsgiServiceHttpPortSecure** | **kotlin.String**|  | [optional]
+ **orgOsgiServiceHttpPortSecureAtTypeHint** | **kotlin.String**|  | [optional]
 
 ### Return type
 
@@ -1073,7 +1122,10 @@ null (empty response body)
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -1082,7 +1134,7 @@ null (empty response body)
 
 <a name="postConfigApacheHttpComponentsProxyConfiguration"></a>
 # **postConfigApacheHttpComponentsProxyConfiguration**
-> postConfigApacheHttpComponentsProxyConfiguration(proxyPeriodhost, proxyPeriodhostAtTypeHint, proxyPeriodport, proxyPeriodportAtTypeHint, proxyPeriodexceptions, proxyPeriodexceptionsAtTypeHint, proxyPeriodenabled, proxyPeriodenabledAtTypeHint, proxyPerioduser, proxyPerioduserAtTypeHint, proxyPeriodpassword, proxyPeriodpasswordAtTypeHint)
+> postConfigApacheHttpComponentsProxyConfiguration(proxyHost, proxyHostAtTypeHint, proxyPort, proxyPortAtTypeHint, proxyExceptions, proxyExceptionsAtTypeHint, proxyEnabled, proxyEnabledAtTypeHint, proxyUser, proxyUserAtTypeHint, proxyPassword, proxyPasswordAtTypeHint)
 
 
 
@@ -1093,20 +1145,20 @@ null (empty response body)
 //import org.openapitools.client.models.*
 
 val apiInstance = SlingApi()
-val proxyPeriodhost : kotlin.String = proxyPeriodhost_example // kotlin.String | 
-val proxyPeriodhostAtTypeHint : kotlin.String = proxyPeriodhostAtTypeHint_example // kotlin.String | 
-val proxyPeriodport : kotlin.Int = 56 // kotlin.Int | 
-val proxyPeriodportAtTypeHint : kotlin.String = proxyPeriodportAtTypeHint_example // kotlin.String | 
-val proxyPeriodexceptions : kotlin.Array<kotlin.String> =  // kotlin.Array<kotlin.String> | 
-val proxyPeriodexceptionsAtTypeHint : kotlin.String = proxyPeriodexceptionsAtTypeHint_example // kotlin.String | 
-val proxyPeriodenabled : kotlin.Boolean = true // kotlin.Boolean | 
-val proxyPeriodenabledAtTypeHint : kotlin.String = proxyPeriodenabledAtTypeHint_example // kotlin.String | 
-val proxyPerioduser : kotlin.String = proxyPerioduser_example // kotlin.String | 
-val proxyPerioduserAtTypeHint : kotlin.String = proxyPerioduserAtTypeHint_example // kotlin.String | 
-val proxyPeriodpassword : kotlin.String = proxyPeriodpassword_example // kotlin.String | 
-val proxyPeriodpasswordAtTypeHint : kotlin.String = proxyPeriodpasswordAtTypeHint_example // kotlin.String | 
+val proxyHost : kotlin.String = proxyHost_example // kotlin.String | 
+val proxyHostAtTypeHint : kotlin.String = proxyHostAtTypeHint_example // kotlin.String | 
+val proxyPort : kotlin.Int = 56 // kotlin.Int | 
+val proxyPortAtTypeHint : kotlin.String = proxyPortAtTypeHint_example // kotlin.String | 
+val proxyExceptions : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
+val proxyExceptionsAtTypeHint : kotlin.String = proxyExceptionsAtTypeHint_example // kotlin.String | 
+val proxyEnabled : kotlin.Boolean = true // kotlin.Boolean | 
+val proxyEnabledAtTypeHint : kotlin.String = proxyEnabledAtTypeHint_example // kotlin.String | 
+val proxyUser : kotlin.String = proxyUser_example // kotlin.String | 
+val proxyUserAtTypeHint : kotlin.String = proxyUserAtTypeHint_example // kotlin.String | 
+val proxyPassword : kotlin.String = proxyPassword_example // kotlin.String | 
+val proxyPasswordAtTypeHint : kotlin.String = proxyPasswordAtTypeHint_example // kotlin.String | 
 try {
-    apiInstance.postConfigApacheHttpComponentsProxyConfiguration(proxyPeriodhost, proxyPeriodhostAtTypeHint, proxyPeriodport, proxyPeriodportAtTypeHint, proxyPeriodexceptions, proxyPeriodexceptionsAtTypeHint, proxyPeriodenabled, proxyPeriodenabledAtTypeHint, proxyPerioduser, proxyPerioduserAtTypeHint, proxyPeriodpassword, proxyPeriodpasswordAtTypeHint)
+    apiInstance.postConfigApacheHttpComponentsProxyConfiguration(proxyHost, proxyHostAtTypeHint, proxyPort, proxyPortAtTypeHint, proxyExceptions, proxyExceptionsAtTypeHint, proxyEnabled, proxyEnabledAtTypeHint, proxyUser, proxyUserAtTypeHint, proxyPassword, proxyPasswordAtTypeHint)
 } catch (e: ClientException) {
     println("4xx response calling SlingApi#postConfigApacheHttpComponentsProxyConfiguration")
     e.printStackTrace()
@@ -1120,18 +1172,18 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **proxyPeriodhost** | **kotlin.String**|  | [optional]
- **proxyPeriodhostAtTypeHint** | **kotlin.String**|  | [optional]
- **proxyPeriodport** | **kotlin.Int**|  | [optional]
- **proxyPeriodportAtTypeHint** | **kotlin.String**|  | [optional]
- **proxyPeriodexceptions** | [**kotlin.Array&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional]
- **proxyPeriodexceptionsAtTypeHint** | **kotlin.String**|  | [optional]
- **proxyPeriodenabled** | **kotlin.Boolean**|  | [optional]
- **proxyPeriodenabledAtTypeHint** | **kotlin.String**|  | [optional]
- **proxyPerioduser** | **kotlin.String**|  | [optional]
- **proxyPerioduserAtTypeHint** | **kotlin.String**|  | [optional]
- **proxyPeriodpassword** | **kotlin.String**|  | [optional]
- **proxyPeriodpasswordAtTypeHint** | **kotlin.String**|  | [optional]
+ **proxyHost** | **kotlin.String**|  | [optional]
+ **proxyHostAtTypeHint** | **kotlin.String**|  | [optional]
+ **proxyPort** | **kotlin.Int**|  | [optional]
+ **proxyPortAtTypeHint** | **kotlin.String**|  | [optional]
+ **proxyExceptions** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional]
+ **proxyExceptionsAtTypeHint** | **kotlin.String**|  | [optional]
+ **proxyEnabled** | **kotlin.Boolean**|  | [optional]
+ **proxyEnabledAtTypeHint** | **kotlin.String**|  | [optional]
+ **proxyUser** | **kotlin.String**|  | [optional]
+ **proxyUserAtTypeHint** | **kotlin.String**|  | [optional]
+ **proxyPassword** | **kotlin.String**|  | [optional]
+ **proxyPasswordAtTypeHint** | **kotlin.String**|  | [optional]
 
 ### Return type
 
@@ -1139,7 +1191,10 @@ null (empty response body)
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -1148,7 +1203,7 @@ null (empty response body)
 
 <a name="postConfigApacheSlingDavExServlet"></a>
 # **postConfigApacheSlingDavExServlet**
-> postConfigApacheSlingDavExServlet(alias, aliasAtTypeHint, davPeriodcreateAbsoluteUri, davPeriodcreateAbsoluteUriAtTypeHint)
+> postConfigApacheSlingDavExServlet(alias, aliasAtTypeHint, davCreateAbsoluteUri, davCreateAbsoluteUriAtTypeHint)
 
 
 
@@ -1161,10 +1216,10 @@ null (empty response body)
 val apiInstance = SlingApi()
 val alias : kotlin.String = alias_example // kotlin.String | 
 val aliasAtTypeHint : kotlin.String = aliasAtTypeHint_example // kotlin.String | 
-val davPeriodcreateAbsoluteUri : kotlin.Boolean = true // kotlin.Boolean | 
-val davPeriodcreateAbsoluteUriAtTypeHint : kotlin.String = davPeriodcreateAbsoluteUriAtTypeHint_example // kotlin.String | 
+val davCreateAbsoluteUri : kotlin.Boolean = true // kotlin.Boolean | 
+val davCreateAbsoluteUriAtTypeHint : kotlin.String = davCreateAbsoluteUriAtTypeHint_example // kotlin.String | 
 try {
-    apiInstance.postConfigApacheSlingDavExServlet(alias, aliasAtTypeHint, davPeriodcreateAbsoluteUri, davPeriodcreateAbsoluteUriAtTypeHint)
+    apiInstance.postConfigApacheSlingDavExServlet(alias, aliasAtTypeHint, davCreateAbsoluteUri, davCreateAbsoluteUriAtTypeHint)
 } catch (e: ClientException) {
     println("4xx response calling SlingApi#postConfigApacheSlingDavExServlet")
     e.printStackTrace()
@@ -1180,8 +1235,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **alias** | **kotlin.String**|  | [optional]
  **aliasAtTypeHint** | **kotlin.String**|  | [optional]
- **davPeriodcreateAbsoluteUri** | **kotlin.Boolean**|  | [optional]
- **davPeriodcreateAbsoluteUriAtTypeHint** | **kotlin.String**|  | [optional]
+ **davCreateAbsoluteUri** | **kotlin.Boolean**|  | [optional]
+ **davCreateAbsoluteUriAtTypeHint** | **kotlin.String**|  | [optional]
 
 ### Return type
 
@@ -1189,7 +1244,10 @@ null (empty response body)
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -1198,7 +1256,7 @@ null (empty response body)
 
 <a name="postConfigApacheSlingGetServlet"></a>
 # **postConfigApacheSlingGetServlet**
-> postConfigApacheSlingGetServlet(jsonPeriodmaximumresults, jsonPeriodmaximumresultsAtTypeHint, enablePeriodhtml, enablePeriodhtmlAtTypeHint, enablePeriodtxt, enablePeriodtxtAtTypeHint, enablePeriodxml, enablePeriodxmlAtTypeHint)
+> postConfigApacheSlingGetServlet(jsonMaximumresults, jsonMaximumresultsAtTypeHint, enableHtml, enableHtmlAtTypeHint, enableTxt, enableTxtAtTypeHint, enableXml, enableXmlAtTypeHint)
 
 
 
@@ -1209,16 +1267,16 @@ null (empty response body)
 //import org.openapitools.client.models.*
 
 val apiInstance = SlingApi()
-val jsonPeriodmaximumresults : kotlin.String = jsonPeriodmaximumresults_example // kotlin.String | 
-val jsonPeriodmaximumresultsAtTypeHint : kotlin.String = jsonPeriodmaximumresultsAtTypeHint_example // kotlin.String | 
-val enablePeriodhtml : kotlin.Boolean = true // kotlin.Boolean | 
-val enablePeriodhtmlAtTypeHint : kotlin.String = enablePeriodhtmlAtTypeHint_example // kotlin.String | 
-val enablePeriodtxt : kotlin.Boolean = true // kotlin.Boolean | 
-val enablePeriodtxtAtTypeHint : kotlin.String = enablePeriodtxtAtTypeHint_example // kotlin.String | 
-val enablePeriodxml : kotlin.Boolean = true // kotlin.Boolean | 
-val enablePeriodxmlAtTypeHint : kotlin.String = enablePeriodxmlAtTypeHint_example // kotlin.String | 
+val jsonMaximumresults : kotlin.String = jsonMaximumresults_example // kotlin.String | 
+val jsonMaximumresultsAtTypeHint : kotlin.String = jsonMaximumresultsAtTypeHint_example // kotlin.String | 
+val enableHtml : kotlin.Boolean = true // kotlin.Boolean | 
+val enableHtmlAtTypeHint : kotlin.String = enableHtmlAtTypeHint_example // kotlin.String | 
+val enableTxt : kotlin.Boolean = true // kotlin.Boolean | 
+val enableTxtAtTypeHint : kotlin.String = enableTxtAtTypeHint_example // kotlin.String | 
+val enableXml : kotlin.Boolean = true // kotlin.Boolean | 
+val enableXmlAtTypeHint : kotlin.String = enableXmlAtTypeHint_example // kotlin.String | 
 try {
-    apiInstance.postConfigApacheSlingGetServlet(jsonPeriodmaximumresults, jsonPeriodmaximumresultsAtTypeHint, enablePeriodhtml, enablePeriodhtmlAtTypeHint, enablePeriodtxt, enablePeriodtxtAtTypeHint, enablePeriodxml, enablePeriodxmlAtTypeHint)
+    apiInstance.postConfigApacheSlingGetServlet(jsonMaximumresults, jsonMaximumresultsAtTypeHint, enableHtml, enableHtmlAtTypeHint, enableTxt, enableTxtAtTypeHint, enableXml, enableXmlAtTypeHint)
 } catch (e: ClientException) {
     println("4xx response calling SlingApi#postConfigApacheSlingGetServlet")
     e.printStackTrace()
@@ -1232,14 +1290,14 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **jsonPeriodmaximumresults** | **kotlin.String**|  | [optional]
- **jsonPeriodmaximumresultsAtTypeHint** | **kotlin.String**|  | [optional]
- **enablePeriodhtml** | **kotlin.Boolean**|  | [optional]
- **enablePeriodhtmlAtTypeHint** | **kotlin.String**|  | [optional]
- **enablePeriodtxt** | **kotlin.Boolean**|  | [optional]
- **enablePeriodtxtAtTypeHint** | **kotlin.String**|  | [optional]
- **enablePeriodxml** | **kotlin.Boolean**|  | [optional]
- **enablePeriodxmlAtTypeHint** | **kotlin.String**|  | [optional]
+ **jsonMaximumresults** | **kotlin.String**|  | [optional]
+ **jsonMaximumresultsAtTypeHint** | **kotlin.String**|  | [optional]
+ **enableHtml** | **kotlin.Boolean**|  | [optional]
+ **enableHtmlAtTypeHint** | **kotlin.String**|  | [optional]
+ **enableTxt** | **kotlin.Boolean**|  | [optional]
+ **enableTxtAtTypeHint** | **kotlin.String**|  | [optional]
+ **enableXml** | **kotlin.Boolean**|  | [optional]
+ **enableXmlAtTypeHint** | **kotlin.String**|  | [optional]
 
 ### Return type
 
@@ -1247,7 +1305,10 @@ null (empty response body)
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -1256,7 +1317,7 @@ null (empty response body)
 
 <a name="postConfigApacheSlingReferrerFilter"></a>
 # **postConfigApacheSlingReferrerFilter**
-> postConfigApacheSlingReferrerFilter(allowPeriodempty, allowPeriodemptyAtTypeHint, allowPeriodhosts, allowPeriodhostsAtTypeHint, allowPeriodhostsPeriodregexp, allowPeriodhostsPeriodregexpAtTypeHint, filterPeriodmethods, filterPeriodmethodsAtTypeHint)
+> postConfigApacheSlingReferrerFilter(allowEmpty, allowEmptyAtTypeHint, allowHosts, allowHostsAtTypeHint, allowHostsRegexp, allowHostsRegexpAtTypeHint, filterMethods, filterMethodsAtTypeHint)
 
 
 
@@ -1267,16 +1328,16 @@ null (empty response body)
 //import org.openapitools.client.models.*
 
 val apiInstance = SlingApi()
-val allowPeriodempty : kotlin.Boolean = true // kotlin.Boolean | 
-val allowPeriodemptyAtTypeHint : kotlin.String = allowPeriodemptyAtTypeHint_example // kotlin.String | 
-val allowPeriodhosts : kotlin.String = allowPeriodhosts_example // kotlin.String | 
-val allowPeriodhostsAtTypeHint : kotlin.String = allowPeriodhostsAtTypeHint_example // kotlin.String | 
-val allowPeriodhostsPeriodregexp : kotlin.String = allowPeriodhostsPeriodregexp_example // kotlin.String | 
-val allowPeriodhostsPeriodregexpAtTypeHint : kotlin.String = allowPeriodhostsPeriodregexpAtTypeHint_example // kotlin.String | 
-val filterPeriodmethods : kotlin.String = filterPeriodmethods_example // kotlin.String | 
-val filterPeriodmethodsAtTypeHint : kotlin.String = filterPeriodmethodsAtTypeHint_example // kotlin.String | 
+val allowEmpty : kotlin.Boolean = true // kotlin.Boolean | 
+val allowEmptyAtTypeHint : kotlin.String = allowEmptyAtTypeHint_example // kotlin.String | 
+val allowHosts : kotlin.String = allowHosts_example // kotlin.String | 
+val allowHostsAtTypeHint : kotlin.String = allowHostsAtTypeHint_example // kotlin.String | 
+val allowHostsRegexp : kotlin.String = allowHostsRegexp_example // kotlin.String | 
+val allowHostsRegexpAtTypeHint : kotlin.String = allowHostsRegexpAtTypeHint_example // kotlin.String | 
+val filterMethods : kotlin.String = filterMethods_example // kotlin.String | 
+val filterMethodsAtTypeHint : kotlin.String = filterMethodsAtTypeHint_example // kotlin.String | 
 try {
-    apiInstance.postConfigApacheSlingReferrerFilter(allowPeriodempty, allowPeriodemptyAtTypeHint, allowPeriodhosts, allowPeriodhostsAtTypeHint, allowPeriodhostsPeriodregexp, allowPeriodhostsPeriodregexpAtTypeHint, filterPeriodmethods, filterPeriodmethodsAtTypeHint)
+    apiInstance.postConfigApacheSlingReferrerFilter(allowEmpty, allowEmptyAtTypeHint, allowHosts, allowHostsAtTypeHint, allowHostsRegexp, allowHostsRegexpAtTypeHint, filterMethods, filterMethodsAtTypeHint)
 } catch (e: ClientException) {
     println("4xx response calling SlingApi#postConfigApacheSlingReferrerFilter")
     e.printStackTrace()
@@ -1290,14 +1351,14 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **allowPeriodempty** | **kotlin.Boolean**|  | [optional]
- **allowPeriodemptyAtTypeHint** | **kotlin.String**|  | [optional]
- **allowPeriodhosts** | **kotlin.String**|  | [optional]
- **allowPeriodhostsAtTypeHint** | **kotlin.String**|  | [optional]
- **allowPeriodhostsPeriodregexp** | **kotlin.String**|  | [optional]
- **allowPeriodhostsPeriodregexpAtTypeHint** | **kotlin.String**|  | [optional]
- **filterPeriodmethods** | **kotlin.String**|  | [optional]
- **filterPeriodmethodsAtTypeHint** | **kotlin.String**|  | [optional]
+ **allowEmpty** | **kotlin.Boolean**|  | [optional]
+ **allowEmptyAtTypeHint** | **kotlin.String**|  | [optional]
+ **allowHosts** | **kotlin.String**|  | [optional]
+ **allowHostsAtTypeHint** | **kotlin.String**|  | [optional]
+ **allowHostsRegexp** | **kotlin.String**|  | [optional]
+ **allowHostsRegexpAtTypeHint** | **kotlin.String**|  | [optional]
+ **filterMethods** | **kotlin.String**|  | [optional]
+ **filterMethodsAtTypeHint** | **kotlin.String**|  | [optional]
 
 ### Return type
 
@@ -1305,7 +1366,57 @@ null (empty response body)
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+<a name="postConfigProperty"></a>
+# **postConfigProperty**
+> postConfigProperty(configNodeName)
+
+
+
+### Example
+```kotlin
+// Import classes:
+//import org.openapitools.client.infrastructure.*
+//import org.openapitools.client.models.*
+
+val apiInstance = SlingApi()
+val configNodeName : kotlin.String = configNodeName_example // kotlin.String | 
+try {
+    apiInstance.postConfigProperty(configNodeName)
+} catch (e: ClientException) {
+    println("4xx response calling SlingApi#postConfigProperty")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling SlingApi#postConfigProperty")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **configNodeName** | **kotlin.String**|  |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -1314,7 +1425,7 @@ null (empty response body)
 
 <a name="postNode"></a>
 # **postNode**
-> postNode(path, name, operation, deleteAuthorizable, file)
+> postNode(path, name, colonOperation, deleteAuthorizable, file)
 
 
 
@@ -1327,11 +1438,11 @@ null (empty response body)
 val apiInstance = SlingApi()
 val path : kotlin.String = path_example // kotlin.String | 
 val name : kotlin.String = name_example // kotlin.String | 
-val operation : kotlin.String = operation_example // kotlin.String | 
+val colonOperation : kotlin.String = colonOperation_example // kotlin.String | 
 val deleteAuthorizable : kotlin.String = deleteAuthorizable_example // kotlin.String | 
 val file : java.io.File = BINARY_DATA_HERE // java.io.File | 
 try {
-    apiInstance.postNode(path, name, operation, deleteAuthorizable, file)
+    apiInstance.postNode(path, name, colonOperation, deleteAuthorizable, file)
 } catch (e: ClientException) {
     println("4xx response calling SlingApi#postNode")
     e.printStackTrace()
@@ -1347,9 +1458,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path** | **kotlin.String**|  |
  **name** | **kotlin.String**|  |
- **operation** | **kotlin.String**|  | [optional]
+ **colonOperation** | **kotlin.String**|  | [optional]
  **deleteAuthorizable** | **kotlin.String**|  | [optional]
- **file** | **java.io.File**|  | [optional] [default to null]
+ **file** | **java.io.File**|  | [optional]
 
 ### Return type
 
@@ -1357,7 +1468,10 @@ null (empty response body)
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -1405,7 +1519,10 @@ null (empty response body)
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -1414,7 +1531,7 @@ null (empty response body)
 
 <a name="postPath"></a>
 # **postPath**
-> postPath(path, jcrPrimaryType, name)
+> postPath(path, jcrColonPrimaryType, colonName)
 
 
 
@@ -1426,10 +1543,10 @@ null (empty response body)
 
 val apiInstance = SlingApi()
 val path : kotlin.String = path_example // kotlin.String | 
-val jcrPrimaryType : kotlin.String = jcrPrimaryType_example // kotlin.String | 
-val name : kotlin.String = name_example // kotlin.String | 
+val jcrColonPrimaryType : kotlin.String = jcrColonPrimaryType_example // kotlin.String | 
+val colonName : kotlin.String = colonName_example // kotlin.String | 
 try {
-    apiInstance.postPath(path, jcrPrimaryType, name)
+    apiInstance.postPath(path, jcrColonPrimaryType, colonName)
 } catch (e: ClientException) {
     println("4xx response calling SlingApi#postPath")
     e.printStackTrace()
@@ -1444,8 +1561,8 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path** | **kotlin.String**|  |
- **jcrPrimaryType** | **kotlin.String**|  |
- **name** | **kotlin.String**|  |
+ **jcrColonPrimaryType** | **kotlin.String**|  |
+ **colonName** | **kotlin.String**|  |
 
 ### Return type
 
@@ -1453,7 +1570,10 @@ null (empty response body)
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -1462,7 +1582,7 @@ null (empty response body)
 
 <a name="postQuery"></a>
 # **postQuery**
-> kotlin.String postQuery(path, pPeriodlimit, 1Property, 1PropertyPeriodvalue)
+> kotlin.String postQuery(path, pLimit, `1property`, `1propertyValue`)
 
 
 
@@ -1474,11 +1594,11 @@ null (empty response body)
 
 val apiInstance = SlingApi()
 val path : kotlin.String = path_example // kotlin.String | 
-val pPeriodlimit : java.math.BigDecimal = 1.2 // java.math.BigDecimal | 
-val 1Property : kotlin.String = 1Property_example // kotlin.String | 
-val 1PropertyPeriodvalue : kotlin.String = 1PropertyPeriodvalue_example // kotlin.String | 
+val pLimit : java.math.BigDecimal = 8.14 // java.math.BigDecimal | 
+val `1property` : kotlin.String = `1property`_example // kotlin.String | 
+val `1propertyValue` : kotlin.String = `1propertyValue`_example // kotlin.String | 
 try {
-    val result : kotlin.String = apiInstance.postQuery(path, pPeriodlimit, 1Property, 1PropertyPeriodvalue)
+    val result : kotlin.String = apiInstance.postQuery(path, pLimit, `1property`, `1propertyValue`)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling SlingApi#postQuery")
@@ -1494,9 +1614,9 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path** | **kotlin.String**|  |
- **pPeriodlimit** | **java.math.BigDecimal**|  |
- **1Property** | **kotlin.String**|  |
- **1PropertyPeriodvalue** | **kotlin.String**|  |
+ **pLimit** | **java.math.BigDecimal**|  |
+ **&#x60;1property&#x60;** | **kotlin.String**|  |
+ **&#x60;1propertyValue&#x60;** | **kotlin.String**|  |
 
 ### Return type
 
@@ -1504,7 +1624,10 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -1552,7 +1675,10 @@ null (empty response body)
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -1561,7 +1687,7 @@ null (empty response body)
 
 <a name="postTruststore"></a>
 # **postTruststore**
-> kotlin.String postTruststore(operation, newPassword, rePassword, keyStoreType, removeAlias, certificate)
+> kotlin.String postTruststore(colonOperation, newPassword, rePassword, keyStoreType, removeAlias, certificate)
 
 
 
@@ -1572,14 +1698,14 @@ null (empty response body)
 //import org.openapitools.client.models.*
 
 val apiInstance = SlingApi()
-val operation : kotlin.String = operation_example // kotlin.String | 
+val colonOperation : kotlin.String = colonOperation_example // kotlin.String | 
 val newPassword : kotlin.String = newPassword_example // kotlin.String | 
 val rePassword : kotlin.String = rePassword_example // kotlin.String | 
 val keyStoreType : kotlin.String = keyStoreType_example // kotlin.String | 
 val removeAlias : kotlin.String = removeAlias_example // kotlin.String | 
 val certificate : java.io.File = BINARY_DATA_HERE // java.io.File | 
 try {
-    val result : kotlin.String = apiInstance.postTruststore(operation, newPassword, rePassword, keyStoreType, removeAlias, certificate)
+    val result : kotlin.String = apiInstance.postTruststore(colonOperation, newPassword, rePassword, keyStoreType, removeAlias, certificate)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling SlingApi#postTruststore")
@@ -1594,12 +1720,12 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **operation** | **kotlin.String**|  | [optional]
+ **colonOperation** | **kotlin.String**|  | [optional]
  **newPassword** | **kotlin.String**|  | [optional]
  **rePassword** | **kotlin.String**|  | [optional]
  **keyStoreType** | **kotlin.String**|  | [optional]
  **removeAlias** | **kotlin.String**|  | [optional]
- **certificate** | **java.io.File**|  | [optional] [default to null]
+ **certificate** | **java.io.File**|  | [optional]
 
 ### Return type
 
@@ -1607,7 +1733,10 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -1616,7 +1745,7 @@ Name | Type | Description  | Notes
 
 <a name="postTruststorePKCS12"></a>
 # **postTruststorePKCS12**
-> kotlin.String postTruststorePKCS12(truststorePeriodp12)
+> kotlin.String postTruststorePKCS12(truststoreP12)
 
 
 
@@ -1627,9 +1756,9 @@ Name | Type | Description  | Notes
 //import org.openapitools.client.models.*
 
 val apiInstance = SlingApi()
-val truststorePeriodp12 : java.io.File = BINARY_DATA_HERE // java.io.File | 
+val truststoreP12 : java.io.File = BINARY_DATA_HERE // java.io.File | 
 try {
-    val result : kotlin.String = apiInstance.postTruststorePKCS12(truststorePeriodp12)
+    val result : kotlin.String = apiInstance.postTruststorePKCS12(truststoreP12)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling SlingApi#postTruststorePKCS12")
@@ -1644,7 +1773,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **truststorePeriodp12** | **java.io.File**|  | [optional] [default to null]
+ **truststoreP12** | **java.io.File**|  | [optional]
 
 ### Return type
 
@@ -1652,7 +1781,10 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 

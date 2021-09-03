@@ -10,52 +10,52 @@ import org.openapitools.model.SamlConfigurationPropertyItemsString;
 
 @Canonical
 class SamlConfigurationProperties {
-    SamlConfigurationPropertyItemsArray path = null
-
-    SamlConfigurationPropertyItemsLong serviceRanking = null
-
-    SamlConfigurationPropertyItemsString idpUrl = null
-
-    SamlConfigurationPropertyItemsString idpCertAlias = null
-
-    SamlConfigurationPropertyItemsBoolean idpHttpRedirect = null
-
-    SamlConfigurationPropertyItemsString serviceProviderEntityId = null
-
-    SamlConfigurationPropertyItemsString assertionConsumerServiceURL = null
-
-    SamlConfigurationPropertyItemsString spPrivateKeyAlias = null
-
-    SamlConfigurationPropertyItemsString keyStorePassword = null
-
-    SamlConfigurationPropertyItemsString defaultRedirectUrl = null
-
-    SamlConfigurationPropertyItemsString userIDAttribute = null
-
-    SamlConfigurationPropertyItemsBoolean useEncryption = null
-
-    SamlConfigurationPropertyItemsBoolean createUser = null
-
-    SamlConfigurationPropertyItemsBoolean addGroupMemberships = null
-
-    SamlConfigurationPropertyItemsString groupMembershipAttribute = null
-
-    SamlConfigurationPropertyItemsArray defaultGroups = null
-
-    SamlConfigurationPropertyItemsString nameIdFormat = null
-
-    SamlConfigurationPropertyItemsArray synchronizeAttributes = null
-
-    SamlConfigurationPropertyItemsBoolean handleLogout = null
-
-    SamlConfigurationPropertyItemsString logoutUrl = null
-
-    SamlConfigurationPropertyItemsLong clockTolerance = null
-
-    SamlConfigurationPropertyItemsString digestMethod = null
-
-    SamlConfigurationPropertyItemsString signatureMethod = null
-
-    SamlConfigurationPropertyItemsString userIntermediatePath = null
-
+    
+    SamlConfigurationPropertyItemsArray path
+    
+    SamlConfigurationPropertyItemsLong serviceRanking
+    
+    SamlConfigurationPropertyItemsString idpUrl
+    
+    SamlConfigurationPropertyItemsString idpCertAlias
+    
+    SamlConfigurationPropertyItemsBoolean idpHttpRedirect
+    
+    SamlConfigurationPropertyItemsString serviceProviderEntityId
+    
+    SamlConfigurationPropertyItemsString assertionConsumerServiceURL
+    
+    SamlConfigurationPropertyItemsString spPrivateKeyAlias
+    
+    SamlConfigurationPropertyItemsString keyStorePassword
+    
+    SamlConfigurationPropertyItemsString defaultRedirectUrl
+    
+    SamlConfigurationPropertyItemsString userIDAttribute
+    
+    SamlConfigurationPropertyItemsBoolean useEncryption
+    
+    SamlConfigurationPropertyItemsBoolean createUser
+    
+    SamlConfigurationPropertyItemsBoolean addGroupMemberships
+    
+    SamlConfigurationPropertyItemsString groupMembershipAttribute
+    
+    SamlConfigurationPropertyItemsArray defaultGroups
+    
+    SamlConfigurationPropertyItemsString nameIdFormat
+    
+    SamlConfigurationPropertyItemsArray synchronizeAttributes
+    
+    SamlConfigurationPropertyItemsBoolean handleLogout
+    
+    SamlConfigurationPropertyItemsString logoutUrl
+    
+    SamlConfigurationPropertyItemsLong clockTolerance
+    
+    SamlConfigurationPropertyItemsString digestMethod
+    
+    SamlConfigurationPropertyItemsString signatureMethod
+    
+    SamlConfigurationPropertyItemsString userIntermediatePath
 }

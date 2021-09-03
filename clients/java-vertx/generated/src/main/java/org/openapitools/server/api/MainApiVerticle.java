@@ -19,7 +19,7 @@ import io.vertx.core.Vertx;
 import io.vertx.ext.web.Router;
 
 public class MainApiVerticle extends AbstractVerticle {
-    final static Logger LOGGER = LoggerFactory.getLogger(MainApiVerticle.class);
+    static final Logger LOGGER = LoggerFactory.getLogger(MainApiVerticle.class);
 
     private int serverPort = 8080;
     protected Router router;
@@ -59,9 +59,9 @@ public class MainApiVerticle extends AbstractVerticle {
                         }
                     });
             } else {
-            	startFuture.fail(readFile.cause());
+                startFuture.fail(readFile.cause());
             }
-        });        		        
+        });                
     }
       
     public void deployVerticles(Future<Void> startFuture) {
@@ -99,6 +99,15 @@ public class MainApiVerticle extends AbstractVerticle {
             } else {
                 startFuture.fail(res.cause());
                 LOGGER.error("CustomApiVerticle : Deployment failed");
+            }
+        });
+        
+        vertx.deployVerticle("org.openapitools.server.api.verticle.GraniteApiVerticle", res -> {
+            if (res.succeeded()) {
+                LOGGER.info("GraniteApiVerticle : Deployed");
+            } else {
+                startFuture.fail(res.cause());
+                LOGGER.error("GraniteApiVerticle : Deployment failed");
             }
         });
         

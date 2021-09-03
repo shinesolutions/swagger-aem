@@ -6,21 +6,22 @@ import javax.ws.rs.core.Response;
 
 import io.swagger.annotations.*;
 
+import java.io.InputStream;
 import java.util.Map;
 import java.util.List;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
 
-@Path("/apps")
+@Path("/apps/system/config")
 @Api(description = "the apps API")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2019-08-04T23:42:15.912Z[GMT]")
-public class AppsApi {
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2021-09-03T15:26:06.461+10:00[Australia/Melbourne]")public class AppsApi {
 
     @POST
-    @Path("/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config")
+    @Path("/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config")
     @ApiOperation(value = "", notes = "", response = Void.class, authorizations = {
+        
         @Authorization(value = "aemAuth")
-    }, tags={ "sling",  })
+         }, tags={ "sling" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = Void.class)
     })
@@ -29,10 +30,11 @@ public class AppsApi {
     }
 
     @POST
-    @Path("/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck")
+    @Path("/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck")
     @ApiOperation(value = "", notes = "", response = Void.class, authorizations = {
+        
         @Authorization(value = "aemAuth")
-    }, tags={ "custom",  })
+         }, tags={ "custom" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = Void.class)
     })
@@ -41,10 +43,11 @@ public class AppsApi {
     }
 
     @POST
-    @Path("/system/config/com.shinesolutions.aem.passwordreset.Activator")
+    @Path("/com.shinesolutions.aem.passwordreset.Activator")
     @ApiOperation(value = "", notes = "", response = Void.class, authorizations = {
+        
         @Authorization(value = "aemAuth")
-    }, tags={ "custom",  })
+         }, tags={ "custom" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = Void.class)
     })
@@ -53,10 +56,11 @@ public class AppsApi {
     }
 
     @POST
-    @Path("/system/config/org.apache.felix.http")
+    @Path("/org.apache.felix.http")
     @ApiOperation(value = "", notes = "", response = Void.class, authorizations = {
+        
         @Authorization(value = "aemAuth")
-    }, tags={ "sling",  })
+         }, tags={ "sling" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = Void.class)
     })
@@ -65,10 +69,11 @@ public class AppsApi {
     }
 
     @POST
-    @Path("/system/config/org.apache.http.proxyconfigurator.config")
+    @Path("/org.apache.http.proxyconfigurator.config")
     @ApiOperation(value = "", notes = "", response = Void.class, authorizations = {
+        
         @Authorization(value = "aemAuth")
-    }, tags={ "sling",  })
+         }, tags={ "sling" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = Void.class)
     })
@@ -77,10 +82,11 @@ public class AppsApi {
     }
 
     @POST
-    @Path("/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet")
+    @Path("/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet")
     @ApiOperation(value = "", notes = "", response = Void.class, authorizations = {
+        
         @Authorization(value = "aemAuth")
-    }, tags={ "sling",  })
+         }, tags={ "sling" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = Void.class)
     })
@@ -89,10 +95,11 @@ public class AppsApi {
     }
 
     @POST
-    @Path("/system/config/org.apache.sling.servlets.get.DefaultGetServlet")
+    @Path("/org.apache.sling.servlets.get.DefaultGetServlet")
     @ApiOperation(value = "", notes = "", response = Void.class, authorizations = {
+        
         @Authorization(value = "aemAuth")
-    }, tags={ "sling",  })
+         }, tags={ "sling" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = Void.class)
     })
@@ -101,14 +108,28 @@ public class AppsApi {
     }
 
     @POST
-    @Path("/system/config/org.apache.sling.security.impl.ReferrerFilter")
+    @Path("/org.apache.sling.security.impl.ReferrerFilter")
     @ApiOperation(value = "", notes = "", response = Void.class, authorizations = {
+        
         @Authorization(value = "aemAuth")
-    }, tags={ "sling" })
+         }, tags={ "sling" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = Void.class)
     })
     public Response postConfigApacheSlingReferrerFilter(@QueryParam("allow.empty")    Boolean allowEmpty,@QueryParam("allow.empty@TypeHint")    String allowEmptyAtTypeHint,@QueryParam("allow.hosts")    String allowHosts,@QueryParam("allow.hosts@TypeHint")    String allowHostsAtTypeHint,@QueryParam("allow.hosts.regexp")    String allowHostsRegexp,@QueryParam("allow.hosts.regexp@TypeHint")    String allowHostsRegexpAtTypeHint,@QueryParam("filter.methods")    String filterMethods,@QueryParam("filter.methods@TypeHint")    String filterMethodsAtTypeHint) {
+        return Response.ok().entity("magic!").build();
+    }
+
+    @POST
+    @Path("/{configNodeName}")
+    @ApiOperation(value = "", notes = "", response = Void.class, authorizations = {
+        
+        @Authorization(value = "aemAuth")
+         }, tags={ "sling" })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "Default response", response = Void.class)
+    })
+    public Response postConfigProperty(@PathParam("configNodeName") String configNodeName) {
         return Response.ok().entity("magic!").build();
     }
 }

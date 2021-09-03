@@ -7,33 +7,33 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
  * SamlConfigurationPropertyItemsArray
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-08-04T23:44:43.219Z[GMT]")
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-09-03T15:28:35.636+10:00[Australia/Melbourne]")
 public class SamlConfigurationPropertyItemsArray   {
   @JsonProperty("name")
-  private String name = null;
+  private String name;
 
   @JsonProperty("optional")
-  private Boolean optional = null;
+  private Boolean optional;
 
   @JsonProperty("is_set")
-  private Boolean isSet = null;
+  private Boolean isSet;
 
   @JsonProperty("type")
-  private Integer type = null;
+  private Integer type;
 
   @JsonProperty("values")
   @Valid
   private List<String> values = null;
 
   @JsonProperty("description")
-  private String description = null;
+  private String description;
 
   public SamlConfigurationPropertyItemsArray name(String name) {
     this.name = name;
@@ -43,7 +43,7 @@ public class SamlConfigurationPropertyItemsArray   {
   /**
    * property name
    * @return name
-  **/
+  */
   @ApiModelProperty(value = "property name")
 
 
@@ -63,7 +63,7 @@ public class SamlConfigurationPropertyItemsArray   {
   /**
    * True if optional
    * @return optional
-  **/
+  */
   @ApiModelProperty(value = "True if optional")
 
 
@@ -83,7 +83,7 @@ public class SamlConfigurationPropertyItemsArray   {
   /**
    * True if property is set
    * @return isSet
-  **/
+  */
   @ApiModelProperty(value = "True if property is set")
 
 
@@ -103,7 +103,7 @@ public class SamlConfigurationPropertyItemsArray   {
   /**
    * Property type, 1=String, 3=long, 11=boolean, 12=Password
    * @return type
-  **/
+  */
   @ApiModelProperty(value = "Property type, 1=String, 3=long, 11=boolean, 12=Password")
 
 
@@ -131,7 +131,7 @@ public class SamlConfigurationPropertyItemsArray   {
   /**
    * Property value
    * @return values
-  **/
+  */
   @ApiModelProperty(value = "Property value")
 
 
@@ -151,7 +151,7 @@ public class SamlConfigurationPropertyItemsArray   {
   /**
    * Property description
    * @return description
-  **/
+  */
   @ApiModelProperty(value = "Property description")
 
 
@@ -165,7 +165,7 @@ public class SamlConfigurationPropertyItemsArray   {
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -205,7 +205,7 @@ public class SamlConfigurationPropertyItemsArray   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

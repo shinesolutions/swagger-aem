@@ -20,8 +20,8 @@ Feature | HTTP request | Description
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tags** | **STRING_32**|  | [optional] 
- **combine_tags_or** | **BOOLEAN**|  | [optional] 
+ **tags** | **STRING_32**|  | [optional] [default to null]
+ **combine_tags_or** | **BOOLEAN**|  | [optional] [default to null]
 
 ### Return type
 
@@ -49,8 +49,8 @@ Name | Type | Description  | Notes
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **bundles_ignored** | [**LIST [STRING_32]**](STRING_32.md)|  | [optional] 
- **bundles_ignored_type_hint** | **STRING_32**|  | [optional] 
+ **bundles_ignored** | [**LIST [STRING_32]**](STRING_32.md)|  | [optional] [default to null]
+ **bundles_ignored_type_hint** | **STRING_32**|  | [optional] [default to null]
 
 ### Return type
 
@@ -78,8 +78,8 @@ Name | Type | Description  | Notes
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pwdreset_authorizables** | [**LIST [STRING_32]**](STRING_32.md)|  | [optional] 
- **pwdreset_authorizables_type_hint** | **STRING_32**|  | [optional] 
+ **pwdreset_authorizables** | [**LIST [STRING_32]**](STRING_32.md)|  | [optional] [default to null]
+ **pwdreset_authorizables_type_hint** | **STRING_32**|  | [optional] [default to null]
 
 ### Return type
 

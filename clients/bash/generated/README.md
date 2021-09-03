@@ -1,6 +1,7 @@
 # Adobe Experience Manager (AEM) API Bash client
 
 ## Overview
+
 This is a Bash client script for accessing Adobe Experience Manager (AEM) API service.
 
 The script uses cURL underneath for making all REST calls.
@@ -43,6 +44,7 @@ $  --host http://<hostname>:<port> --dry-run <operationid>
 ```
 
 ## Docker image
+
 You can easily create a Docker image containing a preconfigured environment
 for using the REST Bash client including working autocompletion and short
 welcome message with basic instructions, using the generated Dockerfile:
@@ -59,6 +61,7 @@ is also available.
 ## Shell completion
 
 ### Bash
+
 The generated bash-completion script can be either directly loaded to the current Bash session using:
 
 ```shell
@@ -72,10 +75,13 @@ sudo cp .bash-completion /etc/bash-completion.d/
 ```
 
 #### OS X
+
 On OSX you might need to install bash-completion using Homebrew:
+
 ```shell
 brew install bash-completion
 ```
+
 and add the following to the `~/.bashrc`:
 
 ```shell
@@ -85,16 +91,17 @@ fi
 ```
 
 ### Zsh
-In Zsh, the generated `_` Zsh completion file must be copied to one of the folders under `$FPATH` variable.
 
+In Zsh, the generated `_` Zsh completion file must be copied to one of the folders under `$FPATH` variable.
 
 ## Documentation for API Endpoints
 
-All URIs are relative to */*
+All URIs are relative to **
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ConsoleApi* | [**getAemProductInfo**](docs/ConsoleApi.md#getaemproductinfo) | **GET** /system/console/status-productinfo.json | 
+*ConsoleApi* | [**getBundleInfo**](docs/ConsoleApi.md#getbundleinfo) | **GET** /system/console/bundles/{name}.json | 
 *ConsoleApi* | [**getConfigMgr**](docs/ConsoleApi.md#getconfigmgr) | **GET** /system/console/configMgr | 
 *ConsoleApi* | [**postBundle**](docs/ConsoleApi.md#postbundle) | **POST** /system/console/bundles/{name} | 
 *ConsoleApi* | [**postJmxRepository**](docs/ConsoleApi.md#postjmxrepository) | **POST** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} | 
@@ -111,6 +118,7 @@ Class | Method | HTTP request | Description
 *CustomApi* | [**getAemHealthCheck**](docs/CustomApi.md#getaemhealthcheck) | **GET** /system/health | 
 *CustomApi* | [**postConfigAemHealthCheckServlet**](docs/CustomApi.md#postconfigaemhealthcheckservlet) | **POST** /apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck | 
 *CustomApi* | [**postConfigAemPasswordReset**](docs/CustomApi.md#postconfigaempasswordreset) | **POST** /apps/system/config/com.shinesolutions.aem.passwordreset.Activator | 
+*GraniteApi* | [**sslSetup**](docs/GraniteApi.md#sslsetup) | **POST** /libs/granite/security/post/sslSetup.html | 
 *SlingApi* | [**deleteAgent**](docs/SlingApi.md#deleteagent) | **DELETE** /etc/replication/agents.{runmode}/{name} | 
 *SlingApi* | [**deleteNode**](docs/SlingApi.md#deletenode) | **DELETE** /{path}/{name} | 
 *SlingApi* | [**getAgent**](docs/SlingApi.md#getagent) | **GET** /etc/replication/agents.{runmode}/{name} | 
@@ -132,6 +140,7 @@ Class | Method | HTTP request | Description
 *SlingApi* | [**postConfigApacheSlingDavExServlet**](docs/SlingApi.md#postconfigapacheslingdavexservlet) | **POST** /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet | 
 *SlingApi* | [**postConfigApacheSlingGetServlet**](docs/SlingApi.md#postconfigapacheslinggetservlet) | **POST** /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet | 
 *SlingApi* | [**postConfigApacheSlingReferrerFilter**](docs/SlingApi.md#postconfigapacheslingreferrerfilter) | **POST** /apps/system/config/org.apache.sling.security.impl.ReferrerFilter | 
+*SlingApi* | [**postConfigProperty**](docs/SlingApi.md#postconfigproperty) | **POST** /apps/system/config/{configNodeName} | 
 *SlingApi* | [**postNode**](docs/SlingApi.md#postnode) | **POST** /{path}/{name} | 
 *SlingApi* | [**postNodeRw**](docs/SlingApi.md#postnoderw) | **POST** /{path}/{name}.rw.html | 
 *SlingApi* | [**postPath**](docs/SlingApi.md#postpath) | **POST** /{path}/ | 
@@ -143,8 +152,11 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [BundleData](docs/BundleData.md)
+ - [BundleDataProp](docs/BundleDataProp.md)
+ - [BundleInfo](docs/BundleInfo.md)
  - [InstallStatus](docs/InstallStatus.md)
- - [InstallStatus_status](docs/InstallStatus_status.md)
+ - [InstallStatusStatus](docs/InstallStatusStatus.md)
  - [KeystoreChainItems](docs/KeystoreChainItems.md)
  - [KeystoreInfo](docs/KeystoreInfo.md)
  - [KeystoreItems](docs/KeystoreItems.md)

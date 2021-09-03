@@ -83,6 +83,7 @@ public class SlingApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             
         };
@@ -200,6 +201,7 @@ public class SlingApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             
         };
@@ -317,6 +319,7 @@ public class SlingApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             
         };
@@ -432,6 +435,7 @@ public class SlingApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -546,6 +550,7 @@ public class SlingApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "text/plain"
         };
@@ -670,6 +675,7 @@ public class SlingApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/octet-stream"
         };
@@ -791,6 +797,7 @@ public class SlingApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             
         };
@@ -910,6 +917,7 @@ public class SlingApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/octet-stream"
         };
@@ -1041,6 +1049,7 @@ public class SlingApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1167,6 +1176,10 @@ public class SlingApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (path != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("path", path));
         }
@@ -1183,9 +1196,6 @@ public class SlingApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("1_property.value", _1propertyValue));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1319,6 +1329,7 @@ public class SlingApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/octet-stream"
         };
@@ -1421,6 +1432,7 @@ public class SlingApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1576,6 +1588,10 @@ public class SlingApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (jcrColonContentCqColonDistribute != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("jcr:content/cq:distribute", jcrColonContentCqColonDistribute));
         }
@@ -1776,9 +1792,6 @@ public class SlingApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair(":operation", colonOperation));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             
         };
@@ -2056,6 +2069,22 @@ public class SlingApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (certChain != null) {
+            localVarFormParams.put("cert-chain", certChain);
+        }
+
+        if (pk != null) {
+            localVarFormParams.put("pk", pk);
+        }
+
+        if (keyStore != null) {
+            localVarFormParams.put("keyStore", keyStore);
+        }
+
         if (colonOperation != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair(":operation", colonOperation));
         }
@@ -2090,21 +2119,6 @@ public class SlingApi {
 
         if (removeAlias != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("removeAlias", removeAlias));
-        }
-
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-        if (certChain != null) {
-            localVarFormParams.put("cert-chain", certChain);
-        }
-
-        if (pk != null) {
-            localVarFormParams.put("pk", pk);
-        }
-
-        if (keyStore != null) {
-            localVarFormParams.put("keyStore", keyStore);
         }
 
         final String[] localVarAccepts = {
@@ -2266,6 +2280,10 @@ public class SlingApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (authorizableId != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("authorizableId", authorizableId));
         }
@@ -2290,9 +2308,6 @@ public class SlingApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("profile/givenName", profileGivenName));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             "text/html"
         };
@@ -2467,6 +2482,10 @@ public class SlingApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (keyStorePassword != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("keyStorePassword", keyStorePassword));
         }
@@ -2659,9 +2678,6 @@ public class SlingApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("userIntermediatePath@TypeHint", userIntermediatePathAtTypeHint));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             
         };
@@ -2920,6 +2936,10 @@ public class SlingApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (orgApacheFelixHttpsNio != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("org.apache.felix.https.nio", orgApacheFelixHttpsNio));
         }
@@ -3000,9 +3020,6 @@ public class SlingApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("org.osgi.service.http.port.secure@TypeHint", orgOsgiServiceHttpPortSecureAtTypeHint));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             
         };
@@ -3169,6 +3186,10 @@ public class SlingApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (proxyHost != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("proxy.host", proxyHost));
         }
@@ -3217,9 +3238,6 @@ public class SlingApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("proxy.password@TypeHint", proxyPasswordAtTypeHint));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             
         };
@@ -3354,6 +3372,10 @@ public class SlingApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (alias != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("alias", alias));
         }
@@ -3370,9 +3392,6 @@ public class SlingApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("dav.create-absolute-uri@TypeHint", davCreateAbsoluteUriAtTypeHint));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             
         };
@@ -3487,6 +3506,10 @@ public class SlingApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (jsonMaximumresults != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("json.maximumresults", jsonMaximumresults));
         }
@@ -3519,9 +3542,6 @@ public class SlingApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("enable.xml@TypeHint", enableXmlAtTypeHint));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             
         };
@@ -3648,6 +3668,10 @@ public class SlingApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (allowEmpty != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("allow.empty", allowEmpty));
         }
@@ -3680,9 +3704,6 @@ public class SlingApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("filter.methods@TypeHint", filterMethodsAtTypeHint));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             
         };
@@ -3806,6 +3827,7 @@ public class SlingApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             
         };
@@ -3915,19 +3937,20 @@ public class SlingApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (file != null) {
+            localVarFormParams.put("file", file);
+        }
+
         if (colonOperation != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair(":operation", colonOperation));
         }
 
         if (deleteAuthorizable != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("deleteAuthorizable", deleteAuthorizable));
-        }
-
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-        if (file != null) {
-            localVarFormParams.put("file", file);
         }
 
         final String[] localVarAccepts = {
@@ -4054,13 +4077,14 @@ public class SlingApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (addMembers != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("addMembers", addMembers));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             
         };
@@ -4178,6 +4202,10 @@ public class SlingApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (jcrColonPrimaryType != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("jcr:primaryType", jcrColonPrimaryType));
         }
@@ -4186,9 +4214,6 @@ public class SlingApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair(":name", colonName));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             
         };
@@ -4311,6 +4336,10 @@ public class SlingApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (path != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("path", path));
         }
@@ -4327,9 +4356,6 @@ public class SlingApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("1_property.value", _1propertyValue));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -4463,6 +4489,10 @@ public class SlingApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (ignoredeactivated != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("ignoredeactivated", ignoredeactivated));
         }
@@ -4475,9 +4505,6 @@ public class SlingApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("path", path));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             
         };
@@ -4602,6 +4629,14 @@ public class SlingApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (certificate != null) {
+            localVarFormParams.put("certificate", certificate);
+        }
+
         if (colonOperation != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair(":operation", colonOperation));
         }
@@ -4620,13 +4655,6 @@ public class SlingApi {
 
         if (removeAlias != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("removeAlias", removeAlias));
-        }
-
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-        if (certificate != null) {
-            localVarFormParams.put("certificate", certificate);
         }
 
         final String[] localVarAccepts = {
@@ -4749,6 +4777,7 @@ public class SlingApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (truststoreP12 != null) {
             localVarFormParams.put("truststore.p12", truststoreP12);
         }

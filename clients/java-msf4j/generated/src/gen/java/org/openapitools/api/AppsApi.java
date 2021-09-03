@@ -21,16 +21,16 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.*;
 
-@Path("/apps")
+@Path("/apps/system/config")
 
 
 @io.swagger.annotations.Api(description = "the apps API")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaMSF4JServerCodegen", date = "2019-08-04T23:41:25.207Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaMSF4JServerCodegen", date = "2021-09-03T15:25:23.467+10:00[Australia/Melbourne]")
 public class AppsApi  {
    private final AppsApiService delegate = AppsApiServiceFactory.getAppsApi();
 
     @POST
-    @Path("/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config")
+    @Path("/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config")
     
     
     @io.swagger.annotations.ApiOperation(value = "", notes = "", response = Void.class, authorizations = {
@@ -91,7 +91,7 @@ public class AppsApi  {
         return delegate.postConfigAdobeGraniteSamlAuthenticationHandler(keyStorePassword,keyStorePasswordAtTypeHint,serviceRanking,serviceRankingAtTypeHint,idpHttpRedirect,idpHttpRedirectAtTypeHint,createUser,createUserAtTypeHint,defaultRedirectUrl,defaultRedirectUrlAtTypeHint,userIDAttribute,userIDAttributeAtTypeHint,defaultGroups,defaultGroupsAtTypeHint,idpCertAlias,idpCertAliasAtTypeHint,addGroupMemberships,addGroupMembershipsAtTypeHint,path,pathAtTypeHint,synchronizeAttributes,synchronizeAttributesAtTypeHint,clockTolerance,clockToleranceAtTypeHint,groupMembershipAttribute,groupMembershipAttributeAtTypeHint,idpUrl,idpUrlAtTypeHint,logoutUrl,logoutUrlAtTypeHint,serviceProviderEntityId,serviceProviderEntityIdAtTypeHint,assertionConsumerServiceURL,assertionConsumerServiceURLAtTypeHint,handleLogout,handleLogoutAtTypeHint,spPrivateKeyAlias,spPrivateKeyAliasAtTypeHint,useEncryption,useEncryptionAtTypeHint,nameIdFormat,nameIdFormatAtTypeHint,digestMethod,digestMethodAtTypeHint,signatureMethod,signatureMethodAtTypeHint,userIntermediatePath,userIntermediatePathAtTypeHint);
     }
     @POST
-    @Path("/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck")
+    @Path("/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck")
     
     
     @io.swagger.annotations.ApiOperation(value = "", notes = "", response = Void.class, authorizations = {
@@ -106,7 +106,7 @@ public class AppsApi  {
         return delegate.postConfigAemHealthCheckServlet(bundlesIgnored,bundlesIgnoredAtTypeHint);
     }
     @POST
-    @Path("/system/config/com.shinesolutions.aem.passwordreset.Activator")
+    @Path("/com.shinesolutions.aem.passwordreset.Activator")
     
     
     @io.swagger.annotations.ApiOperation(value = "", notes = "", response = Void.class, authorizations = {
@@ -121,7 +121,7 @@ public class AppsApi  {
         return delegate.postConfigAemPasswordReset(pwdresetAuthorizables,pwdresetAuthorizablesAtTypeHint);
     }
     @POST
-    @Path("/system/config/org.apache.felix.http")
+    @Path("/org.apache.felix.http")
     
     
     @io.swagger.annotations.ApiOperation(value = "", notes = "", response = Void.class, authorizations = {
@@ -154,7 +154,7 @@ public class AppsApi  {
         return delegate.postConfigApacheFelixJettyBasedHttpService(orgApacheFelixHttpsNio,orgApacheFelixHttpsNioAtTypeHint,orgApacheFelixHttpsKeystore,orgApacheFelixHttpsKeystoreAtTypeHint,orgApacheFelixHttpsKeystorePassword,orgApacheFelixHttpsKeystorePasswordAtTypeHint,orgApacheFelixHttpsKeystoreKey,orgApacheFelixHttpsKeystoreKeyAtTypeHint,orgApacheFelixHttpsKeystoreKeyPassword,orgApacheFelixHttpsKeystoreKeyPasswordAtTypeHint,orgApacheFelixHttpsTruststore,orgApacheFelixHttpsTruststoreAtTypeHint,orgApacheFelixHttpsTruststorePassword,orgApacheFelixHttpsTruststorePasswordAtTypeHint,orgApacheFelixHttpsClientcertificate,orgApacheFelixHttpsClientcertificateAtTypeHint,orgApacheFelixHttpsEnable,orgApacheFelixHttpsEnableAtTypeHint,orgOsgiServiceHttpPortSecure,orgOsgiServiceHttpPortSecureAtTypeHint);
     }
     @POST
-    @Path("/system/config/org.apache.http.proxyconfigurator.config")
+    @Path("/org.apache.http.proxyconfigurator.config")
     
     
     @io.swagger.annotations.ApiOperation(value = "", notes = "", response = Void.class, authorizations = {
@@ -179,7 +179,7 @@ public class AppsApi  {
         return delegate.postConfigApacheHttpComponentsProxyConfiguration(proxyHost,proxyHostAtTypeHint,proxyPort,proxyPortAtTypeHint,proxyExceptions,proxyExceptionsAtTypeHint,proxyEnabled,proxyEnabledAtTypeHint,proxyUser,proxyUserAtTypeHint,proxyPassword,proxyPasswordAtTypeHint);
     }
     @POST
-    @Path("/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet")
+    @Path("/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet")
     
     
     @io.swagger.annotations.ApiOperation(value = "", notes = "", response = Void.class, authorizations = {
@@ -196,7 +196,7 @@ public class AppsApi  {
         return delegate.postConfigApacheSlingDavExServlet(alias,aliasAtTypeHint,davCreateAbsoluteUri,davCreateAbsoluteUriAtTypeHint);
     }
     @POST
-    @Path("/system/config/org.apache.sling.servlets.get.DefaultGetServlet")
+    @Path("/org.apache.sling.servlets.get.DefaultGetServlet")
     
     
     @io.swagger.annotations.ApiOperation(value = "", notes = "", response = Void.class, authorizations = {
@@ -217,7 +217,7 @@ public class AppsApi  {
         return delegate.postConfigApacheSlingGetServlet(jsonMaximumresults,jsonMaximumresultsAtTypeHint,enableHtml,enableHtmlAtTypeHint,enableTxt,enableTxtAtTypeHint,enableXml,enableXmlAtTypeHint);
     }
     @POST
-    @Path("/system/config/org.apache.sling.security.impl.ReferrerFilter")
+    @Path("/org.apache.sling.security.impl.ReferrerFilter")
     
     
     @io.swagger.annotations.ApiOperation(value = "", notes = "", response = Void.class, authorizations = {
@@ -236,5 +236,19 @@ public class AppsApi  {
 )
     throws NotFoundException {
         return delegate.postConfigApacheSlingReferrerFilter(allowEmpty,allowEmptyAtTypeHint,allowHosts,allowHostsAtTypeHint,allowHostsRegexp,allowHostsRegexpAtTypeHint,filterMethods,filterMethodsAtTypeHint);
+    }
+    @POST
+    @Path("/{configNodeName}")
+    
+    
+    @io.swagger.annotations.ApiOperation(value = "", notes = "", response = Void.class, authorizations = {
+        @io.swagger.annotations.Authorization(value = "aemAuth")
+    }, tags={ "sling", })
+    @io.swagger.annotations.ApiResponses(value = { 
+        @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = Void.class) })
+    public Response postConfigProperty(@ApiParam(value = "",required=true) @PathParam("configNodeName") String configNodeName
+)
+    throws NotFoundException {
+        return delegate.postConfigProperty(configNodeName);
     }
 }

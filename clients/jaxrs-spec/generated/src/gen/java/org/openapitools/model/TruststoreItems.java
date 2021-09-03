@@ -1,23 +1,27 @@
 package org.openapitools.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
-
 
 import io.swagger.annotations.*;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 
-public class TruststoreItems   {
+
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2021-09-03T15:26:06.461+10:00[Australia/Melbourne]")public class TruststoreItems   {
   
-  private @Valid String alias = null;
-  private @Valid String entryType = null;
-  private @Valid String subject = null;
-  private @Valid String issuer = null;
-  private @Valid String notBefore = null;
-  private @Valid String notAfter = null;
-  private @Valid Integer serialNumber = null;
+  private @Valid String alias;
+  private @Valid String entryType;
+  private @Valid String subject;
+  private @Valid String issuer;
+  private @Valid String notBefore;
+  private @Valid String notAfter;
+  private @Valid Integer serialNumber;
 
   /**
    * Truststore alias name
@@ -28,16 +32,19 @@ public class TruststoreItems   {
   }
 
   
+
+  
   @ApiModelProperty(value = "Truststore alias name")
   @JsonProperty("alias")
   public String getAlias() {
     return alias;
   }
+
   public void setAlias(String alias) {
     this.alias = alias;
   }
 
-  /**
+/**
    **/
   public TruststoreItems entryType(String entryType) {
     this.entryType = entryType;
@@ -45,16 +52,19 @@ public class TruststoreItems   {
   }
 
   
+
+  
   @ApiModelProperty(value = "")
   @JsonProperty("entryType")
   public String getEntryType() {
     return entryType;
   }
+
   public void setEntryType(String entryType) {
     this.entryType = entryType;
   }
 
-  /**
+/**
    * e.g. \&quot;CN&#x3D;localhost\&quot;
    **/
   public TruststoreItems subject(String subject) {
@@ -63,16 +73,19 @@ public class TruststoreItems   {
   }
 
   
+
+  
   @ApiModelProperty(value = "e.g. \"CN=localhost\"")
   @JsonProperty("subject")
   public String getSubject() {
     return subject;
   }
+
   public void setSubject(String subject) {
     this.subject = subject;
   }
 
-  /**
+/**
    * e.g. \&quot;CN&#x3D;Admin\&quot;
    **/
   public TruststoreItems issuer(String issuer) {
@@ -81,16 +94,19 @@ public class TruststoreItems   {
   }
 
   
+
+  
   @ApiModelProperty(value = "e.g. \"CN=Admin\"")
   @JsonProperty("issuer")
   public String getIssuer() {
     return issuer;
   }
+
   public void setIssuer(String issuer) {
     this.issuer = issuer;
   }
 
-  /**
+/**
    * e.g. \&quot;Sun Jul 01 12:00:00 AEST 2018\&quot;
    **/
   public TruststoreItems notBefore(String notBefore) {
@@ -99,16 +115,19 @@ public class TruststoreItems   {
   }
 
   
+
+  
   @ApiModelProperty(value = "e.g. \"Sun Jul 01 12:00:00 AEST 2018\"")
   @JsonProperty("notBefore")
   public String getNotBefore() {
     return notBefore;
   }
+
   public void setNotBefore(String notBefore) {
     this.notBefore = notBefore;
   }
 
-  /**
+/**
    * e.g. \&quot;Sun Jun 30 23:59:50 AEST 2019\&quot;
    **/
   public TruststoreItems notAfter(String notAfter) {
@@ -117,16 +136,19 @@ public class TruststoreItems   {
   }
 
   
+
+  
   @ApiModelProperty(value = "e.g. \"Sun Jun 30 23:59:50 AEST 2019\"")
   @JsonProperty("notAfter")
   public String getNotAfter() {
     return notAfter;
   }
+
   public void setNotAfter(String notAfter) {
     this.notAfter = notAfter;
   }
 
-  /**
+/**
    * 18165099476682912368
    **/
   public TruststoreItems serialNumber(Integer serialNumber) {
@@ -135,18 +157,21 @@ public class TruststoreItems   {
   }
 
   
+
+  
   @ApiModelProperty(value = "18165099476682912368")
   @JsonProperty("serialNumber")
   public Integer getSerialNumber() {
     return serialNumber;
   }
+
   public void setSerialNumber(Integer serialNumber) {
     this.serialNumber = serialNumber;
   }
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -154,13 +179,13 @@ public class TruststoreItems   {
       return false;
     }
     TruststoreItems truststoreItems = (TruststoreItems) o;
-    return Objects.equals(alias, truststoreItems.alias) &&
-        Objects.equals(entryType, truststoreItems.entryType) &&
-        Objects.equals(subject, truststoreItems.subject) &&
-        Objects.equals(issuer, truststoreItems.issuer) &&
-        Objects.equals(notBefore, truststoreItems.notBefore) &&
-        Objects.equals(notAfter, truststoreItems.notAfter) &&
-        Objects.equals(serialNumber, truststoreItems.serialNumber);
+    return Objects.equals(this.alias, truststoreItems.alias) &&
+        Objects.equals(this.entryType, truststoreItems.entryType) &&
+        Objects.equals(this.subject, truststoreItems.subject) &&
+        Objects.equals(this.issuer, truststoreItems.issuer) &&
+        Objects.equals(this.notBefore, truststoreItems.notBefore) &&
+        Objects.equals(this.notAfter, truststoreItems.notAfter) &&
+        Objects.equals(this.serialNumber, truststoreItems.serialNumber);
   }
 
   @Override
@@ -188,11 +213,13 @@ public class TruststoreItems   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }
     return o.toString().replace("\n", "\n    ");
   }
+
+
 }
 

@@ -21,6 +21,9 @@ import scalaz.concurrent.Task
 
 import HelperCodecs._
 
+import java.io.File
+import org.openapitools.client.api.InstallStatus
+
 object CrxApi {
 
   val client = PooledHttp1Client()

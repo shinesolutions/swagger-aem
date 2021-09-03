@@ -19,6 +19,12 @@ namespace Org.OpenAPITools.Api
         /// <summary>
         ///  
         /// </summary>
+        /// <param name="name"></param>
+        /// <returns>BundleInfo</returns>
+        BundleInfo GetBundleInfo (string name);
+        /// <summary>
+        ///  
+        /// </summary>
         /// <returns>string</returns>
         string GetConfigMgr ();
         /// <summary>
@@ -70,7 +76,7 @@ namespace Org.OpenAPITools.Api
         /// <returns>SamlConfigurationInfo</returns>
         SamlConfigurationInfo PostSamlConfiguration (bool? post, bool? apply, bool? delete, string action, string location, List<string> path, int? serviceRanking, string idpUrl, string idpCertAlias, bool? idpHttpRedirect, string serviceProviderEntityId, string assertionConsumerServiceURL, string spPrivateKeyAlias, string keyStorePassword, string defaultRedirectUrl, string userIDAttribute, bool? useEncryption, bool? createUser, bool? addGroupMemberships, string groupMembershipAttribute, List<string> defaultGroups, string nameIdFormat, List<string> synchronizeAttributes, bool? handleLogout, string logoutUrl, int? clockTolerance, string digestMethod, string signatureMethod, string userIntermediatePath, List<string> propertylist);
     }
-  
+
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
@@ -84,11 +90,11 @@ namespace Org.OpenAPITools.Api
         public ConsoleApi(ApiClient apiClient = null)
         {
             if (apiClient == null) // use the default one in Configuration
-                this.ApiClient = Configuration.DefaultApiClient; 
+                this.ApiClient = Configuration.DefaultApiClient;
             else
                 this.ApiClient = apiClient;
         }
-    
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ConsoleApi"/> class.
         /// </summary>
@@ -97,7 +103,7 @@ namespace Org.OpenAPITools.Api
         {
             this.ApiClient = new ApiClient(basePath);
         }
-    
+
         /// <summary>
         /// Sets the base path of the API client.
         /// </summary>
@@ -107,7 +113,7 @@ namespace Org.OpenAPITools.Api
         {
             this.ApiClient.BasePath = basePath;
         }
-    
+
         /// <summary>
         /// Gets the base path of the API client.
         /// </summary>
@@ -117,83 +123,120 @@ namespace Org.OpenAPITools.Api
         {
             return this.ApiClient.BasePath;
         }
-    
+
         /// <summary>
         /// Gets or sets the API client.
         /// </summary>
         /// <value>An instance of the ApiClient</value>
         public ApiClient ApiClient {get; set;}
-    
+
         /// <summary>
         ///  
         /// </summary>
-        /// <returns>List&lt;string&gt;</returns>            
+        /// <returns>List&lt;string&gt;</returns>
         public List<string> GetAemProductInfo ()
         {
             
-    
+
             var path = "/system/console/status-productinfo.json";
             path = path.Replace("{format}", "json");
-                
+            
             var queryParams = new Dictionary<String, String>();
             var headerParams = new Dictionary<String, String>();
             var formParams = new Dictionary<String, String>();
             var fileParams = new Dictionary<String, FileParameter>();
             String postBody = null;
-    
-                                                    
+
+                                                
             // authentication setting, if any
             String[] authSettings = new String[] { "aemAuth" };
-    
+
             // make the HTTP request
             IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.GET, queryParams, postBody, headerParams, formParams, fileParams, authSettings);
-    
+
             if (((int)response.StatusCode) >= 400)
                 throw new ApiException ((int)response.StatusCode, "Error calling GetAemProductInfo: " + response.Content, response.Content);
             else if (((int)response.StatusCode) == 0)
                 throw new ApiException ((int)response.StatusCode, "Error calling GetAemProductInfo: " + response.ErrorMessage, response.ErrorMessage);
-    
+
             return (List<string>) ApiClient.Deserialize(response.Content, typeof(List<string>), response.Headers);
         }
-    
+
         /// <summary>
         ///  
         /// </summary>
-        /// <returns>string</returns>            
-        public string GetConfigMgr ()
+        /// <param name="name"></param>
+        /// <returns>BundleInfo</returns>
+        public BundleInfo GetBundleInfo (string name)
         {
             
-    
-            var path = "/system/console/configMgr";
+            // verify the required parameter 'name' is set
+            if (name == null) throw new ApiException(400, "Missing required parameter 'name' when calling GetBundleInfo");
+            
+
+            var path = "/system/console/bundles/{name}.json";
             path = path.Replace("{format}", "json");
-                
+            path = path.Replace("{" + "name" + "}", ApiClient.ParameterToString(name));
+
             var queryParams = new Dictionary<String, String>();
             var headerParams = new Dictionary<String, String>();
             var formParams = new Dictionary<String, String>();
             var fileParams = new Dictionary<String, FileParameter>();
             String postBody = null;
-    
-                                                    
+
+                                                
             // authentication setting, if any
             String[] authSettings = new String[] { "aemAuth" };
-    
+
             // make the HTTP request
             IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.GET, queryParams, postBody, headerParams, formParams, fileParams, authSettings);
-    
+
+            if (((int)response.StatusCode) >= 400)
+                throw new ApiException ((int)response.StatusCode, "Error calling GetBundleInfo: " + response.Content, response.Content);
+            else if (((int)response.StatusCode) == 0)
+                throw new ApiException ((int)response.StatusCode, "Error calling GetBundleInfo: " + response.ErrorMessage, response.ErrorMessage);
+
+            return (BundleInfo) ApiClient.Deserialize(response.Content, typeof(BundleInfo), response.Headers);
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <returns>string</returns>
+        public string GetConfigMgr ()
+        {
+            
+
+            var path = "/system/console/configMgr";
+            path = path.Replace("{format}", "json");
+            
+            var queryParams = new Dictionary<String, String>();
+            var headerParams = new Dictionary<String, String>();
+            var formParams = new Dictionary<String, String>();
+            var fileParams = new Dictionary<String, FileParameter>();
+            String postBody = null;
+
+                                                
+            // authentication setting, if any
+            String[] authSettings = new String[] { "aemAuth" };
+
+            // make the HTTP request
+            IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.GET, queryParams, postBody, headerParams, formParams, fileParams, authSettings);
+
             if (((int)response.StatusCode) >= 400)
                 throw new ApiException ((int)response.StatusCode, "Error calling GetConfigMgr: " + response.Content, response.Content);
             else if (((int)response.StatusCode) == 0)
                 throw new ApiException ((int)response.StatusCode, "Error calling GetConfigMgr: " + response.ErrorMessage, response.ErrorMessage);
-    
+
             return (string) ApiClient.Deserialize(response.Content, typeof(string), response.Headers);
         }
-    
+
         /// <summary>
         ///  
         /// </summary>
-        /// <param name="name"></param> 
-        /// <param name="action"></param> 
-        /// <returns></returns>            
+        /// <param name="name"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
         public void PostBundle (string name, string action)
         {
             
@@ -203,117 +246,117 @@ namespace Org.OpenAPITools.Api
             // verify the required parameter 'action' is set
             if (action == null) throw new ApiException(400, "Missing required parameter 'action' when calling PostBundle");
             
-    
+
             var path = "/system/console/bundles/{name}";
             path = path.Replace("{format}", "json");
             path = path.Replace("{" + "name" + "}", ApiClient.ParameterToString(name));
-    
+
             var queryParams = new Dictionary<String, String>();
             var headerParams = new Dictionary<String, String>();
             var formParams = new Dictionary<String, String>();
             var fileParams = new Dictionary<String, FileParameter>();
             String postBody = null;
-    
+
              if (action != null) queryParams.Add("action", ApiClient.ParameterToString(action)); // query parameter
-                                        
+                                    
             // authentication setting, if any
             String[] authSettings = new String[] { "aemAuth" };
-    
+
             // make the HTTP request
             IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, authSettings);
-    
+
             if (((int)response.StatusCode) >= 400)
                 throw new ApiException ((int)response.StatusCode, "Error calling PostBundle: " + response.Content, response.Content);
             else if (((int)response.StatusCode) == 0)
                 throw new ApiException ((int)response.StatusCode, "Error calling PostBundle: " + response.ErrorMessage, response.ErrorMessage);
-    
+
             return;
         }
-    
+
         /// <summary>
         ///  
         /// </summary>
-        /// <param name="action"></param> 
-        /// <returns></returns>            
+        /// <param name="action"></param>
+        /// <returns></returns>
         public void PostJmxRepository (string action)
         {
             
             // verify the required parameter 'action' is set
             if (action == null) throw new ApiException(400, "Missing required parameter 'action' when calling PostJmxRepository");
             
-    
+
             var path = "/system/console/jmx/com.adobe.granite:type=Repository/op/{action}";
             path = path.Replace("{format}", "json");
             path = path.Replace("{" + "action" + "}", ApiClient.ParameterToString(action));
-    
+
             var queryParams = new Dictionary<String, String>();
             var headerParams = new Dictionary<String, String>();
             var formParams = new Dictionary<String, String>();
             var fileParams = new Dictionary<String, FileParameter>();
             String postBody = null;
-    
-                                                    
+
+                                                
             // authentication setting, if any
             String[] authSettings = new String[] { "aemAuth" };
-    
+
             // make the HTTP request
             IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, authSettings);
-    
+
             if (((int)response.StatusCode) >= 400)
                 throw new ApiException ((int)response.StatusCode, "Error calling PostJmxRepository: " + response.Content, response.Content);
             else if (((int)response.StatusCode) == 0)
                 throw new ApiException ((int)response.StatusCode, "Error calling PostJmxRepository: " + response.ErrorMessage, response.ErrorMessage);
-    
+
             return;
         }
-    
+
         /// <summary>
         ///  
         /// </summary>
-        /// <param name="post"></param> 
-        /// <param name="apply"></param> 
-        /// <param name="delete"></param> 
-        /// <param name="action"></param> 
-        /// <param name="location"></param> 
-        /// <param name="path"></param> 
-        /// <param name="serviceRanking"></param> 
-        /// <param name="idpUrl"></param> 
-        /// <param name="idpCertAlias"></param> 
-        /// <param name="idpHttpRedirect"></param> 
-        /// <param name="serviceProviderEntityId"></param> 
-        /// <param name="assertionConsumerServiceURL"></param> 
-        /// <param name="spPrivateKeyAlias"></param> 
-        /// <param name="keyStorePassword"></param> 
-        /// <param name="defaultRedirectUrl"></param> 
-        /// <param name="userIDAttribute"></param> 
-        /// <param name="useEncryption"></param> 
-        /// <param name="createUser"></param> 
-        /// <param name="addGroupMemberships"></param> 
-        /// <param name="groupMembershipAttribute"></param> 
-        /// <param name="defaultGroups"></param> 
-        /// <param name="nameIdFormat"></param> 
-        /// <param name="synchronizeAttributes"></param> 
-        /// <param name="handleLogout"></param> 
-        /// <param name="logoutUrl"></param> 
-        /// <param name="clockTolerance"></param> 
-        /// <param name="digestMethod"></param> 
-        /// <param name="signatureMethod"></param> 
-        /// <param name="userIntermediatePath"></param> 
-        /// <param name="propertylist"></param> 
-        /// <returns>SamlConfigurationInfo</returns>            
+        /// <param name="post"></param>
+        /// <param name="apply"></param>
+        /// <param name="delete"></param>
+        /// <param name="action"></param>
+        /// <param name="location"></param>
+        /// <param name="path"></param>
+        /// <param name="serviceRanking"></param>
+        /// <param name="idpUrl"></param>
+        /// <param name="idpCertAlias"></param>
+        /// <param name="idpHttpRedirect"></param>
+        /// <param name="serviceProviderEntityId"></param>
+        /// <param name="assertionConsumerServiceURL"></param>
+        /// <param name="spPrivateKeyAlias"></param>
+        /// <param name="keyStorePassword"></param>
+        /// <param name="defaultRedirectUrl"></param>
+        /// <param name="userIDAttribute"></param>
+        /// <param name="useEncryption"></param>
+        /// <param name="createUser"></param>
+        /// <param name="addGroupMemberships"></param>
+        /// <param name="groupMembershipAttribute"></param>
+        /// <param name="defaultGroups"></param>
+        /// <param name="nameIdFormat"></param>
+        /// <param name="synchronizeAttributes"></param>
+        /// <param name="handleLogout"></param>
+        /// <param name="logoutUrl"></param>
+        /// <param name="clockTolerance"></param>
+        /// <param name="digestMethod"></param>
+        /// <param name="signatureMethod"></param>
+        /// <param name="userIntermediatePath"></param>
+        /// <param name="propertylist"></param>
+        /// <returns>SamlConfigurationInfo</returns>
         public SamlConfigurationInfo PostSamlConfiguration (bool? post, bool? apply, bool? delete, string action, string location, List<string> path, int? serviceRanking, string idpUrl, string idpCertAlias, bool? idpHttpRedirect, string serviceProviderEntityId, string assertionConsumerServiceURL, string spPrivateKeyAlias, string keyStorePassword, string defaultRedirectUrl, string userIDAttribute, bool? useEncryption, bool? createUser, bool? addGroupMemberships, string groupMembershipAttribute, List<string> defaultGroups, string nameIdFormat, List<string> synchronizeAttributes, bool? handleLogout, string logoutUrl, int? clockTolerance, string digestMethod, string signatureMethod, string userIntermediatePath, List<string> propertylist)
         {
             
-    
+
             var path = "/system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler";
             path = path.Replace("{format}", "json");
-                
+            
             var queryParams = new Dictionary<String, String>();
             var headerParams = new Dictionary<String, String>();
             var formParams = new Dictionary<String, String>();
             var fileParams = new Dictionary<String, FileParameter>();
             String postBody = null;
-    
+
              if (post != null) queryParams.Add("post", ApiClient.ParameterToString(post)); // query parameter
  if (apply != null) queryParams.Add("apply", ApiClient.ParameterToString(apply)); // query parameter
  if (delete != null) queryParams.Add("delete", ApiClient.ParameterToString(delete)); // query parameter
@@ -344,20 +387,20 @@ namespace Org.OpenAPITools.Api
  if (signatureMethod != null) queryParams.Add("signatureMethod", ApiClient.ParameterToString(signatureMethod)); // query parameter
  if (userIntermediatePath != null) queryParams.Add("userIntermediatePath", ApiClient.ParameterToString(userIntermediatePath)); // query parameter
  if (propertylist != null) queryParams.Add("propertylist", ApiClient.ParameterToString(propertylist)); // query parameter
-                                        
+                                    
             // authentication setting, if any
             String[] authSettings = new String[] { "aemAuth" };
-    
+
             // make the HTTP request
             IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, authSettings);
-    
+
             if (((int)response.StatusCode) >= 400)
                 throw new ApiException ((int)response.StatusCode, "Error calling PostSamlConfiguration: " + response.Content, response.Content);
             else if (((int)response.StatusCode) == 0)
                 throw new ApiException ((int)response.StatusCode, "Error calling PostSamlConfiguration: " + response.ErrorMessage, response.ErrorMessage);
-    
+
             return (SamlConfigurationInfo) ApiClient.Deserialize(response.Content, typeof(SamlConfigurationInfo), response.Headers);
         }
-    
+
     }
 }

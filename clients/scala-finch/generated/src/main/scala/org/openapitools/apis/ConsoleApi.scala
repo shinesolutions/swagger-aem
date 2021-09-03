@@ -3,6 +3,7 @@ package org.openapitools.apis
 import java.io._
 import org.openapitools._
 import org.openapitools.models._
+import org.openapitools.models.BundleInfo
 import org.openapitools.models.SamlConfigurationInfo
 import io.finch.circe._
 import io.circe.generic.semiauto._
@@ -15,6 +16,7 @@ import com.twitter.util.Future
 import com.twitter.io.Buf
 import io.finch._, items._
 import java.io.File
+import java.nio.file.Files
 import java.time._
 
 object ConsoleApi {
@@ -24,6 +26,7 @@ object ConsoleApi {
     */
     def endpoints(da: DataAccessor) =
         getAemProductInfo(da) :+:
+        getBundleInfo(da) :+:
         getConfigMgr(da) :+:
         postBundle(da) :+:
         postJmxRepository(da) :+:
@@ -57,6 +60,20 @@ object ConsoleApi {
         private def getAemProductInfo(da: DataAccessor): Endpoint[Seq[String]] =
         get("system" :: "console" :: "status-productinfo.json") { () =>
           da.Console_getAemProductInfo() match {
+            case Left(error) => checkError(error)
+            case Right(data) => Ok(data)
+          }
+        } handle {
+          case e: Exception => BadRequest(e)
+        }
+
+        /**
+        * 
+        * @return An endpoint representing a BundleInfo
+        */
+        private def getBundleInfo(da: DataAccessor): Endpoint[BundleInfo] =
+        get("system" :: "console" :: "bundles" :: "{name}.json") { (name: String) =>
+          da.Console_getBundleInfo(name) match {
             case Left(error) => checkError(error)
             case Right(data) => Ok(data)
           }
@@ -132,7 +149,7 @@ object ConsoleApi {
     }
 
     private def bytesToFile(input: Array[Byte]): java.io.File = {
-      val file = File.createTempFile("tmpConsoleApi", null)
+      val file = Files.createTempFile("tmpConsoleApi", null).toFile
       val output = new FileOutputStream(file)
       output.write(input)
       file

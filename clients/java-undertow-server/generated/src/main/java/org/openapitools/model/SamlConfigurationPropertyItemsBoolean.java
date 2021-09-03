@@ -1,3 +1,13 @@
+/*
+ * Adobe Experience Manager (AEM) API
+ *
+ * Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
+ *
+ * OpenAPI document version: 3.5.0-pre.0
+ * Maintained by: opensource@shinesolutions.com
+ *
+ * AUTO-GENERATED FILE, DO NOT MODIFY!
+ */
 package org.openapitools.model;
 
 import java.util.Objects;
@@ -10,19 +20,19 @@ import io.swagger.annotations.ApiModelProperty;
 
 
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaUndertowServerCodegen", date = "2019-08-04T23:41:39.991Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaUndertowServerCodegen", date = "2021-09-03T15:25:36.220+10:00[Australia/Melbourne]")
 public class SamlConfigurationPropertyItemsBoolean   {
   
-  private String name = null;
-  private Boolean optional = null;
-  private Boolean isSet = null;
-  private Integer type = null;
-  private Boolean value = null;
-  private String description = null;
+  private String name;
+  private Boolean optional;
+  private Boolean isSet;
+  private Integer type;
+  private Boolean value;
+  private String description;
 
   /**
    * property name
-   **/
+   */
   public SamlConfigurationPropertyItemsBoolean name(String name) {
     this.name = name;
     return this;
@@ -40,7 +50,7 @@ public class SamlConfigurationPropertyItemsBoolean   {
 
   /**
    * True if optional
-   **/
+   */
   public SamlConfigurationPropertyItemsBoolean optional(Boolean optional) {
     this.optional = optional;
     return this;
@@ -58,7 +68,7 @@ public class SamlConfigurationPropertyItemsBoolean   {
 
   /**
    * True if property is set
-   **/
+   */
   public SamlConfigurationPropertyItemsBoolean isSet(Boolean isSet) {
     this.isSet = isSet;
     return this;
@@ -76,7 +86,7 @@ public class SamlConfigurationPropertyItemsBoolean   {
 
   /**
    * Property type, 1=String, 3=long, 11=boolean, 12=Password
-   **/
+   */
   public SamlConfigurationPropertyItemsBoolean type(Integer type) {
     this.type = type;
     return this;
@@ -94,7 +104,7 @@ public class SamlConfigurationPropertyItemsBoolean   {
 
   /**
    * Property value
-   **/
+   */
   public SamlConfigurationPropertyItemsBoolean value(Boolean value) {
     this.value = value;
     return this;
@@ -112,7 +122,7 @@ public class SamlConfigurationPropertyItemsBoolean   {
 
   /**
    * Property description
-   **/
+   */
   public SamlConfigurationPropertyItemsBoolean description(String description) {
     this.description = description;
     return this;
@@ -130,7 +140,7 @@ public class SamlConfigurationPropertyItemsBoolean   {
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -170,7 +180,7 @@ public class SamlConfigurationPropertyItemsBoolean   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

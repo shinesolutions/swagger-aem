@@ -1,7 +1,7 @@
 require 'json'
 
 
-MyApp.add_route('GET', '//system/console/status-productinfo.json', {
+MyApp.add_route('GET', '/system/console/status-productinfo.json', {
   "resourcePath" => "/Console",
   "summary" => "",
   "nickname" => "get_aem_product_info", 
@@ -17,7 +17,29 @@ MyApp.add_route('GET', '//system/console/status-productinfo.json', {
 end
 
 
-MyApp.add_route('GET', '//system/console/configMgr', {
+MyApp.add_route('GET', '/system/console/bundles/{name}.json', {
+  "resourcePath" => "/Console",
+  "summary" => "",
+  "nickname" => "get_bundle_info", 
+  "responseClass" => "BundleInfo",
+  "endpoint" => "/system/console/bundles/{name}.json", 
+  "notes" => "",
+  "parameters" => [
+    {
+      "name" => "name",
+      "description" => "",
+      "dataType" => "String",
+      "paramType" => "path",
+    },
+    ]}) do
+  cross_origin
+  # the guts live here
+
+  {"message" => "yes, it worked"}.to_json
+end
+
+
+MyApp.add_route('GET', '/system/console/configMgr', {
   "resourcePath" => "/Console",
   "summary" => "",
   "nickname" => "get_config_mgr", 
@@ -33,7 +55,7 @@ MyApp.add_route('GET', '//system/console/configMgr', {
 end
 
 
-MyApp.add_route('POST', '//system/console/bundles/{name}', {
+MyApp.add_route('POST', '/system/console/bundles/{name}', {
   "resourcePath" => "/Console",
   "summary" => "",
   "nickname" => "post_bundle", 
@@ -62,7 +84,7 @@ MyApp.add_route('POST', '//system/console/bundles/{name}', {
 end
 
 
-MyApp.add_route('POST', '//system/console/jmx/com.adobe.granite:type=Repository/op/{action}', {
+MyApp.add_route('POST', '/system/console/jmx/com.adobe.granite:type=Repository/op/{action}', {
   "resourcePath" => "/Console",
   "summary" => "",
   "nickname" => "post_jmx_repository", 
@@ -84,7 +106,7 @@ MyApp.add_route('POST', '//system/console/jmx/com.adobe.granite:type=Repository/
 end
 
 
-MyApp.add_route('POST', '//system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler', {
+MyApp.add_route('POST', '/system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler', {
   "resourcePath" => "/Console",
   "summary" => "",
   "nickname" => "post_saml_configuration", 
@@ -95,21 +117,21 @@ MyApp.add_route('POST', '//system/console/configMgr/com.adobe.granite.auth.saml.
     {
       "name" => "post",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
       "name" => "apply",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
       "name" => "delete",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
@@ -158,7 +180,7 @@ MyApp.add_route('POST', '//system/console/configMgr/com.adobe.granite.auth.saml.
     {
       "name" => "idp_http_redirect",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
@@ -207,21 +229,21 @@ MyApp.add_route('POST', '//system/console/configMgr/com.adobe.granite.auth.saml.
     {
       "name" => "use_encryption",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
       "name" => "create_user",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
       "name" => "add_group_memberships",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
@@ -256,7 +278,7 @@ MyApp.add_route('POST', '//system/console/configMgr/com.adobe.granite.auth.saml.
     {
       "name" => "handle_logout",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },

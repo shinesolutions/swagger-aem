@@ -3,325 +3,348 @@
 # Do not edit the class manually.
 
 # console
-open_apiserver_console_getaemproductinfo:
+open_api_server_console_getaemproductinfo:
     path:     /system/console/status-productinfo.json
     methods:  [GET]
     defaults:
-        _controller: open_apiserver.controller.console:getAemProductInfoAction
+        _controller: open_api_server.controller.console:getAemProductInfoAction
 
-open_apiserver_console_getconfigmgr:
+open_api_server_console_getbundleinfo:
+    path:     /system/console/bundles/{name}.json
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.console:getBundleInfoAction
+    requirements:
+        name: '[a-z0-9]+'
+
+open_api_server_console_getconfigmgr:
     path:     /system/console/configMgr
     methods:  [GET]
     defaults:
-        _controller: open_apiserver.controller.console:getConfigMgrAction
+        _controller: open_api_server.controller.console:getConfigMgrAction
 
-open_apiserver_console_postbundle:
+open_api_server_console_postbundle:
     path:     /system/console/bundles/{name}
     methods:  [POST]
     defaults:
-        _controller: open_apiserver.controller.console:postBundleAction
+        _controller: open_api_server.controller.console:postBundleAction
     requirements:
         name: '[a-z0-9]+'
 
-open_apiserver_console_postjmxrepository:
+open_api_server_console_postjmxrepository:
     path:     /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action}
     methods:  [POST]
     defaults:
-        _controller: open_apiserver.controller.console:postJmxRepositoryAction
+        _controller: open_api_server.controller.console:postJmxRepositoryAction
     requirements:
         action: '[a-z0-9]+'
 
-open_apiserver_console_postsamlconfiguration:
+open_api_server_console_postsamlconfiguration:
     path:     /system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler
     methods:  [POST]
     defaults:
-        _controller: open_apiserver.controller.console:postSamlConfigurationAction
+        _controller: open_api_server.controller.console:postSamlConfigurationAction
 
 # cq
-open_apiserver_cq_getloginpage:
+open_api_server_cq_getloginpage:
     path:     /libs/granite/core/content/login.html
     methods:  [GET]
     defaults:
-        _controller: open_apiserver.controller.cq:getLoginPageAction
+        _controller: open_api_server.controller.cq:getLoginPageAction
 
-open_apiserver_cq_postcqactions:
+open_api_server_cq_postcqactions:
     path:     /.cqactions.html
     methods:  [POST]
     defaults:
-        _controller: open_apiserver.controller.cq:postCqActionsAction
+        _controller: open_api_server.controller.cq:postCqActionsAction
 
 # crx
-open_apiserver_crx_getcrxdestatus:
+open_api_server_crx_getcrxdestatus:
     path:     /crx/server/crx.default/jcr:root/.1.json
     methods:  [GET]
     defaults:
-        _controller: open_apiserver.controller.crx:getCrxdeStatusAction
+        _controller: open_api_server.controller.crx:getCrxdeStatusAction
 
-open_apiserver_crx_getinstallstatus:
+open_api_server_crx_getinstallstatus:
     path:     /crx/packmgr/installstatus.jsp
     methods:  [GET]
     defaults:
-        _controller: open_apiserver.controller.crx:getInstallStatusAction
+        _controller: open_api_server.controller.crx:getInstallStatusAction
 
-open_apiserver_crx_getpackagemanagerservlet:
+open_api_server_crx_getpackagemanagerservlet:
     path:     /crx/packmgr/service/script.html
     methods:  [GET]
     defaults:
-        _controller: open_apiserver.controller.crx:getPackageManagerServletAction
+        _controller: open_api_server.controller.crx:getPackageManagerServletAction
 
-open_apiserver_crx_postpackageservice:
+open_api_server_crx_postpackageservice:
     path:     /crx/packmgr/service.jsp
     methods:  [POST]
     defaults:
-        _controller: open_apiserver.controller.crx:postPackageServiceAction
+        _controller: open_api_server.controller.crx:postPackageServiceAction
 
-open_apiserver_crx_postpackageservicejson:
+open_api_server_crx_postpackageservicejson:
     path:     /crx/packmgr/service/.json/{path}
     methods:  [POST]
     defaults:
-        _controller: open_apiserver.controller.crx:postPackageServiceJsonAction
+        _controller: open_api_server.controller.crx:postPackageServiceJsonAction
     requirements:
         path: '[a-z0-9]+'
 
-open_apiserver_crx_postpackageupdate:
+open_api_server_crx_postpackageupdate:
     path:     /crx/packmgr/update.jsp
     methods:  [POST]
     defaults:
-        _controller: open_apiserver.controller.crx:postPackageUpdateAction
+        _controller: open_api_server.controller.crx:postPackageUpdateAction
 
-open_apiserver_crx_postsetpassword:
+open_api_server_crx_postsetpassword:
     path:     /crx/explorer/ui/setpassword.jsp
     methods:  [POST]
     defaults:
-        _controller: open_apiserver.controller.crx:postSetPasswordAction
+        _controller: open_api_server.controller.crx:postSetPasswordAction
 
 # custom
-open_apiserver_custom_getaemhealthcheck:
+open_api_server_custom_getaemhealthcheck:
     path:     /system/health
     methods:  [GET]
     defaults:
-        _controller: open_apiserver.controller.custom:getAemHealthCheckAction
+        _controller: open_api_server.controller.custom:getAemHealthCheckAction
 
-open_apiserver_custom_postconfigaemhealthcheckservlet:
+open_api_server_custom_postconfigaemhealthcheckservlet:
     path:     /apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck
     methods:  [POST]
     defaults:
-        _controller: open_apiserver.controller.custom:postConfigAemHealthCheckServletAction
+        _controller: open_api_server.controller.custom:postConfigAemHealthCheckServletAction
 
-open_apiserver_custom_postconfigaempasswordreset:
+open_api_server_custom_postconfigaempasswordreset:
     path:     /apps/system/config/com.shinesolutions.aem.passwordreset.Activator
     methods:  [POST]
     defaults:
-        _controller: open_apiserver.controller.custom:postConfigAemPasswordResetAction
+        _controller: open_api_server.controller.custom:postConfigAemPasswordResetAction
+
+# granite
+open_api_server_granite_sslsetup:
+    path:     /libs/granite/security/post/sslSetup.html
+    methods:  [POST]
+    defaults:
+        _controller: open_api_server.controller.granite:sslSetupAction
 
 # sling
-open_apiserver_sling_deleteagent:
+open_api_server_sling_deleteagent:
     path:     /etc/replication/agents.{runmode}/{name}
     methods:  [DELETE]
     defaults:
-        _controller: open_apiserver.controller.sling:deleteAgentAction
+        _controller: open_api_server.controller.sling:deleteAgentAction
     requirements:
         runmode: '[a-z0-9]+'
         name: '[a-z0-9]+'
 
-open_apiserver_sling_deletenode:
+open_api_server_sling_deletenode:
     path:     /{path}/{name}
     methods:  [DELETE]
     defaults:
-        _controller: open_apiserver.controller.sling:deleteNodeAction
+        _controller: open_api_server.controller.sling:deleteNodeAction
     requirements:
         path: '[a-z0-9]+'
         name: '[a-z0-9]+'
 
-open_apiserver_sling_getagent:
+open_api_server_sling_getagent:
     path:     /etc/replication/agents.{runmode}/{name}
     methods:  [GET]
     defaults:
-        _controller: open_apiserver.controller.sling:getAgentAction
+        _controller: open_api_server.controller.sling:getAgentAction
     requirements:
         runmode: '[a-z0-9]+'
         name: '[a-z0-9]+'
 
-open_apiserver_sling_getagents:
+open_api_server_sling_getagents:
     path:     /etc/replication/agents.{runmode}.-1.json
     methods:  [GET]
     defaults:
-        _controller: open_apiserver.controller.sling:getAgentsAction
+        _controller: open_api_server.controller.sling:getAgentsAction
     requirements:
         runmode: '[a-z0-9]+'
 
-open_apiserver_sling_getauthorizablekeystore:
+open_api_server_sling_getauthorizablekeystore:
     path:     /{intermediatePath}/{authorizableId}.ks.json
     methods:  [GET]
     defaults:
-        _controller: open_apiserver.controller.sling:getAuthorizableKeystoreAction
+        _controller: open_api_server.controller.sling:getAuthorizableKeystoreAction
     requirements:
         intermediatePath: '[a-z0-9]+'
         authorizableId: '[a-z0-9]+'
 
-open_apiserver_sling_getkeystore:
+open_api_server_sling_getkeystore:
     path:     /{intermediatePath}/{authorizableId}/keystore/store.p12
     methods:  [GET]
     defaults:
-        _controller: open_apiserver.controller.sling:getKeystoreAction
+        _controller: open_api_server.controller.sling:getKeystoreAction
     requirements:
         intermediatePath: '[a-z0-9]+'
         authorizableId: '[a-z0-9]+'
 
-open_apiserver_sling_getnode:
+open_api_server_sling_getnode:
     path:     /{path}/{name}
     methods:  [GET]
     defaults:
-        _controller: open_apiserver.controller.sling:getNodeAction
+        _controller: open_api_server.controller.sling:getNodeAction
     requirements:
         path: '[a-z0-9]+'
         name: '[a-z0-9]+'
 
-open_apiserver_sling_getpackage:
+open_api_server_sling_getpackage:
     path:     /etc/packages/{group}/{name}-{version}.zip
     methods:  [GET]
     defaults:
-        _controller: open_apiserver.controller.sling:getPackageAction
+        _controller: open_api_server.controller.sling:getPackageAction
     requirements:
         group: '[a-z0-9]+'
         name: '[a-z0-9]+'
         version: '[a-z0-9]+'
 
-open_apiserver_sling_getpackagefilter:
+open_api_server_sling_getpackagefilter:
     path:     /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json
     methods:  [GET]
     defaults:
-        _controller: open_apiserver.controller.sling:getPackageFilterAction
+        _controller: open_api_server.controller.sling:getPackageFilterAction
     requirements:
         group: '[a-z0-9]+'
         name: '[a-z0-9]+'
         version: '[a-z0-9]+'
 
-open_apiserver_sling_getquery:
+open_api_server_sling_getquery:
     path:     /bin/querybuilder.json
     methods:  [GET]
     defaults:
-        _controller: open_apiserver.controller.sling:getQueryAction
+        _controller: open_api_server.controller.sling:getQueryAction
 
-open_apiserver_sling_gettruststore:
+open_api_server_sling_gettruststore:
     path:     /etc/truststore/truststore.p12
     methods:  [GET]
     defaults:
-        _controller: open_apiserver.controller.sling:getTruststoreAction
+        _controller: open_api_server.controller.sling:getTruststoreAction
 
-open_apiserver_sling_gettruststoreinfo:
+open_api_server_sling_gettruststoreinfo:
     path:     /libs/granite/security/truststore.json
     methods:  [GET]
     defaults:
-        _controller: open_apiserver.controller.sling:getTruststoreInfoAction
+        _controller: open_api_server.controller.sling:getTruststoreInfoAction
 
-open_apiserver_sling_postagent:
+open_api_server_sling_postagent:
     path:     /etc/replication/agents.{runmode}/{name}
     methods:  [POST]
     defaults:
-        _controller: open_apiserver.controller.sling:postAgentAction
+        _controller: open_api_server.controller.sling:postAgentAction
     requirements:
         runmode: '[a-z0-9]+'
         name: '[a-z0-9]+'
 
-open_apiserver_sling_postauthorizablekeystore:
+open_api_server_sling_postauthorizablekeystore:
     path:     /{intermediatePath}/{authorizableId}.ks.html
     methods:  [POST]
     defaults:
-        _controller: open_apiserver.controller.sling:postAuthorizableKeystoreAction
+        _controller: open_api_server.controller.sling:postAuthorizableKeystoreAction
     requirements:
         intermediatePath: '[a-z0-9]+'
         authorizableId: '[a-z0-9]+'
 
-open_apiserver_sling_postauthorizables:
+open_api_server_sling_postauthorizables:
     path:     /libs/granite/security/post/authorizables
     methods:  [POST]
     defaults:
-        _controller: open_apiserver.controller.sling:postAuthorizablesAction
+        _controller: open_api_server.controller.sling:postAuthorizablesAction
 
-open_apiserver_sling_postconfigadobegranitesamlauthenticationhandler:
+open_api_server_sling_postconfigadobegranitesamlauthenticationhandler:
     path:     /apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config
     methods:  [POST]
     defaults:
-        _controller: open_apiserver.controller.sling:postConfigAdobeGraniteSamlAuthenticationHandlerAction
+        _controller: open_api_server.controller.sling:postConfigAdobeGraniteSamlAuthenticationHandlerAction
 
-open_apiserver_sling_postconfigapachefelixjettybasedhttpservice:
+open_api_server_sling_postconfigapachefelixjettybasedhttpservice:
     path:     /apps/system/config/org.apache.felix.http
     methods:  [POST]
     defaults:
-        _controller: open_apiserver.controller.sling:postConfigApacheFelixJettyBasedHttpServiceAction
+        _controller: open_api_server.controller.sling:postConfigApacheFelixJettyBasedHttpServiceAction
 
-open_apiserver_sling_postconfigapachehttpcomponentsproxyconfiguration:
+open_api_server_sling_postconfigapachehttpcomponentsproxyconfiguration:
     path:     /apps/system/config/org.apache.http.proxyconfigurator.config
     methods:  [POST]
     defaults:
-        _controller: open_apiserver.controller.sling:postConfigApacheHttpComponentsProxyConfigurationAction
+        _controller: open_api_server.controller.sling:postConfigApacheHttpComponentsProxyConfigurationAction
 
-open_apiserver_sling_postconfigapacheslingdavexservlet:
+open_api_server_sling_postconfigapacheslingdavexservlet:
     path:     /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet
     methods:  [POST]
     defaults:
-        _controller: open_apiserver.controller.sling:postConfigApacheSlingDavExServletAction
+        _controller: open_api_server.controller.sling:postConfigApacheSlingDavExServletAction
 
-open_apiserver_sling_postconfigapacheslinggetservlet:
+open_api_server_sling_postconfigapacheslinggetservlet:
     path:     /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet
     methods:  [POST]
     defaults:
-        _controller: open_apiserver.controller.sling:postConfigApacheSlingGetServletAction
+        _controller: open_api_server.controller.sling:postConfigApacheSlingGetServletAction
 
-open_apiserver_sling_postconfigapacheslingreferrerfilter:
+open_api_server_sling_postconfigapacheslingreferrerfilter:
     path:     /apps/system/config/org.apache.sling.security.impl.ReferrerFilter
     methods:  [POST]
     defaults:
-        _controller: open_apiserver.controller.sling:postConfigApacheSlingReferrerFilterAction
+        _controller: open_api_server.controller.sling:postConfigApacheSlingReferrerFilterAction
 
-open_apiserver_sling_postnode:
+open_api_server_sling_postconfigproperty:
+    path:     /apps/system/config/{configNodeName}
+    methods:  [POST]
+    defaults:
+        _controller: open_api_server.controller.sling:postConfigPropertyAction
+    requirements:
+        configNodeName: '[a-z0-9]+'
+
+open_api_server_sling_postnode:
     path:     /{path}/{name}
     methods:  [POST]
     defaults:
-        _controller: open_apiserver.controller.sling:postNodeAction
+        _controller: open_api_server.controller.sling:postNodeAction
     requirements:
         path: '[a-z0-9]+'
         name: '[a-z0-9]+'
 
-open_apiserver_sling_postnoderw:
+open_api_server_sling_postnoderw:
     path:     /{path}/{name}.rw.html
     methods:  [POST]
     defaults:
-        _controller: open_apiserver.controller.sling:postNodeRwAction
+        _controller: open_api_server.controller.sling:postNodeRwAction
     requirements:
         path: '[a-z0-9]+'
         name: '[a-z0-9]+'
 
-open_apiserver_sling_postpath:
+open_api_server_sling_postpath:
     path:     /{path}/
     methods:  [POST]
     defaults:
-        _controller: open_apiserver.controller.sling:postPathAction
+        _controller: open_api_server.controller.sling:postPathAction
     requirements:
         path: '[a-z0-9]+'
 
-open_apiserver_sling_postquery:
+open_api_server_sling_postquery:
     path:     /bin/querybuilder.json
     methods:  [POST]
     defaults:
-        _controller: open_apiserver.controller.sling:postQueryAction
+        _controller: open_api_server.controller.sling:postQueryAction
 
-open_apiserver_sling_posttreeactivation:
+open_api_server_sling_posttreeactivation:
     path:     /etc/replication/treeactivation.html
     methods:  [POST]
     defaults:
-        _controller: open_apiserver.controller.sling:postTreeActivationAction
+        _controller: open_api_server.controller.sling:postTreeActivationAction
 
-open_apiserver_sling_posttruststore:
+open_api_server_sling_posttruststore:
     path:     /libs/granite/security/post/truststore
     methods:  [POST]
     defaults:
-        _controller: open_apiserver.controller.sling:postTruststoreAction
+        _controller: open_api_server.controller.sling:postTruststoreAction
 
-open_apiserver_sling_posttruststorepkcs12:
+open_api_server_sling_posttruststorepkcs12:
     path:     /etc/truststore
     methods:  [POST]
     defaults:
-        _controller: open_apiserver.controller.sling:postTruststorePKCS12Action
+        _controller: open_api_server.controller.sling:postTruststorePKCS12Action
 

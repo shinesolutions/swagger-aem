@@ -5,7 +5,7 @@ using NodaTime.Text;
 using System;
 using System.Collections.Generic;
 
-namespace Org.OpenAPITools..Utils
+namespace Org.OpenAPITools._.Utils
 {
     /// <summary>
     /// (De)serializes a <see cref="NodaTime.LocalDate"/> to a string using 

@@ -10,22 +10,21 @@ import org.openapitools.model.SamlConfigurationProperties;
 import javax.validation.constraints.*;
 import io.swagger.annotations.*;
 
-
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyEapServerCodegen", date = "2019-08-04T23:42:11.561Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyEapServerCodegen", date = "2021-09-03T15:26:02.321+10:00[Australia/Melbourne]")
 public class SamlConfigurationInfo   {
   
 
-  private String pid = null;
+  private String pid;
 
-  private String title = null;
+  private String title;
 
-  private String description = null;
+  private String description;
 
-  private String bundleLocation = null;
+  private String bundleLocation;
 
-  private String serviceLocation = null;
+  private String serviceLocation;
 
-  private SamlConfigurationProperties properties = null;
+  private SamlConfigurationProperties properties;
 
   /**
    * Persistent Identity (PID)

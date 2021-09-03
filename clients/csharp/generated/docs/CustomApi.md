@@ -9,15 +9,17 @@ Method | HTTP request | Description
 [**PostConfigAemPasswordReset**](CustomApi.md#postconfigaempasswordreset) | **POST** /apps/system/config/com.shinesolutions.aem.passwordreset.Activator | 
 
 
-<a name="getaemhealthcheck"></a>
-# **GetAemHealthCheck**
+
+## GetAemHealthCheck
+
 > string GetAemHealthCheck (string tags = null, bool? combineTagsOr = null)
 
 
 
 ### Example
+
 ```csharp
-using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Org.OpenAPITools.Api;
 using Org.OpenAPITools.Client;
@@ -27,13 +29,14 @@ namespace Example
 {
     public class GetAemHealthCheckExample
     {
-        public void main()
+        public static void Main()
         {
+            Configuration.Default.BasePath = "http://localhost";
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
 
-            var apiInstance = new CustomApi();
+            var apiInstance = new CustomApi(Configuration.Default);
             var tags = tags_example;  // string |  (optional) 
             var combineTagsOr = true;  // bool? |  (optional) 
 
@@ -42,9 +45,11 @@ namespace Example
                 string result = apiInstance.GetAemHealthCheck(tags, combineTagsOr);
                 Debug.WriteLine(result);
             }
-            catch (Exception e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling CustomApi.GetAemHealthCheck: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
             }
         }
     }
@@ -52,6 +57,7 @@ namespace Example
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -68,20 +74,31 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="postconfigaemhealthcheckservlet"></a>
-# **PostConfigAemHealthCheckServlet**
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **0** | Default response |  -  |
+
+[[Back to top]](#)
+[[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PostConfigAemHealthCheckServlet
+
 > void PostConfigAemHealthCheckServlet (List<string> bundlesIgnored = null, string bundlesIgnoredTypeHint = null)
 
 
 
 ### Example
+
 ```csharp
-using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Org.OpenAPITools.Api;
 using Org.OpenAPITools.Client;
@@ -91,13 +108,14 @@ namespace Example
 {
     public class PostConfigAemHealthCheckServletExample
     {
-        public void main()
+        public static void Main()
         {
+            Configuration.Default.BasePath = "http://localhost";
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
 
-            var apiInstance = new CustomApi();
+            var apiInstance = new CustomApi(Configuration.Default);
             var bundlesIgnored = new List<string>(); // List<string> |  (optional) 
             var bundlesIgnoredTypeHint = bundlesIgnoredTypeHint_example;  // string |  (optional) 
 
@@ -105,9 +123,11 @@ namespace Example
             {
                 apiInstance.PostConfigAemHealthCheckServlet(bundlesIgnored, bundlesIgnoredTypeHint);
             }
-            catch (Exception e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling CustomApi.PostConfigAemHealthCheckServlet: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
             }
         }
     }
@@ -115,6 +135,7 @@ namespace Example
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -131,20 +152,31 @@ void (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="postconfigaempasswordreset"></a>
-# **PostConfigAemPasswordReset**
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **0** | Default response |  -  |
+
+[[Back to top]](#)
+[[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PostConfigAemPasswordReset
+
 > void PostConfigAemPasswordReset (List<string> pwdresetAuthorizables = null, string pwdresetAuthorizablesTypeHint = null)
 
 
 
 ### Example
+
 ```csharp
-using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Org.OpenAPITools.Api;
 using Org.OpenAPITools.Client;
@@ -154,13 +186,14 @@ namespace Example
 {
     public class PostConfigAemPasswordResetExample
     {
-        public void main()
+        public static void Main()
         {
+            Configuration.Default.BasePath = "http://localhost";
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
 
-            var apiInstance = new CustomApi();
+            var apiInstance = new CustomApi(Configuration.Default);
             var pwdresetAuthorizables = new List<string>(); // List<string> |  (optional) 
             var pwdresetAuthorizablesTypeHint = pwdresetAuthorizablesTypeHint_example;  // string |  (optional) 
 
@@ -168,9 +201,11 @@ namespace Example
             {
                 apiInstance.PostConfigAemPasswordReset(pwdresetAuthorizables, pwdresetAuthorizablesTypeHint);
             }
-            catch (Exception e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling CustomApi.PostConfigAemPasswordReset: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
             }
         }
     }
@@ -178,6 +213,7 @@ namespace Example
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -194,8 +230,17 @@ void (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **0** | Default response |  -  |
+
+[[Back to top]](#)
+[[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 

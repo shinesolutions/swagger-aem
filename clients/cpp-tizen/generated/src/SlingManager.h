@@ -293,14 +293,14 @@ bool getPackageFilterAsync(char * accessToken,
  * 
  * \param path  *Required*
  * \param pPeriodlimit  *Required*
- * \param _1_property  *Required*
- * \param _1_property_value  *Required*
+ * \param r_1_property  *Required*
+ * \param r_1_property_value  *Required*
  * \param handler The callback function to be invoked on completion. *Required*
  * \param accessToken The Authorization token. *Required*
  * \param userData The user data to be passed to the callback function.
  */
 bool getQuerySync(char * accessToken,
-	std::string path, long long pPeriodlimit, std::string _1_property, std::string _1_property_value, 
+	std::string path, long long pPeriodlimit, std::string r_1_property, std::string r_1_property_value, 
 	void(* handler)(std::string, Error, void* )
 	, void* userData);
 
@@ -309,14 +309,14 @@ bool getQuerySync(char * accessToken,
  * 
  * \param path  *Required*
  * \param pPeriodlimit  *Required*
- * \param _1_property  *Required*
- * \param _1_property_value  *Required*
+ * \param r_1_property  *Required*
+ * \param r_1_property_value  *Required*
  * \param handler The callback function to be invoked on completion. *Required*
  * \param accessToken The Authorization token. *Required*
  * \param userData The user data to be passed to the callback function.
  */
 bool getQueryAsync(char * accessToken,
-	std::string path, long long pPeriodlimit, std::string _1_property, std::string _1_property_value, 
+	std::string path, long long pPeriodlimit, std::string r_1_property, std::string r_1_property_value, 
 	void(* handler)(std::string, Error, void* )
 	, void* userData);
 
@@ -943,6 +943,33 @@ bool postConfigApacheSlingReferrerFilterAsync(char * accessToken,
 /*! \brief . *Synchronous*
  *
  * 
+ * \param configNodeName  *Required*
+ * \param handler The callback function to be invoked on completion. *Required*
+ * \param accessToken The Authorization token. *Required*
+ * \param userData The user data to be passed to the callback function.
+ */
+bool postConfigPropertySync(char * accessToken,
+	std::string configNodeName, 
+	
+	void(* handler)(Error, void* ) , void* userData);
+
+/*! \brief . *Asynchronous*
+ *
+ * 
+ * \param configNodeName  *Required*
+ * \param handler The callback function to be invoked on completion. *Required*
+ * \param accessToken The Authorization token. *Required*
+ * \param userData The user data to be passed to the callback function.
+ */
+bool postConfigPropertyAsync(char * accessToken,
+	std::string configNodeName, 
+	
+	void(* handler)(Error, void* ) , void* userData);
+
+
+/*! \brief . *Synchronous*
+ *
+ * 
  * \param path  *Required*
  * \param name  *Required*
  * \param operation 
@@ -1042,14 +1069,14 @@ bool postPathAsync(char * accessToken,
  * 
  * \param path  *Required*
  * \param pPeriodlimit  *Required*
- * \param _1_property  *Required*
- * \param _1_property_value  *Required*
+ * \param r_1_property  *Required*
+ * \param r_1_property_value  *Required*
  * \param handler The callback function to be invoked on completion. *Required*
  * \param accessToken The Authorization token. *Required*
  * \param userData The user data to be passed to the callback function.
  */
 bool postQuerySync(char * accessToken,
-	std::string path, long long pPeriodlimit, std::string _1_property, std::string _1_property_value, 
+	std::string path, long long pPeriodlimit, std::string r_1_property, std::string r_1_property_value, 
 	void(* handler)(std::string, Error, void* )
 	, void* userData);
 
@@ -1058,14 +1085,14 @@ bool postQuerySync(char * accessToken,
  * 
  * \param path  *Required*
  * \param pPeriodlimit  *Required*
- * \param _1_property  *Required*
- * \param _1_property_value  *Required*
+ * \param r_1_property  *Required*
+ * \param r_1_property_value  *Required*
  * \param handler The callback function to be invoked on completion. *Required*
  * \param accessToken The Authorization token. *Required*
  * \param userData The user data to be passed to the callback function.
  */
 bool postQueryAsync(char * accessToken,
-	std::string path, long long pPeriodlimit, std::string _1_property, std::string _1_property_value, 
+	std::string path, long long pPeriodlimit, std::string r_1_property, std::string r_1_property_value, 
 	void(* handler)(std::string, Error, void* )
 	, void* userData);
 

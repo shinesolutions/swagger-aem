@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
 @RequestScoped
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyServerCodegen", date = "2019-08-04T23:42:05.073Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyServerCodegen", date = "2021-09-03T15:25:57.989+10:00[Australia/Melbourne]")
 public class AppsApiServiceImpl implements AppsApiService {
       public Response postConfigAdobeGraniteSamlAuthenticationHandler(String keyStorePassword,String keyStorePasswordAtTypeHint,Integer serviceRanking,String serviceRankingAtTypeHint,Boolean idpHttpRedirect,String idpHttpRedirectAtTypeHint,Boolean createUser,String createUserAtTypeHint,String defaultRedirectUrl,String defaultRedirectUrlAtTypeHint,String userIDAttribute,String userIDAttributeAtTypeHint,List<String> defaultGroups,String defaultGroupsAtTypeHint,String idpCertAlias,String idpCertAliasAtTypeHint,Boolean addGroupMemberships,String addGroupMembershipsAtTypeHint,List<String> path,String pathAtTypeHint,List<String> synchronizeAttributes,String synchronizeAttributesAtTypeHint,Integer clockTolerance,String clockToleranceAtTypeHint,String groupMembershipAttribute,String groupMembershipAttributeAtTypeHint,String idpUrl,String idpUrlAtTypeHint,String logoutUrl,String logoutUrlAtTypeHint,String serviceProviderEntityId,String serviceProviderEntityIdAtTypeHint,String assertionConsumerServiceURL,String assertionConsumerServiceURLAtTypeHint,Boolean handleLogout,String handleLogoutAtTypeHint,String spPrivateKeyAlias,String spPrivateKeyAliasAtTypeHint,Boolean useEncryption,String useEncryptionAtTypeHint,String nameIdFormat,String nameIdFormatAtTypeHint,String digestMethod,String digestMethodAtTypeHint,String signatureMethod,String signatureMethodAtTypeHint,String userIntermediatePath,String userIntermediatePathAtTypeHint,SecurityContext securityContext)
       throws NotFoundException {
@@ -53,6 +53,11 @@ public class AppsApiServiceImpl implements AppsApiService {
       return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
   }
       public Response postConfigApacheSlingReferrerFilter(Boolean allowEmpty,String allowEmptyAtTypeHint,String allowHosts,String allowHostsAtTypeHint,String allowHostsRegexp,String allowHostsRegexpAtTypeHint,String filterMethods,String filterMethodsAtTypeHint,SecurityContext securityContext)
+      throws NotFoundException {
+      // do some magic!
+      return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
+  }
+      public Response postConfigProperty(String configNodeName,SecurityContext securityContext)
       throws NotFoundException {
       // do some magic!
       return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();

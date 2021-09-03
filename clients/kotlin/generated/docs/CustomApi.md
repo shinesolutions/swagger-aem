@@ -49,7 +49,10 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -58,7 +61,7 @@ Name | Type | Description  | Notes
 
 <a name="postConfigAemHealthCheckServlet"></a>
 # **postConfigAemHealthCheckServlet**
-> postConfigAemHealthCheckServlet(bundlesPeriodignored, bundlesPeriodignoredAtTypeHint)
+> postConfigAemHealthCheckServlet(bundlesIgnored, bundlesIgnoredAtTypeHint)
 
 
 
@@ -69,10 +72,10 @@ Name | Type | Description  | Notes
 //import org.openapitools.client.models.*
 
 val apiInstance = CustomApi()
-val bundlesPeriodignored : kotlin.Array<kotlin.String> =  // kotlin.Array<kotlin.String> | 
-val bundlesPeriodignoredAtTypeHint : kotlin.String = bundlesPeriodignoredAtTypeHint_example // kotlin.String | 
+val bundlesIgnored : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
+val bundlesIgnoredAtTypeHint : kotlin.String = bundlesIgnoredAtTypeHint_example // kotlin.String | 
 try {
-    apiInstance.postConfigAemHealthCheckServlet(bundlesPeriodignored, bundlesPeriodignoredAtTypeHint)
+    apiInstance.postConfigAemHealthCheckServlet(bundlesIgnored, bundlesIgnoredAtTypeHint)
 } catch (e: ClientException) {
     println("4xx response calling CustomApi#postConfigAemHealthCheckServlet")
     e.printStackTrace()
@@ -86,8 +89,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **bundlesPeriodignored** | [**kotlin.Array&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional]
- **bundlesPeriodignoredAtTypeHint** | **kotlin.String**|  | [optional]
+ **bundlesIgnored** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional]
+ **bundlesIgnoredAtTypeHint** | **kotlin.String**|  | [optional]
 
 ### Return type
 
@@ -95,7 +98,10 @@ null (empty response body)
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -104,7 +110,7 @@ null (empty response body)
 
 <a name="postConfigAemPasswordReset"></a>
 # **postConfigAemPasswordReset**
-> postConfigAemPasswordReset(pwdresetPeriodauthorizables, pwdresetPeriodauthorizablesAtTypeHint)
+> postConfigAemPasswordReset(pwdresetAuthorizables, pwdresetAuthorizablesAtTypeHint)
 
 
 
@@ -115,10 +121,10 @@ null (empty response body)
 //import org.openapitools.client.models.*
 
 val apiInstance = CustomApi()
-val pwdresetPeriodauthorizables : kotlin.Array<kotlin.String> =  // kotlin.Array<kotlin.String> | 
-val pwdresetPeriodauthorizablesAtTypeHint : kotlin.String = pwdresetPeriodauthorizablesAtTypeHint_example // kotlin.String | 
+val pwdresetAuthorizables : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
+val pwdresetAuthorizablesAtTypeHint : kotlin.String = pwdresetAuthorizablesAtTypeHint_example // kotlin.String | 
 try {
-    apiInstance.postConfigAemPasswordReset(pwdresetPeriodauthorizables, pwdresetPeriodauthorizablesAtTypeHint)
+    apiInstance.postConfigAemPasswordReset(pwdresetAuthorizables, pwdresetAuthorizablesAtTypeHint)
 } catch (e: ClientException) {
     println("4xx response calling CustomApi#postConfigAemPasswordReset")
     e.printStackTrace()
@@ -132,8 +138,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pwdresetPeriodauthorizables** | [**kotlin.Array&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional]
- **pwdresetPeriodauthorizablesAtTypeHint** | **kotlin.String**|  | [optional]
+ **pwdresetAuthorizables** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional]
+ **pwdresetAuthorizablesAtTypeHint** | **kotlin.String**|  | [optional]
 
 ### Return type
 
@@ -141,7 +147,10 @@ null (empty response body)
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 

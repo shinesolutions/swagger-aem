@@ -18,34 +18,34 @@ public class SamlConfigurationInfo  {
  /**
    * Persistent Identity (PID)
   **/
-  private String pid = null;
+  private String pid;
 
   @ApiModelProperty(value = "Title")
  /**
    * Title
   **/
-  private String title = null;
+  private String title;
 
   @ApiModelProperty(value = "Title")
  /**
    * Title
   **/
-  private String description = null;
+  private String description;
 
   @ApiModelProperty(value = "needed for configuration binding")
  /**
    * needed for configuration binding
   **/
-  private String bundleLocation = null;
+  private String bundleLocation;
 
   @ApiModelProperty(value = "needed for configuraiton binding")
  /**
    * needed for configuraiton binding
   **/
-  private String serviceLocation = null;
+  private String serviceLocation;
 
   @ApiModelProperty(value = "")
-  private SamlConfigurationProperties properties = null;
+  private SamlConfigurationProperties properties;
  /**
    * Persistent Identity (PID)
    * @return pid
@@ -174,7 +174,7 @@ public class SamlConfigurationInfo  {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private static String toIndentedString(java.lang.Object o) {
+  private static String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

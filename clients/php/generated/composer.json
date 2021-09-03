@@ -1,16 +1,16 @@
 {
-    "name": "GIT_USER_ID/GIT_REPO_ID",
-    "description": "",
+    "description": "Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API",
     "keywords": [
         "openapitools",
         "openapi-generator",
+        "openapi",
         "php",
         "sdk",
         "rest",
         "api"
     ],
-    "homepage": "http://openapi-generator.tech",
-    "license": "proprietary",
+    "homepage": "https://openapi-generator.tech",
+    "license": "unlicense",
     "authors": [
         {
             "name": "OpenAPI-Generator contributors",
@@ -18,21 +18,20 @@
         }
     ],
     "require": {
-        "php": ">=5.5",
+        "php": "^7.3 || ^8.0",
         "ext-curl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
         "guzzlehttp/guzzle": "^6.2"
     },
     "require-dev": {
-        "phpunit/phpunit": "^4.8",
-        "squizlabs/php_codesniffer": "~2.6",
-        "friendsofphp/php-cs-fixer": "~1.12"
+        "phpunit/phpunit": "^8.0 || ^9.0",
+        "friendsofphp/php-cs-fixer": "^2.12"
     },
     "autoload": {
         "psr-4": { "OpenAPI\\Client\\" : "lib/" }
     },
     "autoload-dev": {
-        "psr-4": { "OpenAPI\\Client\\" : "test/" }
+        "psr-4": { "OpenAPI\\Client\\Test\\" : "test/" }
     }
 }

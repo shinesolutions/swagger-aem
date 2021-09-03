@@ -1,79 +1,85 @@
 package org.openapitools.api;
 
-import groovyx.net.http.*
-import static groovyx.net.http.ContentType.*
-import static groovyx.net.http.Method.*
 import org.openapitools.api.ApiUtils
 
-
-import java.util.*;
-
-@Mixin(ApiUtils)
 class CustomApi {
     String basePath = "http://localhost"
-    String versionPath = "/api/v1"
+    String versionPath = ""
+    ApiUtils apiUtils = new ApiUtils();
 
     def getAemHealthCheck ( String tags, Boolean combineTagsOr, Closure onSuccess, Closure onFailure)  {
-        // create path and map path parameters (TODO)
         String resourcePath = "/system/health"
 
-        // query params
+        // params
         def queryParams = [:]
         def headerParams = [:]
+        def bodyParams
+        def contentType
 
-        if (!"null".equals(String.valueOf(tags)))
-            queryParams.put("tags", String.valueOf(tags))
 
-        if (!"null".equals(String.valueOf(combineTagsOr)))
-            queryParams.put("combineTagsOr", String.valueOf(combineTagsOr))
+        if (tags != null) {
+            queryParams.put("tags", tags)
+        }
+        if (combineTagsOr != null) {
+            queryParams.put("combineTagsOr", combineTagsOr)
+        }
 
-        // TODO: form params, body param not yet support
 
-        invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams,
+
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
                     "GET", "",
                     String.class )
 
     }
 
     def postConfigAemHealthCheckServlet ( List<String> bundlesIgnored, String bundlesIgnoredAtTypeHint, Closure onSuccess, Closure onFailure)  {
-        // create path and map path parameters (TODO)
         String resourcePath = "/apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck"
 
-        // query params
+        // params
         def queryParams = [:]
         def headerParams = [:]
+        def bodyParams
+        def contentType
 
-        if (!"null".equals(String.valueOf(bundlesIgnored)))
-            queryParams.put("bundles.ignored", String.valueOf(bundlesIgnored))
 
-        if (!"null".equals(String.valueOf(bundlesIgnoredAtTypeHint)))
-            queryParams.put("bundles.ignored@TypeHint", String.valueOf(bundlesIgnoredAtTypeHint))
+        if (bundlesIgnored != null) {
+            queryParams.put("bundles.ignored", bundlesIgnored)
+        }
+        if (bundlesIgnoredAtTypeHint != null) {
+            queryParams.put("bundles.ignored@TypeHint", bundlesIgnoredAtTypeHint)
+        }
 
-        // TODO: form params, body param not yet support
 
-        invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams,
+
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
                     "POST", "",
                     null )
 
     }
 
     def postConfigAemPasswordReset ( List<String> pwdresetAuthorizables, String pwdresetAuthorizablesAtTypeHint, Closure onSuccess, Closure onFailure)  {
-        // create path and map path parameters (TODO)
         String resourcePath = "/apps/system/config/com.shinesolutions.aem.passwordreset.Activator"
 
-        // query params
+        // params
         def queryParams = [:]
         def headerParams = [:]
+        def bodyParams
+        def contentType
 
-        if (!"null".equals(String.valueOf(pwdresetAuthorizables)))
-            queryParams.put("pwdreset.authorizables", String.valueOf(pwdresetAuthorizables))
 
-        if (!"null".equals(String.valueOf(pwdresetAuthorizablesAtTypeHint)))
-            queryParams.put("pwdreset.authorizables@TypeHint", String.valueOf(pwdresetAuthorizablesAtTypeHint))
+        if (pwdresetAuthorizables != null) {
+            queryParams.put("pwdreset.authorizables", pwdresetAuthorizables)
+        }
+        if (pwdresetAuthorizablesAtTypeHint != null) {
+            queryParams.put("pwdreset.authorizables@TypeHint", pwdresetAuthorizablesAtTypeHint)
+        }
 
-        // TODO: form params, body param not yet support
 
-        invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams,
+
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
                     "POST", "",
                     null )
 

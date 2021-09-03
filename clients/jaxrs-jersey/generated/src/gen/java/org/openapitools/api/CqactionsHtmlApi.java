@@ -14,8 +14,8 @@ import org.openapitools.api.NotFoundException;
 
 import java.io.InputStream;
 
-import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
+import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 
 import javax.servlet.ServletConfig;
 import javax.ws.rs.core.Context;
@@ -23,12 +23,13 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.*;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 
 @Path("/.cqactions.html")
 
 
 @io.swagger.annotations.Api(description = "the .cqactions.html API")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJerseyServerCodegen", date = "2019-08-04T23:41:59.588Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJerseyServerCodegen", date = "2021-09-03T15:25:53.422+10:00[Australia/Melbourne]")
 public class CqactionsHtmlApi  {
    private final CqactionsHtmlApiService delegate;
 
@@ -60,12 +61,11 @@ public class CqactionsHtmlApi  {
     @io.swagger.annotations.ApiOperation(value = "", notes = "", response = Void.class, authorizations = {
         @io.swagger.annotations.Authorization(value = "aemAuth")
     }, tags={ "cq", })
-    @io.swagger.annotations.ApiResponses(value = { 
-        @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = Void.class) })
-    public Response postCqActions(@ApiParam(value = "",required=true) @QueryParam("authorizableId") String authorizableId
-,@ApiParam(value = "",required=true) @QueryParam("changelog") String changelog
-,@Context SecurityContext securityContext)
+    @io.swagger.annotations.ApiResponses(value = {
+        @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = Void.class)
+    })
+    public Response postCqActions(@ApiParam(value = "", required = true) @QueryParam("authorizableId") @NotNull  String authorizableId,@ApiParam(value = "", required = true) @QueryParam("changelog") @NotNull  String changelog,@Context SecurityContext securityContext)
     throws NotFoundException {
-        return delegate.postCqActions(authorizableId,changelog,securityContext);
+        return delegate.postCqActions(authorizableId, changelog, securityContext);
     }
 }

@@ -17,31 +17,31 @@ public class KeystoreChainItems  {
  /**
    * e.g. \"CN=localhost\"
   **/
-  private String subject = null;
+  private String subject;
 
   @ApiModelProperty(value = "e.g. \"CN=Admin\"")
  /**
    * e.g. \"CN=Admin\"
   **/
-  private String issuer = null;
+  private String issuer;
 
   @ApiModelProperty(value = "e.g. \"Sun Jul 01 12:00:00 AEST 2018\"")
  /**
    * e.g. \"Sun Jul 01 12:00:00 AEST 2018\"
   **/
-  private String notBefore = null;
+  private String notBefore;
 
   @ApiModelProperty(value = "e.g. \"Sun Jun 30 23:59:50 AEST 2019\"")
  /**
    * e.g. \"Sun Jun 30 23:59:50 AEST 2019\"
   **/
-  private String notAfter = null;
+  private String notAfter;
 
   @ApiModelProperty(value = "18165099476682912368")
  /**
    * 18165099476682912368
   **/
-  private Integer serialNumber = null;
+  private Integer serialNumber;
  /**
    * e.g. \&quot;CN&#x3D;localhost\&quot;
    * @return subject
@@ -151,7 +151,7 @@ public class KeystoreChainItems  {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private static String toIndentedString(java.lang.Object o) {
+  private static String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

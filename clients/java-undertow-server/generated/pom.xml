@@ -10,13 +10,14 @@
     <artifactId>openapi-undertow-server</artifactId>
     <packaging>jar</packaging>
     <name>openapi-undertow-server</name>
-    <version>1.0.0</version>
+    <version>3.5.0-pre.0</version>
 
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.framework>0.1.1</version.framework>
-        <version.jackson>2.12.1</version.jackson>
+        <version.jackson>2.10.5</version.jackson>
+        <version.jackson.databind>2.10.5.1</version.jackson.databind>
         <version.slf4j>1.7.21</version.slf4j>
         <version.jose4j>0.5.2</version.jose4j>
         <version.antlr4>4.5.3</version.antlr4>
@@ -26,11 +27,11 @@
         <version.encoder>1.2</version.encoder>
         <version.metrics>3.1.2</version.metrics>
         <version.logback>1.2.0</version.logback>
-        <version.junit>4.13.1</version.junit>
+        <version.junit>4.13</version.junit>
         <version.mockito>2.1.0-beta.124</version.mockito>
-        <version.undertow>2.1.6.Final</version.undertow>
+        <version.undertow>1.4.0.Final</version.undertow>
         <version.jsonpath>2.2.0</version.jsonpath>
-        <version.httpclient>4.5.13</version.httpclient>
+        <version.httpclient>4.5.2</version.httpclient>
         <version.httpasyncclient>4.1.2</version.httpasyncclient>
         <version.swagger>1.5.10</version.swagger>
     </properties>
@@ -80,7 +81,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>${version.jackson}</version>
+            <version>${version.jackson.databind}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -106,6 +107,12 @@
             <groupId>io.swagger</groupId>
             <artifactId>swagger-annotations</artifactId>
             <version>${version.swagger}</version>
+        </dependency>
+        <!-- @Nullable annotation -->
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+            <version>3.0.2</version>
         </dependency>
 
         <!-- Test Dependencies -->

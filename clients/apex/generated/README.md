@@ -1,11 +1,11 @@
 # Adobe Experience Manager (AEM) API API Client
 
+
 Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
 
 ## Requirements
 
 - [Salesforce DX](https://www.salesforce.com/products/platform/products/salesforce-dx/)
-
 
 If everything is set correctly:
 
@@ -15,27 +15,27 @@ If everything is set correctly:
   sfdx-cli/5.7.5-05549de (darwin-amd64) go1.7.5 sfdxstable
   ```
 
-
 ## Installation
 
 1. Copy the output into your Salesforce DX folder - or alternatively deploy the output directly into the workspace.
 2. Deploy the code via Salesforce DX to your Scratch Org
 
    ```bash
-   $ sfdx force:source:push
+      sfdx force:source:push
    ```
+
 3. If the API needs authentication update the Named Credential in Setup.
 4. Run your Apex tests using
 
-    ```bash
-    $ sfdx sfdx force:apex:test:run
-    ```
+   ```bash
+       sfdx sfdx force:apex:test:run
+   ```
+
 5. Retrieve the job id from the console and check the test results.
 
   ```bash
-  $ sfdx force:apex:test:report -i theJobId
+  sfdx force:apex:test:report -i theJobId
   ```
-
 
 ## Getting Started
 
@@ -62,6 +62,7 @@ All URIs are relative to *http://localhost*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *OASConsoleApi* | [**getAemProductInfo**](OASConsoleApi.md#getAemProductInfo) | **GET** /system/console/status-productinfo.json | 
+*OASConsoleApi* | [**getBundleInfo**](OASConsoleApi.md#getBundleInfo) | **GET** /system/console/bundles/{name}.json | 
 *OASConsoleApi* | [**getConfigMgr**](OASConsoleApi.md#getConfigMgr) | **GET** /system/console/configMgr | 
 *OASConsoleApi* | [**postBundle**](OASConsoleApi.md#postBundle) | **POST** /system/console/bundles/{name} | 
 *OASConsoleApi* | [**postJmxRepository**](OASConsoleApi.md#postJmxRepository) | **POST** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} | 
@@ -78,6 +79,7 @@ Class | Method | HTTP request | Description
 *OASCustomApi* | [**getAemHealthCheck**](OASCustomApi.md#getAemHealthCheck) | **GET** /system/health | 
 *OASCustomApi* | [**postConfigAemHealthCheckServlet**](OASCustomApi.md#postConfigAemHealthCheckServlet) | **POST** /apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck | 
 *OASCustomApi* | [**postConfigAemPasswordReset**](OASCustomApi.md#postConfigAemPasswordReset) | **POST** /apps/system/config/com.shinesolutions.aem.passwordreset.Activator | 
+*OASGraniteApi* | [**sslSetup**](OASGraniteApi.md#sslSetup) | **POST** /libs/granite/security/post/sslSetup.html | 
 *OASSlingApi* | [**deleteAgent**](OASSlingApi.md#deleteAgent) | **DELETE** /etc/replication/agents.{runmode}/{name} | 
 *OASSlingApi* | [**deleteNode**](OASSlingApi.md#deleteNode) | **DELETE** /{path}/{name} | 
 *OASSlingApi* | [**getAgent**](OASSlingApi.md#getAgent) | **GET** /etc/replication/agents.{runmode}/{name} | 
@@ -99,6 +101,7 @@ Class | Method | HTTP request | Description
 *OASSlingApi* | [**postConfigApacheSlingDavExServlet**](OASSlingApi.md#postConfigApacheSlingDavExServlet) | **POST** /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet | 
 *OASSlingApi* | [**postConfigApacheSlingGetServlet**](OASSlingApi.md#postConfigApacheSlingGetServlet) | **POST** /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet | 
 *OASSlingApi* | [**postConfigApacheSlingReferrerFilter**](OASSlingApi.md#postConfigApacheSlingReferrerFilter) | **POST** /apps/system/config/org.apache.sling.security.impl.ReferrerFilter | 
+*OASSlingApi* | [**postConfigProperty**](OASSlingApi.md#postConfigProperty) | **POST** /apps/system/config/{configNodeName} | 
 *OASSlingApi* | [**postNode**](OASSlingApi.md#postNode) | **POST** /{path}/{name} | 
 *OASSlingApi* | [**postNodeRw**](OASSlingApi.md#postNodeRw) | **POST** /{path}/{name}.rw.html | 
 *OASSlingApi* | [**postPath**](OASSlingApi.md#postPath) | **POST** /{path}/ | 
@@ -110,6 +113,9 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
+ - [OASBundleData](OASBundleData.md)
+ - [OASBundleDataProp](OASBundleDataProp.md)
+ - [OASBundleInfo](OASBundleInfo.md)
  - [OASInstallStatus](OASInstallStatus.md)
  - [OASInstallStatusStatus](OASInstallStatusStatus.md)
  - [OASKeystoreChainItems](OASKeystoreChainItems.md)

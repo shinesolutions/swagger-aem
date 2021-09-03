@@ -20,7 +20,7 @@ defmodule AdobeExperienceManager(AEM)API.Api.Console do
   ## Returns
 
   {:ok, [%String{}, ...]} on success
-  {:error, info} on failure
+  {:error, Tesla.Env.t} on failure
   """
   @spec get_aem_product_info(Tesla.Env.client, keyword()) :: {:ok, list(String.t)} | {:error, Tesla.Env.t}
   def get_aem_product_info(connection, _opts \\ []) do
@@ -29,7 +29,34 @@ defmodule AdobeExperienceManager(AEM)API.Api.Console do
     |> url("/system/console/status-productinfo.json")
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode([%AdobeExperienceManager(AEM)API.Model.String{}])
+    |> evaluate_response([
+      { :default, []}
+    ])
+  end
+
+  @doc """
+
+  ## Parameters
+
+  - connection (AdobeExperienceManager(AEM)API.Connection): Connection to server
+  - name (String.t): 
+  - opts (KeywordList): [optional] Optional parameters
+  ## Returns
+
+  {:ok, AdobeExperienceManager(AEM)API.Model.BundleInfo.t} on success
+  {:error, Tesla.Env.t} on failure
+  """
+  @spec get_bundle_info(Tesla.Env.client, String.t, keyword()) :: {:ok, AdobeExperienceManager(AEM)API.Model.BundleInfo.t} | {:ok, String.t} | {:error, Tesla.Env.t}
+  def get_bundle_info(connection, name, _opts \\ []) do
+    %{}
+    |> method(:get)
+    |> url("/system/console/bundles/#{name}.json")
+    |> Enum.into([])
+    |> (&Connection.request(connection, &1)).()
+    |> evaluate_response([
+      { 200, %AdobeExperienceManager(AEM)API.Model.BundleInfo{}},
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -40,17 +67,20 @@ defmodule AdobeExperienceManager(AEM)API.Api.Console do
   - opts (KeywordList): [optional] Optional parameters
   ## Returns
 
-  {:ok, %AdobeExperienceManager(AEM)API.Model.String.t{}} on success
-  {:error, info} on failure
+  {:ok, String.t} on success
+  {:error, Tesla.Env.t} on failure
   """
-  @spec get_config_mgr(Tesla.Env.client, keyword()) :: {:ok, String.t} | {:error, Tesla.Env.t}
+  @spec get_config_mgr(Tesla.Env.client, keyword()) :: {:ok, nil} | {:ok, String.t} | {:error, Tesla.Env.t}
   def get_config_mgr(connection, _opts \\ []) do
     %{}
     |> method(:get)
     |> url("/system/console/configMgr")
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { 200, false},
+      { "5XX", false}
+    ])
   end
 
   @doc """
@@ -63,8 +93,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Console do
   - opts (KeywordList): [optional] Optional parameters
   ## Returns
 
-  {:ok, %{}} on success
-  {:error, info} on failure
+  {:ok, nil} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec post_bundle(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def post_bundle(connection, name, action, _opts \\ []) do
@@ -72,9 +102,12 @@ defmodule AdobeExperienceManager(AEM)API.Api.Console do
     |> method(:post)
     |> url("/system/console/bundles/#{name}")
     |> add_param(:query, :"action", action)
+    |> ensure_body()
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -86,17 +119,20 @@ defmodule AdobeExperienceManager(AEM)API.Api.Console do
   - opts (KeywordList): [optional] Optional parameters
   ## Returns
 
-  {:ok, %{}} on success
-  {:error, info} on failure
+  {:ok, nil} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec post_jmx_repository(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def post_jmx_repository(connection, action, _opts \\ []) do
     %{}
     |> method(:post)
     |> url("/system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/#{action}")
+    |> ensure_body()
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -137,10 +173,10 @@ defmodule AdobeExperienceManager(AEM)API.Api.Console do
     - :propertylist ([String.t]): 
   ## Returns
 
-  {:ok, %AdobeExperienceManager(AEM)API.Model.SamlConfigurationInfo{}} on success
-  {:error, info} on failure
+  {:ok, AdobeExperienceManager(AEM)API.Model.SamlConfigurationInfo.t} on success
+  {:error, Tesla.Env.t} on failure
   """
-  @spec post_saml_configuration(Tesla.Env.client, keyword()) :: {:ok, AdobeExperienceManager(AEM)API.Model.SamlConfigurationInfo.t} | {:error, Tesla.Env.t}
+  @spec post_saml_configuration(Tesla.Env.client, keyword()) :: {:ok, AdobeExperienceManager(AEM)API.Model.SamlConfigurationInfo.t} | {:ok, String.t} | {:error, Tesla.Env.t}
   def post_saml_configuration(connection, opts \\ []) do
     optional_params = %{
       :"post" => :query,
@@ -178,8 +214,13 @@ defmodule AdobeExperienceManager(AEM)API.Api.Console do
     |> method(:post)
     |> url("/system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler")
     |> add_optional_params(optional_params, opts)
+    |> ensure_body()
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(%AdobeExperienceManager(AEM)API.Model.SamlConfigurationInfo{})
+    |> evaluate_response([
+      { 200, %AdobeExperienceManager(AEM)API.Model.SamlConfigurationInfo{}},
+      { 302, false},
+      { :default, false}
+    ])
   end
 end

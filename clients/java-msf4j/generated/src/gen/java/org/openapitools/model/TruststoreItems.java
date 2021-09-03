@@ -9,28 +9,28 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * TruststoreItems
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaMSF4JServerCodegen", date = "2019-08-04T23:41:25.207Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaMSF4JServerCodegen", date = "2021-09-03T15:25:23.467+10:00[Australia/Melbourne]")
 public class TruststoreItems   {
   @JsonProperty("alias")
-  private String alias = null;
+  private String alias;
 
   @JsonProperty("entryType")
-  private String entryType = null;
+  private String entryType;
 
   @JsonProperty("subject")
-  private String subject = null;
+  private String subject;
 
   @JsonProperty("issuer")
-  private String issuer = null;
+  private String issuer;
 
   @JsonProperty("notBefore")
-  private String notBefore = null;
+  private String notBefore;
 
   @JsonProperty("notAfter")
-  private String notAfter = null;
+  private String notAfter;
 
   @JsonProperty("serialNumber")
-  private Integer serialNumber = null;
+  private Integer serialNumber;
 
   public TruststoreItems alias(String alias) {
     this.alias = alias;
@@ -160,7 +160,7 @@ public class TruststoreItems   {
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -202,7 +202,7 @@ public class TruststoreItems   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

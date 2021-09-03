@@ -12,8 +12,8 @@ class KeystoreItems {
     /** @var string $alias Keystore alias name*/
     private $alias;
 
-    /** @var string $entry_type e.g. \&quot;privateKey\&quot;*/
-    private $entry_type;
+    /** @var string $entryType e.g. \&quot;privateKey\&quot;*/
+    private $entryType;
 
     /** @var string $algorithm e.g. \&quot;RSA\&quot;*/
     private $algorithm;

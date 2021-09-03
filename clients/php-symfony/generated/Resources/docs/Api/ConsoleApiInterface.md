@@ -5,6 +5,7 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**getAemProductInfo**](ConsoleApiInterface.md#getAemProductInfo) | **GET** /system/console/status-productinfo.json | 
+[**getBundleInfo**](ConsoleApiInterface.md#getBundleInfo) | **GET** /system/console/bundles/{name}.json | 
 [**getConfigMgr**](ConsoleApiInterface.md#getConfigMgr) | **GET** /system/console/configMgr | 
 [**postBundle**](ConsoleApiInterface.md#postBundle) | **POST** /system/console/bundles/{name} | 
 [**postJmxRepository**](ConsoleApiInterface.md#postJmxRepository) | **POST** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} | 
@@ -19,7 +20,7 @@ services:
     acme.my_bundle.api.console:
         class: Acme\MyBundle\Api\ConsoleApi
         tags:
-            - { name: "open_apiserver.api", api: "console" }
+            - { name: "open_api_server.api", api: "console" }
     # ...
 ```
 
@@ -60,6 +61,58 @@ This endpoint does not need any parameter.
 ### Return type
 
 **string**
+
+### Authorization
+
+[aemAuth](../../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+## **getBundleInfo**
+> OpenAPI\Server\Model\BundleInfo getBundleInfo($name)
+
+
+
+### Example Implementation
+```php
+<?php
+// src/Acme/MyBundle/Api/ConsoleApiInterface.php
+
+namespace Acme\MyBundle\Api;
+
+use OpenAPI\Server\Api\ConsoleApiInterface;
+
+class ConsoleApi implements ConsoleApiInterface
+{
+
+    // ...
+
+    /**
+     * Implementation of ConsoleApiInterface#getBundleInfo
+     */
+    public function getBundleInfo($name)
+    {
+        // Implement the operation ...
+    }
+
+    // ...
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**|  |
+
+### Return type
+
+[**OpenAPI\Server\Model\BundleInfo**](../Model/BundleInfo.md)
 
 ### Authorization
 

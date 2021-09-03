@@ -3,10 +3,10 @@
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{8D32DB4D-388D-4C0B-B9E6-4F3B773F7E9F}</ProjectGuid>
+        <ProjectGuid>{E726E567-9319-4045-B7B7-DA6229F68EED}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>Org.OpenAPITools.</RootNamespace>
+        <RootNamespace>Org.OpenAPITools._</RootNamespace>
         <AssemblyName>Org.OpenAPITools</AssemblyName>
             <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>

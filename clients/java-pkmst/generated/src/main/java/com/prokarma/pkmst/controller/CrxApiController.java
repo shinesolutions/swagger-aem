@@ -24,8 +24,7 @@ import java.io.IOException;
  * @author pkmst
  *
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2019-08-04T23:41:29.600Z[GMT]")
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2021-09-03T15:25:27.791+10:00[Australia/Melbourne]")
 @Controller
 public class CrxApiController implements CrxApi {
     private final ObjectMapper objectMapper;

@@ -15,6 +15,7 @@
   {:base-url        "http://localhost"
    :date-format     "yyyy-MM-dd"
    :datetime-format "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
+   :decode-models   false
    :debug           false
    :auths           {"aemAuth" nil}})
 

@@ -13,15 +13,17 @@ Method | HTTP request | Description
 [**PostSetPassword**](CrxApi.md#postsetpassword) | **POST** /crx/explorer/ui/setpassword.jsp | 
 
 
-<a name="getcrxdestatus"></a>
-# **GetCrxdeStatus**
+
+## GetCrxdeStatus
+
 > string GetCrxdeStatus ()
 
 
 
 ### Example
+
 ```csharp
-using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Org.OpenAPITools.Api;
 using Org.OpenAPITools.Client;
@@ -31,22 +33,25 @@ namespace Example
 {
     public class GetCrxdeStatusExample
     {
-        public void main()
+        public static void Main()
         {
+            Configuration.Default.BasePath = "http://localhost";
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
 
-            var apiInstance = new CrxApi();
+            var apiInstance = new CrxApi(Configuration.Default);
 
             try
             {
                 string result = apiInstance.GetCrxdeStatus();
                 Debug.WriteLine(result);
             }
-            catch (Exception e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling CrxApi.GetCrxdeStatus: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
             }
         }
     }
@@ -54,6 +59,7 @@ namespace Example
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -66,20 +72,32 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: plain/text
+- **Content-Type**: Not defined
+- **Accept**: plain/text
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="getinstallstatus"></a>
-# **GetInstallStatus**
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | CRXDE is enabled |  -  |
+| **404** | CRXDE is disabled |  -  |
+
+[[Back to top]](#)
+[[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetInstallStatus
+
 > InstallStatus GetInstallStatus ()
 
 
 
 ### Example
+
 ```csharp
-using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Org.OpenAPITools.Api;
 using Org.OpenAPITools.Client;
@@ -89,22 +107,25 @@ namespace Example
 {
     public class GetInstallStatusExample
     {
-        public void main()
+        public static void Main()
         {
+            Configuration.Default.BasePath = "http://localhost";
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
 
-            var apiInstance = new CrxApi();
+            var apiInstance = new CrxApi(Configuration.Default);
 
             try
             {
                 InstallStatus result = apiInstance.GetInstallStatus();
                 Debug.WriteLine(result);
             }
-            catch (Exception e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling CrxApi.GetInstallStatus: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
             }
         }
     }
@@ -112,6 +133,7 @@ namespace Example
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -124,20 +146,32 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="getpackagemanagerservlet"></a>
-# **GetPackageManagerServlet**
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Retrieved CRX package manager install status |  -  |
+| **0** | Default response |  -  |
+
+[[Back to top]](#)
+[[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetPackageManagerServlet
+
 > void GetPackageManagerServlet ()
 
 
 
 ### Example
+
 ```csharp
-using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Org.OpenAPITools.Api;
 using Org.OpenAPITools.Client;
@@ -147,21 +181,24 @@ namespace Example
 {
     public class GetPackageManagerServletExample
     {
-        public void main()
+        public static void Main()
         {
+            Configuration.Default.BasePath = "http://localhost";
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
 
-            var apiInstance = new CrxApi();
+            var apiInstance = new CrxApi(Configuration.Default);
 
             try
             {
                 apiInstance.GetPackageManagerServlet();
             }
-            catch (Exception e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling CrxApi.GetPackageManagerServlet: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
             }
         }
     }
@@ -169,6 +206,7 @@ namespace Example
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -181,20 +219,32 @@ void (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/html
+- **Content-Type**: Not defined
+- **Accept**: text/html
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="postpackageservice"></a>
-# **PostPackageService**
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **404** | Package Manager Servlet is disabled |  -  |
+| **405** | Package Manager Servlet is active |  -  |
+
+[[Back to top]](#)
+[[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PostPackageService
+
 > string PostPackageService (string cmd)
 
 
 
 ### Example
+
 ```csharp
-using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Org.OpenAPITools.Api;
 using Org.OpenAPITools.Client;
@@ -204,13 +254,14 @@ namespace Example
 {
     public class PostPackageServiceExample
     {
-        public void main()
+        public static void Main()
         {
+            Configuration.Default.BasePath = "http://localhost";
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
 
-            var apiInstance = new CrxApi();
+            var apiInstance = new CrxApi(Configuration.Default);
             var cmd = cmd_example;  // string | 
 
             try
@@ -218,9 +269,11 @@ namespace Example
                 string result = apiInstance.PostPackageService(cmd);
                 Debug.WriteLine(result);
             }
-            catch (Exception e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling CrxApi.PostPackageService: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
             }
         }
     }
@@ -228,6 +281,7 @@ namespace Example
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -243,20 +297,31 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/xml
+- **Content-Type**: Not defined
+- **Accept**: text/xml
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="postpackageservicejson"></a>
-# **PostPackageServiceJson**
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **0** | Default response |  -  |
+
+[[Back to top]](#)
+[[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PostPackageServiceJson
+
 > string PostPackageServiceJson (string path, string cmd, string groupName = null, string packageName = null, string packageVersion = null, string charset = null, bool? force = null, bool? recursive = null, System.IO.Stream package = null)
 
 
 
 ### Example
+
 ```csharp
-using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Org.OpenAPITools.Api;
 using Org.OpenAPITools.Client;
@@ -266,13 +331,14 @@ namespace Example
 {
     public class PostPackageServiceJsonExample
     {
-        public void main()
+        public static void Main()
         {
+            Configuration.Default.BasePath = "http://localhost";
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
 
-            var apiInstance = new CrxApi();
+            var apiInstance = new CrxApi(Configuration.Default);
             var path = path_example;  // string | 
             var cmd = cmd_example;  // string | 
             var groupName = groupName_example;  // string |  (optional) 
@@ -288,9 +354,11 @@ namespace Example
                 string result = apiInstance.PostPackageServiceJson(path, cmd, groupName, packageName, packageVersion, charset, force, recursive, package);
                 Debug.WriteLine(result);
             }
-            catch (Exception e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling CrxApi.PostPackageServiceJson: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
             }
         }
     }
@@ -298,6 +366,7 @@ namespace Example
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -321,20 +390,31 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
+- **Content-Type**: multipart/form-data
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="postpackageupdate"></a>
-# **PostPackageUpdate**
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **0** | Default response |  -  |
+
+[[Back to top]](#)
+[[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PostPackageUpdate
+
 > string PostPackageUpdate (string groupName, string packageName, string version, string path, string filter = null, string charset = null)
 
 
 
 ### Example
+
 ```csharp
-using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Org.OpenAPITools.Api;
 using Org.OpenAPITools.Client;
@@ -344,13 +424,14 @@ namespace Example
 {
     public class PostPackageUpdateExample
     {
-        public void main()
+        public static void Main()
         {
+            Configuration.Default.BasePath = "http://localhost";
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
 
-            var apiInstance = new CrxApi();
+            var apiInstance = new CrxApi(Configuration.Default);
             var groupName = groupName_example;  // string | 
             var packageName = packageName_example;  // string | 
             var version = version_example;  // string | 
@@ -363,9 +444,11 @@ namespace Example
                 string result = apiInstance.PostPackageUpdate(groupName, packageName, version, path, filter, charset);
                 Debug.WriteLine(result);
             }
-            catch (Exception e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling CrxApi.PostPackageUpdate: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
             }
         }
     }
@@ -373,6 +456,7 @@ namespace Example
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -393,20 +477,31 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="postsetpassword"></a>
-# **PostSetPassword**
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **0** | Default response |  -  |
+
+[[Back to top]](#)
+[[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PostSetPassword
+
 > string PostSetPassword (string old, string plain, string verify)
 
 
 
 ### Example
+
 ```csharp
-using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Org.OpenAPITools.Api;
 using Org.OpenAPITools.Client;
@@ -416,13 +511,14 @@ namespace Example
 {
     public class PostSetPasswordExample
     {
-        public void main()
+        public static void Main()
         {
+            Configuration.Default.BasePath = "http://localhost";
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
 
-            var apiInstance = new CrxApi();
+            var apiInstance = new CrxApi(Configuration.Default);
             var old = old_example;  // string | 
             var plain = plain_example;  // string | 
             var verify = verify_example;  // string | 
@@ -432,9 +528,11 @@ namespace Example
                 string result = apiInstance.PostSetPassword(old, plain, verify);
                 Debug.WriteLine(result);
             }
-            catch (Exception e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling CrxApi.PostSetPassword: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
             }
         }
     }
@@ -442,6 +540,7 @@ namespace Example
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -459,8 +558,17 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/plain
+- **Content-Type**: Not defined
+- **Accept**: text/plain
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **0** | Default response |  -  |
+
+[[Back to top]](#)
+[[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 

@@ -7,6 +7,6 @@ import org.openapitools.model.InstallStatusStatus;
 
 @Canonical
 class InstallStatus {
-    InstallStatusStatus status = null
-
+    
+    InstallStatusStatus status
 }

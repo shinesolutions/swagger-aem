@@ -16,15 +16,15 @@ import java.util.List;
 import java.util.Map;
 
 public class CrxApiVerticle extends AbstractVerticle {
-    final static Logger LOGGER = LoggerFactory.getLogger(CrxApiVerticle.class); 
+    static final Logger LOGGER = LoggerFactory.getLogger(CrxApiVerticle.class);
     
-    final static String GETCRXDESTATUS_SERVICE_ID = "getCrxdeStatus";
-    final static String GETINSTALLSTATUS_SERVICE_ID = "getInstallStatus";
-    final static String GETPACKAGEMANAGERSERVLET_SERVICE_ID = "getPackageManagerServlet";
-    final static String POSTPACKAGESERVICE_SERVICE_ID = "postPackageService";
-    final static String POSTPACKAGESERVICEJSON_SERVICE_ID = "postPackageServiceJson";
-    final static String POSTPACKAGEUPDATE_SERVICE_ID = "postPackageUpdate";
-    final static String POSTSETPASSWORD_SERVICE_ID = "postSetPassword";
+    static final String GETCRXDESTATUS_SERVICE_ID = "getCrxdeStatus";
+    static final String GETINSTALLSTATUS_SERVICE_ID = "getInstallStatus";
+    static final String GETPACKAGEMANAGERSERVLET_SERVICE_ID = "getPackageManagerServlet";
+    static final String POSTPACKAGESERVICE_SERVICE_ID = "postPackageService";
+    static final String POSTPACKAGESERVICEJSON_SERVICE_ID = "postPackageServiceJson";
+    static final String POSTPACKAGEUPDATE_SERVICE_ID = "postPackageUpdate";
+    static final String POSTSETPASSWORD_SERVICE_ID = "postSetPassword";
     
     final CrxApi service;
 

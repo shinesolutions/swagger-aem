@@ -7,18 +7,13 @@ import io.swagger.annotations.ApiModelProperty;
 @Canonical
 class KeystoreChainItems {
     /* e.g. \"CN=localhost\" */
-    String subject = null
-
+    String subject
     /* e.g. \"CN=Admin\" */
-    String issuer = null
-
+    String issuer
     /* e.g. \"Sun Jul 01 12:00:00 AEST 2018\" */
-    String notBefore = null
-
+    String notBefore
     /* e.g. \"Sun Jun 30 23:59:50 AEST 2019\" */
-    String notAfter = null
-
+    String notAfter
     /* 18165099476682912368 */
-    Integer serialNumber = null
-
+    Integer serialNumber
 }

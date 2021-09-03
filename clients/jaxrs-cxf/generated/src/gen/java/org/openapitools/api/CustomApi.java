@@ -24,30 +24,30 @@ import javax.validation.Valid;
  * <p>Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
  *
  */
-@Path("/")
+@Path("")
 @Api(value = "/", description = "")
 public interface CustomApi  {
 
     @GET
     @Path("/system/health")
     @Produces({ "application/json" })
-    @ApiOperation(value = "", tags={ "custom",  })
+    @ApiOperation(value = "", tags={ "custom" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public String getAemHealthCheck(@QueryParam("tags") String tags, @QueryParam("combineTagsOr") Boolean combineTagsOr);
+    public String getAemHealthCheck(@QueryParam("tags")  String tags, @QueryParam("combineTagsOr")  Boolean combineTagsOr);
 
     @POST
     @Path("/apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck")
-    @ApiOperation(value = "", tags={ "custom",  })
+    @ApiOperation(value = "", tags={ "custom" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response") })
-    public void postConfigAemHealthCheckServlet(@QueryParam("bundles.ignored") List<String> bundlesIgnored, @QueryParam("bundles.ignored@TypeHint") String bundlesIgnoredAtTypeHint);
+    public void postConfigAemHealthCheckServlet(@QueryParam("bundles.ignored")  List<String> bundlesIgnored, @QueryParam("bundles.ignored@TypeHint")  String bundlesIgnoredAtTypeHint);
 
     @POST
     @Path("/apps/system/config/com.shinesolutions.aem.passwordreset.Activator")
     @ApiOperation(value = "", tags={ "custom" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response") })
-    public void postConfigAemPasswordReset(@QueryParam("pwdreset.authorizables") List<String> pwdresetAuthorizables, @QueryParam("pwdreset.authorizables@TypeHint") String pwdresetAuthorizablesAtTypeHint);
+    public void postConfigAemPasswordReset(@QueryParam("pwdreset.authorizables")  List<String> pwdresetAuthorizables, @QueryParam("pwdreset.authorizables@TypeHint")  String pwdresetAuthorizablesAtTypeHint);
 }
 

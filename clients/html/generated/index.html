@@ -183,8 +183,8 @@ font-style: italic;
     <div class="app-desc">Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API</div>
     <div class="app-desc">More information: <a href="http://shinesolutions.com">http://shinesolutions.com</a></div>
     <div class="app-desc">Contact Info: <a href="opensource@shinesolutions.com">opensource@shinesolutions.com</a></div>
-    <div class="app-desc">Version: 3.2.0-pre.0</div>
-    <div class="app-desc">BasePath:/</div>
+    <div class="app-desc">Version: 3.5.0-pre.0</div>
+    <div class="app-desc">BasePath:</div>
     <div class="license-info">All rights reserved</div>
     <div class="license-url">http://apache.org/licenses/LICENSE-2.0.html</div>
   <h2>Access</h2>
@@ -200,6 +200,7 @@ font-style: italic;
   <h4><a href="#Console">Console</a></h4>
   <ul>
   <li><a href="#getAemProductInfo"><code><span class="http-method">get</span> /system/console/status-productinfo.json</code></a></li>
+  <li><a href="#getBundleInfo"><code><span class="http-method">get</span> /system/console/bundles/{name}.json</code></a></li>
   <li><a href="#getConfigMgr"><code><span class="http-method">get</span> /system/console/configMgr</code></a></li>
   <li><a href="#postBundle"><code><span class="http-method">post</span> /system/console/bundles/{name}</code></a></li>
   <li><a href="#postJmxRepository"><code><span class="http-method">post</span> /system/console/jmx/com.adobe.granite:type=Repository/op/{action}</code></a></li>
@@ -226,6 +227,10 @@ font-style: italic;
   <li><a href="#postConfigAemHealthCheckServlet"><code><span class="http-method">post</span> /apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck</code></a></li>
   <li><a href="#postConfigAemPasswordReset"><code><span class="http-method">post</span> /apps/system/config/com.shinesolutions.aem.passwordreset.Activator</code></a></li>
   </ul>
+  <h4><a href="#Granite">Granite</a></h4>
+  <ul>
+  <li><a href="#sslSetup"><code><span class="http-method">post</span> /libs/granite/security/post/sslSetup.html</code></a></li>
+  </ul>
   <h4><a href="#Sling">Sling</a></h4>
   <ul>
   <li><a href="#deleteAgent"><code><span class="http-method">delete</span> /etc/replication/agents.{runmode}/{name}</code></a></li>
@@ -249,6 +254,7 @@ font-style: italic;
   <li><a href="#postConfigApacheSlingDavExServlet"><code><span class="http-method">post</span> /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet</code></a></li>
   <li><a href="#postConfigApacheSlingGetServlet"><code><span class="http-method">post</span> /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet</code></a></li>
   <li><a href="#postConfigApacheSlingReferrerFilter"><code><span class="http-method">post</span> /apps/system/config/org.apache.sling.security.impl.ReferrerFilter</code></a></li>
+  <li><a href="#postConfigProperty"><code><span class="http-method">post</span> /apps/system/config/{configNodeName}</code></a></li>
   <li><a href="#postNode"><code><span class="http-method">post</span> /{path}/{name}</code></a></li>
   <li><a href="#postNodeRw"><code><span class="http-method">post</span> /{path}/{name}.rw.html</code></a></li>
   <li><a href="#postPath"><code><span class="http-method">post</span> /{path}/</code></a></li>
@@ -295,6 +301,89 @@ font-style: italic;
     <h4 class="field-label">default</h4>
     Default response
         
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getBundleInfo"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /system/console/bundles/{name}.json</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getBundleInfo</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#BundleInfo">BundleInfo</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "s" : [ 0, 0 ],
+  "data" : [ {
+    "fragment" : true,
+    "stateRaw" : 1,
+    "name" : "name",
+    "symbolicName" : "symbolicName",
+    "id" : 6,
+    "state" : "state",
+    "category" : "category",
+    "version" : "version",
+    "props" : [ {
+      "value" : "value",
+      "key" : "key"
+    }, {
+      "value" : "value",
+      "key" : "key"
+    } ]
+  }, {
+    "fragment" : true,
+    "stateRaw" : 1,
+    "name" : "name",
+    "symbolicName" : "symbolicName",
+    "id" : 6,
+    "state" : "state",
+    "category" : "category",
+    "version" : "version",
+    "props" : [ {
+      "value" : "value",
+      "key" : "key"
+    }, {
+      "value" : "value",
+      "key" : "key"
+    } ]
+  } ],
+  "status" : "status"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Retrieved bundle info
+        <a href="#BundleInfo">BundleInfo</a>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#String">String</a>
   </div> <!-- method -->
   <hr/>
   <div class="method"><a name="getConfigMgr"/>
@@ -346,7 +435,7 @@ font-style: italic;
     <div class="field-items">
       <div class="param">name (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -356,7 +445,7 @@ font-style: italic;
     <div class="field-items">
       <div class="param">action (required)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -382,7 +471,7 @@ font-style: italic;
     <div class="field-items">
       <div class="param">action (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -416,65 +505,65 @@ font-style: italic;
     <div class="field-items">
       <div class="param">post (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">apply (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">apply (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">delete (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">delete (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">action (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">action (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">$location (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">$location (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">path (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">path (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">service.ranking (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">service.ranking (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  format: int32</div><div class="param">idpUrl (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">idpUrl (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">idpCertAlias (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">idpCertAlias (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">idpHttpRedirect (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">idpHttpRedirect (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">serviceProviderEntityId (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">serviceProviderEntityId (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">assertionConsumerServiceURL (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">assertionConsumerServiceURL (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">spPrivateKeyAlias (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">spPrivateKeyAlias (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">keyStorePassword (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">keyStorePassword (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">defaultRedirectUrl (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">defaultRedirectUrl (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">userIDAttribute (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">userIDAttribute (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">useEncryption (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">useEncryption (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">createUser (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">createUser (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">addGroupMemberships (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">addGroupMemberships (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">groupMembershipAttribute (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">groupMembershipAttribute (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">defaultGroups (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">defaultGroups (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">nameIdFormat (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">nameIdFormat (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">synchronizeAttributes (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">synchronizeAttributes (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">handleLogout (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">handleLogout (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">logoutUrl (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">logoutUrl (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">clockTolerance (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">clockTolerance (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  format: int32</div><div class="param">digestMethod (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">digestMethod (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">signatureMethod (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">signatureMethod (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">userIntermediatePath (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">userIntermediatePath (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">propertylist (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">propertylist (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -560,9 +649,9 @@ font-style: italic;
     <div class="field-items">
       <div class="param">authorizableId (required)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">changelog (required)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">changelog (required)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -710,7 +799,7 @@ font-style: italic;
     <div class="field-items">
       <div class="param">cmd (required)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -747,7 +836,7 @@ font-style: italic;
     <div class="field-items">
       <div class="param">path (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
     <h3 class="field-label">Consumes</h3>
@@ -762,19 +851,19 @@ font-style: italic;
     <div class="field-items">
       <div class="param">cmd (required)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">groupName (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">groupName (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">packageName (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">packageName (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">packageVersion (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">packageVersion (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">_charset_ (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">_charset_ (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">force (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">force (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">recursive (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">recursive (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
     <h3 class="field-label">Form parameters</h3>
@@ -821,17 +910,17 @@ font-style: italic;
     <div class="field-items">
       <div class="param">groupName (required)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">packageName (required)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">packageName (required)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">version (required)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">version (required)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">path (required)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">path (required)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">filter (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">filter (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">_charset_ (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">_charset_ (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -872,11 +961,11 @@ font-style: italic;
     <div class="field-items">
       <div class="param">old (required)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">plain (required)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">plain (required)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">verify (required)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">verify (required)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -918,9 +1007,9 @@ font-style: italic;
     <div class="field-items">
       <div class="param">tags (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">combineTagsOr (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">combineTagsOr (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -961,9 +1050,9 @@ font-style: italic;
     <div class="field-items">
       <div class="param">bundles.ignored (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">bundles.ignored@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">bundles.ignored@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -993,9 +1082,9 @@ font-style: italic;
     <div class="field-items">
       <div class="param">pwdreset.authorizables (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">pwdreset.authorizables@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">pwdreset.authorizables@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -1010,6 +1099,71 @@ font-style: italic;
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
+  <h1><a name="Granite">Granite</a></h1>
+  <div class="method"><a name="sslSetup"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /libs/granite/security/post/sslSetup.html</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">sslSetup</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>multipart/form-data</code></li>
+    </ul>
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">keystorePassword (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">keystorePasswordConfirm (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">truststorePassword (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">truststorePasswordConfirm (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">httpsHostname (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">httpsPort (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Form parameters</h3>
+    <div class="field-items">
+      <div class="param">privatekeyFile (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash;  default: null format: binary</div><div class="param">certificateFile (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash;  default: null format: binary</div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>text/plain</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
   <h1><a name="Sling">Sling</a></h1>
   <div class="method"><a name="deleteAgent"/>
     <div class="method-path">
@@ -1022,9 +1176,9 @@ font-style: italic;
     <div class="field-items">
       <div class="param">runmode (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div><div class="param">name (required)</div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div><div class="param">name (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -1054,9 +1208,9 @@ font-style: italic;
     <div class="field-items">
       <div class="param">path (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div><div class="param">name (required)</div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div><div class="param">name (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -1086,9 +1240,9 @@ font-style: italic;
     <div class="field-items">
       <div class="param">runmode (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div><div class="param">name (required)</div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div><div class="param">name (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -1118,7 +1272,7 @@ font-style: italic;
     <div class="field-items">
       <div class="param">runmode (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -1159,9 +1313,9 @@ font-style: italic;
     <div class="field-items">
       <div class="param">intermediatePath (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div><div class="param">authorizableId (required)</div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div><div class="param">authorizableId (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -1208,9 +1362,9 @@ font-style: italic;
     <div class="field-items">
       <div class="param">intermediatePath (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div><div class="param">authorizableId (required)</div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div><div class="param">authorizableId (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -1251,9 +1405,9 @@ font-style: italic;
     <div class="field-items">
       <div class="param">path (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div><div class="param">name (required)</div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div><div class="param">name (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -1283,11 +1437,11 @@ font-style: italic;
     <div class="field-items">
       <div class="param">group (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div><div class="param">name (required)</div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div><div class="param">name (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div><div class="param">version (required)</div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div><div class="param">version (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -1328,11 +1482,11 @@ font-style: italic;
     <div class="field-items">
       <div class="param">group (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div><div class="param">name (required)</div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div><div class="param">name (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div><div class="param">version (required)</div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div><div class="param">version (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -1377,13 +1531,13 @@ font-style: italic;
     <div class="field-items">
       <div class="param">path (required)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">p.limit (required)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">p.limit (required)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">1_property (required)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">1_property (required)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">1_property.value (required)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">1_property.value (required)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -1515,9 +1669,9 @@ font-style: italic;
     <div class="field-items">
       <div class="param">runmode (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div><div class="param">name (required)</div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div><div class="param">name (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -1527,105 +1681,105 @@ font-style: italic;
     <div class="field-items">
       <div class="param">jcr:content/cq:distribute (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/cq:distribute@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/cq:distribute@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/cq:name (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/cq:name (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/cq:template (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/cq:template (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/enabled (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/enabled (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/jcr:description (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/jcr:description (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/jcr:lastModified (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/jcr:lastModified (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/jcr:lastModifiedBy (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/jcr:lastModifiedBy (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/jcr:mixinTypes (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/jcr:mixinTypes (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/jcr:title (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/jcr:title (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/logLevel (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/logLevel (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/noStatusUpdate (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/noStatusUpdate (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/noVersioning (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/noVersioning (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/protocolConnectTimeout (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/protocolConnectTimeout (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/protocolHTTPConnectionClosed (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/protocolHTTPConnectionClosed (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/protocolHTTPExpired (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/protocolHTTPExpired (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/protocolHTTPHeaders (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/protocolHTTPHeaders (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/protocolHTTPHeaders@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/protocolHTTPHeaders@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/protocolHTTPMethod (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/protocolHTTPMethod (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/protocolHTTPSRelaxed (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/protocolHTTPSRelaxed (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/protocolInterface (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/protocolInterface (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/protocolSocketTimeout (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/protocolSocketTimeout (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/protocolVersion (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/protocolVersion (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/proxyNTLMDomain (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/proxyNTLMDomain (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/proxyNTLMHost (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/proxyNTLMHost (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/proxyHost (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/proxyHost (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/proxyPassword (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/proxyPassword (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/proxyPort (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/proxyPort (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/proxyUser (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/proxyUser (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/queueBatchMaxSize (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/queueBatchMaxSize (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/queueBatchMode (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/queueBatchMode (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/queueBatchWaitTime (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/queueBatchWaitTime (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/retryDelay (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/retryDelay (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/reverseReplication (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/reverseReplication (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/serializationType (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/serializationType (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/sling:resourceType (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/sling:resourceType (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/ssl (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/ssl (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/transportNTLMDomain (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/transportNTLMDomain (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/transportNTLMHost (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/transportNTLMHost (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/transportPassword (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/transportPassword (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/transportUri (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/transportUri (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/transportUser (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/transportUser (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/triggerDistribute (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/triggerDistribute (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/triggerModified (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/triggerModified (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/triggerOnOffTime (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/triggerOnOffTime (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/triggerReceive (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/triggerReceive (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/triggerSpecific (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/triggerSpecific (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:content/userId (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/userId (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">jcr:primaryType (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:primaryType (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">:operation (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">:operation (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -1651,9 +1805,9 @@ font-style: italic;
     <div class="field-items">
       <div class="param">intermediatePath (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div><div class="param">authorizableId (required)</div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div><div class="param">authorizableId (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
     <h3 class="field-label">Consumes</h3>
@@ -1668,23 +1822,23 @@ font-style: italic;
     <div class="field-items">
       <div class="param">:operation (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">currentPassword (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">currentPassword (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">newPassword (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">newPassword (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">rePassword (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">rePassword (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">keyPassword (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">keyPassword (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">keyStorePass (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">keyStorePass (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">alias (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">alias (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">newAlias (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">newAlias (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">removeAlias (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">removeAlias (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
     <h3 class="field-label">Form parameters</h3>
@@ -1741,17 +1895,17 @@ font-style: italic;
     <div class="field-items">
       <div class="param">authorizableId (required)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">intermediatePath (required)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">intermediatePath (required)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">createUser (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">createUser (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">createGroup (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">createGroup (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">rep:password (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">rep:password (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">profile/givenName (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">profile/givenName (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -1792,101 +1946,101 @@ font-style: italic;
     <div class="field-items">
       <div class="param">keyStorePassword (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">keyStorePassword@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">keyStorePassword@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">service.ranking (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">service.ranking (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  format: int32</div><div class="param">service.ranking@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">service.ranking@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">idpHttpRedirect (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">idpHttpRedirect (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">idpHttpRedirect@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">idpHttpRedirect@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">createUser (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">createUser (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">createUser@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">createUser@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">defaultRedirectUrl (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">defaultRedirectUrl (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">defaultRedirectUrl@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">defaultRedirectUrl@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">userIDAttribute (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">userIDAttribute (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">userIDAttribute@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">userIDAttribute@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">defaultGroups (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">defaultGroups (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">defaultGroups@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">defaultGroups@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">idpCertAlias (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">idpCertAlias (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">idpCertAlias@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">idpCertAlias@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">addGroupMemberships (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">addGroupMemberships (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">addGroupMemberships@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">addGroupMemberships@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">path (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">path (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">path@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">path@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">synchronizeAttributes (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">synchronizeAttributes (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">synchronizeAttributes@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">synchronizeAttributes@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">clockTolerance (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">clockTolerance (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  format: int32</div><div class="param">clockTolerance@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">clockTolerance@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">groupMembershipAttribute (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">groupMembershipAttribute (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">groupMembershipAttribute@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">groupMembershipAttribute@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">idpUrl (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">idpUrl (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">idpUrl@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">idpUrl@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">logoutUrl (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">logoutUrl (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">logoutUrl@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">logoutUrl@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">serviceProviderEntityId (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">serviceProviderEntityId (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">serviceProviderEntityId@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">serviceProviderEntityId@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">assertionConsumerServiceURL (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">assertionConsumerServiceURL (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">assertionConsumerServiceURL@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">assertionConsumerServiceURL@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">handleLogout (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">handleLogout (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">handleLogout@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">handleLogout@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">spPrivateKeyAlias (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">spPrivateKeyAlias (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">spPrivateKeyAlias@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">spPrivateKeyAlias@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">useEncryption (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">useEncryption (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">useEncryption@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">useEncryption@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">nameIdFormat (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">nameIdFormat (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">nameIdFormat@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">nameIdFormat@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">digestMethod (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">digestMethod (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">digestMethod@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">digestMethod@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">signatureMethod (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">signatureMethod (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">signatureMethod@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">signatureMethod@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">userIntermediatePath (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">userIntermediatePath (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">userIntermediatePath@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">userIntermediatePath@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -1916,45 +2070,45 @@ font-style: italic;
     <div class="field-items">
       <div class="param">org.apache.felix.https.nio (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.nio@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">org.apache.felix.https.nio@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.keystore (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">org.apache.felix.https.keystore (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.keystore@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">org.apache.felix.https.keystore@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.keystore.password (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">org.apache.felix.https.keystore.password (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.keystore.password@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">org.apache.felix.https.keystore.password@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.keystore.key (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">org.apache.felix.https.keystore.key (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.keystore.key@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">org.apache.felix.https.keystore.key@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.keystore.key.password (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">org.apache.felix.https.keystore.key.password (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.keystore.key.password@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">org.apache.felix.https.keystore.key.password@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.truststore (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">org.apache.felix.https.truststore (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.truststore@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">org.apache.felix.https.truststore@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.truststore.password (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">org.apache.felix.https.truststore.password (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.truststore.password@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">org.apache.felix.https.truststore.password@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.clientcertificate (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">org.apache.felix.https.clientcertificate (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.clientcertificate@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">org.apache.felix.https.clientcertificate@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.enable (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">org.apache.felix.https.enable (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.apache.felix.https.enable@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">org.apache.felix.https.enable@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.osgi.service.http.port.secure (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">org.osgi.service.http.port.secure (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">org.osgi.service.http.port.secure@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">org.osgi.service.http.port.secure@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -1984,29 +2138,29 @@ font-style: italic;
     <div class="field-items">
       <div class="param">proxy.host (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">proxy.host@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">proxy.host@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">proxy.port (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">proxy.port (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  format: int32</div><div class="param">proxy.port@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">proxy.port@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">proxy.exceptions (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">proxy.exceptions (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">proxy.exceptions@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">proxy.exceptions@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">proxy.enabled (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">proxy.enabled (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">proxy.enabled@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">proxy.enabled@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">proxy.user (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">proxy.user (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">proxy.user@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">proxy.user@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">proxy.password (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">proxy.password (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">proxy.password@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">proxy.password@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -2036,13 +2190,13 @@ font-style: italic;
     <div class="field-items">
       <div class="param">alias (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">alias@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">alias@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">dav.create-absolute-uri (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">dav.create-absolute-uri (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">dav.create-absolute-uri@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">dav.create-absolute-uri@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -2072,21 +2226,21 @@ font-style: italic;
     <div class="field-items">
       <div class="param">json.maximumresults (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">json.maximumresults@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">json.maximumresults@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">enable.html (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">enable.html (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">enable.html@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">enable.html@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">enable.txt (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">enable.txt (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">enable.txt@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">enable.txt@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">enable.xml (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">enable.xml (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">enable.xml@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">enable.xml@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -2116,22 +2270,52 @@ font-style: italic;
     <div class="field-items">
       <div class="param">allow.empty (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">allow.empty@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">allow.empty@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">allow.hosts (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">allow.hosts (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">allow.hosts@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">allow.hosts@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">allow.hosts.regexp (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">allow.hosts.regexp (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">allow.hosts.regexp@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">allow.hosts.regexp@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">filter.methods (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">filter.methods (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">filter.methods@TypeHint (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">filter.methods@TypeHint (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    Default response
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postConfigProperty"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /apps/system/config/{configNodeName}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">postConfigProperty</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">configNodeName (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div>
+    </div>  <!-- field-items -->
+
+
+
+
 
 
 
@@ -2156,9 +2340,9 @@ font-style: italic;
     <div class="field-items">
       <div class="param">path (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div><div class="param">name (required)</div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div><div class="param">name (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
     <h3 class="field-label">Consumes</h3>
@@ -2173,9 +2357,9 @@ font-style: italic;
     <div class="field-items">
       <div class="param">:operation (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">deleteAuthorizable (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">deleteAuthorizable (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
     <h3 class="field-label">Form parameters</h3>
@@ -2207,9 +2391,9 @@ font-style: italic;
     <div class="field-items">
       <div class="param">path (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div><div class="param">name (required)</div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div><div class="param">name (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -2219,7 +2403,7 @@ font-style: italic;
     <div class="field-items">
       <div class="param">addMembers (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -2245,7 +2429,7 @@ font-style: italic;
     <div class="field-items">
       <div class="param">path (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -2255,9 +2439,9 @@ font-style: italic;
     <div class="field-items">
       <div class="param">jcr:primaryType (required)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">:name (required)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">:name (required)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -2287,13 +2471,13 @@ font-style: italic;
     <div class="field-items">
       <div class="param">path (required)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">p.limit (required)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">p.limit (required)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">1_property (required)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">1_property (required)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">1_property.value (required)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">1_property.value (required)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -2334,11 +2518,11 @@ font-style: italic;
     <div class="field-items">
       <div class="param">ignoredeactivated (required)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">onlymodified (required)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">onlymodified (required)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">path (required)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">path (required)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
 
@@ -2373,15 +2557,15 @@ font-style: italic;
     <div class="field-items">
       <div class="param">:operation (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">newPassword (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">newPassword (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">rePassword (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">rePassword (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">keyStoreType (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">keyStoreType (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div><div class="param">removeAlias (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">removeAlias (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div>
     </div>  <!-- field-items -->
 
     <h3 class="field-label">Form parameters</h3>
@@ -2465,6 +2649,9 @@ font-style: italic;
 
   <h3>Table of Contents</h3>
   <ol>
+    <li><a href="#BundleData"><code>BundleData</code> - </a></li>
+    <li><a href="#BundleDataProp"><code>BundleDataProp</code> - </a></li>
+    <li><a href="#BundleInfo"><code>BundleInfo</code> - </a></li>
     <li><a href="#InstallStatus"><code>InstallStatus</code> - </a></li>
     <li><a href="#InstallStatus_status"><code>InstallStatus_status</code> - </a></li>
     <li><a href="#KeystoreChainItems"><code>KeystoreChainItems</code> - </a></li>
@@ -2481,6 +2668,38 @@ font-style: italic;
   </ol>
 
   <div class="model">
+    <h3><a name="BundleData"><code>BundleData</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Bundle ID </div>
+<div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Bundle name </div>
+<div class="param">fragment (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> Is bundle a fragment </div>
+<div class="param">stateRaw (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Numeric raw bundle state value </div>
+<div class="param">state (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Bundle state value </div>
+<div class="param">version (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Bundle version </div>
+<div class="param">symbolicName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Bundle symbolic name </div>
+<div class="param">category (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Bundle category </div>
+<div class="param">props (optional)</div><div class="param-desc"><span class="param-type"><a href="#BundleDataProp">array[BundleDataProp]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="BundleDataProp"><code>BundleDataProp</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">key (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Bundle data key </div>
+<div class="param">value (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Bundle data value </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="BundleInfo"><code>BundleInfo</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">status (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Status description of all bundles </div>
+<div class="param">s (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">array[Integer]</a></span>  </div>
+<div class="param">data (optional)</div><div class="param-desc"><span class="param-type"><a href="#BundleData">array[BundleData]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
     <h3><a name="InstallStatus"><code>InstallStatus</code> - </a> <a class="up" href="#__Models">Up</a></h3>
     <div class='model-description'></div>
     <div class="field-items">
@@ -2492,7 +2711,7 @@ font-style: italic;
     <div class='model-description'></div>
     <div class="field-items">
       <div class="param">finished (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
-<div class="param">itemCount (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int32</div>
+<div class="param">itemCount (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
     </div>  <!-- field-items -->
   </div>
   <div class="model">
@@ -2503,7 +2722,7 @@ font-style: italic;
 <div class="param">issuer (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> e.g. &quot;CN=Admin&quot; </div>
 <div class="param">notBefore (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> e.g. &quot;Sun Jul 01 12:00:00 AEST 2018&quot; </div>
 <div class="param">notAfter (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> e.g. &quot;Sun Jun 30 23:59:50 AEST 2019&quot; </div>
-<div class="param">serialNumber (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> 18165099476682912368 format: int32</div>
+<div class="param">serialNumber (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> 18165099476682912368 </div>
     </div>  <!-- field-items -->
   </div>
   <div class="model">
@@ -2532,8 +2751,8 @@ font-style: italic;
       <div class="param">pid (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Persistent Identity (PID) </div>
 <div class="param">title (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Title </div>
 <div class="param">description (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Title </div>
-<div class="param">bundleUnderscorelocation (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> needed for configuration binding </div>
-<div class="param">serviceUnderscorelocation (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> needed for configuraiton binding </div>
+<div class="param">bundle_location (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> needed for configuration binding </div>
+<div class="param">service_location (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> needed for configuraiton binding </div>
 <div class="param">properties (optional)</div><div class="param-desc"><span class="param-type"><a href="#SamlConfigurationProperties">SamlConfigurationProperties</a></span>  </div>
     </div>  <!-- field-items -->
   </div>
@@ -2573,8 +2792,8 @@ font-style: italic;
     <div class="field-items">
       <div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> property name </div>
 <div class="param">optional (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> True if optional </div>
-<div class="param">isUnderscoreset (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> True if property is set </div>
-<div class="param">type (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Property type, 1=String, 3=long, 11=boolean, 12=Password format: int32</div>
+<div class="param">is_set (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> True if property is set </div>
+<div class="param">type (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Property type, 1=String, 3=long, 11=boolean, 12=Password </div>
 <div class="param">values (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span> Property value </div>
 <div class="param">description (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Property description </div>
     </div>  <!-- field-items -->
@@ -2585,8 +2804,8 @@ font-style: italic;
     <div class="field-items">
       <div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> property name </div>
 <div class="param">optional (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> True if optional </div>
-<div class="param">isUnderscoreset (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> True if property is set </div>
-<div class="param">type (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Property type, 1=String, 3=long, 11=boolean, 12=Password format: int32</div>
+<div class="param">is_set (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> True if property is set </div>
+<div class="param">type (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Property type, 1=String, 3=long, 11=boolean, 12=Password </div>
 <div class="param">value (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> Property value </div>
 <div class="param">description (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Property description </div>
     </div>  <!-- field-items -->
@@ -2597,9 +2816,9 @@ font-style: italic;
     <div class="field-items">
       <div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> property name </div>
 <div class="param">optional (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> True if optional </div>
-<div class="param">isUnderscoreset (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> True if property is set </div>
-<div class="param">type (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Property type, 1=String, 3=long, 11=boolean, 12=Password format: int32</div>
-<div class="param">value (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Property value format: int32</div>
+<div class="param">is_set (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> True if property is set </div>
+<div class="param">type (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Property type, 1=String, 3=long, 11=boolean, 12=Password </div>
+<div class="param">value (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Property value </div>
 <div class="param">description (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Property description </div>
     </div>  <!-- field-items -->
   </div>
@@ -2609,8 +2828,8 @@ font-style: italic;
     <div class="field-items">
       <div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> property name </div>
 <div class="param">optional (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> True if optional </div>
-<div class="param">isUnderscoreset (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> True if property is set </div>
-<div class="param">type (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Property type, 1=String, 3=long, 11=boolean, 12=Password format: int32</div>
+<div class="param">is_set (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> True if property is set </div>
+<div class="param">type (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Property type, 1=String, 3=long, 11=boolean, 12=Password </div>
 <div class="param">value (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Property value </div>
 <div class="param">description (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Property description </div>
     </div>  <!-- field-items -->
@@ -2633,7 +2852,7 @@ font-style: italic;
 <div class="param">issuer (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> e.g. &quot;CN=Admin&quot; </div>
 <div class="param">notBefore (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> e.g. &quot;Sun Jul 01 12:00:00 AEST 2018&quot; </div>
 <div class="param">notAfter (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> e.g. &quot;Sun Jun 30 23:59:50 AEST 2019&quot; </div>
-<div class="param">serialNumber (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> 18165099476682912368 format: int32</div>
+<div class="param">serialNumber (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> 18165099476682912368 </div>
     </div>  <!-- field-items -->
   </div>
   </body>

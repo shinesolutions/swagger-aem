@@ -1,7 +1,7 @@
 require 'json'
 
 
-MyApp.add_route('GET', '//system/health', {
+MyApp.add_route('GET', '/system/health', {
   "resourcePath" => "/Custom",
   "summary" => "",
   "nickname" => "get_aem_health_check", 
@@ -19,7 +19,7 @@ MyApp.add_route('GET', '//system/health', {
     {
       "name" => "combine_tags_or",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
@@ -31,7 +31,7 @@ MyApp.add_route('GET', '//system/health', {
 end
 
 
-MyApp.add_route('POST', '//apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck', {
+MyApp.add_route('POST', '/apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck', {
   "resourcePath" => "/Custom",
   "summary" => "",
   "nickname" => "post_config_aem_health_check_servlet", 
@@ -61,7 +61,7 @@ MyApp.add_route('POST', '//apps/system/config/com.shinesolutions.healthcheck.hc.
 end
 
 
-MyApp.add_route('POST', '//apps/system/config/com.shinesolutions.aem.passwordreset.Activator', {
+MyApp.add_route('POST', '/apps/system/config/com.shinesolutions.aem.passwordreset.Activator', {
   "resourcePath" => "/Custom",
   "summary" => "",
   "nickname" => "post_config_aem_password_reset", 

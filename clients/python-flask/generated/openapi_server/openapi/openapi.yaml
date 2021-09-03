@@ -4,43 +4,15 @@ info:
     email: opensource@shinesolutions.com
     name: Shine Solutions
     url: http://shinesolutions.com
-  description: Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
+  description: Swagger AEM is an OpenAPI specification for Adobe Experience Manager
+    (AEM) API
   title: Adobe Experience Manager (AEM) API
-  version: 3.2.0-pre.0
+  version: 3.5.0-pre.0
 servers:
 - url: /
 security:
 - aemAuth: []
 paths:
-  /system/console/configMgr:
-    get:
-      operationId: get_config_mgr
-      responses:
-        200:
-          content:
-            text/xml:
-              schema:
-                type: string
-          description: OK
-        5XX:
-          description: Unexpected error.
-      tags:
-      - console
-      x-openapi-router-controller: openapi_server.controllers.console_controller
-  /libs/granite/core/content/login.html:
-    get:
-      operationId: get_login_page
-      responses:
-        default:
-          content:
-            text/html:
-              schema:
-                type: string
-          description: Default response
-      security: []
-      tags:
-      - cq
-      x-openapi-router-controller: openapi_server.controllers.cq_controller
   /.cqactions.html:
     post:
       operationId: post_cq_actions
@@ -65,147 +37,348 @@ paths:
       tags:
       - cq
       x-openapi-router-controller: openapi_server.controllers.cq_controller
-  /{path}/:
+  /apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config:
     post:
-      operationId: post_path
+      operationId: post_config_adobe_granite_saml_authentication_handler
       parameters:
-      - explode: false
-        in: path
-        name: path
-        required: true
-        schema:
-          type: string
-        style: simple
       - explode: true
         in: query
-        name: jcr:primaryType
-        required: true
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: :name
-        required: true
-        schema:
-          type: string
-        style: form
-      responses:
-        default:
-          description: Default response
-      tags:
-      - sling
-      x-openapi-router-controller: openapi_server.controllers.sling_controller
-  /{path}/{name}:
-    delete:
-      operationId: delete_node
-      parameters:
-      - explode: false
-        in: path
-        name: path
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: name
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        default:
-          description: Default response
-      tags:
-      - sling
-      x-openapi-router-controller: openapi_server.controllers.sling_controller
-    get:
-      operationId: get_node
-      parameters:
-      - explode: false
-        in: path
-        name: path
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: name
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        default:
-          description: Default response
-      tags:
-      - sling
-      x-openapi-router-controller: openapi_server.controllers.sling_controller
-    post:
-      operationId: post_node
-      parameters:
-      - explode: false
-        in: path
-        name: path
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: name
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: true
-        in: query
-        name: :operation
+        name: keyStorePassword
         required: false
         schema:
           type: string
         style: form
       - explode: true
         in: query
-        name: deleteAuthorizable
+        name: keyStorePassword@TypeHint
         required: false
         schema:
           type: string
         style: form
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/body'
-      responses:
-        default:
-          description: Default response
-      tags:
-      - sling
-      x-openapi-router-controller: openapi_server.controllers.sling_controller
-  /{path}/{name}.rw.html:
-    post:
-      operationId: post_node_rw
-      parameters:
-      - explode: false
-        in: path
-        name: path
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: name
-        required: true
-        schema:
-          type: string
-        style: simple
       - explode: true
         in: query
-        name: addMembers
+        name: service.ranking
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: service.ranking@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: idpHttpRedirect
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: idpHttpRedirect@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: createUser
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: createUser@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: defaultRedirectUrl
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: defaultRedirectUrl@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: userIDAttribute
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: userIDAttribute@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: defaultGroups
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: defaultGroups@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: idpCertAlias
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: idpCertAlias@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: addGroupMemberships
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: addGroupMemberships@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: path
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: path@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: synchronizeAttributes
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: synchronizeAttributes@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: clockTolerance
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: clockTolerance@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: groupMembershipAttribute
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: groupMembershipAttribute@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: idpUrl
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: idpUrl@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: logoutUrl
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: logoutUrl@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: serviceProviderEntityId
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: serviceProviderEntityId@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: assertionConsumerServiceURL
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: assertionConsumerServiceURL@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: handleLogout
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: handleLogout@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: spPrivateKeyAlias
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: spPrivateKeyAlias@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: useEncryption
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: useEncryption@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: nameIdFormat
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: nameIdFormat@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: digestMethod
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: digestMethod@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: signatureMethod
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: signatureMethod@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: userIntermediatePath
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: userIntermediatePath@TypeHint
         required: false
         schema:
           type: string
@@ -216,6 +389,58 @@ paths:
       tags:
       - sling
       x-openapi-router-controller: openapi_server.controllers.sling_controller
+  /apps/system/config/com.shinesolutions.aem.passwordreset.Activator:
+    post:
+      operationId: post_config_aem_password_reset
+      parameters:
+      - explode: true
+        in: query
+        name: pwdreset.authorizables
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: pwdreset.authorizables@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        default:
+          description: Default response
+      tags:
+      - custom
+      x-openapi-router-controller: openapi_server.controllers.custom_controller
+  /apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck:
+    post:
+      operationId: post_config_aem_health_check_servlet
+      parameters:
+      - explode: true
+        in: query
+        name: bundles.ignored
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: bundles.ignored@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        default:
+          description: Default response
+      tags:
+      - custom
+      x-openapi-router-controller: openapi_server.controllers.custom_controller
   /apps/system/config/org.apache.felix.http:
     post:
       operationId: post_config_apache_felix_jetty_based_http_service
@@ -366,62 +591,130 @@ paths:
       tags:
       - sling
       x-openapi-router-controller: openapi_server.controllers.sling_controller
-  /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet:
+  /apps/system/config/org.apache.http.proxyconfigurator.config:
     post:
-      operationId: post_config_apache_sling_get_servlet
+      operationId: post_config_apache_http_components_proxy_configuration
       parameters:
       - explode: true
         in: query
-        name: json.maximumresults
+        name: proxy.host
         required: false
         schema:
           type: string
         style: form
       - explode: true
         in: query
-        name: json.maximumresults@TypeHint
+        name: proxy.host@TypeHint
         required: false
         schema:
           type: string
         style: form
       - explode: true
         in: query
-        name: enable.html
+        name: proxy.port
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: proxy.port@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: proxy.exceptions
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: proxy.exceptions@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: proxy.enabled
         required: false
         schema:
           type: boolean
         style: form
       - explode: true
         in: query
-        name: enable.html@TypeHint
+        name: proxy.enabled@TypeHint
         required: false
         schema:
           type: string
         style: form
       - explode: true
         in: query
-        name: enable.txt
-        required: false
-        schema:
-          type: boolean
-        style: form
-      - explode: true
-        in: query
-        name: enable.txt@TypeHint
+        name: proxy.user
         required: false
         schema:
           type: string
         style: form
       - explode: true
         in: query
-        name: enable.xml
+        name: proxy.user@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: proxy.password
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: proxy.password@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        default:
+          description: Default response
+      tags:
+      - sling
+      x-openapi-router-controller: openapi_server.controllers.sling_controller
+  /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet:
+    post:
+      operationId: post_config_apache_sling_dav_ex_servlet
+      parameters:
+      - explode: true
+        in: query
+        name: alias
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: alias@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: dav.create-absolute-uri
         required: false
         schema:
           type: boolean
         style: form
       - explode: true
         in: query
-        name: enable.xml@TypeHint
+        name: dav.create-absolute-uri@TypeHint
         required: false
         schema:
           type: string
@@ -498,34 +791,62 @@ paths:
       tags:
       - sling
       x-openapi-router-controller: openapi_server.controllers.sling_controller
-  /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet:
+  /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet:
     post:
-      operationId: post_config_apache_sling_dav_ex_servlet
+      operationId: post_config_apache_sling_get_servlet
       parameters:
       - explode: true
         in: query
-        name: alias
+        name: json.maximumresults
         required: false
         schema:
           type: string
         style: form
       - explode: true
         in: query
-        name: alias@TypeHint
+        name: json.maximumresults@TypeHint
         required: false
         schema:
           type: string
         style: form
       - explode: true
         in: query
-        name: dav.create-absolute-uri
+        name: enable.html
         required: false
         schema:
           type: boolean
         style: form
       - explode: true
         in: query
-        name: dav.create-absolute-uri@TypeHint
+        name: enable.html@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: enable.txt
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: enable.txt@TypeHint
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: enable.xml
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: enable.xml@TypeHint
         required: false
         schema:
           type: string
@@ -536,58 +857,23 @@ paths:
       tags:
       - sling
       x-openapi-router-controller: openapi_server.controllers.sling_controller
-  /apps/system/config/com.shinesolutions.aem.passwordreset.Activator:
+  /apps/system/config/{configNodeName}:
     post:
-      operationId: post_config_aem_password_reset
+      operationId: post_config_property
       parameters:
-      - explode: true
-        in: query
-        name: pwdreset.authorizables
-        required: false
-        schema:
-          items:
-            type: string
-          type: array
-        style: form
-      - explode: true
-        in: query
-        name: pwdreset.authorizables@TypeHint
-        required: false
+      - explode: false
+        in: path
+        name: configNodeName
+        required: true
         schema:
           type: string
-        style: form
+        style: simple
       responses:
         default:
           description: Default response
       tags:
-      - custom
-      x-openapi-router-controller: openapi_server.controllers.custom_controller
-  /apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck:
-    post:
-      operationId: post_config_aem_health_check_servlet
-      parameters:
-      - explode: true
-        in: query
-        name: bundles.ignored
-        required: false
-        schema:
-          items:
-            type: string
-          type: array
-        style: form
-      - explode: true
-        in: query
-        name: bundles.ignored@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      responses:
-        default:
-          description: Default response
-      tags:
-      - custom
-      x-openapi-router-controller: openapi_server.controllers.custom_controller
+      - sling
+      x-openapi-router-controller: openapi_server.controllers.sling_controller
   /bin/querybuilder.json:
     get:
       operationId: get_query
@@ -671,6 +957,255 @@ paths:
       tags:
       - sling
       x-openapi-router-controller: openapi_server.controllers.sling_controller
+  /crx/explorer/ui/setpassword.jsp:
+    post:
+      operationId: post_set_password
+      parameters:
+      - explode: true
+        in: query
+        name: old
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: plain
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: verify
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        default:
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Default response
+      tags:
+      - crx
+      x-openapi-router-controller: openapi_server.controllers.crx_controller
+  /crx/packmgr/installstatus.jsp:
+    get:
+      operationId: get_install_status
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstallStatus'
+          description: Retrieved CRX package manager install status
+        default:
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Default response
+      tags:
+      - crx
+      x-openapi-router-controller: openapi_server.controllers.crx_controller
+  /crx/packmgr/service.jsp:
+    post:
+      operationId: post_package_service
+      parameters:
+      - explode: true
+        in: query
+        name: cmd
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        default:
+          content:
+            text/xml:
+              schema:
+                type: string
+          description: Default response
+      tags:
+      - crx
+      x-openapi-router-controller: openapi_server.controllers.crx_controller
+  /crx/packmgr/service/.json/{path}:
+    post:
+      operationId: post_package_service_json
+      parameters:
+      - explode: false
+        in: path
+        name: path
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: cmd
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: groupName
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: packageName
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: packageVersion
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: _charset_
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: force
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: recursive
+        required: false
+        schema:
+          type: boolean
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object_1'
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                package:
+                  format: binary
+                  type: string
+              type: object
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Default response
+      tags:
+      - crx
+      x-openapi-router-controller: openapi_server.controllers.crx_controller
+  /crx/packmgr/service/script.html:
+    get:
+      operationId: get_package_manager_servlet
+      responses:
+        "404":
+          content:
+            text/html:
+              schema:
+                type: string
+          description: Package Manager Servlet is disabled
+        "405":
+          content:
+            text/html:
+              schema:
+                type: string
+          description: Package Manager Servlet is active
+      tags:
+      - crx
+      x-openapi-router-controller: openapi_server.controllers.crx_controller
+  /crx/packmgr/update.jsp:
+    post:
+      operationId: post_package_update
+      parameters:
+      - explode: true
+        in: query
+        name: groupName
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: packageName
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: version
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: path
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: _charset_
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Default response
+      tags:
+      - crx
+      x-openapi-router-controller: openapi_server.controllers.crx_controller
+  /crx/server/crx.default/jcr:root/.1.json:
+    get:
+      operationId: get_crxde_status
+      responses:
+        "200":
+          content:
+            plain/text:
+              schema:
+                type: string
+          description: CRXDE is enabled
+        "404":
+          content:
+            plain/text:
+              schema:
+                type: string
+          description: CRXDE is disabled
+      tags:
+      - crx
+      x-openapi-router-controller: openapi_server.controllers.crx_controller
   /etc/packages/{group}/{name}-{version}.zip:
     get:
       operationId: get_package
@@ -1216,6 +1751,57 @@ paths:
       tags:
       - sling
       x-openapi-router-controller: openapi_server.controllers.sling_controller
+  /etc/truststore:
+    post:
+      operationId: post_truststore_pkcs12
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object_3'
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                truststore.p12:
+                  format: binary
+                  type: string
+              type: object
+      responses:
+        default:
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Default response
+      tags:
+      - sling
+      x-openapi-router-controller: openapi_server.controllers.sling_controller
+  /etc/truststore/truststore.p12:
+    get:
+      operationId: get_truststore
+      responses:
+        default:
+          content:
+            application/octet-stream:
+              schema:
+                format: binary
+                type: string
+          description: Default response
+      tags:
+      - sling
+      x-openapi-router-controller: openapi_server.controllers.sling_controller
+  /libs/granite/core/content/login.html:
+    get:
+      operationId: get_login_page
+      responses:
+        default:
+          content:
+            text/html:
+              schema:
+                type: string
+          description: Default response
+      security: []
+      tags:
+      - cq
+      x-openapi-router-controller: openapi_server.controllers.cq_controller
   /libs/granite/security/post/authorizables:
     post:
       operationId: post_authorizables
@@ -1272,31 +1858,65 @@ paths:
       tags:
       - sling
       x-openapi-router-controller: openapi_server.controllers.sling_controller
-  /crx/explorer/ui/setpassword.jsp:
+  /libs/granite/security/post/sslSetup.html:
     post:
-      operationId: post_set_password
+      operationId: ssl_setup
       parameters:
       - explode: true
         in: query
-        name: old
+        name: keystorePassword
         required: true
         schema:
           type: string
         style: form
       - explode: true
         in: query
-        name: plain
+        name: keystorePasswordConfirm
         required: true
         schema:
           type: string
         style: form
       - explode: true
         in: query
-        name: verify
+        name: truststorePassword
         required: true
         schema:
           type: string
         style: form
+      - explode: true
+        in: query
+        name: truststorePasswordConfirm
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: httpsHostname
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: httpsPort
+        required: true
+        schema:
+          type: string
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object_5'
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                privatekeyFile:
+                  format: binary
+                  type: string
+                certificateFile:
+                  format: binary
+                  type: string
+              type: object
       responses:
         default:
           content:
@@ -1305,737 +1925,8 @@ paths:
                 type: string
           description: Default response
       tags:
-      - crx
-      x-openapi-router-controller: openapi_server.controllers.crx_controller
-  /crx/packmgr/installstatus.jsp:
-    get:
-      operationId: get_install_status
-      responses:
-        200:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InstallStatus'
-          description: Retrieved CRX package manager install status
-        default:
-          content:
-            application/json:
-              schema:
-                type: string
-          description: Default response
-      tags:
-      - crx
-      x-openapi-router-controller: openapi_server.controllers.crx_controller
-  /crx/packmgr/service.jsp:
-    post:
-      operationId: post_package_service
-      parameters:
-      - explode: true
-        in: query
-        name: cmd
-        required: true
-        schema:
-          type: string
-        style: form
-      responses:
-        default:
-          content:
-            text/xml:
-              schema:
-                type: string
-          description: Default response
-      tags:
-      - crx
-      x-openapi-router-controller: openapi_server.controllers.crx_controller
-  /crx/packmgr/update.jsp:
-    post:
-      operationId: post_package_update
-      parameters:
-      - explode: true
-        in: query
-        name: groupName
-        required: true
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: packageName
-        required: true
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: version
-        required: true
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: path
-        required: true
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: filter
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: _charset_
-        required: false
-        schema:
-          type: string
-        style: form
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                type: string
-          description: Default response
-      tags:
-      - crx
-      x-openapi-router-controller: openapi_server.controllers.crx_controller
-  /crx/packmgr/service/.json/{path}:
-    post:
-      operationId: post_package_service_json
-      parameters:
-      - explode: false
-        in: path
-        name: path
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: true
-        in: query
-        name: cmd
-        required: true
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: groupName
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: packageName
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: packageVersion
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: _charset_
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: force
-        required: false
-        schema:
-          type: boolean
-        style: form
-      - explode: true
-        in: query
-        name: recursive
-        required: false
-        schema:
-          type: boolean
-        style: form
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/body_1'
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                type: string
-          description: Default response
-      tags:
-      - crx
-      x-openapi-router-controller: openapi_server.controllers.crx_controller
-  /crx/packmgr/service/script.html:
-    get:
-      operationId: get_package_manager_servlet
-      responses:
-        404:
-          content:
-            text/html:
-              schema:
-                type: string
-          description: Package Manager Servlet is disabled
-        405:
-          content:
-            text/html:
-              schema:
-                type: string
-          description: Package Manager Servlet is active
-      tags:
-      - crx
-      x-openapi-router-controller: openapi_server.controllers.crx_controller
-  /crx/server/crx.default/jcr:root/.1.json:
-    get:
-      operationId: get_crxde_status
-      responses:
-        200:
-          content:
-            plain/text:
-              schema:
-                type: string
-          description: CRXDE is enabled
-        404:
-          content:
-            plain/text:
-              schema:
-                type: string
-          description: CRXDE is disabled
-      tags:
-      - crx
-      x-openapi-router-controller: openapi_server.controllers.crx_controller
-  /system/console/bundles/{name}:
-    post:
-      operationId: post_bundle
-      parameters:
-      - explode: false
-        in: path
-        name: name
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: true
-        in: query
-        name: action
-        required: true
-        schema:
-          type: string
-        style: form
-      responses:
-        default:
-          description: Default response
-      tags:
-      - console
-      x-openapi-router-controller: openapi_server.controllers.console_controller
-  /system/console/jmx/com.adobe.granite:type=Repository/op/{action}:
-    post:
-      operationId: post_jmx_repository
-      parameters:
-      - explode: false
-        in: path
-        name: action
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        default:
-          description: Default response
-      tags:
-      - console
-      x-openapi-router-controller: openapi_server.controllers.console_controller
-  /system/health:
-    get:
-      operationId: get_aem_health_check
-      parameters:
-      - explode: true
-        in: query
-        name: tags
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: combineTagsOr
-        required: false
-        schema:
-          type: boolean
-        style: form
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                type: string
-          description: Default response
-      tags:
-      - custom
-      x-openapi-router-controller: openapi_server.controllers.custom_controller
-  /apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config:
-    post:
-      operationId: post_config_adobe_granite_saml_authentication_handler
-      parameters:
-      - explode: true
-        in: query
-        name: keyStorePassword
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: keyStorePassword@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: service.ranking
-        required: false
-        schema:
-          format: int32
-          type: integer
-        style: form
-      - explode: true
-        in: query
-        name: service.ranking@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: idpHttpRedirect
-        required: false
-        schema:
-          type: boolean
-        style: form
-      - explode: true
-        in: query
-        name: idpHttpRedirect@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: createUser
-        required: false
-        schema:
-          type: boolean
-        style: form
-      - explode: true
-        in: query
-        name: createUser@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: defaultRedirectUrl
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: defaultRedirectUrl@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: userIDAttribute
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: userIDAttribute@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: defaultGroups
-        required: false
-        schema:
-          items:
-            type: string
-          type: array
-        style: form
-      - explode: true
-        in: query
-        name: defaultGroups@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: idpCertAlias
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: idpCertAlias@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: addGroupMemberships
-        required: false
-        schema:
-          type: boolean
-        style: form
-      - explode: true
-        in: query
-        name: addGroupMemberships@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: path
-        required: false
-        schema:
-          items:
-            type: string
-          type: array
-        style: form
-      - explode: true
-        in: query
-        name: path@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: synchronizeAttributes
-        required: false
-        schema:
-          items:
-            type: string
-          type: array
-        style: form
-      - explode: true
-        in: query
-        name: synchronizeAttributes@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: clockTolerance
-        required: false
-        schema:
-          format: int32
-          type: integer
-        style: form
-      - explode: true
-        in: query
-        name: clockTolerance@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: groupMembershipAttribute
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: groupMembershipAttribute@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: idpUrl
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: idpUrl@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: logoutUrl
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: logoutUrl@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: serviceProviderEntityId
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: serviceProviderEntityId@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: assertionConsumerServiceURL
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: assertionConsumerServiceURL@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: handleLogout
-        required: false
-        schema:
-          type: boolean
-        style: form
-      - explode: true
-        in: query
-        name: handleLogout@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: spPrivateKeyAlias
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: spPrivateKeyAlias@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: useEncryption
-        required: false
-        schema:
-          type: boolean
-        style: form
-      - explode: true
-        in: query
-        name: useEncryption@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: nameIdFormat
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: nameIdFormat@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: digestMethod
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: digestMethod@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: signatureMethod
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: signatureMethod@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: userIntermediatePath
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: userIntermediatePath@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      responses:
-        default:
-          description: Default response
-      tags:
-      - sling
-      x-openapi-router-controller: openapi_server.controllers.sling_controller
-  /apps/system/config/org.apache.http.proxyconfigurator.config:
-    post:
-      operationId: post_config_apache_http_components_proxy_configuration
-      parameters:
-      - explode: true
-        in: query
-        name: proxy.host
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: proxy.host@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: proxy.port
-        required: false
-        schema:
-          format: int32
-          type: integer
-        style: form
-      - explode: true
-        in: query
-        name: proxy.port@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: proxy.exceptions
-        required: false
-        schema:
-          items:
-            type: string
-          type: array
-        style: form
-      - explode: true
-        in: query
-        name: proxy.exceptions@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: proxy.enabled
-        required: false
-        schema:
-          type: boolean
-        style: form
-      - explode: true
-        in: query
-        name: proxy.enabled@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: proxy.user
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: proxy.user@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: proxy.password
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: proxy.password@TypeHint
-        required: false
-        schema:
-          type: string
-        style: form
-      responses:
-        default:
-          description: Default response
-      tags:
-      - sling
-      x-openapi-router-controller: openapi_server.controllers.sling_controller
+      - granite
+      x-openapi-router-controller: openapi_server.controllers.granite_controller
   /libs/granite/security/post/truststore:
     post:
       operationId: post_truststore
@@ -2076,10 +1967,15 @@ paths:
           type: string
         style: form
       requestBody:
+        $ref: '#/components/requestBodies/inline_object_2'
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/body_2'
+              properties:
+                certificate:
+                  format: binary
+                  type: string
+              type: object
       responses:
         default:
           content:
@@ -2094,7 +1990,7 @@ paths:
     get:
       operationId: get_truststore_info
       responses:
-        200:
+        "200":
           content:
             application/json:
               schema:
@@ -2109,38 +2005,72 @@ paths:
       tags:
       - sling
       x-openapi-router-controller: openapi_server.controllers.sling_controller
-  /etc/truststore/truststore.p12:
-    get:
-      operationId: get_truststore
-      responses:
-        default:
-          content:
-            application/octet-stream:
-              schema:
-                format: binary
-                type: string
-          description: Default response
-      tags:
-      - sling
-      x-openapi-router-controller: openapi_server.controllers.sling_controller
-  /etc/truststore:
+  /system/console/bundles/{name}:
     post:
-      operationId: post_truststore_pkcs12
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/body_3'
+      operationId: post_bundle
+      parameters:
+      - explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: action
+        required: true
+        schema:
+          type: string
+        style: form
       responses:
         default:
+          description: Default response
+      tags:
+      - console
+      x-openapi-router-controller: openapi_server.controllers.console_controller
+  /system/console/bundles/{name}.json:
+    get:
+      operationId: get_bundle_info
+      parameters:
+      - explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
           content:
-            text/plain:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BundleInfo'
+          description: Retrieved bundle info
+        default:
+          content:
+            application/json:
               schema:
                 type: string
           description: Default response
       tags:
-      - sling
-      x-openapi-router-controller: openapi_server.controllers.sling_controller
+      - console
+      x-openapi-router-controller: openapi_server.controllers.console_controller
+  /system/console/configMgr:
+    get:
+      operationId: get_config_mgr
+      responses:
+        "200":
+          content:
+            text/xml:
+              schema:
+                type: string
+          description: OK
+        "5XX":
+          description: Unexpected error.
+      tags:
+      - console
+      x-openapi-router-controller: openapi_server.controllers.console_controller
   /system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler:
     post:
       operationId: post_saml_configuration
@@ -2194,7 +2124,6 @@ paths:
         name: service.ranking
         required: false
         schema:
-          format: int32
           type: integer
         style: form
       - explode: true
@@ -2332,7 +2261,6 @@ paths:
         name: clockTolerance
         required: false
         schema:
-          format: int32
           type: integer
         style: form
       - explode: true
@@ -2366,13 +2294,13 @@ paths:
           type: array
         style: form
       responses:
-        200:
+        "200":
           content:
             text/plain:
               schema:
                 $ref: '#/components/schemas/SamlConfigurationInfo'
           description: Retrieved AEM SAML Configuration
-        302:
+        "302":
           content:
             text/plain:
               schema:
@@ -2383,6 +2311,23 @@ paths:
             text/plain:
               schema:
                 type: string
+          description: Default response
+      tags:
+      - console
+      x-openapi-router-controller: openapi_server.controllers.console_controller
+  /system/console/jmx/com.adobe.granite:type=Repository/op/{action}:
+    post:
+      operationId: post_jmx_repository
+      parameters:
+      - explode: false
+        in: path
+        name: action
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
           description: Default response
       tags:
       - console
@@ -2402,6 +2347,34 @@ paths:
       tags:
       - console
       x-openapi-router-controller: openapi_server.controllers.console_controller
+  /system/health:
+    get:
+      operationId: get_aem_health_check
+      parameters:
+      - explode: true
+        in: query
+        name: tags
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: combineTagsOr
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Default response
+      tags:
+      - custom
+      x-openapi-router-controller: openapi_server.controllers.custom_controller
   /{intermediatePath}/{authorizableId}.ks.html:
     post:
       operationId: post_authorizable_keystore
@@ -2484,12 +2457,23 @@ paths:
           type: string
         style: form
       requestBody:
+        $ref: '#/components/requestBodies/inline_object_4'
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/body_4'
+              properties:
+                cert-chain:
+                  format: binary
+                  type: string
+                pk:
+                  format: binary
+                  type: string
+                keyStore:
+                  format: binary
+                  type: string
+              type: object
       responses:
-        200:
+        "200":
           content:
             text/plain:
               schema:
@@ -2523,7 +2507,7 @@ paths:
           type: string
         style: simple
       responses:
-        200:
+        "200":
           content:
             text/plain:
               schema:
@@ -2567,7 +2551,194 @@ paths:
       tags:
       - sling
       x-openapi-router-controller: openapi_server.controllers.sling_controller
+  /{path}/:
+    post:
+      operationId: post_path
+      parameters:
+      - explode: false
+        in: path
+        name: path
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: jcr:primaryType
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: :name
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        default:
+          description: Default response
+      tags:
+      - sling
+      x-openapi-router-controller: openapi_server.controllers.sling_controller
+  /{path}/{name}:
+    delete:
+      operationId: delete_node
+      parameters:
+      - explode: false
+        in: path
+        name: path
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          description: Default response
+      tags:
+      - sling
+      x-openapi-router-controller: openapi_server.controllers.sling_controller
+    get:
+      operationId: get_node
+      parameters:
+      - explode: false
+        in: path
+        name: path
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          description: Default response
+      tags:
+      - sling
+      x-openapi-router-controller: openapi_server.controllers.sling_controller
+    post:
+      operationId: post_node
+      parameters:
+      - explode: false
+        in: path
+        name: path
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: :operation
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: deleteAuthorizable
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object'
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                file:
+                  format: binary
+                  type: string
+              type: object
+      responses:
+        default:
+          description: Default response
+      tags:
+      - sling
+      x-openapi-router-controller: openapi_server.controllers.sling_controller
+  /{path}/{name}.rw.html:
+    post:
+      operationId: post_node_rw
+      parameters:
+      - explode: false
+        in: path
+        name: path
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: addMembers
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        default:
+          description: Default response
+      tags:
+      - sling
+      x-openapi-router-controller: openapi_server.controllers.sling_controller
 components:
+  requestBodies:
+    inline_object_1:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object_1'
+    inline_object:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object'
+    inline_object_5:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object_5'
+    inline_object_4:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object_4'
+    inline_object_3:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object_3'
+    inline_object_2:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object_2'
   schemas:
     InstallStatus:
       example:
@@ -2577,16 +2748,20 @@ components:
       properties:
         status:
           $ref: '#/components/schemas/InstallStatus_status'
+      title: InstallStatus
       type: object
     KeystoreInfo:
       properties:
         aliases:
           items:
             $ref: '#/components/schemas/KeystoreItems'
+          title: aliases
           type: array
         exists:
           description: False if truststore don't exist
+          title: exists
           type: boolean
+      title: KeystoreInfo
       type: object
     TruststoreInfo:
       example:
@@ -2610,48 +2785,62 @@ components:
         aliases:
           items:
             $ref: '#/components/schemas/TruststoreItems'
+          title: aliases
           type: array
         exists:
           description: False if truststore don't exist
+          title: exists
           type: boolean
+      title: TruststoreInfo
       type: object
     KeystoreItems:
       properties:
         alias:
           description: Keystore alias name
+          title: alias
           type: string
         entryType:
           description: e.g. "privateKey"
+          title: entryType
           type: string
         algorithm:
           description: e.g. "RSA"
+          title: algorithm
           type: string
         format:
           description: e.g. "PKCS#8"
+          title: format
           type: string
         chain:
           items:
             $ref: '#/components/schemas/KeystoreChainItems'
+          title: chain
           type: array
+      title: KeystoreItems
       type: object
     KeystoreChainItems:
       properties:
         subject:
           description: e.g. "CN=localhost"
+          title: subject
           type: string
         issuer:
           description: e.g. "CN=Admin"
+          title: issuer
           type: string
         notBefore:
           description: e.g. "Sun Jul 01 12:00:00 AEST 2018"
+          title: notBefore
           type: string
         notAfter:
           description: e.g. "Sun Jun 30 23:59:50 AEST 2019"
+          title: notAfter
           type: string
         serialNumber:
           description: "18165099476682912368"
-          format: int32
+          title: serialNumber
           type: integer
+      title: KeystoreChainItems
       type: object
     TruststoreItems:
       example:
@@ -2665,45 +2854,58 @@ components:
       properties:
         alias:
           description: Truststore alias name
+          title: alias
           type: string
         entryType:
+          title: entryType
           type: string
         subject:
           description: e.g. "CN=localhost"
+          title: subject
           type: string
         issuer:
           description: e.g. "CN=Admin"
+          title: issuer
           type: string
         notBefore:
           description: e.g. "Sun Jul 01 12:00:00 AEST 2018"
+          title: notBefore
           type: string
         notAfter:
           description: e.g. "Sun Jun 30 23:59:50 AEST 2019"
+          title: notAfter
           type: string
         serialNumber:
           description: "18165099476682912368"
-          format: int32
+          title: serialNumber
           type: integer
+      title: TruststoreItems
       type: object
     SamlConfigurationInfo:
       properties:
         pid:
           description: Persistent Identity (PID)
+          title: pid
           type: string
         title:
           description: Title
+          title: title
           type: string
         description:
           description: Title
+          title: description
           type: string
         bundle_location:
           description: needed for configuration binding
+          title: bundle_location
           type: string
         service_location:
           description: needed for configuraiton binding
+          title: service_location
           type: string
         properties:
           $ref: '#/components/schemas/SamlConfigurationProperties'
+      title: SamlConfigurationInfo
       type: object
     SamlConfigurationProperties:
       properties:
@@ -2755,123 +2957,267 @@ components:
           $ref: '#/components/schemas/SamlConfigurationPropertyItemsString'
         userIntermediatePath:
           $ref: '#/components/schemas/SamlConfigurationPropertyItemsString'
+      title: SamlConfigurationProperties
       type: object
     SamlConfigurationPropertyItemsArray:
       properties:
         name:
           description: property name
+          title: name
           type: string
         optional:
           description: True if optional
+          title: optional
           type: boolean
         is_set:
           description: True if property is set
+          title: is_set
           type: boolean
         type:
           description: Property type, 1=String, 3=long, 11=boolean, 12=Password
-          format: int32
+          title: type
           type: integer
         values:
           description: Property value
           items:
             type: string
+          title: values
           type: array
         description:
           description: Property description
+          title: description
           type: string
+      title: SamlConfigurationPropertyItemsArray
       type: object
     SamlConfigurationPropertyItemsBoolean:
       properties:
         name:
           description: property name
+          title: name
           type: string
         optional:
           description: True if optional
+          title: optional
           type: boolean
         is_set:
           description: True if property is set
+          title: is_set
           type: boolean
         type:
           description: Property type, 1=String, 3=long, 11=boolean, 12=Password
-          format: int32
+          title: type
           type: integer
         value:
           description: Property value
+          title: value
           type: boolean
         description:
           description: Property description
+          title: description
           type: string
+      title: SamlConfigurationPropertyItemsBoolean
       type: object
     SamlConfigurationPropertyItemsLong:
       properties:
         name:
           description: property name
+          title: name
           type: string
         optional:
           description: True if optional
+          title: optional
           type: boolean
         is_set:
           description: True if property is set
+          title: is_set
           type: boolean
         type:
           description: Property type, 1=String, 3=long, 11=boolean, 12=Password
-          format: int32
+          title: type
           type: integer
         value:
           description: Property value
-          format: int32
+          title: value
           type: integer
         description:
           description: Property description
+          title: description
           type: string
+      title: SamlConfigurationPropertyItemsLong
       type: object
     SamlConfigurationPropertyItemsString:
       properties:
         name:
           description: property name
+          title: name
           type: string
         optional:
           description: True if optional
+          title: optional
           type: boolean
         is_set:
           description: True if property is set
+          title: is_set
           type: boolean
         type:
           description: Property type, 1=String, 3=long, 11=boolean, 12=Password
-          format: int32
+          title: type
           type: integer
         value:
           description: Property value
+          title: value
           type: string
         description:
           description: Property description
+          title: description
           type: string
+      title: SamlConfigurationPropertyItemsString
       type: object
-    body:
+    BundleInfo:
+      example:
+        s:
+        - 0
+        - 0
+        data:
+        - fragment: true
+          stateRaw: 1
+          name: name
+          symbolicName: symbolicName
+          id: 6
+          state: state
+          category: category
+          version: version
+          props:
+          - value: value
+            key: key
+          - value: value
+            key: key
+        - fragment: true
+          stateRaw: 1
+          name: name
+          symbolicName: symbolicName
+          id: 6
+          state: state
+          category: category
+          version: version
+          props:
+          - value: value
+            key: key
+          - value: value
+            key: key
+        status: status
+      properties:
+        status:
+          description: Status description of all bundles
+          title: status
+          type: string
+        s:
+          items:
+            type: integer
+          title: s
+          type: array
+        data:
+          items:
+            $ref: '#/components/schemas/BundleData'
+          title: data
+          type: array
+      title: BundleInfo
+      type: object
+    BundleData:
+      example:
+        fragment: true
+        stateRaw: 1
+        name: name
+        symbolicName: symbolicName
+        id: 6
+        state: state
+        category: category
+        version: version
+        props:
+        - value: value
+          key: key
+        - value: value
+          key: key
+      properties:
+        id:
+          description: Bundle ID
+          title: id
+          type: integer
+        name:
+          description: Bundle name
+          title: name
+          type: string
+        fragment:
+          description: Is bundle a fragment
+          title: fragment
+          type: boolean
+        stateRaw:
+          description: Numeric raw bundle state value
+          title: stateRaw
+          type: integer
+        state:
+          description: Bundle state value
+          title: state
+          type: string
+        version:
+          description: Bundle version
+          title: version
+          type: string
+        symbolicName:
+          description: Bundle symbolic name
+          title: symbolicName
+          type: string
+        category:
+          description: Bundle category
+          title: category
+          type: string
+        props:
+          items:
+            $ref: '#/components/schemas/BundleDataProp'
+          title: props
+          type: array
+      title: BundleData
+      type: object
+    BundleDataProp:
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          description: Bundle data key
+          title: key
+          type: string
+        value:
+          description: Bundle data value
+          title: value
+          type: string
+      title: BundleDataProp
+      type: object
+    inline_object:
       properties:
         file:
           format: binary
           type: string
       type: object
-    body_1:
+    inline_object_1:
       properties:
         package:
           format: binary
           type: string
       type: object
-    body_2:
+    inline_object_2:
       properties:
         certificate:
           format: binary
           type: string
       type: object
-    body_3:
+    inline_object_3:
       properties:
         truststore.p12:
           format: binary
           type: string
       type: object
-    body_4:
+    inline_object_4:
       properties:
         cert-chain:
           format: binary
@@ -2883,18 +3229,30 @@ components:
           format: binary
           type: string
       type: object
+    inline_object_5:
+      properties:
+        privatekeyFile:
+          format: binary
+          type: string
+        certificateFile:
+          format: binary
+          type: string
+      type: object
     InstallStatus_status:
       example:
         finished: true
         itemCount: 0
       properties:
         finished:
+          title: finished
           type: boolean
         itemCount:
-          format: int32
+          title: itemCount
           type: integer
+      title: InstallStatus_status
       type: object
   securitySchemes:
     aemAuth:
       scheme: basic
       type: http
+      x-basicInfoFunc: openapi_server.controllers.security_controller_.info_from_aemAuth

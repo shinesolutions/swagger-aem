@@ -21,18 +21,19 @@ import javax.ws.rs.*;
 import javax.inject.Inject;
 
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 
-@Path("/bin")
+@Path("/bin/querybuilder.json")
 
 
 @io.swagger.annotations.Api(description = "the bin API")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyServerCodegen", date = "2019-08-04T23:42:05.073Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyServerCodegen", date = "2021-09-03T15:25:57.989+10:00[Australia/Melbourne]")
 public class BinApi  {
 
     @Inject BinApiService service;
 
     @GET
-    @Path("/querybuilder.json")
+    
     
     @Produces({ "application/json" })
     @io.swagger.annotations.ApiOperation(value = "", notes = "", response = String.class, authorizations = {
@@ -45,7 +46,7 @@ public class BinApi  {
         return service.getQuery(path,pLimit,_1property,_1propertyValue,securityContext);
     }
     @POST
-    @Path("/querybuilder.json")
+    
     
     @Produces({ "application/json" })
     @io.swagger.annotations.ApiOperation(value = "", notes = "", response = String.class, authorizations = {

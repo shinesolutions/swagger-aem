@@ -1,54 +1,119 @@
+//
+// AUTO-GENERATED FILE, DO NOT MODIFY!
+//
+// @dart=2.0
+
+// ignore_for_file: unused_element, unused_import
+// ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: lines_longer_than_80_chars
+
 part of openapi.api;
 
 class SamlConfigurationInfo {
-  /* Persistent Identity (PID) */
-  String pid = null;
-  /* Title */
-  String title = null;
-  /* Title */
-  String description = null;
-  /* needed for configuration binding */
-  String bundleLocation = null;
-  /* needed for configuraiton binding */
-  String serviceLocation = null;
-  
-  SamlConfigurationProperties properties = null;
-  SamlConfigurationInfo();
+  /// Returns a new [SamlConfigurationInfo] instance.
+  SamlConfigurationInfo({
+    this.pid,
+    this.title,
+    this.description,
+    this.bundleLocation,
+    this.serviceLocation,
+    this.properties,
+  });
+
+  /// Persistent Identity (PID)
+  String pid;
+
+  /// Title
+  String title;
+
+  /// Title
+  String description;
+
+  /// needed for configuration binding
+  String bundleLocation;
+
+  /// needed for configuraiton binding
+  String serviceLocation;
+
+  SamlConfigurationProperties properties;
 
   @override
-  String toString() {
-    return 'SamlConfigurationInfo[pid=$pid, title=$title, description=$description, bundleLocation=$bundleLocation, serviceLocation=$serviceLocation, properties=$properties, ]';
-  }
+  bool operator ==(Object other) => identical(this, other) || other is SamlConfigurationInfo &&
+     other.pid == pid &&
+     other.title == title &&
+     other.description == description &&
+     other.bundleLocation == bundleLocation &&
+     other.serviceLocation == serviceLocation &&
+     other.properties == properties;
 
-  SamlConfigurationInfo.fromJson(Map<String, dynamic> json) {
-    if (json == null) return;
-    pid = json['pid'];
-    title = json['title'];
-    description = json['description'];
-    bundleLocation = json['bundle_location'];
-    serviceLocation = json['service_location'];
-    properties = new SamlConfigurationProperties.fromJson(json['properties']);
-  }
+  @override
+  int get hashCode =>
+    (pid == null ? 0 : pid.hashCode) +
+    (title == null ? 0 : title.hashCode) +
+    (description == null ? 0 : description.hashCode) +
+    (bundleLocation == null ? 0 : bundleLocation.hashCode) +
+    (serviceLocation == null ? 0 : serviceLocation.hashCode) +
+    (properties == null ? 0 : properties.hashCode);
+
+  @override
+  String toString() => 'SamlConfigurationInfo[pid=$pid, title=$title, description=$description, bundleLocation=$bundleLocation, serviceLocation=$serviceLocation, properties=$properties]';
 
   Map<String, dynamic> toJson() {
-    return {
-      'pid': pid,
-      'title': title,
-      'description': description,
-      'bundle_location': bundleLocation,
-      'service_location': serviceLocation,
-      'properties': properties
-    };
+    final json = <String, dynamic>{};
+    if (pid != null) {
+      json[r'pid'] = pid;
+    }
+    if (title != null) {
+      json[r'title'] = title;
+    }
+    if (description != null) {
+      json[r'description'] = description;
+    }
+    if (bundleLocation != null) {
+      json[r'bundle_location'] = bundleLocation;
+    }
+    if (serviceLocation != null) {
+      json[r'service_location'] = serviceLocation;
+    }
+    if (properties != null) {
+      json[r'properties'] = properties;
+    }
+    return json;
   }
 
-  static List<SamlConfigurationInfo> listFromJson(List<dynamic> json) {
-    return json == null ? new List<SamlConfigurationInfo>() : json.map((value) => new SamlConfigurationInfo.fromJson(value)).toList();
+  /// Returns a new [SamlConfigurationInfo] instance and imports its values from
+  /// [json] if it's non-null, null if [json] is null.
+  static SamlConfigurationInfo fromJson(Map<String, dynamic> json) => json == null
+    ? null
+    : SamlConfigurationInfo(
+        pid: json[r'pid'],
+        title: json[r'title'],
+        description: json[r'description'],
+        bundleLocation: json[r'bundle_location'],
+        serviceLocation: json[r'service_location'],
+        properties: SamlConfigurationProperties.fromJson(json[r'properties']),
+    );
+
+  static List<SamlConfigurationInfo> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
+    json == null || json.isEmpty
+      ? true == emptyIsNull ? null : <SamlConfigurationInfo>[]
+      : json.map((dynamic value) => SamlConfigurationInfo.fromJson(value)).toList(growable: true == growable);
+
+  static Map<String, SamlConfigurationInfo> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, SamlConfigurationInfo>{};
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = SamlConfigurationInfo.fromJson(value));
+    }
+    return map;
   }
 
-  static Map<String, SamlConfigurationInfo> mapFromJson(Map<String, Map<String, dynamic>> json) {
-    var map = new Map<String, SamlConfigurationInfo>();
-    if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new SamlConfigurationInfo.fromJson(value));
+  // maps a json object with a list of SamlConfigurationInfo-objects as value to a dart map
+  static Map<String, List<SamlConfigurationInfo>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
+    final map = <String, List<SamlConfigurationInfo>>{};
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = SamlConfigurationInfo.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
+      });
     }
     return map;
   }

@@ -5,6 +5,7 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**getAemProductInfo**](ConsoleApi.md#getAemProductInfo) | **GET** /system/console/status-productinfo.json | 
+[**getBundleInfo**](ConsoleApi.md#getBundleInfo) | **GET** /system/console/bundles/{name}.json | 
 [**getConfigMgr**](ConsoleApi.md#getConfigMgr) | **GET** /system/console/configMgr | 
 [**postBundle**](ConsoleApi.md#postBundle) | **POST** /system/console/bundles/{name} | 
 [**postJmxRepository**](ConsoleApi.md#postJmxRepository) | **POST** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} | 
@@ -71,6 +72,73 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+**0** | Default response |  -  |
+
+<a name="getBundleInfo"></a>
+# **getBundleInfo**
+> BundleInfo getBundleInfo(name)
+
+
+
+### Example
+```java
+// Import classes:
+import com.shinesolutions.swaggeraem4j.ApiClient;
+import com.shinesolutions.swaggeraem4j.ApiException;
+import com.shinesolutions.swaggeraem4j.Configuration;
+import com.shinesolutions.swaggeraem4j.auth.*;
+import com.shinesolutions.swaggeraem4j.models.*;
+import com.shinesolutions.swaggeraem4j.api.ConsoleApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost");
+    
+    // Configure HTTP basic authorization: aemAuth
+    HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+    aemAuth.setUsername("YOUR USERNAME");
+    aemAuth.setPassword("YOUR PASSWORD");
+
+    ConsoleApi apiInstance = new ConsoleApi(defaultClient);
+    String name = "name_example"; // String | 
+    try {
+      BundleInfo result = apiInstance.getBundleInfo(name);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ConsoleApi#getBundleInfo");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **String**|  |
+
+### Return type
+
+[**BundleInfo**](BundleInfo.md)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Retrieved bundle info |  -  |
 **0** | Default response |  -  |
 
 <a name="getConfigMgr"></a>

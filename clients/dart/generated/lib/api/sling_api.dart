@@ -1,1998 +1,2841 @@
+//
+// AUTO-GENERATED FILE, DO NOT MODIFY!
+//
+// @dart=2.0
+
+// ignore_for_file: unused_element, unused_import
+// ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: lines_longer_than_80_chars
+
 part of openapi.api;
 
 
-
 class SlingApi {
-  final ApiClient apiClient;
-
   SlingApi([ApiClient apiClient]) : apiClient = apiClient ?? defaultApiClient;
 
-  /// 
+  final ApiClient apiClient;
+
+  /// Performs an HTTP 'DELETE /etc/replication/agents.{runmode}/{name}' operation and returns the [Response].
+  /// Parameters:
   ///
-  /// 
-  Future deleteAgent(String runmode, String name) async {
-    Object postBody = null;
-
-    // verify required params are set
-    if(runmode == null) {
-     throw new ApiException(400, "Missing required param: runmode");
+  /// * [String] runmode (required):
+  ///
+  /// * [String] name (required):
+  Future<Response> deleteAgentWithHttpInfo(String runmode, String name) async {
+    // Verify required params are set.
+    if (runmode == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: runmode');
     }
-    if(name == null) {
-     throw new ApiException(400, "Missing required param: name");
-    }
-
-    // create path and map variables
-    String path = "/etc/replication/agents.{runmode}/{name}".replaceAll("{format}","json").replaceAll("{" + "runmode" + "}", runmode.toString()).replaceAll("{" + "name" + "}", name.toString());
-
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-
-    List<String> contentTypes = [];
-
-    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-    List<String> authNames = ["aemAuth"];
-
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = new MultipartRequest(null, null);
-      if(hasFields)
-        postBody = mp;
-    }
-    else {
+    if (name == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: name');
     }
 
-    var response = await apiClient.invokeAPI(path,
-                                             'DELETE',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
+    final path = r'/etc/replication/agents.{runmode}/{name}'
+      .replaceAll('{' + 'runmode' + '}', runmode.toString())
+      .replaceAll('{' + 'name' + '}', name.toString());
 
-    if(response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if(response.body != null) {
-    } else {
-      return;
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['aemAuth'];
+
+
+    return await apiClient.invokeAPI(
+      path,
+      'DELETE',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
+
+  /// Parameters:
+  ///
+  /// * [String] runmode (required):
+  ///
+  /// * [String] name (required):
+  Future<void> deleteAgent(String runmode, String name) async {
+    final response = await deleteAgentWithHttpInfo(runmode, name);
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
   }
-  /// 
+
+  /// Performs an HTTP 'DELETE /{path}/{name}' operation and returns the [Response].
+  /// Parameters:
   ///
-  /// 
-  Future deleteNode(String path, String name) async {
-    Object postBody = null;
-
-    // verify required params are set
-    if(path == null) {
-     throw new ApiException(400, "Missing required param: path");
+  /// * [String] path (required):
+  ///
+  /// * [String] name (required):
+  Future<Response> deleteNodeWithHttpInfo(String path, String name) async {
+    // Verify required params are set.
+    if (path == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: path');
     }
-    if(name == null) {
-     throw new ApiException(400, "Missing required param: name");
-    }
-
-    // create path and map variables
-    String path = "/{path}/{name}".replaceAll("{format}","json").replaceAll("{" + "path" + "}", path.toString()).replaceAll("{" + "name" + "}", name.toString());
-
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-
-    List<String> contentTypes = [];
-
-    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-    List<String> authNames = ["aemAuth"];
-
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = new MultipartRequest(null, null);
-      if(hasFields)
-        postBody = mp;
-    }
-    else {
+    if (name == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: name');
     }
 
-    var response = await apiClient.invokeAPI(path,
-                                             'DELETE',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
+    final path = r'/{path}/{name}'
+      .replaceAll('{' + 'path' + '}', path.toString())
+      .replaceAll('{' + 'name' + '}', name.toString());
 
-    if(response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if(response.body != null) {
-    } else {
-      return;
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['aemAuth'];
+
+
+    return await apiClient.invokeAPI(
+      path,
+      'DELETE',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
+
+  /// Parameters:
+  ///
+  /// * [String] path (required):
+  ///
+  /// * [String] name (required):
+  Future<void> deleteNode(String path, String name) async {
+    final response = await deleteNodeWithHttpInfo(path, name);
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
   }
-  /// 
+
+  /// Performs an HTTP 'GET /etc/replication/agents.{runmode}/{name}' operation and returns the [Response].
+  /// Parameters:
   ///
-  /// 
-  Future getAgent(String runmode, String name) async {
-    Object postBody = null;
-
-    // verify required params are set
-    if(runmode == null) {
-     throw new ApiException(400, "Missing required param: runmode");
+  /// * [String] runmode (required):
+  ///
+  /// * [String] name (required):
+  Future<Response> getAgentWithHttpInfo(String runmode, String name) async {
+    // Verify required params are set.
+    if (runmode == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: runmode');
     }
-    if(name == null) {
-     throw new ApiException(400, "Missing required param: name");
-    }
-
-    // create path and map variables
-    String path = "/etc/replication/agents.{runmode}/{name}".replaceAll("{format}","json").replaceAll("{" + "runmode" + "}", runmode.toString()).replaceAll("{" + "name" + "}", name.toString());
-
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-
-    List<String> contentTypes = [];
-
-    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-    List<String> authNames = ["aemAuth"];
-
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = new MultipartRequest(null, null);
-      if(hasFields)
-        postBody = mp;
-    }
-    else {
+    if (name == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: name');
     }
 
-    var response = await apiClient.invokeAPI(path,
-                                             'GET',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
+    final path = r'/etc/replication/agents.{runmode}/{name}'
+      .replaceAll('{' + 'runmode' + '}', runmode.toString())
+      .replaceAll('{' + 'name' + '}', name.toString());
 
-    if(response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if(response.body != null) {
-    } else {
-      return;
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['aemAuth'];
+
+
+    return await apiClient.invokeAPI(
+      path,
+      'GET',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
+
+  /// Parameters:
+  ///
+  /// * [String] runmode (required):
+  ///
+  /// * [String] name (required):
+  Future<void> getAgent(String runmode, String name) async {
+    final response = await getAgentWithHttpInfo(runmode, name);
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
   }
-  /// 
+
+  /// Performs an HTTP 'GET /etc/replication/agents.{runmode}.-1.json' operation and returns the [Response].
+  /// Parameters:
   ///
-  /// 
+  /// * [String] runmode (required):
+  Future<Response> getAgentsWithHttpInfo(String runmode) async {
+    // Verify required params are set.
+    if (runmode == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: runmode');
+    }
+
+    final path = r'/etc/replication/agents.{runmode}.-1.json'
+      .replaceAll('{' + 'runmode' + '}', runmode.toString());
+
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['aemAuth'];
+
+
+    return await apiClient.invokeAPI(
+      path,
+      'GET',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
+
+  /// Parameters:
+  ///
+  /// * [String] runmode (required):
   Future<String> getAgents(String runmode) async {
-    Object postBody = null;
-
-    // verify required params are set
-    if(runmode == null) {
-     throw new ApiException(400, "Missing required param: runmode");
+    final response = await getAgentsWithHttpInfo(runmode);
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
-
-    // create path and map variables
-    String path = "/etc/replication/agents.{runmode}.-1.json".replaceAll("{format}","json").replaceAll("{" + "runmode" + "}", runmode.toString());
-
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-
-    List<String> contentTypes = [];
-
-    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-    List<String> authNames = ["aemAuth"];
-
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = new MultipartRequest(null, null);
-      if(hasFields)
-        postBody = mp;
-    }
-    else {
-    }
-
-    var response = await apiClient.invokeAPI(path,
-                                             'GET',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
-
-    if(response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if(response.body != null) {
-      return apiClient.deserialize(response.body, 'String') as String;
-    } else {
-      return null;
-    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'String',) as String;
+        }
+    return Future<String>.value(null);
   }
-  /// 
+
+  /// Performs an HTTP 'GET /{intermediatePath}/{authorizableId}.ks.json' operation and returns the [Response].
+  /// Parameters:
   ///
-  /// 
+  /// * [String] intermediatePath (required):
+  ///
+  /// * [String] authorizableId (required):
+  Future<Response> getAuthorizableKeystoreWithHttpInfo(String intermediatePath, String authorizableId) async {
+    // Verify required params are set.
+    if (intermediatePath == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: intermediatePath');
+    }
+    if (authorizableId == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: authorizableId');
+    }
+
+    final path = r'/{intermediatePath}/{authorizableId}.ks.json'
+      .replaceAll('{' + 'intermediatePath' + '}', intermediatePath.toString())
+      .replaceAll('{' + 'authorizableId' + '}', authorizableId.toString());
+
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['aemAuth'];
+
+
+    return await apiClient.invokeAPI(
+      path,
+      'GET',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
+
+  /// Parameters:
+  ///
+  /// * [String] intermediatePath (required):
+  ///
+  /// * [String] authorizableId (required):
   Future<KeystoreInfo> getAuthorizableKeystore(String intermediatePath, String authorizableId) async {
-    Object postBody = null;
-
-    // verify required params are set
-    if(intermediatePath == null) {
-     throw new ApiException(400, "Missing required param: intermediatePath");
+    final response = await getAuthorizableKeystoreWithHttpInfo(intermediatePath, authorizableId);
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
-    if(authorizableId == null) {
-     throw new ApiException(400, "Missing required param: authorizableId");
-    }
-
-    // create path and map variables
-    String path = "/{intermediatePath}/{authorizableId}.ks.json".replaceAll("{format}","json").replaceAll("{" + "intermediatePath" + "}", intermediatePath.toString()).replaceAll("{" + "authorizableId" + "}", authorizableId.toString());
-
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-
-    List<String> contentTypes = [];
-
-    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-    List<String> authNames = ["aemAuth"];
-
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = new MultipartRequest(null, null);
-      if(hasFields)
-        postBody = mp;
-    }
-    else {
-    }
-
-    var response = await apiClient.invokeAPI(path,
-                                             'GET',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
-
-    if(response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if(response.body != null) {
-      return apiClient.deserialize(response.body, 'KeystoreInfo') as KeystoreInfo;
-    } else {
-      return null;
-    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'KeystoreInfo',) as KeystoreInfo;
+        }
+    return Future<KeystoreInfo>.value(null);
   }
-  /// 
+
+  /// Performs an HTTP 'GET /{intermediatePath}/{authorizableId}/keystore/store.p12' operation and returns the [Response].
+  /// Parameters:
   ///
-  /// 
+  /// * [String] intermediatePath (required):
+  ///
+  /// * [String] authorizableId (required):
+  Future<Response> getKeystoreWithHttpInfo(String intermediatePath, String authorizableId) async {
+    // Verify required params are set.
+    if (intermediatePath == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: intermediatePath');
+    }
+    if (authorizableId == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: authorizableId');
+    }
+
+    final path = r'/{intermediatePath}/{authorizableId}/keystore/store.p12'
+      .replaceAll('{' + 'intermediatePath' + '}', intermediatePath.toString())
+      .replaceAll('{' + 'authorizableId' + '}', authorizableId.toString());
+
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['aemAuth'];
+
+
+    return await apiClient.invokeAPI(
+      path,
+      'GET',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
+
+  /// Parameters:
+  ///
+  /// * [String] intermediatePath (required):
+  ///
+  /// * [String] authorizableId (required):
   Future<MultipartFile> getKeystore(String intermediatePath, String authorizableId) async {
-    Object postBody = null;
-
-    // verify required params are set
-    if(intermediatePath == null) {
-     throw new ApiException(400, "Missing required param: intermediatePath");
+    final response = await getKeystoreWithHttpInfo(intermediatePath, authorizableId);
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
-    if(authorizableId == null) {
-     throw new ApiException(400, "Missing required param: authorizableId");
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'MultipartFile',) as MultipartFile;
+        }
+    return Future<MultipartFile>.value(null);
+  }
+
+  /// Performs an HTTP 'GET /{path}/{name}' operation and returns the [Response].
+  /// Parameters:
+  ///
+  /// * [String] path (required):
+  ///
+  /// * [String] name (required):
+  Future<Response> getNodeWithHttpInfo(String path, String name) async {
+    // Verify required params are set.
+    if (path == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: path');
     }
-
-    // create path and map variables
-    String path = "/{intermediatePath}/{authorizableId}/keystore/store.p12".replaceAll("{format}","json").replaceAll("{" + "intermediatePath" + "}", intermediatePath.toString()).replaceAll("{" + "authorizableId" + "}", authorizableId.toString());
-
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-
-    List<String> contentTypes = [];
-
-    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-    List<String> authNames = ["aemAuth"];
-
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = new MultipartRequest(null, null);
-      if(hasFields)
-        postBody = mp;
-    }
-    else {
+    if (name == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: name');
     }
 
-    var response = await apiClient.invokeAPI(path,
-                                             'GET',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
+    final path = r'/{path}/{name}'
+      .replaceAll('{' + 'path' + '}', path.toString())
+      .replaceAll('{' + 'name' + '}', name.toString());
 
-    if(response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if(response.body != null) {
-      return apiClient.deserialize(response.body, 'MultipartFile') as MultipartFile;
-    } else {
-      return null;
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['aemAuth'];
+
+
+    return await apiClient.invokeAPI(
+      path,
+      'GET',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
+
+  /// Parameters:
+  ///
+  /// * [String] path (required):
+  ///
+  /// * [String] name (required):
+  Future<void> getNode(String path, String name) async {
+    final response = await getNodeWithHttpInfo(path, name);
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
   }
-  /// 
+
+  /// Performs an HTTP 'GET /etc/packages/{group}/{name}-{version}.zip' operation and returns the [Response].
+  /// Parameters:
   ///
-  /// 
-  Future getNode(String path, String name) async {
-    Object postBody = null;
-
-    // verify required params are set
-    if(path == null) {
-     throw new ApiException(400, "Missing required param: path");
+  /// * [String] group (required):
+  ///
+  /// * [String] name (required):
+  ///
+  /// * [String] version (required):
+  Future<Response> getPackageWithHttpInfo(String group, String name, String version) async {
+    // Verify required params are set.
+    if (group == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: group');
     }
-    if(name == null) {
-     throw new ApiException(400, "Missing required param: name");
+    if (name == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: name');
     }
-
-    // create path and map variables
-    String path = "/{path}/{name}".replaceAll("{format}","json").replaceAll("{" + "path" + "}", path.toString()).replaceAll("{" + "name" + "}", name.toString());
-
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-
-    List<String> contentTypes = [];
-
-    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-    List<String> authNames = ["aemAuth"];
-
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = new MultipartRequest(null, null);
-      if(hasFields)
-        postBody = mp;
-    }
-    else {
+    if (version == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: version');
     }
 
-    var response = await apiClient.invokeAPI(path,
-                                             'GET',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
+    final path = r'/etc/packages/{group}/{name}-{version}.zip'
+      .replaceAll('{' + 'group' + '}', group.toString())
+      .replaceAll('{' + 'name' + '}', name.toString())
+      .replaceAll('{' + 'version' + '}', version.toString());
 
-    if(response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if(response.body != null) {
-    } else {
-      return;
-    }
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['aemAuth'];
+
+
+    return await apiClient.invokeAPI(
+      path,
+      'GET',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
   }
-  /// 
+
+  /// Parameters:
   ///
-  /// 
+  /// * [String] group (required):
+  ///
+  /// * [String] name (required):
+  ///
+  /// * [String] version (required):
   Future<MultipartFile> getPackage(String group, String name, String version) async {
-    Object postBody = null;
-
-    // verify required params are set
-    if(group == null) {
-     throw new ApiException(400, "Missing required param: group");
+    final response = await getPackageWithHttpInfo(group, name, version);
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
-    if(name == null) {
-     throw new ApiException(400, "Missing required param: name");
-    }
-    if(version == null) {
-     throw new ApiException(400, "Missing required param: version");
-    }
-
-    // create path and map variables
-    String path = "/etc/packages/{group}/{name}-{version}.zip".replaceAll("{format}","json").replaceAll("{" + "group" + "}", group.toString()).replaceAll("{" + "name" + "}", name.toString()).replaceAll("{" + "version" + "}", version.toString());
-
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-
-    List<String> contentTypes = [];
-
-    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-    List<String> authNames = ["aemAuth"];
-
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = new MultipartRequest(null, null);
-      if(hasFields)
-        postBody = mp;
-    }
-    else {
-    }
-
-    var response = await apiClient.invokeAPI(path,
-                                             'GET',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
-
-    if(response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if(response.body != null) {
-      return apiClient.deserialize(response.body, 'MultipartFile') as MultipartFile;
-    } else {
-      return null;
-    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'MultipartFile',) as MultipartFile;
+        }
+    return Future<MultipartFile>.value(null);
   }
-  /// 
+
+  /// Performs an HTTP 'GET /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json' operation and returns the [Response].
+  /// Parameters:
   ///
-  /// 
+  /// * [String] group (required):
+  ///
+  /// * [String] name (required):
+  ///
+  /// * [String] version (required):
+  Future<Response> getPackageFilterWithHttpInfo(String group, String name, String version) async {
+    // Verify required params are set.
+    if (group == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: group');
+    }
+    if (name == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: name');
+    }
+    if (version == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: version');
+    }
+
+    final path = r'/etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json'
+      .replaceAll('{' + 'group' + '}', group.toString())
+      .replaceAll('{' + 'name' + '}', name.toString())
+      .replaceAll('{' + 'version' + '}', version.toString());
+
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['aemAuth'];
+
+
+    return await apiClient.invokeAPI(
+      path,
+      'GET',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
+
+  /// Parameters:
+  ///
+  /// * [String] group (required):
+  ///
+  /// * [String] name (required):
+  ///
+  /// * [String] version (required):
   Future<String> getPackageFilter(String group, String name, String version) async {
-    Object postBody = null;
-
-    // verify required params are set
-    if(group == null) {
-     throw new ApiException(400, "Missing required param: group");
+    final response = await getPackageFilterWithHttpInfo(group, name, version);
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
-    if(name == null) {
-     throw new ApiException(400, "Missing required param: name");
-    }
-    if(version == null) {
-     throw new ApiException(400, "Missing required param: version");
-    }
-
-    // create path and map variables
-    String path = "/etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json".replaceAll("{format}","json").replaceAll("{" + "group" + "}", group.toString()).replaceAll("{" + "name" + "}", name.toString()).replaceAll("{" + "version" + "}", version.toString());
-
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-
-    List<String> contentTypes = [];
-
-    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-    List<String> authNames = ["aemAuth"];
-
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = new MultipartRequest(null, null);
-      if(hasFields)
-        postBody = mp;
-    }
-    else {
-    }
-
-    var response = await apiClient.invokeAPI(path,
-                                             'GET',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
-
-    if(response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if(response.body != null) {
-      return apiClient.deserialize(response.body, 'String') as String;
-    } else {
-      return null;
-    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'String',) as String;
+        }
+    return Future<String>.value(null);
   }
-  /// 
+
+  /// Performs an HTTP 'GET /bin/querybuilder.json' operation and returns the [Response].
+  /// Parameters:
   ///
-  /// 
-  Future<String> getQuery(String path, num pLimit, String n1property, String n1propertyValue) async {
-    Object postBody = null;
-
-    // verify required params are set
-    if(path == null) {
-     throw new ApiException(400, "Missing required param: path");
+  /// * [String] path (required):
+  ///
+  /// * [num] pPeriodLimit (required):
+  ///
+  /// * [String] n1property (required):
+  ///
+  /// * [String] n1propertyPeriodValue (required):
+  Future<Response> getQueryWithHttpInfo(String path, num pPeriodLimit, String n1property, String n1propertyPeriodValue) async {
+    // Verify required params are set.
+    if (path == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: path');
     }
-    if(pLimit == null) {
-     throw new ApiException(400, "Missing required param: pLimit");
+    if (pPeriodLimit == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: pPeriodLimit');
     }
-    if(n1property == null) {
-     throw new ApiException(400, "Missing required param: n1property");
+    if (n1property == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: n1property');
     }
-    if(n1propertyValue == null) {
-     throw new ApiException(400, "Missing required param: n1propertyValue");
-    }
-
-    // create path and map variables
-    String path = "/bin/querybuilder.json".replaceAll("{format}","json");
-
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-      queryParams.addAll(_convertParametersForCollectionFormat("", "path", path));
-      queryParams.addAll(_convertParametersForCollectionFormat("", "p.limit", pLimit));
-      queryParams.addAll(_convertParametersForCollectionFormat("", "1_property", n1property));
-      queryParams.addAll(_convertParametersForCollectionFormat("", "1_property.value", n1propertyValue));
-
-    List<String> contentTypes = [];
-
-    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-    List<String> authNames = ["aemAuth"];
-
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = new MultipartRequest(null, null);
-      if(hasFields)
-        postBody = mp;
-    }
-    else {
+    if (n1propertyPeriodValue == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: n1propertyPeriodValue');
     }
 
-    var response = await apiClient.invokeAPI(path,
-                                             'GET',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
+    final path = r'/bin/querybuilder.json';
 
-    if(response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if(response.body != null) {
-      return apiClient.deserialize(response.body, 'String') as String;
-    } else {
-      return null;
-    }
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'path', path));
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'p.limit', pPeriodLimit));
+      queryParams.addAll(_convertParametersForCollectionFormat('', '1_property', n1property));
+      queryParams.addAll(_convertParametersForCollectionFormat('', '1_property.value', n1propertyPeriodValue));
+
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['aemAuth'];
+
+
+    return await apiClient.invokeAPI(
+      path,
+      'GET',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
   }
-  /// 
+
+  /// Parameters:
   ///
-  /// 
+  /// * [String] path (required):
+  ///
+  /// * [num] pPeriodLimit (required):
+  ///
+  /// * [String] n1property (required):
+  ///
+  /// * [String] n1propertyPeriodValue (required):
+  Future<String> getQuery(String path, num pPeriodLimit, String n1property, String n1propertyPeriodValue) async {
+    final response = await getQueryWithHttpInfo(path, pPeriodLimit, n1property, n1propertyPeriodValue);
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'String',) as String;
+        }
+    return Future<String>.value(null);
+  }
+
+  /// Performs an HTTP 'GET /etc/truststore/truststore.p12' operation and returns the [Response].
+  Future<Response> getTruststoreWithHttpInfo() async {
+    final path = r'/etc/truststore/truststore.p12';
+
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['aemAuth'];
+
+
+    return await apiClient.invokeAPI(
+      path,
+      'GET',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
+
   Future<MultipartFile> getTruststore() async {
-    Object postBody = null;
-
-    // verify required params are set
-
-    // create path and map variables
-    String path = "/etc/truststore/truststore.p12".replaceAll("{format}","json");
-
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-
-    List<String> contentTypes = [];
-
-    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-    List<String> authNames = ["aemAuth"];
-
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = new MultipartRequest(null, null);
-      if(hasFields)
-        postBody = mp;
+    final response = await getTruststoreWithHttpInfo();
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
-    else {
-    }
-
-    var response = await apiClient.invokeAPI(path,
-                                             'GET',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
-
-    if(response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if(response.body != null) {
-      return apiClient.deserialize(response.body, 'MultipartFile') as MultipartFile;
-    } else {
-      return null;
-    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'MultipartFile',) as MultipartFile;
+        }
+    return Future<MultipartFile>.value(null);
   }
-  /// 
-  ///
-  /// 
+
+  /// Performs an HTTP 'GET /libs/granite/security/truststore.json' operation and returns the [Response].
+  Future<Response> getTruststoreInfoWithHttpInfo() async {
+    final path = r'/libs/granite/security/truststore.json';
+
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['aemAuth'];
+
+
+    return await apiClient.invokeAPI(
+      path,
+      'GET',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
+
   Future<TruststoreInfo> getTruststoreInfo() async {
-    Object postBody = null;
-
-    // verify required params are set
-
-    // create path and map variables
-    String path = "/libs/granite/security/truststore.json".replaceAll("{format}","json");
-
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-
-    List<String> contentTypes = [];
-
-    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-    List<String> authNames = ["aemAuth"];
-
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = new MultipartRequest(null, null);
-      if(hasFields)
-        postBody = mp;
+    final response = await getTruststoreInfoWithHttpInfo();
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
-    else {
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'TruststoreInfo',) as TruststoreInfo;
+        }
+    return Future<TruststoreInfo>.value(null);
+  }
+
+  /// Performs an HTTP 'POST /etc/replication/agents.{runmode}/{name}' operation and returns the [Response].
+  /// Parameters:
+  ///
+  /// * [String] runmode (required):
+  ///
+  /// * [String] name (required):
+  ///
+  /// * [bool] jcrColonContentSlashCqColonDistribute:
+  ///
+  /// * [String] jcrColonContentSlashCqColonDistributeAtTypeHint:
+  ///
+  /// * [String] jcrColonContentSlashCqColonName:
+  ///
+  /// * [String] jcrColonContentSlashCqColonTemplate:
+  ///
+  /// * [bool] jcrColonContentSlashEnabled:
+  ///
+  /// * [String] jcrColonContentSlashJcrColonDescription:
+  ///
+  /// * [String] jcrColonContentSlashJcrColonLastModified:
+  ///
+  /// * [String] jcrColonContentSlashJcrColonLastModifiedBy:
+  ///
+  /// * [String] jcrColonContentSlashJcrColonMixinTypes:
+  ///
+  /// * [String] jcrColonContentSlashJcrColonTitle:
+  ///
+  /// * [String] jcrColonContentSlashLogLevel:
+  ///
+  /// * [bool] jcrColonContentSlashNoStatusUpdate:
+  ///
+  /// * [bool] jcrColonContentSlashNoVersioning:
+  ///
+  /// * [num] jcrColonContentSlashProtocolConnectTimeout:
+  ///
+  /// * [bool] jcrColonContentSlashProtocolHTTPConnectionClosed:
+  ///
+  /// * [String] jcrColonContentSlashProtocolHTTPExpired:
+  ///
+  /// * [List<String>] jcrColonContentSlashProtocolHTTPHeaders:
+  ///
+  /// * [String] jcrColonContentSlashProtocolHTTPHeadersAtTypeHint:
+  ///
+  /// * [String] jcrColonContentSlashProtocolHTTPMethod:
+  ///
+  /// * [bool] jcrColonContentSlashProtocolHTTPSRelaxed:
+  ///
+  /// * [String] jcrColonContentSlashProtocolInterface:
+  ///
+  /// * [num] jcrColonContentSlashProtocolSocketTimeout:
+  ///
+  /// * [String] jcrColonContentSlashProtocolVersion:
+  ///
+  /// * [String] jcrColonContentSlashProxyNTLMDomain:
+  ///
+  /// * [String] jcrColonContentSlashProxyNTLMHost:
+  ///
+  /// * [String] jcrColonContentSlashProxyHost:
+  ///
+  /// * [String] jcrColonContentSlashProxyPassword:
+  ///
+  /// * [num] jcrColonContentSlashProxyPort:
+  ///
+  /// * [String] jcrColonContentSlashProxyUser:
+  ///
+  /// * [num] jcrColonContentSlashQueueBatchMaxSize:
+  ///
+  /// * [String] jcrColonContentSlashQueueBatchMode:
+  ///
+  /// * [num] jcrColonContentSlashQueueBatchWaitTime:
+  ///
+  /// * [String] jcrColonContentSlashRetryDelay:
+  ///
+  /// * [bool] jcrColonContentSlashReverseReplication:
+  ///
+  /// * [String] jcrColonContentSlashSerializationType:
+  ///
+  /// * [String] jcrColonContentSlashSlingColonResourceType:
+  ///
+  /// * [String] jcrColonContentSlashSsl:
+  ///
+  /// * [String] jcrColonContentSlashTransportNTLMDomain:
+  ///
+  /// * [String] jcrColonContentSlashTransportNTLMHost:
+  ///
+  /// * [String] jcrColonContentSlashTransportPassword:
+  ///
+  /// * [String] jcrColonContentSlashTransportUri:
+  ///
+  /// * [String] jcrColonContentSlashTransportUser:
+  ///
+  /// * [bool] jcrColonContentSlashTriggerDistribute:
+  ///
+  /// * [bool] jcrColonContentSlashTriggerModified:
+  ///
+  /// * [bool] jcrColonContentSlashTriggerOnOffTime:
+  ///
+  /// * [bool] jcrColonContentSlashTriggerReceive:
+  ///
+  /// * [bool] jcrColonContentSlashTriggerSpecific:
+  ///
+  /// * [String] jcrColonContentSlashUserId:
+  ///
+  /// * [String] jcrColonPrimaryType:
+  ///
+  /// * [String] colonOperation:
+  Future<Response> postAgentWithHttpInfo(String runmode, String name, { bool jcrColonContentSlashCqColonDistribute, String jcrColonContentSlashCqColonDistributeAtTypeHint, String jcrColonContentSlashCqColonName, String jcrColonContentSlashCqColonTemplate, bool jcrColonContentSlashEnabled, String jcrColonContentSlashJcrColonDescription, String jcrColonContentSlashJcrColonLastModified, String jcrColonContentSlashJcrColonLastModifiedBy, String jcrColonContentSlashJcrColonMixinTypes, String jcrColonContentSlashJcrColonTitle, String jcrColonContentSlashLogLevel, bool jcrColonContentSlashNoStatusUpdate, bool jcrColonContentSlashNoVersioning, num jcrColonContentSlashProtocolConnectTimeout, bool jcrColonContentSlashProtocolHTTPConnectionClosed, String jcrColonContentSlashProtocolHTTPExpired, List<String> jcrColonContentSlashProtocolHTTPHeaders, String jcrColonContentSlashProtocolHTTPHeadersAtTypeHint, String jcrColonContentSlashProtocolHTTPMethod, bool jcrColonContentSlashProtocolHTTPSRelaxed, String jcrColonContentSlashProtocolInterface, num jcrColonContentSlashProtocolSocketTimeout, String jcrColonContentSlashProtocolVersion, String jcrColonContentSlashProxyNTLMDomain, String jcrColonContentSlashProxyNTLMHost, String jcrColonContentSlashProxyHost, String jcrColonContentSlashProxyPassword, num jcrColonContentSlashProxyPort, String jcrColonContentSlashProxyUser, num jcrColonContentSlashQueueBatchMaxSize, String jcrColonContentSlashQueueBatchMode, num jcrColonContentSlashQueueBatchWaitTime, String jcrColonContentSlashRetryDelay, bool jcrColonContentSlashReverseReplication, String jcrColonContentSlashSerializationType, String jcrColonContentSlashSlingColonResourceType, String jcrColonContentSlashSsl, String jcrColonContentSlashTransportNTLMDomain, String jcrColonContentSlashTransportNTLMHost, String jcrColonContentSlashTransportPassword, String jcrColonContentSlashTransportUri, String jcrColonContentSlashTransportUser, bool jcrColonContentSlashTriggerDistribute, bool jcrColonContentSlashTriggerModified, bool jcrColonContentSlashTriggerOnOffTime, bool jcrColonContentSlashTriggerReceive, bool jcrColonContentSlashTriggerSpecific, String jcrColonContentSlashUserId, String jcrColonPrimaryType, String colonOperation }) async {
+    // Verify required params are set.
+    if (runmode == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: runmode');
+    }
+    if (name == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: name');
     }
 
-    var response = await apiClient.invokeAPI(path,
-                                             'GET',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
+    final path = r'/etc/replication/agents.{runmode}/{name}'
+      .replaceAll('{' + 'runmode' + '}', runmode.toString())
+      .replaceAll('{' + 'name' + '}', name.toString());
 
-    if(response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if(response.body != null) {
-      return apiClient.deserialize(response.body, 'TruststoreInfo') as TruststoreInfo;
-    } else {
-      return null;
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    if (jcrColonContentSlashCqColonDistribute != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/cq:distribute', jcrColonContentSlashCqColonDistribute));
+    }
+    if (jcrColonContentSlashCqColonDistributeAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/cq:distribute@TypeHint', jcrColonContentSlashCqColonDistributeAtTypeHint));
+    }
+    if (jcrColonContentSlashCqColonName != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/cq:name', jcrColonContentSlashCqColonName));
+    }
+    if (jcrColonContentSlashCqColonTemplate != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/cq:template', jcrColonContentSlashCqColonTemplate));
+    }
+    if (jcrColonContentSlashEnabled != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/enabled', jcrColonContentSlashEnabled));
+    }
+    if (jcrColonContentSlashJcrColonDescription != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/jcr:description', jcrColonContentSlashJcrColonDescription));
+    }
+    if (jcrColonContentSlashJcrColonLastModified != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/jcr:lastModified', jcrColonContentSlashJcrColonLastModified));
+    }
+    if (jcrColonContentSlashJcrColonLastModifiedBy != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/jcr:lastModifiedBy', jcrColonContentSlashJcrColonLastModifiedBy));
+    }
+    if (jcrColonContentSlashJcrColonMixinTypes != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/jcr:mixinTypes', jcrColonContentSlashJcrColonMixinTypes));
+    }
+    if (jcrColonContentSlashJcrColonTitle != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/jcr:title', jcrColonContentSlashJcrColonTitle));
+    }
+    if (jcrColonContentSlashLogLevel != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/logLevel', jcrColonContentSlashLogLevel));
+    }
+    if (jcrColonContentSlashNoStatusUpdate != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/noStatusUpdate', jcrColonContentSlashNoStatusUpdate));
+    }
+    if (jcrColonContentSlashNoVersioning != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/noVersioning', jcrColonContentSlashNoVersioning));
+    }
+    if (jcrColonContentSlashProtocolConnectTimeout != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/protocolConnectTimeout', jcrColonContentSlashProtocolConnectTimeout));
+    }
+    if (jcrColonContentSlashProtocolHTTPConnectionClosed != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/protocolHTTPConnectionClosed', jcrColonContentSlashProtocolHTTPConnectionClosed));
+    }
+    if (jcrColonContentSlashProtocolHTTPExpired != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/protocolHTTPExpired', jcrColonContentSlashProtocolHTTPExpired));
+    }
+    if (jcrColonContentSlashProtocolHTTPHeaders != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('multi', 'jcr:content/protocolHTTPHeaders', jcrColonContentSlashProtocolHTTPHeaders));
+    }
+    if (jcrColonContentSlashProtocolHTTPHeadersAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/protocolHTTPHeaders@TypeHint', jcrColonContentSlashProtocolHTTPHeadersAtTypeHint));
+    }
+    if (jcrColonContentSlashProtocolHTTPMethod != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/protocolHTTPMethod', jcrColonContentSlashProtocolHTTPMethod));
+    }
+    if (jcrColonContentSlashProtocolHTTPSRelaxed != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/protocolHTTPSRelaxed', jcrColonContentSlashProtocolHTTPSRelaxed));
+    }
+    if (jcrColonContentSlashProtocolInterface != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/protocolInterface', jcrColonContentSlashProtocolInterface));
+    }
+    if (jcrColonContentSlashProtocolSocketTimeout != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/protocolSocketTimeout', jcrColonContentSlashProtocolSocketTimeout));
+    }
+    if (jcrColonContentSlashProtocolVersion != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/protocolVersion', jcrColonContentSlashProtocolVersion));
+    }
+    if (jcrColonContentSlashProxyNTLMDomain != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/proxyNTLMDomain', jcrColonContentSlashProxyNTLMDomain));
+    }
+    if (jcrColonContentSlashProxyNTLMHost != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/proxyNTLMHost', jcrColonContentSlashProxyNTLMHost));
+    }
+    if (jcrColonContentSlashProxyHost != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/proxyHost', jcrColonContentSlashProxyHost));
+    }
+    if (jcrColonContentSlashProxyPassword != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/proxyPassword', jcrColonContentSlashProxyPassword));
+    }
+    if (jcrColonContentSlashProxyPort != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/proxyPort', jcrColonContentSlashProxyPort));
+    }
+    if (jcrColonContentSlashProxyUser != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/proxyUser', jcrColonContentSlashProxyUser));
+    }
+    if (jcrColonContentSlashQueueBatchMaxSize != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/queueBatchMaxSize', jcrColonContentSlashQueueBatchMaxSize));
+    }
+    if (jcrColonContentSlashQueueBatchMode != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/queueBatchMode', jcrColonContentSlashQueueBatchMode));
+    }
+    if (jcrColonContentSlashQueueBatchWaitTime != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/queueBatchWaitTime', jcrColonContentSlashQueueBatchWaitTime));
+    }
+    if (jcrColonContentSlashRetryDelay != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/retryDelay', jcrColonContentSlashRetryDelay));
+    }
+    if (jcrColonContentSlashReverseReplication != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/reverseReplication', jcrColonContentSlashReverseReplication));
+    }
+    if (jcrColonContentSlashSerializationType != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/serializationType', jcrColonContentSlashSerializationType));
+    }
+    if (jcrColonContentSlashSlingColonResourceType != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/sling:resourceType', jcrColonContentSlashSlingColonResourceType));
+    }
+    if (jcrColonContentSlashSsl != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/ssl', jcrColonContentSlashSsl));
+    }
+    if (jcrColonContentSlashTransportNTLMDomain != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/transportNTLMDomain', jcrColonContentSlashTransportNTLMDomain));
+    }
+    if (jcrColonContentSlashTransportNTLMHost != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/transportNTLMHost', jcrColonContentSlashTransportNTLMHost));
+    }
+    if (jcrColonContentSlashTransportPassword != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/transportPassword', jcrColonContentSlashTransportPassword));
+    }
+    if (jcrColonContentSlashTransportUri != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/transportUri', jcrColonContentSlashTransportUri));
+    }
+    if (jcrColonContentSlashTransportUser != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/transportUser', jcrColonContentSlashTransportUser));
+    }
+    if (jcrColonContentSlashTriggerDistribute != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/triggerDistribute', jcrColonContentSlashTriggerDistribute));
+    }
+    if (jcrColonContentSlashTriggerModified != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/triggerModified', jcrColonContentSlashTriggerModified));
+    }
+    if (jcrColonContentSlashTriggerOnOffTime != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/triggerOnOffTime', jcrColonContentSlashTriggerOnOffTime));
+    }
+    if (jcrColonContentSlashTriggerReceive != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/triggerReceive', jcrColonContentSlashTriggerReceive));
+    }
+    if (jcrColonContentSlashTriggerSpecific != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/triggerSpecific', jcrColonContentSlashTriggerSpecific));
+    }
+    if (jcrColonContentSlashUserId != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:content/userId', jcrColonContentSlashUserId));
+    }
+    if (jcrColonPrimaryType != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:primaryType', jcrColonPrimaryType));
+    }
+    if (colonOperation != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', ':operation', colonOperation));
+    }
+
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['aemAuth'];
+
+
+    return await apiClient.invokeAPI(
+      path,
+      'POST',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
+
+  /// Parameters:
+  ///
+  /// * [String] runmode (required):
+  ///
+  /// * [String] name (required):
+  ///
+  /// * [bool] jcrColonContentSlashCqColonDistribute:
+  ///
+  /// * [String] jcrColonContentSlashCqColonDistributeAtTypeHint:
+  ///
+  /// * [String] jcrColonContentSlashCqColonName:
+  ///
+  /// * [String] jcrColonContentSlashCqColonTemplate:
+  ///
+  /// * [bool] jcrColonContentSlashEnabled:
+  ///
+  /// * [String] jcrColonContentSlashJcrColonDescription:
+  ///
+  /// * [String] jcrColonContentSlashJcrColonLastModified:
+  ///
+  /// * [String] jcrColonContentSlashJcrColonLastModifiedBy:
+  ///
+  /// * [String] jcrColonContentSlashJcrColonMixinTypes:
+  ///
+  /// * [String] jcrColonContentSlashJcrColonTitle:
+  ///
+  /// * [String] jcrColonContentSlashLogLevel:
+  ///
+  /// * [bool] jcrColonContentSlashNoStatusUpdate:
+  ///
+  /// * [bool] jcrColonContentSlashNoVersioning:
+  ///
+  /// * [num] jcrColonContentSlashProtocolConnectTimeout:
+  ///
+  /// * [bool] jcrColonContentSlashProtocolHTTPConnectionClosed:
+  ///
+  /// * [String] jcrColonContentSlashProtocolHTTPExpired:
+  ///
+  /// * [List<String>] jcrColonContentSlashProtocolHTTPHeaders:
+  ///
+  /// * [String] jcrColonContentSlashProtocolHTTPHeadersAtTypeHint:
+  ///
+  /// * [String] jcrColonContentSlashProtocolHTTPMethod:
+  ///
+  /// * [bool] jcrColonContentSlashProtocolHTTPSRelaxed:
+  ///
+  /// * [String] jcrColonContentSlashProtocolInterface:
+  ///
+  /// * [num] jcrColonContentSlashProtocolSocketTimeout:
+  ///
+  /// * [String] jcrColonContentSlashProtocolVersion:
+  ///
+  /// * [String] jcrColonContentSlashProxyNTLMDomain:
+  ///
+  /// * [String] jcrColonContentSlashProxyNTLMHost:
+  ///
+  /// * [String] jcrColonContentSlashProxyHost:
+  ///
+  /// * [String] jcrColonContentSlashProxyPassword:
+  ///
+  /// * [num] jcrColonContentSlashProxyPort:
+  ///
+  /// * [String] jcrColonContentSlashProxyUser:
+  ///
+  /// * [num] jcrColonContentSlashQueueBatchMaxSize:
+  ///
+  /// * [String] jcrColonContentSlashQueueBatchMode:
+  ///
+  /// * [num] jcrColonContentSlashQueueBatchWaitTime:
+  ///
+  /// * [String] jcrColonContentSlashRetryDelay:
+  ///
+  /// * [bool] jcrColonContentSlashReverseReplication:
+  ///
+  /// * [String] jcrColonContentSlashSerializationType:
+  ///
+  /// * [String] jcrColonContentSlashSlingColonResourceType:
+  ///
+  /// * [String] jcrColonContentSlashSsl:
+  ///
+  /// * [String] jcrColonContentSlashTransportNTLMDomain:
+  ///
+  /// * [String] jcrColonContentSlashTransportNTLMHost:
+  ///
+  /// * [String] jcrColonContentSlashTransportPassword:
+  ///
+  /// * [String] jcrColonContentSlashTransportUri:
+  ///
+  /// * [String] jcrColonContentSlashTransportUser:
+  ///
+  /// * [bool] jcrColonContentSlashTriggerDistribute:
+  ///
+  /// * [bool] jcrColonContentSlashTriggerModified:
+  ///
+  /// * [bool] jcrColonContentSlashTriggerOnOffTime:
+  ///
+  /// * [bool] jcrColonContentSlashTriggerReceive:
+  ///
+  /// * [bool] jcrColonContentSlashTriggerSpecific:
+  ///
+  /// * [String] jcrColonContentSlashUserId:
+  ///
+  /// * [String] jcrColonPrimaryType:
+  ///
+  /// * [String] colonOperation:
+  Future<void> postAgent(String runmode, String name, { bool jcrColonContentSlashCqColonDistribute, String jcrColonContentSlashCqColonDistributeAtTypeHint, String jcrColonContentSlashCqColonName, String jcrColonContentSlashCqColonTemplate, bool jcrColonContentSlashEnabled, String jcrColonContentSlashJcrColonDescription, String jcrColonContentSlashJcrColonLastModified, String jcrColonContentSlashJcrColonLastModifiedBy, String jcrColonContentSlashJcrColonMixinTypes, String jcrColonContentSlashJcrColonTitle, String jcrColonContentSlashLogLevel, bool jcrColonContentSlashNoStatusUpdate, bool jcrColonContentSlashNoVersioning, num jcrColonContentSlashProtocolConnectTimeout, bool jcrColonContentSlashProtocolHTTPConnectionClosed, String jcrColonContentSlashProtocolHTTPExpired, List<String> jcrColonContentSlashProtocolHTTPHeaders, String jcrColonContentSlashProtocolHTTPHeadersAtTypeHint, String jcrColonContentSlashProtocolHTTPMethod, bool jcrColonContentSlashProtocolHTTPSRelaxed, String jcrColonContentSlashProtocolInterface, num jcrColonContentSlashProtocolSocketTimeout, String jcrColonContentSlashProtocolVersion, String jcrColonContentSlashProxyNTLMDomain, String jcrColonContentSlashProxyNTLMHost, String jcrColonContentSlashProxyHost, String jcrColonContentSlashProxyPassword, num jcrColonContentSlashProxyPort, String jcrColonContentSlashProxyUser, num jcrColonContentSlashQueueBatchMaxSize, String jcrColonContentSlashQueueBatchMode, num jcrColonContentSlashQueueBatchWaitTime, String jcrColonContentSlashRetryDelay, bool jcrColonContentSlashReverseReplication, String jcrColonContentSlashSerializationType, String jcrColonContentSlashSlingColonResourceType, String jcrColonContentSlashSsl, String jcrColonContentSlashTransportNTLMDomain, String jcrColonContentSlashTransportNTLMHost, String jcrColonContentSlashTransportPassword, String jcrColonContentSlashTransportUri, String jcrColonContentSlashTransportUser, bool jcrColonContentSlashTriggerDistribute, bool jcrColonContentSlashTriggerModified, bool jcrColonContentSlashTriggerOnOffTime, bool jcrColonContentSlashTriggerReceive, bool jcrColonContentSlashTriggerSpecific, String jcrColonContentSlashUserId, String jcrColonPrimaryType, String colonOperation }) async {
+    final response = await postAgentWithHttpInfo(runmode, name,  jcrColonContentSlashCqColonDistribute: jcrColonContentSlashCqColonDistribute, jcrColonContentSlashCqColonDistributeAtTypeHint: jcrColonContentSlashCqColonDistributeAtTypeHint, jcrColonContentSlashCqColonName: jcrColonContentSlashCqColonName, jcrColonContentSlashCqColonTemplate: jcrColonContentSlashCqColonTemplate, jcrColonContentSlashEnabled: jcrColonContentSlashEnabled, jcrColonContentSlashJcrColonDescription: jcrColonContentSlashJcrColonDescription, jcrColonContentSlashJcrColonLastModified: jcrColonContentSlashJcrColonLastModified, jcrColonContentSlashJcrColonLastModifiedBy: jcrColonContentSlashJcrColonLastModifiedBy, jcrColonContentSlashJcrColonMixinTypes: jcrColonContentSlashJcrColonMixinTypes, jcrColonContentSlashJcrColonTitle: jcrColonContentSlashJcrColonTitle, jcrColonContentSlashLogLevel: jcrColonContentSlashLogLevel, jcrColonContentSlashNoStatusUpdate: jcrColonContentSlashNoStatusUpdate, jcrColonContentSlashNoVersioning: jcrColonContentSlashNoVersioning, jcrColonContentSlashProtocolConnectTimeout: jcrColonContentSlashProtocolConnectTimeout, jcrColonContentSlashProtocolHTTPConnectionClosed: jcrColonContentSlashProtocolHTTPConnectionClosed, jcrColonContentSlashProtocolHTTPExpired: jcrColonContentSlashProtocolHTTPExpired, jcrColonContentSlashProtocolHTTPHeaders: jcrColonContentSlashProtocolHTTPHeaders, jcrColonContentSlashProtocolHTTPHeadersAtTypeHint: jcrColonContentSlashProtocolHTTPHeadersAtTypeHint, jcrColonContentSlashProtocolHTTPMethod: jcrColonContentSlashProtocolHTTPMethod, jcrColonContentSlashProtocolHTTPSRelaxed: jcrColonContentSlashProtocolHTTPSRelaxed, jcrColonContentSlashProtocolInterface: jcrColonContentSlashProtocolInterface, jcrColonContentSlashProtocolSocketTimeout: jcrColonContentSlashProtocolSocketTimeout, jcrColonContentSlashProtocolVersion: jcrColonContentSlashProtocolVersion, jcrColonContentSlashProxyNTLMDomain: jcrColonContentSlashProxyNTLMDomain, jcrColonContentSlashProxyNTLMHost: jcrColonContentSlashProxyNTLMHost, jcrColonContentSlashProxyHost: jcrColonContentSlashProxyHost, jcrColonContentSlashProxyPassword: jcrColonContentSlashProxyPassword, jcrColonContentSlashProxyPort: jcrColonContentSlashProxyPort, jcrColonContentSlashProxyUser: jcrColonContentSlashProxyUser, jcrColonContentSlashQueueBatchMaxSize: jcrColonContentSlashQueueBatchMaxSize, jcrColonContentSlashQueueBatchMode: jcrColonContentSlashQueueBatchMode, jcrColonContentSlashQueueBatchWaitTime: jcrColonContentSlashQueueBatchWaitTime, jcrColonContentSlashRetryDelay: jcrColonContentSlashRetryDelay, jcrColonContentSlashReverseReplication: jcrColonContentSlashReverseReplication, jcrColonContentSlashSerializationType: jcrColonContentSlashSerializationType, jcrColonContentSlashSlingColonResourceType: jcrColonContentSlashSlingColonResourceType, jcrColonContentSlashSsl: jcrColonContentSlashSsl, jcrColonContentSlashTransportNTLMDomain: jcrColonContentSlashTransportNTLMDomain, jcrColonContentSlashTransportNTLMHost: jcrColonContentSlashTransportNTLMHost, jcrColonContentSlashTransportPassword: jcrColonContentSlashTransportPassword, jcrColonContentSlashTransportUri: jcrColonContentSlashTransportUri, jcrColonContentSlashTransportUser: jcrColonContentSlashTransportUser, jcrColonContentSlashTriggerDistribute: jcrColonContentSlashTriggerDistribute, jcrColonContentSlashTriggerModified: jcrColonContentSlashTriggerModified, jcrColonContentSlashTriggerOnOffTime: jcrColonContentSlashTriggerOnOffTime, jcrColonContentSlashTriggerReceive: jcrColonContentSlashTriggerReceive, jcrColonContentSlashTriggerSpecific: jcrColonContentSlashTriggerSpecific, jcrColonContentSlashUserId: jcrColonContentSlashUserId, jcrColonPrimaryType: jcrColonPrimaryType, colonOperation: colonOperation );
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
   }
-  /// 
+
+  /// Performs an HTTP 'POST /{intermediatePath}/{authorizableId}.ks.html' operation and returns the [Response].
+  /// Parameters:
   ///
-  /// 
-  Future postAgent(String runmode, String name, { bool jcr:contentCq:distribute, String jcr:contentCq:distribute@TypeHint, String jcr:contentCq:name, String jcr:contentCq:template, bool jcr:contentEnabled, String jcr:contentJcr:description, String jcr:contentJcr:lastModified, String jcr:contentJcr:lastModifiedBy, String jcr:contentJcr:mixinTypes, String jcr:contentJcr:title, String jcr:contentLogLevel, bool jcr:contentNoStatusUpdate, bool jcr:contentNoVersioning, num jcr:contentProtocolConnectTimeout, bool jcr:contentProtocolHTTPConnectionClosed, String jcr:contentProtocolHTTPExpired, List<String> jcr:contentProtocolHTTPHeaders, String jcr:contentProtocolHTTPHeaders@TypeHint, String jcr:contentProtocolHTTPMethod, bool jcr:contentProtocolHTTPSRelaxed, String jcr:contentProtocolInterface, num jcr:contentProtocolSocketTimeout, String jcr:contentProtocolVersion, String jcr:contentProxyNTLMDomain, String jcr:contentProxyNTLMHost, String jcr:contentProxyHost, String jcr:contentProxyPassword, num jcr:contentProxyPort, String jcr:contentProxyUser, num jcr:contentQueueBatchMaxSize, String jcr:contentQueueBatchMode, num jcr:contentQueueBatchWaitTime, String jcr:contentRetryDelay, bool jcr:contentReverseReplication, String jcr:contentSerializationType, String jcr:contentSling:resourceType, String jcr:contentSsl, String jcr:contentTransportNTLMDomain, String jcr:contentTransportNTLMHost, String jcr:contentTransportPassword, String jcr:contentTransportUri, String jcr:contentTransportUser, bool jcr:contentTriggerDistribute, bool jcr:contentTriggerModified, bool jcr:contentTriggerOnOffTime, bool jcr:contentTriggerReceive, bool jcr:contentTriggerSpecific, String jcr:contentUserId, String jcr:primaryType, String :operation }) async {
-    Object postBody = null;
-
-    // verify required params are set
-    if(runmode == null) {
-     throw new ApiException(400, "Missing required param: runmode");
+  /// * [String] intermediatePath (required):
+  ///
+  /// * [String] authorizableId (required):
+  ///
+  /// * [String] colonOperation:
+  ///
+  /// * [String] currentPassword:
+  ///
+  /// * [String] newPassword:
+  ///
+  /// * [String] rePassword:
+  ///
+  /// * [String] keyPassword:
+  ///
+  /// * [String] keyStorePass:
+  ///
+  /// * [String] alias:
+  ///
+  /// * [String] newAlias:
+  ///
+  /// * [String] removeAlias:
+  ///
+  /// * [MultipartFile] certChain:
+  ///
+  /// * [MultipartFile] pk:
+  ///
+  /// * [MultipartFile] keyStore:
+  Future<Response> postAuthorizableKeystoreWithHttpInfo(String intermediatePath, String authorizableId, { String colonOperation, String currentPassword, String newPassword, String rePassword, String keyPassword, String keyStorePass, String alias, String newAlias, String removeAlias, MultipartFile certChain, MultipartFile pk, MultipartFile keyStore }) async {
+    // Verify required params are set.
+    if (intermediatePath == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: intermediatePath');
     }
-    if(name == null) {
-     throw new ApiException(400, "Missing required param: name");
-    }
-
-    // create path and map variables
-    String path = "/etc/replication/agents.{runmode}/{name}".replaceAll("{format}","json").replaceAll("{" + "runmode" + "}", runmode.toString()).replaceAll("{" + "name" + "}", name.toString());
-
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-    if(jcr:contentCq:distribute != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/cq:distribute", jcr:contentCq:distribute));
-    }
-    if(jcr:contentCq:distribute@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/cq:distribute@TypeHint", jcr:contentCq:distribute@TypeHint));
-    }
-    if(jcr:contentCq:name != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/cq:name", jcr:contentCq:name));
-    }
-    if(jcr:contentCq:template != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/cq:template", jcr:contentCq:template));
-    }
-    if(jcr:contentEnabled != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/enabled", jcr:contentEnabled));
-    }
-    if(jcr:contentJcr:description != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/jcr:description", jcr:contentJcr:description));
-    }
-    if(jcr:contentJcr:lastModified != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/jcr:lastModified", jcr:contentJcr:lastModified));
-    }
-    if(jcr:contentJcr:lastModifiedBy != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/jcr:lastModifiedBy", jcr:contentJcr:lastModifiedBy));
-    }
-    if(jcr:contentJcr:mixinTypes != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/jcr:mixinTypes", jcr:contentJcr:mixinTypes));
-    }
-    if(jcr:contentJcr:title != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/jcr:title", jcr:contentJcr:title));
-    }
-    if(jcr:contentLogLevel != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/logLevel", jcr:contentLogLevel));
-    }
-    if(jcr:contentNoStatusUpdate != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/noStatusUpdate", jcr:contentNoStatusUpdate));
-    }
-    if(jcr:contentNoVersioning != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/noVersioning", jcr:contentNoVersioning));
-    }
-    if(jcr:contentProtocolConnectTimeout != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/protocolConnectTimeout", jcr:contentProtocolConnectTimeout));
-    }
-    if(jcr:contentProtocolHTTPConnectionClosed != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/protocolHTTPConnectionClosed", jcr:contentProtocolHTTPConnectionClosed));
-    }
-    if(jcr:contentProtocolHTTPExpired != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/protocolHTTPExpired", jcr:contentProtocolHTTPExpired));
-    }
-    if(jcr:contentProtocolHTTPHeaders != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("multi", "jcr:content/protocolHTTPHeaders", jcr:contentProtocolHTTPHeaders));
-    }
-    if(jcr:contentProtocolHTTPHeaders@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/protocolHTTPHeaders@TypeHint", jcr:contentProtocolHTTPHeaders@TypeHint));
-    }
-    if(jcr:contentProtocolHTTPMethod != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/protocolHTTPMethod", jcr:contentProtocolHTTPMethod));
-    }
-    if(jcr:contentProtocolHTTPSRelaxed != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/protocolHTTPSRelaxed", jcr:contentProtocolHTTPSRelaxed));
-    }
-    if(jcr:contentProtocolInterface != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/protocolInterface", jcr:contentProtocolInterface));
-    }
-    if(jcr:contentProtocolSocketTimeout != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/protocolSocketTimeout", jcr:contentProtocolSocketTimeout));
-    }
-    if(jcr:contentProtocolVersion != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/protocolVersion", jcr:contentProtocolVersion));
-    }
-    if(jcr:contentProxyNTLMDomain != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/proxyNTLMDomain", jcr:contentProxyNTLMDomain));
-    }
-    if(jcr:contentProxyNTLMHost != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/proxyNTLMHost", jcr:contentProxyNTLMHost));
-    }
-    if(jcr:contentProxyHost != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/proxyHost", jcr:contentProxyHost));
-    }
-    if(jcr:contentProxyPassword != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/proxyPassword", jcr:contentProxyPassword));
-    }
-    if(jcr:contentProxyPort != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/proxyPort", jcr:contentProxyPort));
-    }
-    if(jcr:contentProxyUser != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/proxyUser", jcr:contentProxyUser));
-    }
-    if(jcr:contentQueueBatchMaxSize != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/queueBatchMaxSize", jcr:contentQueueBatchMaxSize));
-    }
-    if(jcr:contentQueueBatchMode != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/queueBatchMode", jcr:contentQueueBatchMode));
-    }
-    if(jcr:contentQueueBatchWaitTime != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/queueBatchWaitTime", jcr:contentQueueBatchWaitTime));
-    }
-    if(jcr:contentRetryDelay != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/retryDelay", jcr:contentRetryDelay));
-    }
-    if(jcr:contentReverseReplication != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/reverseReplication", jcr:contentReverseReplication));
-    }
-    if(jcr:contentSerializationType != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/serializationType", jcr:contentSerializationType));
-    }
-    if(jcr:contentSling:resourceType != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/sling:resourceType", jcr:contentSling:resourceType));
-    }
-    if(jcr:contentSsl != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/ssl", jcr:contentSsl));
-    }
-    if(jcr:contentTransportNTLMDomain != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/transportNTLMDomain", jcr:contentTransportNTLMDomain));
-    }
-    if(jcr:contentTransportNTLMHost != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/transportNTLMHost", jcr:contentTransportNTLMHost));
-    }
-    if(jcr:contentTransportPassword != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/transportPassword", jcr:contentTransportPassword));
-    }
-    if(jcr:contentTransportUri != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/transportUri", jcr:contentTransportUri));
-    }
-    if(jcr:contentTransportUser != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/transportUser", jcr:contentTransportUser));
-    }
-    if(jcr:contentTriggerDistribute != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/triggerDistribute", jcr:contentTriggerDistribute));
-    }
-    if(jcr:contentTriggerModified != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/triggerModified", jcr:contentTriggerModified));
-    }
-    if(jcr:contentTriggerOnOffTime != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/triggerOnOffTime", jcr:contentTriggerOnOffTime));
-    }
-    if(jcr:contentTriggerReceive != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/triggerReceive", jcr:contentTriggerReceive));
-    }
-    if(jcr:contentTriggerSpecific != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/triggerSpecific", jcr:contentTriggerSpecific));
-    }
-    if(jcr:contentUserId != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:content/userId", jcr:contentUserId));
-    }
-    if(jcr:primaryType != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:primaryType", jcr:primaryType));
-    }
-    if(:operation != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", ":operation", :operation));
+    if (authorizableId == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: authorizableId');
     }
 
-    List<String> contentTypes = [];
+    final path = r'/{intermediatePath}/{authorizableId}.ks.html'
+      .replaceAll('{' + 'intermediatePath' + '}', intermediatePath.toString())
+      .replaceAll('{' + 'authorizableId' + '}', authorizableId.toString());
 
-    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-    List<String> authNames = ["aemAuth"];
+    Object postBody;
 
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = new MultipartRequest(null, null);
-      if(hasFields)
-        postBody = mp;
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    if (colonOperation != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', ':operation', colonOperation));
     }
-    else {
+    if (currentPassword != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'currentPassword', currentPassword));
+    }
+    if (newPassword != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'newPassword', newPassword));
+    }
+    if (rePassword != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'rePassword', rePassword));
+    }
+    if (keyPassword != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'keyPassword', keyPassword));
+    }
+    if (keyStorePass != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'keyStorePass', keyStorePass));
+    }
+    if (alias != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'alias', alias));
+    }
+    if (newAlias != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'newAlias', newAlias));
+    }
+    if (removeAlias != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'removeAlias', removeAlias));
     }
 
-    var response = await apiClient.invokeAPI(path,
-                                             'POST',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
+    final contentTypes = <String>['multipart/form-data'];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['aemAuth'];
 
-    if(response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if(response.body != null) {
-    } else {
-      return;
+    bool hasFields = false;
+    final mp = MultipartRequest('POST', Uri.parse(path));
+    if (certChain != null) {
+      hasFields = true;
+      mp.fields[r'cert-chain'] = certChain.field;
+      mp.files.add(certChain);
+    }
+    if (pk != null) {
+      hasFields = true;
+      mp.fields[r'pk'] = pk.field;
+      mp.files.add(pk);
+    }
+    if (keyStore != null) {
+      hasFields = true;
+      mp.fields[r'keyStore'] = keyStore.field;
+      mp.files.add(keyStore);
+    }
+    if (hasFields) {
+      postBody = mp;
+    }
+
+    return await apiClient.invokeAPI(
+      path,
+      'POST',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
+
+  /// Parameters:
+  ///
+  /// * [String] intermediatePath (required):
+  ///
+  /// * [String] authorizableId (required):
+  ///
+  /// * [String] colonOperation:
+  ///
+  /// * [String] currentPassword:
+  ///
+  /// * [String] newPassword:
+  ///
+  /// * [String] rePassword:
+  ///
+  /// * [String] keyPassword:
+  ///
+  /// * [String] keyStorePass:
+  ///
+  /// * [String] alias:
+  ///
+  /// * [String] newAlias:
+  ///
+  /// * [String] removeAlias:
+  ///
+  /// * [MultipartFile] certChain:
+  ///
+  /// * [MultipartFile] pk:
+  ///
+  /// * [MultipartFile] keyStore:
+  Future<KeystoreInfo> postAuthorizableKeystore(String intermediatePath, String authorizableId, { String colonOperation, String currentPassword, String newPassword, String rePassword, String keyPassword, String keyStorePass, String alias, String newAlias, String removeAlias, MultipartFile certChain, MultipartFile pk, MultipartFile keyStore }) async {
+    final response = await postAuthorizableKeystoreWithHttpInfo(intermediatePath, authorizableId,  colonOperation: colonOperation, currentPassword: currentPassword, newPassword: newPassword, rePassword: rePassword, keyPassword: keyPassword, keyStorePass: keyStorePass, alias: alias, newAlias: newAlias, removeAlias: removeAlias, certChain: certChain, pk: pk, keyStore: keyStore );
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'KeystoreInfo',) as KeystoreInfo;
+        }
+    return Future<KeystoreInfo>.value(null);
+  }
+
+  /// Performs an HTTP 'POST /libs/granite/security/post/authorizables' operation and returns the [Response].
+  /// Parameters:
+  ///
+  /// * [String] authorizableId (required):
+  ///
+  /// * [String] intermediatePath (required):
+  ///
+  /// * [String] createUser:
+  ///
+  /// * [String] createGroup:
+  ///
+  /// * [String] repColonPassword:
+  ///
+  /// * [String] profileSlashGivenName:
+  Future<Response> postAuthorizablesWithHttpInfo(String authorizableId, String intermediatePath, { String createUser, String createGroup, String repColonPassword, String profileSlashGivenName }) async {
+    // Verify required params are set.
+    if (authorizableId == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: authorizableId');
+    }
+    if (intermediatePath == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: intermediatePath');
+    }
+
+    final path = r'/libs/granite/security/post/authorizables';
+
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'authorizableId', authorizableId));
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'intermediatePath', intermediatePath));
+    if (createUser != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'createUser', createUser));
+    }
+    if (createGroup != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'createGroup', createGroup));
+    }
+    if (repColonPassword != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'rep:password', repColonPassword));
+    }
+    if (profileSlashGivenName != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'profile/givenName', profileSlashGivenName));
+    }
+
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['aemAuth'];
+
+
+    return await apiClient.invokeAPI(
+      path,
+      'POST',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
+
+  /// Parameters:
+  ///
+  /// * [String] authorizableId (required):
+  ///
+  /// * [String] intermediatePath (required):
+  ///
+  /// * [String] createUser:
+  ///
+  /// * [String] createGroup:
+  ///
+  /// * [String] repColonPassword:
+  ///
+  /// * [String] profileSlashGivenName:
+  Future<String> postAuthorizables(String authorizableId, String intermediatePath, { String createUser, String createGroup, String repColonPassword, String profileSlashGivenName }) async {
+    final response = await postAuthorizablesWithHttpInfo(authorizableId, intermediatePath,  createUser: createUser, createGroup: createGroup, repColonPassword: repColonPassword, profileSlashGivenName: profileSlashGivenName );
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'String',) as String;
+        }
+    return Future<String>.value(null);
+  }
+
+  /// Performs an HTTP 'POST /apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config' operation and returns the [Response].
+  /// Parameters:
+  ///
+  /// * [String] keyStorePassword:
+  ///
+  /// * [String] keyStorePasswordAtTypeHint:
+  ///
+  /// * [int] servicePeriodRanking:
+  ///
+  /// * [String] servicePeriodRankingAtTypeHint:
+  ///
+  /// * [bool] idpHttpRedirect:
+  ///
+  /// * [String] idpHttpRedirectAtTypeHint:
+  ///
+  /// * [bool] createUser:
+  ///
+  /// * [String] createUserAtTypeHint:
+  ///
+  /// * [String] defaultRedirectUrl:
+  ///
+  /// * [String] defaultRedirectUrlAtTypeHint:
+  ///
+  /// * [String] userIDAttribute:
+  ///
+  /// * [String] userIDAttributeAtTypeHint:
+  ///
+  /// * [List<String>] defaultGroups:
+  ///
+  /// * [String] defaultGroupsAtTypeHint:
+  ///
+  /// * [String] idpCertAlias:
+  ///
+  /// * [String] idpCertAliasAtTypeHint:
+  ///
+  /// * [bool] addGroupMemberships:
+  ///
+  /// * [String] addGroupMembershipsAtTypeHint:
+  ///
+  /// * [List<String>] path:
+  ///
+  /// * [String] pathAtTypeHint:
+  ///
+  /// * [List<String>] synchronizeAttributes:
+  ///
+  /// * [String] synchronizeAttributesAtTypeHint:
+  ///
+  /// * [int] clockTolerance:
+  ///
+  /// * [String] clockToleranceAtTypeHint:
+  ///
+  /// * [String] groupMembershipAttribute:
+  ///
+  /// * [String] groupMembershipAttributeAtTypeHint:
+  ///
+  /// * [String] idpUrl:
+  ///
+  /// * [String] idpUrlAtTypeHint:
+  ///
+  /// * [String] logoutUrl:
+  ///
+  /// * [String] logoutUrlAtTypeHint:
+  ///
+  /// * [String] serviceProviderEntityId:
+  ///
+  /// * [String] serviceProviderEntityIdAtTypeHint:
+  ///
+  /// * [String] assertionConsumerServiceURL:
+  ///
+  /// * [String] assertionConsumerServiceURLAtTypeHint:
+  ///
+  /// * [bool] handleLogout:
+  ///
+  /// * [String] handleLogoutAtTypeHint:
+  ///
+  /// * [String] spPrivateKeyAlias:
+  ///
+  /// * [String] spPrivateKeyAliasAtTypeHint:
+  ///
+  /// * [bool] useEncryption:
+  ///
+  /// * [String] useEncryptionAtTypeHint:
+  ///
+  /// * [String] nameIdFormat:
+  ///
+  /// * [String] nameIdFormatAtTypeHint:
+  ///
+  /// * [String] digestMethod:
+  ///
+  /// * [String] digestMethodAtTypeHint:
+  ///
+  /// * [String] signatureMethod:
+  ///
+  /// * [String] signatureMethodAtTypeHint:
+  ///
+  /// * [String] userIntermediatePath:
+  ///
+  /// * [String] userIntermediatePathAtTypeHint:
+  Future<Response> postConfigAdobeGraniteSamlAuthenticationHandlerWithHttpInfo({ String keyStorePassword, String keyStorePasswordAtTypeHint, int servicePeriodRanking, String servicePeriodRankingAtTypeHint, bool idpHttpRedirect, String idpHttpRedirectAtTypeHint, bool createUser, String createUserAtTypeHint, String defaultRedirectUrl, String defaultRedirectUrlAtTypeHint, String userIDAttribute, String userIDAttributeAtTypeHint, List<String> defaultGroups, String defaultGroupsAtTypeHint, String idpCertAlias, String idpCertAliasAtTypeHint, bool addGroupMemberships, String addGroupMembershipsAtTypeHint, List<String> path, String pathAtTypeHint, List<String> synchronizeAttributes, String synchronizeAttributesAtTypeHint, int clockTolerance, String clockToleranceAtTypeHint, String groupMembershipAttribute, String groupMembershipAttributeAtTypeHint, String idpUrl, String idpUrlAtTypeHint, String logoutUrl, String logoutUrlAtTypeHint, String serviceProviderEntityId, String serviceProviderEntityIdAtTypeHint, String assertionConsumerServiceURL, String assertionConsumerServiceURLAtTypeHint, bool handleLogout, String handleLogoutAtTypeHint, String spPrivateKeyAlias, String spPrivateKeyAliasAtTypeHint, bool useEncryption, String useEncryptionAtTypeHint, String nameIdFormat, String nameIdFormatAtTypeHint, String digestMethod, String digestMethodAtTypeHint, String signatureMethod, String signatureMethodAtTypeHint, String userIntermediatePath, String userIntermediatePathAtTypeHint }) async {
+    // Verify required params are set.
+
+    final path = r'/apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config';
+
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    if (keyStorePassword != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'keyStorePassword', keyStorePassword));
+    }
+    if (keyStorePasswordAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'keyStorePassword@TypeHint', keyStorePasswordAtTypeHint));
+    }
+    if (servicePeriodRanking != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'service.ranking', servicePeriodRanking));
+    }
+    if (servicePeriodRankingAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'service.ranking@TypeHint', servicePeriodRankingAtTypeHint));
+    }
+    if (idpHttpRedirect != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'idpHttpRedirect', idpHttpRedirect));
+    }
+    if (idpHttpRedirectAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'idpHttpRedirect@TypeHint', idpHttpRedirectAtTypeHint));
+    }
+    if (createUser != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'createUser', createUser));
+    }
+    if (createUserAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'createUser@TypeHint', createUserAtTypeHint));
+    }
+    if (defaultRedirectUrl != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'defaultRedirectUrl', defaultRedirectUrl));
+    }
+    if (defaultRedirectUrlAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'defaultRedirectUrl@TypeHint', defaultRedirectUrlAtTypeHint));
+    }
+    if (userIDAttribute != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'userIDAttribute', userIDAttribute));
+    }
+    if (userIDAttributeAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'userIDAttribute@TypeHint', userIDAttributeAtTypeHint));
+    }
+    if (defaultGroups != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('multi', 'defaultGroups', defaultGroups));
+    }
+    if (defaultGroupsAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'defaultGroups@TypeHint', defaultGroupsAtTypeHint));
+    }
+    if (idpCertAlias != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'idpCertAlias', idpCertAlias));
+    }
+    if (idpCertAliasAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'idpCertAlias@TypeHint', idpCertAliasAtTypeHint));
+    }
+    if (addGroupMemberships != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'addGroupMemberships', addGroupMemberships));
+    }
+    if (addGroupMembershipsAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'addGroupMemberships@TypeHint', addGroupMembershipsAtTypeHint));
+    }
+    if (path != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('multi', 'path', path));
+    }
+    if (pathAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'path@TypeHint', pathAtTypeHint));
+    }
+    if (synchronizeAttributes != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('multi', 'synchronizeAttributes', synchronizeAttributes));
+    }
+    if (synchronizeAttributesAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'synchronizeAttributes@TypeHint', synchronizeAttributesAtTypeHint));
+    }
+    if (clockTolerance != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'clockTolerance', clockTolerance));
+    }
+    if (clockToleranceAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'clockTolerance@TypeHint', clockToleranceAtTypeHint));
+    }
+    if (groupMembershipAttribute != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'groupMembershipAttribute', groupMembershipAttribute));
+    }
+    if (groupMembershipAttributeAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'groupMembershipAttribute@TypeHint', groupMembershipAttributeAtTypeHint));
+    }
+    if (idpUrl != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'idpUrl', idpUrl));
+    }
+    if (idpUrlAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'idpUrl@TypeHint', idpUrlAtTypeHint));
+    }
+    if (logoutUrl != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'logoutUrl', logoutUrl));
+    }
+    if (logoutUrlAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'logoutUrl@TypeHint', logoutUrlAtTypeHint));
+    }
+    if (serviceProviderEntityId != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'serviceProviderEntityId', serviceProviderEntityId));
+    }
+    if (serviceProviderEntityIdAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'serviceProviderEntityId@TypeHint', serviceProviderEntityIdAtTypeHint));
+    }
+    if (assertionConsumerServiceURL != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'assertionConsumerServiceURL', assertionConsumerServiceURL));
+    }
+    if (assertionConsumerServiceURLAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'assertionConsumerServiceURL@TypeHint', assertionConsumerServiceURLAtTypeHint));
+    }
+    if (handleLogout != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'handleLogout', handleLogout));
+    }
+    if (handleLogoutAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'handleLogout@TypeHint', handleLogoutAtTypeHint));
+    }
+    if (spPrivateKeyAlias != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'spPrivateKeyAlias', spPrivateKeyAlias));
+    }
+    if (spPrivateKeyAliasAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'spPrivateKeyAlias@TypeHint', spPrivateKeyAliasAtTypeHint));
+    }
+    if (useEncryption != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'useEncryption', useEncryption));
+    }
+    if (useEncryptionAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'useEncryption@TypeHint', useEncryptionAtTypeHint));
+    }
+    if (nameIdFormat != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'nameIdFormat', nameIdFormat));
+    }
+    if (nameIdFormatAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'nameIdFormat@TypeHint', nameIdFormatAtTypeHint));
+    }
+    if (digestMethod != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'digestMethod', digestMethod));
+    }
+    if (digestMethodAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'digestMethod@TypeHint', digestMethodAtTypeHint));
+    }
+    if (signatureMethod != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'signatureMethod', signatureMethod));
+    }
+    if (signatureMethodAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'signatureMethod@TypeHint', signatureMethodAtTypeHint));
+    }
+    if (userIntermediatePath != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'userIntermediatePath', userIntermediatePath));
+    }
+    if (userIntermediatePathAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'userIntermediatePath@TypeHint', userIntermediatePathAtTypeHint));
+    }
+
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['aemAuth'];
+
+
+    return await apiClient.invokeAPI(
+      path,
+      'POST',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
+
+  /// Parameters:
+  ///
+  /// * [String] keyStorePassword:
+  ///
+  /// * [String] keyStorePasswordAtTypeHint:
+  ///
+  /// * [int] servicePeriodRanking:
+  ///
+  /// * [String] servicePeriodRankingAtTypeHint:
+  ///
+  /// * [bool] idpHttpRedirect:
+  ///
+  /// * [String] idpHttpRedirectAtTypeHint:
+  ///
+  /// * [bool] createUser:
+  ///
+  /// * [String] createUserAtTypeHint:
+  ///
+  /// * [String] defaultRedirectUrl:
+  ///
+  /// * [String] defaultRedirectUrlAtTypeHint:
+  ///
+  /// * [String] userIDAttribute:
+  ///
+  /// * [String] userIDAttributeAtTypeHint:
+  ///
+  /// * [List<String>] defaultGroups:
+  ///
+  /// * [String] defaultGroupsAtTypeHint:
+  ///
+  /// * [String] idpCertAlias:
+  ///
+  /// * [String] idpCertAliasAtTypeHint:
+  ///
+  /// * [bool] addGroupMemberships:
+  ///
+  /// * [String] addGroupMembershipsAtTypeHint:
+  ///
+  /// * [List<String>] path:
+  ///
+  /// * [String] pathAtTypeHint:
+  ///
+  /// * [List<String>] synchronizeAttributes:
+  ///
+  /// * [String] synchronizeAttributesAtTypeHint:
+  ///
+  /// * [int] clockTolerance:
+  ///
+  /// * [String] clockToleranceAtTypeHint:
+  ///
+  /// * [String] groupMembershipAttribute:
+  ///
+  /// * [String] groupMembershipAttributeAtTypeHint:
+  ///
+  /// * [String] idpUrl:
+  ///
+  /// * [String] idpUrlAtTypeHint:
+  ///
+  /// * [String] logoutUrl:
+  ///
+  /// * [String] logoutUrlAtTypeHint:
+  ///
+  /// * [String] serviceProviderEntityId:
+  ///
+  /// * [String] serviceProviderEntityIdAtTypeHint:
+  ///
+  /// * [String] assertionConsumerServiceURL:
+  ///
+  /// * [String] assertionConsumerServiceURLAtTypeHint:
+  ///
+  /// * [bool] handleLogout:
+  ///
+  /// * [String] handleLogoutAtTypeHint:
+  ///
+  /// * [String] spPrivateKeyAlias:
+  ///
+  /// * [String] spPrivateKeyAliasAtTypeHint:
+  ///
+  /// * [bool] useEncryption:
+  ///
+  /// * [String] useEncryptionAtTypeHint:
+  ///
+  /// * [String] nameIdFormat:
+  ///
+  /// * [String] nameIdFormatAtTypeHint:
+  ///
+  /// * [String] digestMethod:
+  ///
+  /// * [String] digestMethodAtTypeHint:
+  ///
+  /// * [String] signatureMethod:
+  ///
+  /// * [String] signatureMethodAtTypeHint:
+  ///
+  /// * [String] userIntermediatePath:
+  ///
+  /// * [String] userIntermediatePathAtTypeHint:
+  Future<void> postConfigAdobeGraniteSamlAuthenticationHandler({ String keyStorePassword, String keyStorePasswordAtTypeHint, int servicePeriodRanking, String servicePeriodRankingAtTypeHint, bool idpHttpRedirect, String idpHttpRedirectAtTypeHint, bool createUser, String createUserAtTypeHint, String defaultRedirectUrl, String defaultRedirectUrlAtTypeHint, String userIDAttribute, String userIDAttributeAtTypeHint, List<String> defaultGroups, String defaultGroupsAtTypeHint, String idpCertAlias, String idpCertAliasAtTypeHint, bool addGroupMemberships, String addGroupMembershipsAtTypeHint, List<String> path, String pathAtTypeHint, List<String> synchronizeAttributes, String synchronizeAttributesAtTypeHint, int clockTolerance, String clockToleranceAtTypeHint, String groupMembershipAttribute, String groupMembershipAttributeAtTypeHint, String idpUrl, String idpUrlAtTypeHint, String logoutUrl, String logoutUrlAtTypeHint, String serviceProviderEntityId, String serviceProviderEntityIdAtTypeHint, String assertionConsumerServiceURL, String assertionConsumerServiceURLAtTypeHint, bool handleLogout, String handleLogoutAtTypeHint, String spPrivateKeyAlias, String spPrivateKeyAliasAtTypeHint, bool useEncryption, String useEncryptionAtTypeHint, String nameIdFormat, String nameIdFormatAtTypeHint, String digestMethod, String digestMethodAtTypeHint, String signatureMethod, String signatureMethodAtTypeHint, String userIntermediatePath, String userIntermediatePathAtTypeHint }) async {
+    final response = await postConfigAdobeGraniteSamlAuthenticationHandlerWithHttpInfo( keyStorePassword: keyStorePassword, keyStorePasswordAtTypeHint: keyStorePasswordAtTypeHint, servicePeriodRanking: servicePeriodRanking, servicePeriodRankingAtTypeHint: servicePeriodRankingAtTypeHint, idpHttpRedirect: idpHttpRedirect, idpHttpRedirectAtTypeHint: idpHttpRedirectAtTypeHint, createUser: createUser, createUserAtTypeHint: createUserAtTypeHint, defaultRedirectUrl: defaultRedirectUrl, defaultRedirectUrlAtTypeHint: defaultRedirectUrlAtTypeHint, userIDAttribute: userIDAttribute, userIDAttributeAtTypeHint: userIDAttributeAtTypeHint, defaultGroups: defaultGroups, defaultGroupsAtTypeHint: defaultGroupsAtTypeHint, idpCertAlias: idpCertAlias, idpCertAliasAtTypeHint: idpCertAliasAtTypeHint, addGroupMemberships: addGroupMemberships, addGroupMembershipsAtTypeHint: addGroupMembershipsAtTypeHint, path: path, pathAtTypeHint: pathAtTypeHint, synchronizeAttributes: synchronizeAttributes, synchronizeAttributesAtTypeHint: synchronizeAttributesAtTypeHint, clockTolerance: clockTolerance, clockToleranceAtTypeHint: clockToleranceAtTypeHint, groupMembershipAttribute: groupMembershipAttribute, groupMembershipAttributeAtTypeHint: groupMembershipAttributeAtTypeHint, idpUrl: idpUrl, idpUrlAtTypeHint: idpUrlAtTypeHint, logoutUrl: logoutUrl, logoutUrlAtTypeHint: logoutUrlAtTypeHint, serviceProviderEntityId: serviceProviderEntityId, serviceProviderEntityIdAtTypeHint: serviceProviderEntityIdAtTypeHint, assertionConsumerServiceURL: assertionConsumerServiceURL, assertionConsumerServiceURLAtTypeHint: assertionConsumerServiceURLAtTypeHint, handleLogout: handleLogout, handleLogoutAtTypeHint: handleLogoutAtTypeHint, spPrivateKeyAlias: spPrivateKeyAlias, spPrivateKeyAliasAtTypeHint: spPrivateKeyAliasAtTypeHint, useEncryption: useEncryption, useEncryptionAtTypeHint: useEncryptionAtTypeHint, nameIdFormat: nameIdFormat, nameIdFormatAtTypeHint: nameIdFormatAtTypeHint, digestMethod: digestMethod, digestMethodAtTypeHint: digestMethodAtTypeHint, signatureMethod: signatureMethod, signatureMethodAtTypeHint: signatureMethodAtTypeHint, userIntermediatePath: userIntermediatePath, userIntermediatePathAtTypeHint: userIntermediatePathAtTypeHint );
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
   }
-  /// 
+
+  /// Performs an HTTP 'POST /apps/system/config/org.apache.felix.http' operation and returns the [Response].
+  /// Parameters:
   ///
-  /// 
-  Future<KeystoreInfo> postAuthorizableKeystore(String intermediatePath, String authorizableId, { String :operation, String currentPassword, String newPassword, String rePassword, String keyPassword, String keyStorePass, String alias, String newAlias, String removeAlias, MultipartFile certChain, MultipartFile pk, MultipartFile keyStore }) async {
-    Object postBody = null;
+  /// * [bool] orgPeriodApachePeriodFelixPeriodHttpsPeriodNio:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodNioAtTypeHint:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystore:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystoreAtTypeHint:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodPassword:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodPasswordAtTypeHint:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKey:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKeyAtTypeHint:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKeyPeriodPassword:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKeyPeriodPasswordAtTypeHint:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststore:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststoreAtTypeHint:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststorePeriodPassword:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststorePeriodPasswordAtTypeHint:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodClientcertificate:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodClientcertificateAtTypeHint:
+  ///
+  /// * [bool] orgPeriodApachePeriodFelixPeriodHttpsPeriodEnable:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodEnableAtTypeHint:
+  ///
+  /// * [String] orgPeriodOsgiPeriodServicePeriodHttpPeriodPortPeriodSecure:
+  ///
+  /// * [String] orgPeriodOsgiPeriodServicePeriodHttpPeriodPortPeriodSecureAtTypeHint:
+  Future<Response> postConfigApacheFelixJettyBasedHttpServiceWithHttpInfo({ bool orgPeriodApachePeriodFelixPeriodHttpsPeriodNio, String orgPeriodApachePeriodFelixPeriodHttpsPeriodNioAtTypeHint, String orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystore, String orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystoreAtTypeHint, String orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodPassword, String orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodPasswordAtTypeHint, String orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKey, String orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKeyAtTypeHint, String orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKeyPeriodPassword, String orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKeyPeriodPasswordAtTypeHint, String orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststore, String orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststoreAtTypeHint, String orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststorePeriodPassword, String orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststorePeriodPasswordAtTypeHint, String orgPeriodApachePeriodFelixPeriodHttpsPeriodClientcertificate, String orgPeriodApachePeriodFelixPeriodHttpsPeriodClientcertificateAtTypeHint, bool orgPeriodApachePeriodFelixPeriodHttpsPeriodEnable, String orgPeriodApachePeriodFelixPeriodHttpsPeriodEnableAtTypeHint, String orgPeriodOsgiPeriodServicePeriodHttpPeriodPortPeriodSecure, String orgPeriodOsgiPeriodServicePeriodHttpPeriodPortPeriodSecureAtTypeHint }) async {
+    // Verify required params are set.
 
-    // verify required params are set
-    if(intermediatePath == null) {
-     throw new ApiException(400, "Missing required param: intermediatePath");
+    final path = r'/apps/system/config/org.apache.felix.http';
+
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    if (orgPeriodApachePeriodFelixPeriodHttpsPeriodNio != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'org.apache.felix.https.nio', orgPeriodApachePeriodFelixPeriodHttpsPeriodNio));
     }
-    if(authorizableId == null) {
-     throw new ApiException(400, "Missing required param: authorizableId");
+    if (orgPeriodApachePeriodFelixPeriodHttpsPeriodNioAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'org.apache.felix.https.nio@TypeHint', orgPeriodApachePeriodFelixPeriodHttpsPeriodNioAtTypeHint));
+    }
+    if (orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystore != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'org.apache.felix.https.keystore', orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystore));
+    }
+    if (orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystoreAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'org.apache.felix.https.keystore@TypeHint', orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystoreAtTypeHint));
+    }
+    if (orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodPassword != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'org.apache.felix.https.keystore.password', orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodPassword));
+    }
+    if (orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodPasswordAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'org.apache.felix.https.keystore.password@TypeHint', orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodPasswordAtTypeHint));
+    }
+    if (orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKey != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'org.apache.felix.https.keystore.key', orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKey));
+    }
+    if (orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKeyAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'org.apache.felix.https.keystore.key@TypeHint', orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKeyAtTypeHint));
+    }
+    if (orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKeyPeriodPassword != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'org.apache.felix.https.keystore.key.password', orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKeyPeriodPassword));
+    }
+    if (orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKeyPeriodPasswordAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'org.apache.felix.https.keystore.key.password@TypeHint', orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKeyPeriodPasswordAtTypeHint));
+    }
+    if (orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststore != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'org.apache.felix.https.truststore', orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststore));
+    }
+    if (orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststoreAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'org.apache.felix.https.truststore@TypeHint', orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststoreAtTypeHint));
+    }
+    if (orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststorePeriodPassword != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'org.apache.felix.https.truststore.password', orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststorePeriodPassword));
+    }
+    if (orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststorePeriodPasswordAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'org.apache.felix.https.truststore.password@TypeHint', orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststorePeriodPasswordAtTypeHint));
+    }
+    if (orgPeriodApachePeriodFelixPeriodHttpsPeriodClientcertificate != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'org.apache.felix.https.clientcertificate', orgPeriodApachePeriodFelixPeriodHttpsPeriodClientcertificate));
+    }
+    if (orgPeriodApachePeriodFelixPeriodHttpsPeriodClientcertificateAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'org.apache.felix.https.clientcertificate@TypeHint', orgPeriodApachePeriodFelixPeriodHttpsPeriodClientcertificateAtTypeHint));
+    }
+    if (orgPeriodApachePeriodFelixPeriodHttpsPeriodEnable != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'org.apache.felix.https.enable', orgPeriodApachePeriodFelixPeriodHttpsPeriodEnable));
+    }
+    if (orgPeriodApachePeriodFelixPeriodHttpsPeriodEnableAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'org.apache.felix.https.enable@TypeHint', orgPeriodApachePeriodFelixPeriodHttpsPeriodEnableAtTypeHint));
+    }
+    if (orgPeriodOsgiPeriodServicePeriodHttpPeriodPortPeriodSecure != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'org.osgi.service.http.port.secure', orgPeriodOsgiPeriodServicePeriodHttpPeriodPortPeriodSecure));
+    }
+    if (orgPeriodOsgiPeriodServicePeriodHttpPeriodPortPeriodSecureAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'org.osgi.service.http.port.secure@TypeHint', orgPeriodOsgiPeriodServicePeriodHttpPeriodPortPeriodSecureAtTypeHint));
     }
 
-    // create path and map variables
-    String path = "/{intermediatePath}/{authorizableId}.ks.html".replaceAll("{format}","json").replaceAll("{" + "intermediatePath" + "}", intermediatePath.toString()).replaceAll("{" + "authorizableId" + "}", authorizableId.toString());
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['aemAuth'];
 
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-    if(:operation != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", ":operation", :operation));
-    }
-    if(currentPassword != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "currentPassword", currentPassword));
-    }
-    if(newPassword != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "newPassword", newPassword));
-    }
-    if(rePassword != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "rePassword", rePassword));
-    }
-    if(keyPassword != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "keyPassword", keyPassword));
-    }
-    if(keyStorePass != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "keyStorePass", keyStorePass));
-    }
-    if(alias != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "alias", alias));
-    }
-    if(newAlias != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "newAlias", newAlias));
-    }
-    if(removeAlias != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "removeAlias", removeAlias));
-    }
 
-    List<String> contentTypes = ["multipart/form-data"];
+    return await apiClient.invokeAPI(
+      path,
+      'POST',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
 
-    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-    List<String> authNames = ["aemAuth"];
-
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = new MultipartRequest(null, null);
-      if (certChain != null) {
-        hasFields = true;
-        mp.fields['cert-chain'] = certChain.field;
-        mp.files.add(certChain);
-      }
-      if (pk != null) {
-        hasFields = true;
-        mp.fields['pk'] = pk.field;
-        mp.files.add(pk);
-      }
-      if (keyStore != null) {
-        hasFields = true;
-        mp.fields['keyStore'] = keyStore.field;
-        mp.files.add(keyStore);
-      }
-      if(hasFields)
-        postBody = mp;
-    }
-    else {
-    }
-
-    var response = await apiClient.invokeAPI(path,
-                                             'POST',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
-
-    if(response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if(response.body != null) {
-      return apiClient.deserialize(response.body, 'KeystoreInfo') as KeystoreInfo;
-    } else {
-      return null;
+  /// Parameters:
+  ///
+  /// * [bool] orgPeriodApachePeriodFelixPeriodHttpsPeriodNio:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodNioAtTypeHint:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystore:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystoreAtTypeHint:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodPassword:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodPasswordAtTypeHint:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKey:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKeyAtTypeHint:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKeyPeriodPassword:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKeyPeriodPasswordAtTypeHint:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststore:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststoreAtTypeHint:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststorePeriodPassword:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststorePeriodPasswordAtTypeHint:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodClientcertificate:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodClientcertificateAtTypeHint:
+  ///
+  /// * [bool] orgPeriodApachePeriodFelixPeriodHttpsPeriodEnable:
+  ///
+  /// * [String] orgPeriodApachePeriodFelixPeriodHttpsPeriodEnableAtTypeHint:
+  ///
+  /// * [String] orgPeriodOsgiPeriodServicePeriodHttpPeriodPortPeriodSecure:
+  ///
+  /// * [String] orgPeriodOsgiPeriodServicePeriodHttpPeriodPortPeriodSecureAtTypeHint:
+  Future<void> postConfigApacheFelixJettyBasedHttpService({ bool orgPeriodApachePeriodFelixPeriodHttpsPeriodNio, String orgPeriodApachePeriodFelixPeriodHttpsPeriodNioAtTypeHint, String orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystore, String orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystoreAtTypeHint, String orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodPassword, String orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodPasswordAtTypeHint, String orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKey, String orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKeyAtTypeHint, String orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKeyPeriodPassword, String orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKeyPeriodPasswordAtTypeHint, String orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststore, String orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststoreAtTypeHint, String orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststorePeriodPassword, String orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststorePeriodPasswordAtTypeHint, String orgPeriodApachePeriodFelixPeriodHttpsPeriodClientcertificate, String orgPeriodApachePeriodFelixPeriodHttpsPeriodClientcertificateAtTypeHint, bool orgPeriodApachePeriodFelixPeriodHttpsPeriodEnable, String orgPeriodApachePeriodFelixPeriodHttpsPeriodEnableAtTypeHint, String orgPeriodOsgiPeriodServicePeriodHttpPeriodPortPeriodSecure, String orgPeriodOsgiPeriodServicePeriodHttpPeriodPortPeriodSecureAtTypeHint }) async {
+    final response = await postConfigApacheFelixJettyBasedHttpServiceWithHttpInfo( orgPeriodApachePeriodFelixPeriodHttpsPeriodNio: orgPeriodApachePeriodFelixPeriodHttpsPeriodNio, orgPeriodApachePeriodFelixPeriodHttpsPeriodNioAtTypeHint: orgPeriodApachePeriodFelixPeriodHttpsPeriodNioAtTypeHint, orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystore: orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystore, orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystoreAtTypeHint: orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystoreAtTypeHint, orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodPassword: orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodPassword, orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodPasswordAtTypeHint: orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodPasswordAtTypeHint, orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKey: orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKey, orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKeyAtTypeHint: orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKeyAtTypeHint, orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKeyPeriodPassword: orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKeyPeriodPassword, orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKeyPeriodPasswordAtTypeHint: orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKeyPeriodPasswordAtTypeHint, orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststore: orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststore, orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststoreAtTypeHint: orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststoreAtTypeHint, orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststorePeriodPassword: orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststorePeriodPassword, orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststorePeriodPasswordAtTypeHint: orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststorePeriodPasswordAtTypeHint, orgPeriodApachePeriodFelixPeriodHttpsPeriodClientcertificate: orgPeriodApachePeriodFelixPeriodHttpsPeriodClientcertificate, orgPeriodApachePeriodFelixPeriodHttpsPeriodClientcertificateAtTypeHint: orgPeriodApachePeriodFelixPeriodHttpsPeriodClientcertificateAtTypeHint, orgPeriodApachePeriodFelixPeriodHttpsPeriodEnable: orgPeriodApachePeriodFelixPeriodHttpsPeriodEnable, orgPeriodApachePeriodFelixPeriodHttpsPeriodEnableAtTypeHint: orgPeriodApachePeriodFelixPeriodHttpsPeriodEnableAtTypeHint, orgPeriodOsgiPeriodServicePeriodHttpPeriodPortPeriodSecure: orgPeriodOsgiPeriodServicePeriodHttpPeriodPortPeriodSecure, orgPeriodOsgiPeriodServicePeriodHttpPeriodPortPeriodSecureAtTypeHint: orgPeriodOsgiPeriodServicePeriodHttpPeriodPortPeriodSecureAtTypeHint );
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
   }
-  /// 
+
+  /// Performs an HTTP 'POST /apps/system/config/org.apache.http.proxyconfigurator.config' operation and returns the [Response].
+  /// Parameters:
   ///
-  /// 
-  Future<String> postAuthorizables(String authorizableId, String intermediatePath, { String createUser, String createGroup, String rep:password, String profileGivenName }) async {
-    Object postBody = null;
+  /// * [String] proxyPeriodHost:
+  ///
+  /// * [String] proxyPeriodHostAtTypeHint:
+  ///
+  /// * [int] proxyPeriodPort:
+  ///
+  /// * [String] proxyPeriodPortAtTypeHint:
+  ///
+  /// * [List<String>] proxyPeriodExceptions:
+  ///
+  /// * [String] proxyPeriodExceptionsAtTypeHint:
+  ///
+  /// * [bool] proxyPeriodEnabled:
+  ///
+  /// * [String] proxyPeriodEnabledAtTypeHint:
+  ///
+  /// * [String] proxyPeriodUser:
+  ///
+  /// * [String] proxyPeriodUserAtTypeHint:
+  ///
+  /// * [String] proxyPeriodPassword:
+  ///
+  /// * [String] proxyPeriodPasswordAtTypeHint:
+  Future<Response> postConfigApacheHttpComponentsProxyConfigurationWithHttpInfo({ String proxyPeriodHost, String proxyPeriodHostAtTypeHint, int proxyPeriodPort, String proxyPeriodPortAtTypeHint, List<String> proxyPeriodExceptions, String proxyPeriodExceptionsAtTypeHint, bool proxyPeriodEnabled, String proxyPeriodEnabledAtTypeHint, String proxyPeriodUser, String proxyPeriodUserAtTypeHint, String proxyPeriodPassword, String proxyPeriodPasswordAtTypeHint }) async {
+    // Verify required params are set.
 
-    // verify required params are set
-    if(authorizableId == null) {
-     throw new ApiException(400, "Missing required param: authorizableId");
+    final path = r'/apps/system/config/org.apache.http.proxyconfigurator.config';
+
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    if (proxyPeriodHost != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'proxy.host', proxyPeriodHost));
     }
-    if(intermediatePath == null) {
-     throw new ApiException(400, "Missing required param: intermediatePath");
+    if (proxyPeriodHostAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'proxy.host@TypeHint', proxyPeriodHostAtTypeHint));
+    }
+    if (proxyPeriodPort != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'proxy.port', proxyPeriodPort));
+    }
+    if (proxyPeriodPortAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'proxy.port@TypeHint', proxyPeriodPortAtTypeHint));
+    }
+    if (proxyPeriodExceptions != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('multi', 'proxy.exceptions', proxyPeriodExceptions));
+    }
+    if (proxyPeriodExceptionsAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'proxy.exceptions@TypeHint', proxyPeriodExceptionsAtTypeHint));
+    }
+    if (proxyPeriodEnabled != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'proxy.enabled', proxyPeriodEnabled));
+    }
+    if (proxyPeriodEnabledAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'proxy.enabled@TypeHint', proxyPeriodEnabledAtTypeHint));
+    }
+    if (proxyPeriodUser != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'proxy.user', proxyPeriodUser));
+    }
+    if (proxyPeriodUserAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'proxy.user@TypeHint', proxyPeriodUserAtTypeHint));
+    }
+    if (proxyPeriodPassword != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'proxy.password', proxyPeriodPassword));
+    }
+    if (proxyPeriodPasswordAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'proxy.password@TypeHint', proxyPeriodPasswordAtTypeHint));
     }
 
-    // create path and map variables
-    String path = "/libs/granite/security/post/authorizables".replaceAll("{format}","json");
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['aemAuth'];
 
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-      queryParams.addAll(_convertParametersForCollectionFormat("", "authorizableId", authorizableId));
-      queryParams.addAll(_convertParametersForCollectionFormat("", "intermediatePath", intermediatePath));
-    if(createUser != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "createUser", createUser));
-    }
-    if(createGroup != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "createGroup", createGroup));
-    }
-    if(rep:password != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "rep:password", rep:password));
-    }
-    if(profileGivenName != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "profile/givenName", profileGivenName));
-    }
 
-    List<String> contentTypes = [];
+    return await apiClient.invokeAPI(
+      path,
+      'POST',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
 
-    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-    List<String> authNames = ["aemAuth"];
-
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = new MultipartRequest(null, null);
-      if(hasFields)
-        postBody = mp;
-    }
-    else {
-    }
-
-    var response = await apiClient.invokeAPI(path,
-                                             'POST',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
-
-    if(response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if(response.body != null) {
-      return apiClient.deserialize(response.body, 'String') as String;
-    } else {
-      return null;
+  /// Parameters:
+  ///
+  /// * [String] proxyPeriodHost:
+  ///
+  /// * [String] proxyPeriodHostAtTypeHint:
+  ///
+  /// * [int] proxyPeriodPort:
+  ///
+  /// * [String] proxyPeriodPortAtTypeHint:
+  ///
+  /// * [List<String>] proxyPeriodExceptions:
+  ///
+  /// * [String] proxyPeriodExceptionsAtTypeHint:
+  ///
+  /// * [bool] proxyPeriodEnabled:
+  ///
+  /// * [String] proxyPeriodEnabledAtTypeHint:
+  ///
+  /// * [String] proxyPeriodUser:
+  ///
+  /// * [String] proxyPeriodUserAtTypeHint:
+  ///
+  /// * [String] proxyPeriodPassword:
+  ///
+  /// * [String] proxyPeriodPasswordAtTypeHint:
+  Future<void> postConfigApacheHttpComponentsProxyConfiguration({ String proxyPeriodHost, String proxyPeriodHostAtTypeHint, int proxyPeriodPort, String proxyPeriodPortAtTypeHint, List<String> proxyPeriodExceptions, String proxyPeriodExceptionsAtTypeHint, bool proxyPeriodEnabled, String proxyPeriodEnabledAtTypeHint, String proxyPeriodUser, String proxyPeriodUserAtTypeHint, String proxyPeriodPassword, String proxyPeriodPasswordAtTypeHint }) async {
+    final response = await postConfigApacheHttpComponentsProxyConfigurationWithHttpInfo( proxyPeriodHost: proxyPeriodHost, proxyPeriodHostAtTypeHint: proxyPeriodHostAtTypeHint, proxyPeriodPort: proxyPeriodPort, proxyPeriodPortAtTypeHint: proxyPeriodPortAtTypeHint, proxyPeriodExceptions: proxyPeriodExceptions, proxyPeriodExceptionsAtTypeHint: proxyPeriodExceptionsAtTypeHint, proxyPeriodEnabled: proxyPeriodEnabled, proxyPeriodEnabledAtTypeHint: proxyPeriodEnabledAtTypeHint, proxyPeriodUser: proxyPeriodUser, proxyPeriodUserAtTypeHint: proxyPeriodUserAtTypeHint, proxyPeriodPassword: proxyPeriodPassword, proxyPeriodPasswordAtTypeHint: proxyPeriodPasswordAtTypeHint );
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
   }
-  /// 
+
+  /// Performs an HTTP 'POST /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet' operation and returns the [Response].
+  /// Parameters:
   ///
-  /// 
-  Future postConfigAdobeGraniteSamlAuthenticationHandler({ String keyStorePassword, String keyStorePassword@TypeHint, int serviceRanking, String serviceRanking@TypeHint, bool idpHttpRedirect, String idpHttpRedirect@TypeHint, bool createUser, String createUser@TypeHint, String defaultRedirectUrl, String defaultRedirectUrl@TypeHint, String userIDAttribute, String userIDAttribute@TypeHint, List<String> defaultGroups, String defaultGroups@TypeHint, String idpCertAlias, String idpCertAlias@TypeHint, bool addGroupMemberships, String addGroupMemberships@TypeHint, List<String> path, String path@TypeHint, List<String> synchronizeAttributes, String synchronizeAttributes@TypeHint, int clockTolerance, String clockTolerance@TypeHint, String groupMembershipAttribute, String groupMembershipAttribute@TypeHint, String idpUrl, String idpUrl@TypeHint, String logoutUrl, String logoutUrl@TypeHint, String serviceProviderEntityId, String serviceProviderEntityId@TypeHint, String assertionConsumerServiceURL, String assertionConsumerServiceURL@TypeHint, bool handleLogout, String handleLogout@TypeHint, String spPrivateKeyAlias, String spPrivateKeyAlias@TypeHint, bool useEncryption, String useEncryption@TypeHint, String nameIdFormat, String nameIdFormat@TypeHint, String digestMethod, String digestMethod@TypeHint, String signatureMethod, String signatureMethod@TypeHint, String userIntermediatePath, String userIntermediatePath@TypeHint }) async {
-    Object postBody = null;
+  /// * [String] alias:
+  ///
+  /// * [String] aliasAtTypeHint:
+  ///
+  /// * [bool] davPeriodCreateAbsoluteUri:
+  ///
+  /// * [String] davPeriodCreateAbsoluteUriAtTypeHint:
+  Future<Response> postConfigApacheSlingDavExServletWithHttpInfo({ String alias, String aliasAtTypeHint, bool davPeriodCreateAbsoluteUri, String davPeriodCreateAbsoluteUriAtTypeHint }) async {
+    // Verify required params are set.
 
-    // verify required params are set
+    final path = r'/apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet';
 
-    // create path and map variables
-    String path = "/apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config".replaceAll("{format}","json");
+    Object postBody;
 
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-    if(keyStorePassword != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "keyStorePassword", keyStorePassword));
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    if (alias != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'alias', alias));
     }
-    if(keyStorePassword@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "keyStorePassword@TypeHint", keyStorePassword@TypeHint));
+    if (aliasAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'alias@TypeHint', aliasAtTypeHint));
     }
-    if(serviceRanking != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "service.ranking", serviceRanking));
+    if (davPeriodCreateAbsoluteUri != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'dav.create-absolute-uri', davPeriodCreateAbsoluteUri));
     }
-    if(serviceRanking@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "service.ranking@TypeHint", serviceRanking@TypeHint));
-    }
-    if(idpHttpRedirect != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "idpHttpRedirect", idpHttpRedirect));
-    }
-    if(idpHttpRedirect@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "idpHttpRedirect@TypeHint", idpHttpRedirect@TypeHint));
-    }
-    if(createUser != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "createUser", createUser));
-    }
-    if(createUser@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "createUser@TypeHint", createUser@TypeHint));
-    }
-    if(defaultRedirectUrl != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "defaultRedirectUrl", defaultRedirectUrl));
-    }
-    if(defaultRedirectUrl@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "defaultRedirectUrl@TypeHint", defaultRedirectUrl@TypeHint));
-    }
-    if(userIDAttribute != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "userIDAttribute", userIDAttribute));
-    }
-    if(userIDAttribute@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "userIDAttribute@TypeHint", userIDAttribute@TypeHint));
-    }
-    if(defaultGroups != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("multi", "defaultGroups", defaultGroups));
-    }
-    if(defaultGroups@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "defaultGroups@TypeHint", defaultGroups@TypeHint));
-    }
-    if(idpCertAlias != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "idpCertAlias", idpCertAlias));
-    }
-    if(idpCertAlias@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "idpCertAlias@TypeHint", idpCertAlias@TypeHint));
-    }
-    if(addGroupMemberships != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "addGroupMemberships", addGroupMemberships));
-    }
-    if(addGroupMemberships@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "addGroupMemberships@TypeHint", addGroupMemberships@TypeHint));
-    }
-    if(path != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("multi", "path", path));
-    }
-    if(path@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "path@TypeHint", path@TypeHint));
-    }
-    if(synchronizeAttributes != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("multi", "synchronizeAttributes", synchronizeAttributes));
-    }
-    if(synchronizeAttributes@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "synchronizeAttributes@TypeHint", synchronizeAttributes@TypeHint));
-    }
-    if(clockTolerance != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "clockTolerance", clockTolerance));
-    }
-    if(clockTolerance@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "clockTolerance@TypeHint", clockTolerance@TypeHint));
-    }
-    if(groupMembershipAttribute != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "groupMembershipAttribute", groupMembershipAttribute));
-    }
-    if(groupMembershipAttribute@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "groupMembershipAttribute@TypeHint", groupMembershipAttribute@TypeHint));
-    }
-    if(idpUrl != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "idpUrl", idpUrl));
-    }
-    if(idpUrl@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "idpUrl@TypeHint", idpUrl@TypeHint));
-    }
-    if(logoutUrl != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "logoutUrl", logoutUrl));
-    }
-    if(logoutUrl@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "logoutUrl@TypeHint", logoutUrl@TypeHint));
-    }
-    if(serviceProviderEntityId != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "serviceProviderEntityId", serviceProviderEntityId));
-    }
-    if(serviceProviderEntityId@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "serviceProviderEntityId@TypeHint", serviceProviderEntityId@TypeHint));
-    }
-    if(assertionConsumerServiceURL != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "assertionConsumerServiceURL", assertionConsumerServiceURL));
-    }
-    if(assertionConsumerServiceURL@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "assertionConsumerServiceURL@TypeHint", assertionConsumerServiceURL@TypeHint));
-    }
-    if(handleLogout != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "handleLogout", handleLogout));
-    }
-    if(handleLogout@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "handleLogout@TypeHint", handleLogout@TypeHint));
-    }
-    if(spPrivateKeyAlias != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "spPrivateKeyAlias", spPrivateKeyAlias));
-    }
-    if(spPrivateKeyAlias@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "spPrivateKeyAlias@TypeHint", spPrivateKeyAlias@TypeHint));
-    }
-    if(useEncryption != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "useEncryption", useEncryption));
-    }
-    if(useEncryption@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "useEncryption@TypeHint", useEncryption@TypeHint));
-    }
-    if(nameIdFormat != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "nameIdFormat", nameIdFormat));
-    }
-    if(nameIdFormat@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "nameIdFormat@TypeHint", nameIdFormat@TypeHint));
-    }
-    if(digestMethod != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "digestMethod", digestMethod));
-    }
-    if(digestMethod@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "digestMethod@TypeHint", digestMethod@TypeHint));
-    }
-    if(signatureMethod != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "signatureMethod", signatureMethod));
-    }
-    if(signatureMethod@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "signatureMethod@TypeHint", signatureMethod@TypeHint));
-    }
-    if(userIntermediatePath != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "userIntermediatePath", userIntermediatePath));
-    }
-    if(userIntermediatePath@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "userIntermediatePath@TypeHint", userIntermediatePath@TypeHint));
+    if (davPeriodCreateAbsoluteUriAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'dav.create-absolute-uri@TypeHint', davPeriodCreateAbsoluteUriAtTypeHint));
     }
 
-    List<String> contentTypes = [];
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['aemAuth'];
 
-    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-    List<String> authNames = ["aemAuth"];
 
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = new MultipartRequest(null, null);
-      if(hasFields)
-        postBody = mp;
-    }
-    else {
-    }
+    return await apiClient.invokeAPI(
+      path,
+      'POST',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
 
-    var response = await apiClient.invokeAPI(path,
-                                             'POST',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
-
-    if(response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if(response.body != null) {
-    } else {
-      return;
+  /// Parameters:
+  ///
+  /// * [String] alias:
+  ///
+  /// * [String] aliasAtTypeHint:
+  ///
+  /// * [bool] davPeriodCreateAbsoluteUri:
+  ///
+  /// * [String] davPeriodCreateAbsoluteUriAtTypeHint:
+  Future<void> postConfigApacheSlingDavExServlet({ String alias, String aliasAtTypeHint, bool davPeriodCreateAbsoluteUri, String davPeriodCreateAbsoluteUriAtTypeHint }) async {
+    final response = await postConfigApacheSlingDavExServletWithHttpInfo( alias: alias, aliasAtTypeHint: aliasAtTypeHint, davPeriodCreateAbsoluteUri: davPeriodCreateAbsoluteUri, davPeriodCreateAbsoluteUriAtTypeHint: davPeriodCreateAbsoluteUriAtTypeHint );
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
   }
-  /// 
+
+  /// Performs an HTTP 'POST /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet' operation and returns the [Response].
+  /// Parameters:
   ///
-  /// 
-  Future postConfigApacheFelixJettyBasedHttpService({ bool orgApacheFelixHttpsNio, String orgApacheFelixHttpsNio@TypeHint, String orgApacheFelixHttpsKeystore, String orgApacheFelixHttpsKeystore@TypeHint, String orgApacheFelixHttpsKeystorePassword, String orgApacheFelixHttpsKeystorePassword@TypeHint, String orgApacheFelixHttpsKeystoreKey, String orgApacheFelixHttpsKeystoreKey@TypeHint, String orgApacheFelixHttpsKeystoreKeyPassword, String orgApacheFelixHttpsKeystoreKeyPassword@TypeHint, String orgApacheFelixHttpsTruststore, String orgApacheFelixHttpsTruststore@TypeHint, String orgApacheFelixHttpsTruststorePassword, String orgApacheFelixHttpsTruststorePassword@TypeHint, String orgApacheFelixHttpsClientcertificate, String orgApacheFelixHttpsClientcertificate@TypeHint, bool orgApacheFelixHttpsEnable, String orgApacheFelixHttpsEnable@TypeHint, String orgOsgiServiceHttpPortSecure, String orgOsgiServiceHttpPortSecure@TypeHint }) async {
-    Object postBody = null;
+  /// * [String] jsonPeriodMaximumresults:
+  ///
+  /// * [String] jsonPeriodMaximumresultsAtTypeHint:
+  ///
+  /// * [bool] enablePeriodHtml:
+  ///
+  /// * [String] enablePeriodHtmlAtTypeHint:
+  ///
+  /// * [bool] enablePeriodTxt:
+  ///
+  /// * [String] enablePeriodTxtAtTypeHint:
+  ///
+  /// * [bool] enablePeriodXml:
+  ///
+  /// * [String] enablePeriodXmlAtTypeHint:
+  Future<Response> postConfigApacheSlingGetServletWithHttpInfo({ String jsonPeriodMaximumresults, String jsonPeriodMaximumresultsAtTypeHint, bool enablePeriodHtml, String enablePeriodHtmlAtTypeHint, bool enablePeriodTxt, String enablePeriodTxtAtTypeHint, bool enablePeriodXml, String enablePeriodXmlAtTypeHint }) async {
+    // Verify required params are set.
 
-    // verify required params are set
+    final path = r'/apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet';
 
-    // create path and map variables
-    String path = "/apps/system/config/org.apache.felix.http".replaceAll("{format}","json");
+    Object postBody;
 
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-    if(orgApacheFelixHttpsNio != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "org.apache.felix.https.nio", orgApacheFelixHttpsNio));
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    if (jsonPeriodMaximumresults != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'json.maximumresults', jsonPeriodMaximumresults));
     }
-    if(orgApacheFelixHttpsNio@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "org.apache.felix.https.nio@TypeHint", orgApacheFelixHttpsNio@TypeHint));
+    if (jsonPeriodMaximumresultsAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'json.maximumresults@TypeHint', jsonPeriodMaximumresultsAtTypeHint));
     }
-    if(orgApacheFelixHttpsKeystore != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "org.apache.felix.https.keystore", orgApacheFelixHttpsKeystore));
+    if (enablePeriodHtml != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'enable.html', enablePeriodHtml));
     }
-    if(orgApacheFelixHttpsKeystore@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "org.apache.felix.https.keystore@TypeHint", orgApacheFelixHttpsKeystore@TypeHint));
+    if (enablePeriodHtmlAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'enable.html@TypeHint', enablePeriodHtmlAtTypeHint));
     }
-    if(orgApacheFelixHttpsKeystorePassword != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "org.apache.felix.https.keystore.password", orgApacheFelixHttpsKeystorePassword));
+    if (enablePeriodTxt != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'enable.txt', enablePeriodTxt));
     }
-    if(orgApacheFelixHttpsKeystorePassword@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "org.apache.felix.https.keystore.password@TypeHint", orgApacheFelixHttpsKeystorePassword@TypeHint));
+    if (enablePeriodTxtAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'enable.txt@TypeHint', enablePeriodTxtAtTypeHint));
     }
-    if(orgApacheFelixHttpsKeystoreKey != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "org.apache.felix.https.keystore.key", orgApacheFelixHttpsKeystoreKey));
+    if (enablePeriodXml != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'enable.xml', enablePeriodXml));
     }
-    if(orgApacheFelixHttpsKeystoreKey@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "org.apache.felix.https.keystore.key@TypeHint", orgApacheFelixHttpsKeystoreKey@TypeHint));
-    }
-    if(orgApacheFelixHttpsKeystoreKeyPassword != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "org.apache.felix.https.keystore.key.password", orgApacheFelixHttpsKeystoreKeyPassword));
-    }
-    if(orgApacheFelixHttpsKeystoreKeyPassword@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "org.apache.felix.https.keystore.key.password@TypeHint", orgApacheFelixHttpsKeystoreKeyPassword@TypeHint));
-    }
-    if(orgApacheFelixHttpsTruststore != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "org.apache.felix.https.truststore", orgApacheFelixHttpsTruststore));
-    }
-    if(orgApacheFelixHttpsTruststore@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "org.apache.felix.https.truststore@TypeHint", orgApacheFelixHttpsTruststore@TypeHint));
-    }
-    if(orgApacheFelixHttpsTruststorePassword != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "org.apache.felix.https.truststore.password", orgApacheFelixHttpsTruststorePassword));
-    }
-    if(orgApacheFelixHttpsTruststorePassword@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "org.apache.felix.https.truststore.password@TypeHint", orgApacheFelixHttpsTruststorePassword@TypeHint));
-    }
-    if(orgApacheFelixHttpsClientcertificate != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "org.apache.felix.https.clientcertificate", orgApacheFelixHttpsClientcertificate));
-    }
-    if(orgApacheFelixHttpsClientcertificate@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "org.apache.felix.https.clientcertificate@TypeHint", orgApacheFelixHttpsClientcertificate@TypeHint));
-    }
-    if(orgApacheFelixHttpsEnable != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "org.apache.felix.https.enable", orgApacheFelixHttpsEnable));
-    }
-    if(orgApacheFelixHttpsEnable@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "org.apache.felix.https.enable@TypeHint", orgApacheFelixHttpsEnable@TypeHint));
-    }
-    if(orgOsgiServiceHttpPortSecure != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "org.osgi.service.http.port.secure", orgOsgiServiceHttpPortSecure));
-    }
-    if(orgOsgiServiceHttpPortSecure@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "org.osgi.service.http.port.secure@TypeHint", orgOsgiServiceHttpPortSecure@TypeHint));
+    if (enablePeriodXmlAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'enable.xml@TypeHint', enablePeriodXmlAtTypeHint));
     }
 
-    List<String> contentTypes = [];
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['aemAuth'];
 
-    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-    List<String> authNames = ["aemAuth"];
 
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = new MultipartRequest(null, null);
-      if(hasFields)
-        postBody = mp;
-    }
-    else {
-    }
+    return await apiClient.invokeAPI(
+      path,
+      'POST',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
 
-    var response = await apiClient.invokeAPI(path,
-                                             'POST',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
-
-    if(response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if(response.body != null) {
-    } else {
-      return;
+  /// Parameters:
+  ///
+  /// * [String] jsonPeriodMaximumresults:
+  ///
+  /// * [String] jsonPeriodMaximumresultsAtTypeHint:
+  ///
+  /// * [bool] enablePeriodHtml:
+  ///
+  /// * [String] enablePeriodHtmlAtTypeHint:
+  ///
+  /// * [bool] enablePeriodTxt:
+  ///
+  /// * [String] enablePeriodTxtAtTypeHint:
+  ///
+  /// * [bool] enablePeriodXml:
+  ///
+  /// * [String] enablePeriodXmlAtTypeHint:
+  Future<void> postConfigApacheSlingGetServlet({ String jsonPeriodMaximumresults, String jsonPeriodMaximumresultsAtTypeHint, bool enablePeriodHtml, String enablePeriodHtmlAtTypeHint, bool enablePeriodTxt, String enablePeriodTxtAtTypeHint, bool enablePeriodXml, String enablePeriodXmlAtTypeHint }) async {
+    final response = await postConfigApacheSlingGetServletWithHttpInfo( jsonPeriodMaximumresults: jsonPeriodMaximumresults, jsonPeriodMaximumresultsAtTypeHint: jsonPeriodMaximumresultsAtTypeHint, enablePeriodHtml: enablePeriodHtml, enablePeriodHtmlAtTypeHint: enablePeriodHtmlAtTypeHint, enablePeriodTxt: enablePeriodTxt, enablePeriodTxtAtTypeHint: enablePeriodTxtAtTypeHint, enablePeriodXml: enablePeriodXml, enablePeriodXmlAtTypeHint: enablePeriodXmlAtTypeHint );
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
   }
-  /// 
+
+  /// Performs an HTTP 'POST /apps/system/config/org.apache.sling.security.impl.ReferrerFilter' operation and returns the [Response].
+  /// Parameters:
   ///
-  /// 
-  Future postConfigApacheHttpComponentsProxyConfiguration({ String proxyHost, String proxyHost@TypeHint, int proxyPort, String proxyPort@TypeHint, List<String> proxyExceptions, String proxyExceptions@TypeHint, bool proxyEnabled, String proxyEnabled@TypeHint, String proxyUser, String proxyUser@TypeHint, String proxyPassword, String proxyPassword@TypeHint }) async {
-    Object postBody = null;
+  /// * [bool] allowPeriodEmpty:
+  ///
+  /// * [String] allowPeriodEmptyAtTypeHint:
+  ///
+  /// * [String] allowPeriodHosts:
+  ///
+  /// * [String] allowPeriodHostsAtTypeHint:
+  ///
+  /// * [String] allowPeriodHostsPeriodRegexp:
+  ///
+  /// * [String] allowPeriodHostsPeriodRegexpAtTypeHint:
+  ///
+  /// * [String] filterPeriodMethods:
+  ///
+  /// * [String] filterPeriodMethodsAtTypeHint:
+  Future<Response> postConfigApacheSlingReferrerFilterWithHttpInfo({ bool allowPeriodEmpty, String allowPeriodEmptyAtTypeHint, String allowPeriodHosts, String allowPeriodHostsAtTypeHint, String allowPeriodHostsPeriodRegexp, String allowPeriodHostsPeriodRegexpAtTypeHint, String filterPeriodMethods, String filterPeriodMethodsAtTypeHint }) async {
+    // Verify required params are set.
 
-    // verify required params are set
+    final path = r'/apps/system/config/org.apache.sling.security.impl.ReferrerFilter';
 
-    // create path and map variables
-    String path = "/apps/system/config/org.apache.http.proxyconfigurator.config".replaceAll("{format}","json");
+    Object postBody;
 
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-    if(proxyHost != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "proxy.host", proxyHost));
-    }
-    if(proxyHost@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "proxy.host@TypeHint", proxyHost@TypeHint));
-    }
-    if(proxyPort != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "proxy.port", proxyPort));
-    }
-    if(proxyPort@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "proxy.port@TypeHint", proxyPort@TypeHint));
-    }
-    if(proxyExceptions != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("multi", "proxy.exceptions", proxyExceptions));
-    }
-    if(proxyExceptions@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "proxy.exceptions@TypeHint", proxyExceptions@TypeHint));
-    }
-    if(proxyEnabled != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "proxy.enabled", proxyEnabled));
-    }
-    if(proxyEnabled@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "proxy.enabled@TypeHint", proxyEnabled@TypeHint));
-    }
-    if(proxyUser != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "proxy.user", proxyUser));
-    }
-    if(proxyUser@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "proxy.user@TypeHint", proxyUser@TypeHint));
-    }
-    if(proxyPassword != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "proxy.password", proxyPassword));
-    }
-    if(proxyPassword@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "proxy.password@TypeHint", proxyPassword@TypeHint));
-    }
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
 
-    List<String> contentTypes = [];
-
-    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-    List<String> authNames = ["aemAuth"];
-
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = new MultipartRequest(null, null);
-      if(hasFields)
-        postBody = mp;
+    if (allowPeriodEmpty != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'allow.empty', allowPeriodEmpty));
     }
-    else {
+    if (allowPeriodEmptyAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'allow.empty@TypeHint', allowPeriodEmptyAtTypeHint));
+    }
+    if (allowPeriodHosts != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'allow.hosts', allowPeriodHosts));
+    }
+    if (allowPeriodHostsAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'allow.hosts@TypeHint', allowPeriodHostsAtTypeHint));
+    }
+    if (allowPeriodHostsPeriodRegexp != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'allow.hosts.regexp', allowPeriodHostsPeriodRegexp));
+    }
+    if (allowPeriodHostsPeriodRegexpAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'allow.hosts.regexp@TypeHint', allowPeriodHostsPeriodRegexpAtTypeHint));
+    }
+    if (filterPeriodMethods != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'filter.methods', filterPeriodMethods));
+    }
+    if (filterPeriodMethodsAtTypeHint != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'filter.methods@TypeHint', filterPeriodMethodsAtTypeHint));
     }
 
-    var response = await apiClient.invokeAPI(path,
-                                             'POST',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['aemAuth'];
 
-    if(response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if(response.body != null) {
-    } else {
-      return;
+
+    return await apiClient.invokeAPI(
+      path,
+      'POST',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
+
+  /// Parameters:
+  ///
+  /// * [bool] allowPeriodEmpty:
+  ///
+  /// * [String] allowPeriodEmptyAtTypeHint:
+  ///
+  /// * [String] allowPeriodHosts:
+  ///
+  /// * [String] allowPeriodHostsAtTypeHint:
+  ///
+  /// * [String] allowPeriodHostsPeriodRegexp:
+  ///
+  /// * [String] allowPeriodHostsPeriodRegexpAtTypeHint:
+  ///
+  /// * [String] filterPeriodMethods:
+  ///
+  /// * [String] filterPeriodMethodsAtTypeHint:
+  Future<void> postConfigApacheSlingReferrerFilter({ bool allowPeriodEmpty, String allowPeriodEmptyAtTypeHint, String allowPeriodHosts, String allowPeriodHostsAtTypeHint, String allowPeriodHostsPeriodRegexp, String allowPeriodHostsPeriodRegexpAtTypeHint, String filterPeriodMethods, String filterPeriodMethodsAtTypeHint }) async {
+    final response = await postConfigApacheSlingReferrerFilterWithHttpInfo( allowPeriodEmpty: allowPeriodEmpty, allowPeriodEmptyAtTypeHint: allowPeriodEmptyAtTypeHint, allowPeriodHosts: allowPeriodHosts, allowPeriodHostsAtTypeHint: allowPeriodHostsAtTypeHint, allowPeriodHostsPeriodRegexp: allowPeriodHostsPeriodRegexp, allowPeriodHostsPeriodRegexpAtTypeHint: allowPeriodHostsPeriodRegexpAtTypeHint, filterPeriodMethods: filterPeriodMethods, filterPeriodMethodsAtTypeHint: filterPeriodMethodsAtTypeHint );
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
   }
-  /// 
+
+  /// Performs an HTTP 'POST /apps/system/config/{configNodeName}' operation and returns the [Response].
+  /// Parameters:
   ///
-  /// 
-  Future postConfigApacheSlingDavExServlet({ String alias, String alias@TypeHint, bool davCreateAbsoluteUri, String davCreateAbsoluteUri@TypeHint }) async {
-    Object postBody = null;
-
-    // verify required params are set
-
-    // create path and map variables
-    String path = "/apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet".replaceAll("{format}","json");
-
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-    if(alias != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "alias", alias));
-    }
-    if(alias@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "alias@TypeHint", alias@TypeHint));
-    }
-    if(davCreateAbsoluteUri != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "dav.create-absolute-uri", davCreateAbsoluteUri));
-    }
-    if(davCreateAbsoluteUri@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "dav.create-absolute-uri@TypeHint", davCreateAbsoluteUri@TypeHint));
+  /// * [String] configNodeName (required):
+  Future<Response> postConfigPropertyWithHttpInfo(String configNodeName) async {
+    // Verify required params are set.
+    if (configNodeName == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: configNodeName');
     }
 
-    List<String> contentTypes = [];
+    final path = r'/apps/system/config/{configNodeName}'
+      .replaceAll('{' + 'configNodeName' + '}', configNodeName.toString());
 
-    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-    List<String> authNames = ["aemAuth"];
+    Object postBody;
 
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = new MultipartRequest(null, null);
-      if(hasFields)
-        postBody = mp;
-    }
-    else {
-    }
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
 
-    var response = await apiClient.invokeAPI(path,
-                                             'POST',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['aemAuth'];
 
-    if(response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if(response.body != null) {
-    } else {
-      return;
+
+    return await apiClient.invokeAPI(
+      path,
+      'POST',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
+
+  /// Parameters:
+  ///
+  /// * [String] configNodeName (required):
+  Future<void> postConfigProperty(String configNodeName) async {
+    final response = await postConfigPropertyWithHttpInfo(configNodeName);
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
   }
-  /// 
+
+  /// Performs an HTTP 'POST /{path}/{name}' operation and returns the [Response].
+  /// Parameters:
   ///
-  /// 
-  Future postConfigApacheSlingGetServlet({ String jsonMaximumresults, String jsonMaximumresults@TypeHint, bool enableHtml, String enableHtml@TypeHint, bool enableTxt, String enableTxt@TypeHint, bool enableXml, String enableXml@TypeHint }) async {
-    Object postBody = null;
-
-    // verify required params are set
-
-    // create path and map variables
-    String path = "/apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet".replaceAll("{format}","json");
-
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-    if(jsonMaximumresults != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "json.maximumresults", jsonMaximumresults));
+  /// * [String] path (required):
+  ///
+  /// * [String] name (required):
+  ///
+  /// * [String] colonOperation:
+  ///
+  /// * [String] deleteAuthorizable:
+  ///
+  /// * [MultipartFile] file:
+  Future<Response> postNodeWithHttpInfo(String path, String name, { String colonOperation, String deleteAuthorizable, MultipartFile file }) async {
+    // Verify required params are set.
+    if (path == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: path');
     }
-    if(jsonMaximumresults@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "json.maximumresults@TypeHint", jsonMaximumresults@TypeHint));
-    }
-    if(enableHtml != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "enable.html", enableHtml));
-    }
-    if(enableHtml@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "enable.html@TypeHint", enableHtml@TypeHint));
-    }
-    if(enableTxt != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "enable.txt", enableTxt));
-    }
-    if(enableTxt@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "enable.txt@TypeHint", enableTxt@TypeHint));
-    }
-    if(enableXml != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "enable.xml", enableXml));
-    }
-    if(enableXml@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "enable.xml@TypeHint", enableXml@TypeHint));
+    if (name == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: name');
     }
 
-    List<String> contentTypes = [];
+    final path = r'/{path}/{name}'
+      .replaceAll('{' + 'path' + '}', path.toString())
+      .replaceAll('{' + 'name' + '}', name.toString());
 
-    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-    List<String> authNames = ["aemAuth"];
+    Object postBody;
 
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = new MultipartRequest(null, null);
-      if(hasFields)
-        postBody = mp;
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    if (colonOperation != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', ':operation', colonOperation));
     }
-    else {
+    if (deleteAuthorizable != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'deleteAuthorizable', deleteAuthorizable));
     }
 
-    var response = await apiClient.invokeAPI(path,
-                                             'POST',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
+    final contentTypes = <String>['multipart/form-data'];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['aemAuth'];
 
-    if(response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if(response.body != null) {
-    } else {
-      return;
+    bool hasFields = false;
+    final mp = MultipartRequest('POST', Uri.parse(path));
+    if (file != null) {
+      hasFields = true;
+      mp.fields[r'file'] = file.field;
+      mp.files.add(file);
+    }
+    if (hasFields) {
+      postBody = mp;
+    }
+
+    return await apiClient.invokeAPI(
+      path,
+      'POST',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
+
+  /// Parameters:
+  ///
+  /// * [String] path (required):
+  ///
+  /// * [String] name (required):
+  ///
+  /// * [String] colonOperation:
+  ///
+  /// * [String] deleteAuthorizable:
+  ///
+  /// * [MultipartFile] file:
+  Future<void> postNode(String path, String name, { String colonOperation, String deleteAuthorizable, MultipartFile file }) async {
+    final response = await postNodeWithHttpInfo(path, name,  colonOperation: colonOperation, deleteAuthorizable: deleteAuthorizable, file: file );
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
   }
-  /// 
+
+  /// Performs an HTTP 'POST /{path}/{name}.rw.html' operation and returns the [Response].
+  /// Parameters:
   ///
-  /// 
-  Future postConfigApacheSlingReferrerFilter({ bool allowEmpty, String allowEmpty@TypeHint, String allowHosts, String allowHosts@TypeHint, String allowHostsRegexp, String allowHostsRegexp@TypeHint, String filterMethods, String filterMethods@TypeHint }) async {
-    Object postBody = null;
-
-    // verify required params are set
-
-    // create path and map variables
-    String path = "/apps/system/config/org.apache.sling.security.impl.ReferrerFilter".replaceAll("{format}","json");
-
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-    if(allowEmpty != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "allow.empty", allowEmpty));
+  /// * [String] path (required):
+  ///
+  /// * [String] name (required):
+  ///
+  /// * [String] addMembers:
+  Future<Response> postNodeRwWithHttpInfo(String path, String name, { String addMembers }) async {
+    // Verify required params are set.
+    if (path == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: path');
     }
-    if(allowEmpty@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "allow.empty@TypeHint", allowEmpty@TypeHint));
-    }
-    if(allowHosts != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "allow.hosts", allowHosts));
-    }
-    if(allowHosts@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "allow.hosts@TypeHint", allowHosts@TypeHint));
-    }
-    if(allowHostsRegexp != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "allow.hosts.regexp", allowHostsRegexp));
-    }
-    if(allowHostsRegexp@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "allow.hosts.regexp@TypeHint", allowHostsRegexp@TypeHint));
-    }
-    if(filterMethods != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "filter.methods", filterMethods));
-    }
-    if(filterMethods@TypeHint != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "filter.methods@TypeHint", filterMethods@TypeHint));
+    if (name == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: name');
     }
 
-    List<String> contentTypes = [];
+    final path = r'/{path}/{name}.rw.html'
+      .replaceAll('{' + 'path' + '}', path.toString())
+      .replaceAll('{' + 'name' + '}', name.toString());
 
-    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-    List<String> authNames = ["aemAuth"];
+    Object postBody;
 
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = new MultipartRequest(null, null);
-      if(hasFields)
-        postBody = mp;
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    if (addMembers != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'addMembers', addMembers));
     }
-    else {
-    }
 
-    var response = await apiClient.invokeAPI(path,
-                                             'POST',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['aemAuth'];
 
-    if(response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if(response.body != null) {
-    } else {
-      return;
+
+    return await apiClient.invokeAPI(
+      path,
+      'POST',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
+
+  /// Parameters:
+  ///
+  /// * [String] path (required):
+  ///
+  /// * [String] name (required):
+  ///
+  /// * [String] addMembers:
+  Future<void> postNodeRw(String path, String name, { String addMembers }) async {
+    final response = await postNodeRwWithHttpInfo(path, name,  addMembers: addMembers );
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
   }
-  /// 
+
+  /// Performs an HTTP 'POST /{path}/' operation and returns the [Response].
+  /// Parameters:
   ///
-  /// 
-  Future postNode(String path, String name, { String :operation, String deleteAuthorizable, MultipartFile file }) async {
-    Object postBody = null;
-
-    // verify required params are set
-    if(path == null) {
-     throw new ApiException(400, "Missing required param: path");
+  /// * [String] path (required):
+  ///
+  /// * [String] jcrColonPrimaryType (required):
+  ///
+  /// * [String] colonName (required):
+  Future<Response> postPathWithHttpInfo(String path, String jcrColonPrimaryType, String colonName) async {
+    // Verify required params are set.
+    if (path == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: path');
     }
-    if(name == null) {
-     throw new ApiException(400, "Missing required param: name");
+    if (jcrColonPrimaryType == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: jcrColonPrimaryType');
     }
-
-    // create path and map variables
-    String path = "/{path}/{name}".replaceAll("{format}","json").replaceAll("{" + "path" + "}", path.toString()).replaceAll("{" + "name" + "}", name.toString());
-
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-    if(:operation != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", ":operation", :operation));
-    }
-    if(deleteAuthorizable != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "deleteAuthorizable", deleteAuthorizable));
+    if (colonName == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: colonName');
     }
 
-    List<String> contentTypes = ["multipart/form-data"];
+    final path = r'/{path}/'
+      .replaceAll('{' + 'path' + '}', path.toString());
 
-    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-    List<String> authNames = ["aemAuth"];
+    Object postBody;
 
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = new MultipartRequest(null, null);
-      if (file != null) {
-        hasFields = true;
-        mp.fields['file'] = file.field;
-        mp.files.add(file);
-      }
-      if(hasFields)
-        postBody = mp;
-    }
-    else {
-    }
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
 
-    var response = await apiClient.invokeAPI(path,
-                                             'POST',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'jcr:primaryType', jcrColonPrimaryType));
+      queryParams.addAll(_convertParametersForCollectionFormat('', ':name', colonName));
 
-    if(response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if(response.body != null) {
-    } else {
-      return;
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['aemAuth'];
+
+
+    return await apiClient.invokeAPI(
+      path,
+      'POST',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
+
+  /// Parameters:
+  ///
+  /// * [String] path (required):
+  ///
+  /// * [String] jcrColonPrimaryType (required):
+  ///
+  /// * [String] colonName (required):
+  Future<void> postPath(String path, String jcrColonPrimaryType, String colonName) async {
+    final response = await postPathWithHttpInfo(path, jcrColonPrimaryType, colonName);
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
   }
-  /// 
+
+  /// Performs an HTTP 'POST /bin/querybuilder.json' operation and returns the [Response].
+  /// Parameters:
   ///
-  /// 
-  Future postNodeRw(String path, String name, { String addMembers }) async {
-    Object postBody = null;
-
-    // verify required params are set
-    if(path == null) {
-     throw new ApiException(400, "Missing required param: path");
+  /// * [String] path (required):
+  ///
+  /// * [num] pPeriodLimit (required):
+  ///
+  /// * [String] n1property (required):
+  ///
+  /// * [String] n1propertyPeriodValue (required):
+  Future<Response> postQueryWithHttpInfo(String path, num pPeriodLimit, String n1property, String n1propertyPeriodValue) async {
+    // Verify required params are set.
+    if (path == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: path');
     }
-    if(name == null) {
-     throw new ApiException(400, "Missing required param: name");
+    if (pPeriodLimit == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: pPeriodLimit');
     }
-
-    // create path and map variables
-    String path = "/{path}/{name}.rw.html".replaceAll("{format}","json").replaceAll("{" + "path" + "}", path.toString()).replaceAll("{" + "name" + "}", name.toString());
-
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-    if(addMembers != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "addMembers", addMembers));
+    if (n1property == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: n1property');
     }
-
-    List<String> contentTypes = [];
-
-    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-    List<String> authNames = ["aemAuth"];
-
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = new MultipartRequest(null, null);
-      if(hasFields)
-        postBody = mp;
-    }
-    else {
+    if (n1propertyPeriodValue == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: n1propertyPeriodValue');
     }
 
-    var response = await apiClient.invokeAPI(path,
-                                             'POST',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
+    final path = r'/bin/querybuilder.json';
 
-    if(response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if(response.body != null) {
-    } else {
-      return;
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'path', path));
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'p.limit', pPeriodLimit));
+      queryParams.addAll(_convertParametersForCollectionFormat('', '1_property', n1property));
+      queryParams.addAll(_convertParametersForCollectionFormat('', '1_property.value', n1propertyPeriodValue));
+
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['aemAuth'];
+
+
+    return await apiClient.invokeAPI(
+      path,
+      'POST',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
+
+  /// Parameters:
+  ///
+  /// * [String] path (required):
+  ///
+  /// * [num] pPeriodLimit (required):
+  ///
+  /// * [String] n1property (required):
+  ///
+  /// * [String] n1propertyPeriodValue (required):
+  Future<String> postQuery(String path, num pPeriodLimit, String n1property, String n1propertyPeriodValue) async {
+    final response = await postQueryWithHttpInfo(path, pPeriodLimit, n1property, n1propertyPeriodValue);
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'String',) as String;
+        }
+    return Future<String>.value(null);
+  }
+
+  /// Performs an HTTP 'POST /etc/replication/treeactivation.html' operation and returns the [Response].
+  /// Parameters:
+  ///
+  /// * [bool] ignoredeactivated (required):
+  ///
+  /// * [bool] onlymodified (required):
+  ///
+  /// * [String] path (required):
+  Future<Response> postTreeActivationWithHttpInfo(bool ignoredeactivated, bool onlymodified, String path) async {
+    // Verify required params are set.
+    if (ignoredeactivated == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: ignoredeactivated');
+    }
+    if (onlymodified == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: onlymodified');
+    }
+    if (path == null) {
+     throw ApiException(HttpStatus.badRequest, 'Missing required param: path');
+    }
+
+    final path = r'/etc/replication/treeactivation.html';
+
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'ignoredeactivated', ignoredeactivated));
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'onlymodified', onlymodified));
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'path', path));
+
+    final contentTypes = <String>[];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['aemAuth'];
+
+
+    return await apiClient.invokeAPI(
+      path,
+      'POST',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
+  }
+
+  /// Parameters:
+  ///
+  /// * [bool] ignoredeactivated (required):
+  ///
+  /// * [bool] onlymodified (required):
+  ///
+  /// * [String] path (required):
+  Future<void> postTreeActivation(bool ignoredeactivated, bool onlymodified, String path) async {
+    final response = await postTreeActivationWithHttpInfo(ignoredeactivated, onlymodified, path);
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
   }
-  /// 
+
+  /// Performs an HTTP 'POST /libs/granite/security/post/truststore' operation and returns the [Response].
+  /// Parameters:
   ///
-  /// 
-  Future postPath(String path, String jcr:primaryType, String :name) async {
-    Object postBody = null;
+  /// * [String] colonOperation:
+  ///
+  /// * [String] newPassword:
+  ///
+  /// * [String] rePassword:
+  ///
+  /// * [String] keyStoreType:
+  ///
+  /// * [String] removeAlias:
+  ///
+  /// * [MultipartFile] certificate:
+  Future<Response> postTruststoreWithHttpInfo({ String colonOperation, String newPassword, String rePassword, String keyStoreType, String removeAlias, MultipartFile certificate }) async {
+    // Verify required params are set.
 
-    // verify required params are set
-    if(path == null) {
-     throw new ApiException(400, "Missing required param: path");
+    final path = r'/libs/granite/security/post/truststore';
+
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    if (colonOperation != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', ':operation', colonOperation));
     }
-    if(jcr:primaryType == null) {
-     throw new ApiException(400, "Missing required param: jcr:primaryType");
+    if (newPassword != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'newPassword', newPassword));
     }
-    if(:name == null) {
-     throw new ApiException(400, "Missing required param: :name");
+    if (rePassword != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'rePassword', rePassword));
     }
-
-    // create path and map variables
-    String path = "/{path}/".replaceAll("{format}","json").replaceAll("{" + "path" + "}", path.toString());
-
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-      queryParams.addAll(_convertParametersForCollectionFormat("", "jcr:primaryType", jcr:primaryType));
-      queryParams.addAll(_convertParametersForCollectionFormat("", ":name", :name));
-
-    List<String> contentTypes = [];
-
-    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-    List<String> authNames = ["aemAuth"];
-
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = new MultipartRequest(null, null);
-      if(hasFields)
-        postBody = mp;
+    if (keyStoreType != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'keyStoreType', keyStoreType));
     }
-    else {
+    if (removeAlias != null) {
+      queryParams.addAll(_convertParametersForCollectionFormat('', 'removeAlias', removeAlias));
     }
 
-    var response = await apiClient.invokeAPI(path,
-                                             'POST',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
+    final contentTypes = <String>['multipart/form-data'];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['aemAuth'];
 
-    if(response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if(response.body != null) {
-    } else {
-      return;
+    bool hasFields = false;
+    final mp = MultipartRequest('POST', Uri.parse(path));
+    if (certificate != null) {
+      hasFields = true;
+      mp.fields[r'certificate'] = certificate.field;
+      mp.files.add(certificate);
     }
+    if (hasFields) {
+      postBody = mp;
+    }
+
+    return await apiClient.invokeAPI(
+      path,
+      'POST',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
   }
-  /// 
+
+  /// Parameters:
   ///
-  /// 
-  Future<String> postQuery(String path, num pLimit, String n1property, String n1propertyValue) async {
-    Object postBody = null;
-
-    // verify required params are set
-    if(path == null) {
-     throw new ApiException(400, "Missing required param: path");
+  /// * [String] colonOperation:
+  ///
+  /// * [String] newPassword:
+  ///
+  /// * [String] rePassword:
+  ///
+  /// * [String] keyStoreType:
+  ///
+  /// * [String] removeAlias:
+  ///
+  /// * [MultipartFile] certificate:
+  Future<String> postTruststore({ String colonOperation, String newPassword, String rePassword, String keyStoreType, String removeAlias, MultipartFile certificate }) async {
+    final response = await postTruststoreWithHttpInfo( colonOperation: colonOperation, newPassword: newPassword, rePassword: rePassword, keyStoreType: keyStoreType, removeAlias: removeAlias, certificate: certificate );
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
-    if(pLimit == null) {
-     throw new ApiException(400, "Missing required param: pLimit");
-    }
-    if(n1property == null) {
-     throw new ApiException(400, "Missing required param: n1property");
-    }
-    if(n1propertyValue == null) {
-     throw new ApiException(400, "Missing required param: n1propertyValue");
-    }
-
-    // create path and map variables
-    String path = "/bin/querybuilder.json".replaceAll("{format}","json");
-
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-      queryParams.addAll(_convertParametersForCollectionFormat("", "path", path));
-      queryParams.addAll(_convertParametersForCollectionFormat("", "p.limit", pLimit));
-      queryParams.addAll(_convertParametersForCollectionFormat("", "1_property", n1property));
-      queryParams.addAll(_convertParametersForCollectionFormat("", "1_property.value", n1propertyValue));
-
-    List<String> contentTypes = [];
-
-    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-    List<String> authNames = ["aemAuth"];
-
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = new MultipartRequest(null, null);
-      if(hasFields)
-        postBody = mp;
-    }
-    else {
-    }
-
-    var response = await apiClient.invokeAPI(path,
-                                             'POST',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
-
-    if(response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if(response.body != null) {
-      return apiClient.deserialize(response.body, 'String') as String;
-    } else {
-      return null;
-    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'String',) as String;
+        }
+    return Future<String>.value(null);
   }
-  /// 
+
+  /// Performs an HTTP 'POST /etc/truststore' operation and returns the [Response].
+  /// Parameters:
   ///
-  /// 
-  Future postTreeActivation(bool ignoredeactivated, bool onlymodified, String path) async {
-    Object postBody = null;
+  /// * [MultipartFile] truststorePeriodP12:
+  Future<Response> postTruststorePKCS12WithHttpInfo({ MultipartFile truststorePeriodP12 }) async {
+    // Verify required params are set.
 
-    // verify required params are set
-    if(ignoredeactivated == null) {
-     throw new ApiException(400, "Missing required param: ignoredeactivated");
+    final path = r'/etc/truststore';
+
+    Object postBody;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    final contentTypes = <String>['multipart/form-data'];
+    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
+    final authNames = <String>['aemAuth'];
+
+    bool hasFields = false;
+    final mp = MultipartRequest('POST', Uri.parse(path));
+    if (truststorePeriodP12 != null) {
+      hasFields = true;
+      mp.fields[r'truststore.p12'] = truststorePeriodP12.field;
+      mp.files.add(truststorePeriodP12);
     }
-    if(onlymodified == null) {
-     throw new ApiException(400, "Missing required param: onlymodified");
-    }
-    if(path == null) {
-     throw new ApiException(400, "Missing required param: path");
-    }
-
-    // create path and map variables
-    String path = "/etc/replication/treeactivation.html".replaceAll("{format}","json");
-
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-      queryParams.addAll(_convertParametersForCollectionFormat("", "ignoredeactivated", ignoredeactivated));
-      queryParams.addAll(_convertParametersForCollectionFormat("", "onlymodified", onlymodified));
-      queryParams.addAll(_convertParametersForCollectionFormat("", "path", path));
-
-    List<String> contentTypes = [];
-
-    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-    List<String> authNames = ["aemAuth"];
-
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = new MultipartRequest(null, null);
-      if(hasFields)
-        postBody = mp;
-    }
-    else {
+    if (hasFields) {
+      postBody = mp;
     }
 
-    var response = await apiClient.invokeAPI(path,
-                                             'POST',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
-
-    if(response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if(response.body != null) {
-    } else {
-      return;
-    }
+    return await apiClient.invokeAPI(
+      path,
+      'POST',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      nullableContentType,
+      authNames,
+    );
   }
-  /// 
+
+  /// Parameters:
   ///
-  /// 
-  Future<String> postTruststore({ String :operation, String newPassword, String rePassword, String keyStoreType, String removeAlias, MultipartFile certificate }) async {
-    Object postBody = null;
-
-    // verify required params are set
-
-    // create path and map variables
-    String path = "/libs/granite/security/post/truststore".replaceAll("{format}","json");
-
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-    if(:operation != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", ":operation", :operation));
+  /// * [MultipartFile] truststorePeriodP12:
+  Future<String> postTruststorePKCS12({ MultipartFile truststorePeriodP12 }) async {
+    final response = await postTruststorePKCS12WithHttpInfo( truststorePeriodP12: truststorePeriodP12 );
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
-    if(newPassword != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "newPassword", newPassword));
-    }
-    if(rePassword != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "rePassword", rePassword));
-    }
-    if(keyStoreType != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "keyStoreType", keyStoreType));
-    }
-    if(removeAlias != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "removeAlias", removeAlias));
-    }
-
-    List<String> contentTypes = ["multipart/form-data"];
-
-    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-    List<String> authNames = ["aemAuth"];
-
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = new MultipartRequest(null, null);
-      if (certificate != null) {
-        hasFields = true;
-        mp.fields['certificate'] = certificate.field;
-        mp.files.add(certificate);
-      }
-      if(hasFields)
-        postBody = mp;
-    }
-    else {
-    }
-
-    var response = await apiClient.invokeAPI(path,
-                                             'POST',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
-
-    if(response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if(response.body != null) {
-      return apiClient.deserialize(response.body, 'String') as String;
-    } else {
-      return null;
-    }
-  }
-  /// 
-  ///
-  /// 
-  Future<String> postTruststorePKCS12({ MultipartFile truststoreP12 }) async {
-    Object postBody = null;
-
-    // verify required params are set
-
-    // create path and map variables
-    String path = "/etc/truststore".replaceAll("{format}","json");
-
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-
-    List<String> contentTypes = ["multipart/form-data"];
-
-    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-    List<String> authNames = ["aemAuth"];
-
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = new MultipartRequest(null, null);
-      if (truststoreP12 != null) {
-        hasFields = true;
-        mp.fields['truststore.p12'] = truststoreP12.field;
-        mp.files.add(truststoreP12);
-      }
-      if(hasFields)
-        postBody = mp;
-    }
-    else {
-    }
-
-    var response = await apiClient.invokeAPI(path,
-                                             'POST',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
-
-    if(response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if(response.body != null) {
-      return apiClient.deserialize(response.body, 'String') as String;
-    } else {
-      return null;
-    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'String',) as String;
+        }
+    return Future<String>.value(null);
   }
 }

@@ -1,12 +1,13 @@
 -module(openapi_console_api).
 
 -export([get_aem_product_info/1, get_aem_product_info/2,
+         get_bundle_info/2, get_bundle_info/3,
          get_config_mgr/1, get_config_mgr/2,
          post_bundle/3, post_bundle/4,
          post_jmx_repository/2, post_jmx_repository/3,
          post_saml_configuration/1, post_saml_configuration/2]).
 
--define(BASE_URL, "/").
+-define(BASE_URL, <<"">>).
 
 %% @doc 
 %% 
@@ -20,7 +21,28 @@ get_aem_product_info(Ctx, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
-    Path = ["/system/console/status-productinfo.json"],
+    Path = [<<"/system/console/status-productinfo.json">>],
+    QS = [],
+    Headers = [],
+    Body1 = [],
+    ContentTypeHeader = openapi_utils:select_header_content_type([]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    openapi_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+
+%% @doc 
+%% 
+-spec get_bundle_info(ctx:ctx(), binary()) -> {ok, openapi_bundle_info:openapi_bundle_info(), openapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), openapi_utils:response_info()}.
+get_bundle_info(Ctx, Name) ->
+    get_bundle_info(Ctx, Name, #{}).
+
+-spec get_bundle_info(ctx:ctx(), binary(), maps:map()) -> {ok, openapi_bundle_info:openapi_bundle_info(), openapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), openapi_utils:response_info()}.
+get_bundle_info(Ctx, Name, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+
+    Method = get,
+    Path = [<<"/system/console/bundles/", Name, ".json">>],
     QS = [],
     Headers = [],
     Body1 = [],
@@ -41,7 +63,7 @@ get_config_mgr(Ctx, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
-    Path = ["/system/console/configMgr"],
+    Path = [<<"/system/console/configMgr">>],
     QS = [],
     Headers = [],
     Body1 = [],
@@ -62,7 +84,7 @@ post_bundle(Ctx, Name, Action, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
-    Path = ["/system/console/bundles/", Name, ""],
+    Path = [<<"/system/console/bundles/", Name, "">>],
     QS = lists:flatten([{<<"action">>, Action}])++openapi_utils:optional_params([], _OptionalParams),
     Headers = [],
     Body1 = [],
@@ -83,7 +105,7 @@ post_jmx_repository(Ctx, Action, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
-    Path = ["/system/console/jmx/com.adobe.granite:type=Repository/op/", Action, ""],
+    Path = [<<"/system/console/jmx/com.adobe.granite:type=Repository/op/", Action, "">>],
     QS = [],
     Headers = [],
     Body1 = [],
@@ -104,7 +126,7 @@ post_saml_configuration(Ctx, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
-    Path = ["/system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler"],
+    Path = [<<"/system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler">>],
     QS = lists:flatten([])++openapi_utils:optional_params(['post', 'apply', 'delete', 'action', '$location', 'path', 'service.ranking', 'idpUrl', 'idpCertAlias', 'idpHttpRedirect', 'serviceProviderEntityId', 'assertionConsumerServiceURL', 'spPrivateKeyAlias', 'keyStorePassword', 'defaultRedirectUrl', 'userIDAttribute', 'useEncryption', 'createUser', 'addGroupMemberships', 'groupMembershipAttribute', 'defaultGroups', 'nameIdFormat', 'synchronizeAttributes', 'handleLogout', 'logoutUrl', 'clockTolerance', 'digestMethod', 'signatureMethod', 'userIntermediatePath', 'propertylist'], _OptionalParams),
     Headers = [],
     Body1 = [],

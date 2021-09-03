@@ -9,9 +9,8 @@ import org.openapitools.model.TruststoreItems;
 
 @Canonical
 class TruststoreInfo {
+    
     List<TruststoreItems> aliases = new ArrayList<TruststoreItems>()
-
     /* False if truststore don't exist */
-    Boolean exists = null
-
+    Boolean exists
 }

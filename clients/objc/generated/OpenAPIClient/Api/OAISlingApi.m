@@ -1062,101 +1062,101 @@ NSInteger kOAISlingApiMissingParamErrorCode = 234513;
 ///
 ///  @param name  
 ///
-///  @param jcrcontentcqdistribute  (optional)
+///  @param jcrcontentCqdistribute  (optional)
 ///
-///  @param jcrcontentcqdistributeTypeHint  (optional)
+///  @param jcrcontentCqdistributeTypeHint  (optional)
 ///
-///  @param jcrcontentcqname  (optional)
+///  @param jcrcontentCqname  (optional)
 ///
-///  @param jcrcontentcqtemplate  (optional)
+///  @param jcrcontentCqtemplate  (optional)
 ///
-///  @param jcrcontentenabled  (optional)
+///  @param jcrcontentEnabled  (optional)
 ///
-///  @param jcrcontentjcrdescription  (optional)
+///  @param jcrcontentJcrdescription  (optional)
 ///
-///  @param jcrcontentjcrlastModified  (optional)
+///  @param jcrcontentJcrlastModified  (optional)
 ///
-///  @param jcrcontentjcrlastModifiedBy  (optional)
+///  @param jcrcontentJcrlastModifiedBy  (optional)
 ///
-///  @param jcrcontentjcrmixinTypes  (optional)
+///  @param jcrcontentJcrmixinTypes  (optional)
 ///
-///  @param jcrcontentjcrtitle  (optional)
+///  @param jcrcontentJcrtitle  (optional)
 ///
-///  @param jcrcontentlogLevel  (optional)
+///  @param jcrcontentLogLevel  (optional)
 ///
-///  @param jcrcontentnoStatusUpdate  (optional)
+///  @param jcrcontentNoStatusUpdate  (optional)
 ///
-///  @param jcrcontentnoVersioning  (optional)
+///  @param jcrcontentNoVersioning  (optional)
 ///
-///  @param jcrcontentprotocolConnectTimeout  (optional)
+///  @param jcrcontentProtocolConnectTimeout  (optional)
 ///
-///  @param jcrcontentprotocolHTTPConnectionClosed  (optional)
+///  @param jcrcontentProtocolHTTPConnectionClosed  (optional)
 ///
-///  @param jcrcontentprotocolHTTPExpired  (optional)
+///  @param jcrcontentProtocolHTTPExpired  (optional)
 ///
-///  @param jcrcontentprotocolHTTPHeaders  (optional)
+///  @param jcrcontentProtocolHTTPHeaders  (optional)
 ///
-///  @param jcrcontentprotocolHTTPHeadersTypeHint  (optional)
+///  @param jcrcontentProtocolHTTPHeadersTypeHint  (optional)
 ///
-///  @param jcrcontentprotocolHTTPMethod  (optional)
+///  @param jcrcontentProtocolHTTPMethod  (optional)
 ///
-///  @param jcrcontentprotocolHTTPSRelaxed  (optional)
+///  @param jcrcontentProtocolHTTPSRelaxed  (optional)
 ///
-///  @param jcrcontentprotocolInterface  (optional)
+///  @param jcrcontentProtocolInterface  (optional)
 ///
-///  @param jcrcontentprotocolSocketTimeout  (optional)
+///  @param jcrcontentProtocolSocketTimeout  (optional)
 ///
-///  @param jcrcontentprotocolVersion  (optional)
+///  @param jcrcontentProtocolVersion  (optional)
 ///
-///  @param jcrcontentproxyNTLMDomain  (optional)
+///  @param jcrcontentProxyNTLMDomain  (optional)
 ///
-///  @param jcrcontentproxyNTLMHost  (optional)
+///  @param jcrcontentProxyNTLMHost  (optional)
 ///
-///  @param jcrcontentproxyHost  (optional)
+///  @param jcrcontentProxyHost  (optional)
 ///
-///  @param jcrcontentproxyPassword  (optional)
+///  @param jcrcontentProxyPassword  (optional)
 ///
-///  @param jcrcontentproxyPort  (optional)
+///  @param jcrcontentProxyPort  (optional)
 ///
-///  @param jcrcontentproxyUser  (optional)
+///  @param jcrcontentProxyUser  (optional)
 ///
-///  @param jcrcontentqueueBatchMaxSize  (optional)
+///  @param jcrcontentQueueBatchMaxSize  (optional)
 ///
-///  @param jcrcontentqueueBatchMode  (optional)
+///  @param jcrcontentQueueBatchMode  (optional)
 ///
-///  @param jcrcontentqueueBatchWaitTime  (optional)
+///  @param jcrcontentQueueBatchWaitTime  (optional)
 ///
-///  @param jcrcontentretryDelay  (optional)
+///  @param jcrcontentRetryDelay  (optional)
 ///
-///  @param jcrcontentreverseReplication  (optional)
+///  @param jcrcontentReverseReplication  (optional)
 ///
-///  @param jcrcontentserializationType  (optional)
+///  @param jcrcontentSerializationType  (optional)
 ///
-///  @param jcrcontentslingresourceType  (optional)
+///  @param jcrcontentSlingresourceType  (optional)
 ///
-///  @param jcrcontentssl  (optional)
+///  @param jcrcontentSsl  (optional)
 ///
-///  @param jcrcontenttransportNTLMDomain  (optional)
+///  @param jcrcontentTransportNTLMDomain  (optional)
 ///
-///  @param jcrcontenttransportNTLMHost  (optional)
+///  @param jcrcontentTransportNTLMHost  (optional)
 ///
-///  @param jcrcontenttransportPassword  (optional)
+///  @param jcrcontentTransportPassword  (optional)
 ///
-///  @param jcrcontenttransportUri  (optional)
+///  @param jcrcontentTransportUri  (optional)
 ///
-///  @param jcrcontenttransportUser  (optional)
+///  @param jcrcontentTransportUser  (optional)
 ///
-///  @param jcrcontenttriggerDistribute  (optional)
+///  @param jcrcontentTriggerDistribute  (optional)
 ///
-///  @param jcrcontenttriggerModified  (optional)
+///  @param jcrcontentTriggerModified  (optional)
 ///
-///  @param jcrcontenttriggerOnOffTime  (optional)
+///  @param jcrcontentTriggerOnOffTime  (optional)
 ///
-///  @param jcrcontenttriggerReceive  (optional)
+///  @param jcrcontentTriggerReceive  (optional)
 ///
-///  @param jcrcontenttriggerSpecific  (optional)
+///  @param jcrcontentTriggerSpecific  (optional)
 ///
-///  @param jcrcontentuserId  (optional)
+///  @param jcrcontentUserId  (optional)
 ///
 ///  @param jcrprimaryType  (optional)
 ///
@@ -1166,54 +1166,54 @@ NSInteger kOAISlingApiMissingParamErrorCode = 234513;
 ///
 -(NSURLSessionTask*) postAgentWithRunmode: (NSString*) runmode
     name: (NSString*) name
-    jcrcontentcqdistribute: (NSNumber*) jcrcontentcqdistribute
-    jcrcontentcqdistributeTypeHint: (NSString*) jcrcontentcqdistributeTypeHint
-    jcrcontentcqname: (NSString*) jcrcontentcqname
-    jcrcontentcqtemplate: (NSString*) jcrcontentcqtemplate
-    jcrcontentenabled: (NSNumber*) jcrcontentenabled
-    jcrcontentjcrdescription: (NSString*) jcrcontentjcrdescription
-    jcrcontentjcrlastModified: (NSString*) jcrcontentjcrlastModified
-    jcrcontentjcrlastModifiedBy: (NSString*) jcrcontentjcrlastModifiedBy
-    jcrcontentjcrmixinTypes: (NSString*) jcrcontentjcrmixinTypes
-    jcrcontentjcrtitle: (NSString*) jcrcontentjcrtitle
-    jcrcontentlogLevel: (NSString*) jcrcontentlogLevel
-    jcrcontentnoStatusUpdate: (NSNumber*) jcrcontentnoStatusUpdate
-    jcrcontentnoVersioning: (NSNumber*) jcrcontentnoVersioning
-    jcrcontentprotocolConnectTimeout: (NSNumber*) jcrcontentprotocolConnectTimeout
-    jcrcontentprotocolHTTPConnectionClosed: (NSNumber*) jcrcontentprotocolHTTPConnectionClosed
-    jcrcontentprotocolHTTPExpired: (NSString*) jcrcontentprotocolHTTPExpired
-    jcrcontentprotocolHTTPHeaders: (NSArray<NSString*>*) jcrcontentprotocolHTTPHeaders
-    jcrcontentprotocolHTTPHeadersTypeHint: (NSString*) jcrcontentprotocolHTTPHeadersTypeHint
-    jcrcontentprotocolHTTPMethod: (NSString*) jcrcontentprotocolHTTPMethod
-    jcrcontentprotocolHTTPSRelaxed: (NSNumber*) jcrcontentprotocolHTTPSRelaxed
-    jcrcontentprotocolInterface: (NSString*) jcrcontentprotocolInterface
-    jcrcontentprotocolSocketTimeout: (NSNumber*) jcrcontentprotocolSocketTimeout
-    jcrcontentprotocolVersion: (NSString*) jcrcontentprotocolVersion
-    jcrcontentproxyNTLMDomain: (NSString*) jcrcontentproxyNTLMDomain
-    jcrcontentproxyNTLMHost: (NSString*) jcrcontentproxyNTLMHost
-    jcrcontentproxyHost: (NSString*) jcrcontentproxyHost
-    jcrcontentproxyPassword: (NSString*) jcrcontentproxyPassword
-    jcrcontentproxyPort: (NSNumber*) jcrcontentproxyPort
-    jcrcontentproxyUser: (NSString*) jcrcontentproxyUser
-    jcrcontentqueueBatchMaxSize: (NSNumber*) jcrcontentqueueBatchMaxSize
-    jcrcontentqueueBatchMode: (NSString*) jcrcontentqueueBatchMode
-    jcrcontentqueueBatchWaitTime: (NSNumber*) jcrcontentqueueBatchWaitTime
-    jcrcontentretryDelay: (NSString*) jcrcontentretryDelay
-    jcrcontentreverseReplication: (NSNumber*) jcrcontentreverseReplication
-    jcrcontentserializationType: (NSString*) jcrcontentserializationType
-    jcrcontentslingresourceType: (NSString*) jcrcontentslingresourceType
-    jcrcontentssl: (NSString*) jcrcontentssl
-    jcrcontenttransportNTLMDomain: (NSString*) jcrcontenttransportNTLMDomain
-    jcrcontenttransportNTLMHost: (NSString*) jcrcontenttransportNTLMHost
-    jcrcontenttransportPassword: (NSString*) jcrcontenttransportPassword
-    jcrcontenttransportUri: (NSString*) jcrcontenttransportUri
-    jcrcontenttransportUser: (NSString*) jcrcontenttransportUser
-    jcrcontenttriggerDistribute: (NSNumber*) jcrcontenttriggerDistribute
-    jcrcontenttriggerModified: (NSNumber*) jcrcontenttriggerModified
-    jcrcontenttriggerOnOffTime: (NSNumber*) jcrcontenttriggerOnOffTime
-    jcrcontenttriggerReceive: (NSNumber*) jcrcontenttriggerReceive
-    jcrcontenttriggerSpecific: (NSNumber*) jcrcontenttriggerSpecific
-    jcrcontentuserId: (NSString*) jcrcontentuserId
+    jcrcontentCqdistribute: (NSNumber*) jcrcontentCqdistribute
+    jcrcontentCqdistributeTypeHint: (NSString*) jcrcontentCqdistributeTypeHint
+    jcrcontentCqname: (NSString*) jcrcontentCqname
+    jcrcontentCqtemplate: (NSString*) jcrcontentCqtemplate
+    jcrcontentEnabled: (NSNumber*) jcrcontentEnabled
+    jcrcontentJcrdescription: (NSString*) jcrcontentJcrdescription
+    jcrcontentJcrlastModified: (NSString*) jcrcontentJcrlastModified
+    jcrcontentJcrlastModifiedBy: (NSString*) jcrcontentJcrlastModifiedBy
+    jcrcontentJcrmixinTypes: (NSString*) jcrcontentJcrmixinTypes
+    jcrcontentJcrtitle: (NSString*) jcrcontentJcrtitle
+    jcrcontentLogLevel: (NSString*) jcrcontentLogLevel
+    jcrcontentNoStatusUpdate: (NSNumber*) jcrcontentNoStatusUpdate
+    jcrcontentNoVersioning: (NSNumber*) jcrcontentNoVersioning
+    jcrcontentProtocolConnectTimeout: (NSNumber*) jcrcontentProtocolConnectTimeout
+    jcrcontentProtocolHTTPConnectionClosed: (NSNumber*) jcrcontentProtocolHTTPConnectionClosed
+    jcrcontentProtocolHTTPExpired: (NSString*) jcrcontentProtocolHTTPExpired
+    jcrcontentProtocolHTTPHeaders: (NSArray<NSString*>*) jcrcontentProtocolHTTPHeaders
+    jcrcontentProtocolHTTPHeadersTypeHint: (NSString*) jcrcontentProtocolHTTPHeadersTypeHint
+    jcrcontentProtocolHTTPMethod: (NSString*) jcrcontentProtocolHTTPMethod
+    jcrcontentProtocolHTTPSRelaxed: (NSNumber*) jcrcontentProtocolHTTPSRelaxed
+    jcrcontentProtocolInterface: (NSString*) jcrcontentProtocolInterface
+    jcrcontentProtocolSocketTimeout: (NSNumber*) jcrcontentProtocolSocketTimeout
+    jcrcontentProtocolVersion: (NSString*) jcrcontentProtocolVersion
+    jcrcontentProxyNTLMDomain: (NSString*) jcrcontentProxyNTLMDomain
+    jcrcontentProxyNTLMHost: (NSString*) jcrcontentProxyNTLMHost
+    jcrcontentProxyHost: (NSString*) jcrcontentProxyHost
+    jcrcontentProxyPassword: (NSString*) jcrcontentProxyPassword
+    jcrcontentProxyPort: (NSNumber*) jcrcontentProxyPort
+    jcrcontentProxyUser: (NSString*) jcrcontentProxyUser
+    jcrcontentQueueBatchMaxSize: (NSNumber*) jcrcontentQueueBatchMaxSize
+    jcrcontentQueueBatchMode: (NSString*) jcrcontentQueueBatchMode
+    jcrcontentQueueBatchWaitTime: (NSNumber*) jcrcontentQueueBatchWaitTime
+    jcrcontentRetryDelay: (NSString*) jcrcontentRetryDelay
+    jcrcontentReverseReplication: (NSNumber*) jcrcontentReverseReplication
+    jcrcontentSerializationType: (NSString*) jcrcontentSerializationType
+    jcrcontentSlingresourceType: (NSString*) jcrcontentSlingresourceType
+    jcrcontentSsl: (NSString*) jcrcontentSsl
+    jcrcontentTransportNTLMDomain: (NSString*) jcrcontentTransportNTLMDomain
+    jcrcontentTransportNTLMHost: (NSString*) jcrcontentTransportNTLMHost
+    jcrcontentTransportPassword: (NSString*) jcrcontentTransportPassword
+    jcrcontentTransportUri: (NSString*) jcrcontentTransportUri
+    jcrcontentTransportUser: (NSString*) jcrcontentTransportUser
+    jcrcontentTriggerDistribute: (NSNumber*) jcrcontentTriggerDistribute
+    jcrcontentTriggerModified: (NSNumber*) jcrcontentTriggerModified
+    jcrcontentTriggerOnOffTime: (NSNumber*) jcrcontentTriggerOnOffTime
+    jcrcontentTriggerReceive: (NSNumber*) jcrcontentTriggerReceive
+    jcrcontentTriggerSpecific: (NSNumber*) jcrcontentTriggerSpecific
+    jcrcontentUserId: (NSString*) jcrcontentUserId
     jcrprimaryType: (NSString*) jcrprimaryType
     operation: (NSString*) operation
     completionHandler: (void (^)(NSError* error)) handler {
@@ -1250,149 +1250,149 @@ NSInteger kOAISlingApiMissingParamErrorCode = 234513;
     }
 
     NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
-    if (jcrcontentcqdistribute != nil) {
-        queryParams[@"jcr:content/cq:distribute"] = [jcrcontentcqdistribute isEqual:@(YES)] ? @"true" : @"false";
+    if (jcrcontentCqdistribute != nil) {
+        queryParams[@"jcr:content/cq:distribute"] = [jcrcontentCqdistribute isEqual:@(YES)] ? @"true" : @"false";
     }
-    if (jcrcontentcqdistributeTypeHint != nil) {
-        queryParams[@"jcr:content/cq:distribute@TypeHint"] = jcrcontentcqdistributeTypeHint;
+    if (jcrcontentCqdistributeTypeHint != nil) {
+        queryParams[@"jcr:content/cq:distribute@TypeHint"] = jcrcontentCqdistributeTypeHint;
     }
-    if (jcrcontentcqname != nil) {
-        queryParams[@"jcr:content/cq:name"] = jcrcontentcqname;
+    if (jcrcontentCqname != nil) {
+        queryParams[@"jcr:content/cq:name"] = jcrcontentCqname;
     }
-    if (jcrcontentcqtemplate != nil) {
-        queryParams[@"jcr:content/cq:template"] = jcrcontentcqtemplate;
+    if (jcrcontentCqtemplate != nil) {
+        queryParams[@"jcr:content/cq:template"] = jcrcontentCqtemplate;
     }
-    if (jcrcontentenabled != nil) {
-        queryParams[@"jcr:content/enabled"] = [jcrcontentenabled isEqual:@(YES)] ? @"true" : @"false";
+    if (jcrcontentEnabled != nil) {
+        queryParams[@"jcr:content/enabled"] = [jcrcontentEnabled isEqual:@(YES)] ? @"true" : @"false";
     }
-    if (jcrcontentjcrdescription != nil) {
-        queryParams[@"jcr:content/jcr:description"] = jcrcontentjcrdescription;
+    if (jcrcontentJcrdescription != nil) {
+        queryParams[@"jcr:content/jcr:description"] = jcrcontentJcrdescription;
     }
-    if (jcrcontentjcrlastModified != nil) {
-        queryParams[@"jcr:content/jcr:lastModified"] = jcrcontentjcrlastModified;
+    if (jcrcontentJcrlastModified != nil) {
+        queryParams[@"jcr:content/jcr:lastModified"] = jcrcontentJcrlastModified;
     }
-    if (jcrcontentjcrlastModifiedBy != nil) {
-        queryParams[@"jcr:content/jcr:lastModifiedBy"] = jcrcontentjcrlastModifiedBy;
+    if (jcrcontentJcrlastModifiedBy != nil) {
+        queryParams[@"jcr:content/jcr:lastModifiedBy"] = jcrcontentJcrlastModifiedBy;
     }
-    if (jcrcontentjcrmixinTypes != nil) {
-        queryParams[@"jcr:content/jcr:mixinTypes"] = jcrcontentjcrmixinTypes;
+    if (jcrcontentJcrmixinTypes != nil) {
+        queryParams[@"jcr:content/jcr:mixinTypes"] = jcrcontentJcrmixinTypes;
     }
-    if (jcrcontentjcrtitle != nil) {
-        queryParams[@"jcr:content/jcr:title"] = jcrcontentjcrtitle;
+    if (jcrcontentJcrtitle != nil) {
+        queryParams[@"jcr:content/jcr:title"] = jcrcontentJcrtitle;
     }
-    if (jcrcontentlogLevel != nil) {
-        queryParams[@"jcr:content/logLevel"] = jcrcontentlogLevel;
+    if (jcrcontentLogLevel != nil) {
+        queryParams[@"jcr:content/logLevel"] = jcrcontentLogLevel;
     }
-    if (jcrcontentnoStatusUpdate != nil) {
-        queryParams[@"jcr:content/noStatusUpdate"] = [jcrcontentnoStatusUpdate isEqual:@(YES)] ? @"true" : @"false";
+    if (jcrcontentNoStatusUpdate != nil) {
+        queryParams[@"jcr:content/noStatusUpdate"] = [jcrcontentNoStatusUpdate isEqual:@(YES)] ? @"true" : @"false";
     }
-    if (jcrcontentnoVersioning != nil) {
-        queryParams[@"jcr:content/noVersioning"] = [jcrcontentnoVersioning isEqual:@(YES)] ? @"true" : @"false";
+    if (jcrcontentNoVersioning != nil) {
+        queryParams[@"jcr:content/noVersioning"] = [jcrcontentNoVersioning isEqual:@(YES)] ? @"true" : @"false";
     }
-    if (jcrcontentprotocolConnectTimeout != nil) {
-        queryParams[@"jcr:content/protocolConnectTimeout"] = jcrcontentprotocolConnectTimeout;
+    if (jcrcontentProtocolConnectTimeout != nil) {
+        queryParams[@"jcr:content/protocolConnectTimeout"] = jcrcontentProtocolConnectTimeout;
     }
-    if (jcrcontentprotocolHTTPConnectionClosed != nil) {
-        queryParams[@"jcr:content/protocolHTTPConnectionClosed"] = [jcrcontentprotocolHTTPConnectionClosed isEqual:@(YES)] ? @"true" : @"false";
+    if (jcrcontentProtocolHTTPConnectionClosed != nil) {
+        queryParams[@"jcr:content/protocolHTTPConnectionClosed"] = [jcrcontentProtocolHTTPConnectionClosed isEqual:@(YES)] ? @"true" : @"false";
     }
-    if (jcrcontentprotocolHTTPExpired != nil) {
-        queryParams[@"jcr:content/protocolHTTPExpired"] = jcrcontentprotocolHTTPExpired;
+    if (jcrcontentProtocolHTTPExpired != nil) {
+        queryParams[@"jcr:content/protocolHTTPExpired"] = jcrcontentProtocolHTTPExpired;
     }
-    if (jcrcontentprotocolHTTPHeaders != nil) {
-        queryParams[@"jcr:content/protocolHTTPHeaders"] = [[OAIQueryParamCollection alloc] initWithValuesAndFormat: jcrcontentprotocolHTTPHeaders format: @"multi"];
+    if (jcrcontentProtocolHTTPHeaders != nil) {
+        queryParams[@"jcr:content/protocolHTTPHeaders"] = [[OAIQueryParamCollection alloc] initWithValuesAndFormat: jcrcontentProtocolHTTPHeaders format: @"multi"];
     }
-    if (jcrcontentprotocolHTTPHeadersTypeHint != nil) {
-        queryParams[@"jcr:content/protocolHTTPHeaders@TypeHint"] = jcrcontentprotocolHTTPHeadersTypeHint;
+    if (jcrcontentProtocolHTTPHeadersTypeHint != nil) {
+        queryParams[@"jcr:content/protocolHTTPHeaders@TypeHint"] = jcrcontentProtocolHTTPHeadersTypeHint;
     }
-    if (jcrcontentprotocolHTTPMethod != nil) {
-        queryParams[@"jcr:content/protocolHTTPMethod"] = jcrcontentprotocolHTTPMethod;
+    if (jcrcontentProtocolHTTPMethod != nil) {
+        queryParams[@"jcr:content/protocolHTTPMethod"] = jcrcontentProtocolHTTPMethod;
     }
-    if (jcrcontentprotocolHTTPSRelaxed != nil) {
-        queryParams[@"jcr:content/protocolHTTPSRelaxed"] = [jcrcontentprotocolHTTPSRelaxed isEqual:@(YES)] ? @"true" : @"false";
+    if (jcrcontentProtocolHTTPSRelaxed != nil) {
+        queryParams[@"jcr:content/protocolHTTPSRelaxed"] = [jcrcontentProtocolHTTPSRelaxed isEqual:@(YES)] ? @"true" : @"false";
     }
-    if (jcrcontentprotocolInterface != nil) {
-        queryParams[@"jcr:content/protocolInterface"] = jcrcontentprotocolInterface;
+    if (jcrcontentProtocolInterface != nil) {
+        queryParams[@"jcr:content/protocolInterface"] = jcrcontentProtocolInterface;
     }
-    if (jcrcontentprotocolSocketTimeout != nil) {
-        queryParams[@"jcr:content/protocolSocketTimeout"] = jcrcontentprotocolSocketTimeout;
+    if (jcrcontentProtocolSocketTimeout != nil) {
+        queryParams[@"jcr:content/protocolSocketTimeout"] = jcrcontentProtocolSocketTimeout;
     }
-    if (jcrcontentprotocolVersion != nil) {
-        queryParams[@"jcr:content/protocolVersion"] = jcrcontentprotocolVersion;
+    if (jcrcontentProtocolVersion != nil) {
+        queryParams[@"jcr:content/protocolVersion"] = jcrcontentProtocolVersion;
     }
-    if (jcrcontentproxyNTLMDomain != nil) {
-        queryParams[@"jcr:content/proxyNTLMDomain"] = jcrcontentproxyNTLMDomain;
+    if (jcrcontentProxyNTLMDomain != nil) {
+        queryParams[@"jcr:content/proxyNTLMDomain"] = jcrcontentProxyNTLMDomain;
     }
-    if (jcrcontentproxyNTLMHost != nil) {
-        queryParams[@"jcr:content/proxyNTLMHost"] = jcrcontentproxyNTLMHost;
+    if (jcrcontentProxyNTLMHost != nil) {
+        queryParams[@"jcr:content/proxyNTLMHost"] = jcrcontentProxyNTLMHost;
     }
-    if (jcrcontentproxyHost != nil) {
-        queryParams[@"jcr:content/proxyHost"] = jcrcontentproxyHost;
+    if (jcrcontentProxyHost != nil) {
+        queryParams[@"jcr:content/proxyHost"] = jcrcontentProxyHost;
     }
-    if (jcrcontentproxyPassword != nil) {
-        queryParams[@"jcr:content/proxyPassword"] = jcrcontentproxyPassword;
+    if (jcrcontentProxyPassword != nil) {
+        queryParams[@"jcr:content/proxyPassword"] = jcrcontentProxyPassword;
     }
-    if (jcrcontentproxyPort != nil) {
-        queryParams[@"jcr:content/proxyPort"] = jcrcontentproxyPort;
+    if (jcrcontentProxyPort != nil) {
+        queryParams[@"jcr:content/proxyPort"] = jcrcontentProxyPort;
     }
-    if (jcrcontentproxyUser != nil) {
-        queryParams[@"jcr:content/proxyUser"] = jcrcontentproxyUser;
+    if (jcrcontentProxyUser != nil) {
+        queryParams[@"jcr:content/proxyUser"] = jcrcontentProxyUser;
     }
-    if (jcrcontentqueueBatchMaxSize != nil) {
-        queryParams[@"jcr:content/queueBatchMaxSize"] = jcrcontentqueueBatchMaxSize;
+    if (jcrcontentQueueBatchMaxSize != nil) {
+        queryParams[@"jcr:content/queueBatchMaxSize"] = jcrcontentQueueBatchMaxSize;
     }
-    if (jcrcontentqueueBatchMode != nil) {
-        queryParams[@"jcr:content/queueBatchMode"] = jcrcontentqueueBatchMode;
+    if (jcrcontentQueueBatchMode != nil) {
+        queryParams[@"jcr:content/queueBatchMode"] = jcrcontentQueueBatchMode;
     }
-    if (jcrcontentqueueBatchWaitTime != nil) {
-        queryParams[@"jcr:content/queueBatchWaitTime"] = jcrcontentqueueBatchWaitTime;
+    if (jcrcontentQueueBatchWaitTime != nil) {
+        queryParams[@"jcr:content/queueBatchWaitTime"] = jcrcontentQueueBatchWaitTime;
     }
-    if (jcrcontentretryDelay != nil) {
-        queryParams[@"jcr:content/retryDelay"] = jcrcontentretryDelay;
+    if (jcrcontentRetryDelay != nil) {
+        queryParams[@"jcr:content/retryDelay"] = jcrcontentRetryDelay;
     }
-    if (jcrcontentreverseReplication != nil) {
-        queryParams[@"jcr:content/reverseReplication"] = [jcrcontentreverseReplication isEqual:@(YES)] ? @"true" : @"false";
+    if (jcrcontentReverseReplication != nil) {
+        queryParams[@"jcr:content/reverseReplication"] = [jcrcontentReverseReplication isEqual:@(YES)] ? @"true" : @"false";
     }
-    if (jcrcontentserializationType != nil) {
-        queryParams[@"jcr:content/serializationType"] = jcrcontentserializationType;
+    if (jcrcontentSerializationType != nil) {
+        queryParams[@"jcr:content/serializationType"] = jcrcontentSerializationType;
     }
-    if (jcrcontentslingresourceType != nil) {
-        queryParams[@"jcr:content/sling:resourceType"] = jcrcontentslingresourceType;
+    if (jcrcontentSlingresourceType != nil) {
+        queryParams[@"jcr:content/sling:resourceType"] = jcrcontentSlingresourceType;
     }
-    if (jcrcontentssl != nil) {
-        queryParams[@"jcr:content/ssl"] = jcrcontentssl;
+    if (jcrcontentSsl != nil) {
+        queryParams[@"jcr:content/ssl"] = jcrcontentSsl;
     }
-    if (jcrcontenttransportNTLMDomain != nil) {
-        queryParams[@"jcr:content/transportNTLMDomain"] = jcrcontenttransportNTLMDomain;
+    if (jcrcontentTransportNTLMDomain != nil) {
+        queryParams[@"jcr:content/transportNTLMDomain"] = jcrcontentTransportNTLMDomain;
     }
-    if (jcrcontenttransportNTLMHost != nil) {
-        queryParams[@"jcr:content/transportNTLMHost"] = jcrcontenttransportNTLMHost;
+    if (jcrcontentTransportNTLMHost != nil) {
+        queryParams[@"jcr:content/transportNTLMHost"] = jcrcontentTransportNTLMHost;
     }
-    if (jcrcontenttransportPassword != nil) {
-        queryParams[@"jcr:content/transportPassword"] = jcrcontenttransportPassword;
+    if (jcrcontentTransportPassword != nil) {
+        queryParams[@"jcr:content/transportPassword"] = jcrcontentTransportPassword;
     }
-    if (jcrcontenttransportUri != nil) {
-        queryParams[@"jcr:content/transportUri"] = jcrcontenttransportUri;
+    if (jcrcontentTransportUri != nil) {
+        queryParams[@"jcr:content/transportUri"] = jcrcontentTransportUri;
     }
-    if (jcrcontenttransportUser != nil) {
-        queryParams[@"jcr:content/transportUser"] = jcrcontenttransportUser;
+    if (jcrcontentTransportUser != nil) {
+        queryParams[@"jcr:content/transportUser"] = jcrcontentTransportUser;
     }
-    if (jcrcontenttriggerDistribute != nil) {
-        queryParams[@"jcr:content/triggerDistribute"] = [jcrcontenttriggerDistribute isEqual:@(YES)] ? @"true" : @"false";
+    if (jcrcontentTriggerDistribute != nil) {
+        queryParams[@"jcr:content/triggerDistribute"] = [jcrcontentTriggerDistribute isEqual:@(YES)] ? @"true" : @"false";
     }
-    if (jcrcontenttriggerModified != nil) {
-        queryParams[@"jcr:content/triggerModified"] = [jcrcontenttriggerModified isEqual:@(YES)] ? @"true" : @"false";
+    if (jcrcontentTriggerModified != nil) {
+        queryParams[@"jcr:content/triggerModified"] = [jcrcontentTriggerModified isEqual:@(YES)] ? @"true" : @"false";
     }
-    if (jcrcontenttriggerOnOffTime != nil) {
-        queryParams[@"jcr:content/triggerOnOffTime"] = [jcrcontenttriggerOnOffTime isEqual:@(YES)] ? @"true" : @"false";
+    if (jcrcontentTriggerOnOffTime != nil) {
+        queryParams[@"jcr:content/triggerOnOffTime"] = [jcrcontentTriggerOnOffTime isEqual:@(YES)] ? @"true" : @"false";
     }
-    if (jcrcontenttriggerReceive != nil) {
-        queryParams[@"jcr:content/triggerReceive"] = [jcrcontenttriggerReceive isEqual:@(YES)] ? @"true" : @"false";
+    if (jcrcontentTriggerReceive != nil) {
+        queryParams[@"jcr:content/triggerReceive"] = [jcrcontentTriggerReceive isEqual:@(YES)] ? @"true" : @"false";
     }
-    if (jcrcontenttriggerSpecific != nil) {
-        queryParams[@"jcr:content/triggerSpecific"] = [jcrcontenttriggerSpecific isEqual:@(YES)] ? @"true" : @"false";
+    if (jcrcontentTriggerSpecific != nil) {
+        queryParams[@"jcr:content/triggerSpecific"] = [jcrcontentTriggerSpecific isEqual:@(YES)] ? @"true" : @"false";
     }
-    if (jcrcontentuserId != nil) {
-        queryParams[@"jcr:content/userId"] = jcrcontentuserId;
+    if (jcrcontentUserId != nil) {
+        queryParams[@"jcr:content/userId"] = jcrcontentUserId;
     }
     if (jcrprimaryType != nil) {
         queryParams[@"jcr:primaryType"] = jcrprimaryType;
@@ -1604,7 +1604,7 @@ NSInteger kOAISlingApiMissingParamErrorCode = 234513;
 ///
 ///  @param reppassword  (optional)
 ///
-///  @param profilegivenName  (optional)
+///  @param profileGivenName  (optional)
 ///
 ///  @returns NSString*
 ///
@@ -1613,7 +1613,7 @@ NSInteger kOAISlingApiMissingParamErrorCode = 234513;
     createUser: (NSString*) createUser
     createGroup: (NSString*) createGroup
     reppassword: (NSString*) reppassword
-    profilegivenName: (NSString*) profilegivenName
+    profileGivenName: (NSString*) profileGivenName
     completionHandler: (void (^)(NSString* output, NSError* error)) handler {
     // verify the required parameter 'authorizableId' is set
     if (authorizableId == nil) {
@@ -1657,8 +1657,8 @@ NSInteger kOAISlingApiMissingParamErrorCode = 234513;
     if (reppassword != nil) {
         queryParams[@"rep:password"] = reppassword;
     }
-    if (profilegivenName != nil) {
-        queryParams[@"profile/givenName"] = profilegivenName;
+    if (profileGivenName != nil) {
+        queryParams[@"profile/givenName"] = profileGivenName;
     }
     NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
     [headerParams addEntriesFromDictionary:self.defaultHeaders];
@@ -2566,6 +2566,74 @@ NSInteger kOAISlingApiMissingParamErrorCode = 234513;
     if (filterMethodsTypeHint != nil) {
         queryParams[@"filter.methods@TypeHint"] = filterMethodsTypeHint;
     }
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"aemAuth"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"POST"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: nil
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler(error);
+                                }
+                            }];
+}
+
+///
+/// 
+/// 
+///  @param configNodeName  
+///
+///  @returns void
+///
+-(NSURLSessionTask*) postConfigPropertyWithConfigNodeName: (NSString*) configNodeName
+    completionHandler: (void (^)(NSError* error)) handler {
+    // verify the required parameter 'configNodeName' is set
+    if (configNodeName == nil) {
+        NSParameterAssert(configNodeName);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"configNodeName"] };
+            NSError* error = [NSError errorWithDomain:kOAISlingApiErrorDomain code:kOAISlingApiMissingParamErrorCode userInfo:userInfo];
+            handler(error);
+        }
+        return nil;
+    }
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/apps/system/config/{configNodeName}"];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+    if (configNodeName != nil) {
+        pathParams[@"configNodeName"] = configNodeName;
+    }
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
     NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
     [headerParams addEntriesFromDictionary:self.defaultHeaders];
     // HTTP header `Accept`

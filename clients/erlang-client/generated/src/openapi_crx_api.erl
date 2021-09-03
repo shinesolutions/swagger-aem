@@ -8,7 +8,7 @@
          post_package_update/5, post_package_update/6,
          post_set_password/4, post_set_password/5]).
 
--define(BASE_URL, "/").
+-define(BASE_URL, <<"">>).
 
 %% @doc 
 %% 
@@ -22,7 +22,7 @@ get_crxde_status(Ctx, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
-    Path = ["/crx/server/crx.default/jcr:root/.1.json"],
+    Path = [<<"/crx/server/crx.default/jcr:root/.1.json">>],
     QS = [],
     Headers = [],
     Body1 = [],
@@ -43,7 +43,7 @@ get_install_status(Ctx, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
-    Path = ["/crx/packmgr/installstatus.jsp"],
+    Path = [<<"/crx/packmgr/installstatus.jsp">>],
     QS = [],
     Headers = [],
     Body1 = [],
@@ -64,7 +64,7 @@ get_package_manager_servlet(Ctx, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
-    Path = ["/crx/packmgr/service/script.html"],
+    Path = [<<"/crx/packmgr/service/script.html">>],
     QS = [],
     Headers = [],
     Body1 = [],
@@ -85,7 +85,7 @@ post_package_service(Ctx, Cmd, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
-    Path = ["/crx/packmgr/service.jsp"],
+    Path = [<<"/crx/packmgr/service.jsp">>],
     QS = lists:flatten([{<<"cmd">>, Cmd}])++openapi_utils:optional_params([], _OptionalParams),
     Headers = [],
     Body1 = [],
@@ -106,8 +106,8 @@ post_package_service_json(Ctx, Path, Cmd, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
-    Path = ["/crx/packmgr/service/.json/", Path, ""],
-    QS = lists:flatten([{<<"cmd">>, Cmd}])++openapi_utils:optional_params([, 'groupName', 'packageName', 'packageVersion', '_charset_', 'force', 'recursive'], _OptionalParams),
+    Path = [<<"/crx/packmgr/service/.json/", Path, "">>],
+    QS = lists:flatten([{<<"cmd">>, Cmd}])++openapi_utils:optional_params(['groupName', 'packageName', 'packageVersion', '_charset_', 'force', 'recursive'], _OptionalParams),
     Headers = [],
     Body1 = {form, []++openapi_utils:optional_params(['package'], _OptionalParams)},
     ContentTypeHeader = openapi_utils:select_header_content_type([<<"multipart/form-data">>]),
@@ -127,8 +127,8 @@ post_package_update(Ctx, GroupName, PackageName, Version, Path, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
-    Path = ["/crx/packmgr/update.jsp"],
-    QS = lists:flatten([{<<"groupName">>, GroupName}, {<<"packageName">>, PackageName}, {<<"version">>, Version}, {<<"path">>, Path}])++openapi_utils:optional_params([, 'filter', '_charset_'], _OptionalParams),
+    Path = [<<"/crx/packmgr/update.jsp">>],
+    QS = lists:flatten([{<<"groupName">>, GroupName}, {<<"packageName">>, PackageName}, {<<"version">>, Version}, {<<"path">>, Path}])++openapi_utils:optional_params(['filter', '_charset_'], _OptionalParams),
     Headers = [],
     Body1 = [],
     ContentTypeHeader = openapi_utils:select_header_content_type([]),
@@ -148,7 +148,7 @@ post_set_password(Ctx, Old, Plain, Verify, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
-    Path = ["/crx/explorer/ui/setpassword.jsp"],
+    Path = [<<"/crx/explorer/ui/setpassword.jsp">>],
     QS = lists:flatten([{<<"old">>, Old}, {<<"plain">>, Plain}, {<<"verify">>, Verify}])++openapi_utils:optional_params([], _OptionalParams),
     Headers = [],
     Body1 = [],

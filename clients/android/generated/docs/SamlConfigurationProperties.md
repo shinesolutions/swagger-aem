@@ -1,7 +1,9 @@
 
+
 # SamlConfigurationProperties
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **path** | [**SamlConfigurationPropertyItemsArray**](SamlConfigurationPropertyItemsArray.md) |  |  [optional]
@@ -28,6 +30,7 @@ Name | Type | Description | Notes
 **digestMethod** | [**SamlConfigurationPropertyItemsString**](SamlConfigurationPropertyItemsString.md) |  |  [optional]
 **signatureMethod** | [**SamlConfigurationPropertyItemsString**](SamlConfigurationPropertyItemsString.md) |  |  [optional]
 **userIntermediatePath** | [**SamlConfigurationPropertyItemsString**](SamlConfigurationPropertyItemsString.md) |  |  [optional]
+
 
 
 

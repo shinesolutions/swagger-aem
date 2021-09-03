@@ -10,27 +10,32 @@ import javax.validation.constraints.*;
 /**
  * SamlConfigurationPropertyItemsArray
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPlayFrameworkCodegen", date = "2019-08-04T23:41:35.248Z[GMT]")
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPlayFrameworkCodegen", date = "2021-09-03T15:25:32.040+10:00[Australia/Melbourne]")
 @SuppressWarnings({"UnusedReturnValue", "WeakerAccess"})
 public class SamlConfigurationPropertyItemsArray   {
   @JsonProperty("name")
-  private String name = null;
+  
+  private String name;
 
   @JsonProperty("optional")
-  private Boolean optional = null;
+  
+  private Boolean optional;
 
   @JsonProperty("is_set")
-  private Boolean isSet = null;
+  
+  private Boolean isSet;
 
   @JsonProperty("type")
-  private Integer type = null;
+  
+  private Integer type;
 
   @JsonProperty("values")
+  
   private List<String> values = null;
 
   @JsonProperty("description")
-  private String description = null;
+  
+  private String description;
 
   public SamlConfigurationPropertyItemsArray name(String name) {
     this.name = name;
@@ -41,7 +46,7 @@ public class SamlConfigurationPropertyItemsArray   {
    * property name
    * @return name
   **/
-    public String getName() {
+  public String getName() {
     return name;
   }
 
@@ -58,7 +63,7 @@ public class SamlConfigurationPropertyItemsArray   {
    * True if optional
    * @return optional
   **/
-    public Boolean getOptional() {
+  public Boolean getOptional() {
     return optional;
   }
 
@@ -75,7 +80,7 @@ public class SamlConfigurationPropertyItemsArray   {
    * True if property is set
    * @return isSet
   **/
-    public Boolean getIsSet() {
+  public Boolean getIsSet() {
     return isSet;
   }
 
@@ -92,7 +97,7 @@ public class SamlConfigurationPropertyItemsArray   {
    * Property type, 1=String, 3=long, 11=boolean, 12=Password
    * @return type
   **/
-    public Integer getType() {
+  public Integer getType() {
     return type;
   }
 
@@ -117,7 +122,7 @@ public class SamlConfigurationPropertyItemsArray   {
    * Property value
    * @return values
   **/
-    public List<String> getValues() {
+  public List<String> getValues() {
     return values;
   }
 
@@ -134,7 +139,7 @@ public class SamlConfigurationPropertyItemsArray   {
    * Property description
    * @return description
   **/
-    public String getDescription() {
+  public String getDescription() {
     return description;
   }
 
@@ -144,7 +149,7 @@ public class SamlConfigurationPropertyItemsArray   {
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -185,7 +190,7 @@ public class SamlConfigurationPropertyItemsArray   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

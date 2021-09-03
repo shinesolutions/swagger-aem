@@ -4,9 +4,10 @@ info:
     email: opensource@shinesolutions.com
     name: Shine Solutions
     url: http://shinesolutions.com
-  description: Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
+  description: Swagger AEM is an OpenAPI specification for Adobe Experience Manager
+    (AEM) API
   title: Adobe Experience Manager (AEM) API
-  version: 3.2.0-pre.0
+  version: 3.5.0-pre.0
 servers:
 - url: /
 security:
@@ -16,13 +17,13 @@ paths:
     get:
       operationId: getConfigMgr
       responses:
-        200:
+        "200":
           content:
             text/xml:
               schema:
                 type: string
           description: OK
-        5XX:
+        "5XX":
           description: Unexpected error.
       tags:
       - console
@@ -175,17 +176,22 @@ paths:
           type: string
         style: form
       requestBody:
+        $ref: '#/components/requestBodies/inline_object'
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/body'
+              properties:
+                file:
+                  format: binary
+                  type: string
+              type: object
       responses:
         default:
           description: Default response
       tags:
       - sling
-      x-accepts: application/json
       x-contentType: multipart/form-data
+      x-accepts: application/json
   /{path}/{name}.rw.html:
     post:
       operationId: postNodeRw
@@ -211,6 +217,23 @@ paths:
         schema:
           type: string
         style: form
+      responses:
+        default:
+          description: Default response
+      tags:
+      - sling
+      x-accepts: application/json
+  /apps/system/config/{configNodeName}:
+    post:
+      operationId: postConfigProperty
+      parameters:
+      - explode: false
+        in: path
+        name: configNodeName
+        required: true
+        schema:
+          type: string
+        style: simple
       responses:
         default:
           description: Default response
@@ -1312,7 +1335,7 @@ paths:
     get:
       operationId: getInstallStatus
       responses:
-        200:
+        "200":
           content:
             application/json:
               schema:
@@ -1465,10 +1488,15 @@ paths:
           type: boolean
         style: form
       requestBody:
+        $ref: '#/components/requestBodies/inline_object_1'
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/body_1'
+              properties:
+                package:
+                  format: binary
+                  type: string
+              type: object
       responses:
         default:
           content:
@@ -1478,19 +1506,19 @@ paths:
           description: Default response
       tags:
       - crx
-      x-accepts: application/json
       x-contentType: multipart/form-data
+      x-accepts: application/json
   /crx/packmgr/service/script.html:
     get:
       operationId: getPackageManagerServlet
       responses:
-        404:
+        "404":
           content:
             text/html:
               schema:
                 type: string
           description: Package Manager Servlet is disabled
-        405:
+        "405":
           content:
             text/html:
               schema:
@@ -1503,13 +1531,13 @@ paths:
     get:
       operationId: getCrxdeStatus
       responses:
-        200:
+        "200":
           content:
             plain/text:
               schema:
                 type: string
           description: CRXDE is enabled
-        404:
+        "404":
           content:
             plain/text:
               schema:
@@ -1518,6 +1546,33 @@ paths:
       tags:
       - crx
       x-accepts: plain/text
+  /system/console/bundles/{name}.json:
+    get:
+      operationId: getBundleInfo
+      parameters:
+      - explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BundleInfo'
+          description: Retrieved bundle info
+        default:
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Default response
+      tags:
+      - console
+      x-accepts: application/json
   /system/console/bundles/{name}:
     post:
       operationId: postBundle
@@ -1610,7 +1665,6 @@ paths:
         name: service.ranking
         required: false
         schema:
-          format: int32
           type: integer
         style: form
       - explode: true
@@ -1757,7 +1811,6 @@ paths:
         name: clockTolerance
         required: false
         schema:
-          format: int32
           type: integer
         style: form
       - explode: true
@@ -1964,7 +2017,6 @@ paths:
         name: proxy.port
         required: false
         schema:
-          format: int32
           type: integer
         style: form
       - explode: true
@@ -2078,10 +2130,15 @@ paths:
           type: string
         style: form
       requestBody:
+        $ref: '#/components/requestBodies/inline_object_2'
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/body_2'
+              properties:
+                certificate:
+                  format: binary
+                  type: string
+              type: object
       responses:
         default:
           content:
@@ -2091,13 +2148,13 @@ paths:
           description: Default response
       tags:
       - sling
-      x-accepts: text/plain
       x-contentType: multipart/form-data
+      x-accepts: text/plain
   /libs/granite/security/truststore.json:
     get:
       operationId: getTruststoreInfo
       responses:
-        200:
+        "200":
           content:
             application/json:
               schema:
@@ -2130,10 +2187,15 @@ paths:
     post:
       operationId: postTruststorePKCS12
       requestBody:
+        $ref: '#/components/requestBodies/inline_object_3'
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/body_3'
+              properties:
+                truststore.p12:
+                  format: binary
+                  type: string
+              type: object
       responses:
         default:
           content:
@@ -2143,8 +2205,8 @@ paths:
           description: Default response
       tags:
       - sling
-      x-accepts: text/plain
       x-contentType: multipart/form-data
+      x-accepts: text/plain
   /system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler:
     post:
       operationId: postSamlConfiguration
@@ -2198,7 +2260,6 @@ paths:
         name: service.ranking
         required: false
         schema:
-          format: int32
           type: integer
         style: form
       - explode: true
@@ -2336,7 +2397,6 @@ paths:
         name: clockTolerance
         required: false
         schema:
-          format: int32
           type: integer
         style: form
       - explode: true
@@ -2370,13 +2430,13 @@ paths:
           type: array
         style: form
       responses:
-        200:
+        "200":
           content:
             text/plain:
               schema:
                 $ref: '#/components/schemas/SamlConfigurationInfo'
           description: Retrieved AEM SAML Configuration
-        302:
+        "302":
           content:
             text/plain:
               schema:
@@ -2488,12 +2548,23 @@ paths:
           type: string
         style: form
       requestBody:
+        $ref: '#/components/requestBodies/inline_object_4'
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/body_4'
+              properties:
+                cert-chain:
+                  format: binary
+                  type: string
+                pk:
+                  format: binary
+                  type: string
+                keyStore:
+                  format: binary
+                  type: string
+              type: object
       responses:
-        200:
+        "200":
           content:
             text/plain:
               schema:
@@ -2507,8 +2578,8 @@ paths:
           description: Default response
       tags:
       - sling
-      x-accepts: text/plain
       x-contentType: multipart/form-data
+      x-accepts: text/plain
   /{intermediatePath}/{authorizableId}.ks.json:
     get:
       operationId: getAuthorizableKeystore
@@ -2528,7 +2599,7 @@ paths:
           type: string
         style: simple
       responses:
-        200:
+        "200":
           content:
             text/plain:
               schema:
@@ -2572,7 +2643,108 @@ paths:
       tags:
       - sling
       x-accepts: application/octet-stream
+  /libs/granite/security/post/sslSetup.html:
+    post:
+      operationId: sslSetup
+      parameters:
+      - explode: true
+        in: query
+        name: keystorePassword
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: keystorePasswordConfirm
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: truststorePassword
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: truststorePasswordConfirm
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: httpsHostname
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: httpsPort
+        required: true
+        schema:
+          type: string
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object_5'
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                privatekeyFile:
+                  format: binary
+                  type: string
+                certificateFile:
+                  format: binary
+                  type: string
+              type: object
+      responses:
+        default:
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Default response
+      tags:
+      - granite
+      x-contentType: multipart/form-data
+      x-accepts: text/plain
 components:
+  requestBodies:
+    inline_object_1:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object_1'
+    inline_object:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object'
+    inline_object_5:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object_5'
+    inline_object_4:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object_4'
+    inline_object_3:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object_3'
+    inline_object_2:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object_2'
   schemas:
     InstallStatus:
       example:
@@ -2655,7 +2827,6 @@ components:
           type: string
         serialNumber:
           description: "18165099476682912368"
-          format: int32
           type: integer
       type: object
     TruststoreItems:
@@ -2687,7 +2858,6 @@ components:
           type: string
         serialNumber:
           description: "18165099476682912368"
-          format: int32
           type: integer
       type: object
     SamlConfigurationInfo:
@@ -2774,7 +2944,6 @@ components:
           type: boolean
         type:
           description: Property type, 1=String, 3=long, 11=boolean, 12=Password
-          format: int32
           type: integer
         values:
           description: Property value
@@ -2798,7 +2967,6 @@ components:
           type: boolean
         type:
           description: Property type, 1=String, 3=long, 11=boolean, 12=Password
-          format: int32
           type: integer
         value:
           description: Property value
@@ -2820,11 +2988,9 @@ components:
           type: boolean
         type:
           description: Property type, 1=String, 3=long, 11=boolean, 12=Password
-          format: int32
           type: integer
         value:
           description: Property value
-          format: int32
           type: integer
         description:
           description: Property description
@@ -2843,7 +3009,6 @@ components:
           type: boolean
         type:
           description: Property type, 1=String, 3=long, 11=boolean, 12=Password
-          format: int32
           type: integer
         value:
           description: Property value
@@ -2852,31 +3017,134 @@ components:
           description: Property description
           type: string
       type: object
-    body:
+    BundleInfo:
+      example:
+        s:
+        - 0
+        - 0
+        data:
+        - fragment: true
+          stateRaw: 1
+          name: name
+          symbolicName: symbolicName
+          id: 6
+          state: state
+          category: category
+          version: version
+          props:
+          - value: value
+            key: key
+          - value: value
+            key: key
+        - fragment: true
+          stateRaw: 1
+          name: name
+          symbolicName: symbolicName
+          id: 6
+          state: state
+          category: category
+          version: version
+          props:
+          - value: value
+            key: key
+          - value: value
+            key: key
+        status: status
+      properties:
+        status:
+          description: Status description of all bundles
+          type: string
+        s:
+          items:
+            type: integer
+          type: array
+        data:
+          items:
+            $ref: '#/components/schemas/BundleData'
+          type: array
+      type: object
+    BundleData:
+      example:
+        fragment: true
+        stateRaw: 1
+        name: name
+        symbolicName: symbolicName
+        id: 6
+        state: state
+        category: category
+        version: version
+        props:
+        - value: value
+          key: key
+        - value: value
+          key: key
+      properties:
+        id:
+          description: Bundle ID
+          type: integer
+        name:
+          description: Bundle name
+          type: string
+        fragment:
+          description: Is bundle a fragment
+          type: boolean
+        stateRaw:
+          description: Numeric raw bundle state value
+          type: integer
+        state:
+          description: Bundle state value
+          type: string
+        version:
+          description: Bundle version
+          type: string
+        symbolicName:
+          description: Bundle symbolic name
+          type: string
+        category:
+          description: Bundle category
+          type: string
+        props:
+          items:
+            $ref: '#/components/schemas/BundleDataProp'
+          type: array
+      type: object
+    BundleDataProp:
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          description: Bundle data key
+          type: string
+        value:
+          description: Bundle data value
+          type: string
+      type: object
+    inline_object:
       properties:
         file:
           format: binary
           type: string
       type: object
-    body_1:
+    inline_object_1:
       properties:
         package:
           format: binary
           type: string
       type: object
-    body_2:
+    inline_object_2:
       properties:
         certificate:
           format: binary
           type: string
       type: object
-    body_3:
+    inline_object_3:
       properties:
         truststore.p12:
           format: binary
           type: string
       type: object
-    body_4:
+    inline_object_4:
       properties:
         cert-chain:
           format: binary
@@ -2888,6 +3156,15 @@ components:
           format: binary
           type: string
       type: object
+    inline_object_5:
+      properties:
+        privatekeyFile:
+          format: binary
+          type: string
+        certificateFile:
+          format: binary
+          type: string
+      type: object
     InstallStatus_status:
       example:
         finished: true
@@ -2896,7 +3173,6 @@ components:
         finished:
           type: boolean
         itemCount:
-          format: int32
           type: integer
       type: object
   securitySchemes:

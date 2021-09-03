@@ -2,8 +2,8 @@
 
 ## Requires
 
-* Kotlin 1.1.2
-* Gradle 3.3
+* Kotlin 1.4.30
+* Gradle 6.8.3
 
 ## Build
 
@@ -36,6 +36,7 @@ All URIs are relative to *http://localhost*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ConsoleApi* | [**getAemProductInfo**](docs/ConsoleApi.md#getaemproductinfo) | **GET** /system/console/status-productinfo.json | 
+*ConsoleApi* | [**getBundleInfo**](docs/ConsoleApi.md#getbundleinfo) | **GET** /system/console/bundles/{name}.json | 
 *ConsoleApi* | [**getConfigMgr**](docs/ConsoleApi.md#getconfigmgr) | **GET** /system/console/configMgr | 
 *ConsoleApi* | [**postBundle**](docs/ConsoleApi.md#postbundle) | **POST** /system/console/bundles/{name} | 
 *ConsoleApi* | [**postJmxRepository**](docs/ConsoleApi.md#postjmxrepository) | **POST** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} | 
@@ -52,6 +53,7 @@ Class | Method | HTTP request | Description
 *CustomApi* | [**getAemHealthCheck**](docs/CustomApi.md#getaemhealthcheck) | **GET** /system/health | 
 *CustomApi* | [**postConfigAemHealthCheckServlet**](docs/CustomApi.md#postconfigaemhealthcheckservlet) | **POST** /apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck | 
 *CustomApi* | [**postConfigAemPasswordReset**](docs/CustomApi.md#postconfigaempasswordreset) | **POST** /apps/system/config/com.shinesolutions.aem.passwordreset.Activator | 
+*GraniteApi* | [**sslSetup**](docs/GraniteApi.md#sslsetup) | **POST** /libs/granite/security/post/sslSetup.html | 
 *SlingApi* | [**deleteAgent**](docs/SlingApi.md#deleteagent) | **DELETE** /etc/replication/agents.{runmode}/{name} | 
 *SlingApi* | [**deleteNode**](docs/SlingApi.md#deletenode) | **DELETE** /{path}/{name} | 
 *SlingApi* | [**getAgent**](docs/SlingApi.md#getagent) | **GET** /etc/replication/agents.{runmode}/{name} | 
@@ -73,6 +75,7 @@ Class | Method | HTTP request | Description
 *SlingApi* | [**postConfigApacheSlingDavExServlet**](docs/SlingApi.md#postconfigapacheslingdavexservlet) | **POST** /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet | 
 *SlingApi* | [**postConfigApacheSlingGetServlet**](docs/SlingApi.md#postconfigapacheslinggetservlet) | **POST** /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet | 
 *SlingApi* | [**postConfigApacheSlingReferrerFilter**](docs/SlingApi.md#postconfigapacheslingreferrerfilter) | **POST** /apps/system/config/org.apache.sling.security.impl.ReferrerFilter | 
+*SlingApi* | [**postConfigProperty**](docs/SlingApi.md#postconfigproperty) | **POST** /apps/system/config/{configNodeName} | 
 *SlingApi* | [**postNode**](docs/SlingApi.md#postnode) | **POST** /{path}/{name} | 
 *SlingApi* | [**postNodeRw**](docs/SlingApi.md#postnoderw) | **POST** /{path}/{name}.rw.html | 
 *SlingApi* | [**postPath**](docs/SlingApi.md#postpath) | **POST** /{path}/ | 
@@ -85,6 +88,9 @@ Class | Method | HTTP request | Description
 <a name="documentation-for-models"></a>
 ## Documentation for Models
 
+ - [org.openapitools.client.models.BundleData](docs/BundleData.md)
+ - [org.openapitools.client.models.BundleDataProp](docs/BundleDataProp.md)
+ - [org.openapitools.client.models.BundleInfo](docs/BundleInfo.md)
  - [org.openapitools.client.models.InstallStatus](docs/InstallStatus.md)
  - [org.openapitools.client.models.InstallStatusStatus](docs/InstallStatusStatus.md)
  - [org.openapitools.client.models.KeystoreChainItems](docs/KeystoreChainItems.md)

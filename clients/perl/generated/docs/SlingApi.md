@@ -30,6 +30,7 @@ Method | HTTP request | Description
 [**post_config_apache_sling_dav_ex_servlet**](SlingApi.md#post_config_apache_sling_dav_ex_servlet) | **POST** /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet | 
 [**post_config_apache_sling_get_servlet**](SlingApi.md#post_config_apache_sling_get_servlet) | **POST** /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet | 
 [**post_config_apache_sling_referrer_filter**](SlingApi.md#post_config_apache_sling_referrer_filter) | **POST** /apps/system/config/org.apache.sling.security.impl.ReferrerFilter | 
+[**post_config_property**](SlingApi.md#post_config_property) | **POST** /apps/system/config/{configNodeName} | 
 [**post_node**](SlingApi.md#post_node) | **POST** /{path}/{name} | 
 [**post_node_rw**](SlingApi.md#post_node_rw) | **POST** /{path}/{name}.rw.html | 
 [**post_path**](SlingApi.md#post_path) | **POST** /{path}/ | 
@@ -53,6 +54,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $runmode = "runmode_example"; # string | 
@@ -102,6 +104,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $path = "path_example"; # string | 
@@ -151,6 +154,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $runmode = "runmode_example"; # string | 
@@ -200,6 +204,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $runmode = "runmode_example"; # string | 
@@ -248,6 +253,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $intermediate_path = "intermediate_path_example"; # string | 
@@ -298,6 +304,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $intermediate_path = "intermediate_path_example"; # string | 
@@ -348,6 +355,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $path = "path_example"; # string | 
@@ -397,6 +405,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $group = "group_example"; # string | 
@@ -449,6 +458,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $group = "group_example"; # string | 
@@ -501,6 +511,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $path = "path_example"; # string | 
@@ -555,6 +566,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 
@@ -599,6 +611,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 
@@ -643,6 +656,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $runmode = "runmode_example"; # string | 
@@ -663,7 +677,7 @@ my $jcr:content/no_versioning = null; # boolean |
 my $jcr:content/protocol_connect_timeout = 3.4; # double | 
 my $jcr:content/protocol_http_connection_closed = null; # boolean | 
 my $jcr:content/protocol_http_expired = "jcr:content/protocol_http_expired_example"; # string | 
-my $jcr:content/protocol_http_headers = [("inner_example")]; # ARRAY[string] | 
+my $jcr:content/protocol_http_headers = [("null")]; # ARRAY[string] | 
 my $jcr:content/protocol_http_headers@type_hint = "jcr:content/protocol_http_headers@type_hint_example"; # string | 
 my $jcr:content/protocol_http_method = "jcr:content/protocol_http_method_example"; # string | 
 my $jcr:content/protocol_https_relaxed = null; # boolean | 
@@ -792,6 +806,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $intermediate_path = "intermediate_path_example"; # string | 
@@ -866,6 +881,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $authorizable_id = "authorizable_id_example"; # string | 
@@ -924,6 +940,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $key_store_password = "key_store_password_example"; # string | 
@@ -938,15 +955,15 @@ my $default_redirect_url = "default_redirect_url_example"; # string |
 my $default_redirect_url@type_hint = "default_redirect_url@type_hint_example"; # string | 
 my $user_id_attribute = "user_id_attribute_example"; # string | 
 my $user_id_attribute@type_hint = "user_id_attribute@type_hint_example"; # string | 
-my $default_groups = [("inner_example")]; # ARRAY[string] | 
+my $default_groups = [("null")]; # ARRAY[string] | 
 my $default_groups@type_hint = "default_groups@type_hint_example"; # string | 
 my $idp_cert_alias = "idp_cert_alias_example"; # string | 
 my $idp_cert_alias@type_hint = "idp_cert_alias@type_hint_example"; # string | 
 my $add_group_memberships = null; # boolean | 
 my $add_group_memberships@type_hint = "add_group_memberships@type_hint_example"; # string | 
-my $path = [("inner_example")]; # ARRAY[string] | 
+my $path = [("null")]; # ARRAY[string] | 
 my $path@type_hint = "path@type_hint_example"; # string | 
-my $synchronize_attributes = [("inner_example")]; # ARRAY[string] | 
+my $synchronize_attributes = [("null")]; # ARRAY[string] | 
 my $synchronize_attributes@type_hint = "synchronize_attributes@type_hint_example"; # string | 
 my $clock_tolerance = 56; # int | 
 my $clock_tolerance@type_hint = "clock_tolerance@type_hint_example"; # string | 
@@ -1065,6 +1082,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $org/apache/felix/https/nio = null; # boolean | 
@@ -1150,13 +1168,14 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $proxy/host = "proxy/host_example"; # string | 
 my $proxy/host@type_hint = "proxy/host@type_hint_example"; # string | 
 my $proxy/port = 56; # int | 
 my $proxy/port@type_hint = "proxy/port@type_hint_example"; # string | 
-my $proxy/exceptions = [("inner_example")]; # ARRAY[string] | 
+my $proxy/exceptions = [("null")]; # ARRAY[string] | 
 my $proxy/exceptions@type_hint = "proxy/exceptions@type_hint_example"; # string | 
 my $proxy/enabled = null; # boolean | 
 my $proxy/enabled@type_hint = "proxy/enabled@type_hint_example"; # string | 
@@ -1219,6 +1238,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $alias = "alias_example"; # string | 
@@ -1272,6 +1292,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $json/maximumresults = "json/maximumresults_example"; # string | 
@@ -1333,6 +1354,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $allow/empty = null; # boolean | 
@@ -1380,6 +1402,54 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **post_config_property**
+> post_config_property(config_node_name => $config_node_name)
+
+
+
+### Example 
+```perl
+use Data::Dumper;
+use WWW::OpenAPIClient::SlingApi;
+my $api_instance = WWW::OpenAPIClient::SlingApi->new(
+
+    # Configure HTTP basic authorization: aemAuth
+    username => 'YOUR_USERNAME',
+    password => 'YOUR_PASSWORD',
+    
+);
+
+my $config_node_name = "config_node_name_example"; # string | 
+
+eval { 
+    $api_instance->post_config_property(config_node_name => $config_node_name);
+};
+if ($@) {
+    warn "Exception when calling SlingApi->post_config_property: $@\n";
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **config_node_name** | **string**|  | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **post_node**
 > post_node(path => $path, name => $name, :operation => $:operation, delete_authorizable => $delete_authorizable, file => $file)
 
@@ -1394,6 +1464,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $path = "path_example"; # string | 
@@ -1449,6 +1520,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $path = "path_example"; # string | 
@@ -1500,6 +1572,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $path = "path_example"; # string | 
@@ -1551,6 +1624,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $path = "path_example"; # string | 
@@ -1605,6 +1679,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $ignoredeactivated = null; # boolean | 
@@ -1656,6 +1731,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $:operation = ":operation_example"; # string | 
@@ -1714,6 +1790,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $truststore/p12 = "/path/to/file"; # string | 

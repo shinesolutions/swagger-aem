@@ -1546,6 +1546,33 @@ paths:
       tags:
       - crx
       x-accepts: plain/text
+  /system/console/bundles/{name}.json:
+    get:
+      operationId: getBundleInfo
+      parameters:
+      - explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BundleInfo'
+          description: Retrieved bundle info
+        default:
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Default response
+      tags:
+      - console
+      x-accepts: application/json
   /system/console/bundles/{name}:
     post:
       operationId: postBundle
@@ -2990,6 +3017,109 @@ components:
           description: Property description
           type: string
       type: object
+    BundleInfo:
+      example:
+        s:
+        - 0
+        - 0
+        data:
+        - fragment: true
+          stateRaw: 1
+          name: name
+          symbolicName: symbolicName
+          id: 6
+          state: state
+          category: category
+          version: version
+          props:
+          - value: value
+            key: key
+          - value: value
+            key: key
+        - fragment: true
+          stateRaw: 1
+          name: name
+          symbolicName: symbolicName
+          id: 6
+          state: state
+          category: category
+          version: version
+          props:
+          - value: value
+            key: key
+          - value: value
+            key: key
+        status: status
+      properties:
+        status:
+          description: Status description of all bundles
+          type: string
+        s:
+          items:
+            type: integer
+          type: array
+        data:
+          items:
+            $ref: '#/components/schemas/BundleData'
+          type: array
+      type: object
+    BundleData:
+      example:
+        fragment: true
+        stateRaw: 1
+        name: name
+        symbolicName: symbolicName
+        id: 6
+        state: state
+        category: category
+        version: version
+        props:
+        - value: value
+          key: key
+        - value: value
+          key: key
+      properties:
+        id:
+          description: Bundle ID
+          type: integer
+        name:
+          description: Bundle name
+          type: string
+        fragment:
+          description: Is bundle a fragment
+          type: boolean
+        stateRaw:
+          description: Numeric raw bundle state value
+          type: integer
+        state:
+          description: Bundle state value
+          type: string
+        version:
+          description: Bundle version
+          type: string
+        symbolicName:
+          description: Bundle symbolic name
+          type: string
+        category:
+          description: Bundle category
+          type: string
+        props:
+          items:
+            $ref: '#/components/schemas/BundleDataProp'
+          type: array
+      type: object
+    BundleDataProp:
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          description: Bundle data key
+          type: string
+        value:
+          description: Bundle data value
+          type: string
+      type: object
     inline_object:
       properties:
         file:
@@ -3044,6 +3174,7 @@ components:
           type: boolean
         itemCount:
           type: integer
+      type: object
   securitySchemes:
     aemAuth:
       scheme: basic

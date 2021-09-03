@@ -7,22 +7,22 @@ import javax.ws.rs.core.Response;
 
 import io.swagger.annotations.*;
 
+import java.io.InputStream;
 import java.util.Map;
 import java.util.List;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
 
-@Path("/bin")
+@Path("/bin/querybuilder.json")
 @Api(description = "the bin API")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2019-08-04T23:42:15.912Z[GMT]")
-public class BinApi {
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2021-09-03T15:26:06.461+10:00[Australia/Melbourne]")public class BinApi {
 
     @GET
-    @Path("/querybuilder.json")
     @Produces({ "application/json" })
     @ApiOperation(value = "", notes = "", response = String.class, authorizations = {
+        
         @Authorization(value = "aemAuth")
-    }, tags={ "sling",  })
+         }, tags={ "sling" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = String.class)
     })
@@ -31,11 +31,11 @@ public class BinApi {
     }
 
     @POST
-    @Path("/querybuilder.json")
     @Produces({ "application/json" })
     @ApiOperation(value = "", notes = "", response = String.class, authorizations = {
+        
         @Authorization(value = "aemAuth")
-    }, tags={ "sling" })
+         }, tags={ "sling" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = String.class)
     })

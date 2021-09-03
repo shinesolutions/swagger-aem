@@ -5,35 +5,35 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.openapitools.jackson.nullable.JsonNullable;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
  * TruststoreItems
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-08-04T23:44:43.219Z[GMT]")
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-09-03T15:28:35.636+10:00[Australia/Melbourne]")
 public class TruststoreItems   {
   @JsonProperty("alias")
-  private String alias = null;
+  private String alias;
 
   @JsonProperty("entryType")
-  private String entryType = null;
+  private String entryType;
 
   @JsonProperty("subject")
-  private String subject = null;
+  private String subject;
 
   @JsonProperty("issuer")
-  private String issuer = null;
+  private String issuer;
 
   @JsonProperty("notBefore")
-  private String notBefore = null;
+  private String notBefore;
 
   @JsonProperty("notAfter")
-  private String notAfter = null;
+  private String notAfter;
 
   @JsonProperty("serialNumber")
-  private Integer serialNumber = null;
+  private Integer serialNumber;
 
   public TruststoreItems alias(String alias) {
     this.alias = alias;
@@ -43,7 +43,7 @@ public class TruststoreItems   {
   /**
    * Truststore alias name
    * @return alias
-  **/
+  */
   @ApiModelProperty(value = "Truststore alias name")
 
 
@@ -63,7 +63,7 @@ public class TruststoreItems   {
   /**
    * Get entryType
    * @return entryType
-  **/
+  */
   @ApiModelProperty(value = "")
 
 
@@ -83,7 +83,7 @@ public class TruststoreItems   {
   /**
    * e.g. \"CN=localhost\"
    * @return subject
-  **/
+  */
   @ApiModelProperty(value = "e.g. \"CN=localhost\"")
 
 
@@ -103,7 +103,7 @@ public class TruststoreItems   {
   /**
    * e.g. \"CN=Admin\"
    * @return issuer
-  **/
+  */
   @ApiModelProperty(value = "e.g. \"CN=Admin\"")
 
 
@@ -123,7 +123,7 @@ public class TruststoreItems   {
   /**
    * e.g. \"Sun Jul 01 12:00:00 AEST 2018\"
    * @return notBefore
-  **/
+  */
   @ApiModelProperty(value = "e.g. \"Sun Jul 01 12:00:00 AEST 2018\"")
 
 
@@ -143,7 +143,7 @@ public class TruststoreItems   {
   /**
    * e.g. \"Sun Jun 30 23:59:50 AEST 2019\"
    * @return notAfter
-  **/
+  */
   @ApiModelProperty(value = "e.g. \"Sun Jun 30 23:59:50 AEST 2019\"")
 
 
@@ -163,7 +163,7 @@ public class TruststoreItems   {
   /**
    * 18165099476682912368
    * @return serialNumber
-  **/
+  */
   @ApiModelProperty(value = "18165099476682912368")
 
 
@@ -177,7 +177,7 @@ public class TruststoreItems   {
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -219,7 +219,7 @@ public class TruststoreItems   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

@@ -1,68 +1,71 @@
-use hyper;
-use serde;
-use serde_json;
+use std::error;
+use std::fmt;
+
+#[derive(Debug, Clone)]
+pub struct ResponseContent<T> {
+    pub status: reqwest::StatusCode,
+    pub content: String,
+    pub entity: Option<T>,
+}
 
 #[derive(Debug)]
 pub enum Error<T> {
-    UriError(hyper::error::UriError),
-    Hyper(hyper::Error),
+    Reqwest(reqwest::Error),
     Serde(serde_json::Error),
-    ApiError(ApiError<T>),
+    Io(std::io::Error),
+    ResponseError(ResponseContent<T>),
 }
 
-#[derive(Debug)]
-pub struct ApiError<T> {
-    pub code: hyper::StatusCode,
-    pub content: Option<T>,
-}
-
-impl<'de, T> From<(hyper::StatusCode, &'de [u8])> for Error<T> 
-    where T: serde::Deserialize<'de> {
-    fn from(e: (hyper::StatusCode, &'de [u8])) -> Self {
-        if e.1.len() == 0 {
-            return Error::ApiError(ApiError{
-                code: e.0,
-                content: None,
-            });
-        }
-        match serde_json::from_slice::<T>(e.1) {
-            Ok(t) => Error::ApiError(ApiError{
-                code: e.0,
-                content: Some(t),
-            }),
-            Err(e) => {
-                Error::from(e)
-            }
-        }
+impl <T> fmt::Display for Error<T> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let (module, e) = match self {
+            Error::Reqwest(e) => ("reqwest", e.to_string()),
+            Error::Serde(e) => ("serde", e.to_string()),
+            Error::Io(e) => ("IO", e.to_string()),
+            Error::ResponseError(e) => ("response", format!("status code {}", e.status)),
+        };
+        write!(f, "error in {}: {}", module, e)
     }
 }
 
-impl<T> From<hyper::Error> for Error<T> {
-    fn from(e: hyper::Error) -> Self {
-        return Error::Hyper(e)
+impl <T: fmt::Debug> error::Error for Error<T> {
+    fn source(&self) -> Option<&(dyn error::Error + 'static)> {
+        Some(match self {
+            Error::Reqwest(e) => e,
+            Error::Serde(e) => e,
+            Error::Io(e) => e,
+            Error::ResponseError(_) => return None,
+        })
     }
 }
 
-impl<T> From<serde_json::Error> for Error<T> {
+impl <T> From<reqwest::Error> for Error<T> {
+    fn from(e: reqwest::Error) -> Self {
+        Error::Reqwest(e)
+    }
+}
+
+impl <T> From<serde_json::Error> for Error<T> {
     fn from(e: serde_json::Error) -> Self {
-        return Error::Serde(e)
+        Error::Serde(e)
     }
 }
 
-use super::models::*;
+impl <T> From<std::io::Error> for Error<T> {
+    fn from(e: std::io::Error) -> Self {
+        Error::Io(e)
+    }
+}
 
-mod request;
+pub fn urlencode<T: AsRef<str>>(s: T) -> String {
+    ::url::form_urlencoded::byte_serialize(s.as_ref().as_bytes()).collect()
+}
 
-mod console_api;
-pub use self::console_api::{ ConsoleApi, ConsoleApiClient };
-mod cq_api;
-pub use self::cq_api::{ CqApi, CqApiClient };
-mod crx_api;
-pub use self::crx_api::{ CrxApi, CrxApiClient };
-mod custom_api;
-pub use self::custom_api::{ CustomApi, CustomApiClient };
-mod sling_api;
-pub use self::sling_api::{ SlingApi, SlingApiClient };
+pub mod console_api;
+pub mod cq_api;
+pub mod crx_api;
+pub mod custom_api;
+pub mod granite_api;
+pub mod sling_api;
 
 pub mod configuration;
-pub mod client;

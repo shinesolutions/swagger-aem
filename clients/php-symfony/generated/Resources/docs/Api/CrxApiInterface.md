@@ -21,7 +21,7 @@ services:
     acme.my_bundle.api.crx:
         class: Acme\MyBundle\Api\CrxApi
         tags:
-            - { name: "open_apiserver.api", api: "crx" }
+            - { name: "open_api_server.api", api: "crx" }
     # ...
 ```
 

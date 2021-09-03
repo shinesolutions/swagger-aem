@@ -1,61 +1,61 @@
 package org.openapitools.api;
 
-import groovyx.net.http.*
-import static groovyx.net.http.ContentType.*
-import static groovyx.net.http.Method.*
 import org.openapitools.api.ApiUtils
 
-
-import java.util.*;
-
-@Mixin(ApiUtils)
 class CqApi {
     String basePath = "http://localhost"
-    String versionPath = "/api/v1"
+    String versionPath = ""
+    ApiUtils apiUtils = new ApiUtils();
 
     def getLoginPage ( Closure onSuccess, Closure onFailure)  {
-        // create path and map path parameters (TODO)
         String resourcePath = "/libs/granite/core/content/login.html"
 
-        // query params
+        // params
         def queryParams = [:]
         def headerParams = [:]
+        def bodyParams
+        def contentType
 
-        // TODO: form params, body param not yet support
 
-        invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams,
+
+
+
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
                     "GET", "",
                     String.class )
 
     }
 
     def postCqActions ( String authorizableId, String changelog, Closure onSuccess, Closure onFailure)  {
-        // create path and map path parameters (TODO)
         String resourcePath = "/.cqactions.html"
 
-        // query params
+        // params
         def queryParams = [:]
         def headerParams = [:]
+        def bodyParams
+        def contentType
 
         // verify required params are set
         if (authorizableId == null) {
             throw new RuntimeException("missing required params authorizableId")
         }
-
         // verify required params are set
         if (changelog == null) {
             throw new RuntimeException("missing required params changelog")
         }
 
-        if (!"null".equals(String.valueOf(authorizableId)))
-            queryParams.put("authorizableId", String.valueOf(authorizableId))
+        if (authorizableId != null) {
+            queryParams.put("authorizableId", authorizableId)
+        }
+        if (changelog != null) {
+            queryParams.put("changelog", changelog)
+        }
 
-        if (!"null".equals(String.valueOf(changelog)))
-            queryParams.put("changelog", String.valueOf(changelog))
 
-        // TODO: form params, body param not yet support
 
-        invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams,
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
                     "POST", "",
                     null )
 

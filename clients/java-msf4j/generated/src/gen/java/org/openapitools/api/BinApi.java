@@ -22,16 +22,16 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.*;
 
-@Path("/bin")
+@Path("/bin/querybuilder.json")
 
 
 @io.swagger.annotations.Api(description = "the bin API")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaMSF4JServerCodegen", date = "2019-08-04T23:41:25.207Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaMSF4JServerCodegen", date = "2021-09-03T15:25:23.467+10:00[Australia/Melbourne]")
 public class BinApi  {
    private final BinApiService delegate = BinApiServiceFactory.getBinApi();
 
     @GET
-    @Path("/querybuilder.json")
+    
     
     @Produces({ "application/json" })
     @io.swagger.annotations.ApiOperation(value = "", notes = "", response = String.class, authorizations = {
@@ -48,7 +48,7 @@ public class BinApi  {
         return delegate.getQuery(path,pLimit,_1property,_1propertyValue);
     }
     @POST
-    @Path("/querybuilder.json")
+    
     
     @Produces({ "application/json" })
     @io.swagger.annotations.ApiOperation(value = "", notes = "", response = String.class, authorizations = {

@@ -13,13 +13,15 @@ Method | HTTP request | Description
 [**postSetPassword**](CrxApi.md#postSetPassword) | **POST** /crx/explorer/ui/setpassword.jsp | 
 
 
-<a name="getCrxdeStatus"></a>
-# **getCrxdeStatus**
+
+## getCrxdeStatus
+
 > String getCrxdeStatus()
 
 
 
 ### Example
+
 ```java
 // Import classes:
 //import org.openapitools.client.api.CrxApi;
@@ -35,6 +37,7 @@ try {
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -47,16 +50,18 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: plain/text
+- **Content-Type**: Not defined
+- **Accept**: plain/text
 
-<a name="getInstallStatus"></a>
-# **getInstallStatus**
+
+## getInstallStatus
+
 > InstallStatus getInstallStatus()
 
 
 
 ### Example
+
 ```java
 // Import classes:
 //import org.openapitools.client.api.CrxApi;
@@ -72,6 +77,7 @@ try {
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -84,16 +90,18 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-<a name="getPackageManagerServlet"></a>
-# **getPackageManagerServlet**
+
+## getPackageManagerServlet
+
 > getPackageManagerServlet()
 
 
 
 ### Example
+
 ```java
 // Import classes:
 //import org.openapitools.client.api.CrxApi;
@@ -108,6 +116,7 @@ try {
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -120,22 +129,24 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/html
+- **Content-Type**: Not defined
+- **Accept**: text/html
 
-<a name="postPackageService"></a>
-# **postPackageService**
+
+## postPackageService
+
 > String postPackageService(cmd)
 
 
 
 ### Example
+
 ```java
 // Import classes:
 //import org.openapitools.client.api.CrxApi;
 
 CrxApi apiInstance = new CrxApi();
-String cmd = "cmd_example"; // String | 
+String cmd = null; // String | 
 try {
     String result = apiInstance.postPackageService(cmd);
     System.out.println(result);
@@ -147,9 +158,10 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cmd** | **String**|  |
+ **cmd** | **String**|  | [default to null]
 
 ### Return type
 
@@ -161,29 +173,31 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/xml
+- **Content-Type**: Not defined
+- **Accept**: text/xml
 
-<a name="postPackageServiceJson"></a>
-# **postPackageServiceJson**
+
+## postPackageServiceJson
+
 > String postPackageServiceJson(path, cmd, groupName, packageName, packageVersion, charset, force, recursive, _package)
 
 
 
 ### Example
+
 ```java
 // Import classes:
 //import org.openapitools.client.api.CrxApi;
 
 CrxApi apiInstance = new CrxApi();
-String path = "path_example"; // String | 
-String cmd = "cmd_example"; // String | 
-String groupName = "groupName_example"; // String | 
-String packageName = "packageName_example"; // String | 
-String packageVersion = "packageVersion_example"; // String | 
-String charset = "charset_example"; // String | 
-Boolean force = true; // Boolean | 
-Boolean recursive = true; // Boolean | 
+String path = null; // String | 
+String cmd = null; // String | 
+String groupName = null; // String | 
+String packageName = null; // String | 
+String packageVersion = null; // String | 
+String charset = null; // String | 
+Boolean force = null; // Boolean | 
+Boolean recursive = null; // Boolean | 
 File _package = null; // File | 
 try {
     String result = apiInstance.postPackageServiceJson(path, cmd, groupName, packageName, packageVersion, charset, force, recursive, _package);
@@ -196,16 +210,17 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **path** | **String**|  |
- **cmd** | **String**|  |
- **groupName** | **String**|  | [optional]
- **packageName** | **String**|  | [optional]
- **packageVersion** | **String**|  | [optional]
- **charset** | **String**|  | [optional]
- **force** | **Boolean**|  | [optional]
- **recursive** | **Boolean**|  | [optional]
+ **path** | **String**|  | [default to null]
+ **cmd** | **String**|  | [default to null]
+ **groupName** | **String**|  | [optional] [default to null]
+ **packageName** | **String**|  | [optional] [default to null]
+ **packageVersion** | **String**|  | [optional] [default to null]
+ **charset** | **String**|  | [optional] [default to null]
+ **force** | **Boolean**|  | [optional] [default to null]
+ **recursive** | **Boolean**|  | [optional] [default to null]
  **_package** | **File**|  | [optional] [default to null]
 
 ### Return type
@@ -218,27 +233,29 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
+- **Content-Type**: multipart/form-data
+- **Accept**: application/json
 
-<a name="postPackageUpdate"></a>
-# **postPackageUpdate**
+
+## postPackageUpdate
+
 > String postPackageUpdate(groupName, packageName, version, path, filter, charset)
 
 
 
 ### Example
+
 ```java
 // Import classes:
 //import org.openapitools.client.api.CrxApi;
 
 CrxApi apiInstance = new CrxApi();
-String groupName = "groupName_example"; // String | 
-String packageName = "packageName_example"; // String | 
-String version = "version_example"; // String | 
-String path = "path_example"; // String | 
-String filter = "filter_example"; // String | 
-String charset = "charset_example"; // String | 
+String groupName = null; // String | 
+String packageName = null; // String | 
+String version = null; // String | 
+String path = null; // String | 
+String filter = null; // String | 
+String charset = null; // String | 
 try {
     String result = apiInstance.postPackageUpdate(groupName, packageName, version, path, filter, charset);
     System.out.println(result);
@@ -250,14 +267,15 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **groupName** | **String**|  |
- **packageName** | **String**|  |
- **version** | **String**|  |
- **path** | **String**|  |
- **filter** | **String**|  | [optional]
- **charset** | **String**|  | [optional]
+ **groupName** | **String**|  | [default to null]
+ **packageName** | **String**|  | [default to null]
+ **version** | **String**|  | [default to null]
+ **path** | **String**|  | [default to null]
+ **filter** | **String**|  | [optional] [default to null]
+ **charset** | **String**|  | [optional] [default to null]
 
 ### Return type
 
@@ -269,24 +287,26 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-<a name="postSetPassword"></a>
-# **postSetPassword**
+
+## postSetPassword
+
 > String postSetPassword(old, plain, verify)
 
 
 
 ### Example
+
 ```java
 // Import classes:
 //import org.openapitools.client.api.CrxApi;
 
 CrxApi apiInstance = new CrxApi();
-String old = "old_example"; // String | 
-String plain = "plain_example"; // String | 
-String verify = "verify_example"; // String | 
+String old = null; // String | 
+String plain = null; // String | 
+String verify = null; // String | 
 try {
     String result = apiInstance.postSetPassword(old, plain, verify);
     System.out.println(result);
@@ -298,11 +318,12 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **old** | **String**|  |
- **plain** | **String**|  |
- **verify** | **String**|  |
+ **old** | **String**|  | [default to null]
+ **plain** | **String**|  | [default to null]
+ **verify** | **String**|  | [default to null]
 
 ### Return type
 
@@ -314,6 +335,6 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/plain
+- **Content-Type**: Not defined
+- **Accept**: text/plain
 

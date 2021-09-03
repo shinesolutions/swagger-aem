@@ -8,20 +8,15 @@ import org.openapitools.model.SamlConfigurationProperties;
 @Canonical
 class SamlConfigurationInfo {
     /* Persistent Identity (PID) */
-    String pid = null
-
+    String pid
     /* Title */
-    String title = null
-
+    String title
     /* Title */
-    String description = null
-
+    String description
     /* needed for configuration binding */
-    String bundleLocation = null
-
+    String bundleLocation
     /* needed for configuraiton binding */
-    String serviceLocation = null
-
-    SamlConfigurationProperties properties = null
-
+    String serviceLocation
+    
+    SamlConfigurationProperties properties
 }

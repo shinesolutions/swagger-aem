@@ -4,7 +4,7 @@
          post_config_aem_health_check_servlet/1, post_config_aem_health_check_servlet/2,
          post_config_aem_password_reset/1, post_config_aem_password_reset/2]).
 
--define(BASE_URL, "/").
+-define(BASE_URL, <<"">>).
 
 %% @doc 
 %% 
@@ -18,7 +18,7 @@ get_aem_health_check(Ctx, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
-    Path = ["/system/health"],
+    Path = [<<"/system/health">>],
     QS = lists:flatten([])++openapi_utils:optional_params(['tags', 'combineTagsOr'], _OptionalParams),
     Headers = [],
     Body1 = [],
@@ -39,7 +39,7 @@ post_config_aem_health_check_servlet(Ctx, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
-    Path = ["/apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck"],
+    Path = [<<"/apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck">>],
     QS = lists:flatten([])++openapi_utils:optional_params(['bundles.ignored', 'bundles.ignored@TypeHint'], _OptionalParams),
     Headers = [],
     Body1 = [],
@@ -60,7 +60,7 @@ post_config_aem_password_reset(Ctx, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
-    Path = ["/apps/system/config/com.shinesolutions.aem.passwordreset.Activator"],
+    Path = [<<"/apps/system/config/com.shinesolutions.aem.passwordreset.Activator">>],
     QS = lists:flatten([])++openapi_utils:optional_params(['pwdreset.authorizables', 'pwdreset.authorizables@TypeHint'], _OptionalParams),
     Headers = [],
     Body1 = [],

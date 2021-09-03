@@ -1,4 +1,5 @@
 # Org.OpenAPITools.Model.SamlConfigurationPropertyItemsString
+
 ## Properties
 
 Name | Type | Description | Notes

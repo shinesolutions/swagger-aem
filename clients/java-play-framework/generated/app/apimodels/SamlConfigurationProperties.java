@@ -12,81 +12,128 @@ import javax.validation.constraints.*;
 /**
  * SamlConfigurationProperties
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPlayFrameworkCodegen", date = "2019-08-04T23:41:35.248Z[GMT]")
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPlayFrameworkCodegen", date = "2021-09-03T15:25:32.040+10:00[Australia/Melbourne]")
 @SuppressWarnings({"UnusedReturnValue", "WeakerAccess"})
 public class SamlConfigurationProperties   {
   @JsonProperty("path")
-  private SamlConfigurationPropertyItemsArray path = null;
+  @Valid
+
+  private SamlConfigurationPropertyItemsArray path;
 
   @JsonProperty("service.ranking")
-  private SamlConfigurationPropertyItemsLong serviceRanking = null;
+  @Valid
+
+  private SamlConfigurationPropertyItemsLong serviceRanking;
 
   @JsonProperty("idpUrl")
-  private SamlConfigurationPropertyItemsString idpUrl = null;
+  @Valid
+
+  private SamlConfigurationPropertyItemsString idpUrl;
 
   @JsonProperty("idpCertAlias")
-  private SamlConfigurationPropertyItemsString idpCertAlias = null;
+  @Valid
+
+  private SamlConfigurationPropertyItemsString idpCertAlias;
 
   @JsonProperty("idpHttpRedirect")
-  private SamlConfigurationPropertyItemsBoolean idpHttpRedirect = null;
+  @Valid
+
+  private SamlConfigurationPropertyItemsBoolean idpHttpRedirect;
 
   @JsonProperty("serviceProviderEntityId")
-  private SamlConfigurationPropertyItemsString serviceProviderEntityId = null;
+  @Valid
+
+  private SamlConfigurationPropertyItemsString serviceProviderEntityId;
 
   @JsonProperty("assertionConsumerServiceURL")
-  private SamlConfigurationPropertyItemsString assertionConsumerServiceURL = null;
+  @Valid
+
+  private SamlConfigurationPropertyItemsString assertionConsumerServiceURL;
 
   @JsonProperty("spPrivateKeyAlias")
-  private SamlConfigurationPropertyItemsString spPrivateKeyAlias = null;
+  @Valid
+
+  private SamlConfigurationPropertyItemsString spPrivateKeyAlias;
 
   @JsonProperty("keyStorePassword")
-  private SamlConfigurationPropertyItemsString keyStorePassword = null;
+  @Valid
+
+  private SamlConfigurationPropertyItemsString keyStorePassword;
 
   @JsonProperty("defaultRedirectUrl")
-  private SamlConfigurationPropertyItemsString defaultRedirectUrl = null;
+  @Valid
+
+  private SamlConfigurationPropertyItemsString defaultRedirectUrl;
 
   @JsonProperty("userIDAttribute")
-  private SamlConfigurationPropertyItemsString userIDAttribute = null;
+  @Valid
+
+  private SamlConfigurationPropertyItemsString userIDAttribute;
 
   @JsonProperty("useEncryption")
-  private SamlConfigurationPropertyItemsBoolean useEncryption = null;
+  @Valid
+
+  private SamlConfigurationPropertyItemsBoolean useEncryption;
 
   @JsonProperty("createUser")
-  private SamlConfigurationPropertyItemsBoolean createUser = null;
+  @Valid
+
+  private SamlConfigurationPropertyItemsBoolean createUser;
 
   @JsonProperty("addGroupMemberships")
-  private SamlConfigurationPropertyItemsBoolean addGroupMemberships = null;
+  @Valid
+
+  private SamlConfigurationPropertyItemsBoolean addGroupMemberships;
 
   @JsonProperty("groupMembershipAttribute")
-  private SamlConfigurationPropertyItemsString groupMembershipAttribute = null;
+  @Valid
+
+  private SamlConfigurationPropertyItemsString groupMembershipAttribute;
 
   @JsonProperty("defaultGroups")
-  private SamlConfigurationPropertyItemsArray defaultGroups = null;
+  @Valid
+
+  private SamlConfigurationPropertyItemsArray defaultGroups;
 
   @JsonProperty("nameIdFormat")
-  private SamlConfigurationPropertyItemsString nameIdFormat = null;
+  @Valid
+
+  private SamlConfigurationPropertyItemsString nameIdFormat;
 
   @JsonProperty("synchronizeAttributes")
-  private SamlConfigurationPropertyItemsArray synchronizeAttributes = null;
+  @Valid
+
+  private SamlConfigurationPropertyItemsArray synchronizeAttributes;
 
   @JsonProperty("handleLogout")
-  private SamlConfigurationPropertyItemsBoolean handleLogout = null;
+  @Valid
+
+  private SamlConfigurationPropertyItemsBoolean handleLogout;
 
   @JsonProperty("logoutUrl")
-  private SamlConfigurationPropertyItemsString logoutUrl = null;
+  @Valid
+
+  private SamlConfigurationPropertyItemsString logoutUrl;
 
   @JsonProperty("clockTolerance")
-  private SamlConfigurationPropertyItemsLong clockTolerance = null;
+  @Valid
+
+  private SamlConfigurationPropertyItemsLong clockTolerance;
 
   @JsonProperty("digestMethod")
-  private SamlConfigurationPropertyItemsString digestMethod = null;
+  @Valid
+
+  private SamlConfigurationPropertyItemsString digestMethod;
 
   @JsonProperty("signatureMethod")
-  private SamlConfigurationPropertyItemsString signatureMethod = null;
+  @Valid
+
+  private SamlConfigurationPropertyItemsString signatureMethod;
 
   @JsonProperty("userIntermediatePath")
-  private SamlConfigurationPropertyItemsString userIntermediatePath = null;
+  @Valid
+
+  private SamlConfigurationPropertyItemsString userIntermediatePath;
 
   public SamlConfigurationProperties path(SamlConfigurationPropertyItemsArray path) {
     this.path = path;
@@ -97,7 +144,6 @@ public class SamlConfigurationProperties   {
    * Get path
    * @return path
   **/
-  @Valid
   public SamlConfigurationPropertyItemsArray getPath() {
     return path;
   }
@@ -115,7 +161,6 @@ public class SamlConfigurationProperties   {
    * Get serviceRanking
    * @return serviceRanking
   **/
-  @Valid
   public SamlConfigurationPropertyItemsLong getServiceRanking() {
     return serviceRanking;
   }
@@ -133,7 +178,6 @@ public class SamlConfigurationProperties   {
    * Get idpUrl
    * @return idpUrl
   **/
-  @Valid
   public SamlConfigurationPropertyItemsString getIdpUrl() {
     return idpUrl;
   }
@@ -151,7 +195,6 @@ public class SamlConfigurationProperties   {
    * Get idpCertAlias
    * @return idpCertAlias
   **/
-  @Valid
   public SamlConfigurationPropertyItemsString getIdpCertAlias() {
     return idpCertAlias;
   }
@@ -169,7 +212,6 @@ public class SamlConfigurationProperties   {
    * Get idpHttpRedirect
    * @return idpHttpRedirect
   **/
-  @Valid
   public SamlConfigurationPropertyItemsBoolean getIdpHttpRedirect() {
     return idpHttpRedirect;
   }
@@ -187,7 +229,6 @@ public class SamlConfigurationProperties   {
    * Get serviceProviderEntityId
    * @return serviceProviderEntityId
   **/
-  @Valid
   public SamlConfigurationPropertyItemsString getServiceProviderEntityId() {
     return serviceProviderEntityId;
   }
@@ -205,7 +246,6 @@ public class SamlConfigurationProperties   {
    * Get assertionConsumerServiceURL
    * @return assertionConsumerServiceURL
   **/
-  @Valid
   public SamlConfigurationPropertyItemsString getAssertionConsumerServiceURL() {
     return assertionConsumerServiceURL;
   }
@@ -223,7 +263,6 @@ public class SamlConfigurationProperties   {
    * Get spPrivateKeyAlias
    * @return spPrivateKeyAlias
   **/
-  @Valid
   public SamlConfigurationPropertyItemsString getSpPrivateKeyAlias() {
     return spPrivateKeyAlias;
   }
@@ -241,7 +280,6 @@ public class SamlConfigurationProperties   {
    * Get keyStorePassword
    * @return keyStorePassword
   **/
-  @Valid
   public SamlConfigurationPropertyItemsString getKeyStorePassword() {
     return keyStorePassword;
   }
@@ -259,7 +297,6 @@ public class SamlConfigurationProperties   {
    * Get defaultRedirectUrl
    * @return defaultRedirectUrl
   **/
-  @Valid
   public SamlConfigurationPropertyItemsString getDefaultRedirectUrl() {
     return defaultRedirectUrl;
   }
@@ -277,7 +314,6 @@ public class SamlConfigurationProperties   {
    * Get userIDAttribute
    * @return userIDAttribute
   **/
-  @Valid
   public SamlConfigurationPropertyItemsString getUserIDAttribute() {
     return userIDAttribute;
   }
@@ -295,7 +331,6 @@ public class SamlConfigurationProperties   {
    * Get useEncryption
    * @return useEncryption
   **/
-  @Valid
   public SamlConfigurationPropertyItemsBoolean getUseEncryption() {
     return useEncryption;
   }
@@ -313,7 +348,6 @@ public class SamlConfigurationProperties   {
    * Get createUser
    * @return createUser
   **/
-  @Valid
   public SamlConfigurationPropertyItemsBoolean getCreateUser() {
     return createUser;
   }
@@ -331,7 +365,6 @@ public class SamlConfigurationProperties   {
    * Get addGroupMemberships
    * @return addGroupMemberships
   **/
-  @Valid
   public SamlConfigurationPropertyItemsBoolean getAddGroupMemberships() {
     return addGroupMemberships;
   }
@@ -349,7 +382,6 @@ public class SamlConfigurationProperties   {
    * Get groupMembershipAttribute
    * @return groupMembershipAttribute
   **/
-  @Valid
   public SamlConfigurationPropertyItemsString getGroupMembershipAttribute() {
     return groupMembershipAttribute;
   }
@@ -367,7 +399,6 @@ public class SamlConfigurationProperties   {
    * Get defaultGroups
    * @return defaultGroups
   **/
-  @Valid
   public SamlConfigurationPropertyItemsArray getDefaultGroups() {
     return defaultGroups;
   }
@@ -385,7 +416,6 @@ public class SamlConfigurationProperties   {
    * Get nameIdFormat
    * @return nameIdFormat
   **/
-  @Valid
   public SamlConfigurationPropertyItemsString getNameIdFormat() {
     return nameIdFormat;
   }
@@ -403,7 +433,6 @@ public class SamlConfigurationProperties   {
    * Get synchronizeAttributes
    * @return synchronizeAttributes
   **/
-  @Valid
   public SamlConfigurationPropertyItemsArray getSynchronizeAttributes() {
     return synchronizeAttributes;
   }
@@ -421,7 +450,6 @@ public class SamlConfigurationProperties   {
    * Get handleLogout
    * @return handleLogout
   **/
-  @Valid
   public SamlConfigurationPropertyItemsBoolean getHandleLogout() {
     return handleLogout;
   }
@@ -439,7 +467,6 @@ public class SamlConfigurationProperties   {
    * Get logoutUrl
    * @return logoutUrl
   **/
-  @Valid
   public SamlConfigurationPropertyItemsString getLogoutUrl() {
     return logoutUrl;
   }
@@ -457,7 +484,6 @@ public class SamlConfigurationProperties   {
    * Get clockTolerance
    * @return clockTolerance
   **/
-  @Valid
   public SamlConfigurationPropertyItemsLong getClockTolerance() {
     return clockTolerance;
   }
@@ -475,7 +501,6 @@ public class SamlConfigurationProperties   {
    * Get digestMethod
    * @return digestMethod
   **/
-  @Valid
   public SamlConfigurationPropertyItemsString getDigestMethod() {
     return digestMethod;
   }
@@ -493,7 +518,6 @@ public class SamlConfigurationProperties   {
    * Get signatureMethod
    * @return signatureMethod
   **/
-  @Valid
   public SamlConfigurationPropertyItemsString getSignatureMethod() {
     return signatureMethod;
   }
@@ -511,7 +535,6 @@ public class SamlConfigurationProperties   {
    * Get userIntermediatePath
    * @return userIntermediatePath
   **/
-  @Valid
   public SamlConfigurationPropertyItemsString getUserIntermediatePath() {
     return userIntermediatePath;
   }
@@ -522,7 +545,7 @@ public class SamlConfigurationProperties   {
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -599,7 +622,7 @@ public class SamlConfigurationProperties   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

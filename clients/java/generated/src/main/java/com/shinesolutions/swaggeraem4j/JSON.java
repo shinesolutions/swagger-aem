@@ -50,6 +50,7 @@ public class JSON {
     private LocalDateTypeAdapter localDateTypeAdapter = new LocalDateTypeAdapter();
     private ByteArrayAdapter byteArrayAdapter = new ByteArrayAdapter();
 
+    @SuppressWarnings("unchecked")
     public static GsonBuilder createGson() {
         GsonFireBuilder fireBuilder = new GsonFireBuilder()
         ;

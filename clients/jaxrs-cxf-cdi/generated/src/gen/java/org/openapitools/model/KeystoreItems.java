@@ -2,6 +2,8 @@ package org.openapitools.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.model.KeystoreChainItems;
@@ -14,16 +16,15 @@ import java.util.Objects;
 import javax.xml.bind.annotation.*;
 
 
-
 public class KeystoreItems   {
   
-  private String alias = null;
+  private String alias;
 
-  private String entryType = null;
+  private String entryType;
 
-  private String algorithm = null;
+  private String algorithm;
 
-  private String format = null;
+  private String format;
 
   private List<KeystoreChainItems> chain = null;
 
@@ -132,7 +133,7 @@ public class KeystoreItems   {
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -170,7 +171,7 @@ public class KeystoreItems   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

@@ -16,7 +16,7 @@ services:
     acme.my_bundle.api.cq:
         class: Acme\MyBundle\Api\CqApi
         tags:
-            - { name: "open_apiserver.api", api: "cq" }
+            - { name: "open_api_server.api", api: "cq" }
     # ...
 ```
 

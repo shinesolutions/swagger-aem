@@ -1,202 +1,238 @@
 package org.openapitools.api;
 
-import groovyx.net.http.*
-import static groovyx.net.http.ContentType.*
-import static groovyx.net.http.Method.*
 import org.openapitools.api.ApiUtils
-
+import org.openapitools.model.BundleInfo
 import org.openapitools.model.SamlConfigurationInfo
 
-import java.util.*;
-
-@Mixin(ApiUtils)
 class ConsoleApi {
     String basePath = "http://localhost"
-    String versionPath = "/api/v1"
+    String versionPath = ""
+    ApiUtils apiUtils = new ApiUtils();
 
     def getAemProductInfo ( Closure onSuccess, Closure onFailure)  {
-        // create path and map path parameters (TODO)
         String resourcePath = "/system/console/status-productinfo.json"
 
-        // query params
+        // params
         def queryParams = [:]
         def headerParams = [:]
+        def bodyParams
+        def contentType
 
-        // TODO: form params, body param not yet support
 
-        invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams,
+
+
+
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
                     "GET", "array",
                     String.class )
 
     }
 
-    def getConfigMgr ( Closure onSuccess, Closure onFailure)  {
-        // create path and map path parameters (TODO)
-        String resourcePath = "/system/console/configMgr"
+    def getBundleInfo ( String name, Closure onSuccess, Closure onFailure)  {
+        String resourcePath = "/system/console/bundles/${name}.json"
 
-        // query params
+        // params
         def queryParams = [:]
         def headerParams = [:]
-
-        // TODO: form params, body param not yet support
-
-        invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams,
-                    "GET", "",
-                    String.class )
-
-    }
-
-    def postBundle ( String name, String action, Closure onSuccess, Closure onFailure)  {
-        // create path and map path parameters (TODO)
-        String resourcePath = "/system/console/bundles/{name}"
-
-        // query params
-        def queryParams = [:]
-        def headerParams = [:]
+        def bodyParams
+        def contentType
 
         // verify required params are set
         if (name == null) {
             throw new RuntimeException("missing required params name")
         }
 
+
+
+
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+                    "GET", "",
+                    BundleInfo.class )
+
+    }
+
+    def getConfigMgr ( Closure onSuccess, Closure onFailure)  {
+        String resourcePath = "/system/console/configMgr"
+
+        // params
+        def queryParams = [:]
+        def headerParams = [:]
+        def bodyParams
+        def contentType
+
+
+
+
+
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+                    "GET", "",
+                    String.class )
+
+    }
+
+    def postBundle ( String name, String action, Closure onSuccess, Closure onFailure)  {
+        String resourcePath = "/system/console/bundles/${name}"
+
+        // params
+        def queryParams = [:]
+        def headerParams = [:]
+        def bodyParams
+        def contentType
+
+        // verify required params are set
+        if (name == null) {
+            throw new RuntimeException("missing required params name")
+        }
         // verify required params are set
         if (action == null) {
             throw new RuntimeException("missing required params action")
         }
 
-        if (!"null".equals(String.valueOf(action)))
-            queryParams.put("action", String.valueOf(action))
+        if (action != null) {
+            queryParams.put("action", action)
+        }
 
-        // TODO: form params, body param not yet support
 
-        invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams,
+
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
                     "POST", "",
                     null )
 
     }
 
     def postJmxRepository ( String action, Closure onSuccess, Closure onFailure)  {
-        // create path and map path parameters (TODO)
-        String resourcePath = "/system/console/jmx/com.adobe.granite:type=Repository/op/{action}"
+        String resourcePath = "/system/console/jmx/com.adobe.granite:type=Repository/op/${action}"
 
-        // query params
+        // params
         def queryParams = [:]
         def headerParams = [:]
+        def bodyParams
+        def contentType
 
         // verify required params are set
         if (action == null) {
             throw new RuntimeException("missing required params action")
         }
 
-        // TODO: form params, body param not yet support
 
-        invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams,
+
+
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
                     "POST", "",
                     null )
 
     }
 
     def postSamlConfiguration ( Boolean post, Boolean apply, Boolean delete, String action, String $location, List<String> path, Integer serviceRanking, String idpUrl, String idpCertAlias, Boolean idpHttpRedirect, String serviceProviderEntityId, String assertionConsumerServiceURL, String spPrivateKeyAlias, String keyStorePassword, String defaultRedirectUrl, String userIDAttribute, Boolean useEncryption, Boolean createUser, Boolean addGroupMemberships, String groupMembershipAttribute, List<String> defaultGroups, String nameIdFormat, List<String> synchronizeAttributes, Boolean handleLogout, String logoutUrl, Integer clockTolerance, String digestMethod, String signatureMethod, String userIntermediatePath, List<String> propertylist, Closure onSuccess, Closure onFailure)  {
-        // create path and map path parameters (TODO)
         String resourcePath = "/system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler"
 
-        // query params
+        // params
         def queryParams = [:]
         def headerParams = [:]
+        def bodyParams
+        def contentType
 
-        if (!"null".equals(String.valueOf(post)))
-            queryParams.put("post", String.valueOf(post))
 
-        if (!"null".equals(String.valueOf(apply)))
-            queryParams.put("apply", String.valueOf(apply))
+        if (post != null) {
+            queryParams.put("post", post)
+        }
+        if (apply != null) {
+            queryParams.put("apply", apply)
+        }
+        if (delete != null) {
+            queryParams.put("delete", delete)
+        }
+        if (action != null) {
+            queryParams.put("action", action)
+        }
+        if ($location != null) {
+            queryParams.put("$location", $location)
+        }
+        if (path != null) {
+            queryParams.put("path", path)
+        }
+        if (serviceRanking != null) {
+            queryParams.put("service.ranking", serviceRanking)
+        }
+        if (idpUrl != null) {
+            queryParams.put("idpUrl", idpUrl)
+        }
+        if (idpCertAlias != null) {
+            queryParams.put("idpCertAlias", idpCertAlias)
+        }
+        if (idpHttpRedirect != null) {
+            queryParams.put("idpHttpRedirect", idpHttpRedirect)
+        }
+        if (serviceProviderEntityId != null) {
+            queryParams.put("serviceProviderEntityId", serviceProviderEntityId)
+        }
+        if (assertionConsumerServiceURL != null) {
+            queryParams.put("assertionConsumerServiceURL", assertionConsumerServiceURL)
+        }
+        if (spPrivateKeyAlias != null) {
+            queryParams.put("spPrivateKeyAlias", spPrivateKeyAlias)
+        }
+        if (keyStorePassword != null) {
+            queryParams.put("keyStorePassword", keyStorePassword)
+        }
+        if (defaultRedirectUrl != null) {
+            queryParams.put("defaultRedirectUrl", defaultRedirectUrl)
+        }
+        if (userIDAttribute != null) {
+            queryParams.put("userIDAttribute", userIDAttribute)
+        }
+        if (useEncryption != null) {
+            queryParams.put("useEncryption", useEncryption)
+        }
+        if (createUser != null) {
+            queryParams.put("createUser", createUser)
+        }
+        if (addGroupMemberships != null) {
+            queryParams.put("addGroupMemberships", addGroupMemberships)
+        }
+        if (groupMembershipAttribute != null) {
+            queryParams.put("groupMembershipAttribute", groupMembershipAttribute)
+        }
+        if (defaultGroups != null) {
+            queryParams.put("defaultGroups", defaultGroups)
+        }
+        if (nameIdFormat != null) {
+            queryParams.put("nameIdFormat", nameIdFormat)
+        }
+        if (synchronizeAttributes != null) {
+            queryParams.put("synchronizeAttributes", synchronizeAttributes)
+        }
+        if (handleLogout != null) {
+            queryParams.put("handleLogout", handleLogout)
+        }
+        if (logoutUrl != null) {
+            queryParams.put("logoutUrl", logoutUrl)
+        }
+        if (clockTolerance != null) {
+            queryParams.put("clockTolerance", clockTolerance)
+        }
+        if (digestMethod != null) {
+            queryParams.put("digestMethod", digestMethod)
+        }
+        if (signatureMethod != null) {
+            queryParams.put("signatureMethod", signatureMethod)
+        }
+        if (userIntermediatePath != null) {
+            queryParams.put("userIntermediatePath", userIntermediatePath)
+        }
+        if (propertylist != null) {
+            queryParams.put("propertylist", propertylist)
+        }
 
-        if (!"null".equals(String.valueOf(delete)))
-            queryParams.put("delete", String.valueOf(delete))
 
-        if (!"null".equals(String.valueOf(action)))
-            queryParams.put("action", String.valueOf(action))
 
-        if (!"null".equals(String.valueOf($location)))
-            queryParams.put("$location", String.valueOf($location))
 
-        if (!"null".equals(String.valueOf(path)))
-            queryParams.put("path", String.valueOf(path))
-
-        if (!"null".equals(String.valueOf(serviceRanking)))
-            queryParams.put("service.ranking", String.valueOf(serviceRanking))
-
-        if (!"null".equals(String.valueOf(idpUrl)))
-            queryParams.put("idpUrl", String.valueOf(idpUrl))
-
-        if (!"null".equals(String.valueOf(idpCertAlias)))
-            queryParams.put("idpCertAlias", String.valueOf(idpCertAlias))
-
-        if (!"null".equals(String.valueOf(idpHttpRedirect)))
-            queryParams.put("idpHttpRedirect", String.valueOf(idpHttpRedirect))
-
-        if (!"null".equals(String.valueOf(serviceProviderEntityId)))
-            queryParams.put("serviceProviderEntityId", String.valueOf(serviceProviderEntityId))
-
-        if (!"null".equals(String.valueOf(assertionConsumerServiceURL)))
-            queryParams.put("assertionConsumerServiceURL", String.valueOf(assertionConsumerServiceURL))
-
-        if (!"null".equals(String.valueOf(spPrivateKeyAlias)))
-            queryParams.put("spPrivateKeyAlias", String.valueOf(spPrivateKeyAlias))
-
-        if (!"null".equals(String.valueOf(keyStorePassword)))
-            queryParams.put("keyStorePassword", String.valueOf(keyStorePassword))
-
-        if (!"null".equals(String.valueOf(defaultRedirectUrl)))
-            queryParams.put("defaultRedirectUrl", String.valueOf(defaultRedirectUrl))
-
-        if (!"null".equals(String.valueOf(userIDAttribute)))
-            queryParams.put("userIDAttribute", String.valueOf(userIDAttribute))
-
-        if (!"null".equals(String.valueOf(useEncryption)))
-            queryParams.put("useEncryption", String.valueOf(useEncryption))
-
-        if (!"null".equals(String.valueOf(createUser)))
-            queryParams.put("createUser", String.valueOf(createUser))
-
-        if (!"null".equals(String.valueOf(addGroupMemberships)))
-            queryParams.put("addGroupMemberships", String.valueOf(addGroupMemberships))
-
-        if (!"null".equals(String.valueOf(groupMembershipAttribute)))
-            queryParams.put("groupMembershipAttribute", String.valueOf(groupMembershipAttribute))
-
-        if (!"null".equals(String.valueOf(defaultGroups)))
-            queryParams.put("defaultGroups", String.valueOf(defaultGroups))
-
-        if (!"null".equals(String.valueOf(nameIdFormat)))
-            queryParams.put("nameIdFormat", String.valueOf(nameIdFormat))
-
-        if (!"null".equals(String.valueOf(synchronizeAttributes)))
-            queryParams.put("synchronizeAttributes", String.valueOf(synchronizeAttributes))
-
-        if (!"null".equals(String.valueOf(handleLogout)))
-            queryParams.put("handleLogout", String.valueOf(handleLogout))
-
-        if (!"null".equals(String.valueOf(logoutUrl)))
-            queryParams.put("logoutUrl", String.valueOf(logoutUrl))
-
-        if (!"null".equals(String.valueOf(clockTolerance)))
-            queryParams.put("clockTolerance", String.valueOf(clockTolerance))
-
-        if (!"null".equals(String.valueOf(digestMethod)))
-            queryParams.put("digestMethod", String.valueOf(digestMethod))
-
-        if (!"null".equals(String.valueOf(signatureMethod)))
-            queryParams.put("signatureMethod", String.valueOf(signatureMethod))
-
-        if (!"null".equals(String.valueOf(userIntermediatePath)))
-            queryParams.put("userIntermediatePath", String.valueOf(userIntermediatePath))
-
-        if (!"null".equals(String.valueOf(propertylist)))
-            queryParams.put("propertylist", String.valueOf(propertylist))
-
-        // TODO: form params, body param not yet support
-
-        invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams,
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
                     "POST", "",
                     SamlConfigurationInfo.class )
 

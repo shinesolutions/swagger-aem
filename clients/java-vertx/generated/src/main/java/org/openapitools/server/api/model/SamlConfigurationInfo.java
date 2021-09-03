@@ -5,15 +5,15 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.openapitools.server.api.model.SamlConfigurationProperties;
 
-@JsonInclude(JsonInclude.Include.NON_NULL) 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class SamlConfigurationInfo   {
   
-  private String pid = null;
-  private String title = null;
-  private String description = null;
-  private String bundleLocation = null;
-  private String serviceLocation = null;
-  private SamlConfigurationProperties properties = null;
+  private String pid;
+  private String title;
+  private String description;
+  private String bundleLocation;
+  private String serviceLocation;
+  private SamlConfigurationProperties properties;
 
   public SamlConfigurationInfo () {
 

@@ -3,54 +3,75 @@
 # Do not edit the class manually.
 
 parameters:
-    open_apiserver.serializer: 'OpenAPI\Server\Service\JmsSerializer'
-    open_apiserver.validator:  'OpenAPI\Server\Service\SymfonyValidator'
+    open_api_server.serializer: 'OpenAPI\Server\Service\JmsSerializer'
+    open_api_server.validator:  'OpenAPI\Server\Service\SymfonyValidator'
 
 services:
-    open_apiserver.api.api_server:
+    open_api_server.api.api_server:
         class: OpenAPI\Server\Api\ApiServer
 
-    open_apiserver.model.model_serializer:
+    open_api_server.model.model_serializer:
         class: OpenAPI\Server\Model\ModelSerializer
 
-    open_apiserver.service.serializer:
-        class: %open_apiserver.serializer%
+    open_api_server.service.serializer:
+        class: '%open_api_server.serializer%'
 
-    open_apiserver.service.validator:
-        class: %open_apiserver.validator%
+    open_api_server.service.validator:
+        class: '%open_api_server.validator%'
+        arguments:
+            - '@validator'
 
-    open_apiserver.controller.console:
+    open_api_server.controller.console:
         class: OpenAPI\Server\Controller\ConsoleController
         calls:
-         - [setSerializer, ['@open_apiserver.service.serializer']]
-         - [setValidator,  ['@open_apiserver.service.validator']]
-         - [setApiServer,  ['@open_apiserver.api.api_server']]
+         - [setSerializer, ['@open_api_server.service.serializer']]
+         - [setValidator,  ['@open_api_server.service.validator']]
+         - [setApiServer,  ['@open_api_server.api.api_server']]
+        tags: ['controller.service_arguments']
+        autowire: true
 
-    open_apiserver.controller.cq:
+    open_api_server.controller.cq:
         class: OpenAPI\Server\Controller\CqController
         calls:
-         - [setSerializer, ['@open_apiserver.service.serializer']]
-         - [setValidator,  ['@open_apiserver.service.validator']]
-         - [setApiServer,  ['@open_apiserver.api.api_server']]
+         - [setSerializer, ['@open_api_server.service.serializer']]
+         - [setValidator,  ['@open_api_server.service.validator']]
+         - [setApiServer,  ['@open_api_server.api.api_server']]
+        tags: ['controller.service_arguments']
+        autowire: true
 
-    open_apiserver.controller.crx:
+    open_api_server.controller.crx:
         class: OpenAPI\Server\Controller\CrxController
         calls:
-         - [setSerializer, ['@open_apiserver.service.serializer']]
-         - [setValidator,  ['@open_apiserver.service.validator']]
-         - [setApiServer,  ['@open_apiserver.api.api_server']]
+         - [setSerializer, ['@open_api_server.service.serializer']]
+         - [setValidator,  ['@open_api_server.service.validator']]
+         - [setApiServer,  ['@open_api_server.api.api_server']]
+        tags: ['controller.service_arguments']
+        autowire: true
 
-    open_apiserver.controller.custom:
+    open_api_server.controller.custom:
         class: OpenAPI\Server\Controller\CustomController
         calls:
-         - [setSerializer, ['@open_apiserver.service.serializer']]
-         - [setValidator,  ['@open_apiserver.service.validator']]
-         - [setApiServer,  ['@open_apiserver.api.api_server']]
+         - [setSerializer, ['@open_api_server.service.serializer']]
+         - [setValidator,  ['@open_api_server.service.validator']]
+         - [setApiServer,  ['@open_api_server.api.api_server']]
+        tags: ['controller.service_arguments']
+        autowire: true
 
-    open_apiserver.controller.sling:
+    open_api_server.controller.granite:
+        class: OpenAPI\Server\Controller\GraniteController
+        calls:
+         - [setSerializer, ['@open_api_server.service.serializer']]
+         - [setValidator,  ['@open_api_server.service.validator']]
+         - [setApiServer,  ['@open_api_server.api.api_server']]
+        tags: ['controller.service_arguments']
+        autowire: true
+
+    open_api_server.controller.sling:
         class: OpenAPI\Server\Controller\SlingController
         calls:
-         - [setSerializer, ['@open_apiserver.service.serializer']]
-         - [setValidator,  ['@open_apiserver.service.validator']]
-         - [setApiServer,  ['@open_apiserver.api.api_server']]
+         - [setSerializer, ['@open_api_server.service.serializer']]
+         - [setValidator,  ['@open_api_server.service.validator']]
+         - [setApiServer,  ['@open_api_server.api.api_server']]
+        tags: ['controller.service_arguments']
+        autowire: true
 

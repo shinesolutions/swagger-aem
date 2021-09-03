@@ -9,21 +9,15 @@ import java.util.List;
 @Canonical
 class SamlConfigurationPropertyItemsArray {
     /* property name */
-    String name = null
-
+    String name
     /* True if optional */
-    Boolean optional = null
-
+    Boolean optional
     /* True if property is set */
-    Boolean isSet = null
-
+    Boolean isSet
     /* Property type, 1=String, 3=long, 11=boolean, 12=Password */
-    Integer type = null
-
+    Integer type
     /* Property value */
     List<String> values = new ArrayList<String>()
-
     /* Property description */
-    String description = null
-
+    String description
 }

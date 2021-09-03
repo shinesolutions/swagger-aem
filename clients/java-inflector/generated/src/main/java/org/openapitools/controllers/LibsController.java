@@ -13,7 +13,7 @@ import org.openapitools.model.*;
 import java.io.File;
 import org.openapitools.model.TruststoreInfo;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaInflectorServerCodegen", date = "2019-08-04T23:41:21.082Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaInflectorServerCodegen", date = "2021-09-03T15:25:18.608+10:00[Australia/Melbourne]")
 public class LibsController  {
   /** 
    * Uncomment and implement as you see fit.  These operations will map
@@ -34,13 +34,19 @@ public class LibsController  {
   */
 
   /*
-    public ResponseContext postAuthorizables(RequestContext request , String authorizableId, String intermediatePath, String createUser, String createGroup, String repColonPassword, String profileSlashGivenName) {
+    public ResponseContext postAuthorizables(RequestContext request , String authorizableId, String intermediatePath, String createUser, String createGroup, String repColonPassword, String profileGivenName) {
         return new ResponseContext().status(Status.INTERNAL_SERVER_ERROR).entity( "Not implemented" );
     }
   */
 
   /*
     public ResponseContext postTruststore(RequestContext request , String colonOperation, String newPassword, String rePassword, String keyStoreType, String removeAlias, FormDataContentDisposition fileDetail) {
+        return new ResponseContext().status(Status.INTERNAL_SERVER_ERROR).entity( "Not implemented" );
+    }
+  */
+
+  /*
+    public ResponseContext sslSetup(RequestContext request , String keystorePassword, String keystorePasswordConfirm, String truststorePassword, String truststorePasswordConfirm, String httpsHostname, String httpsPort, FormDataContentDisposition fileDetail, FormDataContentDisposition fileDetail) {
         return new ResponseContext().status(Status.INTERNAL_SERVER_ERROR).entity( "Not implemented" );
     }
   */

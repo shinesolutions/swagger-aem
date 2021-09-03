@@ -3,11 +3,11 @@ using Nancy;
 using Nancy.ModelBinding;
 using System.Collections.Generic;
 using Sharpility.Base;
-using Org.OpenAPITools..Models;
-using Org.OpenAPITools..Utils;
+using Org.OpenAPITools._.Models;
+using Org.OpenAPITools._.Utils;
 using NodaTime;
 
-namespace Org.OpenAPITools..Modules
+namespace Org.OpenAPITools._.Modules
 { 
 
     /// <summary>
@@ -25,6 +25,14 @@ namespace Org.OpenAPITools..Modules
             {
                 
                 return service.GetAemProductInfo(Context).ToArray();
+            };
+
+            Get["/system/console/bundles/{name}.json"] = parameters =>
+            {
+                var name = Parameters.ValueOf<string>(parameters, Context.Request, "name", ParameterType.Path);
+                Preconditions.IsNotNull(name, "Required parameter: 'name' is missing at 'GetBundleInfo'");
+                
+                return service.GetBundleInfo(Context, name);
             };
 
             Get["/system/console/configMgr"] = parameters =>
@@ -107,6 +115,14 @@ namespace Org.OpenAPITools..Modules
         /// 
         /// </summary>
         /// <param name="context">Context of request</param>
+        /// <param name="name"></param>
+        /// <returns>BundleInfo</returns>
+        BundleInfo GetBundleInfo(NancyContext context, string name);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context">Context of request</param>
         /// <returns>string</returns>
         string GetConfigMgr(NancyContext context);
 
@@ -175,6 +191,11 @@ namespace Org.OpenAPITools..Modules
             return GetAemProductInfo();
         }
 
+        public virtual BundleInfo GetBundleInfo(NancyContext context, string name)
+        {
+            return GetBundleInfo(name);
+        }
+
         public virtual string GetConfigMgr(NancyContext context)
         {
             return GetConfigMgr();
@@ -196,6 +217,8 @@ namespace Org.OpenAPITools..Modules
         }
 
         protected abstract List<string> GetAemProductInfo();
+
+        protected abstract BundleInfo GetBundleInfo(string name);
 
         protected abstract string GetConfigMgr();
 

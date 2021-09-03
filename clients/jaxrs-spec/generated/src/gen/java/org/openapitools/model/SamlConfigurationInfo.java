@@ -1,23 +1,27 @@
 package org.openapitools.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.openapitools.model.SamlConfigurationProperties;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
 
-
 import io.swagger.annotations.*;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 
-public class SamlConfigurationInfo   {
+
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2021-09-03T15:26:06.461+10:00[Australia/Melbourne]")public class SamlConfigurationInfo   {
   
-  private @Valid String pid = null;
-  private @Valid String title = null;
-  private @Valid String description = null;
-  private @Valid String bundleLocation = null;
-  private @Valid String serviceLocation = null;
-  private @Valid SamlConfigurationProperties properties = null;
+  private @Valid String pid;
+  private @Valid String title;
+  private @Valid String description;
+  private @Valid String bundleLocation;
+  private @Valid String serviceLocation;
+  private @Valid SamlConfigurationProperties properties;
 
   /**
    * Persistent Identity (PID)
@@ -28,16 +32,19 @@ public class SamlConfigurationInfo   {
   }
 
   
+
+  
   @ApiModelProperty(value = "Persistent Identity (PID)")
   @JsonProperty("pid")
   public String getPid() {
     return pid;
   }
+
   public void setPid(String pid) {
     this.pid = pid;
   }
 
-  /**
+/**
    * Title
    **/
   public SamlConfigurationInfo title(String title) {
@@ -46,16 +53,19 @@ public class SamlConfigurationInfo   {
   }
 
   
+
+  
   @ApiModelProperty(value = "Title")
   @JsonProperty("title")
   public String getTitle() {
     return title;
   }
+
   public void setTitle(String title) {
     this.title = title;
   }
 
-  /**
+/**
    * Title
    **/
   public SamlConfigurationInfo description(String description) {
@@ -64,16 +74,19 @@ public class SamlConfigurationInfo   {
   }
 
   
+
+  
   @ApiModelProperty(value = "Title")
   @JsonProperty("description")
   public String getDescription() {
     return description;
   }
+
   public void setDescription(String description) {
     this.description = description;
   }
 
-  /**
+/**
    * needed for configuration binding
    **/
   public SamlConfigurationInfo bundleLocation(String bundleLocation) {
@@ -82,16 +95,19 @@ public class SamlConfigurationInfo   {
   }
 
   
+
+  
   @ApiModelProperty(value = "needed for configuration binding")
   @JsonProperty("bundle_location")
   public String getBundleLocation() {
     return bundleLocation;
   }
+
   public void setBundleLocation(String bundleLocation) {
     this.bundleLocation = bundleLocation;
   }
 
-  /**
+/**
    * needed for configuraiton binding
    **/
   public SamlConfigurationInfo serviceLocation(String serviceLocation) {
@@ -100,16 +116,19 @@ public class SamlConfigurationInfo   {
   }
 
   
+
+  
   @ApiModelProperty(value = "needed for configuraiton binding")
   @JsonProperty("service_location")
   public String getServiceLocation() {
     return serviceLocation;
   }
+
   public void setServiceLocation(String serviceLocation) {
     this.serviceLocation = serviceLocation;
   }
 
-  /**
+/**
    **/
   public SamlConfigurationInfo properties(SamlConfigurationProperties properties) {
     this.properties = properties;
@@ -117,18 +136,21 @@ public class SamlConfigurationInfo   {
   }
 
   
+
+  
   @ApiModelProperty(value = "")
   @JsonProperty("properties")
   public SamlConfigurationProperties getProperties() {
     return properties;
   }
+
   public void setProperties(SamlConfigurationProperties properties) {
     this.properties = properties;
   }
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -136,12 +158,12 @@ public class SamlConfigurationInfo   {
       return false;
     }
     SamlConfigurationInfo samlConfigurationInfo = (SamlConfigurationInfo) o;
-    return Objects.equals(pid, samlConfigurationInfo.pid) &&
-        Objects.equals(title, samlConfigurationInfo.title) &&
-        Objects.equals(description, samlConfigurationInfo.description) &&
-        Objects.equals(bundleLocation, samlConfigurationInfo.bundleLocation) &&
-        Objects.equals(serviceLocation, samlConfigurationInfo.serviceLocation) &&
-        Objects.equals(properties, samlConfigurationInfo.properties);
+    return Objects.equals(this.pid, samlConfigurationInfo.pid) &&
+        Objects.equals(this.title, samlConfigurationInfo.title) &&
+        Objects.equals(this.description, samlConfigurationInfo.description) &&
+        Objects.equals(this.bundleLocation, samlConfigurationInfo.bundleLocation) &&
+        Objects.equals(this.serviceLocation, samlConfigurationInfo.serviceLocation) &&
+        Objects.equals(this.properties, samlConfigurationInfo.properties);
   }
 
   @Override
@@ -168,11 +190,13 @@ public class SamlConfigurationInfo   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }
     return o.toString().replace("\n", "\n    ");
   }
+
+
 }
 

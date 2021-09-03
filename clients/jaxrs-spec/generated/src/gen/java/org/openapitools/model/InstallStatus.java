@@ -1,18 +1,22 @@
 package org.openapitools.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.openapitools.model.InstallStatusStatus;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
 
-
 import io.swagger.annotations.*;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 
-public class InstallStatus   {
+
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2021-09-03T15:26:06.461+10:00[Australia/Melbourne]")public class InstallStatus   {
   
-  private @Valid InstallStatusStatus status = null;
+  private @Valid InstallStatusStatus status;
 
   /**
    **/
@@ -22,18 +26,21 @@ public class InstallStatus   {
   }
 
   
+
+  
   @ApiModelProperty(value = "")
   @JsonProperty("status")
   public InstallStatusStatus getStatus() {
     return status;
   }
+
   public void setStatus(InstallStatusStatus status) {
     this.status = status;
   }
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -41,7 +48,7 @@ public class InstallStatus   {
       return false;
     }
     InstallStatus installStatus = (InstallStatus) o;
-    return Objects.equals(status, installStatus.status);
+    return Objects.equals(this.status, installStatus.status);
   }
 
   @Override
@@ -63,11 +70,13 @@ public class InstallStatus   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }
     return o.toString().replace("\n", "\n    ");
   }
+
+
 }
 

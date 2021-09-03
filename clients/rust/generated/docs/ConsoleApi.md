@@ -4,18 +4,22 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_aem_product_info**](ConsoleApi.md#get_aem_product_info) | **Get** /system/console/status-productinfo.json | 
-[**get_config_mgr**](ConsoleApi.md#get_config_mgr) | **Get** /system/console/configMgr | 
-[**post_bundle**](ConsoleApi.md#post_bundle) | **Post** /system/console/bundles/{name} | 
-[**post_jmx_repository**](ConsoleApi.md#post_jmx_repository) | **Post** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} | 
-[**post_saml_configuration**](ConsoleApi.md#post_saml_configuration) | **Post** /system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler | 
+[**get_aem_product_info**](ConsoleApi.md#get_aem_product_info) | **GET** /system/console/status-productinfo.json | 
+[**get_bundle_info**](ConsoleApi.md#get_bundle_info) | **GET** /system/console/bundles/{name}.json | 
+[**get_config_mgr**](ConsoleApi.md#get_config_mgr) | **GET** /system/console/configMgr | 
+[**post_bundle**](ConsoleApi.md#post_bundle) | **POST** /system/console/bundles/{name} | 
+[**post_jmx_repository**](ConsoleApi.md#post_jmx_repository) | **POST** /system/console/jmx/com.adobe.granite:type=Repository/op/{action} | 
+[**post_saml_configuration**](ConsoleApi.md#post_saml_configuration) | **POST** /system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler | 
 
 
-# **get_aem_product_info**
-> Vec<String> get_aem_product_info(ctx, )
+
+## get_aem_product_info
+
+> Vec<String> get_aem_product_info()
 
 
-### Required Parameters
+### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -28,16 +32,47 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_config_mgr**
-> String get_config_mgr(ctx, )
+
+## get_bundle_info
+
+> crate::models::BundleInfo get_bundle_info(name)
 
 
-### Required Parameters
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**name** | **String** |  | [required] |
+
+### Return type
+
+[**crate::models::BundleInfo**](BundleInfo.md)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+## get_config_mgr
+
+> String get_config_mgr()
+
+
+### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -50,22 +85,24 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/xml
+- **Content-Type**: Not defined
+- **Accept**: text/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **post_bundle**
-> post_bundle(ctx, name, action)
+
+## post_bundle
+
+> post_bundle(name, action)
 
 
-### Required Parameters
+### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context containing the authentication | nil if no authentication
-  **name** | **String**|  | 
-  **action** | **String**|  | 
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**name** | **String** |  | [required] |
+**action** | **String** |  | [required] |
 
 ### Return type
 
@@ -77,21 +114,23 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **post_jmx_repository**
-> post_jmx_repository(ctx, action)
+
+## post_jmx_repository
+
+> post_jmx_repository(action)
 
 
-### Required Parameters
+### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context containing the authentication | nil if no authentication
-  **action** | **String**|  | 
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**action** | **String** |  | [required] |
 
 ### Return type
 
@@ -103,61 +142,56 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **post_saml_configuration**
-> ::models::SamlConfigurationInfo post_saml_configuration(ctx, optional)
+
+## post_saml_configuration
+
+> crate::models::SamlConfigurationInfo post_saml_configuration(post, apply, delete, action, location, path, service_ranking, idp_url, idp_cert_alias, idp_http_redirect, service_provider_entity_id, assertion_consumer_service_url, sp_private_key_alias, key_store_password, default_redirect_url, user_id_attribute, use_encryption, create_user, add_group_memberships, group_membership_attribute, default_groups, name_id_format, synchronize_attributes, handle_logout, logout_url, clock_tolerance, digest_method, signature_method, user_intermediate_path, propertylist)
 
 
-### Required Parameters
+### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context containing the authentication | nil if no authentication
- **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
-### Optional Parameters
-Optional parameters are passed through a map[string]interface{}.
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **post** | **bool**|  | 
- **apply** | **bool**|  | 
- **delete** | **bool**|  | 
- **action** | **String**|  | 
- **location** | **String**|  | 
- **path** | [**Vec&lt;String&gt;**](String.md)|  | 
- **service_ranking** | **i32**|  | 
- **idp_url** | **String**|  | 
- **idp_cert_alias** | **String**|  | 
- **idp_http_redirect** | **bool**|  | 
- **service_provider_entity_id** | **String**|  | 
- **assertion_consumer_service_url** | **String**|  | 
- **sp_private_key_alias** | **String**|  | 
- **key_store_password** | **String**|  | 
- **default_redirect_url** | **String**|  | 
- **user_id_attribute** | **String**|  | 
- **use_encryption** | **bool**|  | 
- **create_user** | **bool**|  | 
- **add_group_memberships** | **bool**|  | 
- **group_membership_attribute** | **String**|  | 
- **default_groups** | [**Vec&lt;String&gt;**](String.md)|  | 
- **name_id_format** | **String**|  | 
- **synchronize_attributes** | [**Vec&lt;String&gt;**](String.md)|  | 
- **handle_logout** | **bool**|  | 
- **logout_url** | **String**|  | 
- **clock_tolerance** | **i32**|  | 
- **digest_method** | **String**|  | 
- **signature_method** | **String**|  | 
- **user_intermediate_path** | **String**|  | 
- **propertylist** | [**Vec&lt;String&gt;**](String.md)|  | 
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**post** | Option<**bool**> |  |  |
+**apply** | Option<**bool**> |  |  |
+**delete** | Option<**bool**> |  |  |
+**action** | Option<**String**> |  |  |
+**location** | Option<**String**> |  |  |
+**path** | Option<[**Vec<String>**](String.md)> |  |  |
+**service_ranking** | Option<**i32**> |  |  |
+**idp_url** | Option<**String**> |  |  |
+**idp_cert_alias** | Option<**String**> |  |  |
+**idp_http_redirect** | Option<**bool**> |  |  |
+**service_provider_entity_id** | Option<**String**> |  |  |
+**assertion_consumer_service_url** | Option<**String**> |  |  |
+**sp_private_key_alias** | Option<**String**> |  |  |
+**key_store_password** | Option<**String**> |  |  |
+**default_redirect_url** | Option<**String**> |  |  |
+**user_id_attribute** | Option<**String**> |  |  |
+**use_encryption** | Option<**bool**> |  |  |
+**create_user** | Option<**bool**> |  |  |
+**add_group_memberships** | Option<**bool**> |  |  |
+**group_membership_attribute** | Option<**String**> |  |  |
+**default_groups** | Option<[**Vec<String>**](String.md)> |  |  |
+**name_id_format** | Option<**String**> |  |  |
+**synchronize_attributes** | Option<[**Vec<String>**](String.md)> |  |  |
+**handle_logout** | Option<**bool**> |  |  |
+**logout_url** | Option<**String**> |  |  |
+**clock_tolerance** | Option<**i32**> |  |  |
+**digest_method** | Option<**String**> |  |  |
+**signature_method** | Option<**String**> |  |  |
+**user_intermediate_path** | Option<**String**> |  |  |
+**propertylist** | Option<[**Vec<String>**](String.md)> |  |  |
 
 ### Return type
 
-[**::models::SamlConfigurationInfo**](SamlConfigurationInfo.md)
+[**crate::models::SamlConfigurationInfo**](SamlConfigurationInfo.md)
 
 ### Authorization
 
@@ -165,8 +199,8 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/plain
+- **Content-Type**: Not defined
+- **Accept**: text/plain
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -16,12 +16,13 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.*;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 
 @Path("/.cqactions.html")
 
 
 @io.swagger.annotations.Api(description = "the .cqactions.html API")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyEapServerCodegen", date = "2019-08-04T23:42:11.561Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyEapServerCodegen", date = "2021-09-03T15:26:02.321+10:00[Australia/Melbourne]")
 public interface CqactionsHtmlApi  {
    
     @POST
@@ -33,5 +34,5 @@ public interface CqactionsHtmlApi  {
     }, tags={ "cq", })
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = Void.class) })
-    public Response postCqActions( @NotNull @QueryParam("authorizableId") String authorizableId, @NotNull @QueryParam("changelog") String changelog,@Context SecurityContext securityContext);
+    public Response postCqActions( @NotNull  @QueryParam("authorizableId") String authorizableId, @NotNull  @QueryParam("changelog") String changelog,@Context SecurityContext securityContext);
 }

@@ -19,6 +19,11 @@ request_params('GetAemProductInfo') ->
     [
     ];
 
+request_params('GetBundleInfo') ->
+    [
+        'name'
+    ];
+
 request_params('GetConfigMgr') ->
     [
     ];
@@ -144,6 +149,19 @@ request_params('PostConfigAemPasswordReset') ->
     [
         'pwdreset.authorizables',
         'pwdreset.authorizables@TypeHint'
+    ];
+
+
+request_params('SslSetup') ->
+    [
+        'keystorePassword',
+        'keystorePasswordConfirm',
+        'truststorePassword',
+        'truststorePasswordConfirm',
+        'httpsHostname',
+        'httpsPort',
+        'privatekeyFile',
+        'certificateFile'
     ];
 
 
@@ -426,6 +444,11 @@ request_params('PostConfigApacheSlingReferrerFilter') ->
         'filter.methods@TypeHint'
     ];
 
+request_params('PostConfigProperty') ->
+    [
+        'configNodeName'
+    ];
+
 request_params('PostNode') ->
     [
         'path',
@@ -508,6 +531,15 @@ request_params(_) ->
 }.
 
 
+
+request_param_info('GetBundleInfo', 'name') ->
+    #{
+        source =>  binding ,
+        rules => [
+            {type, 'binary'},
+            required
+        ]
+    };
 
 request_param_info('PostBundle', 'name') ->
     #{
@@ -1047,6 +1079,79 @@ request_param_info('PostConfigAemPasswordReset', 'pwdreset.authorizables@TypeHin
     };
 
 
+request_param_info('SslSetup', 'keystorePassword') ->
+    #{
+        source => qs_val  ,
+        rules => [
+            {type, 'binary'},
+            required
+        ]
+    };
+
+request_param_info('SslSetup', 'keystorePasswordConfirm') ->
+    #{
+        source => qs_val  ,
+        rules => [
+            {type, 'binary'},
+            required
+        ]
+    };
+
+request_param_info('SslSetup', 'truststorePassword') ->
+    #{
+        source => qs_val  ,
+        rules => [
+            {type, 'binary'},
+            required
+        ]
+    };
+
+request_param_info('SslSetup', 'truststorePasswordConfirm') ->
+    #{
+        source => qs_val  ,
+        rules => [
+            {type, 'binary'},
+            required
+        ]
+    };
+
+request_param_info('SslSetup', 'httpsHostname') ->
+    #{
+        source => qs_val  ,
+        rules => [
+            {type, 'binary'},
+            required
+        ]
+    };
+
+request_param_info('SslSetup', 'httpsPort') ->
+    #{
+        source => qs_val  ,
+        rules => [
+            {type, 'binary'},
+            required
+        ]
+    };
+
+request_param_info('SslSetup', 'privatekeyFile') ->
+    #{
+        source =>   body,
+        rules => [
+            {type, 'binary'},
+            not_required
+        ]
+    };
+
+request_param_info('SslSetup', 'certificateFile') ->
+    #{
+        source =>   body,
+        rules => [
+            {type, 'binary'},
+            not_required
+        ]
+    };
+
+
 request_param_info('DeleteAgent', 'runmode') ->
     #{
         source =>  binding ,
@@ -1231,7 +1336,6 @@ request_param_info('GetQuery', 'p.limit') ->
     #{
         source => qs_val  ,
         rules => [
-            {type, 'float'},
             required
         ]
     };
@@ -1393,7 +1497,6 @@ request_param_info('PostAgent', 'jcr:content/protocolConnectTimeout') ->
     #{
         source => qs_val  ,
         rules => [
-            {type, 'float'},
             not_required
         ]
     };
@@ -1464,7 +1567,6 @@ request_param_info('PostAgent', 'jcr:content/protocolSocketTimeout') ->
     #{
         source => qs_val  ,
         rules => [
-            {type, 'float'},
             not_required
         ]
     };
@@ -1518,7 +1620,6 @@ request_param_info('PostAgent', 'jcr:content/proxyPort') ->
     #{
         source => qs_val  ,
         rules => [
-            {type, 'float'},
             not_required
         ]
     };
@@ -1536,7 +1637,6 @@ request_param_info('PostAgent', 'jcr:content/queueBatchMaxSize') ->
     #{
         source => qs_val  ,
         rules => [
-            {type, 'float'},
             not_required
         ]
     };
@@ -1554,7 +1654,6 @@ request_param_info('PostAgent', 'jcr:content/queueBatchWaitTime') ->
     #{
         source => qs_val  ,
         rules => [
-            {type, 'float'},
             not_required
         ]
     };
@@ -2797,6 +2896,15 @@ request_param_info('PostConfigApacheSlingReferrerFilter', 'filter.methods@TypeHi
         ]
     };
 
+request_param_info('PostConfigProperty', 'configNodeName') ->
+    #{
+        source =>  binding ,
+        rules => [
+            {type, 'binary'},
+            required
+        ]
+    };
+
 request_param_info('PostNode', 'path') ->
     #{
         source =>  binding ,
@@ -2909,7 +3017,6 @@ request_param_info('PostQuery', 'p.limit') ->
     #{
         source => qs_val  ,
         rules => [
-            {type, 'float'},
             required
         ]
     };
@@ -3072,6 +3179,11 @@ populate_request_param(OperationID, Name, Req0, ValidatorState) ->
 validate_response('GetAemProductInfo', 0, Body, ValidatorState) ->
     validate_response_body('list', 'string', Body, ValidatorState);
 
+validate_response('GetBundleInfo', 200, Body, ValidatorState) ->
+    validate_response_body('BundleInfo', 'BundleInfo', Body, ValidatorState);
+validate_response('GetBundleInfo', 0, Body, ValidatorState) ->
+    validate_response_body('binary', 'string', Body, ValidatorState);
+
 validate_response('GetConfigMgr', 200, Body, ValidatorState) ->
     validate_response_body('binary', 'string', Body, ValidatorState);
 validate_response('GetConfigMgr', 5XX, Body, ValidatorState) ->
@@ -3134,6 +3246,10 @@ validate_response('PostConfigAemHealthCheckServlet', 0, Body, ValidatorState) ->
 
 validate_response('PostConfigAemPasswordReset', 0, Body, ValidatorState) ->
     validate_response_body('', '', Body, ValidatorState);
+
+
+validate_response('SslSetup', 0, Body, ValidatorState) ->
+    validate_response_body('binary', 'string', Body, ValidatorState);
 
 
 validate_response('DeleteAgent', 0, Body, ValidatorState) ->
@@ -3203,6 +3319,9 @@ validate_response('PostConfigApacheSlingGetServlet', 0, Body, ValidatorState) ->
     validate_response_body('', '', Body, ValidatorState);
 
 validate_response('PostConfigApacheSlingReferrerFilter', 0, Body, ValidatorState) ->
+    validate_response_body('', '', Body, ValidatorState);
+
+validate_response('PostConfigProperty', 0, Body, ValidatorState) ->
     validate_response_body('', '', Body, ValidatorState);
 
 validate_response('PostNode', 0, Body, ValidatorState) ->
@@ -3356,7 +3475,7 @@ validate(Rule = {pattern, Pattern}, Name, Value, _ValidatorState) ->
     end;
 
 validate(Rule = schema, Name, Value, ValidatorState) ->
-    Definition =  list_to_binary("#/definitions/" ++ openapi_utils:to_list(Name)),
+    Definition =  list_to_binary("#/components/schemas/" ++ openapi_utils:to_list(Name)),
     try
         _ = validate_with_schema(Value, Definition, ValidatorState),
         ok
@@ -3395,7 +3514,7 @@ validation_error(ViolatedRule, Name, Info) ->
     {Value :: any(), Req :: cowboy_req:req()} | 
     {error, Reason :: any(), Req :: cowboy_req:req()}.
 get_value(body, _Name, Req0) ->
-    {ok, Body, Req} = cowboy_req:body(Req0),
+    {ok, Body, Req} = cowboy_req:read_body(Req0),
     case prepare_body(Body) of
         {error, Reason} ->
             {error, Reason, Req};
@@ -3403,19 +3522,18 @@ get_value(body, _Name, Req0) ->
             {Value, Req}
     end;
 
-get_value(qs_val, Name, Req0) ->
-    {QS, Req} = cowboy_req:qs_vals(Req0),
+get_value(qs_val, Name, Req) ->
+    QS = cowboy_req:parse_qs(Req),
     Value = openapi_utils:get_opt(openapi_utils:to_qs(Name), QS),
     {Value, Req};
 
-get_value(header, Name, Req0) ->
-    {Headers, Req} = cowboy_req:headers(Req0),
-    Value = openapi_utils:get_opt(openapi_utils:to_header(Name), Headers),
+get_value(header, Name, Req) ->
+    Headers = cowboy_req:headers(Req),
+    Value =  maps:get(openapi_utils:to_header(Name), Headers, undefined),
     {Value, Req};
 
-get_value(binding, Name, Req0) ->
-    {Bindings, Req} = cowboy_req:bindings(Req0),
-    Value = openapi_utils:get_opt(openapi_utils:to_binding(Name), Bindings),
+get_value(binding, Name, Req) ->
+    Value = cowboy_req:binding(openapi_utils:to_binding(Name), Req),
     {Value, Req}.
 
 prepare_body(Body) ->

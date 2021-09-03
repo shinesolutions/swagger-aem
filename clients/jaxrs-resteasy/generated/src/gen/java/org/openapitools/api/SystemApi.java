@@ -6,6 +6,7 @@ import org.openapitools.api.SystemApiService;
 import io.swagger.annotations.ApiParam;
 import io.swagger.jaxrs.*;
 
+import org.openapitools.model.BundleInfo;
 import org.openapitools.model.SamlConfigurationInfo;
 
 import java.util.Map;
@@ -21,12 +22,13 @@ import javax.ws.rs.*;
 import javax.inject.Inject;
 
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 
 @Path("/system")
 
 
 @io.swagger.annotations.Api(description = "the system API")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyServerCodegen", date = "2019-08-04T23:42:05.073Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyServerCodegen", date = "2021-09-03T15:25:57.989+10:00[Australia/Melbourne]")
 public class SystemApi  {
 
     @Inject SystemApiService service;
@@ -56,6 +58,21 @@ public class SystemApi  {
     public Response getAemProductInfo(@Context SecurityContext securityContext)
     throws NotFoundException {
         return service.getAemProductInfo(securityContext);
+    }
+    @GET
+    @Path("/console/bundles/{name}.json")
+    
+    @Produces({ "application/json" })
+    @io.swagger.annotations.ApiOperation(value = "", notes = "", response = BundleInfo.class, authorizations = {
+        @io.swagger.annotations.Authorization(value = "aemAuth")
+    }, tags={ "console", })
+    @io.swagger.annotations.ApiResponses(value = { 
+        @io.swagger.annotations.ApiResponse(code = 200, message = "Retrieved bundle info", response = BundleInfo.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = String.class) })
+    public Response getBundleInfo( @PathParam("name") String name,@Context SecurityContext securityContext)
+    throws NotFoundException {
+        return service.getBundleInfo(name,securityContext);
     }
     @GET
     @Path("/console/configMgr")

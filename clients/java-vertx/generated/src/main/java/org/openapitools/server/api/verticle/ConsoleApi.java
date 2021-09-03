@@ -1,5 +1,6 @@
 package org.openapitools.server.api.verticle;
 
+import org.openapitools.server.api.model.BundleInfo;
 import org.openapitools.server.api.MainApiException;
 import org.openapitools.server.api.model.SamlConfigurationInfo;
 
@@ -12,6 +13,9 @@ import java.util.Map;
 public interface ConsoleApi  {
     //getAemProductInfo
     void getAemProductInfo(Handler<AsyncResult<List<String>>> handler);
+    
+    //getBundleInfo
+    void getBundleInfo(String name, Handler<AsyncResult<BundleInfo>> handler);
     
     //getConfigMgr
     void getConfigMgr(Handler<AsyncResult<String>> handler);

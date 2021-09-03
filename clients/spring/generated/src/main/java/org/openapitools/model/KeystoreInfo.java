@@ -8,21 +8,21 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.model.KeystoreItems;
+import org.openapitools.jackson.nullable.JsonNullable;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
  * KeystoreInfo
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-08-04T23:44:43.219Z[GMT]")
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-09-03T15:28:35.636+10:00[Australia/Melbourne]")
 public class KeystoreInfo   {
   @JsonProperty("aliases")
   @Valid
   private List<KeystoreItems> aliases = null;
 
   @JsonProperty("exists")
-  private Boolean exists = null;
+  private Boolean exists;
 
   public KeystoreInfo aliases(List<KeystoreItems> aliases) {
     this.aliases = aliases;
@@ -40,7 +40,7 @@ public class KeystoreInfo   {
   /**
    * Get aliases
    * @return aliases
-  **/
+  */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -61,7 +61,7 @@ public class KeystoreInfo   {
   /**
    * False if truststore don't exist
    * @return exists
-  **/
+  */
   @ApiModelProperty(value = "False if truststore don't exist")
 
 
@@ -75,7 +75,7 @@ public class KeystoreInfo   {
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -107,7 +107,7 @@ public class KeystoreInfo   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

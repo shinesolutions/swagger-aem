@@ -16,8 +16,8 @@ import org.openapitools.api.NotFoundException;
 
 import java.io.InputStream;
 
-import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
+import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 
 import javax.servlet.ServletConfig;
 import javax.ws.rs.core.Context;
@@ -25,12 +25,13 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.*;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 
 @Path("/crx")
 
 
 @io.swagger.annotations.Api(description = "the crx API")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJerseyServerCodegen", date = "2019-08-04T23:41:59.588Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJerseyServerCodegen", date = "2021-09-03T15:25:53.422+10:00[Australia/Melbourne]")
 public class CrxApi  {
    private final CrxApiService delegate;
 
@@ -62,10 +63,10 @@ public class CrxApi  {
     @io.swagger.annotations.ApiOperation(value = "", notes = "", response = String.class, authorizations = {
         @io.swagger.annotations.Authorization(value = "aemAuth")
     }, tags={ "crx", })
-    @io.swagger.annotations.ApiResponses(value = { 
+    @io.swagger.annotations.ApiResponses(value = {
         @io.swagger.annotations.ApiResponse(code = 200, message = "CRXDE is enabled", response = String.class),
-        
-        @io.swagger.annotations.ApiResponse(code = 404, message = "CRXDE is disabled", response = String.class) })
+        @io.swagger.annotations.ApiResponse(code = 404, message = "CRXDE is disabled", response = String.class)
+    })
     public Response getCrxdeStatus(@Context SecurityContext securityContext)
     throws NotFoundException {
         return delegate.getCrxdeStatus(securityContext);
@@ -77,10 +78,10 @@ public class CrxApi  {
     @io.swagger.annotations.ApiOperation(value = "", notes = "", response = InstallStatus.class, authorizations = {
         @io.swagger.annotations.Authorization(value = "aemAuth")
     }, tags={ "crx", })
-    @io.swagger.annotations.ApiResponses(value = { 
+    @io.swagger.annotations.ApiResponses(value = {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Retrieved CRX package manager install status", response = InstallStatus.class),
-        
-        @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = String.class) })
+        @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = String.class)
+    })
     public Response getInstallStatus(@Context SecurityContext securityContext)
     throws NotFoundException {
         return delegate.getInstallStatus(securityContext);
@@ -92,10 +93,10 @@ public class CrxApi  {
     @io.swagger.annotations.ApiOperation(value = "", notes = "", response = Void.class, authorizations = {
         @io.swagger.annotations.Authorization(value = "aemAuth")
     }, tags={ "crx", })
-    @io.swagger.annotations.ApiResponses(value = { 
+    @io.swagger.annotations.ApiResponses(value = {
         @io.swagger.annotations.ApiResponse(code = 404, message = "Package Manager Servlet is disabled", response = String.class),
-        
-        @io.swagger.annotations.ApiResponse(code = 405, message = "Package Manager Servlet is active", response = String.class) })
+        @io.swagger.annotations.ApiResponse(code = 405, message = "Package Manager Servlet is active", response = String.class)
+    })
     public Response getPackageManagerServlet(@Context SecurityContext securityContext)
     throws NotFoundException {
         return delegate.getPackageManagerServlet(securityContext);
@@ -107,12 +108,12 @@ public class CrxApi  {
     @io.swagger.annotations.ApiOperation(value = "", notes = "", response = String.class, authorizations = {
         @io.swagger.annotations.Authorization(value = "aemAuth")
     }, tags={ "crx", })
-    @io.swagger.annotations.ApiResponses(value = { 
-        @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public Response postPackageService(@ApiParam(value = "",required=true) @QueryParam("cmd") String cmd
-,@Context SecurityContext securityContext)
+    @io.swagger.annotations.ApiResponses(value = {
+        @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = String.class)
+    })
+    public Response postPackageService(@ApiParam(value = "", required = true) @QueryParam("cmd") @NotNull  String cmd,@Context SecurityContext securityContext)
     throws NotFoundException {
-        return delegate.postPackageService(cmd,securityContext);
+        return delegate.postPackageService(cmd, securityContext);
     }
     @POST
     @Path("/packmgr/service/.json/{path}")
@@ -121,22 +122,13 @@ public class CrxApi  {
     @io.swagger.annotations.ApiOperation(value = "", notes = "", response = String.class, authorizations = {
         @io.swagger.annotations.Authorization(value = "aemAuth")
     }, tags={ "crx", })
-    @io.swagger.annotations.ApiResponses(value = { 
-        @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public Response postPackageServiceJson(@ApiParam(value = "",required=true) @PathParam("path") String path
-,@ApiParam(value = "",required=true) @QueryParam("cmd") String cmd
-,@ApiParam(value = "") @QueryParam("groupName") String groupName
-,@ApiParam(value = "") @QueryParam("packageName") String packageName
-,@ApiParam(value = "") @QueryParam("packageVersion") String packageVersion
-,@ApiParam(value = "") @QueryParam("_charset_") String charset
-,@ApiParam(value = "") @QueryParam("force") Boolean force
-,@ApiParam(value = "") @QueryParam("recursive") Boolean recursive
-,
-            @FormDataParam("package") InputStream _packageInputStream,
-            @FormDataParam("package") FormDataContentDisposition _packageDetail
-,@Context SecurityContext securityContext)
+    @io.swagger.annotations.ApiResponses(value = {
+        @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = String.class)
+    })
+    public Response postPackageServiceJson(@ApiParam(value = "", required = true) @PathParam("path") @NotNull  String path,@ApiParam(value = "", required = true) @QueryParam("cmd") @NotNull  String cmd,@ApiParam(value = "") @QueryParam("groupName")  String groupName,@ApiParam(value = "") @QueryParam("packageName")  String packageName,@ApiParam(value = "") @QueryParam("packageVersion")  String packageVersion,@ApiParam(value = "") @QueryParam("_charset_")  String charset,@ApiParam(value = "") @QueryParam("force")  Boolean force,@ApiParam(value = "") @QueryParam("recursive")  Boolean recursive,
+ @FormDataParam("package") FormDataBodyPart _packageBodypart ,@Context SecurityContext securityContext)
     throws NotFoundException {
-        return delegate.postPackageServiceJson(path,cmd,groupName,packageName,packageVersion,charset,force,recursive,_packageInputStream, _packageDetail,securityContext);
+        return delegate.postPackageServiceJson(path, cmd, groupName, packageName, packageVersion, charset, force, recursive, _packageBodypart, securityContext);
     }
     @POST
     @Path("/packmgr/update.jsp")
@@ -145,17 +137,12 @@ public class CrxApi  {
     @io.swagger.annotations.ApiOperation(value = "", notes = "", response = String.class, authorizations = {
         @io.swagger.annotations.Authorization(value = "aemAuth")
     }, tags={ "crx", })
-    @io.swagger.annotations.ApiResponses(value = { 
-        @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public Response postPackageUpdate(@ApiParam(value = "",required=true) @QueryParam("groupName") String groupName
-,@ApiParam(value = "",required=true) @QueryParam("packageName") String packageName
-,@ApiParam(value = "",required=true) @QueryParam("version") String version
-,@ApiParam(value = "",required=true) @QueryParam("path") String path
-,@ApiParam(value = "") @QueryParam("filter") String filter
-,@ApiParam(value = "") @QueryParam("_charset_") String charset
-,@Context SecurityContext securityContext)
+    @io.swagger.annotations.ApiResponses(value = {
+        @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = String.class)
+    })
+    public Response postPackageUpdate(@ApiParam(value = "", required = true) @QueryParam("groupName") @NotNull  String groupName,@ApiParam(value = "", required = true) @QueryParam("packageName") @NotNull  String packageName,@ApiParam(value = "", required = true) @QueryParam("version") @NotNull  String version,@ApiParam(value = "", required = true) @QueryParam("path") @NotNull  String path,@ApiParam(value = "") @QueryParam("filter")  String filter,@ApiParam(value = "") @QueryParam("_charset_")  String charset,@Context SecurityContext securityContext)
     throws NotFoundException {
-        return delegate.postPackageUpdate(groupName,packageName,version,path,filter,charset,securityContext);
+        return delegate.postPackageUpdate(groupName, packageName, version, path, filter, charset, securityContext);
     }
     @POST
     @Path("/explorer/ui/setpassword.jsp")
@@ -164,13 +151,11 @@ public class CrxApi  {
     @io.swagger.annotations.ApiOperation(value = "", notes = "", response = String.class, authorizations = {
         @io.swagger.annotations.Authorization(value = "aemAuth")
     }, tags={ "crx", })
-    @io.swagger.annotations.ApiResponses(value = { 
-        @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public Response postSetPassword(@ApiParam(value = "",required=true) @QueryParam("old") String old
-,@ApiParam(value = "",required=true) @QueryParam("plain") String plain
-,@ApiParam(value = "",required=true) @QueryParam("verify") String verify
-,@Context SecurityContext securityContext)
+    @io.swagger.annotations.ApiResponses(value = {
+        @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = String.class)
+    })
+    public Response postSetPassword(@ApiParam(value = "", required = true) @QueryParam("old") @NotNull  String old,@ApiParam(value = "", required = true) @QueryParam("plain") @NotNull  String plain,@ApiParam(value = "", required = true) @QueryParam("verify") @NotNull  String verify,@Context SecurityContext securityContext)
     throws NotFoundException {
-        return delegate.postSetPassword(old,plain,verify,securityContext);
+        return delegate.postSetPassword(old, plain, verify, securityContext);
     }
 }

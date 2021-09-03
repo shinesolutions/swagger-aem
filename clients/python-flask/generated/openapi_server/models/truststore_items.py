@@ -15,7 +15,7 @@ class TruststoreItems(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, alias: str=None, entry_type: str=None, subject: str=None, issuer: str=None, not_before: str=None, not_after: str=None, serial_number: int=None):  # noqa: E501
+    def __init__(self, alias=None, entry_type=None, subject=None, issuer=None, not_before=None, not_after=None, serial_number=None):  # noqa: E501
         """TruststoreItems - a model defined in OpenAPI
 
         :param alias: The alias of this TruststoreItems.  # noqa: E501
@@ -73,7 +73,7 @@ class TruststoreItems(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def alias(self) -> str:
+    def alias(self):
         """Gets the alias of this TruststoreItems.
 
         Truststore alias name  # noqa: E501
@@ -84,7 +84,7 @@ class TruststoreItems(Model):
         return self._alias
 
     @alias.setter
-    def alias(self, alias: str):
+    def alias(self, alias):
         """Sets the alias of this TruststoreItems.
 
         Truststore alias name  # noqa: E501
@@ -96,7 +96,7 @@ class TruststoreItems(Model):
         self._alias = alias
 
     @property
-    def entry_type(self) -> str:
+    def entry_type(self):
         """Gets the entry_type of this TruststoreItems.
 
 
@@ -106,7 +106,7 @@ class TruststoreItems(Model):
         return self._entry_type
 
     @entry_type.setter
-    def entry_type(self, entry_type: str):
+    def entry_type(self, entry_type):
         """Sets the entry_type of this TruststoreItems.
 
 
@@ -117,7 +117,7 @@ class TruststoreItems(Model):
         self._entry_type = entry_type
 
     @property
-    def subject(self) -> str:
+    def subject(self):
         """Gets the subject of this TruststoreItems.
 
         e.g. \"CN=localhost\"  # noqa: E501
@@ -128,7 +128,7 @@ class TruststoreItems(Model):
         return self._subject
 
     @subject.setter
-    def subject(self, subject: str):
+    def subject(self, subject):
         """Sets the subject of this TruststoreItems.
 
         e.g. \"CN=localhost\"  # noqa: E501
@@ -140,7 +140,7 @@ class TruststoreItems(Model):
         self._subject = subject
 
     @property
-    def issuer(self) -> str:
+    def issuer(self):
         """Gets the issuer of this TruststoreItems.
 
         e.g. \"CN=Admin\"  # noqa: E501
@@ -151,7 +151,7 @@ class TruststoreItems(Model):
         return self._issuer
 
     @issuer.setter
-    def issuer(self, issuer: str):
+    def issuer(self, issuer):
         """Sets the issuer of this TruststoreItems.
 
         e.g. \"CN=Admin\"  # noqa: E501
@@ -163,7 +163,7 @@ class TruststoreItems(Model):
         self._issuer = issuer
 
     @property
-    def not_before(self) -> str:
+    def not_before(self):
         """Gets the not_before of this TruststoreItems.
 
         e.g. \"Sun Jul 01 12:00:00 AEST 2018\"  # noqa: E501
@@ -174,7 +174,7 @@ class TruststoreItems(Model):
         return self._not_before
 
     @not_before.setter
-    def not_before(self, not_before: str):
+    def not_before(self, not_before):
         """Sets the not_before of this TruststoreItems.
 
         e.g. \"Sun Jul 01 12:00:00 AEST 2018\"  # noqa: E501
@@ -186,7 +186,7 @@ class TruststoreItems(Model):
         self._not_before = not_before
 
     @property
-    def not_after(self) -> str:
+    def not_after(self):
         """Gets the not_after of this TruststoreItems.
 
         e.g. \"Sun Jun 30 23:59:50 AEST 2019\"  # noqa: E501
@@ -197,7 +197,7 @@ class TruststoreItems(Model):
         return self._not_after
 
     @not_after.setter
-    def not_after(self, not_after: str):
+    def not_after(self, not_after):
         """Sets the not_after of this TruststoreItems.
 
         e.g. \"Sun Jun 30 23:59:50 AEST 2019\"  # noqa: E501
@@ -209,7 +209,7 @@ class TruststoreItems(Model):
         self._not_after = not_after
 
     @property
-    def serial_number(self) -> int:
+    def serial_number(self):
         """Gets the serial_number of this TruststoreItems.
 
         18165099476682912368  # noqa: E501
@@ -220,7 +220,7 @@ class TruststoreItems(Model):
         return self._serial_number
 
     @serial_number.setter
-    def serial_number(self, serial_number: int):
+    def serial_number(self, serial_number):
         """Sets the serial_number of this TruststoreItems.
 
         18165099476682912368  # noqa: E501

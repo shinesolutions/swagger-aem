@@ -32,6 +32,7 @@ my $api_instance = WWW::OpenAPIClient::CrxApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 
@@ -76,6 +77,7 @@ my $api_instance = WWW::OpenAPIClient::CrxApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 
@@ -120,6 +122,7 @@ my $api_instance = WWW::OpenAPIClient::CrxApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 
@@ -163,6 +166,7 @@ my $api_instance = WWW::OpenAPIClient::CrxApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $cmd = "cmd_example"; # string | 
@@ -211,6 +215,7 @@ my $api_instance = WWW::OpenAPIClient::CrxApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $path = "path_example"; # string | 
@@ -275,6 +280,7 @@ my $api_instance = WWW::OpenAPIClient::CrxApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $group_name = "group_name_example"; # string | 
@@ -333,6 +339,7 @@ my $api_instance = WWW::OpenAPIClient::CrxApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $old = "old_example"; # string | 

@@ -3,10 +3,12 @@ defmodule AdobeExperienceManager(AEM)API.Mixfile do
 
   def project do
     [app: :adobe_experience_manager(aem)api,
-     version: "0.1.0",
-     elixir: "~> 1.4",
+     version: "3.5.0-pre.0",
+     elixir: "~> 1.6",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     package: package(),
+     description: "Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API",
      deps: deps()]
   end
 
@@ -24,13 +26,21 @@ defmodule AdobeExperienceManager(AEM)API.Mixfile do
   #
   # Or git/path repositories:
   #
-  #   {:my_dep, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
+  #   {:my_dep, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.3.0"}
   #
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:tesla, "~> 0.8"},
-      {:poison, ">= 1.0.0"}
+      {:tesla, "~> 1.2"},
+      {:poison, "~> 3.0"}
+    ]
+  end
+
+   defp package() do
+    [
+      name: "adobe_experience_manager(aem)api",
+      files: ~w(lib mix.exs README* LICENSE*),
+      licenses: [""]
     ]
   end
 end

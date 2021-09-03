@@ -42,6 +42,7 @@ object endpoint {
           CqApi.endpoints(da)  :+:
           CrxApi.endpoints(da)  :+:
           CustomApi.endpoints(da)  :+:
+          GraniteApi.endpoints(da)  :+:
           SlingApi.endpoints(da) 
   ).handle({
       case e: CommonError => NotFound(e)

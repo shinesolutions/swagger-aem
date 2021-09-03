@@ -1,23 +1,27 @@
 package org.openapitools.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.model.KeystoreChainItems;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
 
-
 import io.swagger.annotations.*;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 
-public class KeystoreItems   {
+
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2021-09-03T15:26:06.461+10:00[Australia/Melbourne]")public class KeystoreItems   {
   
-  private @Valid String alias = null;
-  private @Valid String entryType = null;
-  private @Valid String algorithm = null;
-  private @Valid String format = null;
+  private @Valid String alias;
+  private @Valid String entryType;
+  private @Valid String algorithm;
+  private @Valid String format;
   private @Valid List<KeystoreChainItems> chain = new ArrayList<KeystoreChainItems>();
 
   /**
@@ -29,16 +33,19 @@ public class KeystoreItems   {
   }
 
   
+
+  
   @ApiModelProperty(value = "Keystore alias name")
   @JsonProperty("alias")
   public String getAlias() {
     return alias;
   }
+
   public void setAlias(String alias) {
     this.alias = alias;
   }
 
-  /**
+/**
    * e.g. \&quot;privateKey\&quot;
    **/
   public KeystoreItems entryType(String entryType) {
@@ -47,16 +54,19 @@ public class KeystoreItems   {
   }
 
   
+
+  
   @ApiModelProperty(value = "e.g. \"privateKey\"")
   @JsonProperty("entryType")
   public String getEntryType() {
     return entryType;
   }
+
   public void setEntryType(String entryType) {
     this.entryType = entryType;
   }
 
-  /**
+/**
    * e.g. \&quot;RSA\&quot;
    **/
   public KeystoreItems algorithm(String algorithm) {
@@ -65,16 +75,19 @@ public class KeystoreItems   {
   }
 
   
+
+  
   @ApiModelProperty(value = "e.g. \"RSA\"")
   @JsonProperty("algorithm")
   public String getAlgorithm() {
     return algorithm;
   }
+
   public void setAlgorithm(String algorithm) {
     this.algorithm = algorithm;
   }
 
-  /**
+/**
    * e.g. \&quot;PKCS#8\&quot;
    **/
   public KeystoreItems format(String format) {
@@ -83,16 +96,19 @@ public class KeystoreItems   {
   }
 
   
+
+  
   @ApiModelProperty(value = "e.g. \"PKCS#8\"")
   @JsonProperty("format")
   public String getFormat() {
     return format;
   }
+
   public void setFormat(String format) {
     this.format = format;
   }
 
-  /**
+/**
    **/
   public KeystoreItems chain(List<KeystoreChainItems> chain) {
     this.chain = chain;
@@ -100,18 +116,21 @@ public class KeystoreItems   {
   }
 
   
+
+  
   @ApiModelProperty(value = "")
   @JsonProperty("chain")
   public List<KeystoreChainItems> getChain() {
     return chain;
   }
+
   public void setChain(List<KeystoreChainItems> chain) {
     this.chain = chain;
   }
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -119,11 +138,11 @@ public class KeystoreItems   {
       return false;
     }
     KeystoreItems keystoreItems = (KeystoreItems) o;
-    return Objects.equals(alias, keystoreItems.alias) &&
-        Objects.equals(entryType, keystoreItems.entryType) &&
-        Objects.equals(algorithm, keystoreItems.algorithm) &&
-        Objects.equals(format, keystoreItems.format) &&
-        Objects.equals(chain, keystoreItems.chain);
+    return Objects.equals(this.alias, keystoreItems.alias) &&
+        Objects.equals(this.entryType, keystoreItems.entryType) &&
+        Objects.equals(this.algorithm, keystoreItems.algorithm) &&
+        Objects.equals(this.format, keystoreItems.format) &&
+        Objects.equals(this.chain, keystoreItems.chain);
   }
 
   @Override
@@ -149,11 +168,13 @@ public class KeystoreItems   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }
     return o.toString().replace("\n", "\n    ");
   }
+
+
 }
 

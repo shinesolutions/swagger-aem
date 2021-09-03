@@ -1,18 +1,32 @@
-FROM microsoft/aspnetcore-build:2.0 AS build-env
+#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
+# Container we use for final publish
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
 WORKDIR /app
+EXPOSE 80
+EXPOSE 443
 
-ENV DOTNET_CLI_TELEMETRY_OPTOUT 1
+# Build container
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 
-# copy csproj and restore as distinct layers
-COPY *.csproj ./
-RUN dotnet restore
+# Copy the code into the container
+WORKDIR /src
+COPY ["src/Org.OpenAPITools/Org.OpenAPITools.csproj", "Org.OpenAPITools/"]
 
-# copy everything else and build
-COPY . ./
-RUN dotnet publish -c Release -o out
+# NuGet restore
+RUN dotnet restore "Org.OpenAPITools/Org.OpenAPITools.csproj"
+COPY ["src/Org.OpenAPITools/", "Org.OpenAPITools/"]
 
-# build runtime image
-FROM microsoft/aspnetcore:2.0
+# Build the API
+WORKDIR "Org.OpenAPITools"
+RUN dotnet build "Org.OpenAPITools.csproj" -c Release -o /app/build
+
+# Publish it
+FROM build AS publish
+RUN dotnet publish "Org.OpenAPITools.csproj" -c Release -o /app/publish
+
+# Make the final image for publishing
+FROM base AS final
 WORKDIR /app
-COPY --from=build-env /app/out .
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Org.OpenAPITools.dll"]

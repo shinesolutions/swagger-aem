@@ -10,10 +10,10 @@ import org.openapitools.model.InstallStatusStatus;
 /**
  * InstallStatus
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaMSF4JServerCodegen", date = "2019-08-04T23:41:25.207Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaMSF4JServerCodegen", date = "2021-09-03T15:25:23.467+10:00[Australia/Melbourne]")
 public class InstallStatus   {
   @JsonProperty("status")
-  private InstallStatusStatus status = null;
+  private InstallStatusStatus status;
 
   public InstallStatus status(InstallStatusStatus status) {
     this.status = status;
@@ -35,7 +35,7 @@ public class InstallStatus   {
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -65,7 +65,7 @@ public class InstallStatus   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

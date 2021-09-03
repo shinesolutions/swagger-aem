@@ -99,7 +99,7 @@ This endpoint does not need any parameter.
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cmd** | **STRING_32**|  | 
+ **cmd** | **STRING_32**|  | [default to null]
 
 ### Return type
 
@@ -127,14 +127,14 @@ Name | Type | Description  | Notes
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **path** | **STRING_32**|  | 
- **cmd** | **STRING_32**|  | 
- **group_name** | **STRING_32**|  | [optional] 
- **package_name** | **STRING_32**|  | [optional] 
- **package_version** | **STRING_32**|  | [optional] 
- **var_charset_** | **STRING_32**|  | [optional] 
- **force** | **BOOLEAN**|  | [optional] 
- **recursive** | **BOOLEAN**|  | [optional] 
+ **path** | **STRING_32**|  | [default to null]
+ **cmd** | **STRING_32**|  | [default to null]
+ **group_name** | **STRING_32**|  | [optional] [default to null]
+ **package_name** | **STRING_32**|  | [optional] [default to null]
+ **package_version** | **STRING_32**|  | [optional] [default to null]
+ **var_charset_** | **STRING_32**|  | [optional] [default to null]
+ **force** | **BOOLEAN**|  | [optional] [default to null]
+ **recursive** | **BOOLEAN**|  | [optional] [default to null]
  **package** | **FILE**|  | [optional] [default to null]
 
 ### Return type
@@ -163,12 +163,12 @@ Name | Type | Description  | Notes
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **group_name** | **STRING_32**|  | 
- **package_name** | **STRING_32**|  | 
- **version** | **STRING_32**|  | 
- **path** | **STRING_32**|  | 
- **filter** | **STRING_32**|  | [optional] 
- **var_charset_** | **STRING_32**|  | [optional] 
+ **group_name** | **STRING_32**|  | [default to null]
+ **package_name** | **STRING_32**|  | [default to null]
+ **version** | **STRING_32**|  | [default to null]
+ **path** | **STRING_32**|  | [default to null]
+ **filter** | **STRING_32**|  | [optional] [default to null]
+ **var_charset_** | **STRING_32**|  | [optional] [default to null]
 
 ### Return type
 
@@ -196,9 +196,9 @@ Name | Type | Description  | Notes
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **var_old** | **STRING_32**|  | 
- **plain** | **STRING_32**|  | 
- **verify** | **STRING_32**|  | 
+ **var_old** | **STRING_32**|  | [default to null]
+ **plain** | **STRING_32**|  | [default to null]
+ **verify** | **STRING_32**|  | [default to null]
 
 ### Return type
 

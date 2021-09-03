@@ -21,8 +21,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Custom do
     - :combine_tags_or (boolean()): 
   ## Returns
 
-  {:ok, %AdobeExperienceManager(AEM)API.Model.String.t{}} on success
-  {:error, info} on failure
+  {:ok, String.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec get_aem_health_check(Tesla.Env.client, keyword()) :: {:ok, String.t} | {:error, Tesla.Env.t}
   def get_aem_health_check(connection, opts \\ []) do
@@ -36,7 +36,9 @@ defmodule AdobeExperienceManager(AEM)API.Api.Custom do
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -49,8 +51,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Custom do
     - :bundles_periodignored_at_type_hint (String.t): 
   ## Returns
 
-  {:ok, %{}} on success
-  {:error, info} on failure
+  {:ok, nil} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec post_config_aem_health_check_servlet(Tesla.Env.client, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def post_config_aem_health_check_servlet(connection, opts \\ []) do
@@ -62,9 +64,12 @@ defmodule AdobeExperienceManager(AEM)API.Api.Custom do
     |> method(:post)
     |> url("/apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck")
     |> add_optional_params(optional_params, opts)
+    |> ensure_body()
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -77,8 +82,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Custom do
     - :pwdreset_periodauthorizables_at_type_hint (String.t): 
   ## Returns
 
-  {:ok, %{}} on success
-  {:error, info} on failure
+  {:ok, nil} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec post_config_aem_password_reset(Tesla.Env.client, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def post_config_aem_password_reset(connection, opts \\ []) do
@@ -90,8 +95,11 @@ defmodule AdobeExperienceManager(AEM)API.Api.Custom do
     |> method(:post)
     |> url("/apps/system/config/com.shinesolutions.aem.passwordreset.Activator")
     |> add_optional_params(optional_params, opts)
+    |> ensure_body()
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 end

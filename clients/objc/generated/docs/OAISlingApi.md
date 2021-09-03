@@ -25,6 +25,7 @@ Method | HTTP request | Description
 [**postConfigApacheSlingDavExServlet**](OAISlingApi.md#postconfigapacheslingdavexservlet) | **POST** /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet | 
 [**postConfigApacheSlingGetServlet**](OAISlingApi.md#postconfigapacheslinggetservlet) | **POST** /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet | 
 [**postConfigApacheSlingReferrerFilter**](OAISlingApi.md#postconfigapacheslingreferrerfilter) | **POST** /apps/system/config/org.apache.sling.security.impl.ReferrerFilter | 
+[**postConfigProperty**](OAISlingApi.md#postconfigproperty) | **POST** /apps/system/config/{configNodeName} | 
 [**postNode**](OAISlingApi.md#postnode) | **POST** /{path}/{name} | 
 [**postNodeRw**](OAISlingApi.md#postnoderw) | **POST** /{path}/{name}.rw.html | 
 [**postPath**](OAISlingApi.md#postpath) | **POST** /{path}/ | 
@@ -694,54 +695,54 @@ This endpoint does not need any parameter.
 ```objc
 -(NSURLSessionTask*) postAgentWithRunmode: (NSString*) runmode
     name: (NSString*) name
-    jcrcontentcqdistribute: (NSNumber*) jcrcontentcqdistribute
-    jcrcontentcqdistributeTypeHint: (NSString*) jcrcontentcqdistributeTypeHint
-    jcrcontentcqname: (NSString*) jcrcontentcqname
-    jcrcontentcqtemplate: (NSString*) jcrcontentcqtemplate
-    jcrcontentenabled: (NSNumber*) jcrcontentenabled
-    jcrcontentjcrdescription: (NSString*) jcrcontentjcrdescription
-    jcrcontentjcrlastModified: (NSString*) jcrcontentjcrlastModified
-    jcrcontentjcrlastModifiedBy: (NSString*) jcrcontentjcrlastModifiedBy
-    jcrcontentjcrmixinTypes: (NSString*) jcrcontentjcrmixinTypes
-    jcrcontentjcrtitle: (NSString*) jcrcontentjcrtitle
-    jcrcontentlogLevel: (NSString*) jcrcontentlogLevel
-    jcrcontentnoStatusUpdate: (NSNumber*) jcrcontentnoStatusUpdate
-    jcrcontentnoVersioning: (NSNumber*) jcrcontentnoVersioning
-    jcrcontentprotocolConnectTimeout: (NSNumber*) jcrcontentprotocolConnectTimeout
-    jcrcontentprotocolHTTPConnectionClosed: (NSNumber*) jcrcontentprotocolHTTPConnectionClosed
-    jcrcontentprotocolHTTPExpired: (NSString*) jcrcontentprotocolHTTPExpired
-    jcrcontentprotocolHTTPHeaders: (NSArray<NSString*>*) jcrcontentprotocolHTTPHeaders
-    jcrcontentprotocolHTTPHeadersTypeHint: (NSString*) jcrcontentprotocolHTTPHeadersTypeHint
-    jcrcontentprotocolHTTPMethod: (NSString*) jcrcontentprotocolHTTPMethod
-    jcrcontentprotocolHTTPSRelaxed: (NSNumber*) jcrcontentprotocolHTTPSRelaxed
-    jcrcontentprotocolInterface: (NSString*) jcrcontentprotocolInterface
-    jcrcontentprotocolSocketTimeout: (NSNumber*) jcrcontentprotocolSocketTimeout
-    jcrcontentprotocolVersion: (NSString*) jcrcontentprotocolVersion
-    jcrcontentproxyNTLMDomain: (NSString*) jcrcontentproxyNTLMDomain
-    jcrcontentproxyNTLMHost: (NSString*) jcrcontentproxyNTLMHost
-    jcrcontentproxyHost: (NSString*) jcrcontentproxyHost
-    jcrcontentproxyPassword: (NSString*) jcrcontentproxyPassword
-    jcrcontentproxyPort: (NSNumber*) jcrcontentproxyPort
-    jcrcontentproxyUser: (NSString*) jcrcontentproxyUser
-    jcrcontentqueueBatchMaxSize: (NSNumber*) jcrcontentqueueBatchMaxSize
-    jcrcontentqueueBatchMode: (NSString*) jcrcontentqueueBatchMode
-    jcrcontentqueueBatchWaitTime: (NSNumber*) jcrcontentqueueBatchWaitTime
-    jcrcontentretryDelay: (NSString*) jcrcontentretryDelay
-    jcrcontentreverseReplication: (NSNumber*) jcrcontentreverseReplication
-    jcrcontentserializationType: (NSString*) jcrcontentserializationType
-    jcrcontentslingresourceType: (NSString*) jcrcontentslingresourceType
-    jcrcontentssl: (NSString*) jcrcontentssl
-    jcrcontenttransportNTLMDomain: (NSString*) jcrcontenttransportNTLMDomain
-    jcrcontenttransportNTLMHost: (NSString*) jcrcontenttransportNTLMHost
-    jcrcontenttransportPassword: (NSString*) jcrcontenttransportPassword
-    jcrcontenttransportUri: (NSString*) jcrcontenttransportUri
-    jcrcontenttransportUser: (NSString*) jcrcontenttransportUser
-    jcrcontenttriggerDistribute: (NSNumber*) jcrcontenttriggerDistribute
-    jcrcontenttriggerModified: (NSNumber*) jcrcontenttriggerModified
-    jcrcontenttriggerOnOffTime: (NSNumber*) jcrcontenttriggerOnOffTime
-    jcrcontenttriggerReceive: (NSNumber*) jcrcontenttriggerReceive
-    jcrcontenttriggerSpecific: (NSNumber*) jcrcontenttriggerSpecific
-    jcrcontentuserId: (NSString*) jcrcontentuserId
+    jcrcontentCqdistribute: (NSNumber*) jcrcontentCqdistribute
+    jcrcontentCqdistributeTypeHint: (NSString*) jcrcontentCqdistributeTypeHint
+    jcrcontentCqname: (NSString*) jcrcontentCqname
+    jcrcontentCqtemplate: (NSString*) jcrcontentCqtemplate
+    jcrcontentEnabled: (NSNumber*) jcrcontentEnabled
+    jcrcontentJcrdescription: (NSString*) jcrcontentJcrdescription
+    jcrcontentJcrlastModified: (NSString*) jcrcontentJcrlastModified
+    jcrcontentJcrlastModifiedBy: (NSString*) jcrcontentJcrlastModifiedBy
+    jcrcontentJcrmixinTypes: (NSString*) jcrcontentJcrmixinTypes
+    jcrcontentJcrtitle: (NSString*) jcrcontentJcrtitle
+    jcrcontentLogLevel: (NSString*) jcrcontentLogLevel
+    jcrcontentNoStatusUpdate: (NSNumber*) jcrcontentNoStatusUpdate
+    jcrcontentNoVersioning: (NSNumber*) jcrcontentNoVersioning
+    jcrcontentProtocolConnectTimeout: (NSNumber*) jcrcontentProtocolConnectTimeout
+    jcrcontentProtocolHTTPConnectionClosed: (NSNumber*) jcrcontentProtocolHTTPConnectionClosed
+    jcrcontentProtocolHTTPExpired: (NSString*) jcrcontentProtocolHTTPExpired
+    jcrcontentProtocolHTTPHeaders: (NSArray<NSString*>*) jcrcontentProtocolHTTPHeaders
+    jcrcontentProtocolHTTPHeadersTypeHint: (NSString*) jcrcontentProtocolHTTPHeadersTypeHint
+    jcrcontentProtocolHTTPMethod: (NSString*) jcrcontentProtocolHTTPMethod
+    jcrcontentProtocolHTTPSRelaxed: (NSNumber*) jcrcontentProtocolHTTPSRelaxed
+    jcrcontentProtocolInterface: (NSString*) jcrcontentProtocolInterface
+    jcrcontentProtocolSocketTimeout: (NSNumber*) jcrcontentProtocolSocketTimeout
+    jcrcontentProtocolVersion: (NSString*) jcrcontentProtocolVersion
+    jcrcontentProxyNTLMDomain: (NSString*) jcrcontentProxyNTLMDomain
+    jcrcontentProxyNTLMHost: (NSString*) jcrcontentProxyNTLMHost
+    jcrcontentProxyHost: (NSString*) jcrcontentProxyHost
+    jcrcontentProxyPassword: (NSString*) jcrcontentProxyPassword
+    jcrcontentProxyPort: (NSNumber*) jcrcontentProxyPort
+    jcrcontentProxyUser: (NSString*) jcrcontentProxyUser
+    jcrcontentQueueBatchMaxSize: (NSNumber*) jcrcontentQueueBatchMaxSize
+    jcrcontentQueueBatchMode: (NSString*) jcrcontentQueueBatchMode
+    jcrcontentQueueBatchWaitTime: (NSNumber*) jcrcontentQueueBatchWaitTime
+    jcrcontentRetryDelay: (NSString*) jcrcontentRetryDelay
+    jcrcontentReverseReplication: (NSNumber*) jcrcontentReverseReplication
+    jcrcontentSerializationType: (NSString*) jcrcontentSerializationType
+    jcrcontentSlingresourceType: (NSString*) jcrcontentSlingresourceType
+    jcrcontentSsl: (NSString*) jcrcontentSsl
+    jcrcontentTransportNTLMDomain: (NSString*) jcrcontentTransportNTLMDomain
+    jcrcontentTransportNTLMHost: (NSString*) jcrcontentTransportNTLMHost
+    jcrcontentTransportPassword: (NSString*) jcrcontentTransportPassword
+    jcrcontentTransportUri: (NSString*) jcrcontentTransportUri
+    jcrcontentTransportUser: (NSString*) jcrcontentTransportUser
+    jcrcontentTriggerDistribute: (NSNumber*) jcrcontentTriggerDistribute
+    jcrcontentTriggerModified: (NSNumber*) jcrcontentTriggerModified
+    jcrcontentTriggerOnOffTime: (NSNumber*) jcrcontentTriggerOnOffTime
+    jcrcontentTriggerReceive: (NSNumber*) jcrcontentTriggerReceive
+    jcrcontentTriggerSpecific: (NSNumber*) jcrcontentTriggerSpecific
+    jcrcontentUserId: (NSString*) jcrcontentUserId
     jcrprimaryType: (NSString*) jcrprimaryType
     operation: (NSString*) operation
         completionHandler: (void (^)(NSError* error)) handler;
@@ -759,54 +760,54 @@ OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
 
 NSString* runmode = @"runmode_example"; // 
 NSString* name = @"name_example"; // 
-NSNumber* jcrcontentcqdistribute = @56; //  (optional)
-NSString* jcrcontentcqdistributeTypeHint = @"jcrcontentcqdistributeTypeHint_example"; //  (optional)
-NSString* jcrcontentcqname = @"jcrcontentcqname_example"; //  (optional)
-NSString* jcrcontentcqtemplate = @"jcrcontentcqtemplate_example"; //  (optional)
-NSNumber* jcrcontentenabled = @56; //  (optional)
-NSString* jcrcontentjcrdescription = @"jcrcontentjcrdescription_example"; //  (optional)
-NSString* jcrcontentjcrlastModified = @"jcrcontentjcrlastModified_example"; //  (optional)
-NSString* jcrcontentjcrlastModifiedBy = @"jcrcontentjcrlastModifiedBy_example"; //  (optional)
-NSString* jcrcontentjcrmixinTypes = @"jcrcontentjcrmixinTypes_example"; //  (optional)
-NSString* jcrcontentjcrtitle = @"jcrcontentjcrtitle_example"; //  (optional)
-NSString* jcrcontentlogLevel = @"jcrcontentlogLevel_example"; //  (optional)
-NSNumber* jcrcontentnoStatusUpdate = @56; //  (optional)
-NSNumber* jcrcontentnoVersioning = @56; //  (optional)
-NSNumber* jcrcontentprotocolConnectTimeout = @56; //  (optional)
-NSNumber* jcrcontentprotocolHTTPConnectionClosed = @56; //  (optional)
-NSString* jcrcontentprotocolHTTPExpired = @"jcrcontentprotocolHTTPExpired_example"; //  (optional)
-NSArray<NSString*>* jcrcontentprotocolHTTPHeaders = @[@"jcrcontentprotocolHTTPHeaders_example"]; //  (optional)
-NSString* jcrcontentprotocolHTTPHeadersTypeHint = @"jcrcontentprotocolHTTPHeadersTypeHint_example"; //  (optional)
-NSString* jcrcontentprotocolHTTPMethod = @"jcrcontentprotocolHTTPMethod_example"; //  (optional)
-NSNumber* jcrcontentprotocolHTTPSRelaxed = @56; //  (optional)
-NSString* jcrcontentprotocolInterface = @"jcrcontentprotocolInterface_example"; //  (optional)
-NSNumber* jcrcontentprotocolSocketTimeout = @56; //  (optional)
-NSString* jcrcontentprotocolVersion = @"jcrcontentprotocolVersion_example"; //  (optional)
-NSString* jcrcontentproxyNTLMDomain = @"jcrcontentproxyNTLMDomain_example"; //  (optional)
-NSString* jcrcontentproxyNTLMHost = @"jcrcontentproxyNTLMHost_example"; //  (optional)
-NSString* jcrcontentproxyHost = @"jcrcontentproxyHost_example"; //  (optional)
-NSString* jcrcontentproxyPassword = @"jcrcontentproxyPassword_example"; //  (optional)
-NSNumber* jcrcontentproxyPort = @56; //  (optional)
-NSString* jcrcontentproxyUser = @"jcrcontentproxyUser_example"; //  (optional)
-NSNumber* jcrcontentqueueBatchMaxSize = @56; //  (optional)
-NSString* jcrcontentqueueBatchMode = @"jcrcontentqueueBatchMode_example"; //  (optional)
-NSNumber* jcrcontentqueueBatchWaitTime = @56; //  (optional)
-NSString* jcrcontentretryDelay = @"jcrcontentretryDelay_example"; //  (optional)
-NSNumber* jcrcontentreverseReplication = @56; //  (optional)
-NSString* jcrcontentserializationType = @"jcrcontentserializationType_example"; //  (optional)
-NSString* jcrcontentslingresourceType = @"jcrcontentslingresourceType_example"; //  (optional)
-NSString* jcrcontentssl = @"jcrcontentssl_example"; //  (optional)
-NSString* jcrcontenttransportNTLMDomain = @"jcrcontenttransportNTLMDomain_example"; //  (optional)
-NSString* jcrcontenttransportNTLMHost = @"jcrcontenttransportNTLMHost_example"; //  (optional)
-NSString* jcrcontenttransportPassword = @"jcrcontenttransportPassword_example"; //  (optional)
-NSString* jcrcontenttransportUri = @"jcrcontenttransportUri_example"; //  (optional)
-NSString* jcrcontenttransportUser = @"jcrcontenttransportUser_example"; //  (optional)
-NSNumber* jcrcontenttriggerDistribute = @56; //  (optional)
-NSNumber* jcrcontenttriggerModified = @56; //  (optional)
-NSNumber* jcrcontenttriggerOnOffTime = @56; //  (optional)
-NSNumber* jcrcontenttriggerReceive = @56; //  (optional)
-NSNumber* jcrcontenttriggerSpecific = @56; //  (optional)
-NSString* jcrcontentuserId = @"jcrcontentuserId_example"; //  (optional)
+NSNumber* jcrcontentCqdistribute = @56; //  (optional)
+NSString* jcrcontentCqdistributeTypeHint = @"jcrcontentCqdistributeTypeHint_example"; //  (optional)
+NSString* jcrcontentCqname = @"jcrcontentCqname_example"; //  (optional)
+NSString* jcrcontentCqtemplate = @"jcrcontentCqtemplate_example"; //  (optional)
+NSNumber* jcrcontentEnabled = @56; //  (optional)
+NSString* jcrcontentJcrdescription = @"jcrcontentJcrdescription_example"; //  (optional)
+NSString* jcrcontentJcrlastModified = @"jcrcontentJcrlastModified_example"; //  (optional)
+NSString* jcrcontentJcrlastModifiedBy = @"jcrcontentJcrlastModifiedBy_example"; //  (optional)
+NSString* jcrcontentJcrmixinTypes = @"jcrcontentJcrmixinTypes_example"; //  (optional)
+NSString* jcrcontentJcrtitle = @"jcrcontentJcrtitle_example"; //  (optional)
+NSString* jcrcontentLogLevel = @"jcrcontentLogLevel_example"; //  (optional)
+NSNumber* jcrcontentNoStatusUpdate = @56; //  (optional)
+NSNumber* jcrcontentNoVersioning = @56; //  (optional)
+NSNumber* jcrcontentProtocolConnectTimeout = @56; //  (optional)
+NSNumber* jcrcontentProtocolHTTPConnectionClosed = @56; //  (optional)
+NSString* jcrcontentProtocolHTTPExpired = @"jcrcontentProtocolHTTPExpired_example"; //  (optional)
+NSArray<NSString*>* jcrcontentProtocolHTTPHeaders = @[@"jcrcontentProtocolHTTPHeaders_example"]; //  (optional)
+NSString* jcrcontentProtocolHTTPHeadersTypeHint = @"jcrcontentProtocolHTTPHeadersTypeHint_example"; //  (optional)
+NSString* jcrcontentProtocolHTTPMethod = @"jcrcontentProtocolHTTPMethod_example"; //  (optional)
+NSNumber* jcrcontentProtocolHTTPSRelaxed = @56; //  (optional)
+NSString* jcrcontentProtocolInterface = @"jcrcontentProtocolInterface_example"; //  (optional)
+NSNumber* jcrcontentProtocolSocketTimeout = @56; //  (optional)
+NSString* jcrcontentProtocolVersion = @"jcrcontentProtocolVersion_example"; //  (optional)
+NSString* jcrcontentProxyNTLMDomain = @"jcrcontentProxyNTLMDomain_example"; //  (optional)
+NSString* jcrcontentProxyNTLMHost = @"jcrcontentProxyNTLMHost_example"; //  (optional)
+NSString* jcrcontentProxyHost = @"jcrcontentProxyHost_example"; //  (optional)
+NSString* jcrcontentProxyPassword = @"jcrcontentProxyPassword_example"; //  (optional)
+NSNumber* jcrcontentProxyPort = @56; //  (optional)
+NSString* jcrcontentProxyUser = @"jcrcontentProxyUser_example"; //  (optional)
+NSNumber* jcrcontentQueueBatchMaxSize = @56; //  (optional)
+NSString* jcrcontentQueueBatchMode = @"jcrcontentQueueBatchMode_example"; //  (optional)
+NSNumber* jcrcontentQueueBatchWaitTime = @56; //  (optional)
+NSString* jcrcontentRetryDelay = @"jcrcontentRetryDelay_example"; //  (optional)
+NSNumber* jcrcontentReverseReplication = @56; //  (optional)
+NSString* jcrcontentSerializationType = @"jcrcontentSerializationType_example"; //  (optional)
+NSString* jcrcontentSlingresourceType = @"jcrcontentSlingresourceType_example"; //  (optional)
+NSString* jcrcontentSsl = @"jcrcontentSsl_example"; //  (optional)
+NSString* jcrcontentTransportNTLMDomain = @"jcrcontentTransportNTLMDomain_example"; //  (optional)
+NSString* jcrcontentTransportNTLMHost = @"jcrcontentTransportNTLMHost_example"; //  (optional)
+NSString* jcrcontentTransportPassword = @"jcrcontentTransportPassword_example"; //  (optional)
+NSString* jcrcontentTransportUri = @"jcrcontentTransportUri_example"; //  (optional)
+NSString* jcrcontentTransportUser = @"jcrcontentTransportUser_example"; //  (optional)
+NSNumber* jcrcontentTriggerDistribute = @56; //  (optional)
+NSNumber* jcrcontentTriggerModified = @56; //  (optional)
+NSNumber* jcrcontentTriggerOnOffTime = @56; //  (optional)
+NSNumber* jcrcontentTriggerReceive = @56; //  (optional)
+NSNumber* jcrcontentTriggerSpecific = @56; //  (optional)
+NSString* jcrcontentUserId = @"jcrcontentUserId_example"; //  (optional)
 NSString* jcrprimaryType = @"jcrprimaryType_example"; //  (optional)
 NSString* operation = @"operation_example"; //  (optional)
 
@@ -814,54 +815,54 @@ OAISlingApi*apiInstance = [[OAISlingApi alloc] init];
 
 [apiInstance postAgentWithRunmode:runmode
               name:name
-              jcrcontentcqdistribute:jcrcontentcqdistribute
-              jcrcontentcqdistributeTypeHint:jcrcontentcqdistributeTypeHint
-              jcrcontentcqname:jcrcontentcqname
-              jcrcontentcqtemplate:jcrcontentcqtemplate
-              jcrcontentenabled:jcrcontentenabled
-              jcrcontentjcrdescription:jcrcontentjcrdescription
-              jcrcontentjcrlastModified:jcrcontentjcrlastModified
-              jcrcontentjcrlastModifiedBy:jcrcontentjcrlastModifiedBy
-              jcrcontentjcrmixinTypes:jcrcontentjcrmixinTypes
-              jcrcontentjcrtitle:jcrcontentjcrtitle
-              jcrcontentlogLevel:jcrcontentlogLevel
-              jcrcontentnoStatusUpdate:jcrcontentnoStatusUpdate
-              jcrcontentnoVersioning:jcrcontentnoVersioning
-              jcrcontentprotocolConnectTimeout:jcrcontentprotocolConnectTimeout
-              jcrcontentprotocolHTTPConnectionClosed:jcrcontentprotocolHTTPConnectionClosed
-              jcrcontentprotocolHTTPExpired:jcrcontentprotocolHTTPExpired
-              jcrcontentprotocolHTTPHeaders:jcrcontentprotocolHTTPHeaders
-              jcrcontentprotocolHTTPHeadersTypeHint:jcrcontentprotocolHTTPHeadersTypeHint
-              jcrcontentprotocolHTTPMethod:jcrcontentprotocolHTTPMethod
-              jcrcontentprotocolHTTPSRelaxed:jcrcontentprotocolHTTPSRelaxed
-              jcrcontentprotocolInterface:jcrcontentprotocolInterface
-              jcrcontentprotocolSocketTimeout:jcrcontentprotocolSocketTimeout
-              jcrcontentprotocolVersion:jcrcontentprotocolVersion
-              jcrcontentproxyNTLMDomain:jcrcontentproxyNTLMDomain
-              jcrcontentproxyNTLMHost:jcrcontentproxyNTLMHost
-              jcrcontentproxyHost:jcrcontentproxyHost
-              jcrcontentproxyPassword:jcrcontentproxyPassword
-              jcrcontentproxyPort:jcrcontentproxyPort
-              jcrcontentproxyUser:jcrcontentproxyUser
-              jcrcontentqueueBatchMaxSize:jcrcontentqueueBatchMaxSize
-              jcrcontentqueueBatchMode:jcrcontentqueueBatchMode
-              jcrcontentqueueBatchWaitTime:jcrcontentqueueBatchWaitTime
-              jcrcontentretryDelay:jcrcontentretryDelay
-              jcrcontentreverseReplication:jcrcontentreverseReplication
-              jcrcontentserializationType:jcrcontentserializationType
-              jcrcontentslingresourceType:jcrcontentslingresourceType
-              jcrcontentssl:jcrcontentssl
-              jcrcontenttransportNTLMDomain:jcrcontenttransportNTLMDomain
-              jcrcontenttransportNTLMHost:jcrcontenttransportNTLMHost
-              jcrcontenttransportPassword:jcrcontenttransportPassword
-              jcrcontenttransportUri:jcrcontenttransportUri
-              jcrcontenttransportUser:jcrcontenttransportUser
-              jcrcontenttriggerDistribute:jcrcontenttriggerDistribute
-              jcrcontenttriggerModified:jcrcontenttriggerModified
-              jcrcontenttriggerOnOffTime:jcrcontenttriggerOnOffTime
-              jcrcontenttriggerReceive:jcrcontenttriggerReceive
-              jcrcontenttriggerSpecific:jcrcontenttriggerSpecific
-              jcrcontentuserId:jcrcontentuserId
+              jcrcontentCqdistribute:jcrcontentCqdistribute
+              jcrcontentCqdistributeTypeHint:jcrcontentCqdistributeTypeHint
+              jcrcontentCqname:jcrcontentCqname
+              jcrcontentCqtemplate:jcrcontentCqtemplate
+              jcrcontentEnabled:jcrcontentEnabled
+              jcrcontentJcrdescription:jcrcontentJcrdescription
+              jcrcontentJcrlastModified:jcrcontentJcrlastModified
+              jcrcontentJcrlastModifiedBy:jcrcontentJcrlastModifiedBy
+              jcrcontentJcrmixinTypes:jcrcontentJcrmixinTypes
+              jcrcontentJcrtitle:jcrcontentJcrtitle
+              jcrcontentLogLevel:jcrcontentLogLevel
+              jcrcontentNoStatusUpdate:jcrcontentNoStatusUpdate
+              jcrcontentNoVersioning:jcrcontentNoVersioning
+              jcrcontentProtocolConnectTimeout:jcrcontentProtocolConnectTimeout
+              jcrcontentProtocolHTTPConnectionClosed:jcrcontentProtocolHTTPConnectionClosed
+              jcrcontentProtocolHTTPExpired:jcrcontentProtocolHTTPExpired
+              jcrcontentProtocolHTTPHeaders:jcrcontentProtocolHTTPHeaders
+              jcrcontentProtocolHTTPHeadersTypeHint:jcrcontentProtocolHTTPHeadersTypeHint
+              jcrcontentProtocolHTTPMethod:jcrcontentProtocolHTTPMethod
+              jcrcontentProtocolHTTPSRelaxed:jcrcontentProtocolHTTPSRelaxed
+              jcrcontentProtocolInterface:jcrcontentProtocolInterface
+              jcrcontentProtocolSocketTimeout:jcrcontentProtocolSocketTimeout
+              jcrcontentProtocolVersion:jcrcontentProtocolVersion
+              jcrcontentProxyNTLMDomain:jcrcontentProxyNTLMDomain
+              jcrcontentProxyNTLMHost:jcrcontentProxyNTLMHost
+              jcrcontentProxyHost:jcrcontentProxyHost
+              jcrcontentProxyPassword:jcrcontentProxyPassword
+              jcrcontentProxyPort:jcrcontentProxyPort
+              jcrcontentProxyUser:jcrcontentProxyUser
+              jcrcontentQueueBatchMaxSize:jcrcontentQueueBatchMaxSize
+              jcrcontentQueueBatchMode:jcrcontentQueueBatchMode
+              jcrcontentQueueBatchWaitTime:jcrcontentQueueBatchWaitTime
+              jcrcontentRetryDelay:jcrcontentRetryDelay
+              jcrcontentReverseReplication:jcrcontentReverseReplication
+              jcrcontentSerializationType:jcrcontentSerializationType
+              jcrcontentSlingresourceType:jcrcontentSlingresourceType
+              jcrcontentSsl:jcrcontentSsl
+              jcrcontentTransportNTLMDomain:jcrcontentTransportNTLMDomain
+              jcrcontentTransportNTLMHost:jcrcontentTransportNTLMHost
+              jcrcontentTransportPassword:jcrcontentTransportPassword
+              jcrcontentTransportUri:jcrcontentTransportUri
+              jcrcontentTransportUser:jcrcontentTransportUser
+              jcrcontentTriggerDistribute:jcrcontentTriggerDistribute
+              jcrcontentTriggerModified:jcrcontentTriggerModified
+              jcrcontentTriggerOnOffTime:jcrcontentTriggerOnOffTime
+              jcrcontentTriggerReceive:jcrcontentTriggerReceive
+              jcrcontentTriggerSpecific:jcrcontentTriggerSpecific
+              jcrcontentUserId:jcrcontentUserId
               jcrprimaryType:jcrprimaryType
               operation:operation
           completionHandler: ^(NSError* error) {
@@ -877,54 +878,54 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **runmode** | **NSString***|  | 
  **name** | **NSString***|  | 
- **jcrcontentcqdistribute** | **NSNumber***|  | [optional] 
- **jcrcontentcqdistributeTypeHint** | **NSString***|  | [optional] 
- **jcrcontentcqname** | **NSString***|  | [optional] 
- **jcrcontentcqtemplate** | **NSString***|  | [optional] 
- **jcrcontentenabled** | **NSNumber***|  | [optional] 
- **jcrcontentjcrdescription** | **NSString***|  | [optional] 
- **jcrcontentjcrlastModified** | **NSString***|  | [optional] 
- **jcrcontentjcrlastModifiedBy** | **NSString***|  | [optional] 
- **jcrcontentjcrmixinTypes** | **NSString***|  | [optional] 
- **jcrcontentjcrtitle** | **NSString***|  | [optional] 
- **jcrcontentlogLevel** | **NSString***|  | [optional] 
- **jcrcontentnoStatusUpdate** | **NSNumber***|  | [optional] 
- **jcrcontentnoVersioning** | **NSNumber***|  | [optional] 
- **jcrcontentprotocolConnectTimeout** | **NSNumber***|  | [optional] 
- **jcrcontentprotocolHTTPConnectionClosed** | **NSNumber***|  | [optional] 
- **jcrcontentprotocolHTTPExpired** | **NSString***|  | [optional] 
- **jcrcontentprotocolHTTPHeaders** | [**NSArray&lt;NSString*&gt;***](NSString*.md)|  | [optional] 
- **jcrcontentprotocolHTTPHeadersTypeHint** | **NSString***|  | [optional] 
- **jcrcontentprotocolHTTPMethod** | **NSString***|  | [optional] 
- **jcrcontentprotocolHTTPSRelaxed** | **NSNumber***|  | [optional] 
- **jcrcontentprotocolInterface** | **NSString***|  | [optional] 
- **jcrcontentprotocolSocketTimeout** | **NSNumber***|  | [optional] 
- **jcrcontentprotocolVersion** | **NSString***|  | [optional] 
- **jcrcontentproxyNTLMDomain** | **NSString***|  | [optional] 
- **jcrcontentproxyNTLMHost** | **NSString***|  | [optional] 
- **jcrcontentproxyHost** | **NSString***|  | [optional] 
- **jcrcontentproxyPassword** | **NSString***|  | [optional] 
- **jcrcontentproxyPort** | **NSNumber***|  | [optional] 
- **jcrcontentproxyUser** | **NSString***|  | [optional] 
- **jcrcontentqueueBatchMaxSize** | **NSNumber***|  | [optional] 
- **jcrcontentqueueBatchMode** | **NSString***|  | [optional] 
- **jcrcontentqueueBatchWaitTime** | **NSNumber***|  | [optional] 
- **jcrcontentretryDelay** | **NSString***|  | [optional] 
- **jcrcontentreverseReplication** | **NSNumber***|  | [optional] 
- **jcrcontentserializationType** | **NSString***|  | [optional] 
- **jcrcontentslingresourceType** | **NSString***|  | [optional] 
- **jcrcontentssl** | **NSString***|  | [optional] 
- **jcrcontenttransportNTLMDomain** | **NSString***|  | [optional] 
- **jcrcontenttransportNTLMHost** | **NSString***|  | [optional] 
- **jcrcontenttransportPassword** | **NSString***|  | [optional] 
- **jcrcontenttransportUri** | **NSString***|  | [optional] 
- **jcrcontenttransportUser** | **NSString***|  | [optional] 
- **jcrcontenttriggerDistribute** | **NSNumber***|  | [optional] 
- **jcrcontenttriggerModified** | **NSNumber***|  | [optional] 
- **jcrcontenttriggerOnOffTime** | **NSNumber***|  | [optional] 
- **jcrcontenttriggerReceive** | **NSNumber***|  | [optional] 
- **jcrcontenttriggerSpecific** | **NSNumber***|  | [optional] 
- **jcrcontentuserId** | **NSString***|  | [optional] 
+ **jcrcontentCqdistribute** | **NSNumber***|  | [optional] 
+ **jcrcontentCqdistributeTypeHint** | **NSString***|  | [optional] 
+ **jcrcontentCqname** | **NSString***|  | [optional] 
+ **jcrcontentCqtemplate** | **NSString***|  | [optional] 
+ **jcrcontentEnabled** | **NSNumber***|  | [optional] 
+ **jcrcontentJcrdescription** | **NSString***|  | [optional] 
+ **jcrcontentJcrlastModified** | **NSString***|  | [optional] 
+ **jcrcontentJcrlastModifiedBy** | **NSString***|  | [optional] 
+ **jcrcontentJcrmixinTypes** | **NSString***|  | [optional] 
+ **jcrcontentJcrtitle** | **NSString***|  | [optional] 
+ **jcrcontentLogLevel** | **NSString***|  | [optional] 
+ **jcrcontentNoStatusUpdate** | **NSNumber***|  | [optional] 
+ **jcrcontentNoVersioning** | **NSNumber***|  | [optional] 
+ **jcrcontentProtocolConnectTimeout** | **NSNumber***|  | [optional] 
+ **jcrcontentProtocolHTTPConnectionClosed** | **NSNumber***|  | [optional] 
+ **jcrcontentProtocolHTTPExpired** | **NSString***|  | [optional] 
+ **jcrcontentProtocolHTTPHeaders** | [**NSArray&lt;NSString*&gt;***](NSString*.md)|  | [optional] 
+ **jcrcontentProtocolHTTPHeadersTypeHint** | **NSString***|  | [optional] 
+ **jcrcontentProtocolHTTPMethod** | **NSString***|  | [optional] 
+ **jcrcontentProtocolHTTPSRelaxed** | **NSNumber***|  | [optional] 
+ **jcrcontentProtocolInterface** | **NSString***|  | [optional] 
+ **jcrcontentProtocolSocketTimeout** | **NSNumber***|  | [optional] 
+ **jcrcontentProtocolVersion** | **NSString***|  | [optional] 
+ **jcrcontentProxyNTLMDomain** | **NSString***|  | [optional] 
+ **jcrcontentProxyNTLMHost** | **NSString***|  | [optional] 
+ **jcrcontentProxyHost** | **NSString***|  | [optional] 
+ **jcrcontentProxyPassword** | **NSString***|  | [optional] 
+ **jcrcontentProxyPort** | **NSNumber***|  | [optional] 
+ **jcrcontentProxyUser** | **NSString***|  | [optional] 
+ **jcrcontentQueueBatchMaxSize** | **NSNumber***|  | [optional] 
+ **jcrcontentQueueBatchMode** | **NSString***|  | [optional] 
+ **jcrcontentQueueBatchWaitTime** | **NSNumber***|  | [optional] 
+ **jcrcontentRetryDelay** | **NSString***|  | [optional] 
+ **jcrcontentReverseReplication** | **NSNumber***|  | [optional] 
+ **jcrcontentSerializationType** | **NSString***|  | [optional] 
+ **jcrcontentSlingresourceType** | **NSString***|  | [optional] 
+ **jcrcontentSsl** | **NSString***|  | [optional] 
+ **jcrcontentTransportNTLMDomain** | **NSString***|  | [optional] 
+ **jcrcontentTransportNTLMHost** | **NSString***|  | [optional] 
+ **jcrcontentTransportPassword** | **NSString***|  | [optional] 
+ **jcrcontentTransportUri** | **NSString***|  | [optional] 
+ **jcrcontentTransportUser** | **NSString***|  | [optional] 
+ **jcrcontentTriggerDistribute** | **NSNumber***|  | [optional] 
+ **jcrcontentTriggerModified** | **NSNumber***|  | [optional] 
+ **jcrcontentTriggerOnOffTime** | **NSNumber***|  | [optional] 
+ **jcrcontentTriggerReceive** | **NSNumber***|  | [optional] 
+ **jcrcontentTriggerSpecific** | **NSNumber***|  | [optional] 
+ **jcrcontentUserId** | **NSString***|  | [optional] 
  **jcrprimaryType** | **NSString***|  | [optional] 
  **operation** | **NSString***|  | [optional] 
 
@@ -1054,7 +1055,7 @@ Name | Type | Description  | Notes
     createUser: (NSString*) createUser
     createGroup: (NSString*) createGroup
     reppassword: (NSString*) reppassword
-    profilegivenName: (NSString*) profilegivenName
+    profileGivenName: (NSString*) profileGivenName
         completionHandler: (void (^)(NSString* output, NSError* error)) handler;
 ```
 
@@ -1073,7 +1074,7 @@ NSString* intermediatePath = @"intermediatePath_example"; //
 NSString* createUser = @"createUser_example"; //  (optional)
 NSString* createGroup = @"createGroup_example"; //  (optional)
 NSString* reppassword = @"reppassword_example"; //  (optional)
-NSString* profilegivenName = @"profilegivenName_example"; //  (optional)
+NSString* profileGivenName = @"profileGivenName_example"; //  (optional)
 
 OAISlingApi*apiInstance = [[OAISlingApi alloc] init];
 
@@ -1082,7 +1083,7 @@ OAISlingApi*apiInstance = [[OAISlingApi alloc] init];
               createUser:createUser
               createGroup:createGroup
               reppassword:reppassword
-              profilegivenName:profilegivenName
+              profileGivenName:profileGivenName
           completionHandler: ^(NSString* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
@@ -1102,7 +1103,7 @@ Name | Type | Description  | Notes
  **createUser** | **NSString***|  | [optional] 
  **createGroup** | **NSString***|  | [optional] 
  **reppassword** | **NSString***|  | [optional] 
- **profilegivenName** | **NSString***|  | [optional] 
+ **profileGivenName** | **NSString***|  | [optional] 
 
 ### Return type
 
@@ -1773,6 +1774,55 @@ Name | Type | Description  | Notes
  **allowHostsRegexpTypeHint** | **NSString***|  | [optional] 
  **filterMethods** | **NSString***|  | [optional] 
  **filterMethodsTypeHint** | **NSString***|  | [optional] 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **postConfigProperty**
+```objc
+-(NSURLSessionTask*) postConfigPropertyWithConfigNodeName: (NSString*) configNodeName
+        completionHandler: (void (^)(NSError* error)) handler;
+```
+
+
+
+### Example 
+```objc
+OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
+// Configure HTTP basic authorization (authentication scheme: aemAuth)
+[apiConfig setUsername:@"YOUR_USERNAME"];
+[apiConfig setPassword:@"YOUR_PASSWORD"];
+
+
+NSString* configNodeName = @"configNodeName_example"; // 
+
+OAISlingApi*apiInstance = [[OAISlingApi alloc] init];
+
+[apiInstance postConfigPropertyWithConfigNodeName:configNodeName
+          completionHandler: ^(NSError* error) {
+                        if (error) {
+                            NSLog(@"Error calling OAISlingApi->postConfigProperty: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **configNodeName** | **NSString***|  | 
 
 ### Return type
 

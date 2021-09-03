@@ -15,7 +15,7 @@ class SamlConfigurationPropertyItemsArray(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, name: str=None, optional: bool=None, is_set: bool=None, type: int=None, values: List[str]=None, description: str=None):  # noqa: E501
+    def __init__(self, name=None, optional=None, is_set=None, type=None, values=None, description=None):  # noqa: E501
         """SamlConfigurationPropertyItemsArray - a model defined in OpenAPI
 
         :param name: The name of this SamlConfigurationPropertyItemsArray.  # noqa: E501
@@ -68,7 +68,7 @@ class SamlConfigurationPropertyItemsArray(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def name(self) -> str:
+    def name(self):
         """Gets the name of this SamlConfigurationPropertyItemsArray.
 
         property name  # noqa: E501
@@ -79,7 +79,7 @@ class SamlConfigurationPropertyItemsArray(Model):
         return self._name
 
     @name.setter
-    def name(self, name: str):
+    def name(self, name):
         """Sets the name of this SamlConfigurationPropertyItemsArray.
 
         property name  # noqa: E501
@@ -91,7 +91,7 @@ class SamlConfigurationPropertyItemsArray(Model):
         self._name = name
 
     @property
-    def optional(self) -> bool:
+    def optional(self):
         """Gets the optional of this SamlConfigurationPropertyItemsArray.
 
         True if optional  # noqa: E501
@@ -102,7 +102,7 @@ class SamlConfigurationPropertyItemsArray(Model):
         return self._optional
 
     @optional.setter
-    def optional(self, optional: bool):
+    def optional(self, optional):
         """Sets the optional of this SamlConfigurationPropertyItemsArray.
 
         True if optional  # noqa: E501
@@ -114,7 +114,7 @@ class SamlConfigurationPropertyItemsArray(Model):
         self._optional = optional
 
     @property
-    def is_set(self) -> bool:
+    def is_set(self):
         """Gets the is_set of this SamlConfigurationPropertyItemsArray.
 
         True if property is set  # noqa: E501
@@ -125,7 +125,7 @@ class SamlConfigurationPropertyItemsArray(Model):
         return self._is_set
 
     @is_set.setter
-    def is_set(self, is_set: bool):
+    def is_set(self, is_set):
         """Sets the is_set of this SamlConfigurationPropertyItemsArray.
 
         True if property is set  # noqa: E501
@@ -137,7 +137,7 @@ class SamlConfigurationPropertyItemsArray(Model):
         self._is_set = is_set
 
     @property
-    def type(self) -> int:
+    def type(self):
         """Gets the type of this SamlConfigurationPropertyItemsArray.
 
         Property type, 1=String, 3=long, 11=boolean, 12=Password  # noqa: E501
@@ -148,7 +148,7 @@ class SamlConfigurationPropertyItemsArray(Model):
         return self._type
 
     @type.setter
-    def type(self, type: int):
+    def type(self, type):
         """Sets the type of this SamlConfigurationPropertyItemsArray.
 
         Property type, 1=String, 3=long, 11=boolean, 12=Password  # noqa: E501
@@ -160,7 +160,7 @@ class SamlConfigurationPropertyItemsArray(Model):
         self._type = type
 
     @property
-    def values(self) -> List[str]:
+    def values(self):
         """Gets the values of this SamlConfigurationPropertyItemsArray.
 
         Property value  # noqa: E501
@@ -171,7 +171,7 @@ class SamlConfigurationPropertyItemsArray(Model):
         return self._values
 
     @values.setter
-    def values(self, values: List[str]):
+    def values(self, values):
         """Sets the values of this SamlConfigurationPropertyItemsArray.
 
         Property value  # noqa: E501
@@ -183,7 +183,7 @@ class SamlConfigurationPropertyItemsArray(Model):
         self._values = values
 
     @property
-    def description(self) -> str:
+    def description(self):
         """Gets the description of this SamlConfigurationPropertyItemsArray.
 
         Property description  # noqa: E501
@@ -194,7 +194,7 @@ class SamlConfigurationPropertyItemsArray(Model):
         return self._description
 
     @description.setter
-    def description(self, description: str):
+    def description(self, description):
         """Sets the description of this SamlConfigurationPropertyItemsArray.
 
         Property description  # noqa: E501

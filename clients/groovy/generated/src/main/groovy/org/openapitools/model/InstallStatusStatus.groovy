@@ -6,8 +6,8 @@ import io.swagger.annotations.ApiModelProperty;
 
 @Canonical
 class InstallStatusStatus {
-    Boolean finished = null
-
-    Integer itemCount = null
-
+    
+    Boolean finished
+    
+    Integer itemCount
 }

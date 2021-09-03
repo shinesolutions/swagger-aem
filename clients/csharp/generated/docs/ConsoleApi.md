@@ -5,21 +5,24 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetAemProductInfo**](ConsoleApi.md#getaemproductinfo) | **GET** /system/console/status-productinfo.json | 
+[**GetBundleInfo**](ConsoleApi.md#getbundleinfo) | **GET** /system/console/bundles/{name}.json | 
 [**GetConfigMgr**](ConsoleApi.md#getconfigmgr) | **GET** /system/console/configMgr | 
 [**PostBundle**](ConsoleApi.md#postbundle) | **POST** /system/console/bundles/{name} | 
 [**PostJmxRepository**](ConsoleApi.md#postjmxrepository) | **POST** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} | 
 [**PostSamlConfiguration**](ConsoleApi.md#postsamlconfiguration) | **POST** /system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler | 
 
 
-<a name="getaemproductinfo"></a>
-# **GetAemProductInfo**
-> List<string> GetAemProductInfo ()
+
+## GetAemProductInfo
+
+> List&lt;string&gt; GetAemProductInfo ()
 
 
 
 ### Example
+
 ```csharp
-using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Org.OpenAPITools.Api;
 using Org.OpenAPITools.Client;
@@ -29,22 +32,25 @@ namespace Example
 {
     public class GetAemProductInfoExample
     {
-        public void main()
+        public static void Main()
         {
+            Configuration.Default.BasePath = "http://localhost";
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
 
-            var apiInstance = new ConsoleApi();
+            var apiInstance = new ConsoleApi(Configuration.Default);
 
             try
             {
-                List&lt;string&gt; result = apiInstance.GetAemProductInfo();
+                List<string> result = apiInstance.GetAemProductInfo();
                 Debug.WriteLine(result);
             }
-            catch (Exception e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling ConsoleApi.GetAemProductInfo: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
             }
         }
     }
@@ -52,6 +58,7 @@ namespace Example
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -64,20 +71,109 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="getconfigmgr"></a>
-# **GetConfigMgr**
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **0** | Default response |  -  |
+
+[[Back to top]](#)
+[[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetBundleInfo
+
+> BundleInfo GetBundleInfo (string name)
+
+
+
+### Example
+
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using Org.OpenAPITools.Api;
+using Org.OpenAPITools.Client;
+using Org.OpenAPITools.Model;
+
+namespace Example
+{
+    public class GetBundleInfoExample
+    {
+        public static void Main()
+        {
+            Configuration.Default.BasePath = "http://localhost";
+            // Configure HTTP basic authorization: aemAuth
+            Configuration.Default.Username = "YOUR_USERNAME";
+            Configuration.Default.Password = "YOUR_PASSWORD";
+
+            var apiInstance = new ConsoleApi(Configuration.Default);
+            var name = name_example;  // string | 
+
+            try
+            {
+                BundleInfo result = apiInstance.GetBundleInfo(name);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Debug.Print("Exception when calling ConsoleApi.GetBundleInfo: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**|  | 
+
+### Return type
+
+[**BundleInfo**](BundleInfo.md)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Retrieved bundle info |  -  |
+| **0** | Default response |  -  |
+
+[[Back to top]](#)
+[[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetConfigMgr
+
 > string GetConfigMgr ()
 
 
 
 ### Example
+
 ```csharp
-using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Org.OpenAPITools.Api;
 using Org.OpenAPITools.Client;
@@ -87,22 +183,25 @@ namespace Example
 {
     public class GetConfigMgrExample
     {
-        public void main()
+        public static void Main()
         {
+            Configuration.Default.BasePath = "http://localhost";
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
 
-            var apiInstance = new ConsoleApi();
+            var apiInstance = new ConsoleApi(Configuration.Default);
 
             try
             {
                 string result = apiInstance.GetConfigMgr();
                 Debug.WriteLine(result);
             }
-            catch (Exception e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling ConsoleApi.GetConfigMgr: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
             }
         }
     }
@@ -110,6 +209,7 @@ namespace Example
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -122,20 +222,32 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/xml
+- **Content-Type**: Not defined
+- **Accept**: text/xml
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="postbundle"></a>
-# **PostBundle**
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **5XX** | Unexpected error. |  -  |
+
+[[Back to top]](#)
+[[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PostBundle
+
 > void PostBundle (string name, string action)
 
 
 
 ### Example
+
 ```csharp
-using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Org.OpenAPITools.Api;
 using Org.OpenAPITools.Client;
@@ -145,13 +257,14 @@ namespace Example
 {
     public class PostBundleExample
     {
-        public void main()
+        public static void Main()
         {
+            Configuration.Default.BasePath = "http://localhost";
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
 
-            var apiInstance = new ConsoleApi();
+            var apiInstance = new ConsoleApi(Configuration.Default);
             var name = name_example;  // string | 
             var action = action_example;  // string | 
 
@@ -159,9 +272,11 @@ namespace Example
             {
                 apiInstance.PostBundle(name, action);
             }
-            catch (Exception e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling ConsoleApi.PostBundle: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
             }
         }
     }
@@ -169,6 +284,7 @@ namespace Example
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -185,20 +301,31 @@ void (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="postjmxrepository"></a>
-# **PostJmxRepository**
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **0** | Default response |  -  |
+
+[[Back to top]](#)
+[[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PostJmxRepository
+
 > void PostJmxRepository (string action)
 
 
 
 ### Example
+
 ```csharp
-using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Org.OpenAPITools.Api;
 using Org.OpenAPITools.Client;
@@ -208,22 +335,25 @@ namespace Example
 {
     public class PostJmxRepositoryExample
     {
-        public void main()
+        public static void Main()
         {
+            Configuration.Default.BasePath = "http://localhost";
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
 
-            var apiInstance = new ConsoleApi();
+            var apiInstance = new ConsoleApi(Configuration.Default);
             var action = action_example;  // string | 
 
             try
             {
                 apiInstance.PostJmxRepository(action);
             }
-            catch (Exception e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling ConsoleApi.PostJmxRepository: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
             }
         }
     }
@@ -231,6 +361,7 @@ namespace Example
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -246,20 +377,31 @@ void (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="postsamlconfiguration"></a>
-# **PostSamlConfiguration**
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **0** | Default response |  -  |
+
+[[Back to top]](#)
+[[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PostSamlConfiguration
+
 > SamlConfigurationInfo PostSamlConfiguration (bool? post = null, bool? apply = null, bool? delete = null, string action = null, string location = null, List<string> path = null, int? serviceRanking = null, string idpUrl = null, string idpCertAlias = null, bool? idpHttpRedirect = null, string serviceProviderEntityId = null, string assertionConsumerServiceURL = null, string spPrivateKeyAlias = null, string keyStorePassword = null, string defaultRedirectUrl = null, string userIDAttribute = null, bool? useEncryption = null, bool? createUser = null, bool? addGroupMemberships = null, string groupMembershipAttribute = null, List<string> defaultGroups = null, string nameIdFormat = null, List<string> synchronizeAttributes = null, bool? handleLogout = null, string logoutUrl = null, int? clockTolerance = null, string digestMethod = null, string signatureMethod = null, string userIntermediatePath = null, List<string> propertylist = null)
 
 
 
 ### Example
+
 ```csharp
-using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Org.OpenAPITools.Api;
 using Org.OpenAPITools.Client;
@@ -269,13 +411,14 @@ namespace Example
 {
     public class PostSamlConfigurationExample
     {
-        public void main()
+        public static void Main()
         {
+            Configuration.Default.BasePath = "http://localhost";
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
 
-            var apiInstance = new ConsoleApi();
+            var apiInstance = new ConsoleApi(Configuration.Default);
             var post = true;  // bool? |  (optional) 
             var apply = true;  // bool? |  (optional) 
             var delete = true;  // bool? |  (optional) 
@@ -312,9 +455,11 @@ namespace Example
                 SamlConfigurationInfo result = apiInstance.PostSamlConfiguration(post, apply, delete, action, location, path, serviceRanking, idpUrl, idpCertAlias, idpHttpRedirect, serviceProviderEntityId, assertionConsumerServiceURL, spPrivateKeyAlias, keyStorePassword, defaultRedirectUrl, userIDAttribute, useEncryption, createUser, addGroupMemberships, groupMembershipAttribute, defaultGroups, nameIdFormat, synchronizeAttributes, handleLogout, logoutUrl, clockTolerance, digestMethod, signatureMethod, userIntermediatePath, propertylist);
                 Debug.WriteLine(result);
             }
-            catch (Exception e)
+            catch (ApiException e)
             {
                 Debug.Print("Exception when calling ConsoleApi.PostSamlConfiguration: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
             }
         }
     }
@@ -322,6 +467,7 @@ namespace Example
 ```
 
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -366,8 +512,19 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/plain
+- **Content-Type**: Not defined
+- **Accept**: text/plain
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Retrieved AEM SAML Configuration |  -  |
+| **302** | Default response |  -  |
+| **0** | Default response |  -  |
+
+[[Back to top]](#)
+[[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 

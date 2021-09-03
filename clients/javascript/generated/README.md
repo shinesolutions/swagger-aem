@@ -126,6 +126,7 @@ All URIs are relative to *http://localhost*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *NodeSwaggerAem.ConsoleApi* | [**getAemProductInfo**](docs/ConsoleApi.md#getAemProductInfo) | **GET** /system/console/status-productinfo.json | 
+*NodeSwaggerAem.ConsoleApi* | [**getBundleInfo**](docs/ConsoleApi.md#getBundleInfo) | **GET** /system/console/bundles/{name}.json | 
 *NodeSwaggerAem.ConsoleApi* | [**getConfigMgr**](docs/ConsoleApi.md#getConfigMgr) | **GET** /system/console/configMgr | 
 *NodeSwaggerAem.ConsoleApi* | [**postBundle**](docs/ConsoleApi.md#postBundle) | **POST** /system/console/bundles/{name} | 
 *NodeSwaggerAem.ConsoleApi* | [**postJmxRepository**](docs/ConsoleApi.md#postJmxRepository) | **POST** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} | 
@@ -176,12 +177,9 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
- - [NodeSwaggerAem.InlineObject](docs/InlineObject.md)
- - [NodeSwaggerAem.InlineObject1](docs/InlineObject1.md)
- - [NodeSwaggerAem.InlineObject2](docs/InlineObject2.md)
- - [NodeSwaggerAem.InlineObject3](docs/InlineObject3.md)
- - [NodeSwaggerAem.InlineObject4](docs/InlineObject4.md)
- - [NodeSwaggerAem.InlineObject5](docs/InlineObject5.md)
+ - [NodeSwaggerAem.BundleData](docs/BundleData.md)
+ - [NodeSwaggerAem.BundleDataProp](docs/BundleDataProp.md)
+ - [NodeSwaggerAem.BundleInfo](docs/BundleInfo.md)
  - [NodeSwaggerAem.InstallStatus](docs/InstallStatus.md)
  - [NodeSwaggerAem.InstallStatusStatus](docs/InstallStatusStatus.md)
  - [NodeSwaggerAem.KeystoreChainItems](docs/KeystoreChainItems.md)

@@ -1,5 +1,6 @@
 package com.prokarma.pkmst.controller;
 
+import com.prokarma.pkmst.model.BundleInfo;
 import com.prokarma.pkmst.model.SamlConfigurationInfo;
 
 import io.swagger.annotations.*;
@@ -23,8 +24,7 @@ import java.io.IOException;
  * @author pkmst
  *
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2019-08-04T23:41:29.600Z[GMT]")
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2021-09-03T15:25:27.791+10:00[Australia/Melbourne]")
 @Controller
 public class ConsoleApiController implements ConsoleApi {
     private final ObjectMapper objectMapper;
@@ -41,6 +41,17 @@ public class ConsoleApiController implements ConsoleApi {
         }
 
         return new ResponseEntity<List<String>>(HttpStatus.OK);
+    }
+
+    public ResponseEntity<BundleInfo> getBundleInfo(@ApiParam(value = "",required=true ) @PathVariable("name") String name,
+        @RequestHeader(value = "Accept", required = false) String accept) throws Exception {
+        // do some magic!
+
+        if (accept != null && accept.contains("application/json")) {
+            return new ResponseEntity<BundleInfo>(objectMapper.readValue("", BundleInfo.class), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<BundleInfo>(HttpStatus.OK);
     }
 
     public ResponseEntity<String> getConfigMgr(@RequestHeader(value = "Accept", required = false) String accept) throws Exception {

@@ -3,8 +3,7 @@
 
 %% Cowboy REST callbacks
 -export([allowed_methods/2]).
--export([init/3]).
--export([rest_init/2]).
+-export([init/2]).
 -export([allow_missing_post/2]).
 -export([content_types_accepted/2]).
 -export([content_types_provided/2]).
@@ -27,18 +26,14 @@
 
 -type state() :: state().
 
--spec init(TransportName :: atom(), Req :: cowboy_req:req(), Opts :: openapi_router:init_opts()) ->
-    {upgrade, protocol, cowboy_rest, Req :: cowboy_req:req(), Opts :: openapi_router:init_opts()}.
+-spec init(Req :: cowboy_req:req(), Opts :: openapi_router:init_opts()) ->
+    {cowboy_rest, Req :: cowboy_req:req(), State :: state()}.
 
-init(_Transport, Req, Opts) ->
-    {upgrade, protocol, cowboy_rest, Req, Opts}.
-
--spec rest_init(Req :: cowboy_req:req(), Opts :: openapi_router:init_opts()) ->
-    {ok, Req :: cowboy_req:req(), State :: state()}.
-
-rest_init(Req0, {Operations, LogicHandler, ValidatorState}) ->
-    {Method, Req} = cowboy_req:method(Req0),
+init(Req, {Operations, LogicHandler, ValidatorMod}) ->
+    Method = cowboy_req:method(Req),
     OperationID = maps:get(Method, Operations, undefined),
+
+    ValidatorState = ValidatorMod:get_validator_state(),
 
     error_logger:info_msg("Attempt to process operation: ~p", [OperationID]),
 
@@ -47,7 +42,7 @@ rest_init(Req0, {Operations, LogicHandler, ValidatorState}) ->
         logic_handler = LogicHandler,
         validator_state = ValidatorState
     },
-    {ok, Req, State}.
+    {cowboy_rest, Req, State}.
 
 -spec allowed_methods(Req :: cowboy_req:req(), State :: state()) ->
     {Value :: [binary()], Req :: cowboy_req:req(), State :: state()}.
@@ -168,7 +163,7 @@ is_authorized(
     }
 ) ->
 is_authorized(Req, State) ->
-    {true, Req, State}.
+    {{false, <<"">>}, Req, State}.
 
 -spec content_types_accepted(Req :: cowboy_req:req(), State :: state()) ->
     {
@@ -302,7 +297,6 @@ valid_entity_length(Req, State) ->
     {true, Req, State}.
 
 %%%%
-
 -type result_ok() :: {
     ok,
     {Status :: cowboy:http_status(), Headers :: cowboy:http_headers(), Body :: iodata()}
@@ -310,7 +304,7 @@ valid_entity_length(Req, State) ->
 
 -type result_error() :: {error, Reason :: any()}.
 
--type processed_response() :: {halt, cowboy_req:req(), state()}.
+-type processed_response() :: {stop, cowboy_req:req(), state()}.
 
 -spec process_response(result_ok() | result_error(), cowboy_req:req(), state()) ->
     processed_response().
@@ -318,24 +312,23 @@ valid_entity_length(Req, State) ->
 process_response(Response, Req0, State = #state{operation_id = OperationID}) ->
     case Response of
         {ok, {Code, Headers, Body}} ->
-            {ok, Req} = cowboy_req:reply(Code, Headers, Body, Req0),
-            {halt, Req, State};
+            Req = cowboy_req:reply(Code, Headers, Body, Req0),
+            {stop, Req, State};
         {error, Message} ->
             error_logger:error_msg("Unable to process request for ~p: ~p", [OperationID, Message]),
 
-            {ok, Req} = cowboy_req:reply(400, Req0),
-            {halt, Req, State}
+            Req = cowboy_req:reply(400, Req0),
+            {stop, Req, State}
     end.
 
--spec handle_request_json(cowboy_req:req(), state()) -> {halt, cowboy_req:req(), state()}.
+-spec handle_request_json(cowboy_req:req(), state()) -> processed_response().
 
 handle_request_json(
     Req0,
     State = #state{
         operation_id = OperationID,
         logic_handler = LogicHandler,
-        validator_state = ValidatorState,
-        context = Context
+        validator_state = ValidatorState
     }
 ) ->
     case openapi_api:populate_request(OperationID, Req0, ValidatorState) of
@@ -343,8 +336,8 @@ handle_request_json(
             {Code, Headers, Body} = openapi_logic_handler:handle_request(
                 LogicHandler,
                 OperationID,
-                Populated,
-                Context
+                Req1,
+                maps:merge(State#state.context, Populated)
             ),
             _ = openapi_api:validate_response(
                 OperationID,
@@ -352,7 +345,7 @@ handle_request_json(
                 Body,
                 ValidatorState
             ),
-            PreparedBody = jsx:encode(Body),
+            PreparedBody = prepare_body(Code, Body),
             Response = {ok, {Code, Headers, PreparedBody}},
             process_response(Response, Req1, State);
         {error, Reason, Req1} ->
@@ -360,3 +353,10 @@ handle_request_json(
     end.
 
 validate_headers(_, Req) -> {true, Req}.
+
+prepare_body(204, Body) when map_size(Body) == 0; length(Body) == 0 ->
+    <<>>;
+prepare_body(304, Body) when map_size(Body) == 0; length(Body) == 0 ->
+    <<>>;
+prepare_body(_Code, Body) ->
+    jsx:encode(Body).

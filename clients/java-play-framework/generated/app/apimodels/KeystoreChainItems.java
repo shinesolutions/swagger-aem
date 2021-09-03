@@ -8,24 +8,28 @@ import javax.validation.constraints.*;
 /**
  * KeystoreChainItems
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPlayFrameworkCodegen", date = "2019-08-04T23:41:35.248Z[GMT]")
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPlayFrameworkCodegen", date = "2021-09-03T15:25:32.040+10:00[Australia/Melbourne]")
 @SuppressWarnings({"UnusedReturnValue", "WeakerAccess"})
 public class KeystoreChainItems   {
   @JsonProperty("subject")
-  private String subject = null;
+  
+  private String subject;
 
   @JsonProperty("issuer")
-  private String issuer = null;
+  
+  private String issuer;
 
   @JsonProperty("notBefore")
-  private String notBefore = null;
+  
+  private String notBefore;
 
   @JsonProperty("notAfter")
-  private String notAfter = null;
+  
+  private String notAfter;
 
   @JsonProperty("serialNumber")
-  private Integer serialNumber = null;
+  
+  private Integer serialNumber;
 
   public KeystoreChainItems subject(String subject) {
     this.subject = subject;
@@ -36,7 +40,7 @@ public class KeystoreChainItems   {
    * e.g. \"CN=localhost\"
    * @return subject
   **/
-    public String getSubject() {
+  public String getSubject() {
     return subject;
   }
 
@@ -53,7 +57,7 @@ public class KeystoreChainItems   {
    * e.g. \"CN=Admin\"
    * @return issuer
   **/
-    public String getIssuer() {
+  public String getIssuer() {
     return issuer;
   }
 
@@ -70,7 +74,7 @@ public class KeystoreChainItems   {
    * e.g. \"Sun Jul 01 12:00:00 AEST 2018\"
    * @return notBefore
   **/
-    public String getNotBefore() {
+  public String getNotBefore() {
     return notBefore;
   }
 
@@ -87,7 +91,7 @@ public class KeystoreChainItems   {
    * e.g. \"Sun Jun 30 23:59:50 AEST 2019\"
    * @return notAfter
   **/
-    public String getNotAfter() {
+  public String getNotAfter() {
     return notAfter;
   }
 
@@ -104,7 +108,7 @@ public class KeystoreChainItems   {
    * 18165099476682912368
    * @return serialNumber
   **/
-    public Integer getSerialNumber() {
+  public Integer getSerialNumber() {
     return serialNumber;
   }
 
@@ -114,7 +118,7 @@ public class KeystoreChainItems   {
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -153,7 +157,7 @@ public class KeystoreChainItems   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

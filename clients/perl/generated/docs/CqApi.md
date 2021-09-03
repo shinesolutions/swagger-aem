@@ -67,6 +67,7 @@ my $api_instance = WWW::OpenAPIClient::CqApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $authorizable_id = "authorizable_id_example"; # string | 

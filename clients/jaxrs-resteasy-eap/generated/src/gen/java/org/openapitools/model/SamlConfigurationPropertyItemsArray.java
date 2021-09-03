@@ -11,22 +11,21 @@ import java.util.List;
 import javax.validation.constraints.*;
 import io.swagger.annotations.*;
 
-
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyEapServerCodegen", date = "2019-08-04T23:42:11.561Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyEapServerCodegen", date = "2021-09-03T15:26:02.321+10:00[Australia/Melbourne]")
 public class SamlConfigurationPropertyItemsArray   {
   
 
-  private String name = null;
+  private String name;
 
-  private Boolean optional = null;
+  private Boolean optional;
 
-  private Boolean isSet = null;
+  private Boolean isSet;
 
-  private Integer type = null;
+  private Integer type;
 
   private List<String> values = new ArrayList<String>();
 
-  private String description = null;
+  private String description;
 
   /**
    * property name

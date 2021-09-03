@@ -14,79 +14,79 @@ import org.openapitools.model.SamlConfigurationPropertyItemsString;
 
 
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaInflectorServerCodegen", date = "2019-08-04T23:41:21.082Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaInflectorServerCodegen", date = "2021-09-03T15:25:18.608+10:00[Australia/Melbourne]")
 public class SamlConfigurationProperties   {
   @JsonProperty("path")
-  private SamlConfigurationPropertyItemsArray path = null;
+  private SamlConfigurationPropertyItemsArray path;
 
   @JsonProperty("service.ranking")
-  private SamlConfigurationPropertyItemsLong serviceRanking = null;
+  private SamlConfigurationPropertyItemsLong serviceRanking;
 
   @JsonProperty("idpUrl")
-  private SamlConfigurationPropertyItemsString idpUrl = null;
+  private SamlConfigurationPropertyItemsString idpUrl;
 
   @JsonProperty("idpCertAlias")
-  private SamlConfigurationPropertyItemsString idpCertAlias = null;
+  private SamlConfigurationPropertyItemsString idpCertAlias;
 
   @JsonProperty("idpHttpRedirect")
-  private SamlConfigurationPropertyItemsBoolean idpHttpRedirect = null;
+  private SamlConfigurationPropertyItemsBoolean idpHttpRedirect;
 
   @JsonProperty("serviceProviderEntityId")
-  private SamlConfigurationPropertyItemsString serviceProviderEntityId = null;
+  private SamlConfigurationPropertyItemsString serviceProviderEntityId;
 
   @JsonProperty("assertionConsumerServiceURL")
-  private SamlConfigurationPropertyItemsString assertionConsumerServiceURL = null;
+  private SamlConfigurationPropertyItemsString assertionConsumerServiceURL;
 
   @JsonProperty("spPrivateKeyAlias")
-  private SamlConfigurationPropertyItemsString spPrivateKeyAlias = null;
+  private SamlConfigurationPropertyItemsString spPrivateKeyAlias;
 
   @JsonProperty("keyStorePassword")
-  private SamlConfigurationPropertyItemsString keyStorePassword = null;
+  private SamlConfigurationPropertyItemsString keyStorePassword;
 
   @JsonProperty("defaultRedirectUrl")
-  private SamlConfigurationPropertyItemsString defaultRedirectUrl = null;
+  private SamlConfigurationPropertyItemsString defaultRedirectUrl;
 
   @JsonProperty("userIDAttribute")
-  private SamlConfigurationPropertyItemsString userIDAttribute = null;
+  private SamlConfigurationPropertyItemsString userIDAttribute;
 
   @JsonProperty("useEncryption")
-  private SamlConfigurationPropertyItemsBoolean useEncryption = null;
+  private SamlConfigurationPropertyItemsBoolean useEncryption;
 
   @JsonProperty("createUser")
-  private SamlConfigurationPropertyItemsBoolean createUser = null;
+  private SamlConfigurationPropertyItemsBoolean createUser;
 
   @JsonProperty("addGroupMemberships")
-  private SamlConfigurationPropertyItemsBoolean addGroupMemberships = null;
+  private SamlConfigurationPropertyItemsBoolean addGroupMemberships;
 
   @JsonProperty("groupMembershipAttribute")
-  private SamlConfigurationPropertyItemsString groupMembershipAttribute = null;
+  private SamlConfigurationPropertyItemsString groupMembershipAttribute;
 
   @JsonProperty("defaultGroups")
-  private SamlConfigurationPropertyItemsArray defaultGroups = null;
+  private SamlConfigurationPropertyItemsArray defaultGroups;
 
   @JsonProperty("nameIdFormat")
-  private SamlConfigurationPropertyItemsString nameIdFormat = null;
+  private SamlConfigurationPropertyItemsString nameIdFormat;
 
   @JsonProperty("synchronizeAttributes")
-  private SamlConfigurationPropertyItemsArray synchronizeAttributes = null;
+  private SamlConfigurationPropertyItemsArray synchronizeAttributes;
 
   @JsonProperty("handleLogout")
-  private SamlConfigurationPropertyItemsBoolean handleLogout = null;
+  private SamlConfigurationPropertyItemsBoolean handleLogout;
 
   @JsonProperty("logoutUrl")
-  private SamlConfigurationPropertyItemsString logoutUrl = null;
+  private SamlConfigurationPropertyItemsString logoutUrl;
 
   @JsonProperty("clockTolerance")
-  private SamlConfigurationPropertyItemsLong clockTolerance = null;
+  private SamlConfigurationPropertyItemsLong clockTolerance;
 
   @JsonProperty("digestMethod")
-  private SamlConfigurationPropertyItemsString digestMethod = null;
+  private SamlConfigurationPropertyItemsString digestMethod;
 
   @JsonProperty("signatureMethod")
-  private SamlConfigurationPropertyItemsString signatureMethod = null;
+  private SamlConfigurationPropertyItemsString signatureMethod;
 
   @JsonProperty("userIntermediatePath")
-  private SamlConfigurationPropertyItemsString userIntermediatePath = null;
+  private SamlConfigurationPropertyItemsString userIntermediatePath;
 
   /**
    **/
@@ -498,7 +498,7 @@ public class SamlConfigurationProperties   {
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -574,7 +574,7 @@ public class SamlConfigurationProperties   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

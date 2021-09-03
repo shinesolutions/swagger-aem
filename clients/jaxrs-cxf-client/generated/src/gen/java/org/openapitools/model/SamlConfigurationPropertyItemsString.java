@@ -17,37 +17,37 @@ public class SamlConfigurationPropertyItemsString  {
  /**
    * property name
   **/
-  private String name = null;
+  private String name;
 
   @ApiModelProperty(value = "True if optional")
  /**
    * True if optional
   **/
-  private Boolean optional = null;
+  private Boolean optional;
 
   @ApiModelProperty(value = "True if property is set")
  /**
    * True if property is set
   **/
-  private Boolean isSet = null;
+  private Boolean isSet;
 
   @ApiModelProperty(value = "Property type, 1=String, 3=long, 11=boolean, 12=Password")
  /**
    * Property type, 1=String, 3=long, 11=boolean, 12=Password
   **/
-  private Integer type = null;
+  private Integer type;
 
   @ApiModelProperty(value = "Property value")
  /**
    * Property value
   **/
-  private String value = null;
+  private String value;
 
   @ApiModelProperty(value = "Property description")
  /**
    * Property description
   **/
-  private String description = null;
+  private String description;
  /**
    * property name
    * @return name
@@ -176,7 +176,7 @@ public class SamlConfigurationPropertyItemsString  {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private static String toIndentedString(java.lang.Object o) {
+  private static String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

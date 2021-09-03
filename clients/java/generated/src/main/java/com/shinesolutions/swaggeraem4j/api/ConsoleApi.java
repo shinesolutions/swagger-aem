@@ -27,6 +27,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
+import com.shinesolutions.swaggeraem4j.model.BundleInfo;
 import com.shinesolutions.swaggeraem4j.model.SamlConfigurationInfo;
 
 import java.lang.reflect.Type;
@@ -76,6 +77,7 @@ public class ConsoleApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -156,6 +158,122 @@ public class ConsoleApi {
         return localVarCall;
     }
     /**
+     * Build call for getBundleInfo
+     * @param name  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Retrieved bundle info </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Default response </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getBundleInfoCall(String name, final ApiCallback _callback) throws ApiException {
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/system/console/bundles/{name}.json"
+            .replaceAll("\\{" + "name" + "\\}", localVarApiClient.escapeString(name.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        String[] localVarAuthNames = new String[] { "aemAuth" };
+        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getBundleInfoValidateBeforeCall(String name, final ApiCallback _callback) throws ApiException {
+        
+        // verify the required parameter 'name' is set
+        if (name == null) {
+            throw new ApiException("Missing the required parameter 'name' when calling getBundleInfo(Async)");
+        }
+        
+
+        okhttp3.Call localVarCall = getBundleInfoCall(name, _callback);
+        return localVarCall;
+
+    }
+
+    /**
+     * 
+     * 
+     * @param name  (required)
+     * @return BundleInfo
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Retrieved bundle info </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Default response </td><td>  -  </td></tr>
+     </table>
+     */
+    public BundleInfo getBundleInfo(String name) throws ApiException {
+        ApiResponse<BundleInfo> localVarResp = getBundleInfoWithHttpInfo(name);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     * 
+     * @param name  (required)
+     * @return ApiResponse&lt;BundleInfo&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Retrieved bundle info </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Default response </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<BundleInfo> getBundleInfoWithHttpInfo(String name) throws ApiException {
+        okhttp3.Call localVarCall = getBundleInfoValidateBeforeCall(name, null);
+        Type localVarReturnType = new TypeToken<BundleInfo>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     * 
+     * @param name  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Retrieved bundle info </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Default response </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getBundleInfoAsync(String name, final ApiCallback<BundleInfo> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getBundleInfoValidateBeforeCall(name, _callback);
+        Type localVarReturnType = new TypeToken<BundleInfo>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for getConfigMgr
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -178,6 +296,7 @@ public class ConsoleApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "text/xml"
         };
@@ -282,13 +401,14 @@ public class ConsoleApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (action != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("action", action));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             
         };
@@ -404,6 +524,7 @@ public class ConsoleApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             
         };
@@ -538,6 +659,10 @@ public class ConsoleApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (post != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("post", post));
         }
@@ -658,9 +783,6 @@ public class ConsoleApi {
             localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("csv", "propertylist", propertylist));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             "text/plain"
         };

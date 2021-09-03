@@ -44,8 +44,8 @@ No authorization required
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorizable_id** | **STRING_32**|  | 
- **changelog** | **STRING_32**|  | 
+ **authorizable_id** | **STRING_32**|  | [default to null]
+ **changelog** | **STRING_32**|  | [default to null]
 
 ### Return type
 

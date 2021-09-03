@@ -1419,7 +1419,7 @@ static bool getQueryProcessor(MemoryStruct_s p_chunk, long code, char* errormsg,
 }
 
 static bool getQueryHelper(char * accessToken,
-	std::string path, long long pPeriodlimit, std::string _1_property, std::string _1_property_value, 
+	std::string path, long long pPeriodlimit, std::string r_1_property, std::string r_1_property_value, 
 	void(* handler)(std::string, Error, void* )
 	, void* userData, bool isAsync)
 {
@@ -1445,11 +1445,11 @@ static bool getQueryHelper(char * accessToken,
 	queryParams.insert(pair<string, string>("p.limit", itemAtq));
 
 
-	itemAtq = stringify(&_1_property, "std::string");
+	itemAtq = stringify(&r_1_property, "std::string");
 	queryParams.insert(pair<string, string>("1_property", itemAtq));
 
 
-	itemAtq = stringify(&_1_property_value, "std::string");
+	itemAtq = stringify(&r_1_property_value, "std::string");
 	queryParams.insert(pair<string, string>("1_property.value", itemAtq));
 
 	string mBody = "";
@@ -1506,22 +1506,22 @@ static bool getQueryHelper(char * accessToken,
 
 
 bool SlingManager::getQueryAsync(char * accessToken,
-	std::string path, long long pPeriodlimit, std::string _1_property, std::string _1_property_value, 
+	std::string path, long long pPeriodlimit, std::string r_1_property, std::string r_1_property_value, 
 	void(* handler)(std::string, Error, void* )
 	, void* userData)
 {
 	return getQueryHelper(accessToken,
-	path, pPeriodlimit, _1_property, _1_property_value, 
+	path, pPeriodlimit, r_1_property, r_1_property_value, 
 	handler, userData, true);
 }
 
 bool SlingManager::getQuerySync(char * accessToken,
-	std::string path, long long pPeriodlimit, std::string _1_property, std::string _1_property_value, 
+	std::string path, long long pPeriodlimit, std::string r_1_property, std::string r_1_property_value, 
 	void(* handler)(std::string, Error, void* )
 	, void* userData)
 {
 	return getQueryHelper(accessToken,
-	path, pPeriodlimit, _1_property, _1_property_value, 
+	path, pPeriodlimit, r_1_property, r_1_property_value, 
 	handler, userData, false);
 }
 
@@ -4150,6 +4150,136 @@ bool SlingManager::postConfigApacheSlingReferrerFilterSync(char * accessToken,
 	handler, userData, false);
 }
 
+static bool postConfigPropertyProcessor(MemoryStruct_s p_chunk, long code, char* errormsg, void* userData,
+	void(* voidHandler)())
+{
+	
+	void(* handler)(Error, void* ) = reinterpret_cast<void(*)(Error, void* )> (voidHandler);
+	JsonNode* pJson;
+	char * data = p_chunk.memory;
+
+	
+
+	if (code >= 200 && code < 300) {
+		Error error(code, string("No Error"));
+
+
+		handler(error, userData);
+		return true;
+
+
+
+	} else {
+		Error error;
+		if (errormsg != NULL) {
+			error = Error(code, string(errormsg));
+		} else if (p_chunk.memory != NULL) {
+			error = Error(code, string(p_chunk.memory));
+		} else {
+			error = Error(code, string("Unknown Error"));
+		}
+		handler(error, userData);
+		return false;
+	}
+}
+
+static bool postConfigPropertyHelper(char * accessToken,
+	std::string configNodeName, 
+	
+	void(* handler)(Error, void* ) , void* userData, bool isAsync)
+{
+
+	//TODO: maybe delete headerList after its used to free up space?
+	struct curl_slist *headerList = NULL;
+
+	
+	string accessHeader = "Authorization: Bearer ";
+	accessHeader.append(accessToken);
+	headerList = curl_slist_append(headerList, accessHeader.c_str());
+	headerList = curl_slist_append(headerList, "Content-Type: application/json");
+
+	map <string, string> queryParams;
+	string itemAtq;
+	
+	string mBody = "";
+	JsonNode* node;
+	JsonArray* json_array;
+
+	string url("/apps/system/config/{configNodeName}");
+	int pos;
+
+	string s_configNodeName("{");
+	s_configNodeName.append("configNodeName");
+	s_configNodeName.append("}");
+	pos = url.find(s_configNodeName);
+	url.erase(pos, s_configNodeName.length());
+	url.insert(pos, stringify(&configNodeName, "std::string"));
+
+	//TODO: free memory of errormsg, memorystruct
+	MemoryStruct_s* p_chunk = new MemoryStruct_s();
+	long code;
+	char* errormsg = NULL;
+	string myhttpmethod("POST");
+
+	if(strcmp("PUT", "POST") == 0){
+		if(strcmp("", mBody.c_str()) == 0){
+			mBody.append("{}");
+		}
+	}
+
+	if(!isAsync){
+		NetClient::easycurl(SlingManager::getBasePath(), url, myhttpmethod, queryParams,
+			mBody, headerList, p_chunk, &code, errormsg);
+		bool retval = postConfigPropertyProcessor(*p_chunk, code, errormsg, userData,reinterpret_cast<void(*)()>(handler));
+
+		curl_slist_free_all(headerList);
+		if (p_chunk) {
+			if(p_chunk->memory) {
+				free(p_chunk->memory);
+			}
+			delete (p_chunk);
+		}
+		if (errormsg) {
+			free(errormsg);
+		}
+		return retval;
+	} else{
+		GThread *thread = NULL;
+		RequestInfo *requestInfo = NULL;
+
+		requestInfo = new(nothrow) RequestInfo (SlingManager::getBasePath(), url, myhttpmethod, queryParams,
+			mBody, headerList, p_chunk, &code, errormsg, userData, reinterpret_cast<void(*)()>(handler), postConfigPropertyProcessor);;
+		if(requestInfo == NULL)
+			return false;
+
+		thread = g_thread_new(NULL, __SlingManagerthreadFunc, static_cast<gpointer>(requestInfo));
+		return true;
+	}
+}
+
+
+
+
+bool SlingManager::postConfigPropertyAsync(char * accessToken,
+	std::string configNodeName, 
+	
+	void(* handler)(Error, void* ) , void* userData)
+{
+	return postConfigPropertyHelper(accessToken,
+	configNodeName, 
+	handler, userData, true);
+}
+
+bool SlingManager::postConfigPropertySync(char * accessToken,
+	std::string configNodeName, 
+	
+	void(* handler)(Error, void* ) , void* userData)
+{
+	return postConfigPropertyHelper(accessToken,
+	configNodeName, 
+	handler, userData, false);
+}
+
 static bool postNodeProcessor(MemoryStruct_s p_chunk, long code, char* errormsg, void* userData,
 	void(* voidHandler)())
 {
@@ -4632,7 +4762,7 @@ static bool postQueryProcessor(MemoryStruct_s p_chunk, long code, char* errormsg
 }
 
 static bool postQueryHelper(char * accessToken,
-	std::string path, long long pPeriodlimit, std::string _1_property, std::string _1_property_value, 
+	std::string path, long long pPeriodlimit, std::string r_1_property, std::string r_1_property_value, 
 	void(* handler)(std::string, Error, void* )
 	, void* userData, bool isAsync)
 {
@@ -4658,11 +4788,11 @@ static bool postQueryHelper(char * accessToken,
 	queryParams.insert(pair<string, string>("p.limit", itemAtq));
 
 
-	itemAtq = stringify(&_1_property, "std::string");
+	itemAtq = stringify(&r_1_property, "std::string");
 	queryParams.insert(pair<string, string>("1_property", itemAtq));
 
 
-	itemAtq = stringify(&_1_property_value, "std::string");
+	itemAtq = stringify(&r_1_property_value, "std::string");
 	queryParams.insert(pair<string, string>("1_property.value", itemAtq));
 
 	string mBody = "";
@@ -4719,22 +4849,22 @@ static bool postQueryHelper(char * accessToken,
 
 
 bool SlingManager::postQueryAsync(char * accessToken,
-	std::string path, long long pPeriodlimit, std::string _1_property, std::string _1_property_value, 
+	std::string path, long long pPeriodlimit, std::string r_1_property, std::string r_1_property_value, 
 	void(* handler)(std::string, Error, void* )
 	, void* userData)
 {
 	return postQueryHelper(accessToken,
-	path, pPeriodlimit, _1_property, _1_property_value, 
+	path, pPeriodlimit, r_1_property, r_1_property_value, 
 	handler, userData, true);
 }
 
 bool SlingManager::postQuerySync(char * accessToken,
-	std::string path, long long pPeriodlimit, std::string _1_property, std::string _1_property_value, 
+	std::string path, long long pPeriodlimit, std::string r_1_property, std::string r_1_property_value, 
 	void(* handler)(std::string, Error, void* )
 	, void* userData)
 {
 	return postQueryHelper(accessToken,
-	path, pPeriodlimit, _1_property, _1_property_value, 
+	path, pPeriodlimit, r_1_property, r_1_property_value, 
 	handler, userData, false);
 }
 

@@ -81,6 +81,18 @@ public class GraniteApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (privatekeyFile != null) {
+            localVarFormParams.put("privatekeyFile", privatekeyFile);
+        }
+
+        if (certificateFile != null) {
+            localVarFormParams.put("certificateFile", certificateFile);
+        }
+
         if (keystorePassword != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("keystorePassword", keystorePassword));
         }
@@ -103,17 +115,6 @@ public class GraniteApi {
 
         if (httpsPort != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("httpsPort", httpsPort));
-        }
-
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-        if (privatekeyFile != null) {
-            localVarFormParams.put("privatekeyFile", privatekeyFile);
-        }
-
-        if (certificateFile != null) {
-            localVarFormParams.put("certificateFile", certificateFile);
         }
 
         final String[] localVarAccepts = {

@@ -1,14 +1,14 @@
 {
   "openapi" : "3.0.0",
   "info" : {
-    "title" : "Adobe Experience Manager (AEM) API",
-    "description" : "Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API",
     "contact" : {
+      "email" : "opensource@shinesolutions.com",
       "name" : "Shine Solutions",
-      "url" : "http://shinesolutions.com",
-      "email" : "opensource@shinesolutions.com"
+      "url" : "http://shinesolutions.com"
     },
-    "version" : "3.2.0-pre.0"
+    "description" : "Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API",
+    "title" : "Adobe Experience Manager (AEM) API",
+    "version" : "3.5.0-pre.0"
   },
   "servers" : [ {
     "url" : "/"
@@ -19,187 +19,221 @@
   "paths" : {
     "/system/console/configMgr" : {
       "get" : {
-        "tags" : [ "console" ],
         "operationId" : "getConfigMgr",
         "responses" : {
           "200" : {
-            "description" : "OK",
             "content" : {
               "text/xml" : {
                 "schema" : {
                   "type" : "string"
                 }
               }
-            }
+            },
+            "description" : "OK"
           },
           "5XX" : {
             "description" : "Unexpected error."
           }
-        }
+        },
+        "tags" : [ "console" ]
       }
     },
     "/libs/granite/core/content/login.html" : {
       "get" : {
-        "tags" : [ "cq" ],
         "operationId" : "getLoginPage",
         "responses" : {
           "default" : {
-            "description" : "Default response",
             "content" : {
               "text/html" : {
                 "schema" : {
                   "type" : "string"
                 }
               }
-            }
+            },
+            "description" : "Default response"
           }
         },
-        "security" : [ ]
+        "security" : [ ],
+        "tags" : [ "cq" ]
       }
     },
     "/.cqactions.html" : {
       "post" : {
-        "tags" : [ "cq" ],
         "operationId" : "postCqActions",
         "parameters" : [ {
+          "explode" : true,
+          "in" : "query",
           "name" : "authorizableId",
-          "in" : "query",
           "required" : true,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
-          "name" : "changelog",
-          "in" : "query",
-          "required" : true,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "changelog",
+          "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         } ],
         "responses" : {
           "default" : {
             "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "cq" ]
       }
     },
     "/{path}/" : {
       "post" : {
-        "tags" : [ "sling" ],
         "operationId" : "postPath",
         "parameters" : [ {
-          "name" : "path",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
           "explode" : false,
+          "in" : "path",
+          "name" : "path",
+          "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "simple"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "jcr:primaryType",
-          "in" : "query",
           "required" : true,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
-          "name" : ":name",
-          "in" : "query",
-          "required" : true,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : ":name",
+          "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         } ],
         "responses" : {
           "default" : {
             "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "sling" ]
       }
     },
     "/{path}/{name}" : {
-      "get" : {
-        "tags" : [ "sling" ],
-        "operationId" : "getNode",
+      "delete" : {
+        "operationId" : "deleteNode",
         "parameters" : [ {
+          "explode" : false,
+          "in" : "path",
           "name" : "path",
-          "in" : "path",
           "required" : true,
-          "style" : "simple",
-          "explode" : false,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "simple"
         }, {
-          "name" : "name",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
           "explode" : false,
+          "in" : "path",
+          "name" : "name",
+          "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "simple"
         } ],
         "responses" : {
           "default" : {
             "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "sling" ]
+      },
+      "get" : {
+        "operationId" : "getNode",
+        "parameters" : [ {
+          "explode" : false,
+          "in" : "path",
+          "name" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "simple"
+        }, {
+          "explode" : false,
+          "in" : "path",
+          "name" : "name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "simple"
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "Default response"
+          }
+        },
+        "tags" : [ "sling" ]
       },
       "post" : {
-        "tags" : [ "sling" ],
         "operationId" : "postNode",
         "parameters" : [ {
+          "explode" : false,
+          "in" : "path",
           "name" : "path",
-          "in" : "path",
           "required" : true,
-          "style" : "simple",
-          "explode" : false,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "simple"
         }, {
+          "explode" : false,
+          "in" : "path",
           "name" : "name",
-          "in" : "path",
           "required" : true,
-          "style" : "simple",
-          "explode" : false,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "simple"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : ":operation",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
-          "name" : "deleteAuthorizable",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "deleteAuthorizable",
+          "required" : false,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         } ],
         "requestBody" : {
+          "$ref" : "#/components/requestBodies/inline_object",
           "content" : {
             "multipart/form-data" : {
               "schema" : {
-                "$ref" : "#/components/schemas/body"
+                "properties" : {
+                  "file" : {
+                    "format" : "binary",
+                    "type" : "string"
+                  }
+                },
+                "type" : "object"
               }
             }
           }
@@ -208,3333 +242,3507 @@
           "default" : {
             "description" : "Default response"
           }
-        }
-      },
-      "delete" : {
-        "tags" : [ "sling" ],
-        "operationId" : "deleteNode",
-        "parameters" : [ {
-          "name" : "path",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "name",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "default" : {
-            "description" : "Default response"
-          }
-        }
+        },
+        "tags" : [ "sling" ]
       }
     },
     "/{path}/{name}.rw.html" : {
       "post" : {
-        "tags" : [ "sling" ],
         "operationId" : "postNodeRw",
         "parameters" : [ {
+          "explode" : false,
+          "in" : "path",
           "name" : "path",
-          "in" : "path",
           "required" : true,
-          "style" : "simple",
-          "explode" : false,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "simple"
         }, {
+          "explode" : false,
+          "in" : "path",
           "name" : "name",
-          "in" : "path",
           "required" : true,
-          "style" : "simple",
-          "explode" : false,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "simple"
         }, {
-          "name" : "addMembers",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "addMembers",
+          "required" : false,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         } ],
         "responses" : {
           "default" : {
             "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "sling" ]
+      }
+    },
+    "/apps/system/config/{configNodeName}" : {
+      "post" : {
+        "operationId" : "postConfigProperty",
+        "parameters" : [ {
+          "explode" : false,
+          "in" : "path",
+          "name" : "configNodeName",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "simple"
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "Default response"
+          }
+        },
+        "tags" : [ "sling" ]
       }
     },
     "/apps/system/config/org.apache.felix.http" : {
       "post" : {
-        "tags" : [ "sling" ],
         "operationId" : "postConfigApacheFelixJettyBasedHttpService",
         "parameters" : [ {
+          "explode" : true,
+          "in" : "query",
           "name" : "org.apache.felix.https.nio",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "org.apache.felix.https.nio@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "org.apache.felix.https.keystore",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "org.apache.felix.https.keystore@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "org.apache.felix.https.keystore.password",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "org.apache.felix.https.keystore.password@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "org.apache.felix.https.keystore.key",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "org.apache.felix.https.keystore.key@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "org.apache.felix.https.keystore.key.password",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "org.apache.felix.https.keystore.key.password@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "org.apache.felix.https.truststore",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "org.apache.felix.https.truststore@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "org.apache.felix.https.truststore.password",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "org.apache.felix.https.truststore.password@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "org.apache.felix.https.clientcertificate",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "org.apache.felix.https.clientcertificate@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
-          "name" : "org.apache.felix.https.enable",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "org.apache.felix.https.enable",
+          "required" : false,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "org.apache.felix.https.enable@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "org.osgi.service.http.port.secure",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
-          "name" : "org.osgi.service.http.port.secure@TypeHint",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "org.osgi.service.http.port.secure@TypeHint",
+          "required" : false,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         } ],
         "responses" : {
           "default" : {
             "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "sling" ]
       }
     },
     "/apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet" : {
       "post" : {
-        "tags" : [ "sling" ],
         "operationId" : "postConfigApacheSlingGetServlet",
         "parameters" : [ {
+          "explode" : true,
+          "in" : "query",
           "name" : "json.maximumresults",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "json.maximumresults@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "enable.html",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "enable.html@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "enable.txt",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "enable.txt@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
-          "name" : "enable.xml",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "enable.xml",
+          "required" : false,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "style" : "form"
         }, {
-          "name" : "enable.xml@TypeHint",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "enable.xml@TypeHint",
+          "required" : false,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         } ],
         "responses" : {
           "default" : {
             "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "sling" ]
       }
     },
     "/apps/system/config/org.apache.sling.security.impl.ReferrerFilter" : {
       "post" : {
-        "tags" : [ "sling" ],
         "operationId" : "postConfigApacheSlingReferrerFilter",
         "parameters" : [ {
-          "name" : "allow.empty",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "allow.empty",
+          "required" : false,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "allow.empty@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "allow.hosts",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "allow.hosts@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "allow.hosts.regexp",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "allow.hosts.regexp@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "filter.methods",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
-          "name" : "filter.methods@TypeHint",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "filter.methods@TypeHint",
+          "required" : false,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         } ],
         "responses" : {
           "default" : {
             "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "sling" ]
       }
     },
     "/apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet" : {
       "post" : {
-        "tags" : [ "sling" ],
         "operationId" : "postConfigApacheSlingDavExServlet",
         "parameters" : [ {
+          "explode" : true,
+          "in" : "query",
           "name" : "alias",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "alias@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
-          "name" : "dav.create-absolute-uri",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "dav.create-absolute-uri",
+          "required" : false,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "style" : "form"
         }, {
-          "name" : "dav.create-absolute-uri@TypeHint",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "dav.create-absolute-uri@TypeHint",
+          "required" : false,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         } ],
         "responses" : {
           "default" : {
             "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "sling" ]
       }
     },
     "/apps/system/config/com.shinesolutions.aem.passwordreset.Activator" : {
       "post" : {
-        "tags" : [ "custom" ],
         "operationId" : "postConfigAemPasswordReset",
         "parameters" : [ {
-          "name" : "pwdreset.authorizables",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "pwdreset.authorizables",
+          "required" : false,
           "schema" : {
-            "type" : "array",
             "items" : {
               "type" : "string"
-            }
-          }
+            },
+            "type" : "array"
+          },
+          "style" : "form"
         }, {
-          "name" : "pwdreset.authorizables@TypeHint",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "pwdreset.authorizables@TypeHint",
+          "required" : false,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         } ],
         "responses" : {
           "default" : {
             "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "custom" ]
       }
     },
     "/apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck" : {
       "post" : {
-        "tags" : [ "custom" ],
         "operationId" : "postConfigAemHealthCheckServlet",
         "parameters" : [ {
-          "name" : "bundles.ignored",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "bundles.ignored",
+          "required" : false,
           "schema" : {
-            "type" : "array",
             "items" : {
               "type" : "string"
-            }
-          }
+            },
+            "type" : "array"
+          },
+          "style" : "form"
         }, {
-          "name" : "bundles.ignored@TypeHint",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "bundles.ignored@TypeHint",
+          "required" : false,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         } ],
         "responses" : {
           "default" : {
             "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "custom" ]
       }
     },
     "/bin/querybuilder.json" : {
       "get" : {
-        "tags" : [ "sling" ],
         "operationId" : "getQuery",
         "parameters" : [ {
-          "name" : "path",
-          "in" : "query",
-          "required" : true,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "path",
+          "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
-          "name" : "p.limit",
-          "in" : "query",
-          "required" : true,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "p.limit",
+          "required" : true,
           "schema" : {
             "type" : "number"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "1_property",
-          "in" : "query",
           "required" : true,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
-          "name" : "1_property.value",
-          "in" : "query",
-          "required" : true,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "1_property.value",
+          "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         } ],
         "responses" : {
           "default" : {
-            "description" : "Default response",
             "content" : {
               "application/json" : {
                 "schema" : {
                   "type" : "string"
                 }
               }
-            }
+            },
+            "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "sling" ]
       },
       "post" : {
-        "tags" : [ "sling" ],
         "operationId" : "postQuery",
         "parameters" : [ {
-          "name" : "path",
-          "in" : "query",
-          "required" : true,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "path",
+          "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
-          "name" : "p.limit",
-          "in" : "query",
-          "required" : true,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "p.limit",
+          "required" : true,
           "schema" : {
             "type" : "number"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "1_property",
-          "in" : "query",
           "required" : true,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
-          "name" : "1_property.value",
-          "in" : "query",
-          "required" : true,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "1_property.value",
+          "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         } ],
         "responses" : {
           "default" : {
-            "description" : "Default response",
             "content" : {
               "application/json" : {
                 "schema" : {
                   "type" : "string"
                 }
               }
-            }
+            },
+            "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "sling" ]
       }
     },
     "/etc/packages/{group}/{name}-{version}.zip" : {
       "get" : {
-        "tags" : [ "sling" ],
         "operationId" : "getPackage",
         "parameters" : [ {
+          "explode" : false,
+          "in" : "path",
           "name" : "group",
-          "in" : "path",
           "required" : true,
-          "style" : "simple",
-          "explode" : false,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "simple"
         }, {
+          "explode" : false,
+          "in" : "path",
           "name" : "name",
-          "in" : "path",
           "required" : true,
-          "style" : "simple",
-          "explode" : false,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "simple"
         }, {
-          "name" : "version",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
           "explode" : false,
+          "in" : "path",
+          "name" : "version",
+          "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "simple"
         } ],
         "responses" : {
           "default" : {
-            "description" : "Default response",
             "content" : {
               "application/octet-stream" : {
                 "schema" : {
-                  "type" : "string",
-                  "format" : "binary"
+                  "format" : "binary",
+                  "type" : "string"
                 }
               }
-            }
+            },
+            "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "sling" ]
       }
     },
     "/etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json" : {
       "get" : {
-        "tags" : [ "sling" ],
         "operationId" : "getPackageFilter",
         "parameters" : [ {
+          "explode" : false,
+          "in" : "path",
           "name" : "group",
-          "in" : "path",
           "required" : true,
-          "style" : "simple",
-          "explode" : false,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "simple"
         }, {
+          "explode" : false,
+          "in" : "path",
           "name" : "name",
-          "in" : "path",
           "required" : true,
-          "style" : "simple",
-          "explode" : false,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "simple"
         }, {
-          "name" : "version",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
           "explode" : false,
+          "in" : "path",
+          "name" : "version",
+          "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "simple"
         } ],
         "responses" : {
           "default" : {
-            "description" : "Default response",
             "content" : {
               "application/json" : {
                 "schema" : {
                   "type" : "string"
                 }
               }
-            }
+            },
+            "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "sling" ]
       }
     },
     "/etc/replication/agents.{runmode}.-1.json" : {
       "get" : {
-        "tags" : [ "sling" ],
         "operationId" : "getAgents",
         "parameters" : [ {
-          "name" : "runmode",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
           "explode" : false,
+          "in" : "path",
+          "name" : "runmode",
+          "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "simple"
         } ],
         "responses" : {
           "default" : {
-            "description" : "Default response",
             "content" : {
               "application/json" : {
                 "schema" : {
                   "type" : "string"
                 }
               }
-            }
+            },
+            "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "sling" ]
       }
     },
     "/etc/replication/agents.{runmode}/{name}" : {
-      "get" : {
-        "tags" : [ "sling" ],
-        "operationId" : "getAgent",
-        "parameters" : [ {
-          "name" : "runmode",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "name",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "default" : {
-            "description" : "Default response"
-          }
-        }
-      },
-      "post" : {
-        "tags" : [ "sling" ],
-        "operationId" : "postAgent",
-        "parameters" : [ {
-          "name" : "runmode",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "name",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:content/cq:distribute",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "boolean"
-          }
-        }, {
-          "name" : "jcr:content/cq:distribute@TypeHint",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:content/cq:name",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:content/cq:template",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:content/enabled",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "boolean"
-          }
-        }, {
-          "name" : "jcr:content/jcr:description",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:content/jcr:lastModified",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:content/jcr:lastModifiedBy",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:content/jcr:mixinTypes",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:content/jcr:title",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:content/logLevel",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:content/noStatusUpdate",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "boolean"
-          }
-        }, {
-          "name" : "jcr:content/noVersioning",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "boolean"
-          }
-        }, {
-          "name" : "jcr:content/protocolConnectTimeout",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "number"
-          }
-        }, {
-          "name" : "jcr:content/protocolHTTPConnectionClosed",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "boolean"
-          }
-        }, {
-          "name" : "jcr:content/protocolHTTPExpired",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:content/protocolHTTPHeaders",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
-            }
-          }
-        }, {
-          "name" : "jcr:content/protocolHTTPHeaders@TypeHint",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:content/protocolHTTPMethod",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:content/protocolHTTPSRelaxed",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "boolean"
-          }
-        }, {
-          "name" : "jcr:content/protocolInterface",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:content/protocolSocketTimeout",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "number"
-          }
-        }, {
-          "name" : "jcr:content/protocolVersion",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:content/proxyNTLMDomain",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:content/proxyNTLMHost",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:content/proxyHost",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:content/proxyPassword",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:content/proxyPort",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "number"
-          }
-        }, {
-          "name" : "jcr:content/proxyUser",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:content/queueBatchMaxSize",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "number"
-          }
-        }, {
-          "name" : "jcr:content/queueBatchMode",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:content/queueBatchWaitTime",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "number"
-          }
-        }, {
-          "name" : "jcr:content/retryDelay",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:content/reverseReplication",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "boolean"
-          }
-        }, {
-          "name" : "jcr:content/serializationType",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:content/sling:resourceType",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:content/ssl",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:content/transportNTLMDomain",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:content/transportNTLMHost",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:content/transportPassword",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:content/transportUri",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:content/transportUser",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:content/triggerDistribute",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "boolean"
-          }
-        }, {
-          "name" : "jcr:content/triggerModified",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "boolean"
-          }
-        }, {
-          "name" : "jcr:content/triggerOnOffTime",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "boolean"
-          }
-        }, {
-          "name" : "jcr:content/triggerReceive",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "boolean"
-          }
-        }, {
-          "name" : "jcr:content/triggerSpecific",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "boolean"
-          }
-        }, {
-          "name" : "jcr:content/userId",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "jcr:primaryType",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : ":operation",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "default" : {
-            "description" : "Default response"
-          }
-        }
-      },
       "delete" : {
-        "tags" : [ "sling" ],
         "operationId" : "deleteAgent",
         "parameters" : [ {
+          "explode" : false,
+          "in" : "path",
           "name" : "runmode",
-          "in" : "path",
           "required" : true,
-          "style" : "simple",
-          "explode" : false,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "simple"
         }, {
-          "name" : "name",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
           "explode" : false,
+          "in" : "path",
+          "name" : "name",
+          "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "simple"
         } ],
         "responses" : {
           "default" : {
             "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "sling" ]
+      },
+      "get" : {
+        "operationId" : "getAgent",
+        "parameters" : [ {
+          "explode" : false,
+          "in" : "path",
+          "name" : "runmode",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "simple"
+        }, {
+          "explode" : false,
+          "in" : "path",
+          "name" : "name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "simple"
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "Default response"
+          }
+        },
+        "tags" : [ "sling" ]
+      },
+      "post" : {
+        "operationId" : "postAgent",
+        "parameters" : [ {
+          "explode" : false,
+          "in" : "path",
+          "name" : "runmode",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "simple"
+        }, {
+          "explode" : false,
+          "in" : "path",
+          "name" : "name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "simple"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/cq:distribute",
+          "required" : false,
+          "schema" : {
+            "type" : "boolean"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/cq:distribute@TypeHint",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/cq:name",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/cq:template",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/enabled",
+          "required" : false,
+          "schema" : {
+            "type" : "boolean"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/jcr:description",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/jcr:lastModified",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/jcr:lastModifiedBy",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/jcr:mixinTypes",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/jcr:title",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/logLevel",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/noStatusUpdate",
+          "required" : false,
+          "schema" : {
+            "type" : "boolean"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/noVersioning",
+          "required" : false,
+          "schema" : {
+            "type" : "boolean"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/protocolConnectTimeout",
+          "required" : false,
+          "schema" : {
+            "type" : "number"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/protocolHTTPConnectionClosed",
+          "required" : false,
+          "schema" : {
+            "type" : "boolean"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/protocolHTTPExpired",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/protocolHTTPHeaders",
+          "required" : false,
+          "schema" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/protocolHTTPHeaders@TypeHint",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/protocolHTTPMethod",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/protocolHTTPSRelaxed",
+          "required" : false,
+          "schema" : {
+            "type" : "boolean"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/protocolInterface",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/protocolSocketTimeout",
+          "required" : false,
+          "schema" : {
+            "type" : "number"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/protocolVersion",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/proxyNTLMDomain",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/proxyNTLMHost",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/proxyHost",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/proxyPassword",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/proxyPort",
+          "required" : false,
+          "schema" : {
+            "type" : "number"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/proxyUser",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/queueBatchMaxSize",
+          "required" : false,
+          "schema" : {
+            "type" : "number"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/queueBatchMode",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/queueBatchWaitTime",
+          "required" : false,
+          "schema" : {
+            "type" : "number"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/retryDelay",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/reverseReplication",
+          "required" : false,
+          "schema" : {
+            "type" : "boolean"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/serializationType",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/sling:resourceType",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/ssl",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/transportNTLMDomain",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/transportNTLMHost",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/transportPassword",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/transportUri",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/transportUser",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/triggerDistribute",
+          "required" : false,
+          "schema" : {
+            "type" : "boolean"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/triggerModified",
+          "required" : false,
+          "schema" : {
+            "type" : "boolean"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/triggerOnOffTime",
+          "required" : false,
+          "schema" : {
+            "type" : "boolean"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/triggerReceive",
+          "required" : false,
+          "schema" : {
+            "type" : "boolean"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/triggerSpecific",
+          "required" : false,
+          "schema" : {
+            "type" : "boolean"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/userId",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:primaryType",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : ":operation",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "Default response"
+          }
+        },
+        "tags" : [ "sling" ]
       }
     },
     "/etc/replication/treeactivation.html" : {
       "post" : {
-        "tags" : [ "sling" ],
         "operationId" : "postTreeActivation",
         "parameters" : [ {
+          "explode" : true,
+          "in" : "query",
           "name" : "ignoredeactivated",
-          "in" : "query",
           "required" : true,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "onlymodified",
-          "in" : "query",
           "required" : true,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "style" : "form"
         }, {
-          "name" : "path",
-          "in" : "query",
-          "required" : true,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "path",
+          "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         } ],
         "responses" : {
           "default" : {
             "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "sling" ]
       }
     },
     "/libs/granite/security/post/authorizables" : {
       "post" : {
-        "tags" : [ "sling" ],
         "operationId" : "postAuthorizables",
         "parameters" : [ {
+          "explode" : true,
+          "in" : "query",
           "name" : "authorizableId",
-          "in" : "query",
           "required" : true,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "intermediatePath",
-          "in" : "query",
           "required" : true,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "createUser",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "createGroup",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "rep:password",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
-          "name" : "profile/givenName",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "profile/givenName",
+          "required" : false,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         } ],
         "responses" : {
           "default" : {
-            "description" : "Default response",
             "content" : {
               "text/html" : {
                 "schema" : {
                   "type" : "string"
                 }
               }
-            }
+            },
+            "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "sling" ]
       }
     },
     "/crx/explorer/ui/setpassword.jsp" : {
       "post" : {
-        "tags" : [ "crx" ],
         "operationId" : "postSetPassword",
         "parameters" : [ {
+          "explode" : true,
+          "in" : "query",
           "name" : "old",
-          "in" : "query",
           "required" : true,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "plain",
-          "in" : "query",
           "required" : true,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
-          "name" : "verify",
-          "in" : "query",
-          "required" : true,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "verify",
+          "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         } ],
         "responses" : {
           "default" : {
-            "description" : "Default response",
             "content" : {
               "text/plain" : {
                 "schema" : {
                   "type" : "string"
                 }
               }
-            }
+            },
+            "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "crx" ]
       }
     },
     "/crx/packmgr/installstatus.jsp" : {
       "get" : {
-        "tags" : [ "crx" ],
         "operationId" : "getInstallStatus",
         "responses" : {
           "200" : {
-            "description" : "Retrieved CRX package manager install status",
             "content" : {
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/InstallStatus"
                 }
               }
-            }
+            },
+            "description" : "Retrieved CRX package manager install status"
           },
           "default" : {
-            "description" : "Default response",
             "content" : {
               "application/json" : {
                 "schema" : {
                   "type" : "string"
                 }
               }
-            }
+            },
+            "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "crx" ]
       }
     },
     "/crx/packmgr/service.jsp" : {
       "post" : {
-        "tags" : [ "crx" ],
         "operationId" : "postPackageService",
         "parameters" : [ {
-          "name" : "cmd",
-          "in" : "query",
-          "required" : true,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "cmd",
+          "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         } ],
         "responses" : {
           "default" : {
-            "description" : "Default response",
             "content" : {
               "text/xml" : {
                 "schema" : {
                   "type" : "string"
                 }
               }
-            }
+            },
+            "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "crx" ]
       }
     },
     "/crx/packmgr/update.jsp" : {
       "post" : {
-        "tags" : [ "crx" ],
         "operationId" : "postPackageUpdate",
         "parameters" : [ {
+          "explode" : true,
+          "in" : "query",
           "name" : "groupName",
-          "in" : "query",
           "required" : true,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "packageName",
-          "in" : "query",
           "required" : true,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "version",
-          "in" : "query",
           "required" : true,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "path",
-          "in" : "query",
           "required" : true,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "filter",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
-          "name" : "_charset_",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "_charset_",
+          "required" : false,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         } ],
         "responses" : {
           "default" : {
-            "description" : "Default response",
             "content" : {
               "application/json" : {
                 "schema" : {
                   "type" : "string"
                 }
               }
-            }
+            },
+            "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "crx" ]
       }
     },
     "/crx/packmgr/service/.json/{path}" : {
       "post" : {
-        "tags" : [ "crx" ],
         "operationId" : "postPackageServiceJson",
         "parameters" : [ {
-          "name" : "path",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
           "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "cmd",
-          "in" : "query",
+          "in" : "path",
+          "name" : "path",
           "required" : true,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "simple"
         }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "cmd",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "groupName",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "packageName",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "packageVersion",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "_charset_",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "force",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "style" : "form"
         }, {
-          "name" : "recursive",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "recursive",
+          "required" : false,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "style" : "form"
         } ],
         "requestBody" : {
+          "$ref" : "#/components/requestBodies/inline_object_1",
           "content" : {
             "multipart/form-data" : {
               "schema" : {
-                "$ref" : "#/components/schemas/body_1"
+                "properties" : {
+                  "package" : {
+                    "format" : "binary",
+                    "type" : "string"
+                  }
+                },
+                "type" : "object"
               }
             }
           }
         },
         "responses" : {
           "default" : {
-            "description" : "Default response",
             "content" : {
               "application/json" : {
                 "schema" : {
                   "type" : "string"
                 }
               }
-            }
+            },
+            "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "crx" ]
       }
     },
     "/crx/packmgr/service/script.html" : {
       "get" : {
-        "tags" : [ "crx" ],
         "operationId" : "getPackageManagerServlet",
         "responses" : {
           "404" : {
-            "description" : "Package Manager Servlet is disabled",
             "content" : {
               "text/html" : {
                 "schema" : {
                   "type" : "string"
                 }
               }
-            }
+            },
+            "description" : "Package Manager Servlet is disabled"
           },
           "405" : {
-            "description" : "Package Manager Servlet is active",
             "content" : {
               "text/html" : {
                 "schema" : {
                   "type" : "string"
                 }
               }
-            }
+            },
+            "description" : "Package Manager Servlet is active"
           }
-        }
+        },
+        "tags" : [ "crx" ]
       }
     },
     "/crx/server/crx.default/jcr:root/.1.json" : {
       "get" : {
-        "tags" : [ "crx" ],
         "operationId" : "getCrxdeStatus",
         "responses" : {
           "200" : {
-            "description" : "CRXDE is enabled",
             "content" : {
               "plain/text" : {
                 "schema" : {
                   "type" : "string"
                 }
               }
-            }
+            },
+            "description" : "CRXDE is enabled"
           },
           "404" : {
-            "description" : "CRXDE is disabled",
             "content" : {
               "plain/text" : {
                 "schema" : {
                   "type" : "string"
                 }
               }
-            }
+            },
+            "description" : "CRXDE is disabled"
           }
-        }
+        },
+        "tags" : [ "crx" ]
       }
     },
-    "/system/console/bundles/{name}" : {
-      "post" : {
-        "tags" : [ "console" ],
-        "operationId" : "postBundle",
-        "parameters" : [ {
-          "name" : "name",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "action",
-          "in" : "query",
-          "required" : true,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "default" : {
-            "description" : "Default response"
-          }
-        }
-      }
-    },
-    "/system/console/jmx/com.adobe.granite:type=Repository/op/{action}" : {
-      "post" : {
-        "tags" : [ "console" ],
-        "operationId" : "postJmxRepository",
-        "parameters" : [ {
-          "name" : "action",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "default" : {
-            "description" : "Default response"
-          }
-        }
-      }
-    },
-    "/system/health" : {
+    "/system/console/bundles/{name}.json" : {
       "get" : {
-        "tags" : [ "custom" ],
-        "operationId" : "getAemHealthCheck",
+        "operationId" : "getBundleInfo",
         "parameters" : [ {
-          "name" : "tags",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
+          "explode" : false,
+          "in" : "path",
+          "name" : "name",
+          "required" : true,
           "schema" : {
             "type" : "string"
-          }
-        }, {
-          "name" : "combineTagsOr",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "boolean"
-          }
+          },
+          "style" : "simple"
         } ],
         "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BundleInfo"
+                }
+              }
+            },
+            "description" : "Retrieved bundle info"
+          },
           "default" : {
-            "description" : "Default response",
             "content" : {
               "application/json" : {
                 "schema" : {
                   "type" : "string"
                 }
               }
-            }
+            },
+            "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "console" ]
+      }
+    },
+    "/system/console/bundles/{name}" : {
+      "post" : {
+        "operationId" : "postBundle",
+        "parameters" : [ {
+          "explode" : false,
+          "in" : "path",
+          "name" : "name",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "simple"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "action",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "Default response"
+          }
+        },
+        "tags" : [ "console" ]
+      }
+    },
+    "/system/console/jmx/com.adobe.granite:type=Repository/op/{action}" : {
+      "post" : {
+        "operationId" : "postJmxRepository",
+        "parameters" : [ {
+          "explode" : false,
+          "in" : "path",
+          "name" : "action",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "simple"
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "Default response"
+          }
+        },
+        "tags" : [ "console" ]
+      }
+    },
+    "/system/health" : {
+      "get" : {
+        "operationId" : "getAemHealthCheck",
+        "parameters" : [ {
+          "explode" : true,
+          "in" : "query",
+          "name" : "tags",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "combineTagsOr",
+          "required" : false,
+          "schema" : {
+            "type" : "boolean"
+          },
+          "style" : "form"
+        } ],
+        "responses" : {
+          "default" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "description" : "Default response"
+          }
+        },
+        "tags" : [ "custom" ]
       }
     },
     "/apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config" : {
       "post" : {
-        "tags" : [ "sling" ],
         "operationId" : "postConfigAdobeGraniteSamlAuthenticationHandler",
         "parameters" : [ {
+          "explode" : true,
+          "in" : "query",
           "name" : "keyStorePassword",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "keyStorePassword@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "service.ranking",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
-            "type" : "integer",
-            "format" : "int32"
-          }
+            "type" : "integer"
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "service.ranking@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "idpHttpRedirect",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "idpHttpRedirect@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "createUser",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "createUser@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "defaultRedirectUrl",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "defaultRedirectUrl@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "userIDAttribute",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "userIDAttribute@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "defaultGroups",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
-            "type" : "array",
             "items" : {
               "type" : "string"
-            }
-          }
+            },
+            "type" : "array"
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "defaultGroups@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "idpCertAlias",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "idpCertAlias@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "addGroupMemberships",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "addGroupMemberships@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "path",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
-            "type" : "array",
             "items" : {
               "type" : "string"
-            }
-          }
+            },
+            "type" : "array"
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "path@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
-          "name" : "synchronizeAttributes",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "synchronizeAttributes",
+          "required" : false,
           "schema" : {
-            "type" : "array",
             "items" : {
               "type" : "string"
-            }
-          }
+            },
+            "type" : "array"
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "synchronizeAttributes@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "clockTolerance",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
-            "type" : "integer",
-            "format" : "int32"
-          }
+            "type" : "integer"
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "clockTolerance@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "groupMembershipAttribute",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "groupMembershipAttribute@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "idpUrl",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "idpUrl@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "logoutUrl",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "logoutUrl@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "serviceProviderEntityId",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "serviceProviderEntityId@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "assertionConsumerServiceURL",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "assertionConsumerServiceURL@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "handleLogout",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "handleLogout@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "spPrivateKeyAlias",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "spPrivateKeyAlias@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
-          "name" : "useEncryption",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "useEncryption",
+          "required" : false,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "useEncryption@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "nameIdFormat",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "nameIdFormat@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "digestMethod",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "digestMethod@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "signatureMethod",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "signatureMethod@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "userIntermediatePath",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
-          "name" : "userIntermediatePath@TypeHint",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "userIntermediatePath@TypeHint",
+          "required" : false,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         } ],
         "responses" : {
           "default" : {
             "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "sling" ]
       }
     },
     "/apps/system/config/org.apache.http.proxyconfigurator.config" : {
       "post" : {
-        "tags" : [ "sling" ],
         "operationId" : "postConfigApacheHttpComponentsProxyConfiguration",
         "parameters" : [ {
+          "explode" : true,
+          "in" : "query",
           "name" : "proxy.host",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "proxy.host@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "proxy.port",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
-            "type" : "integer",
-            "format" : "int32"
-          }
+            "type" : "integer"
+          },
+          "style" : "form"
         }, {
-          "name" : "proxy.port@TypeHint",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "proxy.port@TypeHint",
+          "required" : false,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
-          "name" : "proxy.exceptions",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "proxy.exceptions",
+          "required" : false,
           "schema" : {
-            "type" : "array",
             "items" : {
               "type" : "string"
-            }
-          }
+            },
+            "type" : "array"
+          },
+          "style" : "form"
         }, {
-          "name" : "proxy.exceptions@TypeHint",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "proxy.exceptions@TypeHint",
+          "required" : false,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
-          "name" : "proxy.enabled",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "proxy.enabled",
+          "required" : false,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "proxy.enabled@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "proxy.user",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "proxy.user@TypeHint",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "proxy.password",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
-          "name" : "proxy.password@TypeHint",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "proxy.password@TypeHint",
+          "required" : false,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         } ],
         "responses" : {
           "default" : {
             "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "sling" ]
       }
     },
     "/libs/granite/security/post/truststore" : {
       "post" : {
-        "tags" : [ "sling" ],
         "operationId" : "postTruststore",
         "parameters" : [ {
+          "explode" : true,
+          "in" : "query",
           "name" : ":operation",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "newPassword",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "rePassword",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "keyStoreType",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
-          "name" : "removeAlias",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "removeAlias",
+          "required" : false,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         } ],
         "requestBody" : {
+          "$ref" : "#/components/requestBodies/inline_object_2",
           "content" : {
             "multipart/form-data" : {
               "schema" : {
-                "$ref" : "#/components/schemas/body_2"
+                "properties" : {
+                  "certificate" : {
+                    "format" : "binary",
+                    "type" : "string"
+                  }
+                },
+                "type" : "object"
               }
             }
           }
         },
         "responses" : {
           "default" : {
-            "description" : "Default response",
             "content" : {
               "text/plain" : {
                 "schema" : {
                   "type" : "string"
                 }
               }
-            }
+            },
+            "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "sling" ]
       }
     },
     "/libs/granite/security/truststore.json" : {
       "get" : {
-        "tags" : [ "sling" ],
         "operationId" : "getTruststoreInfo",
         "responses" : {
           "200" : {
-            "description" : "Retrieved AEM Truststore info",
             "content" : {
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/TruststoreInfo"
                 }
               }
-            }
+            },
+            "description" : "Retrieved AEM Truststore info"
           },
           "default" : {
-            "description" : "Default response",
             "content" : {
               "application/json" : {
                 "schema" : {
                   "type" : "string"
                 }
               }
-            }
+            },
+            "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "sling" ]
       }
     },
     "/etc/truststore/truststore.p12" : {
       "get" : {
-        "tags" : [ "sling" ],
         "operationId" : "getTruststore",
         "responses" : {
           "default" : {
-            "description" : "Default response",
             "content" : {
               "application/octet-stream" : {
                 "schema" : {
-                  "type" : "string",
-                  "format" : "binary"
+                  "format" : "binary",
+                  "type" : "string"
                 }
               }
-            }
+            },
+            "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "sling" ]
       }
     },
     "/etc/truststore" : {
       "post" : {
-        "tags" : [ "sling" ],
         "operationId" : "postTruststorePKCS12",
         "requestBody" : {
+          "$ref" : "#/components/requestBodies/inline_object_3",
           "content" : {
             "multipart/form-data" : {
               "schema" : {
-                "$ref" : "#/components/schemas/body_3"
+                "properties" : {
+                  "truststore.p12" : {
+                    "format" : "binary",
+                    "type" : "string"
+                  }
+                },
+                "type" : "object"
               }
             }
           }
         },
         "responses" : {
           "default" : {
-            "description" : "Default response",
             "content" : {
               "text/plain" : {
                 "schema" : {
                   "type" : "string"
                 }
               }
-            }
+            },
+            "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "sling" ]
       }
     },
     "/system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler" : {
       "post" : {
-        "tags" : [ "console" ],
         "operationId" : "postSamlConfiguration",
         "parameters" : [ {
+          "explode" : true,
+          "in" : "query",
           "name" : "post",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "apply",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "delete",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "action",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "$location",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "path",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
-            "type" : "array",
             "items" : {
               "type" : "string"
-            }
-          }
+            },
+            "type" : "array"
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "service.ranking",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
-            "type" : "integer",
-            "format" : "int32"
-          }
+            "type" : "integer"
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "idpUrl",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "idpCertAlias",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "idpHttpRedirect",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "serviceProviderEntityId",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "assertionConsumerServiceURL",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "spPrivateKeyAlias",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "keyStorePassword",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "defaultRedirectUrl",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "userIDAttribute",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "useEncryption",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "createUser",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "addGroupMemberships",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "groupMembershipAttribute",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "defaultGroups",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
-            "type" : "array",
             "items" : {
               "type" : "string"
-            }
-          }
+            },
+            "type" : "array"
+          },
+          "style" : "form"
         }, {
-          "name" : "nameIdFormat",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "nameIdFormat",
+          "required" : false,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
-          "name" : "synchronizeAttributes",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "synchronizeAttributes",
+          "required" : false,
           "schema" : {
-            "type" : "array",
             "items" : {
               "type" : "string"
-            }
-          }
+            },
+            "type" : "array"
+          },
+          "style" : "form"
         }, {
-          "name" : "handleLogout",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "handleLogout",
+          "required" : false,
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "logoutUrl",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "clockTolerance",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
-            "type" : "integer",
-            "format" : "int32"
-          }
+            "type" : "integer"
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "digestMethod",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "signatureMethod",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "userIntermediatePath",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
-          "name" : "propertylist",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : false,
+          "in" : "query",
+          "name" : "propertylist",
+          "required" : false,
           "schema" : {
-            "type" : "array",
             "items" : {
               "type" : "string"
-            }
-          }
+            },
+            "type" : "array"
+          },
+          "style" : "form"
         } ],
         "responses" : {
           "200" : {
-            "description" : "Retrieved AEM SAML Configuration",
             "content" : {
               "text/plain" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/SamlConfigurationInfo"
                 }
               }
-            }
+            },
+            "description" : "Retrieved AEM SAML Configuration"
           },
           "302" : {
-            "description" : "Default response",
             "content" : {
               "text/plain" : {
                 "schema" : {
                   "type" : "string"
                 }
               }
-            }
+            },
+            "description" : "Default response"
           },
           "default" : {
-            "description" : "Default response",
             "content" : {
               "text/plain" : {
                 "schema" : {
                   "type" : "string"
                 }
               }
-            }
+            },
+            "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "console" ]
       }
     },
     "/system/console/status-productinfo.json" : {
       "get" : {
-        "tags" : [ "console" ],
         "operationId" : "getAemProductInfo",
         "responses" : {
           "default" : {
-            "description" : "Default response",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "array",
                   "items" : {
                     "type" : "string"
-                  }
+                  },
+                  "type" : "array"
                 }
               }
-            }
+            },
+            "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "console" ]
       }
     },
     "/{intermediatePath}/{authorizableId}.ks.html" : {
       "post" : {
-        "tags" : [ "sling" ],
         "operationId" : "postAuthorizableKeystore",
         "parameters" : [ {
+          "explode" : false,
+          "in" : "path",
           "name" : "intermediatePath",
-          "in" : "path",
           "required" : true,
-          "style" : "simple",
-          "explode" : false,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "simple"
         }, {
+          "explode" : false,
+          "in" : "path",
           "name" : "authorizableId",
-          "in" : "path",
           "required" : true,
-          "style" : "simple",
-          "explode" : false,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "simple"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : ":operation",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "currentPassword",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "newPassword",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "rePassword",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "keyPassword",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "keyStorePass",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "alias",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "newAlias",
-          "in" : "query",
           "required" : false,
-          "style" : "form",
-          "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         }, {
-          "name" : "removeAlias",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
           "explode" : true,
+          "in" : "query",
+          "name" : "removeAlias",
+          "required" : false,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "form"
         } ],
         "requestBody" : {
+          "$ref" : "#/components/requestBodies/inline_object_4",
           "content" : {
             "multipart/form-data" : {
               "schema" : {
-                "$ref" : "#/components/schemas/body_4"
+                "properties" : {
+                  "cert-chain" : {
+                    "format" : "binary",
+                    "type" : "string"
+                  },
+                  "pk" : {
+                    "format" : "binary",
+                    "type" : "string"
+                  },
+                  "keyStore" : {
+                    "format" : "binary",
+                    "type" : "string"
+                  }
+                },
+                "type" : "object"
               }
             }
           }
         },
         "responses" : {
           "200" : {
-            "description" : "Retrieved Authorizable Keystore info",
             "content" : {
               "text/plain" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/KeystoreInfo"
                 }
               }
-            }
+            },
+            "description" : "Retrieved Authorizable Keystore info"
           },
           "default" : {
-            "description" : "Default response",
             "content" : {
               "text/plain" : {
                 "schema" : {
                   "type" : "string"
                 }
               }
-            }
+            },
+            "description" : "Default response"
           }
-        }
+        },
+        "tags" : [ "sling" ]
       }
     },
     "/{intermediatePath}/{authorizableId}.ks.json" : {
       "get" : {
-        "tags" : [ "sling" ],
         "operationId" : "getAuthorizableKeystore",
         "parameters" : [ {
+          "explode" : false,
+          "in" : "path",
           "name" : "intermediatePath",
-          "in" : "path",
           "required" : true,
-          "style" : "simple",
-          "explode" : false,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "simple"
         }, {
-          "name" : "authorizableId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
           "explode" : false,
+          "in" : "path",
+          "name" : "authorizableId",
+          "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "style" : "simple"
         } ],
         "responses" : {
           "200" : {
-            "description" : "Retrieved Authorizable Keystore info",
             "content" : {
               "text/plain" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/KeystoreInfo"
                 }
               }
-            }
+            },
+            "description" : "Retrieved Authorizable Keystore info"
           },
           "default" : {
-            "description" : "Default response",
             "content" : {
               "text/plain" : {
                 "schema" : {
                   "type" : "string"
                 }
               }
+            },
+            "description" : "Default response"
+          }
+        },
+        "tags" : [ "sling" ]
+      }
+    },
+    "/{intermediatePath}/{authorizableId}/keystore/store.p12" : {
+      "get" : {
+        "operationId" : "getKeystore",
+        "parameters" : [ {
+          "explode" : false,
+          "in" : "path",
+          "name" : "intermediatePath",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "simple"
+        }, {
+          "explode" : false,
+          "in" : "path",
+          "name" : "authorizableId",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "simple"
+        } ],
+        "responses" : {
+          "default" : {
+            "content" : {
+              "application/octet-stream" : {
+                "schema" : {
+                  "format" : "binary",
+                  "type" : "string"
+                }
+              }
+            },
+            "description" : "Default response"
+          }
+        },
+        "tags" : [ "sling" ]
+      }
+    },
+    "/libs/granite/security/post/sslSetup.html" : {
+      "post" : {
+        "operationId" : "sslSetup",
+        "parameters" : [ {
+          "explode" : true,
+          "in" : "query",
+          "name" : "keystorePassword",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "keystorePasswordConfirm",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "truststorePassword",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "truststorePasswordConfirm",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "httpsHostname",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "httpsPort",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        } ],
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/inline_object_5",
+          "content" : {
+            "multipart/form-data" : {
+              "schema" : {
+                "properties" : {
+                  "privatekeyFile" : {
+                    "format" : "binary",
+                    "type" : "string"
+                  },
+                  "certificateFile" : {
+                    "format" : "binary",
+                    "type" : "string"
+                  }
+                },
+                "type" : "object"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "default" : {
+            "content" : {
+              "text/plain" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "description" : "Default response"
+          }
+        },
+        "tags" : [ "granite" ]
+      }
+    }
+  },
+  "components" : {
+    "requestBodies" : {
+      "inline_object_1" : {
+        "content" : {
+          "multipart/form-data" : {
+            "schema" : {
+              "$ref" : "#/components/schemas/inline_object_1"
+            }
+          }
+        }
+      },
+      "inline_object" : {
+        "content" : {
+          "multipart/form-data" : {
+            "schema" : {
+              "$ref" : "#/components/schemas/inline_object"
+            }
+          }
+        }
+      },
+      "inline_object_5" : {
+        "content" : {
+          "multipart/form-data" : {
+            "schema" : {
+              "$ref" : "#/components/schemas/inline_object_5"
+            }
+          }
+        }
+      },
+      "inline_object_4" : {
+        "content" : {
+          "multipart/form-data" : {
+            "schema" : {
+              "$ref" : "#/components/schemas/inline_object_4"
+            }
+          }
+        }
+      },
+      "inline_object_3" : {
+        "content" : {
+          "multipart/form-data" : {
+            "schema" : {
+              "$ref" : "#/components/schemas/inline_object_3"
+            }
+          }
+        }
+      },
+      "inline_object_2" : {
+        "content" : {
+          "multipart/form-data" : {
+            "schema" : {
+              "$ref" : "#/components/schemas/inline_object_2"
             }
           }
         }
       }
     },
-    "/{intermediatePath}/{authorizableId}/keystore/store.p12" : {
-      "get" : {
-        "tags" : [ "sling" ],
-        "operationId" : "getKeystore",
-        "parameters" : [ {
-          "name" : "intermediatePath",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "authorizableId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "default" : {
-            "description" : "Default response",
-            "content" : {
-              "application/octet-stream" : {
-                "schema" : {
-                  "type" : "string",
-                  "format" : "binary"
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "components" : {
     "schemas" : {
       "InstallStatus" : {
-        "type" : "object",
         "properties" : {
           "status" : {
             "$ref" : "#/components/schemas/InstallStatus_status"
           }
         },
-        "example" : {
-          "status" : {
-            "finished" : true,
-            "itemCount" : 0
-          }
-        }
+        "type" : "object"
       },
       "KeystoreInfo" : {
-        "type" : "object",
         "properties" : {
           "aliases" : {
-            "type" : "array",
             "items" : {
               "$ref" : "#/components/schemas/KeystoreItems"
-            }
+            },
+            "type" : "array"
           },
           "exists" : {
-            "type" : "boolean",
-            "description" : "False if truststore don't exist"
-          }
-        }
-      },
-      "TruststoreInfo" : {
-        "type" : "object",
-        "properties" : {
-          "aliases" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/TruststoreItems"
-            }
-          },
-          "exists" : {
-            "type" : "boolean",
-            "description" : "False if truststore don't exist"
+            "description" : "False if truststore don't exist",
+            "type" : "boolean"
           }
         },
-        "example" : {
-          "aliases" : [ {
-            "entryType" : "entryType",
-            "notAfter" : "notAfter",
-            "serialNumber" : 0,
-            "subject" : "subject",
-            "alias" : "alias",
-            "issuer" : "issuer",
-            "notBefore" : "notBefore"
-          }, {
-            "entryType" : "entryType",
-            "notAfter" : "notAfter",
-            "serialNumber" : 0,
-            "subject" : "subject",
-            "alias" : "alias",
-            "issuer" : "issuer",
-            "notBefore" : "notBefore"
-          } ],
-          "exists" : true
-        }
+        "type" : "object"
+      },
+      "TruststoreInfo" : {
+        "properties" : {
+          "aliases" : {
+            "items" : {
+              "$ref" : "#/components/schemas/TruststoreItems"
+            },
+            "type" : "array"
+          },
+          "exists" : {
+            "description" : "False if truststore don't exist",
+            "type" : "boolean"
+          }
+        },
+        "type" : "object"
       },
       "KeystoreItems" : {
-        "type" : "object",
         "properties" : {
           "alias" : {
-            "type" : "string",
-            "description" : "Keystore alias name"
+            "description" : "Keystore alias name",
+            "type" : "string"
           },
           "entryType" : {
-            "type" : "string",
-            "description" : "e.g. \"privateKey\""
+            "description" : "e.g. \"privateKey\"",
+            "type" : "string"
           },
           "algorithm" : {
-            "type" : "string",
-            "description" : "e.g. \"RSA\""
+            "description" : "e.g. \"RSA\"",
+            "type" : "string"
           },
           "format" : {
-            "type" : "string",
-            "description" : "e.g. \"PKCS#8\""
+            "description" : "e.g. \"PKCS#8\"",
+            "type" : "string"
           },
           "chain" : {
-            "type" : "array",
             "items" : {
               "$ref" : "#/components/schemas/KeystoreChainItems"
-            }
+            },
+            "type" : "array"
           }
-        }
+        },
+        "type" : "object"
       },
       "KeystoreChainItems" : {
-        "type" : "object",
         "properties" : {
           "subject" : {
-            "type" : "string",
-            "description" : "e.g. \"CN=localhost\""
+            "description" : "e.g. \"CN=localhost\"",
+            "type" : "string"
           },
           "issuer" : {
-            "type" : "string",
-            "description" : "e.g. \"CN=Admin\""
+            "description" : "e.g. \"CN=Admin\"",
+            "type" : "string"
           },
           "notBefore" : {
-            "type" : "string",
-            "description" : "e.g. \"Sun Jul 01 12:00:00 AEST 2018\""
+            "description" : "e.g. \"Sun Jul 01 12:00:00 AEST 2018\"",
+            "type" : "string"
           },
           "notAfter" : {
-            "type" : "string",
-            "description" : "e.g. \"Sun Jun 30 23:59:50 AEST 2019\""
+            "description" : "e.g. \"Sun Jun 30 23:59:50 AEST 2019\"",
+            "type" : "string"
           },
           "serialNumber" : {
-            "type" : "integer",
             "description" : "18165099476682912368",
-            "format" : "int32"
+            "type" : "integer"
           }
-        }
+        },
+        "type" : "object"
       },
       "TruststoreItems" : {
-        "type" : "object",
         "properties" : {
           "alias" : {
-            "type" : "string",
-            "description" : "Truststore alias name"
+            "description" : "Truststore alias name",
+            "type" : "string"
           },
           "entryType" : {
             "type" : "string"
           },
           "subject" : {
-            "type" : "string",
-            "description" : "e.g. \"CN=localhost\""
+            "description" : "e.g. \"CN=localhost\"",
+            "type" : "string"
           },
           "issuer" : {
-            "type" : "string",
-            "description" : "e.g. \"CN=Admin\""
+            "description" : "e.g. \"CN=Admin\"",
+            "type" : "string"
           },
           "notBefore" : {
-            "type" : "string",
-            "description" : "e.g. \"Sun Jul 01 12:00:00 AEST 2018\""
+            "description" : "e.g. \"Sun Jul 01 12:00:00 AEST 2018\"",
+            "type" : "string"
           },
           "notAfter" : {
-            "type" : "string",
-            "description" : "e.g. \"Sun Jun 30 23:59:50 AEST 2019\""
+            "description" : "e.g. \"Sun Jun 30 23:59:50 AEST 2019\"",
+            "type" : "string"
           },
           "serialNumber" : {
-            "type" : "integer",
             "description" : "18165099476682912368",
-            "format" : "int32"
+            "type" : "integer"
           }
         },
-        "example" : {
-          "entryType" : "entryType",
-          "notAfter" : "notAfter",
-          "serialNumber" : 0,
-          "subject" : "subject",
-          "alias" : "alias",
-          "issuer" : "issuer",
-          "notBefore" : "notBefore"
-        }
+        "type" : "object"
       },
       "SamlConfigurationInfo" : {
-        "type" : "object",
         "properties" : {
           "pid" : {
-            "type" : "string",
-            "description" : "Persistent Identity (PID)"
+            "description" : "Persistent Identity (PID)",
+            "type" : "string"
           },
           "title" : {
-            "type" : "string",
-            "description" : "Title"
+            "description" : "Title",
+            "type" : "string"
           },
           "description" : {
-            "type" : "string",
-            "description" : "Title"
+            "description" : "Title",
+            "type" : "string"
           },
           "bundle_location" : {
-            "type" : "string",
-            "description" : "needed for configuration binding"
+            "description" : "needed for configuration binding",
+            "type" : "string"
           },
           "service_location" : {
-            "type" : "string",
-            "description" : "needed for configuraiton binding"
+            "description" : "needed for configuraiton binding",
+            "type" : "string"
           },
           "properties" : {
             "$ref" : "#/components/schemas/SamlConfigurationProperties"
           }
-        }
+        },
+        "type" : "object"
       },
       "SamlConfigurationProperties" : {
-        "type" : "object",
         "properties" : {
           "path" : {
             "$ref" : "#/components/schemas/SamlConfigurationPropertyItemsArray"
@@ -3608,206 +3816,287 @@
           "userIntermediatePath" : {
             "$ref" : "#/components/schemas/SamlConfigurationPropertyItemsString"
           }
-        }
+        },
+        "type" : "object"
       },
       "SamlConfigurationPropertyItemsArray" : {
-        "type" : "object",
         "properties" : {
           "name" : {
-            "type" : "string",
-            "description" : "property name"
+            "description" : "property name",
+            "type" : "string"
           },
           "optional" : {
-            "type" : "boolean",
-            "description" : "True if optional"
+            "description" : "True if optional",
+            "type" : "boolean"
           },
           "is_set" : {
-            "type" : "boolean",
-            "description" : "True if property is set"
+            "description" : "True if property is set",
+            "type" : "boolean"
           },
           "type" : {
-            "type" : "integer",
             "description" : "Property type, 1=String, 3=long, 11=boolean, 12=Password",
-            "format" : "int32"
+            "type" : "integer"
           },
           "values" : {
-            "type" : "array",
             "description" : "Property value",
             "items" : {
               "type" : "string"
-            }
+            },
+            "type" : "array"
           },
           "description" : {
-            "type" : "string",
-            "description" : "Property description"
+            "description" : "Property description",
+            "type" : "string"
           }
-        }
+        },
+        "type" : "object"
       },
       "SamlConfigurationPropertyItemsBoolean" : {
-        "type" : "object",
         "properties" : {
           "name" : {
-            "type" : "string",
-            "description" : "property name"
+            "description" : "property name",
+            "type" : "string"
           },
           "optional" : {
-            "type" : "boolean",
-            "description" : "True if optional"
+            "description" : "True if optional",
+            "type" : "boolean"
           },
           "is_set" : {
-            "type" : "boolean",
-            "description" : "True if property is set"
+            "description" : "True if property is set",
+            "type" : "boolean"
           },
           "type" : {
-            "type" : "integer",
             "description" : "Property type, 1=String, 3=long, 11=boolean, 12=Password",
-            "format" : "int32"
+            "type" : "integer"
           },
           "value" : {
-            "type" : "boolean",
-            "description" : "Property value"
+            "description" : "Property value",
+            "type" : "boolean"
           },
           "description" : {
-            "type" : "string",
-            "description" : "Property description"
+            "description" : "Property description",
+            "type" : "string"
           }
-        }
+        },
+        "type" : "object"
       },
       "SamlConfigurationPropertyItemsLong" : {
-        "type" : "object",
         "properties" : {
           "name" : {
-            "type" : "string",
-            "description" : "property name"
+            "description" : "property name",
+            "type" : "string"
           },
           "optional" : {
-            "type" : "boolean",
-            "description" : "True if optional"
+            "description" : "True if optional",
+            "type" : "boolean"
           },
           "is_set" : {
-            "type" : "boolean",
-            "description" : "True if property is set"
+            "description" : "True if property is set",
+            "type" : "boolean"
           },
           "type" : {
-            "type" : "integer",
             "description" : "Property type, 1=String, 3=long, 11=boolean, 12=Password",
-            "format" : "int32"
+            "type" : "integer"
           },
           "value" : {
-            "type" : "integer",
             "description" : "Property value",
-            "format" : "int32"
+            "type" : "integer"
           },
           "description" : {
-            "type" : "string",
-            "description" : "Property description"
+            "description" : "Property description",
+            "type" : "string"
           }
-        }
+        },
+        "type" : "object"
       },
       "SamlConfigurationPropertyItemsString" : {
-        "type" : "object",
         "properties" : {
           "name" : {
-            "type" : "string",
-            "description" : "property name"
+            "description" : "property name",
+            "type" : "string"
           },
           "optional" : {
-            "type" : "boolean",
-            "description" : "True if optional"
+            "description" : "True if optional",
+            "type" : "boolean"
           },
           "is_set" : {
-            "type" : "boolean",
-            "description" : "True if property is set"
+            "description" : "True if property is set",
+            "type" : "boolean"
           },
           "type" : {
-            "type" : "integer",
             "description" : "Property type, 1=String, 3=long, 11=boolean, 12=Password",
-            "format" : "int32"
+            "type" : "integer"
           },
           "value" : {
-            "type" : "string",
-            "description" : "Property value"
+            "description" : "Property value",
+            "type" : "string"
           },
           "description" : {
-            "type" : "string",
-            "description" : "Property description"
+            "description" : "Property description",
+            "type" : "string"
           }
-        }
+        },
+        "type" : "object"
       },
-      "body" : {
-        "type" : "object",
+      "BundleInfo" : {
+        "properties" : {
+          "status" : {
+            "description" : "Status description of all bundles",
+            "type" : "string"
+          },
+          "s" : {
+            "items" : {
+              "type" : "integer"
+            },
+            "type" : "array"
+          },
+          "data" : {
+            "items" : {
+              "$ref" : "#/components/schemas/BundleData"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "BundleData" : {
+        "properties" : {
+          "id" : {
+            "description" : "Bundle ID",
+            "type" : "integer"
+          },
+          "name" : {
+            "description" : "Bundle name",
+            "type" : "string"
+          },
+          "fragment" : {
+            "description" : "Is bundle a fragment",
+            "type" : "boolean"
+          },
+          "stateRaw" : {
+            "description" : "Numeric raw bundle state value",
+            "type" : "integer"
+          },
+          "state" : {
+            "description" : "Bundle state value",
+            "type" : "string"
+          },
+          "version" : {
+            "description" : "Bundle version",
+            "type" : "string"
+          },
+          "symbolicName" : {
+            "description" : "Bundle symbolic name",
+            "type" : "string"
+          },
+          "category" : {
+            "description" : "Bundle category",
+            "type" : "string"
+          },
+          "props" : {
+            "items" : {
+              "$ref" : "#/components/schemas/BundleDataProp"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "BundleDataProp" : {
+        "properties" : {
+          "key" : {
+            "description" : "Bundle data key",
+            "type" : "string"
+          },
+          "value" : {
+            "description" : "Bundle data value",
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "inline_object" : {
         "properties" : {
           "file" : {
-            "type" : "string",
-            "format" : "binary"
+            "format" : "binary",
+            "type" : "string"
           }
-        }
+        },
+        "type" : "object"
       },
-      "body_1" : {
-        "type" : "object",
+      "inline_object_1" : {
         "properties" : {
           "package" : {
-            "type" : "string",
-            "format" : "binary"
+            "format" : "binary",
+            "type" : "string"
           }
-        }
+        },
+        "type" : "object"
       },
-      "body_2" : {
-        "type" : "object",
+      "inline_object_2" : {
         "properties" : {
           "certificate" : {
-            "type" : "string",
-            "format" : "binary"
+            "format" : "binary",
+            "type" : "string"
           }
-        }
+        },
+        "type" : "object"
       },
-      "body_3" : {
-        "type" : "object",
+      "inline_object_3" : {
         "properties" : {
           "truststore.p12" : {
-            "type" : "string",
-            "format" : "binary"
+            "format" : "binary",
+            "type" : "string"
           }
-        }
+        },
+        "type" : "object"
       },
-      "body_4" : {
-        "type" : "object",
+      "inline_object_4" : {
         "properties" : {
           "cert-chain" : {
-            "type" : "string",
-            "format" : "binary"
+            "format" : "binary",
+            "type" : "string"
           },
           "pk" : {
-            "type" : "string",
-            "format" : "binary"
+            "format" : "binary",
+            "type" : "string"
           },
           "keyStore" : {
-            "type" : "string",
-            "format" : "binary"
+            "format" : "binary",
+            "type" : "string"
           }
-        }
+        },
+        "type" : "object"
+      },
+      "inline_object_5" : {
+        "properties" : {
+          "privatekeyFile" : {
+            "format" : "binary",
+            "type" : "string"
+          },
+          "certificateFile" : {
+            "format" : "binary",
+            "type" : "string"
+          }
+        },
+        "type" : "object"
       },
       "InstallStatus_status" : {
-        "type" : "object",
         "properties" : {
           "finished" : {
             "type" : "boolean"
           },
           "itemCount" : {
-            "type" : "integer",
-            "format" : "int32"
+            "type" : "integer"
           }
         },
-        "example" : {
-          "finished" : true,
-          "itemCount" : 0
-        }
+        "type" : "object"
       }
     },
     "securitySchemes" : {
       "aemAuth" : {
-        "type" : "http",
-        "scheme" : "basic"
+        "scheme" : "basic",
+        "type" : "http"
       }
     }
   }

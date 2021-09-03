@@ -12,7 +12,7 @@ class InstallStatusStatus {
     /** @var bool $finished */
     private $finished;
 
-    /** @var int $item_count */
-    private $item_count;
+    /** @var int $itemCount */
+    private $itemCount;
 
 }

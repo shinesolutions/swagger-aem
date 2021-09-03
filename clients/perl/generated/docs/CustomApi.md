@@ -28,6 +28,7 @@ my $api_instance = WWW::OpenAPIClient::CustomApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
 my $tags = "tags_example"; # string | 
@@ -78,9 +79,10 @@ my $api_instance = WWW::OpenAPIClient::CustomApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
-my $bundles/ignored = [("inner_example")]; # ARRAY[string] | 
+my $bundles/ignored = [("null")]; # ARRAY[string] | 
 my $bundles/ignored@type_hint = "bundles/ignored@type_hint_example"; # string | 
 
 eval { 
@@ -127,9 +129,10 @@ my $api_instance = WWW::OpenAPIClient::CustomApi->new(
     # Configure HTTP basic authorization: aemAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
+    
 );
 
-my $pwdreset/authorizables = [("inner_example")]; # ARRAY[string] | 
+my $pwdreset/authorizables = [("null")]; # ARRAY[string] | 
 my $pwdreset/authorizables@type_hint = "pwdreset/authorizables@type_hint_example"; # string | 
 
 eval { 

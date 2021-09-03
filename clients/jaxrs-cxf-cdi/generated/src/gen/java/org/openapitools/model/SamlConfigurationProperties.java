@@ -2,6 +2,8 @@ package org.openapitools.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.openapitools.model.SamlConfigurationPropertyItemsArray;
 import org.openapitools.model.SamlConfigurationPropertyItemsBoolean;
 import org.openapitools.model.SamlConfigurationPropertyItemsLong;
@@ -15,56 +17,55 @@ import java.util.Objects;
 import javax.xml.bind.annotation.*;
 
 
-
 public class SamlConfigurationProperties   {
   
-  private SamlConfigurationPropertyItemsArray path = null;
+  private SamlConfigurationPropertyItemsArray path;
 
-  private SamlConfigurationPropertyItemsLong serviceRanking = null;
+  private SamlConfigurationPropertyItemsLong serviceRanking;
 
-  private SamlConfigurationPropertyItemsString idpUrl = null;
+  private SamlConfigurationPropertyItemsString idpUrl;
 
-  private SamlConfigurationPropertyItemsString idpCertAlias = null;
+  private SamlConfigurationPropertyItemsString idpCertAlias;
 
-  private SamlConfigurationPropertyItemsBoolean idpHttpRedirect = null;
+  private SamlConfigurationPropertyItemsBoolean idpHttpRedirect;
 
-  private SamlConfigurationPropertyItemsString serviceProviderEntityId = null;
+  private SamlConfigurationPropertyItemsString serviceProviderEntityId;
 
-  private SamlConfigurationPropertyItemsString assertionConsumerServiceURL = null;
+  private SamlConfigurationPropertyItemsString assertionConsumerServiceURL;
 
-  private SamlConfigurationPropertyItemsString spPrivateKeyAlias = null;
+  private SamlConfigurationPropertyItemsString spPrivateKeyAlias;
 
-  private SamlConfigurationPropertyItemsString keyStorePassword = null;
+  private SamlConfigurationPropertyItemsString keyStorePassword;
 
-  private SamlConfigurationPropertyItemsString defaultRedirectUrl = null;
+  private SamlConfigurationPropertyItemsString defaultRedirectUrl;
 
-  private SamlConfigurationPropertyItemsString userIDAttribute = null;
+  private SamlConfigurationPropertyItemsString userIDAttribute;
 
-  private SamlConfigurationPropertyItemsBoolean useEncryption = null;
+  private SamlConfigurationPropertyItemsBoolean useEncryption;
 
-  private SamlConfigurationPropertyItemsBoolean createUser = null;
+  private SamlConfigurationPropertyItemsBoolean createUser;
 
-  private SamlConfigurationPropertyItemsBoolean addGroupMemberships = null;
+  private SamlConfigurationPropertyItemsBoolean addGroupMemberships;
 
-  private SamlConfigurationPropertyItemsString groupMembershipAttribute = null;
+  private SamlConfigurationPropertyItemsString groupMembershipAttribute;
 
-  private SamlConfigurationPropertyItemsArray defaultGroups = null;
+  private SamlConfigurationPropertyItemsArray defaultGroups;
 
-  private SamlConfigurationPropertyItemsString nameIdFormat = null;
+  private SamlConfigurationPropertyItemsString nameIdFormat;
 
-  private SamlConfigurationPropertyItemsArray synchronizeAttributes = null;
+  private SamlConfigurationPropertyItemsArray synchronizeAttributes;
 
-  private SamlConfigurationPropertyItemsBoolean handleLogout = null;
+  private SamlConfigurationPropertyItemsBoolean handleLogout;
 
-  private SamlConfigurationPropertyItemsString logoutUrl = null;
+  private SamlConfigurationPropertyItemsString logoutUrl;
 
-  private SamlConfigurationPropertyItemsLong clockTolerance = null;
+  private SamlConfigurationPropertyItemsLong clockTolerance;
 
-  private SamlConfigurationPropertyItemsString digestMethod = null;
+  private SamlConfigurationPropertyItemsString digestMethod;
 
-  private SamlConfigurationPropertyItemsString signatureMethod = null;
+  private SamlConfigurationPropertyItemsString signatureMethod;
 
-  private SamlConfigurationPropertyItemsString userIntermediatePath = null;
+  private SamlConfigurationPropertyItemsString userIntermediatePath;
 
 
   /**
@@ -501,7 +502,7 @@ public class SamlConfigurationProperties   {
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -577,7 +578,7 @@ public class SamlConfigurationProperties   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

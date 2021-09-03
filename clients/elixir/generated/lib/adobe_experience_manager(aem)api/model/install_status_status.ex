@@ -14,8 +14,8 @@ defmodule AdobeExperienceManager(AEM)API.Model.InstallStatusStatus do
   ]
 
   @type t :: %__MODULE__{
-    :"finished" => boolean(),
-    :"itemCount" => integer()
+    :"finished" => boolean() | nil,
+    :"itemCount" => integer() | nil
   }
 end
 

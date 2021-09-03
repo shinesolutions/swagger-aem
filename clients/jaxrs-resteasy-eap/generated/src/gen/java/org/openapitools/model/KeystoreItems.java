@@ -12,18 +12,17 @@ import org.openapitools.model.KeystoreChainItems;
 import javax.validation.constraints.*;
 import io.swagger.annotations.*;
 
-
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyEapServerCodegen", date = "2019-08-04T23:42:11.561Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyEapServerCodegen", date = "2021-09-03T15:26:02.321+10:00[Australia/Melbourne]")
 public class KeystoreItems   {
   
 
-  private String alias = null;
+  private String alias;
 
-  private String entryType = null;
+  private String entryType;
 
-  private String algorithm = null;
+  private String algorithm;
 
-  private String format = null;
+  private String format;
 
   private List<KeystoreChainItems> chain = new ArrayList<KeystoreChainItems>();
 

@@ -88,7 +88,10 @@ null (empty response body)
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 

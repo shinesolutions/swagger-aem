@@ -1,54 +1,120 @@
+//
+// AUTO-GENERATED FILE, DO NOT MODIFY!
+//
+// @dart=2.0
+
+// ignore_for_file: unused_element, unused_import
+// ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: lines_longer_than_80_chars
+
 part of openapi.api;
 
 class SamlConfigurationPropertyItemsString {
-  /* property name */
-  String name = null;
-  /* True if optional */
-  bool optional = null;
-  /* True if property is set */
-  bool isSet = null;
-  /* Property type, 1=String, 3=long, 11=boolean, 12=Password */
-  int type = null;
-  /* Property value */
-  String value = null;
-  /* Property description */
-  String description = null;
-  SamlConfigurationPropertyItemsString();
+  /// Returns a new [SamlConfigurationPropertyItemsString] instance.
+  SamlConfigurationPropertyItemsString({
+    this.name,
+    this.optional,
+    this.isSet,
+    this.type,
+    this.value,
+    this.description,
+  });
+
+  /// property name
+  String name;
+
+  /// True if optional
+  bool optional;
+
+  /// True if property is set
+  bool isSet;
+
+  /// Property type, 1=String, 3=long, 11=boolean, 12=Password
+  int type;
+
+  /// Property value
+  String value;
+
+  /// Property description
+  String description;
 
   @override
-  String toString() {
-    return 'SamlConfigurationPropertyItemsString[name=$name, optional=$optional, isSet=$isSet, type=$type, value=$value, description=$description, ]';
-  }
+  bool operator ==(Object other) => identical(this, other) || other is SamlConfigurationPropertyItemsString &&
+     other.name == name &&
+     other.optional == optional &&
+     other.isSet == isSet &&
+     other.type == type &&
+     other.value == value &&
+     other.description == description;
 
-  SamlConfigurationPropertyItemsString.fromJson(Map<String, dynamic> json) {
-    if (json == null) return;
-    name = json['name'];
-    optional = json['optional'];
-    isSet = json['is_set'];
-    type = json['type'];
-    value = json['value'];
-    description = json['description'];
-  }
+  @override
+  int get hashCode =>
+    (name == null ? 0 : name.hashCode) +
+    (optional == null ? 0 : optional.hashCode) +
+    (isSet == null ? 0 : isSet.hashCode) +
+    (type == null ? 0 : type.hashCode) +
+    (value == null ? 0 : value.hashCode) +
+    (description == null ? 0 : description.hashCode);
+
+  @override
+  String toString() => 'SamlConfigurationPropertyItemsString[name=$name, optional=$optional, isSet=$isSet, type=$type, value=$value, description=$description]';
 
   Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'optional': optional,
-      'is_set': isSet,
-      'type': type,
-      'value': value,
-      'description': description
-    };
+    final json = <String, dynamic>{};
+    if (name != null) {
+      json[r'name'] = name;
+    }
+    if (optional != null) {
+      json[r'optional'] = optional;
+    }
+    if (isSet != null) {
+      json[r'is_set'] = isSet;
+    }
+    if (type != null) {
+      json[r'type'] = type;
+    }
+    if (value != null) {
+      json[r'value'] = value;
+    }
+    if (description != null) {
+      json[r'description'] = description;
+    }
+    return json;
   }
 
-  static List<SamlConfigurationPropertyItemsString> listFromJson(List<dynamic> json) {
-    return json == null ? new List<SamlConfigurationPropertyItemsString>() : json.map((value) => new SamlConfigurationPropertyItemsString.fromJson(value)).toList();
+  /// Returns a new [SamlConfigurationPropertyItemsString] instance and imports its values from
+  /// [json] if it's non-null, null if [json] is null.
+  static SamlConfigurationPropertyItemsString fromJson(Map<String, dynamic> json) => json == null
+    ? null
+    : SamlConfigurationPropertyItemsString(
+        name: json[r'name'],
+        optional: json[r'optional'],
+        isSet: json[r'is_set'],
+        type: json[r'type'],
+        value: json[r'value'],
+        description: json[r'description'],
+    );
+
+  static List<SamlConfigurationPropertyItemsString> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
+    json == null || json.isEmpty
+      ? true == emptyIsNull ? null : <SamlConfigurationPropertyItemsString>[]
+      : json.map((dynamic value) => SamlConfigurationPropertyItemsString.fromJson(value)).toList(growable: true == growable);
+
+  static Map<String, SamlConfigurationPropertyItemsString> mapFromJson(Map<String, dynamic> json) {
+    final map = <String, SamlConfigurationPropertyItemsString>{};
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) => map[key] = SamlConfigurationPropertyItemsString.fromJson(value));
+    }
+    return map;
   }
 
-  static Map<String, SamlConfigurationPropertyItemsString> mapFromJson(Map<String, Map<String, dynamic>> json) {
-    var map = new Map<String, SamlConfigurationPropertyItemsString>();
-    if (json != null && json.length > 0) {
-      json.forEach((String key, Map<String, dynamic> value) => map[key] = new SamlConfigurationPropertyItemsString.fromJson(value));
+  // maps a json object with a list of SamlConfigurationPropertyItemsString-objects as value to a dart map
+  static Map<String, List<SamlConfigurationPropertyItemsString>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
+    final map = <String, List<SamlConfigurationPropertyItemsString>>{};
+    if (json?.isNotEmpty == true) {
+      json.forEach((key, value) {
+        map[key] = SamlConfigurationPropertyItemsString.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
+      });
     }
     return map;
   }

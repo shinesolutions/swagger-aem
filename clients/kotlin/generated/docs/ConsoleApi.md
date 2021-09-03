@@ -5,6 +5,7 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**getAemProductInfo**](ConsoleApi.md#getAemProductInfo) | **GET** /system/console/status-productinfo.json | 
+[**getBundleInfo**](ConsoleApi.md#getBundleInfo) | **GET** /system/console/bundles/{name}.json | 
 [**getConfigMgr**](ConsoleApi.md#getConfigMgr) | **GET** /system/console/configMgr | 
 [**postBundle**](ConsoleApi.md#postBundle) | **POST** /system/console/bundles/{name} | 
 [**postJmxRepository**](ConsoleApi.md#postJmxRepository) | **POST** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} | 
@@ -13,7 +14,7 @@ Method | HTTP request | Description
 
 <a name="getAemProductInfo"></a>
 # **getAemProductInfo**
-> kotlin.Array&lt;kotlin.String&gt; getAemProductInfo()
+> kotlin.collections.List&lt;kotlin.String&gt; getAemProductInfo()
 
 
 
@@ -25,7 +26,7 @@ Method | HTTP request | Description
 
 val apiInstance = ConsoleApi()
 try {
-    val result : kotlin.Array<kotlin.String> = apiInstance.getAemProductInfo()
+    val result : kotlin.collections.List<kotlin.String> = apiInstance.getAemProductInfo()
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling ConsoleApi#getAemProductInfo")
@@ -41,11 +42,62 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**kotlin.Array&lt;kotlin.String&gt;**
+**kotlin.collections.List&lt;kotlin.String&gt;**
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="getBundleInfo"></a>
+# **getBundleInfo**
+> BundleInfo getBundleInfo(name)
+
+
+
+### Example
+```kotlin
+// Import classes:
+//import org.openapitools.client.infrastructure.*
+//import org.openapitools.client.models.*
+
+val apiInstance = ConsoleApi()
+val name : kotlin.String = name_example // kotlin.String | 
+try {
+    val result : BundleInfo = apiInstance.getBundleInfo(name)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling ConsoleApi#getBundleInfo")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling ConsoleApi#getBundleInfo")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **kotlin.String**|  |
+
+### Return type
+
+[**BundleInfo**](BundleInfo.md)
+
+### Authorization
+
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -86,7 +138,10 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -132,7 +187,10 @@ null (empty response body)
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -176,7 +234,10 @@ null (empty response body)
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 
@@ -185,7 +246,7 @@ null (empty response body)
 
 <a name="postSamlConfiguration"></a>
 # **postSamlConfiguration**
-> SamlConfigurationInfo postSamlConfiguration(post, apply, delete, action, Dollarlocation, path, servicePeriodranking, idpUrl, idpCertAlias, idpHttpRedirect, serviceProviderEntityId, assertionConsumerServiceURL, spPrivateKeyAlias, keyStorePassword, defaultRedirectUrl, userIDAttribute, useEncryption, createUser, addGroupMemberships, groupMembershipAttribute, defaultGroups, nameIdFormat, synchronizeAttributes, handleLogout, logoutUrl, clockTolerance, digestMethod, signatureMethod, userIntermediatePath, propertylist)
+> SamlConfigurationInfo postSamlConfiguration(post, apply, delete, action, dollarLocation, path, serviceRanking, idpUrl, idpCertAlias, idpHttpRedirect, serviceProviderEntityId, assertionConsumerServiceURL, spPrivateKeyAlias, keyStorePassword, defaultRedirectUrl, userIDAttribute, useEncryption, createUser, addGroupMemberships, groupMembershipAttribute, defaultGroups, nameIdFormat, synchronizeAttributes, handleLogout, logoutUrl, clockTolerance, digestMethod, signatureMethod, userIntermediatePath, propertylist)
 
 
 
@@ -200,9 +261,9 @@ val post : kotlin.Boolean = true // kotlin.Boolean |
 val apply : kotlin.Boolean = true // kotlin.Boolean | 
 val delete : kotlin.Boolean = true // kotlin.Boolean | 
 val action : kotlin.String = action_example // kotlin.String | 
-val Dollarlocation : kotlin.String = Dollarlocation_example // kotlin.String | 
-val path : kotlin.Array<kotlin.String> =  // kotlin.Array<kotlin.String> | 
-val servicePeriodranking : kotlin.Int = 56 // kotlin.Int | 
+val dollarLocation : kotlin.String = dollarLocation_example // kotlin.String | 
+val path : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
+val serviceRanking : kotlin.Int = 56 // kotlin.Int | 
 val idpUrl : kotlin.String = idpUrl_example // kotlin.String | 
 val idpCertAlias : kotlin.String = idpCertAlias_example // kotlin.String | 
 val idpHttpRedirect : kotlin.Boolean = true // kotlin.Boolean | 
@@ -216,18 +277,18 @@ val useEncryption : kotlin.Boolean = true // kotlin.Boolean |
 val createUser : kotlin.Boolean = true // kotlin.Boolean | 
 val addGroupMemberships : kotlin.Boolean = true // kotlin.Boolean | 
 val groupMembershipAttribute : kotlin.String = groupMembershipAttribute_example // kotlin.String | 
-val defaultGroups : kotlin.Array<kotlin.String> =  // kotlin.Array<kotlin.String> | 
+val defaultGroups : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
 val nameIdFormat : kotlin.String = nameIdFormat_example // kotlin.String | 
-val synchronizeAttributes : kotlin.Array<kotlin.String> =  // kotlin.Array<kotlin.String> | 
+val synchronizeAttributes : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
 val handleLogout : kotlin.Boolean = true // kotlin.Boolean | 
 val logoutUrl : kotlin.String = logoutUrl_example // kotlin.String | 
 val clockTolerance : kotlin.Int = 56 // kotlin.Int | 
 val digestMethod : kotlin.String = digestMethod_example // kotlin.String | 
 val signatureMethod : kotlin.String = signatureMethod_example // kotlin.String | 
 val userIntermediatePath : kotlin.String = userIntermediatePath_example // kotlin.String | 
-val propertylist : kotlin.Array<kotlin.String> =  // kotlin.Array<kotlin.String> | 
+val propertylist : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | 
 try {
-    val result : SamlConfigurationInfo = apiInstance.postSamlConfiguration(post, apply, delete, action, Dollarlocation, path, servicePeriodranking, idpUrl, idpCertAlias, idpHttpRedirect, serviceProviderEntityId, assertionConsumerServiceURL, spPrivateKeyAlias, keyStorePassword, defaultRedirectUrl, userIDAttribute, useEncryption, createUser, addGroupMemberships, groupMembershipAttribute, defaultGroups, nameIdFormat, synchronizeAttributes, handleLogout, logoutUrl, clockTolerance, digestMethod, signatureMethod, userIntermediatePath, propertylist)
+    val result : SamlConfigurationInfo = apiInstance.postSamlConfiguration(post, apply, delete, action, dollarLocation, path, serviceRanking, idpUrl, idpCertAlias, idpHttpRedirect, serviceProviderEntityId, assertionConsumerServiceURL, spPrivateKeyAlias, keyStorePassword, defaultRedirectUrl, userIDAttribute, useEncryption, createUser, addGroupMemberships, groupMembershipAttribute, defaultGroups, nameIdFormat, synchronizeAttributes, handleLogout, logoutUrl, clockTolerance, digestMethod, signatureMethod, userIntermediatePath, propertylist)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling ConsoleApi#postSamlConfiguration")
@@ -246,9 +307,9 @@ Name | Type | Description  | Notes
  **apply** | **kotlin.Boolean**|  | [optional]
  **delete** | **kotlin.Boolean**|  | [optional]
  **action** | **kotlin.String**|  | [optional]
- **Dollarlocation** | **kotlin.String**|  | [optional]
- **path** | [**kotlin.Array&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional]
- **servicePeriodranking** | **kotlin.Int**|  | [optional]
+ **dollarLocation** | **kotlin.String**|  | [optional]
+ **path** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional]
+ **serviceRanking** | **kotlin.Int**|  | [optional]
  **idpUrl** | **kotlin.String**|  | [optional]
  **idpCertAlias** | **kotlin.String**|  | [optional]
  **idpHttpRedirect** | **kotlin.Boolean**|  | [optional]
@@ -262,16 +323,16 @@ Name | Type | Description  | Notes
  **createUser** | **kotlin.Boolean**|  | [optional]
  **addGroupMemberships** | **kotlin.Boolean**|  | [optional]
  **groupMembershipAttribute** | **kotlin.String**|  | [optional]
- **defaultGroups** | [**kotlin.Array&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional]
+ **defaultGroups** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional]
  **nameIdFormat** | **kotlin.String**|  | [optional]
- **synchronizeAttributes** | [**kotlin.Array&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional]
+ **synchronizeAttributes** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional]
  **handleLogout** | **kotlin.Boolean**|  | [optional]
  **logoutUrl** | **kotlin.String**|  | [optional]
  **clockTolerance** | **kotlin.Int**|  | [optional]
  **digestMethod** | **kotlin.String**|  | [optional]
  **signatureMethod** | **kotlin.String**|  | [optional]
  **userIntermediatePath** | **kotlin.String**|  | [optional]
- **propertylist** | [**kotlin.Array&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional]
+ **propertylist** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional]
 
 ### Return type
 
@@ -279,7 +340,10 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[aemAuth](../README.md#aemAuth)
+
+Configure aemAuth:
+    ApiClient.username = ""
+    ApiClient.password = ""
 
 ### HTTP request headers
 

@@ -4,15 +4,15 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonInclude(JsonInclude.Include.NON_NULL) 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class SamlConfigurationPropertyItemsString   {
   
-  private String name = null;
-  private Boolean optional = null;
-  private Boolean isSet = null;
-  private Integer type = null;
-  private String value = null;
-  private String description = null;
+  private String name;
+  private Boolean optional;
+  private Boolean isSet;
+  private Integer type;
+  private String value;
+  private String description;
 
   public SamlConfigurationPropertyItemsString () {
 

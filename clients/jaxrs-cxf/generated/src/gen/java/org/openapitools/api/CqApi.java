@@ -24,14 +24,14 @@ import javax.validation.Valid;
  * <p>Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
  *
  */
-@Path("/")
+@Path("")
 @Api(value = "/", description = "")
 public interface CqApi  {
 
     @GET
     @Path("/libs/granite/core/content/login.html")
     @Produces({ "text/html" })
-    @ApiOperation(value = "", tags={ "cq",  })
+    @ApiOperation(value = "", tags={ "cq" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = String.class) })
     public String getLoginPage();
@@ -41,6 +41,6 @@ public interface CqApi  {
     @ApiOperation(value = "", tags={ "cq" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response") })
-    public void postCqActions(@QueryParam("authorizableId") @NotNull String authorizableId, @QueryParam("changelog") @NotNull String changelog);
+    public void postCqActions(@QueryParam("authorizableId") @NotNull  String authorizableId, @QueryParam("changelog") @NotNull  String changelog);
 }
 

@@ -14,8 +14,8 @@ defmodule AdobeExperienceManager(AEM)API.Model.KeystoreInfo do
   ]
 
   @type t :: %__MODULE__{
-    :"aliases" => [KeystoreItems],
-    :"exists" => boolean()
+    :"aliases" => [AdobeExperienceManager(AEM)API.Model.KeystoreItems.t] | nil,
+    :"exists" => boolean() | nil
   }
 end
 

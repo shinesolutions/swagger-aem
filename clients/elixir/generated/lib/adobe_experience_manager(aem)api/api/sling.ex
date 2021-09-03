@@ -21,8 +21,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
   - opts (KeywordList): [optional] Optional parameters
   ## Returns
 
-  {:ok, %{}} on success
-  {:error, info} on failure
+  {:ok, nil} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec delete_agent(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def delete_agent(connection, runmode, name, _opts \\ []) do
@@ -31,7 +31,9 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     |> url("/etc/replication/agents.#{runmode}/#{name}")
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -44,8 +46,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
   - opts (KeywordList): [optional] Optional parameters
   ## Returns
 
-  {:ok, %{}} on success
-  {:error, info} on failure
+  {:ok, nil} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec delete_node(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def delete_node(connection, path, name, _opts \\ []) do
@@ -54,7 +56,9 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     |> url("/#{path}/#{name}")
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -67,8 +71,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
   - opts (KeywordList): [optional] Optional parameters
   ## Returns
 
-  {:ok, %{}} on success
-  {:error, info} on failure
+  {:ok, nil} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec get_agent(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def get_agent(connection, runmode, name, _opts \\ []) do
@@ -77,7 +81,9 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     |> url("/etc/replication/agents.#{runmode}/#{name}")
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -89,8 +95,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
   - opts (KeywordList): [optional] Optional parameters
   ## Returns
 
-  {:ok, %AdobeExperienceManager(AEM)API.Model.String.t{}} on success
-  {:error, info} on failure
+  {:ok, String.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec get_agents(Tesla.Env.client, String.t, keyword()) :: {:ok, String.t} | {:error, Tesla.Env.t}
   def get_agents(connection, runmode, _opts \\ []) do
@@ -99,7 +105,9 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     |> url("/etc/replication/agents.#{runmode}.-1.json")
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -112,17 +120,20 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
   - opts (KeywordList): [optional] Optional parameters
   ## Returns
 
-  {:ok, %AdobeExperienceManager(AEM)API.Model.KeystoreInfo{}} on success
-  {:error, info} on failure
+  {:ok, AdobeExperienceManager(AEM)API.Model.KeystoreInfo.t} on success
+  {:error, Tesla.Env.t} on failure
   """
-  @spec get_authorizable_keystore(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, AdobeExperienceManager(AEM)API.Model.KeystoreInfo.t} | {:error, Tesla.Env.t}
+  @spec get_authorizable_keystore(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, AdobeExperienceManager(AEM)API.Model.KeystoreInfo.t} | {:ok, String.t} | {:error, Tesla.Env.t}
   def get_authorizable_keystore(connection, intermediate_path, authorizable_id, _opts \\ []) do
     %{}
     |> method(:get)
     |> url("/#{intermediate_path}/#{authorizable_id}.ks.json")
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(%AdobeExperienceManager(AEM)API.Model.KeystoreInfo{})
+    |> evaluate_response([
+      { 200, %AdobeExperienceManager(AEM)API.Model.KeystoreInfo{}},
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -135,8 +146,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
   - opts (KeywordList): [optional] Optional parameters
   ## Returns
 
-  {:ok, %AdobeExperienceManager(AEM)API.Model.String.t{}} on success
-  {:error, info} on failure
+  {:ok, String.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec get_keystore(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, String.t} | {:error, Tesla.Env.t}
   def get_keystore(connection, intermediate_path, authorizable_id, _opts \\ []) do
@@ -145,7 +156,9 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     |> url("/#{intermediate_path}/#{authorizable_id}/keystore/store.p12")
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -158,8 +171,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
   - opts (KeywordList): [optional] Optional parameters
   ## Returns
 
-  {:ok, %{}} on success
-  {:error, info} on failure
+  {:ok, nil} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec get_node(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def get_node(connection, path, name, _opts \\ []) do
@@ -168,7 +181,9 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     |> url("/#{path}/#{name}")
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -182,8 +197,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
   - opts (KeywordList): [optional] Optional parameters
   ## Returns
 
-  {:ok, %AdobeExperienceManager(AEM)API.Model.String.t{}} on success
-  {:error, info} on failure
+  {:ok, String.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec get_package(Tesla.Env.client, String.t, String.t, String.t, keyword()) :: {:ok, String.t} | {:error, Tesla.Env.t}
   def get_package(connection, group, name, version, _opts \\ []) do
@@ -192,7 +207,9 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     |> url("/etc/packages/#{group}/#{name}-#{version}.zip")
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -206,8 +223,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
   - opts (KeywordList): [optional] Optional parameters
   ## Returns
 
-  {:ok, %AdobeExperienceManager(AEM)API.Model.String.t{}} on success
-  {:error, info} on failure
+  {:ok, String.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec get_package_filter(Tesla.Env.client, String.t, String.t, String.t, keyword()) :: {:ok, String.t} | {:error, Tesla.Env.t}
   def get_package_filter(connection, group, name, version, _opts \\ []) do
@@ -216,7 +233,9 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     |> url("/etc/packages/#{group}/#{name}-#{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json")
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -231,8 +250,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
   - opts (KeywordList): [optional] Optional parameters
   ## Returns
 
-  {:ok, %AdobeExperienceManager(AEM)API.Model.String.t{}} on success
-  {:error, info} on failure
+  {:ok, String.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec get_query(Tesla.Env.client, String.t, float(), String.t, String.t, keyword()) :: {:ok, String.t} | {:error, Tesla.Env.t}
   def get_query(connection, path, p_periodlimit, 1_property, 1_property_periodvalue, _opts \\ []) do
@@ -245,7 +264,9 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     |> add_param(:query, :"1_property.value", 1_property_periodvalue)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -256,8 +277,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
   - opts (KeywordList): [optional] Optional parameters
   ## Returns
 
-  {:ok, %AdobeExperienceManager(AEM)API.Model.String.t{}} on success
-  {:error, info} on failure
+  {:ok, String.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec get_truststore(Tesla.Env.client, keyword()) :: {:ok, String.t} | {:error, Tesla.Env.t}
   def get_truststore(connection, _opts \\ []) do
@@ -266,7 +287,9 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     |> url("/etc/truststore/truststore.p12")
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -277,17 +300,20 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
   - opts (KeywordList): [optional] Optional parameters
   ## Returns
 
-  {:ok, %AdobeExperienceManager(AEM)API.Model.TruststoreInfo{}} on success
-  {:error, info} on failure
+  {:ok, AdobeExperienceManager(AEM)API.Model.TruststoreInfo.t} on success
+  {:error, Tesla.Env.t} on failure
   """
-  @spec get_truststore_info(Tesla.Env.client, keyword()) :: {:ok, AdobeExperienceManager(AEM)API.Model.TruststoreInfo.t} | {:error, Tesla.Env.t}
+  @spec get_truststore_info(Tesla.Env.client, keyword()) :: {:ok, AdobeExperienceManager(AEM)API.Model.TruststoreInfo.t} | {:ok, String.t} | {:error, Tesla.Env.t}
   def get_truststore_info(connection, _opts \\ []) do
     %{}
     |> method(:get)
     |> url("/libs/granite/security/truststore.json")
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(%AdobeExperienceManager(AEM)API.Model.TruststoreInfo{})
+    |> evaluate_response([
+      { 200, %AdobeExperienceManager(AEM)API.Model.TruststoreInfo{}},
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -350,8 +376,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     - :operation (String.t): 
   ## Returns
 
-  {:ok, %{}} on success
-  {:error, info} on failure
+  {:ok, nil} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec post_agent(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def post_agent(connection, runmode, name, opts \\ []) do
@@ -411,9 +437,12 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     |> method(:post)
     |> url("/etc/replication/agents.#{runmode}/#{name}")
     |> add_optional_params(optional_params, opts)
+    |> ensure_body()
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -438,10 +467,10 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     - :key_store (String.t): 
   ## Returns
 
-  {:ok, %AdobeExperienceManager(AEM)API.Model.KeystoreInfo{}} on success
-  {:error, info} on failure
+  {:ok, AdobeExperienceManager(AEM)API.Model.KeystoreInfo.t} on success
+  {:error, Tesla.Env.t} on failure
   """
-  @spec post_authorizable_keystore(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, AdobeExperienceManager(AEM)API.Model.KeystoreInfo.t} | {:error, Tesla.Env.t}
+  @spec post_authorizable_keystore(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, AdobeExperienceManager(AEM)API.Model.KeystoreInfo.t} | {:ok, String.t} | {:error, Tesla.Env.t}
   def post_authorizable_keystore(connection, intermediate_path, authorizable_id, opts \\ []) do
     optional_params = %{
       :":operation" => :query,
@@ -461,9 +490,13 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     |> method(:post)
     |> url("/#{intermediate_path}/#{authorizable_id}.ks.html")
     |> add_optional_params(optional_params, opts)
+    |> ensure_body()
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(%AdobeExperienceManager(AEM)API.Model.KeystoreInfo{})
+    |> evaluate_response([
+      { 200, %AdobeExperienceManager(AEM)API.Model.KeystoreInfo{}},
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -480,8 +513,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     - :profile_slashgiven_name (String.t): 
   ## Returns
 
-  {:ok, %AdobeExperienceManager(AEM)API.Model.String.t{}} on success
-  {:error, info} on failure
+  {:ok, String.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec post_authorizables(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, String.t} | {:error, Tesla.Env.t}
   def post_authorizables(connection, authorizable_id, intermediate_path, opts \\ []) do
@@ -497,9 +530,12 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     |> add_param(:query, :"authorizableId", authorizable_id)
     |> add_param(:query, :"intermediatePath", intermediate_path)
     |> add_optional_params(optional_params, opts)
+    |> ensure_body()
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -541,7 +577,7 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     - :service_provider_entity_id (String.t): 
     - :service_provider_entity_id_at_type_hint (String.t): 
     - :assertion_consumer_service_url (String.t): 
-    - :assertion_consumer_service_url_at_type_hint (String.t): 
+    - :assertion_consumer_service_urlat_type_hint (String.t): 
     - :handle_logout (boolean()): 
     - :handle_logout_at_type_hint (String.t): 
     - :sp_private_key_alias (String.t): 
@@ -558,8 +594,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     - :user_intermediate_path_at_type_hint (String.t): 
   ## Returns
 
-  {:ok, %{}} on success
-  {:error, info} on failure
+  {:ok, nil} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec post_config_adobe_granite_saml_authentication_handler(Tesla.Env.client, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def post_config_adobe_granite_saml_authentication_handler(connection, opts \\ []) do
@@ -617,9 +653,12 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     |> method(:post)
     |> url("/apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config")
     |> add_optional_params(optional_params, opts)
+    |> ensure_body()
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -650,8 +689,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     - :org_periodosgi_periodservice_periodhttp_periodport_periodsecure_at_type_hint (String.t): 
   ## Returns
 
-  {:ok, %{}} on success
-  {:error, info} on failure
+  {:ok, nil} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec post_config_apache_felix_jetty_based_http_service(Tesla.Env.client, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def post_config_apache_felix_jetty_based_http_service(connection, opts \\ []) do
@@ -681,9 +720,12 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     |> method(:post)
     |> url("/apps/system/config/org.apache.felix.http")
     |> add_optional_params(optional_params, opts)
+    |> ensure_body()
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -706,8 +748,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     - :proxy_periodpassword_at_type_hint (String.t): 
   ## Returns
 
-  {:ok, %{}} on success
-  {:error, info} on failure
+  {:ok, nil} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec post_config_apache_http_components_proxy_configuration(Tesla.Env.client, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def post_config_apache_http_components_proxy_configuration(connection, opts \\ []) do
@@ -729,9 +771,12 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     |> method(:post)
     |> url("/apps/system/config/org.apache.http.proxyconfigurator.config")
     |> add_optional_params(optional_params, opts)
+    |> ensure_body()
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -746,8 +791,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     - :dav_periodcreate_absolute_uri_at_type_hint (String.t): 
   ## Returns
 
-  {:ok, %{}} on success
-  {:error, info} on failure
+  {:ok, nil} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec post_config_apache_sling_dav_ex_servlet(Tesla.Env.client, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def post_config_apache_sling_dav_ex_servlet(connection, opts \\ []) do
@@ -761,9 +806,12 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     |> method(:post)
     |> url("/apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet")
     |> add_optional_params(optional_params, opts)
+    |> ensure_body()
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -782,8 +830,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     - :enable_periodxml_at_type_hint (String.t): 
   ## Returns
 
-  {:ok, %{}} on success
-  {:error, info} on failure
+  {:ok, nil} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec post_config_apache_sling_get_servlet(Tesla.Env.client, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def post_config_apache_sling_get_servlet(connection, opts \\ []) do
@@ -801,9 +849,12 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     |> method(:post)
     |> url("/apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet")
     |> add_optional_params(optional_params, opts)
+    |> ensure_body()
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -822,8 +873,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     - :filter_periodmethods_at_type_hint (String.t): 
   ## Returns
 
-  {:ok, %{}} on success
-  {:error, info} on failure
+  {:ok, nil} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec post_config_apache_sling_referrer_filter(Tesla.Env.client, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def post_config_apache_sling_referrer_filter(connection, opts \\ []) do
@@ -841,9 +892,37 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     |> method(:post)
     |> url("/apps/system/config/org.apache.sling.security.impl.ReferrerFilter")
     |> add_optional_params(optional_params, opts)
+    |> ensure_body()
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
+  end
+
+  @doc """
+
+  ## Parameters
+
+  - connection (AdobeExperienceManager(AEM)API.Connection): Connection to server
+  - config_node_name (String.t): 
+  - opts (KeywordList): [optional] Optional parameters
+  ## Returns
+
+  {:ok, nil} on success
+  {:error, Tesla.Env.t} on failure
+  """
+  @spec post_config_property(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
+  def post_config_property(connection, config_node_name, _opts \\ []) do
+    %{}
+    |> method(:post)
+    |> url("/apps/system/config/#{config_node_name}")
+    |> ensure_body()
+    |> Enum.into([])
+    |> (&Connection.request(connection, &1)).()
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -859,8 +938,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     - :file (String.t): 
   ## Returns
 
-  {:ok, %{}} on success
-  {:error, info} on failure
+  {:ok, nil} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec post_node(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def post_node(connection, path, name, opts \\ []) do
@@ -873,9 +952,12 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     |> method(:post)
     |> url("/#{path}/#{name}")
     |> add_optional_params(optional_params, opts)
+    |> ensure_body()
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -889,8 +971,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     - :add_members (String.t): 
   ## Returns
 
-  {:ok, %{}} on success
-  {:error, info} on failure
+  {:ok, nil} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec post_node_rw(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def post_node_rw(connection, path, name, opts \\ []) do
@@ -901,9 +983,12 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     |> method(:post)
     |> url("/#{path}/#{name}.rw.html")
     |> add_optional_params(optional_params, opts)
+    |> ensure_body()
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -917,8 +1002,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
   - opts (KeywordList): [optional] Optional parameters
   ## Returns
 
-  {:ok, %{}} on success
-  {:error, info} on failure
+  {:ok, nil} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec post_path(Tesla.Env.client, String.t, String.t, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def post_path(connection, path, jcr_primary_type, name, _opts \\ []) do
@@ -927,9 +1012,12 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     |> url("/#{path}/")
     |> add_param(:query, :"jcr:primaryType", jcr_primary_type)
     |> add_param(:query, :":name", name)
+    |> ensure_body()
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -944,8 +1032,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
   - opts (KeywordList): [optional] Optional parameters
   ## Returns
 
-  {:ok, %AdobeExperienceManager(AEM)API.Model.String.t{}} on success
-  {:error, info} on failure
+  {:ok, String.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec post_query(Tesla.Env.client, String.t, float(), String.t, String.t, keyword()) :: {:ok, String.t} | {:error, Tesla.Env.t}
   def post_query(connection, path, p_periodlimit, 1_property, 1_property_periodvalue, _opts \\ []) do
@@ -956,9 +1044,12 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     |> add_param(:query, :"p.limit", p_periodlimit)
     |> add_param(:query, :"1_property", 1_property)
     |> add_param(:query, :"1_property.value", 1_property_periodvalue)
+    |> ensure_body()
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -972,8 +1063,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
   - opts (KeywordList): [optional] Optional parameters
   ## Returns
 
-  {:ok, %{}} on success
-  {:error, info} on failure
+  {:ok, nil} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec post_tree_activation(Tesla.Env.client, boolean(), boolean(), String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def post_tree_activation(connection, ignoredeactivated, onlymodified, path, _opts \\ []) do
@@ -983,9 +1074,12 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     |> add_param(:query, :"ignoredeactivated", ignoredeactivated)
     |> add_param(:query, :"onlymodified", onlymodified)
     |> add_param(:query, :"path", path)
+    |> ensure_body()
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -1002,8 +1096,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     - :certificate (String.t): 
   ## Returns
 
-  {:ok, %AdobeExperienceManager(AEM)API.Model.String.t{}} on success
-  {:error, info} on failure
+  {:ok, String.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec post_truststore(Tesla.Env.client, keyword()) :: {:ok, String.t} | {:error, Tesla.Env.t}
   def post_truststore(connection, opts \\ []) do
@@ -1019,9 +1113,12 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     |> method(:post)
     |> url("/libs/granite/security/post/truststore")
     |> add_optional_params(optional_params, opts)
+    |> ensure_body()
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 
   @doc """
@@ -1033,8 +1130,8 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     - :truststore_periodp12 (String.t): 
   ## Returns
 
-  {:ok, %AdobeExperienceManager(AEM)API.Model.String.t{}} on success
-  {:error, info} on failure
+  {:ok, String.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec post_truststore_pkcs12(Tesla.Env.client, keyword()) :: {:ok, String.t} | {:error, Tesla.Env.t}
   def post_truststore_pkcs12(connection, opts \\ []) do
@@ -1045,8 +1142,11 @@ defmodule AdobeExperienceManager(AEM)API.Api.Sling do
     |> method(:post)
     |> url("/etc/truststore")
     |> add_optional_params(optional_params, opts)
+    |> ensure_body()
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
-    |> decode(false)
+    |> evaluate_response([
+      { :default, false}
+    ])
   end
 end

@@ -18,36 +18,37 @@ import java.util.List;
 import java.util.Map;
 
 public class SlingApiVerticle extends AbstractVerticle {
-    final static Logger LOGGER = LoggerFactory.getLogger(SlingApiVerticle.class); 
+    static final Logger LOGGER = LoggerFactory.getLogger(SlingApiVerticle.class);
     
-    final static String DELETEAGENT_SERVICE_ID = "deleteAgent";
-    final static String DELETENODE_SERVICE_ID = "deleteNode";
-    final static String GETAGENT_SERVICE_ID = "getAgent";
-    final static String GETAGENTS_SERVICE_ID = "getAgents";
-    final static String GETAUTHORIZABLEKEYSTORE_SERVICE_ID = "getAuthorizableKeystore";
-    final static String GETKEYSTORE_SERVICE_ID = "getKeystore";
-    final static String GETNODE_SERVICE_ID = "getNode";
-    final static String GETPACKAGE_SERVICE_ID = "getPackage";
-    final static String GETPACKAGEFILTER_SERVICE_ID = "getPackageFilter";
-    final static String GETQUERY_SERVICE_ID = "getQuery";
-    final static String GETTRUSTSTORE_SERVICE_ID = "getTruststore";
-    final static String GETTRUSTSTOREINFO_SERVICE_ID = "getTruststoreInfo";
-    final static String POSTAGENT_SERVICE_ID = "postAgent";
-    final static String POSTAUTHORIZABLEKEYSTORE_SERVICE_ID = "postAuthorizableKeystore";
-    final static String POSTAUTHORIZABLES_SERVICE_ID = "postAuthorizables";
-    final static String POSTCONFIGADOBEGRANITESAMLAUTHENTICATIONHANDLER_SERVICE_ID = "postConfigAdobeGraniteSamlAuthenticationHandler";
-    final static String POSTCONFIGAPACHEFELIXJETTYBASEDHTTPSERVICE_SERVICE_ID = "postConfigApacheFelixJettyBasedHttpService";
-    final static String POSTCONFIGAPACHEHTTPCOMPONENTSPROXYCONFIGURATION_SERVICE_ID = "postConfigApacheHttpComponentsProxyConfiguration";
-    final static String POSTCONFIGAPACHESLINGDAVEXSERVLET_SERVICE_ID = "postConfigApacheSlingDavExServlet";
-    final static String POSTCONFIGAPACHESLINGGETSERVLET_SERVICE_ID = "postConfigApacheSlingGetServlet";
-    final static String POSTCONFIGAPACHESLINGREFERRERFILTER_SERVICE_ID = "postConfigApacheSlingReferrerFilter";
-    final static String POSTNODE_SERVICE_ID = "postNode";
-    final static String POSTNODERW_SERVICE_ID = "postNodeRw";
-    final static String POSTPATH_SERVICE_ID = "postPath";
-    final static String POSTQUERY_SERVICE_ID = "postQuery";
-    final static String POSTTREEACTIVATION_SERVICE_ID = "postTreeActivation";
-    final static String POSTTRUSTSTORE_SERVICE_ID = "postTruststore";
-    final static String POSTTRUSTSTOREPKCS12_SERVICE_ID = "postTruststorePKCS12";
+    static final String DELETEAGENT_SERVICE_ID = "deleteAgent";
+    static final String DELETENODE_SERVICE_ID = "deleteNode";
+    static final String GETAGENT_SERVICE_ID = "getAgent";
+    static final String GETAGENTS_SERVICE_ID = "getAgents";
+    static final String GETAUTHORIZABLEKEYSTORE_SERVICE_ID = "getAuthorizableKeystore";
+    static final String GETKEYSTORE_SERVICE_ID = "getKeystore";
+    static final String GETNODE_SERVICE_ID = "getNode";
+    static final String GETPACKAGE_SERVICE_ID = "getPackage";
+    static final String GETPACKAGEFILTER_SERVICE_ID = "getPackageFilter";
+    static final String GETQUERY_SERVICE_ID = "getQuery";
+    static final String GETTRUSTSTORE_SERVICE_ID = "getTruststore";
+    static final String GETTRUSTSTOREINFO_SERVICE_ID = "getTruststoreInfo";
+    static final String POSTAGENT_SERVICE_ID = "postAgent";
+    static final String POSTAUTHORIZABLEKEYSTORE_SERVICE_ID = "postAuthorizableKeystore";
+    static final String POSTAUTHORIZABLES_SERVICE_ID = "postAuthorizables";
+    static final String POSTCONFIGADOBEGRANITESAMLAUTHENTICATIONHANDLER_SERVICE_ID = "postConfigAdobeGraniteSamlAuthenticationHandler";
+    static final String POSTCONFIGAPACHEFELIXJETTYBASEDHTTPSERVICE_SERVICE_ID = "postConfigApacheFelixJettyBasedHttpService";
+    static final String POSTCONFIGAPACHEHTTPCOMPONENTSPROXYCONFIGURATION_SERVICE_ID = "postConfigApacheHttpComponentsProxyConfiguration";
+    static final String POSTCONFIGAPACHESLINGDAVEXSERVLET_SERVICE_ID = "postConfigApacheSlingDavExServlet";
+    static final String POSTCONFIGAPACHESLINGGETSERVLET_SERVICE_ID = "postConfigApacheSlingGetServlet";
+    static final String POSTCONFIGAPACHESLINGREFERRERFILTER_SERVICE_ID = "postConfigApacheSlingReferrerFilter";
+    static final String POSTCONFIGPROPERTY_SERVICE_ID = "postConfigProperty";
+    static final String POSTNODE_SERVICE_ID = "postNode";
+    static final String POSTNODERW_SERVICE_ID = "postNodeRw";
+    static final String POSTPATH_SERVICE_ID = "postPath";
+    static final String POSTQUERY_SERVICE_ID = "postQuery";
+    static final String POSTTREEACTIVATION_SERVICE_ID = "postTreeActivation";
+    static final String POSTTRUSTSTORE_SERVICE_ID = "postTruststore";
+    static final String POSTTRUSTSTOREPKCS12_SERVICE_ID = "postTruststorePKCS12";
     
     final SlingApi service;
 
@@ -447,108 +448,108 @@ public class SlingApiVerticle extends AbstractVerticle {
                     return;
                 }
                 String name = nameParam;
-                String jcrColonContentSlashCqColonDistributeParam = message.body().getString("jcr:content/cq:distribute");
-                Boolean jcrColonContentSlashCqColonDistribute = (jcrColonContentSlashCqColonDistributeParam == null) ? null : Json.mapper.readValue(jcrColonContentSlashCqColonDistributeParam, Boolean.class);
-                String jcrColonContentSlashCqColonDistributeAtTypeHintParam = message.body().getString("jcr:content/cq:distribute@TypeHint");
-                String jcrColonContentSlashCqColonDistributeAtTypeHint = (jcrColonContentSlashCqColonDistributeAtTypeHintParam == null) ? null : jcrColonContentSlashCqColonDistributeAtTypeHintParam;
-                String jcrColonContentSlashCqColonNameParam = message.body().getString("jcr:content/cq:name");
-                String jcrColonContentSlashCqColonName = (jcrColonContentSlashCqColonNameParam == null) ? null : jcrColonContentSlashCqColonNameParam;
-                String jcrColonContentSlashCqColonTemplateParam = message.body().getString("jcr:content/cq:template");
-                String jcrColonContentSlashCqColonTemplate = (jcrColonContentSlashCqColonTemplateParam == null) ? null : jcrColonContentSlashCqColonTemplateParam;
-                String jcrColonContentSlashEnabledParam = message.body().getString("jcr:content/enabled");
-                Boolean jcrColonContentSlashEnabled = (jcrColonContentSlashEnabledParam == null) ? null : Json.mapper.readValue(jcrColonContentSlashEnabledParam, Boolean.class);
-                String jcrColonContentSlashJcrColonDescriptionParam = message.body().getString("jcr:content/jcr:description");
-                String jcrColonContentSlashJcrColonDescription = (jcrColonContentSlashJcrColonDescriptionParam == null) ? null : jcrColonContentSlashJcrColonDescriptionParam;
-                String jcrColonContentSlashJcrColonLastModifiedParam = message.body().getString("jcr:content/jcr:lastModified");
-                String jcrColonContentSlashJcrColonLastModified = (jcrColonContentSlashJcrColonLastModifiedParam == null) ? null : jcrColonContentSlashJcrColonLastModifiedParam;
-                String jcrColonContentSlashJcrColonLastModifiedByParam = message.body().getString("jcr:content/jcr:lastModifiedBy");
-                String jcrColonContentSlashJcrColonLastModifiedBy = (jcrColonContentSlashJcrColonLastModifiedByParam == null) ? null : jcrColonContentSlashJcrColonLastModifiedByParam;
-                String jcrColonContentSlashJcrColonMixinTypesParam = message.body().getString("jcr:content/jcr:mixinTypes");
-                String jcrColonContentSlashJcrColonMixinTypes = (jcrColonContentSlashJcrColonMixinTypesParam == null) ? null : jcrColonContentSlashJcrColonMixinTypesParam;
-                String jcrColonContentSlashJcrColonTitleParam = message.body().getString("jcr:content/jcr:title");
-                String jcrColonContentSlashJcrColonTitle = (jcrColonContentSlashJcrColonTitleParam == null) ? null : jcrColonContentSlashJcrColonTitleParam;
-                String jcrColonContentSlashLogLevelParam = message.body().getString("jcr:content/logLevel");
-                String jcrColonContentSlashLogLevel = (jcrColonContentSlashLogLevelParam == null) ? null : jcrColonContentSlashLogLevelParam;
-                String jcrColonContentSlashNoStatusUpdateParam = message.body().getString("jcr:content/noStatusUpdate");
-                Boolean jcrColonContentSlashNoStatusUpdate = (jcrColonContentSlashNoStatusUpdateParam == null) ? null : Json.mapper.readValue(jcrColonContentSlashNoStatusUpdateParam, Boolean.class);
-                String jcrColonContentSlashNoVersioningParam = message.body().getString("jcr:content/noVersioning");
-                Boolean jcrColonContentSlashNoVersioning = (jcrColonContentSlashNoVersioningParam == null) ? null : Json.mapper.readValue(jcrColonContentSlashNoVersioningParam, Boolean.class);
-                String jcrColonContentSlashProtocolConnectTimeoutParam = message.body().getString("jcr:content/protocolConnectTimeout");
-                BigDecimal jcrColonContentSlashProtocolConnectTimeout = (jcrColonContentSlashProtocolConnectTimeoutParam == null) ? null : Json.mapper.readValue(jcrColonContentSlashProtocolConnectTimeoutParam, BigDecimal.class);
-                String jcrColonContentSlashProtocolHTTPConnectionClosedParam = message.body().getString("jcr:content/protocolHTTPConnectionClosed");
-                Boolean jcrColonContentSlashProtocolHTTPConnectionClosed = (jcrColonContentSlashProtocolHTTPConnectionClosedParam == null) ? null : Json.mapper.readValue(jcrColonContentSlashProtocolHTTPConnectionClosedParam, Boolean.class);
-                String jcrColonContentSlashProtocolHTTPExpiredParam = message.body().getString("jcr:content/protocolHTTPExpired");
-                String jcrColonContentSlashProtocolHTTPExpired = (jcrColonContentSlashProtocolHTTPExpiredParam == null) ? null : jcrColonContentSlashProtocolHTTPExpiredParam;
-                JsonArray jcrColonContentSlashProtocolHTTPHeadersParam = message.body().getJsonArray("jcr:content/protocolHTTPHeaders");
-                List<String> jcrColonContentSlashProtocolHTTPHeaders = (jcrColonContentSlashProtocolHTTPHeadersParam == null) ? null : Json.mapper.readValue(jcrColonContentSlashProtocolHTTPHeadersParam.encode(),
+                String jcrColonContentCqColonDistributeParam = message.body().getString("jcr:content/cq:distribute");
+                Boolean jcrColonContentCqColonDistribute = (jcrColonContentCqColonDistributeParam == null) ? null : Json.mapper.readValue(jcrColonContentCqColonDistributeParam, Boolean.class);
+                String jcrColonContentCqColonDistributeAtTypeHintParam = message.body().getString("jcr:content/cq:distribute@TypeHint");
+                String jcrColonContentCqColonDistributeAtTypeHint = (jcrColonContentCqColonDistributeAtTypeHintParam == null) ? null : jcrColonContentCqColonDistributeAtTypeHintParam;
+                String jcrColonContentCqColonNameParam = message.body().getString("jcr:content/cq:name");
+                String jcrColonContentCqColonName = (jcrColonContentCqColonNameParam == null) ? null : jcrColonContentCqColonNameParam;
+                String jcrColonContentCqColonTemplateParam = message.body().getString("jcr:content/cq:template");
+                String jcrColonContentCqColonTemplate = (jcrColonContentCqColonTemplateParam == null) ? null : jcrColonContentCqColonTemplateParam;
+                String jcrColonContentEnabledParam = message.body().getString("jcr:content/enabled");
+                Boolean jcrColonContentEnabled = (jcrColonContentEnabledParam == null) ? null : Json.mapper.readValue(jcrColonContentEnabledParam, Boolean.class);
+                String jcrColonContentJcrColonDescriptionParam = message.body().getString("jcr:content/jcr:description");
+                String jcrColonContentJcrColonDescription = (jcrColonContentJcrColonDescriptionParam == null) ? null : jcrColonContentJcrColonDescriptionParam;
+                String jcrColonContentJcrColonLastModifiedParam = message.body().getString("jcr:content/jcr:lastModified");
+                String jcrColonContentJcrColonLastModified = (jcrColonContentJcrColonLastModifiedParam == null) ? null : jcrColonContentJcrColonLastModifiedParam;
+                String jcrColonContentJcrColonLastModifiedByParam = message.body().getString("jcr:content/jcr:lastModifiedBy");
+                String jcrColonContentJcrColonLastModifiedBy = (jcrColonContentJcrColonLastModifiedByParam == null) ? null : jcrColonContentJcrColonLastModifiedByParam;
+                String jcrColonContentJcrColonMixinTypesParam = message.body().getString("jcr:content/jcr:mixinTypes");
+                String jcrColonContentJcrColonMixinTypes = (jcrColonContentJcrColonMixinTypesParam == null) ? null : jcrColonContentJcrColonMixinTypesParam;
+                String jcrColonContentJcrColonTitleParam = message.body().getString("jcr:content/jcr:title");
+                String jcrColonContentJcrColonTitle = (jcrColonContentJcrColonTitleParam == null) ? null : jcrColonContentJcrColonTitleParam;
+                String jcrColonContentLogLevelParam = message.body().getString("jcr:content/logLevel");
+                String jcrColonContentLogLevel = (jcrColonContentLogLevelParam == null) ? null : jcrColonContentLogLevelParam;
+                String jcrColonContentNoStatusUpdateParam = message.body().getString("jcr:content/noStatusUpdate");
+                Boolean jcrColonContentNoStatusUpdate = (jcrColonContentNoStatusUpdateParam == null) ? null : Json.mapper.readValue(jcrColonContentNoStatusUpdateParam, Boolean.class);
+                String jcrColonContentNoVersioningParam = message.body().getString("jcr:content/noVersioning");
+                Boolean jcrColonContentNoVersioning = (jcrColonContentNoVersioningParam == null) ? null : Json.mapper.readValue(jcrColonContentNoVersioningParam, Boolean.class);
+                String jcrColonContentProtocolConnectTimeoutParam = message.body().getString("jcr:content/protocolConnectTimeout");
+                BigDecimal jcrColonContentProtocolConnectTimeout = (jcrColonContentProtocolConnectTimeoutParam == null) ? null : Json.mapper.readValue(jcrColonContentProtocolConnectTimeoutParam, BigDecimal.class);
+                String jcrColonContentProtocolHTTPConnectionClosedParam = message.body().getString("jcr:content/protocolHTTPConnectionClosed");
+                Boolean jcrColonContentProtocolHTTPConnectionClosed = (jcrColonContentProtocolHTTPConnectionClosedParam == null) ? null : Json.mapper.readValue(jcrColonContentProtocolHTTPConnectionClosedParam, Boolean.class);
+                String jcrColonContentProtocolHTTPExpiredParam = message.body().getString("jcr:content/protocolHTTPExpired");
+                String jcrColonContentProtocolHTTPExpired = (jcrColonContentProtocolHTTPExpiredParam == null) ? null : jcrColonContentProtocolHTTPExpiredParam;
+                JsonArray jcrColonContentProtocolHTTPHeadersParam = message.body().getJsonArray("jcr:content/protocolHTTPHeaders");
+                List<String> jcrColonContentProtocolHTTPHeaders = (jcrColonContentProtocolHTTPHeadersParam == null) ? null : Json.mapper.readValue(jcrColonContentProtocolHTTPHeadersParam.encode(),
                     Json.mapper.getTypeFactory().constructCollectionType(List.class, String.class));
-                String jcrColonContentSlashProtocolHTTPHeadersAtTypeHintParam = message.body().getString("jcr:content/protocolHTTPHeaders@TypeHint");
-                String jcrColonContentSlashProtocolHTTPHeadersAtTypeHint = (jcrColonContentSlashProtocolHTTPHeadersAtTypeHintParam == null) ? null : jcrColonContentSlashProtocolHTTPHeadersAtTypeHintParam;
-                String jcrColonContentSlashProtocolHTTPMethodParam = message.body().getString("jcr:content/protocolHTTPMethod");
-                String jcrColonContentSlashProtocolHTTPMethod = (jcrColonContentSlashProtocolHTTPMethodParam == null) ? null : jcrColonContentSlashProtocolHTTPMethodParam;
-                String jcrColonContentSlashProtocolHTTPSRelaxedParam = message.body().getString("jcr:content/protocolHTTPSRelaxed");
-                Boolean jcrColonContentSlashProtocolHTTPSRelaxed = (jcrColonContentSlashProtocolHTTPSRelaxedParam == null) ? null : Json.mapper.readValue(jcrColonContentSlashProtocolHTTPSRelaxedParam, Boolean.class);
-                String jcrColonContentSlashProtocolInterfaceParam = message.body().getString("jcr:content/protocolInterface");
-                String jcrColonContentSlashProtocolInterface = (jcrColonContentSlashProtocolInterfaceParam == null) ? null : jcrColonContentSlashProtocolInterfaceParam;
-                String jcrColonContentSlashProtocolSocketTimeoutParam = message.body().getString("jcr:content/protocolSocketTimeout");
-                BigDecimal jcrColonContentSlashProtocolSocketTimeout = (jcrColonContentSlashProtocolSocketTimeoutParam == null) ? null : Json.mapper.readValue(jcrColonContentSlashProtocolSocketTimeoutParam, BigDecimal.class);
-                String jcrColonContentSlashProtocolVersionParam = message.body().getString("jcr:content/protocolVersion");
-                String jcrColonContentSlashProtocolVersion = (jcrColonContentSlashProtocolVersionParam == null) ? null : jcrColonContentSlashProtocolVersionParam;
-                String jcrColonContentSlashProxyNTLMDomainParam = message.body().getString("jcr:content/proxyNTLMDomain");
-                String jcrColonContentSlashProxyNTLMDomain = (jcrColonContentSlashProxyNTLMDomainParam == null) ? null : jcrColonContentSlashProxyNTLMDomainParam;
-                String jcrColonContentSlashProxyNTLMHostParam = message.body().getString("jcr:content/proxyNTLMHost");
-                String jcrColonContentSlashProxyNTLMHost = (jcrColonContentSlashProxyNTLMHostParam == null) ? null : jcrColonContentSlashProxyNTLMHostParam;
-                String jcrColonContentSlashProxyHostParam = message.body().getString("jcr:content/proxyHost");
-                String jcrColonContentSlashProxyHost = (jcrColonContentSlashProxyHostParam == null) ? null : jcrColonContentSlashProxyHostParam;
-                String jcrColonContentSlashProxyPasswordParam = message.body().getString("jcr:content/proxyPassword");
-                String jcrColonContentSlashProxyPassword = (jcrColonContentSlashProxyPasswordParam == null) ? null : jcrColonContentSlashProxyPasswordParam;
-                String jcrColonContentSlashProxyPortParam = message.body().getString("jcr:content/proxyPort");
-                BigDecimal jcrColonContentSlashProxyPort = (jcrColonContentSlashProxyPortParam == null) ? null : Json.mapper.readValue(jcrColonContentSlashProxyPortParam, BigDecimal.class);
-                String jcrColonContentSlashProxyUserParam = message.body().getString("jcr:content/proxyUser");
-                String jcrColonContentSlashProxyUser = (jcrColonContentSlashProxyUserParam == null) ? null : jcrColonContentSlashProxyUserParam;
-                String jcrColonContentSlashQueueBatchMaxSizeParam = message.body().getString("jcr:content/queueBatchMaxSize");
-                BigDecimal jcrColonContentSlashQueueBatchMaxSize = (jcrColonContentSlashQueueBatchMaxSizeParam == null) ? null : Json.mapper.readValue(jcrColonContentSlashQueueBatchMaxSizeParam, BigDecimal.class);
-                String jcrColonContentSlashQueueBatchModeParam = message.body().getString("jcr:content/queueBatchMode");
-                String jcrColonContentSlashQueueBatchMode = (jcrColonContentSlashQueueBatchModeParam == null) ? null : jcrColonContentSlashQueueBatchModeParam;
-                String jcrColonContentSlashQueueBatchWaitTimeParam = message.body().getString("jcr:content/queueBatchWaitTime");
-                BigDecimal jcrColonContentSlashQueueBatchWaitTime = (jcrColonContentSlashQueueBatchWaitTimeParam == null) ? null : Json.mapper.readValue(jcrColonContentSlashQueueBatchWaitTimeParam, BigDecimal.class);
-                String jcrColonContentSlashRetryDelayParam = message.body().getString("jcr:content/retryDelay");
-                String jcrColonContentSlashRetryDelay = (jcrColonContentSlashRetryDelayParam == null) ? null : jcrColonContentSlashRetryDelayParam;
-                String jcrColonContentSlashReverseReplicationParam = message.body().getString("jcr:content/reverseReplication");
-                Boolean jcrColonContentSlashReverseReplication = (jcrColonContentSlashReverseReplicationParam == null) ? null : Json.mapper.readValue(jcrColonContentSlashReverseReplicationParam, Boolean.class);
-                String jcrColonContentSlashSerializationTypeParam = message.body().getString("jcr:content/serializationType");
-                String jcrColonContentSlashSerializationType = (jcrColonContentSlashSerializationTypeParam == null) ? null : jcrColonContentSlashSerializationTypeParam;
-                String jcrColonContentSlashSlingColonResourceTypeParam = message.body().getString("jcr:content/sling:resourceType");
-                String jcrColonContentSlashSlingColonResourceType = (jcrColonContentSlashSlingColonResourceTypeParam == null) ? null : jcrColonContentSlashSlingColonResourceTypeParam;
-                String jcrColonContentSlashSslParam = message.body().getString("jcr:content/ssl");
-                String jcrColonContentSlashSsl = (jcrColonContentSlashSslParam == null) ? null : jcrColonContentSlashSslParam;
-                String jcrColonContentSlashTransportNTLMDomainParam = message.body().getString("jcr:content/transportNTLMDomain");
-                String jcrColonContentSlashTransportNTLMDomain = (jcrColonContentSlashTransportNTLMDomainParam == null) ? null : jcrColonContentSlashTransportNTLMDomainParam;
-                String jcrColonContentSlashTransportNTLMHostParam = message.body().getString("jcr:content/transportNTLMHost");
-                String jcrColonContentSlashTransportNTLMHost = (jcrColonContentSlashTransportNTLMHostParam == null) ? null : jcrColonContentSlashTransportNTLMHostParam;
-                String jcrColonContentSlashTransportPasswordParam = message.body().getString("jcr:content/transportPassword");
-                String jcrColonContentSlashTransportPassword = (jcrColonContentSlashTransportPasswordParam == null) ? null : jcrColonContentSlashTransportPasswordParam;
-                String jcrColonContentSlashTransportUriParam = message.body().getString("jcr:content/transportUri");
-                String jcrColonContentSlashTransportUri = (jcrColonContentSlashTransportUriParam == null) ? null : jcrColonContentSlashTransportUriParam;
-                String jcrColonContentSlashTransportUserParam = message.body().getString("jcr:content/transportUser");
-                String jcrColonContentSlashTransportUser = (jcrColonContentSlashTransportUserParam == null) ? null : jcrColonContentSlashTransportUserParam;
-                String jcrColonContentSlashTriggerDistributeParam = message.body().getString("jcr:content/triggerDistribute");
-                Boolean jcrColonContentSlashTriggerDistribute = (jcrColonContentSlashTriggerDistributeParam == null) ? null : Json.mapper.readValue(jcrColonContentSlashTriggerDistributeParam, Boolean.class);
-                String jcrColonContentSlashTriggerModifiedParam = message.body().getString("jcr:content/triggerModified");
-                Boolean jcrColonContentSlashTriggerModified = (jcrColonContentSlashTriggerModifiedParam == null) ? null : Json.mapper.readValue(jcrColonContentSlashTriggerModifiedParam, Boolean.class);
-                String jcrColonContentSlashTriggerOnOffTimeParam = message.body().getString("jcr:content/triggerOnOffTime");
-                Boolean jcrColonContentSlashTriggerOnOffTime = (jcrColonContentSlashTriggerOnOffTimeParam == null) ? null : Json.mapper.readValue(jcrColonContentSlashTriggerOnOffTimeParam, Boolean.class);
-                String jcrColonContentSlashTriggerReceiveParam = message.body().getString("jcr:content/triggerReceive");
-                Boolean jcrColonContentSlashTriggerReceive = (jcrColonContentSlashTriggerReceiveParam == null) ? null : Json.mapper.readValue(jcrColonContentSlashTriggerReceiveParam, Boolean.class);
-                String jcrColonContentSlashTriggerSpecificParam = message.body().getString("jcr:content/triggerSpecific");
-                Boolean jcrColonContentSlashTriggerSpecific = (jcrColonContentSlashTriggerSpecificParam == null) ? null : Json.mapper.readValue(jcrColonContentSlashTriggerSpecificParam, Boolean.class);
-                String jcrColonContentSlashUserIdParam = message.body().getString("jcr:content/userId");
-                String jcrColonContentSlashUserId = (jcrColonContentSlashUserIdParam == null) ? null : jcrColonContentSlashUserIdParam;
+                String jcrColonContentProtocolHTTPHeadersAtTypeHintParam = message.body().getString("jcr:content/protocolHTTPHeaders@TypeHint");
+                String jcrColonContentProtocolHTTPHeadersAtTypeHint = (jcrColonContentProtocolHTTPHeadersAtTypeHintParam == null) ? null : jcrColonContentProtocolHTTPHeadersAtTypeHintParam;
+                String jcrColonContentProtocolHTTPMethodParam = message.body().getString("jcr:content/protocolHTTPMethod");
+                String jcrColonContentProtocolHTTPMethod = (jcrColonContentProtocolHTTPMethodParam == null) ? null : jcrColonContentProtocolHTTPMethodParam;
+                String jcrColonContentProtocolHTTPSRelaxedParam = message.body().getString("jcr:content/protocolHTTPSRelaxed");
+                Boolean jcrColonContentProtocolHTTPSRelaxed = (jcrColonContentProtocolHTTPSRelaxedParam == null) ? null : Json.mapper.readValue(jcrColonContentProtocolHTTPSRelaxedParam, Boolean.class);
+                String jcrColonContentProtocolInterfaceParam = message.body().getString("jcr:content/protocolInterface");
+                String jcrColonContentProtocolInterface = (jcrColonContentProtocolInterfaceParam == null) ? null : jcrColonContentProtocolInterfaceParam;
+                String jcrColonContentProtocolSocketTimeoutParam = message.body().getString("jcr:content/protocolSocketTimeout");
+                BigDecimal jcrColonContentProtocolSocketTimeout = (jcrColonContentProtocolSocketTimeoutParam == null) ? null : Json.mapper.readValue(jcrColonContentProtocolSocketTimeoutParam, BigDecimal.class);
+                String jcrColonContentProtocolVersionParam = message.body().getString("jcr:content/protocolVersion");
+                String jcrColonContentProtocolVersion = (jcrColonContentProtocolVersionParam == null) ? null : jcrColonContentProtocolVersionParam;
+                String jcrColonContentProxyNTLMDomainParam = message.body().getString("jcr:content/proxyNTLMDomain");
+                String jcrColonContentProxyNTLMDomain = (jcrColonContentProxyNTLMDomainParam == null) ? null : jcrColonContentProxyNTLMDomainParam;
+                String jcrColonContentProxyNTLMHostParam = message.body().getString("jcr:content/proxyNTLMHost");
+                String jcrColonContentProxyNTLMHost = (jcrColonContentProxyNTLMHostParam == null) ? null : jcrColonContentProxyNTLMHostParam;
+                String jcrColonContentProxyHostParam = message.body().getString("jcr:content/proxyHost");
+                String jcrColonContentProxyHost = (jcrColonContentProxyHostParam == null) ? null : jcrColonContentProxyHostParam;
+                String jcrColonContentProxyPasswordParam = message.body().getString("jcr:content/proxyPassword");
+                String jcrColonContentProxyPassword = (jcrColonContentProxyPasswordParam == null) ? null : jcrColonContentProxyPasswordParam;
+                String jcrColonContentProxyPortParam = message.body().getString("jcr:content/proxyPort");
+                BigDecimal jcrColonContentProxyPort = (jcrColonContentProxyPortParam == null) ? null : Json.mapper.readValue(jcrColonContentProxyPortParam, BigDecimal.class);
+                String jcrColonContentProxyUserParam = message.body().getString("jcr:content/proxyUser");
+                String jcrColonContentProxyUser = (jcrColonContentProxyUserParam == null) ? null : jcrColonContentProxyUserParam;
+                String jcrColonContentQueueBatchMaxSizeParam = message.body().getString("jcr:content/queueBatchMaxSize");
+                BigDecimal jcrColonContentQueueBatchMaxSize = (jcrColonContentQueueBatchMaxSizeParam == null) ? null : Json.mapper.readValue(jcrColonContentQueueBatchMaxSizeParam, BigDecimal.class);
+                String jcrColonContentQueueBatchModeParam = message.body().getString("jcr:content/queueBatchMode");
+                String jcrColonContentQueueBatchMode = (jcrColonContentQueueBatchModeParam == null) ? null : jcrColonContentQueueBatchModeParam;
+                String jcrColonContentQueueBatchWaitTimeParam = message.body().getString("jcr:content/queueBatchWaitTime");
+                BigDecimal jcrColonContentQueueBatchWaitTime = (jcrColonContentQueueBatchWaitTimeParam == null) ? null : Json.mapper.readValue(jcrColonContentQueueBatchWaitTimeParam, BigDecimal.class);
+                String jcrColonContentRetryDelayParam = message.body().getString("jcr:content/retryDelay");
+                String jcrColonContentRetryDelay = (jcrColonContentRetryDelayParam == null) ? null : jcrColonContentRetryDelayParam;
+                String jcrColonContentReverseReplicationParam = message.body().getString("jcr:content/reverseReplication");
+                Boolean jcrColonContentReverseReplication = (jcrColonContentReverseReplicationParam == null) ? null : Json.mapper.readValue(jcrColonContentReverseReplicationParam, Boolean.class);
+                String jcrColonContentSerializationTypeParam = message.body().getString("jcr:content/serializationType");
+                String jcrColonContentSerializationType = (jcrColonContentSerializationTypeParam == null) ? null : jcrColonContentSerializationTypeParam;
+                String jcrColonContentSlingColonResourceTypeParam = message.body().getString("jcr:content/sling:resourceType");
+                String jcrColonContentSlingColonResourceType = (jcrColonContentSlingColonResourceTypeParam == null) ? null : jcrColonContentSlingColonResourceTypeParam;
+                String jcrColonContentSslParam = message.body().getString("jcr:content/ssl");
+                String jcrColonContentSsl = (jcrColonContentSslParam == null) ? null : jcrColonContentSslParam;
+                String jcrColonContentTransportNTLMDomainParam = message.body().getString("jcr:content/transportNTLMDomain");
+                String jcrColonContentTransportNTLMDomain = (jcrColonContentTransportNTLMDomainParam == null) ? null : jcrColonContentTransportNTLMDomainParam;
+                String jcrColonContentTransportNTLMHostParam = message.body().getString("jcr:content/transportNTLMHost");
+                String jcrColonContentTransportNTLMHost = (jcrColonContentTransportNTLMHostParam == null) ? null : jcrColonContentTransportNTLMHostParam;
+                String jcrColonContentTransportPasswordParam = message.body().getString("jcr:content/transportPassword");
+                String jcrColonContentTransportPassword = (jcrColonContentTransportPasswordParam == null) ? null : jcrColonContentTransportPasswordParam;
+                String jcrColonContentTransportUriParam = message.body().getString("jcr:content/transportUri");
+                String jcrColonContentTransportUri = (jcrColonContentTransportUriParam == null) ? null : jcrColonContentTransportUriParam;
+                String jcrColonContentTransportUserParam = message.body().getString("jcr:content/transportUser");
+                String jcrColonContentTransportUser = (jcrColonContentTransportUserParam == null) ? null : jcrColonContentTransportUserParam;
+                String jcrColonContentTriggerDistributeParam = message.body().getString("jcr:content/triggerDistribute");
+                Boolean jcrColonContentTriggerDistribute = (jcrColonContentTriggerDistributeParam == null) ? null : Json.mapper.readValue(jcrColonContentTriggerDistributeParam, Boolean.class);
+                String jcrColonContentTriggerModifiedParam = message.body().getString("jcr:content/triggerModified");
+                Boolean jcrColonContentTriggerModified = (jcrColonContentTriggerModifiedParam == null) ? null : Json.mapper.readValue(jcrColonContentTriggerModifiedParam, Boolean.class);
+                String jcrColonContentTriggerOnOffTimeParam = message.body().getString("jcr:content/triggerOnOffTime");
+                Boolean jcrColonContentTriggerOnOffTime = (jcrColonContentTriggerOnOffTimeParam == null) ? null : Json.mapper.readValue(jcrColonContentTriggerOnOffTimeParam, Boolean.class);
+                String jcrColonContentTriggerReceiveParam = message.body().getString("jcr:content/triggerReceive");
+                Boolean jcrColonContentTriggerReceive = (jcrColonContentTriggerReceiveParam == null) ? null : Json.mapper.readValue(jcrColonContentTriggerReceiveParam, Boolean.class);
+                String jcrColonContentTriggerSpecificParam = message.body().getString("jcr:content/triggerSpecific");
+                Boolean jcrColonContentTriggerSpecific = (jcrColonContentTriggerSpecificParam == null) ? null : Json.mapper.readValue(jcrColonContentTriggerSpecificParam, Boolean.class);
+                String jcrColonContentUserIdParam = message.body().getString("jcr:content/userId");
+                String jcrColonContentUserId = (jcrColonContentUserIdParam == null) ? null : jcrColonContentUserIdParam;
                 String jcrColonPrimaryTypeParam = message.body().getString("jcr:primaryType");
                 String jcrColonPrimaryType = (jcrColonPrimaryTypeParam == null) ? null : jcrColonPrimaryTypeParam;
                 String colonOperationParam = message.body().getString(":operation");
                 String colonOperation = (colonOperationParam == null) ? null : colonOperationParam;
-                service.postAgent(runmode, name, jcrColonContentSlashCqColonDistribute, jcrColonContentSlashCqColonDistributeAtTypeHint, jcrColonContentSlashCqColonName, jcrColonContentSlashCqColonTemplate, jcrColonContentSlashEnabled, jcrColonContentSlashJcrColonDescription, jcrColonContentSlashJcrColonLastModified, jcrColonContentSlashJcrColonLastModifiedBy, jcrColonContentSlashJcrColonMixinTypes, jcrColonContentSlashJcrColonTitle, jcrColonContentSlashLogLevel, jcrColonContentSlashNoStatusUpdate, jcrColonContentSlashNoVersioning, jcrColonContentSlashProtocolConnectTimeout, jcrColonContentSlashProtocolHTTPConnectionClosed, jcrColonContentSlashProtocolHTTPExpired, jcrColonContentSlashProtocolHTTPHeaders, jcrColonContentSlashProtocolHTTPHeadersAtTypeHint, jcrColonContentSlashProtocolHTTPMethod, jcrColonContentSlashProtocolHTTPSRelaxed, jcrColonContentSlashProtocolInterface, jcrColonContentSlashProtocolSocketTimeout, jcrColonContentSlashProtocolVersion, jcrColonContentSlashProxyNTLMDomain, jcrColonContentSlashProxyNTLMHost, jcrColonContentSlashProxyHost, jcrColonContentSlashProxyPassword, jcrColonContentSlashProxyPort, jcrColonContentSlashProxyUser, jcrColonContentSlashQueueBatchMaxSize, jcrColonContentSlashQueueBatchMode, jcrColonContentSlashQueueBatchWaitTime, jcrColonContentSlashRetryDelay, jcrColonContentSlashReverseReplication, jcrColonContentSlashSerializationType, jcrColonContentSlashSlingColonResourceType, jcrColonContentSlashSsl, jcrColonContentSlashTransportNTLMDomain, jcrColonContentSlashTransportNTLMHost, jcrColonContentSlashTransportPassword, jcrColonContentSlashTransportUri, jcrColonContentSlashTransportUser, jcrColonContentSlashTriggerDistribute, jcrColonContentSlashTriggerModified, jcrColonContentSlashTriggerOnOffTime, jcrColonContentSlashTriggerReceive, jcrColonContentSlashTriggerSpecific, jcrColonContentSlashUserId, jcrColonPrimaryType, colonOperation, result -> {
+                service.postAgent(runmode, name, jcrColonContentCqColonDistribute, jcrColonContentCqColonDistributeAtTypeHint, jcrColonContentCqColonName, jcrColonContentCqColonTemplate, jcrColonContentEnabled, jcrColonContentJcrColonDescription, jcrColonContentJcrColonLastModified, jcrColonContentJcrColonLastModifiedBy, jcrColonContentJcrColonMixinTypes, jcrColonContentJcrColonTitle, jcrColonContentLogLevel, jcrColonContentNoStatusUpdate, jcrColonContentNoVersioning, jcrColonContentProtocolConnectTimeout, jcrColonContentProtocolHTTPConnectionClosed, jcrColonContentProtocolHTTPExpired, jcrColonContentProtocolHTTPHeaders, jcrColonContentProtocolHTTPHeadersAtTypeHint, jcrColonContentProtocolHTTPMethod, jcrColonContentProtocolHTTPSRelaxed, jcrColonContentProtocolInterface, jcrColonContentProtocolSocketTimeout, jcrColonContentProtocolVersion, jcrColonContentProxyNTLMDomain, jcrColonContentProxyNTLMHost, jcrColonContentProxyHost, jcrColonContentProxyPassword, jcrColonContentProxyPort, jcrColonContentProxyUser, jcrColonContentQueueBatchMaxSize, jcrColonContentQueueBatchMode, jcrColonContentQueueBatchWaitTime, jcrColonContentRetryDelay, jcrColonContentReverseReplication, jcrColonContentSerializationType, jcrColonContentSlingColonResourceType, jcrColonContentSsl, jcrColonContentTransportNTLMDomain, jcrColonContentTransportNTLMHost, jcrColonContentTransportPassword, jcrColonContentTransportUri, jcrColonContentTransportUser, jcrColonContentTriggerDistribute, jcrColonContentTriggerModified, jcrColonContentTriggerOnOffTime, jcrColonContentTriggerReceive, jcrColonContentTriggerSpecific, jcrColonContentUserId, jcrColonPrimaryType, colonOperation, result -> {
                     if (result.succeeded())
                         message.reply(null);
                     else {
@@ -640,9 +641,9 @@ public class SlingApiVerticle extends AbstractVerticle {
                 String createGroup = (createGroupParam == null) ? null : createGroupParam;
                 String repColonPasswordParam = message.body().getString("rep:password");
                 String repColonPassword = (repColonPasswordParam == null) ? null : repColonPasswordParam;
-                String profileSlashGivenNameParam = message.body().getString("profile/givenName");
-                String profileSlashGivenName = (profileSlashGivenNameParam == null) ? null : profileSlashGivenNameParam;
-                service.postAuthorizables(authorizableId, intermediatePath, createUser, createGroup, repColonPassword, profileSlashGivenName, result -> {
+                String profileGivenNameParam = message.body().getString("profile/givenName");
+                String profileGivenName = (profileGivenNameParam == null) ? null : profileGivenNameParam;
+                service.postAuthorizables(authorizableId, intermediatePath, createUser, createGroup, repColonPassword, profileGivenName, result -> {
                     if (result.succeeded())
                         message.reply(new JsonObject(Json.encode(result.result())).encodePrettily());
                     else {
@@ -970,6 +971,31 @@ public class SlingApiVerticle extends AbstractVerticle {
                 });
             } catch (Exception e) {
                 logUnexpectedError("postConfigApacheSlingReferrerFilter", e);
+                message.fail(MainApiException.INTERNAL_SERVER_ERROR.getStatusCode(), MainApiException.INTERNAL_SERVER_ERROR.getStatusMessage());
+            }
+        });
+        
+        //Consumer for postConfigProperty
+        vertx.eventBus().<JsonObject> consumer(POSTCONFIGPROPERTY_SERVICE_ID).handler(message -> {
+            try {
+                // Workaround for #allParams section clearing the vendorExtensions map
+                String serviceId = "postConfigProperty";
+                String configNodeNameParam = message.body().getString("configNodeName");
+                if(configNodeNameParam == null) {
+                    manageError(message, new MainApiException(400, "configNodeName is required"), serviceId);
+                    return;
+                }
+                String configNodeName = configNodeNameParam;
+                service.postConfigProperty(configNodeName, result -> {
+                    if (result.succeeded())
+                        message.reply(null);
+                    else {
+                        Throwable cause = result.cause();
+                        manageError(message, cause, "postConfigProperty");
+                    }
+                });
+            } catch (Exception e) {
+                logUnexpectedError("postConfigProperty", e);
                 message.fail(MainApiException.INTERNAL_SERVER_ERROR.getStatusCode(), MainApiException.INTERNAL_SERVER_ERROR.getStatusMessage());
             }
         });

@@ -5,20 +5,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.openapitools.jackson.nullable.JsonNullable;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
  * InstallStatusStatus
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-08-04T23:44:43.219Z[GMT]")
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-09-03T15:28:35.636+10:00[Australia/Melbourne]")
 public class InstallStatusStatus   {
   @JsonProperty("finished")
-  private Boolean finished = null;
+  private Boolean finished;
 
   @JsonProperty("itemCount")
-  private Integer itemCount = null;
+  private Integer itemCount;
 
   public InstallStatusStatus finished(Boolean finished) {
     this.finished = finished;
@@ -28,7 +28,7 @@ public class InstallStatusStatus   {
   /**
    * Get finished
    * @return finished
-  **/
+  */
   @ApiModelProperty(value = "")
 
 
@@ -48,7 +48,7 @@ public class InstallStatusStatus   {
   /**
    * Get itemCount
    * @return itemCount
-  **/
+  */
   @ApiModelProperty(value = "")
 
 
@@ -62,7 +62,7 @@ public class InstallStatusStatus   {
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -94,7 +94,7 @@ public class InstallStatusStatus   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

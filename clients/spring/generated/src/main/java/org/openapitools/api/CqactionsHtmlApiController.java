@@ -4,10 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.NativeWebRequest;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-08-04T23:44:43.219Z[GMT]")
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-09-03T15:28:35.636+10:00[Australia/Melbourne]")
 @Controller
-@RequestMapping("${openapi.adobeExperienceManagerAEM.base-path:/}")
+@RequestMapping("${openapi.adobeExperienceManagerAEM.base-path:}")
 public class CqactionsHtmlApiController implements CqactionsHtmlApi {
 
     private final NativeWebRequest request;

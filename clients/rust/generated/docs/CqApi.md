@@ -4,15 +4,18 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_login_page**](CqApi.md#get_login_page) | **Get** /libs/granite/core/content/login.html | 
-[**post_cq_actions**](CqApi.md#post_cq_actions) | **Post** /.cqactions.html | 
+[**get_login_page**](CqApi.md#get_login_page) | **GET** /libs/granite/core/content/login.html | 
+[**post_cq_actions**](CqApi.md#post_cq_actions) | **POST** /.cqactions.html | 
 
 
-# **get_login_page**
+
+## get_login_page
+
 > String get_login_page()
 
 
-### Required Parameters
+### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -25,22 +28,24 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/html
+- **Content-Type**: Not defined
+- **Accept**: text/html
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **post_cq_actions**
-> post_cq_actions(ctx, authorizable_id, changelog)
+
+## post_cq_actions
+
+> post_cq_actions(authorizable_id, changelog)
 
 
-### Required Parameters
+### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context containing the authentication | nil if no authentication
-  **authorizable_id** | **String**|  | 
-  **changelog** | **String**|  | 
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**authorizable_id** | **String** |  | [required] |
+**changelog** | **String** |  | [required] |
 
 ### Return type
 
@@ -52,8 +57,8 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

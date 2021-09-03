@@ -9,20 +9,19 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
 import io.swagger.annotations.*;
 
-
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyEapServerCodegen", date = "2019-08-04T23:42:11.561Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyEapServerCodegen", date = "2021-09-03T15:26:02.321+10:00[Australia/Melbourne]")
 public class KeystoreChainItems   {
   
 
-  private String subject = null;
+  private String subject;
 
-  private String issuer = null;
+  private String issuer;
 
-  private String notBefore = null;
+  private String notBefore;
 
-  private String notAfter = null;
+  private String notAfter;
 
-  private Integer serialNumber = null;
+  private Integer serialNumber;
 
   /**
    * e.g. \&quot;CN&#x3D;localhost\&quot;

@@ -14,10 +14,10 @@ import java.util.List;
 import java.util.Map;
 
 public class CqApiVerticle extends AbstractVerticle {
-    final static Logger LOGGER = LoggerFactory.getLogger(CqApiVerticle.class); 
+    static final Logger LOGGER = LoggerFactory.getLogger(CqApiVerticle.class);
     
-    final static String GETLOGINPAGE_SERVICE_ID = "getLoginPage";
-    final static String POSTCQACTIONS_SERVICE_ID = "postCqActions";
+    static final String GETLOGINPAGE_SERVICE_ID = "getLoginPage";
+    static final String POSTCQACTIONS_SERVICE_ID = "postCqActions";
     
     final CqApi service;
 

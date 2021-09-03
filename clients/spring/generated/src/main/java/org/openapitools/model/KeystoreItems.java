@@ -8,26 +8,26 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.model.KeystoreChainItems;
+import org.openapitools.jackson.nullable.JsonNullable;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
  * KeystoreItems
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-08-04T23:44:43.219Z[GMT]")
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-09-03T15:28:35.636+10:00[Australia/Melbourne]")
 public class KeystoreItems   {
   @JsonProperty("alias")
-  private String alias = null;
+  private String alias;
 
   @JsonProperty("entryType")
-  private String entryType = null;
+  private String entryType;
 
   @JsonProperty("algorithm")
-  private String algorithm = null;
+  private String algorithm;
 
   @JsonProperty("format")
-  private String format = null;
+  private String format;
 
   @JsonProperty("chain")
   @Valid
@@ -41,7 +41,7 @@ public class KeystoreItems   {
   /**
    * Keystore alias name
    * @return alias
-  **/
+  */
   @ApiModelProperty(value = "Keystore alias name")
 
 
@@ -61,7 +61,7 @@ public class KeystoreItems   {
   /**
    * e.g. \"privateKey\"
    * @return entryType
-  **/
+  */
   @ApiModelProperty(value = "e.g. \"privateKey\"")
 
 
@@ -81,7 +81,7 @@ public class KeystoreItems   {
   /**
    * e.g. \"RSA\"
    * @return algorithm
-  **/
+  */
   @ApiModelProperty(value = "e.g. \"RSA\"")
 
 
@@ -101,7 +101,7 @@ public class KeystoreItems   {
   /**
    * e.g. \"PKCS#8\"
    * @return format
-  **/
+  */
   @ApiModelProperty(value = "e.g. \"PKCS#8\"")
 
 
@@ -129,7 +129,7 @@ public class KeystoreItems   {
   /**
    * Get chain
    * @return chain
-  **/
+  */
   @ApiModelProperty(value = "")
 
   @Valid
@@ -144,7 +144,7 @@ public class KeystoreItems   {
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -182,7 +182,7 @@ public class KeystoreItems   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

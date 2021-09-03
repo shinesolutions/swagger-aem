@@ -16,6 +16,7 @@ import com.twitter.util.Future
 import com.twitter.io.Buf
 import io.finch._, items._
 import java.io.File
+import java.nio.file.Files
 import java.time._
 
 object CrxApi {
@@ -163,7 +164,7 @@ object CrxApi {
     }
 
     private def bytesToFile(input: Array[Byte]): java.io.File = {
-      val file = File.createTempFile("tmpCrxApi", null)
+      val file = Files.createTempFile("tmpCrxApi", null).toFile
       val output = new FileOutputStream(file)
       output.write(input)
       file

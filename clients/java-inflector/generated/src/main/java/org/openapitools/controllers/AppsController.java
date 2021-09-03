@@ -11,7 +11,7 @@ import java.util.List;
 import org.openapitools.model.*;
 
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaInflectorServerCodegen", date = "2019-08-04T23:41:21.082Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaInflectorServerCodegen", date = "2021-09-03T15:25:18.608+10:00[Australia/Melbourne]")
 public class AppsController  {
   /** 
    * Uncomment and implement as you see fit.  These operations will map
@@ -63,6 +63,12 @@ public class AppsController  {
 
   /*
     public ResponseContext postConfigApacheSlingReferrerFilter(RequestContext request , Boolean allowEmpty, String allowEmptyAtTypeHint, String allowHosts, String allowHostsAtTypeHint, String allowHostsRegexp, String allowHostsRegexpAtTypeHint, String filterMethods, String filterMethodsAtTypeHint) {
+        return new ResponseContext().status(Status.INTERNAL_SERVER_ERROR).entity( "Not implemented" );
+    }
+  */
+
+  /*
+    public ResponseContext postConfigProperty(RequestContext request , String configNodeName) {
         return new ResponseContext().status(Status.INTERNAL_SERVER_ERROR).entity( "Not implemented" );
     }
   */

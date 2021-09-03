@@ -1,7 +1,7 @@
 require 'json'
 
 
-MyApp.add_route('GET', '//crx/server/crx.default/jcr:root/.1.json', {
+MyApp.add_route('GET', '/crx/server/crx.default/jcr:root/.1.json', {
   "resourcePath" => "/Crx",
   "summary" => "",
   "nickname" => "get_crxde_status", 
@@ -17,7 +17,7 @@ MyApp.add_route('GET', '//crx/server/crx.default/jcr:root/.1.json', {
 end
 
 
-MyApp.add_route('GET', '//crx/packmgr/installstatus.jsp', {
+MyApp.add_route('GET', '/crx/packmgr/installstatus.jsp', {
   "resourcePath" => "/Crx",
   "summary" => "",
   "nickname" => "get_install_status", 
@@ -33,7 +33,7 @@ MyApp.add_route('GET', '//crx/packmgr/installstatus.jsp', {
 end
 
 
-MyApp.add_route('GET', '//crx/packmgr/service/script.html', {
+MyApp.add_route('GET', '/crx/packmgr/service/script.html', {
   "resourcePath" => "/Crx",
   "summary" => "",
   "nickname" => "get_package_manager_servlet", 
@@ -49,7 +49,7 @@ MyApp.add_route('GET', '//crx/packmgr/service/script.html', {
 end
 
 
-MyApp.add_route('POST', '//crx/packmgr/service.jsp', {
+MyApp.add_route('POST', '/crx/packmgr/service.jsp', {
   "resourcePath" => "/Crx",
   "summary" => "",
   "nickname" => "post_package_service", 
@@ -72,7 +72,7 @@ MyApp.add_route('POST', '//crx/packmgr/service.jsp', {
 end
 
 
-MyApp.add_route('POST', '//crx/packmgr/service/.json/{path}', {
+MyApp.add_route('POST', '/crx/packmgr/service/.json/{path}', {
   "resourcePath" => "/Crx",
   "summary" => "",
   "nickname" => "post_package_service_json", 
@@ -118,14 +118,14 @@ MyApp.add_route('POST', '//crx/packmgr/service/.json/{path}', {
     {
       "name" => "force",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
       "name" => "recursive",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
@@ -143,7 +143,7 @@ MyApp.add_route('POST', '//crx/packmgr/service/.json/{path}', {
 end
 
 
-MyApp.add_route('POST', '//crx/packmgr/update.jsp', {
+MyApp.add_route('POST', '/crx/packmgr/update.jsp', {
   "resourcePath" => "/Crx",
   "summary" => "",
   "nickname" => "post_package_update", 
@@ -201,7 +201,7 @@ MyApp.add_route('POST', '//crx/packmgr/update.jsp', {
 end
 
 
-MyApp.add_route('POST', '//crx/explorer/ui/setpassword.jsp', {
+MyApp.add_route('POST', '/crx/explorer/ui/setpassword.jsp', {
   "resourcePath" => "/Crx",
   "summary" => "",
   "nickname" => "post_set_password", 

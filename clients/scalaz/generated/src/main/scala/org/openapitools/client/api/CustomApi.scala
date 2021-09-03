@@ -21,6 +21,7 @@ import scalaz.concurrent.Task
 
 import HelperCodecs._
 
+
 object CustomApi {
 
   val client = PooledHttp1Client()
@@ -48,7 +49,7 @@ object CustomApi {
     } yield resp
   }
   
-  def postConfigAemHealthCheckServlet(host: String, bundlesIgnored: List[String], bundlesIgnoredTypeHint: String)(implicit bundlesIgnoredQuery: QueryParam[List[String]], bundlesIgnoredTypeHintQuery: QueryParam[String]): Task[Unit] = {
+  def postConfigAemHealthCheckServlet(host: String, bundlesIgnored: List[String] = List.empty[String] , bundlesIgnoredTypeHint: String)(implicit bundlesIgnoredQuery: QueryParam[List[String]], bundlesIgnoredTypeHintQuery: QueryParam[String]): Task[Unit] = {
     val path = "/apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck"
     
     val httpMethod = Method.POST
@@ -67,7 +68,7 @@ object CustomApi {
     } yield resp
   }
   
-  def postConfigAemPasswordReset(host: String, pwdresetAuthorizables: List[String], pwdresetAuthorizablesTypeHint: String)(implicit pwdresetAuthorizablesQuery: QueryParam[List[String]], pwdresetAuthorizablesTypeHintQuery: QueryParam[String]): Task[Unit] = {
+  def postConfigAemPasswordReset(host: String, pwdresetAuthorizables: List[String] = List.empty[String] , pwdresetAuthorizablesTypeHint: String)(implicit pwdresetAuthorizablesQuery: QueryParam[List[String]], pwdresetAuthorizablesTypeHintQuery: QueryParam[String]): Task[Unit] = {
     val path = "/apps/system/config/com.shinesolutions.aem.passwordreset.Activator"
     
     val httpMethod = Method.POST
@@ -114,7 +115,7 @@ class HttpServiceCustomApi(service: HttpService) {
     } yield resp
   }
   
-  def postConfigAemHealthCheckServlet(bundlesIgnored: List[String], bundlesIgnoredTypeHint: String)(implicit bundlesIgnoredQuery: QueryParam[List[String]], bundlesIgnoredTypeHintQuery: QueryParam[String]): Task[Unit] = {
+  def postConfigAemHealthCheckServlet(bundlesIgnored: List[String] = List.empty[String] , bundlesIgnoredTypeHint: String)(implicit bundlesIgnoredQuery: QueryParam[List[String]], bundlesIgnoredTypeHintQuery: QueryParam[String]): Task[Unit] = {
     val path = "/apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck"
     
     val httpMethod = Method.POST
@@ -133,7 +134,7 @@ class HttpServiceCustomApi(service: HttpService) {
     } yield resp
   }
   
-  def postConfigAemPasswordReset(pwdresetAuthorizables: List[String], pwdresetAuthorizablesTypeHint: String)(implicit pwdresetAuthorizablesQuery: QueryParam[List[String]], pwdresetAuthorizablesTypeHintQuery: QueryParam[String]): Task[Unit] = {
+  def postConfigAemPasswordReset(pwdresetAuthorizables: List[String] = List.empty[String] , pwdresetAuthorizablesTypeHint: String)(implicit pwdresetAuthorizablesQuery: QueryParam[List[String]], pwdresetAuthorizablesTypeHintQuery: QueryParam[String]): Task[Unit] = {
     val path = "/apps/system/config/com.shinesolutions.aem.passwordreset.Activator"
     
     val httpMethod = Method.POST

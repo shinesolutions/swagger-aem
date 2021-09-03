@@ -21,6 +21,9 @@ import scalaz.concurrent.Task
 
 import HelperCodecs._
 
+import org.openapitools.client.api.BundleInfo
+import org.openapitools.client.api.SamlConfigurationInfo
+
 object ConsoleApi {
 
   val client = PooledHttp1Client()
@@ -44,6 +47,27 @@ object ConsoleApi {
       uriWithParams =  uri.copy(query = queryParams)
       req           =  Request(method = httpMethod, uri = uriWithParams, headers = headers.put(contentType))
       resp          <- client.expect[List[String]](req)
+
+    } yield resp
+  }
+  
+  def getBundleInfo(host: String, name: String): Task[BundleInfo] = {
+    implicit val returnTypeDecoder: EntityDecoder[BundleInfo] = jsonOf[BundleInfo]
+
+    val path = "/system/console/bundles/{name}.json".replaceAll("\\{" + "name" + "\\}",escape(name.toString))
+    
+    val httpMethod = Method.GET
+    val contentType = `Content-Type`(MediaType.`application/json`)
+    val headers = Headers(
+      )
+    val queryParams = Query(
+      )
+
+    for {
+      uri           <- Task.fromDisjunction(Uri.fromString(host + path))
+      uriWithParams =  uri.copy(query = queryParams)
+      req           =  Request(method = httpMethod, uri = uriWithParams, headers = headers.put(contentType))
+      resp          <- client.expect[BundleInfo](req)
 
     } yield resp
   }
@@ -107,7 +131,7 @@ object ConsoleApi {
     } yield resp
   }
   
-  def postSamlConfiguration(host: String, post: Boolean, apply: Boolean, delete: Boolean, action: String, location: String, `path`: List[String], serviceRanking: Integer, idpUrl: String, idpCertAlias: String, idpHttpRedirect: Boolean, serviceProviderEntityId: String, assertionConsumerServiceURL: String, spPrivateKeyAlias: String, keyStorePassword: String, defaultRedirectUrl: String, userIDAttribute: String, useEncryption: Boolean, createUser: Boolean, addGroupMemberships: Boolean, groupMembershipAttribute: String, defaultGroups: List[String], nameIdFormat: String, synchronizeAttributes: List[String], handleLogout: Boolean, logoutUrl: String, clockTolerance: Integer, digestMethod: String, signatureMethod: String, userIntermediatePath: String, propertylist: List[String])(implicit postQuery: QueryParam[Boolean], applyQuery: QueryParam[Boolean], deleteQuery: QueryParam[Boolean], actionQuery: QueryParam[String], locationQuery: QueryParam[String], `path`Query: QueryParam[List[String]], serviceRankingQuery: QueryParam[Integer], idpUrlQuery: QueryParam[String], idpCertAliasQuery: QueryParam[String], idpHttpRedirectQuery: QueryParam[Boolean], serviceProviderEntityIdQuery: QueryParam[String], assertionConsumerServiceURLQuery: QueryParam[String], spPrivateKeyAliasQuery: QueryParam[String], keyStorePasswordQuery: QueryParam[String], defaultRedirectUrlQuery: QueryParam[String], userIDAttributeQuery: QueryParam[String], useEncryptionQuery: QueryParam[Boolean], createUserQuery: QueryParam[Boolean], addGroupMembershipsQuery: QueryParam[Boolean], groupMembershipAttributeQuery: QueryParam[String], defaultGroupsQuery: QueryParam[List[String]], nameIdFormatQuery: QueryParam[String], synchronizeAttributesQuery: QueryParam[List[String]], handleLogoutQuery: QueryParam[Boolean], logoutUrlQuery: QueryParam[String], clockToleranceQuery: QueryParam[Integer], digestMethodQuery: QueryParam[String], signatureMethodQuery: QueryParam[String], userIntermediatePathQuery: QueryParam[String], propertylistQuery: QueryParam[List[String]]): Task[SamlConfigurationInfo] = {
+  def postSamlConfiguration(host: String, post: Boolean, apply: Boolean, delete: Boolean, action: String, location: String, `path`: List[String] = List.empty[String] , serviceRanking: Integer, idpUrl: String, idpCertAlias: String, idpHttpRedirect: Boolean, serviceProviderEntityId: String, assertionConsumerServiceURL: String, spPrivateKeyAlias: String, keyStorePassword: String, defaultRedirectUrl: String, userIDAttribute: String, useEncryption: Boolean, createUser: Boolean, addGroupMemberships: Boolean, groupMembershipAttribute: String, defaultGroups: List[String] = List.empty[String] , nameIdFormat: String, synchronizeAttributes: List[String] = List.empty[String] , handleLogout: Boolean, logoutUrl: String, clockTolerance: Integer, digestMethod: String, signatureMethod: String, userIntermediatePath: String, propertylist: List[String] = List.empty[String] )(implicit postQuery: QueryParam[Boolean], applyQuery: QueryParam[Boolean], deleteQuery: QueryParam[Boolean], actionQuery: QueryParam[String], locationQuery: QueryParam[String], `path`Query: QueryParam[List[String]], serviceRankingQuery: QueryParam[Integer], idpUrlQuery: QueryParam[String], idpCertAliasQuery: QueryParam[String], idpHttpRedirectQuery: QueryParam[Boolean], serviceProviderEntityIdQuery: QueryParam[String], assertionConsumerServiceURLQuery: QueryParam[String], spPrivateKeyAliasQuery: QueryParam[String], keyStorePasswordQuery: QueryParam[String], defaultRedirectUrlQuery: QueryParam[String], userIDAttributeQuery: QueryParam[String], useEncryptionQuery: QueryParam[Boolean], createUserQuery: QueryParam[Boolean], addGroupMembershipsQuery: QueryParam[Boolean], groupMembershipAttributeQuery: QueryParam[String], defaultGroupsQuery: QueryParam[List[String]], nameIdFormatQuery: QueryParam[String], synchronizeAttributesQuery: QueryParam[List[String]], handleLogoutQuery: QueryParam[Boolean], logoutUrlQuery: QueryParam[String], clockToleranceQuery: QueryParam[Integer], digestMethodQuery: QueryParam[String], signatureMethodQuery: QueryParam[String], userIntermediatePathQuery: QueryParam[String], propertylistQuery: QueryParam[List[String]]): Task[SamlConfigurationInfo] = {
     implicit val returnTypeDecoder: EntityDecoder[SamlConfigurationInfo] = jsonOf[SamlConfigurationInfo]
 
     val path = "/system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler"
@@ -152,6 +176,27 @@ class HttpServiceConsoleApi(service: HttpService) {
       uriWithParams =  uri.copy(query = queryParams)
       req           =  Request(method = httpMethod, uri = uriWithParams, headers = headers.put(contentType))
       resp          <- client.expect[List[String]](req)
+
+    } yield resp
+  }
+  
+  def getBundleInfo(name: String): Task[BundleInfo] = {
+    implicit val returnTypeDecoder: EntityDecoder[BundleInfo] = jsonOf[BundleInfo]
+
+    val path = "/system/console/bundles/{name}.json".replaceAll("\\{" + "name" + "\\}",escape(name.toString))
+    
+    val httpMethod = Method.GET
+    val contentType = `Content-Type`(MediaType.`application/json`)
+    val headers = Headers(
+      )
+    val queryParams = Query(
+      )
+
+    for {
+      uri           <- Task.fromDisjunction(Uri.fromString(path))
+      uriWithParams =  uri.copy(query = queryParams)
+      req           =  Request(method = httpMethod, uri = uriWithParams, headers = headers.put(contentType))
+      resp          <- client.expect[BundleInfo](req)
 
     } yield resp
   }
@@ -215,7 +260,7 @@ class HttpServiceConsoleApi(service: HttpService) {
     } yield resp
   }
   
-  def postSamlConfiguration(post: Boolean, apply: Boolean, delete: Boolean, action: String, location: String, `path`: List[String], serviceRanking: Integer, idpUrl: String, idpCertAlias: String, idpHttpRedirect: Boolean, serviceProviderEntityId: String, assertionConsumerServiceURL: String, spPrivateKeyAlias: String, keyStorePassword: String, defaultRedirectUrl: String, userIDAttribute: String, useEncryption: Boolean, createUser: Boolean, addGroupMemberships: Boolean, groupMembershipAttribute: String, defaultGroups: List[String], nameIdFormat: String, synchronizeAttributes: List[String], handleLogout: Boolean, logoutUrl: String, clockTolerance: Integer, digestMethod: String, signatureMethod: String, userIntermediatePath: String, propertylist: List[String])(implicit postQuery: QueryParam[Boolean], applyQuery: QueryParam[Boolean], deleteQuery: QueryParam[Boolean], actionQuery: QueryParam[String], locationQuery: QueryParam[String], `path`Query: QueryParam[List[String]], serviceRankingQuery: QueryParam[Integer], idpUrlQuery: QueryParam[String], idpCertAliasQuery: QueryParam[String], idpHttpRedirectQuery: QueryParam[Boolean], serviceProviderEntityIdQuery: QueryParam[String], assertionConsumerServiceURLQuery: QueryParam[String], spPrivateKeyAliasQuery: QueryParam[String], keyStorePasswordQuery: QueryParam[String], defaultRedirectUrlQuery: QueryParam[String], userIDAttributeQuery: QueryParam[String], useEncryptionQuery: QueryParam[Boolean], createUserQuery: QueryParam[Boolean], addGroupMembershipsQuery: QueryParam[Boolean], groupMembershipAttributeQuery: QueryParam[String], defaultGroupsQuery: QueryParam[List[String]], nameIdFormatQuery: QueryParam[String], synchronizeAttributesQuery: QueryParam[List[String]], handleLogoutQuery: QueryParam[Boolean], logoutUrlQuery: QueryParam[String], clockToleranceQuery: QueryParam[Integer], digestMethodQuery: QueryParam[String], signatureMethodQuery: QueryParam[String], userIntermediatePathQuery: QueryParam[String], propertylistQuery: QueryParam[List[String]]): Task[SamlConfigurationInfo] = {
+  def postSamlConfiguration(post: Boolean, apply: Boolean, delete: Boolean, action: String, location: String, `path`: List[String] = List.empty[String] , serviceRanking: Integer, idpUrl: String, idpCertAlias: String, idpHttpRedirect: Boolean, serviceProviderEntityId: String, assertionConsumerServiceURL: String, spPrivateKeyAlias: String, keyStorePassword: String, defaultRedirectUrl: String, userIDAttribute: String, useEncryption: Boolean, createUser: Boolean, addGroupMemberships: Boolean, groupMembershipAttribute: String, defaultGroups: List[String] = List.empty[String] , nameIdFormat: String, synchronizeAttributes: List[String] = List.empty[String] , handleLogout: Boolean, logoutUrl: String, clockTolerance: Integer, digestMethod: String, signatureMethod: String, userIntermediatePath: String, propertylist: List[String] = List.empty[String] )(implicit postQuery: QueryParam[Boolean], applyQuery: QueryParam[Boolean], deleteQuery: QueryParam[Boolean], actionQuery: QueryParam[String], locationQuery: QueryParam[String], `path`Query: QueryParam[List[String]], serviceRankingQuery: QueryParam[Integer], idpUrlQuery: QueryParam[String], idpCertAliasQuery: QueryParam[String], idpHttpRedirectQuery: QueryParam[Boolean], serviceProviderEntityIdQuery: QueryParam[String], assertionConsumerServiceURLQuery: QueryParam[String], spPrivateKeyAliasQuery: QueryParam[String], keyStorePasswordQuery: QueryParam[String], defaultRedirectUrlQuery: QueryParam[String], userIDAttributeQuery: QueryParam[String], useEncryptionQuery: QueryParam[Boolean], createUserQuery: QueryParam[Boolean], addGroupMembershipsQuery: QueryParam[Boolean], groupMembershipAttributeQuery: QueryParam[String], defaultGroupsQuery: QueryParam[List[String]], nameIdFormatQuery: QueryParam[String], synchronizeAttributesQuery: QueryParam[List[String]], handleLogoutQuery: QueryParam[Boolean], logoutUrlQuery: QueryParam[String], clockToleranceQuery: QueryParam[Integer], digestMethodQuery: QueryParam[String], signatureMethodQuery: QueryParam[String], userIntermediatePathQuery: QueryParam[String], propertylistQuery: QueryParam[List[String]]): Task[SamlConfigurationInfo] = {
     implicit val returnTypeDecoder: EntityDecoder[SamlConfigurationInfo] = jsonOf[SamlConfigurationInfo]
 
     val path = "/system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler"

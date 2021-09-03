@@ -3,11 +3,11 @@ using Nancy;
 using Nancy.ModelBinding;
 using System.Collections.Generic;
 using Sharpility.Base;
-using Org.OpenAPITools..Models;
-using Org.OpenAPITools..Utils;
+using Org.OpenAPITools._.Models;
+using Org.OpenAPITools._.Utils;
 using NodaTime;
 
-namespace Org.OpenAPITools..Modules
+namespace Org.OpenAPITools._.Modules
 { 
 
     /// <summary>

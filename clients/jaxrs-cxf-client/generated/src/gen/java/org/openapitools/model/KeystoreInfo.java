@@ -23,7 +23,7 @@ public class KeystoreInfo  {
  /**
    * False if truststore don't exist
   **/
-  private Boolean exists = null;
+  private Boolean exists;
  /**
    * Get aliases
    * @return aliases
@@ -81,7 +81,7 @@ public class KeystoreInfo  {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private static String toIndentedString(java.lang.Object o) {
+  private static String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

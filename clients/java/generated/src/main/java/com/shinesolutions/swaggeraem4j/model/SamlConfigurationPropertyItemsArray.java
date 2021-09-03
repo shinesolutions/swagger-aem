@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * SamlConfigurationPropertyItemsArray
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-09-26T04:43:48.113Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-09-03T15:25:08.476+10:00[Australia/Melbourne]")
 public class SamlConfigurationPropertyItemsArray {
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
@@ -203,7 +203,7 @@ public class SamlConfigurationPropertyItemsArray {
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -224,7 +224,6 @@ public class SamlConfigurationPropertyItemsArray {
     return Objects.hash(name, optional, isSet, type, values, description);
   }
 
-
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -243,7 +242,7 @@ public class SamlConfigurationPropertyItemsArray {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

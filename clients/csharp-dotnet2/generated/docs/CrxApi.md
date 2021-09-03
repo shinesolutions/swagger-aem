@@ -33,7 +33,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -92,7 +91,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -151,7 +149,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -209,7 +206,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -272,7 +268,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -351,7 +346,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
@@ -424,7 +418,6 @@ namespace Example
     {
         public void main()
         {
-            
             // Configure HTTP basic authorization: aemAuth
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";

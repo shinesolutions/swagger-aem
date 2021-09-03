@@ -21,6 +21,7 @@ import scalaz.concurrent.Task
 
 import HelperCodecs._
 
+
 object CqApi {
 
   val client = PooledHttp1Client()

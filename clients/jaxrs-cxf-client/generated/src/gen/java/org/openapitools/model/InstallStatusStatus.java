@@ -14,10 +14,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class InstallStatusStatus  {
   
   @ApiModelProperty(value = "")
-  private Boolean finished = null;
+  private Boolean finished;
 
   @ApiModelProperty(value = "")
-  private Integer itemCount = null;
+  private Integer itemCount;
  /**
    * Get finished
    * @return finished
@@ -70,7 +70,7 @@ public class InstallStatusStatus  {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private static String toIndentedString(java.lang.Object o) {
+  private static String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

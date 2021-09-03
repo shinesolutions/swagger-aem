@@ -21,6 +21,7 @@
          post_config_apache_sling_dav_ex_servlet/1, post_config_apache_sling_dav_ex_servlet/2,
          post_config_apache_sling_get_servlet/1, post_config_apache_sling_get_servlet/2,
          post_config_apache_sling_referrer_filter/1, post_config_apache_sling_referrer_filter/2,
+         post_config_property/2, post_config_property/3,
          post_node/3, post_node/4,
          post_node_rw/3, post_node_rw/4,
          post_path/4, post_path/5,
@@ -29,7 +30,7 @@
          post_truststore/1, post_truststore/2,
          post_truststore_pkcs12/1, post_truststore_pkcs12/2]).
 
--define(BASE_URL, "/").
+-define(BASE_URL, <<"">>).
 
 %% @doc 
 %% 
@@ -43,7 +44,7 @@ delete_agent(Ctx, Runmode, Name, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
-    Path = ["/etc/replication/agents.", Runmode, "/", Name, ""],
+    Path = [<<"/etc/replication/agents.", Runmode, "/", Name, "">>],
     QS = [],
     Headers = [],
     Body1 = [],
@@ -64,7 +65,7 @@ delete_node(Ctx, Path, Name, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
-    Path = ["/", Path, "/", Name, ""],
+    Path = [<<"/", Path, "/", Name, "">>],
     QS = [],
     Headers = [],
     Body1 = [],
@@ -85,7 +86,7 @@ get_agent(Ctx, Runmode, Name, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
-    Path = ["/etc/replication/agents.", Runmode, "/", Name, ""],
+    Path = [<<"/etc/replication/agents.", Runmode, "/", Name, "">>],
     QS = [],
     Headers = [],
     Body1 = [],
@@ -106,7 +107,7 @@ get_agents(Ctx, Runmode, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
-    Path = ["/etc/replication/agents.", Runmode, ".-1.json"],
+    Path = [<<"/etc/replication/agents.", Runmode, ".-1.json">>],
     QS = [],
     Headers = [],
     Body1 = [],
@@ -127,7 +128,7 @@ get_authorizable_keystore(Ctx, IntermediatePath, AuthorizableId, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
-    Path = ["/", IntermediatePath, "/", AuthorizableId, ".ks.json"],
+    Path = [<<"/", IntermediatePath, "/", AuthorizableId, ".ks.json">>],
     QS = [],
     Headers = [],
     Body1 = [],
@@ -148,7 +149,7 @@ get_keystore(Ctx, IntermediatePath, AuthorizableId, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
-    Path = ["/", IntermediatePath, "/", AuthorizableId, "/keystore/store.p12"],
+    Path = [<<"/", IntermediatePath, "/", AuthorizableId, "/keystore/store.p12">>],
     QS = [],
     Headers = [],
     Body1 = [],
@@ -169,7 +170,7 @@ get_node(Ctx, Path, Name, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
-    Path = ["/", Path, "/", Name, ""],
+    Path = [<<"/", Path, "/", Name, "">>],
     QS = [],
     Headers = [],
     Body1 = [],
@@ -190,7 +191,7 @@ get_package(Ctx, Group, Name, Version, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
-    Path = ["/etc/packages/", Group, "/", Name, "-", Version, ".zip"],
+    Path = [<<"/etc/packages/", Group, "/", Name, "-", Version, ".zip">>],
     QS = [],
     Headers = [],
     Body1 = [],
@@ -211,7 +212,7 @@ get_package_filter(Ctx, Group, Name, Version, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
-    Path = ["/etc/packages/", Group, "/", Name, "-", Version, ".zip/jcr:content/vlt:definition/filter.tidy.2.json"],
+    Path = [<<"/etc/packages/", Group, "/", Name, "-", Version, ".zip/jcr:content/vlt:definition/filter.tidy.2.json">>],
     QS = [],
     Headers = [],
     Body1 = [],
@@ -232,7 +233,7 @@ get_query(Ctx, Path, PLimit, 1Property, 1PropertyValue, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
-    Path = ["/bin/querybuilder.json"],
+    Path = [<<"/bin/querybuilder.json">>],
     QS = lists:flatten([{<<"path">>, Path}, {<<"p.limit">>, PLimit}, {<<"1_property">>, 1Property}, {<<"1_property.value">>, 1PropertyValue}])++openapi_utils:optional_params([], _OptionalParams),
     Headers = [],
     Body1 = [],
@@ -253,7 +254,7 @@ get_truststore(Ctx, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
-    Path = ["/etc/truststore/truststore.p12"],
+    Path = [<<"/etc/truststore/truststore.p12">>],
     QS = [],
     Headers = [],
     Body1 = [],
@@ -274,7 +275,7 @@ get_truststore_info(Ctx, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
-    Path = ["/libs/granite/security/truststore.json"],
+    Path = [<<"/libs/granite/security/truststore.json">>],
     QS = [],
     Headers = [],
     Body1 = [],
@@ -295,7 +296,7 @@ post_agent(Ctx, Runmode, Name, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
-    Path = ["/etc/replication/agents.", Runmode, "/", Name, ""],
+    Path = [<<"/etc/replication/agents.", Runmode, "/", Name, "">>],
     QS = lists:flatten([])++openapi_utils:optional_params(['jcr:content/cq:distribute', 'jcr:content/cq:distribute@TypeHint', 'jcr:content/cq:name', 'jcr:content/cq:template', 'jcr:content/enabled', 'jcr:content/jcr:description', 'jcr:content/jcr:lastModified', 'jcr:content/jcr:lastModifiedBy', 'jcr:content/jcr:mixinTypes', 'jcr:content/jcr:title', 'jcr:content/logLevel', 'jcr:content/noStatusUpdate', 'jcr:content/noVersioning', 'jcr:content/protocolConnectTimeout', 'jcr:content/protocolHTTPConnectionClosed', 'jcr:content/protocolHTTPExpired', 'jcr:content/protocolHTTPHeaders', 'jcr:content/protocolHTTPHeaders@TypeHint', 'jcr:content/protocolHTTPMethod', 'jcr:content/protocolHTTPSRelaxed', 'jcr:content/protocolInterface', 'jcr:content/protocolSocketTimeout', 'jcr:content/protocolVersion', 'jcr:content/proxyNTLMDomain', 'jcr:content/proxyNTLMHost', 'jcr:content/proxyHost', 'jcr:content/proxyPassword', 'jcr:content/proxyPort', 'jcr:content/proxyUser', 'jcr:content/queueBatchMaxSize', 'jcr:content/queueBatchMode', 'jcr:content/queueBatchWaitTime', 'jcr:content/retryDelay', 'jcr:content/reverseReplication', 'jcr:content/serializationType', 'jcr:content/sling:resourceType', 'jcr:content/ssl', 'jcr:content/transportNTLMDomain', 'jcr:content/transportNTLMHost', 'jcr:content/transportPassword', 'jcr:content/transportUri', 'jcr:content/transportUser', 'jcr:content/triggerDistribute', 'jcr:content/triggerModified', 'jcr:content/triggerOnOffTime', 'jcr:content/triggerReceive', 'jcr:content/triggerSpecific', 'jcr:content/userId', 'jcr:primaryType', ':operation'], _OptionalParams),
     Headers = [],
     Body1 = [],
@@ -316,7 +317,7 @@ post_authorizable_keystore(Ctx, IntermediatePath, AuthorizableId, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
-    Path = ["/", IntermediatePath, "/", AuthorizableId, ".ks.html"],
+    Path = [<<"/", IntermediatePath, "/", AuthorizableId, ".ks.html">>],
     QS = lists:flatten([])++openapi_utils:optional_params([':operation', 'currentPassword', 'newPassword', 'rePassword', 'keyPassword', 'keyStorePass', 'alias', 'newAlias', 'removeAlias'], _OptionalParams),
     Headers = [],
     Body1 = {form, []++openapi_utils:optional_params(['cert-chain', 'pk', 'keyStore'], _OptionalParams)},
@@ -337,8 +338,8 @@ post_authorizables(Ctx, AuthorizableId, IntermediatePath, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
-    Path = ["/libs/granite/security/post/authorizables"],
-    QS = lists:flatten([{<<"authorizableId">>, AuthorizableId}, {<<"intermediatePath">>, IntermediatePath}])++openapi_utils:optional_params([, 'createUser', 'createGroup', 'rep:password', 'profile/givenName'], _OptionalParams),
+    Path = [<<"/libs/granite/security/post/authorizables">>],
+    QS = lists:flatten([{<<"authorizableId">>, AuthorizableId}, {<<"intermediatePath">>, IntermediatePath}])++openapi_utils:optional_params(['createUser', 'createGroup', 'rep:password', 'profile/givenName'], _OptionalParams),
     Headers = [],
     Body1 = [],
     ContentTypeHeader = openapi_utils:select_header_content_type([]),
@@ -358,7 +359,7 @@ post_config_adobe_granite_saml_authentication_handler(Ctx, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
-    Path = ["/apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config"],
+    Path = [<<"/apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config">>],
     QS = lists:flatten([])++openapi_utils:optional_params(['keyStorePassword', 'keyStorePassword@TypeHint', 'service.ranking', 'service.ranking@TypeHint', 'idpHttpRedirect', 'idpHttpRedirect@TypeHint', 'createUser', 'createUser@TypeHint', 'defaultRedirectUrl', 'defaultRedirectUrl@TypeHint', 'userIDAttribute', 'userIDAttribute@TypeHint', 'defaultGroups', 'defaultGroups@TypeHint', 'idpCertAlias', 'idpCertAlias@TypeHint', 'addGroupMemberships', 'addGroupMemberships@TypeHint', 'path', 'path@TypeHint', 'synchronizeAttributes', 'synchronizeAttributes@TypeHint', 'clockTolerance', 'clockTolerance@TypeHint', 'groupMembershipAttribute', 'groupMembershipAttribute@TypeHint', 'idpUrl', 'idpUrl@TypeHint', 'logoutUrl', 'logoutUrl@TypeHint', 'serviceProviderEntityId', 'serviceProviderEntityId@TypeHint', 'assertionConsumerServiceURL', 'assertionConsumerServiceURL@TypeHint', 'handleLogout', 'handleLogout@TypeHint', 'spPrivateKeyAlias', 'spPrivateKeyAlias@TypeHint', 'useEncryption', 'useEncryption@TypeHint', 'nameIdFormat', 'nameIdFormat@TypeHint', 'digestMethod', 'digestMethod@TypeHint', 'signatureMethod', 'signatureMethod@TypeHint', 'userIntermediatePath', 'userIntermediatePath@TypeHint'], _OptionalParams),
     Headers = [],
     Body1 = [],
@@ -379,7 +380,7 @@ post_config_apache_felix_jetty_based_http_service(Ctx, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
-    Path = ["/apps/system/config/org.apache.felix.http"],
+    Path = [<<"/apps/system/config/org.apache.felix.http">>],
     QS = lists:flatten([])++openapi_utils:optional_params(['org.apache.felix.https.nio', 'org.apache.felix.https.nio@TypeHint', 'org.apache.felix.https.keystore', 'org.apache.felix.https.keystore@TypeHint', 'org.apache.felix.https.keystore.password', 'org.apache.felix.https.keystore.password@TypeHint', 'org.apache.felix.https.keystore.key', 'org.apache.felix.https.keystore.key@TypeHint', 'org.apache.felix.https.keystore.key.password', 'org.apache.felix.https.keystore.key.password@TypeHint', 'org.apache.felix.https.truststore', 'org.apache.felix.https.truststore@TypeHint', 'org.apache.felix.https.truststore.password', 'org.apache.felix.https.truststore.password@TypeHint', 'org.apache.felix.https.clientcertificate', 'org.apache.felix.https.clientcertificate@TypeHint', 'org.apache.felix.https.enable', 'org.apache.felix.https.enable@TypeHint', 'org.osgi.service.http.port.secure', 'org.osgi.service.http.port.secure@TypeHint'], _OptionalParams),
     Headers = [],
     Body1 = [],
@@ -400,7 +401,7 @@ post_config_apache_http_components_proxy_configuration(Ctx, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
-    Path = ["/apps/system/config/org.apache.http.proxyconfigurator.config"],
+    Path = [<<"/apps/system/config/org.apache.http.proxyconfigurator.config">>],
     QS = lists:flatten([])++openapi_utils:optional_params(['proxy.host', 'proxy.host@TypeHint', 'proxy.port', 'proxy.port@TypeHint', 'proxy.exceptions', 'proxy.exceptions@TypeHint', 'proxy.enabled', 'proxy.enabled@TypeHint', 'proxy.user', 'proxy.user@TypeHint', 'proxy.password', 'proxy.password@TypeHint'], _OptionalParams),
     Headers = [],
     Body1 = [],
@@ -421,7 +422,7 @@ post_config_apache_sling_dav_ex_servlet(Ctx, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
-    Path = ["/apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet"],
+    Path = [<<"/apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet">>],
     QS = lists:flatten([])++openapi_utils:optional_params(['alias', 'alias@TypeHint', 'dav.create-absolute-uri', 'dav.create-absolute-uri@TypeHint'], _OptionalParams),
     Headers = [],
     Body1 = [],
@@ -442,7 +443,7 @@ post_config_apache_sling_get_servlet(Ctx, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
-    Path = ["/apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet"],
+    Path = [<<"/apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet">>],
     QS = lists:flatten([])++openapi_utils:optional_params(['json.maximumresults', 'json.maximumresults@TypeHint', 'enable.html', 'enable.html@TypeHint', 'enable.txt', 'enable.txt@TypeHint', 'enable.xml', 'enable.xml@TypeHint'], _OptionalParams),
     Headers = [],
     Body1 = [],
@@ -463,8 +464,29 @@ post_config_apache_sling_referrer_filter(Ctx, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
-    Path = ["/apps/system/config/org.apache.sling.security.impl.ReferrerFilter"],
+    Path = [<<"/apps/system/config/org.apache.sling.security.impl.ReferrerFilter">>],
     QS = lists:flatten([])++openapi_utils:optional_params(['allow.empty', 'allow.empty@TypeHint', 'allow.hosts', 'allow.hosts@TypeHint', 'allow.hosts.regexp', 'allow.hosts.regexp@TypeHint', 'filter.methods', 'filter.methods@TypeHint'], _OptionalParams),
+    Headers = [],
+    Body1 = [],
+    ContentTypeHeader = openapi_utils:select_header_content_type([]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    openapi_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+
+%% @doc 
+%% 
+-spec post_config_property(ctx:ctx(), binary()) -> {ok, [], openapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), openapi_utils:response_info()}.
+post_config_property(Ctx, ConfigNodeName) ->
+    post_config_property(Ctx, ConfigNodeName, #{}).
+
+-spec post_config_property(ctx:ctx(), binary(), maps:map()) -> {ok, [], openapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), openapi_utils:response_info()}.
+post_config_property(Ctx, ConfigNodeName, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+
+    Method = post,
+    Path = [<<"/apps/system/config/", ConfigNodeName, "">>],
+    QS = [],
     Headers = [],
     Body1 = [],
     ContentTypeHeader = openapi_utils:select_header_content_type([]),
@@ -484,7 +506,7 @@ post_node(Ctx, Path, Name, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
-    Path = ["/", Path, "/", Name, ""],
+    Path = [<<"/", Path, "/", Name, "">>],
     QS = lists:flatten([])++openapi_utils:optional_params([':operation', 'deleteAuthorizable'], _OptionalParams),
     Headers = [],
     Body1 = {form, []++openapi_utils:optional_params(['file'], _OptionalParams)},
@@ -505,7 +527,7 @@ post_node_rw(Ctx, Path, Name, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
-    Path = ["/", Path, "/", Name, ".rw.html"],
+    Path = [<<"/", Path, "/", Name, ".rw.html">>],
     QS = lists:flatten([])++openapi_utils:optional_params(['addMembers'], _OptionalParams),
     Headers = [],
     Body1 = [],
@@ -526,7 +548,7 @@ post_path(Ctx, Path, JcrprimaryType, Name, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
-    Path = ["/", Path, "/"],
+    Path = [<<"/", Path, "/">>],
     QS = lists:flatten([{<<"jcr:primaryType">>, JcrprimaryType}, {<<":name">>, Name}])++openapi_utils:optional_params([], _OptionalParams),
     Headers = [],
     Body1 = [],
@@ -547,7 +569,7 @@ post_query(Ctx, Path, PLimit, 1Property, 1PropertyValue, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
-    Path = ["/bin/querybuilder.json"],
+    Path = [<<"/bin/querybuilder.json">>],
     QS = lists:flatten([{<<"path">>, Path}, {<<"p.limit">>, PLimit}, {<<"1_property">>, 1Property}, {<<"1_property.value">>, 1PropertyValue}])++openapi_utils:optional_params([], _OptionalParams),
     Headers = [],
     Body1 = [],
@@ -568,7 +590,7 @@ post_tree_activation(Ctx, Ignoredeactivated, Onlymodified, Path, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
-    Path = ["/etc/replication/treeactivation.html"],
+    Path = [<<"/etc/replication/treeactivation.html">>],
     QS = lists:flatten([{<<"ignoredeactivated">>, Ignoredeactivated}, {<<"onlymodified">>, Onlymodified}, {<<"path">>, Path}])++openapi_utils:optional_params([], _OptionalParams),
     Headers = [],
     Body1 = [],
@@ -589,7 +611,7 @@ post_truststore(Ctx, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
-    Path = ["/libs/granite/security/post/truststore"],
+    Path = [<<"/libs/granite/security/post/truststore">>],
     QS = lists:flatten([])++openapi_utils:optional_params([':operation', 'newPassword', 'rePassword', 'keyStoreType', 'removeAlias'], _OptionalParams),
     Headers = [],
     Body1 = {form, []++openapi_utils:optional_params(['certificate'], _OptionalParams)},
@@ -610,7 +632,7 @@ post_truststore_pkcs12(Ctx, Optional) ->
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
-    Path = ["/etc/truststore"],
+    Path = [<<"/etc/truststore">>],
     QS = [],
     Headers = [],
     Body1 = {form, []++openapi_utils:optional_params(['truststore.p12'], _OptionalParams)},

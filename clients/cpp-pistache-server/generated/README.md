@@ -35,13 +35,13 @@ Once compiled run the server:
 
 ```bash
 cd build
-./server
+./api-server
 ```
 
 ## Libraries required
 - [pistache](http://pistache.io/quickstart)
 - [JSON for Modern C++](https://github.com/nlohmann/json/#integration): Please download the `json.hpp` file and
-put it under the model folder
+put it under the model/nlohmann folder
 
 ## Namespaces
 org.openapitools.server.api

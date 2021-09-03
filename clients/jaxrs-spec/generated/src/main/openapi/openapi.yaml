@@ -4,9 +4,10 @@ info:
     email: opensource@shinesolutions.com
     name: Shine Solutions
     url: http://shinesolutions.com
-  description: Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
+  description: Swagger AEM is an OpenAPI specification for Adobe Experience Manager
+    (AEM) API
   title: Adobe Experience Manager (AEM) API
-  version: 3.2.0-pre.0
+  version: 3.5.0-pre.0
 servers:
 - url: /
 security:
@@ -16,16 +17,17 @@ paths:
     get:
       operationId: getConfigMgr
       responses:
-        200:
+        "200":
           content:
             text/xml:
               schema:
                 type: string
           description: OK
-        5XX:
+        "5XX":
           description: Unexpected error.
       tags:
       - console
+      x-accepts: text/xml
       x-tags:
       - tag: console
   /libs/granite/core/content/login.html:
@@ -41,6 +43,7 @@ paths:
       security: []
       tags:
       - cq
+      x-accepts: text/html
       x-tags:
       - tag: cq
   /.cqactions.html:
@@ -66,6 +69,7 @@ paths:
           description: Default response
       tags:
       - cq
+      x-accepts: application/json
       x-tags:
       - tag: cq
   /{path}/:
@@ -98,6 +102,7 @@ paths:
           description: Default response
       tags:
       - sling
+      x-accepts: application/json
       x-tags:
       - tag: sling
   /{path}/{name}:
@@ -123,6 +128,7 @@ paths:
           description: Default response
       tags:
       - sling
+      x-accepts: application/json
       x-tags:
       - tag: sling
     get:
@@ -147,6 +153,7 @@ paths:
           description: Default response
       tags:
       - sling
+      x-accepts: application/json
       x-tags:
       - tag: sling
     post:
@@ -181,15 +188,22 @@ paths:
           type: string
         style: form
       requestBody:
+        $ref: '#/components/requestBodies/inline_object'
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/body'
+              properties:
+                file:
+                  format: binary
+                  type: string
+              type: object
       responses:
         default:
           description: Default response
       tags:
       - sling
+      x-contentType: multipart/form-data
+      x-accepts: application/json
       x-tags:
       - tag: sling
   /{path}/{name}.rw.html:
@@ -222,6 +236,26 @@ paths:
           description: Default response
       tags:
       - sling
+      x-accepts: application/json
+      x-tags:
+      - tag: sling
+  /apps/system/config/{configNodeName}:
+    post:
+      operationId: postConfigProperty
+      parameters:
+      - explode: false
+        in: path
+        name: configNodeName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          description: Default response
+      tags:
+      - sling
+      x-accepts: application/json
       x-tags:
       - tag: sling
   /apps/system/config/org.apache.felix.http:
@@ -373,6 +407,7 @@ paths:
           description: Default response
       tags:
       - sling
+      x-accepts: application/json
       x-tags:
       - tag: sling
   /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet:
@@ -440,6 +475,7 @@ paths:
           description: Default response
       tags:
       - sling
+      x-accepts: application/json
       x-tags:
       - tag: sling
   /apps/system/config/org.apache.sling.security.impl.ReferrerFilter:
@@ -507,6 +543,7 @@ paths:
           description: Default response
       tags:
       - sling
+      x-accepts: application/json
       x-tags:
       - tag: sling
   /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet:
@@ -546,6 +583,7 @@ paths:
           description: Default response
       tags:
       - sling
+      x-accepts: application/json
       x-tags:
       - tag: sling
   /apps/system/config/com.shinesolutions.aem.passwordreset.Activator:
@@ -573,6 +611,7 @@ paths:
           description: Default response
       tags:
       - custom
+      x-accepts: application/json
       x-tags:
       - tag: custom
   /apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck:
@@ -600,6 +639,7 @@ paths:
           description: Default response
       tags:
       - custom
+      x-accepts: application/json
       x-tags:
       - tag: custom
   /bin/querybuilder.json:
@@ -643,6 +683,7 @@ paths:
           description: Default response
       tags:
       - sling
+      x-accepts: application/json
       x-tags:
       - tag: sling
     post:
@@ -685,6 +726,7 @@ paths:
           description: Default response
       tags:
       - sling
+      x-accepts: application/json
       x-tags:
       - tag: sling
   /etc/packages/{group}/{name}-{version}.zip:
@@ -722,6 +764,7 @@ paths:
           description: Default response
       tags:
       - sling
+      x-accepts: application/octet-stream
       x-tags:
       - tag: sling
   /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json:
@@ -758,6 +801,7 @@ paths:
           description: Default response
       tags:
       - sling
+      x-accepts: application/json
       x-tags:
       - tag: sling
   /etc/replication/agents.{runmode}.-1.json:
@@ -780,6 +824,7 @@ paths:
           description: Default response
       tags:
       - sling
+      x-accepts: application/json
       x-tags:
       - tag: sling
   /etc/replication/agents.{runmode}/{name}:
@@ -805,6 +850,7 @@ paths:
           description: Default response
       tags:
       - sling
+      x-accepts: application/json
       x-tags:
       - tag: sling
     get:
@@ -829,6 +875,7 @@ paths:
           description: Default response
       tags:
       - sling
+      x-accepts: application/json
       x-tags:
       - tag: sling
     post:
@@ -1205,6 +1252,7 @@ paths:
           description: Default response
       tags:
       - sling
+      x-accepts: application/json
       x-tags:
       - tag: sling
   /etc/replication/treeactivation.html:
@@ -1237,6 +1285,7 @@ paths:
           description: Default response
       tags:
       - sling
+      x-accepts: application/json
       x-tags:
       - tag: sling
   /libs/granite/security/post/authorizables:
@@ -1294,6 +1343,7 @@ paths:
           description: Default response
       tags:
       - sling
+      x-accepts: text/html
       x-tags:
       - tag: sling
   /crx/explorer/ui/setpassword.jsp:
@@ -1330,13 +1380,14 @@ paths:
           description: Default response
       tags:
       - crx
+      x-accepts: text/plain
       x-tags:
       - tag: crx
   /crx/packmgr/installstatus.jsp:
     get:
       operationId: getInstallStatus
       responses:
-        200:
+        "200":
           content:
             application/json:
               schema:
@@ -1350,6 +1401,7 @@ paths:
           description: Default response
       tags:
       - crx
+      x-accepts: application/json
       x-tags:
       - tag: crx
   /crx/packmgr/service.jsp:
@@ -1372,6 +1424,7 @@ paths:
           description: Default response
       tags:
       - crx
+      x-accepts: text/xml
       x-tags:
       - tag: crx
   /crx/packmgr/update.jsp:
@@ -1429,6 +1482,7 @@ paths:
           description: Default response
       tags:
       - crx
+      x-accepts: application/json
       x-tags:
       - tag: crx
   /crx/packmgr/service/.json/{path}:
@@ -1492,10 +1546,15 @@ paths:
           type: boolean
         style: form
       requestBody:
+        $ref: '#/components/requestBodies/inline_object_1'
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/body_1'
+              properties:
+                package:
+                  format: binary
+                  type: string
+              type: object
       responses:
         default:
           content:
@@ -1505,19 +1564,21 @@ paths:
           description: Default response
       tags:
       - crx
+      x-contentType: multipart/form-data
+      x-accepts: application/json
       x-tags:
       - tag: crx
   /crx/packmgr/service/script.html:
     get:
       operationId: getPackageManagerServlet
       responses:
-        404:
+        "404":
           content:
             text/html:
               schema:
                 type: string
           description: Package Manager Servlet is disabled
-        405:
+        "405":
           content:
             text/html:
               schema:
@@ -1525,19 +1586,20 @@ paths:
           description: Package Manager Servlet is active
       tags:
       - crx
+      x-accepts: text/html
       x-tags:
       - tag: crx
   /crx/server/crx.default/jcr:root/.1.json:
     get:
       operationId: getCrxdeStatus
       responses:
-        200:
+        "200":
           content:
             plain/text:
               schema:
                 type: string
           description: CRXDE is enabled
-        404:
+        "404":
           content:
             plain/text:
               schema:
@@ -1545,8 +1607,38 @@ paths:
           description: CRXDE is disabled
       tags:
       - crx
+      x-accepts: plain/text
       x-tags:
       - tag: crx
+  /system/console/bundles/{name}.json:
+    get:
+      operationId: getBundleInfo
+      parameters:
+      - explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BundleInfo'
+          description: Retrieved bundle info
+        default:
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Default response
+      tags:
+      - console
+      x-accepts: application/json
+      x-tags:
+      - tag: console
   /system/console/bundles/{name}:
     post:
       operationId: postBundle
@@ -1570,6 +1662,7 @@ paths:
           description: Default response
       tags:
       - console
+      x-accepts: application/json
       x-tags:
       - tag: console
   /system/console/jmx/com.adobe.granite:type=Repository/op/{action}:
@@ -1588,6 +1681,7 @@ paths:
           description: Default response
       tags:
       - console
+      x-accepts: application/json
       x-tags:
       - tag: console
   /system/health:
@@ -1617,6 +1711,7 @@ paths:
           description: Default response
       tags:
       - custom
+      x-accepts: application/json
       x-tags:
       - tag: custom
   /apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config:
@@ -1642,7 +1737,6 @@ paths:
         name: service.ranking
         required: false
         schema:
-          format: int32
           type: integer
         style: form
       - explode: true
@@ -1789,7 +1883,6 @@ paths:
         name: clockTolerance
         required: false
         schema:
-          format: int32
           type: integer
         style: form
       - explode: true
@@ -1972,6 +2065,7 @@ paths:
           description: Default response
       tags:
       - sling
+      x-accepts: application/json
       x-tags:
       - tag: sling
   /apps/system/config/org.apache.http.proxyconfigurator.config:
@@ -1997,7 +2091,6 @@ paths:
         name: proxy.port
         required: false
         schema:
-          format: int32
           type: integer
         style: form
       - explode: true
@@ -2070,6 +2163,7 @@ paths:
           description: Default response
       tags:
       - sling
+      x-accepts: application/json
       x-tags:
       - tag: sling
   /libs/granite/security/post/truststore:
@@ -2112,10 +2206,15 @@ paths:
           type: string
         style: form
       requestBody:
+        $ref: '#/components/requestBodies/inline_object_2'
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/body_2'
+              properties:
+                certificate:
+                  format: binary
+                  type: string
+              type: object
       responses:
         default:
           content:
@@ -2125,13 +2224,15 @@ paths:
           description: Default response
       tags:
       - sling
+      x-contentType: multipart/form-data
+      x-accepts: text/plain
       x-tags:
       - tag: sling
   /libs/granite/security/truststore.json:
     get:
       operationId: getTruststoreInfo
       responses:
-        200:
+        "200":
           content:
             application/json:
               schema:
@@ -2145,6 +2246,7 @@ paths:
           description: Default response
       tags:
       - sling
+      x-accepts: application/json
       x-tags:
       - tag: sling
   /etc/truststore/truststore.p12:
@@ -2160,16 +2262,22 @@ paths:
           description: Default response
       tags:
       - sling
+      x-accepts: application/octet-stream
       x-tags:
       - tag: sling
   /etc/truststore:
     post:
       operationId: postTruststorePKCS12
       requestBody:
+        $ref: '#/components/requestBodies/inline_object_3'
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/body_3'
+              properties:
+                truststore.p12:
+                  format: binary
+                  type: string
+              type: object
       responses:
         default:
           content:
@@ -2179,6 +2287,8 @@ paths:
           description: Default response
       tags:
       - sling
+      x-contentType: multipart/form-data
+      x-accepts: text/plain
       x-tags:
       - tag: sling
   /system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler:
@@ -2234,7 +2344,6 @@ paths:
         name: service.ranking
         required: false
         schema:
-          format: int32
           type: integer
         style: form
       - explode: true
@@ -2372,7 +2481,6 @@ paths:
         name: clockTolerance
         required: false
         schema:
-          format: int32
           type: integer
         style: form
       - explode: true
@@ -2406,13 +2514,13 @@ paths:
           type: array
         style: form
       responses:
-        200:
+        "200":
           content:
             text/plain:
               schema:
                 $ref: '#/components/schemas/SamlConfigurationInfo'
           description: Retrieved AEM SAML Configuration
-        302:
+        "302":
           content:
             text/plain:
               schema:
@@ -2426,6 +2534,7 @@ paths:
           description: Default response
       tags:
       - console
+      x-accepts: text/plain
       x-tags:
       - tag: console
   /system/console/status-productinfo.json:
@@ -2442,6 +2551,7 @@ paths:
           description: Default response
       tags:
       - console
+      x-accepts: application/json
       x-tags:
       - tag: console
   /{intermediatePath}/{authorizableId}.ks.html:
@@ -2526,12 +2636,23 @@ paths:
           type: string
         style: form
       requestBody:
+        $ref: '#/components/requestBodies/inline_object_4'
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/body_4'
+              properties:
+                cert-chain:
+                  format: binary
+                  type: string
+                pk:
+                  format: binary
+                  type: string
+                keyStore:
+                  format: binary
+                  type: string
+              type: object
       responses:
-        200:
+        "200":
           content:
             text/plain:
               schema:
@@ -2545,6 +2666,8 @@ paths:
           description: Default response
       tags:
       - sling
+      x-contentType: multipart/form-data
+      x-accepts: text/plain
       x-tags:
       - tag: sling
   /{intermediatePath}/{authorizableId}.ks.json:
@@ -2566,7 +2689,7 @@ paths:
           type: string
         style: simple
       responses:
-        200:
+        "200":
           content:
             text/plain:
               schema:
@@ -2580,6 +2703,7 @@ paths:
           description: Default response
       tags:
       - sling
+      x-accepts: text/plain
       x-tags:
       - tag: sling
   /{intermediatePath}/{authorizableId}/keystore/store.p12:
@@ -2610,9 +2734,113 @@ paths:
           description: Default response
       tags:
       - sling
+      x-accepts: application/octet-stream
       x-tags:
       - tag: sling
+  /libs/granite/security/post/sslSetup.html:
+    post:
+      operationId: sslSetup
+      parameters:
+      - explode: true
+        in: query
+        name: keystorePassword
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: keystorePasswordConfirm
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: truststorePassword
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: truststorePasswordConfirm
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: httpsHostname
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: httpsPort
+        required: true
+        schema:
+          type: string
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object_5'
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                privatekeyFile:
+                  format: binary
+                  type: string
+                certificateFile:
+                  format: binary
+                  type: string
+              type: object
+      responses:
+        default:
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Default response
+      tags:
+      - granite
+      x-contentType: multipart/form-data
+      x-accepts: text/plain
+      x-tags:
+      - tag: granite
 components:
+  requestBodies:
+    inline_object_1:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object_1'
+    inline_object:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object'
+    inline_object_5:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object_5'
+    inline_object_4:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object_4'
+    inline_object_3:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object_3'
+    inline_object_2:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/inline_object_2'
   schemas:
     InstallStatus:
       example:
@@ -2695,7 +2923,6 @@ components:
           type: string
         serialNumber:
           description: "18165099476682912368"
-          format: int32
           type: integer
       type: object
     TruststoreItems:
@@ -2727,7 +2954,6 @@ components:
           type: string
         serialNumber:
           description: "18165099476682912368"
-          format: int32
           type: integer
       type: object
     SamlConfigurationInfo:
@@ -2814,7 +3040,6 @@ components:
           type: boolean
         type:
           description: Property type, 1=String, 3=long, 11=boolean, 12=Password
-          format: int32
           type: integer
         values:
           description: Property value
@@ -2838,7 +3063,6 @@ components:
           type: boolean
         type:
           description: Property type, 1=String, 3=long, 11=boolean, 12=Password
-          format: int32
           type: integer
         value:
           description: Property value
@@ -2860,11 +3084,9 @@ components:
           type: boolean
         type:
           description: Property type, 1=String, 3=long, 11=boolean, 12=Password
-          format: int32
           type: integer
         value:
           description: Property value
-          format: int32
           type: integer
         description:
           description: Property description
@@ -2883,7 +3105,6 @@ components:
           type: boolean
         type:
           description: Property type, 1=String, 3=long, 11=boolean, 12=Password
-          format: int32
           type: integer
         value:
           description: Property value
@@ -2892,31 +3113,134 @@ components:
           description: Property description
           type: string
       type: object
-    body:
+    BundleInfo:
+      example:
+        s:
+        - 0
+        - 0
+        data:
+        - fragment: true
+          stateRaw: 1
+          name: name
+          symbolicName: symbolicName
+          id: 6
+          state: state
+          category: category
+          version: version
+          props:
+          - value: value
+            key: key
+          - value: value
+            key: key
+        - fragment: true
+          stateRaw: 1
+          name: name
+          symbolicName: symbolicName
+          id: 6
+          state: state
+          category: category
+          version: version
+          props:
+          - value: value
+            key: key
+          - value: value
+            key: key
+        status: status
+      properties:
+        status:
+          description: Status description of all bundles
+          type: string
+        s:
+          items:
+            type: integer
+          type: array
+        data:
+          items:
+            $ref: '#/components/schemas/BundleData'
+          type: array
+      type: object
+    BundleData:
+      example:
+        fragment: true
+        stateRaw: 1
+        name: name
+        symbolicName: symbolicName
+        id: 6
+        state: state
+        category: category
+        version: version
+        props:
+        - value: value
+          key: key
+        - value: value
+          key: key
+      properties:
+        id:
+          description: Bundle ID
+          type: integer
+        name:
+          description: Bundle name
+          type: string
+        fragment:
+          description: Is bundle a fragment
+          type: boolean
+        stateRaw:
+          description: Numeric raw bundle state value
+          type: integer
+        state:
+          description: Bundle state value
+          type: string
+        version:
+          description: Bundle version
+          type: string
+        symbolicName:
+          description: Bundle symbolic name
+          type: string
+        category:
+          description: Bundle category
+          type: string
+        props:
+          items:
+            $ref: '#/components/schemas/BundleDataProp'
+          type: array
+      type: object
+    BundleDataProp:
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          description: Bundle data key
+          type: string
+        value:
+          description: Bundle data value
+          type: string
+      type: object
+    inline_object:
       properties:
         file:
           format: binary
           type: string
       type: object
-    body_1:
+    inline_object_1:
       properties:
         package:
           format: binary
           type: string
       type: object
-    body_2:
+    inline_object_2:
       properties:
         certificate:
           format: binary
           type: string
       type: object
-    body_3:
+    inline_object_3:
       properties:
         truststore.p12:
           format: binary
           type: string
       type: object
-    body_4:
+    inline_object_4:
       properties:
         cert-chain:
           format: binary
@@ -2928,6 +3252,15 @@ components:
           format: binary
           type: string
       type: object
+    inline_object_5:
+      properties:
+        privatekeyFile:
+          format: binary
+          type: string
+        certificateFile:
+          format: binary
+          type: string
+      type: object
     InstallStatus_status:
       example:
         finished: true
@@ -2936,7 +3269,6 @@ components:
         finished:
           type: boolean
         itemCount:
-          format: int32
           type: integer
       type: object
   securitySchemes:

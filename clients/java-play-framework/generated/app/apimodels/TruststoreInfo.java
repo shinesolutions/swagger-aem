@@ -11,15 +11,17 @@ import javax.validation.constraints.*;
 /**
  * TruststoreInfo
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPlayFrameworkCodegen", date = "2019-08-04T23:41:35.248Z[GMT]")
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPlayFrameworkCodegen", date = "2021-09-03T15:25:32.040+10:00[Australia/Melbourne]")
 @SuppressWarnings({"UnusedReturnValue", "WeakerAccess"})
 public class TruststoreInfo   {
   @JsonProperty("aliases")
+  @Valid
+
   private List<TruststoreItems> aliases = null;
 
   @JsonProperty("exists")
-  private Boolean exists = null;
+  
+  private Boolean exists;
 
   public TruststoreInfo aliases(List<TruststoreItems> aliases) {
     this.aliases = aliases;
@@ -38,7 +40,6 @@ public class TruststoreInfo   {
    * Get aliases
    * @return aliases
   **/
-  @Valid
   public List<TruststoreItems> getAliases() {
     return aliases;
   }
@@ -56,7 +57,7 @@ public class TruststoreInfo   {
    * False if truststore don't exist
    * @return exists
   **/
-    public Boolean getExists() {
+  public Boolean getExists() {
     return exists;
   }
 
@@ -66,7 +67,7 @@ public class TruststoreInfo   {
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -99,7 +100,7 @@ public class TruststoreInfo   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

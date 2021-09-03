@@ -7,6 +7,7 @@ import org.openapitools.api.factories.SystemApiServiceFactory;
 import io.swagger.annotations.ApiParam;
 import io.swagger.jaxrs.*;
 
+import org.openapitools.model.BundleInfo;
 import org.openapitools.model.SamlConfigurationInfo;
 
 import java.util.List;
@@ -26,7 +27,7 @@ import javax.ws.rs.*;
 
 
 @io.swagger.annotations.Api(description = "the system API")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaMSF4JServerCodegen", date = "2019-08-04T23:41:25.207Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaMSF4JServerCodegen", date = "2021-09-03T15:25:23.467+10:00[Australia/Melbourne]")
 public class SystemApi  {
    private final SystemApiService delegate = SystemApiServiceFactory.getSystemApi();
 
@@ -57,6 +58,22 @@ public class SystemApi  {
     public Response getAemProductInfo()
     throws NotFoundException {
         return delegate.getAemProductInfo();
+    }
+    @GET
+    @Path("/console/bundles/{name}.json")
+    
+    @Produces({ "application/json" })
+    @io.swagger.annotations.ApiOperation(value = "", notes = "", response = BundleInfo.class, authorizations = {
+        @io.swagger.annotations.Authorization(value = "aemAuth")
+    }, tags={ "console", })
+    @io.swagger.annotations.ApiResponses(value = { 
+        @io.swagger.annotations.ApiResponse(code = 200, message = "Retrieved bundle info", response = BundleInfo.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = BundleInfo.class) })
+    public Response getBundleInfo(@ApiParam(value = "",required=true) @PathParam("name") String name
+)
+    throws NotFoundException {
+        return delegate.getBundleInfo(name);
     }
     @GET
     @Path("/console/configMgr")

@@ -186,6 +186,158 @@ bool ConsoleManager::getAemProductInfoSync(char * accessToken,
 	handler, userData, false);
 }
 
+static bool getBundleInfoProcessor(MemoryStruct_s p_chunk, long code, char* errormsg, void* userData,
+	void(* voidHandler)())
+{
+	void(* handler)(BundleInfo, Error, void* )
+	= reinterpret_cast<void(*)(BundleInfo, Error, void* )> (voidHandler);
+	
+	JsonNode* pJson;
+	char * data = p_chunk.memory;
+
+	
+	BundleInfo out;
+
+	if (code >= 200 && code < 300) {
+		Error error(code, string("No Error"));
+
+
+
+
+		if (isprimitive("BundleInfo")) {
+			pJson = json_from_string(data, NULL);
+			jsonToValue(&out, pJson, "BundleInfo", "BundleInfo");
+			json_node_free(pJson);
+
+			if ("BundleInfo" == "std::string") {
+				string* val = (std::string*)(&out);
+				if (val->empty() && p_chunk.size>4) {
+					*val = string(p_chunk.memory, p_chunk.size);
+				}
+			}
+		} else {
+			
+			out.fromJson(data);
+			char *jsonStr =  out.toJson();
+			printf("\n%s\n", jsonStr);
+			g_free(static_cast<gpointer>(jsonStr));
+			
+		}
+		handler(out, error, userData);
+		return true;
+		//TODO: handle case where json parsing has an error
+
+	} else {
+		Error error;
+		if (errormsg != NULL) {
+			error = Error(code, string(errormsg));
+		} else if (p_chunk.memory != NULL) {
+			error = Error(code, string(p_chunk.memory));
+		} else {
+			error = Error(code, string("Unknown Error"));
+		}
+		 handler(out, error, userData);
+		return false;
+			}
+}
+
+static bool getBundleInfoHelper(char * accessToken,
+	std::string name, 
+	void(* handler)(BundleInfo, Error, void* )
+	, void* userData, bool isAsync)
+{
+
+	//TODO: maybe delete headerList after its used to free up space?
+	struct curl_slist *headerList = NULL;
+
+	
+	string accessHeader = "Authorization: Bearer ";
+	accessHeader.append(accessToken);
+	headerList = curl_slist_append(headerList, accessHeader.c_str());
+	headerList = curl_slist_append(headerList, "Content-Type: application/json");
+
+	map <string, string> queryParams;
+	string itemAtq;
+	
+	string mBody = "";
+	JsonNode* node;
+	JsonArray* json_array;
+
+	string url("/system/console/bundles/{name}.json");
+	int pos;
+
+	string s_name("{");
+	s_name.append("name");
+	s_name.append("}");
+	pos = url.find(s_name);
+	url.erase(pos, s_name.length());
+	url.insert(pos, stringify(&name, "std::string"));
+
+	//TODO: free memory of errormsg, memorystruct
+	MemoryStruct_s* p_chunk = new MemoryStruct_s();
+	long code;
+	char* errormsg = NULL;
+	string myhttpmethod("GET");
+
+	if(strcmp("PUT", "GET") == 0){
+		if(strcmp("", mBody.c_str()) == 0){
+			mBody.append("{}");
+		}
+	}
+
+	if(!isAsync){
+		NetClient::easycurl(ConsoleManager::getBasePath(), url, myhttpmethod, queryParams,
+			mBody, headerList, p_chunk, &code, errormsg);
+		bool retval = getBundleInfoProcessor(*p_chunk, code, errormsg, userData,reinterpret_cast<void(*)()>(handler));
+
+		curl_slist_free_all(headerList);
+		if (p_chunk) {
+			if(p_chunk->memory) {
+				free(p_chunk->memory);
+			}
+			delete (p_chunk);
+		}
+		if (errormsg) {
+			free(errormsg);
+		}
+		return retval;
+	} else{
+		GThread *thread = NULL;
+		RequestInfo *requestInfo = NULL;
+
+		requestInfo = new(nothrow) RequestInfo (ConsoleManager::getBasePath(), url, myhttpmethod, queryParams,
+			mBody, headerList, p_chunk, &code, errormsg, userData, reinterpret_cast<void(*)()>(handler), getBundleInfoProcessor);;
+		if(requestInfo == NULL)
+			return false;
+
+		thread = g_thread_new(NULL, __ConsoleManagerthreadFunc, static_cast<gpointer>(requestInfo));
+		return true;
+	}
+}
+
+
+
+
+bool ConsoleManager::getBundleInfoAsync(char * accessToken,
+	std::string name, 
+	void(* handler)(BundleInfo, Error, void* )
+	, void* userData)
+{
+	return getBundleInfoHelper(accessToken,
+	name, 
+	handler, userData, true);
+}
+
+bool ConsoleManager::getBundleInfoSync(char * accessToken,
+	std::string name, 
+	void(* handler)(BundleInfo, Error, void* )
+	, void* userData)
+{
+	return getBundleInfoHelper(accessToken,
+	name, 
+	handler, userData, false);
+}
+
 static bool getConfigMgrProcessor(MemoryStruct_s p_chunk, long code, char* errormsg, void* userData,
 	void(* voidHandler)())
 {
@@ -647,7 +799,7 @@ static bool postSamlConfigurationProcessor(MemoryStruct_s p_chunk, long code, ch
 }
 
 static bool postSamlConfigurationHelper(char * accessToken,
-	bool post, bool apply, bool _delete, std::string action, std::string Dollarlocation, std::list<std::string> path, int servicePeriodranking, std::string idpUrl, std::string idpCertAlias, bool idpHttpRedirect, std::string serviceProviderEntityId, std::string assertionConsumerServiceURL, std::string spPrivateKeyAlias, std::string keyStorePassword, std::string defaultRedirectUrl, std::string userIDAttribute, bool useEncryption, bool createUser, bool addGroupMemberships, std::string groupMembershipAttribute, std::list<std::string> defaultGroups, std::string nameIdFormat, std::list<std::string> synchronizeAttributes, bool handleLogout, std::string logoutUrl, int clockTolerance, std::string digestMethod, std::string signatureMethod, std::string userIntermediatePath, std::list<std::string> propertylist, 
+	bool post, bool apply, bool r_delete, std::string action, std::string Dollarlocation, std::list<std::string> path, int servicePeriodranking, std::string idpUrl, std::string idpCertAlias, bool idpHttpRedirect, std::string serviceProviderEntityId, std::string assertionConsumerServiceURL, std::string spPrivateKeyAlias, std::string keyStorePassword, std::string defaultRedirectUrl, std::string userIDAttribute, bool useEncryption, bool createUser, bool addGroupMemberships, std::string groupMembershipAttribute, std::list<std::string> defaultGroups, std::string nameIdFormat, std::list<std::string> synchronizeAttributes, bool handleLogout, std::string logoutUrl, int clockTolerance, std::string digestMethod, std::string signatureMethod, std::string userIntermediatePath, std::list<std::string> propertylist, 
 	void(* handler)(SamlConfigurationInfo, Error, void* )
 	, void* userData, bool isAsync)
 {
@@ -679,7 +831,7 @@ static bool postSamlConfigurationHelper(char * accessToken,
 	}
 
 
-	itemAtq = stringify(&_delete, "bool");
+	itemAtq = stringify(&r_delete, "bool");
 	queryParams.insert(pair<string, string>("delete", itemAtq));
 	if( itemAtq.empty()==true){
 		queryParams.erase("delete");
@@ -936,22 +1088,22 @@ static bool postSamlConfigurationHelper(char * accessToken,
 
 
 bool ConsoleManager::postSamlConfigurationAsync(char * accessToken,
-	bool post, bool apply, bool _delete, std::string action, std::string Dollarlocation, std::list<std::string> path, int servicePeriodranking, std::string idpUrl, std::string idpCertAlias, bool idpHttpRedirect, std::string serviceProviderEntityId, std::string assertionConsumerServiceURL, std::string spPrivateKeyAlias, std::string keyStorePassword, std::string defaultRedirectUrl, std::string userIDAttribute, bool useEncryption, bool createUser, bool addGroupMemberships, std::string groupMembershipAttribute, std::list<std::string> defaultGroups, std::string nameIdFormat, std::list<std::string> synchronizeAttributes, bool handleLogout, std::string logoutUrl, int clockTolerance, std::string digestMethod, std::string signatureMethod, std::string userIntermediatePath, std::list<std::string> propertylist, 
+	bool post, bool apply, bool r_delete, std::string action, std::string Dollarlocation, std::list<std::string> path, int servicePeriodranking, std::string idpUrl, std::string idpCertAlias, bool idpHttpRedirect, std::string serviceProviderEntityId, std::string assertionConsumerServiceURL, std::string spPrivateKeyAlias, std::string keyStorePassword, std::string defaultRedirectUrl, std::string userIDAttribute, bool useEncryption, bool createUser, bool addGroupMemberships, std::string groupMembershipAttribute, std::list<std::string> defaultGroups, std::string nameIdFormat, std::list<std::string> synchronizeAttributes, bool handleLogout, std::string logoutUrl, int clockTolerance, std::string digestMethod, std::string signatureMethod, std::string userIntermediatePath, std::list<std::string> propertylist, 
 	void(* handler)(SamlConfigurationInfo, Error, void* )
 	, void* userData)
 {
 	return postSamlConfigurationHelper(accessToken,
-	post, apply, _delete, action, Dollarlocation, path, servicePeriodranking, idpUrl, idpCertAlias, idpHttpRedirect, serviceProviderEntityId, assertionConsumerServiceURL, spPrivateKeyAlias, keyStorePassword, defaultRedirectUrl, userIDAttribute, useEncryption, createUser, addGroupMemberships, groupMembershipAttribute, defaultGroups, nameIdFormat, synchronizeAttributes, handleLogout, logoutUrl, clockTolerance, digestMethod, signatureMethod, userIntermediatePath, propertylist, 
+	post, apply, r_delete, action, Dollarlocation, path, servicePeriodranking, idpUrl, idpCertAlias, idpHttpRedirect, serviceProviderEntityId, assertionConsumerServiceURL, spPrivateKeyAlias, keyStorePassword, defaultRedirectUrl, userIDAttribute, useEncryption, createUser, addGroupMemberships, groupMembershipAttribute, defaultGroups, nameIdFormat, synchronizeAttributes, handleLogout, logoutUrl, clockTolerance, digestMethod, signatureMethod, userIntermediatePath, propertylist, 
 	handler, userData, true);
 }
 
 bool ConsoleManager::postSamlConfigurationSync(char * accessToken,
-	bool post, bool apply, bool _delete, std::string action, std::string Dollarlocation, std::list<std::string> path, int servicePeriodranking, std::string idpUrl, std::string idpCertAlias, bool idpHttpRedirect, std::string serviceProviderEntityId, std::string assertionConsumerServiceURL, std::string spPrivateKeyAlias, std::string keyStorePassword, std::string defaultRedirectUrl, std::string userIDAttribute, bool useEncryption, bool createUser, bool addGroupMemberships, std::string groupMembershipAttribute, std::list<std::string> defaultGroups, std::string nameIdFormat, std::list<std::string> synchronizeAttributes, bool handleLogout, std::string logoutUrl, int clockTolerance, std::string digestMethod, std::string signatureMethod, std::string userIntermediatePath, std::list<std::string> propertylist, 
+	bool post, bool apply, bool r_delete, std::string action, std::string Dollarlocation, std::list<std::string> path, int servicePeriodranking, std::string idpUrl, std::string idpCertAlias, bool idpHttpRedirect, std::string serviceProviderEntityId, std::string assertionConsumerServiceURL, std::string spPrivateKeyAlias, std::string keyStorePassword, std::string defaultRedirectUrl, std::string userIDAttribute, bool useEncryption, bool createUser, bool addGroupMemberships, std::string groupMembershipAttribute, std::list<std::string> defaultGroups, std::string nameIdFormat, std::list<std::string> synchronizeAttributes, bool handleLogout, std::string logoutUrl, int clockTolerance, std::string digestMethod, std::string signatureMethod, std::string userIntermediatePath, std::list<std::string> propertylist, 
 	void(* handler)(SamlConfigurationInfo, Error, void* )
 	, void* userData)
 {
 	return postSamlConfigurationHelper(accessToken,
-	post, apply, _delete, action, Dollarlocation, path, servicePeriodranking, idpUrl, idpCertAlias, idpHttpRedirect, serviceProviderEntityId, assertionConsumerServiceURL, spPrivateKeyAlias, keyStorePassword, defaultRedirectUrl, userIDAttribute, useEncryption, createUser, addGroupMemberships, groupMembershipAttribute, defaultGroups, nameIdFormat, synchronizeAttributes, handleLogout, logoutUrl, clockTolerance, digestMethod, signatureMethod, userIntermediatePath, propertylist, 
+	post, apply, r_delete, action, Dollarlocation, path, servicePeriodranking, idpUrl, idpCertAlias, idpHttpRedirect, serviceProviderEntityId, assertionConsumerServiceURL, spPrivateKeyAlias, keyStorePassword, defaultRedirectUrl, userIDAttribute, useEncryption, createUser, addGroupMemberships, groupMembershipAttribute, defaultGroups, nameIdFormat, synchronizeAttributes, handleLogout, logoutUrl, clockTolerance, digestMethod, signatureMethod, userIntermediatePath, propertylist, 
 	handler, userData, false);
 }
 

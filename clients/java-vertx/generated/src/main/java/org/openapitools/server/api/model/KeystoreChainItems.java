@@ -4,14 +4,14 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonInclude(JsonInclude.Include.NON_NULL) 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class KeystoreChainItems   {
   
-  private String subject = null;
-  private String issuer = null;
-  private String notBefore = null;
-  private String notAfter = null;
-  private Integer serialNumber = null;
+  private String subject;
+  private String issuer;
+  private String notBefore;
+  private String notAfter;
+  private Integer serialNumber;
 
   public KeystoreChainItems () {
 

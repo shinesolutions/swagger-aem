@@ -10,17 +10,13 @@ import org.openapitools.model.KeystoreChainItems;
 @Canonical
 class KeystoreItems {
     /* Keystore alias name */
-    String alias = null
-
+    String alias
     /* e.g. \"privateKey\" */
-    String entryType = null
-
+    String entryType
     /* e.g. \"RSA\" */
-    String algorithm = null
-
+    String algorithm
     /* e.g. \"PKCS#8\" */
-    String format = null
-
+    String format
+    
     List<KeystoreChainItems> chain = new ArrayList<KeystoreChainItems>()
-
 }

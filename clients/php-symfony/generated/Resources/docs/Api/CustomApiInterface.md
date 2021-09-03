@@ -17,7 +17,7 @@ services:
     acme.my_bundle.api.custom:
         class: Acme\MyBundle\Api\CustomApi
         tags:
-            - { name: "open_apiserver.api", api: "custom" }
+            - { name: "open_api_server.api", api: "custom" }
     # ...
 ```
 

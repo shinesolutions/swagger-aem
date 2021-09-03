@@ -8,6 +8,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
 
+import org.openapitools.server.api.model.BundleInfo;
 import org.openapitools.server.api.MainApiException;
 import org.openapitools.server.api.model.SamlConfigurationInfo;
 
@@ -15,13 +16,14 @@ import java.util.List;
 import java.util.Map;
 
 public class ConsoleApiVerticle extends AbstractVerticle {
-    final static Logger LOGGER = LoggerFactory.getLogger(ConsoleApiVerticle.class); 
+    static final Logger LOGGER = LoggerFactory.getLogger(ConsoleApiVerticle.class);
     
-    final static String GETAEMPRODUCTINFO_SERVICE_ID = "getAemProductInfo";
-    final static String GETCONFIGMGR_SERVICE_ID = "getConfigMgr";
-    final static String POSTBUNDLE_SERVICE_ID = "postBundle";
-    final static String POSTJMXREPOSITORY_SERVICE_ID = "postJmxRepository";
-    final static String POSTSAMLCONFIGURATION_SERVICE_ID = "postSamlConfiguration";
+    static final String GETAEMPRODUCTINFO_SERVICE_ID = "getAemProductInfo";
+    static final String GETBUNDLEINFO_SERVICE_ID = "getBundleInfo";
+    static final String GETCONFIGMGR_SERVICE_ID = "getConfigMgr";
+    static final String POSTBUNDLE_SERVICE_ID = "postBundle";
+    static final String POSTJMXREPOSITORY_SERVICE_ID = "postJmxRepository";
+    static final String POSTSAMLCONFIGURATION_SERVICE_ID = "postSamlConfiguration";
     
     final ConsoleApi service;
 
@@ -53,6 +55,31 @@ public class ConsoleApiVerticle extends AbstractVerticle {
                 });
             } catch (Exception e) {
                 logUnexpectedError("getAemProductInfo", e);
+                message.fail(MainApiException.INTERNAL_SERVER_ERROR.getStatusCode(), MainApiException.INTERNAL_SERVER_ERROR.getStatusMessage());
+            }
+        });
+        
+        //Consumer for getBundleInfo
+        vertx.eventBus().<JsonObject> consumer(GETBUNDLEINFO_SERVICE_ID).handler(message -> {
+            try {
+                // Workaround for #allParams section clearing the vendorExtensions map
+                String serviceId = "getBundleInfo";
+                String nameParam = message.body().getString("name");
+                if(nameParam == null) {
+                    manageError(message, new MainApiException(400, "name is required"), serviceId);
+                    return;
+                }
+                String name = nameParam;
+                service.getBundleInfo(name, result -> {
+                    if (result.succeeded())
+                        message.reply(new JsonObject(Json.encode(result.result())).encodePrettily());
+                    else {
+                        Throwable cause = result.cause();
+                        manageError(message, cause, "getBundleInfo");
+                    }
+                });
+            } catch (Exception e) {
+                logUnexpectedError("getBundleInfo", e);
                 message.fail(MainApiException.INTERNAL_SERVER_ERROR.getStatusCode(), MainApiException.INTERNAL_SERVER_ERROR.getStatusMessage());
             }
         });

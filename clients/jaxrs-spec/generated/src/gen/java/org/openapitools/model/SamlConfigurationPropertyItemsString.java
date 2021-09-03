@@ -1,22 +1,26 @@
 package org.openapitools.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
-
 
 import io.swagger.annotations.*;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 
-public class SamlConfigurationPropertyItemsString   {
+
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2021-09-03T15:26:06.461+10:00[Australia/Melbourne]")public class SamlConfigurationPropertyItemsString   {
   
-  private @Valid String name = null;
-  private @Valid Boolean optional = null;
-  private @Valid Boolean isSet = null;
-  private @Valid Integer type = null;
-  private @Valid String value = null;
-  private @Valid String description = null;
+  private @Valid String name;
+  private @Valid Boolean optional;
+  private @Valid Boolean isSet;
+  private @Valid Integer type;
+  private @Valid String value;
+  private @Valid String description;
 
   /**
    * property name
@@ -27,16 +31,19 @@ public class SamlConfigurationPropertyItemsString   {
   }
 
   
+
+  
   @ApiModelProperty(value = "property name")
   @JsonProperty("name")
   public String getName() {
     return name;
   }
+
   public void setName(String name) {
     this.name = name;
   }
 
-  /**
+/**
    * True if optional
    **/
   public SamlConfigurationPropertyItemsString optional(Boolean optional) {
@@ -45,16 +52,19 @@ public class SamlConfigurationPropertyItemsString   {
   }
 
   
+
+  
   @ApiModelProperty(value = "True if optional")
   @JsonProperty("optional")
   public Boolean getOptional() {
     return optional;
   }
+
   public void setOptional(Boolean optional) {
     this.optional = optional;
   }
 
-  /**
+/**
    * True if property is set
    **/
   public SamlConfigurationPropertyItemsString isSet(Boolean isSet) {
@@ -63,16 +73,19 @@ public class SamlConfigurationPropertyItemsString   {
   }
 
   
+
+  
   @ApiModelProperty(value = "True if property is set")
   @JsonProperty("is_set")
   public Boolean getIsSet() {
     return isSet;
   }
+
   public void setIsSet(Boolean isSet) {
     this.isSet = isSet;
   }
 
-  /**
+/**
    * Property type, 1&#x3D;String, 3&#x3D;long, 11&#x3D;boolean, 12&#x3D;Password
    **/
   public SamlConfigurationPropertyItemsString type(Integer type) {
@@ -81,16 +94,19 @@ public class SamlConfigurationPropertyItemsString   {
   }
 
   
+
+  
   @ApiModelProperty(value = "Property type, 1=String, 3=long, 11=boolean, 12=Password")
   @JsonProperty("type")
   public Integer getType() {
     return type;
   }
+
   public void setType(Integer type) {
     this.type = type;
   }
 
-  /**
+/**
    * Property value
    **/
   public SamlConfigurationPropertyItemsString value(String value) {
@@ -99,16 +115,19 @@ public class SamlConfigurationPropertyItemsString   {
   }
 
   
+
+  
   @ApiModelProperty(value = "Property value")
   @JsonProperty("value")
   public String getValue() {
     return value;
   }
+
   public void setValue(String value) {
     this.value = value;
   }
 
-  /**
+/**
    * Property description
    **/
   public SamlConfigurationPropertyItemsString description(String description) {
@@ -117,18 +136,21 @@ public class SamlConfigurationPropertyItemsString   {
   }
 
   
+
+  
   @ApiModelProperty(value = "Property description")
   @JsonProperty("description")
   public String getDescription() {
     return description;
   }
+
   public void setDescription(String description) {
     this.description = description;
   }
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -136,12 +158,12 @@ public class SamlConfigurationPropertyItemsString   {
       return false;
     }
     SamlConfigurationPropertyItemsString samlConfigurationPropertyItemsString = (SamlConfigurationPropertyItemsString) o;
-    return Objects.equals(name, samlConfigurationPropertyItemsString.name) &&
-        Objects.equals(optional, samlConfigurationPropertyItemsString.optional) &&
-        Objects.equals(isSet, samlConfigurationPropertyItemsString.isSet) &&
-        Objects.equals(type, samlConfigurationPropertyItemsString.type) &&
-        Objects.equals(value, samlConfigurationPropertyItemsString.value) &&
-        Objects.equals(description, samlConfigurationPropertyItemsString.description);
+    return Objects.equals(this.name, samlConfigurationPropertyItemsString.name) &&
+        Objects.equals(this.optional, samlConfigurationPropertyItemsString.optional) &&
+        Objects.equals(this.isSet, samlConfigurationPropertyItemsString.isSet) &&
+        Objects.equals(this.type, samlConfigurationPropertyItemsString.type) &&
+        Objects.equals(this.value, samlConfigurationPropertyItemsString.value) &&
+        Objects.equals(this.description, samlConfigurationPropertyItemsString.description);
   }
 
   @Override
@@ -168,11 +190,13 @@ public class SamlConfigurationPropertyItemsString   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }
     return o.toString().replace("\n", "\n    ");
   }
+
+
 }
 

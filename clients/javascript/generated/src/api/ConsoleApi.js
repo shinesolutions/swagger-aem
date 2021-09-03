@@ -13,6 +13,7 @@
 
 
 import ApiClient from "../ApiClient";
+import BundleInfo from '../model/BundleInfo';
 import SamlConfigurationInfo from '../model/SamlConfigurationInfo';
 
 /**
@@ -64,6 +65,47 @@ export default class ConsoleApi {
       let returnType = ['String'];
       return this.apiClient.callApi(
         '/system/console/status-productinfo.json', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the getBundleInfo operation.
+     * @callback module:api/ConsoleApi~getBundleInfoCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/BundleInfo} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * @param {String} name 
+     * @param {module:api/ConsoleApi~getBundleInfoCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/BundleInfo}
+     */
+    getBundleInfo(name, callback) {
+      let postBody = null;
+      // verify the required parameter 'name' is set
+      if (name === undefined || name === null) {
+        throw new Error("Missing the required parameter 'name' when calling getBundleInfo");
+      }
+
+      let pathParams = {
+        'name': name
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['aemAuth'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = BundleInfo;
+      return this.apiClient.callApi(
+        '/system/console/bundles/{name}.json', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );

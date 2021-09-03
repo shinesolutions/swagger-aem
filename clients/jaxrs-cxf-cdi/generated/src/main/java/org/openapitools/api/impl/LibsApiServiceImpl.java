@@ -17,7 +17,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
 @RequestScoped
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSCXFCDIServerCodegen", date = "2019-08-04T23:41:53.293Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSCXFCDIServerCodegen", date = "2021-09-03T15:25:48.597+10:00[Australia/Melbourne]")
 public class LibsApiServiceImpl implements LibsApiService {
       @Override
       public Response getLoginPage(SecurityContext securityContext) {
@@ -30,12 +30,17 @@ public class LibsApiServiceImpl implements LibsApiService {
       return Response.ok().entity("magic!").build();
   }
       @Override
-      public Response postAuthorizables(String authorizableId, String intermediatePath, String createUser, String createGroup, String repColonPassword, String profileSlashGivenName, SecurityContext securityContext) {
+      public Response postAuthorizables(String authorizableId, String intermediatePath, String createUser, String createGroup, String repColonPassword, String profileGivenName, SecurityContext securityContext) {
       // do some magic!
       return Response.ok().entity("magic!").build();
   }
       @Override
       public Response postTruststore(String colonOperation, String newPassword, String rePassword, String keyStoreType, String removeAlias, InputStream certificateInputStream, Attachment certificateDetail, SecurityContext securityContext) {
+      // do some magic!
+      return Response.ok().entity("magic!").build();
+  }
+      @Override
+      public Response sslSetup(String keystorePassword, String keystorePasswordConfirm, String truststorePassword, String truststorePasswordConfirm, String httpsHostname, String httpsPort, InputStream privatekeyFileInputStream, Attachment privatekeyFileDetail, InputStream certificateFileInputStream, Attachment certificateFileDetail, SecurityContext securityContext) {
       // do some magic!
       return Response.ok().entity("magic!").build();
   }

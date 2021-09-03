@@ -5,7 +5,7 @@ using System.Text;
 using Sharpility.Extensions;
 using NodaTime;
 
-namespace Org.OpenAPITools..Models
+namespace Org.OpenAPITools._.Models
 {
     /// <summary>
     /// SamlConfigurationPropertyItemsString

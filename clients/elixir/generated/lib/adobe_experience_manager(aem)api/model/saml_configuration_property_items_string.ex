@@ -18,12 +18,12 @@ defmodule AdobeExperienceManager(AEM)API.Model.SamlConfigurationPropertyItemsStr
   ]
 
   @type t :: %__MODULE__{
-    :"name" => String.t,
-    :"optional" => boolean(),
-    :"is_set" => boolean(),
-    :"type" => integer(),
-    :"value" => String.t,
-    :"description" => String.t
+    :"name" => String.t | nil,
+    :"optional" => boolean() | nil,
+    :"is_set" => boolean() | nil,
+    :"type" => integer() | nil,
+    :"value" => String.t | nil,
+    :"description" => String.t | nil
   }
 end
 

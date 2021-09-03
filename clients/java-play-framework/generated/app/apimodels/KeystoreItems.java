@@ -11,23 +11,28 @@ import javax.validation.constraints.*;
 /**
  * KeystoreItems
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPlayFrameworkCodegen", date = "2019-08-04T23:41:35.248Z[GMT]")
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPlayFrameworkCodegen", date = "2021-09-03T15:25:32.040+10:00[Australia/Melbourne]")
 @SuppressWarnings({"UnusedReturnValue", "WeakerAccess"})
 public class KeystoreItems   {
   @JsonProperty("alias")
-  private String alias = null;
+  
+  private String alias;
 
   @JsonProperty("entryType")
-  private String entryType = null;
+  
+  private String entryType;
 
   @JsonProperty("algorithm")
-  private String algorithm = null;
+  
+  private String algorithm;
 
   @JsonProperty("format")
-  private String format = null;
+  
+  private String format;
 
   @JsonProperty("chain")
+  @Valid
+
   private List<KeystoreChainItems> chain = null;
 
   public KeystoreItems alias(String alias) {
@@ -39,7 +44,7 @@ public class KeystoreItems   {
    * Keystore alias name
    * @return alias
   **/
-    public String getAlias() {
+  public String getAlias() {
     return alias;
   }
 
@@ -56,7 +61,7 @@ public class KeystoreItems   {
    * e.g. \"privateKey\"
    * @return entryType
   **/
-    public String getEntryType() {
+  public String getEntryType() {
     return entryType;
   }
 
@@ -73,7 +78,7 @@ public class KeystoreItems   {
    * e.g. \"RSA\"
    * @return algorithm
   **/
-    public String getAlgorithm() {
+  public String getAlgorithm() {
     return algorithm;
   }
 
@@ -90,7 +95,7 @@ public class KeystoreItems   {
    * e.g. \"PKCS#8\"
    * @return format
   **/
-    public String getFormat() {
+  public String getFormat() {
     return format;
   }
 
@@ -115,7 +120,6 @@ public class KeystoreItems   {
    * Get chain
    * @return chain
   **/
-  @Valid
   public List<KeystoreChainItems> getChain() {
     return chain;
   }
@@ -126,7 +130,7 @@ public class KeystoreItems   {
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -165,7 +169,7 @@ public class KeystoreItems   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

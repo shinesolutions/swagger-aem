@@ -15,26 +15,25 @@ import io.swagger.annotations.ApiModelProperty;
  * SamlConfigurationInfo
  */
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2019-08-04T23:41:29.600Z[GMT]")
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2021-09-03T15:25:27.791+10:00[Australia/Melbourne]")
 public class SamlConfigurationInfo   {
   @JsonProperty("pid")
-  private String pid = null;
+  private String pid;
 
   @JsonProperty("title")
-  private String title = null;
+  private String title;
 
   @JsonProperty("description")
-  private String description = null;
+  private String description;
 
   @JsonProperty("bundle_location")
-  private String bundleLocation = null;
+  private String bundleLocation;
 
   @JsonProperty("service_location")
-  private String serviceLocation = null;
+  private String serviceLocation;
 
   @JsonProperty("properties")
-  private SamlConfigurationProperties properties = null;
+  private SamlConfigurationProperties properties;
 
   public SamlConfigurationInfo pid(String pid) {
     this.pid = pid;
@@ -146,7 +145,7 @@ public class SamlConfigurationInfo   {
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -186,7 +185,7 @@ public class SamlConfigurationInfo   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

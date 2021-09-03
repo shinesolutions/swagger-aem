@@ -5,6 +5,7 @@
 #include <cstring>
 #include <list>
 #include <glib.h>
+#include "BundleInfo.h"
 #include "SamlConfigurationInfo.h"
 #include "Error.h"
 
@@ -46,6 +47,33 @@ bool getAemProductInfoSync(char * accessToken,
 bool getAemProductInfoAsync(char * accessToken,
 	
 	void(* handler)(std::list<std::string>, Error, void* )
+	, void* userData);
+
+
+/*! \brief . *Synchronous*
+ *
+ * 
+ * \param name  *Required*
+ * \param handler The callback function to be invoked on completion. *Required*
+ * \param accessToken The Authorization token. *Required*
+ * \param userData The user data to be passed to the callback function.
+ */
+bool getBundleInfoSync(char * accessToken,
+	std::string name, 
+	void(* handler)(BundleInfo, Error, void* )
+	, void* userData);
+
+/*! \brief . *Asynchronous*
+ *
+ * 
+ * \param name  *Required*
+ * \param handler The callback function to be invoked on completion. *Required*
+ * \param accessToken The Authorization token. *Required*
+ * \param userData The user data to be passed to the callback function.
+ */
+bool getBundleInfoAsync(char * accessToken,
+	std::string name, 
+	void(* handler)(BundleInfo, Error, void* )
 	, void* userData);
 
 
@@ -135,7 +163,7 @@ bool postJmxRepositoryAsync(char * accessToken,
  * 
  * \param post 
  * \param apply 
- * \param _delete 
+ * \param r_delete 
  * \param action 
  * \param Dollarlocation 
  * \param path 
@@ -168,7 +196,7 @@ bool postJmxRepositoryAsync(char * accessToken,
  * \param userData The user data to be passed to the callback function.
  */
 bool postSamlConfigurationSync(char * accessToken,
-	bool post, bool apply, bool _delete, std::string action, std::string Dollarlocation, std::list<std::string> path, int servicePeriodranking, std::string idpUrl, std::string idpCertAlias, bool idpHttpRedirect, std::string serviceProviderEntityId, std::string assertionConsumerServiceURL, std::string spPrivateKeyAlias, std::string keyStorePassword, std::string defaultRedirectUrl, std::string userIDAttribute, bool useEncryption, bool createUser, bool addGroupMemberships, std::string groupMembershipAttribute, std::list<std::string> defaultGroups, std::string nameIdFormat, std::list<std::string> synchronizeAttributes, bool handleLogout, std::string logoutUrl, int clockTolerance, std::string digestMethod, std::string signatureMethod, std::string userIntermediatePath, std::list<std::string> propertylist, 
+	bool post, bool apply, bool r_delete, std::string action, std::string Dollarlocation, std::list<std::string> path, int servicePeriodranking, std::string idpUrl, std::string idpCertAlias, bool idpHttpRedirect, std::string serviceProviderEntityId, std::string assertionConsumerServiceURL, std::string spPrivateKeyAlias, std::string keyStorePassword, std::string defaultRedirectUrl, std::string userIDAttribute, bool useEncryption, bool createUser, bool addGroupMemberships, std::string groupMembershipAttribute, std::list<std::string> defaultGroups, std::string nameIdFormat, std::list<std::string> synchronizeAttributes, bool handleLogout, std::string logoutUrl, int clockTolerance, std::string digestMethod, std::string signatureMethod, std::string userIntermediatePath, std::list<std::string> propertylist, 
 	void(* handler)(SamlConfigurationInfo, Error, void* )
 	, void* userData);
 
@@ -177,7 +205,7 @@ bool postSamlConfigurationSync(char * accessToken,
  * 
  * \param post 
  * \param apply 
- * \param _delete 
+ * \param r_delete 
  * \param action 
  * \param Dollarlocation 
  * \param path 
@@ -210,7 +238,7 @@ bool postSamlConfigurationSync(char * accessToken,
  * \param userData The user data to be passed to the callback function.
  */
 bool postSamlConfigurationAsync(char * accessToken,
-	bool post, bool apply, bool _delete, std::string action, std::string Dollarlocation, std::list<std::string> path, int servicePeriodranking, std::string idpUrl, std::string idpCertAlias, bool idpHttpRedirect, std::string serviceProviderEntityId, std::string assertionConsumerServiceURL, std::string spPrivateKeyAlias, std::string keyStorePassword, std::string defaultRedirectUrl, std::string userIDAttribute, bool useEncryption, bool createUser, bool addGroupMemberships, std::string groupMembershipAttribute, std::list<std::string> defaultGroups, std::string nameIdFormat, std::list<std::string> synchronizeAttributes, bool handleLogout, std::string logoutUrl, int clockTolerance, std::string digestMethod, std::string signatureMethod, std::string userIntermediatePath, std::list<std::string> propertylist, 
+	bool post, bool apply, bool r_delete, std::string action, std::string Dollarlocation, std::list<std::string> path, int servicePeriodranking, std::string idpUrl, std::string idpCertAlias, bool idpHttpRedirect, std::string serviceProviderEntityId, std::string assertionConsumerServiceURL, std::string spPrivateKeyAlias, std::string keyStorePassword, std::string defaultRedirectUrl, std::string userIDAttribute, bool useEncryption, bool createUser, bool addGroupMemberships, std::string groupMembershipAttribute, std::list<std::string> defaultGroups, std::string nameIdFormat, std::list<std::string> synchronizeAttributes, bool handleLogout, std::string logoutUrl, int clockTolerance, std::string digestMethod, std::string signatureMethod, std::string userIntermediatePath, std::list<std::string> propertylist, 
 	void(* handler)(SamlConfigurationInfo, Error, void* )
 	, void* userData);
 

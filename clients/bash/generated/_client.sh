@@ -297,6 +297,7 @@ case $state in
     # Operations
     _values "Operations" \
             "getAemProductInfo[]" \
+            "getBundleInfo[]" \
             "getConfigMgr[]" \
             "postBundle[]" \
             "postJmxRepository[]" \
@@ -309,7 +310,7 @@ case $state in
             "postPackageUpdate[]" \
             "postSetPassword[]"             "getAemHealthCheck[]" \
             "postConfigAemHealthCheckServlet[]" \
-            "postConfigAemPasswordReset[]"             "deleteAgent[]" \
+            "postConfigAemPasswordReset[]"             "sslSetup[]"             "deleteAgent[]" \
             "deleteNode[]" \
             "getAgent[]" \
             "getAgents[]" \
@@ -330,13 +331,15 @@ case $state in
             "postConfigApacheSlingDavExServlet[]" \
             "postConfigApacheSlingGetServlet[]" \
             "postConfigApacheSlingReferrerFilter[]" \
+            "postConfigProperty[]" \
             "postNode[]" \
             "postNodeRw[]" \
             "postPath[]" \
             "postQuery[]" \
             "postTreeActivation[]" \
             "postTruststore[]" \
-            "postTruststorePKCS12[]" 
+            "postTruststorePKCS12[]" \
+
     _arguments "(--help)--help[Print information about operation]"
 
     ret=0
@@ -347,6 +350,13 @@ case $state in
         local -a _op_arguments
         _op_arguments=(
                               )
+        _describe -t actions 'operations' _op_arguments -S '' && ret=0
+        ;;
+      getBundleInfo)
+        local -a _op_arguments
+        _op_arguments=(
+          "name=:[PATH] "
+                    )
         _describe -t actions 'operations' _op_arguments -S '' && ret=0
         ;;
       getConfigMgr)
@@ -512,6 +522,18 @@ case $state in
         _op_arguments=(
                     "pwdreset.authorizables=:[QUERY] "
 "pwdreset.authorizables@TypeHint=:[QUERY] "
+          )
+        _describe -t actions 'operations' _op_arguments -S '' && ret=0
+        ;;
+      sslSetup)
+        local -a _op_arguments
+        _op_arguments=(
+                    "keystorePassword=:[QUERY] "
+"keystorePasswordConfirm=:[QUERY] "
+"truststorePassword=:[QUERY] "
+"truststorePasswordConfirm=:[QUERY] "
+"httpsHostname=:[QUERY] "
+"httpsPort=:[QUERY] "
           )
         _describe -t actions 'operations' _op_arguments -S '' && ret=0
         ;;
@@ -856,6 +878,13 @@ case $state in
 "filter.methods=:[QUERY] "
 "filter.methods@TypeHint=:[QUERY] "
           )
+        _describe -t actions 'operations' _op_arguments -S '' && ret=0
+        ;;
+      postConfigProperty)
+        local -a _op_arguments
+        _op_arguments=(
+          "configNodeName=:[PATH] "
+                    )
         _describe -t actions 'operations' _op_arguments -S '' && ret=0
         ;;
       postNode)

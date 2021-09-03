@@ -22,7 +22,7 @@ import io.swagger.jaxrs.PATCH;
  * <p>Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
  *
  */
-@Path("/")
+@Path("")
 @Api(value = "/", description = "")
 public interface CqApi  {
 
@@ -39,6 +39,6 @@ public interface CqApi  {
     @ApiOperation(value = "", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response") })
-    public void postCqActions(@QueryParam("authorizableId")String authorizableId, @QueryParam("changelog")String changelog);
+    public void postCqActions(@QueryParam("authorizableId") String authorizableId, @QueryParam("changelog") String changelog);
 }
 

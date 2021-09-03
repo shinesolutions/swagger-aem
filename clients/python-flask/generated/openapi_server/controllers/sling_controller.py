@@ -151,7 +151,7 @@ def get_query(path, p_limit, _1_property, _1_property_value):  # noqa: E501
     :param path: 
     :type path: str
     :param p_limit: 
-    :type p_limit: float
+    :type p_limit: 
     :param _1_property: 
     :type _1_property: str
     :param _1_property_value: 
@@ -184,7 +184,7 @@ def get_truststore_info():  # noqa: E501
     return 'do some magic!'
 
 
-def post_agent(runmode, name, jcrcontentcqdistribute=None, jcrcontentcqdistribute_type_hint=None, jcrcontentcqname=None, jcrcontentcqtemplate=None, jcrcontentenabled=None, jcrcontentjcrdescription=None, jcrcontentjcrlast_modified=None, jcrcontentjcrlast_modified_by=None, jcrcontentjcrmixin_types=None, jcrcontentjcrtitle=None, jcrcontentlog_level=None, jcrcontentno_status_update=None, jcrcontentno_versioning=None, jcrcontentprotocol_connect_timeout=None, jcrcontentprotocol_http_connection_closed=None, jcrcontentprotocol_http_expired=None, jcrcontentprotocol_http_headers=None, jcrcontentprotocol_http_headers_type_hint=None, jcrcontentprotocol_http_method=None, jcrcontentprotocol_https_relaxed=None, jcrcontentprotocol_interface=None, jcrcontentprotocol_socket_timeout=None, jcrcontentprotocol_version=None, jcrcontentproxy_ntlm_domain=None, jcrcontentproxy_ntlm_host=None, jcrcontentproxy_host=None, jcrcontentproxy_password=None, jcrcontentproxy_port=None, jcrcontentproxy_user=None, jcrcontentqueue_batch_max_size=None, jcrcontentqueue_batch_mode=None, jcrcontentqueue_batch_wait_time=None, jcrcontentretry_delay=None, jcrcontentreverse_replication=None, jcrcontentserialization_type=None, jcrcontentslingresource_type=None, jcrcontentssl=None, jcrcontenttransport_ntlm_domain=None, jcrcontenttransport_ntlm_host=None, jcrcontenttransport_password=None, jcrcontenttransport_uri=None, jcrcontenttransport_user=None, jcrcontenttrigger_distribute=None, jcrcontenttrigger_modified=None, jcrcontenttrigger_on_off_time=None, jcrcontenttrigger_receive=None, jcrcontenttrigger_specific=None, jcrcontentuser_id=None, jcrprimary_type=None, operation=None):  # noqa: E501
+def post_agent(runmode, name, jcrcontent_cqdistribute=None, jcrcontent_cqdistribute_type_hint=None, jcrcontent_cqname=None, jcrcontent_cqtemplate=None, jcrcontent_enabled=None, jcrcontent_jcrdescription=None, jcrcontent_jcrlast_modified=None, jcrcontent_jcrlast_modified_by=None, jcrcontent_jcrmixin_types=None, jcrcontent_jcrtitle=None, jcrcontent_log_level=None, jcrcontent_no_status_update=None, jcrcontent_no_versioning=None, jcrcontent_protocol_connect_timeout=None, jcrcontent_protocol_http_connection_closed=None, jcrcontent_protocol_http_expired=None, jcrcontent_protocol_http_headers=None, jcrcontent_protocol_http_headers_type_hint=None, jcrcontent_protocol_http_method=None, jcrcontent_protocol_https_relaxed=None, jcrcontent_protocol_interface=None, jcrcontent_protocol_socket_timeout=None, jcrcontent_protocol_version=None, jcrcontent_proxy_ntlm_domain=None, jcrcontent_proxy_ntlm_host=None, jcrcontent_proxy_host=None, jcrcontent_proxy_password=None, jcrcontent_proxy_port=None, jcrcontent_proxy_user=None, jcrcontent_queue_batch_max_size=None, jcrcontent_queue_batch_mode=None, jcrcontent_queue_batch_wait_time=None, jcrcontent_retry_delay=None, jcrcontent_reverse_replication=None, jcrcontent_serialization_type=None, jcrcontent_slingresource_type=None, jcrcontent_ssl=None, jcrcontent_transport_ntlm_domain=None, jcrcontent_transport_ntlm_host=None, jcrcontent_transport_password=None, jcrcontent_transport_uri=None, jcrcontent_transport_user=None, jcrcontent_trigger_distribute=None, jcrcontent_trigger_modified=None, jcrcontent_trigger_on_off_time=None, jcrcontent_trigger_receive=None, jcrcontent_trigger_specific=None, jcrcontent_user_id=None, jcrprimary_type=None, operation=None):  # noqa: E501
     """post_agent
 
      # noqa: E501
@@ -193,102 +193,102 @@ def post_agent(runmode, name, jcrcontentcqdistribute=None, jcrcontentcqdistribut
     :type runmode: str
     :param name: 
     :type name: str
-    :param jcrcontentcqdistribute: 
-    :type jcrcontentcqdistribute: bool
-    :param jcrcontentcqdistribute_type_hint: 
-    :type jcrcontentcqdistribute_type_hint: str
-    :param jcrcontentcqname: 
-    :type jcrcontentcqname: str
-    :param jcrcontentcqtemplate: 
-    :type jcrcontentcqtemplate: str
-    :param jcrcontentenabled: 
-    :type jcrcontentenabled: bool
-    :param jcrcontentjcrdescription: 
-    :type jcrcontentjcrdescription: str
-    :param jcrcontentjcrlast_modified: 
-    :type jcrcontentjcrlast_modified: str
-    :param jcrcontentjcrlast_modified_by: 
-    :type jcrcontentjcrlast_modified_by: str
-    :param jcrcontentjcrmixin_types: 
-    :type jcrcontentjcrmixin_types: str
-    :param jcrcontentjcrtitle: 
-    :type jcrcontentjcrtitle: str
-    :param jcrcontentlog_level: 
-    :type jcrcontentlog_level: str
-    :param jcrcontentno_status_update: 
-    :type jcrcontentno_status_update: bool
-    :param jcrcontentno_versioning: 
-    :type jcrcontentno_versioning: bool
-    :param jcrcontentprotocol_connect_timeout: 
-    :type jcrcontentprotocol_connect_timeout: float
-    :param jcrcontentprotocol_http_connection_closed: 
-    :type jcrcontentprotocol_http_connection_closed: bool
-    :param jcrcontentprotocol_http_expired: 
-    :type jcrcontentprotocol_http_expired: str
-    :param jcrcontentprotocol_http_headers: 
-    :type jcrcontentprotocol_http_headers: List[str]
-    :param jcrcontentprotocol_http_headers_type_hint: 
-    :type jcrcontentprotocol_http_headers_type_hint: str
-    :param jcrcontentprotocol_http_method: 
-    :type jcrcontentprotocol_http_method: str
-    :param jcrcontentprotocol_https_relaxed: 
-    :type jcrcontentprotocol_https_relaxed: bool
-    :param jcrcontentprotocol_interface: 
-    :type jcrcontentprotocol_interface: str
-    :param jcrcontentprotocol_socket_timeout: 
-    :type jcrcontentprotocol_socket_timeout: float
-    :param jcrcontentprotocol_version: 
-    :type jcrcontentprotocol_version: str
-    :param jcrcontentproxy_ntlm_domain: 
-    :type jcrcontentproxy_ntlm_domain: str
-    :param jcrcontentproxy_ntlm_host: 
-    :type jcrcontentproxy_ntlm_host: str
-    :param jcrcontentproxy_host: 
-    :type jcrcontentproxy_host: str
-    :param jcrcontentproxy_password: 
-    :type jcrcontentproxy_password: str
-    :param jcrcontentproxy_port: 
-    :type jcrcontentproxy_port: float
-    :param jcrcontentproxy_user: 
-    :type jcrcontentproxy_user: str
-    :param jcrcontentqueue_batch_max_size: 
-    :type jcrcontentqueue_batch_max_size: float
-    :param jcrcontentqueue_batch_mode: 
-    :type jcrcontentqueue_batch_mode: str
-    :param jcrcontentqueue_batch_wait_time: 
-    :type jcrcontentqueue_batch_wait_time: float
-    :param jcrcontentretry_delay: 
-    :type jcrcontentretry_delay: str
-    :param jcrcontentreverse_replication: 
-    :type jcrcontentreverse_replication: bool
-    :param jcrcontentserialization_type: 
-    :type jcrcontentserialization_type: str
-    :param jcrcontentslingresource_type: 
-    :type jcrcontentslingresource_type: str
-    :param jcrcontentssl: 
-    :type jcrcontentssl: str
-    :param jcrcontenttransport_ntlm_domain: 
-    :type jcrcontenttransport_ntlm_domain: str
-    :param jcrcontenttransport_ntlm_host: 
-    :type jcrcontenttransport_ntlm_host: str
-    :param jcrcontenttransport_password: 
-    :type jcrcontenttransport_password: str
-    :param jcrcontenttransport_uri: 
-    :type jcrcontenttransport_uri: str
-    :param jcrcontenttransport_user: 
-    :type jcrcontenttransport_user: str
-    :param jcrcontenttrigger_distribute: 
-    :type jcrcontenttrigger_distribute: bool
-    :param jcrcontenttrigger_modified: 
-    :type jcrcontenttrigger_modified: bool
-    :param jcrcontenttrigger_on_off_time: 
-    :type jcrcontenttrigger_on_off_time: bool
-    :param jcrcontenttrigger_receive: 
-    :type jcrcontenttrigger_receive: bool
-    :param jcrcontenttrigger_specific: 
-    :type jcrcontenttrigger_specific: bool
-    :param jcrcontentuser_id: 
-    :type jcrcontentuser_id: str
+    :param jcrcontent_cqdistribute: 
+    :type jcrcontent_cqdistribute: bool
+    :param jcrcontent_cqdistribute_type_hint: 
+    :type jcrcontent_cqdistribute_type_hint: str
+    :param jcrcontent_cqname: 
+    :type jcrcontent_cqname: str
+    :param jcrcontent_cqtemplate: 
+    :type jcrcontent_cqtemplate: str
+    :param jcrcontent_enabled: 
+    :type jcrcontent_enabled: bool
+    :param jcrcontent_jcrdescription: 
+    :type jcrcontent_jcrdescription: str
+    :param jcrcontent_jcrlast_modified: 
+    :type jcrcontent_jcrlast_modified: str
+    :param jcrcontent_jcrlast_modified_by: 
+    :type jcrcontent_jcrlast_modified_by: str
+    :param jcrcontent_jcrmixin_types: 
+    :type jcrcontent_jcrmixin_types: str
+    :param jcrcontent_jcrtitle: 
+    :type jcrcontent_jcrtitle: str
+    :param jcrcontent_log_level: 
+    :type jcrcontent_log_level: str
+    :param jcrcontent_no_status_update: 
+    :type jcrcontent_no_status_update: bool
+    :param jcrcontent_no_versioning: 
+    :type jcrcontent_no_versioning: bool
+    :param jcrcontent_protocol_connect_timeout: 
+    :type jcrcontent_protocol_connect_timeout: 
+    :param jcrcontent_protocol_http_connection_closed: 
+    :type jcrcontent_protocol_http_connection_closed: bool
+    :param jcrcontent_protocol_http_expired: 
+    :type jcrcontent_protocol_http_expired: str
+    :param jcrcontent_protocol_http_headers: 
+    :type jcrcontent_protocol_http_headers: List[str]
+    :param jcrcontent_protocol_http_headers_type_hint: 
+    :type jcrcontent_protocol_http_headers_type_hint: str
+    :param jcrcontent_protocol_http_method: 
+    :type jcrcontent_protocol_http_method: str
+    :param jcrcontent_protocol_https_relaxed: 
+    :type jcrcontent_protocol_https_relaxed: bool
+    :param jcrcontent_protocol_interface: 
+    :type jcrcontent_protocol_interface: str
+    :param jcrcontent_protocol_socket_timeout: 
+    :type jcrcontent_protocol_socket_timeout: 
+    :param jcrcontent_protocol_version: 
+    :type jcrcontent_protocol_version: str
+    :param jcrcontent_proxy_ntlm_domain: 
+    :type jcrcontent_proxy_ntlm_domain: str
+    :param jcrcontent_proxy_ntlm_host: 
+    :type jcrcontent_proxy_ntlm_host: str
+    :param jcrcontent_proxy_host: 
+    :type jcrcontent_proxy_host: str
+    :param jcrcontent_proxy_password: 
+    :type jcrcontent_proxy_password: str
+    :param jcrcontent_proxy_port: 
+    :type jcrcontent_proxy_port: 
+    :param jcrcontent_proxy_user: 
+    :type jcrcontent_proxy_user: str
+    :param jcrcontent_queue_batch_max_size: 
+    :type jcrcontent_queue_batch_max_size: 
+    :param jcrcontent_queue_batch_mode: 
+    :type jcrcontent_queue_batch_mode: str
+    :param jcrcontent_queue_batch_wait_time: 
+    :type jcrcontent_queue_batch_wait_time: 
+    :param jcrcontent_retry_delay: 
+    :type jcrcontent_retry_delay: str
+    :param jcrcontent_reverse_replication: 
+    :type jcrcontent_reverse_replication: bool
+    :param jcrcontent_serialization_type: 
+    :type jcrcontent_serialization_type: str
+    :param jcrcontent_slingresource_type: 
+    :type jcrcontent_slingresource_type: str
+    :param jcrcontent_ssl: 
+    :type jcrcontent_ssl: str
+    :param jcrcontent_transport_ntlm_domain: 
+    :type jcrcontent_transport_ntlm_domain: str
+    :param jcrcontent_transport_ntlm_host: 
+    :type jcrcontent_transport_ntlm_host: str
+    :param jcrcontent_transport_password: 
+    :type jcrcontent_transport_password: str
+    :param jcrcontent_transport_uri: 
+    :type jcrcontent_transport_uri: str
+    :param jcrcontent_transport_user: 
+    :type jcrcontent_transport_user: str
+    :param jcrcontent_trigger_distribute: 
+    :type jcrcontent_trigger_distribute: bool
+    :param jcrcontent_trigger_modified: 
+    :type jcrcontent_trigger_modified: bool
+    :param jcrcontent_trigger_on_off_time: 
+    :type jcrcontent_trigger_on_off_time: bool
+    :param jcrcontent_trigger_receive: 
+    :type jcrcontent_trigger_receive: bool
+    :param jcrcontent_trigger_specific: 
+    :type jcrcontent_trigger_specific: bool
+    :param jcrcontent_user_id: 
+    :type jcrcontent_user_id: str
     :param jcrprimary_type: 
     :type jcrprimary_type: str
     :param operation: 
@@ -338,7 +338,7 @@ def post_authorizable_keystore(intermediate_path, authorizable_id, operation=Non
     return 'do some magic!'
 
 
-def post_authorizables(authorizable_id, intermediate_path, create_user=None, create_group=None, reppassword=None, profilegiven_name=None):  # noqa: E501
+def post_authorizables(authorizable_id, intermediate_path, create_user=None, create_group=None, reppassword=None, profile_given_name=None):  # noqa: E501
     """post_authorizables
 
      # noqa: E501
@@ -353,8 +353,8 @@ def post_authorizables(authorizable_id, intermediate_path, create_user=None, cre
     :type create_group: str
     :param reppassword: 
     :type reppassword: str
-    :param profilegiven_name: 
-    :type profilegiven_name: str
+    :param profile_given_name: 
+    :type profile_given_name: str
 
     :rtype: str
     """
@@ -627,6 +627,19 @@ def post_config_apache_sling_referrer_filter(allow_empty=None, allow_empty_type_
     return 'do some magic!'
 
 
+def post_config_property(config_node_name):  # noqa: E501
+    """post_config_property
+
+     # noqa: E501
+
+    :param config_node_name: 
+    :type config_node_name: str
+
+    :rtype: None
+    """
+    return 'do some magic!'
+
+
 def post_node(path, name, operation=None, delete_authorizable=None, file=None):  # noqa: E501
     """post_node
 
@@ -690,7 +703,7 @@ def post_query(path, p_limit, _1_property, _1_property_value):  # noqa: E501
     :param path: 
     :type path: str
     :param p_limit: 
-    :type p_limit: float
+    :type p_limit: 
     :param _1_property: 
     :type _1_property: str
     :param _1_property_value: 

@@ -23,7 +23,7 @@ namespace Org.OpenAPITools.Api
         /// <returns></returns>
         void PostCqActions (string authorizableId, string changelog);
     }
-  
+
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
@@ -37,11 +37,11 @@ namespace Org.OpenAPITools.Api
         public CqApi(ApiClient apiClient = null)
         {
             if (apiClient == null) // use the default one in Configuration
-                this.ApiClient = Configuration.DefaultApiClient; 
+                this.ApiClient = Configuration.DefaultApiClient;
             else
                 this.ApiClient = apiClient;
         }
-    
+
         /// <summary>
         /// Initializes a new instance of the <see cref="CqApi"/> class.
         /// </summary>
@@ -50,7 +50,7 @@ namespace Org.OpenAPITools.Api
         {
             this.ApiClient = new ApiClient(basePath);
         }
-    
+
         /// <summary>
         /// Sets the base path of the API client.
         /// </summary>
@@ -60,7 +60,7 @@ namespace Org.OpenAPITools.Api
         {
             this.ApiClient.BasePath = basePath;
         }
-    
+
         /// <summary>
         /// Gets the base path of the API client.
         /// </summary>
@@ -70,51 +70,51 @@ namespace Org.OpenAPITools.Api
         {
             return this.ApiClient.BasePath;
         }
-    
+
         /// <summary>
         /// Gets or sets the API client.
         /// </summary>
         /// <value>An instance of the ApiClient</value>
         public ApiClient ApiClient {get; set;}
-    
+
         /// <summary>
         ///  
         /// </summary>
-        /// <returns>string</returns>            
+        /// <returns>string</returns>
         public string GetLoginPage ()
         {
             
-    
+
             var path = "/libs/granite/core/content/login.html";
             path = path.Replace("{format}", "json");
-                
+            
             var queryParams = new Dictionary<String, String>();
             var headerParams = new Dictionary<String, String>();
             var formParams = new Dictionary<String, String>();
             var fileParams = new Dictionary<String, FileParameter>();
             String postBody = null;
-    
-                                                    
+
+                                                
             // authentication setting, if any
             String[] authSettings = new String[] {  };
-    
+
             // make the HTTP request
             IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.GET, queryParams, postBody, headerParams, formParams, fileParams, authSettings);
-    
+
             if (((int)response.StatusCode) >= 400)
                 throw new ApiException ((int)response.StatusCode, "Error calling GetLoginPage: " + response.Content, response.Content);
             else if (((int)response.StatusCode) == 0)
                 throw new ApiException ((int)response.StatusCode, "Error calling GetLoginPage: " + response.ErrorMessage, response.ErrorMessage);
-    
+
             return (string) ApiClient.Deserialize(response.Content, typeof(string), response.Headers);
         }
-    
+
         /// <summary>
         ///  
         /// </summary>
-        /// <param name="authorizableId"></param> 
-        /// <param name="changelog"></param> 
-        /// <returns></returns>            
+        /// <param name="authorizableId"></param>
+        /// <param name="changelog"></param>
+        /// <returns></returns>
         public void PostCqActions (string authorizableId, string changelog)
         {
             
@@ -124,32 +124,32 @@ namespace Org.OpenAPITools.Api
             // verify the required parameter 'changelog' is set
             if (changelog == null) throw new ApiException(400, "Missing required parameter 'changelog' when calling PostCqActions");
             
-    
+
             var path = "/.cqactions.html";
             path = path.Replace("{format}", "json");
-                
+            
             var queryParams = new Dictionary<String, String>();
             var headerParams = new Dictionary<String, String>();
             var formParams = new Dictionary<String, String>();
             var fileParams = new Dictionary<String, FileParameter>();
             String postBody = null;
-    
+
              if (authorizableId != null) queryParams.Add("authorizableId", ApiClient.ParameterToString(authorizableId)); // query parameter
  if (changelog != null) queryParams.Add("changelog", ApiClient.ParameterToString(changelog)); // query parameter
-                                        
+                                    
             // authentication setting, if any
             String[] authSettings = new String[] { "aemAuth" };
-    
+
             // make the HTTP request
             IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, authSettings);
-    
+
             if (((int)response.StatusCode) >= 400)
                 throw new ApiException ((int)response.StatusCode, "Error calling PostCqActions: " + response.Content, response.Content);
             else if (((int)response.StatusCode) == 0)
                 throw new ApiException ((int)response.StatusCode, "Error calling PostCqActions: " + response.ErrorMessage, response.ErrorMessage);
-    
+
             return;
         }
-    
+
     }
 }

@@ -15,7 +15,7 @@ import java.io.InputStream;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaMSF4JServerCodegen", date = "2019-08-04T23:41:25.207Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaMSF4JServerCodegen", date = "2021-09-03T15:25:23.467+10:00[Australia/Melbourne]")
 public abstract class AppsApiService {
     public abstract Response postConfigAdobeGraniteSamlAuthenticationHandler(String keyStorePassword
  ,String keyStorePasswordAtTypeHint
@@ -128,5 +128,7 @@ public abstract class AppsApiService {
  ,String allowHostsRegexpAtTypeHint
  ,String filterMethods
  ,String filterMethodsAtTypeHint
+ ) throws NotFoundException;
+    public abstract Response postConfigProperty(String configNodeName
  ) throws NotFoundException;
 }

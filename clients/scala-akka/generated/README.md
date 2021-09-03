@@ -1,7 +1,7 @@
 # openapi-client
 
 Adobe Experience Manager (AEM) API
-- API version: 3.2.0-pre.0
+- API version: 3.5.0-pre.0
 
 Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
 
@@ -67,6 +67,7 @@ All URIs are relative to *http://localhost*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ConsoleApi* | **getAemProductInfo** | **GET** /system/console/status-productinfo.json | 
+*ConsoleApi* | **getBundleInfo** | **GET** /system/console/bundles/{name}.json | 
 *ConsoleApi* | **getConfigMgr** | **GET** /system/console/configMgr | 
 *ConsoleApi* | **postBundle** | **POST** /system/console/bundles/{name} | 
 *ConsoleApi* | **postJmxRepository** | **POST** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} | 
@@ -83,6 +84,7 @@ Class | Method | HTTP request | Description
 *CustomApi* | **getAemHealthCheck** | **GET** /system/health | 
 *CustomApi* | **postConfigAemHealthCheckServlet** | **POST** /apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck | 
 *CustomApi* | **postConfigAemPasswordReset** | **POST** /apps/system/config/com.shinesolutions.aem.passwordreset.Activator | 
+*GraniteApi* | **sslSetup** | **POST** /libs/granite/security/post/sslSetup.html | 
 *SlingApi* | **deleteAgent** | **DELETE** /etc/replication/agents.{runmode}/{name} | 
 *SlingApi* | **deleteNode** | **DELETE** /{path}/{name} | 
 *SlingApi* | **getAgent** | **GET** /etc/replication/agents.{runmode}/{name} | 
@@ -104,6 +106,7 @@ Class | Method | HTTP request | Description
 *SlingApi* | **postConfigApacheSlingDavExServlet** | **POST** /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet | 
 *SlingApi* | **postConfigApacheSlingGetServlet** | **POST** /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet | 
 *SlingApi* | **postConfigApacheSlingReferrerFilter** | **POST** /apps/system/config/org.apache.sling.security.impl.ReferrerFilter | 
+*SlingApi* | **postConfigProperty** | **POST** /apps/system/config/{configNodeName} | 
 *SlingApi* | **postNode** | **POST** /{path}/{name} | 
 *SlingApi* | **postNodeRw** | **POST** /{path}/{name}.rw.html | 
 *SlingApi* | **postPath** | **POST** /{path}/ | 
@@ -115,6 +118,9 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
+ - [BundleData](BundleData.md)
+ - [BundleDataProp](BundleDataProp.md)
+ - [BundleInfo](BundleInfo.md)
  - [InstallStatus](InstallStatus.md)
  - [InstallStatusStatus](InstallStatusStatus.md)
  - [KeystoreChainItems](KeystoreChainItems.md)
@@ -141,3 +147,4 @@ Authentication schemes defined for the API:
 ## Author
 
 opensource@shinesolutions.com
+

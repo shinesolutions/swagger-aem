@@ -18,12 +18,12 @@ defmodule AdobeExperienceManager(AEM)API.Model.SamlConfigurationInfo do
   ]
 
   @type t :: %__MODULE__{
-    :"pid" => String.t,
-    :"title" => String.t,
-    :"description" => String.t,
-    :"bundle_location" => String.t,
-    :"service_location" => String.t,
-    :"properties" => SamlConfigurationProperties
+    :"pid" => String.t | nil,
+    :"title" => String.t | nil,
+    :"description" => String.t | nil,
+    :"bundle_location" => String.t | nil,
+    :"service_location" => String.t | nil,
+    :"properties" => AdobeExperienceManager(AEM)API.Model.SamlConfigurationProperties.t | nil
   }
 end
 

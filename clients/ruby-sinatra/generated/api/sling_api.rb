@@ -1,7 +1,7 @@
 require 'json'
 
 
-MyApp.add_route('DELETE', '//etc/replication/agents.{runmode}/{name}', {
+MyApp.add_route('DELETE', '/etc/replication/agents.{runmode}/{name}', {
   "resourcePath" => "/Sling",
   "summary" => "",
   "nickname" => "delete_agent", 
@@ -29,7 +29,7 @@ MyApp.add_route('DELETE', '//etc/replication/agents.{runmode}/{name}', {
 end
 
 
-MyApp.add_route('DELETE', '//{path}/{name}', {
+MyApp.add_route('DELETE', '/{path}/{name}', {
   "resourcePath" => "/Sling",
   "summary" => "",
   "nickname" => "delete_node", 
@@ -57,7 +57,7 @@ MyApp.add_route('DELETE', '//{path}/{name}', {
 end
 
 
-MyApp.add_route('GET', '//etc/replication/agents.{runmode}/{name}', {
+MyApp.add_route('GET', '/etc/replication/agents.{runmode}/{name}', {
   "resourcePath" => "/Sling",
   "summary" => "",
   "nickname" => "get_agent", 
@@ -85,7 +85,7 @@ MyApp.add_route('GET', '//etc/replication/agents.{runmode}/{name}', {
 end
 
 
-MyApp.add_route('GET', '//etc/replication/agents.{runmode}.-1.json', {
+MyApp.add_route('GET', '/etc/replication/agents.{runmode}.-1.json', {
   "resourcePath" => "/Sling",
   "summary" => "",
   "nickname" => "get_agents", 
@@ -107,7 +107,7 @@ MyApp.add_route('GET', '//etc/replication/agents.{runmode}.-1.json', {
 end
 
 
-MyApp.add_route('GET', '//{intermediatePath}/{authorizableId}.ks.json', {
+MyApp.add_route('GET', '/{intermediatePath}/{authorizableId}.ks.json', {
   "resourcePath" => "/Sling",
   "summary" => "",
   "nickname" => "get_authorizable_keystore", 
@@ -135,7 +135,7 @@ MyApp.add_route('GET', '//{intermediatePath}/{authorizableId}.ks.json', {
 end
 
 
-MyApp.add_route('GET', '//{intermediatePath}/{authorizableId}/keystore/store.p12', {
+MyApp.add_route('GET', '/{intermediatePath}/{authorizableId}/keystore/store.p12', {
   "resourcePath" => "/Sling",
   "summary" => "",
   "nickname" => "get_keystore", 
@@ -163,7 +163,7 @@ MyApp.add_route('GET', '//{intermediatePath}/{authorizableId}/keystore/store.p12
 end
 
 
-MyApp.add_route('GET', '//{path}/{name}', {
+MyApp.add_route('GET', '/{path}/{name}', {
   "resourcePath" => "/Sling",
   "summary" => "",
   "nickname" => "get_node", 
@@ -191,7 +191,7 @@ MyApp.add_route('GET', '//{path}/{name}', {
 end
 
 
-MyApp.add_route('GET', '//etc/packages/{group}/{name}-{version}.zip', {
+MyApp.add_route('GET', '/etc/packages/{group}/{name}-{version}.zip', {
   "resourcePath" => "/Sling",
   "summary" => "",
   "nickname" => "get_package", 
@@ -225,7 +225,7 @@ MyApp.add_route('GET', '//etc/packages/{group}/{name}-{version}.zip', {
 end
 
 
-MyApp.add_route('GET', '//etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json', {
+MyApp.add_route('GET', '/etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json', {
   "resourcePath" => "/Sling",
   "summary" => "",
   "nickname" => "get_package_filter", 
@@ -259,7 +259,7 @@ MyApp.add_route('GET', '//etc/packages/{group}/{name}-{version}.zip/jcr:content/
 end
 
 
-MyApp.add_route('GET', '//bin/querybuilder.json', {
+MyApp.add_route('GET', '/bin/querybuilder.json', {
   "resourcePath" => "/Sling",
   "summary" => "",
   "nickname" => "get_query", 
@@ -303,7 +303,7 @@ MyApp.add_route('GET', '//bin/querybuilder.json', {
 end
 
 
-MyApp.add_route('GET', '//etc/truststore/truststore.p12', {
+MyApp.add_route('GET', '/etc/truststore/truststore.p12', {
   "resourcePath" => "/Sling",
   "summary" => "",
   "nickname" => "get_truststore", 
@@ -319,7 +319,7 @@ MyApp.add_route('GET', '//etc/truststore/truststore.p12', {
 end
 
 
-MyApp.add_route('GET', '//libs/granite/security/truststore.json', {
+MyApp.add_route('GET', '/libs/granite/security/truststore.json', {
   "resourcePath" => "/Sling",
   "summary" => "",
   "nickname" => "get_truststore_info", 
@@ -335,7 +335,7 @@ MyApp.add_route('GET', '//libs/granite/security/truststore.json', {
 end
 
 
-MyApp.add_route('POST', '//etc/replication/agents.{runmode}/{name}', {
+MyApp.add_route('POST', '/etc/replication/agents.{runmode}/{name}', {
   "resourcePath" => "/Sling",
   "summary" => "",
   "nickname" => "post_agent", 
@@ -344,336 +344,336 @@ MyApp.add_route('POST', '//etc/replication/agents.{runmode}/{name}', {
   "notes" => "",
   "parameters" => [
     {
-      "name" => "jcrcontentcqdistribute",
+      "name" => "jcrcontent_cqdistribute",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentcqdistribute_type_hint",
-      "description" => "",
-      "dataType" => "String",
-      "allowableValues" => "",
-      "paramType" => "query",
-    },
-    {
-      "name" => "jcrcontentcqname",
+      "name" => "jcrcontent_cqdistribute_type_hint",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentcqtemplate",
+      "name" => "jcrcontent_cqname",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentenabled",
-      "description" => "",
-      "dataType" => "boolean",
-      "allowableValues" => "",
-      "paramType" => "query",
-    },
-    {
-      "name" => "jcrcontentjcrdescription",
+      "name" => "jcrcontent_cqtemplate",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentjcrlast_modified",
+      "name" => "jcrcontent_enabled",
+      "description" => "",
+      "dataType" => "Boolean",
+      "allowableValues" => "",
+      "paramType" => "query",
+    },
+    {
+      "name" => "jcrcontent_jcrdescription",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentjcrlast_modified_by",
+      "name" => "jcrcontent_jcrlast_modified",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentjcrmixin_types",
+      "name" => "jcrcontent_jcrlast_modified_by",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentjcrtitle",
+      "name" => "jcrcontent_jcrmixin_types",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentlog_level",
+      "name" => "jcrcontent_jcrtitle",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentno_status_update",
+      "name" => "jcrcontent_log_level",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentno_versioning",
+      "name" => "jcrcontent_no_status_update",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentprotocol_connect_timeout",
+      "name" => "jcrcontent_no_versioning",
+      "description" => "",
+      "dataType" => "Boolean",
+      "allowableValues" => "",
+      "paramType" => "query",
+    },
+    {
+      "name" => "jcrcontent_protocol_connect_timeout",
       "description" => "",
       "dataType" => "Float",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentprotocol_http_connection_closed",
+      "name" => "jcrcontent_protocol_http_connection_closed",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentprotocol_http_expired",
+      "name" => "jcrcontent_protocol_http_expired",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentprotocol_http_headers",
+      "name" => "jcrcontent_protocol_http_headers",
       "description" => "",
       "dataType" => "Array<String>",
       "collectionFormat" => "multi",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentprotocol_http_headers_type_hint",
+      "name" => "jcrcontent_protocol_http_headers_type_hint",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentprotocol_http_method",
+      "name" => "jcrcontent_protocol_http_method",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentprotocol_https_relaxed",
+      "name" => "jcrcontent_protocol_https_relaxed",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentprotocol_interface",
+      "name" => "jcrcontent_protocol_interface",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentprotocol_socket_timeout",
+      "name" => "jcrcontent_protocol_socket_timeout",
       "description" => "",
       "dataType" => "Float",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentprotocol_version",
+      "name" => "jcrcontent_protocol_version",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentproxy_ntlm_domain",
+      "name" => "jcrcontent_proxy_ntlm_domain",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentproxy_ntlm_host",
+      "name" => "jcrcontent_proxy_ntlm_host",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentproxy_host",
+      "name" => "jcrcontent_proxy_host",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentproxy_password",
+      "name" => "jcrcontent_proxy_password",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentproxy_port",
+      "name" => "jcrcontent_proxy_port",
       "description" => "",
       "dataType" => "Float",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentproxy_user",
+      "name" => "jcrcontent_proxy_user",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentqueue_batch_max_size",
+      "name" => "jcrcontent_queue_batch_max_size",
       "description" => "",
       "dataType" => "Float",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentqueue_batch_mode",
+      "name" => "jcrcontent_queue_batch_mode",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentqueue_batch_wait_time",
+      "name" => "jcrcontent_queue_batch_wait_time",
       "description" => "",
       "dataType" => "Float",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentretry_delay",
+      "name" => "jcrcontent_retry_delay",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentreverse_replication",
+      "name" => "jcrcontent_reverse_replication",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentserialization_type",
-      "description" => "",
-      "dataType" => "String",
-      "allowableValues" => "",
-      "paramType" => "query",
-    },
-    {
-      "name" => "jcrcontentslingresource_type",
+      "name" => "jcrcontent_serialization_type",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentssl",
+      "name" => "jcrcontent_slingresource_type",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontenttransport_ntlm_domain",
+      "name" => "jcrcontent_ssl",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontenttransport_ntlm_host",
+      "name" => "jcrcontent_transport_ntlm_domain",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontenttransport_password",
+      "name" => "jcrcontent_transport_ntlm_host",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontenttransport_uri",
+      "name" => "jcrcontent_transport_password",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontenttransport_user",
+      "name" => "jcrcontent_transport_uri",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontenttrigger_distribute",
+      "name" => "jcrcontent_transport_user",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontenttrigger_modified",
+      "name" => "jcrcontent_trigger_distribute",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontenttrigger_on_off_time",
+      "name" => "jcrcontent_trigger_modified",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontenttrigger_receive",
+      "name" => "jcrcontent_trigger_on_off_time",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontenttrigger_specific",
+      "name" => "jcrcontent_trigger_receive",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontentuser_id",
+      "name" => "jcrcontent_trigger_specific",
+      "description" => "",
+      "dataType" => "Boolean",
+      "allowableValues" => "",
+      "paramType" => "query",
+    },
+    {
+      "name" => "jcrcontent_user_id",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
@@ -713,7 +713,7 @@ MyApp.add_route('POST', '//etc/replication/agents.{runmode}/{name}', {
 end
 
 
-MyApp.add_route('POST', '//{intermediatePath}/{authorizableId}.ks.html', {
+MyApp.add_route('POST', '/{intermediatePath}/{authorizableId}.ks.html', {
   "resourcePath" => "/Sling",
   "summary" => "",
   "nickname" => "post_authorizable_keystore", 
@@ -804,7 +804,7 @@ MyApp.add_route('POST', '//{intermediatePath}/{authorizableId}.ks.html', {
 end
 
 
-MyApp.add_route('POST', '//libs/granite/security/post/authorizables', {
+MyApp.add_route('POST', '/libs/granite/security/post/authorizables', {
   "resourcePath" => "/Sling",
   "summary" => "",
   "nickname" => "post_authorizables", 
@@ -848,7 +848,7 @@ MyApp.add_route('POST', '//libs/granite/security/post/authorizables', {
       "paramType" => "query",
     },
     {
-      "name" => "profilegiven_name",
+      "name" => "profile_given_name",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
@@ -862,7 +862,7 @@ MyApp.add_route('POST', '//libs/granite/security/post/authorizables', {
 end
 
 
-MyApp.add_route('POST', '//apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config', {
+MyApp.add_route('POST', '/apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config', {
   "resourcePath" => "/Sling",
   "summary" => "",
   "nickname" => "post_config_adobe_granite_saml_authentication_handler", 
@@ -901,7 +901,7 @@ MyApp.add_route('POST', '//apps/system/config/com.adobe.granite.auth.saml.SamlAu
     {
       "name" => "idp_http_redirect",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
@@ -915,7 +915,7 @@ MyApp.add_route('POST', '//apps/system/config/com.adobe.granite.auth.saml.SamlAu
     {
       "name" => "create_user",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
@@ -985,7 +985,7 @@ MyApp.add_route('POST', '//apps/system/config/com.adobe.granite.auth.saml.SamlAu
     {
       "name" => "add_group_memberships",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
@@ -1111,7 +1111,7 @@ MyApp.add_route('POST', '//apps/system/config/com.adobe.granite.auth.saml.SamlAu
     {
       "name" => "handle_logout",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
@@ -1139,7 +1139,7 @@ MyApp.add_route('POST', '//apps/system/config/com.adobe.granite.auth.saml.SamlAu
     {
       "name" => "use_encryption",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
@@ -1214,7 +1214,7 @@ MyApp.add_route('POST', '//apps/system/config/com.adobe.granite.auth.saml.SamlAu
 end
 
 
-MyApp.add_route('POST', '//apps/system/config/org.apache.felix.http', {
+MyApp.add_route('POST', '/apps/system/config/org.apache.felix.http', {
   "resourcePath" => "/Sling",
   "summary" => "",
   "nickname" => "post_config_apache_felix_jetty_based_http_service", 
@@ -1225,7 +1225,7 @@ MyApp.add_route('POST', '//apps/system/config/org.apache.felix.http', {
     {
       "name" => "org_apache_felix_https_nio",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
@@ -1337,7 +1337,7 @@ MyApp.add_route('POST', '//apps/system/config/org.apache.felix.http', {
     {
       "name" => "org_apache_felix_https_enable",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
@@ -1370,7 +1370,7 @@ MyApp.add_route('POST', '//apps/system/config/org.apache.felix.http', {
 end
 
 
-MyApp.add_route('POST', '//apps/system/config/org.apache.http.proxyconfigurator.config', {
+MyApp.add_route('POST', '/apps/system/config/org.apache.http.proxyconfigurator.config', {
   "resourcePath" => "/Sling",
   "summary" => "",
   "nickname" => "post_config_apache_http_components_proxy_configuration", 
@@ -1423,7 +1423,7 @@ MyApp.add_route('POST', '//apps/system/config/org.apache.http.proxyconfigurator.
     {
       "name" => "proxy_enabled",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
@@ -1470,7 +1470,7 @@ MyApp.add_route('POST', '//apps/system/config/org.apache.http.proxyconfigurator.
 end
 
 
-MyApp.add_route('POST', '//apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet', {
+MyApp.add_route('POST', '/apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet', {
   "resourcePath" => "/Sling",
   "summary" => "",
   "nickname" => "post_config_apache_sling_dav_ex_servlet", 
@@ -1495,7 +1495,7 @@ MyApp.add_route('POST', '//apps/system/config/org.apache.sling.jcr.davex.impl.se
     {
       "name" => "dav_create_absolute_uri",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
@@ -1514,7 +1514,7 @@ MyApp.add_route('POST', '//apps/system/config/org.apache.sling.jcr.davex.impl.se
 end
 
 
-MyApp.add_route('POST', '//apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet', {
+MyApp.add_route('POST', '/apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet', {
   "resourcePath" => "/Sling",
   "summary" => "",
   "nickname" => "post_config_apache_sling_get_servlet", 
@@ -1539,7 +1539,7 @@ MyApp.add_route('POST', '//apps/system/config/org.apache.sling.servlets.get.Defa
     {
       "name" => "enable_html",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
@@ -1553,7 +1553,7 @@ MyApp.add_route('POST', '//apps/system/config/org.apache.sling.servlets.get.Defa
     {
       "name" => "enable_txt",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
@@ -1567,7 +1567,7 @@ MyApp.add_route('POST', '//apps/system/config/org.apache.sling.servlets.get.Defa
     {
       "name" => "enable_xml",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
@@ -1586,7 +1586,7 @@ MyApp.add_route('POST', '//apps/system/config/org.apache.sling.servlets.get.Defa
 end
 
 
-MyApp.add_route('POST', '//apps/system/config/org.apache.sling.security.impl.ReferrerFilter', {
+MyApp.add_route('POST', '/apps/system/config/org.apache.sling.security.impl.ReferrerFilter', {
   "resourcePath" => "/Sling",
   "summary" => "",
   "nickname" => "post_config_apache_sling_referrer_filter", 
@@ -1597,7 +1597,7 @@ MyApp.add_route('POST', '//apps/system/config/org.apache.sling.security.impl.Ref
     {
       "name" => "allow_empty",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
@@ -1658,7 +1658,29 @@ MyApp.add_route('POST', '//apps/system/config/org.apache.sling.security.impl.Ref
 end
 
 
-MyApp.add_route('POST', '//{path}/{name}', {
+MyApp.add_route('POST', '/apps/system/config/{configNodeName}', {
+  "resourcePath" => "/Sling",
+  "summary" => "",
+  "nickname" => "post_config_property", 
+  "responseClass" => "void",
+  "endpoint" => "/apps/system/config/{configNodeName}", 
+  "notes" => "",
+  "parameters" => [
+    {
+      "name" => "config_node_name",
+      "description" => "",
+      "dataType" => "String",
+      "paramType" => "path",
+    },
+    ]}) do
+  cross_origin
+  # the guts live here
+
+  {"message" => "yes, it worked"}.to_json
+end
+
+
+MyApp.add_route('POST', '/{path}/{name}', {
   "resourcePath" => "/Sling",
   "summary" => "",
   "nickname" => "post_node", 
@@ -1700,7 +1722,7 @@ MyApp.add_route('POST', '//{path}/{name}', {
 end
 
 
-MyApp.add_route('POST', '//{path}/{name}.rw.html', {
+MyApp.add_route('POST', '/{path}/{name}.rw.html', {
   "resourcePath" => "/Sling",
   "summary" => "",
   "nickname" => "post_node_rw", 
@@ -1735,7 +1757,7 @@ MyApp.add_route('POST', '//{path}/{name}.rw.html', {
 end
 
 
-MyApp.add_route('POST', '//{path}/', {
+MyApp.add_route('POST', '/{path}/', {
   "resourcePath" => "/Sling",
   "summary" => "",
   "nickname" => "post_path", 
@@ -1771,7 +1793,7 @@ MyApp.add_route('POST', '//{path}/', {
 end
 
 
-MyApp.add_route('POST', '//bin/querybuilder.json', {
+MyApp.add_route('POST', '/bin/querybuilder.json', {
   "resourcePath" => "/Sling",
   "summary" => "",
   "nickname" => "post_query", 
@@ -1815,7 +1837,7 @@ MyApp.add_route('POST', '//bin/querybuilder.json', {
 end
 
 
-MyApp.add_route('POST', '//etc/replication/treeactivation.html', {
+MyApp.add_route('POST', '/etc/replication/treeactivation.html', {
   "resourcePath" => "/Sling",
   "summary" => "",
   "nickname" => "post_tree_activation", 
@@ -1826,14 +1848,14 @@ MyApp.add_route('POST', '//etc/replication/treeactivation.html', {
     {
       "name" => "ignoredeactivated",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
       "name" => "onlymodified",
       "description" => "",
-      "dataType" => "boolean",
+      "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
@@ -1852,7 +1874,7 @@ MyApp.add_route('POST', '//etc/replication/treeactivation.html', {
 end
 
 
-MyApp.add_route('POST', '//libs/granite/security/post/truststore', {
+MyApp.add_route('POST', '/libs/granite/security/post/truststore', {
   "resourcePath" => "/Sling",
   "summary" => "",
   "nickname" => "post_truststore", 
@@ -1903,7 +1925,7 @@ MyApp.add_route('POST', '//libs/granite/security/post/truststore', {
 end
 
 
-MyApp.add_route('POST', '//etc/truststore', {
+MyApp.add_route('POST', '/etc/truststore', {
   "resourcePath" => "/Sling",
   "summary" => "",
   "nickname" => "post_truststore_pkcs12", 

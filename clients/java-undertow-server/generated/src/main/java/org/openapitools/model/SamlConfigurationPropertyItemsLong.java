@@ -1,3 +1,13 @@
+/*
+ * Adobe Experience Manager (AEM) API
+ *
+ * Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
+ *
+ * OpenAPI document version: 3.5.0-pre.0
+ * Maintained by: opensource@shinesolutions.com
+ *
+ * AUTO-GENERATED FILE, DO NOT MODIFY!
+ */
 package org.openapitools.model;
 
 import java.util.Objects;
@@ -10,19 +20,19 @@ import io.swagger.annotations.ApiModelProperty;
 
 
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaUndertowServerCodegen", date = "2019-08-04T23:41:39.991Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaUndertowServerCodegen", date = "2021-09-03T15:25:36.220+10:00[Australia/Melbourne]")
 public class SamlConfigurationPropertyItemsLong   {
   
-  private String name = null;
-  private Boolean optional = null;
-  private Boolean isSet = null;
-  private Integer type = null;
-  private Integer value = null;
-  private String description = null;
+  private String name;
+  private Boolean optional;
+  private Boolean isSet;
+  private Integer type;
+  private Integer value;
+  private String description;
 
   /**
    * property name
-   **/
+   */
   public SamlConfigurationPropertyItemsLong name(String name) {
     this.name = name;
     return this;
@@ -40,7 +50,7 @@ public class SamlConfigurationPropertyItemsLong   {
 
   /**
    * True if optional
-   **/
+   */
   public SamlConfigurationPropertyItemsLong optional(Boolean optional) {
     this.optional = optional;
     return this;
@@ -58,7 +68,7 @@ public class SamlConfigurationPropertyItemsLong   {
 
   /**
    * True if property is set
-   **/
+   */
   public SamlConfigurationPropertyItemsLong isSet(Boolean isSet) {
     this.isSet = isSet;
     return this;
@@ -76,7 +86,7 @@ public class SamlConfigurationPropertyItemsLong   {
 
   /**
    * Property type, 1=String, 3=long, 11=boolean, 12=Password
-   **/
+   */
   public SamlConfigurationPropertyItemsLong type(Integer type) {
     this.type = type;
     return this;
@@ -94,7 +104,7 @@ public class SamlConfigurationPropertyItemsLong   {
 
   /**
    * Property value
-   **/
+   */
   public SamlConfigurationPropertyItemsLong value(Integer value) {
     this.value = value;
     return this;
@@ -112,7 +122,7 @@ public class SamlConfigurationPropertyItemsLong   {
 
   /**
    * Property description
-   **/
+   */
   public SamlConfigurationPropertyItemsLong description(String description) {
     this.description = description;
     return this;
@@ -130,7 +140,7 @@ public class SamlConfigurationPropertyItemsLong   {
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -170,7 +180,7 @@ public class SamlConfigurationPropertyItemsLong   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

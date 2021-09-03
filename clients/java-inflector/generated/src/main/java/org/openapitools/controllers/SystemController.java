@@ -10,9 +10,10 @@ import java.util.List;
 
 import org.openapitools.model.*;
 
+import org.openapitools.model.BundleInfo;
 import org.openapitools.model.SamlConfigurationInfo;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaInflectorServerCodegen", date = "2019-08-04T23:41:21.082Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaInflectorServerCodegen", date = "2021-09-03T15:25:18.608+10:00[Australia/Melbourne]")
 public class SystemController  {
   /** 
    * Uncomment and implement as you see fit.  These operations will map
@@ -28,6 +29,12 @@ public class SystemController  {
 
   /*
     public ResponseContext getAemProductInfo(RequestContext request ) {
+        return new ResponseContext().status(Status.INTERNAL_SERVER_ERROR).entity( "Not implemented" );
+    }
+  */
+
+  /*
+    public ResponseContext getBundleInfo(RequestContext request , String name) {
         return new ResponseContext().status(Status.INTERNAL_SERVER_ERROR).entity( "Not implemented" );
     }
   */

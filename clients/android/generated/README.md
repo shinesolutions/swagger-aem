@@ -49,8 +49,8 @@ At first generate the JAR by executing:
 
 Then manually install the following JARs:
 
-* target/openapi-android-client-1.0.0.jar
-* target/lib/*.jar
+- target/openapi-android-client-1.0.0.jar
+- target/lib/*.jar
 
 ## Getting Started
 
@@ -83,6 +83,7 @@ All URIs are relative to *http://localhost*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ConsoleApi* | [**getAemProductInfo**](docs/ConsoleApi.md#getAemProductInfo) | **GET** /system/console/status-productinfo.json | 
+*ConsoleApi* | [**getBundleInfo**](docs/ConsoleApi.md#getBundleInfo) | **GET** /system/console/bundles/{name}.json | 
 *ConsoleApi* | [**getConfigMgr**](docs/ConsoleApi.md#getConfigMgr) | **GET** /system/console/configMgr | 
 *ConsoleApi* | [**postBundle**](docs/ConsoleApi.md#postBundle) | **POST** /system/console/bundles/{name} | 
 *ConsoleApi* | [**postJmxRepository**](docs/ConsoleApi.md#postJmxRepository) | **POST** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} | 
@@ -99,6 +100,7 @@ Class | Method | HTTP request | Description
 *CustomApi* | [**getAemHealthCheck**](docs/CustomApi.md#getAemHealthCheck) | **GET** /system/health | 
 *CustomApi* | [**postConfigAemHealthCheckServlet**](docs/CustomApi.md#postConfigAemHealthCheckServlet) | **POST** /apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck | 
 *CustomApi* | [**postConfigAemPasswordReset**](docs/CustomApi.md#postConfigAemPasswordReset) | **POST** /apps/system/config/com.shinesolutions.aem.passwordreset.Activator | 
+*GraniteApi* | [**sslSetup**](docs/GraniteApi.md#sslSetup) | **POST** /libs/granite/security/post/sslSetup.html | 
 *SlingApi* | [**deleteAgent**](docs/SlingApi.md#deleteAgent) | **DELETE** /etc/replication/agents.{runmode}/{name} | 
 *SlingApi* | [**deleteNode**](docs/SlingApi.md#deleteNode) | **DELETE** /{path}/{name} | 
 *SlingApi* | [**getAgent**](docs/SlingApi.md#getAgent) | **GET** /etc/replication/agents.{runmode}/{name} | 
@@ -120,6 +122,7 @@ Class | Method | HTTP request | Description
 *SlingApi* | [**postConfigApacheSlingDavExServlet**](docs/SlingApi.md#postConfigApacheSlingDavExServlet) | **POST** /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet | 
 *SlingApi* | [**postConfigApacheSlingGetServlet**](docs/SlingApi.md#postConfigApacheSlingGetServlet) | **POST** /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet | 
 *SlingApi* | [**postConfigApacheSlingReferrerFilter**](docs/SlingApi.md#postConfigApacheSlingReferrerFilter) | **POST** /apps/system/config/org.apache.sling.security.impl.ReferrerFilter | 
+*SlingApi* | [**postConfigProperty**](docs/SlingApi.md#postConfigProperty) | **POST** /apps/system/config/{configNodeName} | 
 *SlingApi* | [**postNode**](docs/SlingApi.md#postNode) | **POST** /{path}/{name} | 
 *SlingApi* | [**postNodeRw**](docs/SlingApi.md#postNodeRw) | **POST** /{path}/{name}.rw.html | 
 *SlingApi* | [**postPath**](docs/SlingApi.md#postPath) | **POST** /{path}/ | 
@@ -131,6 +134,9 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
+ - [BundleData](docs/BundleData.md)
+ - [BundleDataProp](docs/BundleDataProp.md)
+ - [BundleInfo](docs/BundleInfo.md)
  - [InstallStatus](docs/InstallStatus.md)
  - [InstallStatusStatus](docs/InstallStatusStatus.md)
  - [KeystoreChainItems](docs/KeystoreChainItems.md)

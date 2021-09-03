@@ -1,3 +1,13 @@
+/*
+ * Adobe Experience Manager (AEM) API
+ *
+ * Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
+ *
+ * OpenAPI document version: 3.5.0-pre.0
+ * Maintained by: opensource@shinesolutions.com
+ *
+ * AUTO-GENERATED FILE, DO NOT MODIFY!
+ */
 package org.openapitools.model;
 
 import java.util.Objects;
@@ -13,18 +23,18 @@ import org.openapitools.model.KeystoreChainItems;
 
 
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaUndertowServerCodegen", date = "2019-08-04T23:41:39.991Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaUndertowServerCodegen", date = "2021-09-03T15:25:36.220+10:00[Australia/Melbourne]")
 public class KeystoreItems   {
   
-  private String alias = null;
-  private String entryType = null;
-  private String algorithm = null;
-  private String format = null;
+  private String alias;
+  private String entryType;
+  private String algorithm;
+  private String format;
   private List<KeystoreChainItems> chain = new ArrayList<KeystoreChainItems>();
 
   /**
    * Keystore alias name
-   **/
+   */
   public KeystoreItems alias(String alias) {
     this.alias = alias;
     return this;
@@ -42,7 +52,7 @@ public class KeystoreItems   {
 
   /**
    * e.g. \"privateKey\"
-   **/
+   */
   public KeystoreItems entryType(String entryType) {
     this.entryType = entryType;
     return this;
@@ -60,7 +70,7 @@ public class KeystoreItems   {
 
   /**
    * e.g. \"RSA\"
-   **/
+   */
   public KeystoreItems algorithm(String algorithm) {
     this.algorithm = algorithm;
     return this;
@@ -78,7 +88,7 @@ public class KeystoreItems   {
 
   /**
    * e.g. \"PKCS#8\"
-   **/
+   */
   public KeystoreItems format(String format) {
     this.format = format;
     return this;
@@ -95,7 +105,7 @@ public class KeystoreItems   {
   }
 
   /**
-   **/
+   */
   public KeystoreItems chain(List<KeystoreChainItems> chain) {
     this.chain = chain;
     return this;
@@ -113,7 +123,7 @@ public class KeystoreItems   {
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -151,7 +161,7 @@ public class KeystoreItems   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

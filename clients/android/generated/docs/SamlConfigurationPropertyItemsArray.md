@@ -1,7 +1,9 @@
 
+
 # SamlConfigurationPropertyItemsArray
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **String** | property name |  [optional]
@@ -10,6 +12,7 @@ Name | Type | Description | Notes
 **type** | **Integer** | Property type, 1&#x3D;String, 3&#x3D;long, 11&#x3D;boolean, 12&#x3D;Password |  [optional]
 **values** | **List&lt;String&gt;** | Property value |  [optional]
 **description** | **String** | Property description |  [optional]
+
 
 
 

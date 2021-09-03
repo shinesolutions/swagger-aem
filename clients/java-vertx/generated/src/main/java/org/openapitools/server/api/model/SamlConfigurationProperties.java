@@ -8,33 +8,33 @@ import org.openapitools.server.api.model.SamlConfigurationPropertyItemsBoolean;
 import org.openapitools.server.api.model.SamlConfigurationPropertyItemsLong;
 import org.openapitools.server.api.model.SamlConfigurationPropertyItemsString;
 
-@JsonInclude(JsonInclude.Include.NON_NULL) 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class SamlConfigurationProperties   {
   
-  private SamlConfigurationPropertyItemsArray path = null;
-  private SamlConfigurationPropertyItemsLong serviceRanking = null;
-  private SamlConfigurationPropertyItemsString idpUrl = null;
-  private SamlConfigurationPropertyItemsString idpCertAlias = null;
-  private SamlConfigurationPropertyItemsBoolean idpHttpRedirect = null;
-  private SamlConfigurationPropertyItemsString serviceProviderEntityId = null;
-  private SamlConfigurationPropertyItemsString assertionConsumerServiceURL = null;
-  private SamlConfigurationPropertyItemsString spPrivateKeyAlias = null;
-  private SamlConfigurationPropertyItemsString keyStorePassword = null;
-  private SamlConfigurationPropertyItemsString defaultRedirectUrl = null;
-  private SamlConfigurationPropertyItemsString userIDAttribute = null;
-  private SamlConfigurationPropertyItemsBoolean useEncryption = null;
-  private SamlConfigurationPropertyItemsBoolean createUser = null;
-  private SamlConfigurationPropertyItemsBoolean addGroupMemberships = null;
-  private SamlConfigurationPropertyItemsString groupMembershipAttribute = null;
-  private SamlConfigurationPropertyItemsArray defaultGroups = null;
-  private SamlConfigurationPropertyItemsString nameIdFormat = null;
-  private SamlConfigurationPropertyItemsArray synchronizeAttributes = null;
-  private SamlConfigurationPropertyItemsBoolean handleLogout = null;
-  private SamlConfigurationPropertyItemsString logoutUrl = null;
-  private SamlConfigurationPropertyItemsLong clockTolerance = null;
-  private SamlConfigurationPropertyItemsString digestMethod = null;
-  private SamlConfigurationPropertyItemsString signatureMethod = null;
-  private SamlConfigurationPropertyItemsString userIntermediatePath = null;
+  private SamlConfigurationPropertyItemsArray path;
+  private SamlConfigurationPropertyItemsLong serviceRanking;
+  private SamlConfigurationPropertyItemsString idpUrl;
+  private SamlConfigurationPropertyItemsString idpCertAlias;
+  private SamlConfigurationPropertyItemsBoolean idpHttpRedirect;
+  private SamlConfigurationPropertyItemsString serviceProviderEntityId;
+  private SamlConfigurationPropertyItemsString assertionConsumerServiceURL;
+  private SamlConfigurationPropertyItemsString spPrivateKeyAlias;
+  private SamlConfigurationPropertyItemsString keyStorePassword;
+  private SamlConfigurationPropertyItemsString defaultRedirectUrl;
+  private SamlConfigurationPropertyItemsString userIDAttribute;
+  private SamlConfigurationPropertyItemsBoolean useEncryption;
+  private SamlConfigurationPropertyItemsBoolean createUser;
+  private SamlConfigurationPropertyItemsBoolean addGroupMemberships;
+  private SamlConfigurationPropertyItemsString groupMembershipAttribute;
+  private SamlConfigurationPropertyItemsArray defaultGroups;
+  private SamlConfigurationPropertyItemsString nameIdFormat;
+  private SamlConfigurationPropertyItemsArray synchronizeAttributes;
+  private SamlConfigurationPropertyItemsBoolean handleLogout;
+  private SamlConfigurationPropertyItemsString logoutUrl;
+  private SamlConfigurationPropertyItemsLong clockTolerance;
+  private SamlConfigurationPropertyItemsString digestMethod;
+  private SamlConfigurationPropertyItemsString signatureMethod;
+  private SamlConfigurationPropertyItemsString userIntermediatePath;
 
   public SamlConfigurationProperties () {
 

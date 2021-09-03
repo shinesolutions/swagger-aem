@@ -14,11 +14,11 @@ import java.util.List;
 import java.util.Map;
 
 public class CustomApiVerticle extends AbstractVerticle {
-    final static Logger LOGGER = LoggerFactory.getLogger(CustomApiVerticle.class); 
+    static final Logger LOGGER = LoggerFactory.getLogger(CustomApiVerticle.class);
     
-    final static String GETAEMHEALTHCHECK_SERVICE_ID = "getAemHealthCheck";
-    final static String POSTCONFIGAEMHEALTHCHECKSERVLET_SERVICE_ID = "postConfigAemHealthCheckServlet";
-    final static String POSTCONFIGAEMPASSWORDRESET_SERVICE_ID = "postConfigAemPasswordReset";
+    static final String GETAEMHEALTHCHECK_SERVICE_ID = "getAemHealthCheck";
+    static final String POSTCONFIGAEMHEALTHCHECKSERVLET_SERVICE_ID = "postConfigAemHealthCheckServlet";
+    static final String POSTCONFIGAEMPASSWORDRESET_SERVICE_ID = "postConfigAemPasswordReset";
     
     final CustomApi service;
 

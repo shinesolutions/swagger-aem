@@ -22,25 +22,25 @@ public class KeystoreItems  {
  /**
    * Keystore alias name
   **/
-  private String alias = null;
+  private String alias;
 
   @ApiModelProperty(value = "e.g. \"privateKey\"")
  /**
    * e.g. \"privateKey\"
   **/
-  private String entryType = null;
+  private String entryType;
 
   @ApiModelProperty(value = "e.g. \"RSA\"")
  /**
    * e.g. \"RSA\"
   **/
-  private String algorithm = null;
+  private String algorithm;
 
   @ApiModelProperty(value = "e.g. \"PKCS#8\"")
  /**
    * e.g. \"PKCS#8\"
   **/
-  private String format = null;
+  private String format;
 
   @ApiModelProperty(value = "")
   @Valid
@@ -159,7 +159,7 @@ public class KeystoreItems  {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private static String toIndentedString(java.lang.Object o) {
+  private static String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

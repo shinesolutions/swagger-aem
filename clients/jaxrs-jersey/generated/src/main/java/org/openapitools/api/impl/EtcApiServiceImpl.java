@@ -11,12 +11,12 @@ import org.openapitools.api.NotFoundException;
 
 import java.io.InputStream;
 
-import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
+import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.validation.constraints.*;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJerseyServerCodegen", date = "2019-08-04T23:41:59.588Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJerseyServerCodegen", date = "2021-09-03T15:25:53.422+10:00[Australia/Melbourne]")
 public class EtcApiServiceImpl extends EtcApiService {
     @Override
     public Response deleteAgent(String runmode, String name, SecurityContext securityContext) throws NotFoundException {
@@ -49,7 +49,7 @@ public class EtcApiServiceImpl extends EtcApiService {
         return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
     }
     @Override
-    public Response postAgent(String runmode, String name,  Boolean jcrColonContentSlashCqColonDistribute,  String jcrColonContentSlashCqColonDistributeAtTypeHint,  String jcrColonContentSlashCqColonName,  String jcrColonContentSlashCqColonTemplate,  Boolean jcrColonContentSlashEnabled,  String jcrColonContentSlashJcrColonDescription,  String jcrColonContentSlashJcrColonLastModified,  String jcrColonContentSlashJcrColonLastModifiedBy,  String jcrColonContentSlashJcrColonMixinTypes,  String jcrColonContentSlashJcrColonTitle,  String jcrColonContentSlashLogLevel,  Boolean jcrColonContentSlashNoStatusUpdate,  Boolean jcrColonContentSlashNoVersioning,  BigDecimal jcrColonContentSlashProtocolConnectTimeout,  Boolean jcrColonContentSlashProtocolHTTPConnectionClosed,  String jcrColonContentSlashProtocolHTTPExpired,  List<String> jcrColonContentSlashProtocolHTTPHeaders,  String jcrColonContentSlashProtocolHTTPHeadersAtTypeHint,  String jcrColonContentSlashProtocolHTTPMethod,  Boolean jcrColonContentSlashProtocolHTTPSRelaxed,  String jcrColonContentSlashProtocolInterface,  BigDecimal jcrColonContentSlashProtocolSocketTimeout,  String jcrColonContentSlashProtocolVersion,  String jcrColonContentSlashProxyNTLMDomain,  String jcrColonContentSlashProxyNTLMHost,  String jcrColonContentSlashProxyHost,  String jcrColonContentSlashProxyPassword,  BigDecimal jcrColonContentSlashProxyPort,  String jcrColonContentSlashProxyUser,  BigDecimal jcrColonContentSlashQueueBatchMaxSize,  String jcrColonContentSlashQueueBatchMode,  BigDecimal jcrColonContentSlashQueueBatchWaitTime,  String jcrColonContentSlashRetryDelay,  Boolean jcrColonContentSlashReverseReplication,  String jcrColonContentSlashSerializationType,  String jcrColonContentSlashSlingColonResourceType,  String jcrColonContentSlashSsl,  String jcrColonContentSlashTransportNTLMDomain,  String jcrColonContentSlashTransportNTLMHost,  String jcrColonContentSlashTransportPassword,  String jcrColonContentSlashTransportUri,  String jcrColonContentSlashTransportUser,  Boolean jcrColonContentSlashTriggerDistribute,  Boolean jcrColonContentSlashTriggerModified,  Boolean jcrColonContentSlashTriggerOnOffTime,  Boolean jcrColonContentSlashTriggerReceive,  Boolean jcrColonContentSlashTriggerSpecific,  String jcrColonContentSlashUserId,  String jcrColonPrimaryType,  String colonOperation, SecurityContext securityContext) throws NotFoundException {
+    public Response postAgent(String runmode, String name, Boolean jcrColonContentCqColonDistribute, String jcrColonContentCqColonDistributeAtTypeHint, String jcrColonContentCqColonName, String jcrColonContentCqColonTemplate, Boolean jcrColonContentEnabled, String jcrColonContentJcrColonDescription, String jcrColonContentJcrColonLastModified, String jcrColonContentJcrColonLastModifiedBy, String jcrColonContentJcrColonMixinTypes, String jcrColonContentJcrColonTitle, String jcrColonContentLogLevel, Boolean jcrColonContentNoStatusUpdate, Boolean jcrColonContentNoVersioning, BigDecimal jcrColonContentProtocolConnectTimeout, Boolean jcrColonContentProtocolHTTPConnectionClosed, String jcrColonContentProtocolHTTPExpired, List<String> jcrColonContentProtocolHTTPHeaders, String jcrColonContentProtocolHTTPHeadersAtTypeHint, String jcrColonContentProtocolHTTPMethod, Boolean jcrColonContentProtocolHTTPSRelaxed, String jcrColonContentProtocolInterface, BigDecimal jcrColonContentProtocolSocketTimeout, String jcrColonContentProtocolVersion, String jcrColonContentProxyNTLMDomain, String jcrColonContentProxyNTLMHost, String jcrColonContentProxyHost, String jcrColonContentProxyPassword, BigDecimal jcrColonContentProxyPort, String jcrColonContentProxyUser, BigDecimal jcrColonContentQueueBatchMaxSize, String jcrColonContentQueueBatchMode, BigDecimal jcrColonContentQueueBatchWaitTime, String jcrColonContentRetryDelay, Boolean jcrColonContentReverseReplication, String jcrColonContentSerializationType, String jcrColonContentSlingColonResourceType, String jcrColonContentSsl, String jcrColonContentTransportNTLMDomain, String jcrColonContentTransportNTLMHost, String jcrColonContentTransportPassword, String jcrColonContentTransportUri, String jcrColonContentTransportUser, Boolean jcrColonContentTriggerDistribute, Boolean jcrColonContentTriggerModified, Boolean jcrColonContentTriggerOnOffTime, Boolean jcrColonContentTriggerReceive, Boolean jcrColonContentTriggerSpecific, String jcrColonContentUserId, String jcrColonPrimaryType, String colonOperation, SecurityContext securityContext) throws NotFoundException {
         // do some magic!
         return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
     }
@@ -59,7 +59,7 @@ public class EtcApiServiceImpl extends EtcApiService {
         return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
     }
     @Override
-    public Response postTruststorePKCS12(InputStream truststoreP12InputStream, FormDataContentDisposition truststoreP12Detail, SecurityContext securityContext) throws NotFoundException {
+    public Response postTruststorePKCS12(FormDataBodyPart truststoreP12Bodypart, SecurityContext securityContext) throws NotFoundException {
         // do some magic!
         return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
     }

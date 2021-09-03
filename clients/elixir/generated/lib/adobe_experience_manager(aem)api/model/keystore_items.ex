@@ -17,11 +17,11 @@ defmodule AdobeExperienceManager(AEM)API.Model.KeystoreItems do
   ]
 
   @type t :: %__MODULE__{
-    :"alias" => String.t,
-    :"entryType" => String.t,
-    :"algorithm" => String.t,
-    :"format" => String.t,
-    :"chain" => [KeystoreChainItems]
+    :"alias" => String.t | nil,
+    :"entryType" => String.t | nil,
+    :"algorithm" => String.t | nil,
+    :"format" => String.t | nil,
+    :"chain" => [AdobeExperienceManager(AEM)API.Model.KeystoreChainItems.t] | nil
   }
 end
 

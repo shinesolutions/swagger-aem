@@ -14,13 +14,14 @@ the [Swagger Ada library](https://github.com/stcarrez/swagger-ada).
 When the GNAT Ada compiler and Swagger Ada libraries are installed,
 run the following command:
 
-```
+```shell
   gprbuild -p -PdefaultPackage
 ```
 
 After the build is successful, you will get the server binary
 in bin/-server and you can start it as follows:
-```
+
+```shell
   ./bin/-server
 ```
 
@@ -51,8 +52,8 @@ The server instance is represented by the **.Servers.Server_Type** Ada type.
 The REST API will need an instance of it to make the operation call.  Two server model
 exists:
 
-* The instance per request model creates an instance of the server type for each request.
-* The shared instance model shares the same instance across all concurrent REST requests.  This instance is protected using an Ada protected object which holds the server instance.
+- The instance per request model creates an instance of the server type for each request.
+- The shared instance model shares the same instance across all concurrent REST requests.  This instance is protected using an Ada protected object which holds the server instance.
 
 The choice of the server model is made at the compilation time by instantiating either
 the **.Skeletons.Skeleton** package or the **.Skeletons.Shared_Instance**
@@ -65,15 +66,16 @@ All you have to do is implement the server operation in the **src/-servers.adb**
 The package already contains the operation with its parameters and you only have to replace
 the **null** instruction by real code.
 
-# Documentation
+## Documentation
 
-## API Documentation
+### API Documentation
 
 All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**Get_Aem_Product_Info**](ConsoleApi.md#Get_Aem_Product_Info) | **GET** /system/console/status-productinfo.json | 
+[**Get_Bundle_Info**](ConsoleApi.md#Get_Bundle_Info) | **GET** /system/console/bundles/{name}.json | 
 [**Get_Config_Mgr**](ConsoleApi.md#Get_Config_Mgr) | **GET** /system/console/configMgr | 
 [**Post_Bundle**](ConsoleApi.md#Post_Bundle) | **POST** /system/console/bundles/{name} | 
 [**Post_Jmx_Repository**](ConsoleApi.md#Post_Jmx_Repository) | **POST** /system/console/jmx/com.adobe.granite:type=Repository/op/{action} | 
@@ -90,6 +92,7 @@ Method | HTTP request | Description
 [**Get_Aem_Health_Check**](CustomApi.md#Get_Aem_Health_Check) | **GET** /system/health | 
 [**Post_Config_Aem_Health_Check_Servlet**](CustomApi.md#Post_Config_Aem_Health_Check_Servlet) | **POST** /apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck | 
 [**Post_Config_Aem_Password_Reset**](CustomApi.md#Post_Config_Aem_Password_Reset) | **POST** /apps/system/config/com.shinesolutions.aem.passwordreset.Activator | 
+[**Ssl_Setup**](GraniteApi.md#Ssl_Setup) | **POST** /libs/granite/security/post/sslSetup.html | 
 [**Delete_Agent**](SlingApi.md#Delete_Agent) | **DELETE** /etc/replication/agents.{runmode}/{name} | 
 [**Delete_Node**](SlingApi.md#Delete_Node) | **DELETE** /{path}/{name} | 
 [**Get_Agent**](SlingApi.md#Get_Agent) | **GET** /etc/replication/agents.{runmode}/{name} | 
@@ -111,18 +114,23 @@ Method | HTTP request | Description
 [**Post_Config_Apache_Sling_Dav_Ex_Servlet**](SlingApi.md#Post_Config_Apache_Sling_Dav_Ex_Servlet) | **POST** /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet | 
 [**Post_Config_Apache_Sling_Get_Servlet**](SlingApi.md#Post_Config_Apache_Sling_Get_Servlet) | **POST** /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet | 
 [**Post_Config_Apache_Sling_Referrer_Filter**](SlingApi.md#Post_Config_Apache_Sling_Referrer_Filter) | **POST** /apps/system/config/org.apache.sling.security.impl.ReferrerFilter | 
+[**Post_Config_Property**](SlingApi.md#Post_Config_Property) | **POST** /apps/system/config/{configNodeName} | 
 [**Post_Node**](SlingApi.md#Post_Node) | **POST** /{path}/{name} | 
 [**Post_Node_Rw**](SlingApi.md#Post_Node_Rw) | **POST** /{path}/{name}.rw.html | 
 [**Post_Path**](SlingApi.md#Post_Path) | **POST** /{path}/ | 
 [**Post_Query**](SlingApi.md#Post_Query) | **POST** /bin/querybuilder.json | 
 [**Post_Tree_Activation**](SlingApi.md#Post_Tree_Activation) | **POST** /etc/replication/treeactivation.html | 
 [**Post_Truststore**](SlingApi.md#Post_Truststore) | **POST** /libs/granite/security/post/truststore | 
-[**Post_Truststore_P_K_C_S12**](SlingApi.md#Post_Truststore_P_K_C_S12) | **POST** /etc/truststore | 
+[**Post_Truststore_PKCS12**](SlingApi.md#Post_Truststore_PKCS12) | **POST** /etc/truststore | 
 
 
-## Models
+### Models
+
+ - [.Models.BundleDataProp_Type](BundleDataProp_Type.md)
+ - [.Models.BundleData_Type](BundleData_Type.md)
+ - [.Models.BundleInfo_Type](BundleInfo_Type.md)
+ - [.Models.InstallStatusStatus_Type](InstallStatusStatus_Type.md)
  - [.Models.InstallStatus_Type](InstallStatus_Type.md)
- - [.Models.InstallStatus_status_Type](InstallStatus_status_Type.md)
  - [.Models.KeystoreChainItems_Type](KeystoreChainItems_Type.md)
  - [.Models.KeystoreInfo_Type](KeystoreInfo_Type.md)
  - [.Models.KeystoreItems_Type](KeystoreItems_Type.md)
@@ -136,9 +144,11 @@ Method | HTTP request | Description
  - [.Models.TruststoreItems_Type](TruststoreItems_Type.md)
 
 
-## Authorization
+### Authorization
+
 
 ## aemAuth
+
 
 - **Type**: HTTP basic authentication
 

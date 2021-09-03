@@ -1,27 +1,32 @@
 # OpenAPI\Client\CrxApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to http://localhost.
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getCrxdeStatus**](CrxApi.md#getCrxdeStatus) | **GET** /crx/server/crx.default/jcr:root/.1.json | 
-[**getInstallStatus**](CrxApi.md#getInstallStatus) | **GET** /crx/packmgr/installstatus.jsp | 
-[**getPackageManagerServlet**](CrxApi.md#getPackageManagerServlet) | **GET** /crx/packmgr/service/script.html | 
-[**postPackageService**](CrxApi.md#postPackageService) | **POST** /crx/packmgr/service.jsp | 
-[**postPackageServiceJson**](CrxApi.md#postPackageServiceJson) | **POST** /crx/packmgr/service/.json/{path} | 
-[**postPackageUpdate**](CrxApi.md#postPackageUpdate) | **POST** /crx/packmgr/update.jsp | 
-[**postSetPassword**](CrxApi.md#postSetPassword) | **POST** /crx/explorer/ui/setpassword.jsp | 
+[**getCrxdeStatus()**](CrxApi.md#getCrxdeStatus) | **GET** /crx/server/crx.default/jcr:root/.1.json | 
+[**getInstallStatus()**](CrxApi.md#getInstallStatus) | **GET** /crx/packmgr/installstatus.jsp | 
+[**getPackageManagerServlet()**](CrxApi.md#getPackageManagerServlet) | **GET** /crx/packmgr/service/script.html | 
+[**postPackageService()**](CrxApi.md#postPackageService) | **POST** /crx/packmgr/service.jsp | 
+[**postPackageServiceJson()**](CrxApi.md#postPackageServiceJson) | **POST** /crx/packmgr/service/.json/{path} | 
+[**postPackageUpdate()**](CrxApi.md#postPackageUpdate) | **POST** /crx/packmgr/update.jsp | 
+[**postSetPassword()**](CrxApi.md#postSetPassword) | **POST** /crx/explorer/ui/setpassword.jsp | 
 
 
-# **getCrxdeStatus**
-> string getCrxdeStatus()
+## `getCrxdeStatus()`
+
+```php
+getCrxdeStatus(): string
+```
 
 
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
+
 
 // Configure HTTP basic authorization: aemAuth
 $config = OpenAPI\Client\Configuration::getDefaultConfiguration()
@@ -42,10 +47,10 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling CrxApi->getCrxdeStatus: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -58,20 +63,27 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: plain/text
+- **Content-Type**: Not defined
+- **Accept**: `plain/text`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **getInstallStatus**
-> \OpenAPI\Client\Model\InstallStatus getInstallStatus()
+## `getInstallStatus()`
+
+```php
+getInstallStatus(): \OpenAPI\Client\Model\InstallStatus
+```
 
 
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
+
 
 // Configure HTTP basic authorization: aemAuth
 $config = OpenAPI\Client\Configuration::getDefaultConfiguration()
@@ -92,10 +104,10 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling CrxApi->getInstallStatus: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -108,20 +120,27 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **getPackageManagerServlet**
-> getPackageManagerServlet()
+## `getPackageManagerServlet()`
+
+```php
+getPackageManagerServlet()
+```
 
 
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
+
 
 // Configure HTTP basic authorization: aemAuth
 $config = OpenAPI\Client\Configuration::getDefaultConfiguration()
@@ -141,10 +160,10 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling CrxApi->getPackageManagerServlet: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -157,20 +176,27 @@ void (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/html
+- **Content-Type**: Not defined
+- **Accept**: `text/html`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **postPackageService**
-> string postPackageService($cmd)
+## `postPackageService()`
+
+```php
+postPackageService($cmd): string
+```
 
 
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
+
 
 // Configure HTTP basic authorization: aemAuth
 $config = OpenAPI\Client\Configuration::getDefaultConfiguration()
@@ -184,7 +210,7 @@ $apiInstance = new OpenAPI\Client\Api\CrxApi(
     new GuzzleHttp\Client(),
     $config
 );
-$cmd = 'cmd_example'; // string | 
+$cmd = 'cmd_example'; // string
 
 try {
     $result = $apiInstance->postPackageService($cmd);
@@ -192,7 +218,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling CrxApi->postPackageService: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -211,20 +236,27 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/xml
+- **Content-Type**: Not defined
+- **Accept**: `text/xml`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **postPackageServiceJson**
-> string postPackageServiceJson($path, $cmd, $group_name, $package_name, $package_version, $_charset_, $force, $recursive, $package)
+## `postPackageServiceJson()`
+
+```php
+postPackageServiceJson($path, $cmd, $group_name, $package_name, $package_version, $_charset_, $force, $recursive, $package): string
+```
 
 
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
+
 
 // Configure HTTP basic authorization: aemAuth
 $config = OpenAPI\Client\Configuration::getDefaultConfiguration()
@@ -238,15 +270,15 @@ $apiInstance = new OpenAPI\Client\Api\CrxApi(
     new GuzzleHttp\Client(),
     $config
 );
-$path = 'path_example'; // string | 
-$cmd = 'cmd_example'; // string | 
-$group_name = 'group_name_example'; // string | 
-$package_name = 'package_name_example'; // string | 
-$package_version = 'package_version_example'; // string | 
-$_charset_ = '_charset__example'; // string | 
-$force = True; // bool | 
-$recursive = True; // bool | 
-$package = "/path/to/file.txt"; // \SplFileObject | 
+$path = 'path_example'; // string
+$cmd = 'cmd_example'; // string
+$group_name = 'group_name_example'; // string
+$package_name = 'package_name_example'; // string
+$package_version = 'package_version_example'; // string
+$_charset_ = '_charset__example'; // string
+$force = True; // bool
+$recursive = True; // bool
+$package = "/path/to/file.txt"; // \SplFileObject
 
 try {
     $result = $apiInstance->postPackageServiceJson($path, $cmd, $group_name, $package_name, $package_version, $_charset_, $force, $recursive, $package);
@@ -254,7 +286,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling CrxApi->postPackageServiceJson: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -281,20 +312,27 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
+- **Content-Type**: `multipart/form-data`
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **postPackageUpdate**
-> string postPackageUpdate($group_name, $package_name, $version, $path, $filter, $_charset_)
+## `postPackageUpdate()`
+
+```php
+postPackageUpdate($group_name, $package_name, $version, $path, $filter, $_charset_): string
+```
 
 
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
+
 
 // Configure HTTP basic authorization: aemAuth
 $config = OpenAPI\Client\Configuration::getDefaultConfiguration()
@@ -308,12 +346,12 @@ $apiInstance = new OpenAPI\Client\Api\CrxApi(
     new GuzzleHttp\Client(),
     $config
 );
-$group_name = 'group_name_example'; // string | 
-$package_name = 'package_name_example'; // string | 
-$version = 'version_example'; // string | 
-$path = 'path_example'; // string | 
-$filter = 'filter_example'; // string | 
-$_charset_ = '_charset__example'; // string | 
+$group_name = 'group_name_example'; // string
+$package_name = 'package_name_example'; // string
+$version = 'version_example'; // string
+$path = 'path_example'; // string
+$filter = 'filter_example'; // string
+$_charset_ = '_charset__example'; // string
 
 try {
     $result = $apiInstance->postPackageUpdate($group_name, $package_name, $version, $path, $filter, $_charset_);
@@ -321,7 +359,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling CrxApi->postPackageUpdate: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -345,20 +382,27 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
-# **postSetPassword**
-> string postSetPassword($old, $plain, $verify)
+## `postSetPassword()`
+
+```php
+postSetPassword($old, $plain, $verify): string
+```
 
 
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
+
 
 // Configure HTTP basic authorization: aemAuth
 $config = OpenAPI\Client\Configuration::getDefaultConfiguration()
@@ -372,9 +416,9 @@ $apiInstance = new OpenAPI\Client\Api\CrxApi(
     new GuzzleHttp\Client(),
     $config
 );
-$old = 'old_example'; // string | 
-$plain = 'plain_example'; // string | 
-$verify = 'verify_example'; // string | 
+$old = 'old_example'; // string
+$plain = 'plain_example'; // string
+$verify = 'verify_example'; // string
 
 try {
     $result = $apiInstance->postSetPassword($old, $plain, $verify);
@@ -382,7 +426,6 @@ try {
 } catch (Exception $e) {
     echo 'Exception when calling CrxApi->postSetPassword: ', $e->getMessage(), PHP_EOL;
 }
-?>
 ```
 
 ### Parameters
@@ -403,8 +446,9 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/plain
+- **Content-Type**: Not defined
+- **Accept**: `text/plain`
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
-
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)

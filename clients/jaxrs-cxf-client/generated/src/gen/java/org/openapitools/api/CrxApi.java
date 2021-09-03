@@ -24,12 +24,12 @@ import io.swagger.jaxrs.PATCH;
  * <p>Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
  *
  */
-@Path("/")
+@Path("/crx")
 @Api(value = "/", description = "")
 public interface CrxApi  {
 
     @GET
-    @Path("/crx/server/crx.default/jcr:root/.1.json")
+    @Path("/server/crx.default/jcr:root/.1.json")
     @Produces({ "plain/text" })
     @ApiOperation(value = "", tags={  })
     @ApiResponses(value = { 
@@ -38,7 +38,7 @@ public interface CrxApi  {
     public String getCrxdeStatus();
 
     @GET
-    @Path("/crx/packmgr/installstatus.jsp")
+    @Path("/packmgr/installstatus.jsp")
     @Produces({ "application/json" })
     @ApiOperation(value = "", tags={  })
     @ApiResponses(value = { 
@@ -47,7 +47,7 @@ public interface CrxApi  {
     public InstallStatus getInstallStatus();
 
     @GET
-    @Path("/crx/packmgr/service/script.html")
+    @Path("/packmgr/service/script.html")
     @Produces({ "text/html" })
     @ApiOperation(value = "", tags={  })
     @ApiResponses(value = { 
@@ -56,36 +56,36 @@ public interface CrxApi  {
     public void getPackageManagerServlet();
 
     @POST
-    @Path("/crx/packmgr/service.jsp")
+    @Path("/packmgr/service.jsp")
     @Produces({ "text/xml" })
     @ApiOperation(value = "", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public String postPackageService(@QueryParam("cmd")String cmd);
+    public String postPackageService(@QueryParam("cmd") String cmd);
 
     @POST
-    @Path("/crx/packmgr/service/.json/{path}")
+    @Path("/packmgr/service/.json/{path}")
     @Consumes({ "multipart/form-data" })
     @Produces({ "application/json" })
     @ApiOperation(value = "", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public String postPackageServiceJson(@PathParam("path") String path, @QueryParam("cmd")String cmd, @QueryParam("groupName")String groupName, @QueryParam("packageName")String packageName, @QueryParam("packageVersion")String packageVersion, @QueryParam("_charset_")String charset, @QueryParam("force")Boolean force, @QueryParam("recursive")Boolean recursive,  @Multipart(value = "package" , required = false) Attachment _packageDetail);
+    public String postPackageServiceJson(@PathParam("path") String path, @QueryParam("cmd") String cmd, @QueryParam("groupName") String groupName, @QueryParam("packageName") String packageName, @QueryParam("packageVersion") String packageVersion, @QueryParam("_charset_") String charset, @QueryParam("force") Boolean force, @QueryParam("recursive") Boolean recursive,  @Multipart(value = "package" , required = false) Attachment _packageDetail);
 
     @POST
-    @Path("/crx/packmgr/update.jsp")
+    @Path("/packmgr/update.jsp")
     @Produces({ "application/json" })
     @ApiOperation(value = "", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public String postPackageUpdate(@QueryParam("groupName")String groupName, @QueryParam("packageName")String packageName, @QueryParam("version")String version, @QueryParam("path")String path, @QueryParam("filter")String filter, @QueryParam("_charset_")String charset);
+    public String postPackageUpdate(@QueryParam("groupName") String groupName, @QueryParam("packageName") String packageName, @QueryParam("version") String version, @QueryParam("path") String path, @QueryParam("filter") String filter, @QueryParam("_charset_") String charset);
 
     @POST
-    @Path("/crx/explorer/ui/setpassword.jsp")
+    @Path("/explorer/ui/setpassword.jsp")
     @Produces({ "text/plain" })
     @ApiOperation(value = "", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public String postSetPassword(@QueryParam("old")String old, @QueryParam("plain")String plain, @QueryParam("verify")String verify);
+    public String postSetPassword(@QueryParam("old") String old, @QueryParam("plain") String plain, @QueryParam("verify") String verify);
 }
 

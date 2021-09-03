@@ -2,6 +2,7 @@
 
 # SamlConfigurationInfo
 
+
 ## Properties
 
 Name | Type | Description | Notes

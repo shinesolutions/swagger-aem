@@ -13,6 +13,7 @@ with Swagger.Servers;
 with .Models;
 with .Skeletons;
 package .Servers is
+   pragma Warnings (Off, "*use clause for package*");
    use .Models;
    type Server_Type is limited new .Skeletons.Server_Type with null record;
 
@@ -23,6 +24,14 @@ package .Servers is
       (Server : in out Server_Type
        ;
        Result  : out Swagger.UString_Vectors.Vector;
+       Context : in out Swagger.Servers.Context_Type);
+
+   --  
+   overriding
+   procedure Get_Bundle_Info
+      (Server : in out Server_Type;
+       Name : in Swagger.UString;
+       Result  : out .Models.BundleInfo_Type;
        Context : in out Swagger.Servers.Context_Type);
 
    --  
@@ -63,11 +72,11 @@ package .Servers is
        Idp_Cert_Alias : in Swagger.Nullable_UString;
        Idp_Http_Redirect : in Swagger.Nullable_Boolean;
        Service_Provider_Entity_Id : in Swagger.Nullable_UString;
-       Assertion_Consumer_Service_U_R_L : in Swagger.Nullable_UString;
+       Assertion_Consumer_Service_URL : in Swagger.Nullable_UString;
        Sp_Private_Key_Alias : in Swagger.Nullable_UString;
        Key_Store_Password : in Swagger.Nullable_UString;
        Default_Redirect_Url : in Swagger.Nullable_UString;
-       User_I_D_Attribute : in Swagger.Nullable_UString;
+       User_IDAttribute : in Swagger.Nullable_UString;
        Use_Encryption : in Swagger.Nullable_Boolean;
        Create_User : in Swagger.Nullable_Boolean;
        Add_Group_Memberships : in Swagger.Nullable_Boolean;
@@ -198,6 +207,21 @@ package .Servers is
 
    --  
    overriding
+   procedure Ssl_Setup
+      (Server : in out Server_Type;
+       Keystore_Password : in Swagger.UString;
+       Keystore_Password_Confirm : in Swagger.UString;
+       Truststore_Password : in Swagger.UString;
+       Truststore_Password_Confirm : in Swagger.UString;
+       Https_Hostname : in Swagger.UString;
+       Https_Port : in Swagger.UString;
+       Privatekey_File : in Swagger.File_Part_Type;
+       Certificate_File : in Swagger.File_Part_Type;
+       Result  : out Swagger.UString;
+       Context : in out Swagger.Servers.Context_Type);
+
+   --  
+   overriding
    procedure Delete_Agent
       (Server : in out Server_Type;
        Runmode : in Swagger.UString;
@@ -280,8 +304,8 @@ package .Servers is
       (Server : in out Server_Type;
        Path : in Swagger.UString;
        P_Periodlimit : in Swagger.Number;
-       1_Property : in Swagger.UString;
-       1_Property_Periodvalue : in Swagger.UString;
+       P_1Property : in Swagger.UString;
+       P_1Property_Periodvalue : in Swagger.UString;
        Result  : out Swagger.UString;
        Context : in out Swagger.Servers.Context_Type);
 
@@ -321,17 +345,17 @@ package .Servers is
        Jcr_Content_Slashno_Status_Update : in Swagger.Nullable_Boolean;
        Jcr_Content_Slashno_Versioning : in Swagger.Nullable_Boolean;
        Jcr_Content_Slashprotocol_Connect_Timeout : in Swagger.Number;
-       Jcr_Content_Slashprotocol_H_T_T_P_Connection_Closed : in Swagger.Nullable_Boolean;
-       Jcr_Content_Slashprotocol_H_T_T_P_Expired : in Swagger.Nullable_UString;
-       Jcr_Content_Slashprotocol_H_T_T_P_Headers : in Swagger.UString_Vectors.Vector;
-       Jcr_Content_Slashprotocol_H_T_T_P_Headers_At_Type_Hint : in Swagger.Nullable_UString;
-       Jcr_Content_Slashprotocol_H_T_T_P_Method : in Swagger.Nullable_UString;
-       Jcr_Content_Slashprotocol_H_T_T_P_S_Relaxed : in Swagger.Nullable_Boolean;
+       Jcr_Content_Slashprotocol_HTTPConnection_Closed : in Swagger.Nullable_Boolean;
+       Jcr_Content_Slashprotocol_HTTPExpired : in Swagger.Nullable_UString;
+       Jcr_Content_Slashprotocol_HTTPHeaders : in Swagger.UString_Vectors.Vector;
+       Jcr_Content_Slashprotocol_HTTPHeaders_At_Type_Hint : in Swagger.Nullable_UString;
+       Jcr_Content_Slashprotocol_HTTPMethod : in Swagger.Nullable_UString;
+       Jcr_Content_Slashprotocol_HTTPSRelaxed : in Swagger.Nullable_Boolean;
        Jcr_Content_Slashprotocol_Interface : in Swagger.Nullable_UString;
        Jcr_Content_Slashprotocol_Socket_Timeout : in Swagger.Number;
        Jcr_Content_Slashprotocol_Version : in Swagger.Nullable_UString;
-       Jcr_Content_Slashproxy_N_T_L_M_Domain : in Swagger.Nullable_UString;
-       Jcr_Content_Slashproxy_N_T_L_M_Host : in Swagger.Nullable_UString;
+       Jcr_Content_Slashproxy_NTLMDomain : in Swagger.Nullable_UString;
+       Jcr_Content_Slashproxy_NTLMHost : in Swagger.Nullable_UString;
        Jcr_Content_Slashproxy_Host : in Swagger.Nullable_UString;
        Jcr_Content_Slashproxy_Password : in Swagger.Nullable_UString;
        Jcr_Content_Slashproxy_Port : in Swagger.Number;
@@ -344,8 +368,8 @@ package .Servers is
        Jcr_Content_Slashserialization_Type : in Swagger.Nullable_UString;
        Jcr_Content_Slashsling_Resource_Type : in Swagger.Nullable_UString;
        Jcr_Content_Slashssl : in Swagger.Nullable_UString;
-       Jcr_Content_Slashtransport_N_T_L_M_Domain : in Swagger.Nullable_UString;
-       Jcr_Content_Slashtransport_N_T_L_M_Host : in Swagger.Nullable_UString;
+       Jcr_Content_Slashtransport_NTLMDomain : in Swagger.Nullable_UString;
+       Jcr_Content_Slashtransport_NTLMHost : in Swagger.Nullable_UString;
        Jcr_Content_Slashtransport_Password : in Swagger.Nullable_UString;
        Jcr_Content_Slashtransport_Uri : in Swagger.Nullable_UString;
        Jcr_Content_Slashtransport_User : in Swagger.Nullable_UString;
@@ -407,8 +431,8 @@ package .Servers is
        Create_User_At_Type_Hint : in Swagger.Nullable_UString;
        Default_Redirect_Url : in Swagger.Nullable_UString;
        Default_Redirect_Url_At_Type_Hint : in Swagger.Nullable_UString;
-       User_I_D_Attribute : in Swagger.Nullable_UString;
-       User_I_D_Attribute_At_Type_Hint : in Swagger.Nullable_UString;
+       User_IDAttribute : in Swagger.Nullable_UString;
+       User_IDAttribute_At_Type_Hint : in Swagger.Nullable_UString;
        Default_Groups : in Swagger.UString_Vectors.Vector;
        Default_Groups_At_Type_Hint : in Swagger.Nullable_UString;
        Idp_Cert_Alias : in Swagger.Nullable_UString;
@@ -429,8 +453,8 @@ package .Servers is
        Logout_Url_At_Type_Hint : in Swagger.Nullable_UString;
        Service_Provider_Entity_Id : in Swagger.Nullable_UString;
        Service_Provider_Entity_Id_At_Type_Hint : in Swagger.Nullable_UString;
-       Assertion_Consumer_Service_U_R_L : in Swagger.Nullable_UString;
-       Assertion_Consumer_Service_U_R_L_At_Type_Hint : in Swagger.Nullable_UString;
+       Assertion_Consumer_Service_URL : in Swagger.Nullable_UString;
+       Assertion_Consumer_Service_URLAt_Type_Hint : in Swagger.Nullable_UString;
        Handle_Logout : in Swagger.Nullable_Boolean;
        Handle_Logout_At_Type_Hint : in Swagger.Nullable_UString;
        Sp_Private_Key_Alias : in Swagger.Nullable_UString;
@@ -531,6 +555,13 @@ package .Servers is
 
    --  
    overriding
+   procedure Post_Config_Property
+      (Server : in out Server_Type;
+       Config_Node_Name : in Swagger.UString;
+       Context : in out Swagger.Servers.Context_Type);
+
+   --  
+   overriding
    procedure Post_Node
       (Server : in out Server_Type;
        Path : in Swagger.UString;
@@ -564,8 +595,8 @@ package .Servers is
       (Server : in out Server_Type;
        Path : in Swagger.UString;
        P_Periodlimit : in Swagger.Number;
-       1_Property : in Swagger.UString;
-       1_Property_Periodvalue : in Swagger.UString;
+       P_1Property : in Swagger.UString;
+       P_1Property_Periodvalue : in Swagger.UString;
        Result  : out Swagger.UString;
        Context : in out Swagger.Servers.Context_Type);
 
@@ -593,9 +624,9 @@ package .Servers is
 
    --  
    overriding
-   procedure Post_Truststore_P_K_C_S12
+   procedure Post_Truststore_PKCS12
       (Server : in out Server_Type;
-       Truststore_Periodp12 : in Swagger.File_Part_Type;
+       Truststore_Periodp_12 : in Swagger.File_Part_Type;
        Result  : out Swagger.UString;
        Context : in out Swagger.Servers.Context_Type);
 

@@ -1,3 +1,6 @@
+export * from './BundleData';
+export * from './BundleDataProp';
+export * from './BundleInfo';
 export * from './InstallStatus';
 export * from './InstallStatusStatus';
 export * from './KeystoreChainItems';

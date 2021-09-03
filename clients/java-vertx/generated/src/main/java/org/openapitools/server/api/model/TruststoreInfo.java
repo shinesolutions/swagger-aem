@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.server.api.model.TruststoreItems;
 
-@JsonInclude(JsonInclude.Include.NON_NULL) 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TruststoreInfo   {
   
   private List<TruststoreItems> aliases = new ArrayList<>();
-  private Boolean exists = null;
+  private Boolean exists;
 
   public TruststoreInfo () {
 

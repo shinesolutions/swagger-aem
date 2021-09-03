@@ -22,13 +22,14 @@ import javax.ws.rs.*;
 import javax.inject.Inject;
 
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 @Path("/crx")
 
 
 @io.swagger.annotations.Api(description = "the crx API")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyServerCodegen", date = "2019-08-04T23:42:05.073Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyServerCodegen", date = "2021-09-03T15:25:57.989+10:00[Australia/Melbourne]")
 public class CrxApi  {
 
     @Inject CrxApiService service;

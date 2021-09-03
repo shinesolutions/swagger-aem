@@ -74,6 +74,10 @@ public class CustomApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (tags != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("tags", tags));
         }
@@ -82,9 +86,6 @@ public class CustomApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("combineTagsOr", combineTagsOr));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -191,6 +192,10 @@ public class CustomApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (bundlesIgnored != null) {
             localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "bundles.ignored", bundlesIgnored));
         }
@@ -199,9 +204,6 @@ public class CustomApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("bundles.ignored@TypeHint", bundlesIgnoredAtTypeHint));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             
         };
@@ -304,6 +306,10 @@ public class CustomApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (pwdresetAuthorizables != null) {
             localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "pwdreset.authorizables", pwdresetAuthorizables));
         }
@@ -312,9 +318,6 @@ public class CustomApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("pwdreset.authorizables@TypeHint", pwdresetAuthorizablesAtTypeHint));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             
         };

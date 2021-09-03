@@ -2,6 +2,8 @@ package org.openapitools.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
 
 
@@ -11,22 +13,21 @@ import java.util.Objects;
 import javax.xml.bind.annotation.*;
 
 
-
 public class TruststoreItems   {
   
-  private String alias = null;
+  private String alias;
 
-  private String entryType = null;
+  private String entryType;
 
-  private String subject = null;
+  private String subject;
 
-  private String issuer = null;
+  private String issuer;
 
-  private String notBefore = null;
+  private String notBefore;
 
-  private String notAfter = null;
+  private String notAfter;
 
-  private Integer serialNumber = null;
+  private Integer serialNumber;
 
 
   /**
@@ -163,7 +164,7 @@ public class TruststoreItems   {
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -205,7 +206,7 @@ public class TruststoreItems   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

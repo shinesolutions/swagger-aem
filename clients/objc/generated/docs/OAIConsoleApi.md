@@ -5,6 +5,7 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**getAemProductInfo**](OAIConsoleApi.md#getaemproductinfo) | **GET** /system/console/status-productinfo.json | 
+[**getBundleInfo**](OAIConsoleApi.md#getbundleinfo) | **GET** /system/console/bundles/{name}.json | 
 [**getConfigMgr**](OAIConsoleApi.md#getconfigmgr) | **GET** /system/console/configMgr | 
 [**postBundle**](OAIConsoleApi.md#postbundle) | **POST** /system/console/bundles/{name} | 
 [**postJmxRepository**](OAIConsoleApi.md#postjmxrepository) | **POST** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} | 
@@ -47,6 +48,58 @@ This endpoint does not need any parameter.
 ### Return type
 
 **NSArray<NSString*>***
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getBundleInfo**
+```objc
+-(NSURLSessionTask*) getBundleInfoWithName: (NSString*) name
+        completionHandler: (void (^)(OAIBundleInfo* output, NSError* error)) handler;
+```
+
+
+
+### Example 
+```objc
+OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
+// Configure HTTP basic authorization (authentication scheme: aemAuth)
+[apiConfig setUsername:@"YOUR_USERNAME"];
+[apiConfig setPassword:@"YOUR_PASSWORD"];
+
+
+NSString* name = @"name_example"; // 
+
+OAIConsoleApi*apiInstance = [[OAIConsoleApi alloc] init];
+
+[apiInstance getBundleInfoWithName:name
+          completionHandler: ^(OAIBundleInfo* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling OAIConsoleApi->getBundleInfo: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **NSString***|  | 
+
+### Return type
+
+[**OAIBundleInfo***](OAIBundleInfo.md)
 
 ### Authorization
 

@@ -4,11 +4,11 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonInclude(JsonInclude.Include.NON_NULL) 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class InstallStatusStatus   {
   
-  private Boolean finished = null;
-  private Integer itemCount = null;
+  private Boolean finished;
+  private Integer itemCount;
 
   public InstallStatusStatus () {
 

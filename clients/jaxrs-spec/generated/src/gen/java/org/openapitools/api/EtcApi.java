@@ -8,6 +8,7 @@ import javax.ws.rs.core.Response;
 
 import io.swagger.annotations.*;
 
+import java.io.InputStream;
 import java.util.Map;
 import java.util.List;
 import javax.validation.constraints.*;
@@ -15,14 +16,14 @@ import javax.validation.Valid;
 
 @Path("/etc")
 @Api(description = "the etc API")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2019-08-04T23:42:15.912Z[GMT]")
-public class EtcApi {
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2021-09-03T15:26:06.461+10:00[Australia/Melbourne]")public class EtcApi {
 
     @DELETE
     @Path("/replication/agents.{runmode}/{name}")
     @ApiOperation(value = "", notes = "", response = Void.class, authorizations = {
+        
         @Authorization(value = "aemAuth")
-    }, tags={ "sling",  })
+         }, tags={ "sling" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = Void.class)
     })
@@ -33,8 +34,9 @@ public class EtcApi {
     @GET
     @Path("/replication/agents.{runmode}/{name}")
     @ApiOperation(value = "", notes = "", response = Void.class, authorizations = {
+        
         @Authorization(value = "aemAuth")
-    }, tags={ "sling",  })
+         }, tags={ "sling" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = Void.class)
     })
@@ -46,8 +48,9 @@ public class EtcApi {
     @Path("/replication/agents.{runmode}.-1.json")
     @Produces({ "application/json" })
     @ApiOperation(value = "", notes = "", response = String.class, authorizations = {
+        
         @Authorization(value = "aemAuth")
-    }, tags={ "sling",  })
+         }, tags={ "sling" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = String.class)
     })
@@ -59,8 +62,9 @@ public class EtcApi {
     @Path("/packages/{group}/{name}-{version}.zip")
     @Produces({ "application/octet-stream" })
     @ApiOperation(value = "", notes = "", response = File.class, authorizations = {
+        
         @Authorization(value = "aemAuth")
-    }, tags={ "sling",  })
+         }, tags={ "sling" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = File.class)
     })
@@ -72,8 +76,9 @@ public class EtcApi {
     @Path("/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json")
     @Produces({ "application/json" })
     @ApiOperation(value = "", notes = "", response = String.class, authorizations = {
+        
         @Authorization(value = "aemAuth")
-    }, tags={ "sling",  })
+         }, tags={ "sling" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = String.class)
     })
@@ -85,8 +90,9 @@ public class EtcApi {
     @Path("/truststore/truststore.p12")
     @Produces({ "application/octet-stream" })
     @ApiOperation(value = "", notes = "", response = File.class, authorizations = {
+        
         @Authorization(value = "aemAuth")
-    }, tags={ "sling",  })
+         }, tags={ "sling" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = File.class)
     })
@@ -97,20 +103,22 @@ public class EtcApi {
     @POST
     @Path("/replication/agents.{runmode}/{name}")
     @ApiOperation(value = "", notes = "", response = Void.class, authorizations = {
+        
         @Authorization(value = "aemAuth")
-    }, tags={ "sling",  })
+         }, tags={ "sling" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = Void.class)
     })
-    public Response postAgent(@PathParam("runmode") String runmode,@PathParam("name") String name,@QueryParam("jcr:content/cq:distribute")    Boolean jcrColonContentSlashCqColonDistribute,@QueryParam("jcr:content/cq:distribute@TypeHint")    String jcrColonContentSlashCqColonDistributeAtTypeHint,@QueryParam("jcr:content/cq:name")    String jcrColonContentSlashCqColonName,@QueryParam("jcr:content/cq:template")    String jcrColonContentSlashCqColonTemplate,@QueryParam("jcr:content/enabled")    Boolean jcrColonContentSlashEnabled,@QueryParam("jcr:content/jcr:description")    String jcrColonContentSlashJcrColonDescription,@QueryParam("jcr:content/jcr:lastModified")    String jcrColonContentSlashJcrColonLastModified,@QueryParam("jcr:content/jcr:lastModifiedBy")    String jcrColonContentSlashJcrColonLastModifiedBy,@QueryParam("jcr:content/jcr:mixinTypes")    String jcrColonContentSlashJcrColonMixinTypes,@QueryParam("jcr:content/jcr:title")    String jcrColonContentSlashJcrColonTitle,@QueryParam("jcr:content/logLevel")    String jcrColonContentSlashLogLevel,@QueryParam("jcr:content/noStatusUpdate")    Boolean jcrColonContentSlashNoStatusUpdate,@QueryParam("jcr:content/noVersioning")    Boolean jcrColonContentSlashNoVersioning,@QueryParam("jcr:content/protocolConnectTimeout")    BigDecimal jcrColonContentSlashProtocolConnectTimeout,@QueryParam("jcr:content/protocolHTTPConnectionClosed")    Boolean jcrColonContentSlashProtocolHTTPConnectionClosed,@QueryParam("jcr:content/protocolHTTPExpired")    String jcrColonContentSlashProtocolHTTPExpired,@QueryParam("jcr:content/protocolHTTPHeaders")    List<String> jcrColonContentSlashProtocolHTTPHeaders,@QueryParam("jcr:content/protocolHTTPHeaders@TypeHint")    String jcrColonContentSlashProtocolHTTPHeadersAtTypeHint,@QueryParam("jcr:content/protocolHTTPMethod")    String jcrColonContentSlashProtocolHTTPMethod,@QueryParam("jcr:content/protocolHTTPSRelaxed")    Boolean jcrColonContentSlashProtocolHTTPSRelaxed,@QueryParam("jcr:content/protocolInterface")    String jcrColonContentSlashProtocolInterface,@QueryParam("jcr:content/protocolSocketTimeout")    BigDecimal jcrColonContentSlashProtocolSocketTimeout,@QueryParam("jcr:content/protocolVersion")    String jcrColonContentSlashProtocolVersion,@QueryParam("jcr:content/proxyNTLMDomain")    String jcrColonContentSlashProxyNTLMDomain,@QueryParam("jcr:content/proxyNTLMHost")    String jcrColonContentSlashProxyNTLMHost,@QueryParam("jcr:content/proxyHost")    String jcrColonContentSlashProxyHost,@QueryParam("jcr:content/proxyPassword")    String jcrColonContentSlashProxyPassword,@QueryParam("jcr:content/proxyPort")    BigDecimal jcrColonContentSlashProxyPort,@QueryParam("jcr:content/proxyUser")    String jcrColonContentSlashProxyUser,@QueryParam("jcr:content/queueBatchMaxSize")    BigDecimal jcrColonContentSlashQueueBatchMaxSize,@QueryParam("jcr:content/queueBatchMode")    String jcrColonContentSlashQueueBatchMode,@QueryParam("jcr:content/queueBatchWaitTime")    BigDecimal jcrColonContentSlashQueueBatchWaitTime,@QueryParam("jcr:content/retryDelay")    String jcrColonContentSlashRetryDelay,@QueryParam("jcr:content/reverseReplication")    Boolean jcrColonContentSlashReverseReplication,@QueryParam("jcr:content/serializationType")    String jcrColonContentSlashSerializationType,@QueryParam("jcr:content/sling:resourceType")    String jcrColonContentSlashSlingColonResourceType,@QueryParam("jcr:content/ssl")    String jcrColonContentSlashSsl,@QueryParam("jcr:content/transportNTLMDomain")    String jcrColonContentSlashTransportNTLMDomain,@QueryParam("jcr:content/transportNTLMHost")    String jcrColonContentSlashTransportNTLMHost,@QueryParam("jcr:content/transportPassword")    String jcrColonContentSlashTransportPassword,@QueryParam("jcr:content/transportUri")    String jcrColonContentSlashTransportUri,@QueryParam("jcr:content/transportUser")    String jcrColonContentSlashTransportUser,@QueryParam("jcr:content/triggerDistribute")    Boolean jcrColonContentSlashTriggerDistribute,@QueryParam("jcr:content/triggerModified")    Boolean jcrColonContentSlashTriggerModified,@QueryParam("jcr:content/triggerOnOffTime")    Boolean jcrColonContentSlashTriggerOnOffTime,@QueryParam("jcr:content/triggerReceive")    Boolean jcrColonContentSlashTriggerReceive,@QueryParam("jcr:content/triggerSpecific")    Boolean jcrColonContentSlashTriggerSpecific,@QueryParam("jcr:content/userId")    String jcrColonContentSlashUserId,@QueryParam("jcr:primaryType")    String jcrColonPrimaryType,@QueryParam(":operation")    String colonOperation) {
+    public Response postAgent(@PathParam("runmode") String runmode,@PathParam("name") String name,@QueryParam("jcr:content/cq:distribute")    Boolean jcrColonContentCqColonDistribute,@QueryParam("jcr:content/cq:distribute@TypeHint")    String jcrColonContentCqColonDistributeAtTypeHint,@QueryParam("jcr:content/cq:name")    String jcrColonContentCqColonName,@QueryParam("jcr:content/cq:template")    String jcrColonContentCqColonTemplate,@QueryParam("jcr:content/enabled")    Boolean jcrColonContentEnabled,@QueryParam("jcr:content/jcr:description")    String jcrColonContentJcrColonDescription,@QueryParam("jcr:content/jcr:lastModified")    String jcrColonContentJcrColonLastModified,@QueryParam("jcr:content/jcr:lastModifiedBy")    String jcrColonContentJcrColonLastModifiedBy,@QueryParam("jcr:content/jcr:mixinTypes")    String jcrColonContentJcrColonMixinTypes,@QueryParam("jcr:content/jcr:title")    String jcrColonContentJcrColonTitle,@QueryParam("jcr:content/logLevel")    String jcrColonContentLogLevel,@QueryParam("jcr:content/noStatusUpdate")    Boolean jcrColonContentNoStatusUpdate,@QueryParam("jcr:content/noVersioning")    Boolean jcrColonContentNoVersioning,@QueryParam("jcr:content/protocolConnectTimeout")    BigDecimal jcrColonContentProtocolConnectTimeout,@QueryParam("jcr:content/protocolHTTPConnectionClosed")    Boolean jcrColonContentProtocolHTTPConnectionClosed,@QueryParam("jcr:content/protocolHTTPExpired")    String jcrColonContentProtocolHTTPExpired,@QueryParam("jcr:content/protocolHTTPHeaders")    List<String> jcrColonContentProtocolHTTPHeaders,@QueryParam("jcr:content/protocolHTTPHeaders@TypeHint")    String jcrColonContentProtocolHTTPHeadersAtTypeHint,@QueryParam("jcr:content/protocolHTTPMethod")    String jcrColonContentProtocolHTTPMethod,@QueryParam("jcr:content/protocolHTTPSRelaxed")    Boolean jcrColonContentProtocolHTTPSRelaxed,@QueryParam("jcr:content/protocolInterface")    String jcrColonContentProtocolInterface,@QueryParam("jcr:content/protocolSocketTimeout")    BigDecimal jcrColonContentProtocolSocketTimeout,@QueryParam("jcr:content/protocolVersion")    String jcrColonContentProtocolVersion,@QueryParam("jcr:content/proxyNTLMDomain")    String jcrColonContentProxyNTLMDomain,@QueryParam("jcr:content/proxyNTLMHost")    String jcrColonContentProxyNTLMHost,@QueryParam("jcr:content/proxyHost")    String jcrColonContentProxyHost,@QueryParam("jcr:content/proxyPassword")    String jcrColonContentProxyPassword,@QueryParam("jcr:content/proxyPort")    BigDecimal jcrColonContentProxyPort,@QueryParam("jcr:content/proxyUser")    String jcrColonContentProxyUser,@QueryParam("jcr:content/queueBatchMaxSize")    BigDecimal jcrColonContentQueueBatchMaxSize,@QueryParam("jcr:content/queueBatchMode")    String jcrColonContentQueueBatchMode,@QueryParam("jcr:content/queueBatchWaitTime")    BigDecimal jcrColonContentQueueBatchWaitTime,@QueryParam("jcr:content/retryDelay")    String jcrColonContentRetryDelay,@QueryParam("jcr:content/reverseReplication")    Boolean jcrColonContentReverseReplication,@QueryParam("jcr:content/serializationType")    String jcrColonContentSerializationType,@QueryParam("jcr:content/sling:resourceType")    String jcrColonContentSlingColonResourceType,@QueryParam("jcr:content/ssl")    String jcrColonContentSsl,@QueryParam("jcr:content/transportNTLMDomain")    String jcrColonContentTransportNTLMDomain,@QueryParam("jcr:content/transportNTLMHost")    String jcrColonContentTransportNTLMHost,@QueryParam("jcr:content/transportPassword")    String jcrColonContentTransportPassword,@QueryParam("jcr:content/transportUri")    String jcrColonContentTransportUri,@QueryParam("jcr:content/transportUser")    String jcrColonContentTransportUser,@QueryParam("jcr:content/triggerDistribute")    Boolean jcrColonContentTriggerDistribute,@QueryParam("jcr:content/triggerModified")    Boolean jcrColonContentTriggerModified,@QueryParam("jcr:content/triggerOnOffTime")    Boolean jcrColonContentTriggerOnOffTime,@QueryParam("jcr:content/triggerReceive")    Boolean jcrColonContentTriggerReceive,@QueryParam("jcr:content/triggerSpecific")    Boolean jcrColonContentTriggerSpecific,@QueryParam("jcr:content/userId")    String jcrColonContentUserId,@QueryParam("jcr:primaryType")    String jcrColonPrimaryType,@QueryParam(":operation")    String colonOperation) {
         return Response.ok().entity("magic!").build();
     }
 
     @POST
     @Path("/replication/treeactivation.html")
     @ApiOperation(value = "", notes = "", response = Void.class, authorizations = {
+        
         @Authorization(value = "aemAuth")
-    }, tags={ "sling",  })
+         }, tags={ "sling" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = Void.class)
     })
@@ -123,13 +131,13 @@ public class EtcApi {
     @Consumes({ "multipart/form-data" })
     @Produces({ "text/plain" })
     @ApiOperation(value = "", notes = "", response = String.class, authorizations = {
+        
         @Authorization(value = "aemAuth")
-    }, tags={ "sling" })
+         }, tags={ "sling" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = String.class)
     })
-    public Response postTruststorePKCS12( @FormParam(value = "truststore.p12") InputStream truststoreP12InputStream,
-   @FormParam(value = "truststore.p12") Attachment truststoreP12Detail) {
+    public Response postTruststorePKCS12( @FormParam(value = "truststore.p12") InputStream truststoreP12InputStream) {
         return Response.ok().entity("magic!").build();
     }
 }

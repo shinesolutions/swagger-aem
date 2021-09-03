@@ -25,6 +25,7 @@ Method | HTTP request | Description
 [**postConfigApacheSlingDavExServlet**](SlingApiInterface.md#postConfigApacheSlingDavExServlet) | **POST** /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet | 
 [**postConfigApacheSlingGetServlet**](SlingApiInterface.md#postConfigApacheSlingGetServlet) | **POST** /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet | 
 [**postConfigApacheSlingReferrerFilter**](SlingApiInterface.md#postConfigApacheSlingReferrerFilter) | **POST** /apps/system/config/org.apache.sling.security.impl.ReferrerFilter | 
+[**postConfigProperty**](SlingApiInterface.md#postConfigProperty) | **POST** /apps/system/config/{configNodeName} | 
 [**postNode**](SlingApiInterface.md#postNode) | **POST** /{path}/{name} | 
 [**postNodeRw**](SlingApiInterface.md#postNodeRw) | **POST** /{path}/{name}.rw.html | 
 [**postPath**](SlingApiInterface.md#postPath) | **POST** /{path}/ | 
@@ -42,7 +43,7 @@ services:
     acme.my_bundle.api.sling:
         class: Acme\MyBundle\Api\SlingApi
         tags:
-            - { name: "open_apiserver.api", api: "sling" }
+            - { name: "open_api_server.api", api: "sling" }
     # ...
 ```
 
@@ -678,7 +679,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 ## **postAgent**
-> postAgent($runmode, $name, $jcrcontentcqdistribute, $jcrcontentcqdistributeTypeHint, $jcrcontentcqname, $jcrcontentcqtemplate, $jcrcontentenabled, $jcrcontentjcrdescription, $jcrcontentjcrlastModified, $jcrcontentjcrlastModifiedBy, $jcrcontentjcrmixinTypes, $jcrcontentjcrtitle, $jcrcontentlogLevel, $jcrcontentnoStatusUpdate, $jcrcontentnoVersioning, $jcrcontentprotocolConnectTimeout, $jcrcontentprotocolHTTPConnectionClosed, $jcrcontentprotocolHTTPExpired, $jcrcontentprotocolHTTPHeaders, $jcrcontentprotocolHTTPHeadersTypeHint, $jcrcontentprotocolHTTPMethod, $jcrcontentprotocolHTTPSRelaxed, $jcrcontentprotocolInterface, $jcrcontentprotocolSocketTimeout, $jcrcontentprotocolVersion, $jcrcontentproxyNTLMDomain, $jcrcontentproxyNTLMHost, $jcrcontentproxyHost, $jcrcontentproxyPassword, $jcrcontentproxyPort, $jcrcontentproxyUser, $jcrcontentqueueBatchMaxSize, $jcrcontentqueueBatchMode, $jcrcontentqueueBatchWaitTime, $jcrcontentretryDelay, $jcrcontentreverseReplication, $jcrcontentserializationType, $jcrcontentslingresourceType, $jcrcontentssl, $jcrcontenttransportNTLMDomain, $jcrcontenttransportNTLMHost, $jcrcontenttransportPassword, $jcrcontenttransportUri, $jcrcontenttransportUser, $jcrcontenttriggerDistribute, $jcrcontenttriggerModified, $jcrcontenttriggerOnOffTime, $jcrcontenttriggerReceive, $jcrcontenttriggerSpecific, $jcrcontentuserId, $jcrprimaryType, $operation)
+> postAgent($runmode, $name, $jcrcontentCqdistribute, $jcrcontentCqdistributeTypeHint, $jcrcontentCqname, $jcrcontentCqtemplate, $jcrcontentEnabled, $jcrcontentJcrdescription, $jcrcontentJcrlastModified, $jcrcontentJcrlastModifiedBy, $jcrcontentJcrmixinTypes, $jcrcontentJcrtitle, $jcrcontentLogLevel, $jcrcontentNoStatusUpdate, $jcrcontentNoVersioning, $jcrcontentProtocolConnectTimeout, $jcrcontentProtocolHTTPConnectionClosed, $jcrcontentProtocolHTTPExpired, $jcrcontentProtocolHTTPHeaders, $jcrcontentProtocolHTTPHeadersTypeHint, $jcrcontentProtocolHTTPMethod, $jcrcontentProtocolHTTPSRelaxed, $jcrcontentProtocolInterface, $jcrcontentProtocolSocketTimeout, $jcrcontentProtocolVersion, $jcrcontentProxyNTLMDomain, $jcrcontentProxyNTLMHost, $jcrcontentProxyHost, $jcrcontentProxyPassword, $jcrcontentProxyPort, $jcrcontentProxyUser, $jcrcontentQueueBatchMaxSize, $jcrcontentQueueBatchMode, $jcrcontentQueueBatchWaitTime, $jcrcontentRetryDelay, $jcrcontentReverseReplication, $jcrcontentSerializationType, $jcrcontentSlingresourceType, $jcrcontentSsl, $jcrcontentTransportNTLMDomain, $jcrcontentTransportNTLMHost, $jcrcontentTransportPassword, $jcrcontentTransportUri, $jcrcontentTransportUser, $jcrcontentTriggerDistribute, $jcrcontentTriggerModified, $jcrcontentTriggerOnOffTime, $jcrcontentTriggerReceive, $jcrcontentTriggerSpecific, $jcrcontentUserId, $jcrprimaryType, $operation)
 
 
 
@@ -699,7 +700,7 @@ class SlingApi implements SlingApiInterface
     /**
      * Implementation of SlingApiInterface#postAgent
      */
-    public function postAgent($runmode, $name, $jcrcontentcqdistribute = null, $jcrcontentcqdistributeTypeHint = null, $jcrcontentcqname = null, $jcrcontentcqtemplate = null, $jcrcontentenabled = null, $jcrcontentjcrdescription = null, $jcrcontentjcrlastModified = null, $jcrcontentjcrlastModifiedBy = null, $jcrcontentjcrmixinTypes = null, $jcrcontentjcrtitle = null, $jcrcontentlogLevel = null, $jcrcontentnoStatusUpdate = null, $jcrcontentnoVersioning = null, $jcrcontentprotocolConnectTimeout = null, $jcrcontentprotocolHTTPConnectionClosed = null, $jcrcontentprotocolHTTPExpired = null, array $jcrcontentprotocolHTTPHeaders = null, $jcrcontentprotocolHTTPHeadersTypeHint = null, $jcrcontentprotocolHTTPMethod = null, $jcrcontentprotocolHTTPSRelaxed = null, $jcrcontentprotocolInterface = null, $jcrcontentprotocolSocketTimeout = null, $jcrcontentprotocolVersion = null, $jcrcontentproxyNTLMDomain = null, $jcrcontentproxyNTLMHost = null, $jcrcontentproxyHost = null, $jcrcontentproxyPassword = null, $jcrcontentproxyPort = null, $jcrcontentproxyUser = null, $jcrcontentqueueBatchMaxSize = null, $jcrcontentqueueBatchMode = null, $jcrcontentqueueBatchWaitTime = null, $jcrcontentretryDelay = null, $jcrcontentreverseReplication = null, $jcrcontentserializationType = null, $jcrcontentslingresourceType = null, $jcrcontentssl = null, $jcrcontenttransportNTLMDomain = null, $jcrcontenttransportNTLMHost = null, $jcrcontenttransportPassword = null, $jcrcontenttransportUri = null, $jcrcontenttransportUser = null, $jcrcontenttriggerDistribute = null, $jcrcontenttriggerModified = null, $jcrcontenttriggerOnOffTime = null, $jcrcontenttriggerReceive = null, $jcrcontenttriggerSpecific = null, $jcrcontentuserId = null, $jcrprimaryType = null, $operation = null)
+    public function postAgent($runmode, $name, $jcrcontentCqdistribute = null, $jcrcontentCqdistributeTypeHint = null, $jcrcontentCqname = null, $jcrcontentCqtemplate = null, $jcrcontentEnabled = null, $jcrcontentJcrdescription = null, $jcrcontentJcrlastModified = null, $jcrcontentJcrlastModifiedBy = null, $jcrcontentJcrmixinTypes = null, $jcrcontentJcrtitle = null, $jcrcontentLogLevel = null, $jcrcontentNoStatusUpdate = null, $jcrcontentNoVersioning = null, $jcrcontentProtocolConnectTimeout = null, $jcrcontentProtocolHTTPConnectionClosed = null, $jcrcontentProtocolHTTPExpired = null, array $jcrcontentProtocolHTTPHeaders = null, $jcrcontentProtocolHTTPHeadersTypeHint = null, $jcrcontentProtocolHTTPMethod = null, $jcrcontentProtocolHTTPSRelaxed = null, $jcrcontentProtocolInterface = null, $jcrcontentProtocolSocketTimeout = null, $jcrcontentProtocolVersion = null, $jcrcontentProxyNTLMDomain = null, $jcrcontentProxyNTLMHost = null, $jcrcontentProxyHost = null, $jcrcontentProxyPassword = null, $jcrcontentProxyPort = null, $jcrcontentProxyUser = null, $jcrcontentQueueBatchMaxSize = null, $jcrcontentQueueBatchMode = null, $jcrcontentQueueBatchWaitTime = null, $jcrcontentRetryDelay = null, $jcrcontentReverseReplication = null, $jcrcontentSerializationType = null, $jcrcontentSlingresourceType = null, $jcrcontentSsl = null, $jcrcontentTransportNTLMDomain = null, $jcrcontentTransportNTLMHost = null, $jcrcontentTransportPassword = null, $jcrcontentTransportUri = null, $jcrcontentTransportUser = null, $jcrcontentTriggerDistribute = null, $jcrcontentTriggerModified = null, $jcrcontentTriggerOnOffTime = null, $jcrcontentTriggerReceive = null, $jcrcontentTriggerSpecific = null, $jcrcontentUserId = null, $jcrprimaryType = null, $operation = null)
     {
         // Implement the operation ...
     }
@@ -714,54 +715,54 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **runmode** | **string**|  |
  **name** | **string**|  |
- **jcrcontentcqdistribute** | **bool**|  | [optional]
- **jcrcontentcqdistributeTypeHint** | **string**|  | [optional]
- **jcrcontentcqname** | **string**|  | [optional]
- **jcrcontentcqtemplate** | **string**|  | [optional]
- **jcrcontentenabled** | **bool**|  | [optional]
- **jcrcontentjcrdescription** | **string**|  | [optional]
- **jcrcontentjcrlastModified** | **string**|  | [optional]
- **jcrcontentjcrlastModifiedBy** | **string**|  | [optional]
- **jcrcontentjcrmixinTypes** | **string**|  | [optional]
- **jcrcontentjcrtitle** | **string**|  | [optional]
- **jcrcontentlogLevel** | **string**|  | [optional]
- **jcrcontentnoStatusUpdate** | **bool**|  | [optional]
- **jcrcontentnoVersioning** | **bool**|  | [optional]
- **jcrcontentprotocolConnectTimeout** | **float**|  | [optional]
- **jcrcontentprotocolHTTPConnectionClosed** | **bool**|  | [optional]
- **jcrcontentprotocolHTTPExpired** | **string**|  | [optional]
- **jcrcontentprotocolHTTPHeaders** | [**string**](../Model/string.md)|  | [optional]
- **jcrcontentprotocolHTTPHeadersTypeHint** | **string**|  | [optional]
- **jcrcontentprotocolHTTPMethod** | **string**|  | [optional]
- **jcrcontentprotocolHTTPSRelaxed** | **bool**|  | [optional]
- **jcrcontentprotocolInterface** | **string**|  | [optional]
- **jcrcontentprotocolSocketTimeout** | **float**|  | [optional]
- **jcrcontentprotocolVersion** | **string**|  | [optional]
- **jcrcontentproxyNTLMDomain** | **string**|  | [optional]
- **jcrcontentproxyNTLMHost** | **string**|  | [optional]
- **jcrcontentproxyHost** | **string**|  | [optional]
- **jcrcontentproxyPassword** | **string**|  | [optional]
- **jcrcontentproxyPort** | **float**|  | [optional]
- **jcrcontentproxyUser** | **string**|  | [optional]
- **jcrcontentqueueBatchMaxSize** | **float**|  | [optional]
- **jcrcontentqueueBatchMode** | **string**|  | [optional]
- **jcrcontentqueueBatchWaitTime** | **float**|  | [optional]
- **jcrcontentretryDelay** | **string**|  | [optional]
- **jcrcontentreverseReplication** | **bool**|  | [optional]
- **jcrcontentserializationType** | **string**|  | [optional]
- **jcrcontentslingresourceType** | **string**|  | [optional]
- **jcrcontentssl** | **string**|  | [optional]
- **jcrcontenttransportNTLMDomain** | **string**|  | [optional]
- **jcrcontenttransportNTLMHost** | **string**|  | [optional]
- **jcrcontenttransportPassword** | **string**|  | [optional]
- **jcrcontenttransportUri** | **string**|  | [optional]
- **jcrcontenttransportUser** | **string**|  | [optional]
- **jcrcontenttriggerDistribute** | **bool**|  | [optional]
- **jcrcontenttriggerModified** | **bool**|  | [optional]
- **jcrcontenttriggerOnOffTime** | **bool**|  | [optional]
- **jcrcontenttriggerReceive** | **bool**|  | [optional]
- **jcrcontenttriggerSpecific** | **bool**|  | [optional]
- **jcrcontentuserId** | **string**|  | [optional]
+ **jcrcontentCqdistribute** | **bool**|  | [optional]
+ **jcrcontentCqdistributeTypeHint** | **string**|  | [optional]
+ **jcrcontentCqname** | **string**|  | [optional]
+ **jcrcontentCqtemplate** | **string**|  | [optional]
+ **jcrcontentEnabled** | **bool**|  | [optional]
+ **jcrcontentJcrdescription** | **string**|  | [optional]
+ **jcrcontentJcrlastModified** | **string**|  | [optional]
+ **jcrcontentJcrlastModifiedBy** | **string**|  | [optional]
+ **jcrcontentJcrmixinTypes** | **string**|  | [optional]
+ **jcrcontentJcrtitle** | **string**|  | [optional]
+ **jcrcontentLogLevel** | **string**|  | [optional]
+ **jcrcontentNoStatusUpdate** | **bool**|  | [optional]
+ **jcrcontentNoVersioning** | **bool**|  | [optional]
+ **jcrcontentProtocolConnectTimeout** | **float**|  | [optional]
+ **jcrcontentProtocolHTTPConnectionClosed** | **bool**|  | [optional]
+ **jcrcontentProtocolHTTPExpired** | **string**|  | [optional]
+ **jcrcontentProtocolHTTPHeaders** | [**string**](../Model/string.md)|  | [optional]
+ **jcrcontentProtocolHTTPHeadersTypeHint** | **string**|  | [optional]
+ **jcrcontentProtocolHTTPMethod** | **string**|  | [optional]
+ **jcrcontentProtocolHTTPSRelaxed** | **bool**|  | [optional]
+ **jcrcontentProtocolInterface** | **string**|  | [optional]
+ **jcrcontentProtocolSocketTimeout** | **float**|  | [optional]
+ **jcrcontentProtocolVersion** | **string**|  | [optional]
+ **jcrcontentProxyNTLMDomain** | **string**|  | [optional]
+ **jcrcontentProxyNTLMHost** | **string**|  | [optional]
+ **jcrcontentProxyHost** | **string**|  | [optional]
+ **jcrcontentProxyPassword** | **string**|  | [optional]
+ **jcrcontentProxyPort** | **float**|  | [optional]
+ **jcrcontentProxyUser** | **string**|  | [optional]
+ **jcrcontentQueueBatchMaxSize** | **float**|  | [optional]
+ **jcrcontentQueueBatchMode** | **string**|  | [optional]
+ **jcrcontentQueueBatchWaitTime** | **float**|  | [optional]
+ **jcrcontentRetryDelay** | **string**|  | [optional]
+ **jcrcontentReverseReplication** | **bool**|  | [optional]
+ **jcrcontentSerializationType** | **string**|  | [optional]
+ **jcrcontentSlingresourceType** | **string**|  | [optional]
+ **jcrcontentSsl** | **string**|  | [optional]
+ **jcrcontentTransportNTLMDomain** | **string**|  | [optional]
+ **jcrcontentTransportNTLMHost** | **string**|  | [optional]
+ **jcrcontentTransportPassword** | **string**|  | [optional]
+ **jcrcontentTransportUri** | **string**|  | [optional]
+ **jcrcontentTransportUser** | **string**|  | [optional]
+ **jcrcontentTriggerDistribute** | **bool**|  | [optional]
+ **jcrcontentTriggerModified** | **bool**|  | [optional]
+ **jcrcontentTriggerOnOffTime** | **bool**|  | [optional]
+ **jcrcontentTriggerReceive** | **bool**|  | [optional]
+ **jcrcontentTriggerSpecific** | **bool**|  | [optional]
+ **jcrcontentUserId** | **string**|  | [optional]
  **jcrprimaryType** | **string**|  | [optional]
  **operation** | **string**|  | [optional]
 
@@ -846,7 +847,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 ## **postAuthorizables**
-> string postAuthorizables($authorizableId, $intermediatePath, $createUser, $createGroup, $reppassword, $profilegivenName)
+> string postAuthorizables($authorizableId, $intermediatePath, $createUser, $createGroup, $reppassword, $profileGivenName)
 
 
 
@@ -867,7 +868,7 @@ class SlingApi implements SlingApiInterface
     /**
      * Implementation of SlingApiInterface#postAuthorizables
      */
-    public function postAuthorizables($authorizableId, $intermediatePath, $createUser = null, $createGroup = null, $reppassword = null, $profilegivenName = null)
+    public function postAuthorizables($authorizableId, $intermediatePath, $createUser = null, $createGroup = null, $reppassword = null, $profileGivenName = null)
     {
         // Implement the operation ...
     }
@@ -885,7 +886,7 @@ Name | Type | Description  | Notes
  **createUser** | **string**|  | [optional]
  **createGroup** | **string**|  | [optional]
  **reppassword** | **string**|  | [optional]
- **profilegivenName** | **string**|  | [optional]
+ **profileGivenName** | **string**|  | [optional]
 
 ### Return type
 
@@ -1292,6 +1293,58 @@ Name | Type | Description  | Notes
  **allowHostsRegexpTypeHint** | **string**|  | [optional]
  **filterMethods** | **string**|  | [optional]
  **filterMethodsTypeHint** | **string**|  | [optional]
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[aemAuth](../../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+## **postConfigProperty**
+> postConfigProperty($configNodeName)
+
+
+
+### Example Implementation
+```php
+<?php
+// src/Acme/MyBundle/Api/SlingApiInterface.php
+
+namespace Acme\MyBundle\Api;
+
+use OpenAPI\Server\Api\SlingApiInterface;
+
+class SlingApi implements SlingApiInterface
+{
+
+    // ...
+
+    /**
+     * Implementation of SlingApiInterface#postConfigProperty
+     */
+    public function postConfigProperty($configNodeName)
+    {
+        // Implement the operation ...
+    }
+
+    // ...
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **configNodeName** | **string**|  |
 
 ### Return type
 

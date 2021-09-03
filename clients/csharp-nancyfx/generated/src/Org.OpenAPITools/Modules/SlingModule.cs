@@ -3,11 +3,11 @@ using Nancy;
 using Nancy.ModelBinding;
 using System.Collections.Generic;
 using Sharpility.Base;
-using Org.OpenAPITools..Models;
-using Org.OpenAPITools..Utils;
+using Org.OpenAPITools._.Models;
+using Org.OpenAPITools._.Utils;
 using NodaTime;
 
-namespace Org.OpenAPITools..Modules
+namespace Org.OpenAPITools._.Modules
 { 
 
     /// <summary>
@@ -160,61 +160,61 @@ namespace Org.OpenAPITools..Modules
             {
                 var runmode = Parameters.ValueOf<string>(parameters, Context.Request, "runmode", ParameterType.Path);
                 var name = Parameters.ValueOf<string>(parameters, Context.Request, "name", ParameterType.Path);
-                var jcrcontentcqdistribute = Parameters.ValueOf<bool?>(parameters, Context.Request, "jcrcontentcqdistribute", ParameterType.Query);
-                var jcrcontentcqdistributeTypeHint = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentcqdistributeTypeHint", ParameterType.Query);
-                var jcrcontentcqname = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentcqname", ParameterType.Query);
-                var jcrcontentcqtemplate = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentcqtemplate", ParameterType.Query);
-                var jcrcontentenabled = Parameters.ValueOf<bool?>(parameters, Context.Request, "jcrcontentenabled", ParameterType.Query);
-                var jcrcontentjcrdescription = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentjcrdescription", ParameterType.Query);
-                var jcrcontentjcrlastModified = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentjcrlastModified", ParameterType.Query);
-                var jcrcontentjcrlastModifiedBy = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentjcrlastModifiedBy", ParameterType.Query);
-                var jcrcontentjcrmixinTypes = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentjcrmixinTypes", ParameterType.Query);
-                var jcrcontentjcrtitle = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentjcrtitle", ParameterType.Query);
-                var jcrcontentlogLevel = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentlogLevel", ParameterType.Query);
-                var jcrcontentnoStatusUpdate = Parameters.ValueOf<bool?>(parameters, Context.Request, "jcrcontentnoStatusUpdate", ParameterType.Query);
-                var jcrcontentnoVersioning = Parameters.ValueOf<bool?>(parameters, Context.Request, "jcrcontentnoVersioning", ParameterType.Query);
-                var jcrcontentprotocolConnectTimeout = Parameters.ValueOf<decimal?>(parameters, Context.Request, "jcrcontentprotocolConnectTimeout", ParameterType.Query);
-                var jcrcontentprotocolHTTPConnectionClosed = Parameters.ValueOf<bool?>(parameters, Context.Request, "jcrcontentprotocolHTTPConnectionClosed", ParameterType.Query);
-                var jcrcontentprotocolHTTPExpired = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentprotocolHTTPExpired", ParameterType.Query);
-                var jcrcontentprotocolHTTPHeaders = Parameters.ValueOf<List<string>>(parameters, Context.Request, "jcrcontentprotocolHTTPHeaders", ParameterType.Query);
-                var jcrcontentprotocolHTTPHeadersTypeHint = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentprotocolHTTPHeadersTypeHint", ParameterType.Query);
-                var jcrcontentprotocolHTTPMethod = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentprotocolHTTPMethod", ParameterType.Query);
-                var jcrcontentprotocolHTTPSRelaxed = Parameters.ValueOf<bool?>(parameters, Context.Request, "jcrcontentprotocolHTTPSRelaxed", ParameterType.Query);
-                var jcrcontentprotocolInterface = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentprotocolInterface", ParameterType.Query);
-                var jcrcontentprotocolSocketTimeout = Parameters.ValueOf<decimal?>(parameters, Context.Request, "jcrcontentprotocolSocketTimeout", ParameterType.Query);
-                var jcrcontentprotocolVersion = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentprotocolVersion", ParameterType.Query);
-                var jcrcontentproxyNTLMDomain = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentproxyNTLMDomain", ParameterType.Query);
-                var jcrcontentproxyNTLMHost = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentproxyNTLMHost", ParameterType.Query);
-                var jcrcontentproxyHost = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentproxyHost", ParameterType.Query);
-                var jcrcontentproxyPassword = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentproxyPassword", ParameterType.Query);
-                var jcrcontentproxyPort = Parameters.ValueOf<decimal?>(parameters, Context.Request, "jcrcontentproxyPort", ParameterType.Query);
-                var jcrcontentproxyUser = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentproxyUser", ParameterType.Query);
-                var jcrcontentqueueBatchMaxSize = Parameters.ValueOf<decimal?>(parameters, Context.Request, "jcrcontentqueueBatchMaxSize", ParameterType.Query);
-                var jcrcontentqueueBatchMode = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentqueueBatchMode", ParameterType.Query);
-                var jcrcontentqueueBatchWaitTime = Parameters.ValueOf<decimal?>(parameters, Context.Request, "jcrcontentqueueBatchWaitTime", ParameterType.Query);
-                var jcrcontentretryDelay = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentretryDelay", ParameterType.Query);
-                var jcrcontentreverseReplication = Parameters.ValueOf<bool?>(parameters, Context.Request, "jcrcontentreverseReplication", ParameterType.Query);
-                var jcrcontentserializationType = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentserializationType", ParameterType.Query);
-                var jcrcontentslingresourceType = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentslingresourceType", ParameterType.Query);
-                var jcrcontentssl = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentssl", ParameterType.Query);
-                var jcrcontenttransportNTLMDomain = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontenttransportNTLMDomain", ParameterType.Query);
-                var jcrcontenttransportNTLMHost = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontenttransportNTLMHost", ParameterType.Query);
-                var jcrcontenttransportPassword = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontenttransportPassword", ParameterType.Query);
-                var jcrcontenttransportUri = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontenttransportUri", ParameterType.Query);
-                var jcrcontenttransportUser = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontenttransportUser", ParameterType.Query);
-                var jcrcontenttriggerDistribute = Parameters.ValueOf<bool?>(parameters, Context.Request, "jcrcontenttriggerDistribute", ParameterType.Query);
-                var jcrcontenttriggerModified = Parameters.ValueOf<bool?>(parameters, Context.Request, "jcrcontenttriggerModified", ParameterType.Query);
-                var jcrcontenttriggerOnOffTime = Parameters.ValueOf<bool?>(parameters, Context.Request, "jcrcontenttriggerOnOffTime", ParameterType.Query);
-                var jcrcontenttriggerReceive = Parameters.ValueOf<bool?>(parameters, Context.Request, "jcrcontenttriggerReceive", ParameterType.Query);
-                var jcrcontenttriggerSpecific = Parameters.ValueOf<bool?>(parameters, Context.Request, "jcrcontenttriggerSpecific", ParameterType.Query);
-                var jcrcontentuserId = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentuserId", ParameterType.Query);
+                var jcrcontentCqdistribute = Parameters.ValueOf<bool?>(parameters, Context.Request, "jcrcontentCqdistribute", ParameterType.Query);
+                var jcrcontentCqdistributeTypeHint = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentCqdistributeTypeHint", ParameterType.Query);
+                var jcrcontentCqname = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentCqname", ParameterType.Query);
+                var jcrcontentCqtemplate = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentCqtemplate", ParameterType.Query);
+                var jcrcontentEnabled = Parameters.ValueOf<bool?>(parameters, Context.Request, "jcrcontentEnabled", ParameterType.Query);
+                var jcrcontentJcrdescription = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentJcrdescription", ParameterType.Query);
+                var jcrcontentJcrlastModified = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentJcrlastModified", ParameterType.Query);
+                var jcrcontentJcrlastModifiedBy = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentJcrlastModifiedBy", ParameterType.Query);
+                var jcrcontentJcrmixinTypes = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentJcrmixinTypes", ParameterType.Query);
+                var jcrcontentJcrtitle = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentJcrtitle", ParameterType.Query);
+                var jcrcontentLogLevel = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentLogLevel", ParameterType.Query);
+                var jcrcontentNoStatusUpdate = Parameters.ValueOf<bool?>(parameters, Context.Request, "jcrcontentNoStatusUpdate", ParameterType.Query);
+                var jcrcontentNoVersioning = Parameters.ValueOf<bool?>(parameters, Context.Request, "jcrcontentNoVersioning", ParameterType.Query);
+                var jcrcontentProtocolConnectTimeout = Parameters.ValueOf<decimal?>(parameters, Context.Request, "jcrcontentProtocolConnectTimeout", ParameterType.Query);
+                var jcrcontentProtocolHTTPConnectionClosed = Parameters.ValueOf<bool?>(parameters, Context.Request, "jcrcontentProtocolHTTPConnectionClosed", ParameterType.Query);
+                var jcrcontentProtocolHTTPExpired = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentProtocolHTTPExpired", ParameterType.Query);
+                var jcrcontentProtocolHTTPHeaders = Parameters.ValueOf<List<string>>(parameters, Context.Request, "jcrcontentProtocolHTTPHeaders", ParameterType.Query);
+                var jcrcontentProtocolHTTPHeadersTypeHint = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentProtocolHTTPHeadersTypeHint", ParameterType.Query);
+                var jcrcontentProtocolHTTPMethod = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentProtocolHTTPMethod", ParameterType.Query);
+                var jcrcontentProtocolHTTPSRelaxed = Parameters.ValueOf<bool?>(parameters, Context.Request, "jcrcontentProtocolHTTPSRelaxed", ParameterType.Query);
+                var jcrcontentProtocolInterface = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentProtocolInterface", ParameterType.Query);
+                var jcrcontentProtocolSocketTimeout = Parameters.ValueOf<decimal?>(parameters, Context.Request, "jcrcontentProtocolSocketTimeout", ParameterType.Query);
+                var jcrcontentProtocolVersion = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentProtocolVersion", ParameterType.Query);
+                var jcrcontentProxyNTLMDomain = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentProxyNTLMDomain", ParameterType.Query);
+                var jcrcontentProxyNTLMHost = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentProxyNTLMHost", ParameterType.Query);
+                var jcrcontentProxyHost = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentProxyHost", ParameterType.Query);
+                var jcrcontentProxyPassword = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentProxyPassword", ParameterType.Query);
+                var jcrcontentProxyPort = Parameters.ValueOf<decimal?>(parameters, Context.Request, "jcrcontentProxyPort", ParameterType.Query);
+                var jcrcontentProxyUser = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentProxyUser", ParameterType.Query);
+                var jcrcontentQueueBatchMaxSize = Parameters.ValueOf<decimal?>(parameters, Context.Request, "jcrcontentQueueBatchMaxSize", ParameterType.Query);
+                var jcrcontentQueueBatchMode = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentQueueBatchMode", ParameterType.Query);
+                var jcrcontentQueueBatchWaitTime = Parameters.ValueOf<decimal?>(parameters, Context.Request, "jcrcontentQueueBatchWaitTime", ParameterType.Query);
+                var jcrcontentRetryDelay = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentRetryDelay", ParameterType.Query);
+                var jcrcontentReverseReplication = Parameters.ValueOf<bool?>(parameters, Context.Request, "jcrcontentReverseReplication", ParameterType.Query);
+                var jcrcontentSerializationType = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentSerializationType", ParameterType.Query);
+                var jcrcontentSlingresourceType = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentSlingresourceType", ParameterType.Query);
+                var jcrcontentSsl = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentSsl", ParameterType.Query);
+                var jcrcontentTransportNTLMDomain = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentTransportNTLMDomain", ParameterType.Query);
+                var jcrcontentTransportNTLMHost = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentTransportNTLMHost", ParameterType.Query);
+                var jcrcontentTransportPassword = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentTransportPassword", ParameterType.Query);
+                var jcrcontentTransportUri = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentTransportUri", ParameterType.Query);
+                var jcrcontentTransportUser = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentTransportUser", ParameterType.Query);
+                var jcrcontentTriggerDistribute = Parameters.ValueOf<bool?>(parameters, Context.Request, "jcrcontentTriggerDistribute", ParameterType.Query);
+                var jcrcontentTriggerModified = Parameters.ValueOf<bool?>(parameters, Context.Request, "jcrcontentTriggerModified", ParameterType.Query);
+                var jcrcontentTriggerOnOffTime = Parameters.ValueOf<bool?>(parameters, Context.Request, "jcrcontentTriggerOnOffTime", ParameterType.Query);
+                var jcrcontentTriggerReceive = Parameters.ValueOf<bool?>(parameters, Context.Request, "jcrcontentTriggerReceive", ParameterType.Query);
+                var jcrcontentTriggerSpecific = Parameters.ValueOf<bool?>(parameters, Context.Request, "jcrcontentTriggerSpecific", ParameterType.Query);
+                var jcrcontentUserId = Parameters.ValueOf<string>(parameters, Context.Request, "jcrcontentUserId", ParameterType.Query);
                 var jcrprimaryType = Parameters.ValueOf<string>(parameters, Context.Request, "jcrprimaryType", ParameterType.Query);
                 var operation = Parameters.ValueOf<string>(parameters, Context.Request, "operation", ParameterType.Query);
                 Preconditions.IsNotNull(runmode, "Required parameter: 'runmode' is missing at 'PostAgent'");
                 
                 Preconditions.IsNotNull(name, "Required parameter: 'name' is missing at 'PostAgent'");
                 
-                service.PostAgent(Context, runmode, name, jcrcontentcqdistribute, jcrcontentcqdistributeTypeHint, jcrcontentcqname, jcrcontentcqtemplate, jcrcontentenabled, jcrcontentjcrdescription, jcrcontentjcrlastModified, jcrcontentjcrlastModifiedBy, jcrcontentjcrmixinTypes, jcrcontentjcrtitle, jcrcontentlogLevel, jcrcontentnoStatusUpdate, jcrcontentnoVersioning, jcrcontentprotocolConnectTimeout, jcrcontentprotocolHTTPConnectionClosed, jcrcontentprotocolHTTPExpired, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentprotocolHTTPSRelaxed, jcrcontentprotocolInterface, jcrcontentprotocolSocketTimeout, jcrcontentprotocolVersion, jcrcontentproxyNTLMDomain, jcrcontentproxyNTLMHost, jcrcontentproxyHost, jcrcontentproxyPassword, jcrcontentproxyPort, jcrcontentproxyUser, jcrcontentqueueBatchMaxSize, jcrcontentqueueBatchMode, jcrcontentqueueBatchWaitTime, jcrcontentretryDelay, jcrcontentreverseReplication, jcrcontentserializationType, jcrcontentslingresourceType, jcrcontentssl, jcrcontenttransportNTLMDomain, jcrcontenttransportNTLMHost, jcrcontenttransportPassword, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttriggerDistribute, jcrcontenttriggerModified, jcrcontenttriggerOnOffTime, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentuserId, jcrprimaryType, operation);
+                service.PostAgent(Context, runmode, name, jcrcontentCqdistribute, jcrcontentCqdistributeTypeHint, jcrcontentCqname, jcrcontentCqtemplate, jcrcontentEnabled, jcrcontentJcrdescription, jcrcontentJcrlastModified, jcrcontentJcrlastModifiedBy, jcrcontentJcrmixinTypes, jcrcontentJcrtitle, jcrcontentLogLevel, jcrcontentNoStatusUpdate, jcrcontentNoVersioning, jcrcontentProtocolConnectTimeout, jcrcontentProtocolHTTPConnectionClosed, jcrcontentProtocolHTTPExpired, jcrcontentProtocolHTTPHeaders, jcrcontentProtocolHTTPHeadersTypeHint, jcrcontentProtocolHTTPMethod, jcrcontentProtocolHTTPSRelaxed, jcrcontentProtocolInterface, jcrcontentProtocolSocketTimeout, jcrcontentProtocolVersion, jcrcontentProxyNTLMDomain, jcrcontentProxyNTLMHost, jcrcontentProxyHost, jcrcontentProxyPassword, jcrcontentProxyPort, jcrcontentProxyUser, jcrcontentQueueBatchMaxSize, jcrcontentQueueBatchMode, jcrcontentQueueBatchWaitTime, jcrcontentRetryDelay, jcrcontentReverseReplication, jcrcontentSerializationType, jcrcontentSlingresourceType, jcrcontentSsl, jcrcontentTransportNTLMDomain, jcrcontentTransportNTLMHost, jcrcontentTransportPassword, jcrcontentTransportUri, jcrcontentTransportUser, jcrcontentTriggerDistribute, jcrcontentTriggerModified, jcrcontentTriggerOnOffTime, jcrcontentTriggerReceive, jcrcontentTriggerSpecific, jcrcontentUserId, jcrprimaryType, operation);
                 return new Response { ContentType = ""};
             };
 
@@ -248,12 +248,12 @@ namespace Org.OpenAPITools..Modules
                 var createUser = Parameters.ValueOf<string>(parameters, Context.Request, "createUser", ParameterType.Query);
                 var createGroup = Parameters.ValueOf<string>(parameters, Context.Request, "createGroup", ParameterType.Query);
                 var reppassword = Parameters.ValueOf<string>(parameters, Context.Request, "reppassword", ParameterType.Query);
-                var profilegivenName = Parameters.ValueOf<string>(parameters, Context.Request, "profilegivenName", ParameterType.Query);
+                var profileGivenName = Parameters.ValueOf<string>(parameters, Context.Request, "profileGivenName", ParameterType.Query);
                 Preconditions.IsNotNull(authorizableId, "Required parameter: 'authorizableId' is missing at 'PostAuthorizables'");
                 
                 Preconditions.IsNotNull(intermediatePath, "Required parameter: 'intermediatePath' is missing at 'PostAuthorizables'");
                 
-                return service.PostAuthorizables(Context, authorizableId, intermediatePath, createUser, createGroup, reppassword, profilegivenName);
+                return service.PostAuthorizables(Context, authorizableId, intermediatePath, createUser, createGroup, reppassword, profileGivenName);
             };
 
             Post["/apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config"] = parameters =>
@@ -389,6 +389,15 @@ namespace Org.OpenAPITools..Modules
                 var filterMethods = Parameters.ValueOf<string>(parameters, Context.Request, "filterMethods", ParameterType.Query);
                 var filterMethodsTypeHint = Parameters.ValueOf<string>(parameters, Context.Request, "filterMethodsTypeHint", ParameterType.Query);
                 service.PostConfigApacheSlingReferrerFilter(Context, allowEmpty, allowEmptyTypeHint, allowHosts, allowHostsTypeHint, allowHostsRegexp, allowHostsRegexpTypeHint, filterMethods, filterMethodsTypeHint);
+                return new Response { ContentType = ""};
+            };
+
+            Post["/apps/system/config/{configNodeName}"] = parameters =>
+            {
+                var configNodeName = Parameters.ValueOf<string>(parameters, Context.Request, "configNodeName", ParameterType.Path);
+                Preconditions.IsNotNull(configNodeName, "Required parameter: 'configNodeName' is missing at 'PostConfigProperty'");
+                
+                service.PostConfigProperty(Context, configNodeName);
                 return new Response { ContentType = ""};
             };
 
@@ -604,58 +613,58 @@ namespace Org.OpenAPITools..Modules
         /// <param name="context">Context of request</param>
         /// <param name="runmode"></param>
         /// <param name="name"></param>
-        /// <param name="jcrcontentcqdistribute"> (optional)</param>
-        /// <param name="jcrcontentcqdistributeTypeHint"> (optional)</param>
-        /// <param name="jcrcontentcqname"> (optional)</param>
-        /// <param name="jcrcontentcqtemplate"> (optional)</param>
-        /// <param name="jcrcontentenabled"> (optional)</param>
-        /// <param name="jcrcontentjcrdescription"> (optional)</param>
-        /// <param name="jcrcontentjcrlastModified"> (optional)</param>
-        /// <param name="jcrcontentjcrlastModifiedBy"> (optional)</param>
-        /// <param name="jcrcontentjcrmixinTypes"> (optional)</param>
-        /// <param name="jcrcontentjcrtitle"> (optional)</param>
-        /// <param name="jcrcontentlogLevel"> (optional)</param>
-        /// <param name="jcrcontentnoStatusUpdate"> (optional)</param>
-        /// <param name="jcrcontentnoVersioning"> (optional)</param>
-        /// <param name="jcrcontentprotocolConnectTimeout"> (optional)</param>
-        /// <param name="jcrcontentprotocolHTTPConnectionClosed"> (optional)</param>
-        /// <param name="jcrcontentprotocolHTTPExpired"> (optional)</param>
-        /// <param name="jcrcontentprotocolHTTPHeaders"> (optional)</param>
-        /// <param name="jcrcontentprotocolHTTPHeadersTypeHint"> (optional)</param>
-        /// <param name="jcrcontentprotocolHTTPMethod"> (optional)</param>
-        /// <param name="jcrcontentprotocolHTTPSRelaxed"> (optional)</param>
-        /// <param name="jcrcontentprotocolInterface"> (optional)</param>
-        /// <param name="jcrcontentprotocolSocketTimeout"> (optional)</param>
-        /// <param name="jcrcontentprotocolVersion"> (optional)</param>
-        /// <param name="jcrcontentproxyNTLMDomain"> (optional)</param>
-        /// <param name="jcrcontentproxyNTLMHost"> (optional)</param>
-        /// <param name="jcrcontentproxyHost"> (optional)</param>
-        /// <param name="jcrcontentproxyPassword"> (optional)</param>
-        /// <param name="jcrcontentproxyPort"> (optional)</param>
-        /// <param name="jcrcontentproxyUser"> (optional)</param>
-        /// <param name="jcrcontentqueueBatchMaxSize"> (optional)</param>
-        /// <param name="jcrcontentqueueBatchMode"> (optional)</param>
-        /// <param name="jcrcontentqueueBatchWaitTime"> (optional)</param>
-        /// <param name="jcrcontentretryDelay"> (optional)</param>
-        /// <param name="jcrcontentreverseReplication"> (optional)</param>
-        /// <param name="jcrcontentserializationType"> (optional)</param>
-        /// <param name="jcrcontentslingresourceType"> (optional)</param>
-        /// <param name="jcrcontentssl"> (optional)</param>
-        /// <param name="jcrcontenttransportNTLMDomain"> (optional)</param>
-        /// <param name="jcrcontenttransportNTLMHost"> (optional)</param>
-        /// <param name="jcrcontenttransportPassword"> (optional)</param>
-        /// <param name="jcrcontenttransportUri"> (optional)</param>
-        /// <param name="jcrcontenttransportUser"> (optional)</param>
-        /// <param name="jcrcontenttriggerDistribute"> (optional)</param>
-        /// <param name="jcrcontenttriggerModified"> (optional)</param>
-        /// <param name="jcrcontenttriggerOnOffTime"> (optional)</param>
-        /// <param name="jcrcontenttriggerReceive"> (optional)</param>
-        /// <param name="jcrcontenttriggerSpecific"> (optional)</param>
-        /// <param name="jcrcontentuserId"> (optional)</param>
+        /// <param name="jcrcontentCqdistribute"> (optional)</param>
+        /// <param name="jcrcontentCqdistributeTypeHint"> (optional)</param>
+        /// <param name="jcrcontentCqname"> (optional)</param>
+        /// <param name="jcrcontentCqtemplate"> (optional)</param>
+        /// <param name="jcrcontentEnabled"> (optional)</param>
+        /// <param name="jcrcontentJcrdescription"> (optional)</param>
+        /// <param name="jcrcontentJcrlastModified"> (optional)</param>
+        /// <param name="jcrcontentJcrlastModifiedBy"> (optional)</param>
+        /// <param name="jcrcontentJcrmixinTypes"> (optional)</param>
+        /// <param name="jcrcontentJcrtitle"> (optional)</param>
+        /// <param name="jcrcontentLogLevel"> (optional)</param>
+        /// <param name="jcrcontentNoStatusUpdate"> (optional)</param>
+        /// <param name="jcrcontentNoVersioning"> (optional)</param>
+        /// <param name="jcrcontentProtocolConnectTimeout"> (optional)</param>
+        /// <param name="jcrcontentProtocolHTTPConnectionClosed"> (optional)</param>
+        /// <param name="jcrcontentProtocolHTTPExpired"> (optional)</param>
+        /// <param name="jcrcontentProtocolHTTPHeaders"> (optional)</param>
+        /// <param name="jcrcontentProtocolHTTPHeadersTypeHint"> (optional)</param>
+        /// <param name="jcrcontentProtocolHTTPMethod"> (optional)</param>
+        /// <param name="jcrcontentProtocolHTTPSRelaxed"> (optional)</param>
+        /// <param name="jcrcontentProtocolInterface"> (optional)</param>
+        /// <param name="jcrcontentProtocolSocketTimeout"> (optional)</param>
+        /// <param name="jcrcontentProtocolVersion"> (optional)</param>
+        /// <param name="jcrcontentProxyNTLMDomain"> (optional)</param>
+        /// <param name="jcrcontentProxyNTLMHost"> (optional)</param>
+        /// <param name="jcrcontentProxyHost"> (optional)</param>
+        /// <param name="jcrcontentProxyPassword"> (optional)</param>
+        /// <param name="jcrcontentProxyPort"> (optional)</param>
+        /// <param name="jcrcontentProxyUser"> (optional)</param>
+        /// <param name="jcrcontentQueueBatchMaxSize"> (optional)</param>
+        /// <param name="jcrcontentQueueBatchMode"> (optional)</param>
+        /// <param name="jcrcontentQueueBatchWaitTime"> (optional)</param>
+        /// <param name="jcrcontentRetryDelay"> (optional)</param>
+        /// <param name="jcrcontentReverseReplication"> (optional)</param>
+        /// <param name="jcrcontentSerializationType"> (optional)</param>
+        /// <param name="jcrcontentSlingresourceType"> (optional)</param>
+        /// <param name="jcrcontentSsl"> (optional)</param>
+        /// <param name="jcrcontentTransportNTLMDomain"> (optional)</param>
+        /// <param name="jcrcontentTransportNTLMHost"> (optional)</param>
+        /// <param name="jcrcontentTransportPassword"> (optional)</param>
+        /// <param name="jcrcontentTransportUri"> (optional)</param>
+        /// <param name="jcrcontentTransportUser"> (optional)</param>
+        /// <param name="jcrcontentTriggerDistribute"> (optional)</param>
+        /// <param name="jcrcontentTriggerModified"> (optional)</param>
+        /// <param name="jcrcontentTriggerOnOffTime"> (optional)</param>
+        /// <param name="jcrcontentTriggerReceive"> (optional)</param>
+        /// <param name="jcrcontentTriggerSpecific"> (optional)</param>
+        /// <param name="jcrcontentUserId"> (optional)</param>
         /// <param name="jcrprimaryType"> (optional)</param>
         /// <param name="operation"> (optional)</param>
         /// <returns></returns>
-        void PostAgent(NancyContext context, string runmode, string name, bool? jcrcontentcqdistribute, string jcrcontentcqdistributeTypeHint, string jcrcontentcqname, string jcrcontentcqtemplate, bool? jcrcontentenabled, string jcrcontentjcrdescription, string jcrcontentjcrlastModified, string jcrcontentjcrlastModifiedBy, string jcrcontentjcrmixinTypes, string jcrcontentjcrtitle, string jcrcontentlogLevel, bool? jcrcontentnoStatusUpdate, bool? jcrcontentnoVersioning, decimal? jcrcontentprotocolConnectTimeout, bool? jcrcontentprotocolHTTPConnectionClosed, string jcrcontentprotocolHTTPExpired, List<string> jcrcontentprotocolHTTPHeaders, string jcrcontentprotocolHTTPHeadersTypeHint, string jcrcontentprotocolHTTPMethod, bool? jcrcontentprotocolHTTPSRelaxed, string jcrcontentprotocolInterface, decimal? jcrcontentprotocolSocketTimeout, string jcrcontentprotocolVersion, string jcrcontentproxyNTLMDomain, string jcrcontentproxyNTLMHost, string jcrcontentproxyHost, string jcrcontentproxyPassword, decimal? jcrcontentproxyPort, string jcrcontentproxyUser, decimal? jcrcontentqueueBatchMaxSize, string jcrcontentqueueBatchMode, decimal? jcrcontentqueueBatchWaitTime, string jcrcontentretryDelay, bool? jcrcontentreverseReplication, string jcrcontentserializationType, string jcrcontentslingresourceType, string jcrcontentssl, string jcrcontenttransportNTLMDomain, string jcrcontenttransportNTLMHost, string jcrcontenttransportPassword, string jcrcontenttransportUri, string jcrcontenttransportUser, bool? jcrcontenttriggerDistribute, bool? jcrcontenttriggerModified, bool? jcrcontenttriggerOnOffTime, bool? jcrcontenttriggerReceive, bool? jcrcontenttriggerSpecific, string jcrcontentuserId, string jcrprimaryType, string operation);
+        void PostAgent(NancyContext context, string runmode, string name, bool? jcrcontentCqdistribute, string jcrcontentCqdistributeTypeHint, string jcrcontentCqname, string jcrcontentCqtemplate, bool? jcrcontentEnabled, string jcrcontentJcrdescription, string jcrcontentJcrlastModified, string jcrcontentJcrlastModifiedBy, string jcrcontentJcrmixinTypes, string jcrcontentJcrtitle, string jcrcontentLogLevel, bool? jcrcontentNoStatusUpdate, bool? jcrcontentNoVersioning, decimal? jcrcontentProtocolConnectTimeout, bool? jcrcontentProtocolHTTPConnectionClosed, string jcrcontentProtocolHTTPExpired, List<string> jcrcontentProtocolHTTPHeaders, string jcrcontentProtocolHTTPHeadersTypeHint, string jcrcontentProtocolHTTPMethod, bool? jcrcontentProtocolHTTPSRelaxed, string jcrcontentProtocolInterface, decimal? jcrcontentProtocolSocketTimeout, string jcrcontentProtocolVersion, string jcrcontentProxyNTLMDomain, string jcrcontentProxyNTLMHost, string jcrcontentProxyHost, string jcrcontentProxyPassword, decimal? jcrcontentProxyPort, string jcrcontentProxyUser, decimal? jcrcontentQueueBatchMaxSize, string jcrcontentQueueBatchMode, decimal? jcrcontentQueueBatchWaitTime, string jcrcontentRetryDelay, bool? jcrcontentReverseReplication, string jcrcontentSerializationType, string jcrcontentSlingresourceType, string jcrcontentSsl, string jcrcontentTransportNTLMDomain, string jcrcontentTransportNTLMHost, string jcrcontentTransportPassword, string jcrcontentTransportUri, string jcrcontentTransportUser, bool? jcrcontentTriggerDistribute, bool? jcrcontentTriggerModified, bool? jcrcontentTriggerOnOffTime, bool? jcrcontentTriggerReceive, bool? jcrcontentTriggerSpecific, string jcrcontentUserId, string jcrprimaryType, string operation);
 
         /// <summary>
         /// 
@@ -687,9 +696,9 @@ namespace Org.OpenAPITools..Modules
         /// <param name="createUser"> (optional)</param>
         /// <param name="createGroup"> (optional)</param>
         /// <param name="reppassword"> (optional)</param>
-        /// <param name="profilegivenName"> (optional)</param>
+        /// <param name="profileGivenName"> (optional)</param>
         /// <returns>string</returns>
-        string PostAuthorizables(NancyContext context, string authorizableId, string intermediatePath, string createUser, string createGroup, string reppassword, string profilegivenName);
+        string PostAuthorizables(NancyContext context, string authorizableId, string intermediatePath, string createUser, string createGroup, string reppassword, string profileGivenName);
 
         /// <summary>
         /// 
@@ -837,6 +846,14 @@ namespace Org.OpenAPITools..Modules
         /// 
         /// </summary>
         /// <param name="context">Context of request</param>
+        /// <param name="configNodeName"></param>
+        /// <returns></returns>
+        void PostConfigProperty(NancyContext context, string configNodeName);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context">Context of request</param>
         /// <param name="path"></param>
         /// <param name="name"></param>
         /// <param name="operation"> (optional)</param>
@@ -973,9 +990,9 @@ namespace Org.OpenAPITools..Modules
             return GetTruststoreInfo();
         }
 
-        public virtual void PostAgent(NancyContext context, string runmode, string name, bool? jcrcontentcqdistribute, string jcrcontentcqdistributeTypeHint, string jcrcontentcqname, string jcrcontentcqtemplate, bool? jcrcontentenabled, string jcrcontentjcrdescription, string jcrcontentjcrlastModified, string jcrcontentjcrlastModifiedBy, string jcrcontentjcrmixinTypes, string jcrcontentjcrtitle, string jcrcontentlogLevel, bool? jcrcontentnoStatusUpdate, bool? jcrcontentnoVersioning, decimal? jcrcontentprotocolConnectTimeout, bool? jcrcontentprotocolHTTPConnectionClosed, string jcrcontentprotocolHTTPExpired, List<string> jcrcontentprotocolHTTPHeaders, string jcrcontentprotocolHTTPHeadersTypeHint, string jcrcontentprotocolHTTPMethod, bool? jcrcontentprotocolHTTPSRelaxed, string jcrcontentprotocolInterface, decimal? jcrcontentprotocolSocketTimeout, string jcrcontentprotocolVersion, string jcrcontentproxyNTLMDomain, string jcrcontentproxyNTLMHost, string jcrcontentproxyHost, string jcrcontentproxyPassword, decimal? jcrcontentproxyPort, string jcrcontentproxyUser, decimal? jcrcontentqueueBatchMaxSize, string jcrcontentqueueBatchMode, decimal? jcrcontentqueueBatchWaitTime, string jcrcontentretryDelay, bool? jcrcontentreverseReplication, string jcrcontentserializationType, string jcrcontentslingresourceType, string jcrcontentssl, string jcrcontenttransportNTLMDomain, string jcrcontenttransportNTLMHost, string jcrcontenttransportPassword, string jcrcontenttransportUri, string jcrcontenttransportUser, bool? jcrcontenttriggerDistribute, bool? jcrcontenttriggerModified, bool? jcrcontenttriggerOnOffTime, bool? jcrcontenttriggerReceive, bool? jcrcontenttriggerSpecific, string jcrcontentuserId, string jcrprimaryType, string operation)
+        public virtual void PostAgent(NancyContext context, string runmode, string name, bool? jcrcontentCqdistribute, string jcrcontentCqdistributeTypeHint, string jcrcontentCqname, string jcrcontentCqtemplate, bool? jcrcontentEnabled, string jcrcontentJcrdescription, string jcrcontentJcrlastModified, string jcrcontentJcrlastModifiedBy, string jcrcontentJcrmixinTypes, string jcrcontentJcrtitle, string jcrcontentLogLevel, bool? jcrcontentNoStatusUpdate, bool? jcrcontentNoVersioning, decimal? jcrcontentProtocolConnectTimeout, bool? jcrcontentProtocolHTTPConnectionClosed, string jcrcontentProtocolHTTPExpired, List<string> jcrcontentProtocolHTTPHeaders, string jcrcontentProtocolHTTPHeadersTypeHint, string jcrcontentProtocolHTTPMethod, bool? jcrcontentProtocolHTTPSRelaxed, string jcrcontentProtocolInterface, decimal? jcrcontentProtocolSocketTimeout, string jcrcontentProtocolVersion, string jcrcontentProxyNTLMDomain, string jcrcontentProxyNTLMHost, string jcrcontentProxyHost, string jcrcontentProxyPassword, decimal? jcrcontentProxyPort, string jcrcontentProxyUser, decimal? jcrcontentQueueBatchMaxSize, string jcrcontentQueueBatchMode, decimal? jcrcontentQueueBatchWaitTime, string jcrcontentRetryDelay, bool? jcrcontentReverseReplication, string jcrcontentSerializationType, string jcrcontentSlingresourceType, string jcrcontentSsl, string jcrcontentTransportNTLMDomain, string jcrcontentTransportNTLMHost, string jcrcontentTransportPassword, string jcrcontentTransportUri, string jcrcontentTransportUser, bool? jcrcontentTriggerDistribute, bool? jcrcontentTriggerModified, bool? jcrcontentTriggerOnOffTime, bool? jcrcontentTriggerReceive, bool? jcrcontentTriggerSpecific, string jcrcontentUserId, string jcrprimaryType, string operation)
         {
-            PostAgent(runmode, name, jcrcontentcqdistribute, jcrcontentcqdistributeTypeHint, jcrcontentcqname, jcrcontentcqtemplate, jcrcontentenabled, jcrcontentjcrdescription, jcrcontentjcrlastModified, jcrcontentjcrlastModifiedBy, jcrcontentjcrmixinTypes, jcrcontentjcrtitle, jcrcontentlogLevel, jcrcontentnoStatusUpdate, jcrcontentnoVersioning, jcrcontentprotocolConnectTimeout, jcrcontentprotocolHTTPConnectionClosed, jcrcontentprotocolHTTPExpired, jcrcontentprotocolHTTPHeaders, jcrcontentprotocolHTTPHeadersTypeHint, jcrcontentprotocolHTTPMethod, jcrcontentprotocolHTTPSRelaxed, jcrcontentprotocolInterface, jcrcontentprotocolSocketTimeout, jcrcontentprotocolVersion, jcrcontentproxyNTLMDomain, jcrcontentproxyNTLMHost, jcrcontentproxyHost, jcrcontentproxyPassword, jcrcontentproxyPort, jcrcontentproxyUser, jcrcontentqueueBatchMaxSize, jcrcontentqueueBatchMode, jcrcontentqueueBatchWaitTime, jcrcontentretryDelay, jcrcontentreverseReplication, jcrcontentserializationType, jcrcontentslingresourceType, jcrcontentssl, jcrcontenttransportNTLMDomain, jcrcontenttransportNTLMHost, jcrcontenttransportPassword, jcrcontenttransportUri, jcrcontenttransportUser, jcrcontenttriggerDistribute, jcrcontenttriggerModified, jcrcontenttriggerOnOffTime, jcrcontenttriggerReceive, jcrcontenttriggerSpecific, jcrcontentuserId, jcrprimaryType, operation);
+            PostAgent(runmode, name, jcrcontentCqdistribute, jcrcontentCqdistributeTypeHint, jcrcontentCqname, jcrcontentCqtemplate, jcrcontentEnabled, jcrcontentJcrdescription, jcrcontentJcrlastModified, jcrcontentJcrlastModifiedBy, jcrcontentJcrmixinTypes, jcrcontentJcrtitle, jcrcontentLogLevel, jcrcontentNoStatusUpdate, jcrcontentNoVersioning, jcrcontentProtocolConnectTimeout, jcrcontentProtocolHTTPConnectionClosed, jcrcontentProtocolHTTPExpired, jcrcontentProtocolHTTPHeaders, jcrcontentProtocolHTTPHeadersTypeHint, jcrcontentProtocolHTTPMethod, jcrcontentProtocolHTTPSRelaxed, jcrcontentProtocolInterface, jcrcontentProtocolSocketTimeout, jcrcontentProtocolVersion, jcrcontentProxyNTLMDomain, jcrcontentProxyNTLMHost, jcrcontentProxyHost, jcrcontentProxyPassword, jcrcontentProxyPort, jcrcontentProxyUser, jcrcontentQueueBatchMaxSize, jcrcontentQueueBatchMode, jcrcontentQueueBatchWaitTime, jcrcontentRetryDelay, jcrcontentReverseReplication, jcrcontentSerializationType, jcrcontentSlingresourceType, jcrcontentSsl, jcrcontentTransportNTLMDomain, jcrcontentTransportNTLMHost, jcrcontentTransportPassword, jcrcontentTransportUri, jcrcontentTransportUser, jcrcontentTriggerDistribute, jcrcontentTriggerModified, jcrcontentTriggerOnOffTime, jcrcontentTriggerReceive, jcrcontentTriggerSpecific, jcrcontentUserId, jcrprimaryType, operation);
         }
 
         public virtual KeystoreInfo PostAuthorizableKeystore(NancyContext context, string intermediatePath, string authorizableId, string operation, string currentPassword, string newPassword, string rePassword, string keyPassword, string keyStorePass, string alias, string newAlias, string removeAlias, System.IO.Stream certChain, System.IO.Stream pk, System.IO.Stream keyStore)
@@ -983,9 +1000,9 @@ namespace Org.OpenAPITools..Modules
             return PostAuthorizableKeystore(intermediatePath, authorizableId, operation, currentPassword, newPassword, rePassword, keyPassword, keyStorePass, alias, newAlias, removeAlias, certChain, pk, keyStore);
         }
 
-        public virtual string PostAuthorizables(NancyContext context, string authorizableId, string intermediatePath, string createUser, string createGroup, string reppassword, string profilegivenName)
+        public virtual string PostAuthorizables(NancyContext context, string authorizableId, string intermediatePath, string createUser, string createGroup, string reppassword, string profileGivenName)
         {
-            return PostAuthorizables(authorizableId, intermediatePath, createUser, createGroup, reppassword, profilegivenName);
+            return PostAuthorizables(authorizableId, intermediatePath, createUser, createGroup, reppassword, profileGivenName);
         }
 
         public virtual void PostConfigAdobeGraniteSamlAuthenticationHandler(NancyContext context, string keyStorePassword, string keyStorePasswordTypeHint, int? serviceRanking, string serviceRankingTypeHint, bool? idpHttpRedirect, string idpHttpRedirectTypeHint, bool? createUser, string createUserTypeHint, string defaultRedirectUrl, string defaultRedirectUrlTypeHint, string userIDAttribute, string userIDAttributeTypeHint, List<string> defaultGroups, string defaultGroupsTypeHint, string idpCertAlias, string idpCertAliasTypeHint, bool? addGroupMemberships, string addGroupMembershipsTypeHint, List<string> path, string pathTypeHint, List<string> synchronizeAttributes, string synchronizeAttributesTypeHint, int? clockTolerance, string clockToleranceTypeHint, string groupMembershipAttribute, string groupMembershipAttributeTypeHint, string idpUrl, string idpUrlTypeHint, string logoutUrl, string logoutUrlTypeHint, string serviceProviderEntityId, string serviceProviderEntityIdTypeHint, string assertionConsumerServiceURL, string assertionConsumerServiceURLTypeHint, bool? handleLogout, string handleLogoutTypeHint, string spPrivateKeyAlias, string spPrivateKeyAliasTypeHint, bool? useEncryption, string useEncryptionTypeHint, string nameIdFormat, string nameIdFormatTypeHint, string digestMethod, string digestMethodTypeHint, string signatureMethod, string signatureMethodTypeHint, string userIntermediatePath, string userIntermediatePathTypeHint)
@@ -1016,6 +1033,11 @@ namespace Org.OpenAPITools..Modules
         public virtual void PostConfigApacheSlingReferrerFilter(NancyContext context, bool? allowEmpty, string allowEmptyTypeHint, string allowHosts, string allowHostsTypeHint, string allowHostsRegexp, string allowHostsRegexpTypeHint, string filterMethods, string filterMethodsTypeHint)
         {
             PostConfigApacheSlingReferrerFilter(allowEmpty, allowEmptyTypeHint, allowHosts, allowHostsTypeHint, allowHostsRegexp, allowHostsRegexpTypeHint, filterMethods, filterMethodsTypeHint);
+        }
+
+        public virtual void PostConfigProperty(NancyContext context, string configNodeName)
+        {
+            PostConfigProperty(configNodeName);
         }
 
         public virtual void PostNode(NancyContext context, string path, string name, string operation, string deleteAuthorizable, System.IO.Stream file)
@@ -1077,11 +1099,11 @@ namespace Org.OpenAPITools..Modules
 
         protected abstract TruststoreInfo GetTruststoreInfo();
 
-        protected abstract void PostAgent(string runmode, string name, bool? jcrcontentcqdistribute, string jcrcontentcqdistributeTypeHint, string jcrcontentcqname, string jcrcontentcqtemplate, bool? jcrcontentenabled, string jcrcontentjcrdescription, string jcrcontentjcrlastModified, string jcrcontentjcrlastModifiedBy, string jcrcontentjcrmixinTypes, string jcrcontentjcrtitle, string jcrcontentlogLevel, bool? jcrcontentnoStatusUpdate, bool? jcrcontentnoVersioning, decimal? jcrcontentprotocolConnectTimeout, bool? jcrcontentprotocolHTTPConnectionClosed, string jcrcontentprotocolHTTPExpired, List<string> jcrcontentprotocolHTTPHeaders, string jcrcontentprotocolHTTPHeadersTypeHint, string jcrcontentprotocolHTTPMethod, bool? jcrcontentprotocolHTTPSRelaxed, string jcrcontentprotocolInterface, decimal? jcrcontentprotocolSocketTimeout, string jcrcontentprotocolVersion, string jcrcontentproxyNTLMDomain, string jcrcontentproxyNTLMHost, string jcrcontentproxyHost, string jcrcontentproxyPassword, decimal? jcrcontentproxyPort, string jcrcontentproxyUser, decimal? jcrcontentqueueBatchMaxSize, string jcrcontentqueueBatchMode, decimal? jcrcontentqueueBatchWaitTime, string jcrcontentretryDelay, bool? jcrcontentreverseReplication, string jcrcontentserializationType, string jcrcontentslingresourceType, string jcrcontentssl, string jcrcontenttransportNTLMDomain, string jcrcontenttransportNTLMHost, string jcrcontenttransportPassword, string jcrcontenttransportUri, string jcrcontenttransportUser, bool? jcrcontenttriggerDistribute, bool? jcrcontenttriggerModified, bool? jcrcontenttriggerOnOffTime, bool? jcrcontenttriggerReceive, bool? jcrcontenttriggerSpecific, string jcrcontentuserId, string jcrprimaryType, string operation);
+        protected abstract void PostAgent(string runmode, string name, bool? jcrcontentCqdistribute, string jcrcontentCqdistributeTypeHint, string jcrcontentCqname, string jcrcontentCqtemplate, bool? jcrcontentEnabled, string jcrcontentJcrdescription, string jcrcontentJcrlastModified, string jcrcontentJcrlastModifiedBy, string jcrcontentJcrmixinTypes, string jcrcontentJcrtitle, string jcrcontentLogLevel, bool? jcrcontentNoStatusUpdate, bool? jcrcontentNoVersioning, decimal? jcrcontentProtocolConnectTimeout, bool? jcrcontentProtocolHTTPConnectionClosed, string jcrcontentProtocolHTTPExpired, List<string> jcrcontentProtocolHTTPHeaders, string jcrcontentProtocolHTTPHeadersTypeHint, string jcrcontentProtocolHTTPMethod, bool? jcrcontentProtocolHTTPSRelaxed, string jcrcontentProtocolInterface, decimal? jcrcontentProtocolSocketTimeout, string jcrcontentProtocolVersion, string jcrcontentProxyNTLMDomain, string jcrcontentProxyNTLMHost, string jcrcontentProxyHost, string jcrcontentProxyPassword, decimal? jcrcontentProxyPort, string jcrcontentProxyUser, decimal? jcrcontentQueueBatchMaxSize, string jcrcontentQueueBatchMode, decimal? jcrcontentQueueBatchWaitTime, string jcrcontentRetryDelay, bool? jcrcontentReverseReplication, string jcrcontentSerializationType, string jcrcontentSlingresourceType, string jcrcontentSsl, string jcrcontentTransportNTLMDomain, string jcrcontentTransportNTLMHost, string jcrcontentTransportPassword, string jcrcontentTransportUri, string jcrcontentTransportUser, bool? jcrcontentTriggerDistribute, bool? jcrcontentTriggerModified, bool? jcrcontentTriggerOnOffTime, bool? jcrcontentTriggerReceive, bool? jcrcontentTriggerSpecific, string jcrcontentUserId, string jcrprimaryType, string operation);
 
         protected abstract KeystoreInfo PostAuthorizableKeystore(string intermediatePath, string authorizableId, string operation, string currentPassword, string newPassword, string rePassword, string keyPassword, string keyStorePass, string alias, string newAlias, string removeAlias, System.IO.Stream certChain, System.IO.Stream pk, System.IO.Stream keyStore);
 
-        protected abstract string PostAuthorizables(string authorizableId, string intermediatePath, string createUser, string createGroup, string reppassword, string profilegivenName);
+        protected abstract string PostAuthorizables(string authorizableId, string intermediatePath, string createUser, string createGroup, string reppassword, string profileGivenName);
 
         protected abstract void PostConfigAdobeGraniteSamlAuthenticationHandler(string keyStorePassword, string keyStorePasswordTypeHint, int? serviceRanking, string serviceRankingTypeHint, bool? idpHttpRedirect, string idpHttpRedirectTypeHint, bool? createUser, string createUserTypeHint, string defaultRedirectUrl, string defaultRedirectUrlTypeHint, string userIDAttribute, string userIDAttributeTypeHint, List<string> defaultGroups, string defaultGroupsTypeHint, string idpCertAlias, string idpCertAliasTypeHint, bool? addGroupMemberships, string addGroupMembershipsTypeHint, List<string> path, string pathTypeHint, List<string> synchronizeAttributes, string synchronizeAttributesTypeHint, int? clockTolerance, string clockToleranceTypeHint, string groupMembershipAttribute, string groupMembershipAttributeTypeHint, string idpUrl, string idpUrlTypeHint, string logoutUrl, string logoutUrlTypeHint, string serviceProviderEntityId, string serviceProviderEntityIdTypeHint, string assertionConsumerServiceURL, string assertionConsumerServiceURLTypeHint, bool? handleLogout, string handleLogoutTypeHint, string spPrivateKeyAlias, string spPrivateKeyAliasTypeHint, bool? useEncryption, string useEncryptionTypeHint, string nameIdFormat, string nameIdFormatTypeHint, string digestMethod, string digestMethodTypeHint, string signatureMethod, string signatureMethodTypeHint, string userIntermediatePath, string userIntermediatePathTypeHint);
 
@@ -1094,6 +1116,8 @@ namespace Org.OpenAPITools..Modules
         protected abstract void PostConfigApacheSlingGetServlet(string jsonMaximumresults, string jsonMaximumresultsTypeHint, bool? enableHtml, string enableHtmlTypeHint, bool? enableTxt, string enableTxtTypeHint, bool? enableXml, string enableXmlTypeHint);
 
         protected abstract void PostConfigApacheSlingReferrerFilter(bool? allowEmpty, string allowEmptyTypeHint, string allowHosts, string allowHostsTypeHint, string allowHostsRegexp, string allowHostsRegexpTypeHint, string filterMethods, string filterMethodsTypeHint);
+
+        protected abstract void PostConfigProperty(string configNodeName);
 
         protected abstract void PostNode(string path, string name, string operation, string deleteAuthorizable, System.IO.Stream file);
 
