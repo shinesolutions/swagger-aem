@@ -1,4 +1,4 @@
-name: 'Ruby CI'
+name: 'API Release Minor'
 runs:
   using: 'docker'
   image: 'Dockerfile'

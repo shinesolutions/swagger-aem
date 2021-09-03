@@ -1,4 +1,4 @@
-name: 'CI'
+name: 'API CI'
 runs:
   using: 'docker'
   image: 'Dockerfile'

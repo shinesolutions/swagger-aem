@@ -1,4 +1,4 @@
-name: 'Python'
+name: 'Python CI'
 runs:
   using: 'docker'
   image: 'Dockerfile'
