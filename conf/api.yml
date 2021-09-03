@@ -1,11 +1,13 @@
 openapi: 3.0.0
 info:
   title: Adobe Experience Manager (AEM) API
-  description: Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
-  version: 3.5.0-pre.0
+  description: >-
+    Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM)
+    API
+  version: 3.6.0
   contact:
     name: Shine Solutions
-    url: http://shinesolutions.com
+    url: 'http://shinesolutions.com'
     email: opensource@shinesolutions.com
 security:
   - aemAuth: []
@@ -20,7 +22,7 @@ paths:
             text/xml:
               schema:
                 type: string
-        '5XX':
+        5XX:
           description: Unexpected error.
       tags:
         - console
@@ -56,7 +58,7 @@ paths:
       responses:
         default:
           description: Default response
-  "/{path}/":
+  '/{path}/':
     post:
       operationId: postPath
       parameters:
@@ -65,12 +67,12 @@ paths:
           required: true
           schema:
             type: string
-        - name: jcr:primaryType
+        - name: 'jcr:primaryType'
           in: query
           required: true
           schema:
             type: string
-        - name: :name
+        - name: ':name'
           in: query
           required: true
           schema:
@@ -80,7 +82,7 @@ paths:
       responses:
         default:
           description: Default response
-  "/{path}/{name}":
+  '/{path}/{name}':
     get:
       operationId: getNode
       parameters:
@@ -112,7 +114,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: :operation
+        - name: ':operation'
           in: query
           required: false
           schema:
@@ -154,7 +156,7 @@ paths:
       responses:
         default:
           description: Default response
-  "/{path}/{name}.rw.html":
+  '/{path}/{name}.rw.html':
     post:
       operationId: postNodeRw
       parameters:
@@ -178,7 +180,7 @@ paths:
       responses:
         default:
           description: Default response
-  /apps/system/config/{configNodeName}:
+  '/apps/system/config/{configNodeName}':
     post:
       operationId: postConfigProperty
       parameters:
@@ -537,7 +539,7 @@ paths:
                 type: string
       tags:
         - sling
-  "/etc/packages/{group}/{name}-{version}.zip":
+  '/etc/packages/{group}/{name}-{version}.zip':
     get:
       operationId: getPackage
       parameters:
@@ -566,7 +568,7 @@ paths:
                 format: binary
       tags:
         - sling
-  "/etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json":
+  '/etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json':
     get:
       operationId: getPackageFilter
       parameters:
@@ -594,7 +596,7 @@ paths:
                 type: string
       tags:
         - sling
-  "/etc/replication/agents.{runmode}.-1.json":
+  '/etc/replication/agents.{runmode}.-1.json':
     get:
       operationId: getAgents
       parameters:
@@ -612,7 +614,7 @@ paths:
                 type: string
       tags:
         - sling
-  "/etc/replication/agents.{runmode}/{name}":
+  '/etc/replication/agents.{runmode}/{name}':
     get:
       operationId: getAgent
       parameters:
@@ -662,87 +664,87 @@ paths:
           required: true
           schema:
             type: string
-        - name: jcr:content/cq:distribute
+        - name: 'jcr:content/cq:distribute'
           in: query
           required: false
           schema:
             type: boolean
-        - name: jcr:content/cq:distribute@TypeHint
+        - name: 'jcr:content/cq:distribute@TypeHint'
           in: query
           required: false
           schema:
             type: string
-        - name: jcr:content/cq:name
+        - name: 'jcr:content/cq:name'
           in: query
           required: false
           schema:
             type: string
-        - name: jcr:content/cq:template
+        - name: 'jcr:content/cq:template'
           in: query
           required: false
           schema:
             type: string
-        - name: jcr:content/enabled
+        - name: 'jcr:content/enabled'
           in: query
           required: false
           schema:
             type: boolean
-        - name: jcr:content/jcr:description
+        - name: 'jcr:content/jcr:description'
           in: query
           required: false
           schema:
             type: string
-        - name: jcr:content/jcr:lastModified
+        - name: 'jcr:content/jcr:lastModified'
           in: query
           required: false
           schema:
             type: string
-        - name: jcr:content/jcr:lastModifiedBy
+        - name: 'jcr:content/jcr:lastModifiedBy'
           in: query
           required: false
           schema:
             type: string
-        - name: jcr:content/jcr:mixinTypes
+        - name: 'jcr:content/jcr:mixinTypes'
           in: query
           required: false
           schema:
             type: string
-        - name: jcr:content/jcr:title
+        - name: 'jcr:content/jcr:title'
           in: query
           required: false
           schema:
             type: string
-        - name: jcr:content/logLevel
+        - name: 'jcr:content/logLevel'
           in: query
           required: false
           schema:
             type: string
-        - name: jcr:content/noStatusUpdate
+        - name: 'jcr:content/noStatusUpdate'
           in: query
           required: false
           schema:
             type: boolean
-        - name: jcr:content/noVersioning
+        - name: 'jcr:content/noVersioning'
           in: query
           required: false
           schema:
             type: boolean
-        - name: jcr:content/protocolConnectTimeout
+        - name: 'jcr:content/protocolConnectTimeout'
           in: query
           required: false
           schema:
             type: number
-        - name: jcr:content/protocolHTTPConnectionClosed
+        - name: 'jcr:content/protocolHTTPConnectionClosed'
           in: query
           required: false
           schema:
             type: boolean
-        - name: jcr:content/protocolHTTPExpired
+        - name: 'jcr:content/protocolHTTPExpired'
           in: query
           required: false
           schema:
             type: string
-        - name: jcr:content/protocolHTTPHeaders
+        - name: 'jcr:content/protocolHTTPHeaders'
           in: query
           required: false
           explode: true
@@ -750,167 +752,167 @@ paths:
             type: array
             items:
               type: string
-        - name: jcr:content/protocolHTTPHeaders@TypeHint
+        - name: 'jcr:content/protocolHTTPHeaders@TypeHint'
           in: query
           required: false
           schema:
             type: string
-        - name: jcr:content/protocolHTTPMethod
+        - name: 'jcr:content/protocolHTTPMethod'
           in: query
           required: false
           schema:
             type: string
-        - name: jcr:content/protocolHTTPSRelaxed
+        - name: 'jcr:content/protocolHTTPSRelaxed'
           in: query
           required: false
           schema:
             type: boolean
-        - name: jcr:content/protocolInterface
+        - name: 'jcr:content/protocolInterface'
           in: query
           required: false
           schema:
             type: string
-        - name: jcr:content/protocolSocketTimeout
+        - name: 'jcr:content/protocolSocketTimeout'
           in: query
           required: false
           schema:
             type: number
-        - name: jcr:content/protocolVersion
+        - name: 'jcr:content/protocolVersion'
           in: query
           required: false
           schema:
             type: string
-        - name: jcr:content/proxyNTLMDomain
+        - name: 'jcr:content/proxyNTLMDomain'
           in: query
           required: false
           schema:
             type: string
-        - name: jcr:content/proxyNTLMHost
+        - name: 'jcr:content/proxyNTLMHost'
           in: query
           required: false
           schema:
             type: string
-        - name: jcr:content/proxyHost
+        - name: 'jcr:content/proxyHost'
           in: query
           required: false
           schema:
             type: string
-        - name: jcr:content/proxyPassword
+        - name: 'jcr:content/proxyPassword'
           in: query
           required: false
           schema:
             type: string
-        - name: jcr:content/proxyPort
+        - name: 'jcr:content/proxyPort'
           in: query
           required: false
           schema:
             type: number
-        - name: jcr:content/proxyUser
+        - name: 'jcr:content/proxyUser'
           in: query
           required: false
           schema:
             type: string
-        - name: jcr:content/queueBatchMaxSize
+        - name: 'jcr:content/queueBatchMaxSize'
           in: query
           required: false
           schema:
             type: number
-        - name: jcr:content/queueBatchMode
+        - name: 'jcr:content/queueBatchMode'
           in: query
           required: false
           schema:
             type: string
-        - name: jcr:content/queueBatchWaitTime
+        - name: 'jcr:content/queueBatchWaitTime'
           in: query
           required: false
           schema:
             type: number
-        - name: jcr:content/retryDelay
+        - name: 'jcr:content/retryDelay'
           in: query
           required: false
           schema:
             type: string
-        - name: jcr:content/reverseReplication
+        - name: 'jcr:content/reverseReplication'
           in: query
           required: false
           schema:
             type: boolean
-        - name: jcr:content/serializationType
+        - name: 'jcr:content/serializationType'
           in: query
           required: false
           schema:
             type: string
-        - name: jcr:content/sling:resourceType
+        - name: 'jcr:content/sling:resourceType'
           in: query
           required: false
           schema:
             type: string
-        - name: jcr:content/ssl
+        - name: 'jcr:content/ssl'
           in: query
           required: false
           schema:
             type: string
-        - name: jcr:content/transportNTLMDomain
+        - name: 'jcr:content/transportNTLMDomain'
           in: query
           required: false
           schema:
             type: string
-        - name: jcr:content/transportNTLMHost
+        - name: 'jcr:content/transportNTLMHost'
           in: query
           required: false
           schema:
             type: string
-        - name: jcr:content/transportPassword
+        - name: 'jcr:content/transportPassword'
           in: query
           required: false
           schema:
             type: string
-        - name: jcr:content/transportUri
+        - name: 'jcr:content/transportUri'
           in: query
           required: false
           schema:
             type: string
-        - name: jcr:content/transportUser
+        - name: 'jcr:content/transportUser'
           in: query
           required: false
           schema:
             type: string
-        - name: jcr:content/triggerDistribute
+        - name: 'jcr:content/triggerDistribute'
           in: query
           required: false
           schema:
             type: boolean
-        - name: jcr:content/triggerModified
+        - name: 'jcr:content/triggerModified'
           in: query
           required: false
           schema:
             type: boolean
-        - name: jcr:content/triggerOnOffTime
+        - name: 'jcr:content/triggerOnOffTime'
           in: query
           required: false
           schema:
             type: boolean
-        - name: jcr:content/triggerReceive
+        - name: 'jcr:content/triggerReceive'
           in: query
           required: false
           schema:
             type: boolean
-        - name: jcr:content/triggerSpecific
+        - name: 'jcr:content/triggerSpecific'
           in: query
           required: false
           schema:
             type: boolean
-        - name: jcr:content/userId
+        - name: 'jcr:content/userId'
           in: query
           required: false
           schema:
             type: string
-        - name: jcr:primaryType
+        - name: 'jcr:primaryType'
           in: query
           required: false
           schema:
             type: string
-        - name: :operation
+        - name: ':operation'
           in: query
           required: false
           schema:
@@ -968,7 +970,7 @@ paths:
           required: false
           schema:
             type: string
-        - name: rep:password
+        - name: 'rep:password'
           in: query
           required: false
           schema:
@@ -1019,12 +1021,12 @@ paths:
     get:
       operationId: getInstallStatus
       responses:
-        "200":
+        '200':
           description: Retrieved CRX package manager install status
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/InstallStatus"
+                $ref: '#/components/schemas/InstallStatus'
         default:
           description: Default response
           content:
@@ -1094,7 +1096,7 @@ paths:
                 type: string
       tags:
         - crx
-  "/crx/packmgr/service/.json/{path}":
+  '/crx/packmgr/service/.json/{path}':
     post:
       operationId: postPackageServiceJson
       parameters:
@@ -1160,13 +1162,13 @@ paths:
     get:
       operationId: getPackageManagerServlet
       responses:
-        "404":
+        '404':
           description: Package Manager Servlet is disabled
           content:
             text/html:
               schema:
                 type: string
-        "405":
+        '405':
           description: Package Manager Servlet is active
           content:
             text/html:
@@ -1174,17 +1176,17 @@ paths:
                 type: string
       tags:
         - crx
-  /crx/server/crx.default/jcr:root/.1.json:
+  '/crx/server/crx.default/jcr:root/.1.json':
     get:
       operationId: getCrxdeStatus
       responses:
-        "200":
+        '200':
           description: CRXDE is enabled
           content:
             plain/text:
               schema:
                 type: string
-        "404":
+        '404':
           description: CRXDE is disabled
           content:
             plain/text:
@@ -1192,7 +1194,7 @@ paths:
                 type: string
       tags:
         - crx
-  "/system/console/bundles/{name}.json":
+  '/system/console/bundles/{name}.json':
     get:
       operationId: getBundleInfo
       parameters:
@@ -1204,19 +1206,19 @@ paths:
       tags:
         - console
       responses:
-        "200":
+        '200':
           description: Retrieved bundle info
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BundleInfo"
+                $ref: '#/components/schemas/BundleInfo'
         default:
           description: Default response
           content:
             application/json:
               schema:
                 type: string
-  "/system/console/bundles/{name}":
+  '/system/console/bundles/{name}':
     post:
       operationId: postBundle
       parameters:
@@ -1235,7 +1237,7 @@ paths:
       responses:
         default:
           description: Default response
-  "/system/console/jmx/com.adobe.granite:type=Repository/op/{action}":
+  '/system/console/jmx/com.adobe.granite:type=Repository/op/{action}':
     post:
       operationId: postJmxRepository
       parameters:
@@ -1606,7 +1608,7 @@ paths:
     post:
       operationId: postTruststore
       parameters:
-        - name: :operation
+        - name: ':operation'
           in: query
           required: false
           schema:
@@ -1653,12 +1655,12 @@ paths:
     get:
       operationId: getTruststoreInfo
       responses:
-        "200":
+        '200':
           description: Retrieved AEM Truststore info
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/TruststoreInfo"
+                $ref: '#/components/schemas/TruststoreInfo'
         default:
           description: Default response
           content:
@@ -1869,13 +1871,13 @@ paths:
             items:
               type: string
       responses:
-        "200":
+        '200':
           description: Retrieved AEM SAML Configuration
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/SamlConfigurationInfo"
-        "302":
+                $ref: '#/components/schemas/SamlConfigurationInfo'
+        '302':
           description: Default response
           content:
             text/plain:
@@ -1903,7 +1905,7 @@ paths:
                   type: string
       tags:
         - console
-  "/{intermediatePath}/{authorizableId}.ks.html":
+  '/{intermediatePath}/{authorizableId}.ks.html':
     post:
       operationId: postAuthorizableKeystore
       parameters:
@@ -1917,7 +1919,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: :operation
+        - name: ':operation'
           in: query
           required: false
           schema:
@@ -1980,19 +1982,19 @@ paths:
       tags:
         - sling
       responses:
-        "200":
+        '200':
           description: Retrieved Authorizable Keystore info
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/KeystoreInfo"
+                $ref: '#/components/schemas/KeystoreInfo'
         default:
           description: Default response
           content:
             text/plain:
               schema:
                 type: string
-  "/{intermediatePath}/{authorizableId}.ks.json":
+  '/{intermediatePath}/{authorizableId}.ks.json':
     get:
       operationId: getAuthorizableKeystore
       parameters:
@@ -2009,19 +2011,19 @@ paths:
       tags:
         - sling
       responses:
-        "200":
+        '200':
           description: Retrieved Authorizable Keystore info
           content:
             text/plain:
               schema:
-                $ref: "#/components/schemas/KeystoreInfo"
+                $ref: '#/components/schemas/KeystoreInfo'
         default:
           description: Default response
           content:
             text/plain:
               schema:
                 type: string
-  "/{intermediatePath}/{authorizableId}/keystore/store.p12":
+  '/{intermediatePath}/{authorizableId}/keystore/store.p12':
     get:
       operationId: getKeystore
       parameters:
@@ -2045,7 +2047,7 @@ paths:
                 format: binary
       tags:
         - sling
-  "/libs/granite/security/post/sslSetup.html":
+  /libs/granite/security/post/sslSetup.html:
     post:
       operationId: sslSetup
       parameters:
@@ -2124,7 +2126,7 @@ components:
         aliases:
           type: array
           items:
-            $ref: "#/components/schemas/KeystoreItems"
+            $ref: '#/components/schemas/KeystoreItems'
         exists:
           type: boolean
           description: False if truststore don't exist
@@ -2134,7 +2136,7 @@ components:
         aliases:
           type: array
           items:
-            $ref: "#/components/schemas/TruststoreItems"
+            $ref: '#/components/schemas/TruststoreItems'
         exists:
           type: boolean
           description: False if truststore don't exist
@@ -2156,7 +2158,7 @@ components:
         chain:
           type: array
           items:
-            $ref: "#/components/schemas/KeystoreChainItems"
+            $ref: '#/components/schemas/KeystoreChainItems'
     KeystoreChainItems:
       type: object
       properties:
@@ -2168,13 +2170,13 @@ components:
           description: e.g. "CN=Admin"
         notBefore:
           type: string
-          description: e.g. "Sun Jul 01 12:00:00 AEST 2018"
+          description: 'e.g. "Sun Jul 01 12:00:00 AEST 2018"'
         notAfter:
           type: string
-          description: e.g. "Sun Jun 30 23:59:50 AEST 2019"
+          description: 'e.g. "Sun Jun 30 23:59:50 AEST 2019"'
         serialNumber:
           type: integer
-          description: "18165099476682912368"
+          description: '18165099476682912368'
     TruststoreItems:
       type: object
       properties:
@@ -2191,13 +2193,13 @@ components:
           description: e.g. "CN=Admin"
         notBefore:
           type: string
-          description: e.g. "Sun Jul 01 12:00:00 AEST 2018"
+          description: 'e.g. "Sun Jul 01 12:00:00 AEST 2018"'
         notAfter:
           type: string
-          description: e.g. "Sun Jun 30 23:59:50 AEST 2019"
+          description: 'e.g. "Sun Jun 30 23:59:50 AEST 2019"'
         serialNumber:
           type: integer
-          description: "18165099476682912368"
+          description: '18165099476682912368'
     SamlConfigurationInfo:
       type: object
       properties:
@@ -2217,113 +2219,132 @@ components:
           description: needed for configuraiton binding
           type: string
         properties:
-          $ref: "#/components/schemas/SamlConfigurationProperties"
+          $ref: '#/components/schemas/SamlConfigurationProperties'
     SamlConfigurationProperties:
       type: object
       properties:
         path:
-          description: Repository path for which this authentication handler should be used
+          description: >-
+            Repository path for which this authentication handler should be used
             by Sling. If this is empty, the authentication handler will be
             disabled.
-          $ref: "#/components/schemas/SamlConfigurationPropertyItemsArray"
+          $ref: '#/components/schemas/SamlConfigurationPropertyItemsArray'
         service.ranking:
-          description: OSGi Framework Service Ranking value to indicate the order in which
+          description: >-
+            OSGi Framework Service Ranking value to indicate the order in which
             to call this service. This is an int value where higher values
             designate higher precedence. Default value is 0.
-          $ref: "#/components/schemas/SamlConfigurationPropertyItemsLong"
+          $ref: '#/components/schemas/SamlConfigurationPropertyItemsLong'
         idpUrl:
-          description: URL of the IDP where the SAML Authentication Request should be sent
+          description: >-
+            URL of the IDP where the SAML Authentication Request should be sent
             to. If this property is empty the authentication handler is
             disabled. (idpUrl)
-          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+          $ref: '#/components/schemas/SamlConfigurationPropertyItemsString'
         idpCertAlias:
-          description: The alias of the IdP's certificate in the global truststore. If this
+          description: >-
+            The alias of the IdP's certificate in the global truststore. If this
             property is empty the authentication handler is disabled.
-          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+          $ref: '#/components/schemas/SamlConfigurationPropertyItemsString'
         idpHttpRedirect:
-          description: Use an HTTP Redirect to the IDP URL instead of sending an
+          description: >-
+            Use an HTTP Redirect to the IDP URL instead of sending an
             AuthnRequest-message to request credentials. Use this for IDP
             initiated authentication.
-          $ref: "#/components/schemas/SamlConfigurationPropertyItemsBoolean"
+          $ref: '#/components/schemas/SamlConfigurationPropertyItemsBoolean'
         serviceProviderEntityId:
-          description: ID which uniquely identifies this service provider with the identity
+          description: >-
+            ID which uniquely identifies this service provider with the identity
             provider. If this property is empty the authentication handler is
             disabled.
-          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+          $ref: '#/components/schemas/SamlConfigurationPropertyItemsString'
         assertionConsumerServiceURL:
-          description: The (optional) AssertionConsumerServiceURL attribute of an Authn
-            request specifies the location to which a  message MUST be
-            sent to the requester.
-          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+          description: >-
+            The (optional) AssertionConsumerServiceURL attribute of an Authn
+            request specifies the location to which a  message MUST be sent to
+            the requester.
+          $ref: '#/components/schemas/SamlConfigurationPropertyItemsString'
         spPrivateKeyAlias:
-          description: The alias of the SP's private key in the key-store of the
+          description: >-
+            The alias of the SP's private key in the key-store of the
             'authentication-service' system user. If this property is empty the
             handler will not be able to sign or decrypt messages.
-          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+          $ref: '#/components/schemas/SamlConfigurationPropertyItemsString'
         keyStorePassword:
-          description: The password of the key-store of the 'authentication-service' system
+          description: >-
+            The password of the key-store of the 'authentication-service' system
             user.
-          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+          $ref: '#/components/schemas/SamlConfigurationPropertyItemsString'
         defaultRedirectUrl:
           description: The default location to redirect to after successful authentication.
-          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+          $ref: '#/components/schemas/SamlConfigurationPropertyItemsString'
         userIDAttribute:
-          description: The name of the attribute containing the user ID used to
+          description: >-
+            The name of the attribute containing the user ID used to
             authenticate and create the user in the CRX repository. Leave empty
             to use the Subject:NameId.
-          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+          $ref: '#/components/schemas/SamlConfigurationPropertyItemsString'
         useEncryption:
-          description: Whether or not this authentication handler expects encrypted SAML
+          description: >-
+            Whether or not this authentication handler expects encrypted SAML
             assertions. If this is enabled the SP's private key must be provided
             in the key-store of the 'authentication-service' system user (see SP
             Private Key Alias above).
-          $ref: "#/components/schemas/SamlConfigurationPropertyItemsBoolean"
+          $ref: '#/components/schemas/SamlConfigurationPropertyItemsBoolean'
         createUser:
           description: Whether or not to autocreate nonexisting users in the repository.
-          $ref: "#/components/schemas/SamlConfigurationPropertyItemsBoolean"
+          $ref: '#/components/schemas/SamlConfigurationPropertyItemsBoolean'
         addGroupMemberships:
-          description: Whether or not a user should be automatically added to CRX groups
+          description: >-
+            Whether or not a user should be automatically added to CRX groups
             after successful authentication.
-          $ref: "#/components/schemas/SamlConfigurationPropertyItemsBoolean"
+          $ref: '#/components/schemas/SamlConfigurationPropertyItemsBoolean'
         groupMembershipAttribute:
-          description: The name of the attribute containing a list of CRX groups this user
+          description: >-
+            The name of the attribute containing a list of CRX groups this user
             should be added to.
-          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+          $ref: '#/components/schemas/SamlConfigurationPropertyItemsString'
         defaultGroups:
-          description: A list of default CRX groups users are added to after successful
+          description: >-
+            A list of default CRX groups users are added to after successful
             authentication.
-          $ref: "#/components/schemas/SamlConfigurationPropertyItemsArray"
+          $ref: '#/components/schemas/SamlConfigurationPropertyItemsArray'
         nameIdFormat:
-          description: The value of the NameIDPolicy format parameter to send in the
+          description: >-
+            The value of the NameIDPolicy format parameter to send in the
             AuthnRequest message.
-          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+          $ref: '#/components/schemas/SamlConfigurationPropertyItemsString'
         synchronizeAttributes:
-          description: A list of attribute mappings (in the format
+          description: >-
+            A list of attribute mappings (in the format
             \attributename=path/relative/to/user/node\) which should be stored
             in the repository on user-synchronization.
-          $ref: "#/components/schemas/SamlConfigurationPropertyItemsArray"
+          $ref: '#/components/schemas/SamlConfigurationPropertyItemsArray'
         handleLogout:
-          description: Whether or not logout (dropCredentials) requests will be processed
+          description: >-
+            Whether or not logout (dropCredentials) requests will be processed
             by this handler.
-          $ref: "#/components/schemas/SamlConfigurationPropertyItemsBoolean"
+          $ref: '#/components/schemas/SamlConfigurationPropertyItemsBoolean'
         logoutUrl:
-          description: URL of the IDP where the SAML Logout Request should be sent to. If
+          description: >-
+            URL of the IDP where the SAML Logout Request should be sent to. If
             this property is empty the authentication handler won't handle
             logouts.
-          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+          $ref: '#/components/schemas/SamlConfigurationPropertyItemsString'
         clockTolerance:
-          description: Time tolerance in seconds to compensate clock skew between IDP and
+          description: >-
+            Time tolerance in seconds to compensate clock skew between IDP and
             SP when validating Assertions.
-          $ref: "#/components/schemas/SamlConfigurationPropertyItemsLong"
+          $ref: '#/components/schemas/SamlConfigurationPropertyItemsLong'
         digestMethod:
           description: The digest algorithm to use when signing a SAML message.
-          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+          $ref: '#/components/schemas/SamlConfigurationPropertyItemsString'
         signatureMethod:
           description: The signature algorithm to use when signing a SAML message.
-          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+          $ref: '#/components/schemas/SamlConfigurationPropertyItemsString'
         userIntermediatePath:
           description: User intermediate path to store created users.
-          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
+          $ref: '#/components/schemas/SamlConfigurationPropertyItemsString'
     SamlConfigurationPropertyItemsArray:
       type: object
       properties:
@@ -2337,7 +2358,7 @@ components:
           description: True if property is set
           type: boolean
         type:
-          description: Property type, 1=String, 3=long, 11=boolean, 12=Password
+          description: 'Property type, 1=String, 3=long, 11=boolean, 12=Password'
           type: integer
         values:
           description: Property value
@@ -2360,7 +2381,7 @@ components:
           description: True if property is set
           type: boolean
         type:
-          description: Property type, 1=String, 3=long, 11=boolean, 12=Password
+          description: 'Property type, 1=String, 3=long, 11=boolean, 12=Password'
           type: integer
         value:
           description: Property value
@@ -2381,7 +2402,7 @@ components:
           description: True if property is set
           type: boolean
         type:
-          description: Property type, 1=String, 3=long, 11=boolean, 12=Password
+          description: 'Property type, 1=String, 3=long, 11=boolean, 12=Password'
           type: integer
         value:
           description: Property value
@@ -2402,7 +2423,7 @@ components:
           description: True if property is set
           type: boolean
         type:
-          description: Property type, 1=String, 3=long, 11=boolean, 12=Password
+          description: 'Property type, 1=String, 3=long, 11=boolean, 12=Password'
           type: integer
         value:
           description: Property value
@@ -2423,7 +2444,7 @@ components:
         data:
           type: array
           items:
-            $ref: "#/components/schemas/BundleData"
+            $ref: '#/components/schemas/BundleData'
     BundleData:
       type: object
       properties:
@@ -2454,7 +2475,7 @@ components:
         props:
           type: array
           items:
-            $ref: "#/components/schemas/BundleDataProp"
+            $ref: '#/components/schemas/BundleDataProp'
     BundleDataProp:
       type: object
       properties:
