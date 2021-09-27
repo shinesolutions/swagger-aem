@@ -1,0 +1,14 @@
+---
+name: Ruby Release Patch
+on: [workflow_dispatch]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: ./.github/actions/ruby-release-patch-action
+      - uses: ad-m/github-push-action@master
+        with:
+          tags: true
+          github_token: ${{ secrets.SHINEOPENSOURCE_GITHUB_TOKEN }}
+          branch: ${{ github.ref }}

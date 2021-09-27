@@ -1,0 +1,15 @@
+name: Ruby Publish
+'on':
+  push:
+    tags:
+      - 'ruby-*'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          ref: main
+      - uses: ./.github/actions/ruby-publish-action
+        env:
+          RUBYGEMS_TOKEN: '${{ secrets.SHINEOPENSOURCE_RUBYGEMS_TOKEN }}'

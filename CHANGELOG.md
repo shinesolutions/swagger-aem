@@ -8,8 +8,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ## 3.6.0 - 2021-09-03
-
-## 3.6.0 - 2021-09-03
 ### Added
 - Add deps-python and deps-ruby targets for language specific openapi-generator dependency version
 - Add openapi-generator-version target

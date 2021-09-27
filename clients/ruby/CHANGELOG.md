@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Add ruby-release-*, ruby-publish GitHub Actions
+
 ### Changed
 - Generate client with spec 3.5.0
 - Modify integration tests to handle AEM 6.5 which defaults to disabled crx/de
