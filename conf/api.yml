@@ -4,10 +4,10 @@ info:
   description: >-
     Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM)
     API
-  version: 3.5.1-pre.0
+  version: 3.5.1
   contact:
     name: Shine Solutions
-    url: 'http://shinesolutions.com'
+    url: http://shinesolutions.com
     email: opensource@shinesolutions.com
 security:
   - aemAuth: []
@@ -58,7 +58,7 @@ paths:
       responses:
         default:
           description: Default response
-  '/{path}/':
+  /{path}/:
     post:
       operationId: postPath
       parameters:
@@ -67,7 +67,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: 'jcr:primaryType'
+        - name: jcr:primaryType
           in: query
           required: true
           schema:
@@ -82,7 +82,7 @@ paths:
       responses:
         default:
           description: Default response
-  '/{path}/{name}':
+  /{path}/{name}:
     get:
       operationId: getNode
       parameters:
@@ -156,7 +156,7 @@ paths:
       responses:
         default:
           description: Default response
-  '/{path}/{name}.rw.html':
+  /{path}/{name}.rw.html:
     post:
       operationId: postNodeRw
       parameters:
@@ -180,7 +180,7 @@ paths:
       responses:
         default:
           description: Default response
-  '/apps/system/config/{configNodeName}':
+  /apps/system/config/{configNodeName}:
     post:
       operationId: postConfigProperty
       parameters:
@@ -539,7 +539,7 @@ paths:
                 type: string
       tags:
         - sling
-  '/etc/packages/{group}/{name}-{version}.zip':
+  /etc/packages/{group}/{name}-{version}.zip:
     get:
       operationId: getPackage
       parameters:
@@ -568,7 +568,7 @@ paths:
                 format: binary
       tags:
         - sling
-  '/etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json':
+  /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json:
     get:
       operationId: getPackageFilter
       parameters:
@@ -596,7 +596,7 @@ paths:
                 type: string
       tags:
         - sling
-  '/etc/replication/agents.{runmode}.-1.json':
+  /etc/replication/agents.{runmode}.-1.json:
     get:
       operationId: getAgents
       parameters:
@@ -614,7 +614,7 @@ paths:
                 type: string
       tags:
         - sling
-  '/etc/replication/agents.{runmode}/{name}':
+  /etc/replication/agents.{runmode}/{name}:
     get:
       operationId: getAgent
       parameters:
@@ -664,87 +664,87 @@ paths:
           required: true
           schema:
             type: string
-        - name: 'jcr:content/cq:distribute'
+        - name: jcr:content/cq:distribute
           in: query
           required: false
           schema:
             type: boolean
-        - name: 'jcr:content/cq:distribute@TypeHint'
+        - name: jcr:content/cq:distribute@TypeHint
           in: query
           required: false
           schema:
             type: string
-        - name: 'jcr:content/cq:name'
+        - name: jcr:content/cq:name
           in: query
           required: false
           schema:
             type: string
-        - name: 'jcr:content/cq:template'
+        - name: jcr:content/cq:template
           in: query
           required: false
           schema:
             type: string
-        - name: 'jcr:content/enabled'
+        - name: jcr:content/enabled
           in: query
           required: false
           schema:
             type: boolean
-        - name: 'jcr:content/jcr:description'
+        - name: jcr:content/jcr:description
           in: query
           required: false
           schema:
             type: string
-        - name: 'jcr:content/jcr:lastModified'
+        - name: jcr:content/jcr:lastModified
           in: query
           required: false
           schema:
             type: string
-        - name: 'jcr:content/jcr:lastModifiedBy'
+        - name: jcr:content/jcr:lastModifiedBy
           in: query
           required: false
           schema:
             type: string
-        - name: 'jcr:content/jcr:mixinTypes'
+        - name: jcr:content/jcr:mixinTypes
           in: query
           required: false
           schema:
             type: string
-        - name: 'jcr:content/jcr:title'
+        - name: jcr:content/jcr:title
           in: query
           required: false
           schema:
             type: string
-        - name: 'jcr:content/logLevel'
+        - name: jcr:content/logLevel
           in: query
           required: false
           schema:
             type: string
-        - name: 'jcr:content/noStatusUpdate'
+        - name: jcr:content/noStatusUpdate
           in: query
           required: false
           schema:
             type: boolean
-        - name: 'jcr:content/noVersioning'
+        - name: jcr:content/noVersioning
           in: query
           required: false
           schema:
             type: boolean
-        - name: 'jcr:content/protocolConnectTimeout'
+        - name: jcr:content/protocolConnectTimeout
           in: query
           required: false
           schema:
             type: number
-        - name: 'jcr:content/protocolHTTPConnectionClosed'
+        - name: jcr:content/protocolHTTPConnectionClosed
           in: query
           required: false
           schema:
             type: boolean
-        - name: 'jcr:content/protocolHTTPExpired'
+        - name: jcr:content/protocolHTTPExpired
           in: query
           required: false
           schema:
             type: string
-        - name: 'jcr:content/protocolHTTPHeaders'
+        - name: jcr:content/protocolHTTPHeaders
           in: query
           required: false
           explode: true
@@ -752,162 +752,162 @@ paths:
             type: array
             items:
               type: string
-        - name: 'jcr:content/protocolHTTPHeaders@TypeHint'
+        - name: jcr:content/protocolHTTPHeaders@TypeHint
           in: query
           required: false
           schema:
             type: string
-        - name: 'jcr:content/protocolHTTPMethod'
+        - name: jcr:content/protocolHTTPMethod
           in: query
           required: false
           schema:
             type: string
-        - name: 'jcr:content/protocolHTTPSRelaxed'
+        - name: jcr:content/protocolHTTPSRelaxed
           in: query
           required: false
           schema:
             type: boolean
-        - name: 'jcr:content/protocolInterface'
+        - name: jcr:content/protocolInterface
           in: query
           required: false
           schema:
             type: string
-        - name: 'jcr:content/protocolSocketTimeout'
+        - name: jcr:content/protocolSocketTimeout
           in: query
           required: false
           schema:
             type: number
-        - name: 'jcr:content/protocolVersion'
+        - name: jcr:content/protocolVersion
           in: query
           required: false
           schema:
             type: string
-        - name: 'jcr:content/proxyNTLMDomain'
+        - name: jcr:content/proxyNTLMDomain
           in: query
           required: false
           schema:
             type: string
-        - name: 'jcr:content/proxyNTLMHost'
+        - name: jcr:content/proxyNTLMHost
           in: query
           required: false
           schema:
             type: string
-        - name: 'jcr:content/proxyHost'
+        - name: jcr:content/proxyHost
           in: query
           required: false
           schema:
             type: string
-        - name: 'jcr:content/proxyPassword'
+        - name: jcr:content/proxyPassword
           in: query
           required: false
           schema:
             type: string
-        - name: 'jcr:content/proxyPort'
+        - name: jcr:content/proxyPort
           in: query
           required: false
           schema:
             type: number
-        - name: 'jcr:content/proxyUser'
+        - name: jcr:content/proxyUser
           in: query
           required: false
           schema:
             type: string
-        - name: 'jcr:content/queueBatchMaxSize'
+        - name: jcr:content/queueBatchMaxSize
           in: query
           required: false
           schema:
             type: number
-        - name: 'jcr:content/queueBatchMode'
+        - name: jcr:content/queueBatchMode
           in: query
           required: false
           schema:
             type: string
-        - name: 'jcr:content/queueBatchWaitTime'
+        - name: jcr:content/queueBatchWaitTime
           in: query
           required: false
           schema:
             type: number
-        - name: 'jcr:content/retryDelay'
+        - name: jcr:content/retryDelay
           in: query
           required: false
           schema:
             type: string
-        - name: 'jcr:content/reverseReplication'
+        - name: jcr:content/reverseReplication
           in: query
           required: false
           schema:
             type: boolean
-        - name: 'jcr:content/serializationType'
+        - name: jcr:content/serializationType
           in: query
           required: false
           schema:
             type: string
-        - name: 'jcr:content/sling:resourceType'
+        - name: jcr:content/sling:resourceType
           in: query
           required: false
           schema:
             type: string
-        - name: 'jcr:content/ssl'
+        - name: jcr:content/ssl
           in: query
           required: false
           schema:
             type: string
-        - name: 'jcr:content/transportNTLMDomain'
+        - name: jcr:content/transportNTLMDomain
           in: query
           required: false
           schema:
             type: string
-        - name: 'jcr:content/transportNTLMHost'
+        - name: jcr:content/transportNTLMHost
           in: query
           required: false
           schema:
             type: string
-        - name: 'jcr:content/transportPassword'
+        - name: jcr:content/transportPassword
           in: query
           required: false
           schema:
             type: string
-        - name: 'jcr:content/transportUri'
+        - name: jcr:content/transportUri
           in: query
           required: false
           schema:
             type: string
-        - name: 'jcr:content/transportUser'
+        - name: jcr:content/transportUser
           in: query
           required: false
           schema:
             type: string
-        - name: 'jcr:content/triggerDistribute'
+        - name: jcr:content/triggerDistribute
           in: query
           required: false
           schema:
             type: boolean
-        - name: 'jcr:content/triggerModified'
+        - name: jcr:content/triggerModified
           in: query
           required: false
           schema:
             type: boolean
-        - name: 'jcr:content/triggerOnOffTime'
+        - name: jcr:content/triggerOnOffTime
           in: query
           required: false
           schema:
             type: boolean
-        - name: 'jcr:content/triggerReceive'
+        - name: jcr:content/triggerReceive
           in: query
           required: false
           schema:
             type: boolean
-        - name: 'jcr:content/triggerSpecific'
+        - name: jcr:content/triggerSpecific
           in: query
           required: false
           schema:
             type: boolean
-        - name: 'jcr:content/userId'
+        - name: jcr:content/userId
           in: query
           required: false
           schema:
             type: string
-        - name: 'jcr:primaryType'
+        - name: jcr:primaryType
           in: query
           required: false
           schema:
@@ -970,7 +970,7 @@ paths:
           required: false
           schema:
             type: string
-        - name: 'rep:password'
+        - name: rep:password
           in: query
           required: false
           schema:
@@ -1096,7 +1096,7 @@ paths:
                 type: string
       tags:
         - crx
-  '/crx/packmgr/service/.json/{path}':
+  /crx/packmgr/service/.json/{path}:
     post:
       operationId: postPackageServiceJson
       parameters:
@@ -1176,7 +1176,7 @@ paths:
                 type: string
       tags:
         - crx
-  '/crx/server/crx.default/jcr:root/.1.json':
+  /crx/server/crx.default/jcr:root/.1.json:
     get:
       operationId: getCrxdeStatus
       responses:
@@ -1194,7 +1194,7 @@ paths:
                 type: string
       tags:
         - crx
-  '/system/console/bundles/{name}.json':
+  /system/console/bundles/{name}.json:
     get:
       operationId: getBundleInfo
       parameters:
@@ -1218,7 +1218,7 @@ paths:
             application/json:
               schema:
                 type: string
-  '/system/console/bundles/{name}':
+  /system/console/bundles/{name}:
     post:
       operationId: postBundle
       parameters:
@@ -1237,7 +1237,7 @@ paths:
       responses:
         default:
           description: Default response
-  '/system/console/jmx/com.adobe.granite:type=Repository/op/{action}':
+  /system/console/jmx/com.adobe.granite:type=Repository/op/{action}:
     post:
       operationId: postJmxRepository
       parameters:
@@ -1905,7 +1905,7 @@ paths:
                   type: string
       tags:
         - console
-  '/{intermediatePath}/{authorizableId}.ks.html':
+  /{intermediatePath}/{authorizableId}.ks.html:
     post:
       operationId: postAuthorizableKeystore
       parameters:
@@ -1994,7 +1994,7 @@ paths:
             text/plain:
               schema:
                 type: string
-  '/{intermediatePath}/{authorizableId}.ks.json':
+  /{intermediatePath}/{authorizableId}.ks.json:
     get:
       operationId: getAuthorizableKeystore
       parameters:
@@ -2023,7 +2023,7 @@ paths:
             text/plain:
               schema:
                 type: string
-  '/{intermediatePath}/{authorizableId}/keystore/store.p12':
+  /{intermediatePath}/{authorizableId}/keystore/store.p12:
     get:
       operationId: getKeystore
       parameters:
@@ -2170,10 +2170,10 @@ components:
           description: e.g. "CN=Admin"
         notBefore:
           type: string
-          description: 'e.g. "Sun Jul 01 12:00:00 AEST 2018"'
+          description: e.g. "Sun Jul 01 12:00:00 AEST 2018"
         notAfter:
           type: string
-          description: 'e.g. "Sun Jun 30 23:59:50 AEST 2019"'
+          description: e.g. "Sun Jun 30 23:59:50 AEST 2019"
         serialNumber:
           type: integer
           description: '18165099476682912368'
@@ -2193,10 +2193,10 @@ components:
           description: e.g. "CN=Admin"
         notBefore:
           type: string
-          description: 'e.g. "Sun Jul 01 12:00:00 AEST 2018"'
+          description: e.g. "Sun Jul 01 12:00:00 AEST 2018"
         notAfter:
           type: string
-          description: 'e.g. "Sun Jun 30 23:59:50 AEST 2019"'
+          description: e.g. "Sun Jun 30 23:59:50 AEST 2019"
         serialNumber:
           type: integer
           description: '18165099476682912368'
@@ -2358,7 +2358,7 @@ components:
           description: True if property is set
           type: boolean
         type:
-          description: 'Property type, 1=String, 3=long, 11=boolean, 12=Password'
+          description: Property type, 1=String, 3=long, 11=boolean, 12=Password
           type: integer
         values:
           description: Property value
@@ -2381,7 +2381,7 @@ components:
           description: True if property is set
           type: boolean
         type:
-          description: 'Property type, 1=String, 3=long, 11=boolean, 12=Password'
+          description: Property type, 1=String, 3=long, 11=boolean, 12=Password
           type: integer
         value:
           description: Property value
@@ -2402,7 +2402,7 @@ components:
           description: True if property is set
           type: boolean
         type:
-          description: 'Property type, 1=String, 3=long, 11=boolean, 12=Password'
+          description: Property type, 1=String, 3=long, 11=boolean, 12=Password
           type: integer
         value:
           description: Property value
@@ -2423,7 +2423,7 @@ components:
           description: True if property is set
           type: boolean
         type:
-          description: 'Property type, 1=String, 3=long, 11=boolean, 12=Password'
+          description: Property type, 1=String, 3=long, 11=boolean, 12=Password
           type: integer
         value:
           description: Property value
