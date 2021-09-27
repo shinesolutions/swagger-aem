@@ -5,9 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 3.5.1 - 2021-09-27
-### Changed
-- Switch api-release-* GH Actions to use ghcr.io GitHub Registry
+## Unreleased
 
 ## 3.6.0 - 2021-09-03
 ### Added
@@ -22,6 +20,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Modify client generation to use openapi-generator-cli jar
 - Move node.js build dependencies from Makefile target to package.json
 - Set default deps target to download latest openapi-generator
+
+## 3.5.1 - 2021-09-27
+### Changed
+- Switch api-release-* GH Actions to use ghcr.io GitHub Registry
 
 ## 3.4.0 - 2020-09-26
 ### Changed
