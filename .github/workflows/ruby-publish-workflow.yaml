@@ -2,14 +2,14 @@ name: Ruby Publish
 'on':
   push:
     tags:
-      - 'ruby-*'
+      - ruby-*
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
         with:
-          ref: main
+          ref: 3.6.2
       - uses: docker/login-action@v1
         with:
           registry: ghcr.io
@@ -17,4 +17,4 @@ jobs:
           password: ${{ secrets.SHINEOPENSOURCE_GITHUB_TOKEN }}
       - uses: ./.github/actions/ruby-publish-action
         env:
-          RUBYGEMS_TOKEN: '${{ secrets.SHINEOPENSOURCE_RUBYGEMS_TOKEN }}'
+          RUBYGEMS_TOKEN: ${{ secrets.SHINEOPENSOURCE_RUBYGEMS_TOKEN }}
