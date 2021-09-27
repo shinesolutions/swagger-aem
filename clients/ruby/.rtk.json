@@ -11,6 +11,14 @@
     {
       "path": "CHANGELOG.md",
       "type": "keep-a-changelog"
+    },
+    {
+      "path": "../../.github/workflows/ruby-publish-workflow.yaml",
+      "type": "yaml",
+      "params": {
+        "property": "jobs.build.steps.0.with.ref",
+        "post_release_value": "main"
+      }
     }
   ]
 }
