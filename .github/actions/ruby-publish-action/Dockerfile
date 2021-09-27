@@ -1,3 +1,3 @@
-FROM shinesolutions/aem-platform-buildenv:2.0.0
+FROM ghcr.io/shinesolutions/the-works-buildenv:1.8.0
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh", "$RUBYGEMS_TOKEN"]
