@@ -922,7 +922,7 @@ paths:
       responses:
         default:
           description: Default response
-  /etc/replication/treeactivation.html:
+  /libs/replication/treeactivation.html:
     post:
       operationId: postTreeActivation
       parameters:
@@ -941,6 +941,12 @@ paths:
           required: true
           schema:
             type: string
+        - name: cmd
+          in: query
+          required: true
+          schema:
+            type: string
+            default: activate
       tags:
         - sling
       responses:
