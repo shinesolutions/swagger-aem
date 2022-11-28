@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-## 3.6.0 - 2022-09-07
+## 3.7.0 - 2022-09-07
 ### Added
 - Added tree activation capability for AEM 6.4 & AEM 6.5
 
