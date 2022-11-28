@@ -30,7 +30,7 @@ Method | HTTP request | Description
 [**post_node_rw**](SlingApi.md#post_node_rw) | **POST** /{path}/{name}.rw.html | 
 [**post_path**](SlingApi.md#post_path) | **POST** /{path}/ | 
 [**post_query**](SlingApi.md#post_query) | **POST** /bin/querybuilder.json | 
-[**post_tree_activation**](SlingApi.md#post_tree_activation) | **POST** /etc/replication/treeactivation.html | 
+[**post_tree_activation**](SlingApi.md#post_tree_activation) | **POST** /libs/replication/treeactivation.html | 
 [**post_truststore**](SlingApi.md#post_truststore) | **POST** /libs/granite/security/post/truststore | 
 [**post_truststore_pkcs12**](SlingApi.md#post_truststore_pkcs12) | **POST** /etc/truststore | 
 
@@ -1711,7 +1711,7 @@ Name | Type | Description  | Notes
 
 ## post_tree_activation
 
-> post_tree_activation(ignoredeactivated, onlymodified, path)
+> post_tree_activation(ignoredeactivated, onlymodified, path, cmd)
 
 
 
@@ -1731,9 +1731,10 @@ api_instance = SwaggerAemClient::SlingApi.new
 ignoredeactivated = true # Boolean | 
 onlymodified = true # Boolean | 
 path = 'path_example' # String | 
+cmd = 'activate' # String | 
 
 begin
-  api_instance.post_tree_activation(ignoredeactivated, onlymodified, path)
+  api_instance.post_tree_activation(ignoredeactivated, onlymodified, path, cmd)
 rescue SwaggerAemClient::ApiError => e
   puts "Exception when calling SlingApi->post_tree_activation: #{e}"
 end
@@ -1747,6 +1748,7 @@ Name | Type | Description  | Notes
  **ignoredeactivated** | **Boolean**|  | 
  **onlymodified** | **Boolean**|  | 
  **path** | **String**|  | 
+ **cmd** | **String**|  | [default to &#39;activate&#39;]
 
 ### Return type
 
