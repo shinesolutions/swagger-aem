@@ -684,6 +684,11 @@ paths:
           required: false
           schema:
             type: string
+        - name: jcr:content/aliasUpdate
+          in: query
+          required: false
+          schema:
+            type: boolean
         - name: jcr:content/enabled
           in: query
           required: false
