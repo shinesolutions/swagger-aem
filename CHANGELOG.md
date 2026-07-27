@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Added the possibility to configure the aliasUpdate for a replication flush agent.
 
+### Changed
+- Simplify GitHub Actions release workflows to not use custom action
+
 ## 3.7.0 - 2022-09-07
 ### Added
 - Added tree activation capability for AEM 6.4 & AEM 6.5
