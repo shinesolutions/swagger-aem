@@ -1,0 +1,23 @@
+name: Publish API Documentation
+'on':
+  push:
+    tags:
+      - '*'
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          token: ${{ secrets.OAPICF_GITHUB_TOKEN }}
+          ref: main
+      - uses: cliffano/command-docker-action@v2.1.0
+        with:
+          image: cliffano/studio:3.8.0
+          shell: bash
+          command: |
+             make deps init-spec doc-latest doc-version
+      - uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.OAPICF_GITHUB_TOKEN }}
+          publish_dir: stage/gh-pages

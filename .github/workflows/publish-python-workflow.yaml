@@ -1,0 +1,28 @@
+name: Publish Python
+'on':
+  push:
+    tags:
+      - '*'
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          set-safe-directory: ${{ github.workspace }}
+      - uses: iamsauravsharma/create-dotenv@v2.0.1
+        with:
+          file-path: '/tmp/.env'
+        env:
+          GITHUB_ACTIONS: ${{ env.GITHUB_ACTIONS }}
+      - uses: cliffano/command-docker-action@v2.1.0
+        with:
+          image: cliffano/studio:3.8.0
+          shell: bash
+          command: |
+            make clean deps init-spec generate-primary build-python test-python &&
+            make publish-python
+          env_file: '/tmp/.env'

@@ -1,34 +1,12 @@
-# Start of AOC gitignore
-bin/
-logs/
-modules/
+# Start of Studio gitignore
+core
+doc/
+clients/ruby/generated/bin/
 stage/
-zzz-*.*
-# End of AOC gitignore
+# End of Studio gitignore
 
-# Created by https://www.toptal.com/developers/gitignore/api/macos,vscode,ruby,node,java,python,go
-# Edit at https://www.toptal.com/developers/gitignore?templates=macos,vscode,ruby,node,java,python,go
-
-### Go ###
-# Binaries for programs and plugins
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib
-
-# Test binary, built with `go test -c`
-*.test
-
-# Output of the go coverage tool, specifically when used with LiteIDE
-*.out
-
-# Dependency directories (remove the comment below to include it)
-# vendor/
-
-### Go Patch ###
-/vendor/
-/Godeps/
+# Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,macos,ruby,python,java,node
+# Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,macos,ruby,python,java,node
 
 ### Java ###
 # Compiled class file
@@ -54,6 +32,7 @@ zzz-*.*
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+replay_pid*
 
 ### macOS ###
 # General
@@ -91,6 +70,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
+.pnpm-debug.log*
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
@@ -127,8 +107,8 @@ build/Release
 node_modules/
 jspm_packages/
 
-# TypeScript v1 declaration files
-typings/
+# Snowpack dependency directory (https://snowpack.dev/)
+web_modules/
 
 # TypeScript cache
 *.tsbuildinfo
@@ -157,10 +137,12 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
-# dotenv environment variables file
+# dotenv environment variable files
 .env
-.env.test
-.env*.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -168,18 +150,11 @@ typings/
 
 # Next.js build output
 .next
+out
 
 # Nuxt.js build / generate output
 .nuxt
 dist
-
-# Storybook build outputs
-.out
-.storybook-out
-storybook-static
-
-# rollup.js default build output
-dist/
 
 # Gatsby files
 .cache/
@@ -189,6 +164,12 @@ dist/
 
 # vuepress build output
 .vuepress/dist
+
+# vuepress v2.x temp and cache directory
+.temp
+
+# Docusaurus cache and generated files
+.docusaurus
 
 # Serverless directories
 .serverless/
@@ -205,9 +186,21 @@ dist/
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
-# Temporary folders
-tmp/
-temp/
+# yarn v2
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+### Node Patch ###
+# Serverless Webpack directories
+.webpack/
+
+# Optional stylelint cache
+
+# SvelteKit build / generate output
+.svelte-kit
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
@@ -216,19 +209,22 @@ __pycache__/
 *$py.class
 
 # C extensions
+*.so
 
 # Distribution / packaging
 .Python
 build/
 develop-eggs/
+dist/
 downloads/
 eggs/
 .eggs/
+lib/
+lib64/
 parts/
 sdist/
 var/
 wheels/
-pip-wheel-metadata/
 share/python-wheels/
 *.egg-info/
 .installed.cfg
@@ -257,7 +253,7 @@ coverage.xml
 *.py,cover
 .hypothesis/
 .pytest_cache/
-pytestdebug.log
+cover/
 
 # Translations
 *.mo
@@ -277,9 +273,9 @@ instance/
 
 # Sphinx documentation
 docs/_build/
-doc/_build/
 
 # PyBuilder
+.pybuilder/
 target/
 
 # Jupyter Notebook
@@ -290,7 +286,9 @@ profile_default/
 ipython_config.py
 
 # pyenv
-.python-version
+#   For a library or package, you might want to ignore these files since the code is
+#   intended to run in multiple environments; otherwise, check them in:
+# .python-version
 
 # pipenv
 #   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
@@ -300,6 +298,10 @@ ipython_config.py
 #Pipfile.lock
 
 # poetry
+#   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
+#   This is especially recommended for binary packages to ensure reproducibility, and is more
+#   commonly ignored for libraries.
+#   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
 #poetry.lock
 
 # PEP 582; used by e.g. github.com/David-OConnor/pyflow
@@ -313,15 +315,12 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-# .env
-.env/
-.venv/
+.venv
 env/
 venv/
 ENV/
 env.bak/
 venv.bak/
-pythonenv*
 
 # Spyder project settings
 .spyderproject
@@ -344,15 +343,15 @@ dmypy.json
 # pytype static type analyzer
 .pytype/
 
-# operating system-related files
-# file properties cache/storage on macOS
-*.DS_Store
-# thumbnail cache on Windows
-Thumbs.db
+# Cython debug symbols
+cython_debug/
 
-# profiling data
-.prof
-
+# PyCharm
+#  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
+#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
+#  and can be added to the global gitignore or merged into this file.  For a more nuclear
+#  option (not recommended) you can uncomment the following to ignore the entire idea folder.
+#.idea/
 
 ### Ruby ###
 *.gem
@@ -410,12 +409,25 @@ build-iPhoneSimulator/
 # Used by RuboCop. Remote config files pulled in from inherit_from directive.
 # .rubocop-https?--*
 
-### vscode ###
+### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-*.code-workspace
+!.vscode/*.code-snippets
 
-# End of https://www.toptal.com/developers/gitignore/api/macos,vscode,ruby,node,java,python,go
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+.ionide
+
+# Support for Project snippet scope
+
+# End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,macos,ruby,python,java,node

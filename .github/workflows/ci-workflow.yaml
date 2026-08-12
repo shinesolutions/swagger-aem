@@ -1,0 +1,28 @@
+---
+name: CI
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          token: ${{ secrets.OAPICF_GITHUB_TOKEN }}
+      - uses: iamsauravsharma/create-dotenv@v2.0.1
+        with:
+          file-path: '/tmp/.env'
+        env:
+          GITHUB_ACTIONS: ${{ env.GITHUB_ACTIONS }}
+      - uses: cliffano/command-docker-action@v2.0.0
+        with:
+          command: 'make ci'
+          image: cliffano/studio
+          shell: bash
+          # based on https://github.com/cliffano/packer-studio/blob/main/provisioners/shell/info-post.sh#L5
+          # TODO: replace /root with studio-user's home when available
+          extra_path: '/root/.cargo/bin:/root/.local/bin:/root/go/bin:/opt/poetry-venv/bin:/opt/poetry/bin:/usr/local/go/bin:/usr/local/maven/bin:/usr/local/node/bin:/usr/local/openjdk-jdk/bin'
+          env_file: '/tmp/.env'
+      - uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.OAPICF_GITHUB_TOKEN }}
+          publish_dir: stage/gh-pages
