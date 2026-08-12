@@ -24,6 +24,6 @@ jobs:
           image: cliffano/studio:3.8.0
           shell: bash
           command: |
-            make clean deps init-spec generate-primary build-ruby test-ruby &&
+            make deps build-ruby test-ruby &&
             make publish-ruby
           env_file: '/tmp/.env'
