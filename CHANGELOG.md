@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Added the possibility to configure the aliasUpdate for a replication flush agent. - thanks to Robin Brouns @rubnig
 - Add clients as supported by OAG 7.24.0
+- Add tests and examples
 
 ### Changed
 - Simplify GitHub Actions release workflows to not use custom action
