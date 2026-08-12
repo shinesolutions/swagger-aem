@@ -11,12 +11,23 @@ describe('healthCheck', function() {
       aemAuth.password = 'admin';
 
       var api = new NodeSwaggerAem.CustomApi();
+
+      // Stub the underlying HTTP call so no real AEM server is needed
+      var calledWith = null;
+      api.apiClient.callApi = function() {
+        calledWith = { path: arguments[0], httpMethod: arguments[1] };
+        var callback = arguments[arguments.length - 1];
+        callback(null, 'OK', { status: 200 });
+      };
+
       var callback = function(error, data, response) {
         if (error) {
           console.error(error);
         } else {
           console.log('API called successfully. Returned data: ' + data);
-          assert.notEqual(data, undefined);
+          assert.equal(data, 'OK');
+          assert.equal(calledWith.path, '/system/health');
+          assert.equal(calledWith.httpMethod, 'GET');
         }
         done(error);
       };

@@ -16,9 +16,15 @@ describe 'SwaggerAemClientHealthCheck' do
       end
 
       api_instance = SwaggerAemClient::CustomApi.new
+
+      # Stub the underlying HTTP call so no real AEM server is needed
+      allow(api_instance.api_client).to receive(:call_api)
+        .with(:GET, '/system/health', anything)
+        .and_return(['OK', 200, {}])
+
       begin
         result = api_instance.get_aem_health_check
-        expect(result).not_to be_nil
+        expect(result).to eq('OK')
       rescue SwaggerAemClient::ApiError => e
         puts "Error when calling CustomApi->get_aem_health_check: #{e}"
         fail
