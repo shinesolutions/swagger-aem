@@ -1,4 +1,0 @@
-name: 'Ruby Release Minor'
-runs:
-  using: 'docker'
-  image: 'Dockerfile'

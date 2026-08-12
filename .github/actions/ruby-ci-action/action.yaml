@@ -1,4 +1,0 @@
-name: 'Ruby CI'
-runs:
-  using: 'docker'
-  image: 'Dockerfile'
