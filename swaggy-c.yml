@@ -22,4 +22,4 @@ generator:
     author_url: https://github.com/shinesolutions
     github_id: shinesolutions
     github_repo: swagger-aem
-    github_token_prefix: OAPICF
+    github_token_prefix: SHINEOPENSOURCE
