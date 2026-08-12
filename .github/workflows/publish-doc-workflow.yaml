@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
-          token: ${{ secrets.OAPICF_GITHUB_TOKEN }}
+          token: ${{ secrets.SHINEOPENSOURCE_GITHUB_TOKEN }}
           ref: main
       - uses: cliffano/command-docker-action@v2.1.0
         with:
@@ -19,5 +19,5 @@ jobs:
              make deps init-spec doc-latest doc-version
       - uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.OAPICF_GITHUB_TOKEN }}
+          github_token: ${{ secrets.SHINEOPENSOURCE_GITHUB_TOKEN }}
           publish_dir: stage/gh-pages

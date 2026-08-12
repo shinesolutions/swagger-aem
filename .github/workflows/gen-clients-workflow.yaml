@@ -7,7 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
-          token: ${{ secrets.OAPICF_GITHUB_TOKEN }}
+          token: ${{ secrets.SHINEOPENSOURCE_GITHUB_TOKEN }}
       - uses: iamsauravsharma/create-dotenv@v2.0.1
         with:
           file-path: '/tmp/.env'
@@ -24,6 +24,6 @@ jobs:
           env_file: '/tmp/.env'
       - uses: cliffano/save-changes-action@v2.0.0
         with:
-          github_token: ${{ secrets.OAPICF_GITHUB_TOKEN }}
+          github_token: ${{ secrets.SHINEOPENSOURCE_GITHUB_TOKEN }}
           message: 'Generate all API clients'
           push_changes: 'true'

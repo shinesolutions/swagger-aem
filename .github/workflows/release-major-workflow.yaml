@@ -8,4 +8,4 @@ jobs:
       - uses: cliffano/release-action@v2.0.0
         with:
           release_type: 'major'
-          github_token: ${{ secrets.OAPICF_GITHUB_TOKEN }}
+          github_token: ${{ secrets.SHINEOPENSOURCE_GITHUB_TOKEN }}
