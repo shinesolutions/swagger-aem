@@ -33,15 +33,23 @@ Swagger AEM is part of [AEM OpenCloud](https://aemopencloud.io) platform but it 
 
 To generate API clients (note that at different time, there could be some changes that have to be retrofitted since they're not yet included in OpenAPI Generator):
 
-    make deps-ruby generate-ruby ruby
+```shell
+make deps-ruby generate-ruby ruby
+```
 
-    make deps-python generate-python python
+```shell
+make deps-python generate-python python
+```
 
 If you want to use a custom `openapi-generator-cli-<version>.jar`, place the custom jar at `stage/openapi-generator-cli.jar`, then run:
 
-    make generate-ruby ruby
+```shell
+make generate-ruby ruby
+```
 
-    make generate-python python
+```shell
+make generate-python python
+```
 
 ## Testing
 
