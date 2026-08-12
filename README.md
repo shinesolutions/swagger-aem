@@ -1,6 +1,4 @@
-[![API Build Status](https://github.com/shinesolutions/swagger-aem/actions/workflows/api-ci-workflow.yaml/badge.svg)](https://github.com/shinesolutions/swagger-aem/actions/workflows/api-ci-workflow.yaml)
-[![Python Build Status](https://github.com/shinesolutions/swagger-aem/actions/workflows/python-ci-workflow.yaml/badge.svg)](https://github.com/shinesolutions/swagger-aem/actions/workflows/python-ci-workflow.yaml)
-[![Ruby Build Status](https://github.com/shinesolutions/swagger-aem/actions/workflows/ruby-ci-workflow.yaml/badge.svg)](https://github.com/shinesolutions/swagger-aem/actions/workflows/ruby-ci-workflow.yaml)
+[![Build Status](https://github.com/shinesolutions/swagger-aem/actions/workflows/ci-workflow.yaml/badge.svg)](https://github.com/shinesolutions/swagger-aem/actions/workflows/ci-workflow.yaml)
 
 # Swagger AEM
 
@@ -63,7 +61,9 @@ Integration tests are part of Swagger AEM and require an AEM instance running on
   __A:__ There are two reasons. The first one is to explicitly define which parameters are relevant for which OSGI config, which won't be clear when we have one operation for all OSGI configs with all parameters declared within that operation. The second one is to manage the usability of the generated code. A single operation will translate to a single method with all parameters supported, which is fine in generated Ruby client because it supports optional hash, but it's a problem with generated Java client because all parameters will be declared within the method signature where caller will have to pass in `null`s for the parameters that aren't relevant for the OSGI config being processed, on top of the risk of hitting maximum number of 255 parameters per method (as per [JVM Specification for Java SE 11](https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html#jvms-4.11)).
 
 
-## Contribution
+## Developers Guide
+
+Prior to version 4.0.0:
 
 Since swagger-aem contains multiple languages, add a `[ruby|python|java]` prefix to language-specific commits, this will help with filtering full commits log.
 
