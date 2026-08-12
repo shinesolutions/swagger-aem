@@ -16,6 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Restructure project to use Swaggy C 6.2.2
 - Upgrade OpenAPI Generator to 7.24.0
 
+### Removed
+- Remove historical versions matrix
+
 ## 3.7.0 - 2022-09-07
 ### Added
 - Added tree activation capability for AEM 6.4 & AEM 6.5
