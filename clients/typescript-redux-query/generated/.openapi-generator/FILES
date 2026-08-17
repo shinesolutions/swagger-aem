@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 src/apis/ConsoleApi.ts
 src/apis/CqApi.ts
 src/apis/CrxApi.ts

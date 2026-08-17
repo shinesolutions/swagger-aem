@@ -1,4 +1,3 @@
-.openapi-generator-ignore
 openapi2graphql/api/console_api.graphql
 openapi2graphql/api/cq_api.graphql
 openapi2graphql/api/crx_api.graphql

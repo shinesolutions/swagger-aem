@@ -1,4 +1,3 @@
-.openapi-generator-ignore
 README.md
 lib/Models/BundleData.cpp
 lib/Models/BundleData.h
@@ -34,22 +33,6 @@ lib/Models/TruststoreInfo.cpp
 lib/Models/TruststoreInfo.h
 lib/Models/TruststoreItems.cpp
 lib/Models/TruststoreItems.h
-lib/TestFiles/BundleDataPropTest.cpp
-lib/TestFiles/BundleDataTest.cpp
-lib/TestFiles/BundleInfoTest.cpp
-lib/TestFiles/InstallStatusStatusTest.cpp
-lib/TestFiles/InstallStatusTest.cpp
-lib/TestFiles/KeystoreChainItemsTest.cpp
-lib/TestFiles/KeystoreInfoTest.cpp
-lib/TestFiles/KeystoreItemsTest.cpp
-lib/TestFiles/SamlConfigurationInfoTest.cpp
-lib/TestFiles/SamlConfigurationPropertiesTest.cpp
-lib/TestFiles/SamlConfigurationPropertyItemsArrayTest.cpp
-lib/TestFiles/SamlConfigurationPropertyItemsBooleanTest.cpp
-lib/TestFiles/SamlConfigurationPropertyItemsLongTest.cpp
-lib/TestFiles/SamlConfigurationPropertyItemsStringTest.cpp
-lib/TestFiles/TruststoreInfoTest.cpp
-lib/TestFiles/TruststoreItemsTest.cpp
 lib/service/ConsoleApi.cpp
 lib/service/ConsoleApi.h
 lib/service/CqApi.cpp

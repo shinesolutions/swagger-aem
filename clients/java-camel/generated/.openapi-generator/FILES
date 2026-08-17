@@ -1,4 +1,3 @@
-.openapi-generator-ignore
 README.md
 pom.xml
 src/main/java/org/openapitools/OpenApiGeneratorApplication.java
@@ -39,12 +38,3 @@ src/main/java/org/openapitools/model/SamlConfigurationPropertyItemsString.java
 src/main/java/org/openapitools/model/TruststoreInfo.java
 src/main/java/org/openapitools/model/TruststoreItems.java
 src/main/resources/application.properties
-src/test/java/org/openapitools/api/AppsApiTest.java
-src/test/java/org/openapitools/api/BinApiTest.java
-src/test/java/org/openapitools/api/CqactionsHtmlApiTest.java
-src/test/java/org/openapitools/api/CrxApiTest.java
-src/test/java/org/openapitools/api/EtcApiTest.java
-src/test/java/org/openapitools/api/IntermediatePathApiTest.java
-src/test/java/org/openapitools/api/LibsApiTest.java
-src/test/java/org/openapitools/api/PathApiTest.java
-src/test/java/org/openapitools/api/SystemApiTest.java

@@ -1,5 +1,4 @@
 .eslintrc.json
-.openapi-generator-ignore
 README.md
 api/openapi.yaml
 config.js

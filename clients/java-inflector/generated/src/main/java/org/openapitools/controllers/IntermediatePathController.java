@@ -13,7 +13,7 @@ import org.openapitools.model.*;
 import java.io.File;
 import org.openapitools.model.KeystoreInfo;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaInflectorServerCodegen", date = "2026-08-17T02:15:06.513440410Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaInflectorServerCodegen", date = "2026-08-17T07:12:38.973476137Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class IntermediatePathController  {
   /**
    * Uncomment and implement as you see fit.  These operations will map

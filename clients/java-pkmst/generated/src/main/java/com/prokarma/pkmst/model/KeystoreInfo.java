@@ -18,7 +18,7 @@ import java.util.List;
  * KeystoreInfo
  */
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2026-08-17T02:15:15.504120373Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2026-08-17T07:12:48.036788598Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class KeystoreInfo   {
   @JsonProperty("aliases")
   

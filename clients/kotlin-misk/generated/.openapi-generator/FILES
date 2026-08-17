@@ -1,4 +1,3 @@
-.openapi-generator-ignore
 README.md
 build.gradle.kts
 docs/BundleData.md
@@ -47,9 +46,3 @@ src/main/kotlin/org/openapitools/server/api/model/SamlConfigurationPropertyItems
 src/main/kotlin/org/openapitools/server/api/model/SamlConfigurationPropertyItemsString.kt
 src/main/kotlin/org/openapitools/server/api/model/TruststoreInfo.kt
 src/main/kotlin/org/openapitools/server/api/model/TruststoreItems.kt
-src/test/kotlin/org/openapitools/server/api/api/ConsoleApiTest.kt
-src/test/kotlin/org/openapitools/server/api/api/CqApiTest.kt
-src/test/kotlin/org/openapitools/server/api/api/CrxApiTest.kt
-src/test/kotlin/org/openapitools/server/api/api/CustomApiTest.kt
-src/test/kotlin/org/openapitools/server/api/api/GraniteApiTest.kt
-src/test/kotlin/org/openapitools/server/api/api/SlingApiTest.kt

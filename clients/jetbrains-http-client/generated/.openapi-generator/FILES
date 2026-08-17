@@ -1,4 +1,3 @@
-.openapi-generator-ignore
 Apis/ConsoleApi.http
 Apis/CqApi.http
 Apis/CrxApi.http

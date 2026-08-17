@@ -1,17 +1,4 @@
-.openapi-generator-ignore
-OpenAPI.Tests/ConsoleApiTests.fs
-OpenAPI.Tests/ConsoleApiTestsHelper.fs
-OpenAPI.Tests/CqApiTests.fs
-OpenAPI.Tests/CqApiTestsHelper.fs
-OpenAPI.Tests/CrxApiTests.fs
-OpenAPI.Tests/CrxApiTestsHelper.fs
-OpenAPI.Tests/CustomApiTests.fs
-OpenAPI.Tests/CustomApiTestsHelper.fs
-OpenAPI.Tests/GraniteApiTests.fs
-OpenAPI.Tests/GraniteApiTestsHelper.fs
 OpenAPI.Tests/OpenAPITests.fsproj
-OpenAPI.Tests/SlingApiTests.fs
-OpenAPI.Tests/SlingApiTestsHelper.fs
 OpenAPI.Tests/TestHelper.fs
 OpenAPI/.gitignore
 OpenAPI/README.md

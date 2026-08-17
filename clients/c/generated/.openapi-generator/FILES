@@ -1,4 +1,3 @@
-.openapi-generator-ignore
 CMakeLists.txt
 Config.cmake.in
 Packing.cmake
@@ -85,19 +84,3 @@ src/apiKey.c
 src/binary.c
 src/list.c
 uncrustify-rules.cfg
-unit-test/test_bundle_data.c
-unit-test/test_bundle_data_prop.c
-unit-test/test_bundle_info.c
-unit-test/test_install_status.c
-unit-test/test_install_status_status.c
-unit-test/test_keystore_chain_items.c
-unit-test/test_keystore_info.c
-unit-test/test_keystore_items.c
-unit-test/test_saml_configuration_info.c
-unit-test/test_saml_configuration_properties.c
-unit-test/test_saml_configuration_property_items_array.c
-unit-test/test_saml_configuration_property_items_boolean.c
-unit-test/test_saml_configuration_property_items_long.c
-unit-test/test_saml_configuration_property_items_string.c
-unit-test/test_truststore_info.c
-unit-test/test_truststore_items.c

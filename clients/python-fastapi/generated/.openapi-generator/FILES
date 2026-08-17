@@ -1,6 +1,5 @@
 .flake8
 .gitignore
-.openapi-generator-ignore
 Dockerfile
 README.md
 docker-compose.yaml
@@ -43,9 +42,3 @@ src/openapi_server/models/truststore_info.py
 src/openapi_server/models/truststore_items.py
 src/openapi_server/security_api.py
 tests/conftest.py
-tests/test_console_api.py
-tests/test_cq_api.py
-tests/test_crx_api.py
-tests/test_custom_api.py
-tests/test_granite_api.py
-tests/test_sling_api.py

@@ -6,7 +6,7 @@ import model.SamlConfigurationInfo
 /**
   * Provides a default implementation for [[ConsoleApi]].
   */
-@javax.annotation.Generated(value = Array("org.openapitools.codegen.languages.ScalaPlayFrameworkServerCodegen"), date = "2026-08-17T02:18:11.620114289Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+@javax.annotation.Generated(value = Array("org.openapitools.codegen.languages.ScalaPlayFrameworkServerCodegen"), date = "2026-08-17T07:15:43.105475754Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 class ConsoleApiImpl extends ConsoleApi {
   /**
     * @inheritdoc

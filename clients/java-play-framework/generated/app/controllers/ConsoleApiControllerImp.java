@@ -12,7 +12,7 @@ import java.io.FileInputStream;
 import play.libs.Files.TemporaryFile;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPlayFrameworkCodegen", date = "2026-08-17T02:15:17.717598878Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPlayFrameworkCodegen", date = "2026-08-17T07:12:50.232821425Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class ConsoleApiControllerImp extends ConsoleApiControllerImpInterface {
     @Override
     public List<String> getAemProductInfo(Http.Request request) throws Exception {

@@ -22,15 +22,3 @@ src/gen/java/org/openapitools/model/SamlConfigurationPropertyItemsLong.java
 src/gen/java/org/openapitools/model/SamlConfigurationPropertyItemsString.java
 src/gen/java/org/openapitools/model/TruststoreInfo.java
 src/gen/java/org/openapitools/model/TruststoreItems.java
-src/main/java/org/openapitools/api/impl/ConsoleApiServiceImpl.java
-src/main/java/org/openapitools/api/impl/CqApiServiceImpl.java
-src/main/java/org/openapitools/api/impl/CrxApiServiceImpl.java
-src/main/java/org/openapitools/api/impl/CustomApiServiceImpl.java
-src/main/java/org/openapitools/api/impl/GraniteApiServiceImpl.java
-src/main/java/org/openapitools/api/impl/SlingApiServiceImpl.java
-src/test/java/org/openapitools/api/ConsoleApiTest.java
-src/test/java/org/openapitools/api/CqApiTest.java
-src/test/java/org/openapitools/api/CrxApiTest.java
-src/test/java/org/openapitools/api/CustomApiTest.java
-src/test/java/org/openapitools/api/GraniteApiTest.java
-src/test/java/org/openapitools/api/SlingApiTest.java

@@ -52,10 +52,4 @@ model_saml_configuration_property_items_string.go
 model_truststore_info.go
 model_truststore_items.go
 response.go
-test/api_console_test.go
-test/api_cq_test.go
-test/api_crx_test.go
-test/api_custom_test.go
-test/api_granite_test.go
-test/api_sling_test.go
 utils.go

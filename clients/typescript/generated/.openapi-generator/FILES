@@ -1,6 +1,5 @@
 .gitattributes
 .gitignore
-.openapi-generator-ignore
 README.md
 apis/ConsoleApi.ts
 apis/CqApi.ts

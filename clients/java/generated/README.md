@@ -2,7 +2,7 @@
 
 Adobe Experience Manager (AEM) API
 - API version: 3.7.1-pre.0
-  - Build date: 2026-08-17T02:14:54.022516575Z[Etc/UTC]
+  - Build date: 2026-08-17T07:12:26.411152700Z[Etc/UTC]
   - Generator version: 7.24.0
 
 Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API

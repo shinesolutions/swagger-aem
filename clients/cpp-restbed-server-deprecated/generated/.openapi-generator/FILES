@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 README.md
 api/ConsoleApi.cpp
 api/ConsoleApi.h

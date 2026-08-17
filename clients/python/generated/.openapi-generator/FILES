@@ -63,7 +63,4 @@ swaggeraem/py.typed
 swaggeraem/rest.py
 test-requirements.txt
 test/__init__.py
-test/test_bundle_data.py
-test/test_bundle_data_prop.py
-test/test_bundle_info.py
 tox.ini

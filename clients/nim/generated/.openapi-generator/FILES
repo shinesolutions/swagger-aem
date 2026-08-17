@@ -1,4 +1,3 @@
-.openapi-generator-ignore
 README.md
 config.nim
 openapiclient.nim

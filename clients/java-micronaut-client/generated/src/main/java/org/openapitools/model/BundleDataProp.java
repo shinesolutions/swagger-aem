@@ -29,7 +29,7 @@ import javax.annotation.Generated;
   BundleDataProp.JSON_PROPERTY_VALUE
 })
 @JsonTypeName("BundleDataProp")
-@Generated(value="org.openapitools.codegen.languages.JavaMicronautClientCodegen", date="2026-08-17T02:15:08.740117462Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+@Generated(value="org.openapitools.codegen.languages.JavaMicronautClientCodegen", date="2026-08-17T07:12:41.220559277Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 @Introspected
 public class BundleDataProp {
     public static final String JSON_PROPERTY_KEY = "key";

@@ -30,7 +30,7 @@ import javax.validation.Valid;
   InstallStatusStatus.JSON_PROPERTY_FINISHED,
   InstallStatusStatus.JSON_PROPERTY_ITEM_COUNT
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJerseyServerCodegen", date = "2026-08-17T02:15:33.561165235Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJerseyServerCodegen", date = "2026-08-17T07:13:06.132469009Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class InstallStatusStatus   {
   public static final String JSON_PROPERTY_FINISHED = "finished";
   @JsonProperty(JSON_PROPERTY_FINISHED)

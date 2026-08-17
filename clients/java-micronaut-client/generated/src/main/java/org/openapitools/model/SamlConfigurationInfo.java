@@ -34,7 +34,7 @@ import javax.annotation.Generated;
   SamlConfigurationInfo.JSON_PROPERTY_PROPERTIES
 })
 @JsonTypeName("SamlConfigurationInfo")
-@Generated(value="org.openapitools.codegen.languages.JavaMicronautClientCodegen", date="2026-08-17T02:15:08.740117462Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+@Generated(value="org.openapitools.codegen.languages.JavaMicronautClientCodegen", date="2026-08-17T07:12:41.220559277Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 @Introspected
 public class SamlConfigurationInfo {
     public static final String JSON_PROPERTY_PID = "pid";

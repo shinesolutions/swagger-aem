@@ -36,7 +36,7 @@ import javax.annotation.Generated;
   SamlConfigurationPropertyItemsArray.JSON_PROPERTY_DESCRIPTION
 })
 @JsonTypeName("SamlConfigurationPropertyItemsArray")
-@Generated(value="org.openapitools.codegen.languages.JavaMicronautClientCodegen", date="2026-08-17T02:15:08.740117462Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+@Generated(value="org.openapitools.codegen.languages.JavaMicronautClientCodegen", date="2026-08-17T07:12:41.220559277Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 @Introspected
 public class SamlConfigurationPropertyItemsArray {
     public static final String JSON_PROPERTY_NAME = "name";

@@ -11,7 +11,7 @@ import play.api.libs.json._
   * @param value Property value
   * @param description Property description
   */
-@javax.annotation.Generated(value = Array("org.openapitools.codegen.languages.ScalaPlayFrameworkServerCodegen"), date = "2026-08-17T02:18:11.620114289Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+@javax.annotation.Generated(value = Array("org.openapitools.codegen.languages.ScalaPlayFrameworkServerCodegen"), date = "2026-08-17T07:15:43.105475754Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 case class SamlConfigurationPropertyItemsBoolean(
   name: Option[String],
   optional: Option[Boolean],

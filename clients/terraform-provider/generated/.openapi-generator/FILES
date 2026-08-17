@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 GNUmakefile
 README.md
 examples/provider/provider.tf

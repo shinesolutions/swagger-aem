@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 Api/ConsoleApiInterface.php
 Api/CqApiInterface.php
 Api/CrxApiInterface.php

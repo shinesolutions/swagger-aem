@@ -24,7 +24,7 @@ import org.openapitools.model.BundleDataProp;
 
 
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaUndertowServerCodegen", date = "2026-08-17T02:15:19.997360538Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaUndertowServerCodegen", date = "2026-08-17T07:12:52.513315767Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class BundleData   {
   
   private Integer id;

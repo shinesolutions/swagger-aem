@@ -21,7 +21,7 @@ import jakarta.annotation.Generated;
  * SamlConfigurationInfo
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-08-17T02:18:23.350215970Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-08-17T07:15:54.600438135Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class SamlConfigurationInfo {
 
   @JsonInclude(JsonInclude.Include.NON_NULL)

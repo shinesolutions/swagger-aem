@@ -31,7 +31,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
   InstallStatusStatus.JSON_PROPERTY_ITEM_COUNT
 })
 @JsonTypeName("InstallStatus_status")
-@Generated(value="org.openapitools.codegen.languages.JavaMicronautServerCodegen", date="2026-08-17T02:15:11.041915077Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+@Generated(value="org.openapitools.codegen.languages.JavaMicronautServerCodegen", date="2026-08-17T07:12:43.522338566Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 @Introspected
 public class InstallStatusStatus {
     public static final String JSON_PROPERTY_FINISHED = "finished";

@@ -1,4 +1,3 @@
-.openapi-generator-ignore
 README.md
 apis/ConsoleApi.js
 apis/CqApi.js
@@ -26,10 +25,4 @@ models/TruststoreInfo.js
 models/TruststoreItems.js
 operations/actions.js
 package.json
-samples/ConsoleApi.js
-samples/CqApi.js
-samples/CrxApi.js
-samples/CustomApi.js
-samples/GraniteApi.js
-samples/SlingApi.js
 utils/utils.js

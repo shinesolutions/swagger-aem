@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 OpenAPI/OpenAPI.fsproj
 OpenAPI/build.bat
 OpenAPI/build.sh
