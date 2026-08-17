@@ -1,0 +1,178 @@
+@startuml
+
+title Adobe Experience Manager (AEM) API Schemas Diagram
+
+entity BundleData {
+    id: Integer
+    name: String
+    fragment: Boolean
+    stateRaw: Integer
+    state: String
+    version: String
+    symbolicName: String
+    category: String
+    props: List<BundleDataProp>
+}
+
+entity BundleDataProp {
+    key: String
+    value: String
+}
+
+entity BundleInfo {
+    status: String
+    s: List<Integer>
+    data: List<BundleData>
+}
+
+entity InstallStatus {
+    status: InstallStatusStatus
+}
+
+entity InstallStatusStatus {
+    finished: Boolean
+    itemCount: Integer
+}
+
+entity KeystoreChainItems {
+    subject: String
+    issuer: String
+    notBefore: String
+    notAfter: String
+    serialNumber: Integer
+}
+
+entity KeystoreInfo {
+    aliases: List<KeystoreItems>
+    exists: Boolean
+}
+
+entity KeystoreItems {
+    alias: String
+    entryType: String
+    algorithm: String
+    format: String
+    chain: List<KeystoreChainItems>
+}
+
+entity SamlConfigurationInfo {
+    pid: String
+    title: String
+    description: String
+    bundle_location: String
+    service_location: String
+    properties: SamlConfigurationProperties
+}
+
+entity SamlConfigurationProperties {
+    path: SamlConfigurationPropertyItemsArray
+    service.ranking: SamlConfigurationPropertyItemsLong
+    idpUrl: SamlConfigurationPropertyItemsString
+    idpCertAlias: SamlConfigurationPropertyItemsString
+    idpHttpRedirect: SamlConfigurationPropertyItemsBoolean
+    serviceProviderEntityId: SamlConfigurationPropertyItemsString
+    assertionConsumerServiceURL: SamlConfigurationPropertyItemsString
+    spPrivateKeyAlias: SamlConfigurationPropertyItemsString
+    keyStorePassword: SamlConfigurationPropertyItemsString
+    defaultRedirectUrl: SamlConfigurationPropertyItemsString
+    userIDAttribute: SamlConfigurationPropertyItemsString
+    useEncryption: SamlConfigurationPropertyItemsBoolean
+    createUser: SamlConfigurationPropertyItemsBoolean
+    addGroupMemberships: SamlConfigurationPropertyItemsBoolean
+    groupMembershipAttribute: SamlConfigurationPropertyItemsString
+    defaultGroups: SamlConfigurationPropertyItemsArray
+    nameIdFormat: SamlConfigurationPropertyItemsString
+    synchronizeAttributes: SamlConfigurationPropertyItemsArray
+    handleLogout: SamlConfigurationPropertyItemsBoolean
+    logoutUrl: SamlConfigurationPropertyItemsString
+    clockTolerance: SamlConfigurationPropertyItemsLong
+    digestMethod: SamlConfigurationPropertyItemsString
+    signatureMethod: SamlConfigurationPropertyItemsString
+    userIntermediatePath: SamlConfigurationPropertyItemsString
+}
+
+entity SamlConfigurationPropertyItemsArray {
+    name: String
+    optional: Boolean
+    is_set: Boolean
+    type: Integer
+    values: List<String>
+    description: String
+}
+
+entity SamlConfigurationPropertyItemsBoolean {
+    name: String
+    optional: Boolean
+    is_set: Boolean
+    type: Integer
+    value: Boolean
+    description: String
+}
+
+entity SamlConfigurationPropertyItemsLong {
+    name: String
+    optional: Boolean
+    is_set: Boolean
+    type: Integer
+    value: Integer
+    description: String
+}
+
+entity SamlConfigurationPropertyItemsString {
+    name: String
+    optional: Boolean
+    is_set: Boolean
+    type: Integer
+    value: String
+    description: String
+}
+
+entity TruststoreInfo {
+    aliases: List<TruststoreItems>
+    exists: Boolean
+}
+
+entity TruststoreItems {
+    alias: String
+    entryType: String
+    subject: String
+    issuer: String
+    notBefore: String
+    notAfter: String
+    serialNumber: Integer
+}
+
+
+KeystoreInfo -- "0..*" KeystoreItems : aliases
+SamlConfigurationProperties -- SamlConfigurationPropertyItemsArray : path
+SamlConfigurationProperties -- SamlConfigurationPropertyItemsLong : service.ranking
+SamlConfigurationProperties -- SamlConfigurationPropertyItemsString : idpUrl
+SamlConfigurationProperties -- SamlConfigurationPropertyItemsString : idpCertAlias
+SamlConfigurationProperties -- SamlConfigurationPropertyItemsBoolean : idpHttpRedirect
+SamlConfigurationProperties -- SamlConfigurationPropertyItemsString : serviceProviderEntityId
+SamlConfigurationProperties -- SamlConfigurationPropertyItemsString : assertionConsumerServiceURL
+SamlConfigurationProperties -- SamlConfigurationPropertyItemsString : spPrivateKeyAlias
+SamlConfigurationProperties -- SamlConfigurationPropertyItemsString : keyStorePassword
+SamlConfigurationProperties -- SamlConfigurationPropertyItemsString : defaultRedirectUrl
+SamlConfigurationProperties -- SamlConfigurationPropertyItemsString : userIDAttribute
+SamlConfigurationProperties -- SamlConfigurationPropertyItemsBoolean : useEncryption
+SamlConfigurationProperties -- SamlConfigurationPropertyItemsBoolean : createUser
+SamlConfigurationProperties -- SamlConfigurationPropertyItemsBoolean : addGroupMemberships
+SamlConfigurationProperties -- SamlConfigurationPropertyItemsString : groupMembershipAttribute
+SamlConfigurationProperties -- SamlConfigurationPropertyItemsArray : defaultGroups
+SamlConfigurationProperties -- SamlConfigurationPropertyItemsString : nameIdFormat
+SamlConfigurationProperties -- SamlConfigurationPropertyItemsArray : synchronizeAttributes
+SamlConfigurationProperties -- SamlConfigurationPropertyItemsBoolean : handleLogout
+SamlConfigurationProperties -- SamlConfigurationPropertyItemsString : logoutUrl
+SamlConfigurationProperties -- SamlConfigurationPropertyItemsLong : clockTolerance
+SamlConfigurationProperties -- SamlConfigurationPropertyItemsString : digestMethod
+SamlConfigurationProperties -- SamlConfigurationPropertyItemsString : signatureMethod
+SamlConfigurationProperties -- SamlConfigurationPropertyItemsString : userIntermediatePath
+BundleData -- "0..*" BundleDataProp : props
+TruststoreInfo -- "0..*" TruststoreItems : aliases
+KeystoreItems -- "0..*" KeystoreChainItems : chain
+BundleInfo -- "0..*" BundleData : data
+InstallStatus -- InstallStatusStatus : status
+SamlConfigurationInfo -- SamlConfigurationProperties : properties
+
+@enduml

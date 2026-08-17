@@ -10,17 +10,23 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2021-09-03T15:26:06.461+10:00[Australia/Melbourne]")public class SamlConfigurationPropertyItemsString   {
-  
-  private @Valid String name;
-  private @Valid Boolean optional;
-  private @Valid Boolean isSet;
-  private @Valid Integer type;
-  private @Valid String value;
-  private @Valid String description;
+@JsonTypeName("SamlConfigurationPropertyItemsString")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2026-08-17T02:15:42.417242947Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+public class SamlConfigurationPropertyItemsString   {
+  private String name;
+  private Boolean optional;
+  private Boolean isSet;
+  private Integer type;
+  private String value;
+  private String description;
+
+  public SamlConfigurationPropertyItemsString() {
+  }
 
   /**
    * property name
@@ -31,19 +37,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "property name")
   @JsonProperty("name")
   public String getName() {
     return name;
   }
 
+  @JsonProperty("name")
   public void setName(String name) {
     this.name = name;
   }
 
-/**
+  /**
    * True if optional
    **/
   public SamlConfigurationPropertyItemsString optional(Boolean optional) {
@@ -52,19 +57,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "True if optional")
   @JsonProperty("optional")
   public Boolean getOptional() {
     return optional;
   }
 
+  @JsonProperty("optional")
   public void setOptional(Boolean optional) {
     this.optional = optional;
   }
 
-/**
+  /**
    * True if property is set
    **/
   public SamlConfigurationPropertyItemsString isSet(Boolean isSet) {
@@ -73,19 +77,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "True if property is set")
   @JsonProperty("is_set")
   public Boolean getIsSet() {
     return isSet;
   }
 
+  @JsonProperty("is_set")
   public void setIsSet(Boolean isSet) {
     this.isSet = isSet;
   }
 
-/**
+  /**
    * Property type, 1&#x3D;String, 3&#x3D;long, 11&#x3D;boolean, 12&#x3D;Password
    **/
   public SamlConfigurationPropertyItemsString type(Integer type) {
@@ -94,19 +97,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "Property type, 1=String, 3=long, 11=boolean, 12=Password")
   @JsonProperty("type")
   public Integer getType() {
     return type;
   }
 
+  @JsonProperty("type")
   public void setType(Integer type) {
     this.type = type;
   }
 
-/**
+  /**
    * Property value
    **/
   public SamlConfigurationPropertyItemsString value(String value) {
@@ -115,19 +117,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "Property value")
   @JsonProperty("value")
   public String getValue() {
     return value;
   }
 
+  @JsonProperty("value")
   public void setValue(String value) {
     this.value = value;
   }
 
-/**
+  /**
    * Property description
    **/
   public SamlConfigurationPropertyItemsString description(String description) {
@@ -136,14 +137,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "Property description")
   @JsonProperty("description")
   public String getDescription() {
     return description;
   }
 
+  @JsonProperty("description")
   public void setDescription(String description) {
     this.description = description;
   }
@@ -191,12 +191,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 
 
 }
-

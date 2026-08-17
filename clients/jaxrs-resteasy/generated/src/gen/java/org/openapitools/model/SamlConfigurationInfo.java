@@ -8,9 +8,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.openapitools.model.SamlConfigurationProperties;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 import io.swagger.annotations.*;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyServerCodegen", date = "2021-09-03T15:25:57.989+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyServerCodegen", date = "2026-08-17T02:15:38.090574223Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class SamlConfigurationInfo   {
   
   private String pid;
@@ -90,6 +91,7 @@ public class SamlConfigurationInfo   {
   
   @ApiModelProperty(value = "")
   @JsonProperty("properties")
+  @Valid
   public SamlConfigurationProperties getProperties() {
     return properties;
   }
@@ -107,12 +109,12 @@ public class SamlConfigurationInfo   {
       return false;
     }
     SamlConfigurationInfo samlConfigurationInfo = (SamlConfigurationInfo) o;
-    return Objects.equals(pid, samlConfigurationInfo.pid) &&
-        Objects.equals(title, samlConfigurationInfo.title) &&
-        Objects.equals(description, samlConfigurationInfo.description) &&
-        Objects.equals(bundleLocation, samlConfigurationInfo.bundleLocation) &&
-        Objects.equals(serviceLocation, samlConfigurationInfo.serviceLocation) &&
-        Objects.equals(properties, samlConfigurationInfo.properties);
+    return Objects.equals(this.pid, samlConfigurationInfo.pid) &&
+        Objects.equals(this.title, samlConfigurationInfo.title) &&
+        Objects.equals(this.description, samlConfigurationInfo.description) &&
+        Objects.equals(this.bundleLocation, samlConfigurationInfo.bundleLocation) &&
+        Objects.equals(this.serviceLocation, samlConfigurationInfo.serviceLocation) &&
+        Objects.equals(this.properties, samlConfigurationInfo.properties);
   }
 
   @Override
@@ -140,10 +142,7 @@ public class SamlConfigurationInfo   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

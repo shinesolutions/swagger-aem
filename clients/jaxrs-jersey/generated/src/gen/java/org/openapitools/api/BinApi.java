@@ -1,6 +1,5 @@
 package org.openapitools.api;
 
-import org.openapitools.model.*;
 import org.openapitools.api.BinApiService;
 import org.openapitools.api.factories.BinApiServiceFactory;
 
@@ -30,7 +29,7 @@ import javax.validation.Valid;
 
 
 @io.swagger.annotations.Api(description = "the bin API")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJerseyServerCodegen", date = "2021-09-03T15:25:53.422+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJerseyServerCodegen", date = "2026-08-17T02:15:33.561165235Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class BinApi  {
    private final BinApiService delegate;
 
@@ -41,11 +40,11 @@ public class BinApi  {
          String implClass = servletContext.getInitParameter("BinApi.implementation");
          if (implClass != null && !"".equals(implClass.trim())) {
             try {
-               delegate = (BinApiService) Class.forName(implClass).newInstance();
+               delegate = (BinApiService) Class.forName(implClass).getDeclaredConstructor().newInstance();
             } catch (Exception e) {
                throw new RuntimeException(e);
             }
-         } 
+         }
       }
 
       if (delegate == null) {
@@ -55,7 +54,7 @@ public class BinApi  {
       this.delegate = delegate;
    }
 
-    @GET
+    @javax.ws.rs.GET
     
     
     @Produces({ "application/json" })
@@ -69,7 +68,7 @@ public class BinApi  {
     throws NotFoundException {
         return delegate.getQuery(path, pLimit, _1property, _1propertyValue, securityContext);
     }
-    @POST
+    @javax.ws.rs.POST
     
     
     @Produces({ "application/json" })

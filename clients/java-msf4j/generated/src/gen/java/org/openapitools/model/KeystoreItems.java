@@ -6,13 +6,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.model.KeystoreChainItems;
 
 /**
  * KeystoreItems
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaMSF4JServerCodegen", date = "2021-09-03T15:25:23.467+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaMSF4JServerCodegen", date = "2026-08-17T02:15:13.302721680Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class KeystoreItems   {
   @JsonProperty("alias")
   private String alias;
@@ -27,7 +28,7 @@ public class KeystoreItems   {
   private String format;
 
   @JsonProperty("chain")
-  private List<KeystoreChainItems> chain = null;
+  private List<@Valid KeystoreChainItems> chain = null;
 
   public KeystoreItems alias(String alias) {
     this.alias = alias;
@@ -101,14 +102,14 @@ public class KeystoreItems   {
     this.format = format;
   }
 
-  public KeystoreItems chain(List<KeystoreChainItems> chain) {
+  public KeystoreItems chain(List<@Valid KeystoreChainItems> chain) {
     this.chain = chain;
     return this;
   }
 
   public KeystoreItems addChainItem(KeystoreChainItems chainItem) {
     if (this.chain == null) {
-      this.chain = new ArrayList<KeystoreChainItems>();
+      this.chain = new ArrayList<>();
     }
     this.chain.add(chainItem);
     return this;
@@ -119,11 +120,11 @@ public class KeystoreItems   {
    * @return chain
   **/
   @ApiModelProperty(value = "")
-  public List<KeystoreChainItems> getChain() {
+  public List<@Valid KeystoreChainItems> getChain() {
     return chain;
   }
 
-  public void setChain(List<KeystoreChainItems> chain) {
+  public void setChain(List<@Valid KeystoreChainItems> chain) {
     this.chain = chain;
   }
 
@@ -168,10 +169,7 @@ public class KeystoreItems   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

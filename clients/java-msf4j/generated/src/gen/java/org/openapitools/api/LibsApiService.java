@@ -17,7 +17,7 @@ import java.io.InputStream;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaMSF4JServerCodegen", date = "2021-09-03T15:25:23.467+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaMSF4JServerCodegen", date = "2026-08-17T02:15:13.302721680Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public abstract class LibsApiService {
     public abstract Response getLoginPage() throws NotFoundException;
     public abstract Response getTruststoreInfo() throws NotFoundException;
@@ -25,10 +25,15 @@ public abstract class LibsApiService {
  ,String intermediatePath
  ,String createUser
  ,String createGroup
- ,String repColonPassword
+ ,String repPassword
  ,String profileGivenName
  ) throws NotFoundException;
-    public abstract Response postTruststore(String colonOperation
+    public abstract Response postTreeActivation(Boolean ignoredeactivated
+ ,Boolean onlymodified
+ ,String path
+ ,String cmd
+ ) throws NotFoundException;
+    public abstract Response postTruststore(String operation
  ,String newPassword
  ,String rePassword
  ,String keyStoreType

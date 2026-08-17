@@ -3,7 +3,7 @@ Adobe Experience Manager (AEM) API
 
 Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
 
-API version: 3.5.0-pre.0
+API version: 3.7.1-pre.0
 Contact: opensource@shinesolutions.com
 */
 
@@ -13,37 +13,32 @@ package openapi
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io"
+	"net/http"
+	"net/url"
 )
 
-// Linger please
-var (
-	_ _context.Context
-)
 
-// CqApiService CqApi service
-type CqApiService service
+// CqAPIService CqAPI service
+type CqAPIService service
 
 type ApiGetLoginPageRequest struct {
-	ctx _context.Context
-	ApiService *CqApiService
+	ctx context.Context
+	ApiService *CqAPIService
 }
 
-
-func (r ApiGetLoginPageRequest) Execute() (string, *_nethttp.Response, error) {
+func (r ApiGetLoginPageRequest) Execute() (string, *http.Response, error) {
 	return r.ApiService.GetLoginPageExecute(r)
 }
 
 /*
 GetLoginPage Method for GetLoginPage
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetLoginPageRequest
 */
-func (a *CqApiService) GetLoginPage(ctx _context.Context) ApiGetLoginPageRequest {
+func (a *CqAPIService) GetLoginPage(ctx context.Context) ApiGetLoginPageRequest {
 	return ApiGetLoginPageRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -52,26 +47,24 @@ func (a *CqApiService) GetLoginPage(ctx _context.Context) ApiGetLoginPageRequest
 
 // Execute executes the request
 //  @return string
-func (a *CqApiService) GetLoginPageExecute(r ApiGetLoginPageRequest) (string, *_nethttp.Response, error) {
+func (a *CqAPIService) GetLoginPageExecute(r ApiGetLoginPageRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 		localVarReturnValue  string
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CqApiService.GetLoginPage")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CqAPIService.GetLoginPage")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/libs/granite/core/content/login.html"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -90,7 +83,7 @@ func (a *CqApiService) GetLoginPageExecute(r ApiGetLoginPageRequest) (string, *_
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -100,15 +93,15 @@ func (a *CqApiService) GetLoginPageExecute(r ApiGetLoginPageRequest) (string, *_
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -118,13 +111,14 @@ func (a *CqApiService) GetLoginPageExecute(r ApiGetLoginPageRequest) (string, *_
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -135,8 +129,8 @@ func (a *CqApiService) GetLoginPageExecute(r ApiGetLoginPageRequest) (string, *_
 }
 
 type ApiPostCqActionsRequest struct {
-	ctx _context.Context
-	ApiService *CqApiService
+	ctx context.Context
+	ApiService *CqAPIService
 	authorizableId *string
 	changelog *string
 }
@@ -145,22 +139,23 @@ func (r ApiPostCqActionsRequest) AuthorizableId(authorizableId string) ApiPostCq
 	r.authorizableId = &authorizableId
 	return r
 }
+
 func (r ApiPostCqActionsRequest) Changelog(changelog string) ApiPostCqActionsRequest {
 	r.changelog = &changelog
 	return r
 }
 
-func (r ApiPostCqActionsRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiPostCqActionsRequest) Execute() (*http.Response, error) {
 	return r.ApiService.PostCqActionsExecute(r)
 }
 
 /*
 PostCqActions Method for PostCqActions
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPostCqActionsRequest
 */
-func (a *CqApiService) PostCqActions(ctx _context.Context) ApiPostCqActionsRequest {
+func (a *CqAPIService) PostCqActions(ctx context.Context) ApiPostCqActionsRequest {
 	return ApiPostCqActionsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -168,25 +163,23 @@ func (a *CqApiService) PostCqActions(ctx _context.Context) ApiPostCqActionsReque
 }
 
 // Execute executes the request
-func (a *CqApiService) PostCqActionsExecute(r ApiPostCqActionsRequest) (*_nethttp.Response, error) {
+func (a *CqAPIService) PostCqActionsExecute(r ApiPostCqActionsRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CqApiService.PostCqActions")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CqAPIService.PostCqActions")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/.cqactions.html"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.authorizableId == nil {
 		return nil, reportError("authorizableId is required and must be specified")
 	}
@@ -194,8 +187,8 @@ func (a *CqApiService) PostCqActionsExecute(r ApiPostCqActionsRequest) (*_nethtt
 		return nil, reportError("changelog is required and must be specified")
 	}
 
-	localVarQueryParams.Add("authorizableId", parameterToString(*r.authorizableId, ""))
-	localVarQueryParams.Add("changelog", parameterToString(*r.changelog, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "authorizableId", r.authorizableId, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "changelog", r.changelog, "form", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -213,7 +206,7 @@ func (a *CqApiService) PostCqActionsExecute(r ApiPostCqActionsRequest) (*_nethtt
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -223,15 +216,15 @@ func (a *CqApiService) PostCqActionsExecute(r ApiPostCqActionsRequest) (*_nethtt
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}

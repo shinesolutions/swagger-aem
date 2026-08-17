@@ -1,315 +1,386 @@
 -module(openapi_router).
 
--export([get_paths/1, get_validator_state/0]).
+-export([get_paths/1]).
 
--type operations() :: #{
-    Method :: binary() => openapi_api:operation_id()
-}.
-
--type init_opts()  :: {
-    Operations :: operations(),
-    LogicHandler :: atom(),
-    ValidatorMod :: module()
-}.
+-type method() :: binary().
+-type operations() :: #{method() => openapi_api:operation_id()}.
+-type init_opts()  :: {operations(), module()}.
 
 -export_type([init_opts/0]).
 
--spec get_paths(LogicHandler :: atom()) ->  [{'_',[{
-    Path :: string(),
-    Handler :: atom(),
-    InitOpts :: init_opts()
-}]}].
-
+-spec get_paths(LogicHandler :: module()) -> cowboy_router:routes().
 get_paths(LogicHandler) ->
-    ValidatorState = prepare_validator(),
     PreparedPaths = maps:fold(
-        fun(Path, #{operations := Operations, handler := Handler}, Acc) ->
-            [{Path, Handler, Operations} | Acc]
-        end,
-        [],
-        group_paths()
-    ),
-    [
-        {'_',
-            [{P, H, {O, LogicHandler, ValidatorState}} || {P, H, O} <- PreparedPaths]
-        }
-    ].
+                      fun(Path, #{operations := Operations, handler := Handler}, Acc) ->
+                              [{Path, Handler, Operations} | Acc]
+                      end, [], group_paths()
+                     ),
+    [{'_', [{P, H, {O, LogicHandler}} || {P, H, O} <- PreparedPaths]}].
 
 group_paths() ->
     maps:fold(
-        fun(OperationID, #{path := Path, method := Method, handler := Handler}, Acc) ->
-            case maps:find(Path, Acc) of
-                {ok, PathInfo0 = #{operations := Operations0}} ->
-                    Operations = Operations0#{Method => OperationID},
-                    PathInfo = PathInfo0#{operations => Operations},
-                    Acc#{Path => PathInfo};
-                error ->
-                    Operations = #{Method => OperationID},
-                    PathInfo = #{handler => Handler, operations => Operations},
-                    Acc#{Path => PathInfo}
-            end
-        end,
-        #{},
-        get_operations()
-    ).
+      fun(OperationID, #{servers := Servers, base_path := BasePath, path := Path,
+                         method := Method, handler := Handler}, Acc) ->
+              FullPaths = build_full_paths(Servers, BasePath, Path),
+              merge_paths(FullPaths, OperationID, Method, Handler, Acc)
+      end, #{}, get_operations()).
+
+build_full_paths([], BasePath, Path) ->
+    [lists:append([BasePath, Path])];
+build_full_paths(Servers, _BasePath, Path) ->
+    [lists:append([Server, Path]) || Server <- Servers ].
+
+merge_paths(FullPaths, OperationID, Method, Handler, Acc) ->
+    lists:foldl(
+      fun(Path, Acc0) ->
+              case maps:find(Path, Acc0) of
+                  {ok, PathInfo0 = #{operations := Operations0}} ->
+                      Operations = Operations0#{Method => OperationID},
+                      PathInfo = PathInfo0#{operations => Operations},
+                      Acc0#{Path => PathInfo};
+                  error ->
+                      Operations = #{Method => OperationID},
+                      PathInfo = #{handler => Handler, operations => Operations},
+                      Acc0#{Path => PathInfo}
+              end
+      end, Acc, FullPaths).
 
 get_operations() ->
     #{ 
-        'GetAemProductInfo' => #{
+       'getAemProductInfo' => #{
+            servers => [],
+            base_path => "",
             path => "/system/console/status-productinfo.json",
             method => <<"GET">>,
             handler => 'openapi_console_handler'
         },
-        'GetBundleInfo' => #{
+       'getBundleInfo' => #{
+            servers => [],
+            base_path => "",
             path => "/system/console/bundles/:name.json",
             method => <<"GET">>,
             handler => 'openapi_console_handler'
         },
-        'GetConfigMgr' => #{
+       'getConfigMgr' => #{
+            servers => [],
+            base_path => "",
             path => "/system/console/configMgr",
             method => <<"GET">>,
             handler => 'openapi_console_handler'
         },
-        'PostBundle' => #{
+       'postBundle' => #{
+            servers => [],
+            base_path => "",
             path => "/system/console/bundles/:name",
             method => <<"POST">>,
             handler => 'openapi_console_handler'
         },
-        'PostJmxRepository' => #{
+       'postJmxRepository' => #{
+            servers => [],
+            base_path => "",
             path => "/system/console/jmx/com.adobe.granite:type=Repository/op/:action",
             method => <<"POST">>,
             handler => 'openapi_console_handler'
         },
-        'PostSamlConfiguration' => #{
+       'postSamlConfiguration' => #{
+            servers => [],
+            base_path => "",
             path => "/system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler",
             method => <<"POST">>,
             handler => 'openapi_console_handler'
         },
-        'GetLoginPage' => #{
+       'getLoginPage' => #{
+            servers => [],
+            base_path => "",
             path => "/libs/granite/core/content/login.html",
             method => <<"GET">>,
             handler => 'openapi_cq_handler'
         },
-        'PostCqActions' => #{
+       'postCqActions' => #{
+            servers => [],
+            base_path => "",
             path => "/.cqactions.html",
             method => <<"POST">>,
             handler => 'openapi_cq_handler'
         },
-        'GetCrxdeStatus' => #{
+       'getCrxdeStatus' => #{
+            servers => [],
+            base_path => "",
             path => "/crx/server/crx.default/jcr:root/.1.json",
             method => <<"GET">>,
             handler => 'openapi_crx_handler'
         },
-        'GetInstallStatus' => #{
+       'getInstallStatus' => #{
+            servers => [],
+            base_path => "",
             path => "/crx/packmgr/installstatus.jsp",
             method => <<"GET">>,
             handler => 'openapi_crx_handler'
         },
-        'GetPackageManagerServlet' => #{
+       'getPackageManagerServlet' => #{
+            servers => [],
+            base_path => "",
             path => "/crx/packmgr/service/script.html",
             method => <<"GET">>,
             handler => 'openapi_crx_handler'
         },
-        'PostPackageService' => #{
+       'postPackageService' => #{
+            servers => [],
+            base_path => "",
             path => "/crx/packmgr/service.jsp",
             method => <<"POST">>,
             handler => 'openapi_crx_handler'
         },
-        'PostPackageServiceJson' => #{
+       'postPackageServiceJson' => #{
+            servers => [],
+            base_path => "",
             path => "/crx/packmgr/service/.json/:path",
             method => <<"POST">>,
             handler => 'openapi_crx_handler'
         },
-        'PostPackageUpdate' => #{
+       'postPackageUpdate' => #{
+            servers => [],
+            base_path => "",
             path => "/crx/packmgr/update.jsp",
             method => <<"POST">>,
             handler => 'openapi_crx_handler'
         },
-        'PostSetPassword' => #{
+       'postSetPassword' => #{
+            servers => [],
+            base_path => "",
             path => "/crx/explorer/ui/setpassword.jsp",
             method => <<"POST">>,
             handler => 'openapi_crx_handler'
         },
-        'GetAemHealthCheck' => #{
+       'getAemHealthCheck' => #{
+            servers => [],
+            base_path => "",
             path => "/system/health",
             method => <<"GET">>,
             handler => 'openapi_custom_handler'
         },
-        'PostConfigAemHealthCheckServlet' => #{
+       'postConfigAemHealthCheckServlet' => #{
+            servers => [],
+            base_path => "",
             path => "/apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck",
             method => <<"POST">>,
             handler => 'openapi_custom_handler'
         },
-        'PostConfigAemPasswordReset' => #{
+       'postConfigAemPasswordReset' => #{
+            servers => [],
+            base_path => "",
             path => "/apps/system/config/com.shinesolutions.aem.passwordreset.Activator",
             method => <<"POST">>,
             handler => 'openapi_custom_handler'
         },
-        'SslSetup' => #{
+       'sslSetup' => #{
+            servers => [],
+            base_path => "",
             path => "/libs/granite/security/post/sslSetup.html",
             method => <<"POST">>,
             handler => 'openapi_granite_handler'
         },
-        'DeleteAgent' => #{
+       'deleteAgent' => #{
+            servers => [],
+            base_path => "",
             path => "/etc/replication/agents.:runmode/:name",
             method => <<"DELETE">>,
             handler => 'openapi_sling_handler'
         },
-        'DeleteNode' => #{
+       'deleteNode' => #{
+            servers => [],
+            base_path => "",
             path => "/:path/:name",
             method => <<"DELETE">>,
             handler => 'openapi_sling_handler'
         },
-        'GetAgent' => #{
+       'getAgent' => #{
+            servers => [],
+            base_path => "",
             path => "/etc/replication/agents.:runmode/:name",
             method => <<"GET">>,
             handler => 'openapi_sling_handler'
         },
-        'GetAgents' => #{
+       'getAgents' => #{
+            servers => [],
+            base_path => "",
             path => "/etc/replication/agents.:runmode.-1.json",
             method => <<"GET">>,
             handler => 'openapi_sling_handler'
         },
-        'GetAuthorizableKeystore' => #{
+       'getAuthorizableKeystore' => #{
+            servers => [],
+            base_path => "",
             path => "/:intermediatePath/:authorizableId.ks.json",
             method => <<"GET">>,
             handler => 'openapi_sling_handler'
         },
-        'GetKeystore' => #{
+       'getKeystore' => #{
+            servers => [],
+            base_path => "",
             path => "/:intermediatePath/:authorizableId/keystore/store.p12",
             method => <<"GET">>,
             handler => 'openapi_sling_handler'
         },
-        'GetNode' => #{
+       'getNode' => #{
+            servers => [],
+            base_path => "",
             path => "/:path/:name",
             method => <<"GET">>,
             handler => 'openapi_sling_handler'
         },
-        'GetPackage' => #{
+       'getPackage' => #{
+            servers => [],
+            base_path => "",
             path => "/etc/packages/:group/:name-:version.zip",
             method => <<"GET">>,
             handler => 'openapi_sling_handler'
         },
-        'GetPackageFilter' => #{
+       'getPackageFilter' => #{
+            servers => [],
+            base_path => "",
             path => "/etc/packages/:group/:name-:version.zip/jcr:content/vlt:definition/filter.tidy.2.json",
             method => <<"GET">>,
             handler => 'openapi_sling_handler'
         },
-        'GetQuery' => #{
+       'getQuery' => #{
+            servers => [],
+            base_path => "",
             path => "/bin/querybuilder.json",
             method => <<"GET">>,
             handler => 'openapi_sling_handler'
         },
-        'GetTruststore' => #{
+       'getTruststore' => #{
+            servers => [],
+            base_path => "",
             path => "/etc/truststore/truststore.p12",
             method => <<"GET">>,
             handler => 'openapi_sling_handler'
         },
-        'GetTruststoreInfo' => #{
+       'getTruststoreInfo' => #{
+            servers => [],
+            base_path => "",
             path => "/libs/granite/security/truststore.json",
             method => <<"GET">>,
             handler => 'openapi_sling_handler'
         },
-        'PostAgent' => #{
+       'postAgent' => #{
+            servers => [],
+            base_path => "",
             path => "/etc/replication/agents.:runmode/:name",
             method => <<"POST">>,
             handler => 'openapi_sling_handler'
         },
-        'PostAuthorizableKeystore' => #{
+       'postAuthorizableKeystore' => #{
+            servers => [],
+            base_path => "",
             path => "/:intermediatePath/:authorizableId.ks.html",
             method => <<"POST">>,
             handler => 'openapi_sling_handler'
         },
-        'PostAuthorizables' => #{
+       'postAuthorizables' => #{
+            servers => [],
+            base_path => "",
             path => "/libs/granite/security/post/authorizables",
             method => <<"POST">>,
             handler => 'openapi_sling_handler'
         },
-        'PostConfigAdobeGraniteSamlAuthenticationHandler' => #{
+       'postConfigAdobeGraniteSamlAuthenticationHandler' => #{
+            servers => [],
+            base_path => "",
             path => "/apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config",
             method => <<"POST">>,
             handler => 'openapi_sling_handler'
         },
-        'PostConfigApacheFelixJettyBasedHttpService' => #{
+       'postConfigApacheFelixJettyBasedHttpService' => #{
+            servers => [],
+            base_path => "",
             path => "/apps/system/config/org.apache.felix.http",
             method => <<"POST">>,
             handler => 'openapi_sling_handler'
         },
-        'PostConfigApacheHttpComponentsProxyConfiguration' => #{
+       'postConfigApacheHttpComponentsProxyConfiguration' => #{
+            servers => [],
+            base_path => "",
             path => "/apps/system/config/org.apache.http.proxyconfigurator.config",
             method => <<"POST">>,
             handler => 'openapi_sling_handler'
         },
-        'PostConfigApacheSlingDavExServlet' => #{
+       'postConfigApacheSlingDavExServlet' => #{
+            servers => [],
+            base_path => "",
             path => "/apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet",
             method => <<"POST">>,
             handler => 'openapi_sling_handler'
         },
-        'PostConfigApacheSlingGetServlet' => #{
+       'postConfigApacheSlingGetServlet' => #{
+            servers => [],
+            base_path => "",
             path => "/apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet",
             method => <<"POST">>,
             handler => 'openapi_sling_handler'
         },
-        'PostConfigApacheSlingReferrerFilter' => #{
+       'postConfigApacheSlingReferrerFilter' => #{
+            servers => [],
+            base_path => "",
             path => "/apps/system/config/org.apache.sling.security.impl.ReferrerFilter",
             method => <<"POST">>,
             handler => 'openapi_sling_handler'
         },
-        'PostConfigProperty' => #{
+       'postConfigProperty' => #{
+            servers => [],
+            base_path => "",
             path => "/apps/system/config/:configNodeName",
             method => <<"POST">>,
             handler => 'openapi_sling_handler'
         },
-        'PostNode' => #{
+       'postNode' => #{
+            servers => [],
+            base_path => "",
             path => "/:path/:name",
             method => <<"POST">>,
             handler => 'openapi_sling_handler'
         },
-        'PostNodeRw' => #{
+       'postNodeRw' => #{
+            servers => [],
+            base_path => "",
             path => "/:path/:name.rw.html",
             method => <<"POST">>,
             handler => 'openapi_sling_handler'
         },
-        'PostPath' => #{
+       'postPath' => #{
+            servers => [],
+            base_path => "",
             path => "/:path/",
             method => <<"POST">>,
             handler => 'openapi_sling_handler'
         },
-        'PostQuery' => #{
+       'postQuery' => #{
+            servers => [],
+            base_path => "",
             path => "/bin/querybuilder.json",
             method => <<"POST">>,
             handler => 'openapi_sling_handler'
         },
-        'PostTreeActivation' => #{
-            path => "/etc/replication/treeactivation.html",
+       'postTreeActivation' => #{
+            servers => [],
+            base_path => "",
+            path => "/libs/replication/treeactivation.html",
             method => <<"POST">>,
             handler => 'openapi_sling_handler'
         },
-        'PostTruststore' => #{
+       'postTruststore' => #{
+            servers => [],
+            base_path => "",
             path => "/libs/granite/security/post/truststore",
             method => <<"POST">>,
             handler => 'openapi_sling_handler'
         },
-        'PostTruststorePKCS12' => #{
+       'postTruststorePKCS12' => #{
+            servers => [],
+            base_path => "",
             path => "/etc/truststore",
             method => <<"POST">>,
             handler => 'openapi_sling_handler'
         }
     }.
-
-get_validator_state() ->
-    persistent_term:get({?MODULE, validator_state}).
-
-
-prepare_validator() ->
-    R = jsx:decode(element(2, file:read_file(get_openapi_path()))),
-    JesseState = jesse_state:new(R, [{default_schema_ver, <<"http://json-schema.org/draft-04/schema#">>}]),
-    persistent_term:put({?MODULE, validator_state}, JesseState),
-    ?MODULE.
-
-
-get_openapi_path() ->
-    {ok, AppName} = application:get_application(?MODULE),
-    filename:join(openapi_utils:priv_dir(AppName), "openapi.json").
-
-

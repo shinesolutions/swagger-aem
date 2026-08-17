@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **version** | Option<**String**> | Bundle version | [optional]
 **symbolic_name** | Option<**String**> | Bundle symbolic name | [optional]
 **category** | Option<**String**> | Bundle category | [optional]
-**props** | Option<[**Vec<crate::models::BundleDataProp>**](BundleDataProp.md)> |  | [optional]
+**props** | Option<[**Vec<models::BundleDataProp>**](BundleDataProp.md)> |  | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

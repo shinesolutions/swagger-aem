@@ -1,0 +1,153 @@
+{
+  "namespace": "model",
+  "type": "record",
+  "doc": "",
+  "name": "SamlConfigurationProperties",
+  "fields": [
+    {
+      "name": "path",
+      "type": ["null", "model.SamlConfigurationPropertyItemsArray"],
+      "doc": "",
+      "default": null
+    },
+    {
+      "name": "service.ranking",
+      "type": ["null", "model.SamlConfigurationPropertyItemsLong"],
+      "doc": "",
+      "default": null
+    },
+    {
+      "name": "idpUrl",
+      "type": ["null", "model.SamlConfigurationPropertyItemsString"],
+      "doc": "",
+      "default": null
+    },
+    {
+      "name": "idpCertAlias",
+      "type": ["null", "model.SamlConfigurationPropertyItemsString"],
+      "doc": "",
+      "default": null
+    },
+    {
+      "name": "idpHttpRedirect",
+      "type": ["null", "model.SamlConfigurationPropertyItemsBoolean"],
+      "doc": "",
+      "default": null
+    },
+    {
+      "name": "serviceProviderEntityId",
+      "type": ["null", "model.SamlConfigurationPropertyItemsString"],
+      "doc": "",
+      "default": null
+    },
+    {
+      "name": "assertionConsumerServiceURL",
+      "type": ["null", "model.SamlConfigurationPropertyItemsString"],
+      "doc": "",
+      "default": null
+    },
+    {
+      "name": "spPrivateKeyAlias",
+      "type": ["null", "model.SamlConfigurationPropertyItemsString"],
+      "doc": "",
+      "default": null
+    },
+    {
+      "name": "keyStorePassword",
+      "type": ["null", "model.SamlConfigurationPropertyItemsString"],
+      "doc": "",
+      "default": null
+    },
+    {
+      "name": "defaultRedirectUrl",
+      "type": ["null", "model.SamlConfigurationPropertyItemsString"],
+      "doc": "",
+      "default": null
+    },
+    {
+      "name": "userIDAttribute",
+      "type": ["null", "model.SamlConfigurationPropertyItemsString"],
+      "doc": "",
+      "default": null
+    },
+    {
+      "name": "useEncryption",
+      "type": ["null", "model.SamlConfigurationPropertyItemsBoolean"],
+      "doc": "",
+      "default": null
+    },
+    {
+      "name": "createUser",
+      "type": ["null", "model.SamlConfigurationPropertyItemsBoolean"],
+      "doc": "",
+      "default": null
+    },
+    {
+      "name": "addGroupMemberships",
+      "type": ["null", "model.SamlConfigurationPropertyItemsBoolean"],
+      "doc": "",
+      "default": null
+    },
+    {
+      "name": "groupMembershipAttribute",
+      "type": ["null", "model.SamlConfigurationPropertyItemsString"],
+      "doc": "",
+      "default": null
+    },
+    {
+      "name": "defaultGroups",
+      "type": ["null", "model.SamlConfigurationPropertyItemsArray"],
+      "doc": "",
+      "default": null
+    },
+    {
+      "name": "nameIdFormat",
+      "type": ["null", "model.SamlConfigurationPropertyItemsString"],
+      "doc": "",
+      "default": null
+    },
+    {
+      "name": "synchronizeAttributes",
+      "type": ["null", "model.SamlConfigurationPropertyItemsArray"],
+      "doc": "",
+      "default": null
+    },
+    {
+      "name": "handleLogout",
+      "type": ["null", "model.SamlConfigurationPropertyItemsBoolean"],
+      "doc": "",
+      "default": null
+    },
+    {
+      "name": "logoutUrl",
+      "type": ["null", "model.SamlConfigurationPropertyItemsString"],
+      "doc": "",
+      "default": null
+    },
+    {
+      "name": "clockTolerance",
+      "type": ["null", "model.SamlConfigurationPropertyItemsLong"],
+      "doc": "",
+      "default": null
+    },
+    {
+      "name": "digestMethod",
+      "type": ["null", "model.SamlConfigurationPropertyItemsString"],
+      "doc": "",
+      "default": null
+    },
+    {
+      "name": "signatureMethod",
+      "type": ["null", "model.SamlConfigurationPropertyItemsString"],
+      "doc": "",
+      "default": null
+    },
+    {
+      "name": "userIntermediatePath",
+      "type": ["null", "model.SamlConfigurationPropertyItemsString"],
+      "doc": "",
+      "default": null
+    }
+  ]
+
+}

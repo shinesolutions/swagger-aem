@@ -10,7 +10,7 @@ Feature | HTTP request | Description
 
 # **login_page**
 > login_page : detachable STRING_32
-	
+
 
 
 
@@ -35,7 +35,7 @@ No authorization required
 
 # **post_cq_actions**
 > post_cq_actions (authorizable_id: STRING_32 ; changelog: STRING_32 )
-	
+
 
 
 

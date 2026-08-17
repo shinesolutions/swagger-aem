@@ -2,13 +2,13 @@
 
 All URIs are relative to *http://localhost*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**getLoginPage**](CqApi.md#getLoginPage) | **GET** /libs/granite/core/content/login.html | 
-[**postCqActions**](CqApi.md#postCqActions) | **POST** /.cqactions.html | 
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**getLoginPage**](CqApi.md#getLoginPage) | **GET** /libs/granite/core/content/login.html |  |
+| [**postCqActions**](CqApi.md#postCqActions) | **POST** /.cqactions.html |  |
 
 
-<a name="getLoginPage"></a>
+<a id="getLoginPage"></a>
 # **getLoginPage**
 > String getLoginPage()
 
@@ -62,9 +62,9 @@ No authorization required
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Default response |  -  |
+| **0** | Default response |  -  |
 
-<a name="postCqActions"></a>
+<a id="postCqActions"></a>
 # **postCqActions**
 > postCqActions(authorizableId, changelog)
 
@@ -108,10 +108,10 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **authorizableId** | **String**|  |
- **changelog** | **String**|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **authorizableId** | **String**|  | |
+| **changelog** | **String**|  | |
 
 ### Return type
 
@@ -129,5 +129,5 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Default response |  -  |
+| **0** | Default response |  -  |
 

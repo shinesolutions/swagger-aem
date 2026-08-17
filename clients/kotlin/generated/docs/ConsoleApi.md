@@ -2,17 +2,17 @@
 
 All URIs are relative to *http://localhost*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**getAemProductInfo**](ConsoleApi.md#getAemProductInfo) | **GET** /system/console/status-productinfo.json | 
-[**getBundleInfo**](ConsoleApi.md#getBundleInfo) | **GET** /system/console/bundles/{name}.json | 
-[**getConfigMgr**](ConsoleApi.md#getConfigMgr) | **GET** /system/console/configMgr | 
-[**postBundle**](ConsoleApi.md#postBundle) | **POST** /system/console/bundles/{name} | 
-[**postJmxRepository**](ConsoleApi.md#postJmxRepository) | **POST** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} | 
-[**postSamlConfiguration**](ConsoleApi.md#postSamlConfiguration) | **POST** /system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler | 
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**getAemProductInfo**](ConsoleApi.md#getAemProductInfo) | **GET** /system/console/status-productinfo.json |  |
+| [**getBundleInfo**](ConsoleApi.md#getBundleInfo) | **GET** /system/console/bundles/{name}.json |  |
+| [**getConfigMgr**](ConsoleApi.md#getConfigMgr) | **GET** /system/console/configMgr |  |
+| [**postBundle**](ConsoleApi.md#postBundle) | **POST** /system/console/bundles/{name} |  |
+| [**postJmxRepository**](ConsoleApi.md#postJmxRepository) | **POST** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} |  |
+| [**postSamlConfiguration**](ConsoleApi.md#postSamlConfiguration) | **POST** /system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler |  |
 
 
-<a name="getAemProductInfo"></a>
+<a id="getAemProductInfo"></a>
 # **getAemProductInfo**
 > kotlin.collections.List&lt;kotlin.String&gt; getAemProductInfo()
 
@@ -47,16 +47,22 @@ This endpoint does not need any parameter.
 ### Authorization
 
 
-Configure aemAuth:
-    ApiClient.username = ""
-    ApiClient.password = ""
+Configure aemAuth statically:
+```kotlin
+ApiClient.username = ""
+ApiClient.password = ""
+```
+Configure aemAuth dynamically:
+```kotlin
+apiInstance.userCredentialProvider = { "user" to "pass" }
+```
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getBundleInfo"></a>
+<a id="getBundleInfo"></a>
 # **getBundleInfo**
 > BundleInfo getBundleInfo(name)
 
@@ -83,10 +89,9 @@ try {
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **kotlin.String**|  |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **name** | **kotlin.String**|  | |
 
 ### Return type
 
@@ -95,16 +100,22 @@ Name | Type | Description  | Notes
 ### Authorization
 
 
-Configure aemAuth:
-    ApiClient.username = ""
-    ApiClient.password = ""
+Configure aemAuth statically:
+```kotlin
+ApiClient.username = ""
+ApiClient.password = ""
+```
+Configure aemAuth dynamically:
+```kotlin
+apiInstance.userCredentialProvider = { "user" to "pass" }
+```
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getConfigMgr"></a>
+<a id="getConfigMgr"></a>
 # **getConfigMgr**
 > kotlin.String getConfigMgr()
 
@@ -139,16 +150,22 @@ This endpoint does not need any parameter.
 ### Authorization
 
 
-Configure aemAuth:
-    ApiClient.username = ""
-    ApiClient.password = ""
+Configure aemAuth statically:
+```kotlin
+ApiClient.username = ""
+ApiClient.password = ""
+```
+Configure aemAuth dynamically:
+```kotlin
+apiInstance.userCredentialProvider = { "user" to "pass" }
+```
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/xml
+ - **Accept**: Not defined
 
-<a name="postBundle"></a>
+<a id="postBundle"></a>
 # **postBundle**
 > postBundle(name, action)
 
@@ -175,11 +192,10 @@ try {
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **kotlin.String**|  |
- **action** | **kotlin.String**|  |
+| **name** | **kotlin.String**|  | |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **action** | **kotlin.String**|  | |
 
 ### Return type
 
@@ -188,16 +204,22 @@ null (empty response body)
 ### Authorization
 
 
-Configure aemAuth:
-    ApiClient.username = ""
-    ApiClient.password = ""
+Configure aemAuth statically:
+```kotlin
+ApiClient.username = ""
+ApiClient.password = ""
+```
+Configure aemAuth dynamically:
+```kotlin
+apiInstance.userCredentialProvider = { "user" to "pass" }
+```
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
-<a name="postJmxRepository"></a>
+<a id="postJmxRepository"></a>
 # **postJmxRepository**
 > postJmxRepository(action)
 
@@ -223,10 +245,9 @@ try {
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **action** | **kotlin.String**|  |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **action** | **kotlin.String**|  | |
 
 ### Return type
 
@@ -235,16 +256,22 @@ null (empty response body)
 ### Authorization
 
 
-Configure aemAuth:
-    ApiClient.username = ""
-    ApiClient.password = ""
+Configure aemAuth statically:
+```kotlin
+ApiClient.username = ""
+ApiClient.password = ""
+```
+Configure aemAuth dynamically:
+```kotlin
+apiInstance.userCredentialProvider = { "user" to "pass" }
+```
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
-<a name="postSamlConfiguration"></a>
+<a id="postSamlConfiguration"></a>
 # **postSamlConfiguration**
 > SamlConfigurationInfo postSamlConfiguration(post, apply, delete, action, dollarLocation, path, serviceRanking, idpUrl, idpCertAlias, idpHttpRedirect, serviceProviderEntityId, assertionConsumerServiceURL, spPrivateKeyAlias, keyStorePassword, defaultRedirectUrl, userIDAttribute, useEncryption, createUser, addGroupMemberships, groupMembershipAttribute, defaultGroups, nameIdFormat, synchronizeAttributes, handleLogout, logoutUrl, clockTolerance, digestMethod, signatureMethod, userIntermediatePath, propertylist)
 
@@ -300,39 +327,38 @@ try {
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **post** | **kotlin.Boolean**|  | [optional]
- **apply** | **kotlin.Boolean**|  | [optional]
- **delete** | **kotlin.Boolean**|  | [optional]
- **action** | **kotlin.String**|  | [optional]
- **dollarLocation** | **kotlin.String**|  | [optional]
- **path** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional]
- **serviceRanking** | **kotlin.Int**|  | [optional]
- **idpUrl** | **kotlin.String**|  | [optional]
- **idpCertAlias** | **kotlin.String**|  | [optional]
- **idpHttpRedirect** | **kotlin.Boolean**|  | [optional]
- **serviceProviderEntityId** | **kotlin.String**|  | [optional]
- **assertionConsumerServiceURL** | **kotlin.String**|  | [optional]
- **spPrivateKeyAlias** | **kotlin.String**|  | [optional]
- **keyStorePassword** | **kotlin.String**|  | [optional]
- **defaultRedirectUrl** | **kotlin.String**|  | [optional]
- **userIDAttribute** | **kotlin.String**|  | [optional]
- **useEncryption** | **kotlin.Boolean**|  | [optional]
- **createUser** | **kotlin.Boolean**|  | [optional]
- **addGroupMemberships** | **kotlin.Boolean**|  | [optional]
- **groupMembershipAttribute** | **kotlin.String**|  | [optional]
- **defaultGroups** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional]
- **nameIdFormat** | **kotlin.String**|  | [optional]
- **synchronizeAttributes** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional]
- **handleLogout** | **kotlin.Boolean**|  | [optional]
- **logoutUrl** | **kotlin.String**|  | [optional]
- **clockTolerance** | **kotlin.Int**|  | [optional]
- **digestMethod** | **kotlin.String**|  | [optional]
- **signatureMethod** | **kotlin.String**|  | [optional]
- **userIntermediatePath** | **kotlin.String**|  | [optional]
- **propertylist** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional]
+| **post** | **kotlin.Boolean**|  | [optional] |
+| **apply** | **kotlin.Boolean**|  | [optional] |
+| **delete** | **kotlin.Boolean**|  | [optional] |
+| **action** | **kotlin.String**|  | [optional] |
+| **dollarLocation** | **kotlin.String**|  | [optional] |
+| **path** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional] |
+| **serviceRanking** | **kotlin.Int**|  | [optional] |
+| **idpUrl** | **kotlin.String**|  | [optional] |
+| **idpCertAlias** | **kotlin.String**|  | [optional] |
+| **idpHttpRedirect** | **kotlin.Boolean**|  | [optional] |
+| **serviceProviderEntityId** | **kotlin.String**|  | [optional] |
+| **assertionConsumerServiceURL** | **kotlin.String**|  | [optional] |
+| **spPrivateKeyAlias** | **kotlin.String**|  | [optional] |
+| **keyStorePassword** | **kotlin.String**|  | [optional] |
+| **defaultRedirectUrl** | **kotlin.String**|  | [optional] |
+| **userIDAttribute** | **kotlin.String**|  | [optional] |
+| **useEncryption** | **kotlin.Boolean**|  | [optional] |
+| **createUser** | **kotlin.Boolean**|  | [optional] |
+| **addGroupMemberships** | **kotlin.Boolean**|  | [optional] |
+| **groupMembershipAttribute** | **kotlin.String**|  | [optional] |
+| **defaultGroups** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional] |
+| **nameIdFormat** | **kotlin.String**|  | [optional] |
+| **synchronizeAttributes** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional] |
+| **handleLogout** | **kotlin.Boolean**|  | [optional] |
+| **logoutUrl** | **kotlin.String**|  | [optional] |
+| **clockTolerance** | **kotlin.Int**|  | [optional] |
+| **digestMethod** | **kotlin.String**|  | [optional] |
+| **signatureMethod** | **kotlin.String**|  | [optional] |
+| **userIntermediatePath** | **kotlin.String**|  | [optional] |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **propertylist** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional] |
 
 ### Return type
 
@@ -341,9 +367,15 @@ Name | Type | Description  | Notes
 ### Authorization
 
 
-Configure aemAuth:
-    ApiClient.username = ""
-    ApiClient.password = ""
+Configure aemAuth statically:
+```kotlin
+ApiClient.username = ""
+ApiClient.password = ""
+```
+Configure aemAuth dynamically:
+```kotlin
+apiInstance.userCredentialProvider = { "user" to "pass" }
+```
 
 ### HTTP request headers
 

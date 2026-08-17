@@ -3,11 +3,11 @@ info:
   contact:
     email: opensource@shinesolutions.com
     name: Shine Solutions
-    url: http://shinesolutions.com
+    url: https://github.com/shinesolutions
   description: Swagger AEM is an OpenAPI specification for Adobe Experience Manager
     (AEM) API
   title: Adobe Experience Manager (AEM) API
-  version: 3.5.0-pre.0
+  version: 3.7.1-pre.0
 servers:
 - url: /
 security:
@@ -1000,7 +1000,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InstallStatus'
+                $ref: "#/components/schemas/InstallStatus"
           description: Retrieved CRX package manager install status
         default:
           content:
@@ -1093,15 +1093,10 @@ paths:
           type: boolean
         style: form
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_1'
         content:
           multipart/form-data:
             schema:
-              properties:
-                package:
-                  format: binary
-                  type: string
-              type: object
+              $ref: "#/components/schemas/postPackageServiceJson_request"
       responses:
         default:
           content:
@@ -1389,6 +1384,13 @@ paths:
         required: false
         schema:
           type: string
+        style: form
+      - explode: true
+        in: query
+        name: jcr:content/aliasUpdate
+        required: false
+        schema:
+          type: boolean
         style: form
       - explode: true
         in: query
@@ -1720,50 +1722,14 @@ paths:
       tags:
       - sling
       x-openapi-router-controller: openapi_server.controllers.sling_controller
-  /etc/replication/treeactivation.html:
-    post:
-      operationId: post_tree_activation
-      parameters:
-      - explode: true
-        in: query
-        name: ignoredeactivated
-        required: true
-        schema:
-          type: boolean
-        style: form
-      - explode: true
-        in: query
-        name: onlymodified
-        required: true
-        schema:
-          type: boolean
-        style: form
-      - explode: true
-        in: query
-        name: path
-        required: true
-        schema:
-          type: string
-        style: form
-      responses:
-        default:
-          description: Default response
-      tags:
-      - sling
-      x-openapi-router-controller: openapi_server.controllers.sling_controller
   /etc/truststore:
     post:
       operationId: post_truststore_pkcs12
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_3'
         content:
           multipart/form-data:
             schema:
-              properties:
-                truststore.p12:
-                  format: binary
-                  type: string
-              type: object
+              $ref: "#/components/schemas/postTruststorePKCS12_request"
       responses:
         default:
           content:
@@ -1905,18 +1871,10 @@ paths:
           type: string
         style: form
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_5'
         content:
           multipart/form-data:
             schema:
-              properties:
-                privatekeyFile:
-                  format: binary
-                  type: string
-                certificateFile:
-                  format: binary
-                  type: string
-              type: object
+              $ref: "#/components/schemas/sslSetup_request"
       responses:
         default:
           content:
@@ -1967,15 +1925,10 @@ paths:
           type: string
         style: form
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_2'
         content:
           multipart/form-data:
             schema:
-              properties:
-                certificate:
-                  format: binary
-                  type: string
-              type: object
+              $ref: "#/components/schemas/postTruststore_request"
       responses:
         default:
           content:
@@ -1994,13 +1947,52 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TruststoreInfo'
+                $ref: "#/components/schemas/TruststoreInfo"
           description: Retrieved AEM Truststore info
         default:
           content:
             application/json:
               schema:
                 type: string
+          description: Default response
+      tags:
+      - sling
+      x-openapi-router-controller: openapi_server.controllers.sling_controller
+  /libs/replication/treeactivation.html:
+    post:
+      operationId: post_tree_activation
+      parameters:
+      - explode: true
+        in: query
+        name: ignoredeactivated
+        required: true
+        schema:
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: onlymodified
+        required: true
+        schema:
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: path
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: cmd
+        required: true
+        schema:
+          default: activate
+          type: string
+        style: form
+      responses:
+        default:
           description: Default response
       tags:
       - sling
@@ -2045,7 +2037,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BundleInfo'
+                $ref: "#/components/schemas/BundleInfo"
           description: Retrieved bundle info
         default:
           content:
@@ -2298,7 +2290,7 @@ paths:
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/SamlConfigurationInfo'
+                $ref: "#/components/schemas/SamlConfigurationInfo"
           description: Retrieved AEM SAML Configuration
         "302":
           content:
@@ -2457,27 +2449,16 @@ paths:
           type: string
         style: form
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_4'
         content:
           multipart/form-data:
             schema:
-              properties:
-                cert-chain:
-                  format: binary
-                  type: string
-                pk:
-                  format: binary
-                  type: string
-                keyStore:
-                  format: binary
-                  type: string
-              type: object
+              $ref: "#/components/schemas/postAuthorizableKeystore_request"
       responses:
         "200":
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/KeystoreInfo'
+                $ref: "#/components/schemas/KeystoreInfo"
           description: Retrieved Authorizable Keystore info
         default:
           content:
@@ -2511,7 +2492,7 @@ paths:
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/KeystoreInfo'
+                $ref: "#/components/schemas/KeystoreInfo"
           description: Retrieved Authorizable Keystore info
         default:
           content:
@@ -2661,15 +2642,10 @@ paths:
           type: string
         style: form
       requestBody:
-        $ref: '#/components/requestBodies/inline_object'
         content:
           multipart/form-data:
             schema:
-              properties:
-                file:
-                  format: binary
-                  type: string
-              type: object
+              $ref: "#/components/schemas/postNode_request"
       responses:
         default:
           description: Default response
@@ -2708,37 +2684,6 @@ paths:
       - sling
       x-openapi-router-controller: openapi_server.controllers.sling_controller
 components:
-  requestBodies:
-    inline_object_1:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_1'
-    inline_object:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object'
-    inline_object_5:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_5'
-    inline_object_4:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_4'
-    inline_object_3:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_3'
-    inline_object_2:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_2'
   schemas:
     InstallStatus:
       example:
@@ -2747,14 +2692,14 @@ components:
           itemCount: 0
       properties:
         status:
-          $ref: '#/components/schemas/InstallStatus_status'
+          $ref: "#/components/schemas/InstallStatus_status"
       title: InstallStatus
       type: object
     KeystoreInfo:
       properties:
         aliases:
           items:
-            $ref: '#/components/schemas/KeystoreItems'
+            $ref: "#/components/schemas/KeystoreItems"
           title: aliases
           type: array
         exists:
@@ -2766,25 +2711,25 @@ components:
     TruststoreInfo:
       example:
         aliases:
-        - entryType: entryType
-          notAfter: notAfter
-          serialNumber: 0
+        - alias: alias
+          entryType: entryType
           subject: subject
-          alias: alias
           issuer: issuer
           notBefore: notBefore
-        - entryType: entryType
           notAfter: notAfter
           serialNumber: 0
+        - alias: alias
+          entryType: entryType
           subject: subject
-          alias: alias
           issuer: issuer
           notBefore: notBefore
+          notAfter: notAfter
+          serialNumber: 0
         exists: true
       properties:
         aliases:
           items:
-            $ref: '#/components/schemas/TruststoreItems'
+            $ref: "#/components/schemas/TruststoreItems"
           title: aliases
           type: array
         exists:
@@ -2813,7 +2758,7 @@ components:
           type: string
         chain:
           items:
-            $ref: '#/components/schemas/KeystoreChainItems'
+            $ref: "#/components/schemas/KeystoreChainItems"
           title: chain
           type: array
       title: KeystoreItems
@@ -2844,13 +2789,13 @@ components:
       type: object
     TruststoreItems:
       example:
-        entryType: entryType
-        notAfter: notAfter
-        serialNumber: 0
-        subject: subject
         alias: alias
+        entryType: entryType
+        subject: subject
         issuer: issuer
         notBefore: notBefore
+        notAfter: notAfter
+        serialNumber: 0
       properties:
         alias:
           description: Truststore alias name
@@ -2904,59 +2849,59 @@ components:
           title: service_location
           type: string
         properties:
-          $ref: '#/components/schemas/SamlConfigurationProperties'
+          $ref: "#/components/schemas/SamlConfigurationProperties"
       title: SamlConfigurationInfo
       type: object
     SamlConfigurationProperties:
       properties:
         path:
-          $ref: '#/components/schemas/SamlConfigurationPropertyItemsArray'
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsArray"
         service.ranking:
-          $ref: '#/components/schemas/SamlConfigurationPropertyItemsLong'
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsLong"
         idpUrl:
-          $ref: '#/components/schemas/SamlConfigurationPropertyItemsString'
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
         idpCertAlias:
-          $ref: '#/components/schemas/SamlConfigurationPropertyItemsString'
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
         idpHttpRedirect:
-          $ref: '#/components/schemas/SamlConfigurationPropertyItemsBoolean'
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsBoolean"
         serviceProviderEntityId:
-          $ref: '#/components/schemas/SamlConfigurationPropertyItemsString'
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
         assertionConsumerServiceURL:
-          $ref: '#/components/schemas/SamlConfigurationPropertyItemsString'
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
         spPrivateKeyAlias:
-          $ref: '#/components/schemas/SamlConfigurationPropertyItemsString'
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
         keyStorePassword:
-          $ref: '#/components/schemas/SamlConfigurationPropertyItemsString'
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
         defaultRedirectUrl:
-          $ref: '#/components/schemas/SamlConfigurationPropertyItemsString'
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
         userIDAttribute:
-          $ref: '#/components/schemas/SamlConfigurationPropertyItemsString'
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
         useEncryption:
-          $ref: '#/components/schemas/SamlConfigurationPropertyItemsBoolean'
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsBoolean"
         createUser:
-          $ref: '#/components/schemas/SamlConfigurationPropertyItemsBoolean'
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsBoolean"
         addGroupMemberships:
-          $ref: '#/components/schemas/SamlConfigurationPropertyItemsBoolean'
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsBoolean"
         groupMembershipAttribute:
-          $ref: '#/components/schemas/SamlConfigurationPropertyItemsString'
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
         defaultGroups:
-          $ref: '#/components/schemas/SamlConfigurationPropertyItemsArray'
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsArray"
         nameIdFormat:
-          $ref: '#/components/schemas/SamlConfigurationPropertyItemsString'
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
         synchronizeAttributes:
-          $ref: '#/components/schemas/SamlConfigurationPropertyItemsArray'
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsArray"
         handleLogout:
-          $ref: '#/components/schemas/SamlConfigurationPropertyItemsBoolean'
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsBoolean"
         logoutUrl:
-          $ref: '#/components/schemas/SamlConfigurationPropertyItemsString'
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
         clockTolerance:
-          $ref: '#/components/schemas/SamlConfigurationPropertyItemsLong'
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsLong"
         digestMethod:
-          $ref: '#/components/schemas/SamlConfigurationPropertyItemsString'
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
         signatureMethod:
-          $ref: '#/components/schemas/SamlConfigurationPropertyItemsString'
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
         userIntermediatePath:
-          $ref: '#/components/schemas/SamlConfigurationPropertyItemsString'
+          $ref: "#/components/schemas/SamlConfigurationPropertyItemsString"
       title: SamlConfigurationProperties
       type: object
     SamlConfigurationPropertyItemsArray:
@@ -2974,7 +2919,7 @@ components:
           title: is_set
           type: boolean
         type:
-          description: Property type, 1=String, 3=long, 11=boolean, 12=Password
+          description: "Property type, 1=String, 3=long, 11=boolean, 12=Password"
           title: type
           type: integer
         values:
@@ -3004,7 +2949,7 @@ components:
           title: is_set
           type: boolean
         type:
-          description: Property type, 1=String, 3=long, 11=boolean, 12=Password
+          description: "Property type, 1=String, 3=long, 11=boolean, 12=Password"
           title: type
           type: integer
         value:
@@ -3032,7 +2977,7 @@ components:
           title: is_set
           type: boolean
         type:
-          description: Property type, 1=String, 3=long, 11=boolean, 12=Password
+          description: "Property type, 1=String, 3=long, 11=boolean, 12=Password"
           title: type
           type: integer
         value:
@@ -3060,7 +3005,7 @@ components:
           title: is_set
           type: boolean
         type:
-          description: Property type, 1=String, 3=long, 11=boolean, 12=Password
+          description: "Property type, 1=String, 3=long, 11=boolean, 12=Password"
           title: type
           type: integer
         value:
@@ -3075,37 +3020,37 @@ components:
       type: object
     BundleInfo:
       example:
+        status: status
         s:
         - 0
         - 0
         data:
-        - fragment: true
-          stateRaw: 1
+        - id: 6
           name: name
-          symbolicName: symbolicName
-          id: 6
-          state: state
-          category: category
-          version: version
-          props:
-          - value: value
-            key: key
-          - value: value
-            key: key
-        - fragment: true
+          fragment: true
           stateRaw: 1
-          name: name
-          symbolicName: symbolicName
-          id: 6
           state: state
-          category: category
           version: version
+          symbolicName: symbolicName
+          category: category
           props:
-          - value: value
-            key: key
-          - value: value
-            key: key
-        status: status
+          - key: key
+            value: value
+          - key: key
+            value: value
+        - id: 6
+          name: name
+          fragment: true
+          stateRaw: 1
+          state: state
+          version: version
+          symbolicName: symbolicName
+          category: category
+          props:
+          - key: key
+            value: value
+          - key: key
+            value: value
       properties:
         status:
           description: Status description of all bundles
@@ -3118,26 +3063,26 @@ components:
           type: array
         data:
           items:
-            $ref: '#/components/schemas/BundleData'
+            $ref: "#/components/schemas/BundleData"
           title: data
           type: array
       title: BundleInfo
       type: object
     BundleData:
       example:
+        id: 6
+        name: name
         fragment: true
         stateRaw: 1
-        name: name
-        symbolicName: symbolicName
-        id: 6
         state: state
-        category: category
         version: version
+        symbolicName: symbolicName
+        category: category
         props:
-        - value: value
-          key: key
-        - value: value
-          key: key
+        - key: key
+          value: value
+        - key: key
+          value: value
       properties:
         id:
           description: Bundle ID
@@ -3173,15 +3118,15 @@ components:
           type: string
         props:
           items:
-            $ref: '#/components/schemas/BundleDataProp'
+            $ref: "#/components/schemas/BundleDataProp"
           title: props
           type: array
       title: BundleData
       type: object
     BundleDataProp:
       example:
-        value: value
         key: key
+        value: value
       properties:
         key:
           description: Bundle data key
@@ -3193,31 +3138,31 @@ components:
           type: string
       title: BundleDataProp
       type: object
-    inline_object:
+    postNode_request:
       properties:
         file:
           format: binary
           type: string
       type: object
-    inline_object_1:
+    postPackageServiceJson_request:
       properties:
         package:
           format: binary
           type: string
       type: object
-    inline_object_2:
+    postTruststore_request:
       properties:
         certificate:
           format: binary
           type: string
       type: object
-    inline_object_3:
+    postTruststorePKCS12_request:
       properties:
         truststore.p12:
           format: binary
           type: string
       type: object
-    inline_object_4:
+    postAuthorizableKeystore_request:
       properties:
         cert-chain:
           format: binary
@@ -3229,7 +3174,7 @@ components:
           format: binary
           type: string
       type: object
-    inline_object_5:
+    sslSetup_request:
       properties:
         privatekeyFile:
           format: binary
@@ -3255,4 +3200,4 @@ components:
     aemAuth:
       scheme: basic
       type: http
-      x-basicInfoFunc: openapi_server.controllers.security_controller_.info_from_aemAuth
+      x-basicInfoFunc: openapi_server.controllers.security_controller.info_from_aemAuth

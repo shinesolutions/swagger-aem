@@ -1,7 +1,8 @@
 Package: openapi
 Title: R Package Client for Adobe Experience Manager (AEM) API
 Version: 1.0.0
-Authors@R: person("Shine Solutions", email = "opensource@shinesolutions.com", role = c("aut", "cre"))
+Author: person("Shine Solutions", email = "opensource@shinesolutions.com", role = c("aut", "cre"))
+Maintainer: Shine Solutions <opensource@shinesolutions.com>
 Description: Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
 URL: https://github.com/GIT_USER_ID/GIT_REPO_ID
 BugReports: https://github.com/GIT_USER_ID/GIT_REPO_ID/issues
@@ -10,5 +11,5 @@ Encoding: UTF-8
 License: Unlicense
 LazyData: true
 Suggests: testthat
-Imports: jsonlite, httr, R6, base64enc
-RoxygenNote: 6.0.1.9000
+Imports: jsonlite, httr, R6, base64enc, stringr
+RoxygenNote: 7.2.1

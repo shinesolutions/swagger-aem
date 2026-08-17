@@ -3,48 +3,49 @@ package org.openapitools.model;
 import org.openapitools.model.SamlConfigurationProperties;
 
 import io.swagger.annotations.ApiModelProperty;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlEnumValue;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 public class SamlConfigurationInfo  {
   
-  @ApiModelProperty(value = "Persistent Identity (PID)")
  /**
-   * Persistent Identity (PID)
-  **/
+  * Persistent Identity (PID)
+  */
+  @ApiModelProperty(value = "Persistent Identity (PID)")
+
   private String pid;
 
-  @ApiModelProperty(value = "Title")
  /**
-   * Title
-  **/
+  * Title
+  */
+  @ApiModelProperty(value = "Title")
+
   private String title;
 
-  @ApiModelProperty(value = "Title")
  /**
-   * Title
-  **/
+  * Title
+  */
+  @ApiModelProperty(value = "Title")
+
   private String description;
 
-  @ApiModelProperty(value = "needed for configuration binding")
  /**
-   * needed for configuration binding
-  **/
+  * needed for configuration binding
+  */
+  @ApiModelProperty(value = "needed for configuration binding")
+
   private String bundleLocation;
 
-  @ApiModelProperty(value = "needed for configuraiton binding")
  /**
-   * needed for configuraiton binding
-  **/
+  * needed for configuraiton binding
+  */
+  @ApiModelProperty(value = "needed for configuraiton binding")
+
   private String serviceLocation;
 
   @ApiModelProperty(value = "")
+
   private SamlConfigurationProperties properties;
  /**
    * Persistent Identity (PID)
@@ -154,6 +155,27 @@ public class SamlConfigurationInfo  {
     return this;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    SamlConfigurationInfo samlConfigurationInfo = (SamlConfigurationInfo) o;
+    return Objects.equals(this.pid, samlConfigurationInfo.pid) &&
+        Objects.equals(this.title, samlConfigurationInfo.title) &&
+        Objects.equals(this.description, samlConfigurationInfo.description) &&
+        Objects.equals(this.bundleLocation, samlConfigurationInfo.bundleLocation) &&
+        Objects.equals(this.serviceLocation, samlConfigurationInfo.serviceLocation) &&
+        Objects.equals(this.properties, samlConfigurationInfo.properties);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(pid, title, description, bundleLocation, serviceLocation, properties);
+  }
 
   @Override
   public String toString() {
@@ -175,10 +197,7 @@ public class SamlConfigurationInfo  {
    * (except the first line).
    */
   private static String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

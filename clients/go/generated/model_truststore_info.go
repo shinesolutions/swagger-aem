@@ -3,7 +3,7 @@ Adobe Experience Manager (AEM) API
 
 Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
 
-API version: 3.5.0-pre.0
+API version: 3.7.1-pre.0
 Contact: opensource@shinesolutions.com
 */
 
@@ -15,9 +15,12 @@ import (
 	"encoding/json"
 )
 
+// checks if the TruststoreInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TruststoreInfo{}
+
 // TruststoreInfo struct for TruststoreInfo
 type TruststoreInfo struct {
-	Aliases *[]TruststoreItems `json:"aliases,omitempty"`
+	Aliases []TruststoreItems `json:"aliases,omitempty"`
 	// False if truststore don't exist
 	Exists *bool `json:"exists,omitempty"`
 }
@@ -41,17 +44,17 @@ func NewTruststoreInfoWithDefaults() *TruststoreInfo {
 
 // GetAliases returns the Aliases field value if set, zero value otherwise.
 func (o *TruststoreInfo) GetAliases() []TruststoreItems {
-	if o == nil || o.Aliases == nil {
+	if o == nil || IsNil(o.Aliases) {
 		var ret []TruststoreItems
 		return ret
 	}
-	return *o.Aliases
+	return o.Aliases
 }
 
 // GetAliasesOk returns a tuple with the Aliases field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TruststoreInfo) GetAliasesOk() (*[]TruststoreItems, bool) {
-	if o == nil || o.Aliases == nil {
+func (o *TruststoreInfo) GetAliasesOk() ([]TruststoreItems, bool) {
+	if o == nil || IsNil(o.Aliases) {
 		return nil, false
 	}
 	return o.Aliases, true
@@ -59,7 +62,7 @@ func (o *TruststoreInfo) GetAliasesOk() (*[]TruststoreItems, bool) {
 
 // HasAliases returns a boolean if a field has been set.
 func (o *TruststoreInfo) HasAliases() bool {
-	if o != nil && o.Aliases != nil {
+	if o != nil && !IsNil(o.Aliases) {
 		return true
 	}
 
@@ -68,12 +71,12 @@ func (o *TruststoreInfo) HasAliases() bool {
 
 // SetAliases gets a reference to the given []TruststoreItems and assigns it to the Aliases field.
 func (o *TruststoreInfo) SetAliases(v []TruststoreItems) {
-	o.Aliases = &v
+	o.Aliases = v
 }
 
 // GetExists returns the Exists field value if set, zero value otherwise.
 func (o *TruststoreInfo) GetExists() bool {
-	if o == nil || o.Exists == nil {
+	if o == nil || IsNil(o.Exists) {
 		var ret bool
 		return ret
 	}
@@ -83,7 +86,7 @@ func (o *TruststoreInfo) GetExists() bool {
 // GetExistsOk returns a tuple with the Exists field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TruststoreInfo) GetExistsOk() (*bool, bool) {
-	if o == nil || o.Exists == nil {
+	if o == nil || IsNil(o.Exists) {
 		return nil, false
 	}
 	return o.Exists, true
@@ -91,7 +94,7 @@ func (o *TruststoreInfo) GetExistsOk() (*bool, bool) {
 
 // HasExists returns a boolean if a field has been set.
 func (o *TruststoreInfo) HasExists() bool {
-	if o != nil && o.Exists != nil {
+	if o != nil && !IsNil(o.Exists) {
 		return true
 	}
 
@@ -104,14 +107,22 @@ func (o *TruststoreInfo) SetExists(v bool) {
 }
 
 func (o TruststoreInfo) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Aliases != nil {
-		toSerialize["aliases"] = o.Aliases
-	}
-	if o.Exists != nil {
-		toSerialize["exists"] = o.Exists
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o TruststoreInfo) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Aliases) {
+		toSerialize["aliases"] = o.Aliases
+	}
+	if !IsNil(o.Exists) {
+		toSerialize["exists"] = o.Exists
+	}
+	return toSerialize, nil
 }
 
 type NullableTruststoreInfo struct {

@@ -18,11 +18,11 @@ import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 /**
- * Api implemention
+ * Api implementation
  * @author pkmst
  *
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2021-09-03T15:25:27.791+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2026-08-17T02:15:15.504120373Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 @Controller
 public class CqApiController implements CqApi {
     private final ObjectMapper objectMapper;

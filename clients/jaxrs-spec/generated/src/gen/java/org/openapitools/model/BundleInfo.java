@@ -3,6 +3,7 @@ package org.openapitools.model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.model.BundleData;
 import javax.validation.constraints.*;
@@ -13,14 +14,20 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2021-09-03T15:26:06.461+10:00[Australia/Melbourne]")public class BundleInfo   {
-  
-  private @Valid String status;
-  private @Valid List<Integer> s = new ArrayList<Integer>();
-  private @Valid List<BundleData> data = new ArrayList<BundleData>();
+@JsonTypeName("BundleInfo")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2026-08-17T02:15:42.417242947Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+public class BundleInfo   {
+  private String status;
+  private @Valid List<Integer> s = new ArrayList<>();
+  private @Valid List<@Valid BundleData> data = new ArrayList<>();
+
+  public BundleInfo() {
+  }
 
   /**
    * Status description of all bundles
@@ -31,26 +38,23 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "Status description of all bundles")
   @JsonProperty("status")
   public String getStatus() {
     return status;
   }
 
+  @JsonProperty("status")
   public void setStatus(String status) {
     this.status = status;
   }
 
-/**
+  /**
    **/
   public BundleInfo s(List<Integer> s) {
     this.s = s;
     return this;
   }
-
-  
 
   
   @ApiModelProperty(value = "")
@@ -59,30 +63,62 @@ import com.fasterxml.jackson.annotation.JsonValue;
     return s;
   }
 
+  @JsonProperty("s")
   public void setS(List<Integer> s) {
     this.s = s;
   }
 
-/**
+  public BundleInfo addSItem(Integer sItem) {
+    if (this.s == null) {
+      this.s = new ArrayList<>();
+    }
+
+    this.s.add(sItem);
+    return this;
+  }
+
+  public BundleInfo removeSItem(Integer sItem) {
+    if (sItem != null && this.s != null) {
+      this.s.remove(sItem);
+    }
+
+    return this;
+  }
+  /**
    **/
-  public BundleInfo data(List<BundleData> data) {
+  public BundleInfo data(List<@Valid BundleData> data) {
     this.data = data;
     return this;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("data")
-  public List<BundleData> getData() {
+  @Valid public List<@Valid BundleData> getData() {
     return data;
   }
 
-  public void setData(List<BundleData> data) {
+  @JsonProperty("data")
+  public void setData(List<@Valid BundleData> data) {
     this.data = data;
   }
 
+  public BundleInfo addDataItem(BundleData dataItem) {
+    if (this.data == null) {
+      this.data = new ArrayList<>();
+    }
+
+    this.data.add(dataItem);
+    return this;
+  }
+
+  public BundleInfo removeDataItem(BundleData dataItem) {
+    if (dataItem != null && this.data != null) {
+      this.data.remove(dataItem);
+    }
+
+    return this;
+  }
 
   @Override
   public boolean equals(Object o) {
@@ -120,12 +156,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 
 
 }
-

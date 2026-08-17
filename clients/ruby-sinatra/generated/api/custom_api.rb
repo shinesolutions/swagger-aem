@@ -4,9 +4,9 @@ require 'json'
 MyApp.add_route('GET', '/system/health', {
   "resourcePath" => "/Custom",
   "summary" => "",
-  "nickname" => "get_aem_health_check", 
+  "nickname" => "get_aem_health_check",
   "responseClass" => "String",
-  "endpoint" => "/system/health", 
+  "endpoint" => "/system/health",
   "notes" => "",
   "parameters" => [
     {
@@ -34,9 +34,9 @@ end
 MyApp.add_route('POST', '/apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck', {
   "resourcePath" => "/Custom",
   "summary" => "",
-  "nickname" => "post_config_aem_health_check_servlet", 
+  "nickname" => "post_config_aem_health_check_servlet",
   "responseClass" => "void",
-  "endpoint" => "/apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck", 
+  "endpoint" => "/apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck",
   "notes" => "",
   "parameters" => [
     {
@@ -64,9 +64,9 @@ end
 MyApp.add_route('POST', '/apps/system/config/com.shinesolutions.aem.passwordreset.Activator', {
   "resourcePath" => "/Custom",
   "summary" => "",
-  "nickname" => "post_config_aem_password_reset", 
+  "nickname" => "post_config_aem_password_reset",
   "responseClass" => "void",
-  "endpoint" => "/apps/system/config/com.shinesolutions.aem.passwordreset.Activator", 
+  "endpoint" => "/apps/system/config/com.shinesolutions.aem.passwordreset.Activator",
   "notes" => "",
   "parameters" => [
     {

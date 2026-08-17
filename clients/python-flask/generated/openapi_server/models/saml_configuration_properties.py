@@ -1,11 +1,8 @@
-# coding: utf-8
-
-from __future__ import absolute_import
 from datetime import date, datetime  # noqa: F401
 
 from typing import List, Dict  # noqa: F401
 
-from openapi_server.models.base_model_ import Model
+from openapi_server.models.base_model import Model
 from openapi_server.models.saml_configuration_property_items_array import SamlConfigurationPropertyItemsArray
 from openapi_server.models.saml_configuration_property_items_boolean import SamlConfigurationPropertyItemsBoolean
 from openapi_server.models.saml_configuration_property_items_long import SamlConfigurationPropertyItemsLong
@@ -166,7 +163,7 @@ class SamlConfigurationProperties(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def path(self):
+    def path(self) -> SamlConfigurationPropertyItemsArray:
         """Gets the path of this SamlConfigurationProperties.
 
 
@@ -176,7 +173,7 @@ class SamlConfigurationProperties(Model):
         return self._path
 
     @path.setter
-    def path(self, path):
+    def path(self, path: SamlConfigurationPropertyItemsArray):
         """Sets the path of this SamlConfigurationProperties.
 
 
@@ -187,7 +184,7 @@ class SamlConfigurationProperties(Model):
         self._path = path
 
     @property
-    def service_ranking(self):
+    def service_ranking(self) -> SamlConfigurationPropertyItemsLong:
         """Gets the service_ranking of this SamlConfigurationProperties.
 
 
@@ -197,7 +194,7 @@ class SamlConfigurationProperties(Model):
         return self._service_ranking
 
     @service_ranking.setter
-    def service_ranking(self, service_ranking):
+    def service_ranking(self, service_ranking: SamlConfigurationPropertyItemsLong):
         """Sets the service_ranking of this SamlConfigurationProperties.
 
 
@@ -208,7 +205,7 @@ class SamlConfigurationProperties(Model):
         self._service_ranking = service_ranking
 
     @property
-    def idp_url(self):
+    def idp_url(self) -> SamlConfigurationPropertyItemsString:
         """Gets the idp_url of this SamlConfigurationProperties.
 
 
@@ -218,7 +215,7 @@ class SamlConfigurationProperties(Model):
         return self._idp_url
 
     @idp_url.setter
-    def idp_url(self, idp_url):
+    def idp_url(self, idp_url: SamlConfigurationPropertyItemsString):
         """Sets the idp_url of this SamlConfigurationProperties.
 
 
@@ -229,7 +226,7 @@ class SamlConfigurationProperties(Model):
         self._idp_url = idp_url
 
     @property
-    def idp_cert_alias(self):
+    def idp_cert_alias(self) -> SamlConfigurationPropertyItemsString:
         """Gets the idp_cert_alias of this SamlConfigurationProperties.
 
 
@@ -239,7 +236,7 @@ class SamlConfigurationProperties(Model):
         return self._idp_cert_alias
 
     @idp_cert_alias.setter
-    def idp_cert_alias(self, idp_cert_alias):
+    def idp_cert_alias(self, idp_cert_alias: SamlConfigurationPropertyItemsString):
         """Sets the idp_cert_alias of this SamlConfigurationProperties.
 
 
@@ -250,7 +247,7 @@ class SamlConfigurationProperties(Model):
         self._idp_cert_alias = idp_cert_alias
 
     @property
-    def idp_http_redirect(self):
+    def idp_http_redirect(self) -> SamlConfigurationPropertyItemsBoolean:
         """Gets the idp_http_redirect of this SamlConfigurationProperties.
 
 
@@ -260,7 +257,7 @@ class SamlConfigurationProperties(Model):
         return self._idp_http_redirect
 
     @idp_http_redirect.setter
-    def idp_http_redirect(self, idp_http_redirect):
+    def idp_http_redirect(self, idp_http_redirect: SamlConfigurationPropertyItemsBoolean):
         """Sets the idp_http_redirect of this SamlConfigurationProperties.
 
 
@@ -271,7 +268,7 @@ class SamlConfigurationProperties(Model):
         self._idp_http_redirect = idp_http_redirect
 
     @property
-    def service_provider_entity_id(self):
+    def service_provider_entity_id(self) -> SamlConfigurationPropertyItemsString:
         """Gets the service_provider_entity_id of this SamlConfigurationProperties.
 
 
@@ -281,7 +278,7 @@ class SamlConfigurationProperties(Model):
         return self._service_provider_entity_id
 
     @service_provider_entity_id.setter
-    def service_provider_entity_id(self, service_provider_entity_id):
+    def service_provider_entity_id(self, service_provider_entity_id: SamlConfigurationPropertyItemsString):
         """Sets the service_provider_entity_id of this SamlConfigurationProperties.
 
 
@@ -292,7 +289,7 @@ class SamlConfigurationProperties(Model):
         self._service_provider_entity_id = service_provider_entity_id
 
     @property
-    def assertion_consumer_service_url(self):
+    def assertion_consumer_service_url(self) -> SamlConfigurationPropertyItemsString:
         """Gets the assertion_consumer_service_url of this SamlConfigurationProperties.
 
 
@@ -302,7 +299,7 @@ class SamlConfigurationProperties(Model):
         return self._assertion_consumer_service_url
 
     @assertion_consumer_service_url.setter
-    def assertion_consumer_service_url(self, assertion_consumer_service_url):
+    def assertion_consumer_service_url(self, assertion_consumer_service_url: SamlConfigurationPropertyItemsString):
         """Sets the assertion_consumer_service_url of this SamlConfigurationProperties.
 
 
@@ -313,7 +310,7 @@ class SamlConfigurationProperties(Model):
         self._assertion_consumer_service_url = assertion_consumer_service_url
 
     @property
-    def sp_private_key_alias(self):
+    def sp_private_key_alias(self) -> SamlConfigurationPropertyItemsString:
         """Gets the sp_private_key_alias of this SamlConfigurationProperties.
 
 
@@ -323,7 +320,7 @@ class SamlConfigurationProperties(Model):
         return self._sp_private_key_alias
 
     @sp_private_key_alias.setter
-    def sp_private_key_alias(self, sp_private_key_alias):
+    def sp_private_key_alias(self, sp_private_key_alias: SamlConfigurationPropertyItemsString):
         """Sets the sp_private_key_alias of this SamlConfigurationProperties.
 
 
@@ -334,7 +331,7 @@ class SamlConfigurationProperties(Model):
         self._sp_private_key_alias = sp_private_key_alias
 
     @property
-    def key_store_password(self):
+    def key_store_password(self) -> SamlConfigurationPropertyItemsString:
         """Gets the key_store_password of this SamlConfigurationProperties.
 
 
@@ -344,7 +341,7 @@ class SamlConfigurationProperties(Model):
         return self._key_store_password
 
     @key_store_password.setter
-    def key_store_password(self, key_store_password):
+    def key_store_password(self, key_store_password: SamlConfigurationPropertyItemsString):
         """Sets the key_store_password of this SamlConfigurationProperties.
 
 
@@ -355,7 +352,7 @@ class SamlConfigurationProperties(Model):
         self._key_store_password = key_store_password
 
     @property
-    def default_redirect_url(self):
+    def default_redirect_url(self) -> SamlConfigurationPropertyItemsString:
         """Gets the default_redirect_url of this SamlConfigurationProperties.
 
 
@@ -365,7 +362,7 @@ class SamlConfigurationProperties(Model):
         return self._default_redirect_url
 
     @default_redirect_url.setter
-    def default_redirect_url(self, default_redirect_url):
+    def default_redirect_url(self, default_redirect_url: SamlConfigurationPropertyItemsString):
         """Sets the default_redirect_url of this SamlConfigurationProperties.
 
 
@@ -376,7 +373,7 @@ class SamlConfigurationProperties(Model):
         self._default_redirect_url = default_redirect_url
 
     @property
-    def user_id_attribute(self):
+    def user_id_attribute(self) -> SamlConfigurationPropertyItemsString:
         """Gets the user_id_attribute of this SamlConfigurationProperties.
 
 
@@ -386,7 +383,7 @@ class SamlConfigurationProperties(Model):
         return self._user_id_attribute
 
     @user_id_attribute.setter
-    def user_id_attribute(self, user_id_attribute):
+    def user_id_attribute(self, user_id_attribute: SamlConfigurationPropertyItemsString):
         """Sets the user_id_attribute of this SamlConfigurationProperties.
 
 
@@ -397,7 +394,7 @@ class SamlConfigurationProperties(Model):
         self._user_id_attribute = user_id_attribute
 
     @property
-    def use_encryption(self):
+    def use_encryption(self) -> SamlConfigurationPropertyItemsBoolean:
         """Gets the use_encryption of this SamlConfigurationProperties.
 
 
@@ -407,7 +404,7 @@ class SamlConfigurationProperties(Model):
         return self._use_encryption
 
     @use_encryption.setter
-    def use_encryption(self, use_encryption):
+    def use_encryption(self, use_encryption: SamlConfigurationPropertyItemsBoolean):
         """Sets the use_encryption of this SamlConfigurationProperties.
 
 
@@ -418,7 +415,7 @@ class SamlConfigurationProperties(Model):
         self._use_encryption = use_encryption
 
     @property
-    def create_user(self):
+    def create_user(self) -> SamlConfigurationPropertyItemsBoolean:
         """Gets the create_user of this SamlConfigurationProperties.
 
 
@@ -428,7 +425,7 @@ class SamlConfigurationProperties(Model):
         return self._create_user
 
     @create_user.setter
-    def create_user(self, create_user):
+    def create_user(self, create_user: SamlConfigurationPropertyItemsBoolean):
         """Sets the create_user of this SamlConfigurationProperties.
 
 
@@ -439,7 +436,7 @@ class SamlConfigurationProperties(Model):
         self._create_user = create_user
 
     @property
-    def add_group_memberships(self):
+    def add_group_memberships(self) -> SamlConfigurationPropertyItemsBoolean:
         """Gets the add_group_memberships of this SamlConfigurationProperties.
 
 
@@ -449,7 +446,7 @@ class SamlConfigurationProperties(Model):
         return self._add_group_memberships
 
     @add_group_memberships.setter
-    def add_group_memberships(self, add_group_memberships):
+    def add_group_memberships(self, add_group_memberships: SamlConfigurationPropertyItemsBoolean):
         """Sets the add_group_memberships of this SamlConfigurationProperties.
 
 
@@ -460,7 +457,7 @@ class SamlConfigurationProperties(Model):
         self._add_group_memberships = add_group_memberships
 
     @property
-    def group_membership_attribute(self):
+    def group_membership_attribute(self) -> SamlConfigurationPropertyItemsString:
         """Gets the group_membership_attribute of this SamlConfigurationProperties.
 
 
@@ -470,7 +467,7 @@ class SamlConfigurationProperties(Model):
         return self._group_membership_attribute
 
     @group_membership_attribute.setter
-    def group_membership_attribute(self, group_membership_attribute):
+    def group_membership_attribute(self, group_membership_attribute: SamlConfigurationPropertyItemsString):
         """Sets the group_membership_attribute of this SamlConfigurationProperties.
 
 
@@ -481,7 +478,7 @@ class SamlConfigurationProperties(Model):
         self._group_membership_attribute = group_membership_attribute
 
     @property
-    def default_groups(self):
+    def default_groups(self) -> SamlConfigurationPropertyItemsArray:
         """Gets the default_groups of this SamlConfigurationProperties.
 
 
@@ -491,7 +488,7 @@ class SamlConfigurationProperties(Model):
         return self._default_groups
 
     @default_groups.setter
-    def default_groups(self, default_groups):
+    def default_groups(self, default_groups: SamlConfigurationPropertyItemsArray):
         """Sets the default_groups of this SamlConfigurationProperties.
 
 
@@ -502,7 +499,7 @@ class SamlConfigurationProperties(Model):
         self._default_groups = default_groups
 
     @property
-    def name_id_format(self):
+    def name_id_format(self) -> SamlConfigurationPropertyItemsString:
         """Gets the name_id_format of this SamlConfigurationProperties.
 
 
@@ -512,7 +509,7 @@ class SamlConfigurationProperties(Model):
         return self._name_id_format
 
     @name_id_format.setter
-    def name_id_format(self, name_id_format):
+    def name_id_format(self, name_id_format: SamlConfigurationPropertyItemsString):
         """Sets the name_id_format of this SamlConfigurationProperties.
 
 
@@ -523,7 +520,7 @@ class SamlConfigurationProperties(Model):
         self._name_id_format = name_id_format
 
     @property
-    def synchronize_attributes(self):
+    def synchronize_attributes(self) -> SamlConfigurationPropertyItemsArray:
         """Gets the synchronize_attributes of this SamlConfigurationProperties.
 
 
@@ -533,7 +530,7 @@ class SamlConfigurationProperties(Model):
         return self._synchronize_attributes
 
     @synchronize_attributes.setter
-    def synchronize_attributes(self, synchronize_attributes):
+    def synchronize_attributes(self, synchronize_attributes: SamlConfigurationPropertyItemsArray):
         """Sets the synchronize_attributes of this SamlConfigurationProperties.
 
 
@@ -544,7 +541,7 @@ class SamlConfigurationProperties(Model):
         self._synchronize_attributes = synchronize_attributes
 
     @property
-    def handle_logout(self):
+    def handle_logout(self) -> SamlConfigurationPropertyItemsBoolean:
         """Gets the handle_logout of this SamlConfigurationProperties.
 
 
@@ -554,7 +551,7 @@ class SamlConfigurationProperties(Model):
         return self._handle_logout
 
     @handle_logout.setter
-    def handle_logout(self, handle_logout):
+    def handle_logout(self, handle_logout: SamlConfigurationPropertyItemsBoolean):
         """Sets the handle_logout of this SamlConfigurationProperties.
 
 
@@ -565,7 +562,7 @@ class SamlConfigurationProperties(Model):
         self._handle_logout = handle_logout
 
     @property
-    def logout_url(self):
+    def logout_url(self) -> SamlConfigurationPropertyItemsString:
         """Gets the logout_url of this SamlConfigurationProperties.
 
 
@@ -575,7 +572,7 @@ class SamlConfigurationProperties(Model):
         return self._logout_url
 
     @logout_url.setter
-    def logout_url(self, logout_url):
+    def logout_url(self, logout_url: SamlConfigurationPropertyItemsString):
         """Sets the logout_url of this SamlConfigurationProperties.
 
 
@@ -586,7 +583,7 @@ class SamlConfigurationProperties(Model):
         self._logout_url = logout_url
 
     @property
-    def clock_tolerance(self):
+    def clock_tolerance(self) -> SamlConfigurationPropertyItemsLong:
         """Gets the clock_tolerance of this SamlConfigurationProperties.
 
 
@@ -596,7 +593,7 @@ class SamlConfigurationProperties(Model):
         return self._clock_tolerance
 
     @clock_tolerance.setter
-    def clock_tolerance(self, clock_tolerance):
+    def clock_tolerance(self, clock_tolerance: SamlConfigurationPropertyItemsLong):
         """Sets the clock_tolerance of this SamlConfigurationProperties.
 
 
@@ -607,7 +604,7 @@ class SamlConfigurationProperties(Model):
         self._clock_tolerance = clock_tolerance
 
     @property
-    def digest_method(self):
+    def digest_method(self) -> SamlConfigurationPropertyItemsString:
         """Gets the digest_method of this SamlConfigurationProperties.
 
 
@@ -617,7 +614,7 @@ class SamlConfigurationProperties(Model):
         return self._digest_method
 
     @digest_method.setter
-    def digest_method(self, digest_method):
+    def digest_method(self, digest_method: SamlConfigurationPropertyItemsString):
         """Sets the digest_method of this SamlConfigurationProperties.
 
 
@@ -628,7 +625,7 @@ class SamlConfigurationProperties(Model):
         self._digest_method = digest_method
 
     @property
-    def signature_method(self):
+    def signature_method(self) -> SamlConfigurationPropertyItemsString:
         """Gets the signature_method of this SamlConfigurationProperties.
 
 
@@ -638,7 +635,7 @@ class SamlConfigurationProperties(Model):
         return self._signature_method
 
     @signature_method.setter
-    def signature_method(self, signature_method):
+    def signature_method(self, signature_method: SamlConfigurationPropertyItemsString):
         """Sets the signature_method of this SamlConfigurationProperties.
 
 
@@ -649,7 +646,7 @@ class SamlConfigurationProperties(Model):
         self._signature_method = signature_method
 
     @property
-    def user_intermediate_path(self):
+    def user_intermediate_path(self) -> SamlConfigurationPropertyItemsString:
         """Gets the user_intermediate_path of this SamlConfigurationProperties.
 
 
@@ -659,7 +656,7 @@ class SamlConfigurationProperties(Model):
         return self._user_intermediate_path
 
     @user_intermediate_path.setter
-    def user_intermediate_path(self, user_intermediate_path):
+    def user_intermediate_path(self, user_intermediate_path: SamlConfigurationPropertyItemsString):
         """Sets the user_intermediate_path of this SamlConfigurationProperties.
 
 

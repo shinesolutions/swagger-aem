@@ -4,7 +4,7 @@ import groovy.transform.Canonical
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 @Canonical
 class SamlConfigurationPropertyItemsArray {
@@ -17,7 +17,7 @@ class SamlConfigurationPropertyItemsArray {
     /* Property type, 1=String, 3=long, 11=boolean, 12=Password */
     Integer type
     /* Property value */
-    List<String> values = new ArrayList<String>()
+    List<String> values = new ArrayList<>()
     /* Property description */
     String description
 }

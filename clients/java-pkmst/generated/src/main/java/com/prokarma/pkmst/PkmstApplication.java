@@ -4,8 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
-import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
@@ -13,11 +11,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @author pkmst
  *
  */
- 
+
 @SpringBootApplication
 @EnableSwagger2
-@EnableCircuitBreaker
-@EnableHystrixDashboard
 public class PkmstApplication {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(PkmstApplication.class);
@@ -27,4 +23,3 @@ public class PkmstApplication {
     SpringApplication.run(PkmstApplication.class, args);
   }
 }
-

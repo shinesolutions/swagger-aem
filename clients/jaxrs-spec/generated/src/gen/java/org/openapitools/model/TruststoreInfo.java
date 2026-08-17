@@ -3,6 +3,7 @@ package org.openapitools.model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.model.TruststoreItems;
 import javax.validation.constraints.*;
@@ -13,35 +14,56 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2021-09-03T15:26:06.461+10:00[Australia/Melbourne]")public class TruststoreInfo   {
-  
-  private @Valid List<TruststoreItems> aliases = new ArrayList<TruststoreItems>();
-  private @Valid Boolean exists;
+@JsonTypeName("TruststoreInfo")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2026-08-17T02:15:42.417242947Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+public class TruststoreInfo   {
+  private @Valid List<@Valid TruststoreItems> aliases = new ArrayList<>();
+  private Boolean exists;
+
+  public TruststoreInfo() {
+  }
 
   /**
    **/
-  public TruststoreInfo aliases(List<TruststoreItems> aliases) {
+  public TruststoreInfo aliases(List<@Valid TruststoreItems> aliases) {
     this.aliases = aliases;
     return this;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("aliases")
-  public List<TruststoreItems> getAliases() {
+  @Valid public List<@Valid TruststoreItems> getAliases() {
     return aliases;
   }
 
-  public void setAliases(List<TruststoreItems> aliases) {
+  @JsonProperty("aliases")
+  public void setAliases(List<@Valid TruststoreItems> aliases) {
     this.aliases = aliases;
   }
 
-/**
+  public TruststoreInfo addAliasesItem(TruststoreItems aliasesItem) {
+    if (this.aliases == null) {
+      this.aliases = new ArrayList<>();
+    }
+
+    this.aliases.add(aliasesItem);
+    return this;
+  }
+
+  public TruststoreInfo removeAliasesItem(TruststoreItems aliasesItem) {
+    if (aliasesItem != null && this.aliases != null) {
+      this.aliases.remove(aliasesItem);
+    }
+
+    return this;
+  }
+  /**
    * False if truststore don&#39;t exist
    **/
   public TruststoreInfo exists(Boolean exists) {
@@ -50,14 +72,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "False if truststore don't exist")
   @JsonProperty("exists")
   public Boolean getExists() {
     return exists;
   }
 
+  @JsonProperty("exists")
   public void setExists(Boolean exists) {
     this.exists = exists;
   }
@@ -97,12 +118,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 
 
 }
-

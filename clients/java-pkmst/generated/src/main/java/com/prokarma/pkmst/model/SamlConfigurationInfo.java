@@ -15,7 +15,7 @@ import io.swagger.annotations.ApiModelProperty;
  * SamlConfigurationInfo
  */
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2021-09-03T15:25:27.791+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2026-08-17T02:15:15.504120373Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class SamlConfigurationInfo   {
   @JsonProperty("pid")
   private String pid;
@@ -40,10 +40,10 @@ public class SamlConfigurationInfo   {
     return this;
   }
 
-   /**
+  /**
    * Persistent Identity (PID)
    * @return pid
-  **/
+   */
   @ApiModelProperty(value = "Persistent Identity (PID)")
   public String getPid() {
     return pid;
@@ -58,10 +58,10 @@ public class SamlConfigurationInfo   {
     return this;
   }
 
-   /**
+  /**
    * Title
    * @return title
-  **/
+   */
   @ApiModelProperty(value = "Title")
   public String getTitle() {
     return title;
@@ -76,10 +76,10 @@ public class SamlConfigurationInfo   {
     return this;
   }
 
-   /**
+  /**
    * Title
    * @return description
-  **/
+   */
   @ApiModelProperty(value = "Title")
   public String getDescription() {
     return description;
@@ -94,10 +94,10 @@ public class SamlConfigurationInfo   {
     return this;
   }
 
-   /**
+  /**
    * needed for configuration binding
    * @return bundleLocation
-  **/
+   */
   @ApiModelProperty(value = "needed for configuration binding")
   public String getBundleLocation() {
     return bundleLocation;
@@ -112,10 +112,10 @@ public class SamlConfigurationInfo   {
     return this;
   }
 
-   /**
+  /**
    * needed for configuraiton binding
    * @return serviceLocation
-  **/
+   */
   @ApiModelProperty(value = "needed for configuraiton binding")
   public String getServiceLocation() {
     return serviceLocation;
@@ -130,10 +130,10 @@ public class SamlConfigurationInfo   {
     return this;
   }
 
-   /**
+  /**
    * Get properties
    * @return properties
-  **/
+   */
   @ApiModelProperty(value = "")
   public SamlConfigurationProperties getProperties() {
     return properties;
@@ -186,10 +186,7 @@ public class SamlConfigurationInfo   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

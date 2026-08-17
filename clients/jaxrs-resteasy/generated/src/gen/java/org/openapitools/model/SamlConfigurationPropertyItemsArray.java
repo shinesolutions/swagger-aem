@@ -7,18 +7,20 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 import io.swagger.annotations.*;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyServerCodegen", date = "2021-09-03T15:25:57.989+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyServerCodegen", date = "2026-08-17T02:15:38.090574223Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class SamlConfigurationPropertyItemsArray   {
   
   private String name;
   private Boolean optional;
   private Boolean isSet;
   private Integer type;
-  private List<String> values = new ArrayList<String>();
+  private List<String> values = new ArrayList<>();
   private String description;
 
   /**
@@ -109,12 +111,12 @@ public class SamlConfigurationPropertyItemsArray   {
       return false;
     }
     SamlConfigurationPropertyItemsArray samlConfigurationPropertyItemsArray = (SamlConfigurationPropertyItemsArray) o;
-    return Objects.equals(name, samlConfigurationPropertyItemsArray.name) &&
-        Objects.equals(optional, samlConfigurationPropertyItemsArray.optional) &&
-        Objects.equals(isSet, samlConfigurationPropertyItemsArray.isSet) &&
-        Objects.equals(type, samlConfigurationPropertyItemsArray.type) &&
-        Objects.equals(values, samlConfigurationPropertyItemsArray.values) &&
-        Objects.equals(description, samlConfigurationPropertyItemsArray.description);
+    return Objects.equals(this.name, samlConfigurationPropertyItemsArray.name) &&
+        Objects.equals(this.optional, samlConfigurationPropertyItemsArray.optional) &&
+        Objects.equals(this.isSet, samlConfigurationPropertyItemsArray.isSet) &&
+        Objects.equals(this.type, samlConfigurationPropertyItemsArray.type) &&
+        Objects.equals(this.values, samlConfigurationPropertyItemsArray.values) &&
+        Objects.equals(this.description, samlConfigurationPropertyItemsArray.description);
   }
 
   @Override
@@ -142,10 +144,7 @@ public class SamlConfigurationPropertyItemsArray   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

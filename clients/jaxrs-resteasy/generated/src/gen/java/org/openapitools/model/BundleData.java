@@ -7,12 +7,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.model.BundleDataProp;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 import io.swagger.annotations.*;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyServerCodegen", date = "2021-09-03T15:25:57.989+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyServerCodegen", date = "2026-08-17T02:15:38.090574223Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class BundleData   {
   
   private Integer id;
@@ -23,7 +25,7 @@ public class BundleData   {
   private String version;
   private String symbolicName;
   private String category;
-  private List<BundleDataProp> props = new ArrayList<BundleDataProp>();
+  private List<@Valid BundleDataProp> props = new ArrayList<>();
 
   /**
    * Bundle ID
@@ -134,10 +136,11 @@ public class BundleData   {
   
   @ApiModelProperty(value = "")
   @JsonProperty("props")
-  public List<BundleDataProp> getProps() {
+  @Valid
+  public List<@Valid BundleDataProp> getProps() {
     return props;
   }
-  public void setProps(List<BundleDataProp> props) {
+  public void setProps(List<@Valid BundleDataProp> props) {
     this.props = props;
   }
 
@@ -151,15 +154,15 @@ public class BundleData   {
       return false;
     }
     BundleData bundleData = (BundleData) o;
-    return Objects.equals(id, bundleData.id) &&
-        Objects.equals(name, bundleData.name) &&
-        Objects.equals(fragment, bundleData.fragment) &&
-        Objects.equals(stateRaw, bundleData.stateRaw) &&
-        Objects.equals(state, bundleData.state) &&
-        Objects.equals(version, bundleData.version) &&
-        Objects.equals(symbolicName, bundleData.symbolicName) &&
-        Objects.equals(category, bundleData.category) &&
-        Objects.equals(props, bundleData.props);
+    return Objects.equals(this.id, bundleData.id) &&
+        Objects.equals(this.name, bundleData.name) &&
+        Objects.equals(this.fragment, bundleData.fragment) &&
+        Objects.equals(this.stateRaw, bundleData.stateRaw) &&
+        Objects.equals(this.state, bundleData.state) &&
+        Objects.equals(this.version, bundleData.version) &&
+        Objects.equals(this.symbolicName, bundleData.symbolicName) &&
+        Objects.equals(this.category, bundleData.category) &&
+        Objects.equals(this.props, bundleData.props);
   }
 
   @Override
@@ -190,10 +193,7 @@ public class BundleData   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

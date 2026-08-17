@@ -1,6 +1,7 @@
 import com.google.inject.AbstractModule;
 
 import controllers.*;
+import openapitools.SecurityAPIUtils;
 
 public class Module extends AbstractModule {
 
@@ -12,5 +13,6 @@ public class Module extends AbstractModule {
         bind(CustomApiControllerImpInterface.class).to(CustomApiControllerImp.class);
         bind(GraniteApiControllerImpInterface.class).to(GraniteApiControllerImp.class);
         bind(SlingApiControllerImpInterface.class).to(SlingApiControllerImp.class);
+        bind(SecurityAPIUtils.class);
     }
 }

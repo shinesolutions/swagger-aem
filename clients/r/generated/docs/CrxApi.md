@@ -23,11 +23,13 @@ Method | HTTP request | Description
 library(openapi)
 
 
-api.instance <- CrxApi$new()
+api_instance <- CrxApi$new()
 # Configure HTTP basic authorization: aemAuth
-api.instance$apiClient$username <- 'TODO_YOUR_USERNAME';
-api.instance$apiClient$password <- 'TODO_YOUR_PASSWORD';
-result <- api.instance$GetCrxdeStatus()
+api_instance$api_client$username <- Sys.getenv("USERNAME")
+api_instance$api_client$password <- Sys.getenv("PASSWORD")
+# to save the result into a file, simply add the optional `data_file` parameter, e.g.
+# result <- api_instance$GetCrxdeStatus(data_file = "result.txt")
+result <- api_instance$GetCrxdeStatus()
 dput(result)
 ```
 
@@ -63,11 +65,13 @@ This endpoint does not need any parameter.
 library(openapi)
 
 
-api.instance <- CrxApi$new()
+api_instance <- CrxApi$new()
 # Configure HTTP basic authorization: aemAuth
-api.instance$apiClient$username <- 'TODO_YOUR_USERNAME';
-api.instance$apiClient$password <- 'TODO_YOUR_PASSWORD';
-result <- api.instance$GetInstallStatus()
+api_instance$api_client$username <- Sys.getenv("USERNAME")
+api_instance$api_client$password <- Sys.getenv("PASSWORD")
+# to save the result into a file, simply add the optional `data_file` parameter, e.g.
+# result <- api_instance$GetInstallStatus(data_file = "result.txt")
+result <- api_instance$GetInstallStatus()
 dput(result)
 ```
 
@@ -103,11 +107,11 @@ This endpoint does not need any parameter.
 library(openapi)
 
 
-api.instance <- CrxApi$new()
+api_instance <- CrxApi$new()
 # Configure HTTP basic authorization: aemAuth
-api.instance$apiClient$username <- 'TODO_YOUR_USERNAME';
-api.instance$apiClient$password <- 'TODO_YOUR_PASSWORD';
-api.instance$GetPackageManagerServlet()
+api_instance$api_client$username <- Sys.getenv("USERNAME")
+api_instance$api_client$password <- Sys.getenv("PASSWORD")
+api_instance$GetPackageManagerServlet()
 ```
 
 ### Parameters
@@ -141,13 +145,16 @@ void (empty response body)
 ```R
 library(openapi)
 
-var.cmd <- 'cmd_example' # character | 
+# prepare function argument(s)
+var_cmd <- "cmd_example" # character | 
 
-api.instance <- CrxApi$new()
+api_instance <- CrxApi$new()
 # Configure HTTP basic authorization: aemAuth
-api.instance$apiClient$username <- 'TODO_YOUR_USERNAME';
-api.instance$apiClient$password <- 'TODO_YOUR_PASSWORD';
-result <- api.instance$PostPackageService(var.cmd)
+api_instance$api_client$username <- Sys.getenv("USERNAME")
+api_instance$api_client$password <- Sys.getenv("PASSWORD")
+# to save the result into a file, simply add the optional `data_file` parameter, e.g.
+# result <- api_instance$PostPackageService(var_cmddata_file = "result.txt")
+result <- api_instance$PostPackageService(var_cmd)
 dput(result)
 ```
 
@@ -176,7 +183,7 @@ Name | Type | Description  | Notes
 | **0** | Default response |  -  |
 
 # **PostPackageServiceJson**
-> character PostPackageServiceJson(path, cmd, group.name=var.group.name, package.name=var.package.name, package.version=var.package.version, .charset.=var..charset., force=var.force, recursive=var.recursive, package=var.package)
+> character PostPackageServiceJson(path, cmd, group_name = var.group_name, package_name = var.package_name, package_version = var.package_version, _charset_ = var._charset_, force = var.force, recursive = var.recursive, package = var.package)
 
 
 
@@ -184,21 +191,24 @@ Name | Type | Description  | Notes
 ```R
 library(openapi)
 
-var.path <- 'path_example' # character | 
-var.cmd <- 'cmd_example' # character | 
-var.group.name <- 'group.name_example' # character | 
-var.package.name <- 'package.name_example' # character | 
-var.package.version <- 'package.version_example' # character | 
-var..charset. <- '.charset._example' # character | 
-var.force <- 'force_example' # character | 
-var.recursive <- 'recursive_example' # character | 
-var.package <- File.new('/path/to/file') # data.frame | 
+# prepare function argument(s)
+var_path <- "path_example" # character | 
+var_cmd <- "cmd_example" # character | 
+var_group_name <- "group_name_example" # character |  (Optional)
+var_package_name <- "package_name_example" # character |  (Optional)
+var_package_version <- "package_version_example" # character |  (Optional)
+var__charset_ <- "_charset__example" # character |  (Optional)
+var_force <- "force_example" # character |  (Optional)
+var_recursive <- "recursive_example" # character |  (Optional)
+var_package <- File.new('/path/to/file') # data.frame |  (Optional)
 
-api.instance <- CrxApi$new()
+api_instance <- CrxApi$new()
 # Configure HTTP basic authorization: aemAuth
-api.instance$apiClient$username <- 'TODO_YOUR_USERNAME';
-api.instance$apiClient$password <- 'TODO_YOUR_PASSWORD';
-result <- api.instance$PostPackageServiceJson(var.path, var.cmd, group.name=var.group.name, package.name=var.package.name, package.version=var.package.version, .charset.=var..charset., force=var.force, recursive=var.recursive, package=var.package)
+api_instance$api_client$username <- Sys.getenv("USERNAME")
+api_instance$api_client$password <- Sys.getenv("PASSWORD")
+# to save the result into a file, simply add the optional `data_file` parameter, e.g.
+# result <- api_instance$PostPackageServiceJson(var_path, var_cmd, group_name = var_group_name, package_name = var_package_name, package_version = var_package_version, _charset_ = var__charset_, force = var_force, recursive = var_recursive, package = var_packagedata_file = "result.txt")
+result <- api_instance$PostPackageServiceJson(var_path, var_cmd, group_name = var_group_name, package_name = var_package_name, package_version = var_package_version, _charset_ = var__charset_, force = var_force, recursive = var_recursive, package = var_package)
 dput(result)
 ```
 
@@ -208,10 +218,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path** | **character**|  | 
  **cmd** | **character**|  | 
- **group.name** | **character**|  | [optional] 
- **package.name** | **character**|  | [optional] 
- **package.version** | **character**|  | [optional] 
- **.charset.** | **character**|  | [optional] 
+ **group_name** | **character**|  | [optional] 
+ **package_name** | **character**|  | [optional] 
+ **package_version** | **character**|  | [optional] 
+ **_charset_** | **character**|  | [optional] 
  **force** | **character**|  | [optional] 
  **recursive** | **character**|  | [optional] 
  **package** | **data.frame**|  | [optional] 
@@ -235,7 +245,7 @@ Name | Type | Description  | Notes
 | **0** | Default response |  -  |
 
 # **PostPackageUpdate**
-> character PostPackageUpdate(group.name, package.name, version, path, filter=var.filter, .charset.=var..charset.)
+> character PostPackageUpdate(group_name, package_name, version, path, filter = var.filter, _charset_ = var._charset_)
 
 
 
@@ -243,18 +253,21 @@ Name | Type | Description  | Notes
 ```R
 library(openapi)
 
-var.group.name <- 'group.name_example' # character | 
-var.package.name <- 'package.name_example' # character | 
-var.version <- 'version_example' # character | 
-var.path <- 'path_example' # character | 
-var.filter <- 'filter_example' # character | 
-var..charset. <- '.charset._example' # character | 
+# prepare function argument(s)
+var_group_name <- "group_name_example" # character | 
+var_package_name <- "package_name_example" # character | 
+var_version <- "version_example" # character | 
+var_path <- "path_example" # character | 
+var_filter <- "filter_example" # character |  (Optional)
+var__charset_ <- "_charset__example" # character |  (Optional)
 
-api.instance <- CrxApi$new()
+api_instance <- CrxApi$new()
 # Configure HTTP basic authorization: aemAuth
-api.instance$apiClient$username <- 'TODO_YOUR_USERNAME';
-api.instance$apiClient$password <- 'TODO_YOUR_PASSWORD';
-result <- api.instance$PostPackageUpdate(var.group.name, var.package.name, var.version, var.path, filter=var.filter, .charset.=var..charset.)
+api_instance$api_client$username <- Sys.getenv("USERNAME")
+api_instance$api_client$password <- Sys.getenv("PASSWORD")
+# to save the result into a file, simply add the optional `data_file` parameter, e.g.
+# result <- api_instance$PostPackageUpdate(var_group_name, var_package_name, var_version, var_path, filter = var_filter, _charset_ = var__charset_data_file = "result.txt")
+result <- api_instance$PostPackageUpdate(var_group_name, var_package_name, var_version, var_path, filter = var_filter, _charset_ = var__charset_)
 dput(result)
 ```
 
@@ -262,12 +275,12 @@ dput(result)
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **group.name** | **character**|  | 
- **package.name** | **character**|  | 
+ **group_name** | **character**|  | 
+ **package_name** | **character**|  | 
  **version** | **character**|  | 
  **path** | **character**|  | 
  **filter** | **character**|  | [optional] 
- **.charset.** | **character**|  | [optional] 
+ **_charset_** | **character**|  | [optional] 
 
 ### Return type
 
@@ -296,15 +309,18 @@ Name | Type | Description  | Notes
 ```R
 library(openapi)
 
-var.old <- 'old_example' # character | 
-var.plain <- 'plain_example' # character | 
-var.verify <- 'verify_example' # character | 
+# prepare function argument(s)
+var_old <- "old_example" # character | 
+var_plain <- "plain_example" # character | 
+var_verify <- "verify_example" # character | 
 
-api.instance <- CrxApi$new()
+api_instance <- CrxApi$new()
 # Configure HTTP basic authorization: aemAuth
-api.instance$apiClient$username <- 'TODO_YOUR_USERNAME';
-api.instance$apiClient$password <- 'TODO_YOUR_PASSWORD';
-result <- api.instance$PostSetPassword(var.old, var.plain, var.verify)
+api_instance$api_client$username <- Sys.getenv("USERNAME")
+api_instance$api_client$password <- Sys.getenv("PASSWORD")
+# to save the result into a file, simply add the optional `data_file` parameter, e.g.
+# result <- api_instance$PostSetPassword(var_old, var_plain, var_verifydata_file = "result.txt")
+result <- api_instance$PostSetPassword(var_old, var_plain, var_verify)
 dput(result)
 ```
 

@@ -1,4 +1,4 @@
-# Documentation for Adobe Experience Manager (AEM) API 3.5.0-pre.0 Tizen Client SDK
+# Documentation for Adobe Experience Manager (AEM) API 3.7.1-pre.0 Tizen Client SDK
 
 ## How do I get the doc files?
 First generate source code by running `openapi-generator`
@@ -157,8 +157,8 @@ Method | HTTP request | Description
 *postPathASync* | *POST* /{path}/ | .
 *postQuerySync* | *POST* /bin/querybuilder.json | .
 *postQueryASync* | *POST* /bin/querybuilder.json | .
-*postTreeActivationSync* | *POST* /etc/replication/treeactivation.html | .
-*postTreeActivationASync* | *POST* /etc/replication/treeactivation.html | .
+*postTreeActivationSync* | *POST* /libs/replication/treeactivation.html | .
+*postTreeActivationASync* | *POST* /libs/replication/treeactivation.html | .
 *postTruststoreSync* | *POST* /libs/granite/security/post/truststore | .
 *postTruststoreASync* | *POST* /libs/granite/security/post/truststore | .
 *postTruststorePKCS12Sync* | *POST* /etc/truststore | .

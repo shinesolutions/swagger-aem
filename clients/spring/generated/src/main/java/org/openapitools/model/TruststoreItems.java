@@ -1,41 +1,50 @@
 package org.openapitools.model;
 
+import java.net.URI;
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import org.springframework.lang.Nullable;
 import org.openapitools.jackson.nullable.JsonNullable;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+import java.time.OffsetDateTime;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+
+import java.util.*;
+import jakarta.annotation.Generated;
 
 /**
  * TruststoreItems
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-09-03T15:28:35.636+10:00[Australia/Melbourne]")
-public class TruststoreItems   {
-  @JsonProperty("alias")
-  private String alias;
 
-  @JsonProperty("entryType")
-  private String entryType;
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-08-17T02:18:23.350215970Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+public class TruststoreItems {
 
-  @JsonProperty("subject")
-  private String subject;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable String alias;
 
-  @JsonProperty("issuer")
-  private String issuer;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable String entryType;
 
-  @JsonProperty("notBefore")
-  private String notBefore;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable String subject;
 
-  @JsonProperty("notAfter")
-  private String notAfter;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable String issuer;
 
-  @JsonProperty("serialNumber")
-  private Integer serialNumber;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable String notBefore;
 
-  public TruststoreItems alias(String alias) {
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable String notAfter;
+
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable Integer serialNumber;
+
+  public TruststoreItems alias(@Nullable String alias) {
     this.alias = alias;
     return this;
   }
@@ -43,19 +52,20 @@ public class TruststoreItems   {
   /**
    * Truststore alias name
    * @return alias
-  */
-  @ApiModelProperty(value = "Truststore alias name")
-
-
-  public String getAlias() {
+   */
+  
+  @Schema(name = "alias", description = "Truststore alias name", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("alias")
+  public @Nullable String getAlias() {
     return alias;
   }
 
-  public void setAlias(String alias) {
+  @JsonProperty("alias")
+  public void setAlias(@Nullable String alias) {
     this.alias = alias;
   }
 
-  public TruststoreItems entryType(String entryType) {
+  public TruststoreItems entryType(@Nullable String entryType) {
     this.entryType = entryType;
     return this;
   }
@@ -63,19 +73,20 @@ public class TruststoreItems   {
   /**
    * Get entryType
    * @return entryType
-  */
-  @ApiModelProperty(value = "")
-
-
-  public String getEntryType() {
+   */
+  
+  @Schema(name = "entryType", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("entryType")
+  public @Nullable String getEntryType() {
     return entryType;
   }
 
-  public void setEntryType(String entryType) {
+  @JsonProperty("entryType")
+  public void setEntryType(@Nullable String entryType) {
     this.entryType = entryType;
   }
 
-  public TruststoreItems subject(String subject) {
+  public TruststoreItems subject(@Nullable String subject) {
     this.subject = subject;
     return this;
   }
@@ -83,19 +94,20 @@ public class TruststoreItems   {
   /**
    * e.g. \"CN=localhost\"
    * @return subject
-  */
-  @ApiModelProperty(value = "e.g. \"CN=localhost\"")
-
-
-  public String getSubject() {
+   */
+  
+  @Schema(name = "subject", description = "e.g. \"CN=localhost\"", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("subject")
+  public @Nullable String getSubject() {
     return subject;
   }
 
-  public void setSubject(String subject) {
+  @JsonProperty("subject")
+  public void setSubject(@Nullable String subject) {
     this.subject = subject;
   }
 
-  public TruststoreItems issuer(String issuer) {
+  public TruststoreItems issuer(@Nullable String issuer) {
     this.issuer = issuer;
     return this;
   }
@@ -103,19 +115,20 @@ public class TruststoreItems   {
   /**
    * e.g. \"CN=Admin\"
    * @return issuer
-  */
-  @ApiModelProperty(value = "e.g. \"CN=Admin\"")
-
-
-  public String getIssuer() {
+   */
+  
+  @Schema(name = "issuer", description = "e.g. \"CN=Admin\"", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("issuer")
+  public @Nullable String getIssuer() {
     return issuer;
   }
 
-  public void setIssuer(String issuer) {
+  @JsonProperty("issuer")
+  public void setIssuer(@Nullable String issuer) {
     this.issuer = issuer;
   }
 
-  public TruststoreItems notBefore(String notBefore) {
+  public TruststoreItems notBefore(@Nullable String notBefore) {
     this.notBefore = notBefore;
     return this;
   }
@@ -123,19 +136,20 @@ public class TruststoreItems   {
   /**
    * e.g. \"Sun Jul 01 12:00:00 AEST 2018\"
    * @return notBefore
-  */
-  @ApiModelProperty(value = "e.g. \"Sun Jul 01 12:00:00 AEST 2018\"")
-
-
-  public String getNotBefore() {
+   */
+  
+  @Schema(name = "notBefore", description = "e.g. \"Sun Jul 01 12:00:00 AEST 2018\"", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("notBefore")
+  public @Nullable String getNotBefore() {
     return notBefore;
   }
 
-  public void setNotBefore(String notBefore) {
+  @JsonProperty("notBefore")
+  public void setNotBefore(@Nullable String notBefore) {
     this.notBefore = notBefore;
   }
 
-  public TruststoreItems notAfter(String notAfter) {
+  public TruststoreItems notAfter(@Nullable String notAfter) {
     this.notAfter = notAfter;
     return this;
   }
@@ -143,19 +157,20 @@ public class TruststoreItems   {
   /**
    * e.g. \"Sun Jun 30 23:59:50 AEST 2019\"
    * @return notAfter
-  */
-  @ApiModelProperty(value = "e.g. \"Sun Jun 30 23:59:50 AEST 2019\"")
-
-
-  public String getNotAfter() {
+   */
+  
+  @Schema(name = "notAfter", description = "e.g. \"Sun Jun 30 23:59:50 AEST 2019\"", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("notAfter")
+  public @Nullable String getNotAfter() {
     return notAfter;
   }
 
-  public void setNotAfter(String notAfter) {
+  @JsonProperty("notAfter")
+  public void setNotAfter(@Nullable String notAfter) {
     this.notAfter = notAfter;
   }
 
-  public TruststoreItems serialNumber(Integer serialNumber) {
+  public TruststoreItems serialNumber(@Nullable Integer serialNumber) {
     this.serialNumber = serialNumber;
     return this;
   }
@@ -163,18 +178,18 @@ public class TruststoreItems   {
   /**
    * 18165099476682912368
    * @return serialNumber
-  */
-  @ApiModelProperty(value = "18165099476682912368")
-
-
-  public Integer getSerialNumber() {
+   */
+  
+  @Schema(name = "serialNumber", description = "18165099476682912368", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("serialNumber")
+  public @Nullable Integer getSerialNumber() {
     return serialNumber;
   }
 
-  public void setSerialNumber(Integer serialNumber) {
+  @JsonProperty("serialNumber")
+  public void setSerialNumber(@Nullable Integer serialNumber) {
     this.serialNumber = serialNumber;
   }
-
 
   @Override
   public boolean equals(Object o) {
@@ -203,7 +218,6 @@ public class TruststoreItems   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class TruststoreItems {\n");
-    
     sb.append("    alias: ").append(toIndentedString(alias)).append("\n");
     sb.append("    entryType: ").append(toIndentedString(entryType)).append("\n");
     sb.append("    subject: ").append(toIndentedString(subject)).append("\n");
@@ -219,11 +233,8 @@ public class TruststoreItems   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+  private String toIndentedString(@Nullable Object o) {
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

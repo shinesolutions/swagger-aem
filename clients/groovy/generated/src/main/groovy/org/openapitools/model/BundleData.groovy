@@ -4,7 +4,7 @@ import groovy.transform.Canonical
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import org.openapitools.model.BundleDataProp;
 
 @Canonical
@@ -26,5 +26,5 @@ class BundleData {
     /* Bundle category */
     String category
     
-    List<BundleDataProp> props = new ArrayList<BundleDataProp>()
+    List<BundleDataProp> props = new ArrayList<>()
 }

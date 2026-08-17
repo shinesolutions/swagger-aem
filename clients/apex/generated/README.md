@@ -106,7 +106,7 @@ Class | Method | HTTP request | Description
 *OASSlingApi* | [**postNodeRw**](OASSlingApi.md#postNodeRw) | **POST** /{path}/{name}.rw.html | 
 *OASSlingApi* | [**postPath**](OASSlingApi.md#postPath) | **POST** /{path}/ | 
 *OASSlingApi* | [**postQuery**](OASSlingApi.md#postQuery) | **POST** /bin/querybuilder.json | 
-*OASSlingApi* | [**postTreeActivation**](OASSlingApi.md#postTreeActivation) | **POST** /etc/replication/treeactivation.html | 
+*OASSlingApi* | [**postTreeActivation**](OASSlingApi.md#postTreeActivation) | **POST** /libs/replication/treeactivation.html | 
 *OASSlingApi* | [**postTruststore**](OASSlingApi.md#postTruststore) | **POST** /libs/granite/security/post/truststore | 
 *OASSlingApi* | [**postTruststorePKCS12**](OASSlingApi.md#postTruststorePKCS12) | **POST** /etc/truststore | 
 
@@ -132,6 +132,7 @@ Class | Method | HTTP request | Description
 
 
 ## Documentation for Authorization
+
 
 Authentication schemes defined for the API:
 ### aemAuth

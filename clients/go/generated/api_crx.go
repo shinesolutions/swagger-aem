@@ -3,7 +3,7 @@ Adobe Experience Manager (AEM) API
 
 Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
 
-API version: 3.5.0-pre.0
+API version: 3.7.1-pre.0
 Contact: opensource@shinesolutions.com
 */
 
@@ -13,39 +13,34 @@ package openapi
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io"
+	"net/http"
+	"net/url"
 	"strings"
 	"os"
 )
 
-// Linger please
-var (
-	_ _context.Context
-)
 
-// CrxApiService CrxApi service
-type CrxApiService service
+// CrxAPIService CrxAPI service
+type CrxAPIService service
 
 type ApiGetCrxdeStatusRequest struct {
-	ctx _context.Context
-	ApiService *CrxApiService
+	ctx context.Context
+	ApiService *CrxAPIService
 }
 
-
-func (r ApiGetCrxdeStatusRequest) Execute() (string, *_nethttp.Response, error) {
+func (r ApiGetCrxdeStatusRequest) Execute() (string, *http.Response, error) {
 	return r.ApiService.GetCrxdeStatusExecute(r)
 }
 
 /*
 GetCrxdeStatus Method for GetCrxdeStatus
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetCrxdeStatusRequest
 */
-func (a *CrxApiService) GetCrxdeStatus(ctx _context.Context) ApiGetCrxdeStatusRequest {
+func (a *CrxAPIService) GetCrxdeStatus(ctx context.Context) ApiGetCrxdeStatusRequest {
 	return ApiGetCrxdeStatusRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -54,26 +49,24 @@ func (a *CrxApiService) GetCrxdeStatus(ctx _context.Context) ApiGetCrxdeStatusRe
 
 // Execute executes the request
 //  @return string
-func (a *CrxApiService) GetCrxdeStatusExecute(r ApiGetCrxdeStatusRequest) (string, *_nethttp.Response, error) {
+func (a *CrxAPIService) GetCrxdeStatusExecute(r ApiGetCrxdeStatusRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 		localVarReturnValue  string
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CrxApiService.GetCrxdeStatus")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CrxAPIService.GetCrxdeStatus")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/crx/server/crx.default/jcr:root/.1.json"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -92,7 +85,7 @@ func (a *CrxApiService) GetCrxdeStatusExecute(r ApiGetCrxdeStatusRequest) (strin
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -102,15 +95,15 @@ func (a *CrxApiService) GetCrxdeStatusExecute(r ApiGetCrxdeStatusRequest) (strin
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -121,14 +114,15 @@ func (a *CrxApiService) GetCrxdeStatusExecute(r ApiGetCrxdeStatusRequest) (strin
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -139,22 +133,21 @@ func (a *CrxApiService) GetCrxdeStatusExecute(r ApiGetCrxdeStatusRequest) (strin
 }
 
 type ApiGetInstallStatusRequest struct {
-	ctx _context.Context
-	ApiService *CrxApiService
+	ctx context.Context
+	ApiService *CrxAPIService
 }
 
-
-func (r ApiGetInstallStatusRequest) Execute() (InstallStatus, *_nethttp.Response, error) {
+func (r ApiGetInstallStatusRequest) Execute() (*InstallStatus, *http.Response, error) {
 	return r.ApiService.GetInstallStatusExecute(r)
 }
 
 /*
 GetInstallStatus Method for GetInstallStatus
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetInstallStatusRequest
 */
-func (a *CrxApiService) GetInstallStatus(ctx _context.Context) ApiGetInstallStatusRequest {
+func (a *CrxAPIService) GetInstallStatus(ctx context.Context) ApiGetInstallStatusRequest {
 	return ApiGetInstallStatusRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -163,26 +156,24 @@ func (a *CrxApiService) GetInstallStatus(ctx _context.Context) ApiGetInstallStat
 
 // Execute executes the request
 //  @return InstallStatus
-func (a *CrxApiService) GetInstallStatusExecute(r ApiGetInstallStatusRequest) (InstallStatus, *_nethttp.Response, error) {
+func (a *CrxAPIService) GetInstallStatusExecute(r ApiGetInstallStatusRequest) (*InstallStatus, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  InstallStatus
+		formFiles            []formFile
+		localVarReturnValue  *InstallStatus
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CrxApiService.GetInstallStatus")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CrxAPIService.GetInstallStatus")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/crx/packmgr/installstatus.jsp"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -201,7 +192,7 @@ func (a *CrxApiService) GetInstallStatusExecute(r ApiGetInstallStatusRequest) (I
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -211,15 +202,15 @@ func (a *CrxApiService) GetInstallStatusExecute(r ApiGetInstallStatusRequest) (I
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -229,13 +220,14 @@ func (a *CrxApiService) GetInstallStatusExecute(r ApiGetInstallStatusRequest) (I
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -246,22 +238,21 @@ func (a *CrxApiService) GetInstallStatusExecute(r ApiGetInstallStatusRequest) (I
 }
 
 type ApiGetPackageManagerServletRequest struct {
-	ctx _context.Context
-	ApiService *CrxApiService
+	ctx context.Context
+	ApiService *CrxAPIService
 }
 
-
-func (r ApiGetPackageManagerServletRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiGetPackageManagerServletRequest) Execute() (*http.Response, error) {
 	return r.ApiService.GetPackageManagerServletExecute(r)
 }
 
 /*
 GetPackageManagerServlet Method for GetPackageManagerServlet
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetPackageManagerServletRequest
 */
-func (a *CrxApiService) GetPackageManagerServlet(ctx _context.Context) ApiGetPackageManagerServletRequest {
+func (a *CrxAPIService) GetPackageManagerServlet(ctx context.Context) ApiGetPackageManagerServletRequest {
 	return ApiGetPackageManagerServletRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -269,25 +260,23 @@ func (a *CrxApiService) GetPackageManagerServlet(ctx _context.Context) ApiGetPac
 }
 
 // Execute executes the request
-func (a *CrxApiService) GetPackageManagerServletExecute(r ApiGetPackageManagerServletRequest) (*_nethttp.Response, error) {
+func (a *CrxAPIService) GetPackageManagerServletExecute(r ApiGetPackageManagerServletRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CrxApiService.GetPackageManagerServlet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CrxAPIService.GetPackageManagerServlet")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/crx/packmgr/service/script.html"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -306,7 +295,7 @@ func (a *CrxApiService) GetPackageManagerServletExecute(r ApiGetPackageManagerSe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -316,15 +305,15 @@ func (a *CrxApiService) GetPackageManagerServletExecute(r ApiGetPackageManagerSe
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -335,7 +324,8 @@ func (a *CrxApiService) GetPackageManagerServletExecute(r ApiGetPackageManagerSe
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 405 {
@@ -345,7 +335,8 @@ func (a *CrxApiService) GetPackageManagerServletExecute(r ApiGetPackageManagerSe
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
 	}
@@ -354,8 +345,8 @@ func (a *CrxApiService) GetPackageManagerServletExecute(r ApiGetPackageManagerSe
 }
 
 type ApiPostPackageServiceRequest struct {
-	ctx _context.Context
-	ApiService *CrxApiService
+	ctx context.Context
+	ApiService *CrxAPIService
 	cmd *string
 }
 
@@ -364,17 +355,17 @@ func (r ApiPostPackageServiceRequest) Cmd(cmd string) ApiPostPackageServiceReque
 	return r
 }
 
-func (r ApiPostPackageServiceRequest) Execute() (string, *_nethttp.Response, error) {
+func (r ApiPostPackageServiceRequest) Execute() (string, *http.Response, error) {
 	return r.ApiService.PostPackageServiceExecute(r)
 }
 
 /*
 PostPackageService Method for PostPackageService
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPostPackageServiceRequest
 */
-func (a *CrxApiService) PostPackageService(ctx _context.Context) ApiPostPackageServiceRequest {
+func (a *CrxAPIService) PostPackageService(ctx context.Context) ApiPostPackageServiceRequest {
 	return ApiPostPackageServiceRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -383,31 +374,29 @@ func (a *CrxApiService) PostPackageService(ctx _context.Context) ApiPostPackageS
 
 // Execute executes the request
 //  @return string
-func (a *CrxApiService) PostPackageServiceExecute(r ApiPostPackageServiceRequest) (string, *_nethttp.Response, error) {
+func (a *CrxAPIService) PostPackageServiceExecute(r ApiPostPackageServiceRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 		localVarReturnValue  string
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CrxApiService.PostPackageService")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CrxAPIService.PostPackageService")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/crx/packmgr/service.jsp"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.cmd == nil {
 		return localVarReturnValue, nil, reportError("cmd is required and must be specified")
 	}
 
-	localVarQueryParams.Add("cmd", parameterToString(*r.cmd, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "cmd", r.cmd, "form", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -425,7 +414,7 @@ func (a *CrxApiService) PostPackageServiceExecute(r ApiPostPackageServiceRequest
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -435,15 +424,15 @@ func (a *CrxApiService) PostPackageServiceExecute(r ApiPostPackageServiceRequest
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -453,13 +442,14 @@ func (a *CrxApiService) PostPackageServiceExecute(r ApiPostPackageServiceRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -470,8 +460,8 @@ func (a *CrxApiService) PostPackageServiceExecute(r ApiPostPackageServiceRequest
 }
 
 type ApiPostPackageServiceJsonRequest struct {
-	ctx _context.Context
-	ApiService *CrxApiService
+	ctx context.Context
+	ApiService *CrxAPIService
 	path string
 	cmd *string
 	groupName *string
@@ -480,54 +470,61 @@ type ApiPostPackageServiceJsonRequest struct {
 	charset *string
 	force *bool
 	recursive *bool
-	package_ **os.File
+	package_ *os.File
 }
 
 func (r ApiPostPackageServiceJsonRequest) Cmd(cmd string) ApiPostPackageServiceJsonRequest {
 	r.cmd = &cmd
 	return r
 }
+
 func (r ApiPostPackageServiceJsonRequest) GroupName(groupName string) ApiPostPackageServiceJsonRequest {
 	r.groupName = &groupName
 	return r
 }
+
 func (r ApiPostPackageServiceJsonRequest) PackageName(packageName string) ApiPostPackageServiceJsonRequest {
 	r.packageName = &packageName
 	return r
 }
+
 func (r ApiPostPackageServiceJsonRequest) PackageVersion(packageVersion string) ApiPostPackageServiceJsonRequest {
 	r.packageVersion = &packageVersion
 	return r
 }
+
 func (r ApiPostPackageServiceJsonRequest) Charset(charset string) ApiPostPackageServiceJsonRequest {
 	r.charset = &charset
 	return r
 }
+
 func (r ApiPostPackageServiceJsonRequest) Force(force bool) ApiPostPackageServiceJsonRequest {
 	r.force = &force
 	return r
 }
+
 func (r ApiPostPackageServiceJsonRequest) Recursive(recursive bool) ApiPostPackageServiceJsonRequest {
 	r.recursive = &recursive
 	return r
 }
+
 func (r ApiPostPackageServiceJsonRequest) Package_(package_ *os.File) ApiPostPackageServiceJsonRequest {
-	r.package_ = &package_
+	r.package_ = package_
 	return r
 }
 
-func (r ApiPostPackageServiceJsonRequest) Execute() (string, *_nethttp.Response, error) {
+func (r ApiPostPackageServiceJsonRequest) Execute() (string, *http.Response, error) {
 	return r.ApiService.PostPackageServiceJsonExecute(r)
 }
 
 /*
 PostPackageServiceJson Method for PostPackageServiceJson
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param path
  @return ApiPostPackageServiceJsonRequest
 */
-func (a *CrxApiService) PostPackageServiceJson(ctx _context.Context, path string) ApiPostPackageServiceJsonRequest {
+func (a *CrxAPIService) PostPackageServiceJson(ctx context.Context, path string) ApiPostPackageServiceJsonRequest {
 	return ApiPostPackageServiceJsonRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -537,49 +534,47 @@ func (a *CrxApiService) PostPackageServiceJson(ctx _context.Context, path string
 
 // Execute executes the request
 //  @return string
-func (a *CrxApiService) PostPackageServiceJsonExecute(r ApiPostPackageServiceJsonRequest) (string, *_nethttp.Response, error) {
+func (a *CrxAPIService) PostPackageServiceJsonExecute(r ApiPostPackageServiceJsonRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 		localVarReturnValue  string
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CrxApiService.PostPackageServiceJson")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CrxAPIService.PostPackageServiceJson")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/crx/packmgr/service/.json/{path}"
-	localVarPath = strings.Replace(localVarPath, "{"+"path"+"}", _neturl.PathEscape(parameterToString(r.path, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"path"+"}", url.PathEscape(parameterValueToString(r.path, "path")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.cmd == nil {
 		return localVarReturnValue, nil, reportError("cmd is required and must be specified")
 	}
 
-	localVarQueryParams.Add("cmd", parameterToString(*r.cmd, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "cmd", r.cmd, "form", "")
 	if r.groupName != nil {
-		localVarQueryParams.Add("groupName", parameterToString(*r.groupName, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "groupName", r.groupName, "form", "")
 	}
 	if r.packageName != nil {
-		localVarQueryParams.Add("packageName", parameterToString(*r.packageName, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "packageName", r.packageName, "form", "")
 	}
 	if r.packageVersion != nil {
-		localVarQueryParams.Add("packageVersion", parameterToString(*r.packageVersion, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "packageVersion", r.packageVersion, "form", "")
 	}
 	if r.charset != nil {
-		localVarQueryParams.Add("_charset_", parameterToString(*r.charset, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "_charset_", r.charset, "form", "")
 	}
 	if r.force != nil {
-		localVarQueryParams.Add("force", parameterToString(*r.force, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "force", r.force, "form", "")
 	}
 	if r.recursive != nil {
-		localVarQueryParams.Add("recursive", parameterToString(*r.recursive, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "recursive", r.recursive, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"multipart/form-data"}
@@ -598,18 +593,22 @@ func (a *CrxApiService) PostPackageServiceJsonExecute(r ApiPostPackageServiceJso
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	localVarFormFileName = "package"
-	var localVarFile *os.File
-	if r.package_ != nil {
-		localVarFile = *r.package_
+	var package_LocalVarFormFileName string
+	var package_LocalVarFileName     string
+	var package_LocalVarFileBytes    []byte
+
+	package_LocalVarFormFileName = "package"
+	package_LocalVarFile := r.package_
+
+	if package_LocalVarFile != nil {
+		fbs, _ := io.ReadAll(package_LocalVarFile)
+
+		package_LocalVarFileBytes = fbs
+		package_LocalVarFileName = package_LocalVarFile.Name()
+		package_LocalVarFile.Close()
+		formFiles = append(formFiles, formFile{fileBytes: package_LocalVarFileBytes, fileName: package_LocalVarFileName, formFileName: package_LocalVarFormFileName})
 	}
-	if localVarFile != nil {
-		fbs, _ := _ioutil.ReadAll(localVarFile)
-		localVarFileBytes = fbs
-		localVarFileName = localVarFile.Name()
-		localVarFile.Close()
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -619,15 +618,15 @@ func (a *CrxApiService) PostPackageServiceJsonExecute(r ApiPostPackageServiceJso
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -637,13 +636,14 @@ func (a *CrxApiService) PostPackageServiceJsonExecute(r ApiPostPackageServiceJso
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -654,8 +654,8 @@ func (a *CrxApiService) PostPackageServiceJsonExecute(r ApiPostPackageServiceJso
 }
 
 type ApiPostPackageUpdateRequest struct {
-	ctx _context.Context
-	ApiService *CrxApiService
+	ctx context.Context
+	ApiService *CrxAPIService
 	groupName *string
 	packageName *string
 	version *string
@@ -668,38 +668,43 @@ func (r ApiPostPackageUpdateRequest) GroupName(groupName string) ApiPostPackageU
 	r.groupName = &groupName
 	return r
 }
+
 func (r ApiPostPackageUpdateRequest) PackageName(packageName string) ApiPostPackageUpdateRequest {
 	r.packageName = &packageName
 	return r
 }
+
 func (r ApiPostPackageUpdateRequest) Version(version string) ApiPostPackageUpdateRequest {
 	r.version = &version
 	return r
 }
+
 func (r ApiPostPackageUpdateRequest) Path(path string) ApiPostPackageUpdateRequest {
 	r.path = &path
 	return r
 }
+
 func (r ApiPostPackageUpdateRequest) Filter(filter string) ApiPostPackageUpdateRequest {
 	r.filter = &filter
 	return r
 }
+
 func (r ApiPostPackageUpdateRequest) Charset(charset string) ApiPostPackageUpdateRequest {
 	r.charset = &charset
 	return r
 }
 
-func (r ApiPostPackageUpdateRequest) Execute() (string, *_nethttp.Response, error) {
+func (r ApiPostPackageUpdateRequest) Execute() (string, *http.Response, error) {
 	return r.ApiService.PostPackageUpdateExecute(r)
 }
 
 /*
 PostPackageUpdate Method for PostPackageUpdate
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPostPackageUpdateRequest
 */
-func (a *CrxApiService) PostPackageUpdate(ctx _context.Context) ApiPostPackageUpdateRequest {
+func (a *CrxAPIService) PostPackageUpdate(ctx context.Context) ApiPostPackageUpdateRequest {
 	return ApiPostPackageUpdateRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -708,26 +713,24 @@ func (a *CrxApiService) PostPackageUpdate(ctx _context.Context) ApiPostPackageUp
 
 // Execute executes the request
 //  @return string
-func (a *CrxApiService) PostPackageUpdateExecute(r ApiPostPackageUpdateRequest) (string, *_nethttp.Response, error) {
+func (a *CrxAPIService) PostPackageUpdateExecute(r ApiPostPackageUpdateRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 		localVarReturnValue  string
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CrxApiService.PostPackageUpdate")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CrxAPIService.PostPackageUpdate")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/crx/packmgr/update.jsp"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.groupName == nil {
 		return localVarReturnValue, nil, reportError("groupName is required and must be specified")
 	}
@@ -741,15 +744,15 @@ func (a *CrxApiService) PostPackageUpdateExecute(r ApiPostPackageUpdateRequest) 
 		return localVarReturnValue, nil, reportError("path is required and must be specified")
 	}
 
-	localVarQueryParams.Add("groupName", parameterToString(*r.groupName, ""))
-	localVarQueryParams.Add("packageName", parameterToString(*r.packageName, ""))
-	localVarQueryParams.Add("version", parameterToString(*r.version, ""))
-	localVarQueryParams.Add("path", parameterToString(*r.path, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "groupName", r.groupName, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "packageName", r.packageName, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "version", r.version, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "path", r.path, "form", "")
 	if r.filter != nil {
-		localVarQueryParams.Add("filter", parameterToString(*r.filter, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "form", "")
 	}
 	if r.charset != nil {
-		localVarQueryParams.Add("_charset_", parameterToString(*r.charset, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "_charset_", r.charset, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -768,7 +771,7 @@ func (a *CrxApiService) PostPackageUpdateExecute(r ApiPostPackageUpdateRequest) 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -778,15 +781,15 @@ func (a *CrxApiService) PostPackageUpdateExecute(r ApiPostPackageUpdateRequest) 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -796,13 +799,14 @@ func (a *CrxApiService) PostPackageUpdateExecute(r ApiPostPackageUpdateRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -813,8 +817,8 @@ func (a *CrxApiService) PostPackageUpdateExecute(r ApiPostPackageUpdateRequest) 
 }
 
 type ApiPostSetPasswordRequest struct {
-	ctx _context.Context
-	ApiService *CrxApiService
+	ctx context.Context
+	ApiService *CrxAPIService
 	old *string
 	plain *string
 	verify *string
@@ -824,26 +828,28 @@ func (r ApiPostSetPasswordRequest) Old(old string) ApiPostSetPasswordRequest {
 	r.old = &old
 	return r
 }
+
 func (r ApiPostSetPasswordRequest) Plain(plain string) ApiPostSetPasswordRequest {
 	r.plain = &plain
 	return r
 }
+
 func (r ApiPostSetPasswordRequest) Verify(verify string) ApiPostSetPasswordRequest {
 	r.verify = &verify
 	return r
 }
 
-func (r ApiPostSetPasswordRequest) Execute() (string, *_nethttp.Response, error) {
+func (r ApiPostSetPasswordRequest) Execute() (string, *http.Response, error) {
 	return r.ApiService.PostSetPasswordExecute(r)
 }
 
 /*
 PostSetPassword Method for PostSetPassword
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPostSetPasswordRequest
 */
-func (a *CrxApiService) PostSetPassword(ctx _context.Context) ApiPostSetPasswordRequest {
+func (a *CrxAPIService) PostSetPassword(ctx context.Context) ApiPostSetPasswordRequest {
 	return ApiPostSetPasswordRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -852,26 +858,24 @@ func (a *CrxApiService) PostSetPassword(ctx _context.Context) ApiPostSetPassword
 
 // Execute executes the request
 //  @return string
-func (a *CrxApiService) PostSetPasswordExecute(r ApiPostSetPasswordRequest) (string, *_nethttp.Response, error) {
+func (a *CrxAPIService) PostSetPasswordExecute(r ApiPostSetPasswordRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 		localVarReturnValue  string
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CrxApiService.PostSetPassword")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CrxAPIService.PostSetPassword")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/crx/explorer/ui/setpassword.jsp"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.old == nil {
 		return localVarReturnValue, nil, reportError("old is required and must be specified")
 	}
@@ -882,9 +886,9 @@ func (a *CrxApiService) PostSetPasswordExecute(r ApiPostSetPasswordRequest) (str
 		return localVarReturnValue, nil, reportError("verify is required and must be specified")
 	}
 
-	localVarQueryParams.Add("old", parameterToString(*r.old, ""))
-	localVarQueryParams.Add("plain", parameterToString(*r.plain, ""))
-	localVarQueryParams.Add("verify", parameterToString(*r.verify, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "old", r.old, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "plain", r.plain, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "verify", r.verify, "form", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -902,7 +906,7 @@ func (a *CrxApiService) PostSetPasswordExecute(r ApiPostSetPasswordRequest) (str
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -912,15 +916,15 @@ func (a *CrxApiService) PostSetPasswordExecute(r ApiPostSetPasswordRequest) (str
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -930,13 +934,14 @@ func (a *CrxApiService) PostSetPasswordExecute(r ApiPostSetPasswordRequest) (str
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

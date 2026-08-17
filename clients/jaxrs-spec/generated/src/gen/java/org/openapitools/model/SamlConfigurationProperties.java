@@ -14,35 +14,41 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2021-09-03T15:26:06.461+10:00[Australia/Melbourne]")public class SamlConfigurationProperties   {
-  
-  private @Valid SamlConfigurationPropertyItemsArray path;
-  private @Valid SamlConfigurationPropertyItemsLong serviceRanking;
-  private @Valid SamlConfigurationPropertyItemsString idpUrl;
-  private @Valid SamlConfigurationPropertyItemsString idpCertAlias;
-  private @Valid SamlConfigurationPropertyItemsBoolean idpHttpRedirect;
-  private @Valid SamlConfigurationPropertyItemsString serviceProviderEntityId;
-  private @Valid SamlConfigurationPropertyItemsString assertionConsumerServiceURL;
-  private @Valid SamlConfigurationPropertyItemsString spPrivateKeyAlias;
-  private @Valid SamlConfigurationPropertyItemsString keyStorePassword;
-  private @Valid SamlConfigurationPropertyItemsString defaultRedirectUrl;
-  private @Valid SamlConfigurationPropertyItemsString userIDAttribute;
-  private @Valid SamlConfigurationPropertyItemsBoolean useEncryption;
-  private @Valid SamlConfigurationPropertyItemsBoolean createUser;
-  private @Valid SamlConfigurationPropertyItemsBoolean addGroupMemberships;
-  private @Valid SamlConfigurationPropertyItemsString groupMembershipAttribute;
-  private @Valid SamlConfigurationPropertyItemsArray defaultGroups;
-  private @Valid SamlConfigurationPropertyItemsString nameIdFormat;
-  private @Valid SamlConfigurationPropertyItemsArray synchronizeAttributes;
-  private @Valid SamlConfigurationPropertyItemsBoolean handleLogout;
-  private @Valid SamlConfigurationPropertyItemsString logoutUrl;
-  private @Valid SamlConfigurationPropertyItemsLong clockTolerance;
-  private @Valid SamlConfigurationPropertyItemsString digestMethod;
-  private @Valid SamlConfigurationPropertyItemsString signatureMethod;
-  private @Valid SamlConfigurationPropertyItemsString userIntermediatePath;
+@JsonTypeName("SamlConfigurationProperties")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2026-08-17T02:15:42.417242947Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+public class SamlConfigurationProperties   {
+  private SamlConfigurationPropertyItemsArray path;
+  private SamlConfigurationPropertyItemsLong serviceRanking;
+  private SamlConfigurationPropertyItemsString idpUrl;
+  private SamlConfigurationPropertyItemsString idpCertAlias;
+  private SamlConfigurationPropertyItemsBoolean idpHttpRedirect;
+  private SamlConfigurationPropertyItemsString serviceProviderEntityId;
+  private SamlConfigurationPropertyItemsString assertionConsumerServiceURL;
+  private SamlConfigurationPropertyItemsString spPrivateKeyAlias;
+  private SamlConfigurationPropertyItemsString keyStorePassword;
+  private SamlConfigurationPropertyItemsString defaultRedirectUrl;
+  private SamlConfigurationPropertyItemsString userIDAttribute;
+  private SamlConfigurationPropertyItemsBoolean useEncryption;
+  private SamlConfigurationPropertyItemsBoolean createUser;
+  private SamlConfigurationPropertyItemsBoolean addGroupMemberships;
+  private SamlConfigurationPropertyItemsString groupMembershipAttribute;
+  private SamlConfigurationPropertyItemsArray defaultGroups;
+  private SamlConfigurationPropertyItemsString nameIdFormat;
+  private SamlConfigurationPropertyItemsArray synchronizeAttributes;
+  private SamlConfigurationPropertyItemsBoolean handleLogout;
+  private SamlConfigurationPropertyItemsString logoutUrl;
+  private SamlConfigurationPropertyItemsLong clockTolerance;
+  private SamlConfigurationPropertyItemsString digestMethod;
+  private SamlConfigurationPropertyItemsString signatureMethod;
+  private SamlConfigurationPropertyItemsString userIntermediatePath;
+
+  public SamlConfigurationProperties() {
+  }
 
   /**
    **/
@@ -52,19 +58,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("path")
-  public SamlConfigurationPropertyItemsArray getPath() {
+  @Valid public SamlConfigurationPropertyItemsArray getPath() {
     return path;
   }
 
+  @JsonProperty("path")
   public void setPath(SamlConfigurationPropertyItemsArray path) {
     this.path = path;
   }
 
-/**
+  /**
    **/
   public SamlConfigurationProperties serviceRanking(SamlConfigurationPropertyItemsLong serviceRanking) {
     this.serviceRanking = serviceRanking;
@@ -72,19 +77,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("service.ranking")
-  public SamlConfigurationPropertyItemsLong getServiceRanking() {
+  @Valid public SamlConfigurationPropertyItemsLong getServiceRanking() {
     return serviceRanking;
   }
 
+  @JsonProperty("service.ranking")
   public void setServiceRanking(SamlConfigurationPropertyItemsLong serviceRanking) {
     this.serviceRanking = serviceRanking;
   }
 
-/**
+  /**
    **/
   public SamlConfigurationProperties idpUrl(SamlConfigurationPropertyItemsString idpUrl) {
     this.idpUrl = idpUrl;
@@ -92,19 +96,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("idpUrl")
-  public SamlConfigurationPropertyItemsString getIdpUrl() {
+  @Valid public SamlConfigurationPropertyItemsString getIdpUrl() {
     return idpUrl;
   }
 
+  @JsonProperty("idpUrl")
   public void setIdpUrl(SamlConfigurationPropertyItemsString idpUrl) {
     this.idpUrl = idpUrl;
   }
 
-/**
+  /**
    **/
   public SamlConfigurationProperties idpCertAlias(SamlConfigurationPropertyItemsString idpCertAlias) {
     this.idpCertAlias = idpCertAlias;
@@ -112,19 +115,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("idpCertAlias")
-  public SamlConfigurationPropertyItemsString getIdpCertAlias() {
+  @Valid public SamlConfigurationPropertyItemsString getIdpCertAlias() {
     return idpCertAlias;
   }
 
+  @JsonProperty("idpCertAlias")
   public void setIdpCertAlias(SamlConfigurationPropertyItemsString idpCertAlias) {
     this.idpCertAlias = idpCertAlias;
   }
 
-/**
+  /**
    **/
   public SamlConfigurationProperties idpHttpRedirect(SamlConfigurationPropertyItemsBoolean idpHttpRedirect) {
     this.idpHttpRedirect = idpHttpRedirect;
@@ -132,19 +134,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("idpHttpRedirect")
-  public SamlConfigurationPropertyItemsBoolean getIdpHttpRedirect() {
+  @Valid public SamlConfigurationPropertyItemsBoolean getIdpHttpRedirect() {
     return idpHttpRedirect;
   }
 
+  @JsonProperty("idpHttpRedirect")
   public void setIdpHttpRedirect(SamlConfigurationPropertyItemsBoolean idpHttpRedirect) {
     this.idpHttpRedirect = idpHttpRedirect;
   }
 
-/**
+  /**
    **/
   public SamlConfigurationProperties serviceProviderEntityId(SamlConfigurationPropertyItemsString serviceProviderEntityId) {
     this.serviceProviderEntityId = serviceProviderEntityId;
@@ -152,19 +153,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("serviceProviderEntityId")
-  public SamlConfigurationPropertyItemsString getServiceProviderEntityId() {
+  @Valid public SamlConfigurationPropertyItemsString getServiceProviderEntityId() {
     return serviceProviderEntityId;
   }
 
+  @JsonProperty("serviceProviderEntityId")
   public void setServiceProviderEntityId(SamlConfigurationPropertyItemsString serviceProviderEntityId) {
     this.serviceProviderEntityId = serviceProviderEntityId;
   }
 
-/**
+  /**
    **/
   public SamlConfigurationProperties assertionConsumerServiceURL(SamlConfigurationPropertyItemsString assertionConsumerServiceURL) {
     this.assertionConsumerServiceURL = assertionConsumerServiceURL;
@@ -172,19 +172,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("assertionConsumerServiceURL")
-  public SamlConfigurationPropertyItemsString getAssertionConsumerServiceURL() {
+  @Valid public SamlConfigurationPropertyItemsString getAssertionConsumerServiceURL() {
     return assertionConsumerServiceURL;
   }
 
+  @JsonProperty("assertionConsumerServiceURL")
   public void setAssertionConsumerServiceURL(SamlConfigurationPropertyItemsString assertionConsumerServiceURL) {
     this.assertionConsumerServiceURL = assertionConsumerServiceURL;
   }
 
-/**
+  /**
    **/
   public SamlConfigurationProperties spPrivateKeyAlias(SamlConfigurationPropertyItemsString spPrivateKeyAlias) {
     this.spPrivateKeyAlias = spPrivateKeyAlias;
@@ -192,19 +191,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("spPrivateKeyAlias")
-  public SamlConfigurationPropertyItemsString getSpPrivateKeyAlias() {
+  @Valid public SamlConfigurationPropertyItemsString getSpPrivateKeyAlias() {
     return spPrivateKeyAlias;
   }
 
+  @JsonProperty("spPrivateKeyAlias")
   public void setSpPrivateKeyAlias(SamlConfigurationPropertyItemsString spPrivateKeyAlias) {
     this.spPrivateKeyAlias = spPrivateKeyAlias;
   }
 
-/**
+  /**
    **/
   public SamlConfigurationProperties keyStorePassword(SamlConfigurationPropertyItemsString keyStorePassword) {
     this.keyStorePassword = keyStorePassword;
@@ -212,19 +210,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("keyStorePassword")
-  public SamlConfigurationPropertyItemsString getKeyStorePassword() {
+  @Valid public SamlConfigurationPropertyItemsString getKeyStorePassword() {
     return keyStorePassword;
   }
 
+  @JsonProperty("keyStorePassword")
   public void setKeyStorePassword(SamlConfigurationPropertyItemsString keyStorePassword) {
     this.keyStorePassword = keyStorePassword;
   }
 
-/**
+  /**
    **/
   public SamlConfigurationProperties defaultRedirectUrl(SamlConfigurationPropertyItemsString defaultRedirectUrl) {
     this.defaultRedirectUrl = defaultRedirectUrl;
@@ -232,19 +229,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("defaultRedirectUrl")
-  public SamlConfigurationPropertyItemsString getDefaultRedirectUrl() {
+  @Valid public SamlConfigurationPropertyItemsString getDefaultRedirectUrl() {
     return defaultRedirectUrl;
   }
 
+  @JsonProperty("defaultRedirectUrl")
   public void setDefaultRedirectUrl(SamlConfigurationPropertyItemsString defaultRedirectUrl) {
     this.defaultRedirectUrl = defaultRedirectUrl;
   }
 
-/**
+  /**
    **/
   public SamlConfigurationProperties userIDAttribute(SamlConfigurationPropertyItemsString userIDAttribute) {
     this.userIDAttribute = userIDAttribute;
@@ -252,19 +248,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("userIDAttribute")
-  public SamlConfigurationPropertyItemsString getUserIDAttribute() {
+  @Valid public SamlConfigurationPropertyItemsString getUserIDAttribute() {
     return userIDAttribute;
   }
 
+  @JsonProperty("userIDAttribute")
   public void setUserIDAttribute(SamlConfigurationPropertyItemsString userIDAttribute) {
     this.userIDAttribute = userIDAttribute;
   }
 
-/**
+  /**
    **/
   public SamlConfigurationProperties useEncryption(SamlConfigurationPropertyItemsBoolean useEncryption) {
     this.useEncryption = useEncryption;
@@ -272,19 +267,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("useEncryption")
-  public SamlConfigurationPropertyItemsBoolean getUseEncryption() {
+  @Valid public SamlConfigurationPropertyItemsBoolean getUseEncryption() {
     return useEncryption;
   }
 
+  @JsonProperty("useEncryption")
   public void setUseEncryption(SamlConfigurationPropertyItemsBoolean useEncryption) {
     this.useEncryption = useEncryption;
   }
 
-/**
+  /**
    **/
   public SamlConfigurationProperties createUser(SamlConfigurationPropertyItemsBoolean createUser) {
     this.createUser = createUser;
@@ -292,19 +286,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("createUser")
-  public SamlConfigurationPropertyItemsBoolean getCreateUser() {
+  @Valid public SamlConfigurationPropertyItemsBoolean getCreateUser() {
     return createUser;
   }
 
+  @JsonProperty("createUser")
   public void setCreateUser(SamlConfigurationPropertyItemsBoolean createUser) {
     this.createUser = createUser;
   }
 
-/**
+  /**
    **/
   public SamlConfigurationProperties addGroupMemberships(SamlConfigurationPropertyItemsBoolean addGroupMemberships) {
     this.addGroupMemberships = addGroupMemberships;
@@ -312,19 +305,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("addGroupMemberships")
-  public SamlConfigurationPropertyItemsBoolean getAddGroupMemberships() {
+  @Valid public SamlConfigurationPropertyItemsBoolean getAddGroupMemberships() {
     return addGroupMemberships;
   }
 
+  @JsonProperty("addGroupMemberships")
   public void setAddGroupMemberships(SamlConfigurationPropertyItemsBoolean addGroupMemberships) {
     this.addGroupMemberships = addGroupMemberships;
   }
 
-/**
+  /**
    **/
   public SamlConfigurationProperties groupMembershipAttribute(SamlConfigurationPropertyItemsString groupMembershipAttribute) {
     this.groupMembershipAttribute = groupMembershipAttribute;
@@ -332,19 +324,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("groupMembershipAttribute")
-  public SamlConfigurationPropertyItemsString getGroupMembershipAttribute() {
+  @Valid public SamlConfigurationPropertyItemsString getGroupMembershipAttribute() {
     return groupMembershipAttribute;
   }
 
+  @JsonProperty("groupMembershipAttribute")
   public void setGroupMembershipAttribute(SamlConfigurationPropertyItemsString groupMembershipAttribute) {
     this.groupMembershipAttribute = groupMembershipAttribute;
   }
 
-/**
+  /**
    **/
   public SamlConfigurationProperties defaultGroups(SamlConfigurationPropertyItemsArray defaultGroups) {
     this.defaultGroups = defaultGroups;
@@ -352,19 +343,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("defaultGroups")
-  public SamlConfigurationPropertyItemsArray getDefaultGroups() {
+  @Valid public SamlConfigurationPropertyItemsArray getDefaultGroups() {
     return defaultGroups;
   }
 
+  @JsonProperty("defaultGroups")
   public void setDefaultGroups(SamlConfigurationPropertyItemsArray defaultGroups) {
     this.defaultGroups = defaultGroups;
   }
 
-/**
+  /**
    **/
   public SamlConfigurationProperties nameIdFormat(SamlConfigurationPropertyItemsString nameIdFormat) {
     this.nameIdFormat = nameIdFormat;
@@ -372,19 +362,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("nameIdFormat")
-  public SamlConfigurationPropertyItemsString getNameIdFormat() {
+  @Valid public SamlConfigurationPropertyItemsString getNameIdFormat() {
     return nameIdFormat;
   }
 
+  @JsonProperty("nameIdFormat")
   public void setNameIdFormat(SamlConfigurationPropertyItemsString nameIdFormat) {
     this.nameIdFormat = nameIdFormat;
   }
 
-/**
+  /**
    **/
   public SamlConfigurationProperties synchronizeAttributes(SamlConfigurationPropertyItemsArray synchronizeAttributes) {
     this.synchronizeAttributes = synchronizeAttributes;
@@ -392,19 +381,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("synchronizeAttributes")
-  public SamlConfigurationPropertyItemsArray getSynchronizeAttributes() {
+  @Valid public SamlConfigurationPropertyItemsArray getSynchronizeAttributes() {
     return synchronizeAttributes;
   }
 
+  @JsonProperty("synchronizeAttributes")
   public void setSynchronizeAttributes(SamlConfigurationPropertyItemsArray synchronizeAttributes) {
     this.synchronizeAttributes = synchronizeAttributes;
   }
 
-/**
+  /**
    **/
   public SamlConfigurationProperties handleLogout(SamlConfigurationPropertyItemsBoolean handleLogout) {
     this.handleLogout = handleLogout;
@@ -412,19 +400,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("handleLogout")
-  public SamlConfigurationPropertyItemsBoolean getHandleLogout() {
+  @Valid public SamlConfigurationPropertyItemsBoolean getHandleLogout() {
     return handleLogout;
   }
 
+  @JsonProperty("handleLogout")
   public void setHandleLogout(SamlConfigurationPropertyItemsBoolean handleLogout) {
     this.handleLogout = handleLogout;
   }
 
-/**
+  /**
    **/
   public SamlConfigurationProperties logoutUrl(SamlConfigurationPropertyItemsString logoutUrl) {
     this.logoutUrl = logoutUrl;
@@ -432,19 +419,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("logoutUrl")
-  public SamlConfigurationPropertyItemsString getLogoutUrl() {
+  @Valid public SamlConfigurationPropertyItemsString getLogoutUrl() {
     return logoutUrl;
   }
 
+  @JsonProperty("logoutUrl")
   public void setLogoutUrl(SamlConfigurationPropertyItemsString logoutUrl) {
     this.logoutUrl = logoutUrl;
   }
 
-/**
+  /**
    **/
   public SamlConfigurationProperties clockTolerance(SamlConfigurationPropertyItemsLong clockTolerance) {
     this.clockTolerance = clockTolerance;
@@ -452,19 +438,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("clockTolerance")
-  public SamlConfigurationPropertyItemsLong getClockTolerance() {
+  @Valid public SamlConfigurationPropertyItemsLong getClockTolerance() {
     return clockTolerance;
   }
 
+  @JsonProperty("clockTolerance")
   public void setClockTolerance(SamlConfigurationPropertyItemsLong clockTolerance) {
     this.clockTolerance = clockTolerance;
   }
 
-/**
+  /**
    **/
   public SamlConfigurationProperties digestMethod(SamlConfigurationPropertyItemsString digestMethod) {
     this.digestMethod = digestMethod;
@@ -472,19 +457,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("digestMethod")
-  public SamlConfigurationPropertyItemsString getDigestMethod() {
+  @Valid public SamlConfigurationPropertyItemsString getDigestMethod() {
     return digestMethod;
   }
 
+  @JsonProperty("digestMethod")
   public void setDigestMethod(SamlConfigurationPropertyItemsString digestMethod) {
     this.digestMethod = digestMethod;
   }
 
-/**
+  /**
    **/
   public SamlConfigurationProperties signatureMethod(SamlConfigurationPropertyItemsString signatureMethod) {
     this.signatureMethod = signatureMethod;
@@ -492,19 +476,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("signatureMethod")
-  public SamlConfigurationPropertyItemsString getSignatureMethod() {
+  @Valid public SamlConfigurationPropertyItemsString getSignatureMethod() {
     return signatureMethod;
   }
 
+  @JsonProperty("signatureMethod")
   public void setSignatureMethod(SamlConfigurationPropertyItemsString signatureMethod) {
     this.signatureMethod = signatureMethod;
   }
 
-/**
+  /**
    **/
   public SamlConfigurationProperties userIntermediatePath(SamlConfigurationPropertyItemsString userIntermediatePath) {
     this.userIntermediatePath = userIntermediatePath;
@@ -512,14 +495,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("userIntermediatePath")
-  public SamlConfigurationPropertyItemsString getUserIntermediatePath() {
+  @Valid public SamlConfigurationPropertyItemsString getUserIntermediatePath() {
     return userIntermediatePath;
   }
 
+  @JsonProperty("userIntermediatePath")
   public void setUserIntermediatePath(SamlConfigurationPropertyItemsString userIntermediatePath) {
     this.userIntermediatePath = userIntermediatePath;
   }
@@ -603,12 +585,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 
 
 }
-

@@ -1,6 +1,5 @@
 package org.openapitools.api;
 
-import java.io.File;
 import org.openapitools.model.KeystoreInfo;
 import org.openapitools.api.DefaultApiService;
 
@@ -21,13 +20,14 @@ import org.apache.cxf.jaxrs.ext.multipart.Multipart;
 import java.util.Map;
 import java.util.List;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 @Path("")
 @RequestScoped
 
-@Api(description = "the default API")
+@Api
 
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSCXFCDIServerCodegen", date = "2021-09-03T15:25:48.597+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSCXFCDIServerCodegen", date = "2026-08-17T02:15:31.267227214Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 
 public class DefaultApi  {
 
@@ -69,12 +69,12 @@ public class DefaultApi  {
     @Path("/{intermediatePath}/{authorizableId}/keystore/store.p12")
     
     @Produces({ "application/octet-stream" })
-    @ApiOperation(value = "", notes = "", response = File.class, authorizations = {
+    @ApiOperation(value = "", notes = "", response = java.io.InputStream.class, authorizations = {
         
         @Authorization(value = "aemAuth")
          }, tags={ "sling" })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Default response", response = File.class) })
+        @ApiResponse(code = 200, message = "Default response", response = java.io.InputStream.class) })
     public Response getKeystore(@ApiParam(value = "",required=true) @PathParam("intermediatePath") String intermediatePath, @ApiParam(value = "",required=true) @PathParam("authorizableId") String authorizableId) {
         return delegate.getKeystore(intermediatePath, authorizableId, securityContext);
     }
@@ -104,8 +104,8 @@ public class DefaultApi  {
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Retrieved Authorizable Keystore info", response = KeystoreInfo.class),
         @ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public Response postAuthorizableKeystore(@ApiParam(value = "",required=true) @PathParam("intermediatePath") String intermediatePath, @ApiParam(value = "",required=true) @PathParam("authorizableId") String authorizableId, @ApiParam(value = "")  @QueryParam(":operation") String colonOperation, @ApiParam(value = "")  @QueryParam("currentPassword") String currentPassword, @ApiParam(value = "")  @QueryParam("newPassword") String newPassword, @ApiParam(value = "")  @QueryParam("rePassword") String rePassword, @ApiParam(value = "")  @QueryParam("keyPassword") String keyPassword, @ApiParam(value = "")  @QueryParam("keyStorePass") String keyStorePass, @ApiParam(value = "")  @QueryParam("alias") String alias, @ApiParam(value = "")  @QueryParam("newAlias") String newAlias, @ApiParam(value = "")  @QueryParam("removeAlias") String removeAlias,  @Multipart(value = "cert-chain", required = false) InputStream certChainInputStream, @Multipart(value = "cert-chain" , required = false) Attachment certChainDetail,  @Multipart(value = "pk", required = false) InputStream pkInputStream, @Multipart(value = "pk" , required = false) Attachment pkDetail,  @Multipart(value = "keyStore", required = false) InputStream keyStoreInputStream, @Multipart(value = "keyStore" , required = false) Attachment keyStoreDetail) {
-        return delegate.postAuthorizableKeystore(intermediatePath, authorizableId, colonOperation, currentPassword, newPassword, rePassword, keyPassword, keyStorePass, alias, newAlias, removeAlias, certChainInputStream, certChainDetail, pkInputStream, pkDetail, keyStoreInputStream, keyStoreDetail, securityContext);
+    public Response postAuthorizableKeystore(@ApiParam(value = "",required=true) @PathParam("intermediatePath") String intermediatePath, @ApiParam(value = "",required=true) @PathParam("authorizableId") String authorizableId, @ApiParam(value = "")  @QueryParam(":operation") String operation, @ApiParam(value = "")  @QueryParam("currentPassword") String currentPassword, @ApiParam(value = "")  @QueryParam("newPassword") String newPassword, @ApiParam(value = "")  @QueryParam("rePassword") String rePassword, @ApiParam(value = "")  @QueryParam("keyPassword") String keyPassword, @ApiParam(value = "")  @QueryParam("keyStorePass") String keyStorePass, @ApiParam(value = "")  @QueryParam("alias") String alias, @ApiParam(value = "")  @QueryParam("newAlias") String newAlias, @ApiParam(value = "")  @QueryParam("removeAlias") String removeAlias,  @Multipart(value = "cert-chain" , required = false) Attachment certChainDetail,  @Multipart(value = "pk" , required = false) Attachment pkDetail,  @Multipart(value = "keyStore" , required = false) Attachment keyStoreDetail) {
+        return delegate.postAuthorizableKeystore(intermediatePath, authorizableId, operation, currentPassword, newPassword, rePassword, keyPassword, keyStorePass, alias, newAlias, removeAlias, certChainDetail, pkDetail, keyStoreDetail, securityContext);
     }
 
     @POST
@@ -118,8 +118,8 @@ public class DefaultApi  {
          }, tags={ "sling" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = Void.class) })
-    public Response postNode(@ApiParam(value = "",required=true) @PathParam("path") String path, @ApiParam(value = "",required=true) @PathParam("name") String name, @ApiParam(value = "")  @QueryParam(":operation") String colonOperation, @ApiParam(value = "")  @QueryParam("deleteAuthorizable") String deleteAuthorizable,  @Multipart(value = "file", required = false) InputStream fileInputStream, @Multipart(value = "file" , required = false) Attachment fileDetail) {
-        return delegate.postNode(path, name, colonOperation, deleteAuthorizable, fileInputStream, fileDetail, securityContext);
+    public Response postNode(@ApiParam(value = "",required=true) @PathParam("path") String path, @ApiParam(value = "",required=true) @PathParam("name") String name, @ApiParam(value = "")  @QueryParam(":operation") String operation, @ApiParam(value = "")  @QueryParam("deleteAuthorizable") String deleteAuthorizable,  @Multipart(value = "file" , required = false) Attachment _fileDetail) {
+        return delegate.postNode(path, name, operation, deleteAuthorizable, _fileDetail, securityContext);
     }
 
     @POST
@@ -146,7 +146,7 @@ public class DefaultApi  {
          }, tags={ "sling" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = Void.class) })
-    public Response postPath(@ApiParam(value = "",required=true) @PathParam("path") String path,  @NotNull @ApiParam(value = "",required=true)  @QueryParam("jcr:primaryType") String jcrColonPrimaryType,  @NotNull @ApiParam(value = "",required=true)  @QueryParam(":name") String colonName) {
-        return delegate.postPath(path, jcrColonPrimaryType, colonName, securityContext);
+    public Response postPath(@ApiParam(value = "",required=true) @PathParam("path") String path,  @NotNull @ApiParam(value = "",required=true)  @QueryParam("jcr:primaryType") String jcrPrimaryType,  @NotNull @ApiParam(value = "",required=true)  @QueryParam(":name") String name) {
+        return delegate.postPath(path, jcrPrimaryType, name, securityContext);
     }
 }

@@ -4,51 +4,52 @@ import javax.validation.constraints.*;
 import javax.validation.Valid;
 
 import io.swagger.annotations.ApiModelProperty;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlEnumValue;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 public class SamlConfigurationPropertyItemsLong  {
   
-  @ApiModelProperty(value = "property name")
  /**
-   * property name
-  **/
+  * property name
+  */
+  @ApiModelProperty(value = "property name")
+
   private String name;
 
-  @ApiModelProperty(value = "True if optional")
  /**
-   * True if optional
-  **/
+  * True if optional
+  */
+  @ApiModelProperty(value = "True if optional")
+
   private Boolean optional;
 
-  @ApiModelProperty(value = "True if property is set")
  /**
-   * True if property is set
-  **/
+  * True if property is set
+  */
+  @ApiModelProperty(value = "True if property is set")
+
   private Boolean isSet;
 
-  @ApiModelProperty(value = "Property type, 1=String, 3=long, 11=boolean, 12=Password")
  /**
-   * Property type, 1=String, 3=long, 11=boolean, 12=Password
-  **/
+  * Property type, 1=String, 3=long, 11=boolean, 12=Password
+  */
+  @ApiModelProperty(value = "Property type, 1=String, 3=long, 11=boolean, 12=Password")
+
   private Integer type;
 
-  @ApiModelProperty(value = "Property value")
  /**
-   * Property value
-  **/
+  * Property value
+  */
+  @ApiModelProperty(value = "Property value")
+
   private Integer value;
 
-  @ApiModelProperty(value = "Property description")
  /**
-   * Property description
-  **/
+  * Property description
+  */
+  @ApiModelProperty(value = "Property description")
+
   private String description;
  /**
    * property name
@@ -158,6 +159,27 @@ public class SamlConfigurationPropertyItemsLong  {
     return this;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    SamlConfigurationPropertyItemsLong samlConfigurationPropertyItemsLong = (SamlConfigurationPropertyItemsLong) o;
+    return Objects.equals(this.name, samlConfigurationPropertyItemsLong.name) &&
+        Objects.equals(this.optional, samlConfigurationPropertyItemsLong.optional) &&
+        Objects.equals(this.isSet, samlConfigurationPropertyItemsLong.isSet) &&
+        Objects.equals(this.type, samlConfigurationPropertyItemsLong.type) &&
+        Objects.equals(this.value, samlConfigurationPropertyItemsLong.value) &&
+        Objects.equals(this.description, samlConfigurationPropertyItemsLong.description);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(name, optional, isSet, type, value, description);
+  }
 
   @Override
   public String toString() {
@@ -179,10 +201,7 @@ public class SamlConfigurationPropertyItemsLong  {
    * (except the first line).
    */
   private static String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

@@ -12,20 +12,25 @@ import play.mvc.Result;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.JsonNode;
 import openapitools.OpenAPIUtils;
+import openapitools.SecurityAPIUtils;
 import static play.mvc.Results.ok;
+import static play.mvc.Results.unauthorized;
 import play.libs.Files.TemporaryFile;
 
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 
 @SuppressWarnings("RedundantThrows")
 public abstract class CqApiControllerImpInterface {
     @Inject private Config configuration;
+    @Inject private SecurityAPIUtils securityAPIUtils;
     private ObjectMapper mapper = new ObjectMapper();
 
     public Result getLoginPageHttp(Http.Request request) throws Exception {
         String obj = getLoginPage(request);
-JsonNode result = mapper.valueToTree(obj);
-return ok(result);
+        JsonNode result = mapper.valueToTree(obj);
+
+        return ok(result);
 
     }
 
@@ -33,7 +38,7 @@ return ok(result);
 
     public Result postCqActionsHttp(Http.Request request, @NotNull String authorizableId, @NotNull String changelog) throws Exception {
         postCqActions(request, authorizableId, changelog);
-return ok();
+        return ok();
 
     }
 

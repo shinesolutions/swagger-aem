@@ -3,7 +3,7 @@ Adobe Experience Manager (AEM) API
 
 Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
 
-API version: 3.5.0-pre.0
+API version: 3.7.1-pre.0
 Contact: opensource@shinesolutions.com
 */
 
@@ -14,6 +14,9 @@ package openapi
 import (
 	"encoding/json"
 )
+
+// checks if the InstallStatus type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &InstallStatus{}
 
 // InstallStatus struct for InstallStatus
 type InstallStatus struct {
@@ -39,7 +42,7 @@ func NewInstallStatusWithDefaults() *InstallStatus {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *InstallStatus) GetStatus() InstallStatusStatus {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret InstallStatusStatus
 		return ret
 	}
@@ -49,7 +52,7 @@ func (o *InstallStatus) GetStatus() InstallStatusStatus {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *InstallStatus) GetStatusOk() (*InstallStatusStatus, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -57,7 +60,7 @@ func (o *InstallStatus) GetStatusOk() (*InstallStatusStatus, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *InstallStatus) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -70,11 +73,19 @@ func (o *InstallStatus) SetStatus(v InstallStatusStatus) {
 }
 
 func (o InstallStatus) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Status != nil {
-		toSerialize["status"] = o.Status
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o InstallStatus) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Status) {
+		toSerialize["status"] = o.Status
+	}
+	return toSerialize, nil
 }
 
 type NullableInstallStatus struct {

@@ -1,10 +1,12 @@
 # OpenAPI\Client\GraniteApi
 
-All URIs are relative to http://localhost.
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**sslSetup()**](GraniteApi.md#sslSetup) | **POST** /libs/granite/security/post/sslSetup.html | 
+
+All URIs are relative to http://localhost, except if the operation defines another base path.
+
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**sslSetup()**](GraniteApi.md#sslSetup) | **POST** /libs/granite/security/post/sslSetup.html |  |
 
 
 ## `sslSetup()`
@@ -40,8 +42,8 @@ $truststore_password = 'truststore_password_example'; // string
 $truststore_password_confirm = 'truststore_password_confirm_example'; // string
 $https_hostname = 'https_hostname_example'; // string
 $https_port = 'https_port_example'; // string
-$privatekey_file = "/path/to/file.txt"; // \SplFileObject
-$certificate_file = "/path/to/file.txt"; // \SplFileObject
+$privatekey_file = '/path/to/file.txt'; // \SplFileObject
+$certificate_file = '/path/to/file.txt'; // \SplFileObject
 
 try {
     $result = $apiInstance->sslSetup($keystore_password, $keystore_password_confirm, $truststore_password, $truststore_password_confirm, $https_hostname, $https_port, $privatekey_file, $certificate_file);
@@ -53,16 +55,16 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **keystore_password** | **string**|  |
- **keystore_password_confirm** | **string**|  |
- **truststore_password** | **string**|  |
- **truststore_password_confirm** | **string**|  |
- **https_hostname** | **string**|  |
- **https_port** | **string**|  |
- **privatekey_file** | **\SplFileObject****\SplFileObject**|  | [optional]
- **certificate_file** | **\SplFileObject****\SplFileObject**|  | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **keystore_password** | **string**|  | |
+| **keystore_password_confirm** | **string**|  | |
+| **truststore_password** | **string**|  | |
+| **truststore_password_confirm** | **string**|  | |
+| **https_hostname** | **string**|  | |
+| **https_port** | **string**|  | |
+| **privatekey_file** | **\SplFileObject****\SplFileObject**|  | [optional] |
+| **certificate_file** | **\SplFileObject****\SplFileObject**|  | [optional] |
 
 ### Return type
 

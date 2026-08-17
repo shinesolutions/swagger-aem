@@ -30,7 +30,7 @@ Method | HTTP request | Description
 [**postNodeRw**](SlingApi.md#postNodeRw) | **POST** /{path}/{name}.rw.html | 
 [**postPath**](SlingApi.md#postPath) | **POST** /{path}/ | 
 [**postQuery**](SlingApi.md#postQuery) | **POST** /bin/querybuilder.json | 
-[**postTreeActivation**](SlingApi.md#postTreeActivation) | **POST** /etc/replication/treeactivation.html | 
+[**postTreeActivation**](SlingApi.md#postTreeActivation) | **POST** /libs/replication/treeactivation.html | 
 [**postTruststore**](SlingApi.md#postTruststore) | **POST** /libs/granite/security/post/truststore | 
 [**postTruststorePKCS12**](SlingApi.md#postTruststorePKCS12) | **POST** /etc/truststore | 
 
@@ -446,7 +446,7 @@ This endpoint does not need any parameter.
 ### Example
 
 ```bash
- postAgent runmode=value name=value  jcr:content/cq:distribute=value  jcr:content/cq:distribute@TypeHint=value  jcr:content/cq:name=value  jcr:content/cq:template=value  jcr:content/enabled=value  jcr:content/jcr:description=value  jcr:content/jcr:lastModified=value  jcr:content/jcr:lastModifiedBy=value  jcr:content/jcr:mixinTypes=value  jcr:content/jcr:title=value  jcr:content/logLevel=value  jcr:content/noStatusUpdate=value  jcr:content/noVersioning=value  jcr:content/protocolConnectTimeout=value  jcr:content/protocolHTTPConnectionClosed=value  jcr:content/protocolHTTPExpired=value  Specify as:  jcr:content/protocolHTTPHeaders=value1 jcr:content/protocolHTTPHeaders=value2 jcr:content/protocolHTTPHeaders=...  jcr:content/protocolHTTPHeaders@TypeHint=value  jcr:content/protocolHTTPMethod=value  jcr:content/protocolHTTPSRelaxed=value  jcr:content/protocolInterface=value  jcr:content/protocolSocketTimeout=value  jcr:content/protocolVersion=value  jcr:content/proxyNTLMDomain=value  jcr:content/proxyNTLMHost=value  jcr:content/proxyHost=value  jcr:content/proxyPassword=value  jcr:content/proxyPort=value  jcr:content/proxyUser=value  jcr:content/queueBatchMaxSize=value  jcr:content/queueBatchMode=value  jcr:content/queueBatchWaitTime=value  jcr:content/retryDelay=value  jcr:content/reverseReplication=value  jcr:content/serializationType=value  jcr:content/sling:resourceType=value  jcr:content/ssl=value  jcr:content/transportNTLMDomain=value  jcr:content/transportNTLMHost=value  jcr:content/transportPassword=value  jcr:content/transportUri=value  jcr:content/transportUser=value  jcr:content/triggerDistribute=value  jcr:content/triggerModified=value  jcr:content/triggerOnOffTime=value  jcr:content/triggerReceive=value  jcr:content/triggerSpecific=value  jcr:content/userId=value  jcr:primaryType=value  :operation=value
+ postAgent runmode=value name=value  jcr:content/cq:distribute=value  jcr:content/cq:distribute@TypeHint=value  jcr:content/cq:name=value  jcr:content/cq:template=value  jcr:content/aliasUpdate=value  jcr:content/enabled=value  jcr:content/jcr:description=value  jcr:content/jcr:lastModified=value  jcr:content/jcr:lastModifiedBy=value  jcr:content/jcr:mixinTypes=value  jcr:content/jcr:title=value  jcr:content/logLevel=value  jcr:content/noStatusUpdate=value  jcr:content/noVersioning=value  jcr:content/protocolConnectTimeout=value  jcr:content/protocolHTTPConnectionClosed=value  jcr:content/protocolHTTPExpired=value  Specify as:  jcr:content/protocolHTTPHeaders=value1 jcr:content/protocolHTTPHeaders=value2 jcr:content/protocolHTTPHeaders=...  jcr:content/protocolHTTPHeaders@TypeHint=value  jcr:content/protocolHTTPMethod=value  jcr:content/protocolHTTPSRelaxed=value  jcr:content/protocolInterface=value  jcr:content/protocolSocketTimeout=value  jcr:content/protocolVersion=value  jcr:content/proxyNTLMDomain=value  jcr:content/proxyNTLMHost=value  jcr:content/proxyHost=value  jcr:content/proxyPassword=value  jcr:content/proxyPort=value  jcr:content/proxyUser=value  jcr:content/queueBatchMaxSize=value  jcr:content/queueBatchMode=value  jcr:content/queueBatchWaitTime=value  jcr:content/retryDelay=value  jcr:content/reverseReplication=value  jcr:content/serializationType=value  jcr:content/sling:resourceType=value  jcr:content/ssl=value  jcr:content/transportNTLMDomain=value  jcr:content/transportNTLMHost=value  jcr:content/transportPassword=value  jcr:content/transportUri=value  jcr:content/transportUser=value  jcr:content/triggerDistribute=value  jcr:content/triggerModified=value  jcr:content/triggerOnOffTime=value  jcr:content/triggerReceive=value  jcr:content/triggerSpecific=value  jcr:content/userId=value  jcr:primaryType=value  :operation=value
 ```
 
 ### Parameters
@@ -460,6 +460,7 @@ Name | Type | Description  | Notes
  **jcrContentSlashcqDistributeAtTypeHint** | **string** |  | [optional] [default to null]
  **jcrContentSlashcqName** | **string** |  | [optional] [default to null]
  **jcrContentSlashcqTemplate** | **string** |  | [optional] [default to null]
+ **jcrContentSlashaliasUpdate** | **boolean** |  | [optional] [default to null]
  **jcrContentSlashenabled** | **boolean** |  | [optional] [default to null]
  **jcrContentSlashjcrDescription** | **string** |  | [optional] [default to null]
  **jcrContentSlashjcrLastModified** | **string** |  | [optional] [default to null]
@@ -1082,7 +1083,7 @@ Name | Type | Description  | Notes
 ### Example
 
 ```bash
- postTreeActivation  ignoredeactivated=value  onlymodified=value  path=value
+ postTreeActivation  ignoredeactivated=value  onlymodified=value  path=value  cmd=value
 ```
 
 ### Parameters
@@ -1093,6 +1094,7 @@ Name | Type | Description  | Notes
  **ignoredeactivated** | **boolean** |  | [default to null]
  **onlymodified** | **boolean** |  | [default to null]
  **path** | **string** |  | [default to null]
+ **cmd** | **string** |  | [default to activate]
 
 ### Return type
 

@@ -1,0 +1,25 @@
+{
+  "name": "graphql-server",
+  "version": "1.0.0",
+  "description": " Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API ",
+  "main": "index.js",
+  "scripts": {
+    "start": "node start.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "latest",
+    "graphql": "latest",
+    "apollo-server-express": "latest",
+    "graphql-combine": "latest",
+    "lodash": "latest",
+    "path": "latest"
+  },
+  "devDependencies": {
+    "babel-register": "latest",
+    "babel-preset-env": "latest"
+  }
+}

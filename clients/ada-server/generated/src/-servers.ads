@@ -12,6 +12,7 @@
 with Swagger.Servers;
 with .Models;
 with .Skeletons;
+
 package .Servers is
    pragma Warnings (Off, "*use clause for package*");
    use .Models;
@@ -23,7 +24,7 @@ package .Servers is
    procedure Get_Aem_Product_Info
       (Server : in out Server_Type
        ;
-       Result  : out Swagger.UString_Vectors.Vector;
+       Result  : out ;
        Context : in out Swagger.Servers.Context_Type);
 
    --  
@@ -267,7 +268,7 @@ package .Servers is
       (Server : in out Server_Type;
        Intermediate_Path : in Swagger.UString;
        Authorizable_Id : in Swagger.UString;
-       Result  : out Swagger.Http_Content_Type;
+       Result  : out Swagger.Blob_Ref;
        Context : in out Swagger.Servers.Context_Type);
 
    --  
@@ -285,7 +286,7 @@ package .Servers is
        Group : in Swagger.UString;
        Name : in Swagger.UString;
        Version : in Swagger.UString;
-       Result  : out Swagger.Http_Content_Type;
+       Result  : out Swagger.Blob_Ref;
        Context : in out Swagger.Servers.Context_Type);
 
    --  
@@ -314,7 +315,7 @@ package .Servers is
    procedure Get_Truststore
       (Server : in out Server_Type
        ;
-       Result  : out Swagger.Http_Content_Type;
+       Result  : out Swagger.Blob_Ref;
        Context : in out Swagger.Servers.Context_Type);
 
    --  
@@ -335,6 +336,7 @@ package .Servers is
        Jcr_Content_Slashcq_Distribute_At_Type_Hint : in Swagger.Nullable_UString;
        Jcr_Content_Slashcq_Name : in Swagger.Nullable_UString;
        Jcr_Content_Slashcq_Template : in Swagger.Nullable_UString;
+       Jcr_Content_Slashalias_Update : in Swagger.Nullable_Boolean;
        Jcr_Content_Slashenabled : in Swagger.Nullable_Boolean;
        Jcr_Content_Slashjcr_Description : in Swagger.Nullable_UString;
        Jcr_Content_Slashjcr_Last_Modified : in Swagger.Nullable_UString;
@@ -607,6 +609,7 @@ package .Servers is
        Ignoredeactivated : in Boolean;
        Onlymodified : in Boolean;
        Path : in Swagger.UString;
+       Cmd : in Swagger.UString;
        Context : in out Swagger.Servers.Context_Type);
 
    --  

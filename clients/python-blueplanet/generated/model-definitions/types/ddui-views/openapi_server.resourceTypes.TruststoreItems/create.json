@@ -1,0 +1,23 @@
+{
+  "type": "form",
+  "version": "2.0",
+  "cells": [{
+    "label": "General",
+    "children": [
+      {"model": "label"},
+      {"model": "description"}
+    ]
+  },{
+    "label": "Details",
+    "model": "properties",
+    "children": [
+      {"model": "alias" },
+      {"model": "entry_type" },
+      {"model": "subject" },
+      {"model": "issuer" },
+      {"model": "not_before" },
+      {"model": "not_after" },
+      {"model": "serial_number" },
+    ]
+  }]
+}

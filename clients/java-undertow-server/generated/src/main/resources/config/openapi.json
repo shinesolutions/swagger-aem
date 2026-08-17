@@ -4,11 +4,11 @@
     "contact" : {
       "email" : "opensource@shinesolutions.com",
       "name" : "Shine Solutions",
-      "url" : "http://shinesolutions.com"
+      "url" : "https://github.com/shinesolutions"
     },
     "description" : "Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API",
     "title" : "Adobe Experience Manager (AEM) API",
-    "version" : "3.5.0-pre.0"
+    "version" : "3.7.1-pre.0"
   },
   "servers" : [ {
     "url" : "/"
@@ -36,7 +36,7 @@
           }
         },
         "tags" : [ "console" ],
-        "x-accepts" : "text/xml"
+        "x-accepts" : [ "text/xml" ]
       }
     },
     "/libs/granite/core/content/login.html" : {
@@ -56,7 +56,7 @@
         },
         "security" : [ ],
         "tags" : [ "cq" ],
-        "x-accepts" : "text/html"
+        "x-accepts" : [ "text/html" ]
       }
     },
     "/.cqactions.html" : {
@@ -87,7 +87,7 @@
           }
         },
         "tags" : [ "cq" ],
-        "x-accepts" : "application/json"
+        "x-accepts" : [ "application/json" ]
       }
     },
     "/{path}/" : {
@@ -127,7 +127,7 @@
           }
         },
         "tags" : [ "sling" ],
-        "x-accepts" : "application/json"
+        "x-accepts" : [ "application/json" ]
       }
     },
     "/{path}/{name}" : {
@@ -158,7 +158,7 @@
           }
         },
         "tags" : [ "sling" ],
-        "x-accepts" : "application/json"
+        "x-accepts" : [ "application/json" ]
       },
       "get" : {
         "operationId" : "getNode",
@@ -187,7 +187,7 @@
           }
         },
         "tags" : [ "sling" ],
-        "x-accepts" : "application/json"
+        "x-accepts" : [ "application/json" ]
       },
       "post" : {
         "operationId" : "postNode",
@@ -229,17 +229,10 @@
           "style" : "form"
         } ],
         "requestBody" : {
-          "$ref" : "#/components/requestBodies/inline_object",
           "content" : {
             "multipart/form-data" : {
               "schema" : {
-                "properties" : {
-                  "file" : {
-                    "format" : "binary",
-                    "type" : "string"
-                  }
-                },
-                "type" : "object"
+                "$ref" : "#/components/schemas/postNode_request"
               }
             }
           }
@@ -250,8 +243,8 @@
           }
         },
         "tags" : [ "sling" ],
-        "x-contentType" : "multipart/form-data",
-        "x-accepts" : "application/json"
+        "x-content-type" : "multipart/form-data",
+        "x-accepts" : [ "application/json" ]
       }
     },
     "/{path}/{name}.rw.html" : {
@@ -291,7 +284,7 @@
           }
         },
         "tags" : [ "sling" ],
-        "x-accepts" : "application/json"
+        "x-accepts" : [ "application/json" ]
       }
     },
     "/apps/system/config/{configNodeName}" : {
@@ -313,7 +306,7 @@
           }
         },
         "tags" : [ "sling" ],
-        "x-accepts" : "application/json"
+        "x-accepts" : [ "application/json" ]
       }
     },
     "/apps/system/config/org.apache.felix.http" : {
@@ -506,7 +499,7 @@
           }
         },
         "tags" : [ "sling" ],
-        "x-accepts" : "application/json"
+        "x-accepts" : [ "application/json" ]
       }
     },
     "/apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet" : {
@@ -591,7 +584,7 @@
           }
         },
         "tags" : [ "sling" ],
-        "x-accepts" : "application/json"
+        "x-accepts" : [ "application/json" ]
       }
     },
     "/apps/system/config/org.apache.sling.security.impl.ReferrerFilter" : {
@@ -676,7 +669,7 @@
           }
         },
         "tags" : [ "sling" ],
-        "x-accepts" : "application/json"
+        "x-accepts" : [ "application/json" ]
       }
     },
     "/apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet" : {
@@ -725,7 +718,7 @@
           }
         },
         "tags" : [ "sling" ],
-        "x-accepts" : "application/json"
+        "x-accepts" : [ "application/json" ]
       }
     },
     "/apps/system/config/com.shinesolutions.aem.passwordreset.Activator" : {
@@ -759,7 +752,7 @@
           }
         },
         "tags" : [ "custom" ],
-        "x-accepts" : "application/json"
+        "x-accepts" : [ "application/json" ]
       }
     },
     "/apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck" : {
@@ -793,7 +786,7 @@
           }
         },
         "tags" : [ "custom" ],
-        "x-accepts" : "application/json"
+        "x-accepts" : [ "application/json" ]
       }
     },
     "/bin/querybuilder.json" : {
@@ -849,7 +842,7 @@
           }
         },
         "tags" : [ "sling" ],
-        "x-accepts" : "application/json"
+        "x-accepts" : [ "application/json" ]
       },
       "post" : {
         "operationId" : "postQuery",
@@ -903,7 +896,7 @@
           }
         },
         "tags" : [ "sling" ],
-        "x-accepts" : "application/json"
+        "x-accepts" : [ "application/json" ]
       }
     },
     "/etc/packages/{group}/{name}-{version}.zip" : {
@@ -951,7 +944,7 @@
           }
         },
         "tags" : [ "sling" ],
-        "x-accepts" : "application/octet-stream"
+        "x-accepts" : [ "application/octet-stream" ]
       }
     },
     "/etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json" : {
@@ -998,7 +991,7 @@
           }
         },
         "tags" : [ "sling" ],
-        "x-accepts" : "application/json"
+        "x-accepts" : [ "application/json" ]
       }
     },
     "/etc/replication/agents.{runmode}.-1.json" : {
@@ -1027,7 +1020,7 @@
           }
         },
         "tags" : [ "sling" ],
-        "x-accepts" : "application/json"
+        "x-accepts" : [ "application/json" ]
       }
     },
     "/etc/replication/agents.{runmode}/{name}" : {
@@ -1058,7 +1051,7 @@
           }
         },
         "tags" : [ "sling" ],
-        "x-accepts" : "application/json"
+        "x-accepts" : [ "application/json" ]
       },
       "get" : {
         "operationId" : "getAgent",
@@ -1087,7 +1080,7 @@
           }
         },
         "tags" : [ "sling" ],
-        "x-accepts" : "application/json"
+        "x-accepts" : [ "application/json" ]
       },
       "post" : {
         "operationId" : "postAgent",
@@ -1143,6 +1136,15 @@
           "required" : false,
           "schema" : {
             "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "jcr:content/aliasUpdate",
+          "required" : false,
+          "schema" : {
+            "type" : "boolean"
           },
           "style" : "form"
         }, {
@@ -1569,10 +1571,10 @@
           }
         },
         "tags" : [ "sling" ],
-        "x-accepts" : "application/json"
+        "x-accepts" : [ "application/json" ]
       }
     },
-    "/etc/replication/treeactivation.html" : {
+    "/libs/replication/treeactivation.html" : {
       "post" : {
         "operationId" : "postTreeActivation",
         "parameters" : [ {
@@ -1602,6 +1604,16 @@
             "type" : "string"
           },
           "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "cmd",
+          "required" : true,
+          "schema" : {
+            "default" : "activate",
+            "type" : "string"
+          },
+          "style" : "form"
         } ],
         "responses" : {
           "default" : {
@@ -1609,7 +1621,7 @@
           }
         },
         "tags" : [ "sling" ],
-        "x-accepts" : "application/json"
+        "x-accepts" : [ "application/json" ]
       }
     },
     "/libs/granite/security/post/authorizables" : {
@@ -1683,7 +1695,7 @@
           }
         },
         "tags" : [ "sling" ],
-        "x-accepts" : "text/html"
+        "x-accepts" : [ "text/html" ]
       }
     },
     "/crx/explorer/ui/setpassword.jsp" : {
@@ -1730,7 +1742,7 @@
           }
         },
         "tags" : [ "crx" ],
-        "x-accepts" : "text/plain"
+        "x-accepts" : [ "text/plain" ]
       }
     },
     "/crx/packmgr/installstatus.jsp" : {
@@ -1759,7 +1771,7 @@
           }
         },
         "tags" : [ "crx" ],
-        "x-accepts" : "application/json"
+        "x-accepts" : [ "application/json" ]
       }
     },
     "/crx/packmgr/service.jsp" : {
@@ -1788,7 +1800,7 @@
           }
         },
         "tags" : [ "crx" ],
-        "x-accepts" : "text/xml"
+        "x-accepts" : [ "text/xml" ]
       }
     },
     "/crx/packmgr/update.jsp" : {
@@ -1862,7 +1874,7 @@
           }
         },
         "tags" : [ "crx" ],
-        "x-accepts" : "application/json"
+        "x-accepts" : [ "application/json" ]
       }
     },
     "/crx/packmgr/service/.json/{path}" : {
@@ -1942,17 +1954,10 @@
           "style" : "form"
         } ],
         "requestBody" : {
-          "$ref" : "#/components/requestBodies/inline_object_1",
           "content" : {
             "multipart/form-data" : {
               "schema" : {
-                "properties" : {
-                  "package" : {
-                    "format" : "binary",
-                    "type" : "string"
-                  }
-                },
-                "type" : "object"
+                "$ref" : "#/components/schemas/postPackageServiceJson_request"
               }
             }
           }
@@ -1970,8 +1975,8 @@
           }
         },
         "tags" : [ "crx" ],
-        "x-contentType" : "multipart/form-data",
-        "x-accepts" : "application/json"
+        "x-content-type" : "multipart/form-data",
+        "x-accepts" : [ "application/json" ]
       }
     },
     "/crx/packmgr/service/script.html" : {
@@ -2000,7 +2005,7 @@
           }
         },
         "tags" : [ "crx" ],
-        "x-accepts" : "text/html"
+        "x-accepts" : [ "text/html" ]
       }
     },
     "/crx/server/crx.default/jcr:root/.1.json" : {
@@ -2029,7 +2034,7 @@
           }
         },
         "tags" : [ "crx" ],
-        "x-accepts" : "plain/text"
+        "x-accepts" : [ "plain/text" ]
       }
     },
     "/system/console/bundles/{name}.json" : {
@@ -2068,7 +2073,7 @@
           }
         },
         "tags" : [ "console" ],
-        "x-accepts" : "application/json"
+        "x-accepts" : [ "application/json" ]
       }
     },
     "/system/console/bundles/{name}" : {
@@ -2099,7 +2104,7 @@
           }
         },
         "tags" : [ "console" ],
-        "x-accepts" : "application/json"
+        "x-accepts" : [ "application/json" ]
       }
     },
     "/system/console/jmx/com.adobe.granite:type=Repository/op/{action}" : {
@@ -2121,7 +2126,7 @@
           }
         },
         "tags" : [ "console" ],
-        "x-accepts" : "application/json"
+        "x-accepts" : [ "application/json" ]
       }
     },
     "/system/health" : {
@@ -2159,7 +2164,7 @@
           }
         },
         "tags" : [ "custom" ],
-        "x-accepts" : "application/json"
+        "x-accepts" : [ "application/json" ]
       }
     },
     "/apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config" : {
@@ -2613,7 +2618,7 @@
           }
         },
         "tags" : [ "sling" ],
-        "x-accepts" : "application/json"
+        "x-accepts" : [ "application/json" ]
       }
     },
     "/apps/system/config/org.apache.http.proxyconfigurator.config" : {
@@ -2737,7 +2742,7 @@
           }
         },
         "tags" : [ "sling" ],
-        "x-accepts" : "application/json"
+        "x-accepts" : [ "application/json" ]
       }
     },
     "/libs/granite/security/post/truststore" : {
@@ -2790,17 +2795,10 @@
           "style" : "form"
         } ],
         "requestBody" : {
-          "$ref" : "#/components/requestBodies/inline_object_2",
           "content" : {
             "multipart/form-data" : {
               "schema" : {
-                "properties" : {
-                  "certificate" : {
-                    "format" : "binary",
-                    "type" : "string"
-                  }
-                },
-                "type" : "object"
+                "$ref" : "#/components/schemas/postTruststore_request"
               }
             }
           }
@@ -2818,8 +2816,8 @@
           }
         },
         "tags" : [ "sling" ],
-        "x-contentType" : "multipart/form-data",
-        "x-accepts" : "text/plain"
+        "x-content-type" : "multipart/form-data",
+        "x-accepts" : [ "text/plain" ]
       }
     },
     "/libs/granite/security/truststore.json" : {
@@ -2848,7 +2846,7 @@
           }
         },
         "tags" : [ "sling" ],
-        "x-accepts" : "application/json"
+        "x-accepts" : [ "application/json" ]
       }
     },
     "/etc/truststore/truststore.p12" : {
@@ -2868,24 +2866,17 @@
           }
         },
         "tags" : [ "sling" ],
-        "x-accepts" : "application/octet-stream"
+        "x-accepts" : [ "application/octet-stream" ]
       }
     },
     "/etc/truststore" : {
       "post" : {
         "operationId" : "postTruststorePKCS12",
         "requestBody" : {
-          "$ref" : "#/components/requestBodies/inline_object_3",
           "content" : {
             "multipart/form-data" : {
               "schema" : {
-                "properties" : {
-                  "truststore.p12" : {
-                    "format" : "binary",
-                    "type" : "string"
-                  }
-                },
-                "type" : "object"
+                "$ref" : "#/components/schemas/postTruststorePKCS12_request"
               }
             }
           }
@@ -2903,8 +2894,8 @@
           }
         },
         "tags" : [ "sling" ],
-        "x-contentType" : "multipart/form-data",
-        "x-accepts" : "text/plain"
+        "x-content-type" : "multipart/form-data",
+        "x-accepts" : [ "text/plain" ]
       }
     },
     "/system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler" : {
@@ -3226,7 +3217,7 @@
           }
         },
         "tags" : [ "console" ],
-        "x-accepts" : "text/plain"
+        "x-accepts" : [ "text/plain" ]
       }
     },
     "/system/console/status-productinfo.json" : {
@@ -3248,7 +3239,7 @@
           }
         },
         "tags" : [ "console" ],
-        "x-accepts" : "application/json"
+        "x-accepts" : [ "application/json" ]
       }
     },
     "/{intermediatePath}/{authorizableId}.ks.html" : {
@@ -3355,25 +3346,10 @@
           "style" : "form"
         } ],
         "requestBody" : {
-          "$ref" : "#/components/requestBodies/inline_object_4",
           "content" : {
             "multipart/form-data" : {
               "schema" : {
-                "properties" : {
-                  "cert-chain" : {
-                    "format" : "binary",
-                    "type" : "string"
-                  },
-                  "pk" : {
-                    "format" : "binary",
-                    "type" : "string"
-                  },
-                  "keyStore" : {
-                    "format" : "binary",
-                    "type" : "string"
-                  }
-                },
-                "type" : "object"
+                "$ref" : "#/components/schemas/postAuthorizableKeystore_request"
               }
             }
           }
@@ -3401,8 +3377,8 @@
           }
         },
         "tags" : [ "sling" ],
-        "x-contentType" : "multipart/form-data",
-        "x-accepts" : "text/plain"
+        "x-content-type" : "multipart/form-data",
+        "x-accepts" : [ "text/plain" ]
       }
     },
     "/{intermediatePath}/{authorizableId}.ks.json" : {
@@ -3450,7 +3426,7 @@
           }
         },
         "tags" : [ "sling" ],
-        "x-accepts" : "text/plain"
+        "x-accepts" : [ "text/plain" ]
       }
     },
     "/{intermediatePath}/{authorizableId}/keystore/store.p12" : {
@@ -3489,7 +3465,7 @@
           }
         },
         "tags" : [ "sling" ],
-        "x-accepts" : "application/octet-stream"
+        "x-accepts" : [ "application/octet-stream" ]
       }
     },
     "/libs/granite/security/post/sslSetup.html" : {
@@ -3551,21 +3527,10 @@
           "style" : "form"
         } ],
         "requestBody" : {
-          "$ref" : "#/components/requestBodies/inline_object_5",
           "content" : {
             "multipart/form-data" : {
               "schema" : {
-                "properties" : {
-                  "privatekeyFile" : {
-                    "format" : "binary",
-                    "type" : "string"
-                  },
-                  "certificateFile" : {
-                    "format" : "binary",
-                    "type" : "string"
-                  }
-                },
-                "type" : "object"
+                "$ref" : "#/components/schemas/sslSetup_request"
               }
             }
           }
@@ -3583,68 +3548,12 @@
           }
         },
         "tags" : [ "granite" ],
-        "x-contentType" : "multipart/form-data",
-        "x-accepts" : "text/plain"
+        "x-content-type" : "multipart/form-data",
+        "x-accepts" : [ "text/plain" ]
       }
     }
   },
   "components" : {
-    "requestBodies" : {
-      "inline_object_1" : {
-        "content" : {
-          "multipart/form-data" : {
-            "schema" : {
-              "$ref" : "#/components/schemas/inline_object_1"
-            }
-          }
-        }
-      },
-      "inline_object" : {
-        "content" : {
-          "multipart/form-data" : {
-            "schema" : {
-              "$ref" : "#/components/schemas/inline_object"
-            }
-          }
-        }
-      },
-      "inline_object_5" : {
-        "content" : {
-          "multipart/form-data" : {
-            "schema" : {
-              "$ref" : "#/components/schemas/inline_object_5"
-            }
-          }
-        }
-      },
-      "inline_object_4" : {
-        "content" : {
-          "multipart/form-data" : {
-            "schema" : {
-              "$ref" : "#/components/schemas/inline_object_4"
-            }
-          }
-        }
-      },
-      "inline_object_3" : {
-        "content" : {
-          "multipart/form-data" : {
-            "schema" : {
-              "$ref" : "#/components/schemas/inline_object_3"
-            }
-          }
-        }
-      },
-      "inline_object_2" : {
-        "content" : {
-          "multipart/form-data" : {
-            "schema" : {
-              "$ref" : "#/components/schemas/inline_object_2"
-            }
-          }
-        }
-      }
-    },
     "schemas" : {
       "InstallStatus" : {
         "example" : {
@@ -3678,21 +3587,21 @@
       "TruststoreInfo" : {
         "example" : {
           "aliases" : [ {
-            "entryType" : "entryType",
-            "notAfter" : "notAfter",
-            "serialNumber" : 0,
-            "subject" : "subject",
             "alias" : "alias",
+            "entryType" : "entryType",
+            "subject" : "subject",
             "issuer" : "issuer",
-            "notBefore" : "notBefore"
+            "notBefore" : "notBefore",
+            "notAfter" : "notAfter",
+            "serialNumber" : 0
           }, {
-            "entryType" : "entryType",
-            "notAfter" : "notAfter",
-            "serialNumber" : 0,
-            "subject" : "subject",
             "alias" : "alias",
+            "entryType" : "entryType",
+            "subject" : "subject",
             "issuer" : "issuer",
-            "notBefore" : "notBefore"
+            "notBefore" : "notBefore",
+            "notAfter" : "notAfter",
+            "serialNumber" : 0
           } ],
           "exists" : true
         },
@@ -3764,13 +3673,13 @@
       },
       "TruststoreItems" : {
         "example" : {
-          "entryType" : "entryType",
-          "notAfter" : "notAfter",
-          "serialNumber" : 0,
-          "subject" : "subject",
           "alias" : "alias",
+          "entryType" : "entryType",
+          "subject" : "subject",
           "issuer" : "issuer",
-          "notBefore" : "notBefore"
+          "notBefore" : "notBefore",
+          "notAfter" : "notAfter",
+          "serialNumber" : 0
         },
         "properties" : {
           "alias" : {
@@ -4029,41 +3938,41 @@
       },
       "BundleInfo" : {
         "example" : {
+          "status" : "status",
           "s" : [ 0, 0 ],
           "data" : [ {
+            "id" : 6,
+            "name" : "name",
             "fragment" : true,
             "stateRaw" : 1,
-            "name" : "name",
-            "symbolicName" : "symbolicName",
-            "id" : 6,
             "state" : "state",
-            "category" : "category",
             "version" : "version",
+            "symbolicName" : "symbolicName",
+            "category" : "category",
             "props" : [ {
-              "value" : "value",
-              "key" : "key"
+              "key" : "key",
+              "value" : "value"
             }, {
-              "value" : "value",
-              "key" : "key"
+              "key" : "key",
+              "value" : "value"
             } ]
           }, {
+            "id" : 6,
+            "name" : "name",
             "fragment" : true,
             "stateRaw" : 1,
-            "name" : "name",
-            "symbolicName" : "symbolicName",
-            "id" : 6,
             "state" : "state",
-            "category" : "category",
             "version" : "version",
+            "symbolicName" : "symbolicName",
+            "category" : "category",
             "props" : [ {
-              "value" : "value",
-              "key" : "key"
+              "key" : "key",
+              "value" : "value"
             }, {
-              "value" : "value",
-              "key" : "key"
+              "key" : "key",
+              "value" : "value"
             } ]
-          } ],
-          "status" : "status"
+          } ]
         },
         "properties" : {
           "status" : {
@@ -4087,20 +3996,20 @@
       },
       "BundleData" : {
         "example" : {
+          "id" : 6,
+          "name" : "name",
           "fragment" : true,
           "stateRaw" : 1,
-          "name" : "name",
-          "symbolicName" : "symbolicName",
-          "id" : 6,
           "state" : "state",
-          "category" : "category",
           "version" : "version",
+          "symbolicName" : "symbolicName",
+          "category" : "category",
           "props" : [ {
-            "value" : "value",
-            "key" : "key"
+            "key" : "key",
+            "value" : "value"
           }, {
-            "value" : "value",
-            "key" : "key"
+            "key" : "key",
+            "value" : "value"
           } ]
         },
         "properties" : {
@@ -4147,8 +4056,8 @@
       },
       "BundleDataProp" : {
         "example" : {
-          "value" : "value",
-          "key" : "key"
+          "key" : "key",
+          "value" : "value"
         },
         "properties" : {
           "key" : {
@@ -4162,7 +4071,7 @@
         },
         "type" : "object"
       },
-      "inline_object" : {
+      "postNode_request" : {
         "properties" : {
           "file" : {
             "format" : "binary",
@@ -4171,7 +4080,7 @@
         },
         "type" : "object"
       },
-      "inline_object_1" : {
+      "postPackageServiceJson_request" : {
         "properties" : {
           "package" : {
             "format" : "binary",
@@ -4180,7 +4089,7 @@
         },
         "type" : "object"
       },
-      "inline_object_2" : {
+      "postTruststore_request" : {
         "properties" : {
           "certificate" : {
             "format" : "binary",
@@ -4189,7 +4098,7 @@
         },
         "type" : "object"
       },
-      "inline_object_3" : {
+      "postTruststorePKCS12_request" : {
         "properties" : {
           "truststore.p12" : {
             "format" : "binary",
@@ -4198,7 +4107,7 @@
         },
         "type" : "object"
       },
-      "inline_object_4" : {
+      "postAuthorizableKeystore_request" : {
         "properties" : {
           "cert-chain" : {
             "format" : "binary",
@@ -4215,7 +4124,7 @@
         },
         "type" : "object"
       },
-      "inline_object_5" : {
+      "sslSetup_request" : {
         "properties" : {
           "privatekeyFile" : {
             "format" : "binary",

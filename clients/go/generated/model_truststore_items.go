@@ -3,7 +3,7 @@ Adobe Experience Manager (AEM) API
 
 Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
 
-API version: 3.5.0-pre.0
+API version: 3.7.1-pre.0
 Contact: opensource@shinesolutions.com
 */
 
@@ -14,6 +14,9 @@ package openapi
 import (
 	"encoding/json"
 )
+
+// checks if the TruststoreItems type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TruststoreItems{}
 
 // TruststoreItems struct for TruststoreItems
 type TruststoreItems struct {
@@ -51,7 +54,7 @@ func NewTruststoreItemsWithDefaults() *TruststoreItems {
 
 // GetAlias returns the Alias field value if set, zero value otherwise.
 func (o *TruststoreItems) GetAlias() string {
-	if o == nil || o.Alias == nil {
+	if o == nil || IsNil(o.Alias) {
 		var ret string
 		return ret
 	}
@@ -61,7 +64,7 @@ func (o *TruststoreItems) GetAlias() string {
 // GetAliasOk returns a tuple with the Alias field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TruststoreItems) GetAliasOk() (*string, bool) {
-	if o == nil || o.Alias == nil {
+	if o == nil || IsNil(o.Alias) {
 		return nil, false
 	}
 	return o.Alias, true
@@ -69,7 +72,7 @@ func (o *TruststoreItems) GetAliasOk() (*string, bool) {
 
 // HasAlias returns a boolean if a field has been set.
 func (o *TruststoreItems) HasAlias() bool {
-	if o != nil && o.Alias != nil {
+	if o != nil && !IsNil(o.Alias) {
 		return true
 	}
 
@@ -83,7 +86,7 @@ func (o *TruststoreItems) SetAlias(v string) {
 
 // GetEntryType returns the EntryType field value if set, zero value otherwise.
 func (o *TruststoreItems) GetEntryType() string {
-	if o == nil || o.EntryType == nil {
+	if o == nil || IsNil(o.EntryType) {
 		var ret string
 		return ret
 	}
@@ -93,7 +96,7 @@ func (o *TruststoreItems) GetEntryType() string {
 // GetEntryTypeOk returns a tuple with the EntryType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TruststoreItems) GetEntryTypeOk() (*string, bool) {
-	if o == nil || o.EntryType == nil {
+	if o == nil || IsNil(o.EntryType) {
 		return nil, false
 	}
 	return o.EntryType, true
@@ -101,7 +104,7 @@ func (o *TruststoreItems) GetEntryTypeOk() (*string, bool) {
 
 // HasEntryType returns a boolean if a field has been set.
 func (o *TruststoreItems) HasEntryType() bool {
-	if o != nil && o.EntryType != nil {
+	if o != nil && !IsNil(o.EntryType) {
 		return true
 	}
 
@@ -115,7 +118,7 @@ func (o *TruststoreItems) SetEntryType(v string) {
 
 // GetSubject returns the Subject field value if set, zero value otherwise.
 func (o *TruststoreItems) GetSubject() string {
-	if o == nil || o.Subject == nil {
+	if o == nil || IsNil(o.Subject) {
 		var ret string
 		return ret
 	}
@@ -125,7 +128,7 @@ func (o *TruststoreItems) GetSubject() string {
 // GetSubjectOk returns a tuple with the Subject field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TruststoreItems) GetSubjectOk() (*string, bool) {
-	if o == nil || o.Subject == nil {
+	if o == nil || IsNil(o.Subject) {
 		return nil, false
 	}
 	return o.Subject, true
@@ -133,7 +136,7 @@ func (o *TruststoreItems) GetSubjectOk() (*string, bool) {
 
 // HasSubject returns a boolean if a field has been set.
 func (o *TruststoreItems) HasSubject() bool {
-	if o != nil && o.Subject != nil {
+	if o != nil && !IsNil(o.Subject) {
 		return true
 	}
 
@@ -147,7 +150,7 @@ func (o *TruststoreItems) SetSubject(v string) {
 
 // GetIssuer returns the Issuer field value if set, zero value otherwise.
 func (o *TruststoreItems) GetIssuer() string {
-	if o == nil || o.Issuer == nil {
+	if o == nil || IsNil(o.Issuer) {
 		var ret string
 		return ret
 	}
@@ -157,7 +160,7 @@ func (o *TruststoreItems) GetIssuer() string {
 // GetIssuerOk returns a tuple with the Issuer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TruststoreItems) GetIssuerOk() (*string, bool) {
-	if o == nil || o.Issuer == nil {
+	if o == nil || IsNil(o.Issuer) {
 		return nil, false
 	}
 	return o.Issuer, true
@@ -165,7 +168,7 @@ func (o *TruststoreItems) GetIssuerOk() (*string, bool) {
 
 // HasIssuer returns a boolean if a field has been set.
 func (o *TruststoreItems) HasIssuer() bool {
-	if o != nil && o.Issuer != nil {
+	if o != nil && !IsNil(o.Issuer) {
 		return true
 	}
 
@@ -179,7 +182,7 @@ func (o *TruststoreItems) SetIssuer(v string) {
 
 // GetNotBefore returns the NotBefore field value if set, zero value otherwise.
 func (o *TruststoreItems) GetNotBefore() string {
-	if o == nil || o.NotBefore == nil {
+	if o == nil || IsNil(o.NotBefore) {
 		var ret string
 		return ret
 	}
@@ -189,7 +192,7 @@ func (o *TruststoreItems) GetNotBefore() string {
 // GetNotBeforeOk returns a tuple with the NotBefore field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TruststoreItems) GetNotBeforeOk() (*string, bool) {
-	if o == nil || o.NotBefore == nil {
+	if o == nil || IsNil(o.NotBefore) {
 		return nil, false
 	}
 	return o.NotBefore, true
@@ -197,7 +200,7 @@ func (o *TruststoreItems) GetNotBeforeOk() (*string, bool) {
 
 // HasNotBefore returns a boolean if a field has been set.
 func (o *TruststoreItems) HasNotBefore() bool {
-	if o != nil && o.NotBefore != nil {
+	if o != nil && !IsNil(o.NotBefore) {
 		return true
 	}
 
@@ -211,7 +214,7 @@ func (o *TruststoreItems) SetNotBefore(v string) {
 
 // GetNotAfter returns the NotAfter field value if set, zero value otherwise.
 func (o *TruststoreItems) GetNotAfter() string {
-	if o == nil || o.NotAfter == nil {
+	if o == nil || IsNil(o.NotAfter) {
 		var ret string
 		return ret
 	}
@@ -221,7 +224,7 @@ func (o *TruststoreItems) GetNotAfter() string {
 // GetNotAfterOk returns a tuple with the NotAfter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TruststoreItems) GetNotAfterOk() (*string, bool) {
-	if o == nil || o.NotAfter == nil {
+	if o == nil || IsNil(o.NotAfter) {
 		return nil, false
 	}
 	return o.NotAfter, true
@@ -229,7 +232,7 @@ func (o *TruststoreItems) GetNotAfterOk() (*string, bool) {
 
 // HasNotAfter returns a boolean if a field has been set.
 func (o *TruststoreItems) HasNotAfter() bool {
-	if o != nil && o.NotAfter != nil {
+	if o != nil && !IsNil(o.NotAfter) {
 		return true
 	}
 
@@ -243,7 +246,7 @@ func (o *TruststoreItems) SetNotAfter(v string) {
 
 // GetSerialNumber returns the SerialNumber field value if set, zero value otherwise.
 func (o *TruststoreItems) GetSerialNumber() int32 {
-	if o == nil || o.SerialNumber == nil {
+	if o == nil || IsNil(o.SerialNumber) {
 		var ret int32
 		return ret
 	}
@@ -253,7 +256,7 @@ func (o *TruststoreItems) GetSerialNumber() int32 {
 // GetSerialNumberOk returns a tuple with the SerialNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TruststoreItems) GetSerialNumberOk() (*int32, bool) {
-	if o == nil || o.SerialNumber == nil {
+	if o == nil || IsNil(o.SerialNumber) {
 		return nil, false
 	}
 	return o.SerialNumber, true
@@ -261,7 +264,7 @@ func (o *TruststoreItems) GetSerialNumberOk() (*int32, bool) {
 
 // HasSerialNumber returns a boolean if a field has been set.
 func (o *TruststoreItems) HasSerialNumber() bool {
-	if o != nil && o.SerialNumber != nil {
+	if o != nil && !IsNil(o.SerialNumber) {
 		return true
 	}
 
@@ -274,29 +277,37 @@ func (o *TruststoreItems) SetSerialNumber(v int32) {
 }
 
 func (o TruststoreItems) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Alias != nil {
-		toSerialize["alias"] = o.Alias
-	}
-	if o.EntryType != nil {
-		toSerialize["entryType"] = o.EntryType
-	}
-	if o.Subject != nil {
-		toSerialize["subject"] = o.Subject
-	}
-	if o.Issuer != nil {
-		toSerialize["issuer"] = o.Issuer
-	}
-	if o.NotBefore != nil {
-		toSerialize["notBefore"] = o.NotBefore
-	}
-	if o.NotAfter != nil {
-		toSerialize["notAfter"] = o.NotAfter
-	}
-	if o.SerialNumber != nil {
-		toSerialize["serialNumber"] = o.SerialNumber
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o TruststoreItems) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Alias) {
+		toSerialize["alias"] = o.Alias
+	}
+	if !IsNil(o.EntryType) {
+		toSerialize["entryType"] = o.EntryType
+	}
+	if !IsNil(o.Subject) {
+		toSerialize["subject"] = o.Subject
+	}
+	if !IsNil(o.Issuer) {
+		toSerialize["issuer"] = o.Issuer
+	}
+	if !IsNil(o.NotBefore) {
+		toSerialize["notBefore"] = o.NotBefore
+	}
+	if !IsNil(o.NotAfter) {
+		toSerialize["notAfter"] = o.NotAfter
+	}
+	if !IsNil(o.SerialNumber) {
+		toSerialize["serialNumber"] = o.SerialNumber
+	}
+	return toSerialize, nil
 }
 
 type NullableTruststoreItems struct {

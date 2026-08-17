@@ -5,12 +5,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 
 
 import io.swagger.annotations.*;
 import java.util.Objects;
 
-import javax.xml.bind.annotation.*;
 
 
 public class BundleDataProp   {
@@ -18,7 +18,6 @@ public class BundleDataProp   {
   private String key;
 
   private String value;
-
 
   /**
    * Bundle data key
@@ -68,8 +67,8 @@ public class BundleDataProp   {
       return false;
     }
     BundleDataProp bundleDataProp = (BundleDataProp) o;
-    return Objects.equals(key, bundleDataProp.key) &&
-        Objects.equals(value, bundleDataProp.value);
+    return Objects.equals(this.key, bundleDataProp.key) &&
+        Objects.equals(this.value, bundleDataProp.value);
   }
 
   @Override
@@ -93,10 +92,7 @@ public class BundleDataProp   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

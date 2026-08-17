@@ -1,5 +1,6 @@
 .gitignore
 README.md
+api.base.service.ts
 api.module.ts
 api/api.ts
 api/console.service.ts
@@ -29,4 +30,7 @@ model/samlConfigurationPropertyItemsLong.ts
 model/samlConfigurationPropertyItemsString.ts
 model/truststoreInfo.ts
 model/truststoreItems.ts
+param.ts
+provide-api.ts
+query.params.ts
 variables.ts

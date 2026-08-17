@@ -3,13 +3,9 @@ package org.openapitools.api;
 import org.openapitools.model.BundleInfo;
 import org.openapitools.model.SamlConfigurationInfo;
 
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.MediaType;
 import org.apache.cxf.jaxrs.ext.multipart.*;
 
 import io.swagger.annotations.Api;
@@ -78,4 +74,3 @@ public interface ConsoleApi  {
         @ApiResponse(code = 200, message = "Default response", response = String.class) })
     public SamlConfigurationInfo postSamlConfiguration(@QueryParam("post") Boolean post, @QueryParam("apply") Boolean apply, @QueryParam("delete") Boolean delete, @QueryParam("action") String action, @QueryParam("$location") String $location, @QueryParam("path") List<String> path, @QueryParam("service.ranking") Integer serviceRanking, @QueryParam("idpUrl") String idpUrl, @QueryParam("idpCertAlias") String idpCertAlias, @QueryParam("idpHttpRedirect") Boolean idpHttpRedirect, @QueryParam("serviceProviderEntityId") String serviceProviderEntityId, @QueryParam("assertionConsumerServiceURL") String assertionConsumerServiceURL, @QueryParam("spPrivateKeyAlias") String spPrivateKeyAlias, @QueryParam("keyStorePassword") String keyStorePassword, @QueryParam("defaultRedirectUrl") String defaultRedirectUrl, @QueryParam("userIDAttribute") String userIDAttribute, @QueryParam("useEncryption") Boolean useEncryption, @QueryParam("createUser") Boolean createUser, @QueryParam("addGroupMemberships") Boolean addGroupMemberships, @QueryParam("groupMembershipAttribute") String groupMembershipAttribute, @QueryParam("defaultGroups") List<String> defaultGroups, @QueryParam("nameIdFormat") String nameIdFormat, @QueryParam("synchronizeAttributes") List<String> synchronizeAttributes, @QueryParam("handleLogout") Boolean handleLogout, @QueryParam("logoutUrl") String logoutUrl, @QueryParam("clockTolerance") Integer clockTolerance, @QueryParam("digestMethod") String digestMethod, @QueryParam("signatureMethod") String signatureMethod, @QueryParam("userIntermediatePath") String userIntermediatePath, @QueryParam("propertylist") List<String> propertylist);
 }
-

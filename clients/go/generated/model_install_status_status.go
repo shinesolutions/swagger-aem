@@ -3,7 +3,7 @@ Adobe Experience Manager (AEM) API
 
 Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
 
-API version: 3.5.0-pre.0
+API version: 3.7.1-pre.0
 Contact: opensource@shinesolutions.com
 */
 
@@ -14,6 +14,9 @@ package openapi
 import (
 	"encoding/json"
 )
+
+// checks if the InstallStatusStatus type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &InstallStatusStatus{}
 
 // InstallStatusStatus struct for InstallStatusStatus
 type InstallStatusStatus struct {
@@ -40,7 +43,7 @@ func NewInstallStatusStatusWithDefaults() *InstallStatusStatus {
 
 // GetFinished returns the Finished field value if set, zero value otherwise.
 func (o *InstallStatusStatus) GetFinished() bool {
-	if o == nil || o.Finished == nil {
+	if o == nil || IsNil(o.Finished) {
 		var ret bool
 		return ret
 	}
@@ -50,7 +53,7 @@ func (o *InstallStatusStatus) GetFinished() bool {
 // GetFinishedOk returns a tuple with the Finished field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *InstallStatusStatus) GetFinishedOk() (*bool, bool) {
-	if o == nil || o.Finished == nil {
+	if o == nil || IsNil(o.Finished) {
 		return nil, false
 	}
 	return o.Finished, true
@@ -58,7 +61,7 @@ func (o *InstallStatusStatus) GetFinishedOk() (*bool, bool) {
 
 // HasFinished returns a boolean if a field has been set.
 func (o *InstallStatusStatus) HasFinished() bool {
-	if o != nil && o.Finished != nil {
+	if o != nil && !IsNil(o.Finished) {
 		return true
 	}
 
@@ -72,7 +75,7 @@ func (o *InstallStatusStatus) SetFinished(v bool) {
 
 // GetItemCount returns the ItemCount field value if set, zero value otherwise.
 func (o *InstallStatusStatus) GetItemCount() int32 {
-	if o == nil || o.ItemCount == nil {
+	if o == nil || IsNil(o.ItemCount) {
 		var ret int32
 		return ret
 	}
@@ -82,7 +85,7 @@ func (o *InstallStatusStatus) GetItemCount() int32 {
 // GetItemCountOk returns a tuple with the ItemCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *InstallStatusStatus) GetItemCountOk() (*int32, bool) {
-	if o == nil || o.ItemCount == nil {
+	if o == nil || IsNil(o.ItemCount) {
 		return nil, false
 	}
 	return o.ItemCount, true
@@ -90,7 +93,7 @@ func (o *InstallStatusStatus) GetItemCountOk() (*int32, bool) {
 
 // HasItemCount returns a boolean if a field has been set.
 func (o *InstallStatusStatus) HasItemCount() bool {
-	if o != nil && o.ItemCount != nil {
+	if o != nil && !IsNil(o.ItemCount) {
 		return true
 	}
 
@@ -103,14 +106,22 @@ func (o *InstallStatusStatus) SetItemCount(v int32) {
 }
 
 func (o InstallStatusStatus) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Finished != nil {
-		toSerialize["finished"] = o.Finished
-	}
-	if o.ItemCount != nil {
-		toSerialize["itemCount"] = o.ItemCount
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o InstallStatusStatus) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Finished) {
+		toSerialize["finished"] = o.Finished
+	}
+	if !IsNil(o.ItemCount) {
+		toSerialize["itemCount"] = o.ItemCount
+	}
+	return toSerialize, nil
 }
 
 type NullableInstallStatusStatus struct {

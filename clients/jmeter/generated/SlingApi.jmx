@@ -267,7 +267,7 @@
           <hashTree/>
         </hashTree>
         <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP Status Assertion" enabled="true">
-          <collectionProp name="Asserion.test_strings">
+          <collectionProp name="Assertion.test_strings">
             <stringProp name="812696575">${httpStatusCode}</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
@@ -338,7 +338,7 @@
           <hashTree/>
         </hashTree>
         <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP Status Assertion" enabled="true">
-          <collectionProp name="Asserion.test_strings">
+          <collectionProp name="Assertion.test_strings">
             <stringProp name="812696575">${httpStatusCode}</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
@@ -409,7 +409,7 @@
           <hashTree/>
         </hashTree>
         <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP Status Assertion" enabled="true">
-          <collectionProp name="Asserion.test_strings">
+          <collectionProp name="Assertion.test_strings">
             <stringProp name="812696575">${httpStatusCode}</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
@@ -484,7 +484,7 @@
           <hashTree/>
         </hashTree>
         <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP Status Assertion" enabled="true">
-          <collectionProp name="Asserion.test_strings">
+          <collectionProp name="Assertion.test_strings">
             <stringProp name="812696575">${httpStatusCode}</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
@@ -559,7 +559,7 @@
           <hashTree/>
         </hashTree>
         <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP Status Assertion" enabled="true">
-          <collectionProp name="Asserion.test_strings">
+          <collectionProp name="Assertion.test_strings">
             <stringProp name="812696575">${httpStatusCode}</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
@@ -634,7 +634,7 @@
           <hashTree/>
         </hashTree>
         <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP Status Assertion" enabled="true">
-          <collectionProp name="Asserion.test_strings">
+          <collectionProp name="Assertion.test_strings">
             <stringProp name="812696575">${httpStatusCode}</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
@@ -705,7 +705,7 @@
           <hashTree/>
         </hashTree>
         <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP Status Assertion" enabled="true">
-          <collectionProp name="Asserion.test_strings">
+          <collectionProp name="Assertion.test_strings">
             <stringProp name="812696575">${httpStatusCode}</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
@@ -780,7 +780,7 @@
           <hashTree/>
         </hashTree>
         <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP Status Assertion" enabled="true">
-          <collectionProp name="Asserion.test_strings">
+          <collectionProp name="Assertion.test_strings">
             <stringProp name="812696575">${httpStatusCode}</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
@@ -855,7 +855,7 @@
           <hashTree/>
         </hashTree>
         <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP Status Assertion" enabled="true">
-          <collectionProp name="Asserion.test_strings">
+          <collectionProp name="Assertion.test_strings">
             <stringProp name="812696575">${httpStatusCode}</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
@@ -958,7 +958,7 @@
           <hashTree/>
         </hashTree>
         <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP Status Assertion" enabled="true">
-          <collectionProp name="Asserion.test_strings">
+          <collectionProp name="Assertion.test_strings">
             <stringProp name="812696575">${httpStatusCode}</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
@@ -1033,7 +1033,7 @@
           <hashTree/>
         </hashTree>
         <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP Status Assertion" enabled="true">
-          <collectionProp name="Asserion.test_strings">
+          <collectionProp name="Assertion.test_strings">
             <stringProp name="812696575">${httpStatusCode}</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
@@ -1108,7 +1108,7 @@
           <hashTree/>
         </hashTree>
         <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP Status Assertion" enabled="true">
-          <collectionProp name="Asserion.test_strings">
+          <collectionProp name="Assertion.test_strings">
             <stringProp name="812696575">${httpStatusCode}</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
@@ -1172,6 +1172,13 @@
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">jcrContentSlashcqTemplate</stringProp>
+              </elementProp>
+              <elementProp name="jcrContentSlashaliasUpdate" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">${jcrContentSlashaliasUpdate}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">jcrContentSlashaliasUpdate</stringProp>
               </elementProp>
               <elementProp name="jcrContentSlashenabled" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
@@ -1529,7 +1536,7 @@
           <hashTree/>
         </hashTree>
         <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP Status Assertion" enabled="true">
-          <collectionProp name="Asserion.test_strings">
+          <collectionProp name="Assertion.test_strings">
             <stringProp name="812696575">${httpStatusCode}</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
@@ -1671,7 +1678,7 @@
           <hashTree/>
         </hashTree>
         <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP Status Assertion" enabled="true">
-          <collectionProp name="Asserion.test_strings">
+          <collectionProp name="Assertion.test_strings">
             <stringProp name="812696575">${httpStatusCode}</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
@@ -1788,7 +1795,7 @@
           <hashTree/>
         </hashTree>
         <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP Status Assertion" enabled="true">
-          <collectionProp name="Asserion.test_strings">
+          <collectionProp name="Assertion.test_strings">
             <stringProp name="812696575">${httpStatusCode}</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
@@ -2195,7 +2202,7 @@
           <hashTree/>
         </hashTree>
         <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP Status Assertion" enabled="true">
-          <collectionProp name="Asserion.test_strings">
+          <collectionProp name="Assertion.test_strings">
             <stringProp name="812696575">${httpStatusCode}</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
@@ -2406,7 +2413,7 @@
           <hashTree/>
         </hashTree>
         <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP Status Assertion" enabled="true">
-          <collectionProp name="Asserion.test_strings">
+          <collectionProp name="Assertion.test_strings">
             <stringProp name="812696575">${httpStatusCode}</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
@@ -2561,7 +2568,7 @@
           <hashTree/>
         </hashTree>
         <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP Status Assertion" enabled="true">
-          <collectionProp name="Asserion.test_strings">
+          <collectionProp name="Assertion.test_strings">
             <stringProp name="812696575">${httpStatusCode}</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
@@ -2660,7 +2667,7 @@
           <hashTree/>
         </hashTree>
         <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP Status Assertion" enabled="true">
-          <collectionProp name="Asserion.test_strings">
+          <collectionProp name="Assertion.test_strings">
             <stringProp name="812696575">${httpStatusCode}</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
@@ -2787,7 +2794,7 @@
           <hashTree/>
         </hashTree>
         <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP Status Assertion" enabled="true">
-          <collectionProp name="Asserion.test_strings">
+          <collectionProp name="Assertion.test_strings">
             <stringProp name="812696575">${httpStatusCode}</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
@@ -2914,7 +2921,7 @@
           <hashTree/>
         </hashTree>
         <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP Status Assertion" enabled="true">
-          <collectionProp name="Asserion.test_strings">
+          <collectionProp name="Assertion.test_strings">
             <stringProp name="812696575">${httpStatusCode}</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
@@ -2985,7 +2992,7 @@
           <hashTree/>
         </hashTree>
         <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP Status Assertion" enabled="true">
-          <collectionProp name="Asserion.test_strings">
+          <collectionProp name="Assertion.test_strings">
             <stringProp name="812696575">${httpStatusCode}</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
@@ -3074,7 +3081,7 @@
           <hashTree/>
         </hashTree>
         <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP Status Assertion" enabled="true">
-          <collectionProp name="Asserion.test_strings">
+          <collectionProp name="Assertion.test_strings">
             <stringProp name="812696575">${httpStatusCode}</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
@@ -3152,7 +3159,7 @@
           <hashTree/>
         </hashTree>
         <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP Status Assertion" enabled="true">
-          <collectionProp name="Asserion.test_strings">
+          <collectionProp name="Assertion.test_strings">
             <stringProp name="812696575">${httpStatusCode}</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
@@ -3237,7 +3244,7 @@
           <hashTree/>
         </hashTree>
         <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP Status Assertion" enabled="true">
-          <collectionProp name="Asserion.test_strings">
+          <collectionProp name="Assertion.test_strings">
             <stringProp name="812696575">${httpStatusCode}</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
@@ -3340,7 +3347,7 @@
           <hashTree/>
         </hashTree>
         <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP Status Assertion" enabled="true">
-          <collectionProp name="Asserion.test_strings">
+          <collectionProp name="Assertion.test_strings">
             <stringProp name="812696575">${httpStatusCode}</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
@@ -3398,6 +3405,13 @@
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">path</stringProp>
               </elementProp>
+              <elementProp name="cmd" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">${cmd}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">cmd</stringProp>
+              </elementProp>
             </collectionProp>
           </elementProp>
           <stringProp name="HTTPSampler.domain"></stringProp>
@@ -3406,7 +3420,7 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/etc/replication/treeactivation.html</stringProp>
+          <stringProp name="HTTPSampler.path">/libs/replication/treeactivation.html</stringProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -3432,7 +3446,7 @@
           <hashTree/>
         </hashTree>
         <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP Status Assertion" enabled="true">
-          <collectionProp name="Asserion.test_strings">
+          <collectionProp name="Assertion.test_strings">
             <stringProp name="812696575">${httpStatusCode}</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
@@ -3546,7 +3560,7 @@
           <hashTree/>
         </hashTree>
         <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP Status Assertion" enabled="true">
-          <collectionProp name="Asserion.test_strings">
+          <collectionProp name="Assertion.test_strings">
             <stringProp name="812696575">${httpStatusCode}</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
@@ -3625,7 +3639,7 @@
           <hashTree/>
         </hashTree>
         <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP Status Assertion" enabled="true">
-          <collectionProp name="Asserion.test_strings">
+          <collectionProp name="Assertion.test_strings">
             <stringProp name="812696575">${httpStatusCode}</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>

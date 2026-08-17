@@ -5,12 +5,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 
 
 import io.swagger.annotations.*;
 import java.util.Objects;
 
-import javax.xml.bind.annotation.*;
 
 
 public class TruststoreItems   {
@@ -28,7 +28,6 @@ public class TruststoreItems   {
   private String notAfter;
 
   private Integer serialNumber;
-
 
   /**
    * Truststore alias name
@@ -172,13 +171,13 @@ public class TruststoreItems   {
       return false;
     }
     TruststoreItems truststoreItems = (TruststoreItems) o;
-    return Objects.equals(alias, truststoreItems.alias) &&
-        Objects.equals(entryType, truststoreItems.entryType) &&
-        Objects.equals(subject, truststoreItems.subject) &&
-        Objects.equals(issuer, truststoreItems.issuer) &&
-        Objects.equals(notBefore, truststoreItems.notBefore) &&
-        Objects.equals(notAfter, truststoreItems.notAfter) &&
-        Objects.equals(serialNumber, truststoreItems.serialNumber);
+    return Objects.equals(this.alias, truststoreItems.alias) &&
+        Objects.equals(this.entryType, truststoreItems.entryType) &&
+        Objects.equals(this.subject, truststoreItems.subject) &&
+        Objects.equals(this.issuer, truststoreItems.issuer) &&
+        Objects.equals(this.notBefore, truststoreItems.notBefore) &&
+        Objects.equals(this.notAfter, truststoreItems.notAfter) &&
+        Objects.equals(this.serialNumber, truststoreItems.serialNumber);
   }
 
   @Override
@@ -207,10 +206,7 @@ public class TruststoreItems   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

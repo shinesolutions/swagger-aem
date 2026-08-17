@@ -1,0 +1,15 @@
+{
+  "namespace": "model",
+  "type": "record",
+  "doc": "",
+  "name": "InstallStatus",
+  "fields": [
+    {
+      "name": "status",
+      "type": ["null", "model.InstallStatusStatus"],
+      "doc": "",
+      "default": null
+    }
+  ]
+
+}

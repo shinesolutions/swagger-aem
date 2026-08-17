@@ -1,0 +1,35 @@
+{
+  "name": "shinesolutions/swagger-aem",
+  "description": "Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API.",
+  "keywords": ["openapi", "php", "framework", "flightphp"],
+  "version": "1.0.0",
+  "homepage": "https://openapi-generator.tech",
+  "license": "unlicense",
+  "authors": [
+    {
+        "name": "OpenAPI",
+        "homepage": "https://openapi-generator.tech"
+    }
+  ],
+  "type": "library",
+  "require": {
+    "php": "^8.1",
+    "flightphp/core": "^3.5.1",
+    "ext-json": "*"
+  },
+ "require-dev": {
+    "phpunit/phpunit": "^9.5"
+  },
+  "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "OpenAPIServer\\": ""
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

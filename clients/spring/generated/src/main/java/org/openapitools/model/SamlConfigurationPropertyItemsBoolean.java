@@ -1,38 +1,47 @@
 package org.openapitools.model;
 
+import java.net.URI;
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import org.springframework.lang.Nullable;
 import org.openapitools.jackson.nullable.JsonNullable;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+import java.time.OffsetDateTime;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+
+import java.util.*;
+import jakarta.annotation.Generated;
 
 /**
  * SamlConfigurationPropertyItemsBoolean
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-09-03T15:28:35.636+10:00[Australia/Melbourne]")
-public class SamlConfigurationPropertyItemsBoolean   {
-  @JsonProperty("name")
-  private String name;
 
-  @JsonProperty("optional")
-  private Boolean optional;
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-08-17T02:18:23.350215970Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+public class SamlConfigurationPropertyItemsBoolean {
 
-  @JsonProperty("is_set")
-  private Boolean isSet;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable String name;
 
-  @JsonProperty("type")
-  private Integer type;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable Boolean optional;
 
-  @JsonProperty("value")
-  private Boolean value;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable Boolean isSet;
 
-  @JsonProperty("description")
-  private String description;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable Integer type;
 
-  public SamlConfigurationPropertyItemsBoolean name(String name) {
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable Boolean value;
+
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable String description;
+
+  public SamlConfigurationPropertyItemsBoolean name(@Nullable String name) {
     this.name = name;
     return this;
   }
@@ -40,19 +49,20 @@ public class SamlConfigurationPropertyItemsBoolean   {
   /**
    * property name
    * @return name
-  */
-  @ApiModelProperty(value = "property name")
-
-
-  public String getName() {
+   */
+  
+  @Schema(name = "name", description = "property name", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("name")
+  public @Nullable String getName() {
     return name;
   }
 
-  public void setName(String name) {
+  @JsonProperty("name")
+  public void setName(@Nullable String name) {
     this.name = name;
   }
 
-  public SamlConfigurationPropertyItemsBoolean optional(Boolean optional) {
+  public SamlConfigurationPropertyItemsBoolean optional(@Nullable Boolean optional) {
     this.optional = optional;
     return this;
   }
@@ -60,19 +70,20 @@ public class SamlConfigurationPropertyItemsBoolean   {
   /**
    * True if optional
    * @return optional
-  */
-  @ApiModelProperty(value = "True if optional")
-
-
-  public Boolean getOptional() {
+   */
+  
+  @Schema(name = "optional", description = "True if optional", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("optional")
+  public @Nullable Boolean getOptional() {
     return optional;
   }
 
-  public void setOptional(Boolean optional) {
+  @JsonProperty("optional")
+  public void setOptional(@Nullable Boolean optional) {
     this.optional = optional;
   }
 
-  public SamlConfigurationPropertyItemsBoolean isSet(Boolean isSet) {
+  public SamlConfigurationPropertyItemsBoolean isSet(@Nullable Boolean isSet) {
     this.isSet = isSet;
     return this;
   }
@@ -80,19 +91,20 @@ public class SamlConfigurationPropertyItemsBoolean   {
   /**
    * True if property is set
    * @return isSet
-  */
-  @ApiModelProperty(value = "True if property is set")
-
-
-  public Boolean getIsSet() {
+   */
+  
+  @Schema(name = "is_set", description = "True if property is set", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("is_set")
+  public @Nullable Boolean getIsSet() {
     return isSet;
   }
 
-  public void setIsSet(Boolean isSet) {
+  @JsonProperty("is_set")
+  public void setIsSet(@Nullable Boolean isSet) {
     this.isSet = isSet;
   }
 
-  public SamlConfigurationPropertyItemsBoolean type(Integer type) {
+  public SamlConfigurationPropertyItemsBoolean type(@Nullable Integer type) {
     this.type = type;
     return this;
   }
@@ -100,19 +112,20 @@ public class SamlConfigurationPropertyItemsBoolean   {
   /**
    * Property type, 1=String, 3=long, 11=boolean, 12=Password
    * @return type
-  */
-  @ApiModelProperty(value = "Property type, 1=String, 3=long, 11=boolean, 12=Password")
-
-
-  public Integer getType() {
+   */
+  
+  @Schema(name = "type", description = "Property type, 1=String, 3=long, 11=boolean, 12=Password", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("type")
+  public @Nullable Integer getType() {
     return type;
   }
 
-  public void setType(Integer type) {
+  @JsonProperty("type")
+  public void setType(@Nullable Integer type) {
     this.type = type;
   }
 
-  public SamlConfigurationPropertyItemsBoolean value(Boolean value) {
+  public SamlConfigurationPropertyItemsBoolean value(@Nullable Boolean value) {
     this.value = value;
     return this;
   }
@@ -120,19 +133,20 @@ public class SamlConfigurationPropertyItemsBoolean   {
   /**
    * Property value
    * @return value
-  */
-  @ApiModelProperty(value = "Property value")
-
-
-  public Boolean getValue() {
+   */
+  
+  @Schema(name = "value", description = "Property value", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("value")
+  public @Nullable Boolean getValue() {
     return value;
   }
 
-  public void setValue(Boolean value) {
+  @JsonProperty("value")
+  public void setValue(@Nullable Boolean value) {
     this.value = value;
   }
 
-  public SamlConfigurationPropertyItemsBoolean description(String description) {
+  public SamlConfigurationPropertyItemsBoolean description(@Nullable String description) {
     this.description = description;
     return this;
   }
@@ -140,18 +154,18 @@ public class SamlConfigurationPropertyItemsBoolean   {
   /**
    * Property description
    * @return description
-  */
-  @ApiModelProperty(value = "Property description")
-
-
-  public String getDescription() {
+   */
+  
+  @Schema(name = "description", description = "Property description", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("description")
+  public @Nullable String getDescription() {
     return description;
   }
 
-  public void setDescription(String description) {
+  @JsonProperty("description")
+  public void setDescription(@Nullable String description) {
     this.description = description;
   }
-
 
   @Override
   public boolean equals(Object o) {
@@ -179,7 +193,6 @@ public class SamlConfigurationPropertyItemsBoolean   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class SamlConfigurationPropertyItemsBoolean {\n");
-    
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    optional: ").append(toIndentedString(optional)).append("\n");
     sb.append("    isSet: ").append(toIndentedString(isSet)).append("\n");
@@ -194,11 +207,8 @@ public class SamlConfigurationPropertyItemsBoolean   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+  private String toIndentedString(@Nullable Object o) {
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

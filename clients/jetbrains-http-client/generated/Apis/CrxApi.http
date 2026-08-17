@@ -1,0 +1,44 @@
+## CrxApi
+
+### 
+## 
+GET http://localhost/crx/server/crx.default/jcr:root/.1.json
+Accept: plain/text
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+GET http://localhost/crx/packmgr/installstatus.jsp
+Accept: application/json
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+GET http://localhost/crx/packmgr/service/script.html
+Accept: text/html
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+POST http://localhost/crx/packmgr/service.jsp?cmd={{cmd}}
+Accept: text/xml
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+POST http://localhost/crx/packmgr/service/.json/{{path}}?cmd={{cmd}}&groupName={{groupName}}&packageName={{packageName}}&packageVersion={{packageVersion}}&charset={{charset}}&force={{force}}&recursive={{recursive}}
+Content-Type: multipart/form-data
+Accept: application/json
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+POST http://localhost/crx/packmgr/update.jsp?groupName={{groupName}}&packageName={{packageName}}&version={{version}}&path={{path}}&filter={{filter}}&charset={{charset}}
+Accept: application/json
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+POST http://localhost/crx/explorer/ui/setpassword.jsp?old={{old}}&plain={{plain}}&verify={{verify}}
+Accept: text/plain
+Authorization: Basic: {{username-password}}

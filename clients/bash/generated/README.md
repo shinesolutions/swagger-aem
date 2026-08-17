@@ -38,6 +38,9 @@ $ echo '<body_content>' |  --host <hostname> --content-type json <operationId> -
 # }
 $ echo '<body_content>' |  --host <hostname> --content-type json <operationId> key1==value1 key2=value2 key3:=23 -
 
+# Make POST request with form data
+$  --host <hostname> <operationId> key1:=value1 key2:=value2 key3:=23
+
 # Preview the cURL command without actually executing it
 $  --host http://<hostname>:<port> --dry-run <operationid>
 
@@ -145,7 +148,7 @@ Class | Method | HTTP request | Description
 *SlingApi* | [**postNodeRw**](docs/SlingApi.md#postnoderw) | **POST** /{path}/{name}.rw.html | 
 *SlingApi* | [**postPath**](docs/SlingApi.md#postpath) | **POST** /{path}/ | 
 *SlingApi* | [**postQuery**](docs/SlingApi.md#postquery) | **POST** /bin/querybuilder.json | 
-*SlingApi* | [**postTreeActivation**](docs/SlingApi.md#posttreeactivation) | **POST** /etc/replication/treeactivation.html | 
+*SlingApi* | [**postTreeActivation**](docs/SlingApi.md#posttreeactivation) | **POST** /libs/replication/treeactivation.html | 
 *SlingApi* | [**postTruststore**](docs/SlingApi.md#posttruststore) | **POST** /libs/granite/security/post/truststore | 
 *SlingApi* | [**postTruststorePKCS12**](docs/SlingApi.md#posttruststorepkcs12) | **POST** /etc/truststore | 
 
@@ -174,6 +177,7 @@ Class | Method | HTTP request | Description
 
 
 ## aemAuth
+
 
 - **Type**: HTTP basic authentication
 

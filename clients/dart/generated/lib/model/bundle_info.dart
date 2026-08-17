@@ -1,10 +1,11 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+// @dart=2.18
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of openapi.api;
@@ -18,7 +19,13 @@ class BundleInfo {
   });
 
   /// Status description of all bundles
-  String status;
+  ///
+  /// Please note: This property should have been non-nullable! Since the specification file
+  /// does not include a default value (using the "default:" property), however, the generated
+  /// source code must fall back to having a nullable type.
+  /// Consider adding a "default:" property in the specification file to hide this note.
+  ///
+  String? status;
 
   List<int> s;
 
@@ -26,67 +33,99 @@ class BundleInfo {
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is BundleInfo &&
-     other.status == status &&
-     other.s == s &&
-     other.data == data;
+    other.status == status &&
+    _deepEquality.equals(other.s, s) &&
+    _deepEquality.equals(other.data, data);
 
   @override
   int get hashCode =>
-    (status == null ? 0 : status.hashCode) +
-    (s == null ? 0 : s.hashCode) +
-    (data == null ? 0 : data.hashCode);
+    // ignore: unnecessary_parenthesis
+    (status == null ? 0 : status!.hashCode) +
+    (s.hashCode) +
+    (data.hashCode);
 
   @override
   String toString() => 'BundleInfo[status=$status, s=$s, data=$data]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
-    if (status != null) {
-      json[r'status'] = status;
+    if (this.status != null) {
+      json[r'status'] = this.status;
+    } else {
+      json[r'status'] = null;
     }
-    if (s != null) {
-      json[r's'] = s;
-    }
-    if (data != null) {
-      json[r'data'] = data;
-    }
+      json[r's'] = this.s;
+      json[r'data'] = this.data;
     return json;
   }
 
   /// Returns a new [BundleInfo] instance and imports its values from
-  /// [json] if it's non-null, null if [json] is null.
-  static BundleInfo fromJson(Map<String, dynamic> json) => json == null
-    ? null
-    : BundleInfo(
-        status: json[r'status'],
-        s: json[r's'] == null
-          ? null
-          : (json[r's'] as List).cast<int>(),
+  /// [value] if it's a [Map], null otherwise.
+  // ignore: prefer_constructors_over_static_methods
+  static BundleInfo? fromJson(dynamic value) {
+    if (value is Map) {
+      final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        return true;
+      }());
+
+      return BundleInfo(
+        status: mapValueOfType<String>(json, r'status'),
+        s: json[r's'] is Iterable
+            ? (json[r's'] as Iterable).cast<int>().toList(growable: false)
+            : const [],
         data: BundleData.listFromJson(json[r'data']),
-    );
+      );
+    }
+    return null;
+  }
 
-  static List<BundleInfo> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
-      ? true == emptyIsNull ? null : <BundleInfo>[]
-      : json.map((dynamic value) => BundleInfo.fromJson(value)).toList(growable: true == growable);
+  static List<BundleInfo> listFromJson(dynamic json, {bool growable = false,}) {
+    final result = <BundleInfo>[];
+    if (json is List && json.isNotEmpty) {
+      for (final row in json) {
+        final value = BundleInfo.fromJson(row);
+        if (value != null) {
+          result.add(value);
+        }
+      }
+    }
+    return result.toList(growable: growable);
+  }
 
-  static Map<String, BundleInfo> mapFromJson(Map<String, dynamic> json) {
+  static Map<String, BundleInfo> mapFromJson(dynamic json) {
     final map = <String, BundleInfo>{};
-    if (json?.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = BundleInfo.fromJson(value));
+    if (json is Map && json.isNotEmpty) {
+      json = json.cast<String, dynamic>(); // ignore: parameter_assignments
+      for (final entry in json.entries) {
+        final value = BundleInfo.fromJson(entry.value);
+        if (value != null) {
+          map[entry.key] = value;
+        }
+      }
     }
     return map;
   }
 
   // maps a json object with a list of BundleInfo-objects as value to a dart map
-  static Map<String, List<BundleInfo>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
+  static Map<String, List<BundleInfo>> mapListFromJson(dynamic json, {bool growable = false,}) {
     final map = <String, List<BundleInfo>>{};
-    if (json?.isNotEmpty == true) {
-      json.forEach((key, value) {
-        map[key] = BundleInfo.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
-      });
+    if (json is Map && json.isNotEmpty) {
+      // ignore: parameter_assignments
+      json = json.cast<String, dynamic>();
+      for (final entry in json.entries) {
+        map[entry.key] = BundleInfo.listFromJson(entry.value, growable: growable,);
+      }
     }
     return map;
   }
+
+  /// The list of required keys that must be present in a JSON.
+  static const requiredKeys = <String>{
+  };
 }
 

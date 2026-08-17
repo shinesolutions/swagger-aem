@@ -11,12 +11,18 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2021-09-03T15:26:06.461+10:00[Australia/Melbourne]")public class InstallStatus   {
-  
-  private @Valid InstallStatusStatus status;
+@JsonTypeName("InstallStatus")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2026-08-17T02:15:42.417242947Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+public class InstallStatus   {
+  private InstallStatusStatus status;
+
+  public InstallStatus() {
+  }
 
   /**
    **/
@@ -26,14 +32,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("status")
-  public InstallStatusStatus getStatus() {
+  @Valid public InstallStatusStatus getStatus() {
     return status;
   }
 
+  @JsonProperty("status")
   public void setStatus(InstallStatusStatus status) {
     this.status = status;
   }
@@ -71,12 +76,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 
 
 }
-

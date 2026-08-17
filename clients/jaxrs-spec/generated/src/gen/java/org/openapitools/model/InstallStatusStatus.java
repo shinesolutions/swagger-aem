@@ -1,5 +1,6 @@
 package org.openapitools.model;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
@@ -10,13 +11,19 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2021-09-03T15:26:06.461+10:00[Australia/Melbourne]")public class InstallStatusStatus   {
-  
-  private @Valid Boolean finished;
-  private @Valid Integer itemCount;
+@JsonTypeName("InstallStatus_status")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2026-08-17T02:15:42.417242947Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+public class InstallStatusStatus   {
+  private Boolean finished;
+  private Integer itemCount;
+
+  public InstallStatusStatus() {
+  }
 
   /**
    **/
@@ -26,26 +33,23 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("finished")
   public Boolean getFinished() {
     return finished;
   }
 
+  @JsonProperty("finished")
   public void setFinished(Boolean finished) {
     this.finished = finished;
   }
 
-/**
+  /**
    **/
   public InstallStatusStatus itemCount(Integer itemCount) {
     this.itemCount = itemCount;
     return this;
   }
-
-  
 
   
   @ApiModelProperty(value = "")
@@ -54,6 +58,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
     return itemCount;
   }
 
+  @JsonProperty("itemCount")
   public void setItemCount(Integer itemCount) {
     this.itemCount = itemCount;
   }
@@ -93,12 +98,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 
 
 }
-

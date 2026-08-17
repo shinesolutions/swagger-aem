@@ -2,14 +2,14 @@
 
 All URIs are relative to *http://localhost*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**getAemHealthCheck**](CustomApi.md#getAemHealthCheck) | **GET** /system/health | 
-[**postConfigAemHealthCheckServlet**](CustomApi.md#postConfigAemHealthCheckServlet) | **POST** /apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck | 
-[**postConfigAemPasswordReset**](CustomApi.md#postConfigAemPasswordReset) | **POST** /apps/system/config/com.shinesolutions.aem.passwordreset.Activator | 
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**getAemHealthCheck**](CustomApi.md#getAemHealthCheck) | **GET** /system/health |  |
+| [**postConfigAemHealthCheckServlet**](CustomApi.md#postConfigAemHealthCheckServlet) | **POST** /apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck |  |
+| [**postConfigAemPasswordReset**](CustomApi.md#postConfigAemPasswordReset) | **POST** /apps/system/config/com.shinesolutions.aem.passwordreset.Activator |  |
 
 
-<a name="getAemHealthCheck"></a>
+<a id="getAemHealthCheck"></a>
 # **getAemHealthCheck**
 > String getAemHealthCheck(tags, combineTagsOr)
 
@@ -54,10 +54,10 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **tags** | **String**|  | [optional]
- **combineTagsOr** | **Boolean**|  | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **tags** | **String**|  | [optional] |
+| **combineTagsOr** | **Boolean**|  | [optional] |
 
 ### Return type
 
@@ -75,9 +75,9 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Default response |  -  |
+| **0** | Default response |  -  |
 
-<a name="postConfigAemHealthCheckServlet"></a>
+<a id="postConfigAemHealthCheckServlet"></a>
 # **postConfigAemHealthCheckServlet**
 > postConfigAemHealthCheckServlet(bundlesIgnored, bundlesIgnoredAtTypeHint)
 
@@ -121,10 +121,10 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **bundlesIgnored** | [**List&lt;String&gt;**](String.md)|  | [optional]
- **bundlesIgnoredAtTypeHint** | **String**|  | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **bundlesIgnored** | [**List&lt;String&gt;**](String.md)|  | [optional] |
+| **bundlesIgnoredAtTypeHint** | **String**|  | [optional] |
 
 ### Return type
 
@@ -142,9 +142,9 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Default response |  -  |
+| **0** | Default response |  -  |
 
-<a name="postConfigAemPasswordReset"></a>
+<a id="postConfigAemPasswordReset"></a>
 # **postConfigAemPasswordReset**
 > postConfigAemPasswordReset(pwdresetAuthorizables, pwdresetAuthorizablesAtTypeHint)
 
@@ -188,10 +188,10 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **pwdresetAuthorizables** | [**List&lt;String&gt;**](String.md)|  | [optional]
- **pwdresetAuthorizablesAtTypeHint** | **String**|  | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **pwdresetAuthorizables** | [**List&lt;String&gt;**](String.md)|  | [optional] |
+| **pwdresetAuthorizablesAtTypeHint** | **String**|  | [optional] |
 
 ### Return type
 
@@ -209,5 +209,5 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Default response |  -  |
+| **0** | Default response |  -  |
 

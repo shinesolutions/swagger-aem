@@ -17,7 +17,7 @@ import org.wso2.msf4j.formparam.FileInfo;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaMSF4JServerCodegen", date = "2021-09-03T15:25:23.467+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaMSF4JServerCodegen", date = "2026-08-17T02:15:13.302721680Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class DefaultApiServiceImpl extends DefaultApiService {
     @Override
     public Response deleteNode(String path
@@ -50,7 +50,7 @@ public class DefaultApiServiceImpl extends DefaultApiService {
     @Override
     public Response postAuthorizableKeystore(String intermediatePath
 , String authorizableId
-, String colonOperation
+, String operation
 , String currentPassword
 , String newPassword
 , String rePassword
@@ -69,9 +69,9 @@ public class DefaultApiServiceImpl extends DefaultApiService {
     @Override
     public Response postNode(String path
 , String name
-, String colonOperation
+, String operation
 , String deleteAuthorizable
-, InputStream fileInputStream, FileInfo fileDetail
+, InputStream _fileInputStream, FileInfo _fileDetail
  ) throws NotFoundException {
         // do some magic!
         return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
@@ -86,8 +86,8 @@ public class DefaultApiServiceImpl extends DefaultApiService {
     }
     @Override
     public Response postPath(String path
-, String jcrColonPrimaryType
-, String colonName
+, String jcrPrimaryType
+, String name
  ) throws NotFoundException {
         // do some magic!
         return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();

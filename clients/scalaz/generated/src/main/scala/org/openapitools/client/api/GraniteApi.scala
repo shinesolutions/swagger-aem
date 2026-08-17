@@ -33,7 +33,7 @@ object GraniteApi {
     implicit val returnTypeDecoder: EntityDecoder[String] = jsonOf[String]
 
     val path = "/libs/granite/security/post/sslSetup.html"
-    
+
     val httpMethod = Method.POST
     val contentType = `Content-Type`(MediaType.`application/json`)
     val headers = Headers(
@@ -49,7 +49,7 @@ object GraniteApi {
 
     } yield resp
   }
-  
+
 }
 
 class HttpServiceGraniteApi(service: HttpService) {
@@ -61,7 +61,7 @@ class HttpServiceGraniteApi(service: HttpService) {
     implicit val returnTypeDecoder: EntityDecoder[String] = jsonOf[String]
 
     val path = "/libs/granite/security/post/sslSetup.html"
-    
+
     val httpMethod = Method.POST
     val contentType = `Content-Type`(MediaType.`application/json`)
     val headers = Headers(
@@ -77,5 +77,5 @@ class HttpServiceGraniteApi(service: HttpService) {
 
     } yield resp
   }
-  
+
 }

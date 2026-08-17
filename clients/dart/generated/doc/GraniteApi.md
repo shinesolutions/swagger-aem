@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -34,7 +34,7 @@ final httpsPort = httpsPort_example; // String |
 final privatekeyFile = BINARY_DATA_HERE; // MultipartFile | 
 final certificateFile = BINARY_DATA_HERE; // MultipartFile | 
 
-try { 
+try {
     final result = api_instance.sslSetup(keystorePassword, keystorePasswordConfirm, truststorePassword, truststorePasswordConfirm, httpsHostname, httpsPort, privatekeyFile, certificateFile);
     print(result);
 } catch (e) {

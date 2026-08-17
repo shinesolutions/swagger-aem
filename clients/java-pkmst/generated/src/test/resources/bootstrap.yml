@@ -2,4 +2,4 @@ spring:
   application:
     name: pkmst-microservice
   profiles:
-    active: test    
+    active: test

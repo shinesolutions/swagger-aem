@@ -51,6 +51,3 @@ src/model/SamlConfigurationPropertyItemsLong.js
 src/model/SamlConfigurationPropertyItemsString.js
 src/model/TruststoreInfo.js
 src/model/TruststoreItems.js
-test/model/BundleData.spec.js
-test/model/BundleDataProp.spec.js
-test/model/BundleInfo.spec.js

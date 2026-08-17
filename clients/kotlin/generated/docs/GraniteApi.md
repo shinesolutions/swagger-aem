@@ -2,12 +2,12 @@
 
 All URIs are relative to *http://localhost*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**sslSetup**](GraniteApi.md#sslSetup) | **POST** /libs/granite/security/post/sslSetup.html | 
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**sslSetup**](GraniteApi.md#sslSetup) | **POST** /libs/granite/security/post/sslSetup.html |  |
 
 
-<a name="sslSetup"></a>
+<a id="sslSetup"></a>
 # **sslSetup**
 > kotlin.String sslSetup(keystorePassword, keystorePasswordConfirm, truststorePassword, truststorePasswordConfirm, httpsHostname, httpsPort, privatekeyFile, certificateFile)
 
@@ -41,17 +41,16 @@ try {
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **keystorePassword** | **kotlin.String**|  |
- **keystorePasswordConfirm** | **kotlin.String**|  |
- **truststorePassword** | **kotlin.String**|  |
- **truststorePasswordConfirm** | **kotlin.String**|  |
- **httpsHostname** | **kotlin.String**|  |
- **httpsPort** | **kotlin.String**|  |
- **privatekeyFile** | **java.io.File**|  | [optional]
- **certificateFile** | **java.io.File**|  | [optional]
+| **keystorePassword** | **kotlin.String**|  | |
+| **keystorePasswordConfirm** | **kotlin.String**|  | |
+| **truststorePassword** | **kotlin.String**|  | |
+| **truststorePasswordConfirm** | **kotlin.String**|  | |
+| **httpsHostname** | **kotlin.String**|  | |
+| **httpsPort** | **kotlin.String**|  | |
+| **privatekeyFile** | **java.io.File**|  | [optional] |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **certificateFile** | **java.io.File**|  | [optional] |
 
 ### Return type
 
@@ -60,9 +59,15 @@ Name | Type | Description  | Notes
 ### Authorization
 
 
-Configure aemAuth:
-    ApiClient.username = ""
-    ApiClient.password = ""
+Configure aemAuth statically:
+```kotlin
+ApiClient.username = ""
+ApiClient.password = ""
+```
+Configure aemAuth dynamically:
+```kotlin
+apiInstance.userCredentialProvider = { "user" to "pass" }
+```
 
 ### HTTP request headers
 

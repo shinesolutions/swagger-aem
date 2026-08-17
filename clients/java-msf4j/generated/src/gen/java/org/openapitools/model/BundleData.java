@@ -6,13 +6,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.model.BundleDataProp;
 
 /**
  * BundleData
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaMSF4JServerCodegen", date = "2021-09-03T15:25:23.467+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaMSF4JServerCodegen", date = "2026-08-17T02:15:13.302721680Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class BundleData   {
   @JsonProperty("id")
   private Integer id;
@@ -39,7 +40,7 @@ public class BundleData   {
   private String category;
 
   @JsonProperty("props")
-  private List<BundleDataProp> props = null;
+  private List<@Valid BundleDataProp> props = null;
 
   public BundleData id(Integer id) {
     this.id = id;
@@ -185,14 +186,14 @@ public class BundleData   {
     this.category = category;
   }
 
-  public BundleData props(List<BundleDataProp> props) {
+  public BundleData props(List<@Valid BundleDataProp> props) {
     this.props = props;
     return this;
   }
 
   public BundleData addPropsItem(BundleDataProp propsItem) {
     if (this.props == null) {
-      this.props = new ArrayList<BundleDataProp>();
+      this.props = new ArrayList<>();
     }
     this.props.add(propsItem);
     return this;
@@ -203,11 +204,11 @@ public class BundleData   {
    * @return props
   **/
   @ApiModelProperty(value = "")
-  public List<BundleDataProp> getProps() {
+  public List<@Valid BundleDataProp> getProps() {
     return props;
   }
 
-  public void setProps(List<BundleDataProp> props) {
+  public void setProps(List<@Valid BundleDataProp> props) {
     this.props = props;
   }
 
@@ -260,10 +261,7 @@ public class BundleData   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

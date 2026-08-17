@@ -2,18 +2,18 @@
 
 All URIs are relative to *http://localhost*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**getCrxdeStatus**](CrxApi.md#getCrxdeStatus) | **GET** /crx/server/crx.default/jcr:root/.1.json | 
-[**getInstallStatus**](CrxApi.md#getInstallStatus) | **GET** /crx/packmgr/installstatus.jsp | 
-[**getPackageManagerServlet**](CrxApi.md#getPackageManagerServlet) | **GET** /crx/packmgr/service/script.html | 
-[**postPackageService**](CrxApi.md#postPackageService) | **POST** /crx/packmgr/service.jsp | 
-[**postPackageServiceJson**](CrxApi.md#postPackageServiceJson) | **POST** /crx/packmgr/service/.json/{path} | 
-[**postPackageUpdate**](CrxApi.md#postPackageUpdate) | **POST** /crx/packmgr/update.jsp | 
-[**postSetPassword**](CrxApi.md#postSetPassword) | **POST** /crx/explorer/ui/setpassword.jsp | 
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**getCrxdeStatus**](CrxApi.md#getCrxdeStatus) | **GET** /crx/server/crx.default/jcr:root/.1.json |  |
+| [**getInstallStatus**](CrxApi.md#getInstallStatus) | **GET** /crx/packmgr/installstatus.jsp |  |
+| [**getPackageManagerServlet**](CrxApi.md#getPackageManagerServlet) | **GET** /crx/packmgr/service/script.html |  |
+| [**postPackageService**](CrxApi.md#postPackageService) | **POST** /crx/packmgr/service.jsp |  |
+| [**postPackageServiceJson**](CrxApi.md#postPackageServiceJson) | **POST** /crx/packmgr/service/.json/{path} |  |
+| [**postPackageUpdate**](CrxApi.md#postPackageUpdate) | **POST** /crx/packmgr/update.jsp |  |
+| [**postSetPassword**](CrxApi.md#postSetPassword) | **POST** /crx/explorer/ui/setpassword.jsp |  |
 
 
-<a name="getCrxdeStatus"></a>
+<a id="getCrxdeStatus"></a>
 # **getCrxdeStatus**
 > String getCrxdeStatus()
 
@@ -73,10 +73,10 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | CRXDE is enabled |  -  |
-**404** | CRXDE is disabled |  -  |
+| **200** | CRXDE is enabled |  -  |
+| **404** | CRXDE is disabled |  -  |
 
-<a name="getInstallStatus"></a>
+<a id="getInstallStatus"></a>
 # **getInstallStatus**
 > InstallStatus getInstallStatus()
 
@@ -136,10 +136,10 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Retrieved CRX package manager install status |  -  |
-**0** | Default response |  -  |
+| **200** | Retrieved CRX package manager install status |  -  |
+| **0** | Default response |  -  |
 
-<a name="getPackageManagerServlet"></a>
+<a id="getPackageManagerServlet"></a>
 # **getPackageManagerServlet**
 > getPackageManagerServlet()
 
@@ -198,10 +198,10 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**404** | Package Manager Servlet is disabled |  -  |
-**405** | Package Manager Servlet is active |  -  |
+| **404** | Package Manager Servlet is disabled |  -  |
+| **405** | Package Manager Servlet is active |  -  |
 
-<a name="postPackageService"></a>
+<a id="postPackageService"></a>
 # **postPackageService**
 > String postPackageService(cmd)
 
@@ -245,9 +245,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **cmd** | **String**|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **cmd** | **String**|  | |
 
 ### Return type
 
@@ -265,9 +265,9 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Default response |  -  |
+| **0** | Default response |  -  |
 
-<a name="postPackageServiceJson"></a>
+<a id="postPackageServiceJson"></a>
 # **postPackageServiceJson**
 > String postPackageServiceJson(path, cmd, groupName, packageName, packageVersion, charset, force, recursive, _package)
 
@@ -319,17 +319,17 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **path** | **String**|  |
- **cmd** | **String**|  |
- **groupName** | **String**|  | [optional]
- **packageName** | **String**|  | [optional]
- **packageVersion** | **String**|  | [optional]
- **charset** | **String**|  | [optional]
- **force** | **Boolean**|  | [optional]
- **recursive** | **Boolean**|  | [optional]
- **_package** | **File**|  | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **path** | **String**|  | |
+| **cmd** | **String**|  | |
+| **groupName** | **String**|  | [optional] |
+| **packageName** | **String**|  | [optional] |
+| **packageVersion** | **String**|  | [optional] |
+| **charset** | **String**|  | [optional] |
+| **force** | **Boolean**|  | [optional] |
+| **recursive** | **Boolean**|  | [optional] |
+| **_package** | **File**|  | [optional] |
 
 ### Return type
 
@@ -347,9 +347,9 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Default response |  -  |
+| **0** | Default response |  -  |
 
-<a name="postPackageUpdate"></a>
+<a id="postPackageUpdate"></a>
 # **postPackageUpdate**
 > String postPackageUpdate(groupName, packageName, version, path, filter, charset)
 
@@ -398,14 +398,14 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **groupName** | **String**|  |
- **packageName** | **String**|  |
- **version** | **String**|  |
- **path** | **String**|  |
- **filter** | **String**|  | [optional]
- **charset** | **String**|  | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **groupName** | **String**|  | |
+| **packageName** | **String**|  | |
+| **version** | **String**|  | |
+| **path** | **String**|  | |
+| **filter** | **String**|  | [optional] |
+| **charset** | **String**|  | [optional] |
 
 ### Return type
 
@@ -423,9 +423,9 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Default response |  -  |
+| **0** | Default response |  -  |
 
-<a name="postSetPassword"></a>
+<a id="postSetPassword"></a>
 # **postSetPassword**
 > String postSetPassword(old, plain, verify)
 
@@ -471,11 +471,11 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **old** | **String**|  |
- **plain** | **String**|  |
- **verify** | **String**|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **old** | **String**|  | |
+| **plain** | **String**|  | |
+| **verify** | **String**|  | |
 
 ### Return type
 
@@ -493,5 +493,5 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Default response |  -  |
+| **0** | Default response |  -  |
 

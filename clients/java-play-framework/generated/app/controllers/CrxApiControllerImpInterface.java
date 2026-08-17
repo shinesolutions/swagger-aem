@@ -14,20 +14,25 @@ import play.mvc.Result;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.JsonNode;
 import openapitools.OpenAPIUtils;
+import openapitools.SecurityAPIUtils;
 import static play.mvc.Results.ok;
+import static play.mvc.Results.unauthorized;
 import play.libs.Files.TemporaryFile;
 
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 
 @SuppressWarnings("RedundantThrows")
 public abstract class CrxApiControllerImpInterface {
     @Inject private Config configuration;
+    @Inject private SecurityAPIUtils securityAPIUtils;
     private ObjectMapper mapper = new ObjectMapper();
 
     public Result getCrxdeStatusHttp(Http.Request request) throws Exception {
         String obj = getCrxdeStatus(request);
-JsonNode result = mapper.valueToTree(obj);
-return ok(result);
+        JsonNode result = mapper.valueToTree(obj);
+
+        return ok(result);
 
     }
 
@@ -35,11 +40,14 @@ return ok(result);
 
     public Result getInstallStatusHttp(Http.Request request) throws Exception {
         InstallStatus obj = getInstallStatus(request);
-    if (configuration.getBoolean("useOutputBeanValidation")) {
+
+        if (configuration.getBoolean("useOutputBeanValidation")) {
             OpenAPIUtils.validate(obj);
-    }
-JsonNode result = mapper.valueToTree(obj);
-return ok(result);
+        }
+
+        JsonNode result = mapper.valueToTree(obj);
+
+        return ok(result);
 
     }
 
@@ -47,7 +55,7 @@ return ok(result);
 
     public Result getPackageManagerServletHttp(Http.Request request) throws Exception {
         getPackageManagerServlet(request);
-return ok();
+        return ok();
 
     }
 
@@ -55,8 +63,9 @@ return ok();
 
     public Result postPackageServiceHttp(Http.Request request, @NotNull String cmd) throws Exception {
         String obj = postPackageService(request, cmd);
-JsonNode result = mapper.valueToTree(obj);
-return ok(result);
+        JsonNode result = mapper.valueToTree(obj);
+
+        return ok(result);
 
     }
 
@@ -64,8 +73,9 @@ return ok(result);
 
     public Result postPackageServiceJsonHttp(Http.Request request, String path, @NotNull String cmd, String groupName, String packageName, String packageVersion, String charset, Boolean force, Boolean recursive, Http.MultipartFormData.FilePart<TemporaryFile> _package) throws Exception {
         String obj = postPackageServiceJson(request, path, cmd, groupName, packageName, packageVersion, charset, force, recursive, _package);
-JsonNode result = mapper.valueToTree(obj);
-return ok(result);
+        JsonNode result = mapper.valueToTree(obj);
+
+        return ok(result);
 
     }
 
@@ -73,8 +83,9 @@ return ok(result);
 
     public Result postPackageUpdateHttp(Http.Request request, @NotNull String groupName, @NotNull String packageName, @NotNull String version, @NotNull String path, String filter, String charset) throws Exception {
         String obj = postPackageUpdate(request, groupName, packageName, version, path, filter, charset);
-JsonNode result = mapper.valueToTree(obj);
-return ok(result);
+        JsonNode result = mapper.valueToTree(obj);
+
+        return ok(result);
 
     }
 
@@ -82,8 +93,9 @@ return ok(result);
 
     public Result postSetPasswordHttp(Http.Request request, @NotNull String old, @NotNull String plain, @NotNull String verify) throws Exception {
         String obj = postSetPassword(request, old, plain, verify);
-JsonNode result = mapper.valueToTree(obj);
-return ok(result);
+        JsonNode result = mapper.valueToTree(obj);
+
+        return ok(result);
 
     }
 

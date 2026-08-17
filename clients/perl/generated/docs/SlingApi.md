@@ -35,7 +35,7 @@ Method | HTTP request | Description
 [**post_node_rw**](SlingApi.md#post_node_rw) | **POST** /{path}/{name}.rw.html | 
 [**post_path**](SlingApi.md#post_path) | **POST** /{path}/ | 
 [**post_query**](SlingApi.md#post_query) | **POST** /bin/querybuilder.json | 
-[**post_tree_activation**](SlingApi.md#post_tree_activation) | **POST** /etc/replication/treeactivation.html | 
+[**post_tree_activation**](SlingApi.md#post_tree_activation) | **POST** /libs/replication/treeactivation.html | 
 [**post_truststore**](SlingApi.md#post_truststore) | **POST** /libs/granite/security/post/truststore | 
 [**post_truststore_pkcs12**](SlingApi.md#post_truststore_pkcs12) | **POST** /etc/truststore | 
 
@@ -45,7 +45,7 @@ Method | HTTP request | Description
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::SlingApi;
@@ -60,7 +60,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
 my $runmode = "runmode_example"; # string | 
 my $name = "name_example"; # string | 
 
-eval { 
+eval {
     $api_instance->delete_agent(runmode => $runmode, name => $name);
 };
 if ($@) {
@@ -95,7 +95,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::SlingApi;
@@ -110,7 +110,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
 my $path = "path_example"; # string | 
 my $name = "name_example"; # string | 
 
-eval { 
+eval {
     $api_instance->delete_node(path => $path, name => $name);
 };
 if ($@) {
@@ -145,7 +145,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::SlingApi;
@@ -160,7 +160,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
 my $runmode = "runmode_example"; # string | 
 my $name = "name_example"; # string | 
 
-eval { 
+eval {
     $api_instance->get_agent(runmode => $runmode, name => $name);
 };
 if ($@) {
@@ -195,7 +195,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::SlingApi;
@@ -209,7 +209,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
 
 my $runmode = "runmode_example"; # string | 
 
-eval { 
+eval {
     my $result = $api_instance->get_agents(runmode => $runmode);
     print Dumper($result);
 };
@@ -244,7 +244,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::SlingApi;
@@ -259,7 +259,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
 my $intermediate_path = "intermediate_path_example"; # string | 
 my $authorizable_id = "authorizable_id_example"; # string | 
 
-eval { 
+eval {
     my $result = $api_instance->get_authorizable_keystore(intermediate_path => $intermediate_path, authorizable_id => $authorizable_id);
     print Dumper($result);
 };
@@ -295,7 +295,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::SlingApi;
@@ -310,7 +310,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
 my $intermediate_path = "intermediate_path_example"; # string | 
 my $authorizable_id = "authorizable_id_example"; # string | 
 
-eval { 
+eval {
     my $result = $api_instance->get_keystore(intermediate_path => $intermediate_path, authorizable_id => $authorizable_id);
     print Dumper($result);
 };
@@ -346,7 +346,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::SlingApi;
@@ -361,7 +361,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
 my $path = "path_example"; # string | 
 my $name = "name_example"; # string | 
 
-eval { 
+eval {
     $api_instance->get_node(path => $path, name => $name);
 };
 if ($@) {
@@ -396,7 +396,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::SlingApi;
@@ -412,7 +412,7 @@ my $group = "group_example"; # string |
 my $name = "name_example"; # string | 
 my $version = "version_example"; # string | 
 
-eval { 
+eval {
     my $result = $api_instance->get_package(group => $group, name => $name, version => $version);
     print Dumper($result);
 };
@@ -449,7 +449,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::SlingApi;
@@ -465,7 +465,7 @@ my $group = "group_example"; # string |
 my $name = "name_example"; # string | 
 my $version = "version_example"; # string | 
 
-eval { 
+eval {
     my $result = $api_instance->get_package_filter(group => $group, name => $name, version => $version);
     print Dumper($result);
 };
@@ -502,7 +502,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::SlingApi;
@@ -519,7 +519,7 @@ my $p/limit = 3.4; # double |
 my $_1_property = "_1_property_example"; # string | 
 my $_1_property/value = "_1_property/value_example"; # string | 
 
-eval { 
+eval {
     my $result = $api_instance->get_query(path => $path, p/limit => $p/limit, _1_property => $_1_property, _1_property/value => $_1_property/value);
     print Dumper($result);
 };
@@ -557,7 +557,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::SlingApi;
@@ -570,7 +570,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
 );
 
 
-eval { 
+eval {
     my $result = $api_instance->get_truststore();
     print Dumper($result);
 };
@@ -602,7 +602,7 @@ This endpoint does not need any parameter.
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::SlingApi;
@@ -615,7 +615,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
 );
 
 
-eval { 
+eval {
     my $result = $api_instance->get_truststore_info();
     print Dumper($result);
 };
@@ -643,11 +643,11 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_agent**
-> post_agent(runmode => $runmode, name => $name, jcr:content/cq:distribute => $jcr:content/cq:distribute, jcr:content/cq:distribute@type_hint => $jcr:content/cq:distribute@type_hint, jcr:content/cq:name => $jcr:content/cq:name, jcr:content/cq:template => $jcr:content/cq:template, jcr:content/enabled => $jcr:content/enabled, jcr:content/jcr:description => $jcr:content/jcr:description, jcr:content/jcr:last_modified => $jcr:content/jcr:last_modified, jcr:content/jcr:last_modified_by => $jcr:content/jcr:last_modified_by, jcr:content/jcr:mixin_types => $jcr:content/jcr:mixin_types, jcr:content/jcr:title => $jcr:content/jcr:title, jcr:content/log_level => $jcr:content/log_level, jcr:content/no_status_update => $jcr:content/no_status_update, jcr:content/no_versioning => $jcr:content/no_versioning, jcr:content/protocol_connect_timeout => $jcr:content/protocol_connect_timeout, jcr:content/protocol_http_connection_closed => $jcr:content/protocol_http_connection_closed, jcr:content/protocol_http_expired => $jcr:content/protocol_http_expired, jcr:content/protocol_http_headers => $jcr:content/protocol_http_headers, jcr:content/protocol_http_headers@type_hint => $jcr:content/protocol_http_headers@type_hint, jcr:content/protocol_http_method => $jcr:content/protocol_http_method, jcr:content/protocol_https_relaxed => $jcr:content/protocol_https_relaxed, jcr:content/protocol_interface => $jcr:content/protocol_interface, jcr:content/protocol_socket_timeout => $jcr:content/protocol_socket_timeout, jcr:content/protocol_version => $jcr:content/protocol_version, jcr:content/proxy_ntlm_domain => $jcr:content/proxy_ntlm_domain, jcr:content/proxy_ntlm_host => $jcr:content/proxy_ntlm_host, jcr:content/proxy_host => $jcr:content/proxy_host, jcr:content/proxy_password => $jcr:content/proxy_password, jcr:content/proxy_port => $jcr:content/proxy_port, jcr:content/proxy_user => $jcr:content/proxy_user, jcr:content/queue_batch_max_size => $jcr:content/queue_batch_max_size, jcr:content/queue_batch_mode => $jcr:content/queue_batch_mode, jcr:content/queue_batch_wait_time => $jcr:content/queue_batch_wait_time, jcr:content/retry_delay => $jcr:content/retry_delay, jcr:content/reverse_replication => $jcr:content/reverse_replication, jcr:content/serialization_type => $jcr:content/serialization_type, jcr:content/sling:resource_type => $jcr:content/sling:resource_type, jcr:content/ssl => $jcr:content/ssl, jcr:content/transport_ntlm_domain => $jcr:content/transport_ntlm_domain, jcr:content/transport_ntlm_host => $jcr:content/transport_ntlm_host, jcr:content/transport_password => $jcr:content/transport_password, jcr:content/transport_uri => $jcr:content/transport_uri, jcr:content/transport_user => $jcr:content/transport_user, jcr:content/trigger_distribute => $jcr:content/trigger_distribute, jcr:content/trigger_modified => $jcr:content/trigger_modified, jcr:content/trigger_on_off_time => $jcr:content/trigger_on_off_time, jcr:content/trigger_receive => $jcr:content/trigger_receive, jcr:content/trigger_specific => $jcr:content/trigger_specific, jcr:content/user_id => $jcr:content/user_id, jcr:primary_type => $jcr:primary_type, :operation => $:operation)
+> post_agent(runmode => $runmode, name => $name, jcr:content/cq:distribute => $jcr:content/cq:distribute, jcr:content/cq:distribute@type_hint => $jcr:content/cq:distribute@type_hint, jcr:content/cq:name => $jcr:content/cq:name, jcr:content/cq:template => $jcr:content/cq:template, jcr:content/alias_update => $jcr:content/alias_update, jcr:content/enabled => $jcr:content/enabled, jcr:content/jcr:description => $jcr:content/jcr:description, jcr:content/jcr:last_modified => $jcr:content/jcr:last_modified, jcr:content/jcr:last_modified_by => $jcr:content/jcr:last_modified_by, jcr:content/jcr:mixin_types => $jcr:content/jcr:mixin_types, jcr:content/jcr:title => $jcr:content/jcr:title, jcr:content/log_level => $jcr:content/log_level, jcr:content/no_status_update => $jcr:content/no_status_update, jcr:content/no_versioning => $jcr:content/no_versioning, jcr:content/protocol_connect_timeout => $jcr:content/protocol_connect_timeout, jcr:content/protocol_http_connection_closed => $jcr:content/protocol_http_connection_closed, jcr:content/protocol_http_expired => $jcr:content/protocol_http_expired, jcr:content/protocol_http_headers => $jcr:content/protocol_http_headers, jcr:content/protocol_http_headers@type_hint => $jcr:content/protocol_http_headers@type_hint, jcr:content/protocol_http_method => $jcr:content/protocol_http_method, jcr:content/protocol_https_relaxed => $jcr:content/protocol_https_relaxed, jcr:content/protocol_interface => $jcr:content/protocol_interface, jcr:content/protocol_socket_timeout => $jcr:content/protocol_socket_timeout, jcr:content/protocol_version => $jcr:content/protocol_version, jcr:content/proxy_ntlm_domain => $jcr:content/proxy_ntlm_domain, jcr:content/proxy_ntlm_host => $jcr:content/proxy_ntlm_host, jcr:content/proxy_host => $jcr:content/proxy_host, jcr:content/proxy_password => $jcr:content/proxy_password, jcr:content/proxy_port => $jcr:content/proxy_port, jcr:content/proxy_user => $jcr:content/proxy_user, jcr:content/queue_batch_max_size => $jcr:content/queue_batch_max_size, jcr:content/queue_batch_mode => $jcr:content/queue_batch_mode, jcr:content/queue_batch_wait_time => $jcr:content/queue_batch_wait_time, jcr:content/retry_delay => $jcr:content/retry_delay, jcr:content/reverse_replication => $jcr:content/reverse_replication, jcr:content/serialization_type => $jcr:content/serialization_type, jcr:content/sling:resource_type => $jcr:content/sling:resource_type, jcr:content/ssl => $jcr:content/ssl, jcr:content/transport_ntlm_domain => $jcr:content/transport_ntlm_domain, jcr:content/transport_ntlm_host => $jcr:content/transport_ntlm_host, jcr:content/transport_password => $jcr:content/transport_password, jcr:content/transport_uri => $jcr:content/transport_uri, jcr:content/transport_user => $jcr:content/transport_user, jcr:content/trigger_distribute => $jcr:content/trigger_distribute, jcr:content/trigger_modified => $jcr:content/trigger_modified, jcr:content/trigger_on_off_time => $jcr:content/trigger_on_off_time, jcr:content/trigger_receive => $jcr:content/trigger_receive, jcr:content/trigger_specific => $jcr:content/trigger_specific, jcr:content/user_id => $jcr:content/user_id, jcr:primary_type => $jcr:primary_type, :operation => $:operation)
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::SlingApi;
@@ -665,6 +665,7 @@ my $jcr:content/cq:distribute = null; # boolean |
 my $jcr:content/cq:distribute@type_hint = "jcr:content/cq:distribute@type_hint_example"; # string | 
 my $jcr:content/cq:name = "jcr:content/cq:name_example"; # string | 
 my $jcr:content/cq:template = "jcr:content/cq:template_example"; # string | 
+my $jcr:content/alias_update = null; # boolean | 
 my $jcr:content/enabled = null; # boolean | 
 my $jcr:content/jcr:description = "jcr:content/jcr:description_example"; # string | 
 my $jcr:content/jcr:last_modified = "jcr:content/jcr:last_modified_example"; # string | 
@@ -712,8 +713,8 @@ my $jcr:content/user_id = "jcr:content/user_id_example"; # string |
 my $jcr:primary_type = "jcr:primary_type_example"; # string | 
 my $:operation = ":operation_example"; # string | 
 
-eval { 
-    $api_instance->post_agent(runmode => $runmode, name => $name, jcr:content/cq:distribute => $jcr:content/cq:distribute, jcr:content/cq:distribute@type_hint => $jcr:content/cq:distribute@type_hint, jcr:content/cq:name => $jcr:content/cq:name, jcr:content/cq:template => $jcr:content/cq:template, jcr:content/enabled => $jcr:content/enabled, jcr:content/jcr:description => $jcr:content/jcr:description, jcr:content/jcr:last_modified => $jcr:content/jcr:last_modified, jcr:content/jcr:last_modified_by => $jcr:content/jcr:last_modified_by, jcr:content/jcr:mixin_types => $jcr:content/jcr:mixin_types, jcr:content/jcr:title => $jcr:content/jcr:title, jcr:content/log_level => $jcr:content/log_level, jcr:content/no_status_update => $jcr:content/no_status_update, jcr:content/no_versioning => $jcr:content/no_versioning, jcr:content/protocol_connect_timeout => $jcr:content/protocol_connect_timeout, jcr:content/protocol_http_connection_closed => $jcr:content/protocol_http_connection_closed, jcr:content/protocol_http_expired => $jcr:content/protocol_http_expired, jcr:content/protocol_http_headers => $jcr:content/protocol_http_headers, jcr:content/protocol_http_headers@type_hint => $jcr:content/protocol_http_headers@type_hint, jcr:content/protocol_http_method => $jcr:content/protocol_http_method, jcr:content/protocol_https_relaxed => $jcr:content/protocol_https_relaxed, jcr:content/protocol_interface => $jcr:content/protocol_interface, jcr:content/protocol_socket_timeout => $jcr:content/protocol_socket_timeout, jcr:content/protocol_version => $jcr:content/protocol_version, jcr:content/proxy_ntlm_domain => $jcr:content/proxy_ntlm_domain, jcr:content/proxy_ntlm_host => $jcr:content/proxy_ntlm_host, jcr:content/proxy_host => $jcr:content/proxy_host, jcr:content/proxy_password => $jcr:content/proxy_password, jcr:content/proxy_port => $jcr:content/proxy_port, jcr:content/proxy_user => $jcr:content/proxy_user, jcr:content/queue_batch_max_size => $jcr:content/queue_batch_max_size, jcr:content/queue_batch_mode => $jcr:content/queue_batch_mode, jcr:content/queue_batch_wait_time => $jcr:content/queue_batch_wait_time, jcr:content/retry_delay => $jcr:content/retry_delay, jcr:content/reverse_replication => $jcr:content/reverse_replication, jcr:content/serialization_type => $jcr:content/serialization_type, jcr:content/sling:resource_type => $jcr:content/sling:resource_type, jcr:content/ssl => $jcr:content/ssl, jcr:content/transport_ntlm_domain => $jcr:content/transport_ntlm_domain, jcr:content/transport_ntlm_host => $jcr:content/transport_ntlm_host, jcr:content/transport_password => $jcr:content/transport_password, jcr:content/transport_uri => $jcr:content/transport_uri, jcr:content/transport_user => $jcr:content/transport_user, jcr:content/trigger_distribute => $jcr:content/trigger_distribute, jcr:content/trigger_modified => $jcr:content/trigger_modified, jcr:content/trigger_on_off_time => $jcr:content/trigger_on_off_time, jcr:content/trigger_receive => $jcr:content/trigger_receive, jcr:content/trigger_specific => $jcr:content/trigger_specific, jcr:content/user_id => $jcr:content/user_id, jcr:primary_type => $jcr:primary_type, :operation => $:operation);
+eval {
+    $api_instance->post_agent(runmode => $runmode, name => $name, jcr:content/cq:distribute => $jcr:content/cq:distribute, jcr:content/cq:distribute@type_hint => $jcr:content/cq:distribute@type_hint, jcr:content/cq:name => $jcr:content/cq:name, jcr:content/cq:template => $jcr:content/cq:template, jcr:content/alias_update => $jcr:content/alias_update, jcr:content/enabled => $jcr:content/enabled, jcr:content/jcr:description => $jcr:content/jcr:description, jcr:content/jcr:last_modified => $jcr:content/jcr:last_modified, jcr:content/jcr:last_modified_by => $jcr:content/jcr:last_modified_by, jcr:content/jcr:mixin_types => $jcr:content/jcr:mixin_types, jcr:content/jcr:title => $jcr:content/jcr:title, jcr:content/log_level => $jcr:content/log_level, jcr:content/no_status_update => $jcr:content/no_status_update, jcr:content/no_versioning => $jcr:content/no_versioning, jcr:content/protocol_connect_timeout => $jcr:content/protocol_connect_timeout, jcr:content/protocol_http_connection_closed => $jcr:content/protocol_http_connection_closed, jcr:content/protocol_http_expired => $jcr:content/protocol_http_expired, jcr:content/protocol_http_headers => $jcr:content/protocol_http_headers, jcr:content/protocol_http_headers@type_hint => $jcr:content/protocol_http_headers@type_hint, jcr:content/protocol_http_method => $jcr:content/protocol_http_method, jcr:content/protocol_https_relaxed => $jcr:content/protocol_https_relaxed, jcr:content/protocol_interface => $jcr:content/protocol_interface, jcr:content/protocol_socket_timeout => $jcr:content/protocol_socket_timeout, jcr:content/protocol_version => $jcr:content/protocol_version, jcr:content/proxy_ntlm_domain => $jcr:content/proxy_ntlm_domain, jcr:content/proxy_ntlm_host => $jcr:content/proxy_ntlm_host, jcr:content/proxy_host => $jcr:content/proxy_host, jcr:content/proxy_password => $jcr:content/proxy_password, jcr:content/proxy_port => $jcr:content/proxy_port, jcr:content/proxy_user => $jcr:content/proxy_user, jcr:content/queue_batch_max_size => $jcr:content/queue_batch_max_size, jcr:content/queue_batch_mode => $jcr:content/queue_batch_mode, jcr:content/queue_batch_wait_time => $jcr:content/queue_batch_wait_time, jcr:content/retry_delay => $jcr:content/retry_delay, jcr:content/reverse_replication => $jcr:content/reverse_replication, jcr:content/serialization_type => $jcr:content/serialization_type, jcr:content/sling:resource_type => $jcr:content/sling:resource_type, jcr:content/ssl => $jcr:content/ssl, jcr:content/transport_ntlm_domain => $jcr:content/transport_ntlm_domain, jcr:content/transport_ntlm_host => $jcr:content/transport_ntlm_host, jcr:content/transport_password => $jcr:content/transport_password, jcr:content/transport_uri => $jcr:content/transport_uri, jcr:content/transport_user => $jcr:content/transport_user, jcr:content/trigger_distribute => $jcr:content/trigger_distribute, jcr:content/trigger_modified => $jcr:content/trigger_modified, jcr:content/trigger_on_off_time => $jcr:content/trigger_on_off_time, jcr:content/trigger_receive => $jcr:content/trigger_receive, jcr:content/trigger_specific => $jcr:content/trigger_specific, jcr:content/user_id => $jcr:content/user_id, jcr:primary_type => $jcr:primary_type, :operation => $:operation);
 };
 if ($@) {
     warn "Exception when calling SlingApi->post_agent: $@\n";
@@ -730,6 +731,7 @@ Name | Type | Description  | Notes
  **jcr:content/cq:distribute@type_hint** | **string**|  | [optional] 
  **jcr:content/cq:name** | **string**|  | [optional] 
  **jcr:content/cq:template** | **string**|  | [optional] 
+ **jcr:content/alias_update** | **boolean**|  | [optional] 
  **jcr:content/enabled** | **boolean**|  | [optional] 
  **jcr:content/jcr:description** | **string**|  | [optional] 
  **jcr:content/jcr:last_modified** | **string**|  | [optional] 
@@ -797,7 +799,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::SlingApi;
@@ -824,7 +826,7 @@ my $cert_chain = "/path/to/file"; # string |
 my $pk = "/path/to/file"; # string | 
 my $key_store = "/path/to/file"; # string | 
 
-eval { 
+eval {
     my $result = $api_instance->post_authorizable_keystore(intermediate_path => $intermediate_path, authorizable_id => $authorizable_id, :operation => $:operation, current_password => $current_password, new_password => $new_password, re_password => $re_password, key_password => $key_password, key_store_pass => $key_store_pass, alias => $alias, new_alias => $new_alias, remove_alias => $remove_alias, cert_chain => $cert_chain, pk => $pk, key_store => $key_store);
     print Dumper($result);
 };
@@ -872,7 +874,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::SlingApi;
@@ -891,7 +893,7 @@ my $create_group = "create_group_example"; # string |
 my $rep:password = "rep:password_example"; # string | 
 my $profile/given_name = "profile/given_name_example"; # string | 
 
-eval { 
+eval {
     my $result = $api_instance->post_authorizables(authorizable_id => $authorizable_id, intermediate_path => $intermediate_path, create_user => $create_user, create_group => $create_group, rep:password => $rep:password, profile/given_name => $profile/given_name);
     print Dumper($result);
 };
@@ -931,7 +933,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::SlingApi;
@@ -992,7 +994,7 @@ my $signature_method@type_hint = "signature_method@type_hint_example"; # string 
 my $user_intermediate_path = "user_intermediate_path_example"; # string | 
 my $user_intermediate_path@type_hint = "user_intermediate_path@type_hint_example"; # string | 
 
-eval { 
+eval {
     $api_instance->post_config_adobe_granite_saml_authentication_handler(key_store_password => $key_store_password, key_store_password@type_hint => $key_store_password@type_hint, service/ranking => $service/ranking, service/ranking@type_hint => $service/ranking@type_hint, idp_http_redirect => $idp_http_redirect, idp_http_redirect@type_hint => $idp_http_redirect@type_hint, create_user => $create_user, create_user@type_hint => $create_user@type_hint, default_redirect_url => $default_redirect_url, default_redirect_url@type_hint => $default_redirect_url@type_hint, user_id_attribute => $user_id_attribute, user_id_attribute@type_hint => $user_id_attribute@type_hint, default_groups => $default_groups, default_groups@type_hint => $default_groups@type_hint, idp_cert_alias => $idp_cert_alias, idp_cert_alias@type_hint => $idp_cert_alias@type_hint, add_group_memberships => $add_group_memberships, add_group_memberships@type_hint => $add_group_memberships@type_hint, path => $path, path@type_hint => $path@type_hint, synchronize_attributes => $synchronize_attributes, synchronize_attributes@type_hint => $synchronize_attributes@type_hint, clock_tolerance => $clock_tolerance, clock_tolerance@type_hint => $clock_tolerance@type_hint, group_membership_attribute => $group_membership_attribute, group_membership_attribute@type_hint => $group_membership_attribute@type_hint, idp_url => $idp_url, idp_url@type_hint => $idp_url@type_hint, logout_url => $logout_url, logout_url@type_hint => $logout_url@type_hint, service_provider_entity_id => $service_provider_entity_id, service_provider_entity_id@type_hint => $service_provider_entity_id@type_hint, assertion_consumer_service_url => $assertion_consumer_service_url, assertion_consumer_service_url@type_hint => $assertion_consumer_service_url@type_hint, handle_logout => $handle_logout, handle_logout@type_hint => $handle_logout@type_hint, sp_private_key_alias => $sp_private_key_alias, sp_private_key_alias@type_hint => $sp_private_key_alias@type_hint, use_encryption => $use_encryption, use_encryption@type_hint => $use_encryption@type_hint, name_id_format => $name_id_format, name_id_format@type_hint => $name_id_format@type_hint, digest_method => $digest_method, digest_method@type_hint => $digest_method@type_hint, signature_method => $signature_method, signature_method@type_hint => $signature_method@type_hint, user_intermediate_path => $user_intermediate_path, user_intermediate_path@type_hint => $user_intermediate_path@type_hint);
 };
 if ($@) {
@@ -1073,7 +1075,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::SlingApi;
@@ -1106,7 +1108,7 @@ my $org/apache/felix/https/enable@type_hint = "org/apache/felix/https/enable@typ
 my $org/osgi/service/http/port/secure = "org/osgi/service/http/port/secure_example"; # string | 
 my $org/osgi/service/http/port/secure@type_hint = "org/osgi/service/http/port/secure@type_hint_example"; # string | 
 
-eval { 
+eval {
     $api_instance->post_config_apache_felix_jetty_based_http_service(org/apache/felix/https/nio => $org/apache/felix/https/nio, org/apache/felix/https/nio@type_hint => $org/apache/felix/https/nio@type_hint, org/apache/felix/https/keystore => $org/apache/felix/https/keystore, org/apache/felix/https/keystore@type_hint => $org/apache/felix/https/keystore@type_hint, org/apache/felix/https/keystore/password => $org/apache/felix/https/keystore/password, org/apache/felix/https/keystore/password@type_hint => $org/apache/felix/https/keystore/password@type_hint, org/apache/felix/https/keystore/key => $org/apache/felix/https/keystore/key, org/apache/felix/https/keystore/key@type_hint => $org/apache/felix/https/keystore/key@type_hint, org/apache/felix/https/keystore/key/password => $org/apache/felix/https/keystore/key/password, org/apache/felix/https/keystore/key/password@type_hint => $org/apache/felix/https/keystore/key/password@type_hint, org/apache/felix/https/truststore => $org/apache/felix/https/truststore, org/apache/felix/https/truststore@type_hint => $org/apache/felix/https/truststore@type_hint, org/apache/felix/https/truststore/password => $org/apache/felix/https/truststore/password, org/apache/felix/https/truststore/password@type_hint => $org/apache/felix/https/truststore/password@type_hint, org/apache/felix/https/clientcertificate => $org/apache/felix/https/clientcertificate, org/apache/felix/https/clientcertificate@type_hint => $org/apache/felix/https/clientcertificate@type_hint, org/apache/felix/https/enable => $org/apache/felix/https/enable, org/apache/felix/https/enable@type_hint => $org/apache/felix/https/enable@type_hint, org/osgi/service/http/port/secure => $org/osgi/service/http/port/secure, org/osgi/service/http/port/secure@type_hint => $org/osgi/service/http/port/secure@type_hint);
 };
 if ($@) {
@@ -1159,7 +1161,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::SlingApi;
@@ -1184,7 +1186,7 @@ my $proxy/user@type_hint = "proxy/user@type_hint_example"; # string |
 my $proxy/password = "proxy/password_example"; # string | 
 my $proxy/password@type_hint = "proxy/password@type_hint_example"; # string | 
 
-eval { 
+eval {
     $api_instance->post_config_apache_http_components_proxy_configuration(proxy/host => $proxy/host, proxy/host@type_hint => $proxy/host@type_hint, proxy/port => $proxy/port, proxy/port@type_hint => $proxy/port@type_hint, proxy/exceptions => $proxy/exceptions, proxy/exceptions@type_hint => $proxy/exceptions@type_hint, proxy/enabled => $proxy/enabled, proxy/enabled@type_hint => $proxy/enabled@type_hint, proxy/user => $proxy/user, proxy/user@type_hint => $proxy/user@type_hint, proxy/password => $proxy/password, proxy/password@type_hint => $proxy/password@type_hint);
 };
 if ($@) {
@@ -1229,7 +1231,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::SlingApi;
@@ -1246,7 +1248,7 @@ my $alias@type_hint = "alias@type_hint_example"; # string |
 my $dav/create_absolute_uri = null; # boolean | 
 my $dav/create_absolute_uri@type_hint = "dav/create_absolute_uri@type_hint_example"; # string | 
 
-eval { 
+eval {
     $api_instance->post_config_apache_sling_dav_ex_servlet(alias => $alias, alias@type_hint => $alias@type_hint, dav/create_absolute_uri => $dav/create_absolute_uri, dav/create_absolute_uri@type_hint => $dav/create_absolute_uri@type_hint);
 };
 if ($@) {
@@ -1283,7 +1285,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::SlingApi;
@@ -1304,7 +1306,7 @@ my $enable/txt@type_hint = "enable/txt@type_hint_example"; # string |
 my $enable/xml = null; # boolean | 
 my $enable/xml@type_hint = "enable/xml@type_hint_example"; # string | 
 
-eval { 
+eval {
     $api_instance->post_config_apache_sling_get_servlet(json/maximumresults => $json/maximumresults, json/maximumresults@type_hint => $json/maximumresults@type_hint, enable/html => $enable/html, enable/html@type_hint => $enable/html@type_hint, enable/txt => $enable/txt, enable/txt@type_hint => $enable/txt@type_hint, enable/xml => $enable/xml, enable/xml@type_hint => $enable/xml@type_hint);
 };
 if ($@) {
@@ -1345,7 +1347,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::SlingApi;
@@ -1366,7 +1368,7 @@ my $allow/hosts/regexp@type_hint = "allow/hosts/regexp@type_hint_example"; # str
 my $filter/methods = "filter/methods_example"; # string | 
 my $filter/methods@type_hint = "filter/methods@type_hint_example"; # string | 
 
-eval { 
+eval {
     $api_instance->post_config_apache_sling_referrer_filter(allow/empty => $allow/empty, allow/empty@type_hint => $allow/empty@type_hint, allow/hosts => $allow/hosts, allow/hosts@type_hint => $allow/hosts@type_hint, allow/hosts/regexp => $allow/hosts/regexp, allow/hosts/regexp@type_hint => $allow/hosts/regexp@type_hint, filter/methods => $filter/methods, filter/methods@type_hint => $filter/methods@type_hint);
 };
 if ($@) {
@@ -1407,7 +1409,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::SlingApi;
@@ -1421,7 +1423,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
 
 my $config_node_name = "config_node_name_example"; # string | 
 
-eval { 
+eval {
     $api_instance->post_config_property(config_node_name => $config_node_name);
 };
 if ($@) {
@@ -1455,7 +1457,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::SlingApi;
@@ -1473,7 +1475,7 @@ my $:operation = ":operation_example"; # string |
 my $delete_authorizable = "delete_authorizable_example"; # string | 
 my $file = "/path/to/file"; # string | 
 
-eval { 
+eval {
     $api_instance->post_node(path => $path, name => $name, :operation => $:operation, delete_authorizable => $delete_authorizable, file => $file);
 };
 if ($@) {
@@ -1511,7 +1513,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::SlingApi;
@@ -1527,7 +1529,7 @@ my $path = "path_example"; # string |
 my $name = "name_example"; # string | 
 my $add_members = "add_members_example"; # string | 
 
-eval { 
+eval {
     $api_instance->post_node_rw(path => $path, name => $name, add_members => $add_members);
 };
 if ($@) {
@@ -1563,7 +1565,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::SlingApi;
@@ -1579,7 +1581,7 @@ my $path = "path_example"; # string |
 my $jcr:primary_type = "jcr:primary_type_example"; # string | 
 my $:name = ":name_example"; # string | 
 
-eval { 
+eval {
     $api_instance->post_path(path => $path, jcr:primary_type => $jcr:primary_type, :name => $:name);
 };
 if ($@) {
@@ -1615,7 +1617,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::SlingApi;
@@ -1632,7 +1634,7 @@ my $p/limit = 3.4; # double |
 my $_1_property = "_1_property_example"; # string | 
 my $_1_property/value = "_1_property/value_example"; # string | 
 
-eval { 
+eval {
     my $result = $api_instance->post_query(path => $path, p/limit => $p/limit, _1_property => $_1_property, _1_property/value => $_1_property/value);
     print Dumper($result);
 };
@@ -1666,11 +1668,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_tree_activation**
-> post_tree_activation(ignoredeactivated => $ignoredeactivated, onlymodified => $onlymodified, path => $path)
+> post_tree_activation(ignoredeactivated => $ignoredeactivated, onlymodified => $onlymodified, path => $path, cmd => $cmd)
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::SlingApi;
@@ -1685,9 +1687,10 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
 my $ignoredeactivated = null; # boolean | 
 my $onlymodified = null; # boolean | 
 my $path = "path_example"; # string | 
+my $cmd = 'activate'; # string | 
 
-eval { 
-    $api_instance->post_tree_activation(ignoredeactivated => $ignoredeactivated, onlymodified => $onlymodified, path => $path);
+eval {
+    $api_instance->post_tree_activation(ignoredeactivated => $ignoredeactivated, onlymodified => $onlymodified, path => $path, cmd => $cmd);
 };
 if ($@) {
     warn "Exception when calling SlingApi->post_tree_activation: $@\n";
@@ -1701,6 +1704,7 @@ Name | Type | Description  | Notes
  **ignoredeactivated** | **boolean**|  | 
  **onlymodified** | **boolean**|  | 
  **path** | **string**|  | 
+ **cmd** | **string**|  | [default to &#39;activate&#39;]
 
 ### Return type
 
@@ -1722,7 +1726,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::SlingApi;
@@ -1741,7 +1745,7 @@ my $key_store_type = "key_store_type_example"; # string |
 my $remove_alias = "remove_alias_example"; # string | 
 my $certificate = "/path/to/file"; # string | 
 
-eval { 
+eval {
     my $result = $api_instance->post_truststore(:operation => $:operation, new_password => $new_password, re_password => $re_password, key_store_type => $key_store_type, remove_alias => $remove_alias, certificate => $certificate);
     print Dumper($result);
 };
@@ -1781,7 +1785,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::SlingApi;
@@ -1795,7 +1799,7 @@ my $api_instance = WWW::OpenAPIClient::SlingApi->new(
 
 my $truststore/p12 = "/path/to/file"; # string | 
 
-eval { 
+eval {
     my $result = $api_instance->post_truststore_pkcs12(truststore/p12 => $truststore/p12);
     print Dumper($result);
 };

@@ -1,6 +1,7 @@
 package com.prokarma.pkmst.controller;
 
 import com.prokarma.pkmst.model.BundleInfo;
+import java.util.List;
 import com.prokarma.pkmst.model.SamlConfigurationInfo;
 
 import io.swagger.annotations.*;
@@ -20,11 +21,11 @@ import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 /**
- * Api implemention
+ * Api implementation
  * @author pkmst
  *
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2021-09-03T15:25:27.791+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2026-08-17T02:15:15.504120373Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 @Controller
 public class ConsoleApiController implements ConsoleApi {
     private final ObjectMapper objectMapper;
@@ -105,7 +106,7 @@ public class ConsoleApiController implements ConsoleApi {
         @RequestHeader(value = "Accept", required = false) String accept) throws Exception {
         // do some magic!
 
-        if (accept != null && accept.contains("")) {
+        if (accept != null && accept.contains("text/plain")) {
             return new ResponseEntity<SamlConfigurationInfo>(objectMapper.readValue("", SamlConfigurationInfo.class), HttpStatus.OK);
         }
 

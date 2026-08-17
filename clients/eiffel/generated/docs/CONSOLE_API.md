@@ -14,7 +14,7 @@ Feature | HTTP request | Description
 
 # **aem_product_info**
 > aem_product_info : detachable LIST [STRING_32]
-	
+
 
 
 
@@ -39,7 +39,7 @@ This endpoint does not need any parameter.
 
 # **bundle_info**
 > bundle_info (name: STRING_32 ): detachable BUNDLE_INFO
-	
+
 
 
 
@@ -67,7 +67,7 @@ Name | Type | Description  | Notes
 
 # **config_mgr**
 > config_mgr : detachable STRING_32
-	
+
 
 
 
@@ -92,7 +92,7 @@ This endpoint does not need any parameter.
 
 # **post_bundle**
 > post_bundle (name: STRING_32 ; action: STRING_32 )
-	
+
 
 
 
@@ -121,7 +121,7 @@ Name | Type | Description  | Notes
 
 # **post_jmx_repository**
 > post_jmx_repository (action: STRING_32 )
-	
+
 
 
 
@@ -149,7 +149,7 @@ Name | Type | Description  | Notes
 
 # **post_saml_configuration**
 > post_saml_configuration (post:  detachable BOOLEAN ; apply:  detachable BOOLEAN ; delete:  detachable BOOLEAN ; action:  detachable STRING_32 ; location:  detachable STRING_32 ; path:  detachable LIST [STRING_32] ; service_ranking:  detachable INTEGER_32 ; idp_url:  detachable STRING_32 ; idp_cert_alias:  detachable STRING_32 ; idp_http_redirect:  detachable BOOLEAN ; service_provider_entity_id:  detachable STRING_32 ; assertion_consumer_service_ur_l:  detachable STRING_32 ; sp_private_key_alias:  detachable STRING_32 ; key_store_password:  detachable STRING_32 ; default_redirect_url:  detachable STRING_32 ; user_id_attribute:  detachable STRING_32 ; use_encryption:  detachable BOOLEAN ; create_user:  detachable BOOLEAN ; add_group_memberships:  detachable BOOLEAN ; group_membership_attribute:  detachable STRING_32 ; default_groups:  detachable LIST [STRING_32] ; name_id_format:  detachable STRING_32 ; synchronize_attributes:  detachable LIST [STRING_32] ; handle_logout:  detachable BOOLEAN ; logout_url:  detachable STRING_32 ; clock_tolerance:  detachable INTEGER_32 ; digest_method:  detachable STRING_32 ; signature_method:  detachable STRING_32 ; user_intermediate_path:  detachable STRING_32 ; propertylist:  detachable LIST [STRING_32] ): detachable SAML_CONFIGURATION_INFO
-	
+
 
 
 

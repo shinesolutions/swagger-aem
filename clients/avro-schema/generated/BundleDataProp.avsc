@@ -1,0 +1,21 @@
+{
+  "namespace": "model",
+  "type": "record",
+  "doc": "",
+  "name": "BundleDataProp",
+  "fields": [
+    {
+      "name": "key",
+      "type": ["null", "string"],
+      "doc": "Bundle data key",
+      "default": null
+    },
+    {
+      "name": "value",
+      "type": ["null", "string"],
+      "doc": "Bundle data value",
+      "default": null
+    }
+  ]
+
+}

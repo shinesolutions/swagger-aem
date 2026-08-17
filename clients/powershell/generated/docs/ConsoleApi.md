@@ -1,4 +1,4 @@
-# PSOpenAPITools.PSOpenAPITools/Api.ConsoleApi
+# PSOpenAPITools.PSOpenAPITools\Api.ConsoleApi
 
 All URIs are relative to *http://localhost*
 
@@ -12,7 +12,7 @@ Method | HTTP request | Description
 [**Submit-SamlConfiguration**](ConsoleApi.md#Submit-SamlConfiguration) | **POST** /system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler | 
 
 
-<a name="Get-AemProductInfo"></a>
+<a id="Get-AemProductInfo"></a>
 # **Get-AemProductInfo**
 > String[] Get-AemProductInfo<br>
 
@@ -30,7 +30,7 @@ $Configuration.Password = "YOUR_PASSWORD"
 try {
     $Result = Get-AemProductInfo
 } catch {
-    Write-Host ("Exception occured when calling Get-AemProductInfo: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Get-AemProductInfo: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -53,7 +53,7 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-BundleInfo"></a>
+<a id="Get-BundleInfo"></a>
 # **Get-BundleInfo**
 > BundleInfo Get-BundleInfo<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Name] <String><br>
@@ -73,7 +73,7 @@ $Name = "MyName" # String |
 try {
     $Result = Get-BundleInfo -Name $Name
 } catch {
-    Write-Host ("Exception occured when calling Get-BundleInfo: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Get-BundleInfo: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -99,7 +99,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-ConfigMgr"></a>
+<a id="Get-ConfigMgr"></a>
 # **Get-ConfigMgr**
 > String Get-ConfigMgr<br>
 
@@ -117,7 +117,7 @@ $Configuration.Password = "YOUR_PASSWORD"
 try {
     $Result = Get-ConfigMgr
 } catch {
-    Write-Host ("Exception occured when calling Get-ConfigMgr: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Get-ConfigMgr: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -140,7 +140,7 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-Bundle"></a>
+<a id="Submit-Bundle"></a>
 # **Submit-Bundle**
 > void Submit-Bundle<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Name] <String><br>
@@ -162,7 +162,7 @@ $Action = "MyAction" # String |
 try {
     $Result = Submit-Bundle -Name $Name -Action $Action
 } catch {
-    Write-Host ("Exception occured when calling Submit-Bundle: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Submit-Bundle: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -189,7 +189,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-JmxRepository"></a>
+<a id="Submit-JmxRepository"></a>
 # **Submit-JmxRepository**
 > void Submit-JmxRepository<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Action] <String><br>
@@ -209,7 +209,7 @@ $Action = "MyAction" # String |
 try {
     $Result = Submit-JmxRepository -Action $Action
 } catch {
-    Write-Host ("Exception occured when calling Submit-JmxRepository: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Submit-JmxRepository: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -235,7 +235,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-SamlConfiguration"></a>
+<a id="Submit-SamlConfiguration"></a>
 # **Submit-SamlConfiguration**
 > SamlConfigurationInfo Submit-SamlConfiguration<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Post] <System.Nullable[Boolean]><br>
@@ -313,7 +313,7 @@ $Propertylist = "MyPropertylist" # String[] |  (optional)
 try {
     $Result = Submit-SamlConfiguration -Post $Post -Apply $Apply -Delete $Delete -Action $Action -Location $Location -Path $Path -ServiceRanking $ServiceRanking -IdpUrl $IdpUrl -IdpCertAlias $IdpCertAlias -IdpHttpRedirect $IdpHttpRedirect -ServiceProviderEntityId $ServiceProviderEntityId -AssertionConsumerServiceURL $AssertionConsumerServiceURL -SpPrivateKeyAlias $SpPrivateKeyAlias -KeyStorePassword $KeyStorePassword -DefaultRedirectUrl $DefaultRedirectUrl -UserIDAttribute $UserIDAttribute -UseEncryption $UseEncryption -CreateUser $CreateUser -AddGroupMemberships $AddGroupMemberships -GroupMembershipAttribute $GroupMembershipAttribute -DefaultGroups $DefaultGroups -NameIdFormat $NameIdFormat -SynchronizeAttributes $SynchronizeAttributes -HandleLogout $HandleLogout -LogoutUrl $LogoutUrl -ClockTolerance $ClockTolerance -DigestMethod $DigestMethod -SignatureMethod $SignatureMethod -UserIntermediatePath $UserIntermediatePath -Propertylist $Propertylist
 } catch {
-    Write-Host ("Exception occured when calling Submit-SamlConfiguration: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Submit-SamlConfiguration: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```

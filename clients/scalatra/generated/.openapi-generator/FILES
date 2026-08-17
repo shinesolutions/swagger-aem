@@ -5,9 +5,9 @@ project/build.properties
 project/plugins.sbt
 sbt
 src/main/resources/logback.xml
-src/main/scala/JettyMain.scala
-src/main/scala/ScalatraBootstrap.scala
-src/main/scala/ServletApp.scala
+src/main/scala/org/openapitools/JettyMain.scala
+src/main/scala/org/openapitools/ScalatraBootstrap.scala
+src/main/scala/org/openapitools/app/ServletApp.scala
 src/main/scala/org/openapitools/server/api/ConsoleApi.scala
 src/main/scala/org/openapitools/server/api/CqApi.scala
 src/main/scala/org/openapitools/server/api/CrxApi.scala

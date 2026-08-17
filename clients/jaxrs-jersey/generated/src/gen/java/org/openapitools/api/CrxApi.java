@@ -1,6 +1,5 @@
 package org.openapitools.api;
 
-import org.openapitools.model.*;
 import org.openapitools.api.CrxApiService;
 import org.openapitools.api.factories.CrxApiServiceFactory;
 
@@ -31,7 +30,7 @@ import javax.validation.Valid;
 
 
 @io.swagger.annotations.Api(description = "the crx API")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJerseyServerCodegen", date = "2021-09-03T15:25:53.422+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJerseyServerCodegen", date = "2026-08-17T02:15:33.561165235Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class CrxApi  {
    private final CrxApiService delegate;
 
@@ -42,11 +41,11 @@ public class CrxApi  {
          String implClass = servletContext.getInitParameter("CrxApi.implementation");
          if (implClass != null && !"".equals(implClass.trim())) {
             try {
-               delegate = (CrxApiService) Class.forName(implClass).newInstance();
+               delegate = (CrxApiService) Class.forName(implClass).getDeclaredConstructor().newInstance();
             } catch (Exception e) {
                throw new RuntimeException(e);
             }
-         } 
+         }
       }
 
       if (delegate == null) {
@@ -56,7 +55,7 @@ public class CrxApi  {
       this.delegate = delegate;
    }
 
-    @GET
+    @javax.ws.rs.GET
     @Path("/server/crx.default/jcr:root/.1.json")
     
     @Produces({ "plain/text" })
@@ -71,7 +70,7 @@ public class CrxApi  {
     throws NotFoundException {
         return delegate.getCrxdeStatus(securityContext);
     }
-    @GET
+    @javax.ws.rs.GET
     @Path("/packmgr/installstatus.jsp")
     
     @Produces({ "application/json" })
@@ -86,7 +85,7 @@ public class CrxApi  {
     throws NotFoundException {
         return delegate.getInstallStatus(securityContext);
     }
-    @GET
+    @javax.ws.rs.GET
     @Path("/packmgr/service/script.html")
     
     @Produces({ "text/html" })
@@ -101,7 +100,7 @@ public class CrxApi  {
     throws NotFoundException {
         return delegate.getPackageManagerServlet(securityContext);
     }
-    @POST
+    @javax.ws.rs.POST
     @Path("/packmgr/service.jsp")
     
     @Produces({ "text/xml" })
@@ -115,7 +114,7 @@ public class CrxApi  {
     throws NotFoundException {
         return delegate.postPackageService(cmd, securityContext);
     }
-    @POST
+    @javax.ws.rs.POST
     @Path("/packmgr/service/.json/{path}")
     @Consumes({ "multipart/form-data" })
     @Produces({ "application/json" })
@@ -130,7 +129,7 @@ public class CrxApi  {
     throws NotFoundException {
         return delegate.postPackageServiceJson(path, cmd, groupName, packageName, packageVersion, charset, force, recursive, _packageBodypart, securityContext);
     }
-    @POST
+    @javax.ws.rs.POST
     @Path("/packmgr/update.jsp")
     
     @Produces({ "application/json" })
@@ -144,7 +143,7 @@ public class CrxApi  {
     throws NotFoundException {
         return delegate.postPackageUpdate(groupName, packageName, version, path, filter, charset, securityContext);
     }
-    @POST
+    @javax.ws.rs.POST
     @Path("/explorer/ui/setpassword.jsp")
     
     @Produces({ "text/plain" })

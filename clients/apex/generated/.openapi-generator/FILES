@@ -6,14 +6,8 @@ force-app/main/default/classes/OASBundleData.cls
 force-app/main/default/classes/OASBundleData.cls-meta.xml
 force-app/main/default/classes/OASBundleDataProp.cls
 force-app/main/default/classes/OASBundleDataProp.cls-meta.xml
-force-app/main/default/classes/OASBundleDataPropTest.cls
-force-app/main/default/classes/OASBundleDataPropTest.cls-meta.xml
-force-app/main/default/classes/OASBundleDataTest.cls
-force-app/main/default/classes/OASBundleDataTest.cls-meta.xml
 force-app/main/default/classes/OASBundleInfo.cls
 force-app/main/default/classes/OASBundleInfo.cls-meta.xml
-force-app/main/default/classes/OASBundleInfoTest.cls
-force-app/main/default/classes/OASBundleInfoTest.cls-meta.xml
 force-app/main/default/classes/OASClient.cls
 force-app/main/default/classes/OASClient.cls-meta.xml
 force-app/main/default/classes/OASConsoleApi.cls
@@ -26,8 +20,6 @@ force-app/main/default/classes/OASCustomApi.cls
 force-app/main/default/classes/OASCustomApi.cls-meta.xml
 force-app/main/default/classes/OASGraniteApi.cls
 force-app/main/default/classes/OASGraniteApi.cls-meta.xml
-force-app/main/default/classes/OASGraniteApiTest.cls
-force-app/main/default/classes/OASGraniteApiTest.cls-meta.xml
 force-app/main/default/classes/OASInstallStatus.cls
 force-app/main/default/classes/OASInstallStatus.cls-meta.xml
 force-app/main/default/classes/OASInstallStatusStatus.cls

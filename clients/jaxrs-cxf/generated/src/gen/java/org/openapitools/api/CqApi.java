@@ -1,13 +1,9 @@
 package org.openapitools.api;
 
 
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.MediaType;
 import org.apache.cxf.jaxrs.ext.multipart.*;
 
 import io.swagger.annotations.Api;
@@ -41,6 +37,5 @@ public interface CqApi  {
     @ApiOperation(value = "", tags={ "cq" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response") })
-    public void postCqActions(@QueryParam("authorizableId") @NotNull  String authorizableId, @QueryParam("changelog") @NotNull  String changelog);
+    public void postCqActions(@QueryParam("authorizableId") @NotNull String authorizableId, @QueryParam("changelog") @NotNull String changelog);
 }
-

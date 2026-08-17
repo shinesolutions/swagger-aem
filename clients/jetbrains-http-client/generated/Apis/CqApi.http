@@ -1,0 +1,11 @@
+## CqApi
+
+### 
+## 
+GET http://localhost/libs/granite/core/content/login.html
+Accept: text/html
+
+### 
+## 
+POST http://localhost/.cqactions.html?authorizableId={{authorizableId}}&changelog={{changelog}}
+Authorization: Basic: {{username-password}}

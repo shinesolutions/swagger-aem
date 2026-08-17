@@ -1,7 +1,6 @@
 package org.openapitools.api;
 
 import org.openapitools.api.*;
-import org.openapitools.model.*;
 
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 
@@ -14,7 +13,8 @@ import java.io.InputStream;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.validation.constraints.*;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJerseyServerCodegen", date = "2021-09-03T15:25:53.422+10:00[Australia/Melbourne]")
+import javax.validation.Valid;
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJerseyServerCodegen", date = "2026-08-17T02:15:33.561165235Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public abstract class CqactionsHtmlApiService {
     public abstract Response postCqActions( @NotNull String authorizableId, @NotNull String changelog,SecurityContext securityContext) throws NotFoundException;
 }

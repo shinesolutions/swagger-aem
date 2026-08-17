@@ -1,0 +1,3928 @@
+{
+	"info": {
+		"name": "Adobe Experience Manager (AEM) API",
+		"description": {
+		    "content": "Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API",
+		    "type": "text/markdown"
+		},
+		"version": "3.7.1-pre.0",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+	        {
+	            "name": "crx",
+	            "description": "crx tag",
+	            "item": [
+	                        {
+    "name": "/crx/explorer/ui/setpassword.jsp",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "postSetPassword",
+                                "request": {
+    "method": "POST",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "text/plain",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/crx/explorer/ui/setpassword.jsp",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "crx",
+        "explorer",
+        "ui",
+        "setpassword.jsp"
+    ],
+    "variable": [
+    ],
+    "query": [
+        {
+        "key": "old",
+        "value": "old_example",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "plain",
+        "value": "plain_example",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "verify",
+        "value": "verify_example",
+        "description": "",
+        "disabled": false
+        }
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/crx/packmgr/installstatus.jsp",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "getInstallStatus",
+                                "request": {
+    "method": "GET",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/crx/packmgr/installstatus.jsp",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "crx",
+        "packmgr",
+        "installstatus.jsp"
+    ],
+    "variable": [
+    ],
+    "query": [
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/crx/packmgr/service.jsp",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "postPackageService",
+                                "request": {
+    "method": "POST",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "text/xml",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/crx/packmgr/service.jsp",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "crx",
+        "packmgr",
+        "service.jsp"
+    ],
+    "variable": [
+    ],
+    "query": [
+        {
+        "key": "cmd",
+        "value": "cmd_example",
+        "description": "",
+        "disabled": false
+        }
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/crx/packmgr/service/.json/:path",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "postPackageServiceJson",
+                                "request": {
+    "method": "POST",
+    "header": [
+        {
+        "key": "Content-Type",
+        "value": "multipart/form-data",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "Accept",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/crx/packmgr/service/.json/:path",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "crx",
+        "packmgr",
+        "service",
+        ".json",
+        ":path"
+    ],
+    "variable": [
+        {
+        "key": "path",
+        "value": "",
+        "description": ""
+        }
+    ],
+    "query": [
+        {
+        "key": "cmd",
+        "value": "cmd_example",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "groupName",
+        "value": "groupName_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "packageName",
+        "value": "packageName_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "packageVersion",
+        "value": "packageVersion_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "charset",
+        "value": "charset_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "force",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "recursive",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        }
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/crx/packmgr/service/script.html",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "getPackageManagerServlet",
+                                "request": {
+    "method": "GET",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "text/html",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/crx/packmgr/service/script.html",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "crx",
+        "packmgr",
+        "service",
+        "script.html"
+    ],
+    "variable": [
+    ],
+    "query": [
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/crx/packmgr/update.jsp",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "postPackageUpdate",
+                                "request": {
+    "method": "POST",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/crx/packmgr/update.jsp",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "crx",
+        "packmgr",
+        "update.jsp"
+    ],
+    "variable": [
+    ],
+    "query": [
+        {
+        "key": "groupName",
+        "value": "groupName_example",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "packageName",
+        "value": "packageName_example",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "version",
+        "value": "version_example",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "path",
+        "value": "path_example",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "filter",
+        "value": "filter_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "charset",
+        "value": "charset_example",
+        "description": "",
+        "disabled": true
+        }
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/crx/server/crx.default/jcr:root/.1.json",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "getCrxdeStatus",
+                                "request": {
+    "method": "GET",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "plain/text",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/crx/server/crx.default/jcr:root/.1.json",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "crx",
+        "server",
+        "crx.default",
+        "jcr:root",
+        ".1.json"
+    ],
+    "variable": [
+    ],
+    "query": [
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        }
+	                    ]
+	        },
+	        {
+	            "name": "cq",
+	            "description": "cq tag",
+	            "item": [
+	                        {
+    "name": "/.cqactions.html",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "postCqActions",
+                                "request": {
+    "method": "POST",
+    "header": [
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/.cqactions.html",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        ".cqactions.html"
+    ],
+    "variable": [
+    ],
+    "query": [
+        {
+        "key": "authorizableId",
+        "value": "authorizableId_example",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "changelog",
+        "value": "changelog_example",
+        "description": "",
+        "disabled": false
+        }
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/libs/granite/core/content/login.html",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "getLoginPage",
+                                "request": {
+    "method": "GET",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "text/html",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/libs/granite/core/content/login.html",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "libs",
+        "granite",
+        "core",
+        "content",
+        "login.html"
+    ],
+    "variable": [
+    ],
+    "query": [
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        }
+	                    ]
+	        },
+	        {
+	            "name": "console",
+	            "description": "console tag",
+	            "item": [
+	                        {
+    "name": "/system/console/bundles/:name",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "postBundle",
+                                "request": {
+    "method": "POST",
+    "header": [
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/system/console/bundles/:name",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "system",
+        "console",
+        "bundles",
+        ":name"
+    ],
+    "variable": [
+        {
+        "key": "name",
+        "value": "",
+        "description": ""
+        }
+    ],
+    "query": [
+        {
+        "key": "action",
+        "value": "action_example",
+        "description": "",
+        "disabled": false
+        }
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/system/console/bundles/:name.json",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "getBundleInfo",
+                                "request": {
+    "method": "GET",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/system/console/bundles/:name.json",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "system",
+        "console",
+        "bundles",
+        ":name.json"
+    ],
+    "variable": [
+        {
+        "key": "name",
+        "value": "",
+        "description": ""
+        }
+    ],
+    "query": [
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/system/console/configMgr",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "getConfigMgr",
+                                "request": {
+    "method": "GET",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "text/xml",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/system/console/configMgr",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "system",
+        "console",
+        "configMgr"
+    ],
+    "variable": [
+    ],
+    "query": [
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "postSamlConfiguration",
+                                "request": {
+    "method": "POST",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "text/plain",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "system",
+        "console",
+        "configMgr",
+        "com.adobe.granite.auth.saml.SamlAuthenticationHandler"
+    ],
+    "variable": [
+    ],
+    "query": [
+        {
+        "key": "post",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "apply",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "delete",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "action",
+        "value": "action_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "Dollarlocation",
+        "value": "Dollarlocation_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "path",
+        "value": "",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "servicePeriodranking",
+        "value": "56",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "idpUrl",
+        "value": "idpUrl_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "idpCertAlias",
+        "value": "idpCertAlias_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "idpHttpRedirect",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "serviceProviderEntityId",
+        "value": "serviceProviderEntityId_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "assertionConsumerServiceURL",
+        "value": "assertionConsumerServiceURL_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "spPrivateKeyAlias",
+        "value": "spPrivateKeyAlias_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "keyStorePassword",
+        "value": "keyStorePassword_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "defaultRedirectUrl",
+        "value": "defaultRedirectUrl_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "userIDAttribute",
+        "value": "userIDAttribute_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "useEncryption",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "createUser",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "addGroupMemberships",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "groupMembershipAttribute",
+        "value": "groupMembershipAttribute_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "defaultGroups",
+        "value": "",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "nameIdFormat",
+        "value": "nameIdFormat_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "synchronizeAttributes",
+        "value": "",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "handleLogout",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "logoutUrl",
+        "value": "logoutUrl_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "clockTolerance",
+        "value": "56",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "digestMethod",
+        "value": "digestMethod_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "signatureMethod",
+        "value": "signatureMethod_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "userIntermediatePath",
+        "value": "userIntermediatePath_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "propertylist",
+        "value": "",
+        "description": "",
+        "disabled": true
+        }
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/system/console/jmx/com.adobe.granite:type=Repository/op/:action",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "postJmxRepository",
+                                "request": {
+    "method": "POST",
+    "header": [
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/:action",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "system",
+        "console",
+        "jmx",
+        "com.adobe.granite:type&#x3D;Repository",
+        "op",
+        ":action"
+    ],
+    "variable": [
+        {
+        "key": "action",
+        "value": "",
+        "description": ""
+        }
+    ],
+    "query": [
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/system/console/status-productinfo.json",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "getAemProductInfo",
+                                "request": {
+    "method": "GET",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/system/console/status-productinfo.json",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "system",
+        "console",
+        "status-productinfo.json"
+    ],
+    "variable": [
+    ],
+    "query": [
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        }
+	                    ]
+	        },
+	        {
+	            "name": "custom",
+	            "description": "custom tag",
+	            "item": [
+	                        {
+    "name": "/apps/system/config/com.shinesolutions.aem.passwordreset.Activator",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "postConfigAemPasswordReset",
+                                "request": {
+    "method": "POST",
+    "header": [
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/apps/system/config/com.shinesolutions.aem.passwordreset.Activator",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "apps",
+        "system",
+        "config",
+        "com.shinesolutions.aem.passwordreset.Activator"
+    ],
+    "variable": [
+    ],
+    "query": [
+        {
+        "key": "pwdresetPeriodauthorizables",
+        "value": "",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "pwdresetPeriodauthorizablesAtTypeHint",
+        "value": "pwdresetPeriodauthorizablesAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        }
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "postConfigAemHealthCheckServlet",
+                                "request": {
+    "method": "POST",
+    "header": [
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "apps",
+        "system",
+        "config",
+        "com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck"
+    ],
+    "variable": [
+    ],
+    "query": [
+        {
+        "key": "bundlesPeriodignored",
+        "value": "",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "bundlesPeriodignoredAtTypeHint",
+        "value": "bundlesPeriodignoredAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        }
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/system/health",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "getAemHealthCheck",
+                                "request": {
+    "method": "GET",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/system/health",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "system",
+        "health"
+    ],
+    "variable": [
+    ],
+    "query": [
+        {
+        "key": "tags",
+        "value": "tags_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "combineTagsOr",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        }
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        }
+	                    ]
+	        },
+	        {
+	            "name": "granite",
+	            "description": "granite tag",
+	            "item": [
+	                        {
+    "name": "/libs/granite/security/post/sslSetup.html",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "sslSetup",
+                                "request": {
+    "method": "POST",
+    "header": [
+        {
+        "key": "Content-Type",
+        "value": "multipart/form-data",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "Accept",
+        "value": "text/plain",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/libs/granite/security/post/sslSetup.html",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "libs",
+        "granite",
+        "security",
+        "post",
+        "sslSetup.html"
+    ],
+    "variable": [
+    ],
+    "query": [
+        {
+        "key": "keystorePassword",
+        "value": "keystorePassword_example",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "keystorePasswordConfirm",
+        "value": "keystorePasswordConfirm_example",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "truststorePassword",
+        "value": "truststorePassword_example",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "truststorePasswordConfirm",
+        "value": "truststorePasswordConfirm_example",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "httpsHostname",
+        "value": "httpsHostname_example",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "httpsPort",
+        "value": "httpsPort_example",
+        "description": "",
+        "disabled": false
+        }
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        }
+	                    ]
+	        },
+	        {
+	            "name": "sling",
+	            "description": "sling tag",
+	            "item": [
+	                        {
+    "name": "/:intermediatePath/:authorizableId.ks.html",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "postAuthorizableKeystore",
+                                "request": {
+    "method": "POST",
+    "header": [
+        {
+        "key": "Content-Type",
+        "value": "multipart/form-data",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "Accept",
+        "value": "text/plain",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/:intermediatePath/:authorizableId.ks.html",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        ":intermediatePath",
+        ":authorizableId.ks.html"
+    ],
+    "variable": [
+        {
+        "key": "intermediatePath",
+        "value": "",
+        "description": ""
+        },
+        {
+        "key": "authorizableId",
+        "value": "",
+        "description": ""
+        }
+    ],
+    "query": [
+        {
+        "key": "operation",
+        "value": "operation_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "currentPassword",
+        "value": "currentPassword_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "newPassword",
+        "value": "newPassword_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "rePassword",
+        "value": "rePassword_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "keyPassword",
+        "value": "keyPassword_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "keyStorePass",
+        "value": "keyStorePass_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "alias",
+        "value": "alias_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "newAlias",
+        "value": "newAlias_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "removeAlias",
+        "value": "removeAlias_example",
+        "description": "",
+        "disabled": true
+        }
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/:intermediatePath/:authorizableId.ks.json",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "getAuthorizableKeystore",
+                                "request": {
+    "method": "GET",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "text/plain",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/:intermediatePath/:authorizableId.ks.json",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        ":intermediatePath",
+        ":authorizableId.ks.json"
+    ],
+    "variable": [
+        {
+        "key": "intermediatePath",
+        "value": "",
+        "description": ""
+        },
+        {
+        "key": "authorizableId",
+        "value": "",
+        "description": ""
+        }
+    ],
+    "query": [
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/:intermediatePath/:authorizableId/keystore/store.p12",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "getKeystore",
+                                "request": {
+    "method": "GET",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "application/octet-stream",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/:intermediatePath/:authorizableId/keystore/store.p12",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        ":intermediatePath",
+        ":authorizableId",
+        "keystore",
+        "store.p12"
+    ],
+    "variable": [
+        {
+        "key": "intermediatePath",
+        "value": "",
+        "description": ""
+        },
+        {
+        "key": "authorizableId",
+        "value": "",
+        "description": ""
+        }
+    ],
+    "query": [
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/:path/",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "postPath",
+                                "request": {
+    "method": "POST",
+    "header": [
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/:path/",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        ":path"
+    ],
+    "variable": [
+        {
+        "key": "path",
+        "value": "",
+        "description": ""
+        }
+    ],
+    "query": [
+        {
+        "key": "jcrPrimaryType",
+        "value": "jcrPrimaryType_example",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "name",
+        "value": "name_example",
+        "description": "",
+        "disabled": false
+        }
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/:path/:name",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "deleteNode",
+                                "request": {
+    "method": "DELETE",
+    "header": [
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/:path/:name",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        ":path",
+        ":name"
+    ],
+    "variable": [
+        {
+        "key": "path",
+        "value": "",
+        "description": ""
+        },
+        {
+        "key": "name",
+        "value": "",
+        "description": ""
+        }
+    ],
+    "query": [
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/:path/:name",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "getNode",
+                                "request": {
+    "method": "GET",
+    "header": [
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/:path/:name",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        ":path",
+        ":name"
+    ],
+    "variable": [
+        {
+        "key": "path",
+        "value": "",
+        "description": ""
+        },
+        {
+        "key": "name",
+        "value": "",
+        "description": ""
+        }
+    ],
+    "query": [
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/:path/:name",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "postNode",
+                                "request": {
+    "method": "POST",
+    "header": [
+        {
+        "key": "Content-Type",
+        "value": "multipart/form-data",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/:path/:name",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        ":path",
+        ":name"
+    ],
+    "variable": [
+        {
+        "key": "path",
+        "value": "",
+        "description": ""
+        },
+        {
+        "key": "name",
+        "value": "",
+        "description": ""
+        }
+    ],
+    "query": [
+        {
+        "key": "operation",
+        "value": "operation_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "deleteAuthorizable",
+        "value": "deleteAuthorizable_example",
+        "description": "",
+        "disabled": true
+        }
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/:path/:name.rw.html",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "postNodeRw",
+                                "request": {
+    "method": "POST",
+    "header": [
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/:path/:name.rw.html",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        ":path",
+        ":name.rw.html"
+    ],
+    "variable": [
+        {
+        "key": "path",
+        "value": "",
+        "description": ""
+        },
+        {
+        "key": "name",
+        "value": "",
+        "description": ""
+        }
+    ],
+    "query": [
+        {
+        "key": "addMembers",
+        "value": "addMembers_example",
+        "description": "",
+        "disabled": true
+        }
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/apps/system/config/:configNodeName",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "postConfigProperty",
+                                "request": {
+    "method": "POST",
+    "header": [
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/apps/system/config/:configNodeName",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "apps",
+        "system",
+        "config",
+        ":configNodeName"
+    ],
+    "variable": [
+        {
+        "key": "configNodeName",
+        "value": "",
+        "description": ""
+        }
+    ],
+    "query": [
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "postConfigAdobeGraniteSamlAuthenticationHandler",
+                                "request": {
+    "method": "POST",
+    "header": [
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "apps",
+        "system",
+        "config",
+        "com.adobe.granite.auth.saml.SamlAuthenticationHandler.config"
+    ],
+    "variable": [
+    ],
+    "query": [
+        {
+        "key": "keyStorePassword",
+        "value": "keyStorePassword_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "keyStorePasswordAtTypeHint",
+        "value": "keyStorePasswordAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "servicePeriodranking",
+        "value": "56",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "servicePeriodrankingAtTypeHint",
+        "value": "servicePeriodrankingAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "idpHttpRedirect",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "idpHttpRedirectAtTypeHint",
+        "value": "idpHttpRedirectAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "createUser",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "createUserAtTypeHint",
+        "value": "createUserAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "defaultRedirectUrl",
+        "value": "defaultRedirectUrl_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "defaultRedirectUrlAtTypeHint",
+        "value": "defaultRedirectUrlAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "userIDAttribute",
+        "value": "userIDAttribute_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "userIDAttributeAtTypeHint",
+        "value": "userIDAttributeAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "defaultGroups",
+        "value": "",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "defaultGroupsAtTypeHint",
+        "value": "defaultGroupsAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "idpCertAlias",
+        "value": "idpCertAlias_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "idpCertAliasAtTypeHint",
+        "value": "idpCertAliasAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "addGroupMemberships",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "addGroupMembershipsAtTypeHint",
+        "value": "addGroupMembershipsAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "path",
+        "value": "",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "pathAtTypeHint",
+        "value": "pathAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "synchronizeAttributes",
+        "value": "",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "synchronizeAttributesAtTypeHint",
+        "value": "synchronizeAttributesAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "clockTolerance",
+        "value": "56",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "clockToleranceAtTypeHint",
+        "value": "clockToleranceAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "groupMembershipAttribute",
+        "value": "groupMembershipAttribute_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "groupMembershipAttributeAtTypeHint",
+        "value": "groupMembershipAttributeAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "idpUrl",
+        "value": "idpUrl_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "idpUrlAtTypeHint",
+        "value": "idpUrlAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "logoutUrl",
+        "value": "logoutUrl_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "logoutUrlAtTypeHint",
+        "value": "logoutUrlAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "serviceProviderEntityId",
+        "value": "serviceProviderEntityId_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "serviceProviderEntityIdAtTypeHint",
+        "value": "serviceProviderEntityIdAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "assertionConsumerServiceURL",
+        "value": "assertionConsumerServiceURL_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "assertionConsumerServiceURLAtTypeHint",
+        "value": "assertionConsumerServiceURLAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "handleLogout",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "handleLogoutAtTypeHint",
+        "value": "handleLogoutAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "spPrivateKeyAlias",
+        "value": "spPrivateKeyAlias_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "spPrivateKeyAliasAtTypeHint",
+        "value": "spPrivateKeyAliasAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "useEncryption",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "useEncryptionAtTypeHint",
+        "value": "useEncryptionAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "nameIdFormat",
+        "value": "nameIdFormat_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "nameIdFormatAtTypeHint",
+        "value": "nameIdFormatAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "digestMethod",
+        "value": "digestMethod_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "digestMethodAtTypeHint",
+        "value": "digestMethodAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "signatureMethod",
+        "value": "signatureMethod_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "signatureMethodAtTypeHint",
+        "value": "signatureMethodAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "userIntermediatePath",
+        "value": "userIntermediatePath_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "userIntermediatePathAtTypeHint",
+        "value": "userIntermediatePathAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        }
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/apps/system/config/org.apache.felix.http",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "postConfigApacheFelixJettyBasedHttpService",
+                                "request": {
+    "method": "POST",
+    "header": [
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/apps/system/config/org.apache.felix.http",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "apps",
+        "system",
+        "config",
+        "org.apache.felix.http"
+    ],
+    "variable": [
+    ],
+    "query": [
+        {
+        "key": "orgPeriodapachePeriodfelixPeriodhttpsPeriodnio",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "orgPeriodapachePeriodfelixPeriodhttpsPeriodnioAtTypeHint",
+        "value": "orgPeriodapachePeriodfelixPeriodhttpsPeriodnioAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystore",
+        "value": "orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystore_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystoreAtTypeHint",
+        "value": "orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystoreAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodpassword",
+        "value": "orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodpassword_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodpasswordAtTypeHint",
+        "value": "orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodpasswordAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkey",
+        "value": "orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkey_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyAtTypeHint",
+        "value": "orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyPeriodpassword",
+        "value": "orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyPeriodpassword_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyPeriodpasswordAtTypeHint",
+        "value": "orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyPeriodpasswordAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststore",
+        "value": "orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststore_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststoreAtTypeHint",
+        "value": "orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststoreAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststorePeriodpassword",
+        "value": "orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststorePeriodpassword_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststorePeriodpasswordAtTypeHint",
+        "value": "orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststorePeriodpasswordAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "orgPeriodapachePeriodfelixPeriodhttpsPeriodclientcertificate",
+        "value": "orgPeriodapachePeriodfelixPeriodhttpsPeriodclientcertificate_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "orgPeriodapachePeriodfelixPeriodhttpsPeriodclientcertificateAtTypeHint",
+        "value": "orgPeriodapachePeriodfelixPeriodhttpsPeriodclientcertificateAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "orgPeriodapachePeriodfelixPeriodhttpsPeriodenable",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "orgPeriodapachePeriodfelixPeriodhttpsPeriodenableAtTypeHint",
+        "value": "orgPeriodapachePeriodfelixPeriodhttpsPeriodenableAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "orgPeriodosgiPeriodservicePeriodhttpPeriodportPeriodsecure",
+        "value": "orgPeriodosgiPeriodservicePeriodhttpPeriodportPeriodsecure_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "orgPeriodosgiPeriodservicePeriodhttpPeriodportPeriodsecureAtTypeHint",
+        "value": "orgPeriodosgiPeriodservicePeriodhttpPeriodportPeriodsecureAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        }
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/apps/system/config/org.apache.http.proxyconfigurator.config",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "postConfigApacheHttpComponentsProxyConfiguration",
+                                "request": {
+    "method": "POST",
+    "header": [
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/apps/system/config/org.apache.http.proxyconfigurator.config",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "apps",
+        "system",
+        "config",
+        "org.apache.http.proxyconfigurator.config"
+    ],
+    "variable": [
+    ],
+    "query": [
+        {
+        "key": "proxyPeriodhost",
+        "value": "proxyPeriodhost_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "proxyPeriodhostAtTypeHint",
+        "value": "proxyPeriodhostAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "proxyPeriodport",
+        "value": "56",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "proxyPeriodportAtTypeHint",
+        "value": "proxyPeriodportAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "proxyPeriodexceptions",
+        "value": "",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "proxyPeriodexceptionsAtTypeHint",
+        "value": "proxyPeriodexceptionsAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "proxyPeriodenabled",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "proxyPeriodenabledAtTypeHint",
+        "value": "proxyPeriodenabledAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "proxyPerioduser",
+        "value": "proxyPerioduser_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "proxyPerioduserAtTypeHint",
+        "value": "proxyPerioduserAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "proxyPeriodpassword",
+        "value": "proxyPeriodpassword_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "proxyPeriodpasswordAtTypeHint",
+        "value": "proxyPeriodpasswordAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        }
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "postConfigApacheSlingDavExServlet",
+                                "request": {
+    "method": "POST",
+    "header": [
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "apps",
+        "system",
+        "config",
+        "org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet"
+    ],
+    "variable": [
+    ],
+    "query": [
+        {
+        "key": "alias",
+        "value": "alias_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "aliasAtTypeHint",
+        "value": "aliasAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "davPeriodcreateAbsoluteUri",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "davPeriodcreateAbsoluteUriAtTypeHint",
+        "value": "davPeriodcreateAbsoluteUriAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        }
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/apps/system/config/org.apache.sling.security.impl.ReferrerFilter",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "postConfigApacheSlingReferrerFilter",
+                                "request": {
+    "method": "POST",
+    "header": [
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/apps/system/config/org.apache.sling.security.impl.ReferrerFilter",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "apps",
+        "system",
+        "config",
+        "org.apache.sling.security.impl.ReferrerFilter"
+    ],
+    "variable": [
+    ],
+    "query": [
+        {
+        "key": "allowPeriodempty",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "allowPeriodemptyAtTypeHint",
+        "value": "allowPeriodemptyAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "allowPeriodhosts",
+        "value": "allowPeriodhosts_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "allowPeriodhostsAtTypeHint",
+        "value": "allowPeriodhostsAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "allowPeriodhostsPeriodregexp",
+        "value": "allowPeriodhostsPeriodregexp_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "allowPeriodhostsPeriodregexpAtTypeHint",
+        "value": "allowPeriodhostsPeriodregexpAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "filterPeriodmethods",
+        "value": "filterPeriodmethods_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "filterPeriodmethodsAtTypeHint",
+        "value": "filterPeriodmethodsAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        }
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "postConfigApacheSlingGetServlet",
+                                "request": {
+    "method": "POST",
+    "header": [
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "apps",
+        "system",
+        "config",
+        "org.apache.sling.servlets.get.DefaultGetServlet"
+    ],
+    "variable": [
+    ],
+    "query": [
+        {
+        "key": "jsonPeriodmaximumresults",
+        "value": "jsonPeriodmaximumresults_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jsonPeriodmaximumresultsAtTypeHint",
+        "value": "jsonPeriodmaximumresultsAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "enablePeriodhtml",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "enablePeriodhtmlAtTypeHint",
+        "value": "enablePeriodhtmlAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "enablePeriodtxt",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "enablePeriodtxtAtTypeHint",
+        "value": "enablePeriodtxtAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "enablePeriodxml",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "enablePeriodxmlAtTypeHint",
+        "value": "enablePeriodxmlAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        }
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/bin/querybuilder.json",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "getQuery",
+                                "request": {
+    "method": "GET",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/bin/querybuilder.json",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "bin",
+        "querybuilder.json"
+    ],
+    "variable": [
+    ],
+    "query": [
+        {
+        "key": "path",
+        "value": "path_example",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "pPeriodlimit",
+        "value": "8.14",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "1Property",
+        "value": "1Property_example",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "1PropertyPeriodvalue",
+        "value": "1PropertyPeriodvalue_example",
+        "description": "",
+        "disabled": false
+        }
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/bin/querybuilder.json",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "postQuery",
+                                "request": {
+    "method": "POST",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/bin/querybuilder.json",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "bin",
+        "querybuilder.json"
+    ],
+    "variable": [
+    ],
+    "query": [
+        {
+        "key": "path",
+        "value": "path_example",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "pPeriodlimit",
+        "value": "8.14",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "1Property",
+        "value": "1Property_example",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "1PropertyPeriodvalue",
+        "value": "1PropertyPeriodvalue_example",
+        "description": "",
+        "disabled": false
+        }
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/etc/packages/:group/:name-:version.zip",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "getPackage",
+                                "request": {
+    "method": "GET",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "application/octet-stream",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/etc/packages/:group/:name-:version.zip",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "etc",
+        "packages",
+        ":group",
+        ":name-:version.zip"
+    ],
+    "variable": [
+        {
+        "key": "group",
+        "value": "",
+        "description": ""
+        },
+        {
+        "key": "name",
+        "value": "",
+        "description": ""
+        },
+        {
+        "key": "version",
+        "value": "",
+        "description": ""
+        }
+    ],
+    "query": [
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/etc/packages/:group/:name-:version.zip/jcr:content/vlt:definition/filter.tidy.2.json",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "getPackageFilter",
+                                "request": {
+    "method": "GET",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/etc/packages/:group/:name-:version.zip/jcr:content/vlt:definition/filter.tidy.2.json",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "etc",
+        "packages",
+        ":group",
+        ":name-:version.zip",
+        "jcr:content",
+        "vlt:definition",
+        "filter.tidy.2.json"
+    ],
+    "variable": [
+        {
+        "key": "group",
+        "value": "",
+        "description": ""
+        },
+        {
+        "key": "name",
+        "value": "",
+        "description": ""
+        },
+        {
+        "key": "version",
+        "value": "",
+        "description": ""
+        }
+    ],
+    "query": [
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/etc/replication/agents.:runmode.-1.json",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "getAgents",
+                                "request": {
+    "method": "GET",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/etc/replication/agents.:runmode.-1.json",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "etc",
+        "replication",
+        "agents.:runmode.-1.json"
+    ],
+    "variable": [
+        {
+        "key": "runmode",
+        "value": "",
+        "description": ""
+        }
+    ],
+    "query": [
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/etc/replication/agents.:runmode/:name",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "deleteAgent",
+                                "request": {
+    "method": "DELETE",
+    "header": [
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/etc/replication/agents.:runmode/:name",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "etc",
+        "replication",
+        "agents.:runmode",
+        ":name"
+    ],
+    "variable": [
+        {
+        "key": "runmode",
+        "value": "",
+        "description": ""
+        },
+        {
+        "key": "name",
+        "value": "",
+        "description": ""
+        }
+    ],
+    "query": [
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/etc/replication/agents.:runmode/:name",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "getAgent",
+                                "request": {
+    "method": "GET",
+    "header": [
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/etc/replication/agents.:runmode/:name",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "etc",
+        "replication",
+        "agents.:runmode",
+        ":name"
+    ],
+    "variable": [
+        {
+        "key": "runmode",
+        "value": "",
+        "description": ""
+        },
+        {
+        "key": "name",
+        "value": "",
+        "description": ""
+        }
+    ],
+    "query": [
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/etc/replication/agents.:runmode/:name",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "postAgent",
+                                "request": {
+    "method": "POST",
+    "header": [
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/etc/replication/agents.:runmode/:name",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "etc",
+        "replication",
+        "agents.:runmode",
+        ":name"
+    ],
+    "variable": [
+        {
+        "key": "runmode",
+        "value": "",
+        "description": ""
+        },
+        {
+        "key": "name",
+        "value": "",
+        "description": ""
+        }
+    ],
+    "query": [
+        {
+        "key": "jcrContentSlashcqDistribute",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashcqDistributeAtTypeHint",
+        "value": "jcrContentSlashcqDistributeAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashcqName",
+        "value": "jcrContentSlashcqName_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashcqTemplate",
+        "value": "jcrContentSlashcqTemplate_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashaliasUpdate",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashenabled",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashjcrDescription",
+        "value": "jcrContentSlashjcrDescription_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashjcrLastModified",
+        "value": "jcrContentSlashjcrLastModified_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashjcrLastModifiedBy",
+        "value": "jcrContentSlashjcrLastModifiedBy_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashjcrMixinTypes",
+        "value": "jcrContentSlashjcrMixinTypes_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashjcrTitle",
+        "value": "jcrContentSlashjcrTitle_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashlogLevel",
+        "value": "jcrContentSlashlogLevel_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashnoStatusUpdate",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashnoVersioning",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashprotocolConnectTimeout",
+        "value": "8.14",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashprotocolHTTPConnectionClosed",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashprotocolHTTPExpired",
+        "value": "jcrContentSlashprotocolHTTPExpired_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashprotocolHTTPHeaders",
+        "value": "",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashprotocolHTTPHeadersAtTypeHint",
+        "value": "jcrContentSlashprotocolHTTPHeadersAtTypeHint_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashprotocolHTTPMethod",
+        "value": "jcrContentSlashprotocolHTTPMethod_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashprotocolHTTPSRelaxed",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashprotocolInterface",
+        "value": "jcrContentSlashprotocolInterface_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashprotocolSocketTimeout",
+        "value": "8.14",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashprotocolVersion",
+        "value": "jcrContentSlashprotocolVersion_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashproxyNTLMDomain",
+        "value": "jcrContentSlashproxyNTLMDomain_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashproxyNTLMHost",
+        "value": "jcrContentSlashproxyNTLMHost_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashproxyHost",
+        "value": "jcrContentSlashproxyHost_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashproxyPassword",
+        "value": "jcrContentSlashproxyPassword_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashproxyPort",
+        "value": "8.14",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashproxyUser",
+        "value": "jcrContentSlashproxyUser_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashqueueBatchMaxSize",
+        "value": "8.14",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashqueueBatchMode",
+        "value": "jcrContentSlashqueueBatchMode_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashqueueBatchWaitTime",
+        "value": "8.14",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashretryDelay",
+        "value": "jcrContentSlashretryDelay_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashreverseReplication",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashserializationType",
+        "value": "jcrContentSlashserializationType_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashslingResourceType",
+        "value": "jcrContentSlashslingResourceType_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashssl",
+        "value": "jcrContentSlashssl_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashtransportNTLMDomain",
+        "value": "jcrContentSlashtransportNTLMDomain_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashtransportNTLMHost",
+        "value": "jcrContentSlashtransportNTLMHost_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashtransportPassword",
+        "value": "jcrContentSlashtransportPassword_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashtransportUri",
+        "value": "jcrContentSlashtransportUri_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashtransportUser",
+        "value": "jcrContentSlashtransportUser_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashtriggerDistribute",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashtriggerModified",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashtriggerOnOffTime",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashtriggerReceive",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashtriggerSpecific",
+        "value": "true",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrContentSlashuserId",
+        "value": "jcrContentSlashuserId_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "jcrPrimaryType",
+        "value": "jcrPrimaryType_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "operation",
+        "value": "operation_example",
+        "description": "",
+        "disabled": true
+        }
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/etc/truststore",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "postTruststorePKCS12",
+                                "request": {
+    "method": "POST",
+    "header": [
+        {
+        "key": "Content-Type",
+        "value": "multipart/form-data",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "Accept",
+        "value": "text/plain",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/etc/truststore",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "etc",
+        "truststore"
+    ],
+    "variable": [
+    ],
+    "query": [
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/etc/truststore/truststore.p12",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "getTruststore",
+                                "request": {
+    "method": "GET",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "application/octet-stream",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/etc/truststore/truststore.p12",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "etc",
+        "truststore",
+        "truststore.p12"
+    ],
+    "variable": [
+    ],
+    "query": [
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/libs/granite/security/post/authorizables",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "postAuthorizables",
+                                "request": {
+    "method": "POST",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "text/html",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/libs/granite/security/post/authorizables",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "libs",
+        "granite",
+        "security",
+        "post",
+        "authorizables"
+    ],
+    "variable": [
+    ],
+    "query": [
+        {
+        "key": "authorizableId",
+        "value": "authorizableId_example",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "intermediatePath",
+        "value": "intermediatePath_example",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "createUser",
+        "value": "createUser_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "createGroup",
+        "value": "createGroup_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "repPassword",
+        "value": "repPassword_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "profileSlashgivenName",
+        "value": "profileSlashgivenName_example",
+        "description": "",
+        "disabled": true
+        }
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/libs/granite/security/post/truststore",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "postTruststore",
+                                "request": {
+    "method": "POST",
+    "header": [
+        {
+        "key": "Content-Type",
+        "value": "multipart/form-data",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "Accept",
+        "value": "text/plain",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/libs/granite/security/post/truststore",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "libs",
+        "granite",
+        "security",
+        "post",
+        "truststore"
+    ],
+    "variable": [
+    ],
+    "query": [
+        {
+        "key": "operation",
+        "value": "operation_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "newPassword",
+        "value": "newPassword_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "rePassword",
+        "value": "rePassword_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "keyStoreType",
+        "value": "keyStoreType_example",
+        "description": "",
+        "disabled": true
+        },
+        {
+        "key": "removeAlias",
+        "value": "removeAlias_example",
+        "description": "",
+        "disabled": true
+        }
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/libs/granite/security/truststore.json",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "getTruststoreInfo",
+                                "request": {
+    "method": "GET",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/libs/granite/security/truststore.json",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "libs",
+        "granite",
+        "security",
+        "truststore.json"
+    ],
+    "variable": [
+    ],
+    "query": [
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/libs/replication/treeactivation.html",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "postTreeActivation",
+                                "request": {
+    "method": "POST",
+    "header": [
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/libs/replication/treeactivation.html",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "libs",
+        "replication",
+        "treeactivation.html"
+    ],
+    "variable": [
+    ],
+    "query": [
+        {
+        "key": "ignoredeactivated",
+        "value": "true",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "onlymodified",
+        "value": "true",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "path",
+        "value": "path_example",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "cmd",
+        "value": "cmd_example",
+        "description": "",
+        "disabled": false
+        }
+    ]
+    },
+    "description": ""
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        }
+	                    ]
+	        }
+    ],
+    "auth": {
+            		"type": "basic",
+            		"basic": [
+            			{
+            				"key": "username",
+            				"value": "{{USERNAME}}",
+            				"type": "string"
+            			},
+            			{
+            				"key": "password",
+            				"value": "{{PASSWORD}}",
+            				"type": "string"
+            			}
+            		]
+            	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "",
+			"type": "string"
+        }
+	]
+}
+

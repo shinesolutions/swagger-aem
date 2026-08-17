@@ -41,7 +41,7 @@ Name | Type | Description  | Required | Notes
 
 ## post_config_aem_health_check_servlet
 
-> post_config_aem_health_check_servlet(bundles_ignored, bundles_ignored_type_hint)
+> post_config_aem_health_check_servlet(bundles_ignored, bundles_ignored_at_type_hint)
 
 
 ### Parameters
@@ -50,7 +50,7 @@ Name | Type | Description  | Required | Notes
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **bundles_ignored** | Option<[**Vec<String>**](String.md)> |  |  |
-**bundles_ignored_type_hint** | Option<**String**> |  |  |
+**bundles_ignored_at_type_hint** | Option<**String**> |  |  |
 
 ### Return type
 
@@ -70,7 +70,7 @@ Name | Type | Description  | Required | Notes
 
 ## post_config_aem_password_reset
 
-> post_config_aem_password_reset(pwdreset_authorizables, pwdreset_authorizables_type_hint)
+> post_config_aem_password_reset(pwdreset_authorizables, pwdreset_authorizables_at_type_hint)
 
 
 ### Parameters
@@ -79,7 +79,7 @@ Name | Type | Description  | Required | Notes
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **pwdreset_authorizables** | Option<[**Vec<String>**](String.md)> |  |  |
-**pwdreset_authorizables_type_hint** | Option<**String**> |  |  |
+**pwdreset_authorizables_at_type_hint** | Option<**String**> |  |  |
 
 ### Return type
 

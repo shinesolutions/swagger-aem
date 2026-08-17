@@ -106,8 +106,8 @@ class CustomApiSimulation extends Simulation {
         .feed(postConfigAemPasswordResetQUERYFeeder)
         .exec(http("postConfigAemPasswordReset")
         .httpRequest("POST","/apps/system/config/com.shinesolutions.aem.passwordreset.Activator")
-        .queryParam("pwdreset.authorizables@TypeHint","${pwdreset.authorizables@TypeHint}")
         .queryParam("pwdreset.authorizables","${pwdreset.authorizables}")
+        .queryParam("pwdreset.authorizables@TypeHint","${pwdreset.authorizables@TypeHint}")
 )
 
     // Run scnpostConfigAemPasswordReset with warm up and reach a constant rate for entire duration

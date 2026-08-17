@@ -2,21 +2,18 @@ package org.openapitools.model;
 
 
 import io.swagger.annotations.ApiModelProperty;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlEnumValue;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 public class InstallStatusStatus  {
   
   @ApiModelProperty(value = "")
+
   private Boolean finished;
 
   @ApiModelProperty(value = "")
+
   private Integer itemCount;
  /**
    * Get finished
@@ -54,6 +51,23 @@ public class InstallStatusStatus  {
     return this;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    InstallStatusStatus installStatusStatus = (InstallStatusStatus) o;
+    return Objects.equals(this.finished, installStatusStatus.finished) &&
+        Objects.equals(this.itemCount, installStatusStatus.itemCount);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(finished, itemCount);
+  }
 
   @Override
   public String toString() {
@@ -71,10 +85,7 @@ public class InstallStatusStatus  {
    * (except the first line).
    */
   private static String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

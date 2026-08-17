@@ -1,11 +1,11 @@
 language: ruby
 cache: bundler
 rvm:
-  - 2.3
-  - 2.4
-  - 2.5
+  - 2.7
+  - 3.0
+  - 3.1
 script:
   - bundle install --path vendor/bundle
   - bundle exec rspec
   - gem build swagger_aem.gemspec
-  - gem install ./swagger_aem-3.7.1-pre.0.gem
+  - gem install ./swagger_aem-3.8.1-pre.0.gem

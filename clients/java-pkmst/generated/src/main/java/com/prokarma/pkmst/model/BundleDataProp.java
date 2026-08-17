@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiModelProperty;
  * BundleDataProp
  */
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2021-09-03T15:25:27.791+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2026-08-17T02:15:15.504120373Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class BundleDataProp   {
   @JsonProperty("key")
   private String key;
@@ -27,10 +27,10 @@ public class BundleDataProp   {
     return this;
   }
 
-   /**
+  /**
    * Bundle data key
    * @return key
-  **/
+   */
   @ApiModelProperty(value = "Bundle data key")
   public String getKey() {
     return key;
@@ -45,10 +45,10 @@ public class BundleDataProp   {
     return this;
   }
 
-   /**
+  /**
    * Bundle data value
    * @return value
-  **/
+   */
   @ApiModelProperty(value = "Bundle data value")
   public String getValue() {
     return value;
@@ -93,10 +93,7 @@ public class BundleDataProp   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

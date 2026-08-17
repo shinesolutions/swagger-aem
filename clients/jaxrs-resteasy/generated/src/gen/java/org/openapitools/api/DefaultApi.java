@@ -30,7 +30,7 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 
 @io.swagger.annotations.Api(description = "the default API")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyServerCodegen", date = "2021-09-03T15:25:57.989+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyServerCodegen", date = "2026-08-17T02:15:38.090574223Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class DefaultApi  {
 
     @Inject DefaultApiService service;
@@ -100,9 +100,9 @@ public class DefaultApi  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Retrieved Authorizable Keystore info", response = KeystoreInfo.class),
         
         @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public Response postAuthorizableKeystore(MultipartFormDataInput input, @PathParam("intermediatePath") String intermediatePath, @PathParam("authorizableId") String authorizableId,  @QueryParam(":operation") String colonOperation,  @QueryParam("currentPassword") String currentPassword,  @QueryParam("newPassword") String newPassword,  @QueryParam("rePassword") String rePassword,  @QueryParam("keyPassword") String keyPassword,  @QueryParam("keyStorePass") String keyStorePass,  @QueryParam("alias") String alias,  @QueryParam("newAlias") String newAlias,  @QueryParam("removeAlias") String removeAlias,@Context SecurityContext securityContext)
+    public Response postAuthorizableKeystore(MultipartFormDataInput input, @PathParam("intermediatePath") String intermediatePath, @PathParam("authorizableId") String authorizableId, @QueryParam(":operation") String operation, @QueryParam("currentPassword") String currentPassword, @QueryParam("newPassword") String newPassword, @QueryParam("rePassword") String rePassword, @QueryParam("keyPassword") String keyPassword, @QueryParam("keyStorePass") String keyStorePass, @QueryParam("alias") String alias, @QueryParam("newAlias") String newAlias, @QueryParam("removeAlias") String removeAlias,@Context SecurityContext securityContext)
     throws NotFoundException {
-        return service.postAuthorizableKeystore(input,intermediatePath,authorizableId,colonOperation,currentPassword,newPassword,rePassword,keyPassword,keyStorePass,alias,newAlias,removeAlias,securityContext);
+        return service.postAuthorizableKeystore(input,intermediatePath,authorizableId,operation,currentPassword,newPassword,rePassword,keyPassword,keyStorePass,alias,newAlias,removeAlias,securityContext);
     }
     @POST
     @Path("/{path}/{name}")
@@ -113,9 +113,9 @@ public class DefaultApi  {
     }, tags={ "sling", })
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = Void.class) })
-    public Response postNode(MultipartFormDataInput input, @PathParam("path") String path, @PathParam("name") String name,  @QueryParam(":operation") String colonOperation,  @QueryParam("deleteAuthorizable") String deleteAuthorizable,@Context SecurityContext securityContext)
+    public Response postNode(MultipartFormDataInput input, @PathParam("path") String path, @PathParam("name") String name, @QueryParam(":operation") String operation, @QueryParam("deleteAuthorizable") String deleteAuthorizable,@Context SecurityContext securityContext)
     throws NotFoundException {
-        return service.postNode(input,path,name,colonOperation,deleteAuthorizable,securityContext);
+        return service.postNode(input,path,name,operation,deleteAuthorizable,securityContext);
     }
     @POST
     @Path("/{path}/{name}.rw.html")
@@ -126,7 +126,7 @@ public class DefaultApi  {
     }, tags={ "sling", })
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = Void.class) })
-    public Response postNodeRw( @PathParam("path") String path, @PathParam("name") String name,  @QueryParam("addMembers") String addMembers,@Context SecurityContext securityContext)
+    public Response postNodeRw( @PathParam("path") String path, @PathParam("name") String name, @QueryParam("addMembers") String addMembers,@Context SecurityContext securityContext)
     throws NotFoundException {
         return service.postNodeRw(path,name,addMembers,securityContext);
     }
@@ -139,8 +139,8 @@ public class DefaultApi  {
     }, tags={ "sling", })
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = Void.class) })
-    public Response postPath( @PathParam("path") String path, @NotNull  @QueryParam("jcr:primaryType") String jcrColonPrimaryType, @NotNull  @QueryParam(":name") String colonName,@Context SecurityContext securityContext)
+    public Response postPath( @PathParam("path") String path, @NotNull @QueryParam("jcr:primaryType") String jcrPrimaryType, @NotNull @QueryParam(":name") String name,@Context SecurityContext securityContext)
     throws NotFoundException {
-        return service.postPath(path,jcrColonPrimaryType,colonName,securityContext);
+        return service.postPath(path,jcrPrimaryType,name,securityContext);
     }
 }

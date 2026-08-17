@@ -41,7 +41,7 @@ This endpoint does not need any parameter.
 
 ## get_install_status
 
-> crate::models::InstallStatus get_install_status()
+> models::InstallStatus get_install_status()
 
 
 ### Parameters
@@ -50,7 +50,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**crate::models::InstallStatus**](InstallStatus.md)
+[**models::InstallStatus**](InstallStatus.md)
 
 ### Authorization
 

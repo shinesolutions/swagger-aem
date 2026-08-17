@@ -11,7 +11,7 @@ Feature | HTTP request | Description
 
 # **aem_health_check**
 > aem_health_check (tags:  detachable STRING_32 ; combine_tags_or:  detachable BOOLEAN ): detachable STRING_32
-	
+
 
 
 
@@ -40,7 +40,7 @@ Name | Type | Description  | Notes
 
 # **post_config_aem_health_check_servlet**
 > post_config_aem_health_check_servlet (bundles_ignored:  detachable LIST [STRING_32] ; bundles_ignored_type_hint:  detachable STRING_32 )
-	
+
 
 
 
@@ -69,7 +69,7 @@ Name | Type | Description  | Notes
 
 # **post_config_aem_password_reset**
 > post_config_aem_password_reset (pwdreset_authorizables:  detachable LIST [STRING_32] ; pwdreset_authorizables_type_hint:  detachable STRING_32 )
-	
+
 
 
 

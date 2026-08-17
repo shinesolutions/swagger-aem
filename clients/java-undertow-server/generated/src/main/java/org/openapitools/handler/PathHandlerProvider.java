@@ -3,7 +3,7 @@
  *
  * Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
  *
- * OpenAPI document version: 3.5.0-pre.0
+ * OpenAPI document version: 3.7.1-pre.0
  * Maintained by: opensource@shinesolutions.com
  *
  * AUTO-GENERATED FILE, DO NOT MODIFY!
@@ -364,7 +364,7 @@ abstract public class PathHandlerProvider implements HandlerProvider, PathHandle
                     postQuery().handleRequest(exchange);
                 }
             })
-            .add(Methods.POST, basePath + "/etc/replication/treeactivation.html", new HttpHandler() {
+            .add(Methods.POST, basePath + "/libs/replication/treeactivation.html", new HttpHandler() {
                 @Override
                 public void handleRequest(HttpServerExchange exchange) throws Exception {
                     postTreeActivation().handleRequest(exchange);
@@ -475,7 +475,7 @@ abstract public class PathHandlerProvider implements HandlerProvider, PathHandle
             .add(Methods.POST, basePath + "/{path}/{name}.rw.html", postNodeRw())
             .add(Methods.POST, basePath + "/{path}/", postPath())
             .add(Methods.POST, basePath + "/bin/querybuilder.json", postQuery())
-            .add(Methods.POST, basePath + "/etc/replication/treeactivation.html", postTreeActivation())
+            .add(Methods.POST, basePath + "/libs/replication/treeactivation.html", postTreeActivation())
             .add(Methods.POST, basePath + "/libs/granite/security/post/truststore", postTruststore())
             .add(Methods.POST, basePath + "/etc/truststore", postTruststorePKCS12())
             ;

@@ -1,11 +1,8 @@
-# coding: utf-8
-
-from __future__ import absolute_import
 from datetime import date, datetime  # noqa: F401
 
 from typing import List, Dict  # noqa: F401
 
-from openapi_server.models.base_model_ import Model
+from openapi_server.models.base_model import Model
 from openapi_server.models.bundle_data import BundleData
 from openapi_server import util
 
@@ -55,7 +52,7 @@ class BundleInfo(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def status(self):
+    def status(self) -> str:
         """Gets the status of this BundleInfo.
 
         Status description of all bundles  # noqa: E501
@@ -66,7 +63,7 @@ class BundleInfo(Model):
         return self._status
 
     @status.setter
-    def status(self, status):
+    def status(self, status: str):
         """Sets the status of this BundleInfo.
 
         Status description of all bundles  # noqa: E501
@@ -78,7 +75,7 @@ class BundleInfo(Model):
         self._status = status
 
     @property
-    def s(self):
+    def s(self) -> List[int]:
         """Gets the s of this BundleInfo.
 
 
@@ -88,7 +85,7 @@ class BundleInfo(Model):
         return self._s
 
     @s.setter
-    def s(self, s):
+    def s(self, s: List[int]):
         """Sets the s of this BundleInfo.
 
 
@@ -99,7 +96,7 @@ class BundleInfo(Model):
         self._s = s
 
     @property
-    def data(self):
+    def data(self) -> List[BundleData]:
         """Gets the data of this BundleInfo.
 
 
@@ -109,7 +106,7 @@ class BundleInfo(Model):
         return self._data
 
     @data.setter
-    def data(self, data):
+    def data(self, data: List[BundleData]):
         """Sets the data of this BundleInfo.
 
 

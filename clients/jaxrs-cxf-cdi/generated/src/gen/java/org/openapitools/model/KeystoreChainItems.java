@@ -5,12 +5,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 
 
 import io.swagger.annotations.*;
 import java.util.Objects;
 
-import javax.xml.bind.annotation.*;
 
 
 public class KeystoreChainItems   {
@@ -24,7 +24,6 @@ public class KeystoreChainItems   {
   private String notAfter;
 
   private Integer serialNumber;
-
 
   /**
    * e.g. \&quot;CN&#x3D;localhost\&quot;
@@ -131,11 +130,11 @@ public class KeystoreChainItems   {
       return false;
     }
     KeystoreChainItems keystoreChainItems = (KeystoreChainItems) o;
-    return Objects.equals(subject, keystoreChainItems.subject) &&
-        Objects.equals(issuer, keystoreChainItems.issuer) &&
-        Objects.equals(notBefore, keystoreChainItems.notBefore) &&
-        Objects.equals(notAfter, keystoreChainItems.notAfter) &&
-        Objects.equals(serialNumber, keystoreChainItems.serialNumber);
+    return Objects.equals(this.subject, keystoreChainItems.subject) &&
+        Objects.equals(this.issuer, keystoreChainItems.issuer) &&
+        Objects.equals(this.notBefore, keystoreChainItems.notBefore) &&
+        Objects.equals(this.notAfter, keystoreChainItems.notAfter) &&
+        Objects.equals(this.serialNumber, keystoreChainItems.serialNumber);
   }
 
   @Override
@@ -162,10 +161,7 @@ public class KeystoreChainItems   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

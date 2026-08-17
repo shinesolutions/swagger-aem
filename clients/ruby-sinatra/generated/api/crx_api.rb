@@ -4,9 +4,9 @@ require 'json'
 MyApp.add_route('GET', '/crx/server/crx.default/jcr:root/.1.json', {
   "resourcePath" => "/Crx",
   "summary" => "",
-  "nickname" => "get_crxde_status", 
+  "nickname" => "get_crxde_status",
   "responseClass" => "String",
-  "endpoint" => "/crx/server/crx.default/jcr:root/.1.json", 
+  "endpoint" => "/crx/server/crx.default/jcr:root/.1.json",
   "notes" => "",
   "parameters" => [
     ]}) do
@@ -20,9 +20,9 @@ end
 MyApp.add_route('GET', '/crx/packmgr/installstatus.jsp', {
   "resourcePath" => "/Crx",
   "summary" => "",
-  "nickname" => "get_install_status", 
+  "nickname" => "get_install_status",
   "responseClass" => "InstallStatus",
-  "endpoint" => "/crx/packmgr/installstatus.jsp", 
+  "endpoint" => "/crx/packmgr/installstatus.jsp",
   "notes" => "",
   "parameters" => [
     ]}) do
@@ -36,9 +36,9 @@ end
 MyApp.add_route('GET', '/crx/packmgr/service/script.html', {
   "resourcePath" => "/Crx",
   "summary" => "",
-  "nickname" => "get_package_manager_servlet", 
+  "nickname" => "get_package_manager_servlet",
   "responseClass" => "void",
-  "endpoint" => "/crx/packmgr/service/script.html", 
+  "endpoint" => "/crx/packmgr/service/script.html",
   "notes" => "",
   "parameters" => [
     ]}) do
@@ -52,9 +52,9 @@ end
 MyApp.add_route('POST', '/crx/packmgr/service.jsp', {
   "resourcePath" => "/Crx",
   "summary" => "",
-  "nickname" => "post_package_service", 
+  "nickname" => "post_package_service",
   "responseClass" => "String",
-  "endpoint" => "/crx/packmgr/service.jsp", 
+  "endpoint" => "/crx/packmgr/service.jsp",
   "notes" => "",
   "parameters" => [
     {
@@ -75,9 +75,9 @@ end
 MyApp.add_route('POST', '/crx/packmgr/service/.json/{path}', {
   "resourcePath" => "/Crx",
   "summary" => "",
-  "nickname" => "post_package_service_json", 
+  "nickname" => "post_package_service_json",
   "responseClass" => "String",
-  "endpoint" => "/crx/packmgr/service/.json/{path}", 
+  "endpoint" => "/crx/packmgr/service/.json/{path}",
   "notes" => "",
   "parameters" => [
     {
@@ -146,9 +146,9 @@ end
 MyApp.add_route('POST', '/crx/packmgr/update.jsp', {
   "resourcePath" => "/Crx",
   "summary" => "",
-  "nickname" => "post_package_update", 
+  "nickname" => "post_package_update",
   "responseClass" => "String",
-  "endpoint" => "/crx/packmgr/update.jsp", 
+  "endpoint" => "/crx/packmgr/update.jsp",
   "notes" => "",
   "parameters" => [
     {
@@ -204,9 +204,9 @@ end
 MyApp.add_route('POST', '/crx/explorer/ui/setpassword.jsp', {
   "resourcePath" => "/Crx",
   "summary" => "",
-  "nickname" => "post_set_password", 
+  "nickname" => "post_set_password",
   "responseClass" => "String",
-  "endpoint" => "/crx/explorer/ui/setpassword.jsp", 
+  "endpoint" => "/crx/explorer/ui/setpassword.jsp",
   "notes" => "",
   "parameters" => [
     {

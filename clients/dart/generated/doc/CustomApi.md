@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -30,7 +30,7 @@ final api_instance = CustomApi();
 final tags = tags_example; // String | 
 final combineTagsOr = true; // bool | 
 
-try { 
+try {
     final result = api_instance.getAemHealthCheck(tags, combineTagsOr);
     print(result);
 } catch (e) {
@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -76,7 +76,7 @@ final api_instance = CustomApi();
 final bundlesPeriodIgnored = []; // List<String> | 
 final bundlesPeriodIgnoredAtTypeHint = bundlesPeriodIgnoredAtTypeHint_example; // String | 
 
-try { 
+try {
     api_instance.postConfigAemHealthCheckServlet(bundlesPeriodIgnored, bundlesPeriodIgnoredAtTypeHint);
 } catch (e) {
     print('Exception when calling CustomApi->postConfigAemHealthCheckServlet: $e\n');
@@ -110,7 +110,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -121,7 +121,7 @@ final api_instance = CustomApi();
 final pwdresetPeriodAuthorizables = []; // List<String> | 
 final pwdresetPeriodAuthorizablesAtTypeHint = pwdresetPeriodAuthorizablesAtTypeHint_example; // String | 
 
-try { 
+try {
     api_instance.postConfigAemPasswordReset(pwdresetPeriodAuthorizables, pwdresetPeriodAuthorizablesAtTypeHint);
 } catch (e) {
     print('Exception when calling CustomApi->postConfigAemPasswordReset: $e\n');

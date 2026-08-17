@@ -2,17 +2,17 @@
 
 All URIs are relative to *http://localhost*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**getAemProductInfo**](ConsoleApi.md#getAemProductInfo) | **GET** /system/console/status-productinfo.json | 
-[**getBundleInfo**](ConsoleApi.md#getBundleInfo) | **GET** /system/console/bundles/{name}.json | 
-[**getConfigMgr**](ConsoleApi.md#getConfigMgr) | **GET** /system/console/configMgr | 
-[**postBundle**](ConsoleApi.md#postBundle) | **POST** /system/console/bundles/{name} | 
-[**postJmxRepository**](ConsoleApi.md#postJmxRepository) | **POST** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} | 
-[**postSamlConfiguration**](ConsoleApi.md#postSamlConfiguration) | **POST** /system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler | 
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**getAemProductInfo**](ConsoleApi.md#getAemProductInfo) | **GET** /system/console/status-productinfo.json |  |
+| [**getBundleInfo**](ConsoleApi.md#getBundleInfo) | **GET** /system/console/bundles/{name}.json |  |
+| [**getConfigMgr**](ConsoleApi.md#getConfigMgr) | **GET** /system/console/configMgr |  |
+| [**postBundle**](ConsoleApi.md#postBundle) | **POST** /system/console/bundles/{name} |  |
+| [**postJmxRepository**](ConsoleApi.md#postJmxRepository) | **POST** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} |  |
+| [**postSamlConfiguration**](ConsoleApi.md#postSamlConfiguration) | **POST** /system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler |  |
 
 
-<a name="getAemProductInfo"></a>
+<a id="getAemProductInfo"></a>
 # **getAemProductInfo**
 > List&lt;String&gt; getAemProductInfo()
 
@@ -72,9 +72,9 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Default response |  -  |
+| **0** | Default response |  -  |
 
-<a name="getBundleInfo"></a>
+<a id="getBundleInfo"></a>
 # **getBundleInfo**
 > BundleInfo getBundleInfo(name)
 
@@ -118,9 +118,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **String**|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **name** | **String**|  | |
 
 ### Return type
 
@@ -138,10 +138,10 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Retrieved bundle info |  -  |
-**0** | Default response |  -  |
+| **200** | Retrieved bundle info |  -  |
+| **0** | Default response |  -  |
 
-<a name="getConfigMgr"></a>
+<a id="getConfigMgr"></a>
 # **getConfigMgr**
 > String getConfigMgr()
 
@@ -201,10 +201,10 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**5XX** | Unexpected error. |  -  |
+| **200** | OK |  -  |
+| **5XX** | Unexpected error. |  -  |
 
-<a name="postBundle"></a>
+<a id="postBundle"></a>
 # **postBundle**
 > postBundle(name, action)
 
@@ -248,10 +248,10 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **String**|  |
- **action** | **String**|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **name** | **String**|  | |
+| **action** | **String**|  | |
 
 ### Return type
 
@@ -269,9 +269,9 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Default response |  -  |
+| **0** | Default response |  -  |
 
-<a name="postJmxRepository"></a>
+<a id="postJmxRepository"></a>
 # **postJmxRepository**
 > postJmxRepository(action)
 
@@ -314,9 +314,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **action** | **String**|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **action** | **String**|  | |
 
 ### Return type
 
@@ -334,9 +334,9 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Default response |  -  |
+| **0** | Default response |  -  |
 
-<a name="postSamlConfiguration"></a>
+<a id="postSamlConfiguration"></a>
 # **postSamlConfiguration**
 > SamlConfigurationInfo postSamlConfiguration(post, apply, delete, action, $location, path, serviceRanking, idpUrl, idpCertAlias, idpHttpRedirect, serviceProviderEntityId, assertionConsumerServiceURL, spPrivateKeyAlias, keyStorePassword, defaultRedirectUrl, userIDAttribute, useEncryption, createUser, addGroupMemberships, groupMembershipAttribute, defaultGroups, nameIdFormat, synchronizeAttributes, handleLogout, logoutUrl, clockTolerance, digestMethod, signatureMethod, userIntermediatePath, propertylist)
 
@@ -409,38 +409,38 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **post** | **Boolean**|  | [optional]
- **apply** | **Boolean**|  | [optional]
- **delete** | **Boolean**|  | [optional]
- **action** | **String**|  | [optional]
- **$location** | **String**|  | [optional]
- **path** | [**List&lt;String&gt;**](String.md)|  | [optional]
- **serviceRanking** | **Integer**|  | [optional]
- **idpUrl** | **String**|  | [optional]
- **idpCertAlias** | **String**|  | [optional]
- **idpHttpRedirect** | **Boolean**|  | [optional]
- **serviceProviderEntityId** | **String**|  | [optional]
- **assertionConsumerServiceURL** | **String**|  | [optional]
- **spPrivateKeyAlias** | **String**|  | [optional]
- **keyStorePassword** | **String**|  | [optional]
- **defaultRedirectUrl** | **String**|  | [optional]
- **userIDAttribute** | **String**|  | [optional]
- **useEncryption** | **Boolean**|  | [optional]
- **createUser** | **Boolean**|  | [optional]
- **addGroupMemberships** | **Boolean**|  | [optional]
- **groupMembershipAttribute** | **String**|  | [optional]
- **defaultGroups** | [**List&lt;String&gt;**](String.md)|  | [optional]
- **nameIdFormat** | **String**|  | [optional]
- **synchronizeAttributes** | [**List&lt;String&gt;**](String.md)|  | [optional]
- **handleLogout** | **Boolean**|  | [optional]
- **logoutUrl** | **String**|  | [optional]
- **clockTolerance** | **Integer**|  | [optional]
- **digestMethod** | **String**|  | [optional]
- **signatureMethod** | **String**|  | [optional]
- **userIntermediatePath** | **String**|  | [optional]
- **propertylist** | [**List&lt;String&gt;**](String.md)|  | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **post** | **Boolean**|  | [optional] |
+| **apply** | **Boolean**|  | [optional] |
+| **delete** | **Boolean**|  | [optional] |
+| **action** | **String**|  | [optional] |
+| **$location** | **String**|  | [optional] |
+| **path** | [**List&lt;String&gt;**](String.md)|  | [optional] |
+| **serviceRanking** | **Integer**|  | [optional] |
+| **idpUrl** | **String**|  | [optional] |
+| **idpCertAlias** | **String**|  | [optional] |
+| **idpHttpRedirect** | **Boolean**|  | [optional] |
+| **serviceProviderEntityId** | **String**|  | [optional] |
+| **assertionConsumerServiceURL** | **String**|  | [optional] |
+| **spPrivateKeyAlias** | **String**|  | [optional] |
+| **keyStorePassword** | **String**|  | [optional] |
+| **defaultRedirectUrl** | **String**|  | [optional] |
+| **userIDAttribute** | **String**|  | [optional] |
+| **useEncryption** | **Boolean**|  | [optional] |
+| **createUser** | **Boolean**|  | [optional] |
+| **addGroupMemberships** | **Boolean**|  | [optional] |
+| **groupMembershipAttribute** | **String**|  | [optional] |
+| **defaultGroups** | [**List&lt;String&gt;**](String.md)|  | [optional] |
+| **nameIdFormat** | **String**|  | [optional] |
+| **synchronizeAttributes** | [**List&lt;String&gt;**](String.md)|  | [optional] |
+| **handleLogout** | **Boolean**|  | [optional] |
+| **logoutUrl** | **String**|  | [optional] |
+| **clockTolerance** | **Integer**|  | [optional] |
+| **digestMethod** | **String**|  | [optional] |
+| **signatureMethod** | **String**|  | [optional] |
+| **userIntermediatePath** | **String**|  | [optional] |
+| **propertylist** | [**List&lt;String&gt;**](String.md)|  | [optional] |
 
 ### Return type
 
@@ -458,7 +458,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Retrieved AEM SAML Configuration |  -  |
-**302** | Default response |  -  |
-**0** | Default response |  -  |
+| **200** | Retrieved AEM SAML Configuration |  -  |
+| **302** | Default response |  -  |
+| **0** | Default response |  -  |
 

@@ -4,9 +4,9 @@ require 'json'
 MyApp.add_route('DELETE', '/etc/replication/agents.{runmode}/{name}', {
   "resourcePath" => "/Sling",
   "summary" => "",
-  "nickname" => "delete_agent", 
+  "nickname" => "delete_agent",
   "responseClass" => "void",
-  "endpoint" => "/etc/replication/agents.{runmode}/{name}", 
+  "endpoint" => "/etc/replication/agents.{runmode}/{name}",
   "notes" => "",
   "parameters" => [
     {
@@ -32,9 +32,9 @@ end
 MyApp.add_route('DELETE', '/{path}/{name}', {
   "resourcePath" => "/Sling",
   "summary" => "",
-  "nickname" => "delete_node", 
+  "nickname" => "delete_node",
   "responseClass" => "void",
-  "endpoint" => "/{path}/{name}", 
+  "endpoint" => "/{path}/{name}",
   "notes" => "",
   "parameters" => [
     {
@@ -60,9 +60,9 @@ end
 MyApp.add_route('GET', '/etc/replication/agents.{runmode}/{name}', {
   "resourcePath" => "/Sling",
   "summary" => "",
-  "nickname" => "get_agent", 
+  "nickname" => "get_agent",
   "responseClass" => "void",
-  "endpoint" => "/etc/replication/agents.{runmode}/{name}", 
+  "endpoint" => "/etc/replication/agents.{runmode}/{name}",
   "notes" => "",
   "parameters" => [
     {
@@ -88,9 +88,9 @@ end
 MyApp.add_route('GET', '/etc/replication/agents.{runmode}.-1.json', {
   "resourcePath" => "/Sling",
   "summary" => "",
-  "nickname" => "get_agents", 
+  "nickname" => "get_agents",
   "responseClass" => "String",
-  "endpoint" => "/etc/replication/agents.{runmode}.-1.json", 
+  "endpoint" => "/etc/replication/agents.{runmode}.-1.json",
   "notes" => "",
   "parameters" => [
     {
@@ -110,9 +110,9 @@ end
 MyApp.add_route('GET', '/{intermediatePath}/{authorizableId}.ks.json', {
   "resourcePath" => "/Sling",
   "summary" => "",
-  "nickname" => "get_authorizable_keystore", 
+  "nickname" => "get_authorizable_keystore",
   "responseClass" => "KeystoreInfo",
-  "endpoint" => "/{intermediatePath}/{authorizableId}.ks.json", 
+  "endpoint" => "/{intermediatePath}/{authorizableId}.ks.json",
   "notes" => "",
   "parameters" => [
     {
@@ -138,9 +138,9 @@ end
 MyApp.add_route('GET', '/{intermediatePath}/{authorizableId}/keystore/store.p12', {
   "resourcePath" => "/Sling",
   "summary" => "",
-  "nickname" => "get_keystore", 
+  "nickname" => "get_keystore",
   "responseClass" => "File",
-  "endpoint" => "/{intermediatePath}/{authorizableId}/keystore/store.p12", 
+  "endpoint" => "/{intermediatePath}/{authorizableId}/keystore/store.p12",
   "notes" => "",
   "parameters" => [
     {
@@ -166,9 +166,9 @@ end
 MyApp.add_route('GET', '/{path}/{name}', {
   "resourcePath" => "/Sling",
   "summary" => "",
-  "nickname" => "get_node", 
+  "nickname" => "get_node",
   "responseClass" => "void",
-  "endpoint" => "/{path}/{name}", 
+  "endpoint" => "/{path}/{name}",
   "notes" => "",
   "parameters" => [
     {
@@ -194,9 +194,9 @@ end
 MyApp.add_route('GET', '/etc/packages/{group}/{name}-{version}.zip', {
   "resourcePath" => "/Sling",
   "summary" => "",
-  "nickname" => "get_package", 
+  "nickname" => "get_package",
   "responseClass" => "File",
-  "endpoint" => "/etc/packages/{group}/{name}-{version}.zip", 
+  "endpoint" => "/etc/packages/{group}/{name}-{version}.zip",
   "notes" => "",
   "parameters" => [
     {
@@ -228,9 +228,9 @@ end
 MyApp.add_route('GET', '/etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json', {
   "resourcePath" => "/Sling",
   "summary" => "",
-  "nickname" => "get_package_filter", 
+  "nickname" => "get_package_filter",
   "responseClass" => "String",
-  "endpoint" => "/etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json", 
+  "endpoint" => "/etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json",
   "notes" => "",
   "parameters" => [
     {
@@ -262,9 +262,9 @@ end
 MyApp.add_route('GET', '/bin/querybuilder.json', {
   "resourcePath" => "/Sling",
   "summary" => "",
-  "nickname" => "get_query", 
+  "nickname" => "get_query",
   "responseClass" => "String",
-  "endpoint" => "/bin/querybuilder.json", 
+  "endpoint" => "/bin/querybuilder.json",
   "notes" => "",
   "parameters" => [
     {
@@ -306,9 +306,9 @@ end
 MyApp.add_route('GET', '/etc/truststore/truststore.p12', {
   "resourcePath" => "/Sling",
   "summary" => "",
-  "nickname" => "get_truststore", 
+  "nickname" => "get_truststore",
   "responseClass" => "File",
-  "endpoint" => "/etc/truststore/truststore.p12", 
+  "endpoint" => "/etc/truststore/truststore.p12",
   "notes" => "",
   "parameters" => [
     ]}) do
@@ -322,9 +322,9 @@ end
 MyApp.add_route('GET', '/libs/granite/security/truststore.json', {
   "resourcePath" => "/Sling",
   "summary" => "",
-  "nickname" => "get_truststore_info", 
+  "nickname" => "get_truststore_info",
   "responseClass" => "TruststoreInfo",
-  "endpoint" => "/libs/granite/security/truststore.json", 
+  "endpoint" => "/libs/granite/security/truststore.json",
   "notes" => "",
   "parameters" => [
     ]}) do
@@ -338,356 +338,363 @@ end
 MyApp.add_route('POST', '/etc/replication/agents.{runmode}/{name}', {
   "resourcePath" => "/Sling",
   "summary" => "",
-  "nickname" => "post_agent", 
+  "nickname" => "post_agent",
   "responseClass" => "void",
-  "endpoint" => "/etc/replication/agents.{runmode}/{name}", 
+  "endpoint" => "/etc/replication/agents.{runmode}/{name}",
   "notes" => "",
   "parameters" => [
     {
-      "name" => "jcrcontent_cqdistribute",
+      "name" => "jcr_content_cq_distribute",
       "description" => "",
       "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_cqdistribute_type_hint",
+      "name" => "jcr_content_cq_distribute_type_hint",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_cqname",
+      "name" => "jcr_content_cq_name",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_cqtemplate",
+      "name" => "jcr_content_cq_template",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_enabled",
+      "name" => "jcr_content_alias_update",
       "description" => "",
       "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_jcrdescription",
-      "description" => "",
-      "dataType" => "String",
-      "allowableValues" => "",
-      "paramType" => "query",
-    },
-    {
-      "name" => "jcrcontent_jcrlast_modified",
-      "description" => "",
-      "dataType" => "String",
-      "allowableValues" => "",
-      "paramType" => "query",
-    },
-    {
-      "name" => "jcrcontent_jcrlast_modified_by",
-      "description" => "",
-      "dataType" => "String",
-      "allowableValues" => "",
-      "paramType" => "query",
-    },
-    {
-      "name" => "jcrcontent_jcrmixin_types",
-      "description" => "",
-      "dataType" => "String",
-      "allowableValues" => "",
-      "paramType" => "query",
-    },
-    {
-      "name" => "jcrcontent_jcrtitle",
-      "description" => "",
-      "dataType" => "String",
-      "allowableValues" => "",
-      "paramType" => "query",
-    },
-    {
-      "name" => "jcrcontent_log_level",
-      "description" => "",
-      "dataType" => "String",
-      "allowableValues" => "",
-      "paramType" => "query",
-    },
-    {
-      "name" => "jcrcontent_no_status_update",
+      "name" => "jcr_content_enabled",
       "description" => "",
       "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_no_versioning",
+      "name" => "jcr_content_jcr_description",
+      "description" => "",
+      "dataType" => "String",
+      "allowableValues" => "",
+      "paramType" => "query",
+    },
+    {
+      "name" => "jcr_content_jcr_last_modified",
+      "description" => "",
+      "dataType" => "String",
+      "allowableValues" => "",
+      "paramType" => "query",
+    },
+    {
+      "name" => "jcr_content_jcr_last_modified_by",
+      "description" => "",
+      "dataType" => "String",
+      "allowableValues" => "",
+      "paramType" => "query",
+    },
+    {
+      "name" => "jcr_content_jcr_mixin_types",
+      "description" => "",
+      "dataType" => "String",
+      "allowableValues" => "",
+      "paramType" => "query",
+    },
+    {
+      "name" => "jcr_content_jcr_title",
+      "description" => "",
+      "dataType" => "String",
+      "allowableValues" => "",
+      "paramType" => "query",
+    },
+    {
+      "name" => "jcr_content_log_level",
+      "description" => "",
+      "dataType" => "String",
+      "allowableValues" => "",
+      "paramType" => "query",
+    },
+    {
+      "name" => "jcr_content_no_status_update",
       "description" => "",
       "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_protocol_connect_timeout",
+      "name" => "jcr_content_no_versioning",
+      "description" => "",
+      "dataType" => "Boolean",
+      "allowableValues" => "",
+      "paramType" => "query",
+    },
+    {
+      "name" => "jcr_content_protocol_connect_timeout",
       "description" => "",
       "dataType" => "Float",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_protocol_http_connection_closed",
+      "name" => "jcr_content_protocol_http_connection_closed",
       "description" => "",
       "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_protocol_http_expired",
+      "name" => "jcr_content_protocol_http_expired",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_protocol_http_headers",
+      "name" => "jcr_content_protocol_http_headers",
       "description" => "",
       "dataType" => "Array<String>",
       "collectionFormat" => "multi",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_protocol_http_headers_type_hint",
+      "name" => "jcr_content_protocol_http_headers_type_hint",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_protocol_http_method",
+      "name" => "jcr_content_protocol_http_method",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_protocol_https_relaxed",
+      "name" => "jcr_content_protocol_https_relaxed",
       "description" => "",
       "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_protocol_interface",
+      "name" => "jcr_content_protocol_interface",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_protocol_socket_timeout",
+      "name" => "jcr_content_protocol_socket_timeout",
       "description" => "",
       "dataType" => "Float",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_protocol_version",
+      "name" => "jcr_content_protocol_version",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_proxy_ntlm_domain",
+      "name" => "jcr_content_proxy_ntlm_domain",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_proxy_ntlm_host",
+      "name" => "jcr_content_proxy_ntlm_host",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_proxy_host",
+      "name" => "jcr_content_proxy_host",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_proxy_password",
+      "name" => "jcr_content_proxy_password",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_proxy_port",
+      "name" => "jcr_content_proxy_port",
       "description" => "",
       "dataType" => "Float",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_proxy_user",
+      "name" => "jcr_content_proxy_user",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_queue_batch_max_size",
+      "name" => "jcr_content_queue_batch_max_size",
       "description" => "",
       "dataType" => "Float",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_queue_batch_mode",
+      "name" => "jcr_content_queue_batch_mode",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_queue_batch_wait_time",
+      "name" => "jcr_content_queue_batch_wait_time",
       "description" => "",
       "dataType" => "Float",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_retry_delay",
+      "name" => "jcr_content_retry_delay",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_reverse_replication",
+      "name" => "jcr_content_reverse_replication",
       "description" => "",
       "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_serialization_type",
+      "name" => "jcr_content_serialization_type",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_slingresource_type",
+      "name" => "jcr_content_sling_resource_type",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_ssl",
+      "name" => "jcr_content_ssl",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_transport_ntlm_domain",
+      "name" => "jcr_content_transport_ntlm_domain",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_transport_ntlm_host",
+      "name" => "jcr_content_transport_ntlm_host",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_transport_password",
+      "name" => "jcr_content_transport_password",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_transport_uri",
+      "name" => "jcr_content_transport_uri",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_transport_user",
+      "name" => "jcr_content_transport_user",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_trigger_distribute",
+      "name" => "jcr_content_trigger_distribute",
       "description" => "",
       "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_trigger_modified",
+      "name" => "jcr_content_trigger_modified",
       "description" => "",
       "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_trigger_on_off_time",
+      "name" => "jcr_content_trigger_on_off_time",
       "description" => "",
       "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_trigger_receive",
+      "name" => "jcr_content_trigger_receive",
       "description" => "",
       "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_trigger_specific",
+      "name" => "jcr_content_trigger_specific",
       "description" => "",
       "dataType" => "Boolean",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrcontent_user_id",
+      "name" => "jcr_content_user_id",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "jcrprimary_type",
+      "name" => "jcr_primary_type",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "operation",
+      "name" => "_operation",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
@@ -716,13 +723,13 @@ end
 MyApp.add_route('POST', '/{intermediatePath}/{authorizableId}.ks.html', {
   "resourcePath" => "/Sling",
   "summary" => "",
-  "nickname" => "post_authorizable_keystore", 
+  "nickname" => "post_authorizable_keystore",
   "responseClass" => "KeystoreInfo",
-  "endpoint" => "/{intermediatePath}/{authorizableId}.ks.html", 
+  "endpoint" => "/{intermediatePath}/{authorizableId}.ks.html",
   "notes" => "",
   "parameters" => [
     {
-      "name" => "operation",
+      "name" => "_operation",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
@@ -807,9 +814,9 @@ end
 MyApp.add_route('POST', '/libs/granite/security/post/authorizables', {
   "resourcePath" => "/Sling",
   "summary" => "",
-  "nickname" => "post_authorizables", 
+  "nickname" => "post_authorizables",
   "responseClass" => "String",
-  "endpoint" => "/libs/granite/security/post/authorizables", 
+  "endpoint" => "/libs/granite/security/post/authorizables",
   "notes" => "",
   "parameters" => [
     {
@@ -841,7 +848,7 @@ MyApp.add_route('POST', '/libs/granite/security/post/authorizables', {
       "paramType" => "query",
     },
     {
-      "name" => "reppassword",
+      "name" => "rep_password",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
@@ -865,9 +872,9 @@ end
 MyApp.add_route('POST', '/apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config', {
   "resourcePath" => "/Sling",
   "summary" => "",
-  "nickname" => "post_config_adobe_granite_saml_authentication_handler", 
+  "nickname" => "post_config_adobe_granite_saml_authentication_handler",
   "responseClass" => "void",
-  "endpoint" => "/apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config", 
+  "endpoint" => "/apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config",
   "notes" => "",
   "parameters" => [
     {
@@ -1217,9 +1224,9 @@ end
 MyApp.add_route('POST', '/apps/system/config/org.apache.felix.http', {
   "resourcePath" => "/Sling",
   "summary" => "",
-  "nickname" => "post_config_apache_felix_jetty_based_http_service", 
+  "nickname" => "post_config_apache_felix_jetty_based_http_service",
   "responseClass" => "void",
-  "endpoint" => "/apps/system/config/org.apache.felix.http", 
+  "endpoint" => "/apps/system/config/org.apache.felix.http",
   "notes" => "",
   "parameters" => [
     {
@@ -1373,9 +1380,9 @@ end
 MyApp.add_route('POST', '/apps/system/config/org.apache.http.proxyconfigurator.config', {
   "resourcePath" => "/Sling",
   "summary" => "",
-  "nickname" => "post_config_apache_http_components_proxy_configuration", 
+  "nickname" => "post_config_apache_http_components_proxy_configuration",
   "responseClass" => "void",
-  "endpoint" => "/apps/system/config/org.apache.http.proxyconfigurator.config", 
+  "endpoint" => "/apps/system/config/org.apache.http.proxyconfigurator.config",
   "notes" => "",
   "parameters" => [
     {
@@ -1473,9 +1480,9 @@ end
 MyApp.add_route('POST', '/apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet', {
   "resourcePath" => "/Sling",
   "summary" => "",
-  "nickname" => "post_config_apache_sling_dav_ex_servlet", 
+  "nickname" => "post_config_apache_sling_dav_ex_servlet",
   "responseClass" => "void",
-  "endpoint" => "/apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet", 
+  "endpoint" => "/apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet",
   "notes" => "",
   "parameters" => [
     {
@@ -1517,9 +1524,9 @@ end
 MyApp.add_route('POST', '/apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet', {
   "resourcePath" => "/Sling",
   "summary" => "",
-  "nickname" => "post_config_apache_sling_get_servlet", 
+  "nickname" => "post_config_apache_sling_get_servlet",
   "responseClass" => "void",
-  "endpoint" => "/apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet", 
+  "endpoint" => "/apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet",
   "notes" => "",
   "parameters" => [
     {
@@ -1589,9 +1596,9 @@ end
 MyApp.add_route('POST', '/apps/system/config/org.apache.sling.security.impl.ReferrerFilter', {
   "resourcePath" => "/Sling",
   "summary" => "",
-  "nickname" => "post_config_apache_sling_referrer_filter", 
+  "nickname" => "post_config_apache_sling_referrer_filter",
   "responseClass" => "void",
-  "endpoint" => "/apps/system/config/org.apache.sling.security.impl.ReferrerFilter", 
+  "endpoint" => "/apps/system/config/org.apache.sling.security.impl.ReferrerFilter",
   "notes" => "",
   "parameters" => [
     {
@@ -1661,9 +1668,9 @@ end
 MyApp.add_route('POST', '/apps/system/config/{configNodeName}', {
   "resourcePath" => "/Sling",
   "summary" => "",
-  "nickname" => "post_config_property", 
+  "nickname" => "post_config_property",
   "responseClass" => "void",
-  "endpoint" => "/apps/system/config/{configNodeName}", 
+  "endpoint" => "/apps/system/config/{configNodeName}",
   "notes" => "",
   "parameters" => [
     {
@@ -1683,13 +1690,13 @@ end
 MyApp.add_route('POST', '/{path}/{name}', {
   "resourcePath" => "/Sling",
   "summary" => "",
-  "nickname" => "post_node", 
+  "nickname" => "post_node",
   "responseClass" => "void",
-  "endpoint" => "/{path}/{name}", 
+  "endpoint" => "/{path}/{name}",
   "notes" => "",
   "parameters" => [
     {
-      "name" => "operation",
+      "name" => "_operation",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
@@ -1725,9 +1732,9 @@ end
 MyApp.add_route('POST', '/{path}/{name}.rw.html', {
   "resourcePath" => "/Sling",
   "summary" => "",
-  "nickname" => "post_node_rw", 
+  "nickname" => "post_node_rw",
   "responseClass" => "void",
-  "endpoint" => "/{path}/{name}.rw.html", 
+  "endpoint" => "/{path}/{name}.rw.html",
   "notes" => "",
   "parameters" => [
     {
@@ -1760,20 +1767,20 @@ end
 MyApp.add_route('POST', '/{path}/', {
   "resourcePath" => "/Sling",
   "summary" => "",
-  "nickname" => "post_path", 
+  "nickname" => "post_path",
   "responseClass" => "void",
-  "endpoint" => "/{path}/", 
+  "endpoint" => "/{path}/",
   "notes" => "",
   "parameters" => [
     {
-      "name" => "jcrprimary_type",
+      "name" => "jcr_primary_type",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
       "paramType" => "query",
     },
     {
-      "name" => "name",
+      "name" => "_name",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
@@ -1796,9 +1803,9 @@ end
 MyApp.add_route('POST', '/bin/querybuilder.json', {
   "resourcePath" => "/Sling",
   "summary" => "",
-  "nickname" => "post_query", 
+  "nickname" => "post_query",
   "responseClass" => "String",
-  "endpoint" => "/bin/querybuilder.json", 
+  "endpoint" => "/bin/querybuilder.json",
   "notes" => "",
   "parameters" => [
     {
@@ -1837,12 +1844,12 @@ MyApp.add_route('POST', '/bin/querybuilder.json', {
 end
 
 
-MyApp.add_route('POST', '/etc/replication/treeactivation.html', {
+MyApp.add_route('POST', '/libs/replication/treeactivation.html', {
   "resourcePath" => "/Sling",
   "summary" => "",
-  "nickname" => "post_tree_activation", 
+  "nickname" => "post_tree_activation",
   "responseClass" => "void",
-  "endpoint" => "/etc/replication/treeactivation.html", 
+  "endpoint" => "/libs/replication/treeactivation.html",
   "notes" => "",
   "parameters" => [
     {
@@ -1866,6 +1873,14 @@ MyApp.add_route('POST', '/etc/replication/treeactivation.html', {
       "allowableValues" => "",
       "paramType" => "query",
     },
+    {
+      "name" => "cmd",
+      "description" => "",
+      "dataType" => "String",
+      "allowableValues" => "",
+      "defaultValue" => "'activate'",
+      "paramType" => "query",
+    },
     ]}) do
   cross_origin
   # the guts live here
@@ -1877,13 +1892,13 @@ end
 MyApp.add_route('POST', '/libs/granite/security/post/truststore', {
   "resourcePath" => "/Sling",
   "summary" => "",
-  "nickname" => "post_truststore", 
+  "nickname" => "post_truststore",
   "responseClass" => "String",
-  "endpoint" => "/libs/granite/security/post/truststore", 
+  "endpoint" => "/libs/granite/security/post/truststore",
   "notes" => "",
   "parameters" => [
     {
-      "name" => "operation",
+      "name" => "_operation",
       "description" => "",
       "dataType" => "String",
       "allowableValues" => "",
@@ -1928,9 +1943,9 @@ end
 MyApp.add_route('POST', '/etc/truststore', {
   "resourcePath" => "/Sling",
   "summary" => "",
-  "nickname" => "post_truststore_pkcs12", 
+  "nickname" => "post_truststore_pkcs12",
   "responseClass" => "String",
-  "endpoint" => "/etc/truststore", 
+  "endpoint" => "/etc/truststore",
   "notes" => "",
   "parameters" => [
     ]}) do

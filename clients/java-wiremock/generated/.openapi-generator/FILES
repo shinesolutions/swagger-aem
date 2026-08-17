@@ -1,0 +1,8 @@
+.openapi-generator-ignore
+pom.xml
+src/main/java/org/openapitools/mockserver/api/ConsoleApiMockServer.java
+src/main/java/org/openapitools/mockserver/api/CqApiMockServer.java
+src/main/java/org/openapitools/mockserver/api/CrxApiMockServer.java
+src/main/java/org/openapitools/mockserver/api/CustomApiMockServer.java
+src/main/java/org/openapitools/mockserver/api/GraniteApiMockServer.java
+src/main/java/org/openapitools/mockserver/api/SlingApiMockServer.java

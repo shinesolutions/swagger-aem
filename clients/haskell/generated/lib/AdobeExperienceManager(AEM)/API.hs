@@ -29,6 +29,10 @@ module AdobeExperienceManager(AEM).API
   , AdobeExperienceManager(AEM)API
   -- ** Plain WAI Application
   , serverWaiApplicationAdobeExperienceManager(AEM)
+  -- ** Authentication
+  , AdobeExperienceManager(AEM)Auth(..)
+  , clientAuth
+  , Protected
   ) where
 
 import           AdobeExperienceManager(AEM).Types
@@ -38,6 +42,8 @@ import           Control.Monad.Except               (ExceptT, runExceptT)
 import           Control.Monad.IO.Class
 import           Control.Monad.Trans.Reader         (ReaderT (..))
 import           Data.Aeson                         (Value)
+import qualified Data.Aeson                         as Aeson
+import qualified Data.ByteString.Lazy               as BSL
 import           Data.Coerce                        (coerce)
 import           Data.Data                          (Data)
 import           Data.Function                      ((&))
@@ -47,6 +53,7 @@ import           Data.Proxy                         (Proxy (..))
 import           Data.Set                           (Set)
 import           Data.Text                          (Text)
 import qualified Data.Text                          as T
+import qualified Data.Text.Encoding                 as T
 import           Data.Time
 import           Data.UUID                          (UUID)
 import           GHC.Exts                           (IsString (..))
@@ -54,16 +61,20 @@ import           GHC.Generics                       (Generic)
 import           Network.HTTP.Client                (Manager, newManager)
 import           Network.HTTP.Client.TLS            (tlsManagerSettings)
 import           Network.HTTP.Types.Method          (methodOptions)
-import           Network.Wai                        (Middleware)
+import           Network.Wai                        (Middleware, Request, requestHeaders)
 import qualified Network.Wai.Handler.Warp           as Warp
-import           Servant                            (ServerError, serve)
-import           Servant.API
+import           Network.Wai.Middleware.HttpAuth    (extractBasicAuth)
+import           Servant                            (ServerError, serveWithContextT, throwError)
+import           Servant.API                        hiding (addHeader)
+import           Servant.API.BasicAuth              (BasicAuthData (..))
 import           Servant.API.Verbs                  (StdMethod (..), Verb)
+import           Servant.API.Experimental.Auth      (AuthProtect)
 import           Servant.Client                     (ClientEnv, Scheme (Http), ClientError, client,
                                                      mkClientEnv, parseBaseUrl)
-import           Servant.Client.Core                (baseUrlPort, baseUrlHost)
+import           Servant.Client.Core                (baseUrlPort, baseUrlHost, basicAuthReq, AuthClientData, AuthenticatedRequest, addHeader, mkAuthenticatedRequest)
 import           Servant.Client.Internal.HttpClient (ClientM (..))
-import           Servant.Server                     (Handler (..), Application)
+import           Servant.Server                     (Handler (..), Application, Context ((:.), EmptyContext))
+import           Servant.Server.Experimental.Auth   (AuthHandler, AuthServerData, mkAuthHandler)
 import           Servant.Server.StaticFiles         (serveDirectoryFileServer)
 import           Web.FormUrlEncoded
 import           Web.HttpApiData
@@ -165,58 +176,68 @@ instance ToHttpApiData a => ToHttpApiData (QueryList 'MultiParamArray a) where
 formatSeparatedQueryList :: ToHttpApiData a => Char ->  QueryList p a -> Text
 formatSeparatedQueryList char = T.intercalate (T.singleton char) . map toQueryParam . fromQueryList
 
+newtype JSONQueryParam a = JSONQueryParam
+  { fromJsonQueryParam :: a
+  } deriving (Functor, Foldable, Traversable)
+
+instance Aeson.ToJSON a => ToHttpApiData (JSONQueryParam a) where
+  toQueryParam = T.decodeUtf8 . BSL.toStrict . Aeson.encode . fromJsonQueryParam
+
+instance Aeson.FromJSON a => FromHttpApiData (JSONQueryParam a) where
+  parseQueryParam = either (Left . T.pack) (Right . JSONQueryParam) . Aeson.eitherDecodeStrict . T.encodeUtf8
+
 
 -- | Servant type-level API, generated from the OpenAPI spec for AdobeExperienceManager(AEM).
 type AdobeExperienceManager(AEM)API
-    =    "system" :> "console" :> "status-productinfo.json" :> Verb 'GET 200 '[JSON] [Text] -- 'getAemProductInfo' route
-    :<|> "system" :> "console" :> "bundles" :> "{name}.json" :> Verb 'GET 200 '[JSON] BundleInfo -- 'getBundleInfo' route
-    :<|> "system" :> "console" :> "configMgr" :> Verb 'GET 200 '[JSON] Text -- 'getConfigMgr' route
-    :<|> "system" :> "console" :> "bundles" :> Capture "name" Text :> QueryParam "action" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postBundle' route
-    :<|> "system" :> "console" :> "jmx" :> "com.adobe.granite:type=Repository" :> "op" :> Capture "action" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postJmxRepository' route
-    :<|> "system" :> "console" :> "configMgr" :> "com.adobe.granite.auth.saml.SamlAuthenticationHandler" :> QueryParam "post" Bool :> QueryParam "apply" Bool :> QueryParam "delete" Bool :> QueryParam "action" Text :> QueryParam "$location" Text :> QueryParam "path" (QueryList 'MultiParamArray (Text)) :> QueryParam "service.ranking" Int :> QueryParam "idpUrl" Text :> QueryParam "idpCertAlias" Text :> QueryParam "idpHttpRedirect" Bool :> QueryParam "serviceProviderEntityId" Text :> QueryParam "assertionConsumerServiceURL" Text :> QueryParam "spPrivateKeyAlias" Text :> QueryParam "keyStorePassword" Text :> QueryParam "defaultRedirectUrl" Text :> QueryParam "userIDAttribute" Text :> QueryParam "useEncryption" Bool :> QueryParam "createUser" Bool :> QueryParam "addGroupMemberships" Bool :> QueryParam "groupMembershipAttribute" Text :> QueryParam "defaultGroups" (QueryList 'MultiParamArray (Text)) :> QueryParam "nameIdFormat" Text :> QueryParam "synchronizeAttributes" (QueryList 'MultiParamArray (Text)) :> QueryParam "handleLogout" Bool :> QueryParam "logoutUrl" Text :> QueryParam "clockTolerance" Int :> QueryParam "digestMethod" Text :> QueryParam "signatureMethod" Text :> QueryParam "userIntermediatePath" Text :> QueryParam "propertylist" (QueryList 'CommaSeparated (Text)) :> Verb 'POST 200 '[JSON] SamlConfigurationInfo -- 'postSamlConfiguration' route
+    =    Protected :> "system" :> "console" :> "status-productinfo.json" :> Verb 'GET 200 '[JSON] [Text] -- 'getAemProductInfo' route
+    :<|> Protected :> "system" :> "console" :> "bundles" :> "{name}.json" :> Verb 'GET 200 '[JSON] BundleInfo -- 'getBundleInfo' route
+    :<|> Protected :> "system" :> "console" :> "configMgr" :> Verb 'GET 200 '[JSON] Text -- 'getConfigMgr' route
+    :<|> Protected :> "system" :> "console" :> "bundles" :> Capture "name" Text :> QueryParam "action" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postBundle' route
+    :<|> Protected :> "system" :> "console" :> "jmx" :> "com.adobe.granite:type=Repository" :> "op" :> Capture "action" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postJmxRepository' route
+    :<|> Protected :> "system" :> "console" :> "configMgr" :> "com.adobe.granite.auth.saml.SamlAuthenticationHandler" :> QueryParam "post" Bool :> QueryParam "apply" Bool :> QueryParam "delete" Bool :> QueryParam "action" Text :> QueryParam "$location" Text :> QueryParam "path" (QueryList 'MultiParamArray (Text)) :> QueryParam "service.ranking" Int :> QueryParam "idpUrl" Text :> QueryParam "idpCertAlias" Text :> QueryParam "idpHttpRedirect" Bool :> QueryParam "serviceProviderEntityId" Text :> QueryParam "assertionConsumerServiceURL" Text :> QueryParam "spPrivateKeyAlias" Text :> QueryParam "keyStorePassword" Text :> QueryParam "defaultRedirectUrl" Text :> QueryParam "userIDAttribute" Text :> QueryParam "useEncryption" Bool :> QueryParam "createUser" Bool :> QueryParam "addGroupMemberships" Bool :> QueryParam "groupMembershipAttribute" Text :> QueryParam "defaultGroups" (QueryList 'MultiParamArray (Text)) :> QueryParam "nameIdFormat" Text :> QueryParam "synchronizeAttributes" (QueryList 'MultiParamArray (Text)) :> QueryParam "handleLogout" Bool :> QueryParam "logoutUrl" Text :> QueryParam "clockTolerance" Int :> QueryParam "digestMethod" Text :> QueryParam "signatureMethod" Text :> QueryParam "userIntermediatePath" Text :> QueryParam "propertylist" (QueryList 'CommaSeparated (Text)) :> Verb 'POST 200 '[JSON] SamlConfigurationInfo -- 'postSamlConfiguration' route
     :<|> "libs" :> "granite" :> "core" :> "content" :> "login.html" :> Verb 'GET 200 '[JSON] Text -- 'getLoginPage' route
-    :<|> ".cqactions.html" :> QueryParam "authorizableId" Text :> QueryParam "changelog" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postCqActions' route
-    :<|> "crx" :> "server" :> "crx.default" :> "jcr:root" :> ".1.json" :> Verb 'GET 200 '[JSON] Text -- 'getCrxdeStatus' route
-    :<|> "crx" :> "packmgr" :> "installstatus.jsp" :> Verb 'GET 200 '[JSON] InstallStatus -- 'getInstallStatus' route
-    :<|> "crx" :> "packmgr" :> "service" :> "script.html" :> Verb 'GET 200 '[JSON] NoContent -- 'getPackageManagerServlet' route
-    :<|> "crx" :> "packmgr" :> "service.jsp" :> QueryParam "cmd" Text :> Verb 'POST 200 '[JSON] Text -- 'postPackageService' route
-    :<|> "crx" :> "packmgr" :> "service" :> ".json" :> Capture "path" Text :> QueryParam "cmd" Text :> QueryParam "groupName" Text :> QueryParam "packageName" Text :> QueryParam "packageVersion" Text :> QueryParam "_charset_" Text :> QueryParam "force" Bool :> QueryParam "recursive" Bool :> ReqBody '[FormUrlEncoded] FormPostPackageServiceJson :> Verb 'POST 200 '[JSON] Text -- 'postPackageServiceJson' route
-    :<|> "crx" :> "packmgr" :> "update.jsp" :> QueryParam "groupName" Text :> QueryParam "packageName" Text :> QueryParam "version" Text :> QueryParam "path" Text :> QueryParam "filter" Text :> QueryParam "_charset_" Text :> Verb 'POST 200 '[JSON] Text -- 'postPackageUpdate' route
-    :<|> "crx" :> "explorer" :> "ui" :> "setpassword.jsp" :> QueryParam "old" Text :> QueryParam "plain" Text :> QueryParam "verify" Text :> Verb 'POST 200 '[JSON] Text -- 'postSetPassword' route
-    :<|> "system" :> "health" :> QueryParam "tags" Text :> QueryParam "combineTagsOr" Bool :> Verb 'GET 200 '[JSON] Text -- 'getAemHealthCheck' route
-    :<|> "apps" :> "system" :> "config" :> "com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck" :> QueryParam "bundles.ignored" (QueryList 'MultiParamArray (Text)) :> QueryParam "bundles.ignored@TypeHint" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postConfigAemHealthCheckServlet' route
-    :<|> "apps" :> "system" :> "config" :> "com.shinesolutions.aem.passwordreset.Activator" :> QueryParam "pwdreset.authorizables" (QueryList 'MultiParamArray (Text)) :> QueryParam "pwdreset.authorizables@TypeHint" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postConfigAemPasswordReset' route
-    :<|> "libs" :> "granite" :> "security" :> "post" :> "sslSetup.html" :> QueryParam "keystorePassword" Text :> QueryParam "keystorePasswordConfirm" Text :> QueryParam "truststorePassword" Text :> QueryParam "truststorePasswordConfirm" Text :> QueryParam "httpsHostname" Text :> QueryParam "httpsPort" Text :> ReqBody '[FormUrlEncoded] FormSslSetup :> Verb 'POST 200 '[JSON] Text -- 'sslSetup' route
-    :<|> "etc" :> "replication" :> "agents.{runmode}" :> Capture "name" Text :> Verb 'DELETE 200 '[JSON] NoContent -- 'deleteAgent' route
-    :<|> Capture "path" Text :> Capture "name" Text :> Verb 'DELETE 200 '[JSON] NoContent -- 'deleteNode' route
-    :<|> "etc" :> "replication" :> "agents.{runmode}" :> Capture "name" Text :> Verb 'GET 200 '[JSON] NoContent -- 'getAgent' route
-    :<|> "etc" :> "replication" :> "agents.{runmode}.-1.json" :> Verb 'GET 200 '[JSON] Text -- 'getAgents' route
-    :<|> Capture "intermediatePath" Text :> "{authorizableId}.ks.json" :> Verb 'GET 200 '[JSON] KeystoreInfo -- 'getAuthorizableKeystore' route
-    :<|> Capture "intermediatePath" Text :> Capture "authorizableId" Text :> "keystore" :> "store.p12" :> Verb 'GET 200 '[JSON] FilePath -- 'getKeystore' route
-    :<|> Capture "path" Text :> Capture "name" Text :> Verb 'GET 200 '[JSON] NoContent -- 'getNode' route
-    :<|> "etc" :> "packages" :> Capture "group" Text :> "{name}-{version}.zip" :> Verb 'GET 200 '[JSON] FilePath -- 'getPackage' route
-    :<|> "etc" :> "packages" :> Capture "group" Text :> "{name}-{version}.zip" :> "jcr:content" :> "vlt:definition" :> "filter.tidy.2.json" :> Verb 'GET 200 '[JSON] Text -- 'getPackageFilter' route
-    :<|> "bin" :> "querybuilder.json" :> QueryParam "path" Text :> QueryParam "p.limit" Double :> QueryParam "1_property" Text :> QueryParam "1_property.value" Text :> Verb 'GET 200 '[JSON] Text -- 'getQuery' route
-    :<|> "etc" :> "truststore" :> "truststore.p12" :> Verb 'GET 200 '[JSON] FilePath -- 'getTruststore' route
-    :<|> "libs" :> "granite" :> "security" :> "truststore.json" :> Verb 'GET 200 '[JSON] TruststoreInfo -- 'getTruststoreInfo' route
-    :<|> "etc" :> "replication" :> "agents.{runmode}" :> Capture "name" Text :> QueryParam "jcr:content/cq:distribute" Bool :> QueryParam "jcr:content/cq:distribute@TypeHint" Text :> QueryParam "jcr:content/cq:name" Text :> QueryParam "jcr:content/cq:template" Text :> QueryParam "jcr:content/enabled" Bool :> QueryParam "jcr:content/jcr:description" Text :> QueryParam "jcr:content/jcr:lastModified" Text :> QueryParam "jcr:content/jcr:lastModifiedBy" Text :> QueryParam "jcr:content/jcr:mixinTypes" Text :> QueryParam "jcr:content/jcr:title" Text :> QueryParam "jcr:content/logLevel" Text :> QueryParam "jcr:content/noStatusUpdate" Bool :> QueryParam "jcr:content/noVersioning" Bool :> QueryParam "jcr:content/protocolConnectTimeout" Double :> QueryParam "jcr:content/protocolHTTPConnectionClosed" Bool :> QueryParam "jcr:content/protocolHTTPExpired" Text :> QueryParam "jcr:content/protocolHTTPHeaders" (QueryList 'MultiParamArray (Text)) :> QueryParam "jcr:content/protocolHTTPHeaders@TypeHint" Text :> QueryParam "jcr:content/protocolHTTPMethod" Text :> QueryParam "jcr:content/protocolHTTPSRelaxed" Bool :> QueryParam "jcr:content/protocolInterface" Text :> QueryParam "jcr:content/protocolSocketTimeout" Double :> QueryParam "jcr:content/protocolVersion" Text :> QueryParam "jcr:content/proxyNTLMDomain" Text :> QueryParam "jcr:content/proxyNTLMHost" Text :> QueryParam "jcr:content/proxyHost" Text :> QueryParam "jcr:content/proxyPassword" Text :> QueryParam "jcr:content/proxyPort" Double :> QueryParam "jcr:content/proxyUser" Text :> QueryParam "jcr:content/queueBatchMaxSize" Double :> QueryParam "jcr:content/queueBatchMode" Text :> QueryParam "jcr:content/queueBatchWaitTime" Double :> QueryParam "jcr:content/retryDelay" Text :> QueryParam "jcr:content/reverseReplication" Bool :> QueryParam "jcr:content/serializationType" Text :> QueryParam "jcr:content/sling:resourceType" Text :> QueryParam "jcr:content/ssl" Text :> QueryParam "jcr:content/transportNTLMDomain" Text :> QueryParam "jcr:content/transportNTLMHost" Text :> QueryParam "jcr:content/transportPassword" Text :> QueryParam "jcr:content/transportUri" Text :> QueryParam "jcr:content/transportUser" Text :> QueryParam "jcr:content/triggerDistribute" Bool :> QueryParam "jcr:content/triggerModified" Bool :> QueryParam "jcr:content/triggerOnOffTime" Bool :> QueryParam "jcr:content/triggerReceive" Bool :> QueryParam "jcr:content/triggerSpecific" Bool :> QueryParam "jcr:content/userId" Text :> QueryParam "jcr:primaryType" Text :> QueryParam ":operation" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postAgent' route
-    :<|> Capture "intermediatePath" Text :> "{authorizableId}.ks.html" :> QueryParam ":operation" Text :> QueryParam "currentPassword" Text :> QueryParam "newPassword" Text :> QueryParam "rePassword" Text :> QueryParam "keyPassword" Text :> QueryParam "keyStorePass" Text :> QueryParam "alias" Text :> QueryParam "newAlias" Text :> QueryParam "removeAlias" Text :> ReqBody '[FormUrlEncoded] FormPostAuthorizableKeystore :> Verb 'POST 200 '[JSON] KeystoreInfo -- 'postAuthorizableKeystore' route
-    :<|> "libs" :> "granite" :> "security" :> "post" :> "authorizables" :> QueryParam "authorizableId" Text :> QueryParam "intermediatePath" Text :> QueryParam "createUser" Text :> QueryParam "createGroup" Text :> QueryParam "rep:password" Text :> QueryParam "profile/givenName" Text :> Verb 'POST 200 '[JSON] Text -- 'postAuthorizables' route
-    :<|> "apps" :> "system" :> "config" :> "com.adobe.granite.auth.saml.SamlAuthenticationHandler.config" :> QueryParam "keyStorePassword" Text :> QueryParam "keyStorePassword@TypeHint" Text :> QueryParam "service.ranking" Int :> QueryParam "service.ranking@TypeHint" Text :> QueryParam "idpHttpRedirect" Bool :> QueryParam "idpHttpRedirect@TypeHint" Text :> QueryParam "createUser" Bool :> QueryParam "createUser@TypeHint" Text :> QueryParam "defaultRedirectUrl" Text :> QueryParam "defaultRedirectUrl@TypeHint" Text :> QueryParam "userIDAttribute" Text :> QueryParam "userIDAttribute@TypeHint" Text :> QueryParam "defaultGroups" (QueryList 'MultiParamArray (Text)) :> QueryParam "defaultGroups@TypeHint" Text :> QueryParam "idpCertAlias" Text :> QueryParam "idpCertAlias@TypeHint" Text :> QueryParam "addGroupMemberships" Bool :> QueryParam "addGroupMemberships@TypeHint" Text :> QueryParam "path" (QueryList 'MultiParamArray (Text)) :> QueryParam "path@TypeHint" Text :> QueryParam "synchronizeAttributes" (QueryList 'MultiParamArray (Text)) :> QueryParam "synchronizeAttributes@TypeHint" Text :> QueryParam "clockTolerance" Int :> QueryParam "clockTolerance@TypeHint" Text :> QueryParam "groupMembershipAttribute" Text :> QueryParam "groupMembershipAttribute@TypeHint" Text :> QueryParam "idpUrl" Text :> QueryParam "idpUrl@TypeHint" Text :> QueryParam "logoutUrl" Text :> QueryParam "logoutUrl@TypeHint" Text :> QueryParam "serviceProviderEntityId" Text :> QueryParam "serviceProviderEntityId@TypeHint" Text :> QueryParam "assertionConsumerServiceURL" Text :> QueryParam "assertionConsumerServiceURL@TypeHint" Text :> QueryParam "handleLogout" Bool :> QueryParam "handleLogout@TypeHint" Text :> QueryParam "spPrivateKeyAlias" Text :> QueryParam "spPrivateKeyAlias@TypeHint" Text :> QueryParam "useEncryption" Bool :> QueryParam "useEncryption@TypeHint" Text :> QueryParam "nameIdFormat" Text :> QueryParam "nameIdFormat@TypeHint" Text :> QueryParam "digestMethod" Text :> QueryParam "digestMethod@TypeHint" Text :> QueryParam "signatureMethod" Text :> QueryParam "signatureMethod@TypeHint" Text :> QueryParam "userIntermediatePath" Text :> QueryParam "userIntermediatePath@TypeHint" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postConfigAdobeGraniteSamlAuthenticationHandler' route
-    :<|> "apps" :> "system" :> "config" :> "org.apache.felix.http" :> QueryParam "org.apache.felix.https.nio" Bool :> QueryParam "org.apache.felix.https.nio@TypeHint" Text :> QueryParam "org.apache.felix.https.keystore" Text :> QueryParam "org.apache.felix.https.keystore@TypeHint" Text :> QueryParam "org.apache.felix.https.keystore.password" Text :> QueryParam "org.apache.felix.https.keystore.password@TypeHint" Text :> QueryParam "org.apache.felix.https.keystore.key" Text :> QueryParam "org.apache.felix.https.keystore.key@TypeHint" Text :> QueryParam "org.apache.felix.https.keystore.key.password" Text :> QueryParam "org.apache.felix.https.keystore.key.password@TypeHint" Text :> QueryParam "org.apache.felix.https.truststore" Text :> QueryParam "org.apache.felix.https.truststore@TypeHint" Text :> QueryParam "org.apache.felix.https.truststore.password" Text :> QueryParam "org.apache.felix.https.truststore.password@TypeHint" Text :> QueryParam "org.apache.felix.https.clientcertificate" Text :> QueryParam "org.apache.felix.https.clientcertificate@TypeHint" Text :> QueryParam "org.apache.felix.https.enable" Bool :> QueryParam "org.apache.felix.https.enable@TypeHint" Text :> QueryParam "org.osgi.service.http.port.secure" Text :> QueryParam "org.osgi.service.http.port.secure@TypeHint" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postConfigApacheFelixJettyBasedHttpService' route
-    :<|> "apps" :> "system" :> "config" :> "org.apache.http.proxyconfigurator.config" :> QueryParam "proxy.host" Text :> QueryParam "proxy.host@TypeHint" Text :> QueryParam "proxy.port" Int :> QueryParam "proxy.port@TypeHint" Text :> QueryParam "proxy.exceptions" (QueryList 'MultiParamArray (Text)) :> QueryParam "proxy.exceptions@TypeHint" Text :> QueryParam "proxy.enabled" Bool :> QueryParam "proxy.enabled@TypeHint" Text :> QueryParam "proxy.user" Text :> QueryParam "proxy.user@TypeHint" Text :> QueryParam "proxy.password" Text :> QueryParam "proxy.password@TypeHint" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postConfigApacheHttpComponentsProxyConfiguration' route
-    :<|> "apps" :> "system" :> "config" :> "org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet" :> QueryParam "alias" Text :> QueryParam "alias@TypeHint" Text :> QueryParam "dav.create-absolute-uri" Bool :> QueryParam "dav.create-absolute-uri@TypeHint" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postConfigApacheSlingDavExServlet' route
-    :<|> "apps" :> "system" :> "config" :> "org.apache.sling.servlets.get.DefaultGetServlet" :> QueryParam "json.maximumresults" Text :> QueryParam "json.maximumresults@TypeHint" Text :> QueryParam "enable.html" Bool :> QueryParam "enable.html@TypeHint" Text :> QueryParam "enable.txt" Bool :> QueryParam "enable.txt@TypeHint" Text :> QueryParam "enable.xml" Bool :> QueryParam "enable.xml@TypeHint" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postConfigApacheSlingGetServlet' route
-    :<|> "apps" :> "system" :> "config" :> "org.apache.sling.security.impl.ReferrerFilter" :> QueryParam "allow.empty" Bool :> QueryParam "allow.empty@TypeHint" Text :> QueryParam "allow.hosts" Text :> QueryParam "allow.hosts@TypeHint" Text :> QueryParam "allow.hosts.regexp" Text :> QueryParam "allow.hosts.regexp@TypeHint" Text :> QueryParam "filter.methods" Text :> QueryParam "filter.methods@TypeHint" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postConfigApacheSlingReferrerFilter' route
-    :<|> "apps" :> "system" :> "config" :> Capture "configNodeName" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postConfigProperty' route
-    :<|> Capture "path" Text :> Capture "name" Text :> QueryParam ":operation" Text :> QueryParam "deleteAuthorizable" Text :> ReqBody '[FormUrlEncoded] FormPostNode :> Verb 'POST 200 '[JSON] NoContent -- 'postNode' route
-    :<|> Capture "path" Text :> "{name}.rw.html" :> QueryParam "addMembers" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postNodeRw' route
-    :<|> Capture "path" Text :> QueryParam "jcr:primaryType" Text :> QueryParam ":name" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postPath' route
-    :<|> "bin" :> "querybuilder.json" :> QueryParam "path" Text :> QueryParam "p.limit" Double :> QueryParam "1_property" Text :> QueryParam "1_property.value" Text :> Verb 'POST 200 '[JSON] Text -- 'postQuery' route
-    :<|> "etc" :> "replication" :> "treeactivation.html" :> QueryParam "ignoredeactivated" Bool :> QueryParam "onlymodified" Bool :> QueryParam "path" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postTreeActivation' route
-    :<|> "libs" :> "granite" :> "security" :> "post" :> "truststore" :> QueryParam ":operation" Text :> QueryParam "newPassword" Text :> QueryParam "rePassword" Text :> QueryParam "keyStoreType" Text :> QueryParam "removeAlias" Text :> ReqBody '[FormUrlEncoded] FormPostTruststore :> Verb 'POST 200 '[JSON] Text -- 'postTruststore' route
-    :<|> "etc" :> "truststore" :> ReqBody '[FormUrlEncoded] FormPostTruststorePKCS12 :> Verb 'POST 200 '[JSON] Text -- 'postTruststorePKCS12' route
-    :<|> Raw 
+    :<|> Protected :> ".cqactions.html" :> QueryParam "authorizableId" Text :> QueryParam "changelog" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postCqActions' route
+    :<|> Protected :> "crx" :> "server" :> "crx.default" :> "jcr:root" :> ".1.json" :> Verb 'GET 200 '[JSON] Text -- 'getCrxdeStatus' route
+    :<|> Protected :> "crx" :> "packmgr" :> "installstatus.jsp" :> Verb 'GET 200 '[JSON] InstallStatus -- 'getInstallStatus' route
+    :<|> Protected :> "crx" :> "packmgr" :> "service" :> "script.html" :> Verb 'GET 200 '[JSON] NoContent -- 'getPackageManagerServlet' route
+    :<|> Protected :> "crx" :> "packmgr" :> "service.jsp" :> QueryParam "cmd" Text :> Verb 'POST 200 '[JSON] Text -- 'postPackageService' route
+    :<|> Protected :> "crx" :> "packmgr" :> "service" :> ".json" :> Capture "path" Text :> QueryParam "cmd" Text :> QueryParam "groupName" Text :> QueryParam "packageName" Text :> QueryParam "packageVersion" Text :> QueryParam "_charset_" Text :> QueryParam "force" Bool :> QueryParam "recursive" Bool :> ReqBody '[FormUrlEncoded] FormPostPackageServiceJson :> Verb 'POST 200 '[JSON] Text -- 'postPackageServiceJson' route
+    :<|> Protected :> "crx" :> "packmgr" :> "update.jsp" :> QueryParam "groupName" Text :> QueryParam "packageName" Text :> QueryParam "version" Text :> QueryParam "path" Text :> QueryParam "filter" Text :> QueryParam "_charset_" Text :> Verb 'POST 200 '[JSON] Text -- 'postPackageUpdate' route
+    :<|> Protected :> "crx" :> "explorer" :> "ui" :> "setpassword.jsp" :> QueryParam "old" Text :> QueryParam "plain" Text :> QueryParam "verify" Text :> Verb 'POST 200 '[JSON] Text -- 'postSetPassword' route
+    :<|> Protected :> "system" :> "health" :> QueryParam "tags" Text :> QueryParam "combineTagsOr" Bool :> Verb 'GET 200 '[JSON] Text -- 'getAemHealthCheck' route
+    :<|> Protected :> "apps" :> "system" :> "config" :> "com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck" :> QueryParam "bundles.ignored" (QueryList 'MultiParamArray (Text)) :> QueryParam "bundles.ignored@TypeHint" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postConfigAemHealthCheckServlet' route
+    :<|> Protected :> "apps" :> "system" :> "config" :> "com.shinesolutions.aem.passwordreset.Activator" :> QueryParam "pwdreset.authorizables" (QueryList 'MultiParamArray (Text)) :> QueryParam "pwdreset.authorizables@TypeHint" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postConfigAemPasswordReset' route
+    :<|> Protected :> "libs" :> "granite" :> "security" :> "post" :> "sslSetup.html" :> QueryParam "keystorePassword" Text :> QueryParam "keystorePasswordConfirm" Text :> QueryParam "truststorePassword" Text :> QueryParam "truststorePasswordConfirm" Text :> QueryParam "httpsHostname" Text :> QueryParam "httpsPort" Text :> ReqBody '[FormUrlEncoded] FormSslSetup :> Verb 'POST 200 '[JSON] Text -- 'sslSetup' route
+    :<|> Protected :> "etc" :> "replication" :> "agents.{runmode}" :> Capture "name" Text :> Verb 'DELETE 200 '[JSON] NoContent -- 'deleteAgent' route
+    :<|> Protected :> Capture "path" Text :> Capture "name" Text :> Verb 'DELETE 200 '[JSON] NoContent -- 'deleteNode' route
+    :<|> Protected :> "etc" :> "replication" :> "agents.{runmode}" :> Capture "name" Text :> Verb 'GET 200 '[JSON] NoContent -- 'getAgent' route
+    :<|> Protected :> "etc" :> "replication" :> "agents.{runmode}.-1.json" :> Verb 'GET 200 '[JSON] Text -- 'getAgents' route
+    :<|> Protected :> Capture "intermediatePath" Text :> "{authorizableId}.ks.json" :> Verb 'GET 200 '[JSON] KeystoreInfo -- 'getAuthorizableKeystore' route
+    :<|> Protected :> Capture "intermediatePath" Text :> Capture "authorizableId" Text :> "keystore" :> "store.p12" :> Verb 'GET 200 '[JSON] FilePath -- 'getKeystore' route
+    :<|> Protected :> Capture "path" Text :> Capture "name" Text :> Verb 'GET 200 '[JSON] NoContent -- 'getNode' route
+    :<|> Protected :> "etc" :> "packages" :> Capture "group" Text :> "{name}-{version}.zip" :> Verb 'GET 200 '[JSON] FilePath -- 'getPackage' route
+    :<|> Protected :> "etc" :> "packages" :> Capture "group" Text :> "{name}-{version}.zip" :> "jcr:content" :> "vlt:definition" :> "filter.tidy.2.json" :> Verb 'GET 200 '[JSON] Text -- 'getPackageFilter' route
+    :<|> Protected :> "bin" :> "querybuilder.json" :> QueryParam "path" Text :> QueryParam "p.limit" Double :> QueryParam "1_property" Text :> QueryParam "1_property.value" Text :> Verb 'GET 200 '[JSON] Text -- 'getQuery' route
+    :<|> Protected :> "etc" :> "truststore" :> "truststore.p12" :> Verb 'GET 200 '[JSON] FilePath -- 'getTruststore' route
+    :<|> Protected :> "libs" :> "granite" :> "security" :> "truststore.json" :> Verb 'GET 200 '[JSON] TruststoreInfo -- 'getTruststoreInfo' route
+    :<|> Protected :> "etc" :> "replication" :> "agents.{runmode}" :> Capture "name" Text :> QueryParam "jcr:content/cq:distribute" Bool :> QueryParam "jcr:content/cq:distribute@TypeHint" Text :> QueryParam "jcr:content/cq:name" Text :> QueryParam "jcr:content/cq:template" Text :> QueryParam "jcr:content/aliasUpdate" Bool :> QueryParam "jcr:content/enabled" Bool :> QueryParam "jcr:content/jcr:description" Text :> QueryParam "jcr:content/jcr:lastModified" Text :> QueryParam "jcr:content/jcr:lastModifiedBy" Text :> QueryParam "jcr:content/jcr:mixinTypes" Text :> QueryParam "jcr:content/jcr:title" Text :> QueryParam "jcr:content/logLevel" Text :> QueryParam "jcr:content/noStatusUpdate" Bool :> QueryParam "jcr:content/noVersioning" Bool :> QueryParam "jcr:content/protocolConnectTimeout" Double :> QueryParam "jcr:content/protocolHTTPConnectionClosed" Bool :> QueryParam "jcr:content/protocolHTTPExpired" Text :> QueryParam "jcr:content/protocolHTTPHeaders" (QueryList 'MultiParamArray (Text)) :> QueryParam "jcr:content/protocolHTTPHeaders@TypeHint" Text :> QueryParam "jcr:content/protocolHTTPMethod" Text :> QueryParam "jcr:content/protocolHTTPSRelaxed" Bool :> QueryParam "jcr:content/protocolInterface" Text :> QueryParam "jcr:content/protocolSocketTimeout" Double :> QueryParam "jcr:content/protocolVersion" Text :> QueryParam "jcr:content/proxyNTLMDomain" Text :> QueryParam "jcr:content/proxyNTLMHost" Text :> QueryParam "jcr:content/proxyHost" Text :> QueryParam "jcr:content/proxyPassword" Text :> QueryParam "jcr:content/proxyPort" Double :> QueryParam "jcr:content/proxyUser" Text :> QueryParam "jcr:content/queueBatchMaxSize" Double :> QueryParam "jcr:content/queueBatchMode" Text :> QueryParam "jcr:content/queueBatchWaitTime" Double :> QueryParam "jcr:content/retryDelay" Text :> QueryParam "jcr:content/reverseReplication" Bool :> QueryParam "jcr:content/serializationType" Text :> QueryParam "jcr:content/sling:resourceType" Text :> QueryParam "jcr:content/ssl" Text :> QueryParam "jcr:content/transportNTLMDomain" Text :> QueryParam "jcr:content/transportNTLMHost" Text :> QueryParam "jcr:content/transportPassword" Text :> QueryParam "jcr:content/transportUri" Text :> QueryParam "jcr:content/transportUser" Text :> QueryParam "jcr:content/triggerDistribute" Bool :> QueryParam "jcr:content/triggerModified" Bool :> QueryParam "jcr:content/triggerOnOffTime" Bool :> QueryParam "jcr:content/triggerReceive" Bool :> QueryParam "jcr:content/triggerSpecific" Bool :> QueryParam "jcr:content/userId" Text :> QueryParam "jcr:primaryType" Text :> QueryParam ":operation" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postAgent' route
+    :<|> Protected :> Capture "intermediatePath" Text :> "{authorizableId}.ks.html" :> QueryParam ":operation" Text :> QueryParam "currentPassword" Text :> QueryParam "newPassword" Text :> QueryParam "rePassword" Text :> QueryParam "keyPassword" Text :> QueryParam "keyStorePass" Text :> QueryParam "alias" Text :> QueryParam "newAlias" Text :> QueryParam "removeAlias" Text :> ReqBody '[FormUrlEncoded] FormPostAuthorizableKeystore :> Verb 'POST 200 '[JSON] KeystoreInfo -- 'postAuthorizableKeystore' route
+    :<|> Protected :> "libs" :> "granite" :> "security" :> "post" :> "authorizables" :> QueryParam "authorizableId" Text :> QueryParam "intermediatePath" Text :> QueryParam "createUser" Text :> QueryParam "createGroup" Text :> QueryParam "rep:password" Text :> QueryParam "profile/givenName" Text :> Verb 'POST 200 '[JSON] Text -- 'postAuthorizables' route
+    :<|> Protected :> "apps" :> "system" :> "config" :> "com.adobe.granite.auth.saml.SamlAuthenticationHandler.config" :> QueryParam "keyStorePassword" Text :> QueryParam "keyStorePassword@TypeHint" Text :> QueryParam "service.ranking" Int :> QueryParam "service.ranking@TypeHint" Text :> QueryParam "idpHttpRedirect" Bool :> QueryParam "idpHttpRedirect@TypeHint" Text :> QueryParam "createUser" Bool :> QueryParam "createUser@TypeHint" Text :> QueryParam "defaultRedirectUrl" Text :> QueryParam "defaultRedirectUrl@TypeHint" Text :> QueryParam "userIDAttribute" Text :> QueryParam "userIDAttribute@TypeHint" Text :> QueryParam "defaultGroups" (QueryList 'MultiParamArray (Text)) :> QueryParam "defaultGroups@TypeHint" Text :> QueryParam "idpCertAlias" Text :> QueryParam "idpCertAlias@TypeHint" Text :> QueryParam "addGroupMemberships" Bool :> QueryParam "addGroupMemberships@TypeHint" Text :> QueryParam "path" (QueryList 'MultiParamArray (Text)) :> QueryParam "path@TypeHint" Text :> QueryParam "synchronizeAttributes" (QueryList 'MultiParamArray (Text)) :> QueryParam "synchronizeAttributes@TypeHint" Text :> QueryParam "clockTolerance" Int :> QueryParam "clockTolerance@TypeHint" Text :> QueryParam "groupMembershipAttribute" Text :> QueryParam "groupMembershipAttribute@TypeHint" Text :> QueryParam "idpUrl" Text :> QueryParam "idpUrl@TypeHint" Text :> QueryParam "logoutUrl" Text :> QueryParam "logoutUrl@TypeHint" Text :> QueryParam "serviceProviderEntityId" Text :> QueryParam "serviceProviderEntityId@TypeHint" Text :> QueryParam "assertionConsumerServiceURL" Text :> QueryParam "assertionConsumerServiceURL@TypeHint" Text :> QueryParam "handleLogout" Bool :> QueryParam "handleLogout@TypeHint" Text :> QueryParam "spPrivateKeyAlias" Text :> QueryParam "spPrivateKeyAlias@TypeHint" Text :> QueryParam "useEncryption" Bool :> QueryParam "useEncryption@TypeHint" Text :> QueryParam "nameIdFormat" Text :> QueryParam "nameIdFormat@TypeHint" Text :> QueryParam "digestMethod" Text :> QueryParam "digestMethod@TypeHint" Text :> QueryParam "signatureMethod" Text :> QueryParam "signatureMethod@TypeHint" Text :> QueryParam "userIntermediatePath" Text :> QueryParam "userIntermediatePath@TypeHint" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postConfigAdobeGraniteSamlAuthenticationHandler' route
+    :<|> Protected :> "apps" :> "system" :> "config" :> "org.apache.felix.http" :> QueryParam "org.apache.felix.https.nio" Bool :> QueryParam "org.apache.felix.https.nio@TypeHint" Text :> QueryParam "org.apache.felix.https.keystore" Text :> QueryParam "org.apache.felix.https.keystore@TypeHint" Text :> QueryParam "org.apache.felix.https.keystore.password" Text :> QueryParam "org.apache.felix.https.keystore.password@TypeHint" Text :> QueryParam "org.apache.felix.https.keystore.key" Text :> QueryParam "org.apache.felix.https.keystore.key@TypeHint" Text :> QueryParam "org.apache.felix.https.keystore.key.password" Text :> QueryParam "org.apache.felix.https.keystore.key.password@TypeHint" Text :> QueryParam "org.apache.felix.https.truststore" Text :> QueryParam "org.apache.felix.https.truststore@TypeHint" Text :> QueryParam "org.apache.felix.https.truststore.password" Text :> QueryParam "org.apache.felix.https.truststore.password@TypeHint" Text :> QueryParam "org.apache.felix.https.clientcertificate" Text :> QueryParam "org.apache.felix.https.clientcertificate@TypeHint" Text :> QueryParam "org.apache.felix.https.enable" Bool :> QueryParam "org.apache.felix.https.enable@TypeHint" Text :> QueryParam "org.osgi.service.http.port.secure" Text :> QueryParam "org.osgi.service.http.port.secure@TypeHint" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postConfigApacheFelixJettyBasedHttpService' route
+    :<|> Protected :> "apps" :> "system" :> "config" :> "org.apache.http.proxyconfigurator.config" :> QueryParam "proxy.host" Text :> QueryParam "proxy.host@TypeHint" Text :> QueryParam "proxy.port" Int :> QueryParam "proxy.port@TypeHint" Text :> QueryParam "proxy.exceptions" (QueryList 'MultiParamArray (Text)) :> QueryParam "proxy.exceptions@TypeHint" Text :> QueryParam "proxy.enabled" Bool :> QueryParam "proxy.enabled@TypeHint" Text :> QueryParam "proxy.user" Text :> QueryParam "proxy.user@TypeHint" Text :> QueryParam "proxy.password" Text :> QueryParam "proxy.password@TypeHint" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postConfigApacheHttpComponentsProxyConfiguration' route
+    :<|> Protected :> "apps" :> "system" :> "config" :> "org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet" :> QueryParam "alias" Text :> QueryParam "alias@TypeHint" Text :> QueryParam "dav.create-absolute-uri" Bool :> QueryParam "dav.create-absolute-uri@TypeHint" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postConfigApacheSlingDavExServlet' route
+    :<|> Protected :> "apps" :> "system" :> "config" :> "org.apache.sling.servlets.get.DefaultGetServlet" :> QueryParam "json.maximumresults" Text :> QueryParam "json.maximumresults@TypeHint" Text :> QueryParam "enable.html" Bool :> QueryParam "enable.html@TypeHint" Text :> QueryParam "enable.txt" Bool :> QueryParam "enable.txt@TypeHint" Text :> QueryParam "enable.xml" Bool :> QueryParam "enable.xml@TypeHint" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postConfigApacheSlingGetServlet' route
+    :<|> Protected :> "apps" :> "system" :> "config" :> "org.apache.sling.security.impl.ReferrerFilter" :> QueryParam "allow.empty" Bool :> QueryParam "allow.empty@TypeHint" Text :> QueryParam "allow.hosts" Text :> QueryParam "allow.hosts@TypeHint" Text :> QueryParam "allow.hosts.regexp" Text :> QueryParam "allow.hosts.regexp@TypeHint" Text :> QueryParam "filter.methods" Text :> QueryParam "filter.methods@TypeHint" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postConfigApacheSlingReferrerFilter' route
+    :<|> Protected :> "apps" :> "system" :> "config" :> Capture "configNodeName" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postConfigProperty' route
+    :<|> Protected :> Capture "path" Text :> Capture "name" Text :> QueryParam ":operation" Text :> QueryParam "deleteAuthorizable" Text :> ReqBody '[FormUrlEncoded] FormPostNode :> Verb 'POST 200 '[JSON] NoContent -- 'postNode' route
+    :<|> Protected :> Capture "path" Text :> "{name}.rw.html" :> QueryParam "addMembers" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postNodeRw' route
+    :<|> Protected :> Capture "path" Text :> QueryParam "jcr:primaryType" Text :> QueryParam ":name" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postPath' route
+    :<|> Protected :> "bin" :> "querybuilder.json" :> QueryParam "path" Text :> QueryParam "p.limit" Double :> QueryParam "1_property" Text :> QueryParam "1_property.value" Text :> Verb 'POST 200 '[JSON] Text -- 'postQuery' route
+    :<|> Protected :> "libs" :> "replication" :> "treeactivation.html" :> QueryParam "ignoredeactivated" Bool :> QueryParam "onlymodified" Bool :> QueryParam "path" Text :> QueryParam "cmd" Text :> Verb 'POST 200 '[JSON] NoContent -- 'postTreeActivation' route
+    :<|> Protected :> "libs" :> "granite" :> "security" :> "post" :> "truststore" :> QueryParam ":operation" Text :> QueryParam "newPassword" Text :> QueryParam "rePassword" Text :> QueryParam "keyStoreType" Text :> QueryParam "removeAlias" Text :> ReqBody '[FormUrlEncoded] FormPostTruststore :> Verb 'POST 200 '[JSON] Text -- 'postTruststore' route
+    :<|> Protected :> "etc" :> "truststore" :> ReqBody '[FormUrlEncoded] FormPostTruststorePKCS12 :> Verb 'POST 200 '[JSON] Text -- 'postTruststorePKCS12' route
+    :<|> Raw
 
 
 -- | Server or client configuration, specifying the host and port to query or serve on.
@@ -235,55 +256,64 @@ newtype AdobeExperienceManager(AEM)ClientError = AdobeExperienceManager(AEM)Clie
 -- The backend can be used both for the client and the server. The client generated from the AdobeExperienceManager(AEM) OpenAPI spec
 -- is a backend that executes actions by sending HTTP requests (see @createAdobeExperienceManager(AEM)Client@). Alternatively, provided
 -- a backend, the API can be served using @runAdobeExperienceManager(AEM)MiddlewareServer@.
-data AdobeExperienceManager(AEM)Backend m = AdobeExperienceManager(AEM)Backend
-  { getAemProductInfo :: m [Text]{- ^  -}
-  , getBundleInfo :: m BundleInfo{- ^  -}
-  , getConfigMgr :: m Text{- ^  -}
-  , postBundle :: Text -> Maybe Text -> m NoContent{- ^  -}
-  , postJmxRepository :: Text -> m NoContent{- ^  -}
-  , postSamlConfiguration :: Maybe Bool -> Maybe Bool -> Maybe Bool -> Maybe Text -> Maybe Text -> Maybe [Text] -> Maybe Int -> Maybe Text -> Maybe Text -> Maybe Bool -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Bool -> Maybe Bool -> Maybe Bool -> Maybe Text -> Maybe [Text] -> Maybe Text -> Maybe [Text] -> Maybe Bool -> Maybe Text -> Maybe Int -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe [Text] -> m SamlConfigurationInfo{- ^  -}
+data AdobeExperienceManager(AEM)Backend a m = AdobeExperienceManager(AEM)Backend
+  { getAemProductInfo :: a -> m [Text]{- ^  -}
+  , getBundleInfo :: a -> m BundleInfo{- ^  -}
+  , getConfigMgr :: a -> m Text{- ^  -}
+  , postBundle :: a -> Text -> Maybe Text -> m NoContent{- ^  -}
+  , postJmxRepository :: a -> Text -> m NoContent{- ^  -}
+  , postSamlConfiguration :: a -> Maybe Bool -> Maybe Bool -> Maybe Bool -> Maybe Text -> Maybe Text -> Maybe [Text] -> Maybe Int -> Maybe Text -> Maybe Text -> Maybe Bool -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Bool -> Maybe Bool -> Maybe Bool -> Maybe Text -> Maybe [Text] -> Maybe Text -> Maybe [Text] -> Maybe Bool -> Maybe Text -> Maybe Int -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe [Text] -> m SamlConfigurationInfo{- ^  -}
   , getLoginPage :: m Text{- ^  -}
-  , postCqActions :: Maybe Text -> Maybe Text -> m NoContent{- ^  -}
-  , getCrxdeStatus :: m Text{- ^  -}
-  , getInstallStatus :: m InstallStatus{- ^  -}
-  , getPackageManagerServlet :: m NoContent{- ^  -}
-  , postPackageService :: Maybe Text -> m Text{- ^  -}
-  , postPackageServiceJson :: Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Bool -> Maybe Bool -> FormPostPackageServiceJson -> m Text{- ^  -}
-  , postPackageUpdate :: Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> m Text{- ^  -}
-  , postSetPassword :: Maybe Text -> Maybe Text -> Maybe Text -> m Text{- ^  -}
-  , getAemHealthCheck :: Maybe Text -> Maybe Bool -> m Text{- ^  -}
-  , postConfigAemHealthCheckServlet :: Maybe [Text] -> Maybe Text -> m NoContent{- ^  -}
-  , postConfigAemPasswordReset :: Maybe [Text] -> Maybe Text -> m NoContent{- ^  -}
-  , sslSetup :: Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> FormSslSetup -> m Text{- ^  -}
-  , deleteAgent :: Text -> m NoContent{- ^  -}
-  , deleteNode :: Text -> Text -> m NoContent{- ^  -}
-  , getAgent :: Text -> m NoContent{- ^  -}
-  , getAgents :: m Text{- ^  -}
-  , getAuthorizableKeystore :: Text -> m KeystoreInfo{- ^  -}
-  , getKeystore :: Text -> Text -> m FilePath{- ^  -}
-  , getNode :: Text -> Text -> m NoContent{- ^  -}
-  , getPackage :: Text -> m FilePath{- ^  -}
-  , getPackageFilter :: Text -> m Text{- ^  -}
-  , getQuery :: Maybe Text -> Maybe Double -> Maybe Text -> Maybe Text -> m Text{- ^  -}
-  , getTruststore :: m FilePath{- ^  -}
-  , getTruststoreInfo :: m TruststoreInfo{- ^  -}
-  , postAgent :: Text -> Maybe Bool -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Bool -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Bool -> Maybe Bool -> Maybe Double -> Maybe Bool -> Maybe Text -> Maybe [Text] -> Maybe Text -> Maybe Text -> Maybe Bool -> Maybe Text -> Maybe Double -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Double -> Maybe Text -> Maybe Double -> Maybe Text -> Maybe Double -> Maybe Text -> Maybe Bool -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Bool -> Maybe Bool -> Maybe Bool -> Maybe Bool -> Maybe Bool -> Maybe Text -> Maybe Text -> Maybe Text -> m NoContent{- ^  -}
-  , postAuthorizableKeystore :: Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> FormPostAuthorizableKeystore -> m KeystoreInfo{- ^  -}
-  , postAuthorizables :: Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> m Text{- ^  -}
-  , postConfigAdobeGraniteSamlAuthenticationHandler :: Maybe Text -> Maybe Text -> Maybe Int -> Maybe Text -> Maybe Bool -> Maybe Text -> Maybe Bool -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe [Text] -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Bool -> Maybe Text -> Maybe [Text] -> Maybe Text -> Maybe [Text] -> Maybe Text -> Maybe Int -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Bool -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Bool -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> m NoContent{- ^  -}
-  , postConfigApacheFelixJettyBasedHttpService :: Maybe Bool -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Bool -> Maybe Text -> Maybe Text -> Maybe Text -> m NoContent{- ^  -}
-  , postConfigApacheHttpComponentsProxyConfiguration :: Maybe Text -> Maybe Text -> Maybe Int -> Maybe Text -> Maybe [Text] -> Maybe Text -> Maybe Bool -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> m NoContent{- ^  -}
-  , postConfigApacheSlingDavExServlet :: Maybe Text -> Maybe Text -> Maybe Bool -> Maybe Text -> m NoContent{- ^  -}
-  , postConfigApacheSlingGetServlet :: Maybe Text -> Maybe Text -> Maybe Bool -> Maybe Text -> Maybe Bool -> Maybe Text -> Maybe Bool -> Maybe Text -> m NoContent{- ^  -}
-  , postConfigApacheSlingReferrerFilter :: Maybe Bool -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> m NoContent{- ^  -}
-  , postConfigProperty :: Text -> m NoContent{- ^  -}
-  , postNode :: Text -> Text -> Maybe Text -> Maybe Text -> FormPostNode -> m NoContent{- ^  -}
-  , postNodeRw :: Text -> Maybe Text -> m NoContent{- ^  -}
-  , postPath :: Text -> Maybe Text -> Maybe Text -> m NoContent{- ^  -}
-  , postQuery :: Maybe Text -> Maybe Double -> Maybe Text -> Maybe Text -> m Text{- ^  -}
-  , postTreeActivation :: Maybe Bool -> Maybe Bool -> Maybe Text -> m NoContent{- ^  -}
-  , postTruststore :: Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> FormPostTruststore -> m Text{- ^  -}
-  , postTruststorePKCS12 :: FormPostTruststorePKCS12 -> m Text{- ^  -}
+  , postCqActions :: a -> Maybe Text -> Maybe Text -> m NoContent{- ^  -}
+  , getCrxdeStatus :: a -> m Text{- ^  -}
+  , getInstallStatus :: a -> m InstallStatus{- ^  -}
+  , getPackageManagerServlet :: a -> m NoContent{- ^  -}
+  , postPackageService :: a -> Maybe Text -> m Text{- ^  -}
+  , postPackageServiceJson :: a -> Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Bool -> Maybe Bool -> FormPostPackageServiceJson -> m Text{- ^  -}
+  , postPackageUpdate :: a -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> m Text{- ^  -}
+  , postSetPassword :: a -> Maybe Text -> Maybe Text -> Maybe Text -> m Text{- ^  -}
+  , getAemHealthCheck :: a -> Maybe Text -> Maybe Bool -> m Text{- ^  -}
+  , postConfigAemHealthCheckServlet :: a -> Maybe [Text] -> Maybe Text -> m NoContent{- ^  -}
+  , postConfigAemPasswordReset :: a -> Maybe [Text] -> Maybe Text -> m NoContent{- ^  -}
+  , sslSetup :: a -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> FormSslSetup -> m Text{- ^  -}
+  , deleteAgent :: a -> Text -> m NoContent{- ^  -}
+  , deleteNode :: a -> Text -> Text -> m NoContent{- ^  -}
+  , getAgent :: a -> Text -> m NoContent{- ^  -}
+  , getAgents :: a -> m Text{- ^  -}
+  , getAuthorizableKeystore :: a -> Text -> m KeystoreInfo{- ^  -}
+  , getKeystore :: a -> Text -> Text -> m FilePath{- ^  -}
+  , getNode :: a -> Text -> Text -> m NoContent{- ^  -}
+  , getPackage :: a -> Text -> m FilePath{- ^  -}
+  , getPackageFilter :: a -> Text -> m Text{- ^  -}
+  , getQuery :: a -> Maybe Text -> Maybe Double -> Maybe Text -> Maybe Text -> m Text{- ^  -}
+  , getTruststore :: a -> m FilePath{- ^  -}
+  , getTruststoreInfo :: a -> m TruststoreInfo{- ^  -}
+  , postAgent :: a -> Text -> Maybe Bool -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Bool -> Maybe Bool -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Bool -> Maybe Bool -> Maybe Double -> Maybe Bool -> Maybe Text -> Maybe [Text] -> Maybe Text -> Maybe Text -> Maybe Bool -> Maybe Text -> Maybe Double -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Double -> Maybe Text -> Maybe Double -> Maybe Text -> Maybe Double -> Maybe Text -> Maybe Bool -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Bool -> Maybe Bool -> Maybe Bool -> Maybe Bool -> Maybe Bool -> Maybe Text -> Maybe Text -> Maybe Text -> m NoContent{- ^  -}
+  , postAuthorizableKeystore :: a -> Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> FormPostAuthorizableKeystore -> m KeystoreInfo{- ^  -}
+  , postAuthorizables :: a -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> m Text{- ^  -}
+  , postConfigAdobeGraniteSamlAuthenticationHandler :: a -> Maybe Text -> Maybe Text -> Maybe Int -> Maybe Text -> Maybe Bool -> Maybe Text -> Maybe Bool -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe [Text] -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Bool -> Maybe Text -> Maybe [Text] -> Maybe Text -> Maybe [Text] -> Maybe Text -> Maybe Int -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Bool -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Bool -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> m NoContent{- ^  -}
+  , postConfigApacheFelixJettyBasedHttpService :: a -> Maybe Bool -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Bool -> Maybe Text -> Maybe Text -> Maybe Text -> m NoContent{- ^  -}
+  , postConfigApacheHttpComponentsProxyConfiguration :: a -> Maybe Text -> Maybe Text -> Maybe Int -> Maybe Text -> Maybe [Text] -> Maybe Text -> Maybe Bool -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> m NoContent{- ^  -}
+  , postConfigApacheSlingDavExServlet :: a -> Maybe Text -> Maybe Text -> Maybe Bool -> Maybe Text -> m NoContent{- ^  -}
+  , postConfigApacheSlingGetServlet :: a -> Maybe Text -> Maybe Text -> Maybe Bool -> Maybe Text -> Maybe Bool -> Maybe Text -> Maybe Bool -> Maybe Text -> m NoContent{- ^  -}
+  , postConfigApacheSlingReferrerFilter :: a -> Maybe Bool -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> m NoContent{- ^  -}
+  , postConfigProperty :: a -> Text -> m NoContent{- ^  -}
+  , postNode :: a -> Text -> Text -> Maybe Text -> Maybe Text -> FormPostNode -> m NoContent{- ^  -}
+  , postNodeRw :: a -> Text -> Maybe Text -> m NoContent{- ^  -}
+  , postPath :: a -> Text -> Maybe Text -> Maybe Text -> m NoContent{- ^  -}
+  , postQuery :: a -> Maybe Text -> Maybe Double -> Maybe Text -> Maybe Text -> m Text{- ^  -}
+  , postTreeActivation :: a -> Maybe Bool -> Maybe Bool -> Maybe Text -> Maybe Text -> m NoContent{- ^  -}
+  , postTruststore :: a -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> Maybe Text -> FormPostTruststore -> m Text{- ^  -}
+  , postTruststorePKCS12 :: a -> FormPostTruststorePKCS12 -> m Text{- ^  -}
+  }
+
+-- | Authentication settings for AdobeExperienceManager(AEM).
+-- lookupUser is used to retrieve a user given a header value. The data type can be specified by providing an
+-- type instance for AuthServerData. authError is a function that given a request returns a custom error that
+-- is returned when the header is not found.
+data AdobeExperienceManager(AEM)Auth = AdobeExperienceManager(AEM)Auth
+  { lookupUser :: BasicAuthData -> Handler AuthServer
+  , authError :: Request -> ServerError
   }
 
 newtype AdobeExperienceManager(AEM)Client a = AdobeExperienceManager(AEM)Client
@@ -304,7 +334,7 @@ instance Monad AdobeExperienceManager(AEM)Client where
 instance MonadIO AdobeExperienceManager(AEM)Client where
   liftIO io = AdobeExperienceManager(AEM)Client (\_ -> liftIO io)
 
-createAdobeExperienceManager(AEM)Client :: AdobeExperienceManager(AEM)Backend AdobeExperienceManager(AEM)Client
+createAdobeExperienceManager(AEM)Client :: AdobeExperienceManager(AEM)Backend AuthClient AdobeExperienceManager(AEM)Client
 createAdobeExperienceManager(AEM)Client = AdobeExperienceManager(AEM)Backend{..}
   where
     ((coerce -> getAemProductInfo) :<|>
@@ -387,26 +417,27 @@ requestMiddlewareId a = a
 -- | Run the AdobeExperienceManager(AEM) server at the provided host and port.
 runAdobeExperienceManager(AEM)Server
   :: (MonadIO m, MonadThrow m)
-  => Config -> AdobeExperienceManager(AEM)Backend (ExceptT ServerError IO) -> m ()
-runAdobeExperienceManager(AEM)Server config backend = runAdobeExperienceManager(AEM)MiddlewareServer config requestMiddlewareId backend
+  => Config -> AdobeExperienceManager(AEM)Auth -> AdobeExperienceManager(AEM)Backend AuthServer (ExceptT ServerError IO) -> m ()
+runAdobeExperienceManager(AEM)Server config auth backend = runAdobeExperienceManager(AEM)MiddlewareServer config requestMiddlewareId auth backend
 
 -- | Run the AdobeExperienceManager(AEM) server at the provided host and port.
 runAdobeExperienceManager(AEM)MiddlewareServer
   :: (MonadIO m, MonadThrow m)
-  => Config -> Middleware -> AdobeExperienceManager(AEM)Backend (ExceptT ServerError IO) -> m ()
-runAdobeExperienceManager(AEM)MiddlewareServer Config{..} middleware backend = do
+  => Config -> Middleware -> AdobeExperienceManager(AEM)Auth -> AdobeExperienceManager(AEM)Backend AuthServer (ExceptT ServerError IO) -> m ()
+runAdobeExperienceManager(AEM)MiddlewareServer Config{..} middleware auth backend = do
   url <- parseBaseUrl configUrl
   let warpSettings = Warp.defaultSettings
         & Warp.setPort (baseUrlPort url)
         & Warp.setHost (fromString $ baseUrlHost url)
-  liftIO $ Warp.runSettings warpSettings $ middleware $ serverWaiApplicationAdobeExperienceManager(AEM) backend
+  liftIO $ Warp.runSettings warpSettings $ middleware $ serverWaiApplicationAdobeExperienceManager(AEM) auth backend
 
 -- | Plain "Network.Wai" Application for the AdobeExperienceManager(AEM) server.
 --
 -- Can be used to implement e.g. tests that call the API without a full webserver.
-serverWaiApplicationAdobeExperienceManager(AEM) :: AdobeExperienceManager(AEM)Backend (ExceptT ServerError IO) -> Application
-serverWaiApplicationAdobeExperienceManager(AEM) backend = serve (Proxy :: Proxy AdobeExperienceManager(AEM)API) (serverFromBackend backend)
+serverWaiApplicationAdobeExperienceManager(AEM) :: AdobeExperienceManager(AEM)Auth -> AdobeExperienceManager(AEM)Backend AuthServer (ExceptT ServerError IO) -> Application
+serverWaiApplicationAdobeExperienceManager(AEM) auth backend = serveWithContextT (Proxy :: Proxy AdobeExperienceManager(AEM)API) context id (serverFromBackend backend)
   where
+    context = serverContext auth
     serverFromBackend AdobeExperienceManager(AEM)Backend{..} =
       (coerce getAemProductInfo :<|>
        coerce getBundleInfo :<|>
@@ -457,3 +488,26 @@ serverWaiApplicationAdobeExperienceManager(AEM) backend = serve (Proxy :: Proxy 
        coerce postTruststore :<|>
        coerce postTruststorePKCS12 :<|>
        serveDirectoryFileServer "static")
+
+-- Authentication is implemented with servants generalized authentication:
+-- https://docs.servant.dev/en/stable/tutorial/Authentication.html#generalized-authentication
+
+authHandler :: AdobeExperienceManager(AEM)Auth -> AuthHandler Request AuthServer
+authHandler AdobeExperienceManager(AEM)Auth{..} = mkAuthHandler handler
+  where
+    handler req = case lookup "Authorization" (requestHeaders req) of
+      Just header -> case extractBasicAuth header of
+        Just (user, password) -> lookupUser (BasicAuthData user password)
+        Nothing -> throwError (authError req)
+      Nothing -> throwError (authError req)
+
+type Protected = AuthProtect "basic"
+type AuthServer = AuthServerData Protected
+type AuthClient = AuthenticatedRequest Protected
+type instance AuthClientData Protected = BasicAuthData
+
+clientAuth :: BasicAuthData -> AuthClient
+clientAuth key = mkAuthenticatedRequest key basicAuthReq
+
+serverContext :: AdobeExperienceManager(AEM)Auth -> Context (AuthHandler Request AuthServer ': '[])
+serverContext auth = authHandler auth :. EmptyContext

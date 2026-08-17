@@ -3,7 +3,7 @@ Adobe Experience Manager (AEM) API
 
 Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
 
-API version: 3.5.0-pre.0
+API version: 3.7.1-pre.0
 Contact: opensource@shinesolutions.com
 */
 
@@ -13,44 +13,39 @@ package openapi
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io"
+	"net/http"
+	"net/url"
 	"strings"
 	"os"
 	"reflect"
 )
 
-// Linger please
-var (
-	_ _context.Context
-)
 
-// SlingApiService SlingApi service
-type SlingApiService service
+// SlingAPIService SlingAPI service
+type SlingAPIService service
 
 type ApiDeleteAgentRequest struct {
-	ctx _context.Context
-	ApiService *SlingApiService
+	ctx context.Context
+	ApiService *SlingAPIService
 	runmode string
 	name string
 }
 
-
-func (r ApiDeleteAgentRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteAgentRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteAgentExecute(r)
 }
 
 /*
 DeleteAgent Method for DeleteAgent
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param runmode
  @param name
  @return ApiDeleteAgentRequest
 */
-func (a *SlingApiService) DeleteAgent(ctx _context.Context, runmode string, name string) ApiDeleteAgentRequest {
+func (a *SlingAPIService) DeleteAgent(ctx context.Context, runmode string, name string) ApiDeleteAgentRequest {
 	return ApiDeleteAgentRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -60,27 +55,25 @@ func (a *SlingApiService) DeleteAgent(ctx _context.Context, runmode string, name
 }
 
 // Execute executes the request
-func (a *SlingApiService) DeleteAgentExecute(r ApiDeleteAgentRequest) (*_nethttp.Response, error) {
+func (a *SlingAPIService) DeleteAgentExecute(r ApiDeleteAgentRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingApiService.DeleteAgent")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingAPIService.DeleteAgent")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/etc/replication/agents.{runmode}/{name}"
-	localVarPath = strings.Replace(localVarPath, "{"+"runmode"+"}", _neturl.PathEscape(parameterToString(r.runmode, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(r.name, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"runmode"+"}", url.PathEscape(parameterValueToString(r.runmode, "runmode")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", url.PathEscape(parameterValueToString(r.name, "name")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -99,7 +92,7 @@ func (a *SlingApiService) DeleteAgentExecute(r ApiDeleteAgentRequest) (*_nethttp
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -109,15 +102,15 @@ func (a *SlingApiService) DeleteAgentExecute(r ApiDeleteAgentRequest) (*_nethttp
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -128,26 +121,25 @@ func (a *SlingApiService) DeleteAgentExecute(r ApiDeleteAgentRequest) (*_nethttp
 }
 
 type ApiDeleteNodeRequest struct {
-	ctx _context.Context
-	ApiService *SlingApiService
+	ctx context.Context
+	ApiService *SlingAPIService
 	path string
 	name string
 }
 
-
-func (r ApiDeleteNodeRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteNodeRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteNodeExecute(r)
 }
 
 /*
 DeleteNode Method for DeleteNode
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param path
  @param name
  @return ApiDeleteNodeRequest
 */
-func (a *SlingApiService) DeleteNode(ctx _context.Context, path string, name string) ApiDeleteNodeRequest {
+func (a *SlingAPIService) DeleteNode(ctx context.Context, path string, name string) ApiDeleteNodeRequest {
 	return ApiDeleteNodeRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -157,27 +149,25 @@ func (a *SlingApiService) DeleteNode(ctx _context.Context, path string, name str
 }
 
 // Execute executes the request
-func (a *SlingApiService) DeleteNodeExecute(r ApiDeleteNodeRequest) (*_nethttp.Response, error) {
+func (a *SlingAPIService) DeleteNodeExecute(r ApiDeleteNodeRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingApiService.DeleteNode")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingAPIService.DeleteNode")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/{path}/{name}"
-	localVarPath = strings.Replace(localVarPath, "{"+"path"+"}", _neturl.PathEscape(parameterToString(r.path, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(r.name, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"path"+"}", url.PathEscape(parameterValueToString(r.path, "path")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", url.PathEscape(parameterValueToString(r.name, "name")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -196,7 +186,7 @@ func (a *SlingApiService) DeleteNodeExecute(r ApiDeleteNodeRequest) (*_nethttp.R
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -206,15 +196,15 @@ func (a *SlingApiService) DeleteNodeExecute(r ApiDeleteNodeRequest) (*_nethttp.R
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -225,26 +215,25 @@ func (a *SlingApiService) DeleteNodeExecute(r ApiDeleteNodeRequest) (*_nethttp.R
 }
 
 type ApiGetAgentRequest struct {
-	ctx _context.Context
-	ApiService *SlingApiService
+	ctx context.Context
+	ApiService *SlingAPIService
 	runmode string
 	name string
 }
 
-
-func (r ApiGetAgentRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiGetAgentRequest) Execute() (*http.Response, error) {
 	return r.ApiService.GetAgentExecute(r)
 }
 
 /*
 GetAgent Method for GetAgent
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param runmode
  @param name
  @return ApiGetAgentRequest
 */
-func (a *SlingApiService) GetAgent(ctx _context.Context, runmode string, name string) ApiGetAgentRequest {
+func (a *SlingAPIService) GetAgent(ctx context.Context, runmode string, name string) ApiGetAgentRequest {
 	return ApiGetAgentRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -254,27 +243,25 @@ func (a *SlingApiService) GetAgent(ctx _context.Context, runmode string, name st
 }
 
 // Execute executes the request
-func (a *SlingApiService) GetAgentExecute(r ApiGetAgentRequest) (*_nethttp.Response, error) {
+func (a *SlingAPIService) GetAgentExecute(r ApiGetAgentRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingApiService.GetAgent")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingAPIService.GetAgent")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/etc/replication/agents.{runmode}/{name}"
-	localVarPath = strings.Replace(localVarPath, "{"+"runmode"+"}", _neturl.PathEscape(parameterToString(r.runmode, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(r.name, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"runmode"+"}", url.PathEscape(parameterValueToString(r.runmode, "runmode")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", url.PathEscape(parameterValueToString(r.name, "name")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -293,7 +280,7 @@ func (a *SlingApiService) GetAgentExecute(r ApiGetAgentRequest) (*_nethttp.Respo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -303,15 +290,15 @@ func (a *SlingApiService) GetAgentExecute(r ApiGetAgentRequest) (*_nethttp.Respo
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -322,24 +309,23 @@ func (a *SlingApiService) GetAgentExecute(r ApiGetAgentRequest) (*_nethttp.Respo
 }
 
 type ApiGetAgentsRequest struct {
-	ctx _context.Context
-	ApiService *SlingApiService
+	ctx context.Context
+	ApiService *SlingAPIService
 	runmode string
 }
 
-
-func (r ApiGetAgentsRequest) Execute() (string, *_nethttp.Response, error) {
+func (r ApiGetAgentsRequest) Execute() (string, *http.Response, error) {
 	return r.ApiService.GetAgentsExecute(r)
 }
 
 /*
 GetAgents Method for GetAgents
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param runmode
  @return ApiGetAgentsRequest
 */
-func (a *SlingApiService) GetAgents(ctx _context.Context, runmode string) ApiGetAgentsRequest {
+func (a *SlingAPIService) GetAgents(ctx context.Context, runmode string) ApiGetAgentsRequest {
 	return ApiGetAgentsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -349,27 +335,25 @@ func (a *SlingApiService) GetAgents(ctx _context.Context, runmode string) ApiGet
 
 // Execute executes the request
 //  @return string
-func (a *SlingApiService) GetAgentsExecute(r ApiGetAgentsRequest) (string, *_nethttp.Response, error) {
+func (a *SlingAPIService) GetAgentsExecute(r ApiGetAgentsRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 		localVarReturnValue  string
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingApiService.GetAgents")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingAPIService.GetAgents")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/etc/replication/agents.{runmode}.-1.json"
-	localVarPath = strings.Replace(localVarPath, "{"+"runmode"+"}", _neturl.PathEscape(parameterToString(r.runmode, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"runmode"+"}", url.PathEscape(parameterValueToString(r.runmode, "runmode")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -388,7 +372,7 @@ func (a *SlingApiService) GetAgentsExecute(r ApiGetAgentsRequest) (string, *_net
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -398,15 +382,15 @@ func (a *SlingApiService) GetAgentsExecute(r ApiGetAgentsRequest) (string, *_net
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -416,13 +400,14 @@ func (a *SlingApiService) GetAgentsExecute(r ApiGetAgentsRequest) (string, *_net
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -433,26 +418,25 @@ func (a *SlingApiService) GetAgentsExecute(r ApiGetAgentsRequest) (string, *_net
 }
 
 type ApiGetAuthorizableKeystoreRequest struct {
-	ctx _context.Context
-	ApiService *SlingApiService
+	ctx context.Context
+	ApiService *SlingAPIService
 	intermediatePath string
 	authorizableId string
 }
 
-
-func (r ApiGetAuthorizableKeystoreRequest) Execute() (KeystoreInfo, *_nethttp.Response, error) {
+func (r ApiGetAuthorizableKeystoreRequest) Execute() (*KeystoreInfo, *http.Response, error) {
 	return r.ApiService.GetAuthorizableKeystoreExecute(r)
 }
 
 /*
 GetAuthorizableKeystore Method for GetAuthorizableKeystore
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param intermediatePath
  @param authorizableId
  @return ApiGetAuthorizableKeystoreRequest
 */
-func (a *SlingApiService) GetAuthorizableKeystore(ctx _context.Context, intermediatePath string, authorizableId string) ApiGetAuthorizableKeystoreRequest {
+func (a *SlingAPIService) GetAuthorizableKeystore(ctx context.Context, intermediatePath string, authorizableId string) ApiGetAuthorizableKeystoreRequest {
 	return ApiGetAuthorizableKeystoreRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -463,28 +447,26 @@ func (a *SlingApiService) GetAuthorizableKeystore(ctx _context.Context, intermed
 
 // Execute executes the request
 //  @return KeystoreInfo
-func (a *SlingApiService) GetAuthorizableKeystoreExecute(r ApiGetAuthorizableKeystoreRequest) (KeystoreInfo, *_nethttp.Response, error) {
+func (a *SlingAPIService) GetAuthorizableKeystoreExecute(r ApiGetAuthorizableKeystoreRequest) (*KeystoreInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  KeystoreInfo
+		formFiles            []formFile
+		localVarReturnValue  *KeystoreInfo
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingApiService.GetAuthorizableKeystore")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingAPIService.GetAuthorizableKeystore")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/{intermediatePath}/{authorizableId}.ks.json"
-	localVarPath = strings.Replace(localVarPath, "{"+"intermediatePath"+"}", _neturl.PathEscape(parameterToString(r.intermediatePath, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"authorizableId"+"}", _neturl.PathEscape(parameterToString(r.authorizableId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"intermediatePath"+"}", url.PathEscape(parameterValueToString(r.intermediatePath, "intermediatePath")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"authorizableId"+"}", url.PathEscape(parameterValueToString(r.authorizableId, "authorizableId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -503,7 +485,7 @@ func (a *SlingApiService) GetAuthorizableKeystoreExecute(r ApiGetAuthorizableKey
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -513,15 +495,15 @@ func (a *SlingApiService) GetAuthorizableKeystoreExecute(r ApiGetAuthorizableKey
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -531,13 +513,14 @@ func (a *SlingApiService) GetAuthorizableKeystoreExecute(r ApiGetAuthorizableKey
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -548,26 +531,25 @@ func (a *SlingApiService) GetAuthorizableKeystoreExecute(r ApiGetAuthorizableKey
 }
 
 type ApiGetKeystoreRequest struct {
-	ctx _context.Context
-	ApiService *SlingApiService
+	ctx context.Context
+	ApiService *SlingAPIService
 	intermediatePath string
 	authorizableId string
 }
 
-
-func (r ApiGetKeystoreRequest) Execute() (*os.File, *_nethttp.Response, error) {
+func (r ApiGetKeystoreRequest) Execute() (**os.File, *http.Response, error) {
 	return r.ApiService.GetKeystoreExecute(r)
 }
 
 /*
 GetKeystore Method for GetKeystore
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param intermediatePath
  @param authorizableId
  @return ApiGetKeystoreRequest
 */
-func (a *SlingApiService) GetKeystore(ctx _context.Context, intermediatePath string, authorizableId string) ApiGetKeystoreRequest {
+func (a *SlingAPIService) GetKeystore(ctx context.Context, intermediatePath string, authorizableId string) ApiGetKeystoreRequest {
 	return ApiGetKeystoreRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -578,28 +560,26 @@ func (a *SlingApiService) GetKeystore(ctx _context.Context, intermediatePath str
 
 // Execute executes the request
 //  @return *os.File
-func (a *SlingApiService) GetKeystoreExecute(r ApiGetKeystoreRequest) (*os.File, *_nethttp.Response, error) {
+func (a *SlingAPIService) GetKeystoreExecute(r ApiGetKeystoreRequest) (**os.File, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  *os.File
+		formFiles            []formFile
+		localVarReturnValue  **os.File
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingApiService.GetKeystore")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingAPIService.GetKeystore")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/{intermediatePath}/{authorizableId}/keystore/store.p12"
-	localVarPath = strings.Replace(localVarPath, "{"+"intermediatePath"+"}", _neturl.PathEscape(parameterToString(r.intermediatePath, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"authorizableId"+"}", _neturl.PathEscape(parameterToString(r.authorizableId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"intermediatePath"+"}", url.PathEscape(parameterValueToString(r.intermediatePath, "intermediatePath")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"authorizableId"+"}", url.PathEscape(parameterValueToString(r.authorizableId, "authorizableId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -618,7 +598,7 @@ func (a *SlingApiService) GetKeystoreExecute(r ApiGetKeystoreRequest) (*os.File,
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -628,15 +608,15 @@ func (a *SlingApiService) GetKeystoreExecute(r ApiGetKeystoreRequest) (*os.File,
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -646,13 +626,14 @@ func (a *SlingApiService) GetKeystoreExecute(r ApiGetKeystoreRequest) (*os.File,
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -663,26 +644,25 @@ func (a *SlingApiService) GetKeystoreExecute(r ApiGetKeystoreRequest) (*os.File,
 }
 
 type ApiGetNodeRequest struct {
-	ctx _context.Context
-	ApiService *SlingApiService
+	ctx context.Context
+	ApiService *SlingAPIService
 	path string
 	name string
 }
 
-
-func (r ApiGetNodeRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiGetNodeRequest) Execute() (*http.Response, error) {
 	return r.ApiService.GetNodeExecute(r)
 }
 
 /*
 GetNode Method for GetNode
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param path
  @param name
  @return ApiGetNodeRequest
 */
-func (a *SlingApiService) GetNode(ctx _context.Context, path string, name string) ApiGetNodeRequest {
+func (a *SlingAPIService) GetNode(ctx context.Context, path string, name string) ApiGetNodeRequest {
 	return ApiGetNodeRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -692,27 +672,25 @@ func (a *SlingApiService) GetNode(ctx _context.Context, path string, name string
 }
 
 // Execute executes the request
-func (a *SlingApiService) GetNodeExecute(r ApiGetNodeRequest) (*_nethttp.Response, error) {
+func (a *SlingAPIService) GetNodeExecute(r ApiGetNodeRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingApiService.GetNode")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingAPIService.GetNode")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/{path}/{name}"
-	localVarPath = strings.Replace(localVarPath, "{"+"path"+"}", _neturl.PathEscape(parameterToString(r.path, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(r.name, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"path"+"}", url.PathEscape(parameterValueToString(r.path, "path")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", url.PathEscape(parameterValueToString(r.name, "name")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -731,7 +709,7 @@ func (a *SlingApiService) GetNodeExecute(r ApiGetNodeRequest) (*_nethttp.Respons
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -741,15 +719,15 @@ func (a *SlingApiService) GetNodeExecute(r ApiGetNodeRequest) (*_nethttp.Respons
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -760,28 +738,27 @@ func (a *SlingApiService) GetNodeExecute(r ApiGetNodeRequest) (*_nethttp.Respons
 }
 
 type ApiGetPackageRequest struct {
-	ctx _context.Context
-	ApiService *SlingApiService
+	ctx context.Context
+	ApiService *SlingAPIService
 	group string
 	name string
 	version string
 }
 
-
-func (r ApiGetPackageRequest) Execute() (*os.File, *_nethttp.Response, error) {
+func (r ApiGetPackageRequest) Execute() (**os.File, *http.Response, error) {
 	return r.ApiService.GetPackageExecute(r)
 }
 
 /*
 GetPackage Method for GetPackage
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param group
  @param name
  @param version
  @return ApiGetPackageRequest
 */
-func (a *SlingApiService) GetPackage(ctx _context.Context, group string, name string, version string) ApiGetPackageRequest {
+func (a *SlingAPIService) GetPackage(ctx context.Context, group string, name string, version string) ApiGetPackageRequest {
 	return ApiGetPackageRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -793,29 +770,27 @@ func (a *SlingApiService) GetPackage(ctx _context.Context, group string, name st
 
 // Execute executes the request
 //  @return *os.File
-func (a *SlingApiService) GetPackageExecute(r ApiGetPackageRequest) (*os.File, *_nethttp.Response, error) {
+func (a *SlingAPIService) GetPackageExecute(r ApiGetPackageRequest) (**os.File, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  *os.File
+		formFiles            []formFile
+		localVarReturnValue  **os.File
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingApiService.GetPackage")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingAPIService.GetPackage")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/etc/packages/{group}/{name}-{version}.zip"
-	localVarPath = strings.Replace(localVarPath, "{"+"group"+"}", _neturl.PathEscape(parameterToString(r.group, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(r.name, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", _neturl.PathEscape(parameterToString(r.version, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"group"+"}", url.PathEscape(parameterValueToString(r.group, "group")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", url.PathEscape(parameterValueToString(r.name, "name")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", url.PathEscape(parameterValueToString(r.version, "version")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -834,7 +809,7 @@ func (a *SlingApiService) GetPackageExecute(r ApiGetPackageRequest) (*os.File, *
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -844,15 +819,15 @@ func (a *SlingApiService) GetPackageExecute(r ApiGetPackageRequest) (*os.File, *
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -862,13 +837,14 @@ func (a *SlingApiService) GetPackageExecute(r ApiGetPackageRequest) (*os.File, *
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -879,28 +855,27 @@ func (a *SlingApiService) GetPackageExecute(r ApiGetPackageRequest) (*os.File, *
 }
 
 type ApiGetPackageFilterRequest struct {
-	ctx _context.Context
-	ApiService *SlingApiService
+	ctx context.Context
+	ApiService *SlingAPIService
 	group string
 	name string
 	version string
 }
 
-
-func (r ApiGetPackageFilterRequest) Execute() (string, *_nethttp.Response, error) {
+func (r ApiGetPackageFilterRequest) Execute() (string, *http.Response, error) {
 	return r.ApiService.GetPackageFilterExecute(r)
 }
 
 /*
 GetPackageFilter Method for GetPackageFilter
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param group
  @param name
  @param version
  @return ApiGetPackageFilterRequest
 */
-func (a *SlingApiService) GetPackageFilter(ctx _context.Context, group string, name string, version string) ApiGetPackageFilterRequest {
+func (a *SlingAPIService) GetPackageFilter(ctx context.Context, group string, name string, version string) ApiGetPackageFilterRequest {
 	return ApiGetPackageFilterRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -912,29 +887,27 @@ func (a *SlingApiService) GetPackageFilter(ctx _context.Context, group string, n
 
 // Execute executes the request
 //  @return string
-func (a *SlingApiService) GetPackageFilterExecute(r ApiGetPackageFilterRequest) (string, *_nethttp.Response, error) {
+func (a *SlingAPIService) GetPackageFilterExecute(r ApiGetPackageFilterRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 		localVarReturnValue  string
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingApiService.GetPackageFilter")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingAPIService.GetPackageFilter")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json"
-	localVarPath = strings.Replace(localVarPath, "{"+"group"+"}", _neturl.PathEscape(parameterToString(r.group, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(r.name, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", _neturl.PathEscape(parameterToString(r.version, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"group"+"}", url.PathEscape(parameterValueToString(r.group, "group")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", url.PathEscape(parameterValueToString(r.name, "name")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", url.PathEscape(parameterValueToString(r.version, "version")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -953,7 +926,7 @@ func (a *SlingApiService) GetPackageFilterExecute(r ApiGetPackageFilterRequest) 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -963,15 +936,15 @@ func (a *SlingApiService) GetPackageFilterExecute(r ApiGetPackageFilterRequest) 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -981,13 +954,14 @@ func (a *SlingApiService) GetPackageFilterExecute(r ApiGetPackageFilterRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -998,8 +972,8 @@ func (a *SlingApiService) GetPackageFilterExecute(r ApiGetPackageFilterRequest) 
 }
 
 type ApiGetQueryRequest struct {
-	ctx _context.Context
-	ApiService *SlingApiService
+	ctx context.Context
+	ApiService *SlingAPIService
 	path *string
 	pLimit *float32
 	var1Property *string
@@ -1010,30 +984,33 @@ func (r ApiGetQueryRequest) Path(path string) ApiGetQueryRequest {
 	r.path = &path
 	return r
 }
+
 func (r ApiGetQueryRequest) PLimit(pLimit float32) ApiGetQueryRequest {
 	r.pLimit = &pLimit
 	return r
 }
+
 func (r ApiGetQueryRequest) Var1Property(var1Property string) ApiGetQueryRequest {
 	r.var1Property = &var1Property
 	return r
 }
+
 func (r ApiGetQueryRequest) Var1PropertyValue(var1PropertyValue string) ApiGetQueryRequest {
 	r.var1PropertyValue = &var1PropertyValue
 	return r
 }
 
-func (r ApiGetQueryRequest) Execute() (string, *_nethttp.Response, error) {
+func (r ApiGetQueryRequest) Execute() (string, *http.Response, error) {
 	return r.ApiService.GetQueryExecute(r)
 }
 
 /*
 GetQuery Method for GetQuery
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetQueryRequest
 */
-func (a *SlingApiService) GetQuery(ctx _context.Context) ApiGetQueryRequest {
+func (a *SlingAPIService) GetQuery(ctx context.Context) ApiGetQueryRequest {
 	return ApiGetQueryRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1042,26 +1019,24 @@ func (a *SlingApiService) GetQuery(ctx _context.Context) ApiGetQueryRequest {
 
 // Execute executes the request
 //  @return string
-func (a *SlingApiService) GetQueryExecute(r ApiGetQueryRequest) (string, *_nethttp.Response, error) {
+func (a *SlingAPIService) GetQueryExecute(r ApiGetQueryRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 		localVarReturnValue  string
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingApiService.GetQuery")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingAPIService.GetQuery")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/bin/querybuilder.json"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.path == nil {
 		return localVarReturnValue, nil, reportError("path is required and must be specified")
 	}
@@ -1075,10 +1050,10 @@ func (a *SlingApiService) GetQueryExecute(r ApiGetQueryRequest) (string, *_netht
 		return localVarReturnValue, nil, reportError("var1PropertyValue is required and must be specified")
 	}
 
-	localVarQueryParams.Add("path", parameterToString(*r.path, ""))
-	localVarQueryParams.Add("p.limit", parameterToString(*r.pLimit, ""))
-	localVarQueryParams.Add("1_property", parameterToString(*r.var1Property, ""))
-	localVarQueryParams.Add("1_property.value", parameterToString(*r.var1PropertyValue, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "path", r.path, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "p.limit", r.pLimit, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "1_property", r.var1Property, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "1_property.value", r.var1PropertyValue, "form", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1096,7 +1071,7 @@ func (a *SlingApiService) GetQueryExecute(r ApiGetQueryRequest) (string, *_netht
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1106,15 +1081,15 @@ func (a *SlingApiService) GetQueryExecute(r ApiGetQueryRequest) (string, *_netht
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1124,13 +1099,14 @@ func (a *SlingApiService) GetQueryExecute(r ApiGetQueryRequest) (string, *_netht
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1141,22 +1117,21 @@ func (a *SlingApiService) GetQueryExecute(r ApiGetQueryRequest) (string, *_netht
 }
 
 type ApiGetTruststoreRequest struct {
-	ctx _context.Context
-	ApiService *SlingApiService
+	ctx context.Context
+	ApiService *SlingAPIService
 }
 
-
-func (r ApiGetTruststoreRequest) Execute() (*os.File, *_nethttp.Response, error) {
+func (r ApiGetTruststoreRequest) Execute() (**os.File, *http.Response, error) {
 	return r.ApiService.GetTruststoreExecute(r)
 }
 
 /*
 GetTruststore Method for GetTruststore
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetTruststoreRequest
 */
-func (a *SlingApiService) GetTruststore(ctx _context.Context) ApiGetTruststoreRequest {
+func (a *SlingAPIService) GetTruststore(ctx context.Context) ApiGetTruststoreRequest {
 	return ApiGetTruststoreRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1165,26 +1140,24 @@ func (a *SlingApiService) GetTruststore(ctx _context.Context) ApiGetTruststoreRe
 
 // Execute executes the request
 //  @return *os.File
-func (a *SlingApiService) GetTruststoreExecute(r ApiGetTruststoreRequest) (*os.File, *_nethttp.Response, error) {
+func (a *SlingAPIService) GetTruststoreExecute(r ApiGetTruststoreRequest) (**os.File, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  *os.File
+		formFiles            []formFile
+		localVarReturnValue  **os.File
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingApiService.GetTruststore")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingAPIService.GetTruststore")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/etc/truststore/truststore.p12"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1203,7 +1176,7 @@ func (a *SlingApiService) GetTruststoreExecute(r ApiGetTruststoreRequest) (*os.F
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1213,15 +1186,15 @@ func (a *SlingApiService) GetTruststoreExecute(r ApiGetTruststoreRequest) (*os.F
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1231,13 +1204,14 @@ func (a *SlingApiService) GetTruststoreExecute(r ApiGetTruststoreRequest) (*os.F
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1248,22 +1222,21 @@ func (a *SlingApiService) GetTruststoreExecute(r ApiGetTruststoreRequest) (*os.F
 }
 
 type ApiGetTruststoreInfoRequest struct {
-	ctx _context.Context
-	ApiService *SlingApiService
+	ctx context.Context
+	ApiService *SlingAPIService
 }
 
-
-func (r ApiGetTruststoreInfoRequest) Execute() (TruststoreInfo, *_nethttp.Response, error) {
+func (r ApiGetTruststoreInfoRequest) Execute() (*TruststoreInfo, *http.Response, error) {
 	return r.ApiService.GetTruststoreInfoExecute(r)
 }
 
 /*
 GetTruststoreInfo Method for GetTruststoreInfo
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetTruststoreInfoRequest
 */
-func (a *SlingApiService) GetTruststoreInfo(ctx _context.Context) ApiGetTruststoreInfoRequest {
+func (a *SlingAPIService) GetTruststoreInfo(ctx context.Context) ApiGetTruststoreInfoRequest {
 	return ApiGetTruststoreInfoRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1272,26 +1245,24 @@ func (a *SlingApiService) GetTruststoreInfo(ctx _context.Context) ApiGetTruststo
 
 // Execute executes the request
 //  @return TruststoreInfo
-func (a *SlingApiService) GetTruststoreInfoExecute(r ApiGetTruststoreInfoRequest) (TruststoreInfo, *_nethttp.Response, error) {
+func (a *SlingAPIService) GetTruststoreInfoExecute(r ApiGetTruststoreInfoRequest) (*TruststoreInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TruststoreInfo
+		formFiles            []formFile
+		localVarReturnValue  *TruststoreInfo
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingApiService.GetTruststoreInfo")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingAPIService.GetTruststoreInfo")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/libs/granite/security/truststore.json"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1310,7 +1281,7 @@ func (a *SlingApiService) GetTruststoreInfoExecute(r ApiGetTruststoreInfoRequest
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1320,15 +1291,15 @@ func (a *SlingApiService) GetTruststoreInfoExecute(r ApiGetTruststoreInfoRequest
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1338,13 +1309,14 @@ func (a *SlingApiService) GetTruststoreInfoExecute(r ApiGetTruststoreInfoRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1355,276 +1327,331 @@ func (a *SlingApiService) GetTruststoreInfoExecute(r ApiGetTruststoreInfoRequest
 }
 
 type ApiPostAgentRequest struct {
-	ctx _context.Context
-	ApiService *SlingApiService
+	ctx context.Context
+	ApiService *SlingAPIService
 	runmode string
 	name string
-	jcrcontentCqdistribute *bool
-	jcrcontentCqdistributeTypeHint *string
-	jcrcontentCqname *string
-	jcrcontentCqtemplate *string
-	jcrcontentEnabled *bool
-	jcrcontentJcrdescription *string
-	jcrcontentJcrlastModified *string
-	jcrcontentJcrlastModifiedBy *string
-	jcrcontentJcrmixinTypes *string
-	jcrcontentJcrtitle *string
-	jcrcontentLogLevel *string
-	jcrcontentNoStatusUpdate *bool
-	jcrcontentNoVersioning *bool
-	jcrcontentProtocolConnectTimeout *float32
-	jcrcontentProtocolHTTPConnectionClosed *bool
-	jcrcontentProtocolHTTPExpired *string
-	jcrcontentProtocolHTTPHeaders *[]string
-	jcrcontentProtocolHTTPHeadersTypeHint *string
-	jcrcontentProtocolHTTPMethod *string
-	jcrcontentProtocolHTTPSRelaxed *bool
-	jcrcontentProtocolInterface *string
-	jcrcontentProtocolSocketTimeout *float32
-	jcrcontentProtocolVersion *string
-	jcrcontentProxyNTLMDomain *string
-	jcrcontentProxyNTLMHost *string
-	jcrcontentProxyHost *string
-	jcrcontentProxyPassword *string
-	jcrcontentProxyPort *float32
-	jcrcontentProxyUser *string
-	jcrcontentQueueBatchMaxSize *float32
-	jcrcontentQueueBatchMode *string
-	jcrcontentQueueBatchWaitTime *float32
-	jcrcontentRetryDelay *string
-	jcrcontentReverseReplication *bool
-	jcrcontentSerializationType *string
-	jcrcontentSlingresourceType *string
-	jcrcontentSsl *string
-	jcrcontentTransportNTLMDomain *string
-	jcrcontentTransportNTLMHost *string
-	jcrcontentTransportPassword *string
-	jcrcontentTransportUri *string
-	jcrcontentTransportUser *string
-	jcrcontentTriggerDistribute *bool
-	jcrcontentTriggerModified *bool
-	jcrcontentTriggerOnOffTime *bool
-	jcrcontentTriggerReceive *bool
-	jcrcontentTriggerSpecific *bool
-	jcrcontentUserId *string
-	jcrprimaryType *string
+	jcrContentCqDistribute *bool
+	jcrContentCqDistributeTypeHint *string
+	jcrContentCqName *string
+	jcrContentCqTemplate *string
+	jcrContentAliasUpdate *bool
+	jcrContentEnabled *bool
+	jcrContentJcrDescription *string
+	jcrContentJcrLastModified *string
+	jcrContentJcrLastModifiedBy *string
+	jcrContentJcrMixinTypes *string
+	jcrContentJcrTitle *string
+	jcrContentLogLevel *string
+	jcrContentNoStatusUpdate *bool
+	jcrContentNoVersioning *bool
+	jcrContentProtocolConnectTimeout *float32
+	jcrContentProtocolHTTPConnectionClosed *bool
+	jcrContentProtocolHTTPExpired *string
+	jcrContentProtocolHTTPHeaders *[]string
+	jcrContentProtocolHTTPHeadersTypeHint *string
+	jcrContentProtocolHTTPMethod *string
+	jcrContentProtocolHTTPSRelaxed *bool
+	jcrContentProtocolInterface *string
+	jcrContentProtocolSocketTimeout *float32
+	jcrContentProtocolVersion *string
+	jcrContentProxyNTLMDomain *string
+	jcrContentProxyNTLMHost *string
+	jcrContentProxyHost *string
+	jcrContentProxyPassword *string
+	jcrContentProxyPort *float32
+	jcrContentProxyUser *string
+	jcrContentQueueBatchMaxSize *float32
+	jcrContentQueueBatchMode *string
+	jcrContentQueueBatchWaitTime *float32
+	jcrContentRetryDelay *string
+	jcrContentReverseReplication *bool
+	jcrContentSerializationType *string
+	jcrContentSlingResourceType *string
+	jcrContentSsl *string
+	jcrContentTransportNTLMDomain *string
+	jcrContentTransportNTLMHost *string
+	jcrContentTransportPassword *string
+	jcrContentTransportUri *string
+	jcrContentTransportUser *string
+	jcrContentTriggerDistribute *bool
+	jcrContentTriggerModified *bool
+	jcrContentTriggerOnOffTime *bool
+	jcrContentTriggerReceive *bool
+	jcrContentTriggerSpecific *bool
+	jcrContentUserId *string
+	jcrPrimaryType *string
 	operation *string
 }
 
-func (r ApiPostAgentRequest) JcrcontentCqdistribute(jcrcontentCqdistribute bool) ApiPostAgentRequest {
-	r.jcrcontentCqdistribute = &jcrcontentCqdistribute
+func (r ApiPostAgentRequest) JcrContentCqDistribute(jcrContentCqDistribute bool) ApiPostAgentRequest {
+	r.jcrContentCqDistribute = &jcrContentCqDistribute
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentCqdistributeTypeHint(jcrcontentCqdistributeTypeHint string) ApiPostAgentRequest {
-	r.jcrcontentCqdistributeTypeHint = &jcrcontentCqdistributeTypeHint
+
+func (r ApiPostAgentRequest) JcrContentCqDistributeTypeHint(jcrContentCqDistributeTypeHint string) ApiPostAgentRequest {
+	r.jcrContentCqDistributeTypeHint = &jcrContentCqDistributeTypeHint
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentCqname(jcrcontentCqname string) ApiPostAgentRequest {
-	r.jcrcontentCqname = &jcrcontentCqname
+
+func (r ApiPostAgentRequest) JcrContentCqName(jcrContentCqName string) ApiPostAgentRequest {
+	r.jcrContentCqName = &jcrContentCqName
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentCqtemplate(jcrcontentCqtemplate string) ApiPostAgentRequest {
-	r.jcrcontentCqtemplate = &jcrcontentCqtemplate
+
+func (r ApiPostAgentRequest) JcrContentCqTemplate(jcrContentCqTemplate string) ApiPostAgentRequest {
+	r.jcrContentCqTemplate = &jcrContentCqTemplate
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentEnabled(jcrcontentEnabled bool) ApiPostAgentRequest {
-	r.jcrcontentEnabled = &jcrcontentEnabled
+
+func (r ApiPostAgentRequest) JcrContentAliasUpdate(jcrContentAliasUpdate bool) ApiPostAgentRequest {
+	r.jcrContentAliasUpdate = &jcrContentAliasUpdate
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentJcrdescription(jcrcontentJcrdescription string) ApiPostAgentRequest {
-	r.jcrcontentJcrdescription = &jcrcontentJcrdescription
+
+func (r ApiPostAgentRequest) JcrContentEnabled(jcrContentEnabled bool) ApiPostAgentRequest {
+	r.jcrContentEnabled = &jcrContentEnabled
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentJcrlastModified(jcrcontentJcrlastModified string) ApiPostAgentRequest {
-	r.jcrcontentJcrlastModified = &jcrcontentJcrlastModified
+
+func (r ApiPostAgentRequest) JcrContentJcrDescription(jcrContentJcrDescription string) ApiPostAgentRequest {
+	r.jcrContentJcrDescription = &jcrContentJcrDescription
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentJcrlastModifiedBy(jcrcontentJcrlastModifiedBy string) ApiPostAgentRequest {
-	r.jcrcontentJcrlastModifiedBy = &jcrcontentJcrlastModifiedBy
+
+func (r ApiPostAgentRequest) JcrContentJcrLastModified(jcrContentJcrLastModified string) ApiPostAgentRequest {
+	r.jcrContentJcrLastModified = &jcrContentJcrLastModified
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentJcrmixinTypes(jcrcontentJcrmixinTypes string) ApiPostAgentRequest {
-	r.jcrcontentJcrmixinTypes = &jcrcontentJcrmixinTypes
+
+func (r ApiPostAgentRequest) JcrContentJcrLastModifiedBy(jcrContentJcrLastModifiedBy string) ApiPostAgentRequest {
+	r.jcrContentJcrLastModifiedBy = &jcrContentJcrLastModifiedBy
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentJcrtitle(jcrcontentJcrtitle string) ApiPostAgentRequest {
-	r.jcrcontentJcrtitle = &jcrcontentJcrtitle
+
+func (r ApiPostAgentRequest) JcrContentJcrMixinTypes(jcrContentJcrMixinTypes string) ApiPostAgentRequest {
+	r.jcrContentJcrMixinTypes = &jcrContentJcrMixinTypes
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentLogLevel(jcrcontentLogLevel string) ApiPostAgentRequest {
-	r.jcrcontentLogLevel = &jcrcontentLogLevel
+
+func (r ApiPostAgentRequest) JcrContentJcrTitle(jcrContentJcrTitle string) ApiPostAgentRequest {
+	r.jcrContentJcrTitle = &jcrContentJcrTitle
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentNoStatusUpdate(jcrcontentNoStatusUpdate bool) ApiPostAgentRequest {
-	r.jcrcontentNoStatusUpdate = &jcrcontentNoStatusUpdate
+
+func (r ApiPostAgentRequest) JcrContentLogLevel(jcrContentLogLevel string) ApiPostAgentRequest {
+	r.jcrContentLogLevel = &jcrContentLogLevel
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentNoVersioning(jcrcontentNoVersioning bool) ApiPostAgentRequest {
-	r.jcrcontentNoVersioning = &jcrcontentNoVersioning
+
+func (r ApiPostAgentRequest) JcrContentNoStatusUpdate(jcrContentNoStatusUpdate bool) ApiPostAgentRequest {
+	r.jcrContentNoStatusUpdate = &jcrContentNoStatusUpdate
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentProtocolConnectTimeout(jcrcontentProtocolConnectTimeout float32) ApiPostAgentRequest {
-	r.jcrcontentProtocolConnectTimeout = &jcrcontentProtocolConnectTimeout
+
+func (r ApiPostAgentRequest) JcrContentNoVersioning(jcrContentNoVersioning bool) ApiPostAgentRequest {
+	r.jcrContentNoVersioning = &jcrContentNoVersioning
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentProtocolHTTPConnectionClosed(jcrcontentProtocolHTTPConnectionClosed bool) ApiPostAgentRequest {
-	r.jcrcontentProtocolHTTPConnectionClosed = &jcrcontentProtocolHTTPConnectionClosed
+
+func (r ApiPostAgentRequest) JcrContentProtocolConnectTimeout(jcrContentProtocolConnectTimeout float32) ApiPostAgentRequest {
+	r.jcrContentProtocolConnectTimeout = &jcrContentProtocolConnectTimeout
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentProtocolHTTPExpired(jcrcontentProtocolHTTPExpired string) ApiPostAgentRequest {
-	r.jcrcontentProtocolHTTPExpired = &jcrcontentProtocolHTTPExpired
+
+func (r ApiPostAgentRequest) JcrContentProtocolHTTPConnectionClosed(jcrContentProtocolHTTPConnectionClosed bool) ApiPostAgentRequest {
+	r.jcrContentProtocolHTTPConnectionClosed = &jcrContentProtocolHTTPConnectionClosed
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentProtocolHTTPHeaders(jcrcontentProtocolHTTPHeaders []string) ApiPostAgentRequest {
-	r.jcrcontentProtocolHTTPHeaders = &jcrcontentProtocolHTTPHeaders
+
+func (r ApiPostAgentRequest) JcrContentProtocolHTTPExpired(jcrContentProtocolHTTPExpired string) ApiPostAgentRequest {
+	r.jcrContentProtocolHTTPExpired = &jcrContentProtocolHTTPExpired
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentProtocolHTTPHeadersTypeHint(jcrcontentProtocolHTTPHeadersTypeHint string) ApiPostAgentRequest {
-	r.jcrcontentProtocolHTTPHeadersTypeHint = &jcrcontentProtocolHTTPHeadersTypeHint
+
+func (r ApiPostAgentRequest) JcrContentProtocolHTTPHeaders(jcrContentProtocolHTTPHeaders []string) ApiPostAgentRequest {
+	r.jcrContentProtocolHTTPHeaders = &jcrContentProtocolHTTPHeaders
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentProtocolHTTPMethod(jcrcontentProtocolHTTPMethod string) ApiPostAgentRequest {
-	r.jcrcontentProtocolHTTPMethod = &jcrcontentProtocolHTTPMethod
+
+func (r ApiPostAgentRequest) JcrContentProtocolHTTPHeadersTypeHint(jcrContentProtocolHTTPHeadersTypeHint string) ApiPostAgentRequest {
+	r.jcrContentProtocolHTTPHeadersTypeHint = &jcrContentProtocolHTTPHeadersTypeHint
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentProtocolHTTPSRelaxed(jcrcontentProtocolHTTPSRelaxed bool) ApiPostAgentRequest {
-	r.jcrcontentProtocolHTTPSRelaxed = &jcrcontentProtocolHTTPSRelaxed
+
+func (r ApiPostAgentRequest) JcrContentProtocolHTTPMethod(jcrContentProtocolHTTPMethod string) ApiPostAgentRequest {
+	r.jcrContentProtocolHTTPMethod = &jcrContentProtocolHTTPMethod
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentProtocolInterface(jcrcontentProtocolInterface string) ApiPostAgentRequest {
-	r.jcrcontentProtocolInterface = &jcrcontentProtocolInterface
+
+func (r ApiPostAgentRequest) JcrContentProtocolHTTPSRelaxed(jcrContentProtocolHTTPSRelaxed bool) ApiPostAgentRequest {
+	r.jcrContentProtocolHTTPSRelaxed = &jcrContentProtocolHTTPSRelaxed
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentProtocolSocketTimeout(jcrcontentProtocolSocketTimeout float32) ApiPostAgentRequest {
-	r.jcrcontentProtocolSocketTimeout = &jcrcontentProtocolSocketTimeout
+
+func (r ApiPostAgentRequest) JcrContentProtocolInterface(jcrContentProtocolInterface string) ApiPostAgentRequest {
+	r.jcrContentProtocolInterface = &jcrContentProtocolInterface
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentProtocolVersion(jcrcontentProtocolVersion string) ApiPostAgentRequest {
-	r.jcrcontentProtocolVersion = &jcrcontentProtocolVersion
+
+func (r ApiPostAgentRequest) JcrContentProtocolSocketTimeout(jcrContentProtocolSocketTimeout float32) ApiPostAgentRequest {
+	r.jcrContentProtocolSocketTimeout = &jcrContentProtocolSocketTimeout
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentProxyNTLMDomain(jcrcontentProxyNTLMDomain string) ApiPostAgentRequest {
-	r.jcrcontentProxyNTLMDomain = &jcrcontentProxyNTLMDomain
+
+func (r ApiPostAgentRequest) JcrContentProtocolVersion(jcrContentProtocolVersion string) ApiPostAgentRequest {
+	r.jcrContentProtocolVersion = &jcrContentProtocolVersion
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentProxyNTLMHost(jcrcontentProxyNTLMHost string) ApiPostAgentRequest {
-	r.jcrcontentProxyNTLMHost = &jcrcontentProxyNTLMHost
+
+func (r ApiPostAgentRequest) JcrContentProxyNTLMDomain(jcrContentProxyNTLMDomain string) ApiPostAgentRequest {
+	r.jcrContentProxyNTLMDomain = &jcrContentProxyNTLMDomain
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentProxyHost(jcrcontentProxyHost string) ApiPostAgentRequest {
-	r.jcrcontentProxyHost = &jcrcontentProxyHost
+
+func (r ApiPostAgentRequest) JcrContentProxyNTLMHost(jcrContentProxyNTLMHost string) ApiPostAgentRequest {
+	r.jcrContentProxyNTLMHost = &jcrContentProxyNTLMHost
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentProxyPassword(jcrcontentProxyPassword string) ApiPostAgentRequest {
-	r.jcrcontentProxyPassword = &jcrcontentProxyPassword
+
+func (r ApiPostAgentRequest) JcrContentProxyHost(jcrContentProxyHost string) ApiPostAgentRequest {
+	r.jcrContentProxyHost = &jcrContentProxyHost
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentProxyPort(jcrcontentProxyPort float32) ApiPostAgentRequest {
-	r.jcrcontentProxyPort = &jcrcontentProxyPort
+
+func (r ApiPostAgentRequest) JcrContentProxyPassword(jcrContentProxyPassword string) ApiPostAgentRequest {
+	r.jcrContentProxyPassword = &jcrContentProxyPassword
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentProxyUser(jcrcontentProxyUser string) ApiPostAgentRequest {
-	r.jcrcontentProxyUser = &jcrcontentProxyUser
+
+func (r ApiPostAgentRequest) JcrContentProxyPort(jcrContentProxyPort float32) ApiPostAgentRequest {
+	r.jcrContentProxyPort = &jcrContentProxyPort
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentQueueBatchMaxSize(jcrcontentQueueBatchMaxSize float32) ApiPostAgentRequest {
-	r.jcrcontentQueueBatchMaxSize = &jcrcontentQueueBatchMaxSize
+
+func (r ApiPostAgentRequest) JcrContentProxyUser(jcrContentProxyUser string) ApiPostAgentRequest {
+	r.jcrContentProxyUser = &jcrContentProxyUser
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentQueueBatchMode(jcrcontentQueueBatchMode string) ApiPostAgentRequest {
-	r.jcrcontentQueueBatchMode = &jcrcontentQueueBatchMode
+
+func (r ApiPostAgentRequest) JcrContentQueueBatchMaxSize(jcrContentQueueBatchMaxSize float32) ApiPostAgentRequest {
+	r.jcrContentQueueBatchMaxSize = &jcrContentQueueBatchMaxSize
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentQueueBatchWaitTime(jcrcontentQueueBatchWaitTime float32) ApiPostAgentRequest {
-	r.jcrcontentQueueBatchWaitTime = &jcrcontentQueueBatchWaitTime
+
+func (r ApiPostAgentRequest) JcrContentQueueBatchMode(jcrContentQueueBatchMode string) ApiPostAgentRequest {
+	r.jcrContentQueueBatchMode = &jcrContentQueueBatchMode
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentRetryDelay(jcrcontentRetryDelay string) ApiPostAgentRequest {
-	r.jcrcontentRetryDelay = &jcrcontentRetryDelay
+
+func (r ApiPostAgentRequest) JcrContentQueueBatchWaitTime(jcrContentQueueBatchWaitTime float32) ApiPostAgentRequest {
+	r.jcrContentQueueBatchWaitTime = &jcrContentQueueBatchWaitTime
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentReverseReplication(jcrcontentReverseReplication bool) ApiPostAgentRequest {
-	r.jcrcontentReverseReplication = &jcrcontentReverseReplication
+
+func (r ApiPostAgentRequest) JcrContentRetryDelay(jcrContentRetryDelay string) ApiPostAgentRequest {
+	r.jcrContentRetryDelay = &jcrContentRetryDelay
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentSerializationType(jcrcontentSerializationType string) ApiPostAgentRequest {
-	r.jcrcontentSerializationType = &jcrcontentSerializationType
+
+func (r ApiPostAgentRequest) JcrContentReverseReplication(jcrContentReverseReplication bool) ApiPostAgentRequest {
+	r.jcrContentReverseReplication = &jcrContentReverseReplication
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentSlingresourceType(jcrcontentSlingresourceType string) ApiPostAgentRequest {
-	r.jcrcontentSlingresourceType = &jcrcontentSlingresourceType
+
+func (r ApiPostAgentRequest) JcrContentSerializationType(jcrContentSerializationType string) ApiPostAgentRequest {
+	r.jcrContentSerializationType = &jcrContentSerializationType
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentSsl(jcrcontentSsl string) ApiPostAgentRequest {
-	r.jcrcontentSsl = &jcrcontentSsl
+
+func (r ApiPostAgentRequest) JcrContentSlingResourceType(jcrContentSlingResourceType string) ApiPostAgentRequest {
+	r.jcrContentSlingResourceType = &jcrContentSlingResourceType
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentTransportNTLMDomain(jcrcontentTransportNTLMDomain string) ApiPostAgentRequest {
-	r.jcrcontentTransportNTLMDomain = &jcrcontentTransportNTLMDomain
+
+func (r ApiPostAgentRequest) JcrContentSsl(jcrContentSsl string) ApiPostAgentRequest {
+	r.jcrContentSsl = &jcrContentSsl
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentTransportNTLMHost(jcrcontentTransportNTLMHost string) ApiPostAgentRequest {
-	r.jcrcontentTransportNTLMHost = &jcrcontentTransportNTLMHost
+
+func (r ApiPostAgentRequest) JcrContentTransportNTLMDomain(jcrContentTransportNTLMDomain string) ApiPostAgentRequest {
+	r.jcrContentTransportNTLMDomain = &jcrContentTransportNTLMDomain
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentTransportPassword(jcrcontentTransportPassword string) ApiPostAgentRequest {
-	r.jcrcontentTransportPassword = &jcrcontentTransportPassword
+
+func (r ApiPostAgentRequest) JcrContentTransportNTLMHost(jcrContentTransportNTLMHost string) ApiPostAgentRequest {
+	r.jcrContentTransportNTLMHost = &jcrContentTransportNTLMHost
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentTransportUri(jcrcontentTransportUri string) ApiPostAgentRequest {
-	r.jcrcontentTransportUri = &jcrcontentTransportUri
+
+func (r ApiPostAgentRequest) JcrContentTransportPassword(jcrContentTransportPassword string) ApiPostAgentRequest {
+	r.jcrContentTransportPassword = &jcrContentTransportPassword
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentTransportUser(jcrcontentTransportUser string) ApiPostAgentRequest {
-	r.jcrcontentTransportUser = &jcrcontentTransportUser
+
+func (r ApiPostAgentRequest) JcrContentTransportUri(jcrContentTransportUri string) ApiPostAgentRequest {
+	r.jcrContentTransportUri = &jcrContentTransportUri
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentTriggerDistribute(jcrcontentTriggerDistribute bool) ApiPostAgentRequest {
-	r.jcrcontentTriggerDistribute = &jcrcontentTriggerDistribute
+
+func (r ApiPostAgentRequest) JcrContentTransportUser(jcrContentTransportUser string) ApiPostAgentRequest {
+	r.jcrContentTransportUser = &jcrContentTransportUser
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentTriggerModified(jcrcontentTriggerModified bool) ApiPostAgentRequest {
-	r.jcrcontentTriggerModified = &jcrcontentTriggerModified
+
+func (r ApiPostAgentRequest) JcrContentTriggerDistribute(jcrContentTriggerDistribute bool) ApiPostAgentRequest {
+	r.jcrContentTriggerDistribute = &jcrContentTriggerDistribute
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentTriggerOnOffTime(jcrcontentTriggerOnOffTime bool) ApiPostAgentRequest {
-	r.jcrcontentTriggerOnOffTime = &jcrcontentTriggerOnOffTime
+
+func (r ApiPostAgentRequest) JcrContentTriggerModified(jcrContentTriggerModified bool) ApiPostAgentRequest {
+	r.jcrContentTriggerModified = &jcrContentTriggerModified
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentTriggerReceive(jcrcontentTriggerReceive bool) ApiPostAgentRequest {
-	r.jcrcontentTriggerReceive = &jcrcontentTriggerReceive
+
+func (r ApiPostAgentRequest) JcrContentTriggerOnOffTime(jcrContentTriggerOnOffTime bool) ApiPostAgentRequest {
+	r.jcrContentTriggerOnOffTime = &jcrContentTriggerOnOffTime
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentTriggerSpecific(jcrcontentTriggerSpecific bool) ApiPostAgentRequest {
-	r.jcrcontentTriggerSpecific = &jcrcontentTriggerSpecific
+
+func (r ApiPostAgentRequest) JcrContentTriggerReceive(jcrContentTriggerReceive bool) ApiPostAgentRequest {
+	r.jcrContentTriggerReceive = &jcrContentTriggerReceive
 	return r
 }
-func (r ApiPostAgentRequest) JcrcontentUserId(jcrcontentUserId string) ApiPostAgentRequest {
-	r.jcrcontentUserId = &jcrcontentUserId
+
+func (r ApiPostAgentRequest) JcrContentTriggerSpecific(jcrContentTriggerSpecific bool) ApiPostAgentRequest {
+	r.jcrContentTriggerSpecific = &jcrContentTriggerSpecific
 	return r
 }
-func (r ApiPostAgentRequest) JcrprimaryType(jcrprimaryType string) ApiPostAgentRequest {
-	r.jcrprimaryType = &jcrprimaryType
+
+func (r ApiPostAgentRequest) JcrContentUserId(jcrContentUserId string) ApiPostAgentRequest {
+	r.jcrContentUserId = &jcrContentUserId
 	return r
 }
+
+func (r ApiPostAgentRequest) JcrPrimaryType(jcrPrimaryType string) ApiPostAgentRequest {
+	r.jcrPrimaryType = &jcrPrimaryType
+	return r
+}
+
 func (r ApiPostAgentRequest) Operation(operation string) ApiPostAgentRequest {
 	r.operation = &operation
 	return r
 }
 
-func (r ApiPostAgentRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiPostAgentRequest) Execute() (*http.Response, error) {
 	return r.ApiService.PostAgentExecute(r)
 }
 
 /*
 PostAgent Method for PostAgent
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param runmode
  @param name
  @return ApiPostAgentRequest
 */
-func (a *SlingApiService) PostAgent(ctx _context.Context, runmode string, name string) ApiPostAgentRequest {
+func (a *SlingAPIService) PostAgent(ctx context.Context, runmode string, name string) ApiPostAgentRequest {
 	return ApiPostAgentRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1634,185 +1661,186 @@ func (a *SlingApiService) PostAgent(ctx _context.Context, runmode string, name s
 }
 
 // Execute executes the request
-func (a *SlingApiService) PostAgentExecute(r ApiPostAgentRequest) (*_nethttp.Response, error) {
+func (a *SlingAPIService) PostAgentExecute(r ApiPostAgentRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingApiService.PostAgent")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingAPIService.PostAgent")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/etc/replication/agents.{runmode}/{name}"
-	localVarPath = strings.Replace(localVarPath, "{"+"runmode"+"}", _neturl.PathEscape(parameterToString(r.runmode, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(r.name, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"runmode"+"}", url.PathEscape(parameterValueToString(r.runmode, "runmode")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", url.PathEscape(parameterValueToString(r.name, "name")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
-	if r.jcrcontentCqdistribute != nil {
-		localVarQueryParams.Add("jcr:content/cq:distribute", parameterToString(*r.jcrcontentCqdistribute, ""))
+	if r.jcrContentCqDistribute != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/cq:distribute", r.jcrContentCqDistribute, "form", "")
 	}
-	if r.jcrcontentCqdistributeTypeHint != nil {
-		localVarQueryParams.Add("jcr:content/cq:distribute@TypeHint", parameterToString(*r.jcrcontentCqdistributeTypeHint, ""))
+	if r.jcrContentCqDistributeTypeHint != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/cq:distribute@TypeHint", r.jcrContentCqDistributeTypeHint, "form", "")
 	}
-	if r.jcrcontentCqname != nil {
-		localVarQueryParams.Add("jcr:content/cq:name", parameterToString(*r.jcrcontentCqname, ""))
+	if r.jcrContentCqName != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/cq:name", r.jcrContentCqName, "form", "")
 	}
-	if r.jcrcontentCqtemplate != nil {
-		localVarQueryParams.Add("jcr:content/cq:template", parameterToString(*r.jcrcontentCqtemplate, ""))
+	if r.jcrContentCqTemplate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/cq:template", r.jcrContentCqTemplate, "form", "")
 	}
-	if r.jcrcontentEnabled != nil {
-		localVarQueryParams.Add("jcr:content/enabled", parameterToString(*r.jcrcontentEnabled, ""))
+	if r.jcrContentAliasUpdate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/aliasUpdate", r.jcrContentAliasUpdate, "form", "")
 	}
-	if r.jcrcontentJcrdescription != nil {
-		localVarQueryParams.Add("jcr:content/jcr:description", parameterToString(*r.jcrcontentJcrdescription, ""))
+	if r.jcrContentEnabled != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/enabled", r.jcrContentEnabled, "form", "")
 	}
-	if r.jcrcontentJcrlastModified != nil {
-		localVarQueryParams.Add("jcr:content/jcr:lastModified", parameterToString(*r.jcrcontentJcrlastModified, ""))
+	if r.jcrContentJcrDescription != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/jcr:description", r.jcrContentJcrDescription, "form", "")
 	}
-	if r.jcrcontentJcrlastModifiedBy != nil {
-		localVarQueryParams.Add("jcr:content/jcr:lastModifiedBy", parameterToString(*r.jcrcontentJcrlastModifiedBy, ""))
+	if r.jcrContentJcrLastModified != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/jcr:lastModified", r.jcrContentJcrLastModified, "form", "")
 	}
-	if r.jcrcontentJcrmixinTypes != nil {
-		localVarQueryParams.Add("jcr:content/jcr:mixinTypes", parameterToString(*r.jcrcontentJcrmixinTypes, ""))
+	if r.jcrContentJcrLastModifiedBy != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/jcr:lastModifiedBy", r.jcrContentJcrLastModifiedBy, "form", "")
 	}
-	if r.jcrcontentJcrtitle != nil {
-		localVarQueryParams.Add("jcr:content/jcr:title", parameterToString(*r.jcrcontentJcrtitle, ""))
+	if r.jcrContentJcrMixinTypes != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/jcr:mixinTypes", r.jcrContentJcrMixinTypes, "form", "")
 	}
-	if r.jcrcontentLogLevel != nil {
-		localVarQueryParams.Add("jcr:content/logLevel", parameterToString(*r.jcrcontentLogLevel, ""))
+	if r.jcrContentJcrTitle != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/jcr:title", r.jcrContentJcrTitle, "form", "")
 	}
-	if r.jcrcontentNoStatusUpdate != nil {
-		localVarQueryParams.Add("jcr:content/noStatusUpdate", parameterToString(*r.jcrcontentNoStatusUpdate, ""))
+	if r.jcrContentLogLevel != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/logLevel", r.jcrContentLogLevel, "form", "")
 	}
-	if r.jcrcontentNoVersioning != nil {
-		localVarQueryParams.Add("jcr:content/noVersioning", parameterToString(*r.jcrcontentNoVersioning, ""))
+	if r.jcrContentNoStatusUpdate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/noStatusUpdate", r.jcrContentNoStatusUpdate, "form", "")
 	}
-	if r.jcrcontentProtocolConnectTimeout != nil {
-		localVarQueryParams.Add("jcr:content/protocolConnectTimeout", parameterToString(*r.jcrcontentProtocolConnectTimeout, ""))
+	if r.jcrContentNoVersioning != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/noVersioning", r.jcrContentNoVersioning, "form", "")
 	}
-	if r.jcrcontentProtocolHTTPConnectionClosed != nil {
-		localVarQueryParams.Add("jcr:content/protocolHTTPConnectionClosed", parameterToString(*r.jcrcontentProtocolHTTPConnectionClosed, ""))
+	if r.jcrContentProtocolConnectTimeout != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/protocolConnectTimeout", r.jcrContentProtocolConnectTimeout, "form", "")
 	}
-	if r.jcrcontentProtocolHTTPExpired != nil {
-		localVarQueryParams.Add("jcr:content/protocolHTTPExpired", parameterToString(*r.jcrcontentProtocolHTTPExpired, ""))
+	if r.jcrContentProtocolHTTPConnectionClosed != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/protocolHTTPConnectionClosed", r.jcrContentProtocolHTTPConnectionClosed, "form", "")
 	}
-	if r.jcrcontentProtocolHTTPHeaders != nil {
-		t := *r.jcrcontentProtocolHTTPHeaders
+	if r.jcrContentProtocolHTTPExpired != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/protocolHTTPExpired", r.jcrContentProtocolHTTPExpired, "form", "")
+	}
+	if r.jcrContentProtocolHTTPHeaders != nil {
+		t := *r.jcrContentProtocolHTTPHeaders
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("jcr:content/protocolHTTPHeaders", parameterToString(s.Index(i), "multi"))
+				parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/protocolHTTPHeaders", s.Index(i).Interface(), "form", "multi")
 			}
 		} else {
-			localVarQueryParams.Add("jcr:content/protocolHTTPHeaders", parameterToString(t, "multi"))
+			parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/protocolHTTPHeaders", t, "form", "multi")
 		}
 	}
-	if r.jcrcontentProtocolHTTPHeadersTypeHint != nil {
-		localVarQueryParams.Add("jcr:content/protocolHTTPHeaders@TypeHint", parameterToString(*r.jcrcontentProtocolHTTPHeadersTypeHint, ""))
+	if r.jcrContentProtocolHTTPHeadersTypeHint != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/protocolHTTPHeaders@TypeHint", r.jcrContentProtocolHTTPHeadersTypeHint, "form", "")
 	}
-	if r.jcrcontentProtocolHTTPMethod != nil {
-		localVarQueryParams.Add("jcr:content/protocolHTTPMethod", parameterToString(*r.jcrcontentProtocolHTTPMethod, ""))
+	if r.jcrContentProtocolHTTPMethod != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/protocolHTTPMethod", r.jcrContentProtocolHTTPMethod, "form", "")
 	}
-	if r.jcrcontentProtocolHTTPSRelaxed != nil {
-		localVarQueryParams.Add("jcr:content/protocolHTTPSRelaxed", parameterToString(*r.jcrcontentProtocolHTTPSRelaxed, ""))
+	if r.jcrContentProtocolHTTPSRelaxed != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/protocolHTTPSRelaxed", r.jcrContentProtocolHTTPSRelaxed, "form", "")
 	}
-	if r.jcrcontentProtocolInterface != nil {
-		localVarQueryParams.Add("jcr:content/protocolInterface", parameterToString(*r.jcrcontentProtocolInterface, ""))
+	if r.jcrContentProtocolInterface != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/protocolInterface", r.jcrContentProtocolInterface, "form", "")
 	}
-	if r.jcrcontentProtocolSocketTimeout != nil {
-		localVarQueryParams.Add("jcr:content/protocolSocketTimeout", parameterToString(*r.jcrcontentProtocolSocketTimeout, ""))
+	if r.jcrContentProtocolSocketTimeout != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/protocolSocketTimeout", r.jcrContentProtocolSocketTimeout, "form", "")
 	}
-	if r.jcrcontentProtocolVersion != nil {
-		localVarQueryParams.Add("jcr:content/protocolVersion", parameterToString(*r.jcrcontentProtocolVersion, ""))
+	if r.jcrContentProtocolVersion != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/protocolVersion", r.jcrContentProtocolVersion, "form", "")
 	}
-	if r.jcrcontentProxyNTLMDomain != nil {
-		localVarQueryParams.Add("jcr:content/proxyNTLMDomain", parameterToString(*r.jcrcontentProxyNTLMDomain, ""))
+	if r.jcrContentProxyNTLMDomain != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/proxyNTLMDomain", r.jcrContentProxyNTLMDomain, "form", "")
 	}
-	if r.jcrcontentProxyNTLMHost != nil {
-		localVarQueryParams.Add("jcr:content/proxyNTLMHost", parameterToString(*r.jcrcontentProxyNTLMHost, ""))
+	if r.jcrContentProxyNTLMHost != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/proxyNTLMHost", r.jcrContentProxyNTLMHost, "form", "")
 	}
-	if r.jcrcontentProxyHost != nil {
-		localVarQueryParams.Add("jcr:content/proxyHost", parameterToString(*r.jcrcontentProxyHost, ""))
+	if r.jcrContentProxyHost != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/proxyHost", r.jcrContentProxyHost, "form", "")
 	}
-	if r.jcrcontentProxyPassword != nil {
-		localVarQueryParams.Add("jcr:content/proxyPassword", parameterToString(*r.jcrcontentProxyPassword, ""))
+	if r.jcrContentProxyPassword != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/proxyPassword", r.jcrContentProxyPassword, "form", "")
 	}
-	if r.jcrcontentProxyPort != nil {
-		localVarQueryParams.Add("jcr:content/proxyPort", parameterToString(*r.jcrcontentProxyPort, ""))
+	if r.jcrContentProxyPort != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/proxyPort", r.jcrContentProxyPort, "form", "")
 	}
-	if r.jcrcontentProxyUser != nil {
-		localVarQueryParams.Add("jcr:content/proxyUser", parameterToString(*r.jcrcontentProxyUser, ""))
+	if r.jcrContentProxyUser != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/proxyUser", r.jcrContentProxyUser, "form", "")
 	}
-	if r.jcrcontentQueueBatchMaxSize != nil {
-		localVarQueryParams.Add("jcr:content/queueBatchMaxSize", parameterToString(*r.jcrcontentQueueBatchMaxSize, ""))
+	if r.jcrContentQueueBatchMaxSize != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/queueBatchMaxSize", r.jcrContentQueueBatchMaxSize, "form", "")
 	}
-	if r.jcrcontentQueueBatchMode != nil {
-		localVarQueryParams.Add("jcr:content/queueBatchMode", parameterToString(*r.jcrcontentQueueBatchMode, ""))
+	if r.jcrContentQueueBatchMode != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/queueBatchMode", r.jcrContentQueueBatchMode, "form", "")
 	}
-	if r.jcrcontentQueueBatchWaitTime != nil {
-		localVarQueryParams.Add("jcr:content/queueBatchWaitTime", parameterToString(*r.jcrcontentQueueBatchWaitTime, ""))
+	if r.jcrContentQueueBatchWaitTime != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/queueBatchWaitTime", r.jcrContentQueueBatchWaitTime, "form", "")
 	}
-	if r.jcrcontentRetryDelay != nil {
-		localVarQueryParams.Add("jcr:content/retryDelay", parameterToString(*r.jcrcontentRetryDelay, ""))
+	if r.jcrContentRetryDelay != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/retryDelay", r.jcrContentRetryDelay, "form", "")
 	}
-	if r.jcrcontentReverseReplication != nil {
-		localVarQueryParams.Add("jcr:content/reverseReplication", parameterToString(*r.jcrcontentReverseReplication, ""))
+	if r.jcrContentReverseReplication != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/reverseReplication", r.jcrContentReverseReplication, "form", "")
 	}
-	if r.jcrcontentSerializationType != nil {
-		localVarQueryParams.Add("jcr:content/serializationType", parameterToString(*r.jcrcontentSerializationType, ""))
+	if r.jcrContentSerializationType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/serializationType", r.jcrContentSerializationType, "form", "")
 	}
-	if r.jcrcontentSlingresourceType != nil {
-		localVarQueryParams.Add("jcr:content/sling:resourceType", parameterToString(*r.jcrcontentSlingresourceType, ""))
+	if r.jcrContentSlingResourceType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/sling:resourceType", r.jcrContentSlingResourceType, "form", "")
 	}
-	if r.jcrcontentSsl != nil {
-		localVarQueryParams.Add("jcr:content/ssl", parameterToString(*r.jcrcontentSsl, ""))
+	if r.jcrContentSsl != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/ssl", r.jcrContentSsl, "form", "")
 	}
-	if r.jcrcontentTransportNTLMDomain != nil {
-		localVarQueryParams.Add("jcr:content/transportNTLMDomain", parameterToString(*r.jcrcontentTransportNTLMDomain, ""))
+	if r.jcrContentTransportNTLMDomain != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/transportNTLMDomain", r.jcrContentTransportNTLMDomain, "form", "")
 	}
-	if r.jcrcontentTransportNTLMHost != nil {
-		localVarQueryParams.Add("jcr:content/transportNTLMHost", parameterToString(*r.jcrcontentTransportNTLMHost, ""))
+	if r.jcrContentTransportNTLMHost != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/transportNTLMHost", r.jcrContentTransportNTLMHost, "form", "")
 	}
-	if r.jcrcontentTransportPassword != nil {
-		localVarQueryParams.Add("jcr:content/transportPassword", parameterToString(*r.jcrcontentTransportPassword, ""))
+	if r.jcrContentTransportPassword != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/transportPassword", r.jcrContentTransportPassword, "form", "")
 	}
-	if r.jcrcontentTransportUri != nil {
-		localVarQueryParams.Add("jcr:content/transportUri", parameterToString(*r.jcrcontentTransportUri, ""))
+	if r.jcrContentTransportUri != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/transportUri", r.jcrContentTransportUri, "form", "")
 	}
-	if r.jcrcontentTransportUser != nil {
-		localVarQueryParams.Add("jcr:content/transportUser", parameterToString(*r.jcrcontentTransportUser, ""))
+	if r.jcrContentTransportUser != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/transportUser", r.jcrContentTransportUser, "form", "")
 	}
-	if r.jcrcontentTriggerDistribute != nil {
-		localVarQueryParams.Add("jcr:content/triggerDistribute", parameterToString(*r.jcrcontentTriggerDistribute, ""))
+	if r.jcrContentTriggerDistribute != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/triggerDistribute", r.jcrContentTriggerDistribute, "form", "")
 	}
-	if r.jcrcontentTriggerModified != nil {
-		localVarQueryParams.Add("jcr:content/triggerModified", parameterToString(*r.jcrcontentTriggerModified, ""))
+	if r.jcrContentTriggerModified != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/triggerModified", r.jcrContentTriggerModified, "form", "")
 	}
-	if r.jcrcontentTriggerOnOffTime != nil {
-		localVarQueryParams.Add("jcr:content/triggerOnOffTime", parameterToString(*r.jcrcontentTriggerOnOffTime, ""))
+	if r.jcrContentTriggerOnOffTime != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/triggerOnOffTime", r.jcrContentTriggerOnOffTime, "form", "")
 	}
-	if r.jcrcontentTriggerReceive != nil {
-		localVarQueryParams.Add("jcr:content/triggerReceive", parameterToString(*r.jcrcontentTriggerReceive, ""))
+	if r.jcrContentTriggerReceive != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/triggerReceive", r.jcrContentTriggerReceive, "form", "")
 	}
-	if r.jcrcontentTriggerSpecific != nil {
-		localVarQueryParams.Add("jcr:content/triggerSpecific", parameterToString(*r.jcrcontentTriggerSpecific, ""))
+	if r.jcrContentTriggerSpecific != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/triggerSpecific", r.jcrContentTriggerSpecific, "form", "")
 	}
-	if r.jcrcontentUserId != nil {
-		localVarQueryParams.Add("jcr:content/userId", parameterToString(*r.jcrcontentUserId, ""))
+	if r.jcrContentUserId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:content/userId", r.jcrContentUserId, "form", "")
 	}
-	if r.jcrprimaryType != nil {
-		localVarQueryParams.Add("jcr:primaryType", parameterToString(*r.jcrprimaryType, ""))
+	if r.jcrPrimaryType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:primaryType", r.jcrPrimaryType, "form", "")
 	}
 	if r.operation != nil {
-		localVarQueryParams.Add(":operation", parameterToString(*r.operation, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, ":operation", r.operation, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1831,7 +1859,7 @@ func (a *SlingApiService) PostAgentExecute(r ApiPostAgentRequest) (*_nethttp.Res
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -1841,15 +1869,15 @@ func (a *SlingApiService) PostAgentExecute(r ApiPostAgentRequest) (*_nethttp.Res
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1860,8 +1888,8 @@ func (a *SlingApiService) PostAgentExecute(r ApiPostAgentRequest) (*_nethttp.Res
 }
 
 type ApiPostAuthorizableKeystoreRequest struct {
-	ctx _context.Context
-	ApiService *SlingApiService
+	ctx context.Context
+	ApiService *SlingAPIService
 	intermediatePath string
 	authorizableId string
 	operation *string
@@ -1873,73 +1901,84 @@ type ApiPostAuthorizableKeystoreRequest struct {
 	alias *string
 	newAlias *string
 	removeAlias *string
-	certChain **os.File
-	pk **os.File
-	keyStore **os.File
+	certChain *os.File
+	pk *os.File
+	keyStore *os.File
 }
 
 func (r ApiPostAuthorizableKeystoreRequest) Operation(operation string) ApiPostAuthorizableKeystoreRequest {
 	r.operation = &operation
 	return r
 }
+
 func (r ApiPostAuthorizableKeystoreRequest) CurrentPassword(currentPassword string) ApiPostAuthorizableKeystoreRequest {
 	r.currentPassword = &currentPassword
 	return r
 }
+
 func (r ApiPostAuthorizableKeystoreRequest) NewPassword(newPassword string) ApiPostAuthorizableKeystoreRequest {
 	r.newPassword = &newPassword
 	return r
 }
+
 func (r ApiPostAuthorizableKeystoreRequest) RePassword(rePassword string) ApiPostAuthorizableKeystoreRequest {
 	r.rePassword = &rePassword
 	return r
 }
+
 func (r ApiPostAuthorizableKeystoreRequest) KeyPassword(keyPassword string) ApiPostAuthorizableKeystoreRequest {
 	r.keyPassword = &keyPassword
 	return r
 }
+
 func (r ApiPostAuthorizableKeystoreRequest) KeyStorePass(keyStorePass string) ApiPostAuthorizableKeystoreRequest {
 	r.keyStorePass = &keyStorePass
 	return r
 }
+
 func (r ApiPostAuthorizableKeystoreRequest) Alias(alias string) ApiPostAuthorizableKeystoreRequest {
 	r.alias = &alias
 	return r
 }
+
 func (r ApiPostAuthorizableKeystoreRequest) NewAlias(newAlias string) ApiPostAuthorizableKeystoreRequest {
 	r.newAlias = &newAlias
 	return r
 }
+
 func (r ApiPostAuthorizableKeystoreRequest) RemoveAlias(removeAlias string) ApiPostAuthorizableKeystoreRequest {
 	r.removeAlias = &removeAlias
 	return r
 }
+
 func (r ApiPostAuthorizableKeystoreRequest) CertChain(certChain *os.File) ApiPostAuthorizableKeystoreRequest {
-	r.certChain = &certChain
-	return r
-}
-func (r ApiPostAuthorizableKeystoreRequest) Pk(pk *os.File) ApiPostAuthorizableKeystoreRequest {
-	r.pk = &pk
-	return r
-}
-func (r ApiPostAuthorizableKeystoreRequest) KeyStore(keyStore *os.File) ApiPostAuthorizableKeystoreRequest {
-	r.keyStore = &keyStore
+	r.certChain = certChain
 	return r
 }
 
-func (r ApiPostAuthorizableKeystoreRequest) Execute() (KeystoreInfo, *_nethttp.Response, error) {
+func (r ApiPostAuthorizableKeystoreRequest) Pk(pk *os.File) ApiPostAuthorizableKeystoreRequest {
+	r.pk = pk
+	return r
+}
+
+func (r ApiPostAuthorizableKeystoreRequest) KeyStore(keyStore *os.File) ApiPostAuthorizableKeystoreRequest {
+	r.keyStore = keyStore
+	return r
+}
+
+func (r ApiPostAuthorizableKeystoreRequest) Execute() (*KeystoreInfo, *http.Response, error) {
 	return r.ApiService.PostAuthorizableKeystoreExecute(r)
 }
 
 /*
 PostAuthorizableKeystore Method for PostAuthorizableKeystore
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param intermediatePath
  @param authorizableId
  @return ApiPostAuthorizableKeystoreRequest
 */
-func (a *SlingApiService) PostAuthorizableKeystore(ctx _context.Context, intermediatePath string, authorizableId string) ApiPostAuthorizableKeystoreRequest {
+func (a *SlingAPIService) PostAuthorizableKeystore(ctx context.Context, intermediatePath string, authorizableId string) ApiPostAuthorizableKeystoreRequest {
 	return ApiPostAuthorizableKeystoreRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1950,55 +1989,53 @@ func (a *SlingApiService) PostAuthorizableKeystore(ctx _context.Context, interme
 
 // Execute executes the request
 //  @return KeystoreInfo
-func (a *SlingApiService) PostAuthorizableKeystoreExecute(r ApiPostAuthorizableKeystoreRequest) (KeystoreInfo, *_nethttp.Response, error) {
+func (a *SlingAPIService) PostAuthorizableKeystoreExecute(r ApiPostAuthorizableKeystoreRequest) (*KeystoreInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  KeystoreInfo
+		formFiles            []formFile
+		localVarReturnValue  *KeystoreInfo
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingApiService.PostAuthorizableKeystore")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingAPIService.PostAuthorizableKeystore")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/{intermediatePath}/{authorizableId}.ks.html"
-	localVarPath = strings.Replace(localVarPath, "{"+"intermediatePath"+"}", _neturl.PathEscape(parameterToString(r.intermediatePath, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"authorizableId"+"}", _neturl.PathEscape(parameterToString(r.authorizableId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"intermediatePath"+"}", url.PathEscape(parameterValueToString(r.intermediatePath, "intermediatePath")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"authorizableId"+"}", url.PathEscape(parameterValueToString(r.authorizableId, "authorizableId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.operation != nil {
-		localVarQueryParams.Add(":operation", parameterToString(*r.operation, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, ":operation", r.operation, "form", "")
 	}
 	if r.currentPassword != nil {
-		localVarQueryParams.Add("currentPassword", parameterToString(*r.currentPassword, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "currentPassword", r.currentPassword, "form", "")
 	}
 	if r.newPassword != nil {
-		localVarQueryParams.Add("newPassword", parameterToString(*r.newPassword, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "newPassword", r.newPassword, "form", "")
 	}
 	if r.rePassword != nil {
-		localVarQueryParams.Add("rePassword", parameterToString(*r.rePassword, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "rePassword", r.rePassword, "form", "")
 	}
 	if r.keyPassword != nil {
-		localVarQueryParams.Add("keyPassword", parameterToString(*r.keyPassword, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "keyPassword", r.keyPassword, "form", "")
 	}
 	if r.keyStorePass != nil {
-		localVarQueryParams.Add("keyStorePass", parameterToString(*r.keyStorePass, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "keyStorePass", r.keyStorePass, "form", "")
 	}
 	if r.alias != nil {
-		localVarQueryParams.Add("alias", parameterToString(*r.alias, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "alias", r.alias, "form", "")
 	}
 	if r.newAlias != nil {
-		localVarQueryParams.Add("newAlias", parameterToString(*r.newAlias, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "newAlias", r.newAlias, "form", "")
 	}
 	if r.removeAlias != nil {
-		localVarQueryParams.Add("removeAlias", parameterToString(*r.removeAlias, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "removeAlias", r.removeAlias, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"multipart/form-data"}
@@ -2017,40 +2054,52 @@ func (a *SlingApiService) PostAuthorizableKeystoreExecute(r ApiPostAuthorizableK
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	localVarFormFileName = "cert-chain"
-	var localVarFile *os.File
-	if r.certChain != nil {
-		localVarFile = *r.certChain
+	var certChainLocalVarFormFileName string
+	var certChainLocalVarFileName     string
+	var certChainLocalVarFileBytes    []byte
+
+	certChainLocalVarFormFileName = "cert-chain"
+	certChainLocalVarFile := r.certChain
+
+	if certChainLocalVarFile != nil {
+		fbs, _ := io.ReadAll(certChainLocalVarFile)
+
+		certChainLocalVarFileBytes = fbs
+		certChainLocalVarFileName = certChainLocalVarFile.Name()
+		certChainLocalVarFile.Close()
+		formFiles = append(formFiles, formFile{fileBytes: certChainLocalVarFileBytes, fileName: certChainLocalVarFileName, formFileName: certChainLocalVarFormFileName})
 	}
-	if localVarFile != nil {
-		fbs, _ := _ioutil.ReadAll(localVarFile)
-		localVarFileBytes = fbs
-		localVarFileName = localVarFile.Name()
-		localVarFile.Close()
+	var pkLocalVarFormFileName string
+	var pkLocalVarFileName     string
+	var pkLocalVarFileBytes    []byte
+
+	pkLocalVarFormFileName = "pk"
+	pkLocalVarFile := r.pk
+
+	if pkLocalVarFile != nil {
+		fbs, _ := io.ReadAll(pkLocalVarFile)
+
+		pkLocalVarFileBytes = fbs
+		pkLocalVarFileName = pkLocalVarFile.Name()
+		pkLocalVarFile.Close()
+		formFiles = append(formFiles, formFile{fileBytes: pkLocalVarFileBytes, fileName: pkLocalVarFileName, formFileName: pkLocalVarFormFileName})
 	}
-	localVarFormFileName = "pk"
-	var localVarFile *os.File
-	if r.pk != nil {
-		localVarFile = *r.pk
+	var keyStoreLocalVarFormFileName string
+	var keyStoreLocalVarFileName     string
+	var keyStoreLocalVarFileBytes    []byte
+
+	keyStoreLocalVarFormFileName = "keyStore"
+	keyStoreLocalVarFile := r.keyStore
+
+	if keyStoreLocalVarFile != nil {
+		fbs, _ := io.ReadAll(keyStoreLocalVarFile)
+
+		keyStoreLocalVarFileBytes = fbs
+		keyStoreLocalVarFileName = keyStoreLocalVarFile.Name()
+		keyStoreLocalVarFile.Close()
+		formFiles = append(formFiles, formFile{fileBytes: keyStoreLocalVarFileBytes, fileName: keyStoreLocalVarFileName, formFileName: keyStoreLocalVarFormFileName})
 	}
-	if localVarFile != nil {
-		fbs, _ := _ioutil.ReadAll(localVarFile)
-		localVarFileBytes = fbs
-		localVarFileName = localVarFile.Name()
-		localVarFile.Close()
-	}
-	localVarFormFileName = "keyStore"
-	var localVarFile *os.File
-	if r.keyStore != nil {
-		localVarFile = *r.keyStore
-	}
-	if localVarFile != nil {
-		fbs, _ := _ioutil.ReadAll(localVarFile)
-		localVarFileBytes = fbs
-		localVarFileName = localVarFile.Name()
-		localVarFile.Close()
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2060,15 +2109,15 @@ func (a *SlingApiService) PostAuthorizableKeystoreExecute(r ApiPostAuthorizableK
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2078,13 +2127,14 @@ func (a *SlingApiService) PostAuthorizableKeystoreExecute(r ApiPostAuthorizableK
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2095,13 +2145,13 @@ func (a *SlingApiService) PostAuthorizableKeystoreExecute(r ApiPostAuthorizableK
 }
 
 type ApiPostAuthorizablesRequest struct {
-	ctx _context.Context
-	ApiService *SlingApiService
+	ctx context.Context
+	ApiService *SlingAPIService
 	authorizableId *string
 	intermediatePath *string
 	createUser *string
 	createGroup *string
-	reppassword *string
+	repPassword *string
 	profileGivenName *string
 }
 
@@ -2109,38 +2159,43 @@ func (r ApiPostAuthorizablesRequest) AuthorizableId(authorizableId string) ApiPo
 	r.authorizableId = &authorizableId
 	return r
 }
+
 func (r ApiPostAuthorizablesRequest) IntermediatePath(intermediatePath string) ApiPostAuthorizablesRequest {
 	r.intermediatePath = &intermediatePath
 	return r
 }
+
 func (r ApiPostAuthorizablesRequest) CreateUser(createUser string) ApiPostAuthorizablesRequest {
 	r.createUser = &createUser
 	return r
 }
+
 func (r ApiPostAuthorizablesRequest) CreateGroup(createGroup string) ApiPostAuthorizablesRequest {
 	r.createGroup = &createGroup
 	return r
 }
-func (r ApiPostAuthorizablesRequest) Reppassword(reppassword string) ApiPostAuthorizablesRequest {
-	r.reppassword = &reppassword
+
+func (r ApiPostAuthorizablesRequest) RepPassword(repPassword string) ApiPostAuthorizablesRequest {
+	r.repPassword = &repPassword
 	return r
 }
+
 func (r ApiPostAuthorizablesRequest) ProfileGivenName(profileGivenName string) ApiPostAuthorizablesRequest {
 	r.profileGivenName = &profileGivenName
 	return r
 }
 
-func (r ApiPostAuthorizablesRequest) Execute() (string, *_nethttp.Response, error) {
+func (r ApiPostAuthorizablesRequest) Execute() (string, *http.Response, error) {
 	return r.ApiService.PostAuthorizablesExecute(r)
 }
 
 /*
 PostAuthorizables Method for PostAuthorizables
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPostAuthorizablesRequest
 */
-func (a *SlingApiService) PostAuthorizables(ctx _context.Context) ApiPostAuthorizablesRequest {
+func (a *SlingAPIService) PostAuthorizables(ctx context.Context) ApiPostAuthorizablesRequest {
 	return ApiPostAuthorizablesRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -2149,26 +2204,24 @@ func (a *SlingApiService) PostAuthorizables(ctx _context.Context) ApiPostAuthori
 
 // Execute executes the request
 //  @return string
-func (a *SlingApiService) PostAuthorizablesExecute(r ApiPostAuthorizablesRequest) (string, *_nethttp.Response, error) {
+func (a *SlingAPIService) PostAuthorizablesExecute(r ApiPostAuthorizablesRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 		localVarReturnValue  string
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingApiService.PostAuthorizables")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingAPIService.PostAuthorizables")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/libs/granite/security/post/authorizables"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.authorizableId == nil {
 		return localVarReturnValue, nil, reportError("authorizableId is required and must be specified")
 	}
@@ -2176,19 +2229,19 @@ func (a *SlingApiService) PostAuthorizablesExecute(r ApiPostAuthorizablesRequest
 		return localVarReturnValue, nil, reportError("intermediatePath is required and must be specified")
 	}
 
-	localVarQueryParams.Add("authorizableId", parameterToString(*r.authorizableId, ""))
-	localVarQueryParams.Add("intermediatePath", parameterToString(*r.intermediatePath, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "authorizableId", r.authorizableId, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "intermediatePath", r.intermediatePath, "form", "")
 	if r.createUser != nil {
-		localVarQueryParams.Add("createUser", parameterToString(*r.createUser, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "createUser", r.createUser, "form", "")
 	}
 	if r.createGroup != nil {
-		localVarQueryParams.Add("createGroup", parameterToString(*r.createGroup, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "createGroup", r.createGroup, "form", "")
 	}
-	if r.reppassword != nil {
-		localVarQueryParams.Add("rep:password", parameterToString(*r.reppassword, ""))
+	if r.repPassword != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "rep:password", r.repPassword, "form", "")
 	}
 	if r.profileGivenName != nil {
-		localVarQueryParams.Add("profile/givenName", parameterToString(*r.profileGivenName, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "profile/givenName", r.profileGivenName, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2207,7 +2260,7 @@ func (a *SlingApiService) PostAuthorizablesExecute(r ApiPostAuthorizablesRequest
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2217,15 +2270,15 @@ func (a *SlingApiService) PostAuthorizablesExecute(r ApiPostAuthorizablesRequest
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2235,13 +2288,14 @@ func (a *SlingApiService) PostAuthorizablesExecute(r ApiPostAuthorizablesRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2252,8 +2306,8 @@ func (a *SlingApiService) PostAuthorizablesExecute(r ApiPostAuthorizablesRequest
 }
 
 type ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest struct {
-	ctx _context.Context
-	ApiService *SlingApiService
+	ctx context.Context
+	ApiService *SlingAPIService
 	keyStorePassword *string
 	keyStorePasswordTypeHint *string
 	serviceRanking *int32
@@ -2308,206 +2362,253 @@ func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) KeyStorePassw
 	r.keyStorePassword = &keyStorePassword
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) KeyStorePasswordTypeHint(keyStorePasswordTypeHint string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.keyStorePasswordTypeHint = &keyStorePasswordTypeHint
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) ServiceRanking(serviceRanking int32) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.serviceRanking = &serviceRanking
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) ServiceRankingTypeHint(serviceRankingTypeHint string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.serviceRankingTypeHint = &serviceRankingTypeHint
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) IdpHttpRedirect(idpHttpRedirect bool) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.idpHttpRedirect = &idpHttpRedirect
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) IdpHttpRedirectTypeHint(idpHttpRedirectTypeHint string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.idpHttpRedirectTypeHint = &idpHttpRedirectTypeHint
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) CreateUser(createUser bool) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.createUser = &createUser
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) CreateUserTypeHint(createUserTypeHint string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.createUserTypeHint = &createUserTypeHint
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) DefaultRedirectUrl(defaultRedirectUrl string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.defaultRedirectUrl = &defaultRedirectUrl
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) DefaultRedirectUrlTypeHint(defaultRedirectUrlTypeHint string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.defaultRedirectUrlTypeHint = &defaultRedirectUrlTypeHint
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) UserIDAttribute(userIDAttribute string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.userIDAttribute = &userIDAttribute
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) UserIDAttributeTypeHint(userIDAttributeTypeHint string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.userIDAttributeTypeHint = &userIDAttributeTypeHint
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) DefaultGroups(defaultGroups []string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.defaultGroups = &defaultGroups
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) DefaultGroupsTypeHint(defaultGroupsTypeHint string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.defaultGroupsTypeHint = &defaultGroupsTypeHint
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) IdpCertAlias(idpCertAlias string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.idpCertAlias = &idpCertAlias
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) IdpCertAliasTypeHint(idpCertAliasTypeHint string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.idpCertAliasTypeHint = &idpCertAliasTypeHint
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) AddGroupMemberships(addGroupMemberships bool) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.addGroupMemberships = &addGroupMemberships
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) AddGroupMembershipsTypeHint(addGroupMembershipsTypeHint string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.addGroupMembershipsTypeHint = &addGroupMembershipsTypeHint
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) Path(path []string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.path = &path
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) PathTypeHint(pathTypeHint string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.pathTypeHint = &pathTypeHint
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) SynchronizeAttributes(synchronizeAttributes []string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.synchronizeAttributes = &synchronizeAttributes
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) SynchronizeAttributesTypeHint(synchronizeAttributesTypeHint string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.synchronizeAttributesTypeHint = &synchronizeAttributesTypeHint
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) ClockTolerance(clockTolerance int32) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.clockTolerance = &clockTolerance
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) ClockToleranceTypeHint(clockToleranceTypeHint string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.clockToleranceTypeHint = &clockToleranceTypeHint
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) GroupMembershipAttribute(groupMembershipAttribute string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.groupMembershipAttribute = &groupMembershipAttribute
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) GroupMembershipAttributeTypeHint(groupMembershipAttributeTypeHint string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.groupMembershipAttributeTypeHint = &groupMembershipAttributeTypeHint
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) IdpUrl(idpUrl string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.idpUrl = &idpUrl
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) IdpUrlTypeHint(idpUrlTypeHint string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.idpUrlTypeHint = &idpUrlTypeHint
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) LogoutUrl(logoutUrl string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.logoutUrl = &logoutUrl
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) LogoutUrlTypeHint(logoutUrlTypeHint string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.logoutUrlTypeHint = &logoutUrlTypeHint
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) ServiceProviderEntityId(serviceProviderEntityId string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.serviceProviderEntityId = &serviceProviderEntityId
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) ServiceProviderEntityIdTypeHint(serviceProviderEntityIdTypeHint string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.serviceProviderEntityIdTypeHint = &serviceProviderEntityIdTypeHint
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) AssertionConsumerServiceURL(assertionConsumerServiceURL string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.assertionConsumerServiceURL = &assertionConsumerServiceURL
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) AssertionConsumerServiceURLTypeHint(assertionConsumerServiceURLTypeHint string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.assertionConsumerServiceURLTypeHint = &assertionConsumerServiceURLTypeHint
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) HandleLogout(handleLogout bool) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.handleLogout = &handleLogout
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) HandleLogoutTypeHint(handleLogoutTypeHint string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.handleLogoutTypeHint = &handleLogoutTypeHint
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) SpPrivateKeyAlias(spPrivateKeyAlias string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.spPrivateKeyAlias = &spPrivateKeyAlias
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) SpPrivateKeyAliasTypeHint(spPrivateKeyAliasTypeHint string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.spPrivateKeyAliasTypeHint = &spPrivateKeyAliasTypeHint
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) UseEncryption(useEncryption bool) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.useEncryption = &useEncryption
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) UseEncryptionTypeHint(useEncryptionTypeHint string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.useEncryptionTypeHint = &useEncryptionTypeHint
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) NameIdFormat(nameIdFormat string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.nameIdFormat = &nameIdFormat
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) NameIdFormatTypeHint(nameIdFormatTypeHint string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.nameIdFormatTypeHint = &nameIdFormatTypeHint
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) DigestMethod(digestMethod string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.digestMethod = &digestMethod
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) DigestMethodTypeHint(digestMethodTypeHint string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.digestMethodTypeHint = &digestMethodTypeHint
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) SignatureMethod(signatureMethod string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.signatureMethod = &signatureMethod
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) SignatureMethodTypeHint(signatureMethodTypeHint string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.signatureMethodTypeHint = &signatureMethodTypeHint
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) UserIntermediatePath(userIntermediatePath string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.userIntermediatePath = &userIntermediatePath
 	return r
 }
+
 func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) UserIntermediatePathTypeHint(userIntermediatePathTypeHint string) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	r.userIntermediatePathTypeHint = &userIntermediatePathTypeHint
 	return r
 }
 
-func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) Execute() (*http.Response, error) {
 	return r.ApiService.PostConfigAdobeGraniteSamlAuthenticationHandlerExecute(r)
 }
 
 /*
 PostConfigAdobeGraniteSamlAuthenticationHandler Method for PostConfigAdobeGraniteSamlAuthenticationHandler
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest
 */
-func (a *SlingApiService) PostConfigAdobeGraniteSamlAuthenticationHandler(ctx _context.Context) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
+func (a *SlingAPIService) PostConfigAdobeGraniteSamlAuthenticationHandler(ctx context.Context) ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest {
 	return ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -2515,193 +2616,191 @@ func (a *SlingApiService) PostConfigAdobeGraniteSamlAuthenticationHandler(ctx _c
 }
 
 // Execute executes the request
-func (a *SlingApiService) PostConfigAdobeGraniteSamlAuthenticationHandlerExecute(r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) (*_nethttp.Response, error) {
+func (a *SlingAPIService) PostConfigAdobeGraniteSamlAuthenticationHandlerExecute(r ApiPostConfigAdobeGraniteSamlAuthenticationHandlerRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingApiService.PostConfigAdobeGraniteSamlAuthenticationHandler")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingAPIService.PostConfigAdobeGraniteSamlAuthenticationHandler")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.keyStorePassword != nil {
-		localVarQueryParams.Add("keyStorePassword", parameterToString(*r.keyStorePassword, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "keyStorePassword", r.keyStorePassword, "form", "")
 	}
 	if r.keyStorePasswordTypeHint != nil {
-		localVarQueryParams.Add("keyStorePassword@TypeHint", parameterToString(*r.keyStorePasswordTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "keyStorePassword@TypeHint", r.keyStorePasswordTypeHint, "form", "")
 	}
 	if r.serviceRanking != nil {
-		localVarQueryParams.Add("service.ranking", parameterToString(*r.serviceRanking, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "service.ranking", r.serviceRanking, "form", "")
 	}
 	if r.serviceRankingTypeHint != nil {
-		localVarQueryParams.Add("service.ranking@TypeHint", parameterToString(*r.serviceRankingTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "service.ranking@TypeHint", r.serviceRankingTypeHint, "form", "")
 	}
 	if r.idpHttpRedirect != nil {
-		localVarQueryParams.Add("idpHttpRedirect", parameterToString(*r.idpHttpRedirect, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "idpHttpRedirect", r.idpHttpRedirect, "form", "")
 	}
 	if r.idpHttpRedirectTypeHint != nil {
-		localVarQueryParams.Add("idpHttpRedirect@TypeHint", parameterToString(*r.idpHttpRedirectTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "idpHttpRedirect@TypeHint", r.idpHttpRedirectTypeHint, "form", "")
 	}
 	if r.createUser != nil {
-		localVarQueryParams.Add("createUser", parameterToString(*r.createUser, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "createUser", r.createUser, "form", "")
 	}
 	if r.createUserTypeHint != nil {
-		localVarQueryParams.Add("createUser@TypeHint", parameterToString(*r.createUserTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "createUser@TypeHint", r.createUserTypeHint, "form", "")
 	}
 	if r.defaultRedirectUrl != nil {
-		localVarQueryParams.Add("defaultRedirectUrl", parameterToString(*r.defaultRedirectUrl, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "defaultRedirectUrl", r.defaultRedirectUrl, "form", "")
 	}
 	if r.defaultRedirectUrlTypeHint != nil {
-		localVarQueryParams.Add("defaultRedirectUrl@TypeHint", parameterToString(*r.defaultRedirectUrlTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "defaultRedirectUrl@TypeHint", r.defaultRedirectUrlTypeHint, "form", "")
 	}
 	if r.userIDAttribute != nil {
-		localVarQueryParams.Add("userIDAttribute", parameterToString(*r.userIDAttribute, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "userIDAttribute", r.userIDAttribute, "form", "")
 	}
 	if r.userIDAttributeTypeHint != nil {
-		localVarQueryParams.Add("userIDAttribute@TypeHint", parameterToString(*r.userIDAttributeTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "userIDAttribute@TypeHint", r.userIDAttributeTypeHint, "form", "")
 	}
 	if r.defaultGroups != nil {
 		t := *r.defaultGroups
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("defaultGroups", parameterToString(s.Index(i), "multi"))
+				parameterAddToHeaderOrQuery(localVarQueryParams, "defaultGroups", s.Index(i).Interface(), "form", "multi")
 			}
 		} else {
-			localVarQueryParams.Add("defaultGroups", parameterToString(t, "multi"))
+			parameterAddToHeaderOrQuery(localVarQueryParams, "defaultGroups", t, "form", "multi")
 		}
 	}
 	if r.defaultGroupsTypeHint != nil {
-		localVarQueryParams.Add("defaultGroups@TypeHint", parameterToString(*r.defaultGroupsTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "defaultGroups@TypeHint", r.defaultGroupsTypeHint, "form", "")
 	}
 	if r.idpCertAlias != nil {
-		localVarQueryParams.Add("idpCertAlias", parameterToString(*r.idpCertAlias, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "idpCertAlias", r.idpCertAlias, "form", "")
 	}
 	if r.idpCertAliasTypeHint != nil {
-		localVarQueryParams.Add("idpCertAlias@TypeHint", parameterToString(*r.idpCertAliasTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "idpCertAlias@TypeHint", r.idpCertAliasTypeHint, "form", "")
 	}
 	if r.addGroupMemberships != nil {
-		localVarQueryParams.Add("addGroupMemberships", parameterToString(*r.addGroupMemberships, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "addGroupMemberships", r.addGroupMemberships, "form", "")
 	}
 	if r.addGroupMembershipsTypeHint != nil {
-		localVarQueryParams.Add("addGroupMemberships@TypeHint", parameterToString(*r.addGroupMembershipsTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "addGroupMemberships@TypeHint", r.addGroupMembershipsTypeHint, "form", "")
 	}
 	if r.path != nil {
 		t := *r.path
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("path", parameterToString(s.Index(i), "multi"))
+				parameterAddToHeaderOrQuery(localVarQueryParams, "path", s.Index(i).Interface(), "form", "multi")
 			}
 		} else {
-			localVarQueryParams.Add("path", parameterToString(t, "multi"))
+			parameterAddToHeaderOrQuery(localVarQueryParams, "path", t, "form", "multi")
 		}
 	}
 	if r.pathTypeHint != nil {
-		localVarQueryParams.Add("path@TypeHint", parameterToString(*r.pathTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "path@TypeHint", r.pathTypeHint, "form", "")
 	}
 	if r.synchronizeAttributes != nil {
 		t := *r.synchronizeAttributes
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("synchronizeAttributes", parameterToString(s.Index(i), "multi"))
+				parameterAddToHeaderOrQuery(localVarQueryParams, "synchronizeAttributes", s.Index(i).Interface(), "form", "multi")
 			}
 		} else {
-			localVarQueryParams.Add("synchronizeAttributes", parameterToString(t, "multi"))
+			parameterAddToHeaderOrQuery(localVarQueryParams, "synchronizeAttributes", t, "form", "multi")
 		}
 	}
 	if r.synchronizeAttributesTypeHint != nil {
-		localVarQueryParams.Add("synchronizeAttributes@TypeHint", parameterToString(*r.synchronizeAttributesTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "synchronizeAttributes@TypeHint", r.synchronizeAttributesTypeHint, "form", "")
 	}
 	if r.clockTolerance != nil {
-		localVarQueryParams.Add("clockTolerance", parameterToString(*r.clockTolerance, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "clockTolerance", r.clockTolerance, "form", "")
 	}
 	if r.clockToleranceTypeHint != nil {
-		localVarQueryParams.Add("clockTolerance@TypeHint", parameterToString(*r.clockToleranceTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "clockTolerance@TypeHint", r.clockToleranceTypeHint, "form", "")
 	}
 	if r.groupMembershipAttribute != nil {
-		localVarQueryParams.Add("groupMembershipAttribute", parameterToString(*r.groupMembershipAttribute, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "groupMembershipAttribute", r.groupMembershipAttribute, "form", "")
 	}
 	if r.groupMembershipAttributeTypeHint != nil {
-		localVarQueryParams.Add("groupMembershipAttribute@TypeHint", parameterToString(*r.groupMembershipAttributeTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "groupMembershipAttribute@TypeHint", r.groupMembershipAttributeTypeHint, "form", "")
 	}
 	if r.idpUrl != nil {
-		localVarQueryParams.Add("idpUrl", parameterToString(*r.idpUrl, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "idpUrl", r.idpUrl, "form", "")
 	}
 	if r.idpUrlTypeHint != nil {
-		localVarQueryParams.Add("idpUrl@TypeHint", parameterToString(*r.idpUrlTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "idpUrl@TypeHint", r.idpUrlTypeHint, "form", "")
 	}
 	if r.logoutUrl != nil {
-		localVarQueryParams.Add("logoutUrl", parameterToString(*r.logoutUrl, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "logoutUrl", r.logoutUrl, "form", "")
 	}
 	if r.logoutUrlTypeHint != nil {
-		localVarQueryParams.Add("logoutUrl@TypeHint", parameterToString(*r.logoutUrlTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "logoutUrl@TypeHint", r.logoutUrlTypeHint, "form", "")
 	}
 	if r.serviceProviderEntityId != nil {
-		localVarQueryParams.Add("serviceProviderEntityId", parameterToString(*r.serviceProviderEntityId, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "serviceProviderEntityId", r.serviceProviderEntityId, "form", "")
 	}
 	if r.serviceProviderEntityIdTypeHint != nil {
-		localVarQueryParams.Add("serviceProviderEntityId@TypeHint", parameterToString(*r.serviceProviderEntityIdTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "serviceProviderEntityId@TypeHint", r.serviceProviderEntityIdTypeHint, "form", "")
 	}
 	if r.assertionConsumerServiceURL != nil {
-		localVarQueryParams.Add("assertionConsumerServiceURL", parameterToString(*r.assertionConsumerServiceURL, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "assertionConsumerServiceURL", r.assertionConsumerServiceURL, "form", "")
 	}
 	if r.assertionConsumerServiceURLTypeHint != nil {
-		localVarQueryParams.Add("assertionConsumerServiceURL@TypeHint", parameterToString(*r.assertionConsumerServiceURLTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "assertionConsumerServiceURL@TypeHint", r.assertionConsumerServiceURLTypeHint, "form", "")
 	}
 	if r.handleLogout != nil {
-		localVarQueryParams.Add("handleLogout", parameterToString(*r.handleLogout, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "handleLogout", r.handleLogout, "form", "")
 	}
 	if r.handleLogoutTypeHint != nil {
-		localVarQueryParams.Add("handleLogout@TypeHint", parameterToString(*r.handleLogoutTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "handleLogout@TypeHint", r.handleLogoutTypeHint, "form", "")
 	}
 	if r.spPrivateKeyAlias != nil {
-		localVarQueryParams.Add("spPrivateKeyAlias", parameterToString(*r.spPrivateKeyAlias, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "spPrivateKeyAlias", r.spPrivateKeyAlias, "form", "")
 	}
 	if r.spPrivateKeyAliasTypeHint != nil {
-		localVarQueryParams.Add("spPrivateKeyAlias@TypeHint", parameterToString(*r.spPrivateKeyAliasTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "spPrivateKeyAlias@TypeHint", r.spPrivateKeyAliasTypeHint, "form", "")
 	}
 	if r.useEncryption != nil {
-		localVarQueryParams.Add("useEncryption", parameterToString(*r.useEncryption, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "useEncryption", r.useEncryption, "form", "")
 	}
 	if r.useEncryptionTypeHint != nil {
-		localVarQueryParams.Add("useEncryption@TypeHint", parameterToString(*r.useEncryptionTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "useEncryption@TypeHint", r.useEncryptionTypeHint, "form", "")
 	}
 	if r.nameIdFormat != nil {
-		localVarQueryParams.Add("nameIdFormat", parameterToString(*r.nameIdFormat, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "nameIdFormat", r.nameIdFormat, "form", "")
 	}
 	if r.nameIdFormatTypeHint != nil {
-		localVarQueryParams.Add("nameIdFormat@TypeHint", parameterToString(*r.nameIdFormatTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "nameIdFormat@TypeHint", r.nameIdFormatTypeHint, "form", "")
 	}
 	if r.digestMethod != nil {
-		localVarQueryParams.Add("digestMethod", parameterToString(*r.digestMethod, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "digestMethod", r.digestMethod, "form", "")
 	}
 	if r.digestMethodTypeHint != nil {
-		localVarQueryParams.Add("digestMethod@TypeHint", parameterToString(*r.digestMethodTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "digestMethod@TypeHint", r.digestMethodTypeHint, "form", "")
 	}
 	if r.signatureMethod != nil {
-		localVarQueryParams.Add("signatureMethod", parameterToString(*r.signatureMethod, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "signatureMethod", r.signatureMethod, "form", "")
 	}
 	if r.signatureMethodTypeHint != nil {
-		localVarQueryParams.Add("signatureMethod@TypeHint", parameterToString(*r.signatureMethodTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "signatureMethod@TypeHint", r.signatureMethodTypeHint, "form", "")
 	}
 	if r.userIntermediatePath != nil {
-		localVarQueryParams.Add("userIntermediatePath", parameterToString(*r.userIntermediatePath, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "userIntermediatePath", r.userIntermediatePath, "form", "")
 	}
 	if r.userIntermediatePathTypeHint != nil {
-		localVarQueryParams.Add("userIntermediatePath@TypeHint", parameterToString(*r.userIntermediatePathTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "userIntermediatePath@TypeHint", r.userIntermediatePathTypeHint, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2720,7 +2819,7 @@ func (a *SlingApiService) PostConfigAdobeGraniteSamlAuthenticationHandlerExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -2730,15 +2829,15 @@ func (a *SlingApiService) PostConfigAdobeGraniteSamlAuthenticationHandlerExecute
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2749,8 +2848,8 @@ func (a *SlingApiService) PostConfigAdobeGraniteSamlAuthenticationHandlerExecute
 }
 
 type ApiPostConfigApacheFelixJettyBasedHttpServiceRequest struct {
-	ctx _context.Context
-	ApiService *SlingApiService
+	ctx context.Context
+	ApiService *SlingAPIService
 	orgApacheFelixHttpsNio *bool
 	orgApacheFelixHttpsNioTypeHint *string
 	orgApacheFelixHttpsKeystore *string
@@ -2777,94 +2876,113 @@ func (r ApiPostConfigApacheFelixJettyBasedHttpServiceRequest) OrgApacheFelixHttp
 	r.orgApacheFelixHttpsNio = &orgApacheFelixHttpsNio
 	return r
 }
+
 func (r ApiPostConfigApacheFelixJettyBasedHttpServiceRequest) OrgApacheFelixHttpsNioTypeHint(orgApacheFelixHttpsNioTypeHint string) ApiPostConfigApacheFelixJettyBasedHttpServiceRequest {
 	r.orgApacheFelixHttpsNioTypeHint = &orgApacheFelixHttpsNioTypeHint
 	return r
 }
+
 func (r ApiPostConfigApacheFelixJettyBasedHttpServiceRequest) OrgApacheFelixHttpsKeystore(orgApacheFelixHttpsKeystore string) ApiPostConfigApacheFelixJettyBasedHttpServiceRequest {
 	r.orgApacheFelixHttpsKeystore = &orgApacheFelixHttpsKeystore
 	return r
 }
+
 func (r ApiPostConfigApacheFelixJettyBasedHttpServiceRequest) OrgApacheFelixHttpsKeystoreTypeHint(orgApacheFelixHttpsKeystoreTypeHint string) ApiPostConfigApacheFelixJettyBasedHttpServiceRequest {
 	r.orgApacheFelixHttpsKeystoreTypeHint = &orgApacheFelixHttpsKeystoreTypeHint
 	return r
 }
+
 func (r ApiPostConfigApacheFelixJettyBasedHttpServiceRequest) OrgApacheFelixHttpsKeystorePassword(orgApacheFelixHttpsKeystorePassword string) ApiPostConfigApacheFelixJettyBasedHttpServiceRequest {
 	r.orgApacheFelixHttpsKeystorePassword = &orgApacheFelixHttpsKeystorePassword
 	return r
 }
+
 func (r ApiPostConfigApacheFelixJettyBasedHttpServiceRequest) OrgApacheFelixHttpsKeystorePasswordTypeHint(orgApacheFelixHttpsKeystorePasswordTypeHint string) ApiPostConfigApacheFelixJettyBasedHttpServiceRequest {
 	r.orgApacheFelixHttpsKeystorePasswordTypeHint = &orgApacheFelixHttpsKeystorePasswordTypeHint
 	return r
 }
+
 func (r ApiPostConfigApacheFelixJettyBasedHttpServiceRequest) OrgApacheFelixHttpsKeystoreKey(orgApacheFelixHttpsKeystoreKey string) ApiPostConfigApacheFelixJettyBasedHttpServiceRequest {
 	r.orgApacheFelixHttpsKeystoreKey = &orgApacheFelixHttpsKeystoreKey
 	return r
 }
+
 func (r ApiPostConfigApacheFelixJettyBasedHttpServiceRequest) OrgApacheFelixHttpsKeystoreKeyTypeHint(orgApacheFelixHttpsKeystoreKeyTypeHint string) ApiPostConfigApacheFelixJettyBasedHttpServiceRequest {
 	r.orgApacheFelixHttpsKeystoreKeyTypeHint = &orgApacheFelixHttpsKeystoreKeyTypeHint
 	return r
 }
+
 func (r ApiPostConfigApacheFelixJettyBasedHttpServiceRequest) OrgApacheFelixHttpsKeystoreKeyPassword(orgApacheFelixHttpsKeystoreKeyPassword string) ApiPostConfigApacheFelixJettyBasedHttpServiceRequest {
 	r.orgApacheFelixHttpsKeystoreKeyPassword = &orgApacheFelixHttpsKeystoreKeyPassword
 	return r
 }
+
 func (r ApiPostConfigApacheFelixJettyBasedHttpServiceRequest) OrgApacheFelixHttpsKeystoreKeyPasswordTypeHint(orgApacheFelixHttpsKeystoreKeyPasswordTypeHint string) ApiPostConfigApacheFelixJettyBasedHttpServiceRequest {
 	r.orgApacheFelixHttpsKeystoreKeyPasswordTypeHint = &orgApacheFelixHttpsKeystoreKeyPasswordTypeHint
 	return r
 }
+
 func (r ApiPostConfigApacheFelixJettyBasedHttpServiceRequest) OrgApacheFelixHttpsTruststore(orgApacheFelixHttpsTruststore string) ApiPostConfigApacheFelixJettyBasedHttpServiceRequest {
 	r.orgApacheFelixHttpsTruststore = &orgApacheFelixHttpsTruststore
 	return r
 }
+
 func (r ApiPostConfigApacheFelixJettyBasedHttpServiceRequest) OrgApacheFelixHttpsTruststoreTypeHint(orgApacheFelixHttpsTruststoreTypeHint string) ApiPostConfigApacheFelixJettyBasedHttpServiceRequest {
 	r.orgApacheFelixHttpsTruststoreTypeHint = &orgApacheFelixHttpsTruststoreTypeHint
 	return r
 }
+
 func (r ApiPostConfigApacheFelixJettyBasedHttpServiceRequest) OrgApacheFelixHttpsTruststorePassword(orgApacheFelixHttpsTruststorePassword string) ApiPostConfigApacheFelixJettyBasedHttpServiceRequest {
 	r.orgApacheFelixHttpsTruststorePassword = &orgApacheFelixHttpsTruststorePassword
 	return r
 }
+
 func (r ApiPostConfigApacheFelixJettyBasedHttpServiceRequest) OrgApacheFelixHttpsTruststorePasswordTypeHint(orgApacheFelixHttpsTruststorePasswordTypeHint string) ApiPostConfigApacheFelixJettyBasedHttpServiceRequest {
 	r.orgApacheFelixHttpsTruststorePasswordTypeHint = &orgApacheFelixHttpsTruststorePasswordTypeHint
 	return r
 }
+
 func (r ApiPostConfigApacheFelixJettyBasedHttpServiceRequest) OrgApacheFelixHttpsClientcertificate(orgApacheFelixHttpsClientcertificate string) ApiPostConfigApacheFelixJettyBasedHttpServiceRequest {
 	r.orgApacheFelixHttpsClientcertificate = &orgApacheFelixHttpsClientcertificate
 	return r
 }
+
 func (r ApiPostConfigApacheFelixJettyBasedHttpServiceRequest) OrgApacheFelixHttpsClientcertificateTypeHint(orgApacheFelixHttpsClientcertificateTypeHint string) ApiPostConfigApacheFelixJettyBasedHttpServiceRequest {
 	r.orgApacheFelixHttpsClientcertificateTypeHint = &orgApacheFelixHttpsClientcertificateTypeHint
 	return r
 }
+
 func (r ApiPostConfigApacheFelixJettyBasedHttpServiceRequest) OrgApacheFelixHttpsEnable(orgApacheFelixHttpsEnable bool) ApiPostConfigApacheFelixJettyBasedHttpServiceRequest {
 	r.orgApacheFelixHttpsEnable = &orgApacheFelixHttpsEnable
 	return r
 }
+
 func (r ApiPostConfigApacheFelixJettyBasedHttpServiceRequest) OrgApacheFelixHttpsEnableTypeHint(orgApacheFelixHttpsEnableTypeHint string) ApiPostConfigApacheFelixJettyBasedHttpServiceRequest {
 	r.orgApacheFelixHttpsEnableTypeHint = &orgApacheFelixHttpsEnableTypeHint
 	return r
 }
+
 func (r ApiPostConfigApacheFelixJettyBasedHttpServiceRequest) OrgOsgiServiceHttpPortSecure(orgOsgiServiceHttpPortSecure string) ApiPostConfigApacheFelixJettyBasedHttpServiceRequest {
 	r.orgOsgiServiceHttpPortSecure = &orgOsgiServiceHttpPortSecure
 	return r
 }
+
 func (r ApiPostConfigApacheFelixJettyBasedHttpServiceRequest) OrgOsgiServiceHttpPortSecureTypeHint(orgOsgiServiceHttpPortSecureTypeHint string) ApiPostConfigApacheFelixJettyBasedHttpServiceRequest {
 	r.orgOsgiServiceHttpPortSecureTypeHint = &orgOsgiServiceHttpPortSecureTypeHint
 	return r
 }
 
-func (r ApiPostConfigApacheFelixJettyBasedHttpServiceRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiPostConfigApacheFelixJettyBasedHttpServiceRequest) Execute() (*http.Response, error) {
 	return r.ApiService.PostConfigApacheFelixJettyBasedHttpServiceExecute(r)
 }
 
 /*
 PostConfigApacheFelixJettyBasedHttpService Method for PostConfigApacheFelixJettyBasedHttpService
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPostConfigApacheFelixJettyBasedHttpServiceRequest
 */
-func (a *SlingApiService) PostConfigApacheFelixJettyBasedHttpService(ctx _context.Context) ApiPostConfigApacheFelixJettyBasedHttpServiceRequest {
+func (a *SlingAPIService) PostConfigApacheFelixJettyBasedHttpService(ctx context.Context) ApiPostConfigApacheFelixJettyBasedHttpServiceRequest {
 	return ApiPostConfigApacheFelixJettyBasedHttpServiceRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -2872,85 +2990,83 @@ func (a *SlingApiService) PostConfigApacheFelixJettyBasedHttpService(ctx _contex
 }
 
 // Execute executes the request
-func (a *SlingApiService) PostConfigApacheFelixJettyBasedHttpServiceExecute(r ApiPostConfigApacheFelixJettyBasedHttpServiceRequest) (*_nethttp.Response, error) {
+func (a *SlingAPIService) PostConfigApacheFelixJettyBasedHttpServiceExecute(r ApiPostConfigApacheFelixJettyBasedHttpServiceRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingApiService.PostConfigApacheFelixJettyBasedHttpService")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingAPIService.PostConfigApacheFelixJettyBasedHttpService")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/apps/system/config/org.apache.felix.http"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.orgApacheFelixHttpsNio != nil {
-		localVarQueryParams.Add("org.apache.felix.https.nio", parameterToString(*r.orgApacheFelixHttpsNio, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "org.apache.felix.https.nio", r.orgApacheFelixHttpsNio, "form", "")
 	}
 	if r.orgApacheFelixHttpsNioTypeHint != nil {
-		localVarQueryParams.Add("org.apache.felix.https.nio@TypeHint", parameterToString(*r.orgApacheFelixHttpsNioTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "org.apache.felix.https.nio@TypeHint", r.orgApacheFelixHttpsNioTypeHint, "form", "")
 	}
 	if r.orgApacheFelixHttpsKeystore != nil {
-		localVarQueryParams.Add("org.apache.felix.https.keystore", parameterToString(*r.orgApacheFelixHttpsKeystore, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "org.apache.felix.https.keystore", r.orgApacheFelixHttpsKeystore, "form", "")
 	}
 	if r.orgApacheFelixHttpsKeystoreTypeHint != nil {
-		localVarQueryParams.Add("org.apache.felix.https.keystore@TypeHint", parameterToString(*r.orgApacheFelixHttpsKeystoreTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "org.apache.felix.https.keystore@TypeHint", r.orgApacheFelixHttpsKeystoreTypeHint, "form", "")
 	}
 	if r.orgApacheFelixHttpsKeystorePassword != nil {
-		localVarQueryParams.Add("org.apache.felix.https.keystore.password", parameterToString(*r.orgApacheFelixHttpsKeystorePassword, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "org.apache.felix.https.keystore.password", r.orgApacheFelixHttpsKeystorePassword, "form", "")
 	}
 	if r.orgApacheFelixHttpsKeystorePasswordTypeHint != nil {
-		localVarQueryParams.Add("org.apache.felix.https.keystore.password@TypeHint", parameterToString(*r.orgApacheFelixHttpsKeystorePasswordTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "org.apache.felix.https.keystore.password@TypeHint", r.orgApacheFelixHttpsKeystorePasswordTypeHint, "form", "")
 	}
 	if r.orgApacheFelixHttpsKeystoreKey != nil {
-		localVarQueryParams.Add("org.apache.felix.https.keystore.key", parameterToString(*r.orgApacheFelixHttpsKeystoreKey, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "org.apache.felix.https.keystore.key", r.orgApacheFelixHttpsKeystoreKey, "form", "")
 	}
 	if r.orgApacheFelixHttpsKeystoreKeyTypeHint != nil {
-		localVarQueryParams.Add("org.apache.felix.https.keystore.key@TypeHint", parameterToString(*r.orgApacheFelixHttpsKeystoreKeyTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "org.apache.felix.https.keystore.key@TypeHint", r.orgApacheFelixHttpsKeystoreKeyTypeHint, "form", "")
 	}
 	if r.orgApacheFelixHttpsKeystoreKeyPassword != nil {
-		localVarQueryParams.Add("org.apache.felix.https.keystore.key.password", parameterToString(*r.orgApacheFelixHttpsKeystoreKeyPassword, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "org.apache.felix.https.keystore.key.password", r.orgApacheFelixHttpsKeystoreKeyPassword, "form", "")
 	}
 	if r.orgApacheFelixHttpsKeystoreKeyPasswordTypeHint != nil {
-		localVarQueryParams.Add("org.apache.felix.https.keystore.key.password@TypeHint", parameterToString(*r.orgApacheFelixHttpsKeystoreKeyPasswordTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "org.apache.felix.https.keystore.key.password@TypeHint", r.orgApacheFelixHttpsKeystoreKeyPasswordTypeHint, "form", "")
 	}
 	if r.orgApacheFelixHttpsTruststore != nil {
-		localVarQueryParams.Add("org.apache.felix.https.truststore", parameterToString(*r.orgApacheFelixHttpsTruststore, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "org.apache.felix.https.truststore", r.orgApacheFelixHttpsTruststore, "form", "")
 	}
 	if r.orgApacheFelixHttpsTruststoreTypeHint != nil {
-		localVarQueryParams.Add("org.apache.felix.https.truststore@TypeHint", parameterToString(*r.orgApacheFelixHttpsTruststoreTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "org.apache.felix.https.truststore@TypeHint", r.orgApacheFelixHttpsTruststoreTypeHint, "form", "")
 	}
 	if r.orgApacheFelixHttpsTruststorePassword != nil {
-		localVarQueryParams.Add("org.apache.felix.https.truststore.password", parameterToString(*r.orgApacheFelixHttpsTruststorePassword, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "org.apache.felix.https.truststore.password", r.orgApacheFelixHttpsTruststorePassword, "form", "")
 	}
 	if r.orgApacheFelixHttpsTruststorePasswordTypeHint != nil {
-		localVarQueryParams.Add("org.apache.felix.https.truststore.password@TypeHint", parameterToString(*r.orgApacheFelixHttpsTruststorePasswordTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "org.apache.felix.https.truststore.password@TypeHint", r.orgApacheFelixHttpsTruststorePasswordTypeHint, "form", "")
 	}
 	if r.orgApacheFelixHttpsClientcertificate != nil {
-		localVarQueryParams.Add("org.apache.felix.https.clientcertificate", parameterToString(*r.orgApacheFelixHttpsClientcertificate, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "org.apache.felix.https.clientcertificate", r.orgApacheFelixHttpsClientcertificate, "form", "")
 	}
 	if r.orgApacheFelixHttpsClientcertificateTypeHint != nil {
-		localVarQueryParams.Add("org.apache.felix.https.clientcertificate@TypeHint", parameterToString(*r.orgApacheFelixHttpsClientcertificateTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "org.apache.felix.https.clientcertificate@TypeHint", r.orgApacheFelixHttpsClientcertificateTypeHint, "form", "")
 	}
 	if r.orgApacheFelixHttpsEnable != nil {
-		localVarQueryParams.Add("org.apache.felix.https.enable", parameterToString(*r.orgApacheFelixHttpsEnable, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "org.apache.felix.https.enable", r.orgApacheFelixHttpsEnable, "form", "")
 	}
 	if r.orgApacheFelixHttpsEnableTypeHint != nil {
-		localVarQueryParams.Add("org.apache.felix.https.enable@TypeHint", parameterToString(*r.orgApacheFelixHttpsEnableTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "org.apache.felix.https.enable@TypeHint", r.orgApacheFelixHttpsEnableTypeHint, "form", "")
 	}
 	if r.orgOsgiServiceHttpPortSecure != nil {
-		localVarQueryParams.Add("org.osgi.service.http.port.secure", parameterToString(*r.orgOsgiServiceHttpPortSecure, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "org.osgi.service.http.port.secure", r.orgOsgiServiceHttpPortSecure, "form", "")
 	}
 	if r.orgOsgiServiceHttpPortSecureTypeHint != nil {
-		localVarQueryParams.Add("org.osgi.service.http.port.secure@TypeHint", parameterToString(*r.orgOsgiServiceHttpPortSecureTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "org.osgi.service.http.port.secure@TypeHint", r.orgOsgiServiceHttpPortSecureTypeHint, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2969,7 +3085,7 @@ func (a *SlingApiService) PostConfigApacheFelixJettyBasedHttpServiceExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -2979,15 +3095,15 @@ func (a *SlingApiService) PostConfigApacheFelixJettyBasedHttpServiceExecute(r Ap
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2998,8 +3114,8 @@ func (a *SlingApiService) PostConfigApacheFelixJettyBasedHttpServiceExecute(r Ap
 }
 
 type ApiPostConfigApacheHttpComponentsProxyConfigurationRequest struct {
-	ctx _context.Context
-	ApiService *SlingApiService
+	ctx context.Context
+	ApiService *SlingAPIService
 	proxyHost *string
 	proxyHostTypeHint *string
 	proxyPort *int32
@@ -3018,62 +3134,73 @@ func (r ApiPostConfigApacheHttpComponentsProxyConfigurationRequest) ProxyHost(pr
 	r.proxyHost = &proxyHost
 	return r
 }
+
 func (r ApiPostConfigApacheHttpComponentsProxyConfigurationRequest) ProxyHostTypeHint(proxyHostTypeHint string) ApiPostConfigApacheHttpComponentsProxyConfigurationRequest {
 	r.proxyHostTypeHint = &proxyHostTypeHint
 	return r
 }
+
 func (r ApiPostConfigApacheHttpComponentsProxyConfigurationRequest) ProxyPort(proxyPort int32) ApiPostConfigApacheHttpComponentsProxyConfigurationRequest {
 	r.proxyPort = &proxyPort
 	return r
 }
+
 func (r ApiPostConfigApacheHttpComponentsProxyConfigurationRequest) ProxyPortTypeHint(proxyPortTypeHint string) ApiPostConfigApacheHttpComponentsProxyConfigurationRequest {
 	r.proxyPortTypeHint = &proxyPortTypeHint
 	return r
 }
+
 func (r ApiPostConfigApacheHttpComponentsProxyConfigurationRequest) ProxyExceptions(proxyExceptions []string) ApiPostConfigApacheHttpComponentsProxyConfigurationRequest {
 	r.proxyExceptions = &proxyExceptions
 	return r
 }
+
 func (r ApiPostConfigApacheHttpComponentsProxyConfigurationRequest) ProxyExceptionsTypeHint(proxyExceptionsTypeHint string) ApiPostConfigApacheHttpComponentsProxyConfigurationRequest {
 	r.proxyExceptionsTypeHint = &proxyExceptionsTypeHint
 	return r
 }
+
 func (r ApiPostConfigApacheHttpComponentsProxyConfigurationRequest) ProxyEnabled(proxyEnabled bool) ApiPostConfigApacheHttpComponentsProxyConfigurationRequest {
 	r.proxyEnabled = &proxyEnabled
 	return r
 }
+
 func (r ApiPostConfigApacheHttpComponentsProxyConfigurationRequest) ProxyEnabledTypeHint(proxyEnabledTypeHint string) ApiPostConfigApacheHttpComponentsProxyConfigurationRequest {
 	r.proxyEnabledTypeHint = &proxyEnabledTypeHint
 	return r
 }
+
 func (r ApiPostConfigApacheHttpComponentsProxyConfigurationRequest) ProxyUser(proxyUser string) ApiPostConfigApacheHttpComponentsProxyConfigurationRequest {
 	r.proxyUser = &proxyUser
 	return r
 }
+
 func (r ApiPostConfigApacheHttpComponentsProxyConfigurationRequest) ProxyUserTypeHint(proxyUserTypeHint string) ApiPostConfigApacheHttpComponentsProxyConfigurationRequest {
 	r.proxyUserTypeHint = &proxyUserTypeHint
 	return r
 }
+
 func (r ApiPostConfigApacheHttpComponentsProxyConfigurationRequest) ProxyPassword(proxyPassword string) ApiPostConfigApacheHttpComponentsProxyConfigurationRequest {
 	r.proxyPassword = &proxyPassword
 	return r
 }
+
 func (r ApiPostConfigApacheHttpComponentsProxyConfigurationRequest) ProxyPasswordTypeHint(proxyPasswordTypeHint string) ApiPostConfigApacheHttpComponentsProxyConfigurationRequest {
 	r.proxyPasswordTypeHint = &proxyPasswordTypeHint
 	return r
 }
 
-func (r ApiPostConfigApacheHttpComponentsProxyConfigurationRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiPostConfigApacheHttpComponentsProxyConfigurationRequest) Execute() (*http.Response, error) {
 	return r.ApiService.PostConfigApacheHttpComponentsProxyConfigurationExecute(r)
 }
 
 /*
 PostConfigApacheHttpComponentsProxyConfiguration Method for PostConfigApacheHttpComponentsProxyConfiguration
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPostConfigApacheHttpComponentsProxyConfigurationRequest
 */
-func (a *SlingApiService) PostConfigApacheHttpComponentsProxyConfiguration(ctx _context.Context) ApiPostConfigApacheHttpComponentsProxyConfigurationRequest {
+func (a *SlingAPIService) PostConfigApacheHttpComponentsProxyConfiguration(ctx context.Context) ApiPostConfigApacheHttpComponentsProxyConfigurationRequest {
 	return ApiPostConfigApacheHttpComponentsProxyConfigurationRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -3081,69 +3208,67 @@ func (a *SlingApiService) PostConfigApacheHttpComponentsProxyConfiguration(ctx _
 }
 
 // Execute executes the request
-func (a *SlingApiService) PostConfigApacheHttpComponentsProxyConfigurationExecute(r ApiPostConfigApacheHttpComponentsProxyConfigurationRequest) (*_nethttp.Response, error) {
+func (a *SlingAPIService) PostConfigApacheHttpComponentsProxyConfigurationExecute(r ApiPostConfigApacheHttpComponentsProxyConfigurationRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingApiService.PostConfigApacheHttpComponentsProxyConfiguration")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingAPIService.PostConfigApacheHttpComponentsProxyConfiguration")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/apps/system/config/org.apache.http.proxyconfigurator.config"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.proxyHost != nil {
-		localVarQueryParams.Add("proxy.host", parameterToString(*r.proxyHost, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "proxy.host", r.proxyHost, "form", "")
 	}
 	if r.proxyHostTypeHint != nil {
-		localVarQueryParams.Add("proxy.host@TypeHint", parameterToString(*r.proxyHostTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "proxy.host@TypeHint", r.proxyHostTypeHint, "form", "")
 	}
 	if r.proxyPort != nil {
-		localVarQueryParams.Add("proxy.port", parameterToString(*r.proxyPort, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "proxy.port", r.proxyPort, "form", "")
 	}
 	if r.proxyPortTypeHint != nil {
-		localVarQueryParams.Add("proxy.port@TypeHint", parameterToString(*r.proxyPortTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "proxy.port@TypeHint", r.proxyPortTypeHint, "form", "")
 	}
 	if r.proxyExceptions != nil {
 		t := *r.proxyExceptions
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("proxy.exceptions", parameterToString(s.Index(i), "multi"))
+				parameterAddToHeaderOrQuery(localVarQueryParams, "proxy.exceptions", s.Index(i).Interface(), "form", "multi")
 			}
 		} else {
-			localVarQueryParams.Add("proxy.exceptions", parameterToString(t, "multi"))
+			parameterAddToHeaderOrQuery(localVarQueryParams, "proxy.exceptions", t, "form", "multi")
 		}
 	}
 	if r.proxyExceptionsTypeHint != nil {
-		localVarQueryParams.Add("proxy.exceptions@TypeHint", parameterToString(*r.proxyExceptionsTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "proxy.exceptions@TypeHint", r.proxyExceptionsTypeHint, "form", "")
 	}
 	if r.proxyEnabled != nil {
-		localVarQueryParams.Add("proxy.enabled", parameterToString(*r.proxyEnabled, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "proxy.enabled", r.proxyEnabled, "form", "")
 	}
 	if r.proxyEnabledTypeHint != nil {
-		localVarQueryParams.Add("proxy.enabled@TypeHint", parameterToString(*r.proxyEnabledTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "proxy.enabled@TypeHint", r.proxyEnabledTypeHint, "form", "")
 	}
 	if r.proxyUser != nil {
-		localVarQueryParams.Add("proxy.user", parameterToString(*r.proxyUser, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "proxy.user", r.proxyUser, "form", "")
 	}
 	if r.proxyUserTypeHint != nil {
-		localVarQueryParams.Add("proxy.user@TypeHint", parameterToString(*r.proxyUserTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "proxy.user@TypeHint", r.proxyUserTypeHint, "form", "")
 	}
 	if r.proxyPassword != nil {
-		localVarQueryParams.Add("proxy.password", parameterToString(*r.proxyPassword, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "proxy.password", r.proxyPassword, "form", "")
 	}
 	if r.proxyPasswordTypeHint != nil {
-		localVarQueryParams.Add("proxy.password@TypeHint", parameterToString(*r.proxyPasswordTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "proxy.password@TypeHint", r.proxyPasswordTypeHint, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3162,7 +3287,7 @@ func (a *SlingApiService) PostConfigApacheHttpComponentsProxyConfigurationExecut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -3172,15 +3297,15 @@ func (a *SlingApiService) PostConfigApacheHttpComponentsProxyConfigurationExecut
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3191,8 +3316,8 @@ func (a *SlingApiService) PostConfigApacheHttpComponentsProxyConfigurationExecut
 }
 
 type ApiPostConfigApacheSlingDavExServletRequest struct {
-	ctx _context.Context
-	ApiService *SlingApiService
+	ctx context.Context
+	ApiService *SlingAPIService
 	alias *string
 	aliasTypeHint *string
 	davCreateAbsoluteUri *bool
@@ -3203,30 +3328,33 @@ func (r ApiPostConfigApacheSlingDavExServletRequest) Alias(alias string) ApiPost
 	r.alias = &alias
 	return r
 }
+
 func (r ApiPostConfigApacheSlingDavExServletRequest) AliasTypeHint(aliasTypeHint string) ApiPostConfigApacheSlingDavExServletRequest {
 	r.aliasTypeHint = &aliasTypeHint
 	return r
 }
+
 func (r ApiPostConfigApacheSlingDavExServletRequest) DavCreateAbsoluteUri(davCreateAbsoluteUri bool) ApiPostConfigApacheSlingDavExServletRequest {
 	r.davCreateAbsoluteUri = &davCreateAbsoluteUri
 	return r
 }
+
 func (r ApiPostConfigApacheSlingDavExServletRequest) DavCreateAbsoluteUriTypeHint(davCreateAbsoluteUriTypeHint string) ApiPostConfigApacheSlingDavExServletRequest {
 	r.davCreateAbsoluteUriTypeHint = &davCreateAbsoluteUriTypeHint
 	return r
 }
 
-func (r ApiPostConfigApacheSlingDavExServletRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiPostConfigApacheSlingDavExServletRequest) Execute() (*http.Response, error) {
 	return r.ApiService.PostConfigApacheSlingDavExServletExecute(r)
 }
 
 /*
 PostConfigApacheSlingDavExServlet Method for PostConfigApacheSlingDavExServlet
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPostConfigApacheSlingDavExServletRequest
 */
-func (a *SlingApiService) PostConfigApacheSlingDavExServlet(ctx _context.Context) ApiPostConfigApacheSlingDavExServletRequest {
+func (a *SlingAPIService) PostConfigApacheSlingDavExServlet(ctx context.Context) ApiPostConfigApacheSlingDavExServletRequest {
 	return ApiPostConfigApacheSlingDavExServletRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -3234,37 +3362,35 @@ func (a *SlingApiService) PostConfigApacheSlingDavExServlet(ctx _context.Context
 }
 
 // Execute executes the request
-func (a *SlingApiService) PostConfigApacheSlingDavExServletExecute(r ApiPostConfigApacheSlingDavExServletRequest) (*_nethttp.Response, error) {
+func (a *SlingAPIService) PostConfigApacheSlingDavExServletExecute(r ApiPostConfigApacheSlingDavExServletRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingApiService.PostConfigApacheSlingDavExServlet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingAPIService.PostConfigApacheSlingDavExServlet")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.alias != nil {
-		localVarQueryParams.Add("alias", parameterToString(*r.alias, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "alias", r.alias, "form", "")
 	}
 	if r.aliasTypeHint != nil {
-		localVarQueryParams.Add("alias@TypeHint", parameterToString(*r.aliasTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "alias@TypeHint", r.aliasTypeHint, "form", "")
 	}
 	if r.davCreateAbsoluteUri != nil {
-		localVarQueryParams.Add("dav.create-absolute-uri", parameterToString(*r.davCreateAbsoluteUri, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "dav.create-absolute-uri", r.davCreateAbsoluteUri, "form", "")
 	}
 	if r.davCreateAbsoluteUriTypeHint != nil {
-		localVarQueryParams.Add("dav.create-absolute-uri@TypeHint", parameterToString(*r.davCreateAbsoluteUriTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "dav.create-absolute-uri@TypeHint", r.davCreateAbsoluteUriTypeHint, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3283,7 +3409,7 @@ func (a *SlingApiService) PostConfigApacheSlingDavExServletExecute(r ApiPostConf
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -3293,15 +3419,15 @@ func (a *SlingApiService) PostConfigApacheSlingDavExServletExecute(r ApiPostConf
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3312,8 +3438,8 @@ func (a *SlingApiService) PostConfigApacheSlingDavExServletExecute(r ApiPostConf
 }
 
 type ApiPostConfigApacheSlingGetServletRequest struct {
-	ctx _context.Context
-	ApiService *SlingApiService
+	ctx context.Context
+	ApiService *SlingAPIService
 	jsonMaximumresults *string
 	jsonMaximumresultsTypeHint *string
 	enableHtml *bool
@@ -3328,46 +3454,53 @@ func (r ApiPostConfigApacheSlingGetServletRequest) JsonMaximumresults(jsonMaximu
 	r.jsonMaximumresults = &jsonMaximumresults
 	return r
 }
+
 func (r ApiPostConfigApacheSlingGetServletRequest) JsonMaximumresultsTypeHint(jsonMaximumresultsTypeHint string) ApiPostConfigApacheSlingGetServletRequest {
 	r.jsonMaximumresultsTypeHint = &jsonMaximumresultsTypeHint
 	return r
 }
+
 func (r ApiPostConfigApacheSlingGetServletRequest) EnableHtml(enableHtml bool) ApiPostConfigApacheSlingGetServletRequest {
 	r.enableHtml = &enableHtml
 	return r
 }
+
 func (r ApiPostConfigApacheSlingGetServletRequest) EnableHtmlTypeHint(enableHtmlTypeHint string) ApiPostConfigApacheSlingGetServletRequest {
 	r.enableHtmlTypeHint = &enableHtmlTypeHint
 	return r
 }
+
 func (r ApiPostConfigApacheSlingGetServletRequest) EnableTxt(enableTxt bool) ApiPostConfigApacheSlingGetServletRequest {
 	r.enableTxt = &enableTxt
 	return r
 }
+
 func (r ApiPostConfigApacheSlingGetServletRequest) EnableTxtTypeHint(enableTxtTypeHint string) ApiPostConfigApacheSlingGetServletRequest {
 	r.enableTxtTypeHint = &enableTxtTypeHint
 	return r
 }
+
 func (r ApiPostConfigApacheSlingGetServletRequest) EnableXml(enableXml bool) ApiPostConfigApacheSlingGetServletRequest {
 	r.enableXml = &enableXml
 	return r
 }
+
 func (r ApiPostConfigApacheSlingGetServletRequest) EnableXmlTypeHint(enableXmlTypeHint string) ApiPostConfigApacheSlingGetServletRequest {
 	r.enableXmlTypeHint = &enableXmlTypeHint
 	return r
 }
 
-func (r ApiPostConfigApacheSlingGetServletRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiPostConfigApacheSlingGetServletRequest) Execute() (*http.Response, error) {
 	return r.ApiService.PostConfigApacheSlingGetServletExecute(r)
 }
 
 /*
 PostConfigApacheSlingGetServlet Method for PostConfigApacheSlingGetServlet
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPostConfigApacheSlingGetServletRequest
 */
-func (a *SlingApiService) PostConfigApacheSlingGetServlet(ctx _context.Context) ApiPostConfigApacheSlingGetServletRequest {
+func (a *SlingAPIService) PostConfigApacheSlingGetServlet(ctx context.Context) ApiPostConfigApacheSlingGetServletRequest {
 	return ApiPostConfigApacheSlingGetServletRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -3375,49 +3508,47 @@ func (a *SlingApiService) PostConfigApacheSlingGetServlet(ctx _context.Context) 
 }
 
 // Execute executes the request
-func (a *SlingApiService) PostConfigApacheSlingGetServletExecute(r ApiPostConfigApacheSlingGetServletRequest) (*_nethttp.Response, error) {
+func (a *SlingAPIService) PostConfigApacheSlingGetServletExecute(r ApiPostConfigApacheSlingGetServletRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingApiService.PostConfigApacheSlingGetServlet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingAPIService.PostConfigApacheSlingGetServlet")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.jsonMaximumresults != nil {
-		localVarQueryParams.Add("json.maximumresults", parameterToString(*r.jsonMaximumresults, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "json.maximumresults", r.jsonMaximumresults, "form", "")
 	}
 	if r.jsonMaximumresultsTypeHint != nil {
-		localVarQueryParams.Add("json.maximumresults@TypeHint", parameterToString(*r.jsonMaximumresultsTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "json.maximumresults@TypeHint", r.jsonMaximumresultsTypeHint, "form", "")
 	}
 	if r.enableHtml != nil {
-		localVarQueryParams.Add("enable.html", parameterToString(*r.enableHtml, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "enable.html", r.enableHtml, "form", "")
 	}
 	if r.enableHtmlTypeHint != nil {
-		localVarQueryParams.Add("enable.html@TypeHint", parameterToString(*r.enableHtmlTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "enable.html@TypeHint", r.enableHtmlTypeHint, "form", "")
 	}
 	if r.enableTxt != nil {
-		localVarQueryParams.Add("enable.txt", parameterToString(*r.enableTxt, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "enable.txt", r.enableTxt, "form", "")
 	}
 	if r.enableTxtTypeHint != nil {
-		localVarQueryParams.Add("enable.txt@TypeHint", parameterToString(*r.enableTxtTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "enable.txt@TypeHint", r.enableTxtTypeHint, "form", "")
 	}
 	if r.enableXml != nil {
-		localVarQueryParams.Add("enable.xml", parameterToString(*r.enableXml, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "enable.xml", r.enableXml, "form", "")
 	}
 	if r.enableXmlTypeHint != nil {
-		localVarQueryParams.Add("enable.xml@TypeHint", parameterToString(*r.enableXmlTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "enable.xml@TypeHint", r.enableXmlTypeHint, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3436,7 +3567,7 @@ func (a *SlingApiService) PostConfigApacheSlingGetServletExecute(r ApiPostConfig
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -3446,15 +3577,15 @@ func (a *SlingApiService) PostConfigApacheSlingGetServletExecute(r ApiPostConfig
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3465,8 +3596,8 @@ func (a *SlingApiService) PostConfigApacheSlingGetServletExecute(r ApiPostConfig
 }
 
 type ApiPostConfigApacheSlingReferrerFilterRequest struct {
-	ctx _context.Context
-	ApiService *SlingApiService
+	ctx context.Context
+	ApiService *SlingAPIService
 	allowEmpty *bool
 	allowEmptyTypeHint *string
 	allowHosts *string
@@ -3481,46 +3612,53 @@ func (r ApiPostConfigApacheSlingReferrerFilterRequest) AllowEmpty(allowEmpty boo
 	r.allowEmpty = &allowEmpty
 	return r
 }
+
 func (r ApiPostConfigApacheSlingReferrerFilterRequest) AllowEmptyTypeHint(allowEmptyTypeHint string) ApiPostConfigApacheSlingReferrerFilterRequest {
 	r.allowEmptyTypeHint = &allowEmptyTypeHint
 	return r
 }
+
 func (r ApiPostConfigApacheSlingReferrerFilterRequest) AllowHosts(allowHosts string) ApiPostConfigApacheSlingReferrerFilterRequest {
 	r.allowHosts = &allowHosts
 	return r
 }
+
 func (r ApiPostConfigApacheSlingReferrerFilterRequest) AllowHostsTypeHint(allowHostsTypeHint string) ApiPostConfigApacheSlingReferrerFilterRequest {
 	r.allowHostsTypeHint = &allowHostsTypeHint
 	return r
 }
+
 func (r ApiPostConfigApacheSlingReferrerFilterRequest) AllowHostsRegexp(allowHostsRegexp string) ApiPostConfigApacheSlingReferrerFilterRequest {
 	r.allowHostsRegexp = &allowHostsRegexp
 	return r
 }
+
 func (r ApiPostConfigApacheSlingReferrerFilterRequest) AllowHostsRegexpTypeHint(allowHostsRegexpTypeHint string) ApiPostConfigApacheSlingReferrerFilterRequest {
 	r.allowHostsRegexpTypeHint = &allowHostsRegexpTypeHint
 	return r
 }
+
 func (r ApiPostConfigApacheSlingReferrerFilterRequest) FilterMethods(filterMethods string) ApiPostConfigApacheSlingReferrerFilterRequest {
 	r.filterMethods = &filterMethods
 	return r
 }
+
 func (r ApiPostConfigApacheSlingReferrerFilterRequest) FilterMethodsTypeHint(filterMethodsTypeHint string) ApiPostConfigApacheSlingReferrerFilterRequest {
 	r.filterMethodsTypeHint = &filterMethodsTypeHint
 	return r
 }
 
-func (r ApiPostConfigApacheSlingReferrerFilterRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiPostConfigApacheSlingReferrerFilterRequest) Execute() (*http.Response, error) {
 	return r.ApiService.PostConfigApacheSlingReferrerFilterExecute(r)
 }
 
 /*
 PostConfigApacheSlingReferrerFilter Method for PostConfigApacheSlingReferrerFilter
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPostConfigApacheSlingReferrerFilterRequest
 */
-func (a *SlingApiService) PostConfigApacheSlingReferrerFilter(ctx _context.Context) ApiPostConfigApacheSlingReferrerFilterRequest {
+func (a *SlingAPIService) PostConfigApacheSlingReferrerFilter(ctx context.Context) ApiPostConfigApacheSlingReferrerFilterRequest {
 	return ApiPostConfigApacheSlingReferrerFilterRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -3528,49 +3666,47 @@ func (a *SlingApiService) PostConfigApacheSlingReferrerFilter(ctx _context.Conte
 }
 
 // Execute executes the request
-func (a *SlingApiService) PostConfigApacheSlingReferrerFilterExecute(r ApiPostConfigApacheSlingReferrerFilterRequest) (*_nethttp.Response, error) {
+func (a *SlingAPIService) PostConfigApacheSlingReferrerFilterExecute(r ApiPostConfigApacheSlingReferrerFilterRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingApiService.PostConfigApacheSlingReferrerFilter")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingAPIService.PostConfigApacheSlingReferrerFilter")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/apps/system/config/org.apache.sling.security.impl.ReferrerFilter"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.allowEmpty != nil {
-		localVarQueryParams.Add("allow.empty", parameterToString(*r.allowEmpty, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "allow.empty", r.allowEmpty, "form", "")
 	}
 	if r.allowEmptyTypeHint != nil {
-		localVarQueryParams.Add("allow.empty@TypeHint", parameterToString(*r.allowEmptyTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "allow.empty@TypeHint", r.allowEmptyTypeHint, "form", "")
 	}
 	if r.allowHosts != nil {
-		localVarQueryParams.Add("allow.hosts", parameterToString(*r.allowHosts, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "allow.hosts", r.allowHosts, "form", "")
 	}
 	if r.allowHostsTypeHint != nil {
-		localVarQueryParams.Add("allow.hosts@TypeHint", parameterToString(*r.allowHostsTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "allow.hosts@TypeHint", r.allowHostsTypeHint, "form", "")
 	}
 	if r.allowHostsRegexp != nil {
-		localVarQueryParams.Add("allow.hosts.regexp", parameterToString(*r.allowHostsRegexp, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "allow.hosts.regexp", r.allowHostsRegexp, "form", "")
 	}
 	if r.allowHostsRegexpTypeHint != nil {
-		localVarQueryParams.Add("allow.hosts.regexp@TypeHint", parameterToString(*r.allowHostsRegexpTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "allow.hosts.regexp@TypeHint", r.allowHostsRegexpTypeHint, "form", "")
 	}
 	if r.filterMethods != nil {
-		localVarQueryParams.Add("filter.methods", parameterToString(*r.filterMethods, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "filter.methods", r.filterMethods, "form", "")
 	}
 	if r.filterMethodsTypeHint != nil {
-		localVarQueryParams.Add("filter.methods@TypeHint", parameterToString(*r.filterMethodsTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "filter.methods@TypeHint", r.filterMethodsTypeHint, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3589,7 +3725,7 @@ func (a *SlingApiService) PostConfigApacheSlingReferrerFilterExecute(r ApiPostCo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -3599,15 +3735,15 @@ func (a *SlingApiService) PostConfigApacheSlingReferrerFilterExecute(r ApiPostCo
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3618,24 +3754,23 @@ func (a *SlingApiService) PostConfigApacheSlingReferrerFilterExecute(r ApiPostCo
 }
 
 type ApiPostConfigPropertyRequest struct {
-	ctx _context.Context
-	ApiService *SlingApiService
+	ctx context.Context
+	ApiService *SlingAPIService
 	configNodeName string
 }
 
-
-func (r ApiPostConfigPropertyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiPostConfigPropertyRequest) Execute() (*http.Response, error) {
 	return r.ApiService.PostConfigPropertyExecute(r)
 }
 
 /*
 PostConfigProperty Method for PostConfigProperty
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param configNodeName
  @return ApiPostConfigPropertyRequest
 */
-func (a *SlingApiService) PostConfigProperty(ctx _context.Context, configNodeName string) ApiPostConfigPropertyRequest {
+func (a *SlingAPIService) PostConfigProperty(ctx context.Context, configNodeName string) ApiPostConfigPropertyRequest {
 	return ApiPostConfigPropertyRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -3644,26 +3779,24 @@ func (a *SlingApiService) PostConfigProperty(ctx _context.Context, configNodeNam
 }
 
 // Execute executes the request
-func (a *SlingApiService) PostConfigPropertyExecute(r ApiPostConfigPropertyRequest) (*_nethttp.Response, error) {
+func (a *SlingAPIService) PostConfigPropertyExecute(r ApiPostConfigPropertyRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingApiService.PostConfigProperty")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingAPIService.PostConfigProperty")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/apps/system/config/{configNodeName}"
-	localVarPath = strings.Replace(localVarPath, "{"+"configNodeName"+"}", _neturl.PathEscape(parameterToString(r.configNodeName, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"configNodeName"+"}", url.PathEscape(parameterValueToString(r.configNodeName, "configNodeName")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3682,7 +3815,7 @@ func (a *SlingApiService) PostConfigPropertyExecute(r ApiPostConfigPropertyReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -3692,15 +3825,15 @@ func (a *SlingApiService) PostConfigPropertyExecute(r ApiPostConfigPropertyReque
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3711,41 +3844,43 @@ func (a *SlingApiService) PostConfigPropertyExecute(r ApiPostConfigPropertyReque
 }
 
 type ApiPostNodeRequest struct {
-	ctx _context.Context
-	ApiService *SlingApiService
+	ctx context.Context
+	ApiService *SlingAPIService
 	path string
 	name string
 	operation *string
 	deleteAuthorizable *string
-	file **os.File
+	file *os.File
 }
 
 func (r ApiPostNodeRequest) Operation(operation string) ApiPostNodeRequest {
 	r.operation = &operation
 	return r
 }
+
 func (r ApiPostNodeRequest) DeleteAuthorizable(deleteAuthorizable string) ApiPostNodeRequest {
 	r.deleteAuthorizable = &deleteAuthorizable
 	return r
 }
+
 func (r ApiPostNodeRequest) File(file *os.File) ApiPostNodeRequest {
-	r.file = &file
+	r.file = file
 	return r
 }
 
-func (r ApiPostNodeRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiPostNodeRequest) Execute() (*http.Response, error) {
 	return r.ApiService.PostNodeExecute(r)
 }
 
 /*
 PostNode Method for PostNode
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param path
  @param name
  @return ApiPostNodeRequest
 */
-func (a *SlingApiService) PostNode(ctx _context.Context, path string, name string) ApiPostNodeRequest {
+func (a *SlingAPIService) PostNode(ctx context.Context, path string, name string) ApiPostNodeRequest {
 	return ApiPostNodeRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -3755,33 +3890,31 @@ func (a *SlingApiService) PostNode(ctx _context.Context, path string, name strin
 }
 
 // Execute executes the request
-func (a *SlingApiService) PostNodeExecute(r ApiPostNodeRequest) (*_nethttp.Response, error) {
+func (a *SlingAPIService) PostNodeExecute(r ApiPostNodeRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingApiService.PostNode")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingAPIService.PostNode")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/{path}/{name}"
-	localVarPath = strings.Replace(localVarPath, "{"+"path"+"}", _neturl.PathEscape(parameterToString(r.path, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(r.name, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"path"+"}", url.PathEscape(parameterValueToString(r.path, "path")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", url.PathEscape(parameterValueToString(r.name, "name")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.operation != nil {
-		localVarQueryParams.Add(":operation", parameterToString(*r.operation, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, ":operation", r.operation, "form", "")
 	}
 	if r.deleteAuthorizable != nil {
-		localVarQueryParams.Add("deleteAuthorizable", parameterToString(*r.deleteAuthorizable, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "deleteAuthorizable", r.deleteAuthorizable, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"multipart/form-data"}
@@ -3800,18 +3933,22 @@ func (a *SlingApiService) PostNodeExecute(r ApiPostNodeRequest) (*_nethttp.Respo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	localVarFormFileName = "file"
-	var localVarFile *os.File
-	if r.file != nil {
-		localVarFile = *r.file
+	var fileLocalVarFormFileName string
+	var fileLocalVarFileName     string
+	var fileLocalVarFileBytes    []byte
+
+	fileLocalVarFormFileName = "file"
+	fileLocalVarFile := r.file
+
+	if fileLocalVarFile != nil {
+		fbs, _ := io.ReadAll(fileLocalVarFile)
+
+		fileLocalVarFileBytes = fbs
+		fileLocalVarFileName = fileLocalVarFile.Name()
+		fileLocalVarFile.Close()
+		formFiles = append(formFiles, formFile{fileBytes: fileLocalVarFileBytes, fileName: fileLocalVarFileName, formFileName: fileLocalVarFormFileName})
 	}
-	if localVarFile != nil {
-		fbs, _ := _ioutil.ReadAll(localVarFile)
-		localVarFileBytes = fbs
-		localVarFileName = localVarFile.Name()
-		localVarFile.Close()
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -3821,15 +3958,15 @@ func (a *SlingApiService) PostNodeExecute(r ApiPostNodeRequest) (*_nethttp.Respo
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3840,8 +3977,8 @@ func (a *SlingApiService) PostNodeExecute(r ApiPostNodeRequest) (*_nethttp.Respo
 }
 
 type ApiPostNodeRwRequest struct {
-	ctx _context.Context
-	ApiService *SlingApiService
+	ctx context.Context
+	ApiService *SlingAPIService
 	path string
 	name string
 	addMembers *string
@@ -3852,19 +3989,19 @@ func (r ApiPostNodeRwRequest) AddMembers(addMembers string) ApiPostNodeRwRequest
 	return r
 }
 
-func (r ApiPostNodeRwRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiPostNodeRwRequest) Execute() (*http.Response, error) {
 	return r.ApiService.PostNodeRwExecute(r)
 }
 
 /*
 PostNodeRw Method for PostNodeRw
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param path
  @param name
  @return ApiPostNodeRwRequest
 */
-func (a *SlingApiService) PostNodeRw(ctx _context.Context, path string, name string) ApiPostNodeRwRequest {
+func (a *SlingAPIService) PostNodeRw(ctx context.Context, path string, name string) ApiPostNodeRwRequest {
 	return ApiPostNodeRwRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -3874,30 +4011,28 @@ func (a *SlingApiService) PostNodeRw(ctx _context.Context, path string, name str
 }
 
 // Execute executes the request
-func (a *SlingApiService) PostNodeRwExecute(r ApiPostNodeRwRequest) (*_nethttp.Response, error) {
+func (a *SlingAPIService) PostNodeRwExecute(r ApiPostNodeRwRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingApiService.PostNodeRw")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingAPIService.PostNodeRw")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/{path}/{name}.rw.html"
-	localVarPath = strings.Replace(localVarPath, "{"+"path"+"}", _neturl.PathEscape(parameterToString(r.path, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(r.name, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"path"+"}", url.PathEscape(parameterValueToString(r.path, "path")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", url.PathEscape(parameterValueToString(r.name, "name")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.addMembers != nil {
-		localVarQueryParams.Add("addMembers", parameterToString(*r.addMembers, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "addMembers", r.addMembers, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3916,7 +4051,7 @@ func (a *SlingApiService) PostNodeRwExecute(r ApiPostNodeRwRequest) (*_nethttp.R
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -3926,15 +4061,15 @@ func (a *SlingApiService) PostNodeRwExecute(r ApiPostNodeRwRequest) (*_nethttp.R
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3945,34 +4080,35 @@ func (a *SlingApiService) PostNodeRwExecute(r ApiPostNodeRwRequest) (*_nethttp.R
 }
 
 type ApiPostPathRequest struct {
-	ctx _context.Context
-	ApiService *SlingApiService
+	ctx context.Context
+	ApiService *SlingAPIService
 	path string
-	jcrprimaryType *string
+	jcrPrimaryType *string
 	name *string
 }
 
-func (r ApiPostPathRequest) JcrprimaryType(jcrprimaryType string) ApiPostPathRequest {
-	r.jcrprimaryType = &jcrprimaryType
+func (r ApiPostPathRequest) JcrPrimaryType(jcrPrimaryType string) ApiPostPathRequest {
+	r.jcrPrimaryType = &jcrPrimaryType
 	return r
 }
+
 func (r ApiPostPathRequest) Name(name string) ApiPostPathRequest {
 	r.name = &name
 	return r
 }
 
-func (r ApiPostPathRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiPostPathRequest) Execute() (*http.Response, error) {
 	return r.ApiService.PostPathExecute(r)
 }
 
 /*
 PostPath Method for PostPath
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param path
  @return ApiPostPathRequest
 */
-func (a *SlingApiService) PostPath(ctx _context.Context, path string) ApiPostPathRequest {
+func (a *SlingAPIService) PostPath(ctx context.Context, path string) ApiPostPathRequest {
 	return ApiPostPathRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -3981,35 +4117,33 @@ func (a *SlingApiService) PostPath(ctx _context.Context, path string) ApiPostPat
 }
 
 // Execute executes the request
-func (a *SlingApiService) PostPathExecute(r ApiPostPathRequest) (*_nethttp.Response, error) {
+func (a *SlingAPIService) PostPathExecute(r ApiPostPathRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingApiService.PostPath")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingAPIService.PostPath")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/{path}/"
-	localVarPath = strings.Replace(localVarPath, "{"+"path"+"}", _neturl.PathEscape(parameterToString(r.path, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"path"+"}", url.PathEscape(parameterValueToString(r.path, "path")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-	if r.jcrprimaryType == nil {
-		return nil, reportError("jcrprimaryType is required and must be specified")
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.jcrPrimaryType == nil {
+		return nil, reportError("jcrPrimaryType is required and must be specified")
 	}
 	if r.name == nil {
 		return nil, reportError("name is required and must be specified")
 	}
 
-	localVarQueryParams.Add("jcr:primaryType", parameterToString(*r.jcrprimaryType, ""))
-	localVarQueryParams.Add(":name", parameterToString(*r.name, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "jcr:primaryType", r.jcrPrimaryType, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, ":name", r.name, "form", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -4027,7 +4161,7 @@ func (a *SlingApiService) PostPathExecute(r ApiPostPathRequest) (*_nethttp.Respo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -4037,15 +4171,15 @@ func (a *SlingApiService) PostPathExecute(r ApiPostPathRequest) (*_nethttp.Respo
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4056,8 +4190,8 @@ func (a *SlingApiService) PostPathExecute(r ApiPostPathRequest) (*_nethttp.Respo
 }
 
 type ApiPostQueryRequest struct {
-	ctx _context.Context
-	ApiService *SlingApiService
+	ctx context.Context
+	ApiService *SlingAPIService
 	path *string
 	pLimit *float32
 	var1Property *string
@@ -4068,30 +4202,33 @@ func (r ApiPostQueryRequest) Path(path string) ApiPostQueryRequest {
 	r.path = &path
 	return r
 }
+
 func (r ApiPostQueryRequest) PLimit(pLimit float32) ApiPostQueryRequest {
 	r.pLimit = &pLimit
 	return r
 }
+
 func (r ApiPostQueryRequest) Var1Property(var1Property string) ApiPostQueryRequest {
 	r.var1Property = &var1Property
 	return r
 }
+
 func (r ApiPostQueryRequest) Var1PropertyValue(var1PropertyValue string) ApiPostQueryRequest {
 	r.var1PropertyValue = &var1PropertyValue
 	return r
 }
 
-func (r ApiPostQueryRequest) Execute() (string, *_nethttp.Response, error) {
+func (r ApiPostQueryRequest) Execute() (string, *http.Response, error) {
 	return r.ApiService.PostQueryExecute(r)
 }
 
 /*
 PostQuery Method for PostQuery
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPostQueryRequest
 */
-func (a *SlingApiService) PostQuery(ctx _context.Context) ApiPostQueryRequest {
+func (a *SlingAPIService) PostQuery(ctx context.Context) ApiPostQueryRequest {
 	return ApiPostQueryRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -4100,26 +4237,24 @@ func (a *SlingApiService) PostQuery(ctx _context.Context) ApiPostQueryRequest {
 
 // Execute executes the request
 //  @return string
-func (a *SlingApiService) PostQueryExecute(r ApiPostQueryRequest) (string, *_nethttp.Response, error) {
+func (a *SlingAPIService) PostQueryExecute(r ApiPostQueryRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 		localVarReturnValue  string
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingApiService.PostQuery")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingAPIService.PostQuery")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/bin/querybuilder.json"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.path == nil {
 		return localVarReturnValue, nil, reportError("path is required and must be specified")
 	}
@@ -4133,10 +4268,10 @@ func (a *SlingApiService) PostQueryExecute(r ApiPostQueryRequest) (string, *_net
 		return localVarReturnValue, nil, reportError("var1PropertyValue is required and must be specified")
 	}
 
-	localVarQueryParams.Add("path", parameterToString(*r.path, ""))
-	localVarQueryParams.Add("p.limit", parameterToString(*r.pLimit, ""))
-	localVarQueryParams.Add("1_property", parameterToString(*r.var1Property, ""))
-	localVarQueryParams.Add("1_property.value", parameterToString(*r.var1PropertyValue, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "path", r.path, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "p.limit", r.pLimit, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "1_property", r.var1Property, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "1_property.value", r.var1PropertyValue, "form", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -4154,7 +4289,7 @@ func (a *SlingApiService) PostQueryExecute(r ApiPostQueryRequest) (string, *_net
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4164,15 +4299,15 @@ func (a *SlingApiService) PostQueryExecute(r ApiPostQueryRequest) (string, *_net
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4182,13 +4317,14 @@ func (a *SlingApiService) PostQueryExecute(r ApiPostQueryRequest) (string, *_net
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4199,37 +4335,45 @@ func (a *SlingApiService) PostQueryExecute(r ApiPostQueryRequest) (string, *_net
 }
 
 type ApiPostTreeActivationRequest struct {
-	ctx _context.Context
-	ApiService *SlingApiService
+	ctx context.Context
+	ApiService *SlingAPIService
 	ignoredeactivated *bool
 	onlymodified *bool
 	path *string
+	cmd *string
 }
 
 func (r ApiPostTreeActivationRequest) Ignoredeactivated(ignoredeactivated bool) ApiPostTreeActivationRequest {
 	r.ignoredeactivated = &ignoredeactivated
 	return r
 }
+
 func (r ApiPostTreeActivationRequest) Onlymodified(onlymodified bool) ApiPostTreeActivationRequest {
 	r.onlymodified = &onlymodified
 	return r
 }
+
 func (r ApiPostTreeActivationRequest) Path(path string) ApiPostTreeActivationRequest {
 	r.path = &path
 	return r
 }
 
-func (r ApiPostTreeActivationRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiPostTreeActivationRequest) Cmd(cmd string) ApiPostTreeActivationRequest {
+	r.cmd = &cmd
+	return r
+}
+
+func (r ApiPostTreeActivationRequest) Execute() (*http.Response, error) {
 	return r.ApiService.PostTreeActivationExecute(r)
 }
 
 /*
 PostTreeActivation Method for PostTreeActivation
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPostTreeActivationRequest
 */
-func (a *SlingApiService) PostTreeActivation(ctx _context.Context) ApiPostTreeActivationRequest {
+func (a *SlingAPIService) PostTreeActivation(ctx context.Context) ApiPostTreeActivationRequest {
 	return ApiPostTreeActivationRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -4237,25 +4381,23 @@ func (a *SlingApiService) PostTreeActivation(ctx _context.Context) ApiPostTreeAc
 }
 
 // Execute executes the request
-func (a *SlingApiService) PostTreeActivationExecute(r ApiPostTreeActivationRequest) (*_nethttp.Response, error) {
+func (a *SlingAPIService) PostTreeActivationExecute(r ApiPostTreeActivationRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingApiService.PostTreeActivation")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingAPIService.PostTreeActivation")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/etc/replication/treeactivation.html"
+	localVarPath := localBasePath + "/libs/replication/treeactivation.html"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.ignoredeactivated == nil {
 		return nil, reportError("ignoredeactivated is required and must be specified")
 	}
@@ -4265,10 +4407,14 @@ func (a *SlingApiService) PostTreeActivationExecute(r ApiPostTreeActivationReque
 	if r.path == nil {
 		return nil, reportError("path is required and must be specified")
 	}
+	if r.cmd == nil {
+		return nil, reportError("cmd is required and must be specified")
+	}
 
-	localVarQueryParams.Add("ignoredeactivated", parameterToString(*r.ignoredeactivated, ""))
-	localVarQueryParams.Add("onlymodified", parameterToString(*r.onlymodified, ""))
-	localVarQueryParams.Add("path", parameterToString(*r.path, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "ignoredeactivated", r.ignoredeactivated, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "onlymodified", r.onlymodified, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "path", r.path, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "cmd", r.cmd, "form", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -4286,7 +4432,7 @@ func (a *SlingApiService) PostTreeActivationExecute(r ApiPostTreeActivationReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -4296,15 +4442,15 @@ func (a *SlingApiService) PostTreeActivationExecute(r ApiPostTreeActivationReque
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4315,52 +4461,57 @@ func (a *SlingApiService) PostTreeActivationExecute(r ApiPostTreeActivationReque
 }
 
 type ApiPostTruststoreRequest struct {
-	ctx _context.Context
-	ApiService *SlingApiService
+	ctx context.Context
+	ApiService *SlingAPIService
 	operation *string
 	newPassword *string
 	rePassword *string
 	keyStoreType *string
 	removeAlias *string
-	certificate **os.File
+	certificate *os.File
 }
 
 func (r ApiPostTruststoreRequest) Operation(operation string) ApiPostTruststoreRequest {
 	r.operation = &operation
 	return r
 }
+
 func (r ApiPostTruststoreRequest) NewPassword(newPassword string) ApiPostTruststoreRequest {
 	r.newPassword = &newPassword
 	return r
 }
+
 func (r ApiPostTruststoreRequest) RePassword(rePassword string) ApiPostTruststoreRequest {
 	r.rePassword = &rePassword
 	return r
 }
+
 func (r ApiPostTruststoreRequest) KeyStoreType(keyStoreType string) ApiPostTruststoreRequest {
 	r.keyStoreType = &keyStoreType
 	return r
 }
+
 func (r ApiPostTruststoreRequest) RemoveAlias(removeAlias string) ApiPostTruststoreRequest {
 	r.removeAlias = &removeAlias
 	return r
 }
+
 func (r ApiPostTruststoreRequest) Certificate(certificate *os.File) ApiPostTruststoreRequest {
-	r.certificate = &certificate
+	r.certificate = certificate
 	return r
 }
 
-func (r ApiPostTruststoreRequest) Execute() (string, *_nethttp.Response, error) {
+func (r ApiPostTruststoreRequest) Execute() (string, *http.Response, error) {
 	return r.ApiService.PostTruststoreExecute(r)
 }
 
 /*
 PostTruststore Method for PostTruststore
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPostTruststoreRequest
 */
-func (a *SlingApiService) PostTruststore(ctx _context.Context) ApiPostTruststoreRequest {
+func (a *SlingAPIService) PostTruststore(ctx context.Context) ApiPostTruststoreRequest {
 	return ApiPostTruststoreRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -4369,41 +4520,39 @@ func (a *SlingApiService) PostTruststore(ctx _context.Context) ApiPostTruststore
 
 // Execute executes the request
 //  @return string
-func (a *SlingApiService) PostTruststoreExecute(r ApiPostTruststoreRequest) (string, *_nethttp.Response, error) {
+func (a *SlingAPIService) PostTruststoreExecute(r ApiPostTruststoreRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 		localVarReturnValue  string
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingApiService.PostTruststore")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingAPIService.PostTruststore")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/libs/granite/security/post/truststore"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.operation != nil {
-		localVarQueryParams.Add(":operation", parameterToString(*r.operation, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, ":operation", r.operation, "form", "")
 	}
 	if r.newPassword != nil {
-		localVarQueryParams.Add("newPassword", parameterToString(*r.newPassword, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "newPassword", r.newPassword, "form", "")
 	}
 	if r.rePassword != nil {
-		localVarQueryParams.Add("rePassword", parameterToString(*r.rePassword, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "rePassword", r.rePassword, "form", "")
 	}
 	if r.keyStoreType != nil {
-		localVarQueryParams.Add("keyStoreType", parameterToString(*r.keyStoreType, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "keyStoreType", r.keyStoreType, "form", "")
 	}
 	if r.removeAlias != nil {
-		localVarQueryParams.Add("removeAlias", parameterToString(*r.removeAlias, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "removeAlias", r.removeAlias, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"multipart/form-data"}
@@ -4422,18 +4571,22 @@ func (a *SlingApiService) PostTruststoreExecute(r ApiPostTruststoreRequest) (str
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	localVarFormFileName = "certificate"
-	var localVarFile *os.File
-	if r.certificate != nil {
-		localVarFile = *r.certificate
+	var certificateLocalVarFormFileName string
+	var certificateLocalVarFileName     string
+	var certificateLocalVarFileBytes    []byte
+
+	certificateLocalVarFormFileName = "certificate"
+	certificateLocalVarFile := r.certificate
+
+	if certificateLocalVarFile != nil {
+		fbs, _ := io.ReadAll(certificateLocalVarFile)
+
+		certificateLocalVarFileBytes = fbs
+		certificateLocalVarFileName = certificateLocalVarFile.Name()
+		certificateLocalVarFile.Close()
+		formFiles = append(formFiles, formFile{fileBytes: certificateLocalVarFileBytes, fileName: certificateLocalVarFileName, formFileName: certificateLocalVarFormFileName})
 	}
-	if localVarFile != nil {
-		fbs, _ := _ioutil.ReadAll(localVarFile)
-		localVarFileBytes = fbs
-		localVarFileName = localVarFile.Name()
-		localVarFile.Close()
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4443,15 +4596,15 @@ func (a *SlingApiService) PostTruststoreExecute(r ApiPostTruststoreRequest) (str
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4461,13 +4614,14 @@ func (a *SlingApiService) PostTruststoreExecute(r ApiPostTruststoreRequest) (str
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4478,27 +4632,27 @@ func (a *SlingApiService) PostTruststoreExecute(r ApiPostTruststoreRequest) (str
 }
 
 type ApiPostTruststorePKCS12Request struct {
-	ctx _context.Context
-	ApiService *SlingApiService
-	truststoreP12 **os.File
+	ctx context.Context
+	ApiService *SlingAPIService
+	truststoreP12 *os.File
 }
 
 func (r ApiPostTruststorePKCS12Request) TruststoreP12(truststoreP12 *os.File) ApiPostTruststorePKCS12Request {
-	r.truststoreP12 = &truststoreP12
+	r.truststoreP12 = truststoreP12
 	return r
 }
 
-func (r ApiPostTruststorePKCS12Request) Execute() (string, *_nethttp.Response, error) {
+func (r ApiPostTruststorePKCS12Request) Execute() (string, *http.Response, error) {
 	return r.ApiService.PostTruststorePKCS12Execute(r)
 }
 
 /*
 PostTruststorePKCS12 Method for PostTruststorePKCS12
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPostTruststorePKCS12Request
 */
-func (a *SlingApiService) PostTruststorePKCS12(ctx _context.Context) ApiPostTruststorePKCS12Request {
+func (a *SlingAPIService) PostTruststorePKCS12(ctx context.Context) ApiPostTruststorePKCS12Request {
 	return ApiPostTruststorePKCS12Request{
 		ApiService: a,
 		ctx: ctx,
@@ -4507,26 +4661,24 @@ func (a *SlingApiService) PostTruststorePKCS12(ctx _context.Context) ApiPostTrus
 
 // Execute executes the request
 //  @return string
-func (a *SlingApiService) PostTruststorePKCS12Execute(r ApiPostTruststorePKCS12Request) (string, *_nethttp.Response, error) {
+func (a *SlingAPIService) PostTruststorePKCS12Execute(r ApiPostTruststorePKCS12Request) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 		localVarReturnValue  string
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingApiService.PostTruststorePKCS12")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlingAPIService.PostTruststorePKCS12")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/etc/truststore"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"multipart/form-data"}
@@ -4545,18 +4697,22 @@ func (a *SlingApiService) PostTruststorePKCS12Execute(r ApiPostTruststorePKCS12R
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	localVarFormFileName = "truststore.p12"
-	var localVarFile *os.File
-	if r.truststoreP12 != nil {
-		localVarFile = *r.truststoreP12
+	var truststoreP12LocalVarFormFileName string
+	var truststoreP12LocalVarFileName     string
+	var truststoreP12LocalVarFileBytes    []byte
+
+	truststoreP12LocalVarFormFileName = "truststore.p12"
+	truststoreP12LocalVarFile := r.truststoreP12
+
+	if truststoreP12LocalVarFile != nil {
+		fbs, _ := io.ReadAll(truststoreP12LocalVarFile)
+
+		truststoreP12LocalVarFileBytes = fbs
+		truststoreP12LocalVarFileName = truststoreP12LocalVarFile.Name()
+		truststoreP12LocalVarFile.Close()
+		formFiles = append(formFiles, formFile{fileBytes: truststoreP12LocalVarFileBytes, fileName: truststoreP12LocalVarFileName, formFileName: truststoreP12LocalVarFormFileName})
 	}
-	if localVarFile != nil {
-		fbs, _ := _ioutil.ReadAll(localVarFile)
-		localVarFileBytes = fbs
-		localVarFileName = localVarFile.Name()
-		localVarFile.Close()
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4566,15 +4722,15 @@ func (a *SlingApiService) PostTruststorePKCS12Execute(r ApiPostTruststorePKCS12R
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4584,13 +4740,14 @@ func (a *SlingApiService) PostTruststorePKCS12Execute(r ApiPostTruststorePKCS12R
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

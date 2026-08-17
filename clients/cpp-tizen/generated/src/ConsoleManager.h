@@ -7,6 +7,7 @@
 #include <glib.h>
 #include "BundleInfo.h"
 #include "SamlConfigurationInfo.h"
+#include <list>
 #include "Error.h"
 
 /** \defgroup Operations API Endpoints

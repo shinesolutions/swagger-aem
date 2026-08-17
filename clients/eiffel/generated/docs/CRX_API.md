@@ -15,7 +15,7 @@ Feature | HTTP request | Description
 
 # **crxde_status**
 > crxde_status : detachable STRING_32
-	
+
 
 
 
@@ -40,7 +40,7 @@ This endpoint does not need any parameter.
 
 # **install_status**
 > install_status : detachable INSTALL_STATUS
-	
+
 
 
 
@@ -65,7 +65,7 @@ This endpoint does not need any parameter.
 
 # **package_manager_servlet**
 > package_manager_servlet 
-	
+
 
 
 
@@ -90,7 +90,7 @@ This endpoint does not need any parameter.
 
 # **post_package_service**
 > post_package_service (cmd: STRING_32 ): detachable STRING_32
-	
+
 
 
 
@@ -118,7 +118,7 @@ Name | Type | Description  | Notes
 
 # **post_package_service_json**
 > post_package_service_json (path: STRING_32 ; cmd: STRING_32 ; group_name:  detachable STRING_32 ; package_name:  detachable STRING_32 ; package_version:  detachable STRING_32 ; var_charset_:  detachable STRING_32 ; force:  detachable BOOLEAN ; recursive:  detachable BOOLEAN ; package:  detachable FILE ): detachable STRING_32
-	
+
 
 
 
@@ -154,7 +154,7 @@ Name | Type | Description  | Notes
 
 # **post_package_update**
 > post_package_update (group_name: STRING_32 ; package_name: STRING_32 ; version: STRING_32 ; path: STRING_32 ; filter:  detachable STRING_32 ; var_charset_:  detachable STRING_32 ): detachable STRING_32
-	
+
 
 
 
@@ -187,7 +187,7 @@ Name | Type | Description  | Notes
 
 # **post_set_password**
 > post_set_password (var_old: STRING_32 ; plain: STRING_32 ; verify: STRING_32 ): detachable STRING_32
-	
+
 
 
 

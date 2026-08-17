@@ -6,12 +6,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.openapitools.model.SamlConfigurationProperties;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 
 
 import io.swagger.annotations.*;
 import java.util.Objects;
 
-import javax.xml.bind.annotation.*;
 
 
 public class SamlConfigurationInfo   {
@@ -27,7 +27,6 @@ public class SamlConfigurationInfo   {
   private String serviceLocation;
 
   private SamlConfigurationProperties properties;
-
 
   /**
    * Persistent Identity (PID)
@@ -152,12 +151,12 @@ public class SamlConfigurationInfo   {
       return false;
     }
     SamlConfigurationInfo samlConfigurationInfo = (SamlConfigurationInfo) o;
-    return Objects.equals(pid, samlConfigurationInfo.pid) &&
-        Objects.equals(title, samlConfigurationInfo.title) &&
-        Objects.equals(description, samlConfigurationInfo.description) &&
-        Objects.equals(bundleLocation, samlConfigurationInfo.bundleLocation) &&
-        Objects.equals(serviceLocation, samlConfigurationInfo.serviceLocation) &&
-        Objects.equals(properties, samlConfigurationInfo.properties);
+    return Objects.equals(this.pid, samlConfigurationInfo.pid) &&
+        Objects.equals(this.title, samlConfigurationInfo.title) &&
+        Objects.equals(this.description, samlConfigurationInfo.description) &&
+        Objects.equals(this.bundleLocation, samlConfigurationInfo.bundleLocation) &&
+        Objects.equals(this.serviceLocation, samlConfigurationInfo.serviceLocation) &&
+        Objects.equals(this.properties, samlConfigurationInfo.properties);
   }
 
   @Override
@@ -185,10 +184,7 @@ public class SamlConfigurationInfo   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

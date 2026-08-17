@@ -11,15 +11,14 @@ Method | HTTP request | Description
 # **get_login_page**
 > str get_login_page()
 
-
-
 ### Example
 
+
 ```python
-import time
 import swaggeraem
-from swaggeraem.api import cq_api
+from swaggeraem.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = swaggeraem.Configuration(
@@ -28,19 +27,22 @@ configuration = swaggeraem.Configuration(
 
 
 # Enter a context with an instance of the API client
-with swaggeraem.ApiClient() as api_client:
+with swaggeraem.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cq_api.CqApi(api_client)
+    api_instance = swaggeraem.CqApi(api_client)
 
-    # example, this endpoint has no required or optional parameters
     try:
         api_response = api_instance.get_login_page()
+        print("The response of CqApi->get_login_page:\n")
         pprint(api_response)
-    except swaggeraem.ApiException as e:
+    except Exception as e:
         print("Exception when calling CqApi->get_login_page: %s\n" % e)
 ```
 
+
+
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
@@ -57,6 +59,7 @@ No authorization required
  - **Accept**: text/html
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **0** | Default response |  -  |
@@ -66,16 +69,15 @@ No authorization required
 # **post_cq_actions**
 > post_cq_actions(authorizable_id, changelog)
 
-
-
 ### Example
 
 * Basic Authentication (aemAuth):
+
 ```python
-import time
 import swaggeraem
-from swaggeraem.api import cq_api
+from swaggeraem.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = swaggeraem.Configuration(
@@ -89,30 +91,32 @@ configuration = swaggeraem.Configuration(
 
 # Configure HTTP basic authorization: aemAuth
 configuration = swaggeraem.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
 )
 
 # Enter a context with an instance of the API client
 with swaggeraem.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cq_api.CqApi(api_client)
-    authorizable_id = "authorizableId_example" # str | 
-    changelog = "changelog_example" # str | 
+    api_instance = swaggeraem.CqApi(api_client)
+    authorizable_id = 'authorizable_id_example' # str | 
+    changelog = 'changelog_example' # str | 
 
-    # example passing only required values which don't have defaults set
     try:
         api_instance.post_cq_actions(authorizable_id, changelog)
-    except swaggeraem.ApiException as e:
+    except Exception as e:
         print("Exception when calling CqApi->post_cq_actions: %s\n" % e)
 ```
 
+
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorizable_id** | **str**|  |
- **changelog** | **str**|  |
+ **authorizable_id** | **str**|  | 
+ **changelog** | **str**|  | 
 
 ### Return type
 
@@ -128,6 +132,7 @@ void (empty response body)
  - **Accept**: Not defined
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **0** | Default response |  -  |

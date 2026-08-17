@@ -22,7 +22,7 @@ Method | HTTP request | Description
 
 
 
-### Example 
+### Example
 ```objc
 OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
 // Configure HTTP basic authorization (authentication scheme: aemAuth)

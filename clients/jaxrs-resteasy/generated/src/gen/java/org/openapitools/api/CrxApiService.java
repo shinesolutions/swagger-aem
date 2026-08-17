@@ -2,6 +2,7 @@ package org.openapitools.api;
 
 import org.openapitools.api.*;
 import org.openapitools.model.*;
+
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 
@@ -13,10 +14,12 @@ import org.openapitools.api.NotFoundException;
 
 import java.io.InputStream;
 
+import javax.validation.constraints.*;
+import javax.validation.Valid;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyServerCodegen", date = "2021-09-03T15:25:57.989+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyServerCodegen", date = "2026-08-17T02:15:38.090574223Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public interface CrxApiService {
       Response getCrxdeStatus(SecurityContext securityContext)
       throws NotFoundException;
@@ -32,4 +35,6 @@ public interface CrxApiService {
       throws NotFoundException;
       Response postSetPassword(String old,String plain,String verify,SecurityContext securityContext)
       throws NotFoundException;
+
+
 }

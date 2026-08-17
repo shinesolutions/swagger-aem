@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **SslSetup**
-> character SslSetup(keystore.password, keystore.password.confirm, truststore.password, truststore.password.confirm, https.hostname, https.port, privatekey.file=var.privatekey.file, certificate.file=var.certificate.file)
+> character SslSetup(keystore_password, keystore_password_confirm, truststore_password, truststore_password_confirm, https_hostname, https_port, privatekey_file = var.privatekey_file, certificate_file = var.certificate_file)
 
 
 
@@ -16,20 +16,23 @@ Method | HTTP request | Description
 ```R
 library(openapi)
 
-var.keystore.password <- 'keystore.password_example' # character | 
-var.keystore.password.confirm <- 'keystore.password.confirm_example' # character | 
-var.truststore.password <- 'truststore.password_example' # character | 
-var.truststore.password.confirm <- 'truststore.password.confirm_example' # character | 
-var.https.hostname <- 'https.hostname_example' # character | 
-var.https.port <- 'https.port_example' # character | 
-var.privatekey.file <- File.new('/path/to/file') # data.frame | 
-var.certificate.file <- File.new('/path/to/file') # data.frame | 
+# prepare function argument(s)
+var_keystore_password <- "keystore_password_example" # character | 
+var_keystore_password_confirm <- "keystore_password_confirm_example" # character | 
+var_truststore_password <- "truststore_password_example" # character | 
+var_truststore_password_confirm <- "truststore_password_confirm_example" # character | 
+var_https_hostname <- "https_hostname_example" # character | 
+var_https_port <- "https_port_example" # character | 
+var_privatekey_file <- File.new('/path/to/file') # data.frame |  (Optional)
+var_certificate_file <- File.new('/path/to/file') # data.frame |  (Optional)
 
-api.instance <- GraniteApi$new()
+api_instance <- GraniteApi$new()
 # Configure HTTP basic authorization: aemAuth
-api.instance$apiClient$username <- 'TODO_YOUR_USERNAME';
-api.instance$apiClient$password <- 'TODO_YOUR_PASSWORD';
-result <- api.instance$SslSetup(var.keystore.password, var.keystore.password.confirm, var.truststore.password, var.truststore.password.confirm, var.https.hostname, var.https.port, privatekey.file=var.privatekey.file, certificate.file=var.certificate.file)
+api_instance$api_client$username <- Sys.getenv("USERNAME")
+api_instance$api_client$password <- Sys.getenv("PASSWORD")
+# to save the result into a file, simply add the optional `data_file` parameter, e.g.
+# result <- api_instance$SslSetup(var_keystore_password, var_keystore_password_confirm, var_truststore_password, var_truststore_password_confirm, var_https_hostname, var_https_port, privatekey_file = var_privatekey_file, certificate_file = var_certificate_filedata_file = "result.txt")
+result <- api_instance$SslSetup(var_keystore_password, var_keystore_password_confirm, var_truststore_password, var_truststore_password_confirm, var_https_hostname, var_https_port, privatekey_file = var_privatekey_file, certificate_file = var_certificate_file)
 dput(result)
 ```
 
@@ -37,14 +40,14 @@ dput(result)
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **keystore.password** | **character**|  | 
- **keystore.password.confirm** | **character**|  | 
- **truststore.password** | **character**|  | 
- **truststore.password.confirm** | **character**|  | 
- **https.hostname** | **character**|  | 
- **https.port** | **character**|  | 
- **privatekey.file** | **data.frame**|  | [optional] 
- **certificate.file** | **data.frame**|  | [optional] 
+ **keystore_password** | **character**|  | 
+ **keystore_password_confirm** | **character**|  | 
+ **truststore_password** | **character**|  | 
+ **truststore_password_confirm** | **character**|  | 
+ **https_hostname** | **character**|  | 
+ **https_port** | **character**|  | 
+ **privatekey_file** | **data.frame**|  | [optional] 
+ **certificate_file** | **data.frame**|  | [optional] 
 
 ### Return type
 

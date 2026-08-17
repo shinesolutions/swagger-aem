@@ -2,16 +2,18 @@ package apimodels;
 
 import apimodels.BundleData;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import com.fasterxml.jackson.annotation.*;
 import java.util.Set;
 import javax.validation.*;
 import java.util.Objects;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 /**
  * BundleInfo
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPlayFrameworkCodegen", date = "2021-09-03T15:25:32.040+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPlayFrameworkCodegen", date = "2026-08-17T02:15:17.717598878Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 @SuppressWarnings({"UnusedReturnValue", "WeakerAccess"})
 public class BundleInfo   {
   @JsonProperty("status")
@@ -25,7 +27,7 @@ public class BundleInfo   {
   @JsonProperty("data")
   @Valid
 
-  private List<BundleData> data = null;
+  private List<@Valid BundleData> data = null;
 
   public BundleInfo status(String status) {
     this.status = status;
@@ -50,10 +52,10 @@ public class BundleInfo   {
   }
 
   public BundleInfo addSItem(Integer sItem) {
-    if (s == null) {
-      s = new ArrayList<>();
+    if (this.s == null) {
+      this.s = new ArrayList<>();
     }
-    s.add(sItem);
+    this.s.add(sItem);
     return this;
   }
 
@@ -69,16 +71,16 @@ public class BundleInfo   {
     this.s = s;
   }
 
-  public BundleInfo data(List<BundleData> data) {
+  public BundleInfo data(List<@Valid BundleData> data) {
     this.data = data;
     return this;
   }
 
   public BundleInfo addDataItem(BundleData dataItem) {
-    if (data == null) {
-      data = new ArrayList<>();
+    if (this.data == null) {
+      this.data = new ArrayList<>();
     }
-    data.add(dataItem);
+    this.data.add(dataItem);
     return this;
   }
 
@@ -86,11 +88,11 @@ public class BundleInfo   {
    * Get data
    * @return data
   **/
-  public List<BundleData> getData() {
+  public List<@Valid BundleData> getData() {
     return data;
   }
 
-  public void setData(List<BundleData> data) {
+  public void setData(List<@Valid BundleData> data) {
     this.data = data;
   }
 
@@ -132,10 +134,7 @@ public class BundleInfo   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

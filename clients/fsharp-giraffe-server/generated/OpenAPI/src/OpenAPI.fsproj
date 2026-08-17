@@ -1,0 +1,69 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <Description>OpenAPI</Description>
+    <Copyright>OpenAPI</Copyright>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <DebugType>portable</DebugType>
+    <EnableDefaultContentItems>false</EnableDefaultContentItems>
+    <RunWorkingDirectory>$(MSBuildThisFileDirectory)</RunWorkingDirectory>
+    <AssemblyName>OpenAPI</AssemblyName>
+    <PackageId>OpenAPI</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" />
+    <PackageReference Include="Giraffe" Version="3.4.*" />
+    <PackageReference Include="TaskBuilder.fs" Version="2.1.*" />
+    <PackageReference Include="AspNet.Security.OAuth.GitHub" Version="2.0.1" />
+    <PackageReference Include="AspNet.Security.ApiKey.Providers" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="openapi.yaml"/>
+    <Compile Include="helpers/Helpers.fs" />
+    <Compile Include="model/TruststoreItems.fs" />
+    <Compile Include="model/TruststoreInfo.fs" />
+    <Compile Include="model/SamlConfigurationPropertyItemsString.fs" />
+    <Compile Include="model/SamlConfigurationPropertyItemsLong.fs" />
+    <Compile Include="model/SamlConfigurationPropertyItemsBoolean.fs" />
+    <Compile Include="model/SamlConfigurationPropertyItemsArray.fs" />
+    <Compile Include="model/SamlConfigurationProperties.fs" />
+    <Compile Include="model/SamlConfigurationInfo.fs" />
+    <Compile Include="model/KeystoreChainItems.fs" />
+    <Compile Include="model/KeystoreItems.fs" />
+    <Compile Include="model/KeystoreInfo.fs" />
+    <Compile Include="model/InstallStatusStatus.fs" />
+    <Compile Include="model/InstallStatus.fs" />
+    <Compile Include="model/BundleDataProp.fs" />
+    <Compile Include="model/BundleData.fs" />
+    <Compile Include="model/BundleInfo.fs" />
+    <Compile Include="api/ConsoleApiHandlerParams.fs" />
+    <Compile Include="api/ConsoleApiServiceInterface.fs" />
+    <Compile Include="impl/ConsoleApiService.fs" />
+    <Compile Include="api/ConsoleApiHandler.fs" />
+    <Compile Include="api/CqApiHandlerParams.fs" />
+    <Compile Include="api/CqApiServiceInterface.fs" />
+    <Compile Include="impl/CqApiService.fs" />
+    <Compile Include="api/CqApiHandler.fs" />
+    <Compile Include="api/CrxApiHandlerParams.fs" />
+    <Compile Include="api/CrxApiServiceInterface.fs" />
+    <Compile Include="impl/CrxApiService.fs" />
+    <Compile Include="api/CrxApiHandler.fs" />
+    <Compile Include="api/CustomApiHandlerParams.fs" />
+    <Compile Include="api/CustomApiServiceInterface.fs" />
+    <Compile Include="impl/CustomApiService.fs" />
+    <Compile Include="api/CustomApiHandler.fs" />
+    <Compile Include="api/GraniteApiHandlerParams.fs" />
+    <Compile Include="api/GraniteApiServiceInterface.fs" />
+    <Compile Include="impl/GraniteApiService.fs" />
+    <Compile Include="api/GraniteApiHandler.fs" />
+    <Compile Include="api/SlingApiHandlerParams.fs" />
+    <Compile Include="api/SlingApiServiceInterface.fs" />
+    <Compile Include="impl/SlingApiService.fs" />
+    <Compile Include="api/SlingApiHandler.fs" />
+    <Compile Include="impl/CustomHandlers.fs" />
+    <Compile Include="auth/AuthSchemes.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+
+</Project>

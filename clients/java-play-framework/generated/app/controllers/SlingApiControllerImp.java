@@ -13,7 +13,8 @@ import java.util.LinkedHashSet;
 import java.io.FileInputStream;
 import play.libs.Files.TemporaryFile;
 import javax.validation.constraints.*;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPlayFrameworkCodegen", date = "2021-09-03T15:25:32.040+10:00[Australia/Melbourne]")
+import javax.validation.Valid;
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPlayFrameworkCodegen", date = "2026-08-17T02:15:17.717598878Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class SlingApiControllerImp extends SlingApiControllerImpInterface {
     @Override
     public void deleteAgent(Http.Request request, String runmode, String name) throws Exception {
@@ -84,18 +85,18 @@ public class SlingApiControllerImp extends SlingApiControllerImpInterface {
     }
 
     @Override
-    public void postAgent(Http.Request request, String runmode, String name, Boolean jcrColonContentCqColonDistribute, String jcrColonContentCqColonDistributeAtTypeHint, String jcrColonContentCqColonName, String jcrColonContentCqColonTemplate, Boolean jcrColonContentEnabled, String jcrColonContentJcrColonDescription, String jcrColonContentJcrColonLastModified, String jcrColonContentJcrColonLastModifiedBy, String jcrColonContentJcrColonMixinTypes, String jcrColonContentJcrColonTitle, String jcrColonContentLogLevel, Boolean jcrColonContentNoStatusUpdate, Boolean jcrColonContentNoVersioning, BigDecimal jcrColonContentProtocolConnectTimeout, Boolean jcrColonContentProtocolHTTPConnectionClosed, String jcrColonContentProtocolHTTPExpired, List<String> jcrColonContentProtocolHTTPHeaders, String jcrColonContentProtocolHTTPHeadersAtTypeHint, String jcrColonContentProtocolHTTPMethod, Boolean jcrColonContentProtocolHTTPSRelaxed, String jcrColonContentProtocolInterface, BigDecimal jcrColonContentProtocolSocketTimeout, String jcrColonContentProtocolVersion, String jcrColonContentProxyNTLMDomain, String jcrColonContentProxyNTLMHost, String jcrColonContentProxyHost, String jcrColonContentProxyPassword, BigDecimal jcrColonContentProxyPort, String jcrColonContentProxyUser, BigDecimal jcrColonContentQueueBatchMaxSize, String jcrColonContentQueueBatchMode, BigDecimal jcrColonContentQueueBatchWaitTime, String jcrColonContentRetryDelay, Boolean jcrColonContentReverseReplication, String jcrColonContentSerializationType, String jcrColonContentSlingColonResourceType, String jcrColonContentSsl, String jcrColonContentTransportNTLMDomain, String jcrColonContentTransportNTLMHost, String jcrColonContentTransportPassword, String jcrColonContentTransportUri, String jcrColonContentTransportUser, Boolean jcrColonContentTriggerDistribute, Boolean jcrColonContentTriggerModified, Boolean jcrColonContentTriggerOnOffTime, Boolean jcrColonContentTriggerReceive, Boolean jcrColonContentTriggerSpecific, String jcrColonContentUserId, String jcrColonPrimaryType, String colonOperation) throws Exception {
+    public void postAgent(Http.Request request, String runmode, String name, Boolean jcrContentCqDistribute, String jcrContentCqDistributeAtTypeHint, String jcrContentCqName, String jcrContentCqTemplate, Boolean jcrContentAliasUpdate, Boolean jcrContentEnabled, String jcrContentJcrDescription, String jcrContentJcrLastModified, String jcrContentJcrLastModifiedBy, String jcrContentJcrMixinTypes, String jcrContentJcrTitle, String jcrContentLogLevel, Boolean jcrContentNoStatusUpdate, Boolean jcrContentNoVersioning, BigDecimal jcrContentProtocolConnectTimeout, Boolean jcrContentProtocolHTTPConnectionClosed, String jcrContentProtocolHTTPExpired, List<String> jcrContentProtocolHTTPHeaders, String jcrContentProtocolHTTPHeadersAtTypeHint, String jcrContentProtocolHTTPMethod, Boolean jcrContentProtocolHTTPSRelaxed, String jcrContentProtocolInterface, BigDecimal jcrContentProtocolSocketTimeout, String jcrContentProtocolVersion, String jcrContentProxyNTLMDomain, String jcrContentProxyNTLMHost, String jcrContentProxyHost, String jcrContentProxyPassword, BigDecimal jcrContentProxyPort, String jcrContentProxyUser, BigDecimal jcrContentQueueBatchMaxSize, String jcrContentQueueBatchMode, BigDecimal jcrContentQueueBatchWaitTime, String jcrContentRetryDelay, Boolean jcrContentReverseReplication, String jcrContentSerializationType, String jcrContentSlingResourceType, String jcrContentSsl, String jcrContentTransportNTLMDomain, String jcrContentTransportNTLMHost, String jcrContentTransportPassword, String jcrContentTransportUri, String jcrContentTransportUser, Boolean jcrContentTriggerDistribute, Boolean jcrContentTriggerModified, Boolean jcrContentTriggerOnOffTime, Boolean jcrContentTriggerReceive, Boolean jcrContentTriggerSpecific, String jcrContentUserId, String jcrPrimaryType, String operation) throws Exception {
         //Do your magic!!!
     }
 
     @Override
-    public KeystoreInfo postAuthorizableKeystore(Http.Request request, String intermediatePath, String authorizableId, String colonOperation, String currentPassword, String newPassword, String rePassword, String keyPassword, String keyStorePass, String alias, String newAlias, String removeAlias, Http.MultipartFormData.FilePart<TemporaryFile> certChain, Http.MultipartFormData.FilePart<TemporaryFile> pk, Http.MultipartFormData.FilePart<TemporaryFile> keyStore) throws Exception {
+    public KeystoreInfo postAuthorizableKeystore(Http.Request request, String intermediatePath, String authorizableId, String operation, String currentPassword, String newPassword, String rePassword, String keyPassword, String keyStorePass, String alias, String newAlias, String removeAlias, Http.MultipartFormData.FilePart<TemporaryFile> certChain, Http.MultipartFormData.FilePart<TemporaryFile> pk, Http.MultipartFormData.FilePart<TemporaryFile> keyStore) throws Exception {
         //Do your magic!!!
         return new KeystoreInfo();
     }
 
     @Override
-    public String postAuthorizables(Http.Request request, @NotNull String authorizableId, @NotNull String intermediatePath, String createUser, String createGroup, String repColonPassword, String profileGivenName) throws Exception {
+    public String postAuthorizables(Http.Request request, @NotNull String authorizableId, @NotNull String intermediatePath, String createUser, String createGroup, String repPassword, String profileGivenName) throws Exception {
         //Do your magic!!!
         return new String();
     }
@@ -136,7 +137,7 @@ public class SlingApiControllerImp extends SlingApiControllerImpInterface {
     }
 
     @Override
-    public void postNode(Http.Request request, String path, String name, String colonOperation, String deleteAuthorizable, Http.MultipartFormData.FilePart<TemporaryFile> file) throws Exception {
+    public void postNode(Http.Request request, String path, String name, String operation, String deleteAuthorizable, Http.MultipartFormData.FilePart<TemporaryFile> _file) throws Exception {
         //Do your magic!!!
     }
 
@@ -146,7 +147,7 @@ public class SlingApiControllerImp extends SlingApiControllerImpInterface {
     }
 
     @Override
-    public void postPath(Http.Request request, String path, @NotNull String jcrColonPrimaryType, @NotNull String colonName) throws Exception {
+    public void postPath(Http.Request request, String path, @NotNull String jcrPrimaryType, @NotNull String name) throws Exception {
         //Do your magic!!!
     }
 
@@ -157,12 +158,12 @@ public class SlingApiControllerImp extends SlingApiControllerImpInterface {
     }
 
     @Override
-    public void postTreeActivation(Http.Request request, @NotNull Boolean ignoredeactivated, @NotNull Boolean onlymodified, @NotNull String path) throws Exception {
+    public void postTreeActivation(Http.Request request, @NotNull Boolean ignoredeactivated, @NotNull Boolean onlymodified, @NotNull String path, @NotNull String cmd) throws Exception {
         //Do your magic!!!
     }
 
     @Override
-    public String postTruststore(Http.Request request, String colonOperation, String newPassword, String rePassword, String keyStoreType, String removeAlias, Http.MultipartFormData.FilePart<TemporaryFile> certificate) throws Exception {
+    public String postTruststore(Http.Request request, String operation, String newPassword, String rePassword, String keyStoreType, String removeAlias, Http.MultipartFormData.FilePart<TemporaryFile> certificate) throws Exception {
         //Do your magic!!!
         return new String();
     }

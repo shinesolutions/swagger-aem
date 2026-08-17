@@ -1,6 +1,32 @@
-# Org.OpenAPITools - ASP.NET Core 3.1 Server
+# Org.OpenAPITools - ASP.NET Core 8.0 Server
 
 Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
+
+## Upgrade NuGet Packages
+
+NuGet packages get frequently updated.
+
+To upgrade this solution to the latest version of all NuGet packages, use the dotnet-outdated tool.
+
+
+Install dotnet-outdated tool:
+
+```
+dotnet tool install --global dotnet-outdated-tool
+```
+
+Upgrade only to new minor versions of packages
+
+```
+dotnet outdated --upgrade --version-lock Major
+```
+
+Upgrade to all new versions of packages (more likely to include breaking API changes)
+
+```
+dotnet outdated --upgrade
+```
+
 
 ## Run
 

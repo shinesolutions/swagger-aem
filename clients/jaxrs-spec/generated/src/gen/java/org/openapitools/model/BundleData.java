@@ -3,6 +3,7 @@ package org.openapitools.model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.model.BundleDataProp;
 import javax.validation.constraints.*;
@@ -13,20 +14,26 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2021-09-03T15:26:06.461+10:00[Australia/Melbourne]")public class BundleData   {
-  
-  private @Valid Integer id;
-  private @Valid String name;
-  private @Valid Boolean fragment;
-  private @Valid Integer stateRaw;
-  private @Valid String state;
-  private @Valid String version;
-  private @Valid String symbolicName;
-  private @Valid String category;
-  private @Valid List<BundleDataProp> props = new ArrayList<BundleDataProp>();
+@JsonTypeName("BundleData")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2026-08-17T02:15:42.417242947Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+public class BundleData   {
+  private Integer id;
+  private String name;
+  private Boolean fragment;
+  private Integer stateRaw;
+  private String state;
+  private String version;
+  private String symbolicName;
+  private String category;
+  private @Valid List<@Valid BundleDataProp> props = new ArrayList<>();
+
+  public BundleData() {
+  }
 
   /**
    * Bundle ID
@@ -37,19 +44,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "Bundle ID")
   @JsonProperty("id")
   public Integer getId() {
     return id;
   }
 
+  @JsonProperty("id")
   public void setId(Integer id) {
     this.id = id;
   }
 
-/**
+  /**
    * Bundle name
    **/
   public BundleData name(String name) {
@@ -58,19 +64,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "Bundle name")
   @JsonProperty("name")
   public String getName() {
     return name;
   }
 
+  @JsonProperty("name")
   public void setName(String name) {
     this.name = name;
   }
 
-/**
+  /**
    * Is bundle a fragment
    **/
   public BundleData fragment(Boolean fragment) {
@@ -79,19 +84,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "Is bundle a fragment")
   @JsonProperty("fragment")
   public Boolean getFragment() {
     return fragment;
   }
 
+  @JsonProperty("fragment")
   public void setFragment(Boolean fragment) {
     this.fragment = fragment;
   }
 
-/**
+  /**
    * Numeric raw bundle state value
    **/
   public BundleData stateRaw(Integer stateRaw) {
@@ -100,19 +104,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "Numeric raw bundle state value")
   @JsonProperty("stateRaw")
   public Integer getStateRaw() {
     return stateRaw;
   }
 
+  @JsonProperty("stateRaw")
   public void setStateRaw(Integer stateRaw) {
     this.stateRaw = stateRaw;
   }
 
-/**
+  /**
    * Bundle state value
    **/
   public BundleData state(String state) {
@@ -121,19 +124,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "Bundle state value")
   @JsonProperty("state")
   public String getState() {
     return state;
   }
 
+  @JsonProperty("state")
   public void setState(String state) {
     this.state = state;
   }
 
-/**
+  /**
    * Bundle version
    **/
   public BundleData version(String version) {
@@ -142,19 +144,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "Bundle version")
   @JsonProperty("version")
   public String getVersion() {
     return version;
   }
 
+  @JsonProperty("version")
   public void setVersion(String version) {
     this.version = version;
   }
 
-/**
+  /**
    * Bundle symbolic name
    **/
   public BundleData symbolicName(String symbolicName) {
@@ -163,19 +164,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "Bundle symbolic name")
   @JsonProperty("symbolicName")
   public String getSymbolicName() {
     return symbolicName;
   }
 
+  @JsonProperty("symbolicName")
   public void setSymbolicName(String symbolicName) {
     this.symbolicName = symbolicName;
   }
 
-/**
+  /**
    * Bundle category
    **/
   public BundleData category(String category) {
@@ -184,38 +184,52 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "Bundle category")
   @JsonProperty("category")
   public String getCategory() {
     return category;
   }
 
+  @JsonProperty("category")
   public void setCategory(String category) {
     this.category = category;
   }
 
-/**
+  /**
    **/
-  public BundleData props(List<BundleDataProp> props) {
+  public BundleData props(List<@Valid BundleDataProp> props) {
     this.props = props;
     return this;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("props")
-  public List<BundleDataProp> getProps() {
+  @Valid public List<@Valid BundleDataProp> getProps() {
     return props;
   }
 
-  public void setProps(List<BundleDataProp> props) {
+  @JsonProperty("props")
+  public void setProps(List<@Valid BundleDataProp> props) {
     this.props = props;
   }
 
+  public BundleData addPropsItem(BundleDataProp propsItem) {
+    if (this.props == null) {
+      this.props = new ArrayList<>();
+    }
+
+    this.props.add(propsItem);
+    return this;
+  }
+
+  public BundleData removePropsItem(BundleDataProp propsItem) {
+    if (propsItem != null && this.props != null) {
+      this.props.remove(propsItem);
+    }
+
+    return this;
+  }
 
   @Override
   public boolean equals(Object o) {
@@ -265,12 +279,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 
 
 }
-

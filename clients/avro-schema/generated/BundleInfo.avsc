@@ -1,0 +1,33 @@
+{
+  "namespace": "model",
+  "type": "record",
+  "doc": "",
+  "name": "BundleInfo",
+  "fields": [
+    {
+      "name": "status",
+      "type": ["null", "string"],
+      "doc": "Status description of all bundles",
+      "default": null
+    },
+    {
+      "name": "s",
+      "type": ["null", {
+        "type": "array",
+        "items": "int"
+      }],
+      "doc": "",
+      "default": null
+    },
+    {
+      "name": "data",
+      "type": ["null", {
+        "type": "array",
+        "items": "model.BundleData"
+      }],
+      "doc": "",
+      "default": null
+    }
+  ]
+
+}

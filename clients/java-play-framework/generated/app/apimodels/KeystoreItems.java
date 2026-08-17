@@ -2,16 +2,18 @@ package apimodels;
 
 import apimodels.KeystoreChainItems;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import com.fasterxml.jackson.annotation.*;
 import java.util.Set;
 import javax.validation.*;
 import java.util.Objects;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 /**
  * KeystoreItems
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPlayFrameworkCodegen", date = "2021-09-03T15:25:32.040+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPlayFrameworkCodegen", date = "2026-08-17T02:15:17.717598878Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 @SuppressWarnings({"UnusedReturnValue", "WeakerAccess"})
 public class KeystoreItems   {
   @JsonProperty("alias")
@@ -33,7 +35,7 @@ public class KeystoreItems   {
   @JsonProperty("chain")
   @Valid
 
-  private List<KeystoreChainItems> chain = null;
+  private List<@Valid KeystoreChainItems> chain = null;
 
   public KeystoreItems alias(String alias) {
     this.alias = alias;
@@ -103,16 +105,16 @@ public class KeystoreItems   {
     this.format = format;
   }
 
-  public KeystoreItems chain(List<KeystoreChainItems> chain) {
+  public KeystoreItems chain(List<@Valid KeystoreChainItems> chain) {
     this.chain = chain;
     return this;
   }
 
   public KeystoreItems addChainItem(KeystoreChainItems chainItem) {
-    if (chain == null) {
-      chain = new ArrayList<>();
+    if (this.chain == null) {
+      this.chain = new ArrayList<>();
     }
-    chain.add(chainItem);
+    this.chain.add(chainItem);
     return this;
   }
 
@@ -120,11 +122,11 @@ public class KeystoreItems   {
    * Get chain
    * @return chain
   **/
-  public List<KeystoreChainItems> getChain() {
+  public List<@Valid KeystoreChainItems> getChain() {
     return chain;
   }
 
-  public void setChain(List<KeystoreChainItems> chain) {
+  public void setChain(List<@Valid KeystoreChainItems> chain) {
     this.chain = chain;
   }
 
@@ -170,10 +172,7 @@ public class KeystoreItems   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

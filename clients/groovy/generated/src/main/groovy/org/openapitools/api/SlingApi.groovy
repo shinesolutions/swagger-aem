@@ -17,6 +17,7 @@ class SlingApi {
         def queryParams = [:]
         def headerParams = [:]
         def bodyParams
+        def accept
         def contentType
 
         // verify required params are set
@@ -32,7 +33,9 @@ class SlingApi {
 
 
 
-        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+        accept = apiUtils.selectHeaderAccept([])
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, accept, contentType,
                     "DELETE", "",
                     null )
 
@@ -45,6 +48,7 @@ class SlingApi {
         def queryParams = [:]
         def headerParams = [:]
         def bodyParams
+        def accept
         def contentType
 
         // verify required params are set
@@ -60,7 +64,9 @@ class SlingApi {
 
 
 
-        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+        accept = apiUtils.selectHeaderAccept([])
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, accept, contentType,
                     "DELETE", "",
                     null )
 
@@ -73,6 +79,7 @@ class SlingApi {
         def queryParams = [:]
         def headerParams = [:]
         def bodyParams
+        def accept
         def contentType
 
         // verify required params are set
@@ -88,7 +95,9 @@ class SlingApi {
 
 
 
-        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+        accept = apiUtils.selectHeaderAccept([])
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, accept, contentType,
                     "GET", "",
                     null )
 
@@ -101,6 +110,7 @@ class SlingApi {
         def queryParams = [:]
         def headerParams = [:]
         def bodyParams
+        def accept
         def contentType
 
         // verify required params are set
@@ -112,7 +122,9 @@ class SlingApi {
 
 
 
-        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+        accept = apiUtils.selectHeaderAccept(["application/json"])
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, accept, contentType,
                     "GET", "",
                     String.class )
 
@@ -125,6 +137,7 @@ class SlingApi {
         def queryParams = [:]
         def headerParams = [:]
         def bodyParams
+        def accept
         def contentType
 
         // verify required params are set
@@ -140,7 +153,9 @@ class SlingApi {
 
 
 
-        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+        accept = apiUtils.selectHeaderAccept(["text/plain"])
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, accept, contentType,
                     "GET", "",
                     KeystoreInfo.class )
 
@@ -153,6 +168,7 @@ class SlingApi {
         def queryParams = [:]
         def headerParams = [:]
         def bodyParams
+        def accept
         def contentType
 
         // verify required params are set
@@ -168,7 +184,9 @@ class SlingApi {
 
 
 
-        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+        accept = apiUtils.selectHeaderAccept(["application/octet-stream"])
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, accept, contentType,
                     "GET", "",
                     File.class )
 
@@ -181,6 +199,7 @@ class SlingApi {
         def queryParams = [:]
         def headerParams = [:]
         def bodyParams
+        def accept
         def contentType
 
         // verify required params are set
@@ -196,7 +215,9 @@ class SlingApi {
 
 
 
-        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+        accept = apiUtils.selectHeaderAccept([])
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, accept, contentType,
                     "GET", "",
                     null )
 
@@ -209,6 +230,7 @@ class SlingApi {
         def queryParams = [:]
         def headerParams = [:]
         def bodyParams
+        def accept
         def contentType
 
         // verify required params are set
@@ -228,7 +250,9 @@ class SlingApi {
 
 
 
-        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+        accept = apiUtils.selectHeaderAccept(["application/octet-stream"])
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, accept, contentType,
                     "GET", "",
                     File.class )
 
@@ -241,6 +265,7 @@ class SlingApi {
         def queryParams = [:]
         def headerParams = [:]
         def bodyParams
+        def accept
         def contentType
 
         // verify required params are set
@@ -260,7 +285,9 @@ class SlingApi {
 
 
 
-        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+        accept = apiUtils.selectHeaderAccept(["application/json"])
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, accept, contentType,
                     "GET", "",
                     String.class )
 
@@ -273,6 +300,7 @@ class SlingApi {
         def queryParams = [:]
         def headerParams = [:]
         def bodyParams
+        def accept
         def contentType
 
         // verify required params are set
@@ -308,7 +336,9 @@ class SlingApi {
 
 
 
-        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+        accept = apiUtils.selectHeaderAccept(["application/json"])
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, accept, contentType,
                     "GET", "",
                     String.class )
 
@@ -321,6 +351,7 @@ class SlingApi {
         def queryParams = [:]
         def headerParams = [:]
         def bodyParams
+        def accept
         def contentType
 
 
@@ -328,7 +359,9 @@ class SlingApi {
 
 
 
-        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+        accept = apiUtils.selectHeaderAccept(["application/octet-stream"])
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, accept, contentType,
                     "GET", "",
                     File.class )
 
@@ -341,6 +374,7 @@ class SlingApi {
         def queryParams = [:]
         def headerParams = [:]
         def bodyParams
+        def accept
         def contentType
 
 
@@ -348,19 +382,22 @@ class SlingApi {
 
 
 
-        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+        accept = apiUtils.selectHeaderAccept(["application/json"])
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, accept, contentType,
                     "GET", "",
                     TruststoreInfo.class )
 
     }
 
-    def postAgent ( String runmode, String name, Boolean jcrColonContentCqColonDistribute, String jcrColonContentCqColonDistributeAtTypeHint, String jcrColonContentCqColonName, String jcrColonContentCqColonTemplate, Boolean jcrColonContentEnabled, String jcrColonContentJcrColonDescription, String jcrColonContentJcrColonLastModified, String jcrColonContentJcrColonLastModifiedBy, String jcrColonContentJcrColonMixinTypes, String jcrColonContentJcrColonTitle, String jcrColonContentLogLevel, Boolean jcrColonContentNoStatusUpdate, Boolean jcrColonContentNoVersioning, BigDecimal jcrColonContentProtocolConnectTimeout, Boolean jcrColonContentProtocolHTTPConnectionClosed, String jcrColonContentProtocolHTTPExpired, List<String> jcrColonContentProtocolHTTPHeaders, String jcrColonContentProtocolHTTPHeadersAtTypeHint, String jcrColonContentProtocolHTTPMethod, Boolean jcrColonContentProtocolHTTPSRelaxed, String jcrColonContentProtocolInterface, BigDecimal jcrColonContentProtocolSocketTimeout, String jcrColonContentProtocolVersion, String jcrColonContentProxyNTLMDomain, String jcrColonContentProxyNTLMHost, String jcrColonContentProxyHost, String jcrColonContentProxyPassword, BigDecimal jcrColonContentProxyPort, String jcrColonContentProxyUser, BigDecimal jcrColonContentQueueBatchMaxSize, String jcrColonContentQueueBatchMode, BigDecimal jcrColonContentQueueBatchWaitTime, String jcrColonContentRetryDelay, Boolean jcrColonContentReverseReplication, String jcrColonContentSerializationType, String jcrColonContentSlingColonResourceType, String jcrColonContentSsl, String jcrColonContentTransportNTLMDomain, String jcrColonContentTransportNTLMHost, String jcrColonContentTransportPassword, String jcrColonContentTransportUri, String jcrColonContentTransportUser, Boolean jcrColonContentTriggerDistribute, Boolean jcrColonContentTriggerModified, Boolean jcrColonContentTriggerOnOffTime, Boolean jcrColonContentTriggerReceive, Boolean jcrColonContentTriggerSpecific, String jcrColonContentUserId, String jcrColonPrimaryType, String colonOperation, Closure onSuccess, Closure onFailure)  {
+    def postAgent ( String runmode, String name, Boolean jcrContentCqDistribute, String jcrContentCqDistributeAtTypeHint, String jcrContentCqName, String jcrContentCqTemplate, Boolean jcrContentAliasUpdate, Boolean jcrContentEnabled, String jcrContentJcrDescription, String jcrContentJcrLastModified, String jcrContentJcrLastModifiedBy, String jcrContentJcrMixinTypes, String jcrContentJcrTitle, String jcrContentLogLevel, Boolean jcrContentNoStatusUpdate, Boolean jcrContentNoVersioning, BigDecimal jcrContentProtocolConnectTimeout, Boolean jcrContentProtocolHTTPConnectionClosed, String jcrContentProtocolHTTPExpired, List<String> jcrContentProtocolHTTPHeaders, String jcrContentProtocolHTTPHeadersAtTypeHint, String jcrContentProtocolHTTPMethod, Boolean jcrContentProtocolHTTPSRelaxed, String jcrContentProtocolInterface, BigDecimal jcrContentProtocolSocketTimeout, String jcrContentProtocolVersion, String jcrContentProxyNTLMDomain, String jcrContentProxyNTLMHost, String jcrContentProxyHost, String jcrContentProxyPassword, BigDecimal jcrContentProxyPort, String jcrContentProxyUser, BigDecimal jcrContentQueueBatchMaxSize, String jcrContentQueueBatchMode, BigDecimal jcrContentQueueBatchWaitTime, String jcrContentRetryDelay, Boolean jcrContentReverseReplication, String jcrContentSerializationType, String jcrContentSlingResourceType, String jcrContentSsl, String jcrContentTransportNTLMDomain, String jcrContentTransportNTLMHost, String jcrContentTransportPassword, String jcrContentTransportUri, String jcrContentTransportUser, Boolean jcrContentTriggerDistribute, Boolean jcrContentTriggerModified, Boolean jcrContentTriggerOnOffTime, Boolean jcrContentTriggerReceive, Boolean jcrContentTriggerSpecific, String jcrContentUserId, String jcrPrimaryType, String operation, Closure onSuccess, Closure onFailure)  {
         String resourcePath = "/etc/replication/agents.${runmode}/${name}"
 
         // params
         def queryParams = [:]
         def headerParams = [:]
         def bodyParams
+        def accept
         def contentType
 
         // verify required params are set
@@ -372,173 +409,179 @@ class SlingApi {
             throw new RuntimeException("missing required params name")
         }
 
-        if (jcrColonContentCqColonDistribute != null) {
-            queryParams.put("jcr:content/cq:distribute", jcrColonContentCqColonDistribute)
+        if (jcrContentCqDistribute != null) {
+            queryParams.put("jcr:content/cq:distribute", jcrContentCqDistribute)
         }
-        if (jcrColonContentCqColonDistributeAtTypeHint != null) {
-            queryParams.put("jcr:content/cq:distribute@TypeHint", jcrColonContentCqColonDistributeAtTypeHint)
+        if (jcrContentCqDistributeAtTypeHint != null) {
+            queryParams.put("jcr:content/cq:distribute@TypeHint", jcrContentCqDistributeAtTypeHint)
         }
-        if (jcrColonContentCqColonName != null) {
-            queryParams.put("jcr:content/cq:name", jcrColonContentCqColonName)
+        if (jcrContentCqName != null) {
+            queryParams.put("jcr:content/cq:name", jcrContentCqName)
         }
-        if (jcrColonContentCqColonTemplate != null) {
-            queryParams.put("jcr:content/cq:template", jcrColonContentCqColonTemplate)
+        if (jcrContentCqTemplate != null) {
+            queryParams.put("jcr:content/cq:template", jcrContentCqTemplate)
         }
-        if (jcrColonContentEnabled != null) {
-            queryParams.put("jcr:content/enabled", jcrColonContentEnabled)
+        if (jcrContentAliasUpdate != null) {
+            queryParams.put("jcr:content/aliasUpdate", jcrContentAliasUpdate)
         }
-        if (jcrColonContentJcrColonDescription != null) {
-            queryParams.put("jcr:content/jcr:description", jcrColonContentJcrColonDescription)
+        if (jcrContentEnabled != null) {
+            queryParams.put("jcr:content/enabled", jcrContentEnabled)
         }
-        if (jcrColonContentJcrColonLastModified != null) {
-            queryParams.put("jcr:content/jcr:lastModified", jcrColonContentJcrColonLastModified)
+        if (jcrContentJcrDescription != null) {
+            queryParams.put("jcr:content/jcr:description", jcrContentJcrDescription)
         }
-        if (jcrColonContentJcrColonLastModifiedBy != null) {
-            queryParams.put("jcr:content/jcr:lastModifiedBy", jcrColonContentJcrColonLastModifiedBy)
+        if (jcrContentJcrLastModified != null) {
+            queryParams.put("jcr:content/jcr:lastModified", jcrContentJcrLastModified)
         }
-        if (jcrColonContentJcrColonMixinTypes != null) {
-            queryParams.put("jcr:content/jcr:mixinTypes", jcrColonContentJcrColonMixinTypes)
+        if (jcrContentJcrLastModifiedBy != null) {
+            queryParams.put("jcr:content/jcr:lastModifiedBy", jcrContentJcrLastModifiedBy)
         }
-        if (jcrColonContentJcrColonTitle != null) {
-            queryParams.put("jcr:content/jcr:title", jcrColonContentJcrColonTitle)
+        if (jcrContentJcrMixinTypes != null) {
+            queryParams.put("jcr:content/jcr:mixinTypes", jcrContentJcrMixinTypes)
         }
-        if (jcrColonContentLogLevel != null) {
-            queryParams.put("jcr:content/logLevel", jcrColonContentLogLevel)
+        if (jcrContentJcrTitle != null) {
+            queryParams.put("jcr:content/jcr:title", jcrContentJcrTitle)
         }
-        if (jcrColonContentNoStatusUpdate != null) {
-            queryParams.put("jcr:content/noStatusUpdate", jcrColonContentNoStatusUpdate)
+        if (jcrContentLogLevel != null) {
+            queryParams.put("jcr:content/logLevel", jcrContentLogLevel)
         }
-        if (jcrColonContentNoVersioning != null) {
-            queryParams.put("jcr:content/noVersioning", jcrColonContentNoVersioning)
+        if (jcrContentNoStatusUpdate != null) {
+            queryParams.put("jcr:content/noStatusUpdate", jcrContentNoStatusUpdate)
         }
-        if (jcrColonContentProtocolConnectTimeout != null) {
-            queryParams.put("jcr:content/protocolConnectTimeout", jcrColonContentProtocolConnectTimeout)
+        if (jcrContentNoVersioning != null) {
+            queryParams.put("jcr:content/noVersioning", jcrContentNoVersioning)
         }
-        if (jcrColonContentProtocolHTTPConnectionClosed != null) {
-            queryParams.put("jcr:content/protocolHTTPConnectionClosed", jcrColonContentProtocolHTTPConnectionClosed)
+        if (jcrContentProtocolConnectTimeout != null) {
+            queryParams.put("jcr:content/protocolConnectTimeout", jcrContentProtocolConnectTimeout)
         }
-        if (jcrColonContentProtocolHTTPExpired != null) {
-            queryParams.put("jcr:content/protocolHTTPExpired", jcrColonContentProtocolHTTPExpired)
+        if (jcrContentProtocolHTTPConnectionClosed != null) {
+            queryParams.put("jcr:content/protocolHTTPConnectionClosed", jcrContentProtocolHTTPConnectionClosed)
         }
-        if (jcrColonContentProtocolHTTPHeaders != null) {
-            queryParams.put("jcr:content/protocolHTTPHeaders", jcrColonContentProtocolHTTPHeaders)
+        if (jcrContentProtocolHTTPExpired != null) {
+            queryParams.put("jcr:content/protocolHTTPExpired", jcrContentProtocolHTTPExpired)
         }
-        if (jcrColonContentProtocolHTTPHeadersAtTypeHint != null) {
-            queryParams.put("jcr:content/protocolHTTPHeaders@TypeHint", jcrColonContentProtocolHTTPHeadersAtTypeHint)
+        if (jcrContentProtocolHTTPHeaders != null) {
+            queryParams.put("jcr:content/protocolHTTPHeaders", jcrContentProtocolHTTPHeaders)
         }
-        if (jcrColonContentProtocolHTTPMethod != null) {
-            queryParams.put("jcr:content/protocolHTTPMethod", jcrColonContentProtocolHTTPMethod)
+        if (jcrContentProtocolHTTPHeadersAtTypeHint != null) {
+            queryParams.put("jcr:content/protocolHTTPHeaders@TypeHint", jcrContentProtocolHTTPHeadersAtTypeHint)
         }
-        if (jcrColonContentProtocolHTTPSRelaxed != null) {
-            queryParams.put("jcr:content/protocolHTTPSRelaxed", jcrColonContentProtocolHTTPSRelaxed)
+        if (jcrContentProtocolHTTPMethod != null) {
+            queryParams.put("jcr:content/protocolHTTPMethod", jcrContentProtocolHTTPMethod)
         }
-        if (jcrColonContentProtocolInterface != null) {
-            queryParams.put("jcr:content/protocolInterface", jcrColonContentProtocolInterface)
+        if (jcrContentProtocolHTTPSRelaxed != null) {
+            queryParams.put("jcr:content/protocolHTTPSRelaxed", jcrContentProtocolHTTPSRelaxed)
         }
-        if (jcrColonContentProtocolSocketTimeout != null) {
-            queryParams.put("jcr:content/protocolSocketTimeout", jcrColonContentProtocolSocketTimeout)
+        if (jcrContentProtocolInterface != null) {
+            queryParams.put("jcr:content/protocolInterface", jcrContentProtocolInterface)
         }
-        if (jcrColonContentProtocolVersion != null) {
-            queryParams.put("jcr:content/protocolVersion", jcrColonContentProtocolVersion)
+        if (jcrContentProtocolSocketTimeout != null) {
+            queryParams.put("jcr:content/protocolSocketTimeout", jcrContentProtocolSocketTimeout)
         }
-        if (jcrColonContentProxyNTLMDomain != null) {
-            queryParams.put("jcr:content/proxyNTLMDomain", jcrColonContentProxyNTLMDomain)
+        if (jcrContentProtocolVersion != null) {
+            queryParams.put("jcr:content/protocolVersion", jcrContentProtocolVersion)
         }
-        if (jcrColonContentProxyNTLMHost != null) {
-            queryParams.put("jcr:content/proxyNTLMHost", jcrColonContentProxyNTLMHost)
+        if (jcrContentProxyNTLMDomain != null) {
+            queryParams.put("jcr:content/proxyNTLMDomain", jcrContentProxyNTLMDomain)
         }
-        if (jcrColonContentProxyHost != null) {
-            queryParams.put("jcr:content/proxyHost", jcrColonContentProxyHost)
+        if (jcrContentProxyNTLMHost != null) {
+            queryParams.put("jcr:content/proxyNTLMHost", jcrContentProxyNTLMHost)
         }
-        if (jcrColonContentProxyPassword != null) {
-            queryParams.put("jcr:content/proxyPassword", jcrColonContentProxyPassword)
+        if (jcrContentProxyHost != null) {
+            queryParams.put("jcr:content/proxyHost", jcrContentProxyHost)
         }
-        if (jcrColonContentProxyPort != null) {
-            queryParams.put("jcr:content/proxyPort", jcrColonContentProxyPort)
+        if (jcrContentProxyPassword != null) {
+            queryParams.put("jcr:content/proxyPassword", jcrContentProxyPassword)
         }
-        if (jcrColonContentProxyUser != null) {
-            queryParams.put("jcr:content/proxyUser", jcrColonContentProxyUser)
+        if (jcrContentProxyPort != null) {
+            queryParams.put("jcr:content/proxyPort", jcrContentProxyPort)
         }
-        if (jcrColonContentQueueBatchMaxSize != null) {
-            queryParams.put("jcr:content/queueBatchMaxSize", jcrColonContentQueueBatchMaxSize)
+        if (jcrContentProxyUser != null) {
+            queryParams.put("jcr:content/proxyUser", jcrContentProxyUser)
         }
-        if (jcrColonContentQueueBatchMode != null) {
-            queryParams.put("jcr:content/queueBatchMode", jcrColonContentQueueBatchMode)
+        if (jcrContentQueueBatchMaxSize != null) {
+            queryParams.put("jcr:content/queueBatchMaxSize", jcrContentQueueBatchMaxSize)
         }
-        if (jcrColonContentQueueBatchWaitTime != null) {
-            queryParams.put("jcr:content/queueBatchWaitTime", jcrColonContentQueueBatchWaitTime)
+        if (jcrContentQueueBatchMode != null) {
+            queryParams.put("jcr:content/queueBatchMode", jcrContentQueueBatchMode)
         }
-        if (jcrColonContentRetryDelay != null) {
-            queryParams.put("jcr:content/retryDelay", jcrColonContentRetryDelay)
+        if (jcrContentQueueBatchWaitTime != null) {
+            queryParams.put("jcr:content/queueBatchWaitTime", jcrContentQueueBatchWaitTime)
         }
-        if (jcrColonContentReverseReplication != null) {
-            queryParams.put("jcr:content/reverseReplication", jcrColonContentReverseReplication)
+        if (jcrContentRetryDelay != null) {
+            queryParams.put("jcr:content/retryDelay", jcrContentRetryDelay)
         }
-        if (jcrColonContentSerializationType != null) {
-            queryParams.put("jcr:content/serializationType", jcrColonContentSerializationType)
+        if (jcrContentReverseReplication != null) {
+            queryParams.put("jcr:content/reverseReplication", jcrContentReverseReplication)
         }
-        if (jcrColonContentSlingColonResourceType != null) {
-            queryParams.put("jcr:content/sling:resourceType", jcrColonContentSlingColonResourceType)
+        if (jcrContentSerializationType != null) {
+            queryParams.put("jcr:content/serializationType", jcrContentSerializationType)
         }
-        if (jcrColonContentSsl != null) {
-            queryParams.put("jcr:content/ssl", jcrColonContentSsl)
+        if (jcrContentSlingResourceType != null) {
+            queryParams.put("jcr:content/sling:resourceType", jcrContentSlingResourceType)
         }
-        if (jcrColonContentTransportNTLMDomain != null) {
-            queryParams.put("jcr:content/transportNTLMDomain", jcrColonContentTransportNTLMDomain)
+        if (jcrContentSsl != null) {
+            queryParams.put("jcr:content/ssl", jcrContentSsl)
         }
-        if (jcrColonContentTransportNTLMHost != null) {
-            queryParams.put("jcr:content/transportNTLMHost", jcrColonContentTransportNTLMHost)
+        if (jcrContentTransportNTLMDomain != null) {
+            queryParams.put("jcr:content/transportNTLMDomain", jcrContentTransportNTLMDomain)
         }
-        if (jcrColonContentTransportPassword != null) {
-            queryParams.put("jcr:content/transportPassword", jcrColonContentTransportPassword)
+        if (jcrContentTransportNTLMHost != null) {
+            queryParams.put("jcr:content/transportNTLMHost", jcrContentTransportNTLMHost)
         }
-        if (jcrColonContentTransportUri != null) {
-            queryParams.put("jcr:content/transportUri", jcrColonContentTransportUri)
+        if (jcrContentTransportPassword != null) {
+            queryParams.put("jcr:content/transportPassword", jcrContentTransportPassword)
         }
-        if (jcrColonContentTransportUser != null) {
-            queryParams.put("jcr:content/transportUser", jcrColonContentTransportUser)
+        if (jcrContentTransportUri != null) {
+            queryParams.put("jcr:content/transportUri", jcrContentTransportUri)
         }
-        if (jcrColonContentTriggerDistribute != null) {
-            queryParams.put("jcr:content/triggerDistribute", jcrColonContentTriggerDistribute)
+        if (jcrContentTransportUser != null) {
+            queryParams.put("jcr:content/transportUser", jcrContentTransportUser)
         }
-        if (jcrColonContentTriggerModified != null) {
-            queryParams.put("jcr:content/triggerModified", jcrColonContentTriggerModified)
+        if (jcrContentTriggerDistribute != null) {
+            queryParams.put("jcr:content/triggerDistribute", jcrContentTriggerDistribute)
         }
-        if (jcrColonContentTriggerOnOffTime != null) {
-            queryParams.put("jcr:content/triggerOnOffTime", jcrColonContentTriggerOnOffTime)
+        if (jcrContentTriggerModified != null) {
+            queryParams.put("jcr:content/triggerModified", jcrContentTriggerModified)
         }
-        if (jcrColonContentTriggerReceive != null) {
-            queryParams.put("jcr:content/triggerReceive", jcrColonContentTriggerReceive)
+        if (jcrContentTriggerOnOffTime != null) {
+            queryParams.put("jcr:content/triggerOnOffTime", jcrContentTriggerOnOffTime)
         }
-        if (jcrColonContentTriggerSpecific != null) {
-            queryParams.put("jcr:content/triggerSpecific", jcrColonContentTriggerSpecific)
+        if (jcrContentTriggerReceive != null) {
+            queryParams.put("jcr:content/triggerReceive", jcrContentTriggerReceive)
         }
-        if (jcrColonContentUserId != null) {
-            queryParams.put("jcr:content/userId", jcrColonContentUserId)
+        if (jcrContentTriggerSpecific != null) {
+            queryParams.put("jcr:content/triggerSpecific", jcrContentTriggerSpecific)
         }
-        if (jcrColonPrimaryType != null) {
-            queryParams.put("jcr:primaryType", jcrColonPrimaryType)
+        if (jcrContentUserId != null) {
+            queryParams.put("jcr:content/userId", jcrContentUserId)
         }
-        if (colonOperation != null) {
-            queryParams.put(":operation", colonOperation)
+        if (jcrPrimaryType != null) {
+            queryParams.put("jcr:primaryType", jcrPrimaryType)
+        }
+        if (operation != null) {
+            queryParams.put(":operation", operation)
         }
 
 
 
 
-        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+        accept = apiUtils.selectHeaderAccept([])
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, accept, contentType,
                     "POST", "",
                     null )
 
     }
 
-    def postAuthorizableKeystore ( String intermediatePath, String authorizableId, String colonOperation, String currentPassword, String newPassword, String rePassword, String keyPassword, String keyStorePass, String alias, String newAlias, String removeAlias, File certChain, File pk, File keyStore, Closure onSuccess, Closure onFailure)  {
+    def postAuthorizableKeystore ( String intermediatePath, String authorizableId, String operation, String currentPassword, String newPassword, String rePassword, String keyPassword, String keyStorePass, String alias, String newAlias, String removeAlias, File certChain, File pk, File keyStore, Closure onSuccess, Closure onFailure)  {
         String resourcePath = "/${intermediatePath}/${authorizableId}.ks.html"
 
         // params
         def queryParams = [:]
         def headerParams = [:]
         def bodyParams
+        def accept
         def contentType
 
         // verify required params are set
@@ -550,8 +593,8 @@ class SlingApi {
             throw new RuntimeException("missing required params authorizableId")
         }
 
-        if (colonOperation != null) {
-            queryParams.put(":operation", colonOperation)
+        if (operation != null) {
+            queryParams.put(":operation", operation)
         }
         if (currentPassword != null) {
             queryParams.put("currentPassword", currentPassword)
@@ -586,19 +629,22 @@ class SlingApi {
         bodyParams.put("pk", pk)
         bodyParams.put("keyStore", keyStore)
 
-        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+        accept = apiUtils.selectHeaderAccept(["text/plain"])
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, accept, contentType,
                     "POST", "",
                     KeystoreInfo.class )
 
     }
 
-    def postAuthorizables ( String authorizableId, String intermediatePath, String createUser, String createGroup, String repColonPassword, String profileGivenName, Closure onSuccess, Closure onFailure)  {
+    def postAuthorizables ( String authorizableId, String intermediatePath, String createUser, String createGroup, String repPassword, String profileGivenName, Closure onSuccess, Closure onFailure)  {
         String resourcePath = "/libs/granite/security/post/authorizables"
 
         // params
         def queryParams = [:]
         def headerParams = [:]
         def bodyParams
+        def accept
         def contentType
 
         // verify required params are set
@@ -622,8 +668,8 @@ class SlingApi {
         if (createGroup != null) {
             queryParams.put("createGroup", createGroup)
         }
-        if (repColonPassword != null) {
-            queryParams.put("rep:password", repColonPassword)
+        if (repPassword != null) {
+            queryParams.put("rep:password", repPassword)
         }
         if (profileGivenName != null) {
             queryParams.put("profile/givenName", profileGivenName)
@@ -632,7 +678,9 @@ class SlingApi {
 
 
 
-        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+        accept = apiUtils.selectHeaderAccept(["text/html"])
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, accept, contentType,
                     "POST", "",
                     String.class )
 
@@ -645,6 +693,7 @@ class SlingApi {
         def queryParams = [:]
         def headerParams = [:]
         def bodyParams
+        def accept
         def contentType
 
 
@@ -796,7 +845,9 @@ class SlingApi {
 
 
 
-        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+        accept = apiUtils.selectHeaderAccept([])
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, accept, contentType,
                     "POST", "",
                     null )
 
@@ -809,6 +860,7 @@ class SlingApi {
         def queryParams = [:]
         def headerParams = [:]
         def bodyParams
+        def accept
         def contentType
 
 
@@ -876,7 +928,9 @@ class SlingApi {
 
 
 
-        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+        accept = apiUtils.selectHeaderAccept([])
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, accept, contentType,
                     "POST", "",
                     null )
 
@@ -889,6 +943,7 @@ class SlingApi {
         def queryParams = [:]
         def headerParams = [:]
         def bodyParams
+        def accept
         def contentType
 
 
@@ -932,7 +987,9 @@ class SlingApi {
 
 
 
-        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+        accept = apiUtils.selectHeaderAccept([])
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, accept, contentType,
                     "POST", "",
                     null )
 
@@ -945,6 +1002,7 @@ class SlingApi {
         def queryParams = [:]
         def headerParams = [:]
         def bodyParams
+        def accept
         def contentType
 
 
@@ -964,7 +1022,9 @@ class SlingApi {
 
 
 
-        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+        accept = apiUtils.selectHeaderAccept([])
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, accept, contentType,
                     "POST", "",
                     null )
 
@@ -977,6 +1037,7 @@ class SlingApi {
         def queryParams = [:]
         def headerParams = [:]
         def bodyParams
+        def accept
         def contentType
 
 
@@ -1008,7 +1069,9 @@ class SlingApi {
 
 
 
-        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+        accept = apiUtils.selectHeaderAccept([])
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, accept, contentType,
                     "POST", "",
                     null )
 
@@ -1021,6 +1084,7 @@ class SlingApi {
         def queryParams = [:]
         def headerParams = [:]
         def bodyParams
+        def accept
         def contentType
 
 
@@ -1052,7 +1116,9 @@ class SlingApi {
 
 
 
-        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+        accept = apiUtils.selectHeaderAccept([])
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, accept, contentType,
                     "POST", "",
                     null )
 
@@ -1065,6 +1131,7 @@ class SlingApi {
         def queryParams = [:]
         def headerParams = [:]
         def bodyParams
+        def accept
         def contentType
 
         // verify required params are set
@@ -1076,19 +1143,22 @@ class SlingApi {
 
 
 
-        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+        accept = apiUtils.selectHeaderAccept([])
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, accept, contentType,
                     "POST", "",
                     null )
 
     }
 
-    def postNode ( String path, String name, String colonOperation, String deleteAuthorizable, File file, Closure onSuccess, Closure onFailure)  {
+    def postNode ( String path, String name, String operation, String deleteAuthorizable, File _file, Closure onSuccess, Closure onFailure)  {
         String resourcePath = "/${path}/${name}"
 
         // params
         def queryParams = [:]
         def headerParams = [:]
         def bodyParams
+        def accept
         def contentType
 
         // verify required params are set
@@ -1100,8 +1170,8 @@ class SlingApi {
             throw new RuntimeException("missing required params name")
         }
 
-        if (colonOperation != null) {
-            queryParams.put(":operation", colonOperation)
+        if (operation != null) {
+            queryParams.put(":operation", operation)
         }
         if (deleteAuthorizable != null) {
             queryParams.put("deleteAuthorizable", deleteAuthorizable)
@@ -1110,9 +1180,11 @@ class SlingApi {
 
 
         contentType = 'multipart/form-data';
-        bodyParams = file
+        bodyParams = _file
 
-        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+        accept = apiUtils.selectHeaderAccept([])
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, accept, contentType,
                     "POST", "",
                     null )
 
@@ -1125,6 +1197,7 @@ class SlingApi {
         def queryParams = [:]
         def headerParams = [:]
         def bodyParams
+        def accept
         def contentType
 
         // verify required params are set
@@ -1143,19 +1216,22 @@ class SlingApi {
 
 
 
-        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+        accept = apiUtils.selectHeaderAccept([])
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, accept, contentType,
                     "POST", "",
                     null )
 
     }
 
-    def postPath ( String path, String jcrColonPrimaryType, String colonName, Closure onSuccess, Closure onFailure)  {
+    def postPath ( String path, String jcrPrimaryType, String name, Closure onSuccess, Closure onFailure)  {
         String resourcePath = "/${path}/"
 
         // params
         def queryParams = [:]
         def headerParams = [:]
         def bodyParams
+        def accept
         def contentType
 
         // verify required params are set
@@ -1163,25 +1239,27 @@ class SlingApi {
             throw new RuntimeException("missing required params path")
         }
         // verify required params are set
-        if (jcrColonPrimaryType == null) {
-            throw new RuntimeException("missing required params jcrColonPrimaryType")
+        if (jcrPrimaryType == null) {
+            throw new RuntimeException("missing required params jcrPrimaryType")
         }
         // verify required params are set
-        if (colonName == null) {
-            throw new RuntimeException("missing required params colonName")
+        if (name == null) {
+            throw new RuntimeException("missing required params name")
         }
 
-        if (jcrColonPrimaryType != null) {
-            queryParams.put("jcr:primaryType", jcrColonPrimaryType)
+        if (jcrPrimaryType != null) {
+            queryParams.put("jcr:primaryType", jcrPrimaryType)
         }
-        if (colonName != null) {
-            queryParams.put(":name", colonName)
+        if (name != null) {
+            queryParams.put(":name", name)
         }
 
 
 
 
-        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+        accept = apiUtils.selectHeaderAccept([])
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, accept, contentType,
                     "POST", "",
                     null )
 
@@ -1194,6 +1272,7 @@ class SlingApi {
         def queryParams = [:]
         def headerParams = [:]
         def bodyParams
+        def accept
         def contentType
 
         // verify required params are set
@@ -1229,19 +1308,22 @@ class SlingApi {
 
 
 
-        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+        accept = apiUtils.selectHeaderAccept(["application/json"])
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, accept, contentType,
                     "POST", "",
                     String.class )
 
     }
 
-    def postTreeActivation ( Boolean ignoredeactivated, Boolean onlymodified, String path, Closure onSuccess, Closure onFailure)  {
-        String resourcePath = "/etc/replication/treeactivation.html"
+    def postTreeActivation ( Boolean ignoredeactivated, Boolean onlymodified, String path, String cmd, Closure onSuccess, Closure onFailure)  {
+        String resourcePath = "/libs/replication/treeactivation.html"
 
         // params
         def queryParams = [:]
         def headerParams = [:]
         def bodyParams
+        def accept
         def contentType
 
         // verify required params are set
@@ -1256,6 +1338,10 @@ class SlingApi {
         if (path == null) {
             throw new RuntimeException("missing required params path")
         }
+        // verify required params are set
+        if (cmd == null) {
+            throw new RuntimeException("missing required params cmd")
+        }
 
         if (ignoredeactivated != null) {
             queryParams.put("ignoredeactivated", ignoredeactivated)
@@ -1266,28 +1352,34 @@ class SlingApi {
         if (path != null) {
             queryParams.put("path", path)
         }
+        if (cmd != null) {
+            queryParams.put("cmd", cmd)
+        }
 
 
 
 
-        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+        accept = apiUtils.selectHeaderAccept([])
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, accept, contentType,
                     "POST", "",
                     null )
 
     }
 
-    def postTruststore ( String colonOperation, String newPassword, String rePassword, String keyStoreType, String removeAlias, File certificate, Closure onSuccess, Closure onFailure)  {
+    def postTruststore ( String operation, String newPassword, String rePassword, String keyStoreType, String removeAlias, File certificate, Closure onSuccess, Closure onFailure)  {
         String resourcePath = "/libs/granite/security/post/truststore"
 
         // params
         def queryParams = [:]
         def headerParams = [:]
         def bodyParams
+        def accept
         def contentType
 
 
-        if (colonOperation != null) {
-            queryParams.put(":operation", colonOperation)
+        if (operation != null) {
+            queryParams.put(":operation", operation)
         }
         if (newPassword != null) {
             queryParams.put("newPassword", newPassword)
@@ -1307,7 +1399,9 @@ class SlingApi {
         contentType = 'multipart/form-data';
         bodyParams = certificate
 
-        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+        accept = apiUtils.selectHeaderAccept(["text/plain"])
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, accept, contentType,
                     "POST", "",
                     String.class )
 
@@ -1320,6 +1414,7 @@ class SlingApi {
         def queryParams = [:]
         def headerParams = [:]
         def bodyParams
+        def accept
         def contentType
 
 
@@ -1329,7 +1424,9 @@ class SlingApi {
         contentType = 'multipart/form-data';
         bodyParams = truststoreP12
 
-        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
+        accept = apiUtils.selectHeaderAccept(["text/plain"])
+
+        apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, accept, contentType,
                     "POST", "",
                     String.class )
 

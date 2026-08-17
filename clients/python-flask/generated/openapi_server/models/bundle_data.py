@@ -1,11 +1,8 @@
-# coding: utf-8
-
-from __future__ import absolute_import
 from datetime import date, datetime  # noqa: F401
 
 from typing import List, Dict  # noqa: F401
 
-from openapi_server.models.base_model_ import Model
+from openapi_server.models.base_model import Model
 from openapi_server.models.bundle_data_prop import BundleDataProp
 from openapi_server import util
 
@@ -85,7 +82,7 @@ class BundleData(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def id(self):
+    def id(self) -> int:
         """Gets the id of this BundleData.
 
         Bundle ID  # noqa: E501
@@ -96,7 +93,7 @@ class BundleData(Model):
         return self._id
 
     @id.setter
-    def id(self, id):
+    def id(self, id: int):
         """Sets the id of this BundleData.
 
         Bundle ID  # noqa: E501
@@ -108,7 +105,7 @@ class BundleData(Model):
         self._id = id
 
     @property
-    def name(self):
+    def name(self) -> str:
         """Gets the name of this BundleData.
 
         Bundle name  # noqa: E501
@@ -119,7 +116,7 @@ class BundleData(Model):
         return self._name
 
     @name.setter
-    def name(self, name):
+    def name(self, name: str):
         """Sets the name of this BundleData.
 
         Bundle name  # noqa: E501
@@ -131,7 +128,7 @@ class BundleData(Model):
         self._name = name
 
     @property
-    def fragment(self):
+    def fragment(self) -> bool:
         """Gets the fragment of this BundleData.
 
         Is bundle a fragment  # noqa: E501
@@ -142,7 +139,7 @@ class BundleData(Model):
         return self._fragment
 
     @fragment.setter
-    def fragment(self, fragment):
+    def fragment(self, fragment: bool):
         """Sets the fragment of this BundleData.
 
         Is bundle a fragment  # noqa: E501
@@ -154,7 +151,7 @@ class BundleData(Model):
         self._fragment = fragment
 
     @property
-    def state_raw(self):
+    def state_raw(self) -> int:
         """Gets the state_raw of this BundleData.
 
         Numeric raw bundle state value  # noqa: E501
@@ -165,7 +162,7 @@ class BundleData(Model):
         return self._state_raw
 
     @state_raw.setter
-    def state_raw(self, state_raw):
+    def state_raw(self, state_raw: int):
         """Sets the state_raw of this BundleData.
 
         Numeric raw bundle state value  # noqa: E501
@@ -177,7 +174,7 @@ class BundleData(Model):
         self._state_raw = state_raw
 
     @property
-    def state(self):
+    def state(self) -> str:
         """Gets the state of this BundleData.
 
         Bundle state value  # noqa: E501
@@ -188,7 +185,7 @@ class BundleData(Model):
         return self._state
 
     @state.setter
-    def state(self, state):
+    def state(self, state: str):
         """Sets the state of this BundleData.
 
         Bundle state value  # noqa: E501
@@ -200,7 +197,7 @@ class BundleData(Model):
         self._state = state
 
     @property
-    def version(self):
+    def version(self) -> str:
         """Gets the version of this BundleData.
 
         Bundle version  # noqa: E501
@@ -211,7 +208,7 @@ class BundleData(Model):
         return self._version
 
     @version.setter
-    def version(self, version):
+    def version(self, version: str):
         """Sets the version of this BundleData.
 
         Bundle version  # noqa: E501
@@ -223,7 +220,7 @@ class BundleData(Model):
         self._version = version
 
     @property
-    def symbolic_name(self):
+    def symbolic_name(self) -> str:
         """Gets the symbolic_name of this BundleData.
 
         Bundle symbolic name  # noqa: E501
@@ -234,7 +231,7 @@ class BundleData(Model):
         return self._symbolic_name
 
     @symbolic_name.setter
-    def symbolic_name(self, symbolic_name):
+    def symbolic_name(self, symbolic_name: str):
         """Sets the symbolic_name of this BundleData.
 
         Bundle symbolic name  # noqa: E501
@@ -246,7 +243,7 @@ class BundleData(Model):
         self._symbolic_name = symbolic_name
 
     @property
-    def category(self):
+    def category(self) -> str:
         """Gets the category of this BundleData.
 
         Bundle category  # noqa: E501
@@ -257,7 +254,7 @@ class BundleData(Model):
         return self._category
 
     @category.setter
-    def category(self, category):
+    def category(self, category: str):
         """Sets the category of this BundleData.
 
         Bundle category  # noqa: E501
@@ -269,7 +266,7 @@ class BundleData(Model):
         self._category = category
 
     @property
-    def props(self):
+    def props(self) -> List[BundleDataProp]:
         """Gets the props of this BundleData.
 
 
@@ -279,7 +276,7 @@ class BundleData(Model):
         return self._props
 
     @props.setter
-    def props(self, props):
+    def props(self, props: List[BundleDataProp]):
         """Sets the props of this BundleData.
 
 

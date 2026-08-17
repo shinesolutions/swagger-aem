@@ -1,24 +1,33 @@
 package org.openapitools.model;
 
+import java.net.URI;
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import org.openapitools.model.InstallStatusStatus;
+import org.springframework.lang.Nullable;
 import org.openapitools.jackson.nullable.JsonNullable;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+import java.time.OffsetDateTime;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+
+import java.util.*;
+import jakarta.annotation.Generated;
 
 /**
  * InstallStatus
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-09-03T15:28:35.636+10:00[Australia/Melbourne]")
-public class InstallStatus   {
-  @JsonProperty("status")
-  private InstallStatusStatus status;
 
-  public InstallStatus status(InstallStatusStatus status) {
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-08-17T02:18:23.350215970Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+public class InstallStatus {
+
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable InstallStatusStatus status;
+
+  public InstallStatus status(@Nullable InstallStatusStatus status) {
     this.status = status;
     return this;
   }
@@ -26,19 +35,18 @@ public class InstallStatus   {
   /**
    * Get status
    * @return status
-  */
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public InstallStatusStatus getStatus() {
+   */
+  @Valid 
+  @Schema(name = "status", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("status")
+  public @Nullable InstallStatusStatus getStatus() {
     return status;
   }
 
-  public void setStatus(InstallStatusStatus status) {
+  @JsonProperty("status")
+  public void setStatus(@Nullable InstallStatusStatus status) {
     this.status = status;
   }
-
 
   @Override
   public boolean equals(Object o) {
@@ -61,7 +69,6 @@ public class InstallStatus   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class InstallStatus {\n");
-    
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -71,11 +78,8 @@ public class InstallStatus   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+  private String toIndentedString(@Nullable Object o) {
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

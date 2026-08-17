@@ -18,8 +18,10 @@ Method | HTTP request | Description
 library(openapi)
 
 
-api.instance <- CqApi$new()
-result <- api.instance$GetLoginPage()
+api_instance <- CqApi$new()
+# to save the result into a file, simply add the optional `data_file` parameter, e.g.
+# result <- api_instance$GetLoginPage(data_file = "result.txt")
+result <- api_instance$GetLoginPage()
 dput(result)
 ```
 
@@ -45,7 +47,7 @@ No authorization required
 | **0** | Default response |  -  |
 
 # **PostCqActions**
-> PostCqActions(authorizable.id, changelog)
+> PostCqActions(authorizable_id, changelog)
 
 
 
@@ -53,21 +55,22 @@ No authorization required
 ```R
 library(openapi)
 
-var.authorizable.id <- 'authorizable.id_example' # character | 
-var.changelog <- 'changelog_example' # character | 
+# prepare function argument(s)
+var_authorizable_id <- "authorizable_id_example" # character | 
+var_changelog <- "changelog_example" # character | 
 
-api.instance <- CqApi$new()
+api_instance <- CqApi$new()
 # Configure HTTP basic authorization: aemAuth
-api.instance$apiClient$username <- 'TODO_YOUR_USERNAME';
-api.instance$apiClient$password <- 'TODO_YOUR_PASSWORD';
-api.instance$PostCqActions(var.authorizable.id, var.changelog)
+api_instance$api_client$username <- Sys.getenv("USERNAME")
+api_instance$api_client$password <- Sys.getenv("PASSWORD")
+api_instance$PostCqActions(var_authorizable_id, var_changelog)
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorizable.id** | **character**|  | 
+ **authorizable_id** | **character**|  | 
  **changelog** | **character**|  | 
 
 ### Return type

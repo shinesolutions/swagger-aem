@@ -1,26 +1,37 @@
 package org.openapitools.model;
 
+import java.net.URI;
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import org.springframework.lang.Nullable;
 import org.openapitools.jackson.nullable.JsonNullable;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+import java.time.OffsetDateTime;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+
+import java.util.*;
+import jakarta.annotation.Generated;
 
 /**
  * InstallStatusStatus
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-09-03T15:28:35.636+10:00[Australia/Melbourne]")
-public class InstallStatusStatus   {
-  @JsonProperty("finished")
-  private Boolean finished;
 
-  @JsonProperty("itemCount")
-  private Integer itemCount;
+@JsonTypeName("InstallStatus_status")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-08-17T02:18:23.350215970Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+public class InstallStatusStatus {
 
-  public InstallStatusStatus finished(Boolean finished) {
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable Boolean finished;
+
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable Integer itemCount;
+
+  public InstallStatusStatus finished(@Nullable Boolean finished) {
     this.finished = finished;
     return this;
   }
@@ -28,19 +39,20 @@ public class InstallStatusStatus   {
   /**
    * Get finished
    * @return finished
-  */
-  @ApiModelProperty(value = "")
-
-
-  public Boolean getFinished() {
+   */
+  
+  @Schema(name = "finished", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("finished")
+  public @Nullable Boolean getFinished() {
     return finished;
   }
 
-  public void setFinished(Boolean finished) {
+  @JsonProperty("finished")
+  public void setFinished(@Nullable Boolean finished) {
     this.finished = finished;
   }
 
-  public InstallStatusStatus itemCount(Integer itemCount) {
+  public InstallStatusStatus itemCount(@Nullable Integer itemCount) {
     this.itemCount = itemCount;
     return this;
   }
@@ -48,18 +60,18 @@ public class InstallStatusStatus   {
   /**
    * Get itemCount
    * @return itemCount
-  */
-  @ApiModelProperty(value = "")
-
-
-  public Integer getItemCount() {
+   */
+  
+  @Schema(name = "itemCount", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("itemCount")
+  public @Nullable Integer getItemCount() {
     return itemCount;
   }
 
-  public void setItemCount(Integer itemCount) {
+  @JsonProperty("itemCount")
+  public void setItemCount(@Nullable Integer itemCount) {
     this.itemCount = itemCount;
   }
-
 
   @Override
   public boolean equals(Object o) {
@@ -83,7 +95,6 @@ public class InstallStatusStatus   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class InstallStatusStatus {\n");
-    
     sb.append("    finished: ").append(toIndentedString(finished)).append("\n");
     sb.append("    itemCount: ").append(toIndentedString(itemCount)).append("\n");
     sb.append("}");
@@ -94,11 +105,8 @@ public class InstallStatusStatus   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+  private String toIndentedString(@Nullable Object o) {
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

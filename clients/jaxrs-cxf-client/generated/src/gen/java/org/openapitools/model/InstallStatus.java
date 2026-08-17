@@ -3,18 +3,14 @@ package org.openapitools.model;
 import org.openapitools.model.InstallStatusStatus;
 
 import io.swagger.annotations.ApiModelProperty;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlEnumValue;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 public class InstallStatus  {
   
   @ApiModelProperty(value = "")
+
   private InstallStatusStatus status;
  /**
    * Get status
@@ -34,6 +30,22 @@ public class InstallStatus  {
     return this;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    InstallStatus installStatus = (InstallStatus) o;
+    return Objects.equals(this.status, installStatus.status);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(status);
+  }
 
   @Override
   public String toString() {
@@ -50,10 +62,7 @@ public class InstallStatus  {
    * (except the first line).
    */
   private static String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

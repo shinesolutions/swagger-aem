@@ -1,0 +1,66 @@
+{
+  "namespace": "model",
+  "type": "record",
+  "doc": "",
+  "name": "BundleData",
+  "fields": [
+    {
+      "name": "id",
+      "type": ["null", "int"],
+      "doc": "Bundle ID",
+      "default": null
+    },
+    {
+      "name": "name",
+      "type": ["null", "string"],
+      "doc": "Bundle name",
+      "default": null
+    },
+    {
+      "name": "fragment",
+      "type": ["null", "boolean"],
+      "doc": "Is bundle a fragment",
+      "default": null
+    },
+    {
+      "name": "stateRaw",
+      "type": ["null", "int"],
+      "doc": "Numeric raw bundle state value",
+      "default": null
+    },
+    {
+      "name": "state",
+      "type": ["null", "string"],
+      "doc": "Bundle state value",
+      "default": null
+    },
+    {
+      "name": "version",
+      "type": ["null", "string"],
+      "doc": "Bundle version",
+      "default": null
+    },
+    {
+      "name": "symbolicName",
+      "type": ["null", "string"],
+      "doc": "Bundle symbolic name",
+      "default": null
+    },
+    {
+      "name": "category",
+      "type": ["null", "string"],
+      "doc": "Bundle category",
+      "default": null
+    },
+    {
+      "name": "props",
+      "type": ["null", {
+        "type": "array",
+        "items": "model.BundleDataProp"
+      }],
+      "doc": "",
+      "default": null
+    }
+  ]
+
+}

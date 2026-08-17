@@ -1,131 +1,134 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+// @dart=2.18
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of openapi.api;
 
 
 class CrxApi {
-  CrxApi([ApiClient apiClient]) : apiClient = apiClient ?? defaultApiClient;
+  CrxApi([ApiClient? apiClient]) : apiClient = apiClient ?? defaultApiClient;
 
   final ApiClient apiClient;
 
   /// Performs an HTTP 'GET /crx/server/crx.default/jcr:root/.1.json' operation and returns the [Response].
-  Future<Response> getCrxdeStatusWithHttpInfo() async {
+  Future<Response> getCrxdeStatusWithHttpInfo({ Future<void>? abortTrigger, }) async {
+    // ignore: prefer_const_declarations
     final path = r'/crx/server/crx.default/jcr:root/.1.json';
 
-    Object postBody;
+    // ignore: prefer_final_locals
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['aemAuth'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
-      authNames,
+      contentTypes.isEmpty ? null : contentTypes.first,
+      abortTrigger: abortTrigger,
     );
   }
 
-  Future<String> getCrxdeStatus() async {
-    final response = await getCrxdeStatusWithHttpInfo();
+  Future<String?> getCrxdeStatus({ Future<void>? abortTrigger, }) async {
+    final response = await getCrxdeStatusWithHttpInfo(abortTrigger: abortTrigger,);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'String',) as String;
-        }
-    return Future<String>.value(null);
+    
+    }
+    return null;
   }
 
   /// Performs an HTTP 'GET /crx/packmgr/installstatus.jsp' operation and returns the [Response].
-  Future<Response> getInstallStatusWithHttpInfo() async {
+  Future<Response> getInstallStatusWithHttpInfo({ Future<void>? abortTrigger, }) async {
+    // ignore: prefer_const_declarations
     final path = r'/crx/packmgr/installstatus.jsp';
 
-    Object postBody;
+    // ignore: prefer_final_locals
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['aemAuth'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
-      authNames,
+      contentTypes.isEmpty ? null : contentTypes.first,
+      abortTrigger: abortTrigger,
     );
   }
 
-  Future<InstallStatus> getInstallStatus() async {
-    final response = await getInstallStatusWithHttpInfo();
+  Future<InstallStatus?> getInstallStatus({ Future<void>? abortTrigger, }) async {
+    final response = await getInstallStatusWithHttpInfo(abortTrigger: abortTrigger,);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'InstallStatus',) as InstallStatus;
-        }
-    return Future<InstallStatus>.value(null);
+    
+    }
+    return null;
   }
 
   /// Performs an HTTP 'GET /crx/packmgr/service/script.html' operation and returns the [Response].
-  Future<Response> getPackageManagerServletWithHttpInfo() async {
+  Future<Response> getPackageManagerServletWithHttpInfo({ Future<void>? abortTrigger, }) async {
+    // ignore: prefer_const_declarations
     final path = r'/crx/packmgr/service/script.html';
 
-    Object postBody;
+    // ignore: prefer_final_locals
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['aemAuth'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'GET',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
-      authNames,
+      contentTypes.isEmpty ? null : contentTypes.first,
+      abortTrigger: abortTrigger,
     );
   }
 
-  Future<void> getPackageManagerServlet() async {
-    final response = await getPackageManagerServletWithHttpInfo();
+  Future<void> getPackageManagerServlet({ Future<void>? abortTrigger, }) async {
+    final response = await getPackageManagerServletWithHttpInfo(abortTrigger: abortTrigger,);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -135,54 +138,50 @@ class CrxApi {
   /// Parameters:
   ///
   /// * [String] cmd (required):
-  Future<Response> postPackageServiceWithHttpInfo(String cmd) async {
-    // Verify required params are set.
-    if (cmd == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: cmd');
-    }
-
+  Future<Response> postPackageServiceWithHttpInfo(String cmd, { Future<void>? abortTrigger, }) async {
+    // ignore: prefer_const_declarations
     final path = r'/crx/packmgr/service.jsp';
 
-    Object postBody;
+    // ignore: prefer_final_locals
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'cmd', cmd));
+      queryParams.addAll(_queryParams('', 'cmd', cmd));
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['aemAuth'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'POST',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
-      authNames,
+      contentTypes.isEmpty ? null : contentTypes.first,
+      abortTrigger: abortTrigger,
     );
   }
 
   /// Parameters:
   ///
   /// * [String] cmd (required):
-  Future<String> postPackageService(String cmd) async {
-    final response = await postPackageServiceWithHttpInfo(cmd);
+  Future<String?> postPackageService(String cmd, { Future<void>? abortTrigger, }) async {
+    final response = await postPackageServiceWithHttpInfo(cmd, abortTrigger: abortTrigger,);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'String',) as String;
-        }
-    return Future<String>.value(null);
+    
+    }
+    return null;
   }
 
   /// Performs an HTTP 'POST /crx/packmgr/service/.json/{path}' operation and returns the [Response].
@@ -205,47 +204,39 @@ class CrxApi {
   /// * [bool] recursive:
   ///
   /// * [MultipartFile] package:
-  Future<Response> postPackageServiceJsonWithHttpInfo(String path, String cmd, { String groupName, String packageName, String packageVersion, String charset, bool force, bool recursive, MultipartFile package }) async {
-    // Verify required params are set.
-    if (path == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: path');
-    }
-    if (cmd == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: cmd');
-    }
-
+  Future<Response> postPackageServiceJsonWithHttpInfo(String path, String cmd, { String? groupName, String? packageName, String? packageVersion, String? charset, bool? force, bool? recursive, MultipartFile? package, Future<void>? abortTrigger, }) async {
+    // ignore: prefer_const_declarations
     final path = r'/crx/packmgr/service/.json/{path}'
-      .replaceAll('{' + 'path' + '}', path.toString());
+      .replaceAll('{path}', path);
 
-    Object postBody;
+    // ignore: prefer_final_locals
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'cmd', cmd));
+      queryParams.addAll(_queryParams('', 'cmd', cmd));
     if (groupName != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'groupName', groupName));
+      queryParams.addAll(_queryParams('', 'groupName', groupName));
     }
     if (packageName != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'packageName', packageName));
+      queryParams.addAll(_queryParams('', 'packageName', packageName));
     }
     if (packageVersion != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'packageVersion', packageVersion));
+      queryParams.addAll(_queryParams('', 'packageVersion', packageVersion));
     }
     if (charset != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', '_charset_', charset));
+      queryParams.addAll(_queryParams('', '_charset_', charset));
     }
     if (force != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'force', force));
+      queryParams.addAll(_queryParams('', 'force', force));
     }
     if (recursive != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'recursive', recursive));
+      queryParams.addAll(_queryParams('', 'recursive', recursive));
     }
 
-    final contentTypes = <String>['multipart/form-data'];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['aemAuth'];
+    const contentTypes = <String>['multipart/form-data'];
 
     bool hasFields = false;
     final mp = MultipartRequest('POST', Uri.parse(path));
@@ -258,15 +249,15 @@ class CrxApi {
       postBody = mp;
     }
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'POST',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
-      authNames,
+      contentTypes.isEmpty ? null : contentTypes.first,
+      abortTrigger: abortTrigger,
     );
   }
 
@@ -289,18 +280,19 @@ class CrxApi {
   /// * [bool] recursive:
   ///
   /// * [MultipartFile] package:
-  Future<String> postPackageServiceJson(String path, String cmd, { String groupName, String packageName, String packageVersion, String charset, bool force, bool recursive, MultipartFile package }) async {
-    final response = await postPackageServiceJsonWithHttpInfo(path, cmd,  groupName: groupName, packageName: packageName, packageVersion: packageVersion, charset: charset, force: force, recursive: recursive, package: package );
+  Future<String?> postPackageServiceJson(String path, String cmd, { String? groupName, String? packageName, String? packageVersion, String? charset, bool? force, bool? recursive, MultipartFile? package, Future<void>? abortTrigger, }) async {
+    final response = await postPackageServiceJsonWithHttpInfo(path, cmd, groupName: groupName, packageName: packageName, packageVersion: packageVersion, charset: charset, force: force, recursive: recursive, package: package, abortTrigger: abortTrigger,);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'String',) as String;
-        }
-    return Future<String>.value(null);
+    
+    }
+    return null;
   }
 
   /// Performs an HTTP 'POST /crx/packmgr/update.jsp' operation and returns the [Response].
@@ -317,54 +309,40 @@ class CrxApi {
   /// * [String] filter:
   ///
   /// * [String] charset:
-  Future<Response> postPackageUpdateWithHttpInfo(String groupName, String packageName, String version, String path, { String filter, String charset }) async {
-    // Verify required params are set.
-    if (groupName == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: groupName');
-    }
-    if (packageName == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: packageName');
-    }
-    if (version == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: version');
-    }
-    if (path == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: path');
-    }
-
+  Future<Response> postPackageUpdateWithHttpInfo(String groupName, String packageName, String version, String path, { String? filter, String? charset, Future<void>? abortTrigger, }) async {
+    // ignore: prefer_const_declarations
     final path = r'/crx/packmgr/update.jsp';
 
-    Object postBody;
+    // ignore: prefer_final_locals
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'groupName', groupName));
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'packageName', packageName));
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'version', version));
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'path', path));
+      queryParams.addAll(_queryParams('', 'groupName', groupName));
+      queryParams.addAll(_queryParams('', 'packageName', packageName));
+      queryParams.addAll(_queryParams('', 'version', version));
+      queryParams.addAll(_queryParams('', 'path', path));
     if (filter != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'filter', filter));
+      queryParams.addAll(_queryParams('', 'filter', filter));
     }
     if (charset != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat('', '_charset_', charset));
+      queryParams.addAll(_queryParams('', '_charset_', charset));
     }
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['aemAuth'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'POST',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
-      authNames,
+      contentTypes.isEmpty ? null : contentTypes.first,
+      abortTrigger: abortTrigger,
     );
   }
 
@@ -381,18 +359,19 @@ class CrxApi {
   /// * [String] filter:
   ///
   /// * [String] charset:
-  Future<String> postPackageUpdate(String groupName, String packageName, String version, String path, { String filter, String charset }) async {
-    final response = await postPackageUpdateWithHttpInfo(groupName, packageName, version, path,  filter: filter, charset: charset );
+  Future<String?> postPackageUpdate(String groupName, String packageName, String version, String path, { String? filter, String? charset, Future<void>? abortTrigger, }) async {
+    final response = await postPackageUpdateWithHttpInfo(groupName, packageName, version, path, filter: filter, charset: charset, abortTrigger: abortTrigger,);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'String',) as String;
-        }
-    return Future<String>.value(null);
+    
+    }
+    return null;
   }
 
   /// Performs an HTTP 'POST /crx/explorer/ui/setpassword.jsp' operation and returns the [Response].
@@ -403,44 +382,33 @@ class CrxApi {
   /// * [String] plain (required):
   ///
   /// * [String] verify (required):
-  Future<Response> postSetPasswordWithHttpInfo(String old, String plain, String verify) async {
-    // Verify required params are set.
-    if (old == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: old');
-    }
-    if (plain == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: plain');
-    }
-    if (verify == null) {
-     throw ApiException(HttpStatus.badRequest, 'Missing required param: verify');
-    }
-
+  Future<Response> postSetPasswordWithHttpInfo(String old, String plain, String verify, { Future<void>? abortTrigger, }) async {
+    // ignore: prefer_const_declarations
     final path = r'/crx/explorer/ui/setpassword.jsp';
 
-    Object postBody;
+    // ignore: prefer_final_locals
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'old', old));
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'plain', plain));
-      queryParams.addAll(_convertParametersForCollectionFormat('', 'verify', verify));
+      queryParams.addAll(_queryParams('', 'old', old));
+      queryParams.addAll(_queryParams('', 'plain', plain));
+      queryParams.addAll(_queryParams('', 'verify', verify));
 
-    final contentTypes = <String>[];
-    final nullableContentType = contentTypes.isNotEmpty ? contentTypes[0] : null;
-    final authNames = <String>['aemAuth'];
+    const contentTypes = <String>[];
 
 
-    return await apiClient.invokeAPI(
+    return apiClient.invokeAPI(
       path,
       'POST',
       queryParams,
       postBody,
       headerParams,
       formParams,
-      nullableContentType,
-      authNames,
+      contentTypes.isEmpty ? null : contentTypes.first,
+      abortTrigger: abortTrigger,
     );
   }
 
@@ -451,17 +419,18 @@ class CrxApi {
   /// * [String] plain (required):
   ///
   /// * [String] verify (required):
-  Future<String> postSetPassword(String old, String plain, String verify) async {
-    final response = await postSetPasswordWithHttpInfo(old, plain, verify);
+  Future<String?> postSetPassword(String old, String plain, String verify, { Future<void>? abortTrigger, }) async {
+    final response = await postSetPasswordWithHttpInfo(old, plain, verify, abortTrigger: abortTrigger,);
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body != null && response.statusCode != HttpStatus.noContent) {
+    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
       return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'String',) as String;
-        }
-    return Future<String>.value(null);
+    
+    }
+    return null;
   }
 }

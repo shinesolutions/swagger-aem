@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 
 
-### Example 
+### Example
 ```objc
 OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
 // Configure HTTP basic authorization (authentication scheme: aemAuth)
@@ -74,7 +74,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```objc
 OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
 // Configure HTTP basic authorization (authentication scheme: aemAuth)
@@ -127,7 +127,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```objc
 OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
 // Configure HTTP basic authorization (authentication scheme: aemAuth)

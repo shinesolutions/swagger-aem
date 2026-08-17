@@ -1,13 +1,9 @@
 package org.openapitools.api;
 
 
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.MediaType;
 import org.apache.cxf.jaxrs.ext.multipart.*;
 
 import io.swagger.annotations.Api;
@@ -48,4 +44,3 @@ public interface CustomApi  {
         @ApiResponse(code = 200, message = "Default response") })
     public void postConfigAemPasswordReset(@QueryParam("pwdreset.authorizables") List<String> pwdresetAuthorizables, @QueryParam("pwdreset.authorizables@TypeHint") String pwdresetAuthorizablesAtTypeHint);
 }
-

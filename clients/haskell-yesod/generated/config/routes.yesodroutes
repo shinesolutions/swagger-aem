@@ -1,0 +1,48 @@
+-- By default this file is used by `parseRoutesFile` in Foundation.hs
+-- Syntax for this file here: https://www.yesodweb.com/book/routing-and-handlers
+
+-- /static StaticR Static appStatic
+
+/system/console/configMgr SystemConsoleConfigMgrR GET
+/libs/granite/core/content/login.html LibsGraniteCoreContentLoginHtmlR GET
+/.cqactions.html CqactionsHtmlR POST
+!/#Text ByTextR POST
+/#Text/#Text ByTextByTextR GET POST DELETE
+!/#Text/{name}.rw.html ByText{Name}RwHtmlR POST
+/apps/system/config/#Text AppsSystemConfigByTextR POST
+!/apps/system/config/org.apache.felix.http AppsSystemConfigOrgApacheFelixHttpR POST
+!/apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet AppsSystemConfigOrgApacheSlingServletsGetDefaultGetServletR POST
+!/apps/system/config/org.apache.sling.security.impl.ReferrerFilter AppsSystemConfigOrgApacheSlingSecurityImplReferrerFilterR POST
+!/apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet AppsSystemConfigOrgApacheSlingJcrDavexImplServletsSlingDavExServletR POST
+!/apps/system/config/com.shinesolutions.aem.passwordreset.Activator AppsSystemConfigComShinesolutionsAemPasswordresetActivatorR POST
+!/apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck AppsSystemConfigComShinesolutionsHealthcheckHcImplActiveBundleHealthCheckR POST
+!/bin/querybuilder.json BinQuerybuilderJsonR GET POST
+/etc/packages/#Text/{name}-{version}.zip EtcPackagesByText{Name}{version}ZipR GET
+/etc/packages/#Text/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json EtcPackagesByText{Name}{version}ZipJcr:contentVlt:definitionFilterTidy2JsonR GET
+/etc/replication/agents.{runmode}.-1.json EtcReplicationAgents{runmode}1JsonR GET
+/etc/replication/agents.{runmode}/#Text EtcReplicationAgents{runmode}ByTextR GET POST DELETE
+/libs/replication/treeactivation.html LibsReplicationTreeactivationHtmlR POST
+/libs/granite/security/post/authorizables LibsGraniteSecurityPostAuthorizablesR POST
+/crx/explorer/ui/setpassword.jsp CrxExplorerUiSetpasswordJspR POST
+/crx/packmgr/installstatus.jsp CrxPackmgrInstallstatusJspR GET
+/crx/packmgr/service.jsp CrxPackmgrServiceJspR POST
+/crx/packmgr/update.jsp CrxPackmgrUpdateJspR POST
+/crx/packmgr/service/.json/#Text CrxPackmgrServiceJsonByTextR POST
+/crx/packmgr/service/script.html CrxPackmgrServiceScriptHtmlR GET
+/crx/server/crx.default/jcr:root/.1.json CrxServerCrxDefaultJcr:root1JsonR GET
+/system/console/bundles/{name}.json SystemConsoleBundles{Name}JsonR GET
+!/system/console/bundles/#Text SystemConsoleBundlesByTextR POST
+/system/console/jmx/com.adobe.granite:type=Repository/op/#Text SystemConsoleJmxComAdobeGranite:type&#x3D;RepositoryOpByTextR POST
+!/system/health SystemHealthR GET
+!/apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config AppsSystemConfigComAdobeGraniteAuthSamlSamlAuthenticationHandlerConfigR POST
+!/apps/system/config/org.apache.http.proxyconfigurator.config AppsSystemConfigOrgApacheHttpProxyconfiguratorConfigR POST
+/libs/granite/security/post/truststore LibsGraniteSecurityPostTruststoreR POST
+/libs/granite/security/truststore.json LibsGraniteSecurityTruststoreJsonR GET
+/etc/truststore/truststore.p12 EtcTruststoreTruststoreP12R GET
+!/etc/truststore EtcTruststoreR POST
+/system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler SystemConsoleConfigMgrComAdobeGraniteAuthSamlSamlAuthenticationHandlerR POST
+/system/console/status-productinfo.json SystemConsoleStatusProductinfoJsonR GET
+!/#Text/{authorizableId}.ks.html ByText{AuthorizableId}KsHtmlR POST
+!/#Text/{authorizableId}.ks.json ByText{AuthorizableId}KsJsonR GET
+/#Text/#Text/keystore/store.p12 ByTextByTextKeystoreStoreP12R GET
+/libs/granite/security/post/sslSetup.html LibsGraniteSecurityPostSslSetupHtmlR POST

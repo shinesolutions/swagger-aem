@@ -1,7 +1,6 @@
 package org.openapitools.api;
 
 import org.openapitools.api.*;
-import org.openapitools.model.*;
 
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 
@@ -14,7 +13,8 @@ import java.io.InputStream;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.validation.constraints.*;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJerseyServerCodegen", date = "2021-09-03T15:25:53.422+10:00[Australia/Melbourne]")
+import javax.validation.Valid;
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJerseyServerCodegen", date = "2026-08-17T02:15:33.561165235Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public abstract class AppsApiService {
     public abstract Response postConfigAdobeGraniteSamlAuthenticationHandler(String keyStorePassword,String keyStorePasswordAtTypeHint,Integer serviceRanking,String serviceRankingAtTypeHint,Boolean idpHttpRedirect,String idpHttpRedirectAtTypeHint,Boolean createUser,String createUserAtTypeHint,String defaultRedirectUrl,String defaultRedirectUrlAtTypeHint,String userIDAttribute,String userIDAttributeAtTypeHint,List<String> defaultGroups,String defaultGroupsAtTypeHint,String idpCertAlias,String idpCertAliasAtTypeHint,Boolean addGroupMemberships,String addGroupMembershipsAtTypeHint,List<String> path,String pathAtTypeHint,List<String> synchronizeAttributes,String synchronizeAttributesAtTypeHint,Integer clockTolerance,String clockToleranceAtTypeHint,String groupMembershipAttribute,String groupMembershipAttributeAtTypeHint,String idpUrl,String idpUrlAtTypeHint,String logoutUrl,String logoutUrlAtTypeHint,String serviceProviderEntityId,String serviceProviderEntityIdAtTypeHint,String assertionConsumerServiceURL,String assertionConsumerServiceURLAtTypeHint,Boolean handleLogout,String handleLogoutAtTypeHint,String spPrivateKeyAlias,String spPrivateKeyAliasAtTypeHint,Boolean useEncryption,String useEncryptionAtTypeHint,String nameIdFormat,String nameIdFormatAtTypeHint,String digestMethod,String digestMethodAtTypeHint,String signatureMethod,String signatureMethodAtTypeHint,String userIntermediatePath,String userIntermediatePathAtTypeHint,SecurityContext securityContext) throws NotFoundException;
     public abstract Response postConfigAemHealthCheckServlet(List<String> bundlesIgnored,String bundlesIgnoredAtTypeHint,SecurityContext securityContext) throws NotFoundException;

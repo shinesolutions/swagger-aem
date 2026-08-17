@@ -1,5 +1,5 @@
 .gitignore
-.php_cs
+.php-cs-fixer.dist.php
 .travis.yml
 README.md
 composer.json
@@ -34,6 +34,7 @@ lib/Api/GraniteApi.php
 lib/Api/SlingApi.php
 lib/ApiException.php
 lib/Configuration.php
+lib/FormDataProcessor.php
 lib/HeaderSelector.php
 lib/Model/BundleData.php
 lib/Model/BundleDataProp.php
@@ -54,7 +55,3 @@ lib/Model/TruststoreInfo.php
 lib/Model/TruststoreItems.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Api/GraniteApiTest.php
-test/Model/BundleDataPropTest.php
-test/Model/BundleDataTest.php
-test/Model/BundleInfoTest.php

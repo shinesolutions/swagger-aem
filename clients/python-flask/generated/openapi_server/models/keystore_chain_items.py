@@ -1,11 +1,8 @@
-# coding: utf-8
-
-from __future__ import absolute_import
 from datetime import date, datetime  # noqa: F401
 
 from typing import List, Dict  # noqa: F401
 
-from openapi_server.models.base_model_ import Model
+from openapi_server.models.base_model import Model
 from openapi_server import util
 
 
@@ -63,7 +60,7 @@ class KeystoreChainItems(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def subject(self):
+    def subject(self) -> str:
         """Gets the subject of this KeystoreChainItems.
 
         e.g. \"CN=localhost\"  # noqa: E501
@@ -74,7 +71,7 @@ class KeystoreChainItems(Model):
         return self._subject
 
     @subject.setter
-    def subject(self, subject):
+    def subject(self, subject: str):
         """Sets the subject of this KeystoreChainItems.
 
         e.g. \"CN=localhost\"  # noqa: E501
@@ -86,7 +83,7 @@ class KeystoreChainItems(Model):
         self._subject = subject
 
     @property
-    def issuer(self):
+    def issuer(self) -> str:
         """Gets the issuer of this KeystoreChainItems.
 
         e.g. \"CN=Admin\"  # noqa: E501
@@ -97,7 +94,7 @@ class KeystoreChainItems(Model):
         return self._issuer
 
     @issuer.setter
-    def issuer(self, issuer):
+    def issuer(self, issuer: str):
         """Sets the issuer of this KeystoreChainItems.
 
         e.g. \"CN=Admin\"  # noqa: E501
@@ -109,7 +106,7 @@ class KeystoreChainItems(Model):
         self._issuer = issuer
 
     @property
-    def not_before(self):
+    def not_before(self) -> str:
         """Gets the not_before of this KeystoreChainItems.
 
         e.g. \"Sun Jul 01 12:00:00 AEST 2018\"  # noqa: E501
@@ -120,7 +117,7 @@ class KeystoreChainItems(Model):
         return self._not_before
 
     @not_before.setter
-    def not_before(self, not_before):
+    def not_before(self, not_before: str):
         """Sets the not_before of this KeystoreChainItems.
 
         e.g. \"Sun Jul 01 12:00:00 AEST 2018\"  # noqa: E501
@@ -132,7 +129,7 @@ class KeystoreChainItems(Model):
         self._not_before = not_before
 
     @property
-    def not_after(self):
+    def not_after(self) -> str:
         """Gets the not_after of this KeystoreChainItems.
 
         e.g. \"Sun Jun 30 23:59:50 AEST 2019\"  # noqa: E501
@@ -143,7 +140,7 @@ class KeystoreChainItems(Model):
         return self._not_after
 
     @not_after.setter
-    def not_after(self, not_after):
+    def not_after(self, not_after: str):
         """Sets the not_after of this KeystoreChainItems.
 
         e.g. \"Sun Jun 30 23:59:50 AEST 2019\"  # noqa: E501
@@ -155,7 +152,7 @@ class KeystoreChainItems(Model):
         self._not_after = not_after
 
     @property
-    def serial_number(self):
+    def serial_number(self) -> int:
         """Gets the serial_number of this KeystoreChainItems.
 
         18165099476682912368  # noqa: E501
@@ -166,7 +163,7 @@ class KeystoreChainItems(Model):
         return self._serial_number
 
     @serial_number.setter
-    def serial_number(self, serial_number):
+    def serial_number(self, serial_number: int):
         """Sets the serial_number of this KeystoreChainItems.
 
         18165099476682912368  # noqa: E501

@@ -1,4 +1,4 @@
-# PSOpenAPITools.PSOpenAPITools/Api.GraniteApi
+# PSOpenAPITools.PSOpenAPITools\Api.GraniteApi
 
 All URIs are relative to *http://localhost*
 
@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**Invoke-SslSetup**](GraniteApi.md#Invoke-SslSetup) | **POST** /libs/granite/security/post/sslSetup.html | 
 
 
-<a name="Invoke-SslSetup"></a>
+<a id="Invoke-SslSetup"></a>
 # **Invoke-SslSetup**
 > String Invoke-SslSetup<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-KeystorePassword] <String><br>
@@ -41,7 +41,7 @@ $CertificateFile =  # System.IO.FileInfo |  (optional)
 try {
     $Result = Invoke-SslSetup -KeystorePassword $KeystorePassword -KeystorePasswordConfirm $KeystorePasswordConfirm -TruststorePassword $TruststorePassword -TruststorePasswordConfirm $TruststorePasswordConfirm -HttpsHostname $HttpsHostname -HttpsPort $HttpsPort -PrivatekeyFile $PrivatekeyFile -CertificateFile $CertificateFile
 } catch {
-    Write-Host ("Exception occured when calling Invoke-SslSetup: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Invoke-SslSetup: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```

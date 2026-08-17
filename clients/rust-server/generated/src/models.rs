@@ -1,59 +1,95 @@
 #![allow(unused_qualifications)]
+#[cfg(not(feature = "validate"))]
+use validator::Validate;
 
 use crate::models;
 #[cfg(any(feature = "client", feature = "server"))]
 use crate::header;
+#[cfg(feature = "validate")]
+use serde_valid::Validate;
 
-#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Validate, serde::Serialize, serde::Deserialize)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct BundleData {
     /// Bundle ID
     #[serde(rename = "id")]
+
     #[serde(skip_serializing_if="Option::is_none")]
-    pub id: Option<isize>,
+    pub id: Option<i32>,
 
     /// Bundle name
     #[serde(rename = "name")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub name: Option<String>,
 
     /// Is bundle a fragment
     #[serde(rename = "fragment")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub fragment: Option<bool>,
 
     /// Numeric raw bundle state value
     #[serde(rename = "stateRaw")]
+
     #[serde(skip_serializing_if="Option::is_none")]
-    pub state_raw: Option<isize>,
+    pub state_raw: Option<i32>,
 
     /// Bundle state value
     #[serde(rename = "state")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub state: Option<String>,
 
     /// Bundle version
     #[serde(rename = "version")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub version: Option<String>,
 
     /// Bundle symbolic name
     #[serde(rename = "symbolicName")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub symbolic_name: Option<String>,
 
     /// Bundle category
     #[serde(rename = "category")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub category: Option<String>,
 
     #[serde(rename = "props")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub props: Option<Vec<models::BundleDataProp>>,
 
 }
 
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMinLength for BundleData {
+    fn validate_composited_min_length(
+        &self,
+        _min_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MinLengthError>> {
+        Ok(())
+    }
+}
+
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMaxLength for BundleData {
+    fn validate_composited_max_length(
+        &self,
+        _max_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MaxLengthError>> {
+        Ok(())
+    }
+}
+
+
 impl BundleData {
+    #[allow(clippy::new_without_default)]
     pub fn new() -> BundleData {
         BundleData {
             id: None,
@@ -70,79 +106,81 @@ impl BundleData {
 }
 
 /// Converts the BundleData value to the Query Parameters representation (style=form, explode=false)
-/// specified in https://swagger.io/docs/specification/serialization/
+/// specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde serializer
-impl std::string::ToString for BundleData {
-    fn to_string(&self) -> String {
-        let mut params: Vec<String> = vec![];
+impl std::fmt::Display for BundleData {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let params: Vec<Option<String>> = vec![
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+            self.name.as_ref().map(|name| {
+                [
+                    "name".to_string(),
+                    name.to_string(),
+                ].join(",")
+            }),
+            self.fragment.as_ref().map(|fragment| {
+                [
+                    "fragment".to_string(),
+                    fragment.to_string(),
+                ].join(",")
+            }),
+            self.state_raw.as_ref().map(|state_raw| {
+                [
+                    "stateRaw".to_string(),
+                    state_raw.to_string(),
+                ].join(",")
+            }),
+            self.state.as_ref().map(|state| {
+                [
+                    "state".to_string(),
+                    state.to_string(),
+                ].join(",")
+            }),
+            self.version.as_ref().map(|version| {
+                [
+                    "version".to_string(),
+                    version.to_string(),
+                ].join(",")
+            }),
+            self.symbolic_name.as_ref().map(|symbolic_name| {
+                [
+                    "symbolicName".to_string(),
+                    symbolic_name.to_string(),
+                ].join(",")
+            }),
+            self.category.as_ref().map(|category| {
+                [
+                    "category".to_string(),
+                    category.to_string(),
+                ].join(",")
+            }),
+            // Skipping non-primitive type props in query parameter serialization
+        ];
 
-        if let Some(ref id) = self.id {
-            params.push("id".to_string());
-            params.push(id.to_string());
-        }
-
-
-        if let Some(ref name) = self.name {
-            params.push("name".to_string());
-            params.push(name.to_string());
-        }
-
-
-        if let Some(ref fragment) = self.fragment {
-            params.push("fragment".to_string());
-            params.push(fragment.to_string());
-        }
-
-
-        if let Some(ref state_raw) = self.state_raw {
-            params.push("stateRaw".to_string());
-            params.push(state_raw.to_string());
-        }
-
-
-        if let Some(ref state) = self.state {
-            params.push("state".to_string());
-            params.push(state.to_string());
-        }
-
-
-        if let Some(ref version) = self.version {
-            params.push("version".to_string());
-            params.push(version.to_string());
-        }
-
-
-        if let Some(ref symbolic_name) = self.symbolic_name {
-            params.push("symbolicName".to_string());
-            params.push(symbolic_name.to_string());
-        }
-
-
-        if let Some(ref category) = self.category {
-            params.push("category".to_string());
-            params.push(category.to_string());
-        }
-
-        // Skipping props in query parameter serialization
-
-        params.join(",").to_string()
+        write!(f, "{}", params.into_iter().flatten().collect::<Vec<_>>().join(","))
     }
 }
 
 /// Converts Query Parameters representation (style=form, explode=false) to a BundleData value
-/// as specified in https://swagger.io/docs/specification/serialization/
+/// as specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde deserializer
 impl std::str::FromStr for BundleData {
     type Err = String;
 
     fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
         #[derive(Default)]
-        // An intermediate representation of the struct to use for parsing.
+        #[allow(dead_code)]
         struct IntermediateRep {
-            pub id: Vec<isize>,
+            pub id: Vec<i32>,
             pub name: Vec<String>,
             pub fragment: Vec<bool>,
-            pub state_raw: Vec<isize>,
+            pub state_raw: Vec<i32>,
             pub state: Vec<String>,
             pub version: Vec<String>,
             pub symbolic_name: Vec<String>,
@@ -153,7 +191,7 @@ impl std::str::FromStr for BundleData {
         let mut intermediate_rep = IntermediateRep::default();
 
         // Parse into intermediate representation
-        let mut string_iter = s.split(',').into_iter();
+        let mut string_iter = s.split(',');
         let mut key_result = string_iter.next();
 
         while key_result.is_some() {
@@ -163,15 +201,24 @@ impl std::str::FromStr for BundleData {
             };
 
             if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
                 match key {
-                    "id" => intermediate_rep.id.push(<isize as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "name" => intermediate_rep.name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "fragment" => intermediate_rep.fragment.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "stateRaw" => intermediate_rep.state_raw.push(<isize as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "state" => intermediate_rep.state.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "version" => intermediate_rep.version.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "symbolicName" => intermediate_rep.symbolic_name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "category" => intermediate_rep.category.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "name" => intermediate_rep.name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "fragment" => intermediate_rep.fragment.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "stateRaw" => intermediate_rep.state_raw.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "state" => intermediate_rep.state.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "version" => intermediate_rep.version.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "symbolicName" => intermediate_rep.symbolic_name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "category" => intermediate_rep.category.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     "props" => return std::result::Result::Err("Parsing a container in this style is not supported in BundleData".to_string()),
                     _ => return std::result::Result::Err("Unexpected key while parsing BundleData".to_string())
                 }
@@ -207,8 +254,7 @@ impl std::convert::TryFrom<header::IntoHeaderValue<BundleData>> for hyper::heade
         match hyper::header::HeaderValue::from_str(&hdr_value) {
              std::result::Result::Ok(value) => std::result::Result::Ok(value),
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Invalid header value for BundleData - value: {} is invalid {}",
-                     hdr_value, e))
+                 format!("Invalid header value for BundleData - value: {hdr_value} is invalid {e}"))
         }
     }
 }
@@ -223,43 +269,107 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                     match <BundleData as std::str::FromStr>::from_str(value) {
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
-                            format!("Unable to convert header value '{}' into BundleData - {}",
-                                value, err))
+                            format!("Unable to convert header value '{value}' into BundleData - {err}"))
                     }
              },
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Unable to convert header: {:?} to string: {}",
-                     hdr_value, e))
+                 format!("Unable to convert header: {hdr_value:?} to string: {e}"))
         }
     }
 }
 
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<Vec<BundleData>>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_values: header::IntoHeaderValue<Vec<BundleData>>) -> std::result::Result<Self, Self::Error> {
+        let hdr_values : Vec<String> = hdr_values.0.into_iter().map(|hdr_value| {
+            hdr_value.to_string()
+        }).collect();
+
+        match hyper::header::HeaderValue::from_str(&hdr_values.join(", ")) {
+           std::result::Result::Ok(hdr_value) => std::result::Result::Ok(hdr_value),
+           std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to convert {hdr_values:?} into a header - {e}",))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<Vec<BundleData>> {
+    type Error = String;
+
+    fn try_from(hdr_values: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_values.to_str() {
+            std::result::Result::Ok(hdr_values) => {
+                let hdr_values : std::vec::Vec<BundleData> = hdr_values
+                .split(',')
+                .filter_map(|hdr_value| match hdr_value.trim() {
+                    "" => std::option::Option::None,
+                    hdr_value => std::option::Option::Some({
+                        match <BundleData as std::str::FromStr>::from_str(hdr_value) {
+                            std::result::Result::Ok(value) => std::result::Result::Ok(value),
+                            std::result::Result::Err(err) => std::result::Result::Err(
+                                format!("Unable to convert header value '{hdr_value}' into BundleData - {err}"))
+                        }
+                    })
+                }).collect::<std::result::Result<std::vec::Vec<_>, String>>()?;
+
+                std::result::Result::Ok(header::IntoHeaderValue(hdr_values))
+            },
+            std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to parse header: {hdr_values:?} as a string - {e}")),
+        }
+    }
+}
 
 impl BundleData {
     /// Helper function to allow us to convert this model to an XML string.
     /// Will panic if serialisation fails.
     #[allow(dead_code)]
-    pub(crate) fn to_xml(&self) -> String {
+    pub(crate) fn as_xml(&self) -> String {
         serde_xml_rs::to_string(&self).expect("impossible to fail to serialize")
     }
 }
 
-#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Validate, serde::Serialize, serde::Deserialize)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct BundleDataProp {
     /// Bundle data key
     #[serde(rename = "key")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub key: Option<String>,
 
     /// Bundle data value
     #[serde(rename = "value")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub value: Option<String>,
 
 }
 
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMinLength for BundleDataProp {
+    fn validate_composited_min_length(
+        &self,
+        _min_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MinLengthError>> {
+        Ok(())
+    }
+}
+
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMaxLength for BundleDataProp {
+    fn validate_composited_max_length(
+        &self,
+        _max_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MaxLengthError>> {
+        Ok(())
+    }
+}
+
+
 impl BundleDataProp {
+    #[allow(clippy::new_without_default)]
     pub fn new() -> BundleDataProp {
         BundleDataProp {
             key: None,
@@ -269,36 +379,39 @@ impl BundleDataProp {
 }
 
 /// Converts the BundleDataProp value to the Query Parameters representation (style=form, explode=false)
-/// specified in https://swagger.io/docs/specification/serialization/
+/// specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde serializer
-impl std::string::ToString for BundleDataProp {
-    fn to_string(&self) -> String {
-        let mut params: Vec<String> = vec![];
+impl std::fmt::Display for BundleDataProp {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let params: Vec<Option<String>> = vec![
+            self.key.as_ref().map(|key| {
+                [
+                    "key".to_string(),
+                    key.to_string(),
+                ].join(",")
+            }),
+            self.value.as_ref().map(|value| {
+                [
+                    "value".to_string(),
+                    value.to_string(),
+                ].join(",")
+            }),
+        ];
 
-        if let Some(ref key) = self.key {
-            params.push("key".to_string());
-            params.push(key.to_string());
-        }
-
-
-        if let Some(ref value) = self.value {
-            params.push("value".to_string());
-            params.push(value.to_string());
-        }
-
-        params.join(",").to_string()
+        write!(f, "{}", params.into_iter().flatten().collect::<Vec<_>>().join(","))
     }
 }
 
 /// Converts Query Parameters representation (style=form, explode=false) to a BundleDataProp value
-/// as specified in https://swagger.io/docs/specification/serialization/
+/// as specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde deserializer
 impl std::str::FromStr for BundleDataProp {
     type Err = String;
 
     fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
         #[derive(Default)]
-        // An intermediate representation of the struct to use for parsing.
+        #[allow(dead_code)]
         struct IntermediateRep {
             pub key: Vec<String>,
             pub value: Vec<String>,
@@ -307,7 +420,7 @@ impl std::str::FromStr for BundleDataProp {
         let mut intermediate_rep = IntermediateRep::default();
 
         // Parse into intermediate representation
-        let mut string_iter = s.split(',').into_iter();
+        let mut string_iter = s.split(',');
         let mut key_result = string_iter.next();
 
         while key_result.is_some() {
@@ -317,9 +430,12 @@ impl std::str::FromStr for BundleDataProp {
             };
 
             if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
                 match key {
-                    "key" => intermediate_rep.key.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "value" => intermediate_rep.value.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
+                    #[allow(clippy::redundant_clone)]
+                    "key" => intermediate_rep.key.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "value" => intermediate_rep.value.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing BundleDataProp".to_string())
                 }
             }
@@ -347,8 +463,7 @@ impl std::convert::TryFrom<header::IntoHeaderValue<BundleDataProp>> for hyper::h
         match hyper::header::HeaderValue::from_str(&hdr_value) {
              std::result::Result::Ok(value) => std::result::Result::Ok(value),
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Invalid header value for BundleDataProp - value: {} is invalid {}",
-                     hdr_value, e))
+                 format!("Invalid header value for BundleDataProp - value: {hdr_value} is invalid {e}"))
         }
     }
 }
@@ -363,46 +478,112 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                     match <BundleDataProp as std::str::FromStr>::from_str(value) {
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
-                            format!("Unable to convert header value '{}' into BundleDataProp - {}",
-                                value, err))
+                            format!("Unable to convert header value '{value}' into BundleDataProp - {err}"))
                     }
              },
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Unable to convert header: {:?} to string: {}",
-                     hdr_value, e))
+                 format!("Unable to convert header: {hdr_value:?} to string: {e}"))
         }
     }
 }
 
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<Vec<BundleDataProp>>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_values: header::IntoHeaderValue<Vec<BundleDataProp>>) -> std::result::Result<Self, Self::Error> {
+        let hdr_values : Vec<String> = hdr_values.0.into_iter().map(|hdr_value| {
+            hdr_value.to_string()
+        }).collect();
+
+        match hyper::header::HeaderValue::from_str(&hdr_values.join(", ")) {
+           std::result::Result::Ok(hdr_value) => std::result::Result::Ok(hdr_value),
+           std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to convert {hdr_values:?} into a header - {e}",))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<Vec<BundleDataProp>> {
+    type Error = String;
+
+    fn try_from(hdr_values: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_values.to_str() {
+            std::result::Result::Ok(hdr_values) => {
+                let hdr_values : std::vec::Vec<BundleDataProp> = hdr_values
+                .split(',')
+                .filter_map(|hdr_value| match hdr_value.trim() {
+                    "" => std::option::Option::None,
+                    hdr_value => std::option::Option::Some({
+                        match <BundleDataProp as std::str::FromStr>::from_str(hdr_value) {
+                            std::result::Result::Ok(value) => std::result::Result::Ok(value),
+                            std::result::Result::Err(err) => std::result::Result::Err(
+                                format!("Unable to convert header value '{hdr_value}' into BundleDataProp - {err}"))
+                        }
+                    })
+                }).collect::<std::result::Result<std::vec::Vec<_>, String>>()?;
+
+                std::result::Result::Ok(header::IntoHeaderValue(hdr_values))
+            },
+            std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to parse header: {hdr_values:?} as a string - {e}")),
+        }
+    }
+}
 
 impl BundleDataProp {
     /// Helper function to allow us to convert this model to an XML string.
     /// Will panic if serialisation fails.
     #[allow(dead_code)]
-    pub(crate) fn to_xml(&self) -> String {
+    pub(crate) fn as_xml(&self) -> String {
         serde_xml_rs::to_string(&self).expect("impossible to fail to serialize")
     }
 }
 
-#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Validate, serde::Serialize, serde::Deserialize)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct BundleInfo {
     /// Status description of all bundles
     #[serde(rename = "status")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub status: Option<String>,
 
     #[serde(rename = "s")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub s: Option<Vec<i32>>,
 
     #[serde(rename = "data")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub data: Option<Vec<models::BundleData>>,
 
 }
 
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMinLength for BundleInfo {
+    fn validate_composited_min_length(
+        &self,
+        _min_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MinLengthError>> {
+        Ok(())
+    }
+}
+
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMaxLength for BundleInfo {
+    fn validate_composited_max_length(
+        &self,
+        _max_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MaxLengthError>> {
+        Ok(())
+    }
+}
+
+
 impl BundleInfo {
+    #[allow(clippy::new_without_default)]
     pub fn new() -> BundleInfo {
         BundleInfo {
             status: None,
@@ -413,38 +594,40 @@ impl BundleInfo {
 }
 
 /// Converts the BundleInfo value to the Query Parameters representation (style=form, explode=false)
-/// specified in https://swagger.io/docs/specification/serialization/
+/// specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde serializer
-impl std::string::ToString for BundleInfo {
-    fn to_string(&self) -> String {
-        let mut params: Vec<String> = vec![];
+impl std::fmt::Display for BundleInfo {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let params: Vec<Option<String>> = vec![
+            self.status.as_ref().map(|status| {
+                [
+                    "status".to_string(),
+                    status.to_string(),
+                ].join(",")
+            }),
+            self.s.as_ref().map(|s| {
+                [
+                    "s".to_string(),
+                    s.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+            // Skipping non-primitive type data in query parameter serialization
+        ];
 
-        if let Some(ref status) = self.status {
-            params.push("status".to_string());
-            params.push(status.to_string());
-        }
-
-
-        if let Some(ref s) = self.s {
-            params.push("s".to_string());
-            params.push(s.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(",").to_string());
-        }
-
-        // Skipping data in query parameter serialization
-
-        params.join(",").to_string()
+        write!(f, "{}", params.into_iter().flatten().collect::<Vec<_>>().join(","))
     }
 }
 
 /// Converts Query Parameters representation (style=form, explode=false) to a BundleInfo value
-/// as specified in https://swagger.io/docs/specification/serialization/
+/// as specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde deserializer
 impl std::str::FromStr for BundleInfo {
     type Err = String;
 
     fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
         #[derive(Default)]
-        // An intermediate representation of the struct to use for parsing.
+        #[allow(dead_code)]
         struct IntermediateRep {
             pub status: Vec<String>,
             pub s: Vec<Vec<i32>>,
@@ -454,7 +637,7 @@ impl std::str::FromStr for BundleInfo {
         let mut intermediate_rep = IntermediateRep::default();
 
         // Parse into intermediate representation
-        let mut string_iter = s.split(',').into_iter();
+        let mut string_iter = s.split(',');
         let mut key_result = string_iter.next();
 
         while key_result.is_some() {
@@ -464,8 +647,10 @@ impl std::str::FromStr for BundleInfo {
             };
 
             if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
                 match key {
-                    "status" => intermediate_rep.status.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
+                    #[allow(clippy::redundant_clone)]
+                    "status" => intermediate_rep.status.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     "s" => return std::result::Result::Err("Parsing a container in this style is not supported in BundleInfo".to_string()),
                     "data" => return std::result::Result::Err("Parsing a container in this style is not supported in BundleInfo".to_string()),
                     _ => return std::result::Result::Err("Unexpected key while parsing BundleInfo".to_string())
@@ -496,8 +681,7 @@ impl std::convert::TryFrom<header::IntoHeaderValue<BundleInfo>> for hyper::heade
         match hyper::header::HeaderValue::from_str(&hdr_value) {
              std::result::Result::Ok(value) => std::result::Result::Ok(value),
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Invalid header value for BundleInfo - value: {} is invalid {}",
-                     hdr_value, e))
+                 format!("Invalid header value for BundleInfo - value: {hdr_value} is invalid {e}"))
         }
     }
 }
@@ -512,37 +696,101 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                     match <BundleInfo as std::str::FromStr>::from_str(value) {
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
-                            format!("Unable to convert header value '{}' into BundleInfo - {}",
-                                value, err))
+                            format!("Unable to convert header value '{value}' into BundleInfo - {err}"))
                     }
              },
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Unable to convert header: {:?} to string: {}",
-                     hdr_value, e))
+                 format!("Unable to convert header: {hdr_value:?} to string: {e}"))
         }
     }
 }
 
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<Vec<BundleInfo>>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_values: header::IntoHeaderValue<Vec<BundleInfo>>) -> std::result::Result<Self, Self::Error> {
+        let hdr_values : Vec<String> = hdr_values.0.into_iter().map(|hdr_value| {
+            hdr_value.to_string()
+        }).collect();
+
+        match hyper::header::HeaderValue::from_str(&hdr_values.join(", ")) {
+           std::result::Result::Ok(hdr_value) => std::result::Result::Ok(hdr_value),
+           std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to convert {hdr_values:?} into a header - {e}",))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<Vec<BundleInfo>> {
+    type Error = String;
+
+    fn try_from(hdr_values: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_values.to_str() {
+            std::result::Result::Ok(hdr_values) => {
+                let hdr_values : std::vec::Vec<BundleInfo> = hdr_values
+                .split(',')
+                .filter_map(|hdr_value| match hdr_value.trim() {
+                    "" => std::option::Option::None,
+                    hdr_value => std::option::Option::Some({
+                        match <BundleInfo as std::str::FromStr>::from_str(hdr_value) {
+                            std::result::Result::Ok(value) => std::result::Result::Ok(value),
+                            std::result::Result::Err(err) => std::result::Result::Err(
+                                format!("Unable to convert header value '{hdr_value}' into BundleInfo - {err}"))
+                        }
+                    })
+                }).collect::<std::result::Result<std::vec::Vec<_>, String>>()?;
+
+                std::result::Result::Ok(header::IntoHeaderValue(hdr_values))
+            },
+            std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to parse header: {hdr_values:?} as a string - {e}")),
+        }
+    }
+}
 
 impl BundleInfo {
     /// Helper function to allow us to convert this model to an XML string.
     /// Will panic if serialisation fails.
     #[allow(dead_code)]
-    pub(crate) fn to_xml(&self) -> String {
+    pub(crate) fn as_xml(&self) -> String {
         serde_xml_rs::to_string(&self).expect("impossible to fail to serialize")
     }
 }
 
-#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Validate, serde::Serialize, serde::Deserialize)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct InstallStatus {
     #[serde(rename = "status")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub status: Option<models::InstallStatusStatus>,
 
 }
 
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMinLength for InstallStatus {
+    fn validate_composited_min_length(
+        &self,
+        _min_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MinLengthError>> {
+        Ok(())
+    }
+}
+
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMaxLength for InstallStatus {
+    fn validate_composited_max_length(
+        &self,
+        _max_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MaxLengthError>> {
+        Ok(())
+    }
+}
+
+
 impl InstallStatus {
+    #[allow(clippy::new_without_default)]
     pub fn new() -> InstallStatus {
         InstallStatus {
             status: None,
@@ -551,26 +799,28 @@ impl InstallStatus {
 }
 
 /// Converts the InstallStatus value to the Query Parameters representation (style=form, explode=false)
-/// specified in https://swagger.io/docs/specification/serialization/
+/// specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde serializer
-impl std::string::ToString for InstallStatus {
-    fn to_string(&self) -> String {
-        let mut params: Vec<String> = vec![];
-        // Skipping status in query parameter serialization
+impl std::fmt::Display for InstallStatus {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let params: Vec<Option<String>> = vec![
+            // Skipping non-primitive type status in query parameter serialization
+        ];
 
-        params.join(",").to_string()
+        write!(f, "{}", params.into_iter().flatten().collect::<Vec<_>>().join(","))
     }
 }
 
 /// Converts Query Parameters representation (style=form, explode=false) to a InstallStatus value
-/// as specified in https://swagger.io/docs/specification/serialization/
+/// as specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde deserializer
 impl std::str::FromStr for InstallStatus {
     type Err = String;
 
     fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
         #[derive(Default)]
-        // An intermediate representation of the struct to use for parsing.
+        #[allow(dead_code)]
         struct IntermediateRep {
             pub status: Vec<models::InstallStatusStatus>,
         }
@@ -578,7 +828,7 @@ impl std::str::FromStr for InstallStatus {
         let mut intermediate_rep = IntermediateRep::default();
 
         // Parse into intermediate representation
-        let mut string_iter = s.split(',').into_iter();
+        let mut string_iter = s.split(',');
         let mut key_result = string_iter.next();
 
         while key_result.is_some() {
@@ -588,8 +838,10 @@ impl std::str::FromStr for InstallStatus {
             };
 
             if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
                 match key {
-                    "status" => intermediate_rep.status.push(<models::InstallStatusStatus as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
+                    #[allow(clippy::redundant_clone)]
+                    "status" => intermediate_rep.status.push(<models::InstallStatusStatus as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing InstallStatus".to_string())
                 }
             }
@@ -616,8 +868,7 @@ impl std::convert::TryFrom<header::IntoHeaderValue<InstallStatus>> for hyper::he
         match hyper::header::HeaderValue::from_str(&hdr_value) {
              std::result::Result::Ok(value) => std::result::Result::Ok(value),
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Invalid header value for InstallStatus - value: {} is invalid {}",
-                     hdr_value, e))
+                 format!("Invalid header value for InstallStatus - value: {hdr_value} is invalid {e}"))
         }
     }
 }
@@ -632,41 +883,105 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                     match <InstallStatus as std::str::FromStr>::from_str(value) {
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
-                            format!("Unable to convert header value '{}' into InstallStatus - {}",
-                                value, err))
+                            format!("Unable to convert header value '{value}' into InstallStatus - {err}"))
                     }
              },
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Unable to convert header: {:?} to string: {}",
-                     hdr_value, e))
+                 format!("Unable to convert header: {hdr_value:?} to string: {e}"))
         }
     }
 }
 
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<Vec<InstallStatus>>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_values: header::IntoHeaderValue<Vec<InstallStatus>>) -> std::result::Result<Self, Self::Error> {
+        let hdr_values : Vec<String> = hdr_values.0.into_iter().map(|hdr_value| {
+            hdr_value.to_string()
+        }).collect();
+
+        match hyper::header::HeaderValue::from_str(&hdr_values.join(", ")) {
+           std::result::Result::Ok(hdr_value) => std::result::Result::Ok(hdr_value),
+           std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to convert {hdr_values:?} into a header - {e}",))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<Vec<InstallStatus>> {
+    type Error = String;
+
+    fn try_from(hdr_values: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_values.to_str() {
+            std::result::Result::Ok(hdr_values) => {
+                let hdr_values : std::vec::Vec<InstallStatus> = hdr_values
+                .split(',')
+                .filter_map(|hdr_value| match hdr_value.trim() {
+                    "" => std::option::Option::None,
+                    hdr_value => std::option::Option::Some({
+                        match <InstallStatus as std::str::FromStr>::from_str(hdr_value) {
+                            std::result::Result::Ok(value) => std::result::Result::Ok(value),
+                            std::result::Result::Err(err) => std::result::Result::Err(
+                                format!("Unable to convert header value '{hdr_value}' into InstallStatus - {err}"))
+                        }
+                    })
+                }).collect::<std::result::Result<std::vec::Vec<_>, String>>()?;
+
+                std::result::Result::Ok(header::IntoHeaderValue(hdr_values))
+            },
+            std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to parse header: {hdr_values:?} as a string - {e}")),
+        }
+    }
+}
 
 impl InstallStatus {
     /// Helper function to allow us to convert this model to an XML string.
     /// Will panic if serialisation fails.
     #[allow(dead_code)]
-    pub(crate) fn to_xml(&self) -> String {
+    pub(crate) fn as_xml(&self) -> String {
         serde_xml_rs::to_string(&self).expect("impossible to fail to serialize")
     }
 }
 
-#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Validate, serde::Serialize, serde::Deserialize)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct InstallStatusStatus {
     #[serde(rename = "finished")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub finished: Option<bool>,
 
     #[serde(rename = "itemCount")]
+
     #[serde(skip_serializing_if="Option::is_none")]
-    pub item_count: Option<isize>,
+    pub item_count: Option<i32>,
 
 }
 
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMinLength for InstallStatusStatus {
+    fn validate_composited_min_length(
+        &self,
+        _min_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MinLengthError>> {
+        Ok(())
+    }
+}
+
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMaxLength for InstallStatusStatus {
+    fn validate_composited_max_length(
+        &self,
+        _max_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MaxLengthError>> {
+        Ok(())
+    }
+}
+
+
 impl InstallStatusStatus {
+    #[allow(clippy::new_without_default)]
     pub fn new() -> InstallStatusStatus {
         InstallStatusStatus {
             finished: None,
@@ -676,45 +991,48 @@ impl InstallStatusStatus {
 }
 
 /// Converts the InstallStatusStatus value to the Query Parameters representation (style=form, explode=false)
-/// specified in https://swagger.io/docs/specification/serialization/
+/// specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde serializer
-impl std::string::ToString for InstallStatusStatus {
-    fn to_string(&self) -> String {
-        let mut params: Vec<String> = vec![];
+impl std::fmt::Display for InstallStatusStatus {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let params: Vec<Option<String>> = vec![
+            self.finished.as_ref().map(|finished| {
+                [
+                    "finished".to_string(),
+                    finished.to_string(),
+                ].join(",")
+            }),
+            self.item_count.as_ref().map(|item_count| {
+                [
+                    "itemCount".to_string(),
+                    item_count.to_string(),
+                ].join(",")
+            }),
+        ];
 
-        if let Some(ref finished) = self.finished {
-            params.push("finished".to_string());
-            params.push(finished.to_string());
-        }
-
-
-        if let Some(ref item_count) = self.item_count {
-            params.push("itemCount".to_string());
-            params.push(item_count.to_string());
-        }
-
-        params.join(",").to_string()
+        write!(f, "{}", params.into_iter().flatten().collect::<Vec<_>>().join(","))
     }
 }
 
 /// Converts Query Parameters representation (style=form, explode=false) to a InstallStatusStatus value
-/// as specified in https://swagger.io/docs/specification/serialization/
+/// as specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde deserializer
 impl std::str::FromStr for InstallStatusStatus {
     type Err = String;
 
     fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
         #[derive(Default)]
-        // An intermediate representation of the struct to use for parsing.
+        #[allow(dead_code)]
         struct IntermediateRep {
             pub finished: Vec<bool>,
-            pub item_count: Vec<isize>,
+            pub item_count: Vec<i32>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
 
         // Parse into intermediate representation
-        let mut string_iter = s.split(',').into_iter();
+        let mut string_iter = s.split(',');
         let mut key_result = string_iter.next();
 
         while key_result.is_some() {
@@ -724,9 +1042,12 @@ impl std::str::FromStr for InstallStatusStatus {
             };
 
             if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
                 match key {
-                    "finished" => intermediate_rep.finished.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "itemCount" => intermediate_rep.item_count.push(<isize as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
+                    #[allow(clippy::redundant_clone)]
+                    "finished" => intermediate_rep.finished.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "itemCount" => intermediate_rep.item_count.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing InstallStatusStatus".to_string())
                 }
             }
@@ -754,8 +1075,7 @@ impl std::convert::TryFrom<header::IntoHeaderValue<InstallStatusStatus>> for hyp
         match hyper::header::HeaderValue::from_str(&hdr_value) {
              std::result::Result::Ok(value) => std::result::Result::Ok(value),
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Invalid header value for InstallStatusStatus - value: {} is invalid {}",
-                     hdr_value, e))
+                 format!("Invalid header value for InstallStatusStatus - value: {hdr_value} is invalid {e}"))
         }
     }
 }
@@ -770,58 +1090,125 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                     match <InstallStatusStatus as std::str::FromStr>::from_str(value) {
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
-                            format!("Unable to convert header value '{}' into InstallStatusStatus - {}",
-                                value, err))
+                            format!("Unable to convert header value '{value}' into InstallStatusStatus - {err}"))
                     }
              },
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Unable to convert header: {:?} to string: {}",
-                     hdr_value, e))
+                 format!("Unable to convert header: {hdr_value:?} to string: {e}"))
         }
     }
 }
 
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<Vec<InstallStatusStatus>>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_values: header::IntoHeaderValue<Vec<InstallStatusStatus>>) -> std::result::Result<Self, Self::Error> {
+        let hdr_values : Vec<String> = hdr_values.0.into_iter().map(|hdr_value| {
+            hdr_value.to_string()
+        }).collect();
+
+        match hyper::header::HeaderValue::from_str(&hdr_values.join(", ")) {
+           std::result::Result::Ok(hdr_value) => std::result::Result::Ok(hdr_value),
+           std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to convert {hdr_values:?} into a header - {e}",))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<Vec<InstallStatusStatus>> {
+    type Error = String;
+
+    fn try_from(hdr_values: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_values.to_str() {
+            std::result::Result::Ok(hdr_values) => {
+                let hdr_values : std::vec::Vec<InstallStatusStatus> = hdr_values
+                .split(',')
+                .filter_map(|hdr_value| match hdr_value.trim() {
+                    "" => std::option::Option::None,
+                    hdr_value => std::option::Option::Some({
+                        match <InstallStatusStatus as std::str::FromStr>::from_str(hdr_value) {
+                            std::result::Result::Ok(value) => std::result::Result::Ok(value),
+                            std::result::Result::Err(err) => std::result::Result::Err(
+                                format!("Unable to convert header value '{hdr_value}' into InstallStatusStatus - {err}"))
+                        }
+                    })
+                }).collect::<std::result::Result<std::vec::Vec<_>, String>>()?;
+
+                std::result::Result::Ok(header::IntoHeaderValue(hdr_values))
+            },
+            std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to parse header: {hdr_values:?} as a string - {e}")),
+        }
+    }
+}
 
 impl InstallStatusStatus {
     /// Helper function to allow us to convert this model to an XML string.
     /// Will panic if serialisation fails.
     #[allow(dead_code)]
-    pub(crate) fn to_xml(&self) -> String {
+    pub(crate) fn as_xml(&self) -> String {
         serde_xml_rs::to_string(&self).expect("impossible to fail to serialize")
     }
 }
 
-#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Validate, serde::Serialize, serde::Deserialize)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct KeystoreChainItems {
     /// e.g. \"CN=localhost\"
     #[serde(rename = "subject")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub subject: Option<String>,
 
     /// e.g. \"CN=Admin\"
     #[serde(rename = "issuer")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub issuer: Option<String>,
 
     /// e.g. \"Sun Jul 01 12:00:00 AEST 2018\"
     #[serde(rename = "notBefore")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub not_before: Option<String>,
 
     /// e.g. \"Sun Jun 30 23:59:50 AEST 2019\"
     #[serde(rename = "notAfter")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub not_after: Option<String>,
 
     /// 18165099476682912368
     #[serde(rename = "serialNumber")]
+
     #[serde(skip_serializing_if="Option::is_none")]
-    pub serial_number: Option<isize>,
+    pub serial_number: Option<i32>,
 
 }
 
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMinLength for KeystoreChainItems {
+    fn validate_composited_min_length(
+        &self,
+        _min_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MinLengthError>> {
+        Ok(())
+    }
+}
+
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMaxLength for KeystoreChainItems {
+    fn validate_composited_max_length(
+        &self,
+        _max_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MaxLengthError>> {
+        Ok(())
+    }
+}
+
+
 impl KeystoreChainItems {
+    #[allow(clippy::new_without_default)]
     pub fn new() -> KeystoreChainItems {
         KeystoreChainItems {
             subject: None,
@@ -834,66 +1221,69 @@ impl KeystoreChainItems {
 }
 
 /// Converts the KeystoreChainItems value to the Query Parameters representation (style=form, explode=false)
-/// specified in https://swagger.io/docs/specification/serialization/
+/// specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde serializer
-impl std::string::ToString for KeystoreChainItems {
-    fn to_string(&self) -> String {
-        let mut params: Vec<String> = vec![];
+impl std::fmt::Display for KeystoreChainItems {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let params: Vec<Option<String>> = vec![
+            self.subject.as_ref().map(|subject| {
+                [
+                    "subject".to_string(),
+                    subject.to_string(),
+                ].join(",")
+            }),
+            self.issuer.as_ref().map(|issuer| {
+                [
+                    "issuer".to_string(),
+                    issuer.to_string(),
+                ].join(",")
+            }),
+            self.not_before.as_ref().map(|not_before| {
+                [
+                    "notBefore".to_string(),
+                    not_before.to_string(),
+                ].join(",")
+            }),
+            self.not_after.as_ref().map(|not_after| {
+                [
+                    "notAfter".to_string(),
+                    not_after.to_string(),
+                ].join(",")
+            }),
+            self.serial_number.as_ref().map(|serial_number| {
+                [
+                    "serialNumber".to_string(),
+                    serial_number.to_string(),
+                ].join(",")
+            }),
+        ];
 
-        if let Some(ref subject) = self.subject {
-            params.push("subject".to_string());
-            params.push(subject.to_string());
-        }
-
-
-        if let Some(ref issuer) = self.issuer {
-            params.push("issuer".to_string());
-            params.push(issuer.to_string());
-        }
-
-
-        if let Some(ref not_before) = self.not_before {
-            params.push("notBefore".to_string());
-            params.push(not_before.to_string());
-        }
-
-
-        if let Some(ref not_after) = self.not_after {
-            params.push("notAfter".to_string());
-            params.push(not_after.to_string());
-        }
-
-
-        if let Some(ref serial_number) = self.serial_number {
-            params.push("serialNumber".to_string());
-            params.push(serial_number.to_string());
-        }
-
-        params.join(",").to_string()
+        write!(f, "{}", params.into_iter().flatten().collect::<Vec<_>>().join(","))
     }
 }
 
 /// Converts Query Parameters representation (style=form, explode=false) to a KeystoreChainItems value
-/// as specified in https://swagger.io/docs/specification/serialization/
+/// as specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde deserializer
 impl std::str::FromStr for KeystoreChainItems {
     type Err = String;
 
     fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
         #[derive(Default)]
-        // An intermediate representation of the struct to use for parsing.
+        #[allow(dead_code)]
         struct IntermediateRep {
             pub subject: Vec<String>,
             pub issuer: Vec<String>,
             pub not_before: Vec<String>,
             pub not_after: Vec<String>,
-            pub serial_number: Vec<isize>,
+            pub serial_number: Vec<i32>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
 
         // Parse into intermediate representation
-        let mut string_iter = s.split(',').into_iter();
+        let mut string_iter = s.split(',');
         let mut key_result = string_iter.next();
 
         while key_result.is_some() {
@@ -903,12 +1293,18 @@ impl std::str::FromStr for KeystoreChainItems {
             };
 
             if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
                 match key {
-                    "subject" => intermediate_rep.subject.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "issuer" => intermediate_rep.issuer.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "notBefore" => intermediate_rep.not_before.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "notAfter" => intermediate_rep.not_after.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "serialNumber" => intermediate_rep.serial_number.push(<isize as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
+                    #[allow(clippy::redundant_clone)]
+                    "subject" => intermediate_rep.subject.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "issuer" => intermediate_rep.issuer.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "notBefore" => intermediate_rep.not_before.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "notAfter" => intermediate_rep.not_after.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "serialNumber" => intermediate_rep.serial_number.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing KeystoreChainItems".to_string())
                 }
             }
@@ -939,8 +1335,7 @@ impl std::convert::TryFrom<header::IntoHeaderValue<KeystoreChainItems>> for hype
         match hyper::header::HeaderValue::from_str(&hdr_value) {
              std::result::Result::Ok(value) => std::result::Result::Ok(value),
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Invalid header value for KeystoreChainItems - value: {} is invalid {}",
-                     hdr_value, e))
+                 format!("Invalid header value for KeystoreChainItems - value: {hdr_value} is invalid {e}"))
         }
     }
 }
@@ -955,42 +1350,107 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                     match <KeystoreChainItems as std::str::FromStr>::from_str(value) {
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
-                            format!("Unable to convert header value '{}' into KeystoreChainItems - {}",
-                                value, err))
+                            format!("Unable to convert header value '{value}' into KeystoreChainItems - {err}"))
                     }
              },
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Unable to convert header: {:?} to string: {}",
-                     hdr_value, e))
+                 format!("Unable to convert header: {hdr_value:?} to string: {e}"))
         }
     }
 }
 
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<Vec<KeystoreChainItems>>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_values: header::IntoHeaderValue<Vec<KeystoreChainItems>>) -> std::result::Result<Self, Self::Error> {
+        let hdr_values : Vec<String> = hdr_values.0.into_iter().map(|hdr_value| {
+            hdr_value.to_string()
+        }).collect();
+
+        match hyper::header::HeaderValue::from_str(&hdr_values.join(", ")) {
+           std::result::Result::Ok(hdr_value) => std::result::Result::Ok(hdr_value),
+           std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to convert {hdr_values:?} into a header - {e}",))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<Vec<KeystoreChainItems>> {
+    type Error = String;
+
+    fn try_from(hdr_values: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_values.to_str() {
+            std::result::Result::Ok(hdr_values) => {
+                let hdr_values : std::vec::Vec<KeystoreChainItems> = hdr_values
+                .split(',')
+                .filter_map(|hdr_value| match hdr_value.trim() {
+                    "" => std::option::Option::None,
+                    hdr_value => std::option::Option::Some({
+                        match <KeystoreChainItems as std::str::FromStr>::from_str(hdr_value) {
+                            std::result::Result::Ok(value) => std::result::Result::Ok(value),
+                            std::result::Result::Err(err) => std::result::Result::Err(
+                                format!("Unable to convert header value '{hdr_value}' into KeystoreChainItems - {err}"))
+                        }
+                    })
+                }).collect::<std::result::Result<std::vec::Vec<_>, String>>()?;
+
+                std::result::Result::Ok(header::IntoHeaderValue(hdr_values))
+            },
+            std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to parse header: {hdr_values:?} as a string - {e}")),
+        }
+    }
+}
 
 impl KeystoreChainItems {
     /// Helper function to allow us to convert this model to an XML string.
     /// Will panic if serialisation fails.
     #[allow(dead_code)]
-    pub(crate) fn to_xml(&self) -> String {
+    pub(crate) fn as_xml(&self) -> String {
         serde_xml_rs::to_string(&self).expect("impossible to fail to serialize")
     }
 }
 
-#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Validate, serde::Serialize, serde::Deserialize)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct KeystoreInfo {
     #[serde(rename = "aliases")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub aliases: Option<Vec<models::KeystoreItems>>,
 
     /// False if truststore don't exist
     #[serde(rename = "exists")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub exists: Option<bool>,
 
 }
 
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMinLength for KeystoreInfo {
+    fn validate_composited_min_length(
+        &self,
+        _min_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MinLengthError>> {
+        Ok(())
+    }
+}
+
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMaxLength for KeystoreInfo {
+    fn validate_composited_max_length(
+        &self,
+        _max_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MaxLengthError>> {
+        Ok(())
+    }
+}
+
+
 impl KeystoreInfo {
+    #[allow(clippy::new_without_default)]
     pub fn new() -> KeystoreInfo {
         KeystoreInfo {
             aliases: None,
@@ -1000,32 +1460,34 @@ impl KeystoreInfo {
 }
 
 /// Converts the KeystoreInfo value to the Query Parameters representation (style=form, explode=false)
-/// specified in https://swagger.io/docs/specification/serialization/
+/// specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde serializer
-impl std::string::ToString for KeystoreInfo {
-    fn to_string(&self) -> String {
-        let mut params: Vec<String> = vec![];
-        // Skipping aliases in query parameter serialization
+impl std::fmt::Display for KeystoreInfo {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let params: Vec<Option<String>> = vec![
+            // Skipping non-primitive type aliases in query parameter serialization
+            self.exists.as_ref().map(|exists| {
+                [
+                    "exists".to_string(),
+                    exists.to_string(),
+                ].join(",")
+            }),
+        ];
 
-
-        if let Some(ref exists) = self.exists {
-            params.push("exists".to_string());
-            params.push(exists.to_string());
-        }
-
-        params.join(",").to_string()
+        write!(f, "{}", params.into_iter().flatten().collect::<Vec<_>>().join(","))
     }
 }
 
 /// Converts Query Parameters representation (style=form, explode=false) to a KeystoreInfo value
-/// as specified in https://swagger.io/docs/specification/serialization/
+/// as specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde deserializer
 impl std::str::FromStr for KeystoreInfo {
     type Err = String;
 
     fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
         #[derive(Default)]
-        // An intermediate representation of the struct to use for parsing.
+        #[allow(dead_code)]
         struct IntermediateRep {
             pub aliases: Vec<Vec<models::KeystoreItems>>,
             pub exists: Vec<bool>,
@@ -1034,7 +1496,7 @@ impl std::str::FromStr for KeystoreInfo {
         let mut intermediate_rep = IntermediateRep::default();
 
         // Parse into intermediate representation
-        let mut string_iter = s.split(',').into_iter();
+        let mut string_iter = s.split(',');
         let mut key_result = string_iter.next();
 
         while key_result.is_some() {
@@ -1044,9 +1506,11 @@ impl std::str::FromStr for KeystoreInfo {
             };
 
             if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
                 match key {
                     "aliases" => return std::result::Result::Err("Parsing a container in this style is not supported in KeystoreInfo".to_string()),
-                    "exists" => intermediate_rep.exists.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
+                    #[allow(clippy::redundant_clone)]
+                    "exists" => intermediate_rep.exists.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing KeystoreInfo".to_string())
                 }
             }
@@ -1074,8 +1538,7 @@ impl std::convert::TryFrom<header::IntoHeaderValue<KeystoreInfo>> for hyper::hea
         match hyper::header::HeaderValue::from_str(&hdr_value) {
              std::result::Result::Ok(value) => std::result::Result::Ok(value),
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Invalid header value for KeystoreInfo - value: {} is invalid {}",
-                     hdr_value, e))
+                 format!("Invalid header value for KeystoreInfo - value: {hdr_value} is invalid {e}"))
         }
     }
 }
@@ -1090,57 +1553,125 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                     match <KeystoreInfo as std::str::FromStr>::from_str(value) {
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
-                            format!("Unable to convert header value '{}' into KeystoreInfo - {}",
-                                value, err))
+                            format!("Unable to convert header value '{value}' into KeystoreInfo - {err}"))
                     }
              },
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Unable to convert header: {:?} to string: {}",
-                     hdr_value, e))
+                 format!("Unable to convert header: {hdr_value:?} to string: {e}"))
         }
     }
 }
 
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<Vec<KeystoreInfo>>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_values: header::IntoHeaderValue<Vec<KeystoreInfo>>) -> std::result::Result<Self, Self::Error> {
+        let hdr_values : Vec<String> = hdr_values.0.into_iter().map(|hdr_value| {
+            hdr_value.to_string()
+        }).collect();
+
+        match hyper::header::HeaderValue::from_str(&hdr_values.join(", ")) {
+           std::result::Result::Ok(hdr_value) => std::result::Result::Ok(hdr_value),
+           std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to convert {hdr_values:?} into a header - {e}",))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<Vec<KeystoreInfo>> {
+    type Error = String;
+
+    fn try_from(hdr_values: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_values.to_str() {
+            std::result::Result::Ok(hdr_values) => {
+                let hdr_values : std::vec::Vec<KeystoreInfo> = hdr_values
+                .split(',')
+                .filter_map(|hdr_value| match hdr_value.trim() {
+                    "" => std::option::Option::None,
+                    hdr_value => std::option::Option::Some({
+                        match <KeystoreInfo as std::str::FromStr>::from_str(hdr_value) {
+                            std::result::Result::Ok(value) => std::result::Result::Ok(value),
+                            std::result::Result::Err(err) => std::result::Result::Err(
+                                format!("Unable to convert header value '{hdr_value}' into KeystoreInfo - {err}"))
+                        }
+                    })
+                }).collect::<std::result::Result<std::vec::Vec<_>, String>>()?;
+
+                std::result::Result::Ok(header::IntoHeaderValue(hdr_values))
+            },
+            std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to parse header: {hdr_values:?} as a string - {e}")),
+        }
+    }
+}
 
 impl KeystoreInfo {
     /// Helper function to allow us to convert this model to an XML string.
     /// Will panic if serialisation fails.
     #[allow(dead_code)]
-    pub(crate) fn to_xml(&self) -> String {
+    pub(crate) fn as_xml(&self) -> String {
         serde_xml_rs::to_string(&self).expect("impossible to fail to serialize")
     }
 }
 
-#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Validate, serde::Serialize, serde::Deserialize)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct KeystoreItems {
     /// Keystore alias name
     #[serde(rename = "alias")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub alias: Option<String>,
 
     /// e.g. \"privateKey\"
     #[serde(rename = "entryType")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub entry_type: Option<String>,
 
     /// e.g. \"RSA\"
     #[serde(rename = "algorithm")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub algorithm: Option<String>,
 
     /// e.g. \"PKCS#8\"
     #[serde(rename = "format")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub format: Option<String>,
 
     #[serde(rename = "chain")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub chain: Option<Vec<models::KeystoreChainItems>>,
 
 }
 
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMinLength for KeystoreItems {
+    fn validate_composited_min_length(
+        &self,
+        _min_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MinLengthError>> {
+        Ok(())
+    }
+}
+
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMaxLength for KeystoreItems {
+    fn validate_composited_max_length(
+        &self,
+        _max_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MaxLengthError>> {
+        Ok(())
+    }
+}
+
+
 impl KeystoreItems {
+    #[allow(clippy::new_without_default)]
     pub fn new() -> KeystoreItems {
         KeystoreItems {
             alias: None,
@@ -1153,50 +1684,52 @@ impl KeystoreItems {
 }
 
 /// Converts the KeystoreItems value to the Query Parameters representation (style=form, explode=false)
-/// specified in https://swagger.io/docs/specification/serialization/
+/// specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde serializer
-impl std::string::ToString for KeystoreItems {
-    fn to_string(&self) -> String {
-        let mut params: Vec<String> = vec![];
+impl std::fmt::Display for KeystoreItems {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let params: Vec<Option<String>> = vec![
+            self.alias.as_ref().map(|alias| {
+                [
+                    "alias".to_string(),
+                    alias.to_string(),
+                ].join(",")
+            }),
+            self.entry_type.as_ref().map(|entry_type| {
+                [
+                    "entryType".to_string(),
+                    entry_type.to_string(),
+                ].join(",")
+            }),
+            self.algorithm.as_ref().map(|algorithm| {
+                [
+                    "algorithm".to_string(),
+                    algorithm.to_string(),
+                ].join(",")
+            }),
+            self.format.as_ref().map(|format| {
+                [
+                    "format".to_string(),
+                    format.to_string(),
+                ].join(",")
+            }),
+            // Skipping non-primitive type chain in query parameter serialization
+        ];
 
-        if let Some(ref alias) = self.alias {
-            params.push("alias".to_string());
-            params.push(alias.to_string());
-        }
-
-
-        if let Some(ref entry_type) = self.entry_type {
-            params.push("entryType".to_string());
-            params.push(entry_type.to_string());
-        }
-
-
-        if let Some(ref algorithm) = self.algorithm {
-            params.push("algorithm".to_string());
-            params.push(algorithm.to_string());
-        }
-
-
-        if let Some(ref format) = self.format {
-            params.push("format".to_string());
-            params.push(format.to_string());
-        }
-
-        // Skipping chain in query parameter serialization
-
-        params.join(",").to_string()
+        write!(f, "{}", params.into_iter().flatten().collect::<Vec<_>>().join(","))
     }
 }
 
 /// Converts Query Parameters representation (style=form, explode=false) to a KeystoreItems value
-/// as specified in https://swagger.io/docs/specification/serialization/
+/// as specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde deserializer
 impl std::str::FromStr for KeystoreItems {
     type Err = String;
 
     fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
         #[derive(Default)]
-        // An intermediate representation of the struct to use for parsing.
+        #[allow(dead_code)]
         struct IntermediateRep {
             pub alias: Vec<String>,
             pub entry_type: Vec<String>,
@@ -1208,7 +1741,7 @@ impl std::str::FromStr for KeystoreItems {
         let mut intermediate_rep = IntermediateRep::default();
 
         // Parse into intermediate representation
-        let mut string_iter = s.split(',').into_iter();
+        let mut string_iter = s.split(',');
         let mut key_result = string_iter.next();
 
         while key_result.is_some() {
@@ -1218,11 +1751,16 @@ impl std::str::FromStr for KeystoreItems {
             };
 
             if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
                 match key {
-                    "alias" => intermediate_rep.alias.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "entryType" => intermediate_rep.entry_type.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "algorithm" => intermediate_rep.algorithm.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "format" => intermediate_rep.format.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
+                    #[allow(clippy::redundant_clone)]
+                    "alias" => intermediate_rep.alias.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "entryType" => intermediate_rep.entry_type.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "algorithm" => intermediate_rep.algorithm.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "format" => intermediate_rep.format.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     "chain" => return std::result::Result::Err("Parsing a container in this style is not supported in KeystoreItems".to_string()),
                     _ => return std::result::Result::Err("Unexpected key while parsing KeystoreItems".to_string())
                 }
@@ -1254,8 +1792,7 @@ impl std::convert::TryFrom<header::IntoHeaderValue<KeystoreItems>> for hyper::he
         match hyper::header::HeaderValue::from_str(&hdr_value) {
              std::result::Result::Ok(value) => std::result::Result::Ok(value),
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Invalid header value for KeystoreItems - value: {} is invalid {}",
-                     hdr_value, e))
+                 format!("Invalid header value for KeystoreItems - value: {hdr_value} is invalid {e}"))
         }
     }
 }
@@ -1270,62 +1807,131 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                     match <KeystoreItems as std::str::FromStr>::from_str(value) {
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
-                            format!("Unable to convert header value '{}' into KeystoreItems - {}",
-                                value, err))
+                            format!("Unable to convert header value '{value}' into KeystoreItems - {err}"))
                     }
              },
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Unable to convert header: {:?} to string: {}",
-                     hdr_value, e))
+                 format!("Unable to convert header: {hdr_value:?} to string: {e}"))
         }
     }
 }
 
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<Vec<KeystoreItems>>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_values: header::IntoHeaderValue<Vec<KeystoreItems>>) -> std::result::Result<Self, Self::Error> {
+        let hdr_values : Vec<String> = hdr_values.0.into_iter().map(|hdr_value| {
+            hdr_value.to_string()
+        }).collect();
+
+        match hyper::header::HeaderValue::from_str(&hdr_values.join(", ")) {
+           std::result::Result::Ok(hdr_value) => std::result::Result::Ok(hdr_value),
+           std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to convert {hdr_values:?} into a header - {e}",))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<Vec<KeystoreItems>> {
+    type Error = String;
+
+    fn try_from(hdr_values: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_values.to_str() {
+            std::result::Result::Ok(hdr_values) => {
+                let hdr_values : std::vec::Vec<KeystoreItems> = hdr_values
+                .split(',')
+                .filter_map(|hdr_value| match hdr_value.trim() {
+                    "" => std::option::Option::None,
+                    hdr_value => std::option::Option::Some({
+                        match <KeystoreItems as std::str::FromStr>::from_str(hdr_value) {
+                            std::result::Result::Ok(value) => std::result::Result::Ok(value),
+                            std::result::Result::Err(err) => std::result::Result::Err(
+                                format!("Unable to convert header value '{hdr_value}' into KeystoreItems - {err}"))
+                        }
+                    })
+                }).collect::<std::result::Result<std::vec::Vec<_>, String>>()?;
+
+                std::result::Result::Ok(header::IntoHeaderValue(hdr_values))
+            },
+            std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to parse header: {hdr_values:?} as a string - {e}")),
+        }
+    }
+}
 
 impl KeystoreItems {
     /// Helper function to allow us to convert this model to an XML string.
     /// Will panic if serialisation fails.
     #[allow(dead_code)]
-    pub(crate) fn to_xml(&self) -> String {
+    pub(crate) fn as_xml(&self) -> String {
         serde_xml_rs::to_string(&self).expect("impossible to fail to serialize")
     }
 }
 
-#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Validate, serde::Serialize, serde::Deserialize)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct SamlConfigurationInfo {
     /// Persistent Identity (PID)
     #[serde(rename = "pid")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub pid: Option<String>,
 
     /// Title
     #[serde(rename = "title")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub title: Option<String>,
 
     /// Title
     #[serde(rename = "description")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub description: Option<String>,
 
     /// needed for configuration binding
     #[serde(rename = "bundle_location")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub bundle_location: Option<String>,
 
     /// needed for configuraiton binding
     #[serde(rename = "service_location")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub service_location: Option<String>,
 
     #[serde(rename = "properties")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub properties: Option<models::SamlConfigurationProperties>,
 
 }
 
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMinLength for SamlConfigurationInfo {
+    fn validate_composited_min_length(
+        &self,
+        _min_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MinLengthError>> {
+        Ok(())
+    }
+}
+
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMaxLength for SamlConfigurationInfo {
+    fn validate_composited_max_length(
+        &self,
+        _max_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MaxLengthError>> {
+        Ok(())
+    }
+}
+
+
 impl SamlConfigurationInfo {
+    #[allow(clippy::new_without_default)]
     pub fn new() -> SamlConfigurationInfo {
         SamlConfigurationInfo {
             pid: None,
@@ -1339,56 +1945,58 @@ impl SamlConfigurationInfo {
 }
 
 /// Converts the SamlConfigurationInfo value to the Query Parameters representation (style=form, explode=false)
-/// specified in https://swagger.io/docs/specification/serialization/
+/// specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde serializer
-impl std::string::ToString for SamlConfigurationInfo {
-    fn to_string(&self) -> String {
-        let mut params: Vec<String> = vec![];
+impl std::fmt::Display for SamlConfigurationInfo {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let params: Vec<Option<String>> = vec![
+            self.pid.as_ref().map(|pid| {
+                [
+                    "pid".to_string(),
+                    pid.to_string(),
+                ].join(",")
+            }),
+            self.title.as_ref().map(|title| {
+                [
+                    "title".to_string(),
+                    title.to_string(),
+                ].join(",")
+            }),
+            self.description.as_ref().map(|description| {
+                [
+                    "description".to_string(),
+                    description.to_string(),
+                ].join(",")
+            }),
+            self.bundle_location.as_ref().map(|bundle_location| {
+                [
+                    "bundle_location".to_string(),
+                    bundle_location.to_string(),
+                ].join(",")
+            }),
+            self.service_location.as_ref().map(|service_location| {
+                [
+                    "service_location".to_string(),
+                    service_location.to_string(),
+                ].join(",")
+            }),
+            // Skipping non-primitive type properties in query parameter serialization
+        ];
 
-        if let Some(ref pid) = self.pid {
-            params.push("pid".to_string());
-            params.push(pid.to_string());
-        }
-
-
-        if let Some(ref title) = self.title {
-            params.push("title".to_string());
-            params.push(title.to_string());
-        }
-
-
-        if let Some(ref description) = self.description {
-            params.push("description".to_string());
-            params.push(description.to_string());
-        }
-
-
-        if let Some(ref bundle_location) = self.bundle_location {
-            params.push("bundle_location".to_string());
-            params.push(bundle_location.to_string());
-        }
-
-
-        if let Some(ref service_location) = self.service_location {
-            params.push("service_location".to_string());
-            params.push(service_location.to_string());
-        }
-
-        // Skipping properties in query parameter serialization
-
-        params.join(",").to_string()
+        write!(f, "{}", params.into_iter().flatten().collect::<Vec<_>>().join(","))
     }
 }
 
 /// Converts Query Parameters representation (style=form, explode=false) to a SamlConfigurationInfo value
-/// as specified in https://swagger.io/docs/specification/serialization/
+/// as specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde deserializer
 impl std::str::FromStr for SamlConfigurationInfo {
     type Err = String;
 
     fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
         #[derive(Default)]
-        // An intermediate representation of the struct to use for parsing.
+        #[allow(dead_code)]
         struct IntermediateRep {
             pub pid: Vec<String>,
             pub title: Vec<String>,
@@ -1401,7 +2009,7 @@ impl std::str::FromStr for SamlConfigurationInfo {
         let mut intermediate_rep = IntermediateRep::default();
 
         // Parse into intermediate representation
-        let mut string_iter = s.split(',').into_iter();
+        let mut string_iter = s.split(',');
         let mut key_result = string_iter.next();
 
         while key_result.is_some() {
@@ -1411,13 +2019,20 @@ impl std::str::FromStr for SamlConfigurationInfo {
             };
 
             if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
                 match key {
-                    "pid" => intermediate_rep.pid.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "title" => intermediate_rep.title.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "description" => intermediate_rep.description.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "bundle_location" => intermediate_rep.bundle_location.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "service_location" => intermediate_rep.service_location.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "properties" => intermediate_rep.properties.push(<models::SamlConfigurationProperties as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
+                    #[allow(clippy::redundant_clone)]
+                    "pid" => intermediate_rep.pid.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "title" => intermediate_rep.title.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "description" => intermediate_rep.description.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "bundle_location" => intermediate_rep.bundle_location.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "service_location" => intermediate_rep.service_location.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "properties" => intermediate_rep.properties.push(<models::SamlConfigurationProperties as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing SamlConfigurationInfo".to_string())
                 }
             }
@@ -1449,8 +2064,7 @@ impl std::convert::TryFrom<header::IntoHeaderValue<SamlConfigurationInfo>> for h
         match hyper::header::HeaderValue::from_str(&hdr_value) {
              std::result::Result::Ok(value) => std::result::Result::Ok(value),
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Invalid header value for SamlConfigurationInfo - value: {} is invalid {}",
-                     hdr_value, e))
+                 format!("Invalid header value for SamlConfigurationInfo - value: {hdr_value} is invalid {e}"))
         }
     }
 }
@@ -1465,129 +2079,239 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                     match <SamlConfigurationInfo as std::str::FromStr>::from_str(value) {
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
-                            format!("Unable to convert header value '{}' into SamlConfigurationInfo - {}",
-                                value, err))
+                            format!("Unable to convert header value '{value}' into SamlConfigurationInfo - {err}"))
                     }
              },
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Unable to convert header: {:?} to string: {}",
-                     hdr_value, e))
+                 format!("Unable to convert header: {hdr_value:?} to string: {e}"))
         }
     }
 }
 
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<Vec<SamlConfigurationInfo>>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_values: header::IntoHeaderValue<Vec<SamlConfigurationInfo>>) -> std::result::Result<Self, Self::Error> {
+        let hdr_values : Vec<String> = hdr_values.0.into_iter().map(|hdr_value| {
+            hdr_value.to_string()
+        }).collect();
+
+        match hyper::header::HeaderValue::from_str(&hdr_values.join(", ")) {
+           std::result::Result::Ok(hdr_value) => std::result::Result::Ok(hdr_value),
+           std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to convert {hdr_values:?} into a header - {e}",))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<Vec<SamlConfigurationInfo>> {
+    type Error = String;
+
+    fn try_from(hdr_values: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_values.to_str() {
+            std::result::Result::Ok(hdr_values) => {
+                let hdr_values : std::vec::Vec<SamlConfigurationInfo> = hdr_values
+                .split(',')
+                .filter_map(|hdr_value| match hdr_value.trim() {
+                    "" => std::option::Option::None,
+                    hdr_value => std::option::Option::Some({
+                        match <SamlConfigurationInfo as std::str::FromStr>::from_str(hdr_value) {
+                            std::result::Result::Ok(value) => std::result::Result::Ok(value),
+                            std::result::Result::Err(err) => std::result::Result::Err(
+                                format!("Unable to convert header value '{hdr_value}' into SamlConfigurationInfo - {err}"))
+                        }
+                    })
+                }).collect::<std::result::Result<std::vec::Vec<_>, String>>()?;
+
+                std::result::Result::Ok(header::IntoHeaderValue(hdr_values))
+            },
+            std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to parse header: {hdr_values:?} as a string - {e}")),
+        }
+    }
+}
 
 impl SamlConfigurationInfo {
     /// Helper function to allow us to convert this model to an XML string.
     /// Will panic if serialisation fails.
     #[allow(dead_code)]
-    pub(crate) fn to_xml(&self) -> String {
+    pub(crate) fn as_xml(&self) -> String {
         serde_xml_rs::to_string(&self).expect("impossible to fail to serialize")
     }
 }
 
-#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Validate, serde::Serialize, serde::Deserialize)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct SamlConfigurationProperties {
     #[serde(rename = "path")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub path: Option<models::SamlConfigurationPropertyItemsArray>,
 
     #[serde(rename = "service.ranking")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub service_ranking: Option<models::SamlConfigurationPropertyItemsLong>,
 
     #[serde(rename = "idpUrl")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub idp_url: Option<models::SamlConfigurationPropertyItemsString>,
 
     #[serde(rename = "idpCertAlias")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub idp_cert_alias: Option<models::SamlConfigurationPropertyItemsString>,
 
     #[serde(rename = "idpHttpRedirect")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub idp_http_redirect: Option<models::SamlConfigurationPropertyItemsBoolean>,
 
     #[serde(rename = "serviceProviderEntityId")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub service_provider_entity_id: Option<models::SamlConfigurationPropertyItemsString>,
 
     #[serde(rename = "assertionConsumerServiceURL")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub assertion_consumer_service_url: Option<models::SamlConfigurationPropertyItemsString>,
 
     #[serde(rename = "spPrivateKeyAlias")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub sp_private_key_alias: Option<models::SamlConfigurationPropertyItemsString>,
 
     #[serde(rename = "keyStorePassword")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub key_store_password: Option<models::SamlConfigurationPropertyItemsString>,
 
     #[serde(rename = "defaultRedirectUrl")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub default_redirect_url: Option<models::SamlConfigurationPropertyItemsString>,
 
     #[serde(rename = "userIDAttribute")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub user_id_attribute: Option<models::SamlConfigurationPropertyItemsString>,
 
     #[serde(rename = "useEncryption")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub use_encryption: Option<models::SamlConfigurationPropertyItemsBoolean>,
 
     #[serde(rename = "createUser")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub create_user: Option<models::SamlConfigurationPropertyItemsBoolean>,
 
     #[serde(rename = "addGroupMemberships")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub add_group_memberships: Option<models::SamlConfigurationPropertyItemsBoolean>,
 
     #[serde(rename = "groupMembershipAttribute")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub group_membership_attribute: Option<models::SamlConfigurationPropertyItemsString>,
 
     #[serde(rename = "defaultGroups")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub default_groups: Option<models::SamlConfigurationPropertyItemsArray>,
 
     #[serde(rename = "nameIdFormat")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub name_id_format: Option<models::SamlConfigurationPropertyItemsString>,
 
     #[serde(rename = "synchronizeAttributes")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub synchronize_attributes: Option<models::SamlConfigurationPropertyItemsArray>,
 
     #[serde(rename = "handleLogout")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub handle_logout: Option<models::SamlConfigurationPropertyItemsBoolean>,
 
     #[serde(rename = "logoutUrl")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub logout_url: Option<models::SamlConfigurationPropertyItemsString>,
 
     #[serde(rename = "clockTolerance")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub clock_tolerance: Option<models::SamlConfigurationPropertyItemsLong>,
 
     #[serde(rename = "digestMethod")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub digest_method: Option<models::SamlConfigurationPropertyItemsString>,
 
     #[serde(rename = "signatureMethod")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub signature_method: Option<models::SamlConfigurationPropertyItemsString>,
 
     #[serde(rename = "userIntermediatePath")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub user_intermediate_path: Option<models::SamlConfigurationPropertyItemsString>,
 
 }
 
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMinLength for SamlConfigurationProperties {
+    fn validate_composited_min_length(
+        &self,
+        _min_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MinLengthError>> {
+        Ok(())
+    }
+}
+
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMaxLength for SamlConfigurationProperties {
+    fn validate_composited_max_length(
+        &self,
+        _max_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MaxLengthError>> {
+        Ok(())
+    }
+}
+
+
 impl SamlConfigurationProperties {
+    #[allow(clippy::new_without_default)]
     pub fn new() -> SamlConfigurationProperties {
         SamlConfigurationProperties {
             path: None,
@@ -1619,72 +2343,51 @@ impl SamlConfigurationProperties {
 }
 
 /// Converts the SamlConfigurationProperties value to the Query Parameters representation (style=form, explode=false)
-/// specified in https://swagger.io/docs/specification/serialization/
+/// specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde serializer
-impl std::string::ToString for SamlConfigurationProperties {
-    fn to_string(&self) -> String {
-        let mut params: Vec<String> = vec![];
-        // Skipping path in query parameter serialization
+impl std::fmt::Display for SamlConfigurationProperties {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let params: Vec<Option<String>> = vec![
+            // Skipping non-primitive type path in query parameter serialization
+            // Skipping non-primitive type service.ranking in query parameter serialization
+            // Skipping non-primitive type idpUrl in query parameter serialization
+            // Skipping non-primitive type idpCertAlias in query parameter serialization
+            // Skipping non-primitive type idpHttpRedirect in query parameter serialization
+            // Skipping non-primitive type serviceProviderEntityId in query parameter serialization
+            // Skipping non-primitive type assertionConsumerServiceURL in query parameter serialization
+            // Skipping non-primitive type spPrivateKeyAlias in query parameter serialization
+            // Skipping non-primitive type keyStorePassword in query parameter serialization
+            // Skipping non-primitive type defaultRedirectUrl in query parameter serialization
+            // Skipping non-primitive type userIDAttribute in query parameter serialization
+            // Skipping non-primitive type useEncryption in query parameter serialization
+            // Skipping non-primitive type createUser in query parameter serialization
+            // Skipping non-primitive type addGroupMemberships in query parameter serialization
+            // Skipping non-primitive type groupMembershipAttribute in query parameter serialization
+            // Skipping non-primitive type defaultGroups in query parameter serialization
+            // Skipping non-primitive type nameIdFormat in query parameter serialization
+            // Skipping non-primitive type synchronizeAttributes in query parameter serialization
+            // Skipping non-primitive type handleLogout in query parameter serialization
+            // Skipping non-primitive type logoutUrl in query parameter serialization
+            // Skipping non-primitive type clockTolerance in query parameter serialization
+            // Skipping non-primitive type digestMethod in query parameter serialization
+            // Skipping non-primitive type signatureMethod in query parameter serialization
+            // Skipping non-primitive type userIntermediatePath in query parameter serialization
+        ];
 
-        // Skipping service.ranking in query parameter serialization
-
-        // Skipping idpUrl in query parameter serialization
-
-        // Skipping idpCertAlias in query parameter serialization
-
-        // Skipping idpHttpRedirect in query parameter serialization
-
-        // Skipping serviceProviderEntityId in query parameter serialization
-
-        // Skipping assertionConsumerServiceURL in query parameter serialization
-
-        // Skipping spPrivateKeyAlias in query parameter serialization
-
-        // Skipping keyStorePassword in query parameter serialization
-
-        // Skipping defaultRedirectUrl in query parameter serialization
-
-        // Skipping userIDAttribute in query parameter serialization
-
-        // Skipping useEncryption in query parameter serialization
-
-        // Skipping createUser in query parameter serialization
-
-        // Skipping addGroupMemberships in query parameter serialization
-
-        // Skipping groupMembershipAttribute in query parameter serialization
-
-        // Skipping defaultGroups in query parameter serialization
-
-        // Skipping nameIdFormat in query parameter serialization
-
-        // Skipping synchronizeAttributes in query parameter serialization
-
-        // Skipping handleLogout in query parameter serialization
-
-        // Skipping logoutUrl in query parameter serialization
-
-        // Skipping clockTolerance in query parameter serialization
-
-        // Skipping digestMethod in query parameter serialization
-
-        // Skipping signatureMethod in query parameter serialization
-
-        // Skipping userIntermediatePath in query parameter serialization
-
-        params.join(",").to_string()
+        write!(f, "{}", params.into_iter().flatten().collect::<Vec<_>>().join(","))
     }
 }
 
 /// Converts Query Parameters representation (style=form, explode=false) to a SamlConfigurationProperties value
-/// as specified in https://swagger.io/docs/specification/serialization/
+/// as specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde deserializer
 impl std::str::FromStr for SamlConfigurationProperties {
     type Err = String;
 
     fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
         #[derive(Default)]
-        // An intermediate representation of the struct to use for parsing.
+        #[allow(dead_code)]
         struct IntermediateRep {
             pub path: Vec<models::SamlConfigurationPropertyItemsArray>,
             pub service_ranking: Vec<models::SamlConfigurationPropertyItemsLong>,
@@ -1715,7 +2418,7 @@ impl std::str::FromStr for SamlConfigurationProperties {
         let mut intermediate_rep = IntermediateRep::default();
 
         // Parse into intermediate representation
-        let mut string_iter = s.split(',').into_iter();
+        let mut string_iter = s.split(',');
         let mut key_result = string_iter.next();
 
         while key_result.is_some() {
@@ -1725,31 +2428,56 @@ impl std::str::FromStr for SamlConfigurationProperties {
             };
 
             if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
                 match key {
-                    "path" => intermediate_rep.path.push(<models::SamlConfigurationPropertyItemsArray as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "service.ranking" => intermediate_rep.service_ranking.push(<models::SamlConfigurationPropertyItemsLong as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "idpUrl" => intermediate_rep.idp_url.push(<models::SamlConfigurationPropertyItemsString as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "idpCertAlias" => intermediate_rep.idp_cert_alias.push(<models::SamlConfigurationPropertyItemsString as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "idpHttpRedirect" => intermediate_rep.idp_http_redirect.push(<models::SamlConfigurationPropertyItemsBoolean as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "serviceProviderEntityId" => intermediate_rep.service_provider_entity_id.push(<models::SamlConfigurationPropertyItemsString as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "assertionConsumerServiceURL" => intermediate_rep.assertion_consumer_service_url.push(<models::SamlConfigurationPropertyItemsString as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "spPrivateKeyAlias" => intermediate_rep.sp_private_key_alias.push(<models::SamlConfigurationPropertyItemsString as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "keyStorePassword" => intermediate_rep.key_store_password.push(<models::SamlConfigurationPropertyItemsString as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "defaultRedirectUrl" => intermediate_rep.default_redirect_url.push(<models::SamlConfigurationPropertyItemsString as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "userIDAttribute" => intermediate_rep.user_id_attribute.push(<models::SamlConfigurationPropertyItemsString as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "useEncryption" => intermediate_rep.use_encryption.push(<models::SamlConfigurationPropertyItemsBoolean as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "createUser" => intermediate_rep.create_user.push(<models::SamlConfigurationPropertyItemsBoolean as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "addGroupMemberships" => intermediate_rep.add_group_memberships.push(<models::SamlConfigurationPropertyItemsBoolean as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "groupMembershipAttribute" => intermediate_rep.group_membership_attribute.push(<models::SamlConfigurationPropertyItemsString as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "defaultGroups" => intermediate_rep.default_groups.push(<models::SamlConfigurationPropertyItemsArray as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "nameIdFormat" => intermediate_rep.name_id_format.push(<models::SamlConfigurationPropertyItemsString as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "synchronizeAttributes" => intermediate_rep.synchronize_attributes.push(<models::SamlConfigurationPropertyItemsArray as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "handleLogout" => intermediate_rep.handle_logout.push(<models::SamlConfigurationPropertyItemsBoolean as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "logoutUrl" => intermediate_rep.logout_url.push(<models::SamlConfigurationPropertyItemsString as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "clockTolerance" => intermediate_rep.clock_tolerance.push(<models::SamlConfigurationPropertyItemsLong as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "digestMethod" => intermediate_rep.digest_method.push(<models::SamlConfigurationPropertyItemsString as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "signatureMethod" => intermediate_rep.signature_method.push(<models::SamlConfigurationPropertyItemsString as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "userIntermediatePath" => intermediate_rep.user_intermediate_path.push(<models::SamlConfigurationPropertyItemsString as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
+                    #[allow(clippy::redundant_clone)]
+                    "path" => intermediate_rep.path.push(<models::SamlConfigurationPropertyItemsArray as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "service.ranking" => intermediate_rep.service_ranking.push(<models::SamlConfigurationPropertyItemsLong as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "idpUrl" => intermediate_rep.idp_url.push(<models::SamlConfigurationPropertyItemsString as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "idpCertAlias" => intermediate_rep.idp_cert_alias.push(<models::SamlConfigurationPropertyItemsString as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "idpHttpRedirect" => intermediate_rep.idp_http_redirect.push(<models::SamlConfigurationPropertyItemsBoolean as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "serviceProviderEntityId" => intermediate_rep.service_provider_entity_id.push(<models::SamlConfigurationPropertyItemsString as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "assertionConsumerServiceURL" => intermediate_rep.assertion_consumer_service_url.push(<models::SamlConfigurationPropertyItemsString as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "spPrivateKeyAlias" => intermediate_rep.sp_private_key_alias.push(<models::SamlConfigurationPropertyItemsString as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "keyStorePassword" => intermediate_rep.key_store_password.push(<models::SamlConfigurationPropertyItemsString as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "defaultRedirectUrl" => intermediate_rep.default_redirect_url.push(<models::SamlConfigurationPropertyItemsString as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "userIDAttribute" => intermediate_rep.user_id_attribute.push(<models::SamlConfigurationPropertyItemsString as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "useEncryption" => intermediate_rep.use_encryption.push(<models::SamlConfigurationPropertyItemsBoolean as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "createUser" => intermediate_rep.create_user.push(<models::SamlConfigurationPropertyItemsBoolean as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "addGroupMemberships" => intermediate_rep.add_group_memberships.push(<models::SamlConfigurationPropertyItemsBoolean as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "groupMembershipAttribute" => intermediate_rep.group_membership_attribute.push(<models::SamlConfigurationPropertyItemsString as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "defaultGroups" => intermediate_rep.default_groups.push(<models::SamlConfigurationPropertyItemsArray as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "nameIdFormat" => intermediate_rep.name_id_format.push(<models::SamlConfigurationPropertyItemsString as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "synchronizeAttributes" => intermediate_rep.synchronize_attributes.push(<models::SamlConfigurationPropertyItemsArray as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "handleLogout" => intermediate_rep.handle_logout.push(<models::SamlConfigurationPropertyItemsBoolean as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "logoutUrl" => intermediate_rep.logout_url.push(<models::SamlConfigurationPropertyItemsString as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "clockTolerance" => intermediate_rep.clock_tolerance.push(<models::SamlConfigurationPropertyItemsLong as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "digestMethod" => intermediate_rep.digest_method.push(<models::SamlConfigurationPropertyItemsString as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "signatureMethod" => intermediate_rep.signature_method.push(<models::SamlConfigurationPropertyItemsString as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "userIntermediatePath" => intermediate_rep.user_intermediate_path.push(<models::SamlConfigurationPropertyItemsString as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing SamlConfigurationProperties".to_string())
                 }
             }
@@ -1799,8 +2527,7 @@ impl std::convert::TryFrom<header::IntoHeaderValue<SamlConfigurationProperties>>
         match hyper::header::HeaderValue::from_str(&hdr_value) {
              std::result::Result::Ok(value) => std::result::Result::Ok(value),
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Invalid header value for SamlConfigurationProperties - value: {} is invalid {}",
-                     hdr_value, e))
+                 format!("Invalid header value for SamlConfigurationProperties - value: {hdr_value} is invalid {e}"))
         }
     }
 }
@@ -1815,69 +2542,137 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                     match <SamlConfigurationProperties as std::str::FromStr>::from_str(value) {
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
-                            format!("Unable to convert header value '{}' into SamlConfigurationProperties - {}",
-                                value, err))
+                            format!("Unable to convert header value '{value}' into SamlConfigurationProperties - {err}"))
                     }
              },
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Unable to convert header: {:?} to string: {}",
-                     hdr_value, e))
+                 format!("Unable to convert header: {hdr_value:?} to string: {e}"))
         }
     }
 }
 
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<Vec<SamlConfigurationProperties>>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_values: header::IntoHeaderValue<Vec<SamlConfigurationProperties>>) -> std::result::Result<Self, Self::Error> {
+        let hdr_values : Vec<String> = hdr_values.0.into_iter().map(|hdr_value| {
+            hdr_value.to_string()
+        }).collect();
+
+        match hyper::header::HeaderValue::from_str(&hdr_values.join(", ")) {
+           std::result::Result::Ok(hdr_value) => std::result::Result::Ok(hdr_value),
+           std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to convert {hdr_values:?} into a header - {e}",))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<Vec<SamlConfigurationProperties>> {
+    type Error = String;
+
+    fn try_from(hdr_values: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_values.to_str() {
+            std::result::Result::Ok(hdr_values) => {
+                let hdr_values : std::vec::Vec<SamlConfigurationProperties> = hdr_values
+                .split(',')
+                .filter_map(|hdr_value| match hdr_value.trim() {
+                    "" => std::option::Option::None,
+                    hdr_value => std::option::Option::Some({
+                        match <SamlConfigurationProperties as std::str::FromStr>::from_str(hdr_value) {
+                            std::result::Result::Ok(value) => std::result::Result::Ok(value),
+                            std::result::Result::Err(err) => std::result::Result::Err(
+                                format!("Unable to convert header value '{hdr_value}' into SamlConfigurationProperties - {err}"))
+                        }
+                    })
+                }).collect::<std::result::Result<std::vec::Vec<_>, String>>()?;
+
+                std::result::Result::Ok(header::IntoHeaderValue(hdr_values))
+            },
+            std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to parse header: {hdr_values:?} as a string - {e}")),
+        }
+    }
+}
 
 impl SamlConfigurationProperties {
     /// Helper function to allow us to convert this model to an XML string.
     /// Will panic if serialisation fails.
     #[allow(dead_code)]
-    pub(crate) fn to_xml(&self) -> String {
+    pub(crate) fn as_xml(&self) -> String {
         serde_xml_rs::to_string(&self).expect("impossible to fail to serialize")
     }
 }
 
-#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Validate, serde::Serialize, serde::Deserialize)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct SamlConfigurationPropertyItemsArray {
     /// property name
     #[serde(rename = "name")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub name: Option<String>,
 
     /// True if optional
     #[serde(rename = "optional")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub optional: Option<bool>,
 
     /// True if property is set
     #[serde(rename = "is_set")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub is_set: Option<bool>,
 
     /// Property type, 1=String, 3=long, 11=boolean, 12=Password
     #[serde(rename = "type")]
+
     #[serde(skip_serializing_if="Option::is_none")]
-    pub type_: Option<isize>,
+    pub r#type: Option<i32>,
 
     /// Property value
     #[serde(rename = "values")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub values: Option<Vec<String>>,
 
     /// Property description
     #[serde(rename = "description")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub description: Option<String>,
 
 }
 
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMinLength for SamlConfigurationPropertyItemsArray {
+    fn validate_composited_min_length(
+        &self,
+        _min_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MinLengthError>> {
+        Ok(())
+    }
+}
+
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMaxLength for SamlConfigurationPropertyItemsArray {
+    fn validate_composited_max_length(
+        &self,
+        _max_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MaxLengthError>> {
+        Ok(())
+    }
+}
+
+
 impl SamlConfigurationPropertyItemsArray {
+    #[allow(clippy::new_without_default)]
     pub fn new() -> SamlConfigurationPropertyItemsArray {
         SamlConfigurationPropertyItemsArray {
             name: None,
             optional: None,
             is_set: None,
-            type_: None,
+            r#type: None,
             values: None,
             description: None,
         }
@@ -1885,65 +2680,68 @@ impl SamlConfigurationPropertyItemsArray {
 }
 
 /// Converts the SamlConfigurationPropertyItemsArray value to the Query Parameters representation (style=form, explode=false)
-/// specified in https://swagger.io/docs/specification/serialization/
+/// specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde serializer
-impl std::string::ToString for SamlConfigurationPropertyItemsArray {
-    fn to_string(&self) -> String {
-        let mut params: Vec<String> = vec![];
+impl std::fmt::Display for SamlConfigurationPropertyItemsArray {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let params: Vec<Option<String>> = vec![
+            self.name.as_ref().map(|name| {
+                [
+                    "name".to_string(),
+                    name.to_string(),
+                ].join(",")
+            }),
+            self.optional.as_ref().map(|optional| {
+                [
+                    "optional".to_string(),
+                    optional.to_string(),
+                ].join(",")
+            }),
+            self.is_set.as_ref().map(|is_set| {
+                [
+                    "is_set".to_string(),
+                    is_set.to_string(),
+                ].join(",")
+            }),
+            self.r#type.as_ref().map(|r#type| {
+                [
+                    "type".to_string(),
+                    r#type.to_string(),
+                ].join(",")
+            }),
+            self.values.as_ref().map(|values| {
+                [
+                    "values".to_string(),
+                    values.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+            self.description.as_ref().map(|description| {
+                [
+                    "description".to_string(),
+                    description.to_string(),
+                ].join(",")
+            }),
+        ];
 
-        if let Some(ref name) = self.name {
-            params.push("name".to_string());
-            params.push(name.to_string());
-        }
-
-
-        if let Some(ref optional) = self.optional {
-            params.push("optional".to_string());
-            params.push(optional.to_string());
-        }
-
-
-        if let Some(ref is_set) = self.is_set {
-            params.push("is_set".to_string());
-            params.push(is_set.to_string());
-        }
-
-
-        if let Some(ref type_) = self.type_ {
-            params.push("type".to_string());
-            params.push(type_.to_string());
-        }
-
-
-        if let Some(ref values) = self.values {
-            params.push("values".to_string());
-            params.push(values.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(",").to_string());
-        }
-
-
-        if let Some(ref description) = self.description {
-            params.push("description".to_string());
-            params.push(description.to_string());
-        }
-
-        params.join(",").to_string()
+        write!(f, "{}", params.into_iter().flatten().collect::<Vec<_>>().join(","))
     }
 }
 
 /// Converts Query Parameters representation (style=form, explode=false) to a SamlConfigurationPropertyItemsArray value
-/// as specified in https://swagger.io/docs/specification/serialization/
+/// as specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde deserializer
 impl std::str::FromStr for SamlConfigurationPropertyItemsArray {
     type Err = String;
 
     fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
         #[derive(Default)]
-        // An intermediate representation of the struct to use for parsing.
+        #[allow(dead_code)]
         struct IntermediateRep {
             pub name: Vec<String>,
             pub optional: Vec<bool>,
             pub is_set: Vec<bool>,
-            pub type_: Vec<isize>,
+            pub r#type: Vec<i32>,
             pub values: Vec<Vec<String>>,
             pub description: Vec<String>,
         }
@@ -1951,7 +2749,7 @@ impl std::str::FromStr for SamlConfigurationPropertyItemsArray {
         let mut intermediate_rep = IntermediateRep::default();
 
         // Parse into intermediate representation
-        let mut string_iter = s.split(',').into_iter();
+        let mut string_iter = s.split(',');
         let mut key_result = string_iter.next();
 
         while key_result.is_some() {
@@ -1961,13 +2759,19 @@ impl std::str::FromStr for SamlConfigurationPropertyItemsArray {
             };
 
             if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
                 match key {
-                    "name" => intermediate_rep.name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "optional" => intermediate_rep.optional.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "is_set" => intermediate_rep.is_set.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "type" => intermediate_rep.type_.push(<isize as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
+                    #[allow(clippy::redundant_clone)]
+                    "name" => intermediate_rep.name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "optional" => intermediate_rep.optional.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "is_set" => intermediate_rep.is_set.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "type" => intermediate_rep.r#type.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     "values" => return std::result::Result::Err("Parsing a container in this style is not supported in SamlConfigurationPropertyItemsArray".to_string()),
-                    "description" => intermediate_rep.description.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
+                    #[allow(clippy::redundant_clone)]
+                    "description" => intermediate_rep.description.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing SamlConfigurationPropertyItemsArray".to_string())
                 }
             }
@@ -1981,7 +2785,7 @@ impl std::str::FromStr for SamlConfigurationPropertyItemsArray {
             name: intermediate_rep.name.into_iter().next(),
             optional: intermediate_rep.optional.into_iter().next(),
             is_set: intermediate_rep.is_set.into_iter().next(),
-            type_: intermediate_rep.type_.into_iter().next(),
+            r#type: intermediate_rep.r#type.into_iter().next(),
             values: intermediate_rep.values.into_iter().next(),
             description: intermediate_rep.description.into_iter().next(),
         })
@@ -1999,8 +2803,7 @@ impl std::convert::TryFrom<header::IntoHeaderValue<SamlConfigurationPropertyItem
         match hyper::header::HeaderValue::from_str(&hdr_value) {
              std::result::Result::Ok(value) => std::result::Result::Ok(value),
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Invalid header value for SamlConfigurationPropertyItemsArray - value: {} is invalid {}",
-                     hdr_value, e))
+                 format!("Invalid header value for SamlConfigurationPropertyItemsArray - value: {hdr_value} is invalid {e}"))
         }
     }
 }
@@ -2015,69 +2818,137 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                     match <SamlConfigurationPropertyItemsArray as std::str::FromStr>::from_str(value) {
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
-                            format!("Unable to convert header value '{}' into SamlConfigurationPropertyItemsArray - {}",
-                                value, err))
+                            format!("Unable to convert header value '{value}' into SamlConfigurationPropertyItemsArray - {err}"))
                     }
              },
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Unable to convert header: {:?} to string: {}",
-                     hdr_value, e))
+                 format!("Unable to convert header: {hdr_value:?} to string: {e}"))
         }
     }
 }
 
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<Vec<SamlConfigurationPropertyItemsArray>>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_values: header::IntoHeaderValue<Vec<SamlConfigurationPropertyItemsArray>>) -> std::result::Result<Self, Self::Error> {
+        let hdr_values : Vec<String> = hdr_values.0.into_iter().map(|hdr_value| {
+            hdr_value.to_string()
+        }).collect();
+
+        match hyper::header::HeaderValue::from_str(&hdr_values.join(", ")) {
+           std::result::Result::Ok(hdr_value) => std::result::Result::Ok(hdr_value),
+           std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to convert {hdr_values:?} into a header - {e}",))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<Vec<SamlConfigurationPropertyItemsArray>> {
+    type Error = String;
+
+    fn try_from(hdr_values: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_values.to_str() {
+            std::result::Result::Ok(hdr_values) => {
+                let hdr_values : std::vec::Vec<SamlConfigurationPropertyItemsArray> = hdr_values
+                .split(',')
+                .filter_map(|hdr_value| match hdr_value.trim() {
+                    "" => std::option::Option::None,
+                    hdr_value => std::option::Option::Some({
+                        match <SamlConfigurationPropertyItemsArray as std::str::FromStr>::from_str(hdr_value) {
+                            std::result::Result::Ok(value) => std::result::Result::Ok(value),
+                            std::result::Result::Err(err) => std::result::Result::Err(
+                                format!("Unable to convert header value '{hdr_value}' into SamlConfigurationPropertyItemsArray - {err}"))
+                        }
+                    })
+                }).collect::<std::result::Result<std::vec::Vec<_>, String>>()?;
+
+                std::result::Result::Ok(header::IntoHeaderValue(hdr_values))
+            },
+            std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to parse header: {hdr_values:?} as a string - {e}")),
+        }
+    }
+}
 
 impl SamlConfigurationPropertyItemsArray {
     /// Helper function to allow us to convert this model to an XML string.
     /// Will panic if serialisation fails.
     #[allow(dead_code)]
-    pub(crate) fn to_xml(&self) -> String {
+    pub(crate) fn as_xml(&self) -> String {
         serde_xml_rs::to_string(&self).expect("impossible to fail to serialize")
     }
 }
 
-#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Validate, serde::Serialize, serde::Deserialize)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct SamlConfigurationPropertyItemsBoolean {
     /// property name
     #[serde(rename = "name")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub name: Option<String>,
 
     /// True if optional
     #[serde(rename = "optional")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub optional: Option<bool>,
 
     /// True if property is set
     #[serde(rename = "is_set")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub is_set: Option<bool>,
 
     /// Property type, 1=String, 3=long, 11=boolean, 12=Password
     #[serde(rename = "type")]
+
     #[serde(skip_serializing_if="Option::is_none")]
-    pub type_: Option<isize>,
+    pub r#type: Option<i32>,
 
     /// Property value
     #[serde(rename = "value")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub value: Option<bool>,
 
     /// Property description
     #[serde(rename = "description")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub description: Option<String>,
 
 }
 
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMinLength for SamlConfigurationPropertyItemsBoolean {
+    fn validate_composited_min_length(
+        &self,
+        _min_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MinLengthError>> {
+        Ok(())
+    }
+}
+
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMaxLength for SamlConfigurationPropertyItemsBoolean {
+    fn validate_composited_max_length(
+        &self,
+        _max_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MaxLengthError>> {
+        Ok(())
+    }
+}
+
+
 impl SamlConfigurationPropertyItemsBoolean {
+    #[allow(clippy::new_without_default)]
     pub fn new() -> SamlConfigurationPropertyItemsBoolean {
         SamlConfigurationPropertyItemsBoolean {
             name: None,
             optional: None,
             is_set: None,
-            type_: None,
+            r#type: None,
             value: None,
             description: None,
         }
@@ -2085,65 +2956,68 @@ impl SamlConfigurationPropertyItemsBoolean {
 }
 
 /// Converts the SamlConfigurationPropertyItemsBoolean value to the Query Parameters representation (style=form, explode=false)
-/// specified in https://swagger.io/docs/specification/serialization/
+/// specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde serializer
-impl std::string::ToString for SamlConfigurationPropertyItemsBoolean {
-    fn to_string(&self) -> String {
-        let mut params: Vec<String> = vec![];
+impl std::fmt::Display for SamlConfigurationPropertyItemsBoolean {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let params: Vec<Option<String>> = vec![
+            self.name.as_ref().map(|name| {
+                [
+                    "name".to_string(),
+                    name.to_string(),
+                ].join(",")
+            }),
+            self.optional.as_ref().map(|optional| {
+                [
+                    "optional".to_string(),
+                    optional.to_string(),
+                ].join(",")
+            }),
+            self.is_set.as_ref().map(|is_set| {
+                [
+                    "is_set".to_string(),
+                    is_set.to_string(),
+                ].join(",")
+            }),
+            self.r#type.as_ref().map(|r#type| {
+                [
+                    "type".to_string(),
+                    r#type.to_string(),
+                ].join(",")
+            }),
+            self.value.as_ref().map(|value| {
+                [
+                    "value".to_string(),
+                    value.to_string(),
+                ].join(",")
+            }),
+            self.description.as_ref().map(|description| {
+                [
+                    "description".to_string(),
+                    description.to_string(),
+                ].join(",")
+            }),
+        ];
 
-        if let Some(ref name) = self.name {
-            params.push("name".to_string());
-            params.push(name.to_string());
-        }
-
-
-        if let Some(ref optional) = self.optional {
-            params.push("optional".to_string());
-            params.push(optional.to_string());
-        }
-
-
-        if let Some(ref is_set) = self.is_set {
-            params.push("is_set".to_string());
-            params.push(is_set.to_string());
-        }
-
-
-        if let Some(ref type_) = self.type_ {
-            params.push("type".to_string());
-            params.push(type_.to_string());
-        }
-
-
-        if let Some(ref value) = self.value {
-            params.push("value".to_string());
-            params.push(value.to_string());
-        }
-
-
-        if let Some(ref description) = self.description {
-            params.push("description".to_string());
-            params.push(description.to_string());
-        }
-
-        params.join(",").to_string()
+        write!(f, "{}", params.into_iter().flatten().collect::<Vec<_>>().join(","))
     }
 }
 
 /// Converts Query Parameters representation (style=form, explode=false) to a SamlConfigurationPropertyItemsBoolean value
-/// as specified in https://swagger.io/docs/specification/serialization/
+/// as specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde deserializer
 impl std::str::FromStr for SamlConfigurationPropertyItemsBoolean {
     type Err = String;
 
     fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
         #[derive(Default)]
-        // An intermediate representation of the struct to use for parsing.
+        #[allow(dead_code)]
         struct IntermediateRep {
             pub name: Vec<String>,
             pub optional: Vec<bool>,
             pub is_set: Vec<bool>,
-            pub type_: Vec<isize>,
+            pub r#type: Vec<i32>,
             pub value: Vec<bool>,
             pub description: Vec<String>,
         }
@@ -2151,7 +3025,7 @@ impl std::str::FromStr for SamlConfigurationPropertyItemsBoolean {
         let mut intermediate_rep = IntermediateRep::default();
 
         // Parse into intermediate representation
-        let mut string_iter = s.split(',').into_iter();
+        let mut string_iter = s.split(',');
         let mut key_result = string_iter.next();
 
         while key_result.is_some() {
@@ -2161,13 +3035,20 @@ impl std::str::FromStr for SamlConfigurationPropertyItemsBoolean {
             };
 
             if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
                 match key {
-                    "name" => intermediate_rep.name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "optional" => intermediate_rep.optional.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "is_set" => intermediate_rep.is_set.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "type" => intermediate_rep.type_.push(<isize as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "value" => intermediate_rep.value.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "description" => intermediate_rep.description.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
+                    #[allow(clippy::redundant_clone)]
+                    "name" => intermediate_rep.name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "optional" => intermediate_rep.optional.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "is_set" => intermediate_rep.is_set.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "type" => intermediate_rep.r#type.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "value" => intermediate_rep.value.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "description" => intermediate_rep.description.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing SamlConfigurationPropertyItemsBoolean".to_string())
                 }
             }
@@ -2181,7 +3062,7 @@ impl std::str::FromStr for SamlConfigurationPropertyItemsBoolean {
             name: intermediate_rep.name.into_iter().next(),
             optional: intermediate_rep.optional.into_iter().next(),
             is_set: intermediate_rep.is_set.into_iter().next(),
-            type_: intermediate_rep.type_.into_iter().next(),
+            r#type: intermediate_rep.r#type.into_iter().next(),
             value: intermediate_rep.value.into_iter().next(),
             description: intermediate_rep.description.into_iter().next(),
         })
@@ -2199,8 +3080,7 @@ impl std::convert::TryFrom<header::IntoHeaderValue<SamlConfigurationPropertyItem
         match hyper::header::HeaderValue::from_str(&hdr_value) {
              std::result::Result::Ok(value) => std::result::Result::Ok(value),
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Invalid header value for SamlConfigurationPropertyItemsBoolean - value: {} is invalid {}",
-                     hdr_value, e))
+                 format!("Invalid header value for SamlConfigurationPropertyItemsBoolean - value: {hdr_value} is invalid {e}"))
         }
     }
 }
@@ -2215,69 +3095,137 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                     match <SamlConfigurationPropertyItemsBoolean as std::str::FromStr>::from_str(value) {
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
-                            format!("Unable to convert header value '{}' into SamlConfigurationPropertyItemsBoolean - {}",
-                                value, err))
+                            format!("Unable to convert header value '{value}' into SamlConfigurationPropertyItemsBoolean - {err}"))
                     }
              },
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Unable to convert header: {:?} to string: {}",
-                     hdr_value, e))
+                 format!("Unable to convert header: {hdr_value:?} to string: {e}"))
         }
     }
 }
 
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<Vec<SamlConfigurationPropertyItemsBoolean>>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_values: header::IntoHeaderValue<Vec<SamlConfigurationPropertyItemsBoolean>>) -> std::result::Result<Self, Self::Error> {
+        let hdr_values : Vec<String> = hdr_values.0.into_iter().map(|hdr_value| {
+            hdr_value.to_string()
+        }).collect();
+
+        match hyper::header::HeaderValue::from_str(&hdr_values.join(", ")) {
+           std::result::Result::Ok(hdr_value) => std::result::Result::Ok(hdr_value),
+           std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to convert {hdr_values:?} into a header - {e}",))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<Vec<SamlConfigurationPropertyItemsBoolean>> {
+    type Error = String;
+
+    fn try_from(hdr_values: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_values.to_str() {
+            std::result::Result::Ok(hdr_values) => {
+                let hdr_values : std::vec::Vec<SamlConfigurationPropertyItemsBoolean> = hdr_values
+                .split(',')
+                .filter_map(|hdr_value| match hdr_value.trim() {
+                    "" => std::option::Option::None,
+                    hdr_value => std::option::Option::Some({
+                        match <SamlConfigurationPropertyItemsBoolean as std::str::FromStr>::from_str(hdr_value) {
+                            std::result::Result::Ok(value) => std::result::Result::Ok(value),
+                            std::result::Result::Err(err) => std::result::Result::Err(
+                                format!("Unable to convert header value '{hdr_value}' into SamlConfigurationPropertyItemsBoolean - {err}"))
+                        }
+                    })
+                }).collect::<std::result::Result<std::vec::Vec<_>, String>>()?;
+
+                std::result::Result::Ok(header::IntoHeaderValue(hdr_values))
+            },
+            std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to parse header: {hdr_values:?} as a string - {e}")),
+        }
+    }
+}
 
 impl SamlConfigurationPropertyItemsBoolean {
     /// Helper function to allow us to convert this model to an XML string.
     /// Will panic if serialisation fails.
     #[allow(dead_code)]
-    pub(crate) fn to_xml(&self) -> String {
+    pub(crate) fn as_xml(&self) -> String {
         serde_xml_rs::to_string(&self).expect("impossible to fail to serialize")
     }
 }
 
-#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Validate, serde::Serialize, serde::Deserialize)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct SamlConfigurationPropertyItemsLong {
     /// property name
     #[serde(rename = "name")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub name: Option<String>,
 
     /// True if optional
     #[serde(rename = "optional")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub optional: Option<bool>,
 
     /// True if property is set
     #[serde(rename = "is_set")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub is_set: Option<bool>,
 
     /// Property type, 1=String, 3=long, 11=boolean, 12=Password
     #[serde(rename = "type")]
+
     #[serde(skip_serializing_if="Option::is_none")]
-    pub type_: Option<isize>,
+    pub r#type: Option<i32>,
 
     /// Property value
     #[serde(rename = "value")]
+
     #[serde(skip_serializing_if="Option::is_none")]
-    pub value: Option<isize>,
+    pub value: Option<i32>,
 
     /// Property description
     #[serde(rename = "description")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub description: Option<String>,
 
 }
 
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMinLength for SamlConfigurationPropertyItemsLong {
+    fn validate_composited_min_length(
+        &self,
+        _min_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MinLengthError>> {
+        Ok(())
+    }
+}
+
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMaxLength for SamlConfigurationPropertyItemsLong {
+    fn validate_composited_max_length(
+        &self,
+        _max_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MaxLengthError>> {
+        Ok(())
+    }
+}
+
+
 impl SamlConfigurationPropertyItemsLong {
+    #[allow(clippy::new_without_default)]
     pub fn new() -> SamlConfigurationPropertyItemsLong {
         SamlConfigurationPropertyItemsLong {
             name: None,
             optional: None,
             is_set: None,
-            type_: None,
+            r#type: None,
             value: None,
             description: None,
         }
@@ -2285,73 +3233,76 @@ impl SamlConfigurationPropertyItemsLong {
 }
 
 /// Converts the SamlConfigurationPropertyItemsLong value to the Query Parameters representation (style=form, explode=false)
-/// specified in https://swagger.io/docs/specification/serialization/
+/// specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde serializer
-impl std::string::ToString for SamlConfigurationPropertyItemsLong {
-    fn to_string(&self) -> String {
-        let mut params: Vec<String> = vec![];
+impl std::fmt::Display for SamlConfigurationPropertyItemsLong {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let params: Vec<Option<String>> = vec![
+            self.name.as_ref().map(|name| {
+                [
+                    "name".to_string(),
+                    name.to_string(),
+                ].join(",")
+            }),
+            self.optional.as_ref().map(|optional| {
+                [
+                    "optional".to_string(),
+                    optional.to_string(),
+                ].join(",")
+            }),
+            self.is_set.as_ref().map(|is_set| {
+                [
+                    "is_set".to_string(),
+                    is_set.to_string(),
+                ].join(",")
+            }),
+            self.r#type.as_ref().map(|r#type| {
+                [
+                    "type".to_string(),
+                    r#type.to_string(),
+                ].join(",")
+            }),
+            self.value.as_ref().map(|value| {
+                [
+                    "value".to_string(),
+                    value.to_string(),
+                ].join(",")
+            }),
+            self.description.as_ref().map(|description| {
+                [
+                    "description".to_string(),
+                    description.to_string(),
+                ].join(",")
+            }),
+        ];
 
-        if let Some(ref name) = self.name {
-            params.push("name".to_string());
-            params.push(name.to_string());
-        }
-
-
-        if let Some(ref optional) = self.optional {
-            params.push("optional".to_string());
-            params.push(optional.to_string());
-        }
-
-
-        if let Some(ref is_set) = self.is_set {
-            params.push("is_set".to_string());
-            params.push(is_set.to_string());
-        }
-
-
-        if let Some(ref type_) = self.type_ {
-            params.push("type".to_string());
-            params.push(type_.to_string());
-        }
-
-
-        if let Some(ref value) = self.value {
-            params.push("value".to_string());
-            params.push(value.to_string());
-        }
-
-
-        if let Some(ref description) = self.description {
-            params.push("description".to_string());
-            params.push(description.to_string());
-        }
-
-        params.join(",").to_string()
+        write!(f, "{}", params.into_iter().flatten().collect::<Vec<_>>().join(","))
     }
 }
 
 /// Converts Query Parameters representation (style=form, explode=false) to a SamlConfigurationPropertyItemsLong value
-/// as specified in https://swagger.io/docs/specification/serialization/
+/// as specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde deserializer
 impl std::str::FromStr for SamlConfigurationPropertyItemsLong {
     type Err = String;
 
     fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
         #[derive(Default)]
-        // An intermediate representation of the struct to use for parsing.
+        #[allow(dead_code)]
         struct IntermediateRep {
             pub name: Vec<String>,
             pub optional: Vec<bool>,
             pub is_set: Vec<bool>,
-            pub type_: Vec<isize>,
-            pub value: Vec<isize>,
+            pub r#type: Vec<i32>,
+            pub value: Vec<i32>,
             pub description: Vec<String>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
 
         // Parse into intermediate representation
-        let mut string_iter = s.split(',').into_iter();
+        let mut string_iter = s.split(',');
         let mut key_result = string_iter.next();
 
         while key_result.is_some() {
@@ -2361,13 +3312,20 @@ impl std::str::FromStr for SamlConfigurationPropertyItemsLong {
             };
 
             if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
                 match key {
-                    "name" => intermediate_rep.name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "optional" => intermediate_rep.optional.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "is_set" => intermediate_rep.is_set.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "type" => intermediate_rep.type_.push(<isize as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "value" => intermediate_rep.value.push(<isize as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "description" => intermediate_rep.description.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
+                    #[allow(clippy::redundant_clone)]
+                    "name" => intermediate_rep.name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "optional" => intermediate_rep.optional.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "is_set" => intermediate_rep.is_set.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "type" => intermediate_rep.r#type.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "value" => intermediate_rep.value.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "description" => intermediate_rep.description.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing SamlConfigurationPropertyItemsLong".to_string())
                 }
             }
@@ -2381,7 +3339,7 @@ impl std::str::FromStr for SamlConfigurationPropertyItemsLong {
             name: intermediate_rep.name.into_iter().next(),
             optional: intermediate_rep.optional.into_iter().next(),
             is_set: intermediate_rep.is_set.into_iter().next(),
-            type_: intermediate_rep.type_.into_iter().next(),
+            r#type: intermediate_rep.r#type.into_iter().next(),
             value: intermediate_rep.value.into_iter().next(),
             description: intermediate_rep.description.into_iter().next(),
         })
@@ -2399,8 +3357,7 @@ impl std::convert::TryFrom<header::IntoHeaderValue<SamlConfigurationPropertyItem
         match hyper::header::HeaderValue::from_str(&hdr_value) {
              std::result::Result::Ok(value) => std::result::Result::Ok(value),
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Invalid header value for SamlConfigurationPropertyItemsLong - value: {} is invalid {}",
-                     hdr_value, e))
+                 format!("Invalid header value for SamlConfigurationPropertyItemsLong - value: {hdr_value} is invalid {e}"))
         }
     }
 }
@@ -2415,69 +3372,137 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                     match <SamlConfigurationPropertyItemsLong as std::str::FromStr>::from_str(value) {
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
-                            format!("Unable to convert header value '{}' into SamlConfigurationPropertyItemsLong - {}",
-                                value, err))
+                            format!("Unable to convert header value '{value}' into SamlConfigurationPropertyItemsLong - {err}"))
                     }
              },
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Unable to convert header: {:?} to string: {}",
-                     hdr_value, e))
+                 format!("Unable to convert header: {hdr_value:?} to string: {e}"))
         }
     }
 }
 
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<Vec<SamlConfigurationPropertyItemsLong>>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_values: header::IntoHeaderValue<Vec<SamlConfigurationPropertyItemsLong>>) -> std::result::Result<Self, Self::Error> {
+        let hdr_values : Vec<String> = hdr_values.0.into_iter().map(|hdr_value| {
+            hdr_value.to_string()
+        }).collect();
+
+        match hyper::header::HeaderValue::from_str(&hdr_values.join(", ")) {
+           std::result::Result::Ok(hdr_value) => std::result::Result::Ok(hdr_value),
+           std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to convert {hdr_values:?} into a header - {e}",))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<Vec<SamlConfigurationPropertyItemsLong>> {
+    type Error = String;
+
+    fn try_from(hdr_values: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_values.to_str() {
+            std::result::Result::Ok(hdr_values) => {
+                let hdr_values : std::vec::Vec<SamlConfigurationPropertyItemsLong> = hdr_values
+                .split(',')
+                .filter_map(|hdr_value| match hdr_value.trim() {
+                    "" => std::option::Option::None,
+                    hdr_value => std::option::Option::Some({
+                        match <SamlConfigurationPropertyItemsLong as std::str::FromStr>::from_str(hdr_value) {
+                            std::result::Result::Ok(value) => std::result::Result::Ok(value),
+                            std::result::Result::Err(err) => std::result::Result::Err(
+                                format!("Unable to convert header value '{hdr_value}' into SamlConfigurationPropertyItemsLong - {err}"))
+                        }
+                    })
+                }).collect::<std::result::Result<std::vec::Vec<_>, String>>()?;
+
+                std::result::Result::Ok(header::IntoHeaderValue(hdr_values))
+            },
+            std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to parse header: {hdr_values:?} as a string - {e}")),
+        }
+    }
+}
 
 impl SamlConfigurationPropertyItemsLong {
     /// Helper function to allow us to convert this model to an XML string.
     /// Will panic if serialisation fails.
     #[allow(dead_code)]
-    pub(crate) fn to_xml(&self) -> String {
+    pub(crate) fn as_xml(&self) -> String {
         serde_xml_rs::to_string(&self).expect("impossible to fail to serialize")
     }
 }
 
-#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Validate, serde::Serialize, serde::Deserialize)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct SamlConfigurationPropertyItemsString {
     /// property name
     #[serde(rename = "name")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub name: Option<String>,
 
     /// True if optional
     #[serde(rename = "optional")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub optional: Option<bool>,
 
     /// True if property is set
     #[serde(rename = "is_set")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub is_set: Option<bool>,
 
     /// Property type, 1=String, 3=long, 11=boolean, 12=Password
     #[serde(rename = "type")]
+
     #[serde(skip_serializing_if="Option::is_none")]
-    pub type_: Option<isize>,
+    pub r#type: Option<i32>,
 
     /// Property value
     #[serde(rename = "value")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub value: Option<String>,
 
     /// Property description
     #[serde(rename = "description")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub description: Option<String>,
 
 }
 
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMinLength for SamlConfigurationPropertyItemsString {
+    fn validate_composited_min_length(
+        &self,
+        _min_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MinLengthError>> {
+        Ok(())
+    }
+}
+
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMaxLength for SamlConfigurationPropertyItemsString {
+    fn validate_composited_max_length(
+        &self,
+        _max_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MaxLengthError>> {
+        Ok(())
+    }
+}
+
+
 impl SamlConfigurationPropertyItemsString {
+    #[allow(clippy::new_without_default)]
     pub fn new() -> SamlConfigurationPropertyItemsString {
         SamlConfigurationPropertyItemsString {
             name: None,
             optional: None,
             is_set: None,
-            type_: None,
+            r#type: None,
             value: None,
             description: None,
         }
@@ -2485,65 +3510,68 @@ impl SamlConfigurationPropertyItemsString {
 }
 
 /// Converts the SamlConfigurationPropertyItemsString value to the Query Parameters representation (style=form, explode=false)
-/// specified in https://swagger.io/docs/specification/serialization/
+/// specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde serializer
-impl std::string::ToString for SamlConfigurationPropertyItemsString {
-    fn to_string(&self) -> String {
-        let mut params: Vec<String> = vec![];
+impl std::fmt::Display for SamlConfigurationPropertyItemsString {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let params: Vec<Option<String>> = vec![
+            self.name.as_ref().map(|name| {
+                [
+                    "name".to_string(),
+                    name.to_string(),
+                ].join(",")
+            }),
+            self.optional.as_ref().map(|optional| {
+                [
+                    "optional".to_string(),
+                    optional.to_string(),
+                ].join(",")
+            }),
+            self.is_set.as_ref().map(|is_set| {
+                [
+                    "is_set".to_string(),
+                    is_set.to_string(),
+                ].join(",")
+            }),
+            self.r#type.as_ref().map(|r#type| {
+                [
+                    "type".to_string(),
+                    r#type.to_string(),
+                ].join(",")
+            }),
+            self.value.as_ref().map(|value| {
+                [
+                    "value".to_string(),
+                    value.to_string(),
+                ].join(",")
+            }),
+            self.description.as_ref().map(|description| {
+                [
+                    "description".to_string(),
+                    description.to_string(),
+                ].join(",")
+            }),
+        ];
 
-        if let Some(ref name) = self.name {
-            params.push("name".to_string());
-            params.push(name.to_string());
-        }
-
-
-        if let Some(ref optional) = self.optional {
-            params.push("optional".to_string());
-            params.push(optional.to_string());
-        }
-
-
-        if let Some(ref is_set) = self.is_set {
-            params.push("is_set".to_string());
-            params.push(is_set.to_string());
-        }
-
-
-        if let Some(ref type_) = self.type_ {
-            params.push("type".to_string());
-            params.push(type_.to_string());
-        }
-
-
-        if let Some(ref value) = self.value {
-            params.push("value".to_string());
-            params.push(value.to_string());
-        }
-
-
-        if let Some(ref description) = self.description {
-            params.push("description".to_string());
-            params.push(description.to_string());
-        }
-
-        params.join(",").to_string()
+        write!(f, "{}", params.into_iter().flatten().collect::<Vec<_>>().join(","))
     }
 }
 
 /// Converts Query Parameters representation (style=form, explode=false) to a SamlConfigurationPropertyItemsString value
-/// as specified in https://swagger.io/docs/specification/serialization/
+/// as specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde deserializer
 impl std::str::FromStr for SamlConfigurationPropertyItemsString {
     type Err = String;
 
     fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
         #[derive(Default)]
-        // An intermediate representation of the struct to use for parsing.
+        #[allow(dead_code)]
         struct IntermediateRep {
             pub name: Vec<String>,
             pub optional: Vec<bool>,
             pub is_set: Vec<bool>,
-            pub type_: Vec<isize>,
+            pub r#type: Vec<i32>,
             pub value: Vec<String>,
             pub description: Vec<String>,
         }
@@ -2551,7 +3579,7 @@ impl std::str::FromStr for SamlConfigurationPropertyItemsString {
         let mut intermediate_rep = IntermediateRep::default();
 
         // Parse into intermediate representation
-        let mut string_iter = s.split(',').into_iter();
+        let mut string_iter = s.split(',');
         let mut key_result = string_iter.next();
 
         while key_result.is_some() {
@@ -2561,13 +3589,20 @@ impl std::str::FromStr for SamlConfigurationPropertyItemsString {
             };
 
             if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
                 match key {
-                    "name" => intermediate_rep.name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "optional" => intermediate_rep.optional.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "is_set" => intermediate_rep.is_set.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "type" => intermediate_rep.type_.push(<isize as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "value" => intermediate_rep.value.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "description" => intermediate_rep.description.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
+                    #[allow(clippy::redundant_clone)]
+                    "name" => intermediate_rep.name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "optional" => intermediate_rep.optional.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "is_set" => intermediate_rep.is_set.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "type" => intermediate_rep.r#type.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "value" => intermediate_rep.value.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "description" => intermediate_rep.description.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing SamlConfigurationPropertyItemsString".to_string())
                 }
             }
@@ -2581,7 +3616,7 @@ impl std::str::FromStr for SamlConfigurationPropertyItemsString {
             name: intermediate_rep.name.into_iter().next(),
             optional: intermediate_rep.optional.into_iter().next(),
             is_set: intermediate_rep.is_set.into_iter().next(),
-            type_: intermediate_rep.type_.into_iter().next(),
+            r#type: intermediate_rep.r#type.into_iter().next(),
             value: intermediate_rep.value.into_iter().next(),
             description: intermediate_rep.description.into_iter().next(),
         })
@@ -2599,8 +3634,7 @@ impl std::convert::TryFrom<header::IntoHeaderValue<SamlConfigurationPropertyItem
         match hyper::header::HeaderValue::from_str(&hdr_value) {
              std::result::Result::Ok(value) => std::result::Result::Ok(value),
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Invalid header value for SamlConfigurationPropertyItemsString - value: {} is invalid {}",
-                     hdr_value, e))
+                 format!("Invalid header value for SamlConfigurationPropertyItemsString - value: {hdr_value} is invalid {e}"))
         }
     }
 }
@@ -2615,42 +3649,107 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                     match <SamlConfigurationPropertyItemsString as std::str::FromStr>::from_str(value) {
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
-                            format!("Unable to convert header value '{}' into SamlConfigurationPropertyItemsString - {}",
-                                value, err))
+                            format!("Unable to convert header value '{value}' into SamlConfigurationPropertyItemsString - {err}"))
                     }
              },
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Unable to convert header: {:?} to string: {}",
-                     hdr_value, e))
+                 format!("Unable to convert header: {hdr_value:?} to string: {e}"))
         }
     }
 }
 
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<Vec<SamlConfigurationPropertyItemsString>>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_values: header::IntoHeaderValue<Vec<SamlConfigurationPropertyItemsString>>) -> std::result::Result<Self, Self::Error> {
+        let hdr_values : Vec<String> = hdr_values.0.into_iter().map(|hdr_value| {
+            hdr_value.to_string()
+        }).collect();
+
+        match hyper::header::HeaderValue::from_str(&hdr_values.join(", ")) {
+           std::result::Result::Ok(hdr_value) => std::result::Result::Ok(hdr_value),
+           std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to convert {hdr_values:?} into a header - {e}",))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<Vec<SamlConfigurationPropertyItemsString>> {
+    type Error = String;
+
+    fn try_from(hdr_values: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_values.to_str() {
+            std::result::Result::Ok(hdr_values) => {
+                let hdr_values : std::vec::Vec<SamlConfigurationPropertyItemsString> = hdr_values
+                .split(',')
+                .filter_map(|hdr_value| match hdr_value.trim() {
+                    "" => std::option::Option::None,
+                    hdr_value => std::option::Option::Some({
+                        match <SamlConfigurationPropertyItemsString as std::str::FromStr>::from_str(hdr_value) {
+                            std::result::Result::Ok(value) => std::result::Result::Ok(value),
+                            std::result::Result::Err(err) => std::result::Result::Err(
+                                format!("Unable to convert header value '{hdr_value}' into SamlConfigurationPropertyItemsString - {err}"))
+                        }
+                    })
+                }).collect::<std::result::Result<std::vec::Vec<_>, String>>()?;
+
+                std::result::Result::Ok(header::IntoHeaderValue(hdr_values))
+            },
+            std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to parse header: {hdr_values:?} as a string - {e}")),
+        }
+    }
+}
 
 impl SamlConfigurationPropertyItemsString {
     /// Helper function to allow us to convert this model to an XML string.
     /// Will panic if serialisation fails.
     #[allow(dead_code)]
-    pub(crate) fn to_xml(&self) -> String {
+    pub(crate) fn as_xml(&self) -> String {
         serde_xml_rs::to_string(&self).expect("impossible to fail to serialize")
     }
 }
 
-#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Validate, serde::Serialize, serde::Deserialize)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct TruststoreInfo {
     #[serde(rename = "aliases")]
+
+    #[cfg_attr(feature = "validate", validate)]
     #[serde(skip_serializing_if="Option::is_none")]
     pub aliases: Option<Vec<models::TruststoreItems>>,
 
     /// False if truststore don't exist
     #[serde(rename = "exists")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub exists: Option<bool>,
 
 }
 
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMinLength for TruststoreInfo {
+    fn validate_composited_min_length(
+        &self,
+        _min_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MinLengthError>> {
+        Ok(())
+    }
+}
+
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMaxLength for TruststoreInfo {
+    fn validate_composited_max_length(
+        &self,
+        _max_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MaxLengthError>> {
+        Ok(())
+    }
+}
+
+
 impl TruststoreInfo {
+    #[allow(clippy::new_without_default)]
     pub fn new() -> TruststoreInfo {
         TruststoreInfo {
             aliases: None,
@@ -2660,32 +3759,34 @@ impl TruststoreInfo {
 }
 
 /// Converts the TruststoreInfo value to the Query Parameters representation (style=form, explode=false)
-/// specified in https://swagger.io/docs/specification/serialization/
+/// specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde serializer
-impl std::string::ToString for TruststoreInfo {
-    fn to_string(&self) -> String {
-        let mut params: Vec<String> = vec![];
-        // Skipping aliases in query parameter serialization
+impl std::fmt::Display for TruststoreInfo {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let params: Vec<Option<String>> = vec![
+            // Skipping non-primitive type aliases in query parameter serialization
+            self.exists.as_ref().map(|exists| {
+                [
+                    "exists".to_string(),
+                    exists.to_string(),
+                ].join(",")
+            }),
+        ];
 
-
-        if let Some(ref exists) = self.exists {
-            params.push("exists".to_string());
-            params.push(exists.to_string());
-        }
-
-        params.join(",").to_string()
+        write!(f, "{}", params.into_iter().flatten().collect::<Vec<_>>().join(","))
     }
 }
 
 /// Converts Query Parameters representation (style=form, explode=false) to a TruststoreInfo value
-/// as specified in https://swagger.io/docs/specification/serialization/
+/// as specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde deserializer
 impl std::str::FromStr for TruststoreInfo {
     type Err = String;
 
     fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
         #[derive(Default)]
-        // An intermediate representation of the struct to use for parsing.
+        #[allow(dead_code)]
         struct IntermediateRep {
             pub aliases: Vec<Vec<models::TruststoreItems>>,
             pub exists: Vec<bool>,
@@ -2694,7 +3795,7 @@ impl std::str::FromStr for TruststoreInfo {
         let mut intermediate_rep = IntermediateRep::default();
 
         // Parse into intermediate representation
-        let mut string_iter = s.split(',').into_iter();
+        let mut string_iter = s.split(',');
         let mut key_result = string_iter.next();
 
         while key_result.is_some() {
@@ -2704,9 +3805,11 @@ impl std::str::FromStr for TruststoreInfo {
             };
 
             if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
                 match key {
                     "aliases" => return std::result::Result::Err("Parsing a container in this style is not supported in TruststoreInfo".to_string()),
-                    "exists" => intermediate_rep.exists.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
+                    #[allow(clippy::redundant_clone)]
+                    "exists" => intermediate_rep.exists.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing TruststoreInfo".to_string())
                 }
             }
@@ -2734,8 +3837,7 @@ impl std::convert::TryFrom<header::IntoHeaderValue<TruststoreInfo>> for hyper::h
         match hyper::header::HeaderValue::from_str(&hdr_value) {
              std::result::Result::Ok(value) => std::result::Result::Ok(value),
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Invalid header value for TruststoreInfo - value: {} is invalid {}",
-                     hdr_value, e))
+                 format!("Invalid header value for TruststoreInfo - value: {hdr_value} is invalid {e}"))
         }
     }
 }
@@ -2750,67 +3852,136 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                     match <TruststoreInfo as std::str::FromStr>::from_str(value) {
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
-                            format!("Unable to convert header value '{}' into TruststoreInfo - {}",
-                                value, err))
+                            format!("Unable to convert header value '{value}' into TruststoreInfo - {err}"))
                     }
              },
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Unable to convert header: {:?} to string: {}",
-                     hdr_value, e))
+                 format!("Unable to convert header: {hdr_value:?} to string: {e}"))
         }
     }
 }
 
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<Vec<TruststoreInfo>>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_values: header::IntoHeaderValue<Vec<TruststoreInfo>>) -> std::result::Result<Self, Self::Error> {
+        let hdr_values : Vec<String> = hdr_values.0.into_iter().map(|hdr_value| {
+            hdr_value.to_string()
+        }).collect();
+
+        match hyper::header::HeaderValue::from_str(&hdr_values.join(", ")) {
+           std::result::Result::Ok(hdr_value) => std::result::Result::Ok(hdr_value),
+           std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to convert {hdr_values:?} into a header - {e}",))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<Vec<TruststoreInfo>> {
+    type Error = String;
+
+    fn try_from(hdr_values: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_values.to_str() {
+            std::result::Result::Ok(hdr_values) => {
+                let hdr_values : std::vec::Vec<TruststoreInfo> = hdr_values
+                .split(',')
+                .filter_map(|hdr_value| match hdr_value.trim() {
+                    "" => std::option::Option::None,
+                    hdr_value => std::option::Option::Some({
+                        match <TruststoreInfo as std::str::FromStr>::from_str(hdr_value) {
+                            std::result::Result::Ok(value) => std::result::Result::Ok(value),
+                            std::result::Result::Err(err) => std::result::Result::Err(
+                                format!("Unable to convert header value '{hdr_value}' into TruststoreInfo - {err}"))
+                        }
+                    })
+                }).collect::<std::result::Result<std::vec::Vec<_>, String>>()?;
+
+                std::result::Result::Ok(header::IntoHeaderValue(hdr_values))
+            },
+            std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to parse header: {hdr_values:?} as a string - {e}")),
+        }
+    }
+}
 
 impl TruststoreInfo {
     /// Helper function to allow us to convert this model to an XML string.
     /// Will panic if serialisation fails.
     #[allow(dead_code)]
-    pub(crate) fn to_xml(&self) -> String {
+    pub(crate) fn as_xml(&self) -> String {
         serde_xml_rs::to_string(&self).expect("impossible to fail to serialize")
     }
 }
 
-#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Validate, serde::Serialize, serde::Deserialize)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct TruststoreItems {
     /// Truststore alias name
     #[serde(rename = "alias")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub alias: Option<String>,
 
     #[serde(rename = "entryType")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub entry_type: Option<String>,
 
     /// e.g. \"CN=localhost\"
     #[serde(rename = "subject")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub subject: Option<String>,
 
     /// e.g. \"CN=Admin\"
     #[serde(rename = "issuer")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub issuer: Option<String>,
 
     /// e.g. \"Sun Jul 01 12:00:00 AEST 2018\"
     #[serde(rename = "notBefore")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub not_before: Option<String>,
 
     /// e.g. \"Sun Jun 30 23:59:50 AEST 2019\"
     #[serde(rename = "notAfter")]
+
     #[serde(skip_serializing_if="Option::is_none")]
     pub not_after: Option<String>,
 
     /// 18165099476682912368
     #[serde(rename = "serialNumber")]
+
     #[serde(skip_serializing_if="Option::is_none")]
-    pub serial_number: Option<isize>,
+    pub serial_number: Option<i32>,
 
 }
 
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMinLength for TruststoreItems {
+    fn validate_composited_min_length(
+        &self,
+        _min_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MinLengthError>> {
+        Ok(())
+    }
+}
+
+#[cfg(feature = "validate")]
+impl serde_valid::validation::ValidateCompositedMaxLength for TruststoreItems {
+    fn validate_composited_max_length(
+        &self,
+        _max_length: usize,
+    ) -> Result<(), serde_valid::validation::Composited<serde_valid::validation::error::MaxLengthError>> {
+        Ok(())
+    }
+}
+
+
 impl TruststoreItems {
+    #[allow(clippy::new_without_default)]
     pub fn new() -> TruststoreItems {
         TruststoreItems {
             alias: None,
@@ -2825,66 +3996,69 @@ impl TruststoreItems {
 }
 
 /// Converts the TruststoreItems value to the Query Parameters representation (style=form, explode=false)
-/// specified in https://swagger.io/docs/specification/serialization/
+/// specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde serializer
-impl std::string::ToString for TruststoreItems {
-    fn to_string(&self) -> String {
-        let mut params: Vec<String> = vec![];
+impl std::fmt::Display for TruststoreItems {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let params: Vec<Option<String>> = vec![
+            self.alias.as_ref().map(|alias| {
+                [
+                    "alias".to_string(),
+                    alias.to_string(),
+                ].join(",")
+            }),
+            self.entry_type.as_ref().map(|entry_type| {
+                [
+                    "entryType".to_string(),
+                    entry_type.to_string(),
+                ].join(",")
+            }),
+            self.subject.as_ref().map(|subject| {
+                [
+                    "subject".to_string(),
+                    subject.to_string(),
+                ].join(",")
+            }),
+            self.issuer.as_ref().map(|issuer| {
+                [
+                    "issuer".to_string(),
+                    issuer.to_string(),
+                ].join(",")
+            }),
+            self.not_before.as_ref().map(|not_before| {
+                [
+                    "notBefore".to_string(),
+                    not_before.to_string(),
+                ].join(",")
+            }),
+            self.not_after.as_ref().map(|not_after| {
+                [
+                    "notAfter".to_string(),
+                    not_after.to_string(),
+                ].join(",")
+            }),
+            self.serial_number.as_ref().map(|serial_number| {
+                [
+                    "serialNumber".to_string(),
+                    serial_number.to_string(),
+                ].join(",")
+            }),
+        ];
 
-        if let Some(ref alias) = self.alias {
-            params.push("alias".to_string());
-            params.push(alias.to_string());
-        }
-
-
-        if let Some(ref entry_type) = self.entry_type {
-            params.push("entryType".to_string());
-            params.push(entry_type.to_string());
-        }
-
-
-        if let Some(ref subject) = self.subject {
-            params.push("subject".to_string());
-            params.push(subject.to_string());
-        }
-
-
-        if let Some(ref issuer) = self.issuer {
-            params.push("issuer".to_string());
-            params.push(issuer.to_string());
-        }
-
-
-        if let Some(ref not_before) = self.not_before {
-            params.push("notBefore".to_string());
-            params.push(not_before.to_string());
-        }
-
-
-        if let Some(ref not_after) = self.not_after {
-            params.push("notAfter".to_string());
-            params.push(not_after.to_string());
-        }
-
-
-        if let Some(ref serial_number) = self.serial_number {
-            params.push("serialNumber".to_string());
-            params.push(serial_number.to_string());
-        }
-
-        params.join(",").to_string()
+        write!(f, "{}", params.into_iter().flatten().collect::<Vec<_>>().join(","))
     }
 }
 
 /// Converts Query Parameters representation (style=form, explode=false) to a TruststoreItems value
-/// as specified in https://swagger.io/docs/specification/serialization/
+/// as specified in <https://swagger.io/docs/specification/serialization/>
 /// Should be implemented in a serde deserializer
 impl std::str::FromStr for TruststoreItems {
     type Err = String;
 
     fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
         #[derive(Default)]
-        // An intermediate representation of the struct to use for parsing.
+        #[allow(dead_code)]
         struct IntermediateRep {
             pub alias: Vec<String>,
             pub entry_type: Vec<String>,
@@ -2892,13 +4066,13 @@ impl std::str::FromStr for TruststoreItems {
             pub issuer: Vec<String>,
             pub not_before: Vec<String>,
             pub not_after: Vec<String>,
-            pub serial_number: Vec<isize>,
+            pub serial_number: Vec<i32>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
 
         // Parse into intermediate representation
-        let mut string_iter = s.split(',').into_iter();
+        let mut string_iter = s.split(',');
         let mut key_result = string_iter.next();
 
         while key_result.is_some() {
@@ -2908,14 +4082,22 @@ impl std::str::FromStr for TruststoreItems {
             };
 
             if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
                 match key {
-                    "alias" => intermediate_rep.alias.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "entryType" => intermediate_rep.entry_type.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "subject" => intermediate_rep.subject.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "issuer" => intermediate_rep.issuer.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "notBefore" => intermediate_rep.not_before.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "notAfter" => intermediate_rep.not_after.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "serialNumber" => intermediate_rep.serial_number.push(<isize as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
+                    #[allow(clippy::redundant_clone)]
+                    "alias" => intermediate_rep.alias.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "entryType" => intermediate_rep.entry_type.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "subject" => intermediate_rep.subject.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "issuer" => intermediate_rep.issuer.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "notBefore" => intermediate_rep.not_before.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "notAfter" => intermediate_rep.not_after.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "serialNumber" => intermediate_rep.serial_number.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing TruststoreItems".to_string())
                 }
             }
@@ -2948,8 +4130,7 @@ impl std::convert::TryFrom<header::IntoHeaderValue<TruststoreItems>> for hyper::
         match hyper::header::HeaderValue::from_str(&hdr_value) {
              std::result::Result::Ok(value) => std::result::Result::Ok(value),
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Invalid header value for TruststoreItems - value: {} is invalid {}",
-                     hdr_value, e))
+                 format!("Invalid header value for TruststoreItems - value: {hdr_value} is invalid {e}"))
         }
     }
 }
@@ -2964,23 +4145,63 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                     match <TruststoreItems as std::str::FromStr>::from_str(value) {
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
-                            format!("Unable to convert header value '{}' into TruststoreItems - {}",
-                                value, err))
+                            format!("Unable to convert header value '{value}' into TruststoreItems - {err}"))
                     }
              },
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Unable to convert header: {:?} to string: {}",
-                     hdr_value, e))
+                 format!("Unable to convert header: {hdr_value:?} to string: {e}"))
         }
     }
 }
 
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<Vec<TruststoreItems>>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_values: header::IntoHeaderValue<Vec<TruststoreItems>>) -> std::result::Result<Self, Self::Error> {
+        let hdr_values : Vec<String> = hdr_values.0.into_iter().map(|hdr_value| {
+            hdr_value.to_string()
+        }).collect();
+
+        match hyper::header::HeaderValue::from_str(&hdr_values.join(", ")) {
+           std::result::Result::Ok(hdr_value) => std::result::Result::Ok(hdr_value),
+           std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to convert {hdr_values:?} into a header - {e}",))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<Vec<TruststoreItems>> {
+    type Error = String;
+
+    fn try_from(hdr_values: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_values.to_str() {
+            std::result::Result::Ok(hdr_values) => {
+                let hdr_values : std::vec::Vec<TruststoreItems> = hdr_values
+                .split(',')
+                .filter_map(|hdr_value| match hdr_value.trim() {
+                    "" => std::option::Option::None,
+                    hdr_value => std::option::Option::Some({
+                        match <TruststoreItems as std::str::FromStr>::from_str(hdr_value) {
+                            std::result::Result::Ok(value) => std::result::Result::Ok(value),
+                            std::result::Result::Err(err) => std::result::Result::Err(
+                                format!("Unable to convert header value '{hdr_value}' into TruststoreItems - {err}"))
+                        }
+                    })
+                }).collect::<std::result::Result<std::vec::Vec<_>, String>>()?;
+
+                std::result::Result::Ok(header::IntoHeaderValue(hdr_values))
+            },
+            std::result::Result::Err(e) => std::result::Result::Err(format!("Unable to parse header: {hdr_values:?} as a string - {e}")),
+        }
+    }
+}
 
 impl TruststoreItems {
     /// Helper function to allow us to convert this model to an XML string.
     /// Will panic if serialisation fails.
     #[allow(dead_code)]
-    pub(crate) fn to_xml(&self) -> String {
+    pub(crate) fn as_xml(&self) -> String {
         serde_xml_rs::to_string(&self).expect("impossible to fail to serialize")
     }
 }

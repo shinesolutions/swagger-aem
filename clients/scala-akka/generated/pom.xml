@@ -102,7 +102,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.0.0</version>
+        <version>3.3.2</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -134,12 +134,12 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.0.0-M4</version>
         <configuration>
-          <systemProperties>
+          <systemPropertyVariables>
             <property>
               <name>loggerPath</name>
               <value>conf/log4j.properties</value>
             </property>
-          </systemProperties>
+          </systemPropertyVariables>
           <argLine>-Xms512m -Xmx1500m</argLine>
           <parallel>methods</parallel>
           <threadCount>4</threadCount>

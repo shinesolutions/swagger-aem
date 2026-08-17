@@ -5,27 +5,27 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.model.KeystoreItems;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 
 
 import io.swagger.annotations.*;
 import java.util.Objects;
 
-import javax.xml.bind.annotation.*;
 
 
 public class KeystoreInfo   {
   
-  private List<KeystoreItems> aliases = null;
+  private List<@Valid KeystoreItems> aliases = new ArrayList<>();
 
   private Boolean exists;
 
-
   /**
    **/
-  public KeystoreInfo aliases(List<KeystoreItems> aliases) {
+  public KeystoreInfo aliases(List<@Valid KeystoreItems> aliases) {
     this.aliases = aliases;
     return this;
   }
@@ -33,16 +33,16 @@ public class KeystoreInfo   {
   
   @ApiModelProperty(value = "")
   @JsonProperty("aliases")
-  public List<KeystoreItems> getAliases() {
+  public List<@Valid KeystoreItems> getAliases() {
     return aliases;
   }
-  public void setAliases(List<KeystoreItems> aliases) {
+  public void setAliases(List<@Valid KeystoreItems> aliases) {
     this.aliases = aliases;
   }
 
   public KeystoreInfo addAliasesItem(KeystoreItems aliasesItem) {
     if (this.aliases == null) {
-      this.aliases = new ArrayList<KeystoreItems>();
+      this.aliases = new ArrayList<>();
     }
     this.aliases.add(aliasesItem);
     return this;
@@ -78,8 +78,8 @@ public class KeystoreInfo   {
       return false;
     }
     KeystoreInfo keystoreInfo = (KeystoreInfo) o;
-    return Objects.equals(aliases, keystoreInfo.aliases) &&
-        Objects.equals(exists, keystoreInfo.exists);
+    return Objects.equals(this.aliases, keystoreInfo.aliases) &&
+        Objects.equals(this.exists, keystoreInfo.exists);
   }
 
   @Override
@@ -103,10 +103,7 @@ public class KeystoreInfo   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

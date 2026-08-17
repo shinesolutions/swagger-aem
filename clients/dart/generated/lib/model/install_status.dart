@@ -1,10 +1,11 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.0
+// @dart=2.18
 
 // ignore_for_file: unused_element, unused_import
 // ignore_for_file: always_put_required_named_parameters_first
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: lines_longer_than_80_chars
 
 part of openapi.api;
@@ -15,57 +16,99 @@ class InstallStatus {
     this.status,
   });
 
-  InstallStatusStatus status;
+  ///
+  /// Please note: This property should have been non-nullable! Since the specification file
+  /// does not include a default value (using the "default:" property), however, the generated
+  /// source code must fall back to having a nullable type.
+  /// Consider adding a "default:" property in the specification file to hide this note.
+  ///
+  InstallStatusStatus? status;
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is InstallStatus &&
-     other.status == status;
+    other.status == status;
 
   @override
   int get hashCode =>
-    (status == null ? 0 : status.hashCode);
+    // ignore: unnecessary_parenthesis
+    (status == null ? 0 : status!.hashCode);
 
   @override
   String toString() => 'InstallStatus[status=$status]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
-    if (status != null) {
-      json[r'status'] = status;
+    if (this.status != null) {
+      json[r'status'] = this.status;
+    } else {
+      json[r'status'] = null;
     }
     return json;
   }
 
   /// Returns a new [InstallStatus] instance and imports its values from
-  /// [json] if it's non-null, null if [json] is null.
-  static InstallStatus fromJson(Map<String, dynamic> json) => json == null
-    ? null
-    : InstallStatus(
+  /// [value] if it's a [Map], null otherwise.
+  // ignore: prefer_constructors_over_static_methods
+  static InstallStatus? fromJson(dynamic value) {
+    if (value is Map) {
+      final json = value.cast<String, dynamic>();
+
+      // Ensure that the map contains the required keys.
+      // Note 1: the values aren't checked for validity beyond being non-null.
+      // Note 2: this code is stripped in release mode!
+      assert(() {
+        return true;
+      }());
+
+      return InstallStatus(
         status: InstallStatusStatus.fromJson(json[r'status']),
-    );
+      );
+    }
+    return null;
+  }
 
-  static List<InstallStatus> listFromJson(List<dynamic> json, {bool emptyIsNull, bool growable,}) =>
-    json == null || json.isEmpty
-      ? true == emptyIsNull ? null : <InstallStatus>[]
-      : json.map((dynamic value) => InstallStatus.fromJson(value)).toList(growable: true == growable);
+  static List<InstallStatus> listFromJson(dynamic json, {bool growable = false,}) {
+    final result = <InstallStatus>[];
+    if (json is List && json.isNotEmpty) {
+      for (final row in json) {
+        final value = InstallStatus.fromJson(row);
+        if (value != null) {
+          result.add(value);
+        }
+      }
+    }
+    return result.toList(growable: growable);
+  }
 
-  static Map<String, InstallStatus> mapFromJson(Map<String, dynamic> json) {
+  static Map<String, InstallStatus> mapFromJson(dynamic json) {
     final map = <String, InstallStatus>{};
-    if (json?.isNotEmpty == true) {
-      json.forEach((key, value) => map[key] = InstallStatus.fromJson(value));
+    if (json is Map && json.isNotEmpty) {
+      json = json.cast<String, dynamic>(); // ignore: parameter_assignments
+      for (final entry in json.entries) {
+        final value = InstallStatus.fromJson(entry.value);
+        if (value != null) {
+          map[entry.key] = value;
+        }
+      }
     }
     return map;
   }
 
   // maps a json object with a list of InstallStatus-objects as value to a dart map
-  static Map<String, List<InstallStatus>> mapListFromJson(Map<String, dynamic> json, {bool emptyIsNull, bool growable,}) {
+  static Map<String, List<InstallStatus>> mapListFromJson(dynamic json, {bool growable = false,}) {
     final map = <String, List<InstallStatus>>{};
-    if (json?.isNotEmpty == true) {
-      json.forEach((key, value) {
-        map[key] = InstallStatus.listFromJson(value, emptyIsNull: emptyIsNull, growable: growable,);
-      });
+    if (json is Map && json.isNotEmpty) {
+      // ignore: parameter_assignments
+      json = json.cast<String, dynamic>();
+      for (final entry in json.entries) {
+        map[entry.key] = InstallStatus.listFromJson(entry.value, growable: growable,);
+      }
     }
     return map;
   }
+
+  /// The list of required keys that must be present in a JSON.
+  static const requiredKeys = <String>{
+  };
 }
 

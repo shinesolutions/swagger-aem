@@ -1,4 +1,6 @@
 .gitignore
+CMakeLists.txt
+FindRestbedAndBoost.cmake
 README.md
 api/ConsoleApi.cpp
 api/ConsoleApi.h
@@ -45,3 +47,4 @@ model/TruststoreInfo.cpp
 model/TruststoreInfo.h
 model/TruststoreItems.cpp
 model/TruststoreItems.h
+model/helpers.h

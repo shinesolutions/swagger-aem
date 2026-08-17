@@ -30,7 +30,7 @@ Method | HTTP request | Description
 [**postNodeRw**](SlingApi.md#postNodeRw) | **POST** /{path}/{name}.rw.html | 
 [**postPath**](SlingApi.md#postPath) | **POST** /{path}/ | 
 [**postQuery**](SlingApi.md#postQuery) | **POST** /bin/querybuilder.json | 
-[**postTreeActivation**](SlingApi.md#postTreeActivation) | **POST** /etc/replication/treeactivation.html | 
+[**postTreeActivation**](SlingApi.md#postTreeActivation) | **POST** /libs/replication/treeactivation.html | 
 [**postTruststore**](SlingApi.md#postTruststore) | **POST** /libs/granite/security/post/truststore | 
 [**postTruststorePKCS12**](SlingApi.md#postTruststorePKCS12) | **POST** /etc/truststore | 
 
@@ -650,55 +650,56 @@ let apiInstance = new NodeSwaggerAem.SlingApi();
 let runmode = "runmode_example"; // String | 
 let name = "name_example"; // String | 
 let opts = {
-  'jcrcontentCqdistribute': true, // Boolean | 
-  'jcrcontentCqdistributeTypeHint': "jcrcontentCqdistributeTypeHint_example", // String | 
-  'jcrcontentCqname': "jcrcontentCqname_example", // String | 
-  'jcrcontentCqtemplate': "jcrcontentCqtemplate_example", // String | 
-  'jcrcontentEnabled': true, // Boolean | 
-  'jcrcontentJcrdescription': "jcrcontentJcrdescription_example", // String | 
-  'jcrcontentJcrlastModified': "jcrcontentJcrlastModified_example", // String | 
-  'jcrcontentJcrlastModifiedBy': "jcrcontentJcrlastModifiedBy_example", // String | 
-  'jcrcontentJcrmixinTypes': "jcrcontentJcrmixinTypes_example", // String | 
-  'jcrcontentJcrtitle': "jcrcontentJcrtitle_example", // String | 
-  'jcrcontentLogLevel': "jcrcontentLogLevel_example", // String | 
-  'jcrcontentNoStatusUpdate': true, // Boolean | 
-  'jcrcontentNoVersioning': true, // Boolean | 
-  'jcrcontentProtocolConnectTimeout': 3.4, // Number | 
-  'jcrcontentProtocolHTTPConnectionClosed': true, // Boolean | 
-  'jcrcontentProtocolHTTPExpired': "jcrcontentProtocolHTTPExpired_example", // String | 
-  'jcrcontentProtocolHTTPHeaders': ["null"], // [String] | 
-  'jcrcontentProtocolHTTPHeadersTypeHint': "jcrcontentProtocolHTTPHeadersTypeHint_example", // String | 
-  'jcrcontentProtocolHTTPMethod': "jcrcontentProtocolHTTPMethod_example", // String | 
-  'jcrcontentProtocolHTTPSRelaxed': true, // Boolean | 
-  'jcrcontentProtocolInterface': "jcrcontentProtocolInterface_example", // String | 
-  'jcrcontentProtocolSocketTimeout': 3.4, // Number | 
-  'jcrcontentProtocolVersion': "jcrcontentProtocolVersion_example", // String | 
-  'jcrcontentProxyNTLMDomain': "jcrcontentProxyNTLMDomain_example", // String | 
-  'jcrcontentProxyNTLMHost': "jcrcontentProxyNTLMHost_example", // String | 
-  'jcrcontentProxyHost': "jcrcontentProxyHost_example", // String | 
-  'jcrcontentProxyPassword': "jcrcontentProxyPassword_example", // String | 
-  'jcrcontentProxyPort': 3.4, // Number | 
-  'jcrcontentProxyUser': "jcrcontentProxyUser_example", // String | 
-  'jcrcontentQueueBatchMaxSize': 3.4, // Number | 
-  'jcrcontentQueueBatchMode': "jcrcontentQueueBatchMode_example", // String | 
-  'jcrcontentQueueBatchWaitTime': 3.4, // Number | 
-  'jcrcontentRetryDelay': "jcrcontentRetryDelay_example", // String | 
-  'jcrcontentReverseReplication': true, // Boolean | 
-  'jcrcontentSerializationType': "jcrcontentSerializationType_example", // String | 
-  'jcrcontentSlingresourceType': "jcrcontentSlingresourceType_example", // String | 
-  'jcrcontentSsl': "jcrcontentSsl_example", // String | 
-  'jcrcontentTransportNTLMDomain': "jcrcontentTransportNTLMDomain_example", // String | 
-  'jcrcontentTransportNTLMHost': "jcrcontentTransportNTLMHost_example", // String | 
-  'jcrcontentTransportPassword': "jcrcontentTransportPassword_example", // String | 
-  'jcrcontentTransportUri': "jcrcontentTransportUri_example", // String | 
-  'jcrcontentTransportUser': "jcrcontentTransportUser_example", // String | 
-  'jcrcontentTriggerDistribute': true, // Boolean | 
-  'jcrcontentTriggerModified': true, // Boolean | 
-  'jcrcontentTriggerOnOffTime': true, // Boolean | 
-  'jcrcontentTriggerReceive': true, // Boolean | 
-  'jcrcontentTriggerSpecific': true, // Boolean | 
-  'jcrcontentUserId': "jcrcontentUserId_example", // String | 
-  'jcrprimaryType': "jcrprimaryType_example", // String | 
+  'jcrContentCqDistribute': true, // Boolean | 
+  'jcrContentCqDistributeTypeHint': "jcrContentCqDistributeTypeHint_example", // String | 
+  'jcrContentCqName': "jcrContentCqName_example", // String | 
+  'jcrContentCqTemplate': "jcrContentCqTemplate_example", // String | 
+  'jcrContentAliasUpdate': true, // Boolean | 
+  'jcrContentEnabled': true, // Boolean | 
+  'jcrContentJcrDescription': "jcrContentJcrDescription_example", // String | 
+  'jcrContentJcrLastModified': "jcrContentJcrLastModified_example", // String | 
+  'jcrContentJcrLastModifiedBy': "jcrContentJcrLastModifiedBy_example", // String | 
+  'jcrContentJcrMixinTypes': "jcrContentJcrMixinTypes_example", // String | 
+  'jcrContentJcrTitle': "jcrContentJcrTitle_example", // String | 
+  'jcrContentLogLevel': "jcrContentLogLevel_example", // String | 
+  'jcrContentNoStatusUpdate': true, // Boolean | 
+  'jcrContentNoVersioning': true, // Boolean | 
+  'jcrContentProtocolConnectTimeout': 3.4, // Number | 
+  'jcrContentProtocolHTTPConnectionClosed': true, // Boolean | 
+  'jcrContentProtocolHTTPExpired': "jcrContentProtocolHTTPExpired_example", // String | 
+  'jcrContentProtocolHTTPHeaders': ["null"], // [String] | 
+  'jcrContentProtocolHTTPHeadersTypeHint': "jcrContentProtocolHTTPHeadersTypeHint_example", // String | 
+  'jcrContentProtocolHTTPMethod': "jcrContentProtocolHTTPMethod_example", // String | 
+  'jcrContentProtocolHTTPSRelaxed': true, // Boolean | 
+  'jcrContentProtocolInterface': "jcrContentProtocolInterface_example", // String | 
+  'jcrContentProtocolSocketTimeout': 3.4, // Number | 
+  'jcrContentProtocolVersion': "jcrContentProtocolVersion_example", // String | 
+  'jcrContentProxyNTLMDomain': "jcrContentProxyNTLMDomain_example", // String | 
+  'jcrContentProxyNTLMHost': "jcrContentProxyNTLMHost_example", // String | 
+  'jcrContentProxyHost': "jcrContentProxyHost_example", // String | 
+  'jcrContentProxyPassword': "jcrContentProxyPassword_example", // String | 
+  'jcrContentProxyPort': 3.4, // Number | 
+  'jcrContentProxyUser': "jcrContentProxyUser_example", // String | 
+  'jcrContentQueueBatchMaxSize': 3.4, // Number | 
+  'jcrContentQueueBatchMode': "jcrContentQueueBatchMode_example", // String | 
+  'jcrContentQueueBatchWaitTime': 3.4, // Number | 
+  'jcrContentRetryDelay': "jcrContentRetryDelay_example", // String | 
+  'jcrContentReverseReplication': true, // Boolean | 
+  'jcrContentSerializationType': "jcrContentSerializationType_example", // String | 
+  'jcrContentSlingResourceType': "jcrContentSlingResourceType_example", // String | 
+  'jcrContentSsl': "jcrContentSsl_example", // String | 
+  'jcrContentTransportNTLMDomain': "jcrContentTransportNTLMDomain_example", // String | 
+  'jcrContentTransportNTLMHost': "jcrContentTransportNTLMHost_example", // String | 
+  'jcrContentTransportPassword': "jcrContentTransportPassword_example", // String | 
+  'jcrContentTransportUri': "jcrContentTransportUri_example", // String | 
+  'jcrContentTransportUser': "jcrContentTransportUser_example", // String | 
+  'jcrContentTriggerDistribute': true, // Boolean | 
+  'jcrContentTriggerModified': true, // Boolean | 
+  'jcrContentTriggerOnOffTime': true, // Boolean | 
+  'jcrContentTriggerReceive': true, // Boolean | 
+  'jcrContentTriggerSpecific': true, // Boolean | 
+  'jcrContentUserId': "jcrContentUserId_example", // String | 
+  'jcrPrimaryType': "jcrPrimaryType_example", // String | 
   'operation': "operation_example" // String | 
 };
 apiInstance.postAgent(runmode, name, opts, (error, data, response) => {
@@ -717,55 +718,56 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **runmode** | **String**|  | 
  **name** | **String**|  | 
- **jcrcontentCqdistribute** | **Boolean**|  | [optional] 
- **jcrcontentCqdistributeTypeHint** | **String**|  | [optional] 
- **jcrcontentCqname** | **String**|  | [optional] 
- **jcrcontentCqtemplate** | **String**|  | [optional] 
- **jcrcontentEnabled** | **Boolean**|  | [optional] 
- **jcrcontentJcrdescription** | **String**|  | [optional] 
- **jcrcontentJcrlastModified** | **String**|  | [optional] 
- **jcrcontentJcrlastModifiedBy** | **String**|  | [optional] 
- **jcrcontentJcrmixinTypes** | **String**|  | [optional] 
- **jcrcontentJcrtitle** | **String**|  | [optional] 
- **jcrcontentLogLevel** | **String**|  | [optional] 
- **jcrcontentNoStatusUpdate** | **Boolean**|  | [optional] 
- **jcrcontentNoVersioning** | **Boolean**|  | [optional] 
- **jcrcontentProtocolConnectTimeout** | **Number**|  | [optional] 
- **jcrcontentProtocolHTTPConnectionClosed** | **Boolean**|  | [optional] 
- **jcrcontentProtocolHTTPExpired** | **String**|  | [optional] 
- **jcrcontentProtocolHTTPHeaders** | [**[String]**](String.md)|  | [optional] 
- **jcrcontentProtocolHTTPHeadersTypeHint** | **String**|  | [optional] 
- **jcrcontentProtocolHTTPMethod** | **String**|  | [optional] 
- **jcrcontentProtocolHTTPSRelaxed** | **Boolean**|  | [optional] 
- **jcrcontentProtocolInterface** | **String**|  | [optional] 
- **jcrcontentProtocolSocketTimeout** | **Number**|  | [optional] 
- **jcrcontentProtocolVersion** | **String**|  | [optional] 
- **jcrcontentProxyNTLMDomain** | **String**|  | [optional] 
- **jcrcontentProxyNTLMHost** | **String**|  | [optional] 
- **jcrcontentProxyHost** | **String**|  | [optional] 
- **jcrcontentProxyPassword** | **String**|  | [optional] 
- **jcrcontentProxyPort** | **Number**|  | [optional] 
- **jcrcontentProxyUser** | **String**|  | [optional] 
- **jcrcontentQueueBatchMaxSize** | **Number**|  | [optional] 
- **jcrcontentQueueBatchMode** | **String**|  | [optional] 
- **jcrcontentQueueBatchWaitTime** | **Number**|  | [optional] 
- **jcrcontentRetryDelay** | **String**|  | [optional] 
- **jcrcontentReverseReplication** | **Boolean**|  | [optional] 
- **jcrcontentSerializationType** | **String**|  | [optional] 
- **jcrcontentSlingresourceType** | **String**|  | [optional] 
- **jcrcontentSsl** | **String**|  | [optional] 
- **jcrcontentTransportNTLMDomain** | **String**|  | [optional] 
- **jcrcontentTransportNTLMHost** | **String**|  | [optional] 
- **jcrcontentTransportPassword** | **String**|  | [optional] 
- **jcrcontentTransportUri** | **String**|  | [optional] 
- **jcrcontentTransportUser** | **String**|  | [optional] 
- **jcrcontentTriggerDistribute** | **Boolean**|  | [optional] 
- **jcrcontentTriggerModified** | **Boolean**|  | [optional] 
- **jcrcontentTriggerOnOffTime** | **Boolean**|  | [optional] 
- **jcrcontentTriggerReceive** | **Boolean**|  | [optional] 
- **jcrcontentTriggerSpecific** | **Boolean**|  | [optional] 
- **jcrcontentUserId** | **String**|  | [optional] 
- **jcrprimaryType** | **String**|  | [optional] 
+ **jcrContentCqDistribute** | **Boolean**|  | [optional] 
+ **jcrContentCqDistributeTypeHint** | **String**|  | [optional] 
+ **jcrContentCqName** | **String**|  | [optional] 
+ **jcrContentCqTemplate** | **String**|  | [optional] 
+ **jcrContentAliasUpdate** | **Boolean**|  | [optional] 
+ **jcrContentEnabled** | **Boolean**|  | [optional] 
+ **jcrContentJcrDescription** | **String**|  | [optional] 
+ **jcrContentJcrLastModified** | **String**|  | [optional] 
+ **jcrContentJcrLastModifiedBy** | **String**|  | [optional] 
+ **jcrContentJcrMixinTypes** | **String**|  | [optional] 
+ **jcrContentJcrTitle** | **String**|  | [optional] 
+ **jcrContentLogLevel** | **String**|  | [optional] 
+ **jcrContentNoStatusUpdate** | **Boolean**|  | [optional] 
+ **jcrContentNoVersioning** | **Boolean**|  | [optional] 
+ **jcrContentProtocolConnectTimeout** | **Number**|  | [optional] 
+ **jcrContentProtocolHTTPConnectionClosed** | **Boolean**|  | [optional] 
+ **jcrContentProtocolHTTPExpired** | **String**|  | [optional] 
+ **jcrContentProtocolHTTPHeaders** | [**[String]**](String.md)|  | [optional] 
+ **jcrContentProtocolHTTPHeadersTypeHint** | **String**|  | [optional] 
+ **jcrContentProtocolHTTPMethod** | **String**|  | [optional] 
+ **jcrContentProtocolHTTPSRelaxed** | **Boolean**|  | [optional] 
+ **jcrContentProtocolInterface** | **String**|  | [optional] 
+ **jcrContentProtocolSocketTimeout** | **Number**|  | [optional] 
+ **jcrContentProtocolVersion** | **String**|  | [optional] 
+ **jcrContentProxyNTLMDomain** | **String**|  | [optional] 
+ **jcrContentProxyNTLMHost** | **String**|  | [optional] 
+ **jcrContentProxyHost** | **String**|  | [optional] 
+ **jcrContentProxyPassword** | **String**|  | [optional] 
+ **jcrContentProxyPort** | **Number**|  | [optional] 
+ **jcrContentProxyUser** | **String**|  | [optional] 
+ **jcrContentQueueBatchMaxSize** | **Number**|  | [optional] 
+ **jcrContentQueueBatchMode** | **String**|  | [optional] 
+ **jcrContentQueueBatchWaitTime** | **Number**|  | [optional] 
+ **jcrContentRetryDelay** | **String**|  | [optional] 
+ **jcrContentReverseReplication** | **Boolean**|  | [optional] 
+ **jcrContentSerializationType** | **String**|  | [optional] 
+ **jcrContentSlingResourceType** | **String**|  | [optional] 
+ **jcrContentSsl** | **String**|  | [optional] 
+ **jcrContentTransportNTLMDomain** | **String**|  | [optional] 
+ **jcrContentTransportNTLMHost** | **String**|  | [optional] 
+ **jcrContentTransportPassword** | **String**|  | [optional] 
+ **jcrContentTransportUri** | **String**|  | [optional] 
+ **jcrContentTransportUser** | **String**|  | [optional] 
+ **jcrContentTriggerDistribute** | **Boolean**|  | [optional] 
+ **jcrContentTriggerModified** | **Boolean**|  | [optional] 
+ **jcrContentTriggerOnOffTime** | **Boolean**|  | [optional] 
+ **jcrContentTriggerReceive** | **Boolean**|  | [optional] 
+ **jcrContentTriggerSpecific** | **Boolean**|  | [optional] 
+ **jcrContentUserId** | **String**|  | [optional] 
+ **jcrPrimaryType** | **String**|  | [optional] 
  **operation** | **String**|  | [optional] 
 
 ### Return type
@@ -880,7 +882,7 @@ let intermediatePath = "intermediatePath_example"; // String |
 let opts = {
   'createUser': "createUser_example", // String | 
   'createGroup': "createGroup_example", // String | 
-  'reppassword': "reppassword_example", // String | 
+  'repPassword': "repPassword_example", // String | 
   'profileGivenName': "profileGivenName_example" // String | 
 };
 apiInstance.postAuthorizables(authorizableId, intermediatePath, opts, (error, data, response) => {
@@ -901,7 +903,7 @@ Name | Type | Description  | Notes
  **intermediatePath** | **String**|  | 
  **createUser** | **String**|  | [optional] 
  **createGroup** | **String**|  | [optional] 
- **reppassword** | **String**|  | [optional] 
+ **repPassword** | **String**|  | [optional] 
  **profileGivenName** | **String**|  | [optional] 
 
 ### Return type
@@ -1568,7 +1570,7 @@ null (empty response body)
 
 ## postPath
 
-> postPath(path, jcrprimaryType, name)
+> postPath(path, jcrPrimaryType, name)
 
 
 
@@ -1584,9 +1586,9 @@ aemAuth.password = 'YOUR PASSWORD';
 
 let apiInstance = new NodeSwaggerAem.SlingApi();
 let path = "path_example"; // String | 
-let jcrprimaryType = "jcrprimaryType_example"; // String | 
+let jcrPrimaryType = "jcrPrimaryType_example"; // String | 
 let name = "name_example"; // String | 
-apiInstance.postPath(path, jcrprimaryType, name, (error, data, response) => {
+apiInstance.postPath(path, jcrPrimaryType, name, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -1601,7 +1603,7 @@ apiInstance.postPath(path, jcrprimaryType, name, (error, data, response) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path** | **String**|  | 
- **jcrprimaryType** | **String**|  | 
+ **jcrPrimaryType** | **String**|  | 
  **name** | **String**|  | 
 
 ### Return type
@@ -1674,7 +1676,7 @@ Name | Type | Description  | Notes
 
 ## postTreeActivation
 
-> postTreeActivation(ignoredeactivated, onlymodified, path)
+> postTreeActivation(ignoredeactivated, onlymodified, path, cmd)
 
 
 
@@ -1692,7 +1694,8 @@ let apiInstance = new NodeSwaggerAem.SlingApi();
 let ignoredeactivated = true; // Boolean | 
 let onlymodified = true; // Boolean | 
 let path = "path_example"; // String | 
-apiInstance.postTreeActivation(ignoredeactivated, onlymodified, path, (error, data, response) => {
+let cmd = "'activate'"; // String | 
+apiInstance.postTreeActivation(ignoredeactivated, onlymodified, path, cmd, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -1709,6 +1712,7 @@ Name | Type | Description  | Notes
  **ignoredeactivated** | **Boolean**|  | 
  **onlymodified** | **Boolean**|  | 
  **path** | **String**|  | 
+ **cmd** | **String**|  | [default to &#39;activate&#39;]
 
 ### Return type
 

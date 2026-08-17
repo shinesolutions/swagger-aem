@@ -9,7 +9,7 @@ Feature | HTTP request | Description
 
 # **ssl_setup**
 > ssl_setup (keystore_password: STRING_32 ; keystore_password_confirm: STRING_32 ; truststore_password: STRING_32 ; truststore_password_confirm: STRING_32 ; https_hostname: STRING_32 ; https_port: STRING_32 ; privatekey_file:  detachable FILE ; certificate_file:  detachable FILE ): detachable STRING_32
-	
+
 
 
 

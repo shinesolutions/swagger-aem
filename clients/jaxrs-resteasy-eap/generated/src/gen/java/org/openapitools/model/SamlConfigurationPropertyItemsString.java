@@ -7,22 +7,17 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 import io.swagger.annotations.*;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyEapServerCodegen", date = "2021-09-03T15:26:02.321+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyEapServerCodegen", date = "2026-08-17T02:15:40.232181116Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class SamlConfigurationPropertyItemsString   {
   
-
   private String name;
-
   private Boolean optional;
-
   private Boolean isSet;
-
   private Integer type;
-
   private String value;
-
   private String description;
 
   /**
@@ -113,12 +108,12 @@ public class SamlConfigurationPropertyItemsString   {
       return false;
     }
     SamlConfigurationPropertyItemsString samlConfigurationPropertyItemsString = (SamlConfigurationPropertyItemsString) o;
-    return Objects.equals(name, samlConfigurationPropertyItemsString.name) &&
-        Objects.equals(optional, samlConfigurationPropertyItemsString.optional) &&
-        Objects.equals(isSet, samlConfigurationPropertyItemsString.isSet) &&
-        Objects.equals(type, samlConfigurationPropertyItemsString.type) &&
-        Objects.equals(value, samlConfigurationPropertyItemsString.value) &&
-        Objects.equals(description, samlConfigurationPropertyItemsString.description);
+    return Objects.equals(this.name, samlConfigurationPropertyItemsString.name) &&
+        Objects.equals(this.optional, samlConfigurationPropertyItemsString.optional) &&
+        Objects.equals(this.isSet, samlConfigurationPropertyItemsString.isSet) &&
+        Objects.equals(this.type, samlConfigurationPropertyItemsString.type) &&
+        Objects.equals(this.value, samlConfigurationPropertyItemsString.value) &&
+        Objects.equals(this.description, samlConfigurationPropertyItemsString.description);
   }
 
   @Override
@@ -146,10 +141,7 @@ public class SamlConfigurationPropertyItemsString   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

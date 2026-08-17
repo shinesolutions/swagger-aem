@@ -1,0 +1,154 @@
+"$schema"   = "http://cyaninc.com/json-schemas/tosca-lite-v1/definition-module#"
+title       = "openapi_server SamlConfigurationProperties"
+package     = openapi_server
+version     = "1.0"
+description = "Defines a SamlConfigurationProperties"
+authors     = ["F. Bar (foo@bar.baz)"]
+
+imports {
+  Root = tosca.resourceTypes.Root
+  SamlConfigurationPropertyItemsArray = openapi_server.resourceTypes.SamlConfigurationPropertyItemsArray
+  SamlConfigurationPropertyItemsBoolean = openapi_server.resourceTypes.SamlConfigurationPropertyItemsBoolean
+  SamlConfigurationPropertyItemsLong = openapi_server.resourceTypes.SamlConfigurationPropertyItemsLong
+  SamlConfigurationPropertyItemsString = openapi_server.resourceTypes.SamlConfigurationPropertyItemsString
+}
+resourceTypes {
+
+  SamlConfigurationProperties {
+    title = SamlConfigurationProperties
+    description = SamlConfigurationProperties
+    derivedFrom = Root
+    properties {
+        path {
+          type = SamlConfigurationPropertyItemsArray
+          description = ""
+          optional = false
+        }
+        service_ranking {
+          type = SamlConfigurationPropertyItemsLong
+          description = ""
+          optional = false
+        }
+        idp_url {
+          type = SamlConfigurationPropertyItemsString
+          description = ""
+          optional = false
+        }
+        idp_cert_alias {
+          type = SamlConfigurationPropertyItemsString
+          description = ""
+          optional = false
+        }
+        idp_http_redirect {
+          type = SamlConfigurationPropertyItemsBoolean
+          description = ""
+          optional = false
+        }
+        service_provider_entity_id {
+          type = SamlConfigurationPropertyItemsString
+          description = ""
+          optional = false
+        }
+        assertion_consumer_service_url {
+          type = SamlConfigurationPropertyItemsString
+          description = ""
+          optional = false
+        }
+        sp_private_key_alias {
+          type = SamlConfigurationPropertyItemsString
+          description = ""
+          optional = false
+        }
+        key_store_password {
+          type = SamlConfigurationPropertyItemsString
+          description = ""
+          optional = false
+        }
+        default_redirect_url {
+          type = SamlConfigurationPropertyItemsString
+          description = ""
+          optional = false
+        }
+        user_id_attribute {
+          type = SamlConfigurationPropertyItemsString
+          description = ""
+          optional = false
+        }
+        use_encryption {
+          type = SamlConfigurationPropertyItemsBoolean
+          description = ""
+          optional = false
+        }
+        create_user {
+          type = SamlConfigurationPropertyItemsBoolean
+          description = ""
+          optional = false
+        }
+        add_group_memberships {
+          type = SamlConfigurationPropertyItemsBoolean
+          description = ""
+          optional = false
+        }
+        group_membership_attribute {
+          type = SamlConfigurationPropertyItemsString
+          description = ""
+          optional = false
+        }
+        default_groups {
+          type = SamlConfigurationPropertyItemsArray
+          description = ""
+          optional = false
+        }
+        name_id_format {
+          type = SamlConfigurationPropertyItemsString
+          description = ""
+          optional = false
+        }
+        synchronize_attributes {
+          type = SamlConfigurationPropertyItemsArray
+          description = ""
+          optional = false
+        }
+        handle_logout {
+          type = SamlConfigurationPropertyItemsBoolean
+          description = ""
+          optional = false
+        }
+        logout_url {
+          type = SamlConfigurationPropertyItemsString
+          description = ""
+          optional = false
+        }
+        clock_tolerance {
+          type = SamlConfigurationPropertyItemsLong
+          description = ""
+          optional = false
+        }
+        digest_method {
+          type = SamlConfigurationPropertyItemsString
+          description = ""
+          optional = false
+        }
+        signature_method {
+          type = SamlConfigurationPropertyItemsString
+          description = ""
+          optional = false
+        }
+        user_intermediate_path {
+          type = SamlConfigurationPropertyItemsString
+          description = ""
+          optional = false
+        }
+    }
+  }
+}
+
+serviceTemplates {
+
+  SamlConfigurationProperties {
+    title = SamlConfigurationProperties
+    description = SamlConfigurationProperties
+    implements = openapi_server.resourceTypes.SamlConfigurationProperties
+
+  }
+}

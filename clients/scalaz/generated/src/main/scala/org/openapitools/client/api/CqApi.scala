@@ -32,7 +32,7 @@ object CqApi {
     implicit val returnTypeDecoder: EntityDecoder[String] = jsonOf[String]
 
     val path = "/libs/granite/core/content/login.html"
-    
+
     val httpMethod = Method.GET
     val contentType = `Content-Type`(MediaType.`application/json`)
     val headers = Headers(
@@ -48,10 +48,10 @@ object CqApi {
 
     } yield resp
   }
-  
+
   def postCqActions(host: String, authorizableId: String, changelog: String)(implicit authorizableIdQuery: QueryParam[String], changelogQuery: QueryParam[String]): Task[Unit] = {
     val path = "/.cqactions.html"
-    
+
     val httpMethod = Method.POST
     val contentType = `Content-Type`(MediaType.`application/json`)
     val headers = Headers(
@@ -67,7 +67,7 @@ object CqApi {
 
     } yield resp
   }
-  
+
 }
 
 class HttpServiceCqApi(service: HttpService) {
@@ -79,7 +79,7 @@ class HttpServiceCqApi(service: HttpService) {
     implicit val returnTypeDecoder: EntityDecoder[String] = jsonOf[String]
 
     val path = "/libs/granite/core/content/login.html"
-    
+
     val httpMethod = Method.GET
     val contentType = `Content-Type`(MediaType.`application/json`)
     val headers = Headers(
@@ -95,10 +95,10 @@ class HttpServiceCqApi(service: HttpService) {
 
     } yield resp
   }
-  
+
   def postCqActions(authorizableId: String, changelog: String)(implicit authorizableIdQuery: QueryParam[String], changelogQuery: QueryParam[String]): Task[Unit] = {
     val path = "/.cqactions.html"
-    
+
     val httpMethod = Method.POST
     val contentType = `Content-Type`(MediaType.`application/json`)
     val headers = Headers(
@@ -114,5 +114,5 @@ class HttpServiceCqApi(service: HttpService) {
 
     } yield resp
   }
-  
+
 }

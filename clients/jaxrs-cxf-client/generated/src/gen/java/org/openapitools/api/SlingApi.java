@@ -5,13 +5,9 @@ import java.io.File;
 import org.openapitools.model.KeystoreInfo;
 import org.openapitools.model.TruststoreInfo;
 
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.MediaType;
 import org.apache.cxf.jaxrs.ext.multipart.*;
 
 import io.swagger.annotations.Api;
@@ -129,7 +125,7 @@ public interface SlingApi  {
     @ApiOperation(value = "", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response") })
-    public void postAgent(@PathParam("runmode") String runmode, @PathParam("name") String name, @QueryParam("jcr:content/cq:distribute") Boolean jcrColonContentCqColonDistribute, @QueryParam("jcr:content/cq:distribute@TypeHint") String jcrColonContentCqColonDistributeAtTypeHint, @QueryParam("jcr:content/cq:name") String jcrColonContentCqColonName, @QueryParam("jcr:content/cq:template") String jcrColonContentCqColonTemplate, @QueryParam("jcr:content/enabled") Boolean jcrColonContentEnabled, @QueryParam("jcr:content/jcr:description") String jcrColonContentJcrColonDescription, @QueryParam("jcr:content/jcr:lastModified") String jcrColonContentJcrColonLastModified, @QueryParam("jcr:content/jcr:lastModifiedBy") String jcrColonContentJcrColonLastModifiedBy, @QueryParam("jcr:content/jcr:mixinTypes") String jcrColonContentJcrColonMixinTypes, @QueryParam("jcr:content/jcr:title") String jcrColonContentJcrColonTitle, @QueryParam("jcr:content/logLevel") String jcrColonContentLogLevel, @QueryParam("jcr:content/noStatusUpdate") Boolean jcrColonContentNoStatusUpdate, @QueryParam("jcr:content/noVersioning") Boolean jcrColonContentNoVersioning, @QueryParam("jcr:content/protocolConnectTimeout") BigDecimal jcrColonContentProtocolConnectTimeout, @QueryParam("jcr:content/protocolHTTPConnectionClosed") Boolean jcrColonContentProtocolHTTPConnectionClosed, @QueryParam("jcr:content/protocolHTTPExpired") String jcrColonContentProtocolHTTPExpired, @QueryParam("jcr:content/protocolHTTPHeaders") List<String> jcrColonContentProtocolHTTPHeaders, @QueryParam("jcr:content/protocolHTTPHeaders@TypeHint") String jcrColonContentProtocolHTTPHeadersAtTypeHint, @QueryParam("jcr:content/protocolHTTPMethod") String jcrColonContentProtocolHTTPMethod, @QueryParam("jcr:content/protocolHTTPSRelaxed") Boolean jcrColonContentProtocolHTTPSRelaxed, @QueryParam("jcr:content/protocolInterface") String jcrColonContentProtocolInterface, @QueryParam("jcr:content/protocolSocketTimeout") BigDecimal jcrColonContentProtocolSocketTimeout, @QueryParam("jcr:content/protocolVersion") String jcrColonContentProtocolVersion, @QueryParam("jcr:content/proxyNTLMDomain") String jcrColonContentProxyNTLMDomain, @QueryParam("jcr:content/proxyNTLMHost") String jcrColonContentProxyNTLMHost, @QueryParam("jcr:content/proxyHost") String jcrColonContentProxyHost, @QueryParam("jcr:content/proxyPassword") String jcrColonContentProxyPassword, @QueryParam("jcr:content/proxyPort") BigDecimal jcrColonContentProxyPort, @QueryParam("jcr:content/proxyUser") String jcrColonContentProxyUser, @QueryParam("jcr:content/queueBatchMaxSize") BigDecimal jcrColonContentQueueBatchMaxSize, @QueryParam("jcr:content/queueBatchMode") String jcrColonContentQueueBatchMode, @QueryParam("jcr:content/queueBatchWaitTime") BigDecimal jcrColonContentQueueBatchWaitTime, @QueryParam("jcr:content/retryDelay") String jcrColonContentRetryDelay, @QueryParam("jcr:content/reverseReplication") Boolean jcrColonContentReverseReplication, @QueryParam("jcr:content/serializationType") String jcrColonContentSerializationType, @QueryParam("jcr:content/sling:resourceType") String jcrColonContentSlingColonResourceType, @QueryParam("jcr:content/ssl") String jcrColonContentSsl, @QueryParam("jcr:content/transportNTLMDomain") String jcrColonContentTransportNTLMDomain, @QueryParam("jcr:content/transportNTLMHost") String jcrColonContentTransportNTLMHost, @QueryParam("jcr:content/transportPassword") String jcrColonContentTransportPassword, @QueryParam("jcr:content/transportUri") String jcrColonContentTransportUri, @QueryParam("jcr:content/transportUser") String jcrColonContentTransportUser, @QueryParam("jcr:content/triggerDistribute") Boolean jcrColonContentTriggerDistribute, @QueryParam("jcr:content/triggerModified") Boolean jcrColonContentTriggerModified, @QueryParam("jcr:content/triggerOnOffTime") Boolean jcrColonContentTriggerOnOffTime, @QueryParam("jcr:content/triggerReceive") Boolean jcrColonContentTriggerReceive, @QueryParam("jcr:content/triggerSpecific") Boolean jcrColonContentTriggerSpecific, @QueryParam("jcr:content/userId") String jcrColonContentUserId, @QueryParam("jcr:primaryType") String jcrColonPrimaryType, @QueryParam(":operation") String colonOperation);
+    public void postAgent(@PathParam("runmode") String runmode, @PathParam("name") String name, @QueryParam("jcr:content/cq:distribute") Boolean jcrContentCqDistribute, @QueryParam("jcr:content/cq:distribute@TypeHint") String jcrContentCqDistributeAtTypeHint, @QueryParam("jcr:content/cq:name") String jcrContentCqName, @QueryParam("jcr:content/cq:template") String jcrContentCqTemplate, @QueryParam("jcr:content/aliasUpdate") Boolean jcrContentAliasUpdate, @QueryParam("jcr:content/enabled") Boolean jcrContentEnabled, @QueryParam("jcr:content/jcr:description") String jcrContentJcrDescription, @QueryParam("jcr:content/jcr:lastModified") String jcrContentJcrLastModified, @QueryParam("jcr:content/jcr:lastModifiedBy") String jcrContentJcrLastModifiedBy, @QueryParam("jcr:content/jcr:mixinTypes") String jcrContentJcrMixinTypes, @QueryParam("jcr:content/jcr:title") String jcrContentJcrTitle, @QueryParam("jcr:content/logLevel") String jcrContentLogLevel, @QueryParam("jcr:content/noStatusUpdate") Boolean jcrContentNoStatusUpdate, @QueryParam("jcr:content/noVersioning") Boolean jcrContentNoVersioning, @QueryParam("jcr:content/protocolConnectTimeout") BigDecimal jcrContentProtocolConnectTimeout, @QueryParam("jcr:content/protocolHTTPConnectionClosed") Boolean jcrContentProtocolHTTPConnectionClosed, @QueryParam("jcr:content/protocolHTTPExpired") String jcrContentProtocolHTTPExpired, @QueryParam("jcr:content/protocolHTTPHeaders") List<String> jcrContentProtocolHTTPHeaders, @QueryParam("jcr:content/protocolHTTPHeaders@TypeHint") String jcrContentProtocolHTTPHeadersAtTypeHint, @QueryParam("jcr:content/protocolHTTPMethod") String jcrContentProtocolHTTPMethod, @QueryParam("jcr:content/protocolHTTPSRelaxed") Boolean jcrContentProtocolHTTPSRelaxed, @QueryParam("jcr:content/protocolInterface") String jcrContentProtocolInterface, @QueryParam("jcr:content/protocolSocketTimeout") BigDecimal jcrContentProtocolSocketTimeout, @QueryParam("jcr:content/protocolVersion") String jcrContentProtocolVersion, @QueryParam("jcr:content/proxyNTLMDomain") String jcrContentProxyNTLMDomain, @QueryParam("jcr:content/proxyNTLMHost") String jcrContentProxyNTLMHost, @QueryParam("jcr:content/proxyHost") String jcrContentProxyHost, @QueryParam("jcr:content/proxyPassword") String jcrContentProxyPassword, @QueryParam("jcr:content/proxyPort") BigDecimal jcrContentProxyPort, @QueryParam("jcr:content/proxyUser") String jcrContentProxyUser, @QueryParam("jcr:content/queueBatchMaxSize") BigDecimal jcrContentQueueBatchMaxSize, @QueryParam("jcr:content/queueBatchMode") String jcrContentQueueBatchMode, @QueryParam("jcr:content/queueBatchWaitTime") BigDecimal jcrContentQueueBatchWaitTime, @QueryParam("jcr:content/retryDelay") String jcrContentRetryDelay, @QueryParam("jcr:content/reverseReplication") Boolean jcrContentReverseReplication, @QueryParam("jcr:content/serializationType") String jcrContentSerializationType, @QueryParam("jcr:content/sling:resourceType") String jcrContentSlingResourceType, @QueryParam("jcr:content/ssl") String jcrContentSsl, @QueryParam("jcr:content/transportNTLMDomain") String jcrContentTransportNTLMDomain, @QueryParam("jcr:content/transportNTLMHost") String jcrContentTransportNTLMHost, @QueryParam("jcr:content/transportPassword") String jcrContentTransportPassword, @QueryParam("jcr:content/transportUri") String jcrContentTransportUri, @QueryParam("jcr:content/transportUser") String jcrContentTransportUser, @QueryParam("jcr:content/triggerDistribute") Boolean jcrContentTriggerDistribute, @QueryParam("jcr:content/triggerModified") Boolean jcrContentTriggerModified, @QueryParam("jcr:content/triggerOnOffTime") Boolean jcrContentTriggerOnOffTime, @QueryParam("jcr:content/triggerReceive") Boolean jcrContentTriggerReceive, @QueryParam("jcr:content/triggerSpecific") Boolean jcrContentTriggerSpecific, @QueryParam("jcr:content/userId") String jcrContentUserId, @QueryParam("jcr:primaryType") String jcrPrimaryType, @QueryParam(":operation") String operation);
 
     @POST
     @Path("/{intermediatePath}/{authorizableId}.ks.html")
@@ -139,7 +135,7 @@ public interface SlingApi  {
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Retrieved Authorizable Keystore info", response = KeystoreInfo.class),
         @ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public KeystoreInfo postAuthorizableKeystore(@PathParam("intermediatePath") String intermediatePath, @PathParam("authorizableId") String authorizableId, @QueryParam(":operation") String colonOperation, @QueryParam("currentPassword") String currentPassword, @QueryParam("newPassword") String newPassword, @QueryParam("rePassword") String rePassword, @QueryParam("keyPassword") String keyPassword, @QueryParam("keyStorePass") String keyStorePass, @QueryParam("alias") String alias, @QueryParam("newAlias") String newAlias, @QueryParam("removeAlias") String removeAlias,  @Multipart(value = "cert-chain" , required = false) Attachment certChainDetail,  @Multipart(value = "pk" , required = false) Attachment pkDetail,  @Multipart(value = "keyStore" , required = false) Attachment keyStoreDetail);
+    public KeystoreInfo postAuthorizableKeystore(@PathParam("intermediatePath") String intermediatePath, @PathParam("authorizableId") String authorizableId, @QueryParam(":operation") String operation, @QueryParam("currentPassword") String currentPassword, @QueryParam("newPassword") String newPassword, @QueryParam("rePassword") String rePassword, @QueryParam("keyPassword") String keyPassword, @QueryParam("keyStorePass") String keyStorePass, @QueryParam("alias") String alias, @QueryParam("newAlias") String newAlias, @QueryParam("removeAlias") String removeAlias,  @Multipart(value = "cert-chain" , required = false) Attachment certChainDetail,  @Multipart(value = "pk" , required = false) Attachment pkDetail,  @Multipart(value = "keyStore" , required = false) Attachment keyStoreDetail);
 
     @POST
     @Path("/libs/granite/security/post/authorizables")
@@ -147,7 +143,7 @@ public interface SlingApi  {
     @ApiOperation(value = "", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public String postAuthorizables(@QueryParam("authorizableId") String authorizableId, @QueryParam("intermediatePath") String intermediatePath, @QueryParam("createUser") String createUser, @QueryParam("createGroup") String createGroup, @QueryParam("rep:password") String repColonPassword, @QueryParam("profile/givenName") String profileGivenName);
+    public String postAuthorizables(@QueryParam("authorizableId") String authorizableId, @QueryParam("intermediatePath") String intermediatePath, @QueryParam("createUser") String createUser, @QueryParam("createGroup") String createGroup, @QueryParam("rep:password") String repPassword, @QueryParam("profile/givenName") String profileGivenName);
 
     @POST
     @Path("/apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config")
@@ -204,7 +200,7 @@ public interface SlingApi  {
     @ApiOperation(value = "", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response") })
-    public void postNode(@PathParam("path") String path, @PathParam("name") String name, @QueryParam(":operation") String colonOperation, @QueryParam("deleteAuthorizable") String deleteAuthorizable,  @Multipart(value = "file" , required = false) Attachment fileDetail);
+    public void postNode(@PathParam("path") String path, @PathParam("name") String name, @QueryParam(":operation") String operation, @QueryParam("deleteAuthorizable") String deleteAuthorizable,  @Multipart(value = "file" , required = false) Attachment _fileDetail);
 
     @POST
     @Path("/{path}/{name}.rw.html")
@@ -218,7 +214,7 @@ public interface SlingApi  {
     @ApiOperation(value = "", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response") })
-    public void postPath(@PathParam("path") String path, @QueryParam("jcr:primaryType") String jcrColonPrimaryType, @QueryParam(":name") String colonName);
+    public void postPath(@PathParam("path") String path, @QueryParam("jcr:primaryType") String jcrPrimaryType, @QueryParam(":name") String name);
 
     @POST
     @Path("/bin/querybuilder.json")
@@ -229,11 +225,11 @@ public interface SlingApi  {
     public String postQuery(@QueryParam("path") String path, @QueryParam("p.limit") BigDecimal pLimit, @QueryParam("1_property") String _1property, @QueryParam("1_property.value") String _1propertyValue);
 
     @POST
-    @Path("/etc/replication/treeactivation.html")
+    @Path("/libs/replication/treeactivation.html")
     @ApiOperation(value = "", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response") })
-    public void postTreeActivation(@QueryParam("ignoredeactivated") Boolean ignoredeactivated, @QueryParam("onlymodified") Boolean onlymodified, @QueryParam("path") String path);
+    public void postTreeActivation(@QueryParam("ignoredeactivated") Boolean ignoredeactivated, @QueryParam("onlymodified") Boolean onlymodified, @QueryParam("path") String path, @QueryParam("cmd") @DefaultValue("activate")String cmd);
 
     @POST
     @Path("/libs/granite/security/post/truststore")
@@ -242,7 +238,7 @@ public interface SlingApi  {
     @ApiOperation(value = "", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public String postTruststore(@QueryParam(":operation") String colonOperation, @QueryParam("newPassword") String newPassword, @QueryParam("rePassword") String rePassword, @QueryParam("keyStoreType") String keyStoreType, @QueryParam("removeAlias") String removeAlias,  @Multipart(value = "certificate" , required = false) Attachment certificateDetail);
+    public String postTruststore(@QueryParam(":operation") String operation, @QueryParam("newPassword") String newPassword, @QueryParam("rePassword") String rePassword, @QueryParam("keyStoreType") String keyStoreType, @QueryParam("removeAlias") String removeAlias,  @Multipart(value = "certificate" , required = false) Attachment certificateDetail);
 
     @POST
     @Path("/etc/truststore")
@@ -253,4 +249,3 @@ public interface SlingApi  {
         @ApiResponse(code = 200, message = "Default response", response = String.class) })
     public String postTruststorePKCS12( @Multipart(value = "truststore.p12" , required = false) Attachment truststoreP12Detail);
 }
-

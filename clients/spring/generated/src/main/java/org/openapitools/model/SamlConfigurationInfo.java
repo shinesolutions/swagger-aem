@@ -1,39 +1,48 @@
 package org.openapitools.model;
 
+import java.net.URI;
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import org.openapitools.model.SamlConfigurationProperties;
+import org.springframework.lang.Nullable;
 import org.openapitools.jackson.nullable.JsonNullable;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+import java.time.OffsetDateTime;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+
+import java.util.*;
+import jakarta.annotation.Generated;
 
 /**
  * SamlConfigurationInfo
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-09-03T15:28:35.636+10:00[Australia/Melbourne]")
-public class SamlConfigurationInfo   {
-  @JsonProperty("pid")
-  private String pid;
 
-  @JsonProperty("title")
-  private String title;
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-08-17T02:18:23.350215970Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+public class SamlConfigurationInfo {
 
-  @JsonProperty("description")
-  private String description;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable String pid;
 
-  @JsonProperty("bundle_location")
-  private String bundleLocation;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable String title;
 
-  @JsonProperty("service_location")
-  private String serviceLocation;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable String description;
 
-  @JsonProperty("properties")
-  private SamlConfigurationProperties properties;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable String bundleLocation;
 
-  public SamlConfigurationInfo pid(String pid) {
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable String serviceLocation;
+
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable SamlConfigurationProperties properties;
+
+  public SamlConfigurationInfo pid(@Nullable String pid) {
     this.pid = pid;
     return this;
   }
@@ -41,19 +50,20 @@ public class SamlConfigurationInfo   {
   /**
    * Persistent Identity (PID)
    * @return pid
-  */
-  @ApiModelProperty(value = "Persistent Identity (PID)")
-
-
-  public String getPid() {
+   */
+  
+  @Schema(name = "pid", description = "Persistent Identity (PID)", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("pid")
+  public @Nullable String getPid() {
     return pid;
   }
 
-  public void setPid(String pid) {
+  @JsonProperty("pid")
+  public void setPid(@Nullable String pid) {
     this.pid = pid;
   }
 
-  public SamlConfigurationInfo title(String title) {
+  public SamlConfigurationInfo title(@Nullable String title) {
     this.title = title;
     return this;
   }
@@ -61,19 +71,20 @@ public class SamlConfigurationInfo   {
   /**
    * Title
    * @return title
-  */
-  @ApiModelProperty(value = "Title")
-
-
-  public String getTitle() {
+   */
+  
+  @Schema(name = "title", description = "Title", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("title")
+  public @Nullable String getTitle() {
     return title;
   }
 
-  public void setTitle(String title) {
+  @JsonProperty("title")
+  public void setTitle(@Nullable String title) {
     this.title = title;
   }
 
-  public SamlConfigurationInfo description(String description) {
+  public SamlConfigurationInfo description(@Nullable String description) {
     this.description = description;
     return this;
   }
@@ -81,19 +92,20 @@ public class SamlConfigurationInfo   {
   /**
    * Title
    * @return description
-  */
-  @ApiModelProperty(value = "Title")
-
-
-  public String getDescription() {
+   */
+  
+  @Schema(name = "description", description = "Title", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("description")
+  public @Nullable String getDescription() {
     return description;
   }
 
-  public void setDescription(String description) {
+  @JsonProperty("description")
+  public void setDescription(@Nullable String description) {
     this.description = description;
   }
 
-  public SamlConfigurationInfo bundleLocation(String bundleLocation) {
+  public SamlConfigurationInfo bundleLocation(@Nullable String bundleLocation) {
     this.bundleLocation = bundleLocation;
     return this;
   }
@@ -101,19 +113,20 @@ public class SamlConfigurationInfo   {
   /**
    * needed for configuration binding
    * @return bundleLocation
-  */
-  @ApiModelProperty(value = "needed for configuration binding")
-
-
-  public String getBundleLocation() {
+   */
+  
+  @Schema(name = "bundle_location", description = "needed for configuration binding", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("bundle_location")
+  public @Nullable String getBundleLocation() {
     return bundleLocation;
   }
 
-  public void setBundleLocation(String bundleLocation) {
+  @JsonProperty("bundle_location")
+  public void setBundleLocation(@Nullable String bundleLocation) {
     this.bundleLocation = bundleLocation;
   }
 
-  public SamlConfigurationInfo serviceLocation(String serviceLocation) {
+  public SamlConfigurationInfo serviceLocation(@Nullable String serviceLocation) {
     this.serviceLocation = serviceLocation;
     return this;
   }
@@ -121,19 +134,20 @@ public class SamlConfigurationInfo   {
   /**
    * needed for configuraiton binding
    * @return serviceLocation
-  */
-  @ApiModelProperty(value = "needed for configuraiton binding")
-
-
-  public String getServiceLocation() {
+   */
+  
+  @Schema(name = "service_location", description = "needed for configuraiton binding", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("service_location")
+  public @Nullable String getServiceLocation() {
     return serviceLocation;
   }
 
-  public void setServiceLocation(String serviceLocation) {
+  @JsonProperty("service_location")
+  public void setServiceLocation(@Nullable String serviceLocation) {
     this.serviceLocation = serviceLocation;
   }
 
-  public SamlConfigurationInfo properties(SamlConfigurationProperties properties) {
+  public SamlConfigurationInfo properties(@Nullable SamlConfigurationProperties properties) {
     this.properties = properties;
     return this;
   }
@@ -141,19 +155,18 @@ public class SamlConfigurationInfo   {
   /**
    * Get properties
    * @return properties
-  */
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public SamlConfigurationProperties getProperties() {
+   */
+  @Valid 
+  @Schema(name = "properties", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("properties")
+  public @Nullable SamlConfigurationProperties getProperties() {
     return properties;
   }
 
-  public void setProperties(SamlConfigurationProperties properties) {
+  @JsonProperty("properties")
+  public void setProperties(@Nullable SamlConfigurationProperties properties) {
     this.properties = properties;
   }
-
 
   @Override
   public boolean equals(Object o) {
@@ -181,7 +194,6 @@ public class SamlConfigurationInfo   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class SamlConfigurationInfo {\n");
-    
     sb.append("    pid: ").append(toIndentedString(pid)).append("\n");
     sb.append("    title: ").append(toIndentedString(title)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
@@ -196,11 +208,8 @@ public class SamlConfigurationInfo   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+  private String toIndentedString(@Nullable Object o) {
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

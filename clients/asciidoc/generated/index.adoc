@@ -1,0 +1,6403 @@
+= Adobe Experience Manager (AEM) API
+opensource@shinesolutions.com
+3.7.1-pre.0
+:toc: left
+:numbered:
+:toclevels: 4
+:source-highlighter: highlightjs
+:keywords: openapi, rest, Adobe Experience Manager (AEM) API
+:specDir: 
+:snippetDir: 
+:generator-template: v1 2019-12-20
+:info-url: https://github.com/shinesolutions
+:app-name: Adobe Experience Manager (AEM) API
+
+[abstract]
+.Abstract
+Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
+
+
+// markup not found, no include::{specDir}intro.adoc[opts=optional]
+
+
+== Access
+
+* *HTTP Basic* Authentication _aemAuth_
+
+
+
+
+
+
+== Endpoints
+
+
+[.Console]
+=== Console
+
+
+[.getAemProductInfo]
+==== getAemProductInfo
+
+`GET /system/console/status-productinfo.json`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}system/console/status-productinfo.json/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+
+<<List>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+| List[<<string>>] 
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}system/console/status-productinfo.json/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}system/console/status-productinfo.json/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :system/console/status-productinfo.json/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}system/console/status-productinfo.json/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.getBundleInfo]
+==== getBundleInfo
+
+`GET /system/console/bundles/{name}.json`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}system/console/bundles/\{name\}.json/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| name
+|  
+| X
+| null
+| 
+
+|===
+
+
+
+
+
+
+===== Return Type
+
+<<BundleInfo>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 200
+| Retrieved bundle info
+|  <<BundleInfo>>
+
+
+| 0
+| Default response
+|  <<String>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}system/console/bundles/\{name\}.json/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}system/console/bundles/\{name\}.json/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :system/console/bundles/{name}.json/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}system/console/bundles/\{name\}.json/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.getConfigMgr]
+==== getConfigMgr
+
+`GET /system/console/configMgr`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}system/console/configMgr/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+
+<<String>>
+
+
+===== Content Type
+
+* text/xml
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 200
+| OK
+|  <<String>>
+
+
+| 5XX
+| Unexpected error.
+|  <<>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}system/console/configMgr/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}system/console/configMgr/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :system/console/configMgr/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}system/console/configMgr/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.postBundle]
+==== postBundle
+
+`POST /system/console/bundles/{name}`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}system/console/bundles/\{name\}/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| name
+|  
+| X
+| null
+| 
+
+|===
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| action
+|  
+| X
+| null
+| 
+
+|===
+
+
+===== Return Type
+
+
+
+-
+
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}system/console/bundles/\{name\}/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}system/console/bundles/\{name\}/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :system/console/bundles/{name}/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}system/console/bundles/\{name\}/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.postJmxRepository]
+==== postJmxRepository
+
+`POST /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action}`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/\{action\}/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| action
+|  
+| X
+| null
+| 
+
+|===
+
+
+
+
+
+
+===== Return Type
+
+
+
+-
+
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/\{action\}/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/\{action\}/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action}/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/\{action\}/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.postSamlConfiguration]
+==== postSamlConfiguration
+
+`POST /system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| post
+|  
+| -
+| null
+| 
+
+| apply
+|  
+| -
+| null
+| 
+
+| delete
+|  
+| -
+| null
+| 
+
+| action
+|  
+| -
+| null
+| 
+
+| $location
+|  
+| -
+| null
+| 
+
+| path
+|  <<String>>
+| -
+| null
+| 
+
+| service.ranking
+|  
+| -
+| null
+| 
+
+| idpUrl
+|  
+| -
+| null
+| 
+
+| idpCertAlias
+|  
+| -
+| null
+| 
+
+| idpHttpRedirect
+|  
+| -
+| null
+| 
+
+| serviceProviderEntityId
+|  
+| -
+| null
+| 
+
+| assertionConsumerServiceURL
+|  
+| -
+| null
+| 
+
+| spPrivateKeyAlias
+|  
+| -
+| null
+| 
+
+| keyStorePassword
+|  
+| -
+| null
+| 
+
+| defaultRedirectUrl
+|  
+| -
+| null
+| 
+
+| userIDAttribute
+|  
+| -
+| null
+| 
+
+| useEncryption
+|  
+| -
+| null
+| 
+
+| createUser
+|  
+| -
+| null
+| 
+
+| addGroupMemberships
+|  
+| -
+| null
+| 
+
+| groupMembershipAttribute
+|  
+| -
+| null
+| 
+
+| defaultGroups
+|  <<String>>
+| -
+| null
+| 
+
+| nameIdFormat
+|  
+| -
+| null
+| 
+
+| synchronizeAttributes
+|  <<String>>
+| -
+| null
+| 
+
+| handleLogout
+|  
+| -
+| null
+| 
+
+| logoutUrl
+|  
+| -
+| null
+| 
+
+| clockTolerance
+|  
+| -
+| null
+| 
+
+| digestMethod
+|  
+| -
+| null
+| 
+
+| signatureMethod
+|  
+| -
+| null
+| 
+
+| userIntermediatePath
+|  
+| -
+| null
+| 
+
+| propertylist
+|  <<String>>
+| -
+| null
+| 
+
+|===
+
+
+===== Return Type
+
+<<SamlConfigurationInfo>>
+
+
+===== Content Type
+
+* text/plain
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 200
+| Retrieved AEM SAML Configuration
+|  <<SamlConfigurationInfo>>
+
+
+| 302
+| Default response
+|  <<String>>
+
+
+| 0
+| Default response
+|  <<String>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.Cq]
+=== Cq
+
+
+[.getLoginPage]
+==== getLoginPage
+
+`GET /libs/granite/core/content/login.html`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}libs/granite/core/content/login.html/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+
+<<String>>
+
+
+===== Content Type
+
+* text/html
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<String>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}libs/granite/core/content/login.html/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}libs/granite/core/content/login.html/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :libs/granite/core/content/login.html/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}libs/granite/core/content/login.html/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.postCqActions]
+==== postCqActions
+
+`POST /.cqactions.html`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}.cqactions.html/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| authorizableId
+|  
+| X
+| null
+| 
+
+| changelog
+|  
+| X
+| null
+| 
+
+|===
+
+
+===== Return Type
+
+
+
+-
+
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}.cqactions.html/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}.cqactions.html/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :.cqactions.html/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}.cqactions.html/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.Crx]
+=== Crx
+
+
+[.getCrxdeStatus]
+==== getCrxdeStatus
+
+`GET /crx/server/crx.default/jcr:root/.1.json`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}crx/server/crx.default/jcr:root/.1.json/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+
+<<String>>
+
+
+===== Content Type
+
+* plain/text
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 200
+| CRXDE is enabled
+|  <<String>>
+
+
+| 404
+| CRXDE is disabled
+|  <<String>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}crx/server/crx.default/jcr:root/.1.json/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}crx/server/crx.default/jcr:root/.1.json/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :crx/server/crx.default/jcr:root/.1.json/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}crx/server/crx.default/jcr:root/.1.json/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.getInstallStatus]
+==== getInstallStatus
+
+`GET /crx/packmgr/installstatus.jsp`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}crx/packmgr/installstatus.jsp/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+<<InstallStatus>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 200
+| Retrieved CRX package manager install status
+|  <<InstallStatus>>
+
+
+| 0
+| Default response
+|  <<String>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}crx/packmgr/installstatus.jsp/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}crx/packmgr/installstatus.jsp/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :crx/packmgr/installstatus.jsp/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}crx/packmgr/installstatus.jsp/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.getPackageManagerServlet]
+==== getPackageManagerServlet
+
+`GET /crx/packmgr/service/script.html`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}crx/packmgr/service/script.html/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+
+
+-
+
+===== Content Type
+
+* text/html
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 404
+| Package Manager Servlet is disabled
+|  <<String>>
+
+
+| 405
+| Package Manager Servlet is active
+|  <<String>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}crx/packmgr/service/script.html/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}crx/packmgr/service/script.html/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :crx/packmgr/service/script.html/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}crx/packmgr/service/script.html/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.postPackageService]
+==== postPackageService
+
+`POST /crx/packmgr/service.jsp`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}crx/packmgr/service.jsp/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| cmd
+|  
+| X
+| null
+| 
+
+|===
+
+
+===== Return Type
+
+
+<<String>>
+
+
+===== Content Type
+
+* text/xml
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<String>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}crx/packmgr/service.jsp/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}crx/packmgr/service.jsp/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :crx/packmgr/service.jsp/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}crx/packmgr/service.jsp/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.postPackageServiceJson]
+==== postPackageServiceJson
+
+`POST /crx/packmgr/service/.json/{path}`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}crx/packmgr/service/.json/\{path\}/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| path
+|  
+| X
+| null
+| 
+
+|===
+
+
+====== Form Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| package
+|  <<file>>
+| -
+| null
+| 
+
+|===
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| cmd
+|  
+| X
+| null
+| 
+
+| groupName
+|  
+| -
+| null
+| 
+
+| packageName
+|  
+| -
+| null
+| 
+
+| packageVersion
+|  
+| -
+| null
+| 
+
+| _charset_
+|  
+| -
+| null
+| 
+
+| force
+|  
+| -
+| null
+| 
+
+| recursive
+|  
+| -
+| null
+| 
+
+|===
+
+
+===== Return Type
+
+
+<<String>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<String>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}crx/packmgr/service/.json/\{path\}/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}crx/packmgr/service/.json/\{path\}/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :crx/packmgr/service/.json/{path}/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}crx/packmgr/service/.json/\{path\}/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.postPackageUpdate]
+==== postPackageUpdate
+
+`POST /crx/packmgr/update.jsp`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}crx/packmgr/update.jsp/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| groupName
+|  
+| X
+| null
+| 
+
+| packageName
+|  
+| X
+| null
+| 
+
+| version
+|  
+| X
+| null
+| 
+
+| path
+|  
+| X
+| null
+| 
+
+| filter
+|  
+| -
+| null
+| 
+
+| _charset_
+|  
+| -
+| null
+| 
+
+|===
+
+
+===== Return Type
+
+
+<<String>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<String>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}crx/packmgr/update.jsp/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}crx/packmgr/update.jsp/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :crx/packmgr/update.jsp/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}crx/packmgr/update.jsp/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.postSetPassword]
+==== postSetPassword
+
+`POST /crx/explorer/ui/setpassword.jsp`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}crx/explorer/ui/setpassword.jsp/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| old
+|  
+| X
+| null
+| 
+
+| plain
+|  
+| X
+| null
+| 
+
+| verify
+|  
+| X
+| null
+| 
+
+|===
+
+
+===== Return Type
+
+
+<<String>>
+
+
+===== Content Type
+
+* text/plain
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<String>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}crx/explorer/ui/setpassword.jsp/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}crx/explorer/ui/setpassword.jsp/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :crx/explorer/ui/setpassword.jsp/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}crx/explorer/ui/setpassword.jsp/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.Custom]
+=== Custom
+
+
+[.getAemHealthCheck]
+==== getAemHealthCheck
+
+`GET /system/health`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}system/health/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| tags
+|  
+| -
+| null
+| 
+
+| combineTagsOr
+|  
+| -
+| null
+| 
+
+|===
+
+
+===== Return Type
+
+
+<<String>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<String>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}system/health/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}system/health/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :system/health/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}system/health/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.postConfigAemHealthCheckServlet]
+==== postConfigAemHealthCheckServlet
+
+`POST /apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| bundles.ignored
+|  <<String>>
+| -
+| null
+| 
+
+| bundles.ignored@TypeHint
+|  
+| -
+| null
+| 
+
+|===
+
+
+===== Return Type
+
+
+
+-
+
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.postConfigAemPasswordReset]
+==== postConfigAemPasswordReset
+
+`POST /apps/system/config/com.shinesolutions.aem.passwordreset.Activator`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}apps/system/config/com.shinesolutions.aem.passwordreset.Activator/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| pwdreset.authorizables
+|  <<String>>
+| -
+| null
+| 
+
+| pwdreset.authorizables@TypeHint
+|  
+| -
+| null
+| 
+
+|===
+
+
+===== Return Type
+
+
+
+-
+
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}apps/system/config/com.shinesolutions.aem.passwordreset.Activator/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}apps/system/config/com.shinesolutions.aem.passwordreset.Activator/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :apps/system/config/com.shinesolutions.aem.passwordreset.Activator/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}apps/system/config/com.shinesolutions.aem.passwordreset.Activator/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.Granite]
+=== Granite
+
+
+[.sslSetup]
+==== sslSetup
+
+`POST /libs/granite/security/post/sslSetup.html`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}libs/granite/security/post/sslSetup.html/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+====== Form Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| privatekeyFile
+|  <<file>>
+| -
+| null
+| 
+
+| certificateFile
+|  <<file>>
+| -
+| null
+| 
+
+|===
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| keystorePassword
+|  
+| X
+| null
+| 
+
+| keystorePasswordConfirm
+|  
+| X
+| null
+| 
+
+| truststorePassword
+|  
+| X
+| null
+| 
+
+| truststorePasswordConfirm
+|  
+| X
+| null
+| 
+
+| httpsHostname
+|  
+| X
+| null
+| 
+
+| httpsPort
+|  
+| X
+| null
+| 
+
+|===
+
+
+===== Return Type
+
+
+<<String>>
+
+
+===== Content Type
+
+* text/plain
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<String>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}libs/granite/security/post/sslSetup.html/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}libs/granite/security/post/sslSetup.html/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :libs/granite/security/post/sslSetup.html/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}libs/granite/security/post/sslSetup.html/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.Sling]
+=== Sling
+
+
+[.deleteAgent]
+==== deleteAgent
+
+`DELETE /etc/replication/agents.{runmode}/{name}`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}etc/replication/agents.\{runmode\}/\{name\}/DELETE/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| runmode
+|  
+| X
+| null
+| 
+
+| name
+|  
+| X
+| null
+| 
+
+|===
+
+
+
+
+
+
+===== Return Type
+
+
+
+-
+
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}etc/replication/agents.\{runmode\}/\{name\}/DELETE/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}etc/replication/agents.\{runmode\}/\{name\}/DELETE/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :etc/replication/agents.{runmode}/{name}/DELETE/DELETE.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}etc/replication/agents.\{runmode\}/\{name\}/DELETE/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.deleteNode]
+==== deleteNode
+
+`DELETE /{path}/{name}`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}\{path\}/\{name\}/DELETE/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| path
+|  
+| X
+| null
+| 
+
+| name
+|  
+| X
+| null
+| 
+
+|===
+
+
+
+
+
+
+===== Return Type
+
+
+
+-
+
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}\{path\}/\{name\}/DELETE/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}\{path\}/\{name\}/DELETE/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :{path}/{name}/DELETE/DELETE.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}\{path\}/\{name\}/DELETE/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.getAgent]
+==== getAgent
+
+`GET /etc/replication/agents.{runmode}/{name}`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}etc/replication/agents.\{runmode\}/\{name\}/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| runmode
+|  
+| X
+| null
+| 
+
+| name
+|  
+| X
+| null
+| 
+
+|===
+
+
+
+
+
+
+===== Return Type
+
+
+
+-
+
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}etc/replication/agents.\{runmode\}/\{name\}/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}etc/replication/agents.\{runmode\}/\{name\}/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :etc/replication/agents.{runmode}/{name}/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}etc/replication/agents.\{runmode\}/\{name\}/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.getAgents]
+==== getAgents
+
+`GET /etc/replication/agents.{runmode}.-1.json`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}etc/replication/agents.\{runmode\}.-1.json/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| runmode
+|  
+| X
+| null
+| 
+
+|===
+
+
+
+
+
+
+===== Return Type
+
+
+<<String>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<String>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}etc/replication/agents.\{runmode\}.-1.json/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}etc/replication/agents.\{runmode\}.-1.json/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :etc/replication/agents.{runmode}.-1.json/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}etc/replication/agents.\{runmode\}.-1.json/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.getAuthorizableKeystore]
+==== getAuthorizableKeystore
+
+`GET /{intermediatePath}/{authorizableId}.ks.json`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}\{intermediatePath\}/\{authorizableId\}.ks.json/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| intermediatePath
+|  
+| X
+| null
+| 
+
+| authorizableId
+|  
+| X
+| null
+| 
+
+|===
+
+
+
+
+
+
+===== Return Type
+
+<<KeystoreInfo>>
+
+
+===== Content Type
+
+* text/plain
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 200
+| Retrieved Authorizable Keystore info
+|  <<KeystoreInfo>>
+
+
+| 0
+| Default response
+|  <<String>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}\{intermediatePath\}/\{authorizableId\}.ks.json/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}\{intermediatePath\}/\{authorizableId\}.ks.json/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :{intermediatePath}/{authorizableId}.ks.json/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}\{intermediatePath\}/\{authorizableId\}.ks.json/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.getKeystore]
+==== getKeystore
+
+`GET /{intermediatePath}/{authorizableId}/keystore/store.p12`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}\{intermediatePath\}/\{authorizableId\}/keystore/store.p12/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| intermediatePath
+|  
+| X
+| null
+| 
+
+| authorizableId
+|  
+| X
+| null
+| 
+
+|===
+
+
+
+
+
+
+===== Return Type
+
+
+<<File>>
+
+
+===== Content Type
+
+* application/octet-stream
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<File>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}\{intermediatePath\}/\{authorizableId\}/keystore/store.p12/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}\{intermediatePath\}/\{authorizableId\}/keystore/store.p12/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :{intermediatePath}/{authorizableId}/keystore/store.p12/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}\{intermediatePath\}/\{authorizableId\}/keystore/store.p12/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.getNode]
+==== getNode
+
+`GET /{path}/{name}`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}\{path\}/\{name\}/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| path
+|  
+| X
+| null
+| 
+
+| name
+|  
+| X
+| null
+| 
+
+|===
+
+
+
+
+
+
+===== Return Type
+
+
+
+-
+
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}\{path\}/\{name\}/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}\{path\}/\{name\}/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :{path}/{name}/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}\{path\}/\{name\}/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.getPackage]
+==== getPackage
+
+`GET /etc/packages/{group}/{name}-{version}.zip`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}etc/packages/\{group\}/\{name\}-\{version\}.zip/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| group
+|  
+| X
+| null
+| 
+
+| name
+|  
+| X
+| null
+| 
+
+| version
+|  
+| X
+| null
+| 
+
+|===
+
+
+
+
+
+
+===== Return Type
+
+
+<<File>>
+
+
+===== Content Type
+
+* application/octet-stream
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<File>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}etc/packages/\{group\}/\{name\}-\{version\}.zip/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}etc/packages/\{group\}/\{name\}-\{version\}.zip/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :etc/packages/{group}/{name}-{version}.zip/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}etc/packages/\{group\}/\{name\}-\{version\}.zip/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.getPackageFilter]
+==== getPackageFilter
+
+`GET /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}etc/packages/\{group\}/\{name\}-\{version\}.zip/jcr:content/vlt:definition/filter.tidy.2.json/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| group
+|  
+| X
+| null
+| 
+
+| name
+|  
+| X
+| null
+| 
+
+| version
+|  
+| X
+| null
+| 
+
+|===
+
+
+
+
+
+
+===== Return Type
+
+
+<<String>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<String>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}etc/packages/\{group\}/\{name\}-\{version\}.zip/jcr:content/vlt:definition/filter.tidy.2.json/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}etc/packages/\{group\}/\{name\}-\{version\}.zip/jcr:content/vlt:definition/filter.tidy.2.json/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}etc/packages/\{group\}/\{name\}-\{version\}.zip/jcr:content/vlt:definition/filter.tidy.2.json/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.getQuery]
+==== getQuery
+
+`GET /bin/querybuilder.json`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}bin/querybuilder.json/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| path
+|  
+| X
+| null
+| 
+
+| p.limit
+|  
+| X
+| null
+| 
+
+| 1_property
+|  
+| X
+| null
+| 
+
+| 1_property.value
+|  
+| X
+| null
+| 
+
+|===
+
+
+===== Return Type
+
+
+<<String>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<String>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}bin/querybuilder.json/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}bin/querybuilder.json/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :bin/querybuilder.json/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}bin/querybuilder.json/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.getTruststore]
+==== getTruststore
+
+`GET /etc/truststore/truststore.p12`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}etc/truststore/truststore.p12/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+
+<<File>>
+
+
+===== Content Type
+
+* application/octet-stream
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<File>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}etc/truststore/truststore.p12/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}etc/truststore/truststore.p12/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :etc/truststore/truststore.p12/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}etc/truststore/truststore.p12/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.getTruststoreInfo]
+==== getTruststoreInfo
+
+`GET /libs/granite/security/truststore.json`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}libs/granite/security/truststore.json/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+<<TruststoreInfo>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 200
+| Retrieved AEM Truststore info
+|  <<TruststoreInfo>>
+
+
+| 0
+| Default response
+|  <<String>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}libs/granite/security/truststore.json/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}libs/granite/security/truststore.json/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :libs/granite/security/truststore.json/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}libs/granite/security/truststore.json/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.postAgent]
+==== postAgent
+
+`POST /etc/replication/agents.{runmode}/{name}`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}etc/replication/agents.\{runmode\}/\{name\}/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| runmode
+|  
+| X
+| null
+| 
+
+| name
+|  
+| X
+| null
+| 
+
+|===
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| jcr:content/cq:distribute
+|  
+| -
+| null
+| 
+
+| jcr:content/cq:distribute@TypeHint
+|  
+| -
+| null
+| 
+
+| jcr:content/cq:name
+|  
+| -
+| null
+| 
+
+| jcr:content/cq:template
+|  
+| -
+| null
+| 
+
+| jcr:content/aliasUpdate
+|  
+| -
+| null
+| 
+
+| jcr:content/enabled
+|  
+| -
+| null
+| 
+
+| jcr:content/jcr:description
+|  
+| -
+| null
+| 
+
+| jcr:content/jcr:lastModified
+|  
+| -
+| null
+| 
+
+| jcr:content/jcr:lastModifiedBy
+|  
+| -
+| null
+| 
+
+| jcr:content/jcr:mixinTypes
+|  
+| -
+| null
+| 
+
+| jcr:content/jcr:title
+|  
+| -
+| null
+| 
+
+| jcr:content/logLevel
+|  
+| -
+| null
+| 
+
+| jcr:content/noStatusUpdate
+|  
+| -
+| null
+| 
+
+| jcr:content/noVersioning
+|  
+| -
+| null
+| 
+
+| jcr:content/protocolConnectTimeout
+|  
+| -
+| null
+| 
+
+| jcr:content/protocolHTTPConnectionClosed
+|  
+| -
+| null
+| 
+
+| jcr:content/protocolHTTPExpired
+|  
+| -
+| null
+| 
+
+| jcr:content/protocolHTTPHeaders
+|  <<String>>
+| -
+| null
+| 
+
+| jcr:content/protocolHTTPHeaders@TypeHint
+|  
+| -
+| null
+| 
+
+| jcr:content/protocolHTTPMethod
+|  
+| -
+| null
+| 
+
+| jcr:content/protocolHTTPSRelaxed
+|  
+| -
+| null
+| 
+
+| jcr:content/protocolInterface
+|  
+| -
+| null
+| 
+
+| jcr:content/protocolSocketTimeout
+|  
+| -
+| null
+| 
+
+| jcr:content/protocolVersion
+|  
+| -
+| null
+| 
+
+| jcr:content/proxyNTLMDomain
+|  
+| -
+| null
+| 
+
+| jcr:content/proxyNTLMHost
+|  
+| -
+| null
+| 
+
+| jcr:content/proxyHost
+|  
+| -
+| null
+| 
+
+| jcr:content/proxyPassword
+|  
+| -
+| null
+| 
+
+| jcr:content/proxyPort
+|  
+| -
+| null
+| 
+
+| jcr:content/proxyUser
+|  
+| -
+| null
+| 
+
+| jcr:content/queueBatchMaxSize
+|  
+| -
+| null
+| 
+
+| jcr:content/queueBatchMode
+|  
+| -
+| null
+| 
+
+| jcr:content/queueBatchWaitTime
+|  
+| -
+| null
+| 
+
+| jcr:content/retryDelay
+|  
+| -
+| null
+| 
+
+| jcr:content/reverseReplication
+|  
+| -
+| null
+| 
+
+| jcr:content/serializationType
+|  
+| -
+| null
+| 
+
+| jcr:content/sling:resourceType
+|  
+| -
+| null
+| 
+
+| jcr:content/ssl
+|  
+| -
+| null
+| 
+
+| jcr:content/transportNTLMDomain
+|  
+| -
+| null
+| 
+
+| jcr:content/transportNTLMHost
+|  
+| -
+| null
+| 
+
+| jcr:content/transportPassword
+|  
+| -
+| null
+| 
+
+| jcr:content/transportUri
+|  
+| -
+| null
+| 
+
+| jcr:content/transportUser
+|  
+| -
+| null
+| 
+
+| jcr:content/triggerDistribute
+|  
+| -
+| null
+| 
+
+| jcr:content/triggerModified
+|  
+| -
+| null
+| 
+
+| jcr:content/triggerOnOffTime
+|  
+| -
+| null
+| 
+
+| jcr:content/triggerReceive
+|  
+| -
+| null
+| 
+
+| jcr:content/triggerSpecific
+|  
+| -
+| null
+| 
+
+| jcr:content/userId
+|  
+| -
+| null
+| 
+
+| jcr:primaryType
+|  
+| -
+| null
+| 
+
+| :operation
+|  
+| -
+| null
+| 
+
+|===
+
+
+===== Return Type
+
+
+
+-
+
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}etc/replication/agents.\{runmode\}/\{name\}/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}etc/replication/agents.\{runmode\}/\{name\}/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :etc/replication/agents.{runmode}/{name}/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}etc/replication/agents.\{runmode\}/\{name\}/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.postAuthorizableKeystore]
+==== postAuthorizableKeystore
+
+`POST /{intermediatePath}/{authorizableId}.ks.html`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}\{intermediatePath\}/\{authorizableId\}.ks.html/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| intermediatePath
+|  
+| X
+| null
+| 
+
+| authorizableId
+|  
+| X
+| null
+| 
+
+|===
+
+
+====== Form Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| cert-chain
+|  <<file>>
+| -
+| null
+| 
+
+| pk
+|  <<file>>
+| -
+| null
+| 
+
+| keyStore
+|  <<file>>
+| -
+| null
+| 
+
+|===
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| :operation
+|  
+| -
+| null
+| 
+
+| currentPassword
+|  
+| -
+| null
+| 
+
+| newPassword
+|  
+| -
+| null
+| 
+
+| rePassword
+|  
+| -
+| null
+| 
+
+| keyPassword
+|  
+| -
+| null
+| 
+
+| keyStorePass
+|  
+| -
+| null
+| 
+
+| alias
+|  
+| -
+| null
+| 
+
+| newAlias
+|  
+| -
+| null
+| 
+
+| removeAlias
+|  
+| -
+| null
+| 
+
+|===
+
+
+===== Return Type
+
+<<KeystoreInfo>>
+
+
+===== Content Type
+
+* text/plain
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 200
+| Retrieved Authorizable Keystore info
+|  <<KeystoreInfo>>
+
+
+| 0
+| Default response
+|  <<String>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}\{intermediatePath\}/\{authorizableId\}.ks.html/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}\{intermediatePath\}/\{authorizableId\}.ks.html/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :{intermediatePath}/{authorizableId}.ks.html/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}\{intermediatePath\}/\{authorizableId\}.ks.html/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.postAuthorizables]
+==== postAuthorizables
+
+`POST /libs/granite/security/post/authorizables`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}libs/granite/security/post/authorizables/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| authorizableId
+|  
+| X
+| null
+| 
+
+| intermediatePath
+|  
+| X
+| null
+| 
+
+| createUser
+|  
+| -
+| null
+| 
+
+| createGroup
+|  
+| -
+| null
+| 
+
+| rep:password
+|  
+| -
+| null
+| 
+
+| profile/givenName
+|  
+| -
+| null
+| 
+
+|===
+
+
+===== Return Type
+
+
+<<String>>
+
+
+===== Content Type
+
+* text/html
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<String>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}libs/granite/security/post/authorizables/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}libs/granite/security/post/authorizables/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :libs/granite/security/post/authorizables/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}libs/granite/security/post/authorizables/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.postConfigAdobeGraniteSamlAuthenticationHandler]
+==== postConfigAdobeGraniteSamlAuthenticationHandler
+
+`POST /apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| keyStorePassword
+|  
+| -
+| null
+| 
+
+| keyStorePassword@TypeHint
+|  
+| -
+| null
+| 
+
+| service.ranking
+|  
+| -
+| null
+| 
+
+| service.ranking@TypeHint
+|  
+| -
+| null
+| 
+
+| idpHttpRedirect
+|  
+| -
+| null
+| 
+
+| idpHttpRedirect@TypeHint
+|  
+| -
+| null
+| 
+
+| createUser
+|  
+| -
+| null
+| 
+
+| createUser@TypeHint
+|  
+| -
+| null
+| 
+
+| defaultRedirectUrl
+|  
+| -
+| null
+| 
+
+| defaultRedirectUrl@TypeHint
+|  
+| -
+| null
+| 
+
+| userIDAttribute
+|  
+| -
+| null
+| 
+
+| userIDAttribute@TypeHint
+|  
+| -
+| null
+| 
+
+| defaultGroups
+|  <<String>>
+| -
+| null
+| 
+
+| defaultGroups@TypeHint
+|  
+| -
+| null
+| 
+
+| idpCertAlias
+|  
+| -
+| null
+| 
+
+| idpCertAlias@TypeHint
+|  
+| -
+| null
+| 
+
+| addGroupMemberships
+|  
+| -
+| null
+| 
+
+| addGroupMemberships@TypeHint
+|  
+| -
+| null
+| 
+
+| path
+|  <<String>>
+| -
+| null
+| 
+
+| path@TypeHint
+|  
+| -
+| null
+| 
+
+| synchronizeAttributes
+|  <<String>>
+| -
+| null
+| 
+
+| synchronizeAttributes@TypeHint
+|  
+| -
+| null
+| 
+
+| clockTolerance
+|  
+| -
+| null
+| 
+
+| clockTolerance@TypeHint
+|  
+| -
+| null
+| 
+
+| groupMembershipAttribute
+|  
+| -
+| null
+| 
+
+| groupMembershipAttribute@TypeHint
+|  
+| -
+| null
+| 
+
+| idpUrl
+|  
+| -
+| null
+| 
+
+| idpUrl@TypeHint
+|  
+| -
+| null
+| 
+
+| logoutUrl
+|  
+| -
+| null
+| 
+
+| logoutUrl@TypeHint
+|  
+| -
+| null
+| 
+
+| serviceProviderEntityId
+|  
+| -
+| null
+| 
+
+| serviceProviderEntityId@TypeHint
+|  
+| -
+| null
+| 
+
+| assertionConsumerServiceURL
+|  
+| -
+| null
+| 
+
+| assertionConsumerServiceURL@TypeHint
+|  
+| -
+| null
+| 
+
+| handleLogout
+|  
+| -
+| null
+| 
+
+| handleLogout@TypeHint
+|  
+| -
+| null
+| 
+
+| spPrivateKeyAlias
+|  
+| -
+| null
+| 
+
+| spPrivateKeyAlias@TypeHint
+|  
+| -
+| null
+| 
+
+| useEncryption
+|  
+| -
+| null
+| 
+
+| useEncryption@TypeHint
+|  
+| -
+| null
+| 
+
+| nameIdFormat
+|  
+| -
+| null
+| 
+
+| nameIdFormat@TypeHint
+|  
+| -
+| null
+| 
+
+| digestMethod
+|  
+| -
+| null
+| 
+
+| digestMethod@TypeHint
+|  
+| -
+| null
+| 
+
+| signatureMethod
+|  
+| -
+| null
+| 
+
+| signatureMethod@TypeHint
+|  
+| -
+| null
+| 
+
+| userIntermediatePath
+|  
+| -
+| null
+| 
+
+| userIntermediatePath@TypeHint
+|  
+| -
+| null
+| 
+
+|===
+
+
+===== Return Type
+
+
+
+-
+
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.postConfigApacheFelixJettyBasedHttpService]
+==== postConfigApacheFelixJettyBasedHttpService
+
+`POST /apps/system/config/org.apache.felix.http`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}apps/system/config/org.apache.felix.http/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| org.apache.felix.https.nio
+|  
+| -
+| null
+| 
+
+| org.apache.felix.https.nio@TypeHint
+|  
+| -
+| null
+| 
+
+| org.apache.felix.https.keystore
+|  
+| -
+| null
+| 
+
+| org.apache.felix.https.keystore@TypeHint
+|  
+| -
+| null
+| 
+
+| org.apache.felix.https.keystore.password
+|  
+| -
+| null
+| 
+
+| org.apache.felix.https.keystore.password@TypeHint
+|  
+| -
+| null
+| 
+
+| org.apache.felix.https.keystore.key
+|  
+| -
+| null
+| 
+
+| org.apache.felix.https.keystore.key@TypeHint
+|  
+| -
+| null
+| 
+
+| org.apache.felix.https.keystore.key.password
+|  
+| -
+| null
+| 
+
+| org.apache.felix.https.keystore.key.password@TypeHint
+|  
+| -
+| null
+| 
+
+| org.apache.felix.https.truststore
+|  
+| -
+| null
+| 
+
+| org.apache.felix.https.truststore@TypeHint
+|  
+| -
+| null
+| 
+
+| org.apache.felix.https.truststore.password
+|  
+| -
+| null
+| 
+
+| org.apache.felix.https.truststore.password@TypeHint
+|  
+| -
+| null
+| 
+
+| org.apache.felix.https.clientcertificate
+|  
+| -
+| null
+| 
+
+| org.apache.felix.https.clientcertificate@TypeHint
+|  
+| -
+| null
+| 
+
+| org.apache.felix.https.enable
+|  
+| -
+| null
+| 
+
+| org.apache.felix.https.enable@TypeHint
+|  
+| -
+| null
+| 
+
+| org.osgi.service.http.port.secure
+|  
+| -
+| null
+| 
+
+| org.osgi.service.http.port.secure@TypeHint
+|  
+| -
+| null
+| 
+
+|===
+
+
+===== Return Type
+
+
+
+-
+
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}apps/system/config/org.apache.felix.http/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}apps/system/config/org.apache.felix.http/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :apps/system/config/org.apache.felix.http/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}apps/system/config/org.apache.felix.http/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.postConfigApacheHttpComponentsProxyConfiguration]
+==== postConfigApacheHttpComponentsProxyConfiguration
+
+`POST /apps/system/config/org.apache.http.proxyconfigurator.config`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}apps/system/config/org.apache.http.proxyconfigurator.config/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| proxy.host
+|  
+| -
+| null
+| 
+
+| proxy.host@TypeHint
+|  
+| -
+| null
+| 
+
+| proxy.port
+|  
+| -
+| null
+| 
+
+| proxy.port@TypeHint
+|  
+| -
+| null
+| 
+
+| proxy.exceptions
+|  <<String>>
+| -
+| null
+| 
+
+| proxy.exceptions@TypeHint
+|  
+| -
+| null
+| 
+
+| proxy.enabled
+|  
+| -
+| null
+| 
+
+| proxy.enabled@TypeHint
+|  
+| -
+| null
+| 
+
+| proxy.user
+|  
+| -
+| null
+| 
+
+| proxy.user@TypeHint
+|  
+| -
+| null
+| 
+
+| proxy.password
+|  
+| -
+| null
+| 
+
+| proxy.password@TypeHint
+|  
+| -
+| null
+| 
+
+|===
+
+
+===== Return Type
+
+
+
+-
+
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}apps/system/config/org.apache.http.proxyconfigurator.config/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}apps/system/config/org.apache.http.proxyconfigurator.config/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :apps/system/config/org.apache.http.proxyconfigurator.config/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}apps/system/config/org.apache.http.proxyconfigurator.config/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.postConfigApacheSlingDavExServlet]
+==== postConfigApacheSlingDavExServlet
+
+`POST /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| alias
+|  
+| -
+| null
+| 
+
+| alias@TypeHint
+|  
+| -
+| null
+| 
+
+| dav.create-absolute-uri
+|  
+| -
+| null
+| 
+
+| dav.create-absolute-uri@TypeHint
+|  
+| -
+| null
+| 
+
+|===
+
+
+===== Return Type
+
+
+
+-
+
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.postConfigApacheSlingGetServlet]
+==== postConfigApacheSlingGetServlet
+
+`POST /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| json.maximumresults
+|  
+| -
+| null
+| 
+
+| json.maximumresults@TypeHint
+|  
+| -
+| null
+| 
+
+| enable.html
+|  
+| -
+| null
+| 
+
+| enable.html@TypeHint
+|  
+| -
+| null
+| 
+
+| enable.txt
+|  
+| -
+| null
+| 
+
+| enable.txt@TypeHint
+|  
+| -
+| null
+| 
+
+| enable.xml
+|  
+| -
+| null
+| 
+
+| enable.xml@TypeHint
+|  
+| -
+| null
+| 
+
+|===
+
+
+===== Return Type
+
+
+
+-
+
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.postConfigApacheSlingReferrerFilter]
+==== postConfigApacheSlingReferrerFilter
+
+`POST /apps/system/config/org.apache.sling.security.impl.ReferrerFilter`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}apps/system/config/org.apache.sling.security.impl.ReferrerFilter/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| allow.empty
+|  
+| -
+| null
+| 
+
+| allow.empty@TypeHint
+|  
+| -
+| null
+| 
+
+| allow.hosts
+|  
+| -
+| null
+| 
+
+| allow.hosts@TypeHint
+|  
+| -
+| null
+| 
+
+| allow.hosts.regexp
+|  
+| -
+| null
+| 
+
+| allow.hosts.regexp@TypeHint
+|  
+| -
+| null
+| 
+
+| filter.methods
+|  
+| -
+| null
+| 
+
+| filter.methods@TypeHint
+|  
+| -
+| null
+| 
+
+|===
+
+
+===== Return Type
+
+
+
+-
+
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}apps/system/config/org.apache.sling.security.impl.ReferrerFilter/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}apps/system/config/org.apache.sling.security.impl.ReferrerFilter/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :apps/system/config/org.apache.sling.security.impl.ReferrerFilter/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}apps/system/config/org.apache.sling.security.impl.ReferrerFilter/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.postConfigProperty]
+==== postConfigProperty
+
+`POST /apps/system/config/{configNodeName}`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}apps/system/config/\{configNodeName\}/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| configNodeName
+|  
+| X
+| null
+| 
+
+|===
+
+
+
+
+
+
+===== Return Type
+
+
+
+-
+
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}apps/system/config/\{configNodeName\}/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}apps/system/config/\{configNodeName\}/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :apps/system/config/{configNodeName}/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}apps/system/config/\{configNodeName\}/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.postNode]
+==== postNode
+
+`POST /{path}/{name}`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}\{path\}/\{name\}/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| path
+|  
+| X
+| null
+| 
+
+| name
+|  
+| X
+| null
+| 
+
+|===
+
+
+====== Form Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| file
+|  <<file>>
+| -
+| null
+| 
+
+|===
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| :operation
+|  
+| -
+| null
+| 
+
+| deleteAuthorizable
+|  
+| -
+| null
+| 
+
+|===
+
+
+===== Return Type
+
+
+
+-
+
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}\{path\}/\{name\}/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}\{path\}/\{name\}/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :{path}/{name}/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}\{path\}/\{name\}/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.postNodeRw]
+==== postNodeRw
+
+`POST /{path}/{name}.rw.html`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}\{path\}/\{name\}.rw.html/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| path
+|  
+| X
+| null
+| 
+
+| name
+|  
+| X
+| null
+| 
+
+|===
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| addMembers
+|  
+| -
+| null
+| 
+
+|===
+
+
+===== Return Type
+
+
+
+-
+
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}\{path\}/\{name\}.rw.html/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}\{path\}/\{name\}.rw.html/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :{path}/{name}.rw.html/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}\{path\}/\{name\}.rw.html/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.postPath]
+==== postPath
+
+`POST /{path}/`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}\{path\}/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| path
+|  
+| X
+| null
+| 
+
+|===
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| jcr:primaryType
+|  
+| X
+| null
+| 
+
+| :name
+|  
+| X
+| null
+| 
+
+|===
+
+
+===== Return Type
+
+
+
+-
+
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}\{path\}/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}\{path\}/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :{path}/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}\{path\}/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.postQuery]
+==== postQuery
+
+`POST /bin/querybuilder.json`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}bin/querybuilder.json/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| path
+|  
+| X
+| null
+| 
+
+| p.limit
+|  
+| X
+| null
+| 
+
+| 1_property
+|  
+| X
+| null
+| 
+
+| 1_property.value
+|  
+| X
+| null
+| 
+
+|===
+
+
+===== Return Type
+
+
+<<String>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<String>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}bin/querybuilder.json/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}bin/querybuilder.json/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :bin/querybuilder.json/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}bin/querybuilder.json/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.postTreeActivation]
+==== postTreeActivation
+
+`POST /libs/replication/treeactivation.html`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}libs/replication/treeactivation.html/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| ignoredeactivated
+|  
+| X
+| null
+| 
+
+| onlymodified
+|  
+| X
+| null
+| 
+
+| path
+|  
+| X
+| null
+| 
+
+| cmd
+|  
+| X
+| activate
+| 
+
+|===
+
+
+===== Return Type
+
+
+
+-
+
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}libs/replication/treeactivation.html/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}libs/replication/treeactivation.html/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :libs/replication/treeactivation.html/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}libs/replication/treeactivation.html/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.postTruststore]
+==== postTruststore
+
+`POST /libs/granite/security/post/truststore`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}libs/granite/security/post/truststore/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+====== Form Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| certificate
+|  <<file>>
+| -
+| null
+| 
+
+|===
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| :operation
+|  
+| -
+| null
+| 
+
+| newPassword
+|  
+| -
+| null
+| 
+
+| rePassword
+|  
+| -
+| null
+| 
+
+| keyStoreType
+|  
+| -
+| null
+| 
+
+| removeAlias
+|  
+| -
+| null
+| 
+
+|===
+
+
+===== Return Type
+
+
+<<String>>
+
+
+===== Content Type
+
+* text/plain
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<String>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}libs/granite/security/post/truststore/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}libs/granite/security/post/truststore/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :libs/granite/security/post/truststore/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}libs/granite/security/post/truststore/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.postTruststorePKCS12]
+==== postTruststorePKCS12
+
+`POST /etc/truststore`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}etc/truststore/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+====== Form Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| truststore.p12
+|  <<file>>
+| -
+| null
+| 
+
+|===
+
+
+
+
+===== Return Type
+
+
+<<String>>
+
+
+===== Content Type
+
+* text/plain
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| Default response
+|  <<String>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}etc/truststore/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}etc/truststore/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :etc/truststore/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}etc/truststore/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[#models]
+== Models
+
+
+[#BundleData]
+=== _BundleData_ 
+
+
+
+
+[.fields-BundleData]
+[cols="2,1,1,2,4,1"]
+|===
+| Field Name| Required| Nullable | Type| Description | Format
+
+| id
+| 
+| 
+|   Integer  
+| Bundle ID
+|     
+
+| name
+| 
+| 
+|   String  
+| Bundle name
+|     
+
+| fragment
+| 
+| 
+|   Boolean  
+| Is bundle a fragment
+|     
+
+| stateRaw
+| 
+| 
+|   Integer  
+| Numeric raw bundle state value
+|     
+
+| state
+| 
+| 
+|   String  
+| Bundle state value
+|     
+
+| version
+| 
+| 
+|   String  
+| Bundle version
+|     
+
+| symbolicName
+| 
+| 
+|   String  
+| Bundle symbolic name
+|     
+
+| category
+| 
+| 
+|   String  
+| Bundle category
+|     
+
+| props
+| 
+| 
+|   List   of <<BundleDataProp>>
+| 
+|     
+
+|===
+
+
+
+[#BundleDataProp]
+=== _BundleDataProp_ 
+
+
+
+
+[.fields-BundleDataProp]
+[cols="2,1,1,2,4,1"]
+|===
+| Field Name| Required| Nullable | Type| Description | Format
+
+| key
+| 
+| 
+|   String  
+| Bundle data key
+|     
+
+| value
+| 
+| 
+|   String  
+| Bundle data value
+|     
+
+|===
+
+
+
+[#BundleInfo]
+=== _BundleInfo_ 
+
+
+
+
+[.fields-BundleInfo]
+[cols="2,1,1,2,4,1"]
+|===
+| Field Name| Required| Nullable | Type| Description | Format
+
+| status
+| 
+| 
+|   String  
+| Status description of all bundles
+|     
+
+| s
+| 
+| 
+|   List   of <<integer>>
+| 
+|     
+
+| data
+| 
+| 
+|   List   of <<BundleData>>
+| 
+|     
+
+|===
+
+
+
+[#InstallStatus]
+=== _InstallStatus_ 
+
+
+
+
+[.fields-InstallStatus]
+[cols="2,1,1,2,4,1"]
+|===
+| Field Name| Required| Nullable | Type| Description | Format
+
+| status
+| 
+| 
+| <<InstallStatus_status>>    
+| 
+|     
+
+|===
+
+
+
+[#InstallStatusStatus]
+=== _InstallStatusStatus_ 
+
+
+
+
+[.fields-InstallStatusStatus]
+[cols="2,1,1,2,4,1"]
+|===
+| Field Name| Required| Nullable | Type| Description | Format
+
+| finished
+| 
+| 
+|   Boolean  
+| 
+|     
+
+| itemCount
+| 
+| 
+|   Integer  
+| 
+|     
+
+|===
+
+
+
+[#KeystoreChainItems]
+=== _KeystoreChainItems_ 
+
+
+
+
+[.fields-KeystoreChainItems]
+[cols="2,1,1,2,4,1"]
+|===
+| Field Name| Required| Nullable | Type| Description | Format
+
+| subject
+| 
+| 
+|   String  
+| e.g. \&quot;CN&#x3D;localhost\&quot;
+|     
+
+| issuer
+| 
+| 
+|   String  
+| e.g. \&quot;CN&#x3D;Admin\&quot;
+|     
+
+| notBefore
+| 
+| 
+|   String  
+| e.g. \&quot;Sun Jul 01 12:00:00 AEST 2018\&quot;
+|     
+
+| notAfter
+| 
+| 
+|   String  
+| e.g. \&quot;Sun Jun 30 23:59:50 AEST 2019\&quot;
+|     
+
+| serialNumber
+| 
+| 
+|   Integer  
+| 18165099476682912368
+|     
+
+|===
+
+
+
+[#KeystoreInfo]
+=== _KeystoreInfo_ 
+
+
+
+
+[.fields-KeystoreInfo]
+[cols="2,1,1,2,4,1"]
+|===
+| Field Name| Required| Nullable | Type| Description | Format
+
+| aliases
+| 
+| 
+|   List   of <<KeystoreItems>>
+| 
+|     
+
+| exists
+| 
+| 
+|   Boolean  
+| False if truststore don&#39;t exist
+|     
+
+|===
+
+
+
+[#KeystoreItems]
+=== _KeystoreItems_ 
+
+
+
+
+[.fields-KeystoreItems]
+[cols="2,1,1,2,4,1"]
+|===
+| Field Name| Required| Nullable | Type| Description | Format
+
+| alias
+| 
+| 
+|   String  
+| Keystore alias name
+|     
+
+| entryType
+| 
+| 
+|   String  
+| e.g. \&quot;privateKey\&quot;
+|     
+
+| algorithm
+| 
+| 
+|   String  
+| e.g. \&quot;RSA\&quot;
+|     
+
+| format
+| 
+| 
+|   String  
+| e.g. \&quot;PKCS#8\&quot;
+|     
+
+| chain
+| 
+| 
+|   List   of <<KeystoreChainItems>>
+| 
+|     
+
+|===
+
+
+
+[#SamlConfigurationInfo]
+=== _SamlConfigurationInfo_ 
+
+
+
+
+[.fields-SamlConfigurationInfo]
+[cols="2,1,1,2,4,1"]
+|===
+| Field Name| Required| Nullable | Type| Description | Format
+
+| pid
+| 
+| 
+|   String  
+| Persistent Identity (PID)
+|     
+
+| title
+| 
+| 
+|   String  
+| Title
+|     
+
+| description
+| 
+| 
+|   String  
+| Title
+|     
+
+| bundle_location
+| 
+| 
+|   String  
+| needed for configuration binding
+|     
+
+| service_location
+| 
+| 
+|   String  
+| needed for configuraiton binding
+|     
+
+| properties
+| 
+| 
+| <<SamlConfigurationProperties>>    
+| 
+|     
+
+|===
+
+
+
+[#SamlConfigurationProperties]
+=== _SamlConfigurationProperties_ 
+
+
+
+
+[.fields-SamlConfigurationProperties]
+[cols="2,1,1,2,4,1"]
+|===
+| Field Name| Required| Nullable | Type| Description | Format
+
+| path
+| 
+| 
+| <<SamlConfigurationPropertyItemsArray>>    
+| 
+|     
+
+| service.ranking
+| 
+| 
+| <<SamlConfigurationPropertyItemsLong>>    
+| 
+|     
+
+| idpUrl
+| 
+| 
+| <<SamlConfigurationPropertyItemsString>>    
+| 
+|     
+
+| idpCertAlias
+| 
+| 
+| <<SamlConfigurationPropertyItemsString>>    
+| 
+|     
+
+| idpHttpRedirect
+| 
+| 
+| <<SamlConfigurationPropertyItemsBoolean>>    
+| 
+|     
+
+| serviceProviderEntityId
+| 
+| 
+| <<SamlConfigurationPropertyItemsString>>    
+| 
+|     
+
+| assertionConsumerServiceURL
+| 
+| 
+| <<SamlConfigurationPropertyItemsString>>    
+| 
+|     
+
+| spPrivateKeyAlias
+| 
+| 
+| <<SamlConfigurationPropertyItemsString>>    
+| 
+|     
+
+| keyStorePassword
+| 
+| 
+| <<SamlConfigurationPropertyItemsString>>    
+| 
+|     
+
+| defaultRedirectUrl
+| 
+| 
+| <<SamlConfigurationPropertyItemsString>>    
+| 
+|     
+
+| userIDAttribute
+| 
+| 
+| <<SamlConfigurationPropertyItemsString>>    
+| 
+|     
+
+| useEncryption
+| 
+| 
+| <<SamlConfigurationPropertyItemsBoolean>>    
+| 
+|     
+
+| createUser
+| 
+| 
+| <<SamlConfigurationPropertyItemsBoolean>>    
+| 
+|     
+
+| addGroupMemberships
+| 
+| 
+| <<SamlConfigurationPropertyItemsBoolean>>    
+| 
+|     
+
+| groupMembershipAttribute
+| 
+| 
+| <<SamlConfigurationPropertyItemsString>>    
+| 
+|     
+
+| defaultGroups
+| 
+| 
+| <<SamlConfigurationPropertyItemsArray>>    
+| 
+|     
+
+| nameIdFormat
+| 
+| 
+| <<SamlConfigurationPropertyItemsString>>    
+| 
+|     
+
+| synchronizeAttributes
+| 
+| 
+| <<SamlConfigurationPropertyItemsArray>>    
+| 
+|     
+
+| handleLogout
+| 
+| 
+| <<SamlConfigurationPropertyItemsBoolean>>    
+| 
+|     
+
+| logoutUrl
+| 
+| 
+| <<SamlConfigurationPropertyItemsString>>    
+| 
+|     
+
+| clockTolerance
+| 
+| 
+| <<SamlConfigurationPropertyItemsLong>>    
+| 
+|     
+
+| digestMethod
+| 
+| 
+| <<SamlConfigurationPropertyItemsString>>    
+| 
+|     
+
+| signatureMethod
+| 
+| 
+| <<SamlConfigurationPropertyItemsString>>    
+| 
+|     
+
+| userIntermediatePath
+| 
+| 
+| <<SamlConfigurationPropertyItemsString>>    
+| 
+|     
+
+|===
+
+
+
+[#SamlConfigurationPropertyItemsArray]
+=== _SamlConfigurationPropertyItemsArray_ 
+
+
+
+
+[.fields-SamlConfigurationPropertyItemsArray]
+[cols="2,1,1,2,4,1"]
+|===
+| Field Name| Required| Nullable | Type| Description | Format
+
+| name
+| 
+| 
+|   String  
+| property name
+|     
+
+| optional
+| 
+| 
+|   Boolean  
+| True if optional
+|     
+
+| is_set
+| 
+| 
+|   Boolean  
+| True if property is set
+|     
+
+| type
+| 
+| 
+|   Integer  
+| Property type, 1&#x3D;String, 3&#x3D;long, 11&#x3D;boolean, 12&#x3D;Password
+|     
+
+| values
+| 
+| 
+|   List   of <<string>>
+| Property value
+|     
+
+| description
+| 
+| 
+|   String  
+| Property description
+|     
+
+|===
+
+
+
+[#SamlConfigurationPropertyItemsBoolean]
+=== _SamlConfigurationPropertyItemsBoolean_ 
+
+
+
+
+[.fields-SamlConfigurationPropertyItemsBoolean]
+[cols="2,1,1,2,4,1"]
+|===
+| Field Name| Required| Nullable | Type| Description | Format
+
+| name
+| 
+| 
+|   String  
+| property name
+|     
+
+| optional
+| 
+| 
+|   Boolean  
+| True if optional
+|     
+
+| is_set
+| 
+| 
+|   Boolean  
+| True if property is set
+|     
+
+| type
+| 
+| 
+|   Integer  
+| Property type, 1&#x3D;String, 3&#x3D;long, 11&#x3D;boolean, 12&#x3D;Password
+|     
+
+| value
+| 
+| 
+|   Boolean  
+| Property value
+|     
+
+| description
+| 
+| 
+|   String  
+| Property description
+|     
+
+|===
+
+
+
+[#SamlConfigurationPropertyItemsLong]
+=== _SamlConfigurationPropertyItemsLong_ 
+
+
+
+
+[.fields-SamlConfigurationPropertyItemsLong]
+[cols="2,1,1,2,4,1"]
+|===
+| Field Name| Required| Nullable | Type| Description | Format
+
+| name
+| 
+| 
+|   String  
+| property name
+|     
+
+| optional
+| 
+| 
+|   Boolean  
+| True if optional
+|     
+
+| is_set
+| 
+| 
+|   Boolean  
+| True if property is set
+|     
+
+| type
+| 
+| 
+|   Integer  
+| Property type, 1&#x3D;String, 3&#x3D;long, 11&#x3D;boolean, 12&#x3D;Password
+|     
+
+| value
+| 
+| 
+|   Integer  
+| Property value
+|     
+
+| description
+| 
+| 
+|   String  
+| Property description
+|     
+
+|===
+
+
+
+[#SamlConfigurationPropertyItemsString]
+=== _SamlConfigurationPropertyItemsString_ 
+
+
+
+
+[.fields-SamlConfigurationPropertyItemsString]
+[cols="2,1,1,2,4,1"]
+|===
+| Field Name| Required| Nullable | Type| Description | Format
+
+| name
+| 
+| 
+|   String  
+| property name
+|     
+
+| optional
+| 
+| 
+|   Boolean  
+| True if optional
+|     
+
+| is_set
+| 
+| 
+|   Boolean  
+| True if property is set
+|     
+
+| type
+| 
+| 
+|   Integer  
+| Property type, 1&#x3D;String, 3&#x3D;long, 11&#x3D;boolean, 12&#x3D;Password
+|     
+
+| value
+| 
+| 
+|   String  
+| Property value
+|     
+
+| description
+| 
+| 
+|   String  
+| Property description
+|     
+
+|===
+
+
+
+[#TruststoreInfo]
+=== _TruststoreInfo_ 
+
+
+
+
+[.fields-TruststoreInfo]
+[cols="2,1,1,2,4,1"]
+|===
+| Field Name| Required| Nullable | Type| Description | Format
+
+| aliases
+| 
+| 
+|   List   of <<TruststoreItems>>
+| 
+|     
+
+| exists
+| 
+| 
+|   Boolean  
+| False if truststore don&#39;t exist
+|     
+
+|===
+
+
+
+[#TruststoreItems]
+=== _TruststoreItems_ 
+
+
+
+
+[.fields-TruststoreItems]
+[cols="2,1,1,2,4,1"]
+|===
+| Field Name| Required| Nullable | Type| Description | Format
+
+| alias
+| 
+| 
+|   String  
+| Truststore alias name
+|     
+
+| entryType
+| 
+| 
+|   String  
+| 
+|     
+
+| subject
+| 
+| 
+|   String  
+| e.g. \&quot;CN&#x3D;localhost\&quot;
+|     
+
+| issuer
+| 
+| 
+|   String  
+| e.g. \&quot;CN&#x3D;Admin\&quot;
+|     
+
+| notBefore
+| 
+| 
+|   String  
+| e.g. \&quot;Sun Jul 01 12:00:00 AEST 2018\&quot;
+|     
+
+| notAfter
+| 
+| 
+|   String  
+| e.g. \&quot;Sun Jun 30 23:59:50 AEST 2019\&quot;
+|     
+
+| serialNumber
+| 
+| 
+|   Integer  
+| 18165099476682912368
+|     
+
+|===
+
+
+

@@ -1,38 +1,40 @@
 # OpenAPI\Client\SlingApi
 
-All URIs are relative to http://localhost.
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**deleteAgent()**](SlingApi.md#deleteAgent) | **DELETE** /etc/replication/agents.{runmode}/{name} | 
-[**deleteNode()**](SlingApi.md#deleteNode) | **DELETE** /{path}/{name} | 
-[**getAgent()**](SlingApi.md#getAgent) | **GET** /etc/replication/agents.{runmode}/{name} | 
-[**getAgents()**](SlingApi.md#getAgents) | **GET** /etc/replication/agents.{runmode}.-1.json | 
-[**getAuthorizableKeystore()**](SlingApi.md#getAuthorizableKeystore) | **GET** /{intermediatePath}/{authorizableId}.ks.json | 
-[**getKeystore()**](SlingApi.md#getKeystore) | **GET** /{intermediatePath}/{authorizableId}/keystore/store.p12 | 
-[**getNode()**](SlingApi.md#getNode) | **GET** /{path}/{name} | 
-[**getPackage()**](SlingApi.md#getPackage) | **GET** /etc/packages/{group}/{name}-{version}.zip | 
-[**getPackageFilter()**](SlingApi.md#getPackageFilter) | **GET** /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json | 
-[**getQuery()**](SlingApi.md#getQuery) | **GET** /bin/querybuilder.json | 
-[**getTruststore()**](SlingApi.md#getTruststore) | **GET** /etc/truststore/truststore.p12 | 
-[**getTruststoreInfo()**](SlingApi.md#getTruststoreInfo) | **GET** /libs/granite/security/truststore.json | 
-[**postAgent()**](SlingApi.md#postAgent) | **POST** /etc/replication/agents.{runmode}/{name} | 
-[**postAuthorizableKeystore()**](SlingApi.md#postAuthorizableKeystore) | **POST** /{intermediatePath}/{authorizableId}.ks.html | 
-[**postAuthorizables()**](SlingApi.md#postAuthorizables) | **POST** /libs/granite/security/post/authorizables | 
-[**postConfigAdobeGraniteSamlAuthenticationHandler()**](SlingApi.md#postConfigAdobeGraniteSamlAuthenticationHandler) | **POST** /apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config | 
-[**postConfigApacheFelixJettyBasedHttpService()**](SlingApi.md#postConfigApacheFelixJettyBasedHttpService) | **POST** /apps/system/config/org.apache.felix.http | 
-[**postConfigApacheHttpComponentsProxyConfiguration()**](SlingApi.md#postConfigApacheHttpComponentsProxyConfiguration) | **POST** /apps/system/config/org.apache.http.proxyconfigurator.config | 
-[**postConfigApacheSlingDavExServlet()**](SlingApi.md#postConfigApacheSlingDavExServlet) | **POST** /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet | 
-[**postConfigApacheSlingGetServlet()**](SlingApi.md#postConfigApacheSlingGetServlet) | **POST** /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet | 
-[**postConfigApacheSlingReferrerFilter()**](SlingApi.md#postConfigApacheSlingReferrerFilter) | **POST** /apps/system/config/org.apache.sling.security.impl.ReferrerFilter | 
-[**postConfigProperty()**](SlingApi.md#postConfigProperty) | **POST** /apps/system/config/{configNodeName} | 
-[**postNode()**](SlingApi.md#postNode) | **POST** /{path}/{name} | 
-[**postNodeRw()**](SlingApi.md#postNodeRw) | **POST** /{path}/{name}.rw.html | 
-[**postPath()**](SlingApi.md#postPath) | **POST** /{path}/ | 
-[**postQuery()**](SlingApi.md#postQuery) | **POST** /bin/querybuilder.json | 
-[**postTreeActivation()**](SlingApi.md#postTreeActivation) | **POST** /etc/replication/treeactivation.html | 
-[**postTruststore()**](SlingApi.md#postTruststore) | **POST** /libs/granite/security/post/truststore | 
-[**postTruststorePKCS12()**](SlingApi.md#postTruststorePKCS12) | **POST** /etc/truststore | 
+
+All URIs are relative to http://localhost, except if the operation defines another base path.
+
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**deleteAgent()**](SlingApi.md#deleteAgent) | **DELETE** /etc/replication/agents.{runmode}/{name} |  |
+| [**deleteNode()**](SlingApi.md#deleteNode) | **DELETE** /{path}/{name} |  |
+| [**getAgent()**](SlingApi.md#getAgent) | **GET** /etc/replication/agents.{runmode}/{name} |  |
+| [**getAgents()**](SlingApi.md#getAgents) | **GET** /etc/replication/agents.{runmode}.-1.json |  |
+| [**getAuthorizableKeystore()**](SlingApi.md#getAuthorizableKeystore) | **GET** /{intermediatePath}/{authorizableId}.ks.json |  |
+| [**getKeystore()**](SlingApi.md#getKeystore) | **GET** /{intermediatePath}/{authorizableId}/keystore/store.p12 |  |
+| [**getNode()**](SlingApi.md#getNode) | **GET** /{path}/{name} |  |
+| [**getPackage()**](SlingApi.md#getPackage) | **GET** /etc/packages/{group}/{name}-{version}.zip |  |
+| [**getPackageFilter()**](SlingApi.md#getPackageFilter) | **GET** /etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json |  |
+| [**getQuery()**](SlingApi.md#getQuery) | **GET** /bin/querybuilder.json |  |
+| [**getTruststore()**](SlingApi.md#getTruststore) | **GET** /etc/truststore/truststore.p12 |  |
+| [**getTruststoreInfo()**](SlingApi.md#getTruststoreInfo) | **GET** /libs/granite/security/truststore.json |  |
+| [**postAgent()**](SlingApi.md#postAgent) | **POST** /etc/replication/agents.{runmode}/{name} |  |
+| [**postAuthorizableKeystore()**](SlingApi.md#postAuthorizableKeystore) | **POST** /{intermediatePath}/{authorizableId}.ks.html |  |
+| [**postAuthorizables()**](SlingApi.md#postAuthorizables) | **POST** /libs/granite/security/post/authorizables |  |
+| [**postConfigAdobeGraniteSamlAuthenticationHandler()**](SlingApi.md#postConfigAdobeGraniteSamlAuthenticationHandler) | **POST** /apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config |  |
+| [**postConfigApacheFelixJettyBasedHttpService()**](SlingApi.md#postConfigApacheFelixJettyBasedHttpService) | **POST** /apps/system/config/org.apache.felix.http |  |
+| [**postConfigApacheHttpComponentsProxyConfiguration()**](SlingApi.md#postConfigApacheHttpComponentsProxyConfiguration) | **POST** /apps/system/config/org.apache.http.proxyconfigurator.config |  |
+| [**postConfigApacheSlingDavExServlet()**](SlingApi.md#postConfigApacheSlingDavExServlet) | **POST** /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet |  |
+| [**postConfigApacheSlingGetServlet()**](SlingApi.md#postConfigApacheSlingGetServlet) | **POST** /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet |  |
+| [**postConfigApacheSlingReferrerFilter()**](SlingApi.md#postConfigApacheSlingReferrerFilter) | **POST** /apps/system/config/org.apache.sling.security.impl.ReferrerFilter |  |
+| [**postConfigProperty()**](SlingApi.md#postConfigProperty) | **POST** /apps/system/config/{configNodeName} |  |
+| [**postNode()**](SlingApi.md#postNode) | **POST** /{path}/{name} |  |
+| [**postNodeRw()**](SlingApi.md#postNodeRw) | **POST** /{path}/{name}.rw.html |  |
+| [**postPath()**](SlingApi.md#postPath) | **POST** /{path}/ |  |
+| [**postQuery()**](SlingApi.md#postQuery) | **POST** /bin/querybuilder.json |  |
+| [**postTreeActivation()**](SlingApi.md#postTreeActivation) | **POST** /libs/replication/treeactivation.html |  |
+| [**postTruststore()**](SlingApi.md#postTruststore) | **POST** /libs/granite/security/post/truststore |  |
+| [**postTruststorePKCS12()**](SlingApi.md#postTruststorePKCS12) | **POST** /etc/truststore |  |
 
 
 ## `deleteAgent()`
@@ -74,10 +76,10 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **runmode** | **string**|  |
- **name** | **string**|  |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **runmode** | **string**|  | |
+| **name** | **string**|  | |
 
 ### Return type
 
@@ -135,10 +137,10 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **path** | **string**|  |
- **name** | **string**|  |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **path** | **string**|  | |
+| **name** | **string**|  | |
 
 ### Return type
 
@@ -196,10 +198,10 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **runmode** | **string**|  |
- **name** | **string**|  |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **runmode** | **string**|  | |
+| **name** | **string**|  | |
 
 ### Return type
 
@@ -257,9 +259,9 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **runmode** | **string**|  |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **runmode** | **string**|  | |
 
 ### Return type
 
@@ -318,10 +320,10 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **intermediate_path** | **string**|  |
- **authorizable_id** | **string**|  |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **intermediate_path** | **string**|  | |
+| **authorizable_id** | **string**|  | |
 
 ### Return type
 
@@ -380,14 +382,14 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **intermediate_path** | **string**|  |
- **authorizable_id** | **string**|  |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **intermediate_path** | **string**|  | |
+| **authorizable_id** | **string**|  | |
 
 ### Return type
 
-[**\SplFileObject**](../Model/\SplFileObject.md)
+**\SplFileObject**
 
 ### Authorization
 
@@ -441,10 +443,10 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **path** | **string**|  |
- **name** | **string**|  |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **path** | **string**|  | |
+| **name** | **string**|  | |
 
 ### Return type
 
@@ -504,15 +506,15 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **group** | **string**|  |
- **name** | **string**|  |
- **version** | **string**|  |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **group** | **string**|  | |
+| **name** | **string**|  | |
+| **version** | **string**|  | |
 
 ### Return type
 
-[**\SplFileObject**](../Model/\SplFileObject.md)
+**\SplFileObject**
 
 ### Authorization
 
@@ -568,11 +570,11 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **group** | **string**|  |
- **name** | **string**|  |
- **version** | **string**|  |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **group** | **string**|  | |
+| **name** | **string**|  | |
+| **version** | **string**|  | |
 
 ### Return type
 
@@ -633,12 +635,12 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **path** | **string**|  |
- **p_limit** | **float**|  |
- **_1_property** | **string**|  |
- **_1_property_value** | **string**|  |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **path** | **string**|  | |
+| **p_limit** | **float**|  | |
+| **_1_property** | **string**|  | |
+| **_1_property_value** | **string**|  | |
 
 ### Return type
 
@@ -699,7 +701,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**\SplFileObject**](../Model/\SplFileObject.md)
+**\SplFileObject**
 
 ### Authorization
 
@@ -774,7 +776,7 @@ This endpoint does not need any parameter.
 ## `postAgent()`
 
 ```php
-postAgent($runmode, $name, $jcrcontent_cqdistribute, $jcrcontent_cqdistribute_type_hint, $jcrcontent_cqname, $jcrcontent_cqtemplate, $jcrcontent_enabled, $jcrcontent_jcrdescription, $jcrcontent_jcrlast_modified, $jcrcontent_jcrlast_modified_by, $jcrcontent_jcrmixin_types, $jcrcontent_jcrtitle, $jcrcontent_log_level, $jcrcontent_no_status_update, $jcrcontent_no_versioning, $jcrcontent_protocol_connect_timeout, $jcrcontent_protocol_http_connection_closed, $jcrcontent_protocol_http_expired, $jcrcontent_protocol_http_headers, $jcrcontent_protocol_http_headers_type_hint, $jcrcontent_protocol_http_method, $jcrcontent_protocol_https_relaxed, $jcrcontent_protocol_interface, $jcrcontent_protocol_socket_timeout, $jcrcontent_protocol_version, $jcrcontent_proxy_ntlm_domain, $jcrcontent_proxy_ntlm_host, $jcrcontent_proxy_host, $jcrcontent_proxy_password, $jcrcontent_proxy_port, $jcrcontent_proxy_user, $jcrcontent_queue_batch_max_size, $jcrcontent_queue_batch_mode, $jcrcontent_queue_batch_wait_time, $jcrcontent_retry_delay, $jcrcontent_reverse_replication, $jcrcontent_serialization_type, $jcrcontent_slingresource_type, $jcrcontent_ssl, $jcrcontent_transport_ntlm_domain, $jcrcontent_transport_ntlm_host, $jcrcontent_transport_password, $jcrcontent_transport_uri, $jcrcontent_transport_user, $jcrcontent_trigger_distribute, $jcrcontent_trigger_modified, $jcrcontent_trigger_on_off_time, $jcrcontent_trigger_receive, $jcrcontent_trigger_specific, $jcrcontent_user_id, $jcrprimary_type, $operation)
+postAgent($runmode, $name, $jcr_content_cq_distribute, $jcr_content_cq_distribute_type_hint, $jcr_content_cq_name, $jcr_content_cq_template, $jcr_content_alias_update, $jcr_content_enabled, $jcr_content_jcr_description, $jcr_content_jcr_last_modified, $jcr_content_jcr_last_modified_by, $jcr_content_jcr_mixin_types, $jcr_content_jcr_title, $jcr_content_log_level, $jcr_content_no_status_update, $jcr_content_no_versioning, $jcr_content_protocol_connect_timeout, $jcr_content_protocol_http_connection_closed, $jcr_content_protocol_http_expired, $jcr_content_protocol_http_headers, $jcr_content_protocol_http_headers_type_hint, $jcr_content_protocol_http_method, $jcr_content_protocol_https_relaxed, $jcr_content_protocol_interface, $jcr_content_protocol_socket_timeout, $jcr_content_protocol_version, $jcr_content_proxy_ntlm_domain, $jcr_content_proxy_ntlm_host, $jcr_content_proxy_host, $jcr_content_proxy_password, $jcr_content_proxy_port, $jcr_content_proxy_user, $jcr_content_queue_batch_max_size, $jcr_content_queue_batch_mode, $jcr_content_queue_batch_wait_time, $jcr_content_retry_delay, $jcr_content_reverse_replication, $jcr_content_serialization_type, $jcr_content_sling_resource_type, $jcr_content_ssl, $jcr_content_transport_ntlm_domain, $jcr_content_transport_ntlm_host, $jcr_content_transport_password, $jcr_content_transport_uri, $jcr_content_transport_user, $jcr_content_trigger_distribute, $jcr_content_trigger_modified, $jcr_content_trigger_on_off_time, $jcr_content_trigger_receive, $jcr_content_trigger_specific, $jcr_content_user_id, $jcr_primary_type, $_operation)
 ```
 
 
@@ -800,59 +802,60 @@ $apiInstance = new OpenAPI\Client\Api\SlingApi(
 );
 $runmode = 'runmode_example'; // string
 $name = 'name_example'; // string
-$jcrcontent_cqdistribute = True; // bool
-$jcrcontent_cqdistribute_type_hint = 'jcrcontent_cqdistribute_type_hint_example'; // string
-$jcrcontent_cqname = 'jcrcontent_cqname_example'; // string
-$jcrcontent_cqtemplate = 'jcrcontent_cqtemplate_example'; // string
-$jcrcontent_enabled = True; // bool
-$jcrcontent_jcrdescription = 'jcrcontent_jcrdescription_example'; // string
-$jcrcontent_jcrlast_modified = 'jcrcontent_jcrlast_modified_example'; // string
-$jcrcontent_jcrlast_modified_by = 'jcrcontent_jcrlast_modified_by_example'; // string
-$jcrcontent_jcrmixin_types = 'jcrcontent_jcrmixin_types_example'; // string
-$jcrcontent_jcrtitle = 'jcrcontent_jcrtitle_example'; // string
-$jcrcontent_log_level = 'jcrcontent_log_level_example'; // string
-$jcrcontent_no_status_update = True; // bool
-$jcrcontent_no_versioning = True; // bool
-$jcrcontent_protocol_connect_timeout = 3.4; // float
-$jcrcontent_protocol_http_connection_closed = True; // bool
-$jcrcontent_protocol_http_expired = 'jcrcontent_protocol_http_expired_example'; // string
-$jcrcontent_protocol_http_headers = array('jcrcontent_protocol_http_headers_example'); // string[]
-$jcrcontent_protocol_http_headers_type_hint = 'jcrcontent_protocol_http_headers_type_hint_example'; // string
-$jcrcontent_protocol_http_method = 'jcrcontent_protocol_http_method_example'; // string
-$jcrcontent_protocol_https_relaxed = True; // bool
-$jcrcontent_protocol_interface = 'jcrcontent_protocol_interface_example'; // string
-$jcrcontent_protocol_socket_timeout = 3.4; // float
-$jcrcontent_protocol_version = 'jcrcontent_protocol_version_example'; // string
-$jcrcontent_proxy_ntlm_domain = 'jcrcontent_proxy_ntlm_domain_example'; // string
-$jcrcontent_proxy_ntlm_host = 'jcrcontent_proxy_ntlm_host_example'; // string
-$jcrcontent_proxy_host = 'jcrcontent_proxy_host_example'; // string
-$jcrcontent_proxy_password = 'jcrcontent_proxy_password_example'; // string
-$jcrcontent_proxy_port = 3.4; // float
-$jcrcontent_proxy_user = 'jcrcontent_proxy_user_example'; // string
-$jcrcontent_queue_batch_max_size = 3.4; // float
-$jcrcontent_queue_batch_mode = 'jcrcontent_queue_batch_mode_example'; // string
-$jcrcontent_queue_batch_wait_time = 3.4; // float
-$jcrcontent_retry_delay = 'jcrcontent_retry_delay_example'; // string
-$jcrcontent_reverse_replication = True; // bool
-$jcrcontent_serialization_type = 'jcrcontent_serialization_type_example'; // string
-$jcrcontent_slingresource_type = 'jcrcontent_slingresource_type_example'; // string
-$jcrcontent_ssl = 'jcrcontent_ssl_example'; // string
-$jcrcontent_transport_ntlm_domain = 'jcrcontent_transport_ntlm_domain_example'; // string
-$jcrcontent_transport_ntlm_host = 'jcrcontent_transport_ntlm_host_example'; // string
-$jcrcontent_transport_password = 'jcrcontent_transport_password_example'; // string
-$jcrcontent_transport_uri = 'jcrcontent_transport_uri_example'; // string
-$jcrcontent_transport_user = 'jcrcontent_transport_user_example'; // string
-$jcrcontent_trigger_distribute = True; // bool
-$jcrcontent_trigger_modified = True; // bool
-$jcrcontent_trigger_on_off_time = True; // bool
-$jcrcontent_trigger_receive = True; // bool
-$jcrcontent_trigger_specific = True; // bool
-$jcrcontent_user_id = 'jcrcontent_user_id_example'; // string
-$jcrprimary_type = 'jcrprimary_type_example'; // string
-$operation = 'operation_example'; // string
+$jcr_content_cq_distribute = True; // bool
+$jcr_content_cq_distribute_type_hint = 'jcr_content_cq_distribute_type_hint_example'; // string
+$jcr_content_cq_name = 'jcr_content_cq_name_example'; // string
+$jcr_content_cq_template = 'jcr_content_cq_template_example'; // string
+$jcr_content_alias_update = True; // bool
+$jcr_content_enabled = True; // bool
+$jcr_content_jcr_description = 'jcr_content_jcr_description_example'; // string
+$jcr_content_jcr_last_modified = 'jcr_content_jcr_last_modified_example'; // string
+$jcr_content_jcr_last_modified_by = 'jcr_content_jcr_last_modified_by_example'; // string
+$jcr_content_jcr_mixin_types = 'jcr_content_jcr_mixin_types_example'; // string
+$jcr_content_jcr_title = 'jcr_content_jcr_title_example'; // string
+$jcr_content_log_level = 'jcr_content_log_level_example'; // string
+$jcr_content_no_status_update = True; // bool
+$jcr_content_no_versioning = True; // bool
+$jcr_content_protocol_connect_timeout = 3.4; // float
+$jcr_content_protocol_http_connection_closed = True; // bool
+$jcr_content_protocol_http_expired = 'jcr_content_protocol_http_expired_example'; // string
+$jcr_content_protocol_http_headers = array('jcr_content_protocol_http_headers_example'); // string[]
+$jcr_content_protocol_http_headers_type_hint = 'jcr_content_protocol_http_headers_type_hint_example'; // string
+$jcr_content_protocol_http_method = 'jcr_content_protocol_http_method_example'; // string
+$jcr_content_protocol_https_relaxed = True; // bool
+$jcr_content_protocol_interface = 'jcr_content_protocol_interface_example'; // string
+$jcr_content_protocol_socket_timeout = 3.4; // float
+$jcr_content_protocol_version = 'jcr_content_protocol_version_example'; // string
+$jcr_content_proxy_ntlm_domain = 'jcr_content_proxy_ntlm_domain_example'; // string
+$jcr_content_proxy_ntlm_host = 'jcr_content_proxy_ntlm_host_example'; // string
+$jcr_content_proxy_host = 'jcr_content_proxy_host_example'; // string
+$jcr_content_proxy_password = 'jcr_content_proxy_password_example'; // string
+$jcr_content_proxy_port = 3.4; // float
+$jcr_content_proxy_user = 'jcr_content_proxy_user_example'; // string
+$jcr_content_queue_batch_max_size = 3.4; // float
+$jcr_content_queue_batch_mode = 'jcr_content_queue_batch_mode_example'; // string
+$jcr_content_queue_batch_wait_time = 3.4; // float
+$jcr_content_retry_delay = 'jcr_content_retry_delay_example'; // string
+$jcr_content_reverse_replication = True; // bool
+$jcr_content_serialization_type = 'jcr_content_serialization_type_example'; // string
+$jcr_content_sling_resource_type = 'jcr_content_sling_resource_type_example'; // string
+$jcr_content_ssl = 'jcr_content_ssl_example'; // string
+$jcr_content_transport_ntlm_domain = 'jcr_content_transport_ntlm_domain_example'; // string
+$jcr_content_transport_ntlm_host = 'jcr_content_transport_ntlm_host_example'; // string
+$jcr_content_transport_password = 'jcr_content_transport_password_example'; // string
+$jcr_content_transport_uri = 'jcr_content_transport_uri_example'; // string
+$jcr_content_transport_user = 'jcr_content_transport_user_example'; // string
+$jcr_content_trigger_distribute = True; // bool
+$jcr_content_trigger_modified = True; // bool
+$jcr_content_trigger_on_off_time = True; // bool
+$jcr_content_trigger_receive = True; // bool
+$jcr_content_trigger_specific = True; // bool
+$jcr_content_user_id = 'jcr_content_user_id_example'; // string
+$jcr_primary_type = 'jcr_primary_type_example'; // string
+$_operation = '_operation_example'; // string
 
 try {
-    $apiInstance->postAgent($runmode, $name, $jcrcontent_cqdistribute, $jcrcontent_cqdistribute_type_hint, $jcrcontent_cqname, $jcrcontent_cqtemplate, $jcrcontent_enabled, $jcrcontent_jcrdescription, $jcrcontent_jcrlast_modified, $jcrcontent_jcrlast_modified_by, $jcrcontent_jcrmixin_types, $jcrcontent_jcrtitle, $jcrcontent_log_level, $jcrcontent_no_status_update, $jcrcontent_no_versioning, $jcrcontent_protocol_connect_timeout, $jcrcontent_protocol_http_connection_closed, $jcrcontent_protocol_http_expired, $jcrcontent_protocol_http_headers, $jcrcontent_protocol_http_headers_type_hint, $jcrcontent_protocol_http_method, $jcrcontent_protocol_https_relaxed, $jcrcontent_protocol_interface, $jcrcontent_protocol_socket_timeout, $jcrcontent_protocol_version, $jcrcontent_proxy_ntlm_domain, $jcrcontent_proxy_ntlm_host, $jcrcontent_proxy_host, $jcrcontent_proxy_password, $jcrcontent_proxy_port, $jcrcontent_proxy_user, $jcrcontent_queue_batch_max_size, $jcrcontent_queue_batch_mode, $jcrcontent_queue_batch_wait_time, $jcrcontent_retry_delay, $jcrcontent_reverse_replication, $jcrcontent_serialization_type, $jcrcontent_slingresource_type, $jcrcontent_ssl, $jcrcontent_transport_ntlm_domain, $jcrcontent_transport_ntlm_host, $jcrcontent_transport_password, $jcrcontent_transport_uri, $jcrcontent_transport_user, $jcrcontent_trigger_distribute, $jcrcontent_trigger_modified, $jcrcontent_trigger_on_off_time, $jcrcontent_trigger_receive, $jcrcontent_trigger_specific, $jcrcontent_user_id, $jcrprimary_type, $operation);
+    $apiInstance->postAgent($runmode, $name, $jcr_content_cq_distribute, $jcr_content_cq_distribute_type_hint, $jcr_content_cq_name, $jcr_content_cq_template, $jcr_content_alias_update, $jcr_content_enabled, $jcr_content_jcr_description, $jcr_content_jcr_last_modified, $jcr_content_jcr_last_modified_by, $jcr_content_jcr_mixin_types, $jcr_content_jcr_title, $jcr_content_log_level, $jcr_content_no_status_update, $jcr_content_no_versioning, $jcr_content_protocol_connect_timeout, $jcr_content_protocol_http_connection_closed, $jcr_content_protocol_http_expired, $jcr_content_protocol_http_headers, $jcr_content_protocol_http_headers_type_hint, $jcr_content_protocol_http_method, $jcr_content_protocol_https_relaxed, $jcr_content_protocol_interface, $jcr_content_protocol_socket_timeout, $jcr_content_protocol_version, $jcr_content_proxy_ntlm_domain, $jcr_content_proxy_ntlm_host, $jcr_content_proxy_host, $jcr_content_proxy_password, $jcr_content_proxy_port, $jcr_content_proxy_user, $jcr_content_queue_batch_max_size, $jcr_content_queue_batch_mode, $jcr_content_queue_batch_wait_time, $jcr_content_retry_delay, $jcr_content_reverse_replication, $jcr_content_serialization_type, $jcr_content_sling_resource_type, $jcr_content_ssl, $jcr_content_transport_ntlm_domain, $jcr_content_transport_ntlm_host, $jcr_content_transport_password, $jcr_content_transport_uri, $jcr_content_transport_user, $jcr_content_trigger_distribute, $jcr_content_trigger_modified, $jcr_content_trigger_on_off_time, $jcr_content_trigger_receive, $jcr_content_trigger_specific, $jcr_content_user_id, $jcr_primary_type, $_operation);
 } catch (Exception $e) {
     echo 'Exception when calling SlingApi->postAgent: ', $e->getMessage(), PHP_EOL;
 }
@@ -860,60 +863,61 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **runmode** | **string**|  |
- **name** | **string**|  |
- **jcrcontent_cqdistribute** | **bool**|  | [optional]
- **jcrcontent_cqdistribute_type_hint** | **string**|  | [optional]
- **jcrcontent_cqname** | **string**|  | [optional]
- **jcrcontent_cqtemplate** | **string**|  | [optional]
- **jcrcontent_enabled** | **bool**|  | [optional]
- **jcrcontent_jcrdescription** | **string**|  | [optional]
- **jcrcontent_jcrlast_modified** | **string**|  | [optional]
- **jcrcontent_jcrlast_modified_by** | **string**|  | [optional]
- **jcrcontent_jcrmixin_types** | **string**|  | [optional]
- **jcrcontent_jcrtitle** | **string**|  | [optional]
- **jcrcontent_log_level** | **string**|  | [optional]
- **jcrcontent_no_status_update** | **bool**|  | [optional]
- **jcrcontent_no_versioning** | **bool**|  | [optional]
- **jcrcontent_protocol_connect_timeout** | **float**|  | [optional]
- **jcrcontent_protocol_http_connection_closed** | **bool**|  | [optional]
- **jcrcontent_protocol_http_expired** | **string**|  | [optional]
- **jcrcontent_protocol_http_headers** | [**string[]**](../Model/string.md)|  | [optional]
- **jcrcontent_protocol_http_headers_type_hint** | **string**|  | [optional]
- **jcrcontent_protocol_http_method** | **string**|  | [optional]
- **jcrcontent_protocol_https_relaxed** | **bool**|  | [optional]
- **jcrcontent_protocol_interface** | **string**|  | [optional]
- **jcrcontent_protocol_socket_timeout** | **float**|  | [optional]
- **jcrcontent_protocol_version** | **string**|  | [optional]
- **jcrcontent_proxy_ntlm_domain** | **string**|  | [optional]
- **jcrcontent_proxy_ntlm_host** | **string**|  | [optional]
- **jcrcontent_proxy_host** | **string**|  | [optional]
- **jcrcontent_proxy_password** | **string**|  | [optional]
- **jcrcontent_proxy_port** | **float**|  | [optional]
- **jcrcontent_proxy_user** | **string**|  | [optional]
- **jcrcontent_queue_batch_max_size** | **float**|  | [optional]
- **jcrcontent_queue_batch_mode** | **string**|  | [optional]
- **jcrcontent_queue_batch_wait_time** | **float**|  | [optional]
- **jcrcontent_retry_delay** | **string**|  | [optional]
- **jcrcontent_reverse_replication** | **bool**|  | [optional]
- **jcrcontent_serialization_type** | **string**|  | [optional]
- **jcrcontent_slingresource_type** | **string**|  | [optional]
- **jcrcontent_ssl** | **string**|  | [optional]
- **jcrcontent_transport_ntlm_domain** | **string**|  | [optional]
- **jcrcontent_transport_ntlm_host** | **string**|  | [optional]
- **jcrcontent_transport_password** | **string**|  | [optional]
- **jcrcontent_transport_uri** | **string**|  | [optional]
- **jcrcontent_transport_user** | **string**|  | [optional]
- **jcrcontent_trigger_distribute** | **bool**|  | [optional]
- **jcrcontent_trigger_modified** | **bool**|  | [optional]
- **jcrcontent_trigger_on_off_time** | **bool**|  | [optional]
- **jcrcontent_trigger_receive** | **bool**|  | [optional]
- **jcrcontent_trigger_specific** | **bool**|  | [optional]
- **jcrcontent_user_id** | **string**|  | [optional]
- **jcrprimary_type** | **string**|  | [optional]
- **operation** | **string**|  | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **runmode** | **string**|  | |
+| **name** | **string**|  | |
+| **jcr_content_cq_distribute** | **bool**|  | [optional] |
+| **jcr_content_cq_distribute_type_hint** | **string**|  | [optional] |
+| **jcr_content_cq_name** | **string**|  | [optional] |
+| **jcr_content_cq_template** | **string**|  | [optional] |
+| **jcr_content_alias_update** | **bool**|  | [optional] |
+| **jcr_content_enabled** | **bool**|  | [optional] |
+| **jcr_content_jcr_description** | **string**|  | [optional] |
+| **jcr_content_jcr_last_modified** | **string**|  | [optional] |
+| **jcr_content_jcr_last_modified_by** | **string**|  | [optional] |
+| **jcr_content_jcr_mixin_types** | **string**|  | [optional] |
+| **jcr_content_jcr_title** | **string**|  | [optional] |
+| **jcr_content_log_level** | **string**|  | [optional] |
+| **jcr_content_no_status_update** | **bool**|  | [optional] |
+| **jcr_content_no_versioning** | **bool**|  | [optional] |
+| **jcr_content_protocol_connect_timeout** | **float**|  | [optional] |
+| **jcr_content_protocol_http_connection_closed** | **bool**|  | [optional] |
+| **jcr_content_protocol_http_expired** | **string**|  | [optional] |
+| **jcr_content_protocol_http_headers** | [**string[]**](../Model/string.md)|  | [optional] |
+| **jcr_content_protocol_http_headers_type_hint** | **string**|  | [optional] |
+| **jcr_content_protocol_http_method** | **string**|  | [optional] |
+| **jcr_content_protocol_https_relaxed** | **bool**|  | [optional] |
+| **jcr_content_protocol_interface** | **string**|  | [optional] |
+| **jcr_content_protocol_socket_timeout** | **float**|  | [optional] |
+| **jcr_content_protocol_version** | **string**|  | [optional] |
+| **jcr_content_proxy_ntlm_domain** | **string**|  | [optional] |
+| **jcr_content_proxy_ntlm_host** | **string**|  | [optional] |
+| **jcr_content_proxy_host** | **string**|  | [optional] |
+| **jcr_content_proxy_password** | **string**|  | [optional] |
+| **jcr_content_proxy_port** | **float**|  | [optional] |
+| **jcr_content_proxy_user** | **string**|  | [optional] |
+| **jcr_content_queue_batch_max_size** | **float**|  | [optional] |
+| **jcr_content_queue_batch_mode** | **string**|  | [optional] |
+| **jcr_content_queue_batch_wait_time** | **float**|  | [optional] |
+| **jcr_content_retry_delay** | **string**|  | [optional] |
+| **jcr_content_reverse_replication** | **bool**|  | [optional] |
+| **jcr_content_serialization_type** | **string**|  | [optional] |
+| **jcr_content_sling_resource_type** | **string**|  | [optional] |
+| **jcr_content_ssl** | **string**|  | [optional] |
+| **jcr_content_transport_ntlm_domain** | **string**|  | [optional] |
+| **jcr_content_transport_ntlm_host** | **string**|  | [optional] |
+| **jcr_content_transport_password** | **string**|  | [optional] |
+| **jcr_content_transport_uri** | **string**|  | [optional] |
+| **jcr_content_transport_user** | **string**|  | [optional] |
+| **jcr_content_trigger_distribute** | **bool**|  | [optional] |
+| **jcr_content_trigger_modified** | **bool**|  | [optional] |
+| **jcr_content_trigger_on_off_time** | **bool**|  | [optional] |
+| **jcr_content_trigger_receive** | **bool**|  | [optional] |
+| **jcr_content_trigger_specific** | **bool**|  | [optional] |
+| **jcr_content_user_id** | **string**|  | [optional] |
+| **jcr_primary_type** | **string**|  | [optional] |
+| **_operation** | **string**|  | [optional] |
 
 ### Return type
 
@@ -935,7 +939,7 @@ void (empty response body)
 ## `postAuthorizableKeystore()`
 
 ```php
-postAuthorizableKeystore($intermediate_path, $authorizable_id, $operation, $current_password, $new_password, $re_password, $key_password, $key_store_pass, $alias, $new_alias, $remove_alias, $cert_chain, $pk, $key_store): \OpenAPI\Client\Model\KeystoreInfo
+postAuthorizableKeystore($intermediate_path, $authorizable_id, $_operation, $current_password, $new_password, $re_password, $key_password, $key_store_pass, $alias, $new_alias, $remove_alias, $cert_chain, $pk, $key_store): \OpenAPI\Client\Model\KeystoreInfo
 ```
 
 
@@ -961,7 +965,7 @@ $apiInstance = new OpenAPI\Client\Api\SlingApi(
 );
 $intermediate_path = 'intermediate_path_example'; // string
 $authorizable_id = 'authorizable_id_example'; // string
-$operation = 'operation_example'; // string
+$_operation = '_operation_example'; // string
 $current_password = 'current_password_example'; // string
 $new_password = 'new_password_example'; // string
 $re_password = 're_password_example'; // string
@@ -970,12 +974,12 @@ $key_store_pass = 'key_store_pass_example'; // string
 $alias = 'alias_example'; // string
 $new_alias = 'new_alias_example'; // string
 $remove_alias = 'remove_alias_example'; // string
-$cert_chain = "/path/to/file.txt"; // \SplFileObject
-$pk = "/path/to/file.txt"; // \SplFileObject
-$key_store = "/path/to/file.txt"; // \SplFileObject
+$cert_chain = '/path/to/file.txt'; // \SplFileObject
+$pk = '/path/to/file.txt'; // \SplFileObject
+$key_store = '/path/to/file.txt'; // \SplFileObject
 
 try {
-    $result = $apiInstance->postAuthorizableKeystore($intermediate_path, $authorizable_id, $operation, $current_password, $new_password, $re_password, $key_password, $key_store_pass, $alias, $new_alias, $remove_alias, $cert_chain, $pk, $key_store);
+    $result = $apiInstance->postAuthorizableKeystore($intermediate_path, $authorizable_id, $_operation, $current_password, $new_password, $re_password, $key_password, $key_store_pass, $alias, $new_alias, $remove_alias, $cert_chain, $pk, $key_store);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling SlingApi->postAuthorizableKeystore: ', $e->getMessage(), PHP_EOL;
@@ -984,22 +988,22 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **intermediate_path** | **string**|  |
- **authorizable_id** | **string**|  |
- **operation** | **string**|  | [optional]
- **current_password** | **string**|  | [optional]
- **new_password** | **string**|  | [optional]
- **re_password** | **string**|  | [optional]
- **key_password** | **string**|  | [optional]
- **key_store_pass** | **string**|  | [optional]
- **alias** | **string**|  | [optional]
- **new_alias** | **string**|  | [optional]
- **remove_alias** | **string**|  | [optional]
- **cert_chain** | **\SplFileObject****\SplFileObject**|  | [optional]
- **pk** | **\SplFileObject****\SplFileObject**|  | [optional]
- **key_store** | **\SplFileObject****\SplFileObject**|  | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **intermediate_path** | **string**|  | |
+| **authorizable_id** | **string**|  | |
+| **_operation** | **string**|  | [optional] |
+| **current_password** | **string**|  | [optional] |
+| **new_password** | **string**|  | [optional] |
+| **re_password** | **string**|  | [optional] |
+| **key_password** | **string**|  | [optional] |
+| **key_store_pass** | **string**|  | [optional] |
+| **alias** | **string**|  | [optional] |
+| **new_alias** | **string**|  | [optional] |
+| **remove_alias** | **string**|  | [optional] |
+| **cert_chain** | **\SplFileObject****\SplFileObject**|  | [optional] |
+| **pk** | **\SplFileObject****\SplFileObject**|  | [optional] |
+| **key_store** | **\SplFileObject****\SplFileObject**|  | [optional] |
 
 ### Return type
 
@@ -1021,7 +1025,7 @@ Name | Type | Description  | Notes
 ## `postAuthorizables()`
 
 ```php
-postAuthorizables($authorizable_id, $intermediate_path, $create_user, $create_group, $reppassword, $profile_given_name): string
+postAuthorizables($authorizable_id, $intermediate_path, $create_user, $create_group, $rep_password, $profile_given_name): string
 ```
 
 
@@ -1049,11 +1053,11 @@ $authorizable_id = 'authorizable_id_example'; // string
 $intermediate_path = 'intermediate_path_example'; // string
 $create_user = 'create_user_example'; // string
 $create_group = 'create_group_example'; // string
-$reppassword = 'reppassword_example'; // string
+$rep_password = 'rep_password_example'; // string
 $profile_given_name = 'profile_given_name_example'; // string
 
 try {
-    $result = $apiInstance->postAuthorizables($authorizable_id, $intermediate_path, $create_user, $create_group, $reppassword, $profile_given_name);
+    $result = $apiInstance->postAuthorizables($authorizable_id, $intermediate_path, $create_user, $create_group, $rep_password, $profile_given_name);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling SlingApi->postAuthorizables: ', $e->getMessage(), PHP_EOL;
@@ -1062,14 +1066,14 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **authorizable_id** | **string**|  |
- **intermediate_path** | **string**|  |
- **create_user** | **string**|  | [optional]
- **create_group** | **string**|  | [optional]
- **reppassword** | **string**|  | [optional]
- **profile_given_name** | **string**|  | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **authorizable_id** | **string**|  | |
+| **intermediate_path** | **string**|  | |
+| **create_user** | **string**|  | [optional] |
+| **create_group** | **string**|  | [optional] |
+| **rep_password** | **string**|  | [optional] |
+| **profile_given_name** | **string**|  | [optional] |
 
 ### Return type
 
@@ -1173,56 +1177,56 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **key_store_password** | **string**|  | [optional]
- **key_store_password_type_hint** | **string**|  | [optional]
- **service_ranking** | **int**|  | [optional]
- **service_ranking_type_hint** | **string**|  | [optional]
- **idp_http_redirect** | **bool**|  | [optional]
- **idp_http_redirect_type_hint** | **string**|  | [optional]
- **create_user** | **bool**|  | [optional]
- **create_user_type_hint** | **string**|  | [optional]
- **default_redirect_url** | **string**|  | [optional]
- **default_redirect_url_type_hint** | **string**|  | [optional]
- **user_id_attribute** | **string**|  | [optional]
- **user_id_attribute_type_hint** | **string**|  | [optional]
- **default_groups** | [**string[]**](../Model/string.md)|  | [optional]
- **default_groups_type_hint** | **string**|  | [optional]
- **idp_cert_alias** | **string**|  | [optional]
- **idp_cert_alias_type_hint** | **string**|  | [optional]
- **add_group_memberships** | **bool**|  | [optional]
- **add_group_memberships_type_hint** | **string**|  | [optional]
- **path** | [**string[]**](../Model/string.md)|  | [optional]
- **path_type_hint** | **string**|  | [optional]
- **synchronize_attributes** | [**string[]**](../Model/string.md)|  | [optional]
- **synchronize_attributes_type_hint** | **string**|  | [optional]
- **clock_tolerance** | **int**|  | [optional]
- **clock_tolerance_type_hint** | **string**|  | [optional]
- **group_membership_attribute** | **string**|  | [optional]
- **group_membership_attribute_type_hint** | **string**|  | [optional]
- **idp_url** | **string**|  | [optional]
- **idp_url_type_hint** | **string**|  | [optional]
- **logout_url** | **string**|  | [optional]
- **logout_url_type_hint** | **string**|  | [optional]
- **service_provider_entity_id** | **string**|  | [optional]
- **service_provider_entity_id_type_hint** | **string**|  | [optional]
- **assertion_consumer_service_url** | **string**|  | [optional]
- **assertion_consumer_service_url_type_hint** | **string**|  | [optional]
- **handle_logout** | **bool**|  | [optional]
- **handle_logout_type_hint** | **string**|  | [optional]
- **sp_private_key_alias** | **string**|  | [optional]
- **sp_private_key_alias_type_hint** | **string**|  | [optional]
- **use_encryption** | **bool**|  | [optional]
- **use_encryption_type_hint** | **string**|  | [optional]
- **name_id_format** | **string**|  | [optional]
- **name_id_format_type_hint** | **string**|  | [optional]
- **digest_method** | **string**|  | [optional]
- **digest_method_type_hint** | **string**|  | [optional]
- **signature_method** | **string**|  | [optional]
- **signature_method_type_hint** | **string**|  | [optional]
- **user_intermediate_path** | **string**|  | [optional]
- **user_intermediate_path_type_hint** | **string**|  | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **key_store_password** | **string**|  | [optional] |
+| **key_store_password_type_hint** | **string**|  | [optional] |
+| **service_ranking** | **int**|  | [optional] |
+| **service_ranking_type_hint** | **string**|  | [optional] |
+| **idp_http_redirect** | **bool**|  | [optional] |
+| **idp_http_redirect_type_hint** | **string**|  | [optional] |
+| **create_user** | **bool**|  | [optional] |
+| **create_user_type_hint** | **string**|  | [optional] |
+| **default_redirect_url** | **string**|  | [optional] |
+| **default_redirect_url_type_hint** | **string**|  | [optional] |
+| **user_id_attribute** | **string**|  | [optional] |
+| **user_id_attribute_type_hint** | **string**|  | [optional] |
+| **default_groups** | [**string[]**](../Model/string.md)|  | [optional] |
+| **default_groups_type_hint** | **string**|  | [optional] |
+| **idp_cert_alias** | **string**|  | [optional] |
+| **idp_cert_alias_type_hint** | **string**|  | [optional] |
+| **add_group_memberships** | **bool**|  | [optional] |
+| **add_group_memberships_type_hint** | **string**|  | [optional] |
+| **path** | [**string[]**](../Model/string.md)|  | [optional] |
+| **path_type_hint** | **string**|  | [optional] |
+| **synchronize_attributes** | [**string[]**](../Model/string.md)|  | [optional] |
+| **synchronize_attributes_type_hint** | **string**|  | [optional] |
+| **clock_tolerance** | **int**|  | [optional] |
+| **clock_tolerance_type_hint** | **string**|  | [optional] |
+| **group_membership_attribute** | **string**|  | [optional] |
+| **group_membership_attribute_type_hint** | **string**|  | [optional] |
+| **idp_url** | **string**|  | [optional] |
+| **idp_url_type_hint** | **string**|  | [optional] |
+| **logout_url** | **string**|  | [optional] |
+| **logout_url_type_hint** | **string**|  | [optional] |
+| **service_provider_entity_id** | **string**|  | [optional] |
+| **service_provider_entity_id_type_hint** | **string**|  | [optional] |
+| **assertion_consumer_service_url** | **string**|  | [optional] |
+| **assertion_consumer_service_url_type_hint** | **string**|  | [optional] |
+| **handle_logout** | **bool**|  | [optional] |
+| **handle_logout_type_hint** | **string**|  | [optional] |
+| **sp_private_key_alias** | **string**|  | [optional] |
+| **sp_private_key_alias_type_hint** | **string**|  | [optional] |
+| **use_encryption** | **bool**|  | [optional] |
+| **use_encryption_type_hint** | **string**|  | [optional] |
+| **name_id_format** | **string**|  | [optional] |
+| **name_id_format_type_hint** | **string**|  | [optional] |
+| **digest_method** | **string**|  | [optional] |
+| **digest_method_type_hint** | **string**|  | [optional] |
+| **signature_method** | **string**|  | [optional] |
+| **signature_method_type_hint** | **string**|  | [optional] |
+| **user_intermediate_path** | **string**|  | [optional] |
+| **user_intermediate_path_type_hint** | **string**|  | [optional] |
 
 ### Return type
 
@@ -1298,28 +1302,28 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **org_apache_felix_https_nio** | **bool**|  | [optional]
- **org_apache_felix_https_nio_type_hint** | **string**|  | [optional]
- **org_apache_felix_https_keystore** | **string**|  | [optional]
- **org_apache_felix_https_keystore_type_hint** | **string**|  | [optional]
- **org_apache_felix_https_keystore_password** | **string**|  | [optional]
- **org_apache_felix_https_keystore_password_type_hint** | **string**|  | [optional]
- **org_apache_felix_https_keystore_key** | **string**|  | [optional]
- **org_apache_felix_https_keystore_key_type_hint** | **string**|  | [optional]
- **org_apache_felix_https_keystore_key_password** | **string**|  | [optional]
- **org_apache_felix_https_keystore_key_password_type_hint** | **string**|  | [optional]
- **org_apache_felix_https_truststore** | **string**|  | [optional]
- **org_apache_felix_https_truststore_type_hint** | **string**|  | [optional]
- **org_apache_felix_https_truststore_password** | **string**|  | [optional]
- **org_apache_felix_https_truststore_password_type_hint** | **string**|  | [optional]
- **org_apache_felix_https_clientcertificate** | **string**|  | [optional]
- **org_apache_felix_https_clientcertificate_type_hint** | **string**|  | [optional]
- **org_apache_felix_https_enable** | **bool**|  | [optional]
- **org_apache_felix_https_enable_type_hint** | **string**|  | [optional]
- **org_osgi_service_http_port_secure** | **string**|  | [optional]
- **org_osgi_service_http_port_secure_type_hint** | **string**|  | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **org_apache_felix_https_nio** | **bool**|  | [optional] |
+| **org_apache_felix_https_nio_type_hint** | **string**|  | [optional] |
+| **org_apache_felix_https_keystore** | **string**|  | [optional] |
+| **org_apache_felix_https_keystore_type_hint** | **string**|  | [optional] |
+| **org_apache_felix_https_keystore_password** | **string**|  | [optional] |
+| **org_apache_felix_https_keystore_password_type_hint** | **string**|  | [optional] |
+| **org_apache_felix_https_keystore_key** | **string**|  | [optional] |
+| **org_apache_felix_https_keystore_key_type_hint** | **string**|  | [optional] |
+| **org_apache_felix_https_keystore_key_password** | **string**|  | [optional] |
+| **org_apache_felix_https_keystore_key_password_type_hint** | **string**|  | [optional] |
+| **org_apache_felix_https_truststore** | **string**|  | [optional] |
+| **org_apache_felix_https_truststore_type_hint** | **string**|  | [optional] |
+| **org_apache_felix_https_truststore_password** | **string**|  | [optional] |
+| **org_apache_felix_https_truststore_password_type_hint** | **string**|  | [optional] |
+| **org_apache_felix_https_clientcertificate** | **string**|  | [optional] |
+| **org_apache_felix_https_clientcertificate_type_hint** | **string**|  | [optional] |
+| **org_apache_felix_https_enable** | **bool**|  | [optional] |
+| **org_apache_felix_https_enable_type_hint** | **string**|  | [optional] |
+| **org_osgi_service_http_port_secure** | **string**|  | [optional] |
+| **org_osgi_service_http_port_secure_type_hint** | **string**|  | [optional] |
 
 ### Return type
 
@@ -1387,20 +1391,20 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **proxy_host** | **string**|  | [optional]
- **proxy_host_type_hint** | **string**|  | [optional]
- **proxy_port** | **int**|  | [optional]
- **proxy_port_type_hint** | **string**|  | [optional]
- **proxy_exceptions** | [**string[]**](../Model/string.md)|  | [optional]
- **proxy_exceptions_type_hint** | **string**|  | [optional]
- **proxy_enabled** | **bool**|  | [optional]
- **proxy_enabled_type_hint** | **string**|  | [optional]
- **proxy_user** | **string**|  | [optional]
- **proxy_user_type_hint** | **string**|  | [optional]
- **proxy_password** | **string**|  | [optional]
- **proxy_password_type_hint** | **string**|  | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **proxy_host** | **string**|  | [optional] |
+| **proxy_host_type_hint** | **string**|  | [optional] |
+| **proxy_port** | **int**|  | [optional] |
+| **proxy_port_type_hint** | **string**|  | [optional] |
+| **proxy_exceptions** | [**string[]**](../Model/string.md)|  | [optional] |
+| **proxy_exceptions_type_hint** | **string**|  | [optional] |
+| **proxy_enabled** | **bool**|  | [optional] |
+| **proxy_enabled_type_hint** | **string**|  | [optional] |
+| **proxy_user** | **string**|  | [optional] |
+| **proxy_user_type_hint** | **string**|  | [optional] |
+| **proxy_password** | **string**|  | [optional] |
+| **proxy_password_type_hint** | **string**|  | [optional] |
 
 ### Return type
 
@@ -1460,12 +1464,12 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **alias** | **string**|  | [optional]
- **alias_type_hint** | **string**|  | [optional]
- **dav_create_absolute_uri** | **bool**|  | [optional]
- **dav_create_absolute_uri_type_hint** | **string**|  | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **alias** | **string**|  | [optional] |
+| **alias_type_hint** | **string**|  | [optional] |
+| **dav_create_absolute_uri** | **bool**|  | [optional] |
+| **dav_create_absolute_uri_type_hint** | **string**|  | [optional] |
 
 ### Return type
 
@@ -1529,16 +1533,16 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **json_maximumresults** | **string**|  | [optional]
- **json_maximumresults_type_hint** | **string**|  | [optional]
- **enable_html** | **bool**|  | [optional]
- **enable_html_type_hint** | **string**|  | [optional]
- **enable_txt** | **bool**|  | [optional]
- **enable_txt_type_hint** | **string**|  | [optional]
- **enable_xml** | **bool**|  | [optional]
- **enable_xml_type_hint** | **string**|  | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **json_maximumresults** | **string**|  | [optional] |
+| **json_maximumresults_type_hint** | **string**|  | [optional] |
+| **enable_html** | **bool**|  | [optional] |
+| **enable_html_type_hint** | **string**|  | [optional] |
+| **enable_txt** | **bool**|  | [optional] |
+| **enable_txt_type_hint** | **string**|  | [optional] |
+| **enable_xml** | **bool**|  | [optional] |
+| **enable_xml_type_hint** | **string**|  | [optional] |
 
 ### Return type
 
@@ -1602,16 +1606,16 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **allow_empty** | **bool**|  | [optional]
- **allow_empty_type_hint** | **string**|  | [optional]
- **allow_hosts** | **string**|  | [optional]
- **allow_hosts_type_hint** | **string**|  | [optional]
- **allow_hosts_regexp** | **string**|  | [optional]
- **allow_hosts_regexp_type_hint** | **string**|  | [optional]
- **filter_methods** | **string**|  | [optional]
- **filter_methods_type_hint** | **string**|  | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **allow_empty** | **bool**|  | [optional] |
+| **allow_empty_type_hint** | **string**|  | [optional] |
+| **allow_hosts** | **string**|  | [optional] |
+| **allow_hosts_type_hint** | **string**|  | [optional] |
+| **allow_hosts_regexp** | **string**|  | [optional] |
+| **allow_hosts_regexp_type_hint** | **string**|  | [optional] |
+| **filter_methods** | **string**|  | [optional] |
+| **filter_methods_type_hint** | **string**|  | [optional] |
 
 ### Return type
 
@@ -1668,9 +1672,9 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **config_node_name** | **string**|  |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **config_node_name** | **string**|  | |
 
 ### Return type
 
@@ -1692,7 +1696,7 @@ void (empty response body)
 ## `postNode()`
 
 ```php
-postNode($path, $name, $operation, $delete_authorizable, $file)
+postNode($path, $name, $_operation, $delete_authorizable, $file)
 ```
 
 
@@ -1718,12 +1722,12 @@ $apiInstance = new OpenAPI\Client\Api\SlingApi(
 );
 $path = 'path_example'; // string
 $name = 'name_example'; // string
-$operation = 'operation_example'; // string
+$_operation = '_operation_example'; // string
 $delete_authorizable = 'delete_authorizable_example'; // string
-$file = "/path/to/file.txt"; // \SplFileObject
+$file = '/path/to/file.txt'; // \SplFileObject
 
 try {
-    $apiInstance->postNode($path, $name, $operation, $delete_authorizable, $file);
+    $apiInstance->postNode($path, $name, $_operation, $delete_authorizable, $file);
 } catch (Exception $e) {
     echo 'Exception when calling SlingApi->postNode: ', $e->getMessage(), PHP_EOL;
 }
@@ -1731,13 +1735,13 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **path** | **string**|  |
- **name** | **string**|  |
- **operation** | **string**|  | [optional]
- **delete_authorizable** | **string**|  | [optional]
- **file** | **\SplFileObject****\SplFileObject**|  | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **path** | **string**|  | |
+| **name** | **string**|  | |
+| **_operation** | **string**|  | [optional] |
+| **delete_authorizable** | **string**|  | [optional] |
+| **file** | **\SplFileObject****\SplFileObject**|  | [optional] |
 
 ### Return type
 
@@ -1796,11 +1800,11 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **path** | **string**|  |
- **name** | **string**|  |
- **add_members** | **string**|  | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **path** | **string**|  | |
+| **name** | **string**|  | |
+| **add_members** | **string**|  | [optional] |
 
 ### Return type
 
@@ -1822,7 +1826,7 @@ void (empty response body)
 ## `postPath()`
 
 ```php
-postPath($path, $jcrprimary_type, $name)
+postPath($path, $jcr_primary_type, $_name)
 ```
 
 
@@ -1847,11 +1851,11 @@ $apiInstance = new OpenAPI\Client\Api\SlingApi(
     $config
 );
 $path = 'path_example'; // string
-$jcrprimary_type = 'jcrprimary_type_example'; // string
-$name = 'name_example'; // string
+$jcr_primary_type = 'jcr_primary_type_example'; // string
+$_name = '_name_example'; // string
 
 try {
-    $apiInstance->postPath($path, $jcrprimary_type, $name);
+    $apiInstance->postPath($path, $jcr_primary_type, $_name);
 } catch (Exception $e) {
     echo 'Exception when calling SlingApi->postPath: ', $e->getMessage(), PHP_EOL;
 }
@@ -1859,11 +1863,11 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **path** | **string**|  |
- **jcrprimary_type** | **string**|  |
- **name** | **string**|  |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **path** | **string**|  | |
+| **jcr_primary_type** | **string**|  | |
+| **_name** | **string**|  | |
 
 ### Return type
 
@@ -1924,12 +1928,12 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **path** | **string**|  |
- **p_limit** | **float**|  |
- **_1_property** | **string**|  |
- **_1_property_value** | **string**|  |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **path** | **string**|  | |
+| **p_limit** | **float**|  | |
+| **_1_property** | **string**|  | |
+| **_1_property_value** | **string**|  | |
 
 ### Return type
 
@@ -1951,7 +1955,7 @@ Name | Type | Description  | Notes
 ## `postTreeActivation()`
 
 ```php
-postTreeActivation($ignoredeactivated, $onlymodified, $path)
+postTreeActivation($ignoredeactivated, $onlymodified, $path, $cmd)
 ```
 
 
@@ -1978,9 +1982,10 @@ $apiInstance = new OpenAPI\Client\Api\SlingApi(
 $ignoredeactivated = True; // bool
 $onlymodified = True; // bool
 $path = 'path_example'; // string
+$cmd = 'activate'; // string
 
 try {
-    $apiInstance->postTreeActivation($ignoredeactivated, $onlymodified, $path);
+    $apiInstance->postTreeActivation($ignoredeactivated, $onlymodified, $path, $cmd);
 } catch (Exception $e) {
     echo 'Exception when calling SlingApi->postTreeActivation: ', $e->getMessage(), PHP_EOL;
 }
@@ -1988,11 +1993,12 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ignoredeactivated** | **bool**|  |
- **onlymodified** | **bool**|  |
- **path** | **string**|  |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **ignoredeactivated** | **bool**|  | |
+| **onlymodified** | **bool**|  | |
+| **path** | **string**|  | |
+| **cmd** | **string**|  | [default to &#39;activate&#39;] |
 
 ### Return type
 
@@ -2014,7 +2020,7 @@ void (empty response body)
 ## `postTruststore()`
 
 ```php
-postTruststore($operation, $new_password, $re_password, $key_store_type, $remove_alias, $certificate): string
+postTruststore($_operation, $new_password, $re_password, $key_store_type, $remove_alias, $certificate): string
 ```
 
 
@@ -2038,15 +2044,15 @@ $apiInstance = new OpenAPI\Client\Api\SlingApi(
     new GuzzleHttp\Client(),
     $config
 );
-$operation = 'operation_example'; // string
+$_operation = '_operation_example'; // string
 $new_password = 'new_password_example'; // string
 $re_password = 're_password_example'; // string
 $key_store_type = 'key_store_type_example'; // string
 $remove_alias = 'remove_alias_example'; // string
-$certificate = "/path/to/file.txt"; // \SplFileObject
+$certificate = '/path/to/file.txt'; // \SplFileObject
 
 try {
-    $result = $apiInstance->postTruststore($operation, $new_password, $re_password, $key_store_type, $remove_alias, $certificate);
+    $result = $apiInstance->postTruststore($_operation, $new_password, $re_password, $key_store_type, $remove_alias, $certificate);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling SlingApi->postTruststore: ', $e->getMessage(), PHP_EOL;
@@ -2055,14 +2061,14 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **operation** | **string**|  | [optional]
- **new_password** | **string**|  | [optional]
- **re_password** | **string**|  | [optional]
- **key_store_type** | **string**|  | [optional]
- **remove_alias** | **string**|  | [optional]
- **certificate** | **\SplFileObject****\SplFileObject**|  | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **_operation** | **string**|  | [optional] |
+| **new_password** | **string**|  | [optional] |
+| **re_password** | **string**|  | [optional] |
+| **key_store_type** | **string**|  | [optional] |
+| **remove_alias** | **string**|  | [optional] |
+| **certificate** | **\SplFileObject****\SplFileObject**|  | [optional] |
 
 ### Return type
 
@@ -2108,7 +2114,7 @@ $apiInstance = new OpenAPI\Client\Api\SlingApi(
     new GuzzleHttp\Client(),
     $config
 );
-$truststore_p12 = "/path/to/file.txt"; // \SplFileObject
+$truststore_p12 = '/path/to/file.txt'; // \SplFileObject
 
 try {
     $result = $apiInstance->postTruststorePKCS12($truststore_p12);
@@ -2120,9 +2126,9 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **truststore_p12** | **\SplFileObject****\SplFileObject**|  | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **truststore_p12** | **\SplFileObject****\SplFileObject**|  | [optional] |
 
 ### Return type
 

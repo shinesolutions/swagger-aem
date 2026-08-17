@@ -1,5 +1,7 @@
-import connexion
-import six
+import flask
+from typing import Dict
+from typing import Tuple
+from typing import Union
 
 from openapi_server.models.bundle_info import BundleInfo  # noqa: E501
 from openapi_server.models.saml_configuration_info import SamlConfigurationInfo  # noqa: E501
@@ -12,7 +14,7 @@ def get_aem_product_info():  # noqa: E501
      # noqa: E501
 
 
-    :rtype: List[str]
+    :rtype: Union[List[str], Tuple[List[str], int], Tuple[List[str], int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -25,7 +27,7 @@ def get_bundle_info(name):  # noqa: E501
     :param name: 
     :type name: str
 
-    :rtype: BundleInfo
+    :rtype: Union[BundleInfo, Tuple[BundleInfo, int], Tuple[BundleInfo, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -36,7 +38,7 @@ def get_config_mgr():  # noqa: E501
      # noqa: E501
 
 
-    :rtype: str
+    :rtype: Union[str, Tuple[str, int], Tuple[str, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -51,7 +53,7 @@ def post_bundle(name, action):  # noqa: E501
     :param action: 
     :type action: str
 
-    :rtype: None
+    :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -64,7 +66,7 @@ def post_jmx_repository(action):  # noqa: E501
     :param action: 
     :type action: str
 
-    :rtype: None
+    :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -135,6 +137,6 @@ def post_saml_configuration(post=None, apply=None, delete=None, action=None, loc
     :param propertylist: 
     :type propertylist: List[str]
 
-    :rtype: SamlConfigurationInfo
+    :rtype: Union[SamlConfigurationInfo, Tuple[SamlConfigurationInfo, int], Tuple[SamlConfigurationInfo, int, Dict[str, str]]
     """
     return 'do some magic!'

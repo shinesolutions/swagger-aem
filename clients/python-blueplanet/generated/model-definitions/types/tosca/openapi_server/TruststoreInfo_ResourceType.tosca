@@ -1,0 +1,42 @@
+"$schema"   = "http://cyaninc.com/json-schemas/tosca-lite-v1/definition-module#"
+title       = "openapi_server TruststoreInfo"
+package     = openapi_server
+version     = "1.0"
+description = "Defines a TruststoreInfo"
+authors     = ["F. Bar (foo@bar.baz)"]
+
+imports {
+  Root = tosca.resourceTypes.Root
+  TruststoreItems = openapi_server.resourceTypes.TruststoreItems
+}
+resourceTypes {
+
+  TruststoreInfo {
+    title = TruststoreInfo
+    description = TruststoreInfo
+    derivedFrom = Root
+    properties {
+        aliases {
+          type = array
+          items.type = TruststoreItems
+          description = ""
+          optional = false
+        }
+        exists {
+          type =  boolean
+          description = "False if truststore don&#39;t exist"
+          optional = false
+        }
+    }
+  }
+}
+
+serviceTemplates {
+
+  TruststoreInfo {
+    title = TruststoreInfo
+    description = TruststoreInfo
+    implements = openapi_server.resourceTypes.TruststoreInfo
+
+  }
+}

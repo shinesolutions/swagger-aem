@@ -2,15 +2,16 @@ package org.openapitools.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 
 
 import io.swagger.annotations.*;
 import java.util.Objects;
 
-import javax.xml.bind.annotation.*;
 
 
 public class InstallStatusStatus   {
@@ -18,7 +19,6 @@ public class InstallStatusStatus   {
   private Boolean finished;
 
   private Integer itemCount;
-
 
   /**
    **/
@@ -66,8 +66,8 @@ public class InstallStatusStatus   {
       return false;
     }
     InstallStatusStatus installStatusStatus = (InstallStatusStatus) o;
-    return Objects.equals(finished, installStatusStatus.finished) &&
-        Objects.equals(itemCount, installStatusStatus.itemCount);
+    return Objects.equals(this.finished, installStatusStatus.finished) &&
+        Objects.equals(this.itemCount, installStatusStatus.itemCount);
   }
 
   @Override
@@ -91,10 +91,7 @@ public class InstallStatusStatus   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

@@ -7,6 +7,7 @@
 #include <glib.h>
 #include "KeystoreInfo.h"
 #include "TruststoreInfo.h"
+#include <list>
 #include "Error.h"
 
 /** \defgroup Operations API Endpoints
@@ -380,6 +381,7 @@ bool getTruststoreInfoAsync(char * accessToken,
  * \param jcrContentSlashcqDistributeAtTypeHint 
  * \param jcrContentSlashcqName 
  * \param jcrContentSlashcqTemplate 
+ * \param jcrContentSlashaliasUpdate 
  * \param jcrContentSlashenabled 
  * \param jcrContentSlashjcrDescription 
  * \param jcrContentSlashjcrLastModified 
@@ -431,7 +433,7 @@ bool getTruststoreInfoAsync(char * accessToken,
  * \param userData The user data to be passed to the callback function.
  */
 bool postAgentSync(char * accessToken,
-	std::string runmode, std::string name, bool jcrContentSlashcqDistribute, std::string jcrContentSlashcqDistributeAtTypeHint, std::string jcrContentSlashcqName, std::string jcrContentSlashcqTemplate, bool jcrContentSlashenabled, std::string jcrContentSlashjcrDescription, std::string jcrContentSlashjcrLastModified, std::string jcrContentSlashjcrLastModifiedBy, std::string jcrContentSlashjcrMixinTypes, std::string jcrContentSlashjcrTitle, std::string jcrContentSlashlogLevel, bool jcrContentSlashnoStatusUpdate, bool jcrContentSlashnoVersioning, long long jcrContentSlashprotocolConnectTimeout, bool jcrContentSlashprotocolHTTPConnectionClosed, std::string jcrContentSlashprotocolHTTPExpired, std::list<std::string> jcrContentSlashprotocolHTTPHeaders, std::string jcrContentSlashprotocolHTTPHeadersAtTypeHint, std::string jcrContentSlashprotocolHTTPMethod, bool jcrContentSlashprotocolHTTPSRelaxed, std::string jcrContentSlashprotocolInterface, long long jcrContentSlashprotocolSocketTimeout, std::string jcrContentSlashprotocolVersion, std::string jcrContentSlashproxyNTLMDomain, std::string jcrContentSlashproxyNTLMHost, std::string jcrContentSlashproxyHost, std::string jcrContentSlashproxyPassword, long long jcrContentSlashproxyPort, std::string jcrContentSlashproxyUser, long long jcrContentSlashqueueBatchMaxSize, std::string jcrContentSlashqueueBatchMode, long long jcrContentSlashqueueBatchWaitTime, std::string jcrContentSlashretryDelay, bool jcrContentSlashreverseReplication, std::string jcrContentSlashserializationType, std::string jcrContentSlashslingResourceType, std::string jcrContentSlashssl, std::string jcrContentSlashtransportNTLMDomain, std::string jcrContentSlashtransportNTLMHost, std::string jcrContentSlashtransportPassword, std::string jcrContentSlashtransportUri, std::string jcrContentSlashtransportUser, bool jcrContentSlashtriggerDistribute, bool jcrContentSlashtriggerModified, bool jcrContentSlashtriggerOnOffTime, bool jcrContentSlashtriggerReceive, bool jcrContentSlashtriggerSpecific, std::string jcrContentSlashuserId, std::string jcrPrimaryType, std::string operation, 
+	std::string runmode, std::string name, bool jcrContentSlashcqDistribute, std::string jcrContentSlashcqDistributeAtTypeHint, std::string jcrContentSlashcqName, std::string jcrContentSlashcqTemplate, bool jcrContentSlashaliasUpdate, bool jcrContentSlashenabled, std::string jcrContentSlashjcrDescription, std::string jcrContentSlashjcrLastModified, std::string jcrContentSlashjcrLastModifiedBy, std::string jcrContentSlashjcrMixinTypes, std::string jcrContentSlashjcrTitle, std::string jcrContentSlashlogLevel, bool jcrContentSlashnoStatusUpdate, bool jcrContentSlashnoVersioning, long long jcrContentSlashprotocolConnectTimeout, bool jcrContentSlashprotocolHTTPConnectionClosed, std::string jcrContentSlashprotocolHTTPExpired, std::list<std::string> jcrContentSlashprotocolHTTPHeaders, std::string jcrContentSlashprotocolHTTPHeadersAtTypeHint, std::string jcrContentSlashprotocolHTTPMethod, bool jcrContentSlashprotocolHTTPSRelaxed, std::string jcrContentSlashprotocolInterface, long long jcrContentSlashprotocolSocketTimeout, std::string jcrContentSlashprotocolVersion, std::string jcrContentSlashproxyNTLMDomain, std::string jcrContentSlashproxyNTLMHost, std::string jcrContentSlashproxyHost, std::string jcrContentSlashproxyPassword, long long jcrContentSlashproxyPort, std::string jcrContentSlashproxyUser, long long jcrContentSlashqueueBatchMaxSize, std::string jcrContentSlashqueueBatchMode, long long jcrContentSlashqueueBatchWaitTime, std::string jcrContentSlashretryDelay, bool jcrContentSlashreverseReplication, std::string jcrContentSlashserializationType, std::string jcrContentSlashslingResourceType, std::string jcrContentSlashssl, std::string jcrContentSlashtransportNTLMDomain, std::string jcrContentSlashtransportNTLMHost, std::string jcrContentSlashtransportPassword, std::string jcrContentSlashtransportUri, std::string jcrContentSlashtransportUser, bool jcrContentSlashtriggerDistribute, bool jcrContentSlashtriggerModified, bool jcrContentSlashtriggerOnOffTime, bool jcrContentSlashtriggerReceive, bool jcrContentSlashtriggerSpecific, std::string jcrContentSlashuserId, std::string jcrPrimaryType, std::string operation, 
 	
 	void(* handler)(Error, void* ) , void* userData);
 
@@ -444,6 +446,7 @@ bool postAgentSync(char * accessToken,
  * \param jcrContentSlashcqDistributeAtTypeHint 
  * \param jcrContentSlashcqName 
  * \param jcrContentSlashcqTemplate 
+ * \param jcrContentSlashaliasUpdate 
  * \param jcrContentSlashenabled 
  * \param jcrContentSlashjcrDescription 
  * \param jcrContentSlashjcrLastModified 
@@ -495,7 +498,7 @@ bool postAgentSync(char * accessToken,
  * \param userData The user data to be passed to the callback function.
  */
 bool postAgentAsync(char * accessToken,
-	std::string runmode, std::string name, bool jcrContentSlashcqDistribute, std::string jcrContentSlashcqDistributeAtTypeHint, std::string jcrContentSlashcqName, std::string jcrContentSlashcqTemplate, bool jcrContentSlashenabled, std::string jcrContentSlashjcrDescription, std::string jcrContentSlashjcrLastModified, std::string jcrContentSlashjcrLastModifiedBy, std::string jcrContentSlashjcrMixinTypes, std::string jcrContentSlashjcrTitle, std::string jcrContentSlashlogLevel, bool jcrContentSlashnoStatusUpdate, bool jcrContentSlashnoVersioning, long long jcrContentSlashprotocolConnectTimeout, bool jcrContentSlashprotocolHTTPConnectionClosed, std::string jcrContentSlashprotocolHTTPExpired, std::list<std::string> jcrContentSlashprotocolHTTPHeaders, std::string jcrContentSlashprotocolHTTPHeadersAtTypeHint, std::string jcrContentSlashprotocolHTTPMethod, bool jcrContentSlashprotocolHTTPSRelaxed, std::string jcrContentSlashprotocolInterface, long long jcrContentSlashprotocolSocketTimeout, std::string jcrContentSlashprotocolVersion, std::string jcrContentSlashproxyNTLMDomain, std::string jcrContentSlashproxyNTLMHost, std::string jcrContentSlashproxyHost, std::string jcrContentSlashproxyPassword, long long jcrContentSlashproxyPort, std::string jcrContentSlashproxyUser, long long jcrContentSlashqueueBatchMaxSize, std::string jcrContentSlashqueueBatchMode, long long jcrContentSlashqueueBatchWaitTime, std::string jcrContentSlashretryDelay, bool jcrContentSlashreverseReplication, std::string jcrContentSlashserializationType, std::string jcrContentSlashslingResourceType, std::string jcrContentSlashssl, std::string jcrContentSlashtransportNTLMDomain, std::string jcrContentSlashtransportNTLMHost, std::string jcrContentSlashtransportPassword, std::string jcrContentSlashtransportUri, std::string jcrContentSlashtransportUser, bool jcrContentSlashtriggerDistribute, bool jcrContentSlashtriggerModified, bool jcrContentSlashtriggerOnOffTime, bool jcrContentSlashtriggerReceive, bool jcrContentSlashtriggerSpecific, std::string jcrContentSlashuserId, std::string jcrPrimaryType, std::string operation, 
+	std::string runmode, std::string name, bool jcrContentSlashcqDistribute, std::string jcrContentSlashcqDistributeAtTypeHint, std::string jcrContentSlashcqName, std::string jcrContentSlashcqTemplate, bool jcrContentSlashaliasUpdate, bool jcrContentSlashenabled, std::string jcrContentSlashjcrDescription, std::string jcrContentSlashjcrLastModified, std::string jcrContentSlashjcrLastModifiedBy, std::string jcrContentSlashjcrMixinTypes, std::string jcrContentSlashjcrTitle, std::string jcrContentSlashlogLevel, bool jcrContentSlashnoStatusUpdate, bool jcrContentSlashnoVersioning, long long jcrContentSlashprotocolConnectTimeout, bool jcrContentSlashprotocolHTTPConnectionClosed, std::string jcrContentSlashprotocolHTTPExpired, std::list<std::string> jcrContentSlashprotocolHTTPHeaders, std::string jcrContentSlashprotocolHTTPHeadersAtTypeHint, std::string jcrContentSlashprotocolHTTPMethod, bool jcrContentSlashprotocolHTTPSRelaxed, std::string jcrContentSlashprotocolInterface, long long jcrContentSlashprotocolSocketTimeout, std::string jcrContentSlashprotocolVersion, std::string jcrContentSlashproxyNTLMDomain, std::string jcrContentSlashproxyNTLMHost, std::string jcrContentSlashproxyHost, std::string jcrContentSlashproxyPassword, long long jcrContentSlashproxyPort, std::string jcrContentSlashproxyUser, long long jcrContentSlashqueueBatchMaxSize, std::string jcrContentSlashqueueBatchMode, long long jcrContentSlashqueueBatchWaitTime, std::string jcrContentSlashretryDelay, bool jcrContentSlashreverseReplication, std::string jcrContentSlashserializationType, std::string jcrContentSlashslingResourceType, std::string jcrContentSlashssl, std::string jcrContentSlashtransportNTLMDomain, std::string jcrContentSlashtransportNTLMHost, std::string jcrContentSlashtransportPassword, std::string jcrContentSlashtransportUri, std::string jcrContentSlashtransportUser, bool jcrContentSlashtriggerDistribute, bool jcrContentSlashtriggerModified, bool jcrContentSlashtriggerOnOffTime, bool jcrContentSlashtriggerReceive, bool jcrContentSlashtriggerSpecific, std::string jcrContentSlashuserId, std::string jcrPrimaryType, std::string operation, 
 	
 	void(* handler)(Error, void* ) , void* userData);
 
@@ -1103,12 +1106,13 @@ bool postQueryAsync(char * accessToken,
  * \param ignoredeactivated  *Required*
  * \param onlymodified  *Required*
  * \param path  *Required*
+ * \param cmd  *Required*
  * \param handler The callback function to be invoked on completion. *Required*
  * \param accessToken The Authorization token. *Required*
  * \param userData The user data to be passed to the callback function.
  */
 bool postTreeActivationSync(char * accessToken,
-	bool ignoredeactivated, bool onlymodified, std::string path, 
+	bool ignoredeactivated, bool onlymodified, std::string path, std::string cmd, 
 	
 	void(* handler)(Error, void* ) , void* userData);
 
@@ -1118,12 +1122,13 @@ bool postTreeActivationSync(char * accessToken,
  * \param ignoredeactivated  *Required*
  * \param onlymodified  *Required*
  * \param path  *Required*
+ * \param cmd  *Required*
  * \param handler The callback function to be invoked on completion. *Required*
  * \param accessToken The Authorization token. *Required*
  * \param userData The user data to be passed to the callback function.
  */
 bool postTreeActivationAsync(char * accessToken,
-	bool ignoredeactivated, bool onlymodified, std::string path, 
+	bool ignoredeactivated, bool onlymodified, std::string path, std::string cmd, 
 	
 	void(* handler)(Error, void* ) , void* userData);
 

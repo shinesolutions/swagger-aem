@@ -7,20 +7,16 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 import io.swagger.annotations.*;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyEapServerCodegen", date = "2021-09-03T15:26:02.321+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyEapServerCodegen", date = "2026-08-17T02:15:40.232181116Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class KeystoreChainItems   {
   
-
   private String subject;
-
   private String issuer;
-
   private String notBefore;
-
   private String notAfter;
-
   private Integer serialNumber;
 
   /**
@@ -98,11 +94,11 @@ public class KeystoreChainItems   {
       return false;
     }
     KeystoreChainItems keystoreChainItems = (KeystoreChainItems) o;
-    return Objects.equals(subject, keystoreChainItems.subject) &&
-        Objects.equals(issuer, keystoreChainItems.issuer) &&
-        Objects.equals(notBefore, keystoreChainItems.notBefore) &&
-        Objects.equals(notAfter, keystoreChainItems.notAfter) &&
-        Objects.equals(serialNumber, keystoreChainItems.serialNumber);
+    return Objects.equals(this.subject, keystoreChainItems.subject) &&
+        Objects.equals(this.issuer, keystoreChainItems.issuer) &&
+        Objects.equals(this.notBefore, keystoreChainItems.notBefore) &&
+        Objects.equals(this.notAfter, keystoreChainItems.notAfter) &&
+        Objects.equals(this.serialNumber, keystoreChainItems.serialNumber);
   }
 
   @Override
@@ -129,10 +125,7 @@ public class KeystoreChainItems   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

@@ -14,9 +14,13 @@ import java.util.List;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
 
+/**
+* Represents a collection of functions to interact with the API endpoints.
+*/
 @Path("/crx")
 @Api(description = "the crx API")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2021-09-03T15:26:06.461+10:00[Australia/Melbourne]")public class CrxApi {
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2026-08-17T02:15:42.417242947Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+public class CrxApi {
 
     @GET
     @Path("/server/crx.default/jcr:root/.1.json")
@@ -73,7 +77,7 @@ import javax.validation.Valid;
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = String.class)
     })
-    public Response postPackageService(@QueryParam("cmd") @NotNull    String cmd) {
+    public Response postPackageService(@QueryParam("cmd") @NotNull   String cmd) {
         return Response.ok().entity("magic!").build();
     }
 
@@ -88,7 +92,7 @@ import javax.validation.Valid;
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = String.class)
     })
-    public Response postPackageServiceJson(@PathParam("path") String path,@QueryParam("cmd") @NotNull    String cmd,@QueryParam("groupName")    String groupName,@QueryParam("packageName")    String packageName,@QueryParam("packageVersion")    String packageVersion,@QueryParam("_charset_")    String charset,@QueryParam("force")    Boolean force,@QueryParam("recursive")    Boolean recursive, @FormParam(value = "package") InputStream _packageInputStream) {
+    public Response postPackageServiceJson(@PathParam("path") String path,@QueryParam("cmd") @NotNull   String cmd,@QueryParam("groupName")   String groupName,@QueryParam("packageName")   String packageName,@QueryParam("packageVersion")   String packageVersion,@QueryParam("_charset_")   String charset,@QueryParam("force")   Boolean force,@QueryParam("recursive")   Boolean recursive,@FormParam(value = "package") InputStream _packageInputStream) {
         return Response.ok().entity("magic!").build();
     }
 
@@ -102,7 +106,7 @@ import javax.validation.Valid;
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = String.class)
     })
-    public Response postPackageUpdate(@QueryParam("groupName") @NotNull    String groupName,@QueryParam("packageName") @NotNull    String packageName,@QueryParam("version") @NotNull    String version,@QueryParam("path") @NotNull    String path,@QueryParam("filter")    String filter,@QueryParam("_charset_")    String charset) {
+    public Response postPackageUpdate(@QueryParam("groupName") @NotNull   String groupName,@QueryParam("packageName") @NotNull   String packageName,@QueryParam("version") @NotNull   String version,@QueryParam("path") @NotNull   String path,@QueryParam("filter")   String filter,@QueryParam("_charset_")   String charset) {
         return Response.ok().entity("magic!").build();
     }
 
@@ -116,7 +120,7 @@ import javax.validation.Valid;
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = String.class)
     })
-    public Response postSetPassword(@QueryParam("old") @NotNull    String old,@QueryParam("plain") @NotNull    String plain,@QueryParam("verify") @NotNull    String verify) {
+    public Response postSetPassword(@QueryParam("old") @NotNull   String old,@QueryParam("plain") @NotNull   String plain,@QueryParam("verify") @NotNull   String verify) {
         return Response.ok().entity("magic!").build();
     }
 }

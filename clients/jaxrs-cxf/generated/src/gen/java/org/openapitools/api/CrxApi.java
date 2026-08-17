@@ -3,13 +3,9 @@ package org.openapitools.api;
 import java.io.File;
 import org.openapitools.model.InstallStatus;
 
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.MediaType;
 import org.apache.cxf.jaxrs.ext.multipart.*;
 
 import io.swagger.annotations.Api;
@@ -63,7 +59,7 @@ public interface CrxApi  {
     @ApiOperation(value = "", tags={ "crx" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public String postPackageService(@QueryParam("cmd") @NotNull  String cmd);
+    public String postPackageService(@QueryParam("cmd") @NotNull String cmd);
 
     @POST
     @Path("/packmgr/service/.json/{path}")
@@ -72,7 +68,7 @@ public interface CrxApi  {
     @ApiOperation(value = "", tags={ "crx" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public String postPackageServiceJson(@PathParam("path") String path, @QueryParam("cmd") @NotNull  String cmd, @QueryParam("groupName")  String groupName, @QueryParam("packageName")  String packageName, @QueryParam("packageVersion")  String packageVersion, @QueryParam("_charset_")  String charset, @QueryParam("force")  Boolean force, @QueryParam("recursive")  Boolean recursive,  @Multipart(value = "package" , required = false) Attachment _packageDetail);
+    public String postPackageServiceJson(@PathParam("path") String path, @QueryParam("cmd") @NotNull String cmd, @QueryParam("groupName") String groupName, @QueryParam("packageName") String packageName, @QueryParam("packageVersion") String packageVersion, @QueryParam("_charset_") String charset, @QueryParam("force") Boolean force, @QueryParam("recursive") Boolean recursive,  @Multipart(value = "package" , required = false) Attachment _packageDetail);
 
     @POST
     @Path("/packmgr/update.jsp")
@@ -80,7 +76,7 @@ public interface CrxApi  {
     @ApiOperation(value = "", tags={ "crx" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public String postPackageUpdate(@QueryParam("groupName") @NotNull  String groupName, @QueryParam("packageName") @NotNull  String packageName, @QueryParam("version") @NotNull  String version, @QueryParam("path") @NotNull  String path, @QueryParam("filter")  String filter, @QueryParam("_charset_")  String charset);
+    public String postPackageUpdate(@QueryParam("groupName") @NotNull String groupName, @QueryParam("packageName") @NotNull String packageName, @QueryParam("version") @NotNull String version, @QueryParam("path") @NotNull String path, @QueryParam("filter") String filter, @QueryParam("_charset_") String charset);
 
     @POST
     @Path("/explorer/ui/setpassword.jsp")
@@ -88,6 +84,5 @@ public interface CrxApi  {
     @ApiOperation(value = "", tags={ "crx" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public String postSetPassword(@QueryParam("old") @NotNull  String old, @QueryParam("plain") @NotNull  String plain, @QueryParam("verify") @NotNull  String verify);
+    public String postSetPassword(@QueryParam("old") @NotNull String old, @QueryParam("plain") @NotNull String plain, @QueryParam("verify") @NotNull String verify);
 }
-

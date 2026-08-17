@@ -11,12 +11,12 @@ import org.springframework.context.ConfigurableApplicationContext
 
 class get extends Simulation {
 
-  
+
 	val app: ConfigurableApplicationContext = SpringApplication.run(classOf[com.prokarma.pkmst.PkmstApplication])
   Runtime.getRuntime.addShutdownHook(new Thread() {
     override def run(): Unit = app.stop()
   })
-  
+
 	val conf = ConfigFactory.load()
    val baseUrl = conf.getString("url")
    val noOfUsers: Int = conf.getInt("noOfUsers")

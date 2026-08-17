@@ -3,7 +3,7 @@ Adobe Experience Manager (AEM) API
 
 Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
 
-API version: 3.5.0-pre.0
+API version: 3.7.1-pre.0
 Contact: opensource@shinesolutions.com
 */
 
@@ -13,78 +13,81 @@ package openapi
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io"
+	"net/http"
+	"net/url"
 	"os"
 )
 
-// Linger please
-var (
-	_ _context.Context
-)
 
-// GraniteApiService GraniteApi service
-type GraniteApiService service
+// GraniteAPIService GraniteAPI service
+type GraniteAPIService service
 
 type ApiSslSetupRequest struct {
-	ctx _context.Context
-	ApiService *GraniteApiService
+	ctx context.Context
+	ApiService *GraniteAPIService
 	keystorePassword *string
 	keystorePasswordConfirm *string
 	truststorePassword *string
 	truststorePasswordConfirm *string
 	httpsHostname *string
 	httpsPort *string
-	privatekeyFile **os.File
-	certificateFile **os.File
+	privatekeyFile *os.File
+	certificateFile *os.File
 }
 
 func (r ApiSslSetupRequest) KeystorePassword(keystorePassword string) ApiSslSetupRequest {
 	r.keystorePassword = &keystorePassword
 	return r
 }
+
 func (r ApiSslSetupRequest) KeystorePasswordConfirm(keystorePasswordConfirm string) ApiSslSetupRequest {
 	r.keystorePasswordConfirm = &keystorePasswordConfirm
 	return r
 }
+
 func (r ApiSslSetupRequest) TruststorePassword(truststorePassword string) ApiSslSetupRequest {
 	r.truststorePassword = &truststorePassword
 	return r
 }
+
 func (r ApiSslSetupRequest) TruststorePasswordConfirm(truststorePasswordConfirm string) ApiSslSetupRequest {
 	r.truststorePasswordConfirm = &truststorePasswordConfirm
 	return r
 }
+
 func (r ApiSslSetupRequest) HttpsHostname(httpsHostname string) ApiSslSetupRequest {
 	r.httpsHostname = &httpsHostname
 	return r
 }
+
 func (r ApiSslSetupRequest) HttpsPort(httpsPort string) ApiSslSetupRequest {
 	r.httpsPort = &httpsPort
 	return r
 }
+
 func (r ApiSslSetupRequest) PrivatekeyFile(privatekeyFile *os.File) ApiSslSetupRequest {
-	r.privatekeyFile = &privatekeyFile
-	return r
-}
-func (r ApiSslSetupRequest) CertificateFile(certificateFile *os.File) ApiSslSetupRequest {
-	r.certificateFile = &certificateFile
+	r.privatekeyFile = privatekeyFile
 	return r
 }
 
-func (r ApiSslSetupRequest) Execute() (string, *_nethttp.Response, error) {
+func (r ApiSslSetupRequest) CertificateFile(certificateFile *os.File) ApiSslSetupRequest {
+	r.certificateFile = certificateFile
+	return r
+}
+
+func (r ApiSslSetupRequest) Execute() (string, *http.Response, error) {
 	return r.ApiService.SslSetupExecute(r)
 }
 
 /*
 SslSetup Method for SslSetup
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSslSetupRequest
 */
-func (a *GraniteApiService) SslSetup(ctx _context.Context) ApiSslSetupRequest {
+func (a *GraniteAPIService) SslSetup(ctx context.Context) ApiSslSetupRequest {
 	return ApiSslSetupRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -93,26 +96,24 @@ func (a *GraniteApiService) SslSetup(ctx _context.Context) ApiSslSetupRequest {
 
 // Execute executes the request
 //  @return string
-func (a *GraniteApiService) SslSetupExecute(r ApiSslSetupRequest) (string, *_nethttp.Response, error) {
+func (a *GraniteAPIService) SslSetupExecute(r ApiSslSetupRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 		localVarReturnValue  string
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GraniteApiService.SslSetup")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GraniteAPIService.SslSetup")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/libs/granite/security/post/sslSetup.html"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.keystorePassword == nil {
 		return localVarReturnValue, nil, reportError("keystorePassword is required and must be specified")
 	}
@@ -132,12 +133,12 @@ func (a *GraniteApiService) SslSetupExecute(r ApiSslSetupRequest) (string, *_net
 		return localVarReturnValue, nil, reportError("httpsPort is required and must be specified")
 	}
 
-	localVarQueryParams.Add("keystorePassword", parameterToString(*r.keystorePassword, ""))
-	localVarQueryParams.Add("keystorePasswordConfirm", parameterToString(*r.keystorePasswordConfirm, ""))
-	localVarQueryParams.Add("truststorePassword", parameterToString(*r.truststorePassword, ""))
-	localVarQueryParams.Add("truststorePasswordConfirm", parameterToString(*r.truststorePasswordConfirm, ""))
-	localVarQueryParams.Add("httpsHostname", parameterToString(*r.httpsHostname, ""))
-	localVarQueryParams.Add("httpsPort", parameterToString(*r.httpsPort, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "keystorePassword", r.keystorePassword, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "keystorePasswordConfirm", r.keystorePasswordConfirm, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "truststorePassword", r.truststorePassword, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "truststorePasswordConfirm", r.truststorePasswordConfirm, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "httpsHostname", r.httpsHostname, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "httpsPort", r.httpsPort, "form", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"multipart/form-data"}
 
@@ -155,29 +156,37 @@ func (a *GraniteApiService) SslSetupExecute(r ApiSslSetupRequest) (string, *_net
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	localVarFormFileName = "privatekeyFile"
-	var localVarFile *os.File
-	if r.privatekeyFile != nil {
-		localVarFile = *r.privatekeyFile
+	var privatekeyFileLocalVarFormFileName string
+	var privatekeyFileLocalVarFileName     string
+	var privatekeyFileLocalVarFileBytes    []byte
+
+	privatekeyFileLocalVarFormFileName = "privatekeyFile"
+	privatekeyFileLocalVarFile := r.privatekeyFile
+
+	if privatekeyFileLocalVarFile != nil {
+		fbs, _ := io.ReadAll(privatekeyFileLocalVarFile)
+
+		privatekeyFileLocalVarFileBytes = fbs
+		privatekeyFileLocalVarFileName = privatekeyFileLocalVarFile.Name()
+		privatekeyFileLocalVarFile.Close()
+		formFiles = append(formFiles, formFile{fileBytes: privatekeyFileLocalVarFileBytes, fileName: privatekeyFileLocalVarFileName, formFileName: privatekeyFileLocalVarFormFileName})
 	}
-	if localVarFile != nil {
-		fbs, _ := _ioutil.ReadAll(localVarFile)
-		localVarFileBytes = fbs
-		localVarFileName = localVarFile.Name()
-		localVarFile.Close()
+	var certificateFileLocalVarFormFileName string
+	var certificateFileLocalVarFileName     string
+	var certificateFileLocalVarFileBytes    []byte
+
+	certificateFileLocalVarFormFileName = "certificateFile"
+	certificateFileLocalVarFile := r.certificateFile
+
+	if certificateFileLocalVarFile != nil {
+		fbs, _ := io.ReadAll(certificateFileLocalVarFile)
+
+		certificateFileLocalVarFileBytes = fbs
+		certificateFileLocalVarFileName = certificateFileLocalVarFile.Name()
+		certificateFileLocalVarFile.Close()
+		formFiles = append(formFiles, formFile{fileBytes: certificateFileLocalVarFileBytes, fileName: certificateFileLocalVarFileName, formFileName: certificateFileLocalVarFormFileName})
 	}
-	localVarFormFileName = "certificateFile"
-	var localVarFile *os.File
-	if r.certificateFile != nil {
-		localVarFile = *r.certificateFile
-	}
-	if localVarFile != nil {
-		fbs, _ := _ioutil.ReadAll(localVarFile)
-		localVarFileBytes = fbs
-		localVarFileName = localVarFile.Name()
-		localVarFile.Close()
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -187,15 +196,15 @@ func (a *GraniteApiService) SslSetupExecute(r ApiSslSetupRequest) (string, *_net
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -205,13 +214,14 @@ func (a *GraniteApiService) SslSetupExecute(r ApiSslSetupRequest) (string, *_net
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

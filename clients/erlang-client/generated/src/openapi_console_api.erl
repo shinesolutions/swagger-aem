@@ -18,17 +18,17 @@ get_aem_product_info(Ctx) ->
 -spec get_aem_product_info(ctx:ctx(), maps:map()) -> {ok, [binary()], openapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), openapi_utils:response_info()}.
 get_aem_product_info(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
-    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+    Cfg = maps:get(cfg, Optional, application:get_env(openapi_api, config, #{})),
 
     Method = get,
-    Path = [<<"/system/console/status-productinfo.json">>],
+    Path = [?BASE_URL, "/system/console/status-productinfo.json"],
     QS = [],
     Headers = [],
     Body1 = [],
     ContentTypeHeader = openapi_utils:select_header_content_type([]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    openapi_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+    openapi_utils:request(Ctx, Method, Path, QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% 
@@ -39,17 +39,17 @@ get_bundle_info(Ctx, Name) ->
 -spec get_bundle_info(ctx:ctx(), binary(), maps:map()) -> {ok, openapi_bundle_info:openapi_bundle_info(), openapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), openapi_utils:response_info()}.
 get_bundle_info(Ctx, Name, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
-    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+    Cfg = maps:get(cfg, Optional, application:get_env(openapi_api, config, #{})),
 
     Method = get,
-    Path = [<<"/system/console/bundles/", Name, ".json">>],
+    Path = [?BASE_URL, "/system/console/bundles/", Name, ".json"],
     QS = [],
     Headers = [],
     Body1 = [],
     ContentTypeHeader = openapi_utils:select_header_content_type([]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    openapi_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+    openapi_utils:request(Ctx, Method, Path, QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% 
@@ -60,17 +60,17 @@ get_config_mgr(Ctx) ->
 -spec get_config_mgr(ctx:ctx(), maps:map()) -> {ok, binary(), openapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), openapi_utils:response_info()}.
 get_config_mgr(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
-    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+    Cfg = maps:get(cfg, Optional, application:get_env(openapi_api, config, #{})),
 
     Method = get,
-    Path = [<<"/system/console/configMgr">>],
+    Path = [?BASE_URL, "/system/console/configMgr"],
     QS = [],
     Headers = [],
     Body1 = [],
     ContentTypeHeader = openapi_utils:select_header_content_type([]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    openapi_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+    openapi_utils:request(Ctx, Method, Path, QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% 
@@ -81,17 +81,17 @@ post_bundle(Ctx, Name, Action) ->
 -spec post_bundle(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, [], openapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), openapi_utils:response_info()}.
 post_bundle(Ctx, Name, Action, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
-    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+    Cfg = maps:get(cfg, Optional, application:get_env(openapi_api, config, #{})),
 
     Method = post,
-    Path = [<<"/system/console/bundles/", Name, "">>],
+    Path = [?BASE_URL, "/system/console/bundles/", Name, ""],
     QS = lists:flatten([{<<"action">>, Action}])++openapi_utils:optional_params([], _OptionalParams),
     Headers = [],
     Body1 = [],
     ContentTypeHeader = openapi_utils:select_header_content_type([]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    openapi_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+    openapi_utils:request(Ctx, Method, Path, QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% 
@@ -102,17 +102,17 @@ post_jmx_repository(Ctx, Action) ->
 -spec post_jmx_repository(ctx:ctx(), binary(), maps:map()) -> {ok, [], openapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), openapi_utils:response_info()}.
 post_jmx_repository(Ctx, Action, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
-    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+    Cfg = maps:get(cfg, Optional, application:get_env(openapi_api, config, #{})),
 
     Method = post,
-    Path = [<<"/system/console/jmx/com.adobe.granite:type=Repository/op/", Action, "">>],
+    Path = [?BASE_URL, "/system/console/jmx/com.adobe.granite:type=Repository/op/", Action, ""],
     QS = [],
     Headers = [],
     Body1 = [],
     ContentTypeHeader = openapi_utils:select_header_content_type([]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    openapi_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+    openapi_utils:request(Ctx, Method, Path, QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% 
@@ -123,16 +123,16 @@ post_saml_configuration(Ctx) ->
 -spec post_saml_configuration(ctx:ctx(), maps:map()) -> {ok, openapi_saml_configuration_info:openapi_saml_configuration_info(), openapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), openapi_utils:response_info()}.
 post_saml_configuration(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
-    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+    Cfg = maps:get(cfg, Optional, application:get_env(openapi_api, config, #{})),
 
     Method = post,
-    Path = [<<"/system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler">>],
+    Path = [?BASE_URL, "/system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler"],
     QS = lists:flatten([])++openapi_utils:optional_params(['post', 'apply', 'delete', 'action', '$location', 'path', 'service.ranking', 'idpUrl', 'idpCertAlias', 'idpHttpRedirect', 'serviceProviderEntityId', 'assertionConsumerServiceURL', 'spPrivateKeyAlias', 'keyStorePassword', 'defaultRedirectUrl', 'userIDAttribute', 'useEncryption', 'createUser', 'addGroupMemberships', 'groupMembershipAttribute', 'defaultGroups', 'nameIdFormat', 'synchronizeAttributes', 'handleLogout', 'logoutUrl', 'clockTolerance', 'digestMethod', 'signatureMethod', 'userIntermediatePath', 'propertylist'], _OptionalParams),
     Headers = [],
     Body1 = [],
     ContentTypeHeader = openapi_utils:select_header_content_type([]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    openapi_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+    openapi_utils:request(Ctx, Method, Path, QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 

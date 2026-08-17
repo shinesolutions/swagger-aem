@@ -10,13 +10,19 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2021-09-03T15:26:06.461+10:00[Australia/Melbourne]")public class BundleDataProp   {
-  
-  private @Valid String key;
-  private @Valid String value;
+@JsonTypeName("BundleDataProp")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2026-08-17T02:15:42.417242947Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+public class BundleDataProp   {
+  private String key;
+  private String value;
+
+  public BundleDataProp() {
+  }
 
   /**
    * Bundle data key
@@ -27,19 +33,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "Bundle data key")
   @JsonProperty("key")
   public String getKey() {
     return key;
   }
 
+  @JsonProperty("key")
   public void setKey(String key) {
     this.key = key;
   }
 
-/**
+  /**
    * Bundle data value
    **/
   public BundleDataProp value(String value) {
@@ -48,14 +53,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "Bundle data value")
   @JsonProperty("value")
   public String getValue() {
     return value;
   }
 
+  @JsonProperty("value")
   public void setValue(String value) {
     this.value = value;
   }
@@ -95,12 +99,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 
 
 }
-

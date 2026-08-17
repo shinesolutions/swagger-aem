@@ -1,32 +1,31 @@
 package org.openapitools.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.model.BundleData;
 
 import io.swagger.annotations.ApiModelProperty;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlEnumValue;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 public class BundleInfo  {
   
-  @ApiModelProperty(value = "Status description of all bundles")
  /**
-   * Status description of all bundles
-  **/
+  * Status description of all bundles
+  */
+  @ApiModelProperty(value = "Status description of all bundles")
+
   private String status;
 
   @ApiModelProperty(value = "")
-  private List<Integer> s = null;
+
+  private List<Integer> s = new ArrayList<>();
 
   @ApiModelProperty(value = "")
-  private List<BundleData> data = null;
+
+  private List<BundleData> data = new ArrayList<>();
  /**
    * Status description of all bundles
    * @return status
@@ -91,6 +90,24 @@ public class BundleInfo  {
     return this;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    BundleInfo bundleInfo = (BundleInfo) o;
+    return Objects.equals(this.status, bundleInfo.status) &&
+        Objects.equals(this.s, bundleInfo.s) &&
+        Objects.equals(this.data, bundleInfo.data);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(status, s, data);
+  }
 
   @Override
   public String toString() {
@@ -109,10 +126,7 @@ public class BundleInfo  {
    * (except the first line).
    */
   private static String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

@@ -1,0 +1,9 @@
+.openapi-generator-ignore
+Apis/ConsoleApi.http
+Apis/CqApi.http
+Apis/CrxApi.http
+Apis/CustomApi.http
+Apis/GraniteApi.http
+Apis/SlingApi.http
+Apis/http-client.template.env.json
+README.md

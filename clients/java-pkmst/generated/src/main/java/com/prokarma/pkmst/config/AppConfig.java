@@ -19,7 +19,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 	 * .allowedHeaders("header1", "header2", "header3")
 	 * .exposedHeaders("header1", "header2")
 	 * .allowCredentials(false).maxAge(3600);
-	 * 
+	 *
 	 * @return a new WebMvcConfigurer instance
 	 */
 	@Bean

@@ -3,7 +3,7 @@ Adobe Experience Manager (AEM) API
 
 Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
 
-API version: 3.5.0-pre.0
+API version: 3.7.1-pre.0
 Contact: opensource@shinesolutions.com
 */
 
@@ -14,6 +14,9 @@ package openapi
 import (
 	"encoding/json"
 )
+
+// checks if the KeystoreChainItems type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &KeystoreChainItems{}
 
 // KeystoreChainItems struct for KeystoreChainItems
 type KeystoreChainItems struct {
@@ -48,7 +51,7 @@ func NewKeystoreChainItemsWithDefaults() *KeystoreChainItems {
 
 // GetSubject returns the Subject field value if set, zero value otherwise.
 func (o *KeystoreChainItems) GetSubject() string {
-	if o == nil || o.Subject == nil {
+	if o == nil || IsNil(o.Subject) {
 		var ret string
 		return ret
 	}
@@ -58,7 +61,7 @@ func (o *KeystoreChainItems) GetSubject() string {
 // GetSubjectOk returns a tuple with the Subject field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KeystoreChainItems) GetSubjectOk() (*string, bool) {
-	if o == nil || o.Subject == nil {
+	if o == nil || IsNil(o.Subject) {
 		return nil, false
 	}
 	return o.Subject, true
@@ -66,7 +69,7 @@ func (o *KeystoreChainItems) GetSubjectOk() (*string, bool) {
 
 // HasSubject returns a boolean if a field has been set.
 func (o *KeystoreChainItems) HasSubject() bool {
-	if o != nil && o.Subject != nil {
+	if o != nil && !IsNil(o.Subject) {
 		return true
 	}
 
@@ -80,7 +83,7 @@ func (o *KeystoreChainItems) SetSubject(v string) {
 
 // GetIssuer returns the Issuer field value if set, zero value otherwise.
 func (o *KeystoreChainItems) GetIssuer() string {
-	if o == nil || o.Issuer == nil {
+	if o == nil || IsNil(o.Issuer) {
 		var ret string
 		return ret
 	}
@@ -90,7 +93,7 @@ func (o *KeystoreChainItems) GetIssuer() string {
 // GetIssuerOk returns a tuple with the Issuer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KeystoreChainItems) GetIssuerOk() (*string, bool) {
-	if o == nil || o.Issuer == nil {
+	if o == nil || IsNil(o.Issuer) {
 		return nil, false
 	}
 	return o.Issuer, true
@@ -98,7 +101,7 @@ func (o *KeystoreChainItems) GetIssuerOk() (*string, bool) {
 
 // HasIssuer returns a boolean if a field has been set.
 func (o *KeystoreChainItems) HasIssuer() bool {
-	if o != nil && o.Issuer != nil {
+	if o != nil && !IsNil(o.Issuer) {
 		return true
 	}
 
@@ -112,7 +115,7 @@ func (o *KeystoreChainItems) SetIssuer(v string) {
 
 // GetNotBefore returns the NotBefore field value if set, zero value otherwise.
 func (o *KeystoreChainItems) GetNotBefore() string {
-	if o == nil || o.NotBefore == nil {
+	if o == nil || IsNil(o.NotBefore) {
 		var ret string
 		return ret
 	}
@@ -122,7 +125,7 @@ func (o *KeystoreChainItems) GetNotBefore() string {
 // GetNotBeforeOk returns a tuple with the NotBefore field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KeystoreChainItems) GetNotBeforeOk() (*string, bool) {
-	if o == nil || o.NotBefore == nil {
+	if o == nil || IsNil(o.NotBefore) {
 		return nil, false
 	}
 	return o.NotBefore, true
@@ -130,7 +133,7 @@ func (o *KeystoreChainItems) GetNotBeforeOk() (*string, bool) {
 
 // HasNotBefore returns a boolean if a field has been set.
 func (o *KeystoreChainItems) HasNotBefore() bool {
-	if o != nil && o.NotBefore != nil {
+	if o != nil && !IsNil(o.NotBefore) {
 		return true
 	}
 
@@ -144,7 +147,7 @@ func (o *KeystoreChainItems) SetNotBefore(v string) {
 
 // GetNotAfter returns the NotAfter field value if set, zero value otherwise.
 func (o *KeystoreChainItems) GetNotAfter() string {
-	if o == nil || o.NotAfter == nil {
+	if o == nil || IsNil(o.NotAfter) {
 		var ret string
 		return ret
 	}
@@ -154,7 +157,7 @@ func (o *KeystoreChainItems) GetNotAfter() string {
 // GetNotAfterOk returns a tuple with the NotAfter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KeystoreChainItems) GetNotAfterOk() (*string, bool) {
-	if o == nil || o.NotAfter == nil {
+	if o == nil || IsNil(o.NotAfter) {
 		return nil, false
 	}
 	return o.NotAfter, true
@@ -162,7 +165,7 @@ func (o *KeystoreChainItems) GetNotAfterOk() (*string, bool) {
 
 // HasNotAfter returns a boolean if a field has been set.
 func (o *KeystoreChainItems) HasNotAfter() bool {
-	if o != nil && o.NotAfter != nil {
+	if o != nil && !IsNil(o.NotAfter) {
 		return true
 	}
 
@@ -176,7 +179,7 @@ func (o *KeystoreChainItems) SetNotAfter(v string) {
 
 // GetSerialNumber returns the SerialNumber field value if set, zero value otherwise.
 func (o *KeystoreChainItems) GetSerialNumber() int32 {
-	if o == nil || o.SerialNumber == nil {
+	if o == nil || IsNil(o.SerialNumber) {
 		var ret int32
 		return ret
 	}
@@ -186,7 +189,7 @@ func (o *KeystoreChainItems) GetSerialNumber() int32 {
 // GetSerialNumberOk returns a tuple with the SerialNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KeystoreChainItems) GetSerialNumberOk() (*int32, bool) {
-	if o == nil || o.SerialNumber == nil {
+	if o == nil || IsNil(o.SerialNumber) {
 		return nil, false
 	}
 	return o.SerialNumber, true
@@ -194,7 +197,7 @@ func (o *KeystoreChainItems) GetSerialNumberOk() (*int32, bool) {
 
 // HasSerialNumber returns a boolean if a field has been set.
 func (o *KeystoreChainItems) HasSerialNumber() bool {
-	if o != nil && o.SerialNumber != nil {
+	if o != nil && !IsNil(o.SerialNumber) {
 		return true
 	}
 
@@ -207,23 +210,31 @@ func (o *KeystoreChainItems) SetSerialNumber(v int32) {
 }
 
 func (o KeystoreChainItems) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Subject != nil {
-		toSerialize["subject"] = o.Subject
-	}
-	if o.Issuer != nil {
-		toSerialize["issuer"] = o.Issuer
-	}
-	if o.NotBefore != nil {
-		toSerialize["notBefore"] = o.NotBefore
-	}
-	if o.NotAfter != nil {
-		toSerialize["notAfter"] = o.NotAfter
-	}
-	if o.SerialNumber != nil {
-		toSerialize["serialNumber"] = o.SerialNumber
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o KeystoreChainItems) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Subject) {
+		toSerialize["subject"] = o.Subject
+	}
+	if !IsNil(o.Issuer) {
+		toSerialize["issuer"] = o.Issuer
+	}
+	if !IsNil(o.NotBefore) {
+		toSerialize["notBefore"] = o.NotBefore
+	}
+	if !IsNil(o.NotAfter) {
+		toSerialize["notAfter"] = o.NotAfter
+	}
+	if !IsNil(o.SerialNumber) {
+		toSerialize["serialNumber"] = o.SerialNumber
+	}
+	return toSerialize, nil
 }
 
 type NullableKeystoreChainItems struct {

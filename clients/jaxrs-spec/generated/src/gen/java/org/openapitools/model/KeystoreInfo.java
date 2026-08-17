@@ -3,6 +3,7 @@ package org.openapitools.model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.model.KeystoreItems;
 import javax.validation.constraints.*;
@@ -13,35 +14,56 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2021-09-03T15:26:06.461+10:00[Australia/Melbourne]")public class KeystoreInfo   {
-  
-  private @Valid List<KeystoreItems> aliases = new ArrayList<KeystoreItems>();
-  private @Valid Boolean exists;
+@JsonTypeName("KeystoreInfo")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2026-08-17T02:15:42.417242947Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+public class KeystoreInfo   {
+  private @Valid List<@Valid KeystoreItems> aliases = new ArrayList<>();
+  private Boolean exists;
+
+  public KeystoreInfo() {
+  }
 
   /**
    **/
-  public KeystoreInfo aliases(List<KeystoreItems> aliases) {
+  public KeystoreInfo aliases(List<@Valid KeystoreItems> aliases) {
     this.aliases = aliases;
     return this;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("aliases")
-  public List<KeystoreItems> getAliases() {
+  @Valid public List<@Valid KeystoreItems> getAliases() {
     return aliases;
   }
 
-  public void setAliases(List<KeystoreItems> aliases) {
+  @JsonProperty("aliases")
+  public void setAliases(List<@Valid KeystoreItems> aliases) {
     this.aliases = aliases;
   }
 
-/**
+  public KeystoreInfo addAliasesItem(KeystoreItems aliasesItem) {
+    if (this.aliases == null) {
+      this.aliases = new ArrayList<>();
+    }
+
+    this.aliases.add(aliasesItem);
+    return this;
+  }
+
+  public KeystoreInfo removeAliasesItem(KeystoreItems aliasesItem) {
+    if (aliasesItem != null && this.aliases != null) {
+      this.aliases.remove(aliasesItem);
+    }
+
+    return this;
+  }
+  /**
    * False if truststore don&#39;t exist
    **/
   public KeystoreInfo exists(Boolean exists) {
@@ -50,14 +72,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "False if truststore don't exist")
   @JsonProperty("exists")
   public Boolean getExists() {
     return exists;
   }
 
+  @JsonProperty("exists")
   public void setExists(Boolean exists) {
     this.exists = exists;
   }
@@ -97,12 +118,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 
 
 }
-

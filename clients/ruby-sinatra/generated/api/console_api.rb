@@ -4,9 +4,9 @@ require 'json'
 MyApp.add_route('GET', '/system/console/status-productinfo.json', {
   "resourcePath" => "/Console",
   "summary" => "",
-  "nickname" => "get_aem_product_info", 
+  "nickname" => "get_aem_product_info",
   "responseClass" => "Array<String>",
-  "endpoint" => "/system/console/status-productinfo.json", 
+  "endpoint" => "/system/console/status-productinfo.json",
   "notes" => "",
   "parameters" => [
     ]}) do
@@ -20,9 +20,9 @@ end
 MyApp.add_route('GET', '/system/console/bundles/{name}.json', {
   "resourcePath" => "/Console",
   "summary" => "",
-  "nickname" => "get_bundle_info", 
+  "nickname" => "get_bundle_info",
   "responseClass" => "BundleInfo",
-  "endpoint" => "/system/console/bundles/{name}.json", 
+  "endpoint" => "/system/console/bundles/{name}.json",
   "notes" => "",
   "parameters" => [
     {
@@ -42,9 +42,9 @@ end
 MyApp.add_route('GET', '/system/console/configMgr', {
   "resourcePath" => "/Console",
   "summary" => "",
-  "nickname" => "get_config_mgr", 
+  "nickname" => "get_config_mgr",
   "responseClass" => "String",
-  "endpoint" => "/system/console/configMgr", 
+  "endpoint" => "/system/console/configMgr",
   "notes" => "",
   "parameters" => [
     ]}) do
@@ -58,9 +58,9 @@ end
 MyApp.add_route('POST', '/system/console/bundles/{name}', {
   "resourcePath" => "/Console",
   "summary" => "",
-  "nickname" => "post_bundle", 
+  "nickname" => "post_bundle",
   "responseClass" => "void",
-  "endpoint" => "/system/console/bundles/{name}", 
+  "endpoint" => "/system/console/bundles/{name}",
   "notes" => "",
   "parameters" => [
     {
@@ -87,9 +87,9 @@ end
 MyApp.add_route('POST', '/system/console/jmx/com.adobe.granite:type=Repository/op/{action}', {
   "resourcePath" => "/Console",
   "summary" => "",
-  "nickname" => "post_jmx_repository", 
+  "nickname" => "post_jmx_repository",
   "responseClass" => "void",
-  "endpoint" => "/system/console/jmx/com.adobe.granite:type=Repository/op/{action}", 
+  "endpoint" => "/system/console/jmx/com.adobe.granite:type=Repository/op/{action}",
   "notes" => "",
   "parameters" => [
     {
@@ -109,9 +109,9 @@ end
 MyApp.add_route('POST', '/system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler', {
   "resourcePath" => "/Console",
   "summary" => "",
-  "nickname" => "post_saml_configuration", 
+  "nickname" => "post_saml_configuration",
   "responseClass" => "SamlConfigurationInfo",
-  "endpoint" => "/system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler", 
+  "endpoint" => "/system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler",
   "notes" => "",
   "parameters" => [
     {

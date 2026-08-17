@@ -19,15 +19,12 @@ info:
   app:
     name: Pkmst
     description: Microservice developed by PKMST
-    version: 3.5.0-pre.0
-
-health:
-  hystrix:
-    enabled: true
-
+    version: 3.7.1-pre.0
+    
 security:
   basic:
     enabled: false
+
 # provide rabbitmq configuration
 spring:
   rabbitmq:
@@ -46,4 +43,3 @@ logging:
       springframework:
         cloud:
           sleuth: DEBUG
-          

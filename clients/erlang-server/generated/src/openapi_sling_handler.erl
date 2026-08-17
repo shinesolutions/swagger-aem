@@ -1,912 +1,770 @@
-%% basic handler
 -module(openapi_sling_handler).
+-moduledoc """
+Exposes the following operation IDs:
+
+- `DELETE` to `/etc/replication/agents.:runmode/:name`, OperationId: `deleteAgent`:
+.
+
+
+- `DELETE` to `/:path/:name`, OperationId: `deleteNode`:
+.
+
+
+- `GET` to `/etc/replication/agents.:runmode/:name`, OperationId: `getAgent`:
+.
+
+
+- `GET` to `/etc/replication/agents.:runmode.-1.json`, OperationId: `getAgents`:
+.
+
+
+- `GET` to `/:intermediatePath/:authorizableId.ks.json`, OperationId: `getAuthorizableKeystore`:
+.
+
+
+- `GET` to `/:intermediatePath/:authorizableId/keystore/store.p12`, OperationId: `getKeystore`:
+.
+
+
+- `GET` to `/:path/:name`, OperationId: `getNode`:
+.
+
+
+- `GET` to `/etc/packages/:group/:name-:version.zip`, OperationId: `getPackage`:
+.
+
+
+- `GET` to `/etc/packages/:group/:name-:version.zip/jcr:content/vlt:definition/filter.tidy.2.json`, OperationId: `getPackageFilter`:
+.
+
+
+- `GET` to `/bin/querybuilder.json`, OperationId: `getQuery`:
+.
+
+
+- `GET` to `/etc/truststore/truststore.p12`, OperationId: `getTruststore`:
+.
+
+
+- `GET` to `/libs/granite/security/truststore.json`, OperationId: `getTruststoreInfo`:
+.
+
+
+- `POST` to `/etc/replication/agents.:runmode/:name`, OperationId: `postAgent`:
+.
+
+
+- `POST` to `/:intermediatePath/:authorizableId.ks.html`, OperationId: `postAuthorizableKeystore`:
+.
+
+
+- `POST` to `/libs/granite/security/post/authorizables`, OperationId: `postAuthorizables`:
+.
+
+
+- `POST` to `/apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config`, OperationId: `postConfigAdobeGraniteSamlAuthenticationHandler`:
+.
+
+
+- `POST` to `/apps/system/config/org.apache.felix.http`, OperationId: `postConfigApacheFelixJettyBasedHttpService`:
+.
+
+
+- `POST` to `/apps/system/config/org.apache.http.proxyconfigurator.config`, OperationId: `postConfigApacheHttpComponentsProxyConfiguration`:
+.
+
+
+- `POST` to `/apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet`, OperationId: `postConfigApacheSlingDavExServlet`:
+.
+
+
+- `POST` to `/apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet`, OperationId: `postConfigApacheSlingGetServlet`:
+.
+
+
+- `POST` to `/apps/system/config/org.apache.sling.security.impl.ReferrerFilter`, OperationId: `postConfigApacheSlingReferrerFilter`:
+.
+
+
+- `POST` to `/apps/system/config/:configNodeName`, OperationId: `postConfigProperty`:
+.
+
+
+- `POST` to `/:path/:name`, OperationId: `postNode`:
+.
+
+
+- `POST` to `/:path/:name.rw.html`, OperationId: `postNodeRw`:
+.
+
+
+- `POST` to `/:path/`, OperationId: `postPath`:
+.
+
+
+- `POST` to `/bin/querybuilder.json`, OperationId: `postQuery`:
+.
+
+
+- `POST` to `/libs/replication/treeactivation.html`, OperationId: `postTreeActivation`:
+.
+
+
+- `POST` to `/libs/granite/security/post/truststore`, OperationId: `postTruststore`:
+.
+
+
+- `POST` to `/etc/truststore`, OperationId: `postTruststorePKCS12`:
+.
+
+
+""".
+
+-behaviour(cowboy_rest).
+
+-include_lib("kernel/include/logger.hrl").
 
 %% Cowboy REST callbacks
--export([allowed_methods/2]).
 -export([init/2]).
--export([allow_missing_post/2]).
+-export([allowed_methods/2]).
 -export([content_types_accepted/2]).
 -export([content_types_provided/2]).
 -export([delete_resource/2]).
 -export([is_authorized/2]).
--export([known_content_type/2]).
--export([malformed_request/2]).
 -export([valid_content_headers/2]).
--export([valid_entity_length/2]).
+-export([handle_type_accepted/2, handle_type_provided/2]).
 
-%% Handlers
--export([handle_request_json/2]).
+-ignore_xref([handle_type_accepted/2, handle_type_provided/2]).
 
--record(state, {
-    operation_id :: openapi_api:operation_id(),
-    logic_handler :: atom(),
-    validator_state :: jesse_state:state(),
-    context=#{} :: #{}
-}).
+-export_type([class/0, operation_id/0]).
 
--type state() :: state().
+-type class() :: 'sling'.
 
--spec init(Req :: cowboy_req:req(), Opts :: openapi_router:init_opts()) ->
-    {cowboy_rest, Req :: cowboy_req:req(), State :: state()}.
+-type operation_id() ::
+    'deleteAgent' %% 
+    | 'deleteNode' %% 
+    | 'getAgent' %% 
+    | 'getAgents' %% 
+    | 'getAuthorizableKeystore' %% 
+    | 'getKeystore' %% 
+    | 'getNode' %% 
+    | 'getPackage' %% 
+    | 'getPackageFilter' %% 
+    | 'getQuery' %% 
+    | 'getTruststore' %% 
+    | 'getTruststoreInfo' %% 
+    | 'postAgent' %% 
+    | 'postAuthorizableKeystore' %% 
+    | 'postAuthorizables' %% 
+    | 'postConfigAdobeGraniteSamlAuthenticationHandler' %% 
+    | 'postConfigApacheFelixJettyBasedHttpService' %% 
+    | 'postConfigApacheHttpComponentsProxyConfiguration' %% 
+    | 'postConfigApacheSlingDavExServlet' %% 
+    | 'postConfigApacheSlingGetServlet' %% 
+    | 'postConfigApacheSlingReferrerFilter' %% 
+    | 'postConfigProperty' %% 
+    | 'postNode' %% 
+    | 'postNodeRw' %% 
+    | 'postPath' %% 
+    | 'postQuery' %% 
+    | 'postTreeActivation' %% 
+    | 'postTruststore' %% 
+    | 'postTruststorePKCS12'. %% 
 
-init(Req, {Operations, LogicHandler, ValidatorMod}) ->
+
+-record(state,
+        {operation_id :: operation_id(),
+         accept_callback :: openapi_logic_handler:accept_callback(),
+         provide_callback :: openapi_logic_handler:provide_callback(),
+         api_key_callback :: openapi_logic_handler:api_key_callback(),
+         context = #{} :: openapi_logic_handler:context()}).
+
+-type state() :: #state{}.
+
+-spec init(cowboy_req:req(), openapi_router:init_opts()) ->
+    {cowboy_rest, cowboy_req:req(), state()}.
+init(Req, {Operations, Module}) ->
     Method = cowboy_req:method(Req),
     OperationID = maps:get(Method, Operations, undefined),
-
-    ValidatorState = ValidatorMod:get_validator_state(),
-
-    error_logger:info_msg("Attempt to process operation: ~p", [OperationID]),
-
-    State = #state{
-        operation_id = OperationID,
-        logic_handler = LogicHandler,
-        validator_state = ValidatorState
-    },
+    ?LOG_INFO(#{what => "Attempt to process operation",
+                method => Method,
+                operation_id => OperationID}),
+    State = #state{operation_id = OperationID,
+                   accept_callback = fun Module:accept_callback/4,
+                   provide_callback = fun Module:provide_callback/4,
+                   api_key_callback = fun Module:api_key_callback/2},
     {cowboy_rest, Req, State}.
 
--spec allowed_methods(Req :: cowboy_req:req(), State :: state()) ->
-    {Value :: [binary()], Req :: cowboy_req:req(), State :: state()}.
-
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'DeleteAgent'
-    }
-) ->
+-spec allowed_methods(cowboy_req:req(), state()) ->
+    {[binary()], cowboy_req:req(), state()}.
+allowed_methods(Req, #state{operation_id = 'deleteAgent'} = State) ->
     {[<<"DELETE">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'DeleteNode'
-    }
-) ->
+allowed_methods(Req, #state{operation_id = 'deleteNode'} = State) ->
     {[<<"DELETE">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'GetAgent'
-    }
-) ->
+allowed_methods(Req, #state{operation_id = 'getAgent'} = State) ->
     {[<<"GET">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'GetAgents'
-    }
-) ->
+allowed_methods(Req, #state{operation_id = 'getAgents'} = State) ->
     {[<<"GET">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'GetAuthorizableKeystore'
-    }
-) ->
+allowed_methods(Req, #state{operation_id = 'getAuthorizableKeystore'} = State) ->
     {[<<"GET">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'GetKeystore'
-    }
-) ->
+allowed_methods(Req, #state{operation_id = 'getKeystore'} = State) ->
     {[<<"GET">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'GetNode'
-    }
-) ->
+allowed_methods(Req, #state{operation_id = 'getNode'} = State) ->
     {[<<"GET">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'GetPackage'
-    }
-) ->
+allowed_methods(Req, #state{operation_id = 'getPackage'} = State) ->
     {[<<"GET">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'GetPackageFilter'
-    }
-) ->
+allowed_methods(Req, #state{operation_id = 'getPackageFilter'} = State) ->
     {[<<"GET">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'GetQuery'
-    }
-) ->
+allowed_methods(Req, #state{operation_id = 'getQuery'} = State) ->
     {[<<"GET">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'GetTruststore'
-    }
-) ->
+allowed_methods(Req, #state{operation_id = 'getTruststore'} = State) ->
     {[<<"GET">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'GetTruststoreInfo'
-    }
-) ->
+allowed_methods(Req, #state{operation_id = 'getTruststoreInfo'} = State) ->
     {[<<"GET">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'PostAgent'
-    }
-) ->
+allowed_methods(Req, #state{operation_id = 'postAgent'} = State) ->
     {[<<"POST">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'PostAuthorizableKeystore'
-    }
-) ->
+allowed_methods(Req, #state{operation_id = 'postAuthorizableKeystore'} = State) ->
     {[<<"POST">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'PostAuthorizables'
-    }
-) ->
+allowed_methods(Req, #state{operation_id = 'postAuthorizables'} = State) ->
     {[<<"POST">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'PostConfigAdobeGraniteSamlAuthenticationHandler'
-    }
-) ->
+allowed_methods(Req, #state{operation_id = 'postConfigAdobeGraniteSamlAuthenticationHandler'} = State) ->
     {[<<"POST">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'PostConfigApacheFelixJettyBasedHttpService'
-    }
-) ->
+allowed_methods(Req, #state{operation_id = 'postConfigApacheFelixJettyBasedHttpService'} = State) ->
     {[<<"POST">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'PostConfigApacheHttpComponentsProxyConfiguration'
-    }
-) ->
+allowed_methods(Req, #state{operation_id = 'postConfigApacheHttpComponentsProxyConfiguration'} = State) ->
     {[<<"POST">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'PostConfigApacheSlingDavExServlet'
-    }
-) ->
+allowed_methods(Req, #state{operation_id = 'postConfigApacheSlingDavExServlet'} = State) ->
     {[<<"POST">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'PostConfigApacheSlingGetServlet'
-    }
-) ->
+allowed_methods(Req, #state{operation_id = 'postConfigApacheSlingGetServlet'} = State) ->
     {[<<"POST">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'PostConfigApacheSlingReferrerFilter'
-    }
-) ->
+allowed_methods(Req, #state{operation_id = 'postConfigApacheSlingReferrerFilter'} = State) ->
     {[<<"POST">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'PostConfigProperty'
-    }
-) ->
+allowed_methods(Req, #state{operation_id = 'postConfigProperty'} = State) ->
     {[<<"POST">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'PostNode'
-    }
-) ->
+allowed_methods(Req, #state{operation_id = 'postNode'} = State) ->
     {[<<"POST">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'PostNodeRw'
-    }
-) ->
+allowed_methods(Req, #state{operation_id = 'postNodeRw'} = State) ->
     {[<<"POST">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'PostPath'
-    }
-) ->
+allowed_methods(Req, #state{operation_id = 'postPath'} = State) ->
     {[<<"POST">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'PostQuery'
-    }
-) ->
+allowed_methods(Req, #state{operation_id = 'postQuery'} = State) ->
     {[<<"POST">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'PostTreeActivation'
-    }
-) ->
+allowed_methods(Req, #state{operation_id = 'postTreeActivation'} = State) ->
     {[<<"POST">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'PostTruststore'
-    }
-) ->
+allowed_methods(Req, #state{operation_id = 'postTruststore'} = State) ->
     {[<<"POST">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'PostTruststorePKCS12'
-    }
-) ->
+allowed_methods(Req, #state{operation_id = 'postTruststorePKCS12'} = State) ->
     {[<<"POST">>], Req, State};
-
 allowed_methods(Req, State) ->
     {[], Req, State}.
 
--spec is_authorized(Req :: cowboy_req:req(), State :: state()) ->
-    {
-        Value :: true | {false, AuthHeader :: iodata()},
-        Req :: cowboy_req:req(),
-        State :: state()
-    }.
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'DeleteAgent' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'DeleteNode' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'GetAgent' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'GetAgents' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'GetAuthorizableKeystore' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'GetKeystore' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'GetNode' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'GetPackage' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'GetPackageFilter' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'GetQuery' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'GetTruststore' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'GetTruststoreInfo' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'PostAgent' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'PostAuthorizableKeystore' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'PostAuthorizables' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'PostConfigAdobeGraniteSamlAuthenticationHandler' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'PostConfigApacheFelixJettyBasedHttpService' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'PostConfigApacheHttpComponentsProxyConfiguration' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'PostConfigApacheSlingDavExServlet' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'PostConfigApacheSlingGetServlet' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'PostConfigApacheSlingReferrerFilter' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'PostConfigProperty' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'PostNode' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'PostNodeRw' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'PostPath' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'PostQuery' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'PostTreeActivation' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'PostTruststore' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'PostTruststorePKCS12' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
+-spec is_authorized(cowboy_req:req(), state()) ->
+    {true | {false, iodata()}, cowboy_req:req(), state()}.
+is_authorized(Req0,
+              #state{operation_id = 'deleteAgent' = OperationID,
+                     api_key_callback = Handler} = State) ->
+    case openapi_auth:authorize_api_key(Handler, OperationID, header, <<"authorization">>, Req0) of
+        {true, Context, Req} ->
+            {true, Req, State#state{context = Context}};
+        {false, AuthHeader, Req} ->
+            {{false, AuthHeader}, Req, State}
+    end;
+is_authorized(Req0,
+              #state{operation_id = 'deleteNode' = OperationID,
+                     api_key_callback = Handler} = State) ->
+    case openapi_auth:authorize_api_key(Handler, OperationID, header, <<"authorization">>, Req0) of
+        {true, Context, Req} ->
+            {true, Req, State#state{context = Context}};
+        {false, AuthHeader, Req} ->
+            {{false, AuthHeader}, Req, State}
+    end;
+is_authorized(Req0,
+              #state{operation_id = 'getAgent' = OperationID,
+                     api_key_callback = Handler} = State) ->
+    case openapi_auth:authorize_api_key(Handler, OperationID, header, <<"authorization">>, Req0) of
+        {true, Context, Req} ->
+            {true, Req, State#state{context = Context}};
+        {false, AuthHeader, Req} ->
+            {{false, AuthHeader}, Req, State}
+    end;
+is_authorized(Req0,
+              #state{operation_id = 'getAgents' = OperationID,
+                     api_key_callback = Handler} = State) ->
+    case openapi_auth:authorize_api_key(Handler, OperationID, header, <<"authorization">>, Req0) of
+        {true, Context, Req} ->
+            {true, Req, State#state{context = Context}};
+        {false, AuthHeader, Req} ->
+            {{false, AuthHeader}, Req, State}
+    end;
+is_authorized(Req0,
+              #state{operation_id = 'getAuthorizableKeystore' = OperationID,
+                     api_key_callback = Handler} = State) ->
+    case openapi_auth:authorize_api_key(Handler, OperationID, header, <<"authorization">>, Req0) of
+        {true, Context, Req} ->
+            {true, Req, State#state{context = Context}};
+        {false, AuthHeader, Req} ->
+            {{false, AuthHeader}, Req, State}
+    end;
+is_authorized(Req0,
+              #state{operation_id = 'getKeystore' = OperationID,
+                     api_key_callback = Handler} = State) ->
+    case openapi_auth:authorize_api_key(Handler, OperationID, header, <<"authorization">>, Req0) of
+        {true, Context, Req} ->
+            {true, Req, State#state{context = Context}};
+        {false, AuthHeader, Req} ->
+            {{false, AuthHeader}, Req, State}
+    end;
+is_authorized(Req0,
+              #state{operation_id = 'getNode' = OperationID,
+                     api_key_callback = Handler} = State) ->
+    case openapi_auth:authorize_api_key(Handler, OperationID, header, <<"authorization">>, Req0) of
+        {true, Context, Req} ->
+            {true, Req, State#state{context = Context}};
+        {false, AuthHeader, Req} ->
+            {{false, AuthHeader}, Req, State}
+    end;
+is_authorized(Req0,
+              #state{operation_id = 'getPackage' = OperationID,
+                     api_key_callback = Handler} = State) ->
+    case openapi_auth:authorize_api_key(Handler, OperationID, header, <<"authorization">>, Req0) of
+        {true, Context, Req} ->
+            {true, Req, State#state{context = Context}};
+        {false, AuthHeader, Req} ->
+            {{false, AuthHeader}, Req, State}
+    end;
+is_authorized(Req0,
+              #state{operation_id = 'getPackageFilter' = OperationID,
+                     api_key_callback = Handler} = State) ->
+    case openapi_auth:authorize_api_key(Handler, OperationID, header, <<"authorization">>, Req0) of
+        {true, Context, Req} ->
+            {true, Req, State#state{context = Context}};
+        {false, AuthHeader, Req} ->
+            {{false, AuthHeader}, Req, State}
+    end;
+is_authorized(Req0,
+              #state{operation_id = 'getQuery' = OperationID,
+                     api_key_callback = Handler} = State) ->
+    case openapi_auth:authorize_api_key(Handler, OperationID, header, <<"authorization">>, Req0) of
+        {true, Context, Req} ->
+            {true, Req, State#state{context = Context}};
+        {false, AuthHeader, Req} ->
+            {{false, AuthHeader}, Req, State}
+    end;
+is_authorized(Req0,
+              #state{operation_id = 'getTruststore' = OperationID,
+                     api_key_callback = Handler} = State) ->
+    case openapi_auth:authorize_api_key(Handler, OperationID, header, <<"authorization">>, Req0) of
+        {true, Context, Req} ->
+            {true, Req, State#state{context = Context}};
+        {false, AuthHeader, Req} ->
+            {{false, AuthHeader}, Req, State}
+    end;
+is_authorized(Req0,
+              #state{operation_id = 'getTruststoreInfo' = OperationID,
+                     api_key_callback = Handler} = State) ->
+    case openapi_auth:authorize_api_key(Handler, OperationID, header, <<"authorization">>, Req0) of
+        {true, Context, Req} ->
+            {true, Req, State#state{context = Context}};
+        {false, AuthHeader, Req} ->
+            {{false, AuthHeader}, Req, State}
+    end;
+is_authorized(Req0,
+              #state{operation_id = 'postAgent' = OperationID,
+                     api_key_callback = Handler} = State) ->
+    case openapi_auth:authorize_api_key(Handler, OperationID, header, <<"authorization">>, Req0) of
+        {true, Context, Req} ->
+            {true, Req, State#state{context = Context}};
+        {false, AuthHeader, Req} ->
+            {{false, AuthHeader}, Req, State}
+    end;
+is_authorized(Req0,
+              #state{operation_id = 'postAuthorizableKeystore' = OperationID,
+                     api_key_callback = Handler} = State) ->
+    case openapi_auth:authorize_api_key(Handler, OperationID, header, <<"authorization">>, Req0) of
+        {true, Context, Req} ->
+            {true, Req, State#state{context = Context}};
+        {false, AuthHeader, Req} ->
+            {{false, AuthHeader}, Req, State}
+    end;
+is_authorized(Req0,
+              #state{operation_id = 'postAuthorizables' = OperationID,
+                     api_key_callback = Handler} = State) ->
+    case openapi_auth:authorize_api_key(Handler, OperationID, header, <<"authorization">>, Req0) of
+        {true, Context, Req} ->
+            {true, Req, State#state{context = Context}};
+        {false, AuthHeader, Req} ->
+            {{false, AuthHeader}, Req, State}
+    end;
+is_authorized(Req0,
+              #state{operation_id = 'postConfigAdobeGraniteSamlAuthenticationHandler' = OperationID,
+                     api_key_callback = Handler} = State) ->
+    case openapi_auth:authorize_api_key(Handler, OperationID, header, <<"authorization">>, Req0) of
+        {true, Context, Req} ->
+            {true, Req, State#state{context = Context}};
+        {false, AuthHeader, Req} ->
+            {{false, AuthHeader}, Req, State}
+    end;
+is_authorized(Req0,
+              #state{operation_id = 'postConfigApacheFelixJettyBasedHttpService' = OperationID,
+                     api_key_callback = Handler} = State) ->
+    case openapi_auth:authorize_api_key(Handler, OperationID, header, <<"authorization">>, Req0) of
+        {true, Context, Req} ->
+            {true, Req, State#state{context = Context}};
+        {false, AuthHeader, Req} ->
+            {{false, AuthHeader}, Req, State}
+    end;
+is_authorized(Req0,
+              #state{operation_id = 'postConfigApacheHttpComponentsProxyConfiguration' = OperationID,
+                     api_key_callback = Handler} = State) ->
+    case openapi_auth:authorize_api_key(Handler, OperationID, header, <<"authorization">>, Req0) of
+        {true, Context, Req} ->
+            {true, Req, State#state{context = Context}};
+        {false, AuthHeader, Req} ->
+            {{false, AuthHeader}, Req, State}
+    end;
+is_authorized(Req0,
+              #state{operation_id = 'postConfigApacheSlingDavExServlet' = OperationID,
+                     api_key_callback = Handler} = State) ->
+    case openapi_auth:authorize_api_key(Handler, OperationID, header, <<"authorization">>, Req0) of
+        {true, Context, Req} ->
+            {true, Req, State#state{context = Context}};
+        {false, AuthHeader, Req} ->
+            {{false, AuthHeader}, Req, State}
+    end;
+is_authorized(Req0,
+              #state{operation_id = 'postConfigApacheSlingGetServlet' = OperationID,
+                     api_key_callback = Handler} = State) ->
+    case openapi_auth:authorize_api_key(Handler, OperationID, header, <<"authorization">>, Req0) of
+        {true, Context, Req} ->
+            {true, Req, State#state{context = Context}};
+        {false, AuthHeader, Req} ->
+            {{false, AuthHeader}, Req, State}
+    end;
+is_authorized(Req0,
+              #state{operation_id = 'postConfigApacheSlingReferrerFilter' = OperationID,
+                     api_key_callback = Handler} = State) ->
+    case openapi_auth:authorize_api_key(Handler, OperationID, header, <<"authorization">>, Req0) of
+        {true, Context, Req} ->
+            {true, Req, State#state{context = Context}};
+        {false, AuthHeader, Req} ->
+            {{false, AuthHeader}, Req, State}
+    end;
+is_authorized(Req0,
+              #state{operation_id = 'postConfigProperty' = OperationID,
+                     api_key_callback = Handler} = State) ->
+    case openapi_auth:authorize_api_key(Handler, OperationID, header, <<"authorization">>, Req0) of
+        {true, Context, Req} ->
+            {true, Req, State#state{context = Context}};
+        {false, AuthHeader, Req} ->
+            {{false, AuthHeader}, Req, State}
+    end;
+is_authorized(Req0,
+              #state{operation_id = 'postNode' = OperationID,
+                     api_key_callback = Handler} = State) ->
+    case openapi_auth:authorize_api_key(Handler, OperationID, header, <<"authorization">>, Req0) of
+        {true, Context, Req} ->
+            {true, Req, State#state{context = Context}};
+        {false, AuthHeader, Req} ->
+            {{false, AuthHeader}, Req, State}
+    end;
+is_authorized(Req0,
+              #state{operation_id = 'postNodeRw' = OperationID,
+                     api_key_callback = Handler} = State) ->
+    case openapi_auth:authorize_api_key(Handler, OperationID, header, <<"authorization">>, Req0) of
+        {true, Context, Req} ->
+            {true, Req, State#state{context = Context}};
+        {false, AuthHeader, Req} ->
+            {{false, AuthHeader}, Req, State}
+    end;
+is_authorized(Req0,
+              #state{operation_id = 'postPath' = OperationID,
+                     api_key_callback = Handler} = State) ->
+    case openapi_auth:authorize_api_key(Handler, OperationID, header, <<"authorization">>, Req0) of
+        {true, Context, Req} ->
+            {true, Req, State#state{context = Context}};
+        {false, AuthHeader, Req} ->
+            {{false, AuthHeader}, Req, State}
+    end;
+is_authorized(Req0,
+              #state{operation_id = 'postQuery' = OperationID,
+                     api_key_callback = Handler} = State) ->
+    case openapi_auth:authorize_api_key(Handler, OperationID, header, <<"authorization">>, Req0) of
+        {true, Context, Req} ->
+            {true, Req, State#state{context = Context}};
+        {false, AuthHeader, Req} ->
+            {{false, AuthHeader}, Req, State}
+    end;
+is_authorized(Req0,
+              #state{operation_id = 'postTreeActivation' = OperationID,
+                     api_key_callback = Handler} = State) ->
+    case openapi_auth:authorize_api_key(Handler, OperationID, header, <<"authorization">>, Req0) of
+        {true, Context, Req} ->
+            {true, Req, State#state{context = Context}};
+        {false, AuthHeader, Req} ->
+            {{false, AuthHeader}, Req, State}
+    end;
+is_authorized(Req0,
+              #state{operation_id = 'postTruststore' = OperationID,
+                     api_key_callback = Handler} = State) ->
+    case openapi_auth:authorize_api_key(Handler, OperationID, header, <<"authorization">>, Req0) of
+        {true, Context, Req} ->
+            {true, Req, State#state{context = Context}};
+        {false, AuthHeader, Req} ->
+            {{false, AuthHeader}, Req, State}
+    end;
+is_authorized(Req0,
+              #state{operation_id = 'postTruststorePKCS12' = OperationID,
+                     api_key_callback = Handler} = State) ->
+    case openapi_auth:authorize_api_key(Handler, OperationID, header, <<"authorization">>, Req0) of
+        {true, Context, Req} ->
+            {true, Req, State#state{context = Context}};
+        {false, AuthHeader, Req} ->
+            {{false, AuthHeader}, Req, State}
+    end;
 is_authorized(Req, State) ->
-    {{false, <<"">>}, Req, State}.
+    {true, Req, State}.
 
--spec content_types_accepted(Req :: cowboy_req:req(), State :: state()) ->
-    {
-        Value :: [{binary(), AcceptResource :: atom()}],
-        Req :: cowboy_req:req(),
-        State :: state()
-    }.
-
-content_types_accepted(Req, State) ->
+-spec content_types_accepted(cowboy_req:req(), state()) ->
+    {[{binary(), atom()}], cowboy_req:req(), state()}.
+content_types_accepted(Req, #state{operation_id = 'deleteAgent'} = State) ->
+    {[], Req, State};
+content_types_accepted(Req, #state{operation_id = 'deleteNode'} = State) ->
+    {[], Req, State};
+content_types_accepted(Req, #state{operation_id = 'getAgent'} = State) ->
+    {[], Req, State};
+content_types_accepted(Req, #state{operation_id = 'getAgents'} = State) ->
+    {[], Req, State};
+content_types_accepted(Req, #state{operation_id = 'getAuthorizableKeystore'} = State) ->
+    {[], Req, State};
+content_types_accepted(Req, #state{operation_id = 'getKeystore'} = State) ->
+    {[], Req, State};
+content_types_accepted(Req, #state{operation_id = 'getNode'} = State) ->
+    {[], Req, State};
+content_types_accepted(Req, #state{operation_id = 'getPackage'} = State) ->
+    {[], Req, State};
+content_types_accepted(Req, #state{operation_id = 'getPackageFilter'} = State) ->
+    {[], Req, State};
+content_types_accepted(Req, #state{operation_id = 'getQuery'} = State) ->
+    {[], Req, State};
+content_types_accepted(Req, #state{operation_id = 'getTruststore'} = State) ->
+    {[], Req, State};
+content_types_accepted(Req, #state{operation_id = 'getTruststoreInfo'} = State) ->
+    {[], Req, State};
+content_types_accepted(Req, #state{operation_id = 'postAgent'} = State) ->
+    {[], Req, State};
+content_types_accepted(Req, #state{operation_id = 'postAuthorizableKeystore'} = State) ->
     {[
-        {<<"application/json">>, handle_request_json}
-    ], Req, State}.
+      {<<"multipart/form-data">>, handle_type_accepted}
+     ], Req, State};
+content_types_accepted(Req, #state{operation_id = 'postAuthorizables'} = State) ->
+    {[], Req, State};
+content_types_accepted(Req, #state{operation_id = 'postConfigAdobeGraniteSamlAuthenticationHandler'} = State) ->
+    {[], Req, State};
+content_types_accepted(Req, #state{operation_id = 'postConfigApacheFelixJettyBasedHttpService'} = State) ->
+    {[], Req, State};
+content_types_accepted(Req, #state{operation_id = 'postConfigApacheHttpComponentsProxyConfiguration'} = State) ->
+    {[], Req, State};
+content_types_accepted(Req, #state{operation_id = 'postConfigApacheSlingDavExServlet'} = State) ->
+    {[], Req, State};
+content_types_accepted(Req, #state{operation_id = 'postConfigApacheSlingGetServlet'} = State) ->
+    {[], Req, State};
+content_types_accepted(Req, #state{operation_id = 'postConfigApacheSlingReferrerFilter'} = State) ->
+    {[], Req, State};
+content_types_accepted(Req, #state{operation_id = 'postConfigProperty'} = State) ->
+    {[], Req, State};
+content_types_accepted(Req, #state{operation_id = 'postNode'} = State) ->
+    {[
+      {<<"multipart/form-data">>, handle_type_accepted}
+     ], Req, State};
+content_types_accepted(Req, #state{operation_id = 'postNodeRw'} = State) ->
+    {[], Req, State};
+content_types_accepted(Req, #state{operation_id = 'postPath'} = State) ->
+    {[], Req, State};
+content_types_accepted(Req, #state{operation_id = 'postQuery'} = State) ->
+    {[], Req, State};
+content_types_accepted(Req, #state{operation_id = 'postTreeActivation'} = State) ->
+    {[], Req, State};
+content_types_accepted(Req, #state{operation_id = 'postTruststore'} = State) ->
+    {[
+      {<<"multipart/form-data">>, handle_type_accepted}
+     ], Req, State};
+content_types_accepted(Req, #state{operation_id = 'postTruststorePKCS12'} = State) ->
+    {[
+      {<<"multipart/form-data">>, handle_type_accepted}
+     ], Req, State};
+content_types_accepted(Req, State) ->
+    {[], Req, State}.
 
--spec valid_content_headers(Req :: cowboy_req:req(), State :: state()) ->
-    {Value :: boolean(), Req :: cowboy_req:req(), State :: state()}.
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'DeleteAgent'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'DeleteNode'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'GetAgent'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'GetAgents'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'GetAuthorizableKeystore'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'GetKeystore'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'GetNode'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'GetPackage'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'GetPackageFilter'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'GetQuery'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'GetTruststore'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'GetTruststoreInfo'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'PostAgent'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'PostAuthorizableKeystore'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'PostAuthorizables'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'PostConfigAdobeGraniteSamlAuthenticationHandler'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'PostConfigApacheFelixJettyBasedHttpService'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'PostConfigApacheHttpComponentsProxyConfiguration'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'PostConfigApacheSlingDavExServlet'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'PostConfigApacheSlingGetServlet'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'PostConfigApacheSlingReferrerFilter'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'PostConfigProperty'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'PostNode'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'PostNodeRw'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'PostPath'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'PostQuery'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'PostTreeActivation'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'PostTruststore'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'PostTruststorePKCS12'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
+-spec valid_content_headers(cowboy_req:req(), state()) ->
+    {boolean(), cowboy_req:req(), state()}.
+valid_content_headers(Req, #state{operation_id = 'deleteAgent'} = State) ->
+    {true, Req, State};
+valid_content_headers(Req, #state{operation_id = 'deleteNode'} = State) ->
+    {true, Req, State};
+valid_content_headers(Req, #state{operation_id = 'getAgent'} = State) ->
+    {true, Req, State};
+valid_content_headers(Req, #state{operation_id = 'getAgents'} = State) ->
+    {true, Req, State};
+valid_content_headers(Req, #state{operation_id = 'getAuthorizableKeystore'} = State) ->
+    {true, Req, State};
+valid_content_headers(Req, #state{operation_id = 'getKeystore'} = State) ->
+    {true, Req, State};
+valid_content_headers(Req, #state{operation_id = 'getNode'} = State) ->
+    {true, Req, State};
+valid_content_headers(Req, #state{operation_id = 'getPackage'} = State) ->
+    {true, Req, State};
+valid_content_headers(Req, #state{operation_id = 'getPackageFilter'} = State) ->
+    {true, Req, State};
+valid_content_headers(Req, #state{operation_id = 'getQuery'} = State) ->
+    {true, Req, State};
+valid_content_headers(Req, #state{operation_id = 'getTruststore'} = State) ->
+    {true, Req, State};
+valid_content_headers(Req, #state{operation_id = 'getTruststoreInfo'} = State) ->
+    {true, Req, State};
+valid_content_headers(Req, #state{operation_id = 'postAgent'} = State) ->
+    {true, Req, State};
+valid_content_headers(Req, #state{operation_id = 'postAuthorizableKeystore'} = State) ->
+    {true, Req, State};
+valid_content_headers(Req, #state{operation_id = 'postAuthorizables'} = State) ->
+    {true, Req, State};
+valid_content_headers(Req, #state{operation_id = 'postConfigAdobeGraniteSamlAuthenticationHandler'} = State) ->
+    {true, Req, State};
+valid_content_headers(Req, #state{operation_id = 'postConfigApacheFelixJettyBasedHttpService'} = State) ->
+    {true, Req, State};
+valid_content_headers(Req, #state{operation_id = 'postConfigApacheHttpComponentsProxyConfiguration'} = State) ->
+    {true, Req, State};
+valid_content_headers(Req, #state{operation_id = 'postConfigApacheSlingDavExServlet'} = State) ->
+    {true, Req, State};
+valid_content_headers(Req, #state{operation_id = 'postConfigApacheSlingGetServlet'} = State) ->
+    {true, Req, State};
+valid_content_headers(Req, #state{operation_id = 'postConfigApacheSlingReferrerFilter'} = State) ->
+    {true, Req, State};
+valid_content_headers(Req, #state{operation_id = 'postConfigProperty'} = State) ->
+    {true, Req, State};
+valid_content_headers(Req, #state{operation_id = 'postNode'} = State) ->
+    {true, Req, State};
+valid_content_headers(Req, #state{operation_id = 'postNodeRw'} = State) ->
+    {true, Req, State};
+valid_content_headers(Req, #state{operation_id = 'postPath'} = State) ->
+    {true, Req, State};
+valid_content_headers(Req, #state{operation_id = 'postQuery'} = State) ->
+    {true, Req, State};
+valid_content_headers(Req, #state{operation_id = 'postTreeActivation'} = State) ->
+    {true, Req, State};
+valid_content_headers(Req, #state{operation_id = 'postTruststore'} = State) ->
+    {true, Req, State};
+valid_content_headers(Req, #state{operation_id = 'postTruststorePKCS12'} = State) ->
+    {true, Req, State};
 valid_content_headers(Req, State) ->
     {false, Req, State}.
 
--spec content_types_provided(Req :: cowboy_req:req(), State :: state()) ->
-    {
-        Value :: [{binary(), ProvideResource :: atom()}],
-        Req :: cowboy_req:req(),
-        State :: state()
-    }.
-
-content_types_provided(Req, State) ->
+-spec content_types_provided(cowboy_req:req(), state()) ->
+    {[{binary(), atom()}], cowboy_req:req(), state()}.
+content_types_provided(Req, #state{operation_id = 'deleteAgent'} = State) ->
+    {[], Req, State};
+content_types_provided(Req, #state{operation_id = 'deleteNode'} = State) ->
+    {[], Req, State};
+content_types_provided(Req, #state{operation_id = 'getAgent'} = State) ->
+    {[], Req, State};
+content_types_provided(Req, #state{operation_id = 'getAgents'} = State) ->
     {[
-        {<<"application/json">>, handle_request_json}
-    ], Req, State}.
+      {<<"application/json">>, handle_type_provided}
+     ], Req, State};
+content_types_provided(Req, #state{operation_id = 'getAuthorizableKeystore'} = State) ->
+    {[
+      {<<"text/plain">>, handle_type_provided}
+     ], Req, State};
+content_types_provided(Req, #state{operation_id = 'getKeystore'} = State) ->
+    {[
+      {<<"application/octet-stream">>, handle_type_provided}
+     ], Req, State};
+content_types_provided(Req, #state{operation_id = 'getNode'} = State) ->
+    {[], Req, State};
+content_types_provided(Req, #state{operation_id = 'getPackage'} = State) ->
+    {[
+      {<<"application/octet-stream">>, handle_type_provided}
+     ], Req, State};
+content_types_provided(Req, #state{operation_id = 'getPackageFilter'} = State) ->
+    {[
+      {<<"application/json">>, handle_type_provided}
+     ], Req, State};
+content_types_provided(Req, #state{operation_id = 'getQuery'} = State) ->
+    {[
+      {<<"application/json">>, handle_type_provided}
+     ], Req, State};
+content_types_provided(Req, #state{operation_id = 'getTruststore'} = State) ->
+    {[
+      {<<"application/octet-stream">>, handle_type_provided}
+     ], Req, State};
+content_types_provided(Req, #state{operation_id = 'getTruststoreInfo'} = State) ->
+    {[
+      {<<"application/json">>, handle_type_provided}
+     ], Req, State};
+content_types_provided(Req, #state{operation_id = 'postAgent'} = State) ->
+    {[], Req, State};
+content_types_provided(Req, #state{operation_id = 'postAuthorizableKeystore'} = State) ->
+    {[
+      {<<"text/plain">>, handle_type_provided}
+     ], Req, State};
+content_types_provided(Req, #state{operation_id = 'postAuthorizables'} = State) ->
+    {[
+      {<<"text/html">>, handle_type_provided}
+     ], Req, State};
+content_types_provided(Req, #state{operation_id = 'postConfigAdobeGraniteSamlAuthenticationHandler'} = State) ->
+    {[], Req, State};
+content_types_provided(Req, #state{operation_id = 'postConfigApacheFelixJettyBasedHttpService'} = State) ->
+    {[], Req, State};
+content_types_provided(Req, #state{operation_id = 'postConfigApacheHttpComponentsProxyConfiguration'} = State) ->
+    {[], Req, State};
+content_types_provided(Req, #state{operation_id = 'postConfigApacheSlingDavExServlet'} = State) ->
+    {[], Req, State};
+content_types_provided(Req, #state{operation_id = 'postConfigApacheSlingGetServlet'} = State) ->
+    {[], Req, State};
+content_types_provided(Req, #state{operation_id = 'postConfigApacheSlingReferrerFilter'} = State) ->
+    {[], Req, State};
+content_types_provided(Req, #state{operation_id = 'postConfigProperty'} = State) ->
+    {[], Req, State};
+content_types_provided(Req, #state{operation_id = 'postNode'} = State) ->
+    {[], Req, State};
+content_types_provided(Req, #state{operation_id = 'postNodeRw'} = State) ->
+    {[], Req, State};
+content_types_provided(Req, #state{operation_id = 'postPath'} = State) ->
+    {[], Req, State};
+content_types_provided(Req, #state{operation_id = 'postQuery'} = State) ->
+    {[
+      {<<"application/json">>, handle_type_provided}
+     ], Req, State};
+content_types_provided(Req, #state{operation_id = 'postTreeActivation'} = State) ->
+    {[], Req, State};
+content_types_provided(Req, #state{operation_id = 'postTruststore'} = State) ->
+    {[
+      {<<"text/plain">>, handle_type_provided}
+     ], Req, State};
+content_types_provided(Req, #state{operation_id = 'postTruststorePKCS12'} = State) ->
+    {[
+      {<<"text/plain">>, handle_type_provided}
+     ], Req, State};
+content_types_provided(Req, State) ->
+    {[], Req, State}.
 
--spec malformed_request(Req :: cowboy_req:req(), State :: state()) ->
-    {Value :: false, Req :: cowboy_req:req(), State :: state()}.
-
-malformed_request(Req, State) ->
-    {false, Req, State}.
-
--spec allow_missing_post(Req :: cowboy_req:req(), State :: state()) ->
-    {Value :: false, Req :: cowboy_req:req(), State :: state()}.
-
-allow_missing_post(Req, State) ->
-    {false, Req, State}.
-
--spec delete_resource(Req :: cowboy_req:req(), State :: state()) ->
-    processed_response().
-
+-spec delete_resource(cowboy_req:req(), state()) ->
+    {boolean(), cowboy_req:req(), state()}.
 delete_resource(Req, State) ->
-    handle_request_json(Req, State).
+    {Res, Req1, State1} = handle_type_accepted(Req, State),
+    {true =:= Res, Req1, State1}.
 
--spec known_content_type(Req :: cowboy_req:req(), State :: state()) ->
-    {Value :: true, Req :: cowboy_req:req(), State :: state()}.
+-spec handle_type_accepted(cowboy_req:req(), state()) ->
+    { openapi_logic_handler:accept_callback_return(), cowboy_req:req(), state()}.
+handle_type_accepted(Req, #state{operation_id = OperationID,
+                                 accept_callback = Handler,
+                                 context = Context} = State) ->
+    {Res, Req1, Context1} = Handler(sling, OperationID, Req, Context),
+    {Res, Req1, State#state{context = Context1}}.
 
-known_content_type(Req, State) ->
-    {true, Req, State}.
-
--spec valid_entity_length(Req :: cowboy_req:req(), State :: state()) ->
-    {Value :: true, Req :: cowboy_req:req(), State :: state()}.
-
-valid_entity_length(Req, State) ->
-    %% @TODO check the length
-    {true, Req, State}.
-
-%%%%
--type result_ok() :: {
-    ok,
-    {Status :: cowboy:http_status(), Headers :: cowboy:http_headers(), Body :: iodata()}
-}.
-
--type result_error() :: {error, Reason :: any()}.
-
--type processed_response() :: {stop, cowboy_req:req(), state()}.
-
--spec process_response(result_ok() | result_error(), cowboy_req:req(), state()) ->
-    processed_response().
-
-process_response(Response, Req0, State = #state{operation_id = OperationID}) ->
-    case Response of
-        {ok, {Code, Headers, Body}} ->
-            Req = cowboy_req:reply(Code, Headers, Body, Req0),
-            {stop, Req, State};
-        {error, Message} ->
-            error_logger:error_msg("Unable to process request for ~p: ~p", [OperationID, Message]),
-
-            Req = cowboy_req:reply(400, Req0),
-            {stop, Req, State}
-    end.
-
--spec handle_request_json(cowboy_req:req(), state()) -> processed_response().
-
-handle_request_json(
-    Req0,
-    State = #state{
-        operation_id = OperationID,
-        logic_handler = LogicHandler,
-        validator_state = ValidatorState
-    }
-) ->
-    case openapi_api:populate_request(OperationID, Req0, ValidatorState) of
-        {ok, Populated, Req1} ->
-            {Code, Headers, Body} = openapi_logic_handler:handle_request(
-                LogicHandler,
-                OperationID,
-                Req1,
-                maps:merge(State#state.context, Populated)
-            ),
-            _ = openapi_api:validate_response(
-                OperationID,
-                Code,
-                Body,
-                ValidatorState
-            ),
-            PreparedBody = prepare_body(Code, Body),
-            Response = {ok, {Code, Headers, PreparedBody}},
-            process_response(Response, Req1, State);
-        {error, Reason, Req1} ->
-            process_response({error, Reason}, Req1, State)
-    end.
-
-validate_headers(_, Req) -> {true, Req}.
-
-prepare_body(204, Body) when map_size(Body) == 0; length(Body) == 0 ->
-    <<>>;
-prepare_body(304, Body) when map_size(Body) == 0; length(Body) == 0 ->
-    <<>>;
-prepare_body(_Code, Body) ->
-    jsx:encode(Body).
+-spec handle_type_provided(cowboy_req:req(), state()) ->
+    { openapi_logic_handler:provide_callback_return(), cowboy_req:req(), state()}.
+handle_type_provided(Req, #state{operation_id = OperationID,
+                                 provide_callback = Handler,
+                                 context = Context} = State) ->
+    {Res, Req1, Context1} = Handler(sling, OperationID, Req, Context),
+    {Res, Req1, State#state{context = Context1}}.

@@ -1,0 +1,163 @@
+## SlingApi
+
+### 
+## 
+DELETE http://localhost/etc/replication/agents.{{runmode}}/{{name}}
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+DELETE http://localhost/{{path}}/{{name}}
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+GET http://localhost/etc/replication/agents.{{runmode}}/{{name}}
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+GET http://localhost/etc/replication/agents.{{runmode}}.-1.json
+Accept: application/json
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+GET http://localhost/{{intermediatePath}}/{{authorizableId}}.ks.json
+Accept: text/plain
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+GET http://localhost/{{intermediatePath}}/{{authorizableId}}/keystore/store.p12
+Accept: application/octet-stream
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+GET http://localhost/{{path}}/{{name}}
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+GET http://localhost/etc/packages/{{group}}/{{name}}-{{version}}.zip
+Accept: application/octet-stream
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+GET http://localhost/etc/packages/{{group}}/{{name}}-{{version}}.zip/jcr:content/vlt:definition/filter.tidy.2.json
+Accept: application/json
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+GET http://localhost/bin/querybuilder.json?path={{path}}&pPeriodlimit={{pPeriodlimit}}&1Property={{1Property}}&1PropertyPeriodvalue={{1PropertyPeriodvalue}}
+Accept: application/json
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+GET http://localhost/etc/truststore/truststore.p12
+Accept: application/octet-stream
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+GET http://localhost/libs/granite/security/truststore.json
+Accept: application/json
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+POST http://localhost/etc/replication/agents.{{runmode}}/{{name}}?jcrContentSlashcqDistribute={{jcrContentSlashcqDistribute}}&jcrContentSlashcqDistributeAtTypeHint={{jcrContentSlashcqDistributeAtTypeHint}}&jcrContentSlashcqName={{jcrContentSlashcqName}}&jcrContentSlashcqTemplate={{jcrContentSlashcqTemplate}}&jcrContentSlashaliasUpdate={{jcrContentSlashaliasUpdate}}&jcrContentSlashenabled={{jcrContentSlashenabled}}&jcrContentSlashjcrDescription={{jcrContentSlashjcrDescription}}&jcrContentSlashjcrLastModified={{jcrContentSlashjcrLastModified}}&jcrContentSlashjcrLastModifiedBy={{jcrContentSlashjcrLastModifiedBy}}&jcrContentSlashjcrMixinTypes={{jcrContentSlashjcrMixinTypes}}&jcrContentSlashjcrTitle={{jcrContentSlashjcrTitle}}&jcrContentSlashlogLevel={{jcrContentSlashlogLevel}}&jcrContentSlashnoStatusUpdate={{jcrContentSlashnoStatusUpdate}}&jcrContentSlashnoVersioning={{jcrContentSlashnoVersioning}}&jcrContentSlashprotocolConnectTimeout={{jcrContentSlashprotocolConnectTimeout}}&jcrContentSlashprotocolHTTPConnectionClosed={{jcrContentSlashprotocolHTTPConnectionClosed}}&jcrContentSlashprotocolHTTPExpired={{jcrContentSlashprotocolHTTPExpired}}&jcrContentSlashprotocolHTTPHeaders={{jcrContentSlashprotocolHTTPHeaders}}&jcrContentSlashprotocolHTTPHeadersAtTypeHint={{jcrContentSlashprotocolHTTPHeadersAtTypeHint}}&jcrContentSlashprotocolHTTPMethod={{jcrContentSlashprotocolHTTPMethod}}&jcrContentSlashprotocolHTTPSRelaxed={{jcrContentSlashprotocolHTTPSRelaxed}}&jcrContentSlashprotocolInterface={{jcrContentSlashprotocolInterface}}&jcrContentSlashprotocolSocketTimeout={{jcrContentSlashprotocolSocketTimeout}}&jcrContentSlashprotocolVersion={{jcrContentSlashprotocolVersion}}&jcrContentSlashproxyNTLMDomain={{jcrContentSlashproxyNTLMDomain}}&jcrContentSlashproxyNTLMHost={{jcrContentSlashproxyNTLMHost}}&jcrContentSlashproxyHost={{jcrContentSlashproxyHost}}&jcrContentSlashproxyPassword={{jcrContentSlashproxyPassword}}&jcrContentSlashproxyPort={{jcrContentSlashproxyPort}}&jcrContentSlashproxyUser={{jcrContentSlashproxyUser}}&jcrContentSlashqueueBatchMaxSize={{jcrContentSlashqueueBatchMaxSize}}&jcrContentSlashqueueBatchMode={{jcrContentSlashqueueBatchMode}}&jcrContentSlashqueueBatchWaitTime={{jcrContentSlashqueueBatchWaitTime}}&jcrContentSlashretryDelay={{jcrContentSlashretryDelay}}&jcrContentSlashreverseReplication={{jcrContentSlashreverseReplication}}&jcrContentSlashserializationType={{jcrContentSlashserializationType}}&jcrContentSlashslingResourceType={{jcrContentSlashslingResourceType}}&jcrContentSlashssl={{jcrContentSlashssl}}&jcrContentSlashtransportNTLMDomain={{jcrContentSlashtransportNTLMDomain}}&jcrContentSlashtransportNTLMHost={{jcrContentSlashtransportNTLMHost}}&jcrContentSlashtransportPassword={{jcrContentSlashtransportPassword}}&jcrContentSlashtransportUri={{jcrContentSlashtransportUri}}&jcrContentSlashtransportUser={{jcrContentSlashtransportUser}}&jcrContentSlashtriggerDistribute={{jcrContentSlashtriggerDistribute}}&jcrContentSlashtriggerModified={{jcrContentSlashtriggerModified}}&jcrContentSlashtriggerOnOffTime={{jcrContentSlashtriggerOnOffTime}}&jcrContentSlashtriggerReceive={{jcrContentSlashtriggerReceive}}&jcrContentSlashtriggerSpecific={{jcrContentSlashtriggerSpecific}}&jcrContentSlashuserId={{jcrContentSlashuserId}}&jcrPrimaryType={{jcrPrimaryType}}&operation={{operation}}
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+POST http://localhost/{{intermediatePath}}/{{authorizableId}}.ks.html?operation={{operation}}&currentPassword={{currentPassword}}&newPassword={{newPassword}}&rePassword={{rePassword}}&keyPassword={{keyPassword}}&keyStorePass={{keyStorePass}}&alias={{alias}}&newAlias={{newAlias}}&removeAlias={{removeAlias}}
+Content-Type: multipart/form-data
+Accept: text/plain
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+POST http://localhost/libs/granite/security/post/authorizables?authorizableId={{authorizableId}}&intermediatePath={{intermediatePath}}&createUser={{createUser}}&createGroup={{createGroup}}&repPassword={{repPassword}}&profileSlashgivenName={{profileSlashgivenName}}
+Accept: text/html
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+POST http://localhost/apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config?keyStorePassword={{keyStorePassword}}&keyStorePasswordAtTypeHint={{keyStorePasswordAtTypeHint}}&servicePeriodranking={{servicePeriodranking}}&servicePeriodrankingAtTypeHint={{servicePeriodrankingAtTypeHint}}&idpHttpRedirect={{idpHttpRedirect}}&idpHttpRedirectAtTypeHint={{idpHttpRedirectAtTypeHint}}&createUser={{createUser}}&createUserAtTypeHint={{createUserAtTypeHint}}&defaultRedirectUrl={{defaultRedirectUrl}}&defaultRedirectUrlAtTypeHint={{defaultRedirectUrlAtTypeHint}}&userIDAttribute={{userIDAttribute}}&userIDAttributeAtTypeHint={{userIDAttributeAtTypeHint}}&defaultGroups={{defaultGroups}}&defaultGroupsAtTypeHint={{defaultGroupsAtTypeHint}}&idpCertAlias={{idpCertAlias}}&idpCertAliasAtTypeHint={{idpCertAliasAtTypeHint}}&addGroupMemberships={{addGroupMemberships}}&addGroupMembershipsAtTypeHint={{addGroupMembershipsAtTypeHint}}&path={{path}}&pathAtTypeHint={{pathAtTypeHint}}&synchronizeAttributes={{synchronizeAttributes}}&synchronizeAttributesAtTypeHint={{synchronizeAttributesAtTypeHint}}&clockTolerance={{clockTolerance}}&clockToleranceAtTypeHint={{clockToleranceAtTypeHint}}&groupMembershipAttribute={{groupMembershipAttribute}}&groupMembershipAttributeAtTypeHint={{groupMembershipAttributeAtTypeHint}}&idpUrl={{idpUrl}}&idpUrlAtTypeHint={{idpUrlAtTypeHint}}&logoutUrl={{logoutUrl}}&logoutUrlAtTypeHint={{logoutUrlAtTypeHint}}&serviceProviderEntityId={{serviceProviderEntityId}}&serviceProviderEntityIdAtTypeHint={{serviceProviderEntityIdAtTypeHint}}&assertionConsumerServiceURL={{assertionConsumerServiceURL}}&assertionConsumerServiceURLAtTypeHint={{assertionConsumerServiceURLAtTypeHint}}&handleLogout={{handleLogout}}&handleLogoutAtTypeHint={{handleLogoutAtTypeHint}}&spPrivateKeyAlias={{spPrivateKeyAlias}}&spPrivateKeyAliasAtTypeHint={{spPrivateKeyAliasAtTypeHint}}&useEncryption={{useEncryption}}&useEncryptionAtTypeHint={{useEncryptionAtTypeHint}}&nameIdFormat={{nameIdFormat}}&nameIdFormatAtTypeHint={{nameIdFormatAtTypeHint}}&digestMethod={{digestMethod}}&digestMethodAtTypeHint={{digestMethodAtTypeHint}}&signatureMethod={{signatureMethod}}&signatureMethodAtTypeHint={{signatureMethodAtTypeHint}}&userIntermediatePath={{userIntermediatePath}}&userIntermediatePathAtTypeHint={{userIntermediatePathAtTypeHint}}
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+POST http://localhost/apps/system/config/org.apache.felix.http?orgPeriodapachePeriodfelixPeriodhttpsPeriodnio={{orgPeriodapachePeriodfelixPeriodhttpsPeriodnio}}&orgPeriodapachePeriodfelixPeriodhttpsPeriodnioAtTypeHint={{orgPeriodapachePeriodfelixPeriodhttpsPeriodnioAtTypeHint}}&orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystore={{orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystore}}&orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystoreAtTypeHint={{orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystoreAtTypeHint}}&orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodpassword={{orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodpassword}}&orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodpasswordAtTypeHint={{orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodpasswordAtTypeHint}}&orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkey={{orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkey}}&orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyAtTypeHint={{orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyAtTypeHint}}&orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyPeriodpassword={{orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyPeriodpassword}}&orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyPeriodpasswordAtTypeHint={{orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyPeriodpasswordAtTypeHint}}&orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststore={{orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststore}}&orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststoreAtTypeHint={{orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststoreAtTypeHint}}&orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststorePeriodpassword={{orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststorePeriodpassword}}&orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststorePeriodpasswordAtTypeHint={{orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststorePeriodpasswordAtTypeHint}}&orgPeriodapachePeriodfelixPeriodhttpsPeriodclientcertificate={{orgPeriodapachePeriodfelixPeriodhttpsPeriodclientcertificate}}&orgPeriodapachePeriodfelixPeriodhttpsPeriodclientcertificateAtTypeHint={{orgPeriodapachePeriodfelixPeriodhttpsPeriodclientcertificateAtTypeHint}}&orgPeriodapachePeriodfelixPeriodhttpsPeriodenable={{orgPeriodapachePeriodfelixPeriodhttpsPeriodenable}}&orgPeriodapachePeriodfelixPeriodhttpsPeriodenableAtTypeHint={{orgPeriodapachePeriodfelixPeriodhttpsPeriodenableAtTypeHint}}&orgPeriodosgiPeriodservicePeriodhttpPeriodportPeriodsecure={{orgPeriodosgiPeriodservicePeriodhttpPeriodportPeriodsecure}}&orgPeriodosgiPeriodservicePeriodhttpPeriodportPeriodsecureAtTypeHint={{orgPeriodosgiPeriodservicePeriodhttpPeriodportPeriodsecureAtTypeHint}}
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+POST http://localhost/apps/system/config/org.apache.http.proxyconfigurator.config?proxyPeriodhost={{proxyPeriodhost}}&proxyPeriodhostAtTypeHint={{proxyPeriodhostAtTypeHint}}&proxyPeriodport={{proxyPeriodport}}&proxyPeriodportAtTypeHint={{proxyPeriodportAtTypeHint}}&proxyPeriodexceptions={{proxyPeriodexceptions}}&proxyPeriodexceptionsAtTypeHint={{proxyPeriodexceptionsAtTypeHint}}&proxyPeriodenabled={{proxyPeriodenabled}}&proxyPeriodenabledAtTypeHint={{proxyPeriodenabledAtTypeHint}}&proxyPerioduser={{proxyPerioduser}}&proxyPerioduserAtTypeHint={{proxyPerioduserAtTypeHint}}&proxyPeriodpassword={{proxyPeriodpassword}}&proxyPeriodpasswordAtTypeHint={{proxyPeriodpasswordAtTypeHint}}
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+POST http://localhost/apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet?alias={{alias}}&aliasAtTypeHint={{aliasAtTypeHint}}&davPeriodcreateAbsoluteUri={{davPeriodcreateAbsoluteUri}}&davPeriodcreateAbsoluteUriAtTypeHint={{davPeriodcreateAbsoluteUriAtTypeHint}}
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+POST http://localhost/apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet?jsonPeriodmaximumresults={{jsonPeriodmaximumresults}}&jsonPeriodmaximumresultsAtTypeHint={{jsonPeriodmaximumresultsAtTypeHint}}&enablePeriodhtml={{enablePeriodhtml}}&enablePeriodhtmlAtTypeHint={{enablePeriodhtmlAtTypeHint}}&enablePeriodtxt={{enablePeriodtxt}}&enablePeriodtxtAtTypeHint={{enablePeriodtxtAtTypeHint}}&enablePeriodxml={{enablePeriodxml}}&enablePeriodxmlAtTypeHint={{enablePeriodxmlAtTypeHint}}
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+POST http://localhost/apps/system/config/org.apache.sling.security.impl.ReferrerFilter?allowPeriodempty={{allowPeriodempty}}&allowPeriodemptyAtTypeHint={{allowPeriodemptyAtTypeHint}}&allowPeriodhosts={{allowPeriodhosts}}&allowPeriodhostsAtTypeHint={{allowPeriodhostsAtTypeHint}}&allowPeriodhostsPeriodregexp={{allowPeriodhostsPeriodregexp}}&allowPeriodhostsPeriodregexpAtTypeHint={{allowPeriodhostsPeriodregexpAtTypeHint}}&filterPeriodmethods={{filterPeriodmethods}}&filterPeriodmethodsAtTypeHint={{filterPeriodmethodsAtTypeHint}}
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+POST http://localhost/apps/system/config/{{configNodeName}}
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+POST http://localhost/{{path}}/{{name}}?operation={{operation}}&deleteAuthorizable={{deleteAuthorizable}}
+Content-Type: multipart/form-data
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+POST http://localhost/{{path}}/{{name}}.rw.html?addMembers={{addMembers}}
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+POST http://localhost/{{path}}/?jcrPrimaryType={{jcrPrimaryType}}&name={{name}}
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+POST http://localhost/bin/querybuilder.json?path={{path}}&pPeriodlimit={{pPeriodlimit}}&1Property={{1Property}}&1PropertyPeriodvalue={{1PropertyPeriodvalue}}
+Accept: application/json
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+POST http://localhost/libs/replication/treeactivation.html?ignoredeactivated={{ignoredeactivated}}&onlymodified={{onlymodified}}&path={{path}}&cmd={{cmd}}
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+POST http://localhost/libs/granite/security/post/truststore?operation={{operation}}&newPassword={{newPassword}}&rePassword={{rePassword}}&keyStoreType={{keyStoreType}}&removeAlias={{removeAlias}}
+Content-Type: multipart/form-data
+Accept: text/plain
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+POST http://localhost/etc/truststore
+Content-Type: multipart/form-data
+Accept: text/plain
+Authorization: Basic: {{username-password}}

@@ -3,7 +3,7 @@ Adobe Experience Manager (AEM) API
 
 Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
 
-API version: 3.5.0-pre.0
+API version: 3.7.1-pre.0
 Contact: opensource@shinesolutions.com
 */
 
@@ -14,6 +14,9 @@ package openapi
 import (
 	"encoding/json"
 )
+
+// checks if the SamlConfigurationProperties type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SamlConfigurationProperties{}
 
 // SamlConfigurationProperties struct for SamlConfigurationProperties
 type SamlConfigurationProperties struct {
@@ -62,7 +65,7 @@ func NewSamlConfigurationPropertiesWithDefaults() *SamlConfigurationProperties {
 
 // GetPath returns the Path field value if set, zero value otherwise.
 func (o *SamlConfigurationProperties) GetPath() SamlConfigurationPropertyItemsArray {
-	if o == nil || o.Path == nil {
+	if o == nil || IsNil(o.Path) {
 		var ret SamlConfigurationPropertyItemsArray
 		return ret
 	}
@@ -72,7 +75,7 @@ func (o *SamlConfigurationProperties) GetPath() SamlConfigurationPropertyItemsAr
 // GetPathOk returns a tuple with the Path field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationProperties) GetPathOk() (*SamlConfigurationPropertyItemsArray, bool) {
-	if o == nil || o.Path == nil {
+	if o == nil || IsNil(o.Path) {
 		return nil, false
 	}
 	return o.Path, true
@@ -80,7 +83,7 @@ func (o *SamlConfigurationProperties) GetPathOk() (*SamlConfigurationPropertyIte
 
 // HasPath returns a boolean if a field has been set.
 func (o *SamlConfigurationProperties) HasPath() bool {
-	if o != nil && o.Path != nil {
+	if o != nil && !IsNil(o.Path) {
 		return true
 	}
 
@@ -94,7 +97,7 @@ func (o *SamlConfigurationProperties) SetPath(v SamlConfigurationPropertyItemsAr
 
 // GetServiceRanking returns the ServiceRanking field value if set, zero value otherwise.
 func (o *SamlConfigurationProperties) GetServiceRanking() SamlConfigurationPropertyItemsLong {
-	if o == nil || o.ServiceRanking == nil {
+	if o == nil || IsNil(o.ServiceRanking) {
 		var ret SamlConfigurationPropertyItemsLong
 		return ret
 	}
@@ -104,7 +107,7 @@ func (o *SamlConfigurationProperties) GetServiceRanking() SamlConfigurationPrope
 // GetServiceRankingOk returns a tuple with the ServiceRanking field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationProperties) GetServiceRankingOk() (*SamlConfigurationPropertyItemsLong, bool) {
-	if o == nil || o.ServiceRanking == nil {
+	if o == nil || IsNil(o.ServiceRanking) {
 		return nil, false
 	}
 	return o.ServiceRanking, true
@@ -112,7 +115,7 @@ func (o *SamlConfigurationProperties) GetServiceRankingOk() (*SamlConfigurationP
 
 // HasServiceRanking returns a boolean if a field has been set.
 func (o *SamlConfigurationProperties) HasServiceRanking() bool {
-	if o != nil && o.ServiceRanking != nil {
+	if o != nil && !IsNil(o.ServiceRanking) {
 		return true
 	}
 
@@ -126,7 +129,7 @@ func (o *SamlConfigurationProperties) SetServiceRanking(v SamlConfigurationPrope
 
 // GetIdpUrl returns the IdpUrl field value if set, zero value otherwise.
 func (o *SamlConfigurationProperties) GetIdpUrl() SamlConfigurationPropertyItemsString {
-	if o == nil || o.IdpUrl == nil {
+	if o == nil || IsNil(o.IdpUrl) {
 		var ret SamlConfigurationPropertyItemsString
 		return ret
 	}
@@ -136,7 +139,7 @@ func (o *SamlConfigurationProperties) GetIdpUrl() SamlConfigurationPropertyItems
 // GetIdpUrlOk returns a tuple with the IdpUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationProperties) GetIdpUrlOk() (*SamlConfigurationPropertyItemsString, bool) {
-	if o == nil || o.IdpUrl == nil {
+	if o == nil || IsNil(o.IdpUrl) {
 		return nil, false
 	}
 	return o.IdpUrl, true
@@ -144,7 +147,7 @@ func (o *SamlConfigurationProperties) GetIdpUrlOk() (*SamlConfigurationPropertyI
 
 // HasIdpUrl returns a boolean if a field has been set.
 func (o *SamlConfigurationProperties) HasIdpUrl() bool {
-	if o != nil && o.IdpUrl != nil {
+	if o != nil && !IsNil(o.IdpUrl) {
 		return true
 	}
 
@@ -158,7 +161,7 @@ func (o *SamlConfigurationProperties) SetIdpUrl(v SamlConfigurationPropertyItems
 
 // GetIdpCertAlias returns the IdpCertAlias field value if set, zero value otherwise.
 func (o *SamlConfigurationProperties) GetIdpCertAlias() SamlConfigurationPropertyItemsString {
-	if o == nil || o.IdpCertAlias == nil {
+	if o == nil || IsNil(o.IdpCertAlias) {
 		var ret SamlConfigurationPropertyItemsString
 		return ret
 	}
@@ -168,7 +171,7 @@ func (o *SamlConfigurationProperties) GetIdpCertAlias() SamlConfigurationPropert
 // GetIdpCertAliasOk returns a tuple with the IdpCertAlias field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationProperties) GetIdpCertAliasOk() (*SamlConfigurationPropertyItemsString, bool) {
-	if o == nil || o.IdpCertAlias == nil {
+	if o == nil || IsNil(o.IdpCertAlias) {
 		return nil, false
 	}
 	return o.IdpCertAlias, true
@@ -176,7 +179,7 @@ func (o *SamlConfigurationProperties) GetIdpCertAliasOk() (*SamlConfigurationPro
 
 // HasIdpCertAlias returns a boolean if a field has been set.
 func (o *SamlConfigurationProperties) HasIdpCertAlias() bool {
-	if o != nil && o.IdpCertAlias != nil {
+	if o != nil && !IsNil(o.IdpCertAlias) {
 		return true
 	}
 
@@ -190,7 +193,7 @@ func (o *SamlConfigurationProperties) SetIdpCertAlias(v SamlConfigurationPropert
 
 // GetIdpHttpRedirect returns the IdpHttpRedirect field value if set, zero value otherwise.
 func (o *SamlConfigurationProperties) GetIdpHttpRedirect() SamlConfigurationPropertyItemsBoolean {
-	if o == nil || o.IdpHttpRedirect == nil {
+	if o == nil || IsNil(o.IdpHttpRedirect) {
 		var ret SamlConfigurationPropertyItemsBoolean
 		return ret
 	}
@@ -200,7 +203,7 @@ func (o *SamlConfigurationProperties) GetIdpHttpRedirect() SamlConfigurationProp
 // GetIdpHttpRedirectOk returns a tuple with the IdpHttpRedirect field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationProperties) GetIdpHttpRedirectOk() (*SamlConfigurationPropertyItemsBoolean, bool) {
-	if o == nil || o.IdpHttpRedirect == nil {
+	if o == nil || IsNil(o.IdpHttpRedirect) {
 		return nil, false
 	}
 	return o.IdpHttpRedirect, true
@@ -208,7 +211,7 @@ func (o *SamlConfigurationProperties) GetIdpHttpRedirectOk() (*SamlConfiguration
 
 // HasIdpHttpRedirect returns a boolean if a field has been set.
 func (o *SamlConfigurationProperties) HasIdpHttpRedirect() bool {
-	if o != nil && o.IdpHttpRedirect != nil {
+	if o != nil && !IsNil(o.IdpHttpRedirect) {
 		return true
 	}
 
@@ -222,7 +225,7 @@ func (o *SamlConfigurationProperties) SetIdpHttpRedirect(v SamlConfigurationProp
 
 // GetServiceProviderEntityId returns the ServiceProviderEntityId field value if set, zero value otherwise.
 func (o *SamlConfigurationProperties) GetServiceProviderEntityId() SamlConfigurationPropertyItemsString {
-	if o == nil || o.ServiceProviderEntityId == nil {
+	if o == nil || IsNil(o.ServiceProviderEntityId) {
 		var ret SamlConfigurationPropertyItemsString
 		return ret
 	}
@@ -232,7 +235,7 @@ func (o *SamlConfigurationProperties) GetServiceProviderEntityId() SamlConfigura
 // GetServiceProviderEntityIdOk returns a tuple with the ServiceProviderEntityId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationProperties) GetServiceProviderEntityIdOk() (*SamlConfigurationPropertyItemsString, bool) {
-	if o == nil || o.ServiceProviderEntityId == nil {
+	if o == nil || IsNil(o.ServiceProviderEntityId) {
 		return nil, false
 	}
 	return o.ServiceProviderEntityId, true
@@ -240,7 +243,7 @@ func (o *SamlConfigurationProperties) GetServiceProviderEntityIdOk() (*SamlConfi
 
 // HasServiceProviderEntityId returns a boolean if a field has been set.
 func (o *SamlConfigurationProperties) HasServiceProviderEntityId() bool {
-	if o != nil && o.ServiceProviderEntityId != nil {
+	if o != nil && !IsNil(o.ServiceProviderEntityId) {
 		return true
 	}
 
@@ -254,7 +257,7 @@ func (o *SamlConfigurationProperties) SetServiceProviderEntityId(v SamlConfigura
 
 // GetAssertionConsumerServiceURL returns the AssertionConsumerServiceURL field value if set, zero value otherwise.
 func (o *SamlConfigurationProperties) GetAssertionConsumerServiceURL() SamlConfigurationPropertyItemsString {
-	if o == nil || o.AssertionConsumerServiceURL == nil {
+	if o == nil || IsNil(o.AssertionConsumerServiceURL) {
 		var ret SamlConfigurationPropertyItemsString
 		return ret
 	}
@@ -264,7 +267,7 @@ func (o *SamlConfigurationProperties) GetAssertionConsumerServiceURL() SamlConfi
 // GetAssertionConsumerServiceURLOk returns a tuple with the AssertionConsumerServiceURL field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationProperties) GetAssertionConsumerServiceURLOk() (*SamlConfigurationPropertyItemsString, bool) {
-	if o == nil || o.AssertionConsumerServiceURL == nil {
+	if o == nil || IsNil(o.AssertionConsumerServiceURL) {
 		return nil, false
 	}
 	return o.AssertionConsumerServiceURL, true
@@ -272,7 +275,7 @@ func (o *SamlConfigurationProperties) GetAssertionConsumerServiceURLOk() (*SamlC
 
 // HasAssertionConsumerServiceURL returns a boolean if a field has been set.
 func (o *SamlConfigurationProperties) HasAssertionConsumerServiceURL() bool {
-	if o != nil && o.AssertionConsumerServiceURL != nil {
+	if o != nil && !IsNil(o.AssertionConsumerServiceURL) {
 		return true
 	}
 
@@ -286,7 +289,7 @@ func (o *SamlConfigurationProperties) SetAssertionConsumerServiceURL(v SamlConfi
 
 // GetSpPrivateKeyAlias returns the SpPrivateKeyAlias field value if set, zero value otherwise.
 func (o *SamlConfigurationProperties) GetSpPrivateKeyAlias() SamlConfigurationPropertyItemsString {
-	if o == nil || o.SpPrivateKeyAlias == nil {
+	if o == nil || IsNil(o.SpPrivateKeyAlias) {
 		var ret SamlConfigurationPropertyItemsString
 		return ret
 	}
@@ -296,7 +299,7 @@ func (o *SamlConfigurationProperties) GetSpPrivateKeyAlias() SamlConfigurationPr
 // GetSpPrivateKeyAliasOk returns a tuple with the SpPrivateKeyAlias field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationProperties) GetSpPrivateKeyAliasOk() (*SamlConfigurationPropertyItemsString, bool) {
-	if o == nil || o.SpPrivateKeyAlias == nil {
+	if o == nil || IsNil(o.SpPrivateKeyAlias) {
 		return nil, false
 	}
 	return o.SpPrivateKeyAlias, true
@@ -304,7 +307,7 @@ func (o *SamlConfigurationProperties) GetSpPrivateKeyAliasOk() (*SamlConfigurati
 
 // HasSpPrivateKeyAlias returns a boolean if a field has been set.
 func (o *SamlConfigurationProperties) HasSpPrivateKeyAlias() bool {
-	if o != nil && o.SpPrivateKeyAlias != nil {
+	if o != nil && !IsNil(o.SpPrivateKeyAlias) {
 		return true
 	}
 
@@ -318,7 +321,7 @@ func (o *SamlConfigurationProperties) SetSpPrivateKeyAlias(v SamlConfigurationPr
 
 // GetKeyStorePassword returns the KeyStorePassword field value if set, zero value otherwise.
 func (o *SamlConfigurationProperties) GetKeyStorePassword() SamlConfigurationPropertyItemsString {
-	if o == nil || o.KeyStorePassword == nil {
+	if o == nil || IsNil(o.KeyStorePassword) {
 		var ret SamlConfigurationPropertyItemsString
 		return ret
 	}
@@ -328,7 +331,7 @@ func (o *SamlConfigurationProperties) GetKeyStorePassword() SamlConfigurationPro
 // GetKeyStorePasswordOk returns a tuple with the KeyStorePassword field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationProperties) GetKeyStorePasswordOk() (*SamlConfigurationPropertyItemsString, bool) {
-	if o == nil || o.KeyStorePassword == nil {
+	if o == nil || IsNil(o.KeyStorePassword) {
 		return nil, false
 	}
 	return o.KeyStorePassword, true
@@ -336,7 +339,7 @@ func (o *SamlConfigurationProperties) GetKeyStorePasswordOk() (*SamlConfiguratio
 
 // HasKeyStorePassword returns a boolean if a field has been set.
 func (o *SamlConfigurationProperties) HasKeyStorePassword() bool {
-	if o != nil && o.KeyStorePassword != nil {
+	if o != nil && !IsNil(o.KeyStorePassword) {
 		return true
 	}
 
@@ -350,7 +353,7 @@ func (o *SamlConfigurationProperties) SetKeyStorePassword(v SamlConfigurationPro
 
 // GetDefaultRedirectUrl returns the DefaultRedirectUrl field value if set, zero value otherwise.
 func (o *SamlConfigurationProperties) GetDefaultRedirectUrl() SamlConfigurationPropertyItemsString {
-	if o == nil || o.DefaultRedirectUrl == nil {
+	if o == nil || IsNil(o.DefaultRedirectUrl) {
 		var ret SamlConfigurationPropertyItemsString
 		return ret
 	}
@@ -360,7 +363,7 @@ func (o *SamlConfigurationProperties) GetDefaultRedirectUrl() SamlConfigurationP
 // GetDefaultRedirectUrlOk returns a tuple with the DefaultRedirectUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationProperties) GetDefaultRedirectUrlOk() (*SamlConfigurationPropertyItemsString, bool) {
-	if o == nil || o.DefaultRedirectUrl == nil {
+	if o == nil || IsNil(o.DefaultRedirectUrl) {
 		return nil, false
 	}
 	return o.DefaultRedirectUrl, true
@@ -368,7 +371,7 @@ func (o *SamlConfigurationProperties) GetDefaultRedirectUrlOk() (*SamlConfigurat
 
 // HasDefaultRedirectUrl returns a boolean if a field has been set.
 func (o *SamlConfigurationProperties) HasDefaultRedirectUrl() bool {
-	if o != nil && o.DefaultRedirectUrl != nil {
+	if o != nil && !IsNil(o.DefaultRedirectUrl) {
 		return true
 	}
 
@@ -382,7 +385,7 @@ func (o *SamlConfigurationProperties) SetDefaultRedirectUrl(v SamlConfigurationP
 
 // GetUserIDAttribute returns the UserIDAttribute field value if set, zero value otherwise.
 func (o *SamlConfigurationProperties) GetUserIDAttribute() SamlConfigurationPropertyItemsString {
-	if o == nil || o.UserIDAttribute == nil {
+	if o == nil || IsNil(o.UserIDAttribute) {
 		var ret SamlConfigurationPropertyItemsString
 		return ret
 	}
@@ -392,7 +395,7 @@ func (o *SamlConfigurationProperties) GetUserIDAttribute() SamlConfigurationProp
 // GetUserIDAttributeOk returns a tuple with the UserIDAttribute field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationProperties) GetUserIDAttributeOk() (*SamlConfigurationPropertyItemsString, bool) {
-	if o == nil || o.UserIDAttribute == nil {
+	if o == nil || IsNil(o.UserIDAttribute) {
 		return nil, false
 	}
 	return o.UserIDAttribute, true
@@ -400,7 +403,7 @@ func (o *SamlConfigurationProperties) GetUserIDAttributeOk() (*SamlConfiguration
 
 // HasUserIDAttribute returns a boolean if a field has been set.
 func (o *SamlConfigurationProperties) HasUserIDAttribute() bool {
-	if o != nil && o.UserIDAttribute != nil {
+	if o != nil && !IsNil(o.UserIDAttribute) {
 		return true
 	}
 
@@ -414,7 +417,7 @@ func (o *SamlConfigurationProperties) SetUserIDAttribute(v SamlConfigurationProp
 
 // GetUseEncryption returns the UseEncryption field value if set, zero value otherwise.
 func (o *SamlConfigurationProperties) GetUseEncryption() SamlConfigurationPropertyItemsBoolean {
-	if o == nil || o.UseEncryption == nil {
+	if o == nil || IsNil(o.UseEncryption) {
 		var ret SamlConfigurationPropertyItemsBoolean
 		return ret
 	}
@@ -424,7 +427,7 @@ func (o *SamlConfigurationProperties) GetUseEncryption() SamlConfigurationProper
 // GetUseEncryptionOk returns a tuple with the UseEncryption field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationProperties) GetUseEncryptionOk() (*SamlConfigurationPropertyItemsBoolean, bool) {
-	if o == nil || o.UseEncryption == nil {
+	if o == nil || IsNil(o.UseEncryption) {
 		return nil, false
 	}
 	return o.UseEncryption, true
@@ -432,7 +435,7 @@ func (o *SamlConfigurationProperties) GetUseEncryptionOk() (*SamlConfigurationPr
 
 // HasUseEncryption returns a boolean if a field has been set.
 func (o *SamlConfigurationProperties) HasUseEncryption() bool {
-	if o != nil && o.UseEncryption != nil {
+	if o != nil && !IsNil(o.UseEncryption) {
 		return true
 	}
 
@@ -446,7 +449,7 @@ func (o *SamlConfigurationProperties) SetUseEncryption(v SamlConfigurationProper
 
 // GetCreateUser returns the CreateUser field value if set, zero value otherwise.
 func (o *SamlConfigurationProperties) GetCreateUser() SamlConfigurationPropertyItemsBoolean {
-	if o == nil || o.CreateUser == nil {
+	if o == nil || IsNil(o.CreateUser) {
 		var ret SamlConfigurationPropertyItemsBoolean
 		return ret
 	}
@@ -456,7 +459,7 @@ func (o *SamlConfigurationProperties) GetCreateUser() SamlConfigurationPropertyI
 // GetCreateUserOk returns a tuple with the CreateUser field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationProperties) GetCreateUserOk() (*SamlConfigurationPropertyItemsBoolean, bool) {
-	if o == nil || o.CreateUser == nil {
+	if o == nil || IsNil(o.CreateUser) {
 		return nil, false
 	}
 	return o.CreateUser, true
@@ -464,7 +467,7 @@ func (o *SamlConfigurationProperties) GetCreateUserOk() (*SamlConfigurationPrope
 
 // HasCreateUser returns a boolean if a field has been set.
 func (o *SamlConfigurationProperties) HasCreateUser() bool {
-	if o != nil && o.CreateUser != nil {
+	if o != nil && !IsNil(o.CreateUser) {
 		return true
 	}
 
@@ -478,7 +481,7 @@ func (o *SamlConfigurationProperties) SetCreateUser(v SamlConfigurationPropertyI
 
 // GetAddGroupMemberships returns the AddGroupMemberships field value if set, zero value otherwise.
 func (o *SamlConfigurationProperties) GetAddGroupMemberships() SamlConfigurationPropertyItemsBoolean {
-	if o == nil || o.AddGroupMemberships == nil {
+	if o == nil || IsNil(o.AddGroupMemberships) {
 		var ret SamlConfigurationPropertyItemsBoolean
 		return ret
 	}
@@ -488,7 +491,7 @@ func (o *SamlConfigurationProperties) GetAddGroupMemberships() SamlConfiguration
 // GetAddGroupMembershipsOk returns a tuple with the AddGroupMemberships field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationProperties) GetAddGroupMembershipsOk() (*SamlConfigurationPropertyItemsBoolean, bool) {
-	if o == nil || o.AddGroupMemberships == nil {
+	if o == nil || IsNil(o.AddGroupMemberships) {
 		return nil, false
 	}
 	return o.AddGroupMemberships, true
@@ -496,7 +499,7 @@ func (o *SamlConfigurationProperties) GetAddGroupMembershipsOk() (*SamlConfigura
 
 // HasAddGroupMemberships returns a boolean if a field has been set.
 func (o *SamlConfigurationProperties) HasAddGroupMemberships() bool {
-	if o != nil && o.AddGroupMemberships != nil {
+	if o != nil && !IsNil(o.AddGroupMemberships) {
 		return true
 	}
 
@@ -510,7 +513,7 @@ func (o *SamlConfigurationProperties) SetAddGroupMemberships(v SamlConfiguration
 
 // GetGroupMembershipAttribute returns the GroupMembershipAttribute field value if set, zero value otherwise.
 func (o *SamlConfigurationProperties) GetGroupMembershipAttribute() SamlConfigurationPropertyItemsString {
-	if o == nil || o.GroupMembershipAttribute == nil {
+	if o == nil || IsNil(o.GroupMembershipAttribute) {
 		var ret SamlConfigurationPropertyItemsString
 		return ret
 	}
@@ -520,7 +523,7 @@ func (o *SamlConfigurationProperties) GetGroupMembershipAttribute() SamlConfigur
 // GetGroupMembershipAttributeOk returns a tuple with the GroupMembershipAttribute field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationProperties) GetGroupMembershipAttributeOk() (*SamlConfigurationPropertyItemsString, bool) {
-	if o == nil || o.GroupMembershipAttribute == nil {
+	if o == nil || IsNil(o.GroupMembershipAttribute) {
 		return nil, false
 	}
 	return o.GroupMembershipAttribute, true
@@ -528,7 +531,7 @@ func (o *SamlConfigurationProperties) GetGroupMembershipAttributeOk() (*SamlConf
 
 // HasGroupMembershipAttribute returns a boolean if a field has been set.
 func (o *SamlConfigurationProperties) HasGroupMembershipAttribute() bool {
-	if o != nil && o.GroupMembershipAttribute != nil {
+	if o != nil && !IsNil(o.GroupMembershipAttribute) {
 		return true
 	}
 
@@ -542,7 +545,7 @@ func (o *SamlConfigurationProperties) SetGroupMembershipAttribute(v SamlConfigur
 
 // GetDefaultGroups returns the DefaultGroups field value if set, zero value otherwise.
 func (o *SamlConfigurationProperties) GetDefaultGroups() SamlConfigurationPropertyItemsArray {
-	if o == nil || o.DefaultGroups == nil {
+	if o == nil || IsNil(o.DefaultGroups) {
 		var ret SamlConfigurationPropertyItemsArray
 		return ret
 	}
@@ -552,7 +555,7 @@ func (o *SamlConfigurationProperties) GetDefaultGroups() SamlConfigurationProper
 // GetDefaultGroupsOk returns a tuple with the DefaultGroups field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationProperties) GetDefaultGroupsOk() (*SamlConfigurationPropertyItemsArray, bool) {
-	if o == nil || o.DefaultGroups == nil {
+	if o == nil || IsNil(o.DefaultGroups) {
 		return nil, false
 	}
 	return o.DefaultGroups, true
@@ -560,7 +563,7 @@ func (o *SamlConfigurationProperties) GetDefaultGroupsOk() (*SamlConfigurationPr
 
 // HasDefaultGroups returns a boolean if a field has been set.
 func (o *SamlConfigurationProperties) HasDefaultGroups() bool {
-	if o != nil && o.DefaultGroups != nil {
+	if o != nil && !IsNil(o.DefaultGroups) {
 		return true
 	}
 
@@ -574,7 +577,7 @@ func (o *SamlConfigurationProperties) SetDefaultGroups(v SamlConfigurationProper
 
 // GetNameIdFormat returns the NameIdFormat field value if set, zero value otherwise.
 func (o *SamlConfigurationProperties) GetNameIdFormat() SamlConfigurationPropertyItemsString {
-	if o == nil || o.NameIdFormat == nil {
+	if o == nil || IsNil(o.NameIdFormat) {
 		var ret SamlConfigurationPropertyItemsString
 		return ret
 	}
@@ -584,7 +587,7 @@ func (o *SamlConfigurationProperties) GetNameIdFormat() SamlConfigurationPropert
 // GetNameIdFormatOk returns a tuple with the NameIdFormat field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationProperties) GetNameIdFormatOk() (*SamlConfigurationPropertyItemsString, bool) {
-	if o == nil || o.NameIdFormat == nil {
+	if o == nil || IsNil(o.NameIdFormat) {
 		return nil, false
 	}
 	return o.NameIdFormat, true
@@ -592,7 +595,7 @@ func (o *SamlConfigurationProperties) GetNameIdFormatOk() (*SamlConfigurationPro
 
 // HasNameIdFormat returns a boolean if a field has been set.
 func (o *SamlConfigurationProperties) HasNameIdFormat() bool {
-	if o != nil && o.NameIdFormat != nil {
+	if o != nil && !IsNil(o.NameIdFormat) {
 		return true
 	}
 
@@ -606,7 +609,7 @@ func (o *SamlConfigurationProperties) SetNameIdFormat(v SamlConfigurationPropert
 
 // GetSynchronizeAttributes returns the SynchronizeAttributes field value if set, zero value otherwise.
 func (o *SamlConfigurationProperties) GetSynchronizeAttributes() SamlConfigurationPropertyItemsArray {
-	if o == nil || o.SynchronizeAttributes == nil {
+	if o == nil || IsNil(o.SynchronizeAttributes) {
 		var ret SamlConfigurationPropertyItemsArray
 		return ret
 	}
@@ -616,7 +619,7 @@ func (o *SamlConfigurationProperties) GetSynchronizeAttributes() SamlConfigurati
 // GetSynchronizeAttributesOk returns a tuple with the SynchronizeAttributes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationProperties) GetSynchronizeAttributesOk() (*SamlConfigurationPropertyItemsArray, bool) {
-	if o == nil || o.SynchronizeAttributes == nil {
+	if o == nil || IsNil(o.SynchronizeAttributes) {
 		return nil, false
 	}
 	return o.SynchronizeAttributes, true
@@ -624,7 +627,7 @@ func (o *SamlConfigurationProperties) GetSynchronizeAttributesOk() (*SamlConfigu
 
 // HasSynchronizeAttributes returns a boolean if a field has been set.
 func (o *SamlConfigurationProperties) HasSynchronizeAttributes() bool {
-	if o != nil && o.SynchronizeAttributes != nil {
+	if o != nil && !IsNil(o.SynchronizeAttributes) {
 		return true
 	}
 
@@ -638,7 +641,7 @@ func (o *SamlConfigurationProperties) SetSynchronizeAttributes(v SamlConfigurati
 
 // GetHandleLogout returns the HandleLogout field value if set, zero value otherwise.
 func (o *SamlConfigurationProperties) GetHandleLogout() SamlConfigurationPropertyItemsBoolean {
-	if o == nil || o.HandleLogout == nil {
+	if o == nil || IsNil(o.HandleLogout) {
 		var ret SamlConfigurationPropertyItemsBoolean
 		return ret
 	}
@@ -648,7 +651,7 @@ func (o *SamlConfigurationProperties) GetHandleLogout() SamlConfigurationPropert
 // GetHandleLogoutOk returns a tuple with the HandleLogout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationProperties) GetHandleLogoutOk() (*SamlConfigurationPropertyItemsBoolean, bool) {
-	if o == nil || o.HandleLogout == nil {
+	if o == nil || IsNil(o.HandleLogout) {
 		return nil, false
 	}
 	return o.HandleLogout, true
@@ -656,7 +659,7 @@ func (o *SamlConfigurationProperties) GetHandleLogoutOk() (*SamlConfigurationPro
 
 // HasHandleLogout returns a boolean if a field has been set.
 func (o *SamlConfigurationProperties) HasHandleLogout() bool {
-	if o != nil && o.HandleLogout != nil {
+	if o != nil && !IsNil(o.HandleLogout) {
 		return true
 	}
 
@@ -670,7 +673,7 @@ func (o *SamlConfigurationProperties) SetHandleLogout(v SamlConfigurationPropert
 
 // GetLogoutUrl returns the LogoutUrl field value if set, zero value otherwise.
 func (o *SamlConfigurationProperties) GetLogoutUrl() SamlConfigurationPropertyItemsString {
-	if o == nil || o.LogoutUrl == nil {
+	if o == nil || IsNil(o.LogoutUrl) {
 		var ret SamlConfigurationPropertyItemsString
 		return ret
 	}
@@ -680,7 +683,7 @@ func (o *SamlConfigurationProperties) GetLogoutUrl() SamlConfigurationPropertyIt
 // GetLogoutUrlOk returns a tuple with the LogoutUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationProperties) GetLogoutUrlOk() (*SamlConfigurationPropertyItemsString, bool) {
-	if o == nil || o.LogoutUrl == nil {
+	if o == nil || IsNil(o.LogoutUrl) {
 		return nil, false
 	}
 	return o.LogoutUrl, true
@@ -688,7 +691,7 @@ func (o *SamlConfigurationProperties) GetLogoutUrlOk() (*SamlConfigurationProper
 
 // HasLogoutUrl returns a boolean if a field has been set.
 func (o *SamlConfigurationProperties) HasLogoutUrl() bool {
-	if o != nil && o.LogoutUrl != nil {
+	if o != nil && !IsNil(o.LogoutUrl) {
 		return true
 	}
 
@@ -702,7 +705,7 @@ func (o *SamlConfigurationProperties) SetLogoutUrl(v SamlConfigurationPropertyIt
 
 // GetClockTolerance returns the ClockTolerance field value if set, zero value otherwise.
 func (o *SamlConfigurationProperties) GetClockTolerance() SamlConfigurationPropertyItemsLong {
-	if o == nil || o.ClockTolerance == nil {
+	if o == nil || IsNil(o.ClockTolerance) {
 		var ret SamlConfigurationPropertyItemsLong
 		return ret
 	}
@@ -712,7 +715,7 @@ func (o *SamlConfigurationProperties) GetClockTolerance() SamlConfigurationPrope
 // GetClockToleranceOk returns a tuple with the ClockTolerance field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationProperties) GetClockToleranceOk() (*SamlConfigurationPropertyItemsLong, bool) {
-	if o == nil || o.ClockTolerance == nil {
+	if o == nil || IsNil(o.ClockTolerance) {
 		return nil, false
 	}
 	return o.ClockTolerance, true
@@ -720,7 +723,7 @@ func (o *SamlConfigurationProperties) GetClockToleranceOk() (*SamlConfigurationP
 
 // HasClockTolerance returns a boolean if a field has been set.
 func (o *SamlConfigurationProperties) HasClockTolerance() bool {
-	if o != nil && o.ClockTolerance != nil {
+	if o != nil && !IsNil(o.ClockTolerance) {
 		return true
 	}
 
@@ -734,7 +737,7 @@ func (o *SamlConfigurationProperties) SetClockTolerance(v SamlConfigurationPrope
 
 // GetDigestMethod returns the DigestMethod field value if set, zero value otherwise.
 func (o *SamlConfigurationProperties) GetDigestMethod() SamlConfigurationPropertyItemsString {
-	if o == nil || o.DigestMethod == nil {
+	if o == nil || IsNil(o.DigestMethod) {
 		var ret SamlConfigurationPropertyItemsString
 		return ret
 	}
@@ -744,7 +747,7 @@ func (o *SamlConfigurationProperties) GetDigestMethod() SamlConfigurationPropert
 // GetDigestMethodOk returns a tuple with the DigestMethod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationProperties) GetDigestMethodOk() (*SamlConfigurationPropertyItemsString, bool) {
-	if o == nil || o.DigestMethod == nil {
+	if o == nil || IsNil(o.DigestMethod) {
 		return nil, false
 	}
 	return o.DigestMethod, true
@@ -752,7 +755,7 @@ func (o *SamlConfigurationProperties) GetDigestMethodOk() (*SamlConfigurationPro
 
 // HasDigestMethod returns a boolean if a field has been set.
 func (o *SamlConfigurationProperties) HasDigestMethod() bool {
-	if o != nil && o.DigestMethod != nil {
+	if o != nil && !IsNil(o.DigestMethod) {
 		return true
 	}
 
@@ -766,7 +769,7 @@ func (o *SamlConfigurationProperties) SetDigestMethod(v SamlConfigurationPropert
 
 // GetSignatureMethod returns the SignatureMethod field value if set, zero value otherwise.
 func (o *SamlConfigurationProperties) GetSignatureMethod() SamlConfigurationPropertyItemsString {
-	if o == nil || o.SignatureMethod == nil {
+	if o == nil || IsNil(o.SignatureMethod) {
 		var ret SamlConfigurationPropertyItemsString
 		return ret
 	}
@@ -776,7 +779,7 @@ func (o *SamlConfigurationProperties) GetSignatureMethod() SamlConfigurationProp
 // GetSignatureMethodOk returns a tuple with the SignatureMethod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationProperties) GetSignatureMethodOk() (*SamlConfigurationPropertyItemsString, bool) {
-	if o == nil || o.SignatureMethod == nil {
+	if o == nil || IsNil(o.SignatureMethod) {
 		return nil, false
 	}
 	return o.SignatureMethod, true
@@ -784,7 +787,7 @@ func (o *SamlConfigurationProperties) GetSignatureMethodOk() (*SamlConfiguration
 
 // HasSignatureMethod returns a boolean if a field has been set.
 func (o *SamlConfigurationProperties) HasSignatureMethod() bool {
-	if o != nil && o.SignatureMethod != nil {
+	if o != nil && !IsNil(o.SignatureMethod) {
 		return true
 	}
 
@@ -798,7 +801,7 @@ func (o *SamlConfigurationProperties) SetSignatureMethod(v SamlConfigurationProp
 
 // GetUserIntermediatePath returns the UserIntermediatePath field value if set, zero value otherwise.
 func (o *SamlConfigurationProperties) GetUserIntermediatePath() SamlConfigurationPropertyItemsString {
-	if o == nil || o.UserIntermediatePath == nil {
+	if o == nil || IsNil(o.UserIntermediatePath) {
 		var ret SamlConfigurationPropertyItemsString
 		return ret
 	}
@@ -808,7 +811,7 @@ func (o *SamlConfigurationProperties) GetUserIntermediatePath() SamlConfiguratio
 // GetUserIntermediatePathOk returns a tuple with the UserIntermediatePath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationProperties) GetUserIntermediatePathOk() (*SamlConfigurationPropertyItemsString, bool) {
-	if o == nil || o.UserIntermediatePath == nil {
+	if o == nil || IsNil(o.UserIntermediatePath) {
 		return nil, false
 	}
 	return o.UserIntermediatePath, true
@@ -816,7 +819,7 @@ func (o *SamlConfigurationProperties) GetUserIntermediatePathOk() (*SamlConfigur
 
 // HasUserIntermediatePath returns a boolean if a field has been set.
 func (o *SamlConfigurationProperties) HasUserIntermediatePath() bool {
-	if o != nil && o.UserIntermediatePath != nil {
+	if o != nil && !IsNil(o.UserIntermediatePath) {
 		return true
 	}
 
@@ -829,80 +832,88 @@ func (o *SamlConfigurationProperties) SetUserIntermediatePath(v SamlConfiguratio
 }
 
 func (o SamlConfigurationProperties) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Path != nil {
-		toSerialize["path"] = o.Path
-	}
-	if o.ServiceRanking != nil {
-		toSerialize["service.ranking"] = o.ServiceRanking
-	}
-	if o.IdpUrl != nil {
-		toSerialize["idpUrl"] = o.IdpUrl
-	}
-	if o.IdpCertAlias != nil {
-		toSerialize["idpCertAlias"] = o.IdpCertAlias
-	}
-	if o.IdpHttpRedirect != nil {
-		toSerialize["idpHttpRedirect"] = o.IdpHttpRedirect
-	}
-	if o.ServiceProviderEntityId != nil {
-		toSerialize["serviceProviderEntityId"] = o.ServiceProviderEntityId
-	}
-	if o.AssertionConsumerServiceURL != nil {
-		toSerialize["assertionConsumerServiceURL"] = o.AssertionConsumerServiceURL
-	}
-	if o.SpPrivateKeyAlias != nil {
-		toSerialize["spPrivateKeyAlias"] = o.SpPrivateKeyAlias
-	}
-	if o.KeyStorePassword != nil {
-		toSerialize["keyStorePassword"] = o.KeyStorePassword
-	}
-	if o.DefaultRedirectUrl != nil {
-		toSerialize["defaultRedirectUrl"] = o.DefaultRedirectUrl
-	}
-	if o.UserIDAttribute != nil {
-		toSerialize["userIDAttribute"] = o.UserIDAttribute
-	}
-	if o.UseEncryption != nil {
-		toSerialize["useEncryption"] = o.UseEncryption
-	}
-	if o.CreateUser != nil {
-		toSerialize["createUser"] = o.CreateUser
-	}
-	if o.AddGroupMemberships != nil {
-		toSerialize["addGroupMemberships"] = o.AddGroupMemberships
-	}
-	if o.GroupMembershipAttribute != nil {
-		toSerialize["groupMembershipAttribute"] = o.GroupMembershipAttribute
-	}
-	if o.DefaultGroups != nil {
-		toSerialize["defaultGroups"] = o.DefaultGroups
-	}
-	if o.NameIdFormat != nil {
-		toSerialize["nameIdFormat"] = o.NameIdFormat
-	}
-	if o.SynchronizeAttributes != nil {
-		toSerialize["synchronizeAttributes"] = o.SynchronizeAttributes
-	}
-	if o.HandleLogout != nil {
-		toSerialize["handleLogout"] = o.HandleLogout
-	}
-	if o.LogoutUrl != nil {
-		toSerialize["logoutUrl"] = o.LogoutUrl
-	}
-	if o.ClockTolerance != nil {
-		toSerialize["clockTolerance"] = o.ClockTolerance
-	}
-	if o.DigestMethod != nil {
-		toSerialize["digestMethod"] = o.DigestMethod
-	}
-	if o.SignatureMethod != nil {
-		toSerialize["signatureMethod"] = o.SignatureMethod
-	}
-	if o.UserIntermediatePath != nil {
-		toSerialize["userIntermediatePath"] = o.UserIntermediatePath
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o SamlConfigurationProperties) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Path) {
+		toSerialize["path"] = o.Path
+	}
+	if !IsNil(o.ServiceRanking) {
+		toSerialize["service.ranking"] = o.ServiceRanking
+	}
+	if !IsNil(o.IdpUrl) {
+		toSerialize["idpUrl"] = o.IdpUrl
+	}
+	if !IsNil(o.IdpCertAlias) {
+		toSerialize["idpCertAlias"] = o.IdpCertAlias
+	}
+	if !IsNil(o.IdpHttpRedirect) {
+		toSerialize["idpHttpRedirect"] = o.IdpHttpRedirect
+	}
+	if !IsNil(o.ServiceProviderEntityId) {
+		toSerialize["serviceProviderEntityId"] = o.ServiceProviderEntityId
+	}
+	if !IsNil(o.AssertionConsumerServiceURL) {
+		toSerialize["assertionConsumerServiceURL"] = o.AssertionConsumerServiceURL
+	}
+	if !IsNil(o.SpPrivateKeyAlias) {
+		toSerialize["spPrivateKeyAlias"] = o.SpPrivateKeyAlias
+	}
+	if !IsNil(o.KeyStorePassword) {
+		toSerialize["keyStorePassword"] = o.KeyStorePassword
+	}
+	if !IsNil(o.DefaultRedirectUrl) {
+		toSerialize["defaultRedirectUrl"] = o.DefaultRedirectUrl
+	}
+	if !IsNil(o.UserIDAttribute) {
+		toSerialize["userIDAttribute"] = o.UserIDAttribute
+	}
+	if !IsNil(o.UseEncryption) {
+		toSerialize["useEncryption"] = o.UseEncryption
+	}
+	if !IsNil(o.CreateUser) {
+		toSerialize["createUser"] = o.CreateUser
+	}
+	if !IsNil(o.AddGroupMemberships) {
+		toSerialize["addGroupMemberships"] = o.AddGroupMemberships
+	}
+	if !IsNil(o.GroupMembershipAttribute) {
+		toSerialize["groupMembershipAttribute"] = o.GroupMembershipAttribute
+	}
+	if !IsNil(o.DefaultGroups) {
+		toSerialize["defaultGroups"] = o.DefaultGroups
+	}
+	if !IsNil(o.NameIdFormat) {
+		toSerialize["nameIdFormat"] = o.NameIdFormat
+	}
+	if !IsNil(o.SynchronizeAttributes) {
+		toSerialize["synchronizeAttributes"] = o.SynchronizeAttributes
+	}
+	if !IsNil(o.HandleLogout) {
+		toSerialize["handleLogout"] = o.HandleLogout
+	}
+	if !IsNil(o.LogoutUrl) {
+		toSerialize["logoutUrl"] = o.LogoutUrl
+	}
+	if !IsNil(o.ClockTolerance) {
+		toSerialize["clockTolerance"] = o.ClockTolerance
+	}
+	if !IsNil(o.DigestMethod) {
+		toSerialize["digestMethod"] = o.DigestMethod
+	}
+	if !IsNil(o.SignatureMethod) {
+		toSerialize["signatureMethod"] = o.SignatureMethod
+	}
+	if !IsNil(o.UserIntermediatePath) {
+		toSerialize["userIntermediatePath"] = o.UserIntermediatePath
+	}
+	return toSerialize, nil
 }
 
 type NullableSamlConfigurationProperties struct {

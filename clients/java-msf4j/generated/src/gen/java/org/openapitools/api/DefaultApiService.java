@@ -17,7 +17,7 @@ import java.io.InputStream;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaMSF4JServerCodegen", date = "2021-09-03T15:25:23.467+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaMSF4JServerCodegen", date = "2026-08-17T02:15:13.302721680Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public abstract class DefaultApiService {
     public abstract Response deleteNode(String path
  ,String name
@@ -33,7 +33,7 @@ public abstract class DefaultApiService {
  ) throws NotFoundException;
     public abstract Response postAuthorizableKeystore(String intermediatePath
  ,String authorizableId
- ,String colonOperation
+ ,String operation
  ,String currentPassword
  ,String newPassword
  ,String rePassword
@@ -48,16 +48,16 @@ public abstract class DefaultApiService {
  ) throws NotFoundException;
     public abstract Response postNode(String path
  ,String name
- ,String colonOperation
+ ,String operation
  ,String deleteAuthorizable
- ,InputStream fileInputStream, FileInfo fileDetail
+ ,InputStream _fileInputStream, FileInfo _fileDetail
  ) throws NotFoundException;
     public abstract Response postNodeRw(String path
  ,String name
  ,String addMembers
  ) throws NotFoundException;
     public abstract Response postPath(String path
- ,String jcrColonPrimaryType
- ,String colonName
+ ,String jcrPrimaryType
+ ,String name
  ) throws NotFoundException;
 }

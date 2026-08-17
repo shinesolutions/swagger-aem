@@ -1,15 +1,17 @@
 # OpenAPI\Client\ConsoleApi
 
-All URIs are relative to http://localhost.
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**getAemProductInfo()**](ConsoleApi.md#getAemProductInfo) | **GET** /system/console/status-productinfo.json | 
-[**getBundleInfo()**](ConsoleApi.md#getBundleInfo) | **GET** /system/console/bundles/{name}.json | 
-[**getConfigMgr()**](ConsoleApi.md#getConfigMgr) | **GET** /system/console/configMgr | 
-[**postBundle()**](ConsoleApi.md#postBundle) | **POST** /system/console/bundles/{name} | 
-[**postJmxRepository()**](ConsoleApi.md#postJmxRepository) | **POST** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} | 
-[**postSamlConfiguration()**](ConsoleApi.md#postSamlConfiguration) | **POST** /system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler | 
+
+All URIs are relative to http://localhost, except if the operation defines another base path.
+
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**getAemProductInfo()**](ConsoleApi.md#getAemProductInfo) | **GET** /system/console/status-productinfo.json |  |
+| [**getBundleInfo()**](ConsoleApi.md#getBundleInfo) | **GET** /system/console/bundles/{name}.json |  |
+| [**getConfigMgr()**](ConsoleApi.md#getConfigMgr) | **GET** /system/console/configMgr |  |
+| [**postBundle()**](ConsoleApi.md#postBundle) | **POST** /system/console/bundles/{name} |  |
+| [**postJmxRepository()**](ConsoleApi.md#postJmxRepository) | **POST** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} |  |
+| [**postSamlConfiguration()**](ConsoleApi.md#postSamlConfiguration) | **POST** /system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler |  |
 
 
 ## `getAemProductInfo()`
@@ -108,9 +110,9 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **string**|  |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **name** | **string**|  | |
 
 ### Return type
 
@@ -225,10 +227,10 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **string**|  |
- **action** | **string**|  |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **name** | **string**|  | |
+| **action** | **string**|  | |
 
 ### Return type
 
@@ -285,9 +287,9 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **action** | **string**|  |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **action** | **string**|  | |
 
 ### Return type
 
@@ -374,38 +376,38 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **post** | **bool**|  | [optional]
- **apply** | **bool**|  | [optional]
- **delete** | **bool**|  | [optional]
- **action** | **string**|  | [optional]
- **location** | **string**|  | [optional]
- **path** | [**string[]**](../Model/string.md)|  | [optional]
- **service_ranking** | **int**|  | [optional]
- **idp_url** | **string**|  | [optional]
- **idp_cert_alias** | **string**|  | [optional]
- **idp_http_redirect** | **bool**|  | [optional]
- **service_provider_entity_id** | **string**|  | [optional]
- **assertion_consumer_service_url** | **string**|  | [optional]
- **sp_private_key_alias** | **string**|  | [optional]
- **key_store_password** | **string**|  | [optional]
- **default_redirect_url** | **string**|  | [optional]
- **user_id_attribute** | **string**|  | [optional]
- **use_encryption** | **bool**|  | [optional]
- **create_user** | **bool**|  | [optional]
- **add_group_memberships** | **bool**|  | [optional]
- **group_membership_attribute** | **string**|  | [optional]
- **default_groups** | [**string[]**](../Model/string.md)|  | [optional]
- **name_id_format** | **string**|  | [optional]
- **synchronize_attributes** | [**string[]**](../Model/string.md)|  | [optional]
- **handle_logout** | **bool**|  | [optional]
- **logout_url** | **string**|  | [optional]
- **clock_tolerance** | **int**|  | [optional]
- **digest_method** | **string**|  | [optional]
- **signature_method** | **string**|  | [optional]
- **user_intermediate_path** | **string**|  | [optional]
- **propertylist** | [**string[]**](../Model/string.md)|  | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **post** | **bool**|  | [optional] |
+| **apply** | **bool**|  | [optional] |
+| **delete** | **bool**|  | [optional] |
+| **action** | **string**|  | [optional] |
+| **location** | **string**|  | [optional] |
+| **path** | [**string[]**](../Model/string.md)|  | [optional] |
+| **service_ranking** | **int**|  | [optional] |
+| **idp_url** | **string**|  | [optional] |
+| **idp_cert_alias** | **string**|  | [optional] |
+| **idp_http_redirect** | **bool**|  | [optional] |
+| **service_provider_entity_id** | **string**|  | [optional] |
+| **assertion_consumer_service_url** | **string**|  | [optional] |
+| **sp_private_key_alias** | **string**|  | [optional] |
+| **key_store_password** | **string**|  | [optional] |
+| **default_redirect_url** | **string**|  | [optional] |
+| **user_id_attribute** | **string**|  | [optional] |
+| **use_encryption** | **bool**|  | [optional] |
+| **create_user** | **bool**|  | [optional] |
+| **add_group_memberships** | **bool**|  | [optional] |
+| **group_membership_attribute** | **string**|  | [optional] |
+| **default_groups** | [**string[]**](../Model/string.md)|  | [optional] |
+| **name_id_format** | **string**|  | [optional] |
+| **synchronize_attributes** | [**string[]**](../Model/string.md)|  | [optional] |
+| **handle_logout** | **bool**|  | [optional] |
+| **logout_url** | **string**|  | [optional] |
+| **clock_tolerance** | **int**|  | [optional] |
+| **digest_method** | **string**|  | [optional] |
+| **signature_method** | **string**|  | [optional] |
+| **user_intermediate_path** | **string**|  | [optional] |
+| **propertylist** | [**string[]**](../Model/string.md)|  | [optional] |
 
 ### Return type
 

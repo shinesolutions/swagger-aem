@@ -3,7 +3,7 @@
  *
  * Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
  *
- * OpenAPI document version: 3.5.0-pre.0
+ * OpenAPI document version: 3.7.1-pre.0
  * Maintained by: opensource@shinesolutions.com
  *
  * AUTO-GENERATED FILE, DO NOT MODIFY!
@@ -20,7 +20,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaUndertowServerCodegen", date = "2021-09-03T15:25:36.220+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaUndertowServerCodegen", date = "2026-08-17T02:15:19.997360538Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class InstallStatusStatus   {
   
   private Boolean finished;
@@ -95,10 +95,7 @@ public class InstallStatusStatus   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

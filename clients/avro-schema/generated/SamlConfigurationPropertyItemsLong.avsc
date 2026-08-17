@@ -1,0 +1,45 @@
+{
+  "namespace": "model",
+  "type": "record",
+  "doc": "",
+  "name": "SamlConfigurationPropertyItemsLong",
+  "fields": [
+    {
+      "name": "name",
+      "type": ["null", "string"],
+      "doc": "property name",
+      "default": null
+    },
+    {
+      "name": "optional",
+      "type": ["null", "boolean"],
+      "doc": "True if optional",
+      "default": null
+    },
+    {
+      "name": "is_set",
+      "type": ["null", "boolean"],
+      "doc": "True if property is set",
+      "default": null
+    },
+    {
+      "name": "type",
+      "type": ["null", "int"],
+      "doc": "Property type, 1=String, 3=long, 11=boolean, 12=Password",
+      "default": null
+    },
+    {
+      "name": "value",
+      "type": ["null", "int"],
+      "doc": "Property value",
+      "default": null
+    },
+    {
+      "name": "description",
+      "type": ["null", "string"],
+      "doc": "Property description",
+      "default": null
+    }
+  ]
+
+}

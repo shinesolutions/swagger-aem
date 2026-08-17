@@ -23,7 +23,7 @@ Method | HTTP request | Description
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -32,7 +32,7 @@ import 'package:openapi/api.dart';
 
 final api_instance = CrxApi();
 
-try { 
+try {
     final result = api_instance.getCrxdeStatus();
     print(result);
 } catch (e) {
@@ -63,7 +63,7 @@ This endpoint does not need any parameter.
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -72,7 +72,7 @@ import 'package:openapi/api.dart';
 
 final api_instance = CrxApi();
 
-try { 
+try {
     final result = api_instance.getInstallStatus();
     print(result);
 } catch (e) {
@@ -103,7 +103,7 @@ This endpoint does not need any parameter.
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -112,7 +112,7 @@ import 'package:openapi/api.dart';
 
 final api_instance = CrxApi();
 
-try { 
+try {
     api_instance.getPackageManagerServlet();
 } catch (e) {
     print('Exception when calling CrxApi->getPackageManagerServlet: $e\n');
@@ -142,7 +142,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -152,7 +152,7 @@ import 'package:openapi/api.dart';
 final api_instance = CrxApi();
 final cmd = cmd_example; // String | 
 
-try { 
+try {
     final result = api_instance.postPackageService(cmd);
     print(result);
 } catch (e) {
@@ -186,7 +186,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -204,7 +204,7 @@ final force = true; // bool |
 final recursive = true; // bool | 
 final package = BINARY_DATA_HERE; // MultipartFile | 
 
-try { 
+try {
     final result = api_instance.postPackageServiceJson(path, cmd, groupName, packageName, packageVersion, charset, force, recursive, package);
     print(result);
 } catch (e) {
@@ -246,7 +246,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -261,7 +261,7 @@ final path = path_example; // String |
 final filter = filter_example; // String | 
 final charset = charset_example; // String | 
 
-try { 
+try {
     final result = api_instance.postPackageUpdate(groupName, packageName, version, path, filter, charset);
     print(result);
 } catch (e) {
@@ -300,7 +300,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -312,7 +312,7 @@ final old = old_example; // String |
 final plain = plain_example; // String | 
 final verify = verify_example; // String | 
 
-try { 
+try {
     final result = api_instance.postSetPassword(old, plain, verify);
     print(result);
 } catch (e) {

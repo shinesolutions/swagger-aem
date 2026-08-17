@@ -40,7 +40,7 @@ This endpoint does not need any parameter.
 
 ## get_bundle_info
 
-> crate::models::BundleInfo get_bundle_info(name)
+> models::BundleInfo get_bundle_info(name)
 
 
 ### Parameters
@@ -52,7 +52,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**crate::models::BundleInfo**](BundleInfo.md)
+[**models::BundleInfo**](BundleInfo.md)
 
 ### Authorization
 
@@ -150,7 +150,7 @@ Name | Type | Description  | Required | Notes
 
 ## post_saml_configuration
 
-> crate::models::SamlConfigurationInfo post_saml_configuration(post, apply, delete, action, location, path, service_ranking, idp_url, idp_cert_alias, idp_http_redirect, service_provider_entity_id, assertion_consumer_service_url, sp_private_key_alias, key_store_password, default_redirect_url, user_id_attribute, use_encryption, create_user, add_group_memberships, group_membership_attribute, default_groups, name_id_format, synchronize_attributes, handle_logout, logout_url, clock_tolerance, digest_method, signature_method, user_intermediate_path, propertylist)
+> models::SamlConfigurationInfo post_saml_configuration(post, apply, delete, action, dollar_location, path, service_ranking, idp_url, idp_cert_alias, idp_http_redirect, service_provider_entity_id, assertion_consumer_service_url, sp_private_key_alias, key_store_password, default_redirect_url, user_id_attribute, use_encryption, create_user, add_group_memberships, group_membership_attribute, default_groups, name_id_format, synchronize_attributes, handle_logout, logout_url, clock_tolerance, digest_method, signature_method, user_intermediate_path, propertylist)
 
 
 ### Parameters
@@ -162,7 +162,7 @@ Name | Type | Description  | Required | Notes
 **apply** | Option<**bool**> |  |  |
 **delete** | Option<**bool**> |  |  |
 **action** | Option<**String**> |  |  |
-**location** | Option<**String**> |  |  |
+**dollar_location** | Option<**String**> |  |  |
 **path** | Option<[**Vec<String>**](String.md)> |  |  |
 **service_ranking** | Option<**i32**> |  |  |
 **idp_url** | Option<**String**> |  |  |
@@ -191,7 +191,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**crate::models::SamlConfigurationInfo**](SamlConfigurationInfo.md)
+[**models::SamlConfigurationInfo**](SamlConfigurationInfo.md)
 
 ### Authorization
 

@@ -70,12 +70,12 @@ class GraniteApiSimulation extends Simulation {
         .feed(sslSetupQUERYFeeder)
         .exec(http("sslSetup")
         .httpRequest("POST","/libs/granite/security/post/sslSetup.html")
-        .queryParam("truststorePassword","${truststorePassword}")
         .queryParam("httpsHostname","${httpsHostname}")
-        .queryParam("truststorePasswordConfirm","${truststorePasswordConfirm}")
-        .queryParam("keystorePassword","${keystorePassword}")
-        .queryParam("httpsPort","${httpsPort}")
         .queryParam("keystorePasswordConfirm","${keystorePasswordConfirm}")
+        .queryParam("truststorePassword","${truststorePassword}")
+        .queryParam("truststorePasswordConfirm","${truststorePasswordConfirm}")
+        .queryParam("httpsPort","${httpsPort}")
+        .queryParam("keystorePassword","${keystorePassword}")
 )
 
     // Run scnsslSetup with warm up and reach a constant rate for entire duration

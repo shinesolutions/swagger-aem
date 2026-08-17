@@ -5,15 +5,18 @@ import org.openapitools.model.*;
 
 
 
+
 import java.util.List;
 import org.openapitools.api.NotFoundException;
 
 import java.io.InputStream;
 
+import javax.validation.constraints.*;
+import javax.validation.Valid;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyServerCodegen", date = "2021-09-03T15:25:57.989+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyServerCodegen", date = "2026-08-17T02:15:38.090574223Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public interface AppsApiService {
       Response postConfigAdobeGraniteSamlAuthenticationHandler(String keyStorePassword,String keyStorePasswordAtTypeHint,Integer serviceRanking,String serviceRankingAtTypeHint,Boolean idpHttpRedirect,String idpHttpRedirectAtTypeHint,Boolean createUser,String createUserAtTypeHint,String defaultRedirectUrl,String defaultRedirectUrlAtTypeHint,String userIDAttribute,String userIDAttributeAtTypeHint,List<String> defaultGroups,String defaultGroupsAtTypeHint,String idpCertAlias,String idpCertAliasAtTypeHint,Boolean addGroupMemberships,String addGroupMembershipsAtTypeHint,List<String> path,String pathAtTypeHint,List<String> synchronizeAttributes,String synchronizeAttributesAtTypeHint,Integer clockTolerance,String clockToleranceAtTypeHint,String groupMembershipAttribute,String groupMembershipAttributeAtTypeHint,String idpUrl,String idpUrlAtTypeHint,String logoutUrl,String logoutUrlAtTypeHint,String serviceProviderEntityId,String serviceProviderEntityIdAtTypeHint,String assertionConsumerServiceURL,String assertionConsumerServiceURLAtTypeHint,Boolean handleLogout,String handleLogoutAtTypeHint,String spPrivateKeyAlias,String spPrivateKeyAliasAtTypeHint,Boolean useEncryption,String useEncryptionAtTypeHint,String nameIdFormat,String nameIdFormatAtTypeHint,String digestMethod,String digestMethodAtTypeHint,String signatureMethod,String signatureMethodAtTypeHint,String userIntermediatePath,String userIntermediatePathAtTypeHint,SecurityContext securityContext)
       throws NotFoundException;
@@ -33,4 +36,6 @@ public interface AppsApiService {
       throws NotFoundException;
       Response postConfigProperty(String configNodeName,SecurityContext securityContext)
       throws NotFoundException;
+
+
 }

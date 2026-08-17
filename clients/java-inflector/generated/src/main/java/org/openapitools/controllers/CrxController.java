@@ -13,9 +13,9 @@ import org.openapitools.model.*;
 import java.io.File;
 import org.openapitools.model.InstallStatus;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaInflectorServerCodegen", date = "2021-09-03T15:25:18.608+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaInflectorServerCodegen", date = "2026-08-17T02:15:06.513440410Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class CrxController  {
-  /** 
+  /**
    * Uncomment and implement as you see fit.  These operations will map
    * Directly to operation calls from the routing logic.  Because the inflector
    * Code allows you to implement logic incrementally, they are disabled.
@@ -64,4 +64,3 @@ public class CrxController  {
   */
 
 }
-

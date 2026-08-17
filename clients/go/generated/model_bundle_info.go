@@ -3,7 +3,7 @@ Adobe Experience Manager (AEM) API
 
 Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
 
-API version: 3.5.0-pre.0
+API version: 3.7.1-pre.0
 Contact: opensource@shinesolutions.com
 */
 
@@ -15,12 +15,15 @@ import (
 	"encoding/json"
 )
 
+// checks if the BundleInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &BundleInfo{}
+
 // BundleInfo struct for BundleInfo
 type BundleInfo struct {
 	// Status description of all bundles
 	Status *string `json:"status,omitempty"`
-	S *[]int32 `json:"s,omitempty"`
-	Data *[]BundleData `json:"data,omitempty"`
+	S []int32 `json:"s,omitempty"`
+	Data []BundleData `json:"data,omitempty"`
 }
 
 // NewBundleInfo instantiates a new BundleInfo object
@@ -42,7 +45,7 @@ func NewBundleInfoWithDefaults() *BundleInfo {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *BundleInfo) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -52,7 +55,7 @@ func (o *BundleInfo) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BundleInfo) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -60,7 +63,7 @@ func (o *BundleInfo) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *BundleInfo) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -74,17 +77,17 @@ func (o *BundleInfo) SetStatus(v string) {
 
 // GetS returns the S field value if set, zero value otherwise.
 func (o *BundleInfo) GetS() []int32 {
-	if o == nil || o.S == nil {
+	if o == nil || IsNil(o.S) {
 		var ret []int32
 		return ret
 	}
-	return *o.S
+	return o.S
 }
 
 // GetSOk returns a tuple with the S field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BundleInfo) GetSOk() (*[]int32, bool) {
-	if o == nil || o.S == nil {
+func (o *BundleInfo) GetSOk() ([]int32, bool) {
+	if o == nil || IsNil(o.S) {
 		return nil, false
 	}
 	return o.S, true
@@ -92,7 +95,7 @@ func (o *BundleInfo) GetSOk() (*[]int32, bool) {
 
 // HasS returns a boolean if a field has been set.
 func (o *BundleInfo) HasS() bool {
-	if o != nil && o.S != nil {
+	if o != nil && !IsNil(o.S) {
 		return true
 	}
 
@@ -101,22 +104,22 @@ func (o *BundleInfo) HasS() bool {
 
 // SetS gets a reference to the given []int32 and assigns it to the S field.
 func (o *BundleInfo) SetS(v []int32) {
-	o.S = &v
+	o.S = v
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
 func (o *BundleInfo) GetData() []BundleData {
-	if o == nil || o.Data == nil {
+	if o == nil || IsNil(o.Data) {
 		var ret []BundleData
 		return ret
 	}
-	return *o.Data
+	return o.Data
 }
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BundleInfo) GetDataOk() (*[]BundleData, bool) {
-	if o == nil || o.Data == nil {
+func (o *BundleInfo) GetDataOk() ([]BundleData, bool) {
+	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
 	return o.Data, true
@@ -124,7 +127,7 @@ func (o *BundleInfo) GetDataOk() (*[]BundleData, bool) {
 
 // HasData returns a boolean if a field has been set.
 func (o *BundleInfo) HasData() bool {
-	if o != nil && o.Data != nil {
+	if o != nil && !IsNil(o.Data) {
 		return true
 	}
 
@@ -133,21 +136,29 @@ func (o *BundleInfo) HasData() bool {
 
 // SetData gets a reference to the given []BundleData and assigns it to the Data field.
 func (o *BundleInfo) SetData(v []BundleData) {
-	o.Data = &v
+	o.Data = v
 }
 
 func (o BundleInfo) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Status != nil {
-		toSerialize["status"] = o.Status
-	}
-	if o.S != nil {
-		toSerialize["s"] = o.S
-	}
-	if o.Data != nil {
-		toSerialize["data"] = o.Data
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o BundleInfo) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Status) {
+		toSerialize["status"] = o.Status
+	}
+	if !IsNil(o.S) {
+		toSerialize["s"] = o.S
+	}
+	if !IsNil(o.Data) {
+		toSerialize["data"] = o.Data
+	}
+	return toSerialize, nil
 }
 
 type NullableBundleInfo struct {

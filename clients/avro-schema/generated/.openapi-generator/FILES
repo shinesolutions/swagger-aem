@@ -1,0 +1,17 @@
+.openapi-generator-ignore
+BundleData.avsc
+BundleDataProp.avsc
+BundleInfo.avsc
+InstallStatus.avsc
+InstallStatusStatus.avsc
+KeystoreChainItems.avsc
+KeystoreInfo.avsc
+KeystoreItems.avsc
+SamlConfigurationInfo.avsc
+SamlConfigurationProperties.avsc
+SamlConfigurationPropertyItemsArray.avsc
+SamlConfigurationPropertyItemsBoolean.avsc
+SamlConfigurationPropertyItemsLong.avsc
+SamlConfigurationPropertyItemsString.avsc
+TruststoreInfo.avsc
+TruststoreItems.avsc

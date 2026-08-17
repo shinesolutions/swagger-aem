@@ -1,50 +1,52 @@
 package org.openapitools.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.model.KeystoreChainItems;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
 
 import io.swagger.annotations.ApiModelProperty;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlEnumValue;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 public class KeystoreItems  {
   
-  @ApiModelProperty(value = "Keystore alias name")
  /**
-   * Keystore alias name
-  **/
+  * Keystore alias name
+  */
+  @ApiModelProperty(value = "Keystore alias name")
+
   private String alias;
 
-  @ApiModelProperty(value = "e.g. \"privateKey\"")
  /**
-   * e.g. \"privateKey\"
-  **/
+  * e.g. \"privateKey\"
+  */
+  @ApiModelProperty(value = "e.g. \"privateKey\"")
+
   private String entryType;
 
-  @ApiModelProperty(value = "e.g. \"RSA\"")
  /**
-   * e.g. \"RSA\"
-  **/
+  * e.g. \"RSA\"
+  */
+  @ApiModelProperty(value = "e.g. \"RSA\"")
+
   private String algorithm;
 
-  @ApiModelProperty(value = "e.g. \"PKCS#8\"")
  /**
-   * e.g. \"PKCS#8\"
-  **/
+  * e.g. \"PKCS#8\"
+  */
+  @ApiModelProperty(value = "e.g. \"PKCS#8\"")
+
   private String format;
 
   @ApiModelProperty(value = "")
+
   @Valid
-  private List<KeystoreChainItems> chain = null;
+
+  private List<@Valid KeystoreChainItems> chain = new ArrayList<>();
  /**
    * Keystore alias name
    * @return alias
@@ -122,15 +124,15 @@ public class KeystoreItems  {
    * @return chain
   **/
   @JsonProperty("chain")
-  public List<KeystoreChainItems> getChain() {
+  public List<@Valid KeystoreChainItems> getChain() {
     return chain;
   }
 
-  public void setChain(List<KeystoreChainItems> chain) {
+  public void setChain(List<@Valid KeystoreChainItems> chain) {
     this.chain = chain;
   }
 
-  public KeystoreItems chain(List<KeystoreChainItems> chain) {
+  public KeystoreItems chain(List<@Valid KeystoreChainItems> chain) {
     this.chain = chain;
     return this;
   }
@@ -140,6 +142,26 @@ public class KeystoreItems  {
     return this;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    KeystoreItems keystoreItems = (KeystoreItems) o;
+    return Objects.equals(this.alias, keystoreItems.alias) &&
+        Objects.equals(this.entryType, keystoreItems.entryType) &&
+        Objects.equals(this.algorithm, keystoreItems.algorithm) &&
+        Objects.equals(this.format, keystoreItems.format) &&
+        Objects.equals(this.chain, keystoreItems.chain);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(alias, entryType, algorithm, format, chain);
+  }
 
   @Override
   public String toString() {
@@ -160,10 +182,7 @@ public class KeystoreItems  {
    * (except the first line).
    */
   private static String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

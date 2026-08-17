@@ -22,7 +22,7 @@ Method | HTTP request | Description
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -31,7 +31,7 @@ import 'package:openapi/api.dart';
 
 final api_instance = ConsoleApi();
 
-try { 
+try {
     final result = api_instance.getAemProductInfo();
     print(result);
 } catch (e) {
@@ -62,7 +62,7 @@ This endpoint does not need any parameter.
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -72,7 +72,7 @@ import 'package:openapi/api.dart';
 final api_instance = ConsoleApi();
 final name = name_example; // String | 
 
-try { 
+try {
     final result = api_instance.getBundleInfo(name);
     print(result);
 } catch (e) {
@@ -106,7 +106,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -115,7 +115,7 @@ import 'package:openapi/api.dart';
 
 final api_instance = ConsoleApi();
 
-try { 
+try {
     final result = api_instance.getConfigMgr();
     print(result);
 } catch (e) {
@@ -146,7 +146,7 @@ This endpoint does not need any parameter.
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -157,7 +157,7 @@ final api_instance = ConsoleApi();
 final name = name_example; // String | 
 final action = action_example; // String | 
 
-try { 
+try {
     api_instance.postBundle(name, action);
 } catch (e) {
     print('Exception when calling ConsoleApi->postBundle: $e\n');
@@ -191,7 +191,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -201,7 +201,7 @@ import 'package:openapi/api.dart';
 final api_instance = ConsoleApi();
 final action = action_example; // String | 
 
-try { 
+try {
     api_instance.postJmxRepository(action);
 } catch (e) {
     print('Exception when calling ConsoleApi->postJmxRepository: $e\n');
@@ -234,7 +234,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -273,7 +273,7 @@ final signatureMethod = signatureMethod_example; // String |
 final userIntermediatePath = userIntermediatePath_example; // String | 
 final propertylist = []; // List<String> | 
 
-try { 
+try {
     final result = api_instance.postSamlConfiguration(post, apply, delete, action, dollarLocation, path, servicePeriodRanking, idpUrl, idpCertAlias, idpHttpRedirect, serviceProviderEntityId, assertionConsumerServiceURL, spPrivateKeyAlias, keyStorePassword, defaultRedirectUrl, userIDAttribute, useEncryption, createUser, addGroupMemberships, groupMembershipAttribute, defaultGroups, nameIdFormat, synchronizeAttributes, handleLogout, logoutUrl, clockTolerance, digestMethod, signatureMethod, userIntermediatePath, propertylist);
     print(result);
 } catch (e) {

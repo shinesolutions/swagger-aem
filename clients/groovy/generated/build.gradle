@@ -1,9 +1,10 @@
 apply plugin: 'groovy'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
+apply plugin: 'com.github.johnrengelman.shadow'
 
 group = 'org.openapitools'
-version = '3.5.0-pre.0'
+version = '3.7.1-pre.0'
 archivesBaseName = 'openapi-gen-groovy'
 
 wrapper {
@@ -14,10 +15,11 @@ wrapper {
 buildscript {
     repositories {
         maven { url "https://repo1.maven.org/maven2" }
-        maven { url = 'https://repo.jfrog.org/artifactory/gradle-plugins' }
+        maven { url = 'https://plugins.gradle.org/m2/' }
     }
     dependencies {
-        classpath(group: 'org.jfrog.buildinfo', name: 'build-info-extractor-gradle', version: '2.0.16')
+        classpath(group: 'org.jfrog.buildinfo', name: 'build-info-extractor-gradle', version: '4.24.20')
+        classpath('com.github.johnrengelman.shadow:com.github.johnrengelman.shadow.gradle.plugin:4.0.4')
     }
 }
 
@@ -28,8 +30,8 @@ repositories {
 
 ext {
     swagger_annotations_version = "1.5.22"
-    jackson_version = "2.9.10"
-    jackson_databind_version = "2.9.10.8"
+    jackson_version = "2.18.9"
+    jackson_databind_version = "2.18.9"
 }
 
 dependencies {

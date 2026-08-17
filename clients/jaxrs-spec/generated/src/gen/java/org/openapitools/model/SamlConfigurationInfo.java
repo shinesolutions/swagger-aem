@@ -11,17 +11,23 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2021-09-03T15:26:06.461+10:00[Australia/Melbourne]")public class SamlConfigurationInfo   {
-  
-  private @Valid String pid;
-  private @Valid String title;
-  private @Valid String description;
-  private @Valid String bundleLocation;
-  private @Valid String serviceLocation;
-  private @Valid SamlConfigurationProperties properties;
+@JsonTypeName("SamlConfigurationInfo")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2026-08-17T02:15:42.417242947Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+public class SamlConfigurationInfo   {
+  private String pid;
+  private String title;
+  private String description;
+  private String bundleLocation;
+  private String serviceLocation;
+  private SamlConfigurationProperties properties;
+
+  public SamlConfigurationInfo() {
+  }
 
   /**
    * Persistent Identity (PID)
@@ -32,19 +38,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "Persistent Identity (PID)")
   @JsonProperty("pid")
   public String getPid() {
     return pid;
   }
 
+  @JsonProperty("pid")
   public void setPid(String pid) {
     this.pid = pid;
   }
 
-/**
+  /**
    * Title
    **/
   public SamlConfigurationInfo title(String title) {
@@ -53,19 +58,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "Title")
   @JsonProperty("title")
   public String getTitle() {
     return title;
   }
 
+  @JsonProperty("title")
   public void setTitle(String title) {
     this.title = title;
   }
 
-/**
+  /**
    * Title
    **/
   public SamlConfigurationInfo description(String description) {
@@ -74,19 +78,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "Title")
   @JsonProperty("description")
   public String getDescription() {
     return description;
   }
 
+  @JsonProperty("description")
   public void setDescription(String description) {
     this.description = description;
   }
 
-/**
+  /**
    * needed for configuration binding
    **/
   public SamlConfigurationInfo bundleLocation(String bundleLocation) {
@@ -95,19 +98,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "needed for configuration binding")
   @JsonProperty("bundle_location")
   public String getBundleLocation() {
     return bundleLocation;
   }
 
+  @JsonProperty("bundle_location")
   public void setBundleLocation(String bundleLocation) {
     this.bundleLocation = bundleLocation;
   }
 
-/**
+  /**
    * needed for configuraiton binding
    **/
   public SamlConfigurationInfo serviceLocation(String serviceLocation) {
@@ -116,19 +118,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "needed for configuraiton binding")
   @JsonProperty("service_location")
   public String getServiceLocation() {
     return serviceLocation;
   }
 
+  @JsonProperty("service_location")
   public void setServiceLocation(String serviceLocation) {
     this.serviceLocation = serviceLocation;
   }
 
-/**
+  /**
    **/
   public SamlConfigurationInfo properties(SamlConfigurationProperties properties) {
     this.properties = properties;
@@ -136,14 +137,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("properties")
-  public SamlConfigurationProperties getProperties() {
+  @Valid public SamlConfigurationProperties getProperties() {
     return properties;
   }
 
+  @JsonProperty("properties")
   public void setProperties(SamlConfigurationProperties properties) {
     this.properties = properties;
   }
@@ -191,12 +191,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 
 
 }
-

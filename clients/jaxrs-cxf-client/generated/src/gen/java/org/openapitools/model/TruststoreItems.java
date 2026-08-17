@@ -2,54 +2,56 @@ package org.openapitools.model;
 
 
 import io.swagger.annotations.ApiModelProperty;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlEnumValue;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 public class TruststoreItems  {
   
-  @ApiModelProperty(value = "Truststore alias name")
  /**
-   * Truststore alias name
-  **/
+  * Truststore alias name
+  */
+  @ApiModelProperty(value = "Truststore alias name")
+
   private String alias;
 
   @ApiModelProperty(value = "")
+
   private String entryType;
 
-  @ApiModelProperty(value = "e.g. \"CN=localhost\"")
  /**
-   * e.g. \"CN=localhost\"
-  **/
+  * e.g. \"CN=localhost\"
+  */
+  @ApiModelProperty(value = "e.g. \"CN=localhost\"")
+
   private String subject;
 
-  @ApiModelProperty(value = "e.g. \"CN=Admin\"")
  /**
-   * e.g. \"CN=Admin\"
-  **/
+  * e.g. \"CN=Admin\"
+  */
+  @ApiModelProperty(value = "e.g. \"CN=Admin\"")
+
   private String issuer;
 
-  @ApiModelProperty(value = "e.g. \"Sun Jul 01 12:00:00 AEST 2018\"")
  /**
-   * e.g. \"Sun Jul 01 12:00:00 AEST 2018\"
-  **/
+  * e.g. \"Sun Jul 01 12:00:00 AEST 2018\"
+  */
+  @ApiModelProperty(value = "e.g. \"Sun Jul 01 12:00:00 AEST 2018\"")
+
   private String notBefore;
 
-  @ApiModelProperty(value = "e.g. \"Sun Jun 30 23:59:50 AEST 2019\"")
  /**
-   * e.g. \"Sun Jun 30 23:59:50 AEST 2019\"
-  **/
+  * e.g. \"Sun Jun 30 23:59:50 AEST 2019\"
+  */
+  @ApiModelProperty(value = "e.g. \"Sun Jun 30 23:59:50 AEST 2019\"")
+
   private String notAfter;
 
-  @ApiModelProperty(value = "18165099476682912368")
  /**
-   * 18165099476682912368
-  **/
+  * 18165099476682912368
+  */
+  @ApiModelProperty(value = "18165099476682912368")
+
   private Integer serialNumber;
  /**
    * Truststore alias name
@@ -177,6 +179,28 @@ public class TruststoreItems  {
     return this;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    TruststoreItems truststoreItems = (TruststoreItems) o;
+    return Objects.equals(this.alias, truststoreItems.alias) &&
+        Objects.equals(this.entryType, truststoreItems.entryType) &&
+        Objects.equals(this.subject, truststoreItems.subject) &&
+        Objects.equals(this.issuer, truststoreItems.issuer) &&
+        Objects.equals(this.notBefore, truststoreItems.notBefore) &&
+        Objects.equals(this.notAfter, truststoreItems.notAfter) &&
+        Objects.equals(this.serialNumber, truststoreItems.serialNumber);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(alias, entryType, subject, issuer, notBefore, notAfter, serialNumber);
+  }
 
   @Override
   public String toString() {
@@ -199,10 +223,7 @@ public class TruststoreItems  {
    * (except the first line).
    */
   private static String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

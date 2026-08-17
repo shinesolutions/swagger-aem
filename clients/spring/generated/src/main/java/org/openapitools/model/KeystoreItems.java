@@ -1,39 +1,48 @@
 package org.openapitools.model;
 
+import java.net.URI;
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.model.KeystoreChainItems;
+import org.springframework.lang.Nullable;
 import org.openapitools.jackson.nullable.JsonNullable;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+import java.time.OffsetDateTime;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+
+import java.util.*;
+import jakarta.annotation.Generated;
 
 /**
  * KeystoreItems
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-09-03T15:28:35.636+10:00[Australia/Melbourne]")
-public class KeystoreItems   {
-  @JsonProperty("alias")
-  private String alias;
 
-  @JsonProperty("entryType")
-  private String entryType;
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-08-17T02:18:23.350215970Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+public class KeystoreItems {
 
-  @JsonProperty("algorithm")
-  private String algorithm;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable String alias;
 
-  @JsonProperty("format")
-  private String format;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable String entryType;
 
-  @JsonProperty("chain")
-  @Valid
-  private List<KeystoreChainItems> chain = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable String algorithm;
 
-  public KeystoreItems alias(String alias) {
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable String format;
+
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private List<@Valid KeystoreChainItems> chain = new ArrayList<>();
+
+  public KeystoreItems alias(@Nullable String alias) {
     this.alias = alias;
     return this;
   }
@@ -41,19 +50,20 @@ public class KeystoreItems   {
   /**
    * Keystore alias name
    * @return alias
-  */
-  @ApiModelProperty(value = "Keystore alias name")
-
-
-  public String getAlias() {
+   */
+  
+  @Schema(name = "alias", description = "Keystore alias name", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("alias")
+  public @Nullable String getAlias() {
     return alias;
   }
 
-  public void setAlias(String alias) {
+  @JsonProperty("alias")
+  public void setAlias(@Nullable String alias) {
     this.alias = alias;
   }
 
-  public KeystoreItems entryType(String entryType) {
+  public KeystoreItems entryType(@Nullable String entryType) {
     this.entryType = entryType;
     return this;
   }
@@ -61,19 +71,20 @@ public class KeystoreItems   {
   /**
    * e.g. \"privateKey\"
    * @return entryType
-  */
-  @ApiModelProperty(value = "e.g. \"privateKey\"")
-
-
-  public String getEntryType() {
+   */
+  
+  @Schema(name = "entryType", description = "e.g. \"privateKey\"", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("entryType")
+  public @Nullable String getEntryType() {
     return entryType;
   }
 
-  public void setEntryType(String entryType) {
+  @JsonProperty("entryType")
+  public void setEntryType(@Nullable String entryType) {
     this.entryType = entryType;
   }
 
-  public KeystoreItems algorithm(String algorithm) {
+  public KeystoreItems algorithm(@Nullable String algorithm) {
     this.algorithm = algorithm;
     return this;
   }
@@ -81,19 +92,20 @@ public class KeystoreItems   {
   /**
    * e.g. \"RSA\"
    * @return algorithm
-  */
-  @ApiModelProperty(value = "e.g. \"RSA\"")
-
-
-  public String getAlgorithm() {
+   */
+  
+  @Schema(name = "algorithm", description = "e.g. \"RSA\"", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("algorithm")
+  public @Nullable String getAlgorithm() {
     return algorithm;
   }
 
-  public void setAlgorithm(String algorithm) {
+  @JsonProperty("algorithm")
+  public void setAlgorithm(@Nullable String algorithm) {
     this.algorithm = algorithm;
   }
 
-  public KeystoreItems format(String format) {
+  public KeystoreItems format(@Nullable String format) {
     this.format = format;
     return this;
   }
@@ -101,19 +113,20 @@ public class KeystoreItems   {
   /**
    * e.g. \"PKCS#8\"
    * @return format
-  */
-  @ApiModelProperty(value = "e.g. \"PKCS#8\"")
-
-
-  public String getFormat() {
+   */
+  
+  @Schema(name = "format", description = "e.g. \"PKCS#8\"", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("format")
+  public @Nullable String getFormat() {
     return format;
   }
 
-  public void setFormat(String format) {
+  @JsonProperty("format")
+  public void setFormat(@Nullable String format) {
     this.format = format;
   }
 
-  public KeystoreItems chain(List<KeystoreChainItems> chain) {
+  public KeystoreItems chain(List<@Valid KeystoreChainItems> chain) {
     this.chain = chain;
     return this;
   }
@@ -129,19 +142,18 @@ public class KeystoreItems   {
   /**
    * Get chain
    * @return chain
-  */
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public List<KeystoreChainItems> getChain() {
+   */
+  @Valid 
+  @Schema(name = "chain", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("chain")
+  public List<@Valid KeystoreChainItems> getChain() {
     return chain;
   }
 
-  public void setChain(List<KeystoreChainItems> chain) {
+  @JsonProperty("chain")
+  public void setChain(List<@Valid KeystoreChainItems> chain) {
     this.chain = chain;
   }
-
 
   @Override
   public boolean equals(Object o) {
@@ -168,7 +180,6 @@ public class KeystoreItems   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class KeystoreItems {\n");
-    
     sb.append("    alias: ").append(toIndentedString(alias)).append("\n");
     sb.append("    entryType: ").append(toIndentedString(entryType)).append("\n");
     sb.append("    algorithm: ").append(toIndentedString(algorithm)).append("\n");
@@ -182,11 +193,8 @@ public class KeystoreItems   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+  private String toIndentedString(@Nullable Object o) {
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

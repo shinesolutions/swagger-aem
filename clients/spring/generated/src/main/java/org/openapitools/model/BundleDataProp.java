@@ -1,26 +1,35 @@
 package org.openapitools.model;
 
+import java.net.URI;
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import org.springframework.lang.Nullable;
 import org.openapitools.jackson.nullable.JsonNullable;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+import java.time.OffsetDateTime;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+
+import java.util.*;
+import jakarta.annotation.Generated;
 
 /**
  * BundleDataProp
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-09-03T15:28:35.636+10:00[Australia/Melbourne]")
-public class BundleDataProp   {
-  @JsonProperty("key")
-  private String key;
 
-  @JsonProperty("value")
-  private String value;
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-08-17T02:18:23.350215970Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+public class BundleDataProp {
 
-  public BundleDataProp key(String key) {
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable String key;
+
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable String value;
+
+  public BundleDataProp key(@Nullable String key) {
     this.key = key;
     return this;
   }
@@ -28,19 +37,20 @@ public class BundleDataProp   {
   /**
    * Bundle data key
    * @return key
-  */
-  @ApiModelProperty(value = "Bundle data key")
-
-
-  public String getKey() {
+   */
+  
+  @Schema(name = "key", description = "Bundle data key", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("key")
+  public @Nullable String getKey() {
     return key;
   }
 
-  public void setKey(String key) {
+  @JsonProperty("key")
+  public void setKey(@Nullable String key) {
     this.key = key;
   }
 
-  public BundleDataProp value(String value) {
+  public BundleDataProp value(@Nullable String value) {
     this.value = value;
     return this;
   }
@@ -48,18 +58,18 @@ public class BundleDataProp   {
   /**
    * Bundle data value
    * @return value
-  */
-  @ApiModelProperty(value = "Bundle data value")
-
-
-  public String getValue() {
+   */
+  
+  @Schema(name = "value", description = "Bundle data value", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("value")
+  public @Nullable String getValue() {
     return value;
   }
 
-  public void setValue(String value) {
+  @JsonProperty("value")
+  public void setValue(@Nullable String value) {
     this.value = value;
   }
-
 
   @Override
   public boolean equals(Object o) {
@@ -83,7 +93,6 @@ public class BundleDataProp   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class BundleDataProp {\n");
-    
     sb.append("    key: ").append(toIndentedString(key)).append("\n");
     sb.append("    value: ").append(toIndentedString(value)).append("\n");
     sb.append("}");
@@ -94,11 +103,8 @@ public class BundleDataProp   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+  private String toIndentedString(@Nullable Object o) {
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

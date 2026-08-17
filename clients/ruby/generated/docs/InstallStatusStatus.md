@@ -2,18 +2,19 @@
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**finished** | **Boolean** |  | [optional] 
-**item_count** | **Integer** |  | [optional] 
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **finished** | **Boolean** |  | [optional] |
+| **item_count** | **Integer** |  | [optional] |
 
-## Code Sample
+## Example
 
 ```ruby
-require 'SwaggerAemClient'
+require 'swagger_aem'
 
-instance = SwaggerAemClient::InstallStatusStatus.new(finished: null,
-                                 item_count: null)
+instance = SwaggerAemClient::InstallStatusStatus.new(
+  finished: null,
+  item_count: null
+)
 ```
-
 

@@ -7,17 +7,19 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.model.BundleData;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 import io.swagger.annotations.*;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyServerCodegen", date = "2021-09-03T15:25:57.989+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyServerCodegen", date = "2026-08-17T02:15:38.090574223Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class BundleInfo   {
   
   private String status;
-  private List<Integer> s = new ArrayList<Integer>();
-  private List<BundleData> data = new ArrayList<BundleData>();
+  private List<Integer> s = new ArrayList<>();
+  private List<@Valid BundleData> data = new ArrayList<>();
 
   /**
    * Status description of all bundles
@@ -49,10 +51,11 @@ public class BundleInfo   {
   
   @ApiModelProperty(value = "")
   @JsonProperty("data")
-  public List<BundleData> getData() {
+  @Valid
+  public List<@Valid BundleData> getData() {
     return data;
   }
-  public void setData(List<BundleData> data) {
+  public void setData(List<@Valid BundleData> data) {
     this.data = data;
   }
 
@@ -66,9 +69,9 @@ public class BundleInfo   {
       return false;
     }
     BundleInfo bundleInfo = (BundleInfo) o;
-    return Objects.equals(status, bundleInfo.status) &&
-        Objects.equals(s, bundleInfo.s) &&
-        Objects.equals(data, bundleInfo.data);
+    return Objects.equals(this.status, bundleInfo.status) &&
+        Objects.equals(this.s, bundleInfo.s) &&
+        Objects.equals(this.data, bundleInfo.data);
   }
 
   @Override
@@ -93,10 +96,7 @@ public class BundleInfo   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

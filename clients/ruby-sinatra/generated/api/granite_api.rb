@@ -4,9 +4,9 @@ require 'json'
 MyApp.add_route('POST', '/libs/granite/security/post/sslSetup.html', {
   "resourcePath" => "/Granite",
   "summary" => "",
-  "nickname" => "ssl_setup", 
+  "nickname" => "ssl_setup",
   "responseClass" => "String",
-  "endpoint" => "/libs/granite/security/post/sslSetup.html", 
+  "endpoint" => "/libs/granite/security/post/sslSetup.html",
   "notes" => "",
   "parameters" => [
     {

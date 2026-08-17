@@ -1,28 +1,26 @@
 package org.openapitools.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.model.TruststoreItems;
 
 import io.swagger.annotations.ApiModelProperty;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlEnumValue;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 public class TruststoreInfo  {
   
   @ApiModelProperty(value = "")
-  private List<TruststoreItems> aliases = null;
 
-  @ApiModelProperty(value = "False if truststore don't exist")
+  private List<TruststoreItems> aliases = new ArrayList<>();
+
  /**
-   * False if truststore don't exist
-  **/
+  * False if truststore don't exist
+  */
+  @ApiModelProperty(value = "False if truststore don't exist")
+
   private Boolean exists;
  /**
    * Get aliases
@@ -65,6 +63,23 @@ public class TruststoreInfo  {
     return this;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    TruststoreInfo truststoreInfo = (TruststoreInfo) o;
+    return Objects.equals(this.aliases, truststoreInfo.aliases) &&
+        Objects.equals(this.exists, truststoreInfo.exists);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(aliases, exists);
+  }
 
   @Override
   public String toString() {
@@ -82,10 +97,7 @@ public class TruststoreInfo  {
    * (except the first line).
    */
   private static String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

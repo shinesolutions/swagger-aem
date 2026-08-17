@@ -1,0 +1,490 @@
+# ConsoleApi
+
+All URIs are relative to *http://localhost*
+
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**getAemProductInfo**](ConsoleApi.md#getAemProductInfo) | **GET** /system/console/status-productinfo.json |  |
+| [**getBundleInfo**](ConsoleApi.md#getBundleInfo) | **GET** /system/console/bundles/{name}.json |  |
+| [**getConfigMgr**](ConsoleApi.md#getConfigMgr) | **GET** /system/console/configMgr |  |
+| [**postBundle**](ConsoleApi.md#postBundle) | **POST** /system/console/bundles/{name} |  |
+| [**postJmxRepository**](ConsoleApi.md#postJmxRepository) | **POST** /system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action} |  |
+| [**postSamlConfiguration**](ConsoleApi.md#postSamlConfiguration) | **POST** /system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler |  |
+
+
+
+## getAemProductInfo
+
+> List&lt;String&gt; getAemProductInfo()
+
+
+
+### Example
+
+```java
+// Import classes:
+import org.openapitools.server.ApiClient;
+import org.openapitools.server.ApiException;
+import org.openapitools.server.Configuration;
+import org.openapitools.server.auth.*;
+import org.openapitools.server.models.*;
+import org.openapitools.server.api.ConsoleApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("http://localhost");
+        
+        // Configure HTTP basic authorization: aemAuth
+        HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+        aemAuth.setUsername("YOUR USERNAME");
+        aemAuth.setPassword("YOUR PASSWORD");
+
+        ConsoleApi apiInstance = new ConsoleApi(defaultClient);
+        try {
+            List<String> result = apiInstance.getAemProductInfo();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ConsoleApi#getAemProductInfo");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+**List&lt;String&gt;**
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Default response |  -  |
+
+
+## getBundleInfo
+
+> BundleInfo getBundleInfo(name)
+
+
+
+### Example
+
+```java
+// Import classes:
+import org.openapitools.server.ApiClient;
+import org.openapitools.server.ApiException;
+import org.openapitools.server.Configuration;
+import org.openapitools.server.auth.*;
+import org.openapitools.server.models.*;
+import org.openapitools.server.api.ConsoleApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("http://localhost");
+        
+        // Configure HTTP basic authorization: aemAuth
+        HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+        aemAuth.setUsername("YOUR USERNAME");
+        aemAuth.setPassword("YOUR PASSWORD");
+
+        ConsoleApi apiInstance = new ConsoleApi(defaultClient);
+        String name = "name_example"; // String | 
+        try {
+            BundleInfo result = apiInstance.getBundleInfo(name);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ConsoleApi#getBundleInfo");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **name** | **String**|  | |
+
+### Return type
+
+[**BundleInfo**](BundleInfo.md)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Retrieved bundle info |  -  |
+| **200** | Default response |  -  |
+
+
+## getConfigMgr
+
+> String getConfigMgr()
+
+
+
+### Example
+
+```java
+// Import classes:
+import org.openapitools.server.ApiClient;
+import org.openapitools.server.ApiException;
+import org.openapitools.server.Configuration;
+import org.openapitools.server.auth.*;
+import org.openapitools.server.models.*;
+import org.openapitools.server.api.ConsoleApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("http://localhost");
+        
+        // Configure HTTP basic authorization: aemAuth
+        HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+        aemAuth.setUsername("YOUR USERNAME");
+        aemAuth.setPassword("YOUR PASSWORD");
+
+        ConsoleApi apiInstance = new ConsoleApi(defaultClient);
+        try {
+            String result = apiInstance.getConfigMgr();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ConsoleApi#getConfigMgr");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+**String**
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/xml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **5XX** | Unexpected error. |  -  |
+
+
+## postBundle
+
+> void postBundle(name, action)
+
+
+
+### Example
+
+```java
+// Import classes:
+import org.openapitools.server.ApiClient;
+import org.openapitools.server.ApiException;
+import org.openapitools.server.Configuration;
+import org.openapitools.server.auth.*;
+import org.openapitools.server.models.*;
+import org.openapitools.server.api.ConsoleApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("http://localhost");
+        
+        // Configure HTTP basic authorization: aemAuth
+        HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+        aemAuth.setUsername("YOUR USERNAME");
+        aemAuth.setPassword("YOUR PASSWORD");
+
+        ConsoleApi apiInstance = new ConsoleApi(defaultClient);
+        String name = "name_example"; // String | 
+        String action = "action_example"; // String | 
+        try {
+            void result = apiInstance.postBundle(name, action);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ConsoleApi#postBundle");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **name** | **String**|  | |
+| **action** | **String**|  | |
+
+### Return type
+
+[**void**](Void.md)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Default response |  -  |
+
+
+## postJmxRepository
+
+> void postJmxRepository(action)
+
+
+
+### Example
+
+```java
+// Import classes:
+import org.openapitools.server.ApiClient;
+import org.openapitools.server.ApiException;
+import org.openapitools.server.Configuration;
+import org.openapitools.server.auth.*;
+import org.openapitools.server.models.*;
+import org.openapitools.server.api.ConsoleApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("http://localhost");
+        
+        // Configure HTTP basic authorization: aemAuth
+        HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+        aemAuth.setUsername("YOUR USERNAME");
+        aemAuth.setPassword("YOUR PASSWORD");
+
+        ConsoleApi apiInstance = new ConsoleApi(defaultClient);
+        String action = "action_example"; // String | 
+        try {
+            void result = apiInstance.postJmxRepository(action);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ConsoleApi#postJmxRepository");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **action** | **String**|  | |
+
+### Return type
+
+[**void**](Void.md)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Default response |  -  |
+
+
+## postSamlConfiguration
+
+> SamlConfigurationInfo postSamlConfiguration(post, apply, delete, action, $location, path, serviceRanking, idpUrl, idpCertAlias, idpHttpRedirect, serviceProviderEntityId, assertionConsumerServiceURL, spPrivateKeyAlias, keyStorePassword, defaultRedirectUrl, userIDAttribute, useEncryption, createUser, addGroupMemberships, groupMembershipAttribute, defaultGroups, nameIdFormat, synchronizeAttributes, handleLogout, logoutUrl, clockTolerance, digestMethod, signatureMethod, userIntermediatePath, propertylist)
+
+
+
+### Example
+
+```java
+// Import classes:
+import org.openapitools.server.ApiClient;
+import org.openapitools.server.ApiException;
+import org.openapitools.server.Configuration;
+import org.openapitools.server.auth.*;
+import org.openapitools.server.models.*;
+import org.openapitools.server.api.ConsoleApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("http://localhost");
+        
+        // Configure HTTP basic authorization: aemAuth
+        HttpBasicAuth aemAuth = (HttpBasicAuth) defaultClient.getAuthentication("aemAuth");
+        aemAuth.setUsername("YOUR USERNAME");
+        aemAuth.setPassword("YOUR PASSWORD");
+
+        ConsoleApi apiInstance = new ConsoleApi(defaultClient);
+        Boolean post = true; // Boolean | 
+        Boolean apply = true; // Boolean | 
+        Boolean delete = true; // Boolean | 
+        String action = "action_example"; // String | 
+        String $location = "$location_example"; // String | 
+        List<String> path = Arrays.asList(); // List<String> | 
+        Integer serviceRanking = 56; // Integer | 
+        String idpUrl = "idpUrl_example"; // String | 
+        String idpCertAlias = "idpCertAlias_example"; // String | 
+        Boolean idpHttpRedirect = true; // Boolean | 
+        String serviceProviderEntityId = "serviceProviderEntityId_example"; // String | 
+        String assertionConsumerServiceURL = "assertionConsumerServiceURL_example"; // String | 
+        String spPrivateKeyAlias = "spPrivateKeyAlias_example"; // String | 
+        String keyStorePassword = "keyStorePassword_example"; // String | 
+        String defaultRedirectUrl = "defaultRedirectUrl_example"; // String | 
+        String userIDAttribute = "userIDAttribute_example"; // String | 
+        Boolean useEncryption = true; // Boolean | 
+        Boolean createUser = true; // Boolean | 
+        Boolean addGroupMemberships = true; // Boolean | 
+        String groupMembershipAttribute = "groupMembershipAttribute_example"; // String | 
+        List<String> defaultGroups = Arrays.asList(); // List<String> | 
+        String nameIdFormat = "nameIdFormat_example"; // String | 
+        List<String> synchronizeAttributes = Arrays.asList(); // List<String> | 
+        Boolean handleLogout = true; // Boolean | 
+        String logoutUrl = "logoutUrl_example"; // String | 
+        Integer clockTolerance = 56; // Integer | 
+        String digestMethod = "digestMethod_example"; // String | 
+        String signatureMethod = "signatureMethod_example"; // String | 
+        String userIntermediatePath = "userIntermediatePath_example"; // String | 
+        List<String> propertylist = Arrays.asList(); // List<String> | 
+        try {
+            SamlConfigurationInfo result = apiInstance.postSamlConfiguration(post, apply, delete, action, $location, path, serviceRanking, idpUrl, idpCertAlias, idpHttpRedirect, serviceProviderEntityId, assertionConsumerServiceURL, spPrivateKeyAlias, keyStorePassword, defaultRedirectUrl, userIDAttribute, useEncryption, createUser, addGroupMemberships, groupMembershipAttribute, defaultGroups, nameIdFormat, synchronizeAttributes, handleLogout, logoutUrl, clockTolerance, digestMethod, signatureMethod, userIntermediatePath, propertylist);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ConsoleApi#postSamlConfiguration");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **post** | **Boolean**|  | [optional] |
+| **apply** | **Boolean**|  | [optional] |
+| **delete** | **Boolean**|  | [optional] |
+| **action** | **String**|  | [optional] |
+| **$location** | **String**|  | [optional] |
+| **path** | [**List&lt;String&gt;**](String.md)|  | [optional] |
+| **serviceRanking** | **Integer**|  | [optional] |
+| **idpUrl** | **String**|  | [optional] |
+| **idpCertAlias** | **String**|  | [optional] |
+| **idpHttpRedirect** | **Boolean**|  | [optional] |
+| **serviceProviderEntityId** | **String**|  | [optional] |
+| **assertionConsumerServiceURL** | **String**|  | [optional] |
+| **spPrivateKeyAlias** | **String**|  | [optional] |
+| **keyStorePassword** | **String**|  | [optional] |
+| **defaultRedirectUrl** | **String**|  | [optional] |
+| **userIDAttribute** | **String**|  | [optional] |
+| **useEncryption** | **Boolean**|  | [optional] |
+| **createUser** | **Boolean**|  | [optional] |
+| **addGroupMemberships** | **Boolean**|  | [optional] |
+| **groupMembershipAttribute** | **String**|  | [optional] |
+| **defaultGroups** | [**List&lt;String&gt;**](String.md)|  | [optional] |
+| **nameIdFormat** | **String**|  | [optional] |
+| **synchronizeAttributes** | [**List&lt;String&gt;**](String.md)|  | [optional] |
+| **handleLogout** | **Boolean**|  | [optional] |
+| **logoutUrl** | **String**|  | [optional] |
+| **clockTolerance** | **Integer**|  | [optional] |
+| **digestMethod** | **String**|  | [optional] |
+| **signatureMethod** | **String**|  | [optional] |
+| **userIntermediatePath** | **String**|  | [optional] |
+| **propertylist** | [**List&lt;String&gt;**](String.md)|  | [optional] |
+
+### Return type
+
+[**SamlConfigurationInfo**](SamlConfigurationInfo.md)
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Retrieved AEM SAML Configuration |  -  |
+| **302** | Default response |  -  |
+| **200** | Default response |  -  |
+

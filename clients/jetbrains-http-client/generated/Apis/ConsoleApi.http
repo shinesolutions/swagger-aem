@@ -1,0 +1,35 @@
+## ConsoleApi
+
+### 
+## 
+GET http://localhost/system/console/status-productinfo.json
+Accept: application/json
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+GET http://localhost/system/console/bundles/{{name}}.json
+Accept: application/json
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+GET http://localhost/system/console/configMgr
+Accept: text/xml
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+POST http://localhost/system/console/bundles/{{name}}?action={{action}}
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+POST http://localhost/system/console/jmx/com.adobe.granite:type=Repository/op/{{action}}
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+POST http://localhost/system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler?post={{post}}&apply={{apply}}&delete={{delete}}&action={{action}}&Dollarlocation={{Dollarlocation}}&path={{path}}&servicePeriodranking={{servicePeriodranking}}&idpUrl={{idpUrl}}&idpCertAlias={{idpCertAlias}}&idpHttpRedirect={{idpHttpRedirect}}&serviceProviderEntityId={{serviceProviderEntityId}}&assertionConsumerServiceURL={{assertionConsumerServiceURL}}&spPrivateKeyAlias={{spPrivateKeyAlias}}&keyStorePassword={{keyStorePassword}}&defaultRedirectUrl={{defaultRedirectUrl}}&userIDAttribute={{userIDAttribute}}&useEncryption={{useEncryption}}&createUser={{createUser}}&addGroupMemberships={{addGroupMemberships}}&groupMembershipAttribute={{groupMembershipAttribute}}&defaultGroups={{defaultGroups}}&nameIdFormat={{nameIdFormat}}&synchronizeAttributes={{synchronizeAttributes}}&handleLogout={{handleLogout}}&logoutUrl={{logoutUrl}}&clockTolerance={{clockTolerance}}&digestMethod={{digestMethod}}&signatureMethod={{signatureMethod}}&userIntermediatePath={{userIntermediatePath}}&propertylist={{propertylist}}
+Accept: text/plain
+Authorization: Basic: {{username-password}}

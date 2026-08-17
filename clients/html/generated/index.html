@@ -181,9 +181,9 @@ font-style: italic;
   <body>
   <h1>Adobe Experience Manager (AEM) API</h1>
     <div class="app-desc">Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API</div>
-    <div class="app-desc">More information: <a href="http://shinesolutions.com">http://shinesolutions.com</a></div>
+    <div class="app-desc">More information: <a href="https://github.com/shinesolutions">https://github.com/shinesolutions</a></div>
     <div class="app-desc">Contact Info: <a href="opensource@shinesolutions.com">opensource@shinesolutions.com</a></div>
-    <div class="app-desc">Version: 3.5.0-pre.0</div>
+    <div class="app-desc">Version: 3.7.1-pre.0</div>
     <div class="app-desc">BasePath:</div>
     <div class="license-info">All rights reserved</div>
     <div class="license-url">http://apache.org/licenses/LICENSE-2.0.html</div>
@@ -259,7 +259,7 @@ font-style: italic;
   <li><a href="#postNodeRw"><code><span class="http-method">post</span> /{path}/{name}.rw.html</code></a></li>
   <li><a href="#postPath"><code><span class="http-method">post</span> /{path}/</code></a></li>
   <li><a href="#postQuery"><code><span class="http-method">post</span> /bin/querybuilder.json</code></a></li>
-  <li><a href="#postTreeActivation"><code><span class="http-method">post</span> /etc/replication/treeactivation.html</code></a></li>
+  <li><a href="#postTreeActivation"><code><span class="http-method">post</span> /libs/replication/treeactivation.html</code></a></li>
   <li><a href="#postTruststore"><code><span class="http-method">post</span> /libs/granite/security/post/truststore</code></a></li>
   <li><a href="#postTruststorePKCS12"><code><span class="http-method">post</span> /etc/truststore</code></a></li>
   </ul>
@@ -288,7 +288,7 @@ font-style: italic;
 
     <h3 class="field-label">Example data</h3>
     <div class="example-data-content-type">Content-Type: application/json</div>
-    <pre class="example"><code>""</code></pre>
+    <pre class="example"><code>[ "", "" ]</code></pre>
 
     <h3 class="field-label">Produces</h3>
     This API call produces the following media types according to the <span class="header">Accept</span> request header;
@@ -333,41 +333,41 @@ font-style: italic;
     <h3 class="field-label">Example data</h3>
     <div class="example-data-content-type">Content-Type: application/json</div>
     <pre class="example"><code>{
+  "status" : "status",
   "s" : [ 0, 0 ],
   "data" : [ {
+    "id" : 6,
+    "name" : "name",
     "fragment" : true,
     "stateRaw" : 1,
-    "name" : "name",
-    "symbolicName" : "symbolicName",
-    "id" : 6,
     "state" : "state",
-    "category" : "category",
     "version" : "version",
+    "symbolicName" : "symbolicName",
+    "category" : "category",
     "props" : [ {
-      "value" : "value",
-      "key" : "key"
+      "key" : "key",
+      "value" : "value"
     }, {
-      "value" : "value",
-      "key" : "key"
+      "key" : "key",
+      "value" : "value"
     } ]
   }, {
+    "id" : 6,
+    "name" : "name",
     "fragment" : true,
     "stateRaw" : 1,
-    "name" : "name",
-    "symbolicName" : "symbolicName",
-    "id" : 6,
     "state" : "state",
-    "category" : "category",
     "version" : "version",
+    "symbolicName" : "symbolicName",
+    "category" : "category",
     "props" : [ {
-      "value" : "value",
-      "key" : "key"
+      "key" : "key",
+      "value" : "value"
     }, {
-      "value" : "value",
-      "key" : "key"
+      "key" : "key",
+      "value" : "value"
     } ]
-  } ],
-  "status" : "status"
+  } ]
 }</code></pre>
 
     <h3 class="field-label">Produces</h3>
@@ -576,8 +576,8 @@ font-style: italic;
     <!--Todo: process Response Object and its headers, schema, examples -->
 
     <h3 class="field-label">Example data</h3>
-    <div class="example-data-content-type">Content-Type: </div>
-    <pre class="example"><code></code></pre>
+    <div class="example-data-content-type">Content-Type: text/plain</div>
+    <pre class="example"><code>Custom MIME type example not yet supported: text/plain</code></pre>
 
     <h3 class="field-label">Produces</h3>
     This API call produces the following media types according to the <span class="header">Accept</span> request header;
@@ -1332,8 +1332,8 @@ font-style: italic;
     <!--Todo: process Response Object and its headers, schema, examples -->
 
     <h3 class="field-label">Example data</h3>
-    <div class="example-data-content-type">Content-Type: </div>
-    <pre class="example"><code></code></pre>
+    <div class="example-data-content-type">Content-Type: text/plain</div>
+    <pre class="example"><code>Custom MIME type example not yet supported: text/plain</code></pre>
 
     <h3 class="field-label">Produces</h3>
     This API call produces the following media types according to the <span class="header">Accept</span> request header;
@@ -1623,21 +1623,21 @@ font-style: italic;
     <div class="example-data-content-type">Content-Type: application/json</div>
     <pre class="example"><code>{
   "aliases" : [ {
-    "entryType" : "entryType",
-    "notAfter" : "notAfter",
-    "serialNumber" : 0,
-    "subject" : "subject",
     "alias" : "alias",
+    "entryType" : "entryType",
+    "subject" : "subject",
     "issuer" : "issuer",
-    "notBefore" : "notBefore"
+    "notBefore" : "notBefore",
+    "notAfter" : "notAfter",
+    "serialNumber" : 0
   }, {
-    "entryType" : "entryType",
-    "notAfter" : "notAfter",
-    "serialNumber" : 0,
-    "subject" : "subject",
     "alias" : "alias",
+    "entryType" : "entryType",
+    "subject" : "subject",
     "issuer" : "issuer",
-    "notBefore" : "notBefore"
+    "notBefore" : "notBefore",
+    "notAfter" : "notAfter",
+    "serialNumber" : 0
   } ],
   "exists" : true
 }</code></pre>
@@ -1686,6 +1686,8 @@ font-style: italic;
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/cq:name (optional)</div>
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/cq:template (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/aliasUpdate (optional)</div>
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">jcr:content/enabled (optional)</div>
 
@@ -1861,8 +1863,8 @@ font-style: italic;
     <!--Todo: process Response Object and its headers, schema, examples -->
 
     <h3 class="field-label">Example data</h3>
-    <div class="example-data-content-type">Content-Type: </div>
-    <pre class="example"><code></code></pre>
+    <div class="example-data-content-type">Content-Type: text/plain</div>
+    <pre class="example"><code>Custom MIME type example not yet supported: text/plain</code></pre>
 
     <h3 class="field-label">Produces</h3>
     This API call produces the following media types according to the <span class="header">Accept</span> request header;
@@ -2506,7 +2508,7 @@ font-style: italic;
   <div class="method"><a name="postTreeActivation"/>
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
-    <pre class="post"><code class="huge"><span class="http-method">post</span> /etc/replication/treeactivation.html</code></pre></div>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /libs/replication/treeactivation.html</code></pre></div>
     <div class="method-summary"> (<span class="nickname">postTreeActivation</span>)</div>
     <div class="method-notes"></div>
 
@@ -2522,7 +2524,9 @@ font-style: italic;
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">path (required)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div><div class="param">cmd (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: activate </div>
     </div>  <!-- field-items -->
 
 

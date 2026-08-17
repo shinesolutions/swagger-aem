@@ -17,7 +17,7 @@ import org.wso2.msf4j.formparam.FileInfo;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaMSF4JServerCodegen", date = "2021-09-03T15:25:23.467+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaMSF4JServerCodegen", date = "2026-08-17T02:15:13.302721680Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class LibsApiServiceImpl extends LibsApiService {
     @Override
     public Response getLoginPage() throws NotFoundException {
@@ -34,14 +34,23 @@ public class LibsApiServiceImpl extends LibsApiService {
 , String intermediatePath
 , String createUser
 , String createGroup
-, String repColonPassword
+, String repPassword
 , String profileGivenName
  ) throws NotFoundException {
         // do some magic!
         return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
     }
     @Override
-    public Response postTruststore(String colonOperation
+    public Response postTreeActivation(Boolean ignoredeactivated
+, Boolean onlymodified
+, String path
+, String cmd
+ ) throws NotFoundException {
+        // do some magic!
+        return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
+    }
+    @Override
+    public Response postTruststore(String operation
 , String newPassword
 , String rePassword
 , String keyStoreType

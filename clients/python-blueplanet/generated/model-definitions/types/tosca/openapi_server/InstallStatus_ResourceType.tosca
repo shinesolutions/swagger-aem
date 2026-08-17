@@ -1,0 +1,36 @@
+"$schema"   = "http://cyaninc.com/json-schemas/tosca-lite-v1/definition-module#"
+title       = "openapi_server InstallStatus"
+package     = openapi_server
+version     = "1.0"
+description = "Defines a InstallStatus"
+authors     = ["F. Bar (foo@bar.baz)"]
+
+imports {
+  Root = tosca.resourceTypes.Root
+  InstallStatusStatus = openapi_server.resourceTypes.InstallStatusStatus
+}
+resourceTypes {
+
+  InstallStatus {
+    title = InstallStatus
+    description = InstallStatus
+    derivedFrom = Root
+    properties {
+        status {
+          type = InstallStatusStatus
+          description = ""
+          optional = false
+        }
+    }
+  }
+}
+
+serviceTemplates {
+
+  InstallStatus {
+    title = InstallStatus
+    description = InstallStatus
+    implements = openapi_server.resourceTypes.InstallStatus
+
+  }
+}

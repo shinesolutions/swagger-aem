@@ -18,7 +18,7 @@ import io.swagger.annotations.ApiModelProperty;
  * SamlConfigurationProperties
  */
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2021-09-03T15:25:27.791+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2026-08-17T02:15:15.504120373Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class SamlConfigurationProperties   {
   @JsonProperty("path")
   private SamlConfigurationPropertyItemsArray path;
@@ -97,10 +97,10 @@ public class SamlConfigurationProperties   {
     return this;
   }
 
-   /**
+  /**
    * Get path
    * @return path
-  **/
+   */
   @ApiModelProperty(value = "")
   public SamlConfigurationPropertyItemsArray getPath() {
     return path;
@@ -115,10 +115,10 @@ public class SamlConfigurationProperties   {
     return this;
   }
 
-   /**
+  /**
    * Get serviceRanking
    * @return serviceRanking
-  **/
+   */
   @ApiModelProperty(value = "")
   public SamlConfigurationPropertyItemsLong getServiceRanking() {
     return serviceRanking;
@@ -133,10 +133,10 @@ public class SamlConfigurationProperties   {
     return this;
   }
 
-   /**
+  /**
    * Get idpUrl
    * @return idpUrl
-  **/
+   */
   @ApiModelProperty(value = "")
   public SamlConfigurationPropertyItemsString getIdpUrl() {
     return idpUrl;
@@ -151,10 +151,10 @@ public class SamlConfigurationProperties   {
     return this;
   }
 
-   /**
+  /**
    * Get idpCertAlias
    * @return idpCertAlias
-  **/
+   */
   @ApiModelProperty(value = "")
   public SamlConfigurationPropertyItemsString getIdpCertAlias() {
     return idpCertAlias;
@@ -169,10 +169,10 @@ public class SamlConfigurationProperties   {
     return this;
   }
 
-   /**
+  /**
    * Get idpHttpRedirect
    * @return idpHttpRedirect
-  **/
+   */
   @ApiModelProperty(value = "")
   public SamlConfigurationPropertyItemsBoolean getIdpHttpRedirect() {
     return idpHttpRedirect;
@@ -187,10 +187,10 @@ public class SamlConfigurationProperties   {
     return this;
   }
 
-   /**
+  /**
    * Get serviceProviderEntityId
    * @return serviceProviderEntityId
-  **/
+   */
   @ApiModelProperty(value = "")
   public SamlConfigurationPropertyItemsString getServiceProviderEntityId() {
     return serviceProviderEntityId;
@@ -205,10 +205,10 @@ public class SamlConfigurationProperties   {
     return this;
   }
 
-   /**
+  /**
    * Get assertionConsumerServiceURL
    * @return assertionConsumerServiceURL
-  **/
+   */
   @ApiModelProperty(value = "")
   public SamlConfigurationPropertyItemsString getAssertionConsumerServiceURL() {
     return assertionConsumerServiceURL;
@@ -223,10 +223,10 @@ public class SamlConfigurationProperties   {
     return this;
   }
 
-   /**
+  /**
    * Get spPrivateKeyAlias
    * @return spPrivateKeyAlias
-  **/
+   */
   @ApiModelProperty(value = "")
   public SamlConfigurationPropertyItemsString getSpPrivateKeyAlias() {
     return spPrivateKeyAlias;
@@ -241,10 +241,10 @@ public class SamlConfigurationProperties   {
     return this;
   }
 
-   /**
+  /**
    * Get keyStorePassword
    * @return keyStorePassword
-  **/
+   */
   @ApiModelProperty(value = "")
   public SamlConfigurationPropertyItemsString getKeyStorePassword() {
     return keyStorePassword;
@@ -259,10 +259,10 @@ public class SamlConfigurationProperties   {
     return this;
   }
 
-   /**
+  /**
    * Get defaultRedirectUrl
    * @return defaultRedirectUrl
-  **/
+   */
   @ApiModelProperty(value = "")
   public SamlConfigurationPropertyItemsString getDefaultRedirectUrl() {
     return defaultRedirectUrl;
@@ -277,10 +277,10 @@ public class SamlConfigurationProperties   {
     return this;
   }
 
-   /**
+  /**
    * Get userIDAttribute
    * @return userIDAttribute
-  **/
+   */
   @ApiModelProperty(value = "")
   public SamlConfigurationPropertyItemsString getUserIDAttribute() {
     return userIDAttribute;
@@ -295,10 +295,10 @@ public class SamlConfigurationProperties   {
     return this;
   }
 
-   /**
+  /**
    * Get useEncryption
    * @return useEncryption
-  **/
+   */
   @ApiModelProperty(value = "")
   public SamlConfigurationPropertyItemsBoolean getUseEncryption() {
     return useEncryption;
@@ -313,10 +313,10 @@ public class SamlConfigurationProperties   {
     return this;
   }
 
-   /**
+  /**
    * Get createUser
    * @return createUser
-  **/
+   */
   @ApiModelProperty(value = "")
   public SamlConfigurationPropertyItemsBoolean getCreateUser() {
     return createUser;
@@ -331,10 +331,10 @@ public class SamlConfigurationProperties   {
     return this;
   }
 
-   /**
+  /**
    * Get addGroupMemberships
    * @return addGroupMemberships
-  **/
+   */
   @ApiModelProperty(value = "")
   public SamlConfigurationPropertyItemsBoolean getAddGroupMemberships() {
     return addGroupMemberships;
@@ -349,10 +349,10 @@ public class SamlConfigurationProperties   {
     return this;
   }
 
-   /**
+  /**
    * Get groupMembershipAttribute
    * @return groupMembershipAttribute
-  **/
+   */
   @ApiModelProperty(value = "")
   public SamlConfigurationPropertyItemsString getGroupMembershipAttribute() {
     return groupMembershipAttribute;
@@ -367,10 +367,10 @@ public class SamlConfigurationProperties   {
     return this;
   }
 
-   /**
+  /**
    * Get defaultGroups
    * @return defaultGroups
-  **/
+   */
   @ApiModelProperty(value = "")
   public SamlConfigurationPropertyItemsArray getDefaultGroups() {
     return defaultGroups;
@@ -385,10 +385,10 @@ public class SamlConfigurationProperties   {
     return this;
   }
 
-   /**
+  /**
    * Get nameIdFormat
    * @return nameIdFormat
-  **/
+   */
   @ApiModelProperty(value = "")
   public SamlConfigurationPropertyItemsString getNameIdFormat() {
     return nameIdFormat;
@@ -403,10 +403,10 @@ public class SamlConfigurationProperties   {
     return this;
   }
 
-   /**
+  /**
    * Get synchronizeAttributes
    * @return synchronizeAttributes
-  **/
+   */
   @ApiModelProperty(value = "")
   public SamlConfigurationPropertyItemsArray getSynchronizeAttributes() {
     return synchronizeAttributes;
@@ -421,10 +421,10 @@ public class SamlConfigurationProperties   {
     return this;
   }
 
-   /**
+  /**
    * Get handleLogout
    * @return handleLogout
-  **/
+   */
   @ApiModelProperty(value = "")
   public SamlConfigurationPropertyItemsBoolean getHandleLogout() {
     return handleLogout;
@@ -439,10 +439,10 @@ public class SamlConfigurationProperties   {
     return this;
   }
 
-   /**
+  /**
    * Get logoutUrl
    * @return logoutUrl
-  **/
+   */
   @ApiModelProperty(value = "")
   public SamlConfigurationPropertyItemsString getLogoutUrl() {
     return logoutUrl;
@@ -457,10 +457,10 @@ public class SamlConfigurationProperties   {
     return this;
   }
 
-   /**
+  /**
    * Get clockTolerance
    * @return clockTolerance
-  **/
+   */
   @ApiModelProperty(value = "")
   public SamlConfigurationPropertyItemsLong getClockTolerance() {
     return clockTolerance;
@@ -475,10 +475,10 @@ public class SamlConfigurationProperties   {
     return this;
   }
 
-   /**
+  /**
    * Get digestMethod
    * @return digestMethod
-  **/
+   */
   @ApiModelProperty(value = "")
   public SamlConfigurationPropertyItemsString getDigestMethod() {
     return digestMethod;
@@ -493,10 +493,10 @@ public class SamlConfigurationProperties   {
     return this;
   }
 
-   /**
+  /**
    * Get signatureMethod
    * @return signatureMethod
-  **/
+   */
   @ApiModelProperty(value = "")
   public SamlConfigurationPropertyItemsString getSignatureMethod() {
     return signatureMethod;
@@ -511,10 +511,10 @@ public class SamlConfigurationProperties   {
     return this;
   }
 
-   /**
+  /**
    * Get userIntermediatePath
    * @return userIntermediatePath
-  **/
+   */
   @ApiModelProperty(value = "")
   public SamlConfigurationPropertyItemsString getUserIntermediatePath() {
     return userIntermediatePath;
@@ -603,10 +603,7 @@ public class SamlConfigurationProperties   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

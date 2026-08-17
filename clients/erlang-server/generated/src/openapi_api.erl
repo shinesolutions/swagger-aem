@@ -1,45 +1,320 @@
 -module(openapi_api).
+-moduledoc """
+This module offers an API for JSON schema validation, using `jesse` under the hood.
 
--export([request_params/1]).
--export([request_param_info/2]).
--export([populate_request/3]).
--export([validate_response/4]).
-%% exported to silence openapi complains
--export([get_value/3, validate_response_body/4]).
+If validation is desired, a jesse state can be loaded using `prepare_validator/1`,
+and request and response can be validated using `populate_request/3`
+and `validate_response/4` respectively.
 
--type operation_id() :: atom().
+For example, the user-defined `Module:accept_callback/4` can be implemented as follows:
+```
+-spec accept_callback(
+        Class :: openapi_api:class(),
+        OperationID :: openapi_api:operation_id(),
+        Req :: cowboy_req:req(),
+        Context :: openapi_logic_handler:context()) ->
+    {openapi_logic_handler:accept_callback_return(),
+     cowboy_req:req(),
+     openapi_logic_handler:context()}.
+accept_callback(Class, OperationID, Req0, Context0) ->
+    ValidatorState = openapi_api:prepare_validator(),
+    case openapi_api:populate_request(OperationID, Req0, ValidatorState) of
+        {ok, Model, Req1} ->
+            Context1 = maps:merge(Context0, Model),
+            case do_accept_callback(Class, OperationID, Req1, Context1) of
+                {false, Req2, Context2} ->
+                    {false, Req2, Context2};
+                {{true, Code, Body}, Req2, Context2} ->
+                    case validate_response(OperationID, Code, Body, ValidatorState) of
+                        ok ->
+                            process_response({ok, Code, Body}, Req2, Context2);
+                        {error, Reason} ->
+                            process_response({error, Reason}, Req2, Context2)
+                    end
+            end;
+        {error, Reason, Req1} ->
+            process_response({error, Reason}, Req1, Context0)
+    end.
+```
+""".
+
+-export([prepare_validator/0, prepare_validator/1, prepare_validator/2]).
+-export([populate_request/3, validate_response/4]).
+
+-ignore_xref([populate_request/3, validate_response/4]).
+-ignore_xref([prepare_validator/0, prepare_validator/1, prepare_validator/2]).
+
+-type class() ::
+    'console'
+    | 'cq'
+    | 'crx'
+    | 'custom'
+    | 'granite'
+    | 'sling'.
+
+
+-type operation_id() ::
+    'getAemProductInfo' | %% 
+    'getBundleInfo' | %% 
+    'getConfigMgr' | %% 
+    'postBundle' | %% 
+    'postJmxRepository' | %% 
+    'postSamlConfiguration' | %% 
+    'getLoginPage' | %% 
+    'postCqActions' | %% 
+    'getCrxdeStatus' | %% 
+    'getInstallStatus' | %% 
+    'getPackageManagerServlet' | %% 
+    'postPackageService' | %% 
+    'postPackageServiceJson' | %% 
+    'postPackageUpdate' | %% 
+    'postSetPassword' | %% 
+    'getAemHealthCheck' | %% 
+    'postConfigAemHealthCheckServlet' | %% 
+    'postConfigAemPasswordReset' | %% 
+    'sslSetup' | %% 
+    'deleteAgent' | %% 
+    'deleteNode' | %% 
+    'getAgent' | %% 
+    'getAgents' | %% 
+    'getAuthorizableKeystore' | %% 
+    'getKeystore' | %% 
+    'getNode' | %% 
+    'getPackage' | %% 
+    'getPackageFilter' | %% 
+    'getQuery' | %% 
+    'getTruststore' | %% 
+    'getTruststoreInfo' | %% 
+    'postAgent' | %% 
+    'postAuthorizableKeystore' | %% 
+    'postAuthorizables' | %% 
+    'postConfigAdobeGraniteSamlAuthenticationHandler' | %% 
+    'postConfigApacheFelixJettyBasedHttpService' | %% 
+    'postConfigApacheHttpComponentsProxyConfiguration' | %% 
+    'postConfigApacheSlingDavExServlet' | %% 
+    'postConfigApacheSlingGetServlet' | %% 
+    'postConfigApacheSlingReferrerFilter' | %% 
+    'postConfigProperty' | %% 
+    'postNode' | %% 
+    'postNodeRw' | %% 
+    'postPath' | %% 
+    'postQuery' | %% 
+    'postTreeActivation' | %% 
+    'postTruststore' | %% 
+    'postTruststorePKCS12' | %% 
+    {error, unknown_operation}.
+
 -type request_param() :: atom().
 
--export_type([operation_id/0]).
+-export_type([class/0, operation_id/0]).
 
+-dialyzer({nowarn_function, [validate_response_body/4]}).
+
+-type rule() ::
+    {type, binary} |
+    {type, byte} |
+    {type, integer} |
+    {type, float} |
+    {type, boolean} |
+    {type, date} |
+    {type, datetime} |
+    {enum, [atom()]} |
+    {max, Max :: number()} |
+    {exclusive_max, Max :: number()} |
+    {min, Min :: number()} |
+    {exclusive_min, Min :: number()} |
+    {max_length, MaxLength :: integer()} |
+    {min_length, MaxLength :: integer()} |
+    {pattern, Pattern :: string()} |
+    {schema, object | list, binary()} |
+    schema |
+    required |
+    not_required.
+
+-doc #{equiv => prepare_validator/2}.
+-spec prepare_validator() -> jesse_state:state().
+prepare_validator() ->
+    prepare_validator(<<"http://json-schema.org/draft-06/schema#">>).
+
+-doc #{equiv => prepare_validator/2}.
+-spec prepare_validator(binary()) -> jesse_state:state().
+prepare_validator(SchemaVer) ->
+    prepare_validator(get_openapi_path(), SchemaVer).
+
+-doc """
+Loads the JSON schema and the desired validation draft into a `t:jesse_state:state/0`.
+""".
+-spec prepare_validator(file:name_all(), binary()) -> jesse_state:state().
+prepare_validator(OpenApiPath, SchemaVer) ->
+    {ok, FileContents} = file:read_file(OpenApiPath),
+    R = json:decode(FileContents),
+    jesse_state:new(R, [{default_schema_ver, SchemaVer}]).
+
+-doc """
+Automatically loads the entire body from the cowboy req
+and validates the JSON body against the schema.
+""".
+-spec populate_request(
+        OperationID :: operation_id(),
+        Req :: cowboy_req:req(),
+        ValidatorState :: jesse_state:state()) ->
+    {ok, Model :: #{}, Req :: cowboy_req:req()} |
+    {error, Reason :: any(), Req :: cowboy_req:req()}.
+populate_request(OperationID, Req, ValidatorState) ->
+    Params = request_params(OperationID),
+    populate_request_params(OperationID, Params, Req, ValidatorState, #{}).
+
+-doc """
+Validates that the provided `Code` and `Body` comply with the `ValidatorState` schema
+for the `OperationID` operation.
+""".
+-spec validate_response(
+        OperationID :: operation_id(),
+        Code :: 200..599,
+        Body :: jesse:json_term(),
+        ValidatorState :: jesse_state:state()) ->
+    ok | {ok, term()} | [ok | {ok, term()}] | no_return().
+validate_response('getAemProductInfo', 0, Body, ValidatorState) ->
+    validate_response_body('list', 'string', Body, ValidatorState);
+validate_response('getBundleInfo', 200, Body, ValidatorState) ->
+    validate_response_body('BundleInfo', 'BundleInfo', Body, ValidatorState);
+validate_response('getBundleInfo', 0, Body, ValidatorState) ->
+    validate_response_body('binary', 'string', Body, ValidatorState);
+validate_response('getConfigMgr', 200, Body, ValidatorState) ->
+    validate_response_body('binary', 'string', Body, ValidatorState);
+validate_response('getConfigMgr', 5XX, Body, ValidatorState) ->
+    validate_response_body('', '', Body, ValidatorState);
+validate_response('postBundle', 0, Body, ValidatorState) ->
+    validate_response_body('', '', Body, ValidatorState);
+validate_response('postJmxRepository', 0, Body, ValidatorState) ->
+    validate_response_body('', '', Body, ValidatorState);
+validate_response('postSamlConfiguration', 200, Body, ValidatorState) ->
+    validate_response_body('SamlConfigurationInfo', 'SamlConfigurationInfo', Body, ValidatorState);
+validate_response('postSamlConfiguration', 302, Body, ValidatorState) ->
+    validate_response_body('binary', 'string', Body, ValidatorState);
+validate_response('postSamlConfiguration', 0, Body, ValidatorState) ->
+    validate_response_body('binary', 'string', Body, ValidatorState);
+validate_response('getLoginPage', 0, Body, ValidatorState) ->
+    validate_response_body('binary', 'string', Body, ValidatorState);
+validate_response('postCqActions', 0, Body, ValidatorState) ->
+    validate_response_body('', '', Body, ValidatorState);
+validate_response('getCrxdeStatus', 200, Body, ValidatorState) ->
+    validate_response_body('binary', 'string', Body, ValidatorState);
+validate_response('getCrxdeStatus', 404, Body, ValidatorState) ->
+    validate_response_body('binary', 'string', Body, ValidatorState);
+validate_response('getInstallStatus', 200, Body, ValidatorState) ->
+    validate_response_body('InstallStatus', 'InstallStatus', Body, ValidatorState);
+validate_response('getInstallStatus', 0, Body, ValidatorState) ->
+    validate_response_body('binary', 'string', Body, ValidatorState);
+validate_response('getPackageManagerServlet', 404, Body, ValidatorState) ->
+    validate_response_body('binary', 'string', Body, ValidatorState);
+validate_response('getPackageManagerServlet', 405, Body, ValidatorState) ->
+    validate_response_body('binary', 'string', Body, ValidatorState);
+validate_response('postPackageService', 0, Body, ValidatorState) ->
+    validate_response_body('binary', 'string', Body, ValidatorState);
+validate_response('postPackageServiceJson', 0, Body, ValidatorState) ->
+    validate_response_body('binary', 'string', Body, ValidatorState);
+validate_response('postPackageUpdate', 0, Body, ValidatorState) ->
+    validate_response_body('binary', 'string', Body, ValidatorState);
+validate_response('postSetPassword', 0, Body, ValidatorState) ->
+    validate_response_body('binary', 'string', Body, ValidatorState);
+validate_response('getAemHealthCheck', 0, Body, ValidatorState) ->
+    validate_response_body('binary', 'string', Body, ValidatorState);
+validate_response('postConfigAemHealthCheckServlet', 0, Body, ValidatorState) ->
+    validate_response_body('', '', Body, ValidatorState);
+validate_response('postConfigAemPasswordReset', 0, Body, ValidatorState) ->
+    validate_response_body('', '', Body, ValidatorState);
+validate_response('sslSetup', 0, Body, ValidatorState) ->
+    validate_response_body('binary', 'string', Body, ValidatorState);
+validate_response('deleteAgent', 0, Body, ValidatorState) ->
+    validate_response_body('', '', Body, ValidatorState);
+validate_response('deleteNode', 0, Body, ValidatorState) ->
+    validate_response_body('', '', Body, ValidatorState);
+validate_response('getAgent', 0, Body, ValidatorState) ->
+    validate_response_body('', '', Body, ValidatorState);
+validate_response('getAgents', 0, Body, ValidatorState) ->
+    validate_response_body('binary', 'string', Body, ValidatorState);
+validate_response('getAuthorizableKeystore', 200, Body, ValidatorState) ->
+    validate_response_body('KeystoreInfo', 'KeystoreInfo', Body, ValidatorState);
+validate_response('getAuthorizableKeystore', 0, Body, ValidatorState) ->
+    validate_response_body('binary', 'string', Body, ValidatorState);
+validate_response('getKeystore', 0, Body, ValidatorState) ->
+    validate_response_body('file', 'file', Body, ValidatorState);
+validate_response('getNode', 0, Body, ValidatorState) ->
+    validate_response_body('', '', Body, ValidatorState);
+validate_response('getPackage', 0, Body, ValidatorState) ->
+    validate_response_body('file', 'file', Body, ValidatorState);
+validate_response('getPackageFilter', 0, Body, ValidatorState) ->
+    validate_response_body('binary', 'string', Body, ValidatorState);
+validate_response('getQuery', 0, Body, ValidatorState) ->
+    validate_response_body('binary', 'string', Body, ValidatorState);
+validate_response('getTruststore', 0, Body, ValidatorState) ->
+    validate_response_body('file', 'file', Body, ValidatorState);
+validate_response('getTruststoreInfo', 200, Body, ValidatorState) ->
+    validate_response_body('TruststoreInfo', 'TruststoreInfo', Body, ValidatorState);
+validate_response('getTruststoreInfo', 0, Body, ValidatorState) ->
+    validate_response_body('binary', 'string', Body, ValidatorState);
+validate_response('postAgent', 0, Body, ValidatorState) ->
+    validate_response_body('', '', Body, ValidatorState);
+validate_response('postAuthorizableKeystore', 200, Body, ValidatorState) ->
+    validate_response_body('KeystoreInfo', 'KeystoreInfo', Body, ValidatorState);
+validate_response('postAuthorizableKeystore', 0, Body, ValidatorState) ->
+    validate_response_body('binary', 'string', Body, ValidatorState);
+validate_response('postAuthorizables', 0, Body, ValidatorState) ->
+    validate_response_body('binary', 'string', Body, ValidatorState);
+validate_response('postConfigAdobeGraniteSamlAuthenticationHandler', 0, Body, ValidatorState) ->
+    validate_response_body('', '', Body, ValidatorState);
+validate_response('postConfigApacheFelixJettyBasedHttpService', 0, Body, ValidatorState) ->
+    validate_response_body('', '', Body, ValidatorState);
+validate_response('postConfigApacheHttpComponentsProxyConfiguration', 0, Body, ValidatorState) ->
+    validate_response_body('', '', Body, ValidatorState);
+validate_response('postConfigApacheSlingDavExServlet', 0, Body, ValidatorState) ->
+    validate_response_body('', '', Body, ValidatorState);
+validate_response('postConfigApacheSlingGetServlet', 0, Body, ValidatorState) ->
+    validate_response_body('', '', Body, ValidatorState);
+validate_response('postConfigApacheSlingReferrerFilter', 0, Body, ValidatorState) ->
+    validate_response_body('', '', Body, ValidatorState);
+validate_response('postConfigProperty', 0, Body, ValidatorState) ->
+    validate_response_body('', '', Body, ValidatorState);
+validate_response('postNode', 0, Body, ValidatorState) ->
+    validate_response_body('', '', Body, ValidatorState);
+validate_response('postNodeRw', 0, Body, ValidatorState) ->
+    validate_response_body('', '', Body, ValidatorState);
+validate_response('postPath', 0, Body, ValidatorState) ->
+    validate_response_body('', '', Body, ValidatorState);
+validate_response('postQuery', 0, Body, ValidatorState) ->
+    validate_response_body('binary', 'string', Body, ValidatorState);
+validate_response('postTreeActivation', 0, Body, ValidatorState) ->
+    validate_response_body('', '', Body, ValidatorState);
+validate_response('postTruststore', 0, Body, ValidatorState) ->
+    validate_response_body('binary', 'string', Body, ValidatorState);
+validate_response('postTruststorePKCS12', 0, Body, ValidatorState) ->
+    validate_response_body('binary', 'string', Body, ValidatorState);
+validate_response(_OperationID, _Code, _Body, _ValidatorState) ->
+    ok.
+
+%%%
 -spec request_params(OperationID :: operation_id()) -> [Param :: request_param()].
-
-
-request_params('GetAemProductInfo') ->
+request_params('getAemProductInfo') ->
     [
     ];
-
-request_params('GetBundleInfo') ->
+request_params('getBundleInfo') ->
     [
         'name'
     ];
-
-request_params('GetConfigMgr') ->
+request_params('getConfigMgr') ->
     [
     ];
-
-request_params('PostBundle') ->
+request_params('postBundle') ->
     [
         'name',
         'action'
     ];
-
-request_params('PostJmxRepository') ->
+request_params('postJmxRepository') ->
     [
         'action'
     ];
-
-request_params('PostSamlConfiguration') ->
+request_params('postSamlConfiguration') ->
     [
         'post',
         'apply',
@@ -72,37 +347,28 @@ request_params('PostSamlConfiguration') ->
         'userIntermediatePath',
         'propertylist'
     ];
-
-
-request_params('GetLoginPage') ->
+request_params('getLoginPage') ->
     [
     ];
-
-request_params('PostCqActions') ->
+request_params('postCqActions') ->
     [
         'authorizableId',
         'changelog'
     ];
-
-
-request_params('GetCrxdeStatus') ->
+request_params('getCrxdeStatus') ->
     [
     ];
-
-request_params('GetInstallStatus') ->
+request_params('getInstallStatus') ->
     [
     ];
-
-request_params('GetPackageManagerServlet') ->
+request_params('getPackageManagerServlet') ->
     [
     ];
-
-request_params('PostPackageService') ->
+request_params('postPackageService') ->
     [
         'cmd'
     ];
-
-request_params('PostPackageServiceJson') ->
+request_params('postPackageServiceJson') ->
     [
         'path',
         'cmd',
@@ -114,8 +380,7 @@ request_params('PostPackageServiceJson') ->
         'recursive',
         'package'
     ];
-
-request_params('PostPackageUpdate') ->
+request_params('postPackageUpdate') ->
     [
         'groupName',
         'packageName',
@@ -124,35 +389,28 @@ request_params('PostPackageUpdate') ->
         'filter',
         '_charset_'
     ];
-
-request_params('PostSetPassword') ->
+request_params('postSetPassword') ->
     [
         'old',
         'plain',
         'verify'
     ];
-
-
-request_params('GetAemHealthCheck') ->
+request_params('getAemHealthCheck') ->
     [
         'tags',
         'combineTagsOr'
     ];
-
-request_params('PostConfigAemHealthCheckServlet') ->
+request_params('postConfigAemHealthCheckServlet') ->
     [
         'bundles.ignored',
         'bundles.ignored@TypeHint'
     ];
-
-request_params('PostConfigAemPasswordReset') ->
+request_params('postConfigAemPasswordReset') ->
     [
         'pwdreset.authorizables',
         'pwdreset.authorizables@TypeHint'
     ];
-
-
-request_params('SslSetup') ->
+request_params('sslSetup') ->
     [
         'keystorePassword',
         'keystorePasswordConfirm',
@@ -163,80 +421,66 @@ request_params('SslSetup') ->
         'privatekeyFile',
         'certificateFile'
     ];
-
-
-request_params('DeleteAgent') ->
+request_params('deleteAgent') ->
     [
         'runmode',
         'name'
     ];
-
-request_params('DeleteNode') ->
+request_params('deleteNode') ->
     [
         'path',
         'name'
     ];
-
-request_params('GetAgent') ->
+request_params('getAgent') ->
     [
         'runmode',
         'name'
     ];
-
-request_params('GetAgents') ->
+request_params('getAgents') ->
     [
         'runmode'
     ];
-
-request_params('GetAuthorizableKeystore') ->
+request_params('getAuthorizableKeystore') ->
     [
         'intermediatePath',
         'authorizableId'
     ];
-
-request_params('GetKeystore') ->
+request_params('getKeystore') ->
     [
         'intermediatePath',
         'authorizableId'
     ];
-
-request_params('GetNode') ->
+request_params('getNode') ->
     [
         'path',
         'name'
     ];
-
-request_params('GetPackage') ->
+request_params('getPackage') ->
     [
         'group',
         'name',
         'version'
     ];
-
-request_params('GetPackageFilter') ->
+request_params('getPackageFilter') ->
     [
         'group',
         'name',
         'version'
     ];
-
-request_params('GetQuery') ->
+request_params('getQuery') ->
     [
         'path',
         'p.limit',
         '1_property',
         '1_property.value'
     ];
-
-request_params('GetTruststore') ->
+request_params('getTruststore') ->
     [
     ];
-
-request_params('GetTruststoreInfo') ->
+request_params('getTruststoreInfo') ->
     [
     ];
-
-request_params('PostAgent') ->
+request_params('postAgent') ->
     [
         'runmode',
         'name',
@@ -244,6 +488,7 @@ request_params('PostAgent') ->
         'jcr:content/cq:distribute@TypeHint',
         'jcr:content/cq:name',
         'jcr:content/cq:template',
+        'jcr:content/aliasUpdate',
         'jcr:content/enabled',
         'jcr:content/jcr:description',
         'jcr:content/jcr:lastModified',
@@ -291,8 +536,7 @@ request_params('PostAgent') ->
         'jcr:primaryType',
         ':operation'
     ];
-
-request_params('PostAuthorizableKeystore') ->
+request_params('postAuthorizableKeystore') ->
     [
         'intermediatePath',
         'authorizableId',
@@ -309,8 +553,7 @@ request_params('PostAuthorizableKeystore') ->
         'pk',
         'keyStore'
     ];
-
-request_params('PostAuthorizables') ->
+request_params('postAuthorizables') ->
     [
         'authorizableId',
         'intermediatePath',
@@ -319,8 +562,7 @@ request_params('PostAuthorizables') ->
         'rep:password',
         'profile/givenName'
     ];
-
-request_params('PostConfigAdobeGraniteSamlAuthenticationHandler') ->
+request_params('postConfigAdobeGraniteSamlAuthenticationHandler') ->
     [
         'keyStorePassword',
         'keyStorePassword@TypeHint',
@@ -371,8 +613,7 @@ request_params('PostConfigAdobeGraniteSamlAuthenticationHandler') ->
         'userIntermediatePath',
         'userIntermediatePath@TypeHint'
     ];
-
-request_params('PostConfigApacheFelixJettyBasedHttpService') ->
+request_params('postConfigApacheFelixJettyBasedHttpService') ->
     [
         'org.apache.felix.https.nio',
         'org.apache.felix.https.nio@TypeHint',
@@ -395,8 +636,7 @@ request_params('PostConfigApacheFelixJettyBasedHttpService') ->
         'org.osgi.service.http.port.secure',
         'org.osgi.service.http.port.secure@TypeHint'
     ];
-
-request_params('PostConfigApacheHttpComponentsProxyConfiguration') ->
+request_params('postConfigApacheHttpComponentsProxyConfiguration') ->
     [
         'proxy.host',
         'proxy.host@TypeHint',
@@ -411,16 +651,14 @@ request_params('PostConfigApacheHttpComponentsProxyConfiguration') ->
         'proxy.password',
         'proxy.password@TypeHint'
     ];
-
-request_params('PostConfigApacheSlingDavExServlet') ->
+request_params('postConfigApacheSlingDavExServlet') ->
     [
         'alias',
         'alias@TypeHint',
         'dav.create-absolute-uri',
         'dav.create-absolute-uri@TypeHint'
     ];
-
-request_params('PostConfigApacheSlingGetServlet') ->
+request_params('postConfigApacheSlingGetServlet') ->
     [
         'json.maximumresults',
         'json.maximumresults@TypeHint',
@@ -431,8 +669,7 @@ request_params('PostConfigApacheSlingGetServlet') ->
         'enable.xml',
         'enable.xml@TypeHint'
     ];
-
-request_params('PostConfigApacheSlingReferrerFilter') ->
+request_params('postConfigApacheSlingReferrerFilter') ->
     [
         'allow.empty',
         'allow.empty@TypeHint',
@@ -443,13 +680,11 @@ request_params('PostConfigApacheSlingReferrerFilter') ->
         'filter.methods',
         'filter.methods@TypeHint'
     ];
-
-request_params('PostConfigProperty') ->
+request_params('postConfigProperty') ->
     [
         'configNodeName'
     ];
-
-request_params('PostNode') ->
+request_params('postNode') ->
     [
         'path',
         'name',
@@ -457,37 +692,33 @@ request_params('PostNode') ->
         'deleteAuthorizable',
         'file'
     ];
-
-request_params('PostNodeRw') ->
+request_params('postNodeRw') ->
     [
         'path',
         'name',
         'addMembers'
     ];
-
-request_params('PostPath') ->
+request_params('postPath') ->
     [
         'path',
         'jcr:primaryType',
         ':name'
     ];
-
-request_params('PostQuery') ->
+request_params('postQuery') ->
     [
         'path',
         'p.limit',
         '1_property',
         '1_property.value'
     ];
-
-request_params('PostTreeActivation') ->
+request_params('postTreeActivation') ->
     [
         'ignoredeactivated',
         'onlymodified',
-        'path'
+        'path',
+        'cmd'
     ];
-
-request_params('PostTruststore') ->
+request_params('postTruststore') ->
     [
         ':operation',
         'newPassword',
@@ -496,2986 +727,2465 @@ request_params('PostTruststore') ->
         'removeAlias',
         'certificate'
     ];
-
-request_params('PostTruststorePKCS12') ->
+request_params('postTruststorePKCS12') ->
     [
         'truststore.p12'
     ];
-
 request_params(_) ->
     error(unknown_operation).
 
--type rule() ::
-    {type, 'binary'} |
-    {type, 'integer'} |
-    {type, 'float'} |
-    {type, 'binary'} |
-    {type, 'boolean'} |
-    {type, 'date'} |
-    {type, 'datetime'} |
-    {enum, [atom()]} |
-    {max, Max :: number()} |
-    {exclusive_max, Max :: number()} |
-    {min, Min :: number()} |
-    {exclusive_min, Min :: number()} |
-    {max_length, MaxLength :: integer()} |
-    {min_length, MaxLength :: integer()} |
-    {pattern, Pattern :: string()} |
-    schema |
-    required |
-    not_required.
-
--spec request_param_info(OperationID :: operation_id(), Name :: request_param()) -> #{
-    source => qs_val | binding | header | body,
-    rules => [rule()]
-}.
-
-
-
-request_param_info('GetBundleInfo', 'name') ->
+-spec request_param_info(OperationID :: operation_id(), Name :: request_param()) ->
+    #{source => qs_val | binding | header | body, rules => [rule()]}.
+request_param_info('getBundleInfo', 'name') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostBundle', 'name') ->
+request_param_info('postBundle', 'name') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostBundle', 'action') ->
+request_param_info('postBundle', 'action') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostJmxRepository', 'action') ->
+request_param_info('postJmxRepository', 'action') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostSamlConfiguration', 'post') ->
+request_param_info('postSamlConfiguration', 'post') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostSamlConfiguration', 'apply') ->
+request_param_info('postSamlConfiguration', 'apply') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostSamlConfiguration', 'delete') ->
+request_param_info('postSamlConfiguration', 'delete') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostSamlConfiguration', 'action') ->
+request_param_info('postSamlConfiguration', 'action') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostSamlConfiguration', '$location') ->
+request_param_info('postSamlConfiguration', '$location') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostSamlConfiguration', 'path') ->
+request_param_info('postSamlConfiguration', 'path') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
             not_required
         ]
     };
-
-request_param_info('PostSamlConfiguration', 'service.ranking') ->
+request_param_info('postSamlConfiguration', 'service.ranking') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'integer'},
+            {type, integer},
             not_required
         ]
     };
-
-request_param_info('PostSamlConfiguration', 'idpUrl') ->
+request_param_info('postSamlConfiguration', 'idpUrl') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostSamlConfiguration', 'idpCertAlias') ->
+request_param_info('postSamlConfiguration', 'idpCertAlias') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostSamlConfiguration', 'idpHttpRedirect') ->
+request_param_info('postSamlConfiguration', 'idpHttpRedirect') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostSamlConfiguration', 'serviceProviderEntityId') ->
+request_param_info('postSamlConfiguration', 'serviceProviderEntityId') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostSamlConfiguration', 'assertionConsumerServiceURL') ->
+request_param_info('postSamlConfiguration', 'assertionConsumerServiceURL') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostSamlConfiguration', 'spPrivateKeyAlias') ->
+request_param_info('postSamlConfiguration', 'spPrivateKeyAlias') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostSamlConfiguration', 'keyStorePassword') ->
+request_param_info('postSamlConfiguration', 'keyStorePassword') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostSamlConfiguration', 'defaultRedirectUrl') ->
+request_param_info('postSamlConfiguration', 'defaultRedirectUrl') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostSamlConfiguration', 'userIDAttribute') ->
+request_param_info('postSamlConfiguration', 'userIDAttribute') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostSamlConfiguration', 'useEncryption') ->
+request_param_info('postSamlConfiguration', 'useEncryption') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostSamlConfiguration', 'createUser') ->
+request_param_info('postSamlConfiguration', 'createUser') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostSamlConfiguration', 'addGroupMemberships') ->
+request_param_info('postSamlConfiguration', 'addGroupMemberships') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostSamlConfiguration', 'groupMembershipAttribute') ->
+request_param_info('postSamlConfiguration', 'groupMembershipAttribute') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostSamlConfiguration', 'defaultGroups') ->
+request_param_info('postSamlConfiguration', 'defaultGroups') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
             not_required
         ]
     };
-
-request_param_info('PostSamlConfiguration', 'nameIdFormat') ->
+request_param_info('postSamlConfiguration', 'nameIdFormat') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostSamlConfiguration', 'synchronizeAttributes') ->
+request_param_info('postSamlConfiguration', 'synchronizeAttributes') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
             not_required
         ]
     };
-
-request_param_info('PostSamlConfiguration', 'handleLogout') ->
+request_param_info('postSamlConfiguration', 'handleLogout') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostSamlConfiguration', 'logoutUrl') ->
+request_param_info('postSamlConfiguration', 'logoutUrl') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostSamlConfiguration', 'clockTolerance') ->
+request_param_info('postSamlConfiguration', 'clockTolerance') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'integer'},
+            {type, integer},
             not_required
         ]
     };
-
-request_param_info('PostSamlConfiguration', 'digestMethod') ->
+request_param_info('postSamlConfiguration', 'digestMethod') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostSamlConfiguration', 'signatureMethod') ->
+request_param_info('postSamlConfiguration', 'signatureMethod') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostSamlConfiguration', 'userIntermediatePath') ->
+request_param_info('postSamlConfiguration', 'userIntermediatePath') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostSamlConfiguration', 'propertylist') ->
+request_param_info('postSamlConfiguration', 'propertylist') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
             not_required
         ]
     };
-
-
-request_param_info('PostCqActions', 'authorizableId') ->
+request_param_info('postCqActions', 'authorizableId') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostCqActions', 'changelog') ->
+request_param_info('postCqActions', 'changelog') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-
-request_param_info('PostPackageService', 'cmd') ->
+request_param_info('postPackageService', 'cmd') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostPackageServiceJson', 'path') ->
+request_param_info('postPackageServiceJson', 'path') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostPackageServiceJson', 'cmd') ->
+request_param_info('postPackageServiceJson', 'cmd') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostPackageServiceJson', 'groupName') ->
+request_param_info('postPackageServiceJson', 'groupName') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostPackageServiceJson', 'packageName') ->
+request_param_info('postPackageServiceJson', 'packageName') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostPackageServiceJson', 'packageVersion') ->
+request_param_info('postPackageServiceJson', 'packageVersion') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostPackageServiceJson', '_charset_') ->
+request_param_info('postPackageServiceJson', '_charset_') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostPackageServiceJson', 'force') ->
+request_param_info('postPackageServiceJson', 'force') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostPackageServiceJson', 'recursive') ->
+request_param_info('postPackageServiceJson', 'recursive') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostPackageServiceJson', 'package') ->
+request_param_info('postPackageServiceJson', 'package') ->
     #{
-        source =>   body,
+        source => body,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostPackageUpdate', 'groupName') ->
+request_param_info('postPackageUpdate', 'groupName') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostPackageUpdate', 'packageName') ->
+request_param_info('postPackageUpdate', 'packageName') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostPackageUpdate', 'version') ->
+request_param_info('postPackageUpdate', 'version') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostPackageUpdate', 'path') ->
+request_param_info('postPackageUpdate', 'path') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostPackageUpdate', 'filter') ->
+request_param_info('postPackageUpdate', 'filter') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostPackageUpdate', '_charset_') ->
+request_param_info('postPackageUpdate', '_charset_') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostSetPassword', 'old') ->
+request_param_info('postSetPassword', 'old') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostSetPassword', 'plain') ->
+request_param_info('postSetPassword', 'plain') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostSetPassword', 'verify') ->
+request_param_info('postSetPassword', 'verify') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-
-request_param_info('GetAemHealthCheck', 'tags') ->
+request_param_info('getAemHealthCheck', 'tags') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('GetAemHealthCheck', 'combineTagsOr') ->
+request_param_info('getAemHealthCheck', 'combineTagsOr') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostConfigAemHealthCheckServlet', 'bundles.ignored') ->
+request_param_info('postConfigAemHealthCheckServlet', 'bundles.ignored') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
             not_required
         ]
     };
-
-request_param_info('PostConfigAemHealthCheckServlet', 'bundles.ignored@TypeHint') ->
+request_param_info('postConfigAemHealthCheckServlet', 'bundles.ignored@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAemPasswordReset', 'pwdreset.authorizables') ->
+request_param_info('postConfigAemPasswordReset', 'pwdreset.authorizables') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
             not_required
         ]
     };
-
-request_param_info('PostConfigAemPasswordReset', 'pwdreset.authorizables@TypeHint') ->
+request_param_info('postConfigAemPasswordReset', 'pwdreset.authorizables@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-
-request_param_info('SslSetup', 'keystorePassword') ->
+request_param_info('sslSetup', 'keystorePassword') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('SslSetup', 'keystorePasswordConfirm') ->
+request_param_info('sslSetup', 'keystorePasswordConfirm') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('SslSetup', 'truststorePassword') ->
+request_param_info('sslSetup', 'truststorePassword') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('SslSetup', 'truststorePasswordConfirm') ->
+request_param_info('sslSetup', 'truststorePasswordConfirm') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('SslSetup', 'httpsHostname') ->
+request_param_info('sslSetup', 'httpsHostname') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('SslSetup', 'httpsPort') ->
+request_param_info('sslSetup', 'httpsPort') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('SslSetup', 'privatekeyFile') ->
+request_param_info('sslSetup', 'privatekeyFile') ->
     #{
-        source =>   body,
+        source => body,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('SslSetup', 'certificateFile') ->
+request_param_info('sslSetup', 'certificateFile') ->
     #{
-        source =>   body,
+        source => body,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-
-request_param_info('DeleteAgent', 'runmode') ->
+request_param_info('deleteAgent', 'runmode') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('DeleteAgent', 'name') ->
+request_param_info('deleteAgent', 'name') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('DeleteNode', 'path') ->
+request_param_info('deleteNode', 'path') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('DeleteNode', 'name') ->
+request_param_info('deleteNode', 'name') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('GetAgent', 'runmode') ->
+request_param_info('getAgent', 'runmode') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('GetAgent', 'name') ->
+request_param_info('getAgent', 'name') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('GetAgents', 'runmode') ->
+request_param_info('getAgents', 'runmode') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('GetAuthorizableKeystore', 'intermediatePath') ->
+request_param_info('getAuthorizableKeystore', 'intermediatePath') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('GetAuthorizableKeystore', 'authorizableId') ->
+request_param_info('getAuthorizableKeystore', 'authorizableId') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('GetKeystore', 'intermediatePath') ->
+request_param_info('getKeystore', 'intermediatePath') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('GetKeystore', 'authorizableId') ->
+request_param_info('getKeystore', 'authorizableId') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('GetNode', 'path') ->
+request_param_info('getNode', 'path') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('GetNode', 'name') ->
+request_param_info('getNode', 'name') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('GetPackage', 'group') ->
+request_param_info('getPackage', 'group') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('GetPackage', 'name') ->
+request_param_info('getPackage', 'name') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('GetPackage', 'version') ->
+request_param_info('getPackage', 'version') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('GetPackageFilter', 'group') ->
+request_param_info('getPackageFilter', 'group') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('GetPackageFilter', 'name') ->
+request_param_info('getPackageFilter', 'name') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('GetPackageFilter', 'version') ->
+request_param_info('getPackageFilter', 'version') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('GetQuery', 'path') ->
+request_param_info('getQuery', 'path') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('GetQuery', 'p.limit') ->
+request_param_info('getQuery', 'p.limit') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
             required
         ]
     };
-
-request_param_info('GetQuery', '1_property') ->
+request_param_info('getQuery', '1_property') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('GetQuery', '1_property.value') ->
+request_param_info('getQuery', '1_property.value') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostAgent', 'runmode') ->
+request_param_info('postAgent', 'runmode') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostAgent', 'name') ->
+request_param_info('postAgent', 'name') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/cq:distribute') ->
+request_param_info('postAgent', 'jcr:content/cq:distribute') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/cq:distribute@TypeHint') ->
+request_param_info('postAgent', 'jcr:content/cq:distribute@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/cq:name') ->
+request_param_info('postAgent', 'jcr:content/cq:name') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/cq:template') ->
+request_param_info('postAgent', 'jcr:content/cq:template') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/enabled') ->
+request_param_info('postAgent', 'jcr:content/aliasUpdate') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/jcr:description') ->
+request_param_info('postAgent', 'jcr:content/enabled') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/jcr:lastModified') ->
+request_param_info('postAgent', 'jcr:content/jcr:description') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/jcr:lastModifiedBy') ->
+request_param_info('postAgent', 'jcr:content/jcr:lastModified') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/jcr:mixinTypes') ->
+request_param_info('postAgent', 'jcr:content/jcr:lastModifiedBy') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/jcr:title') ->
+request_param_info('postAgent', 'jcr:content/jcr:mixinTypes') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/logLevel') ->
+request_param_info('postAgent', 'jcr:content/jcr:title') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/noStatusUpdate') ->
+request_param_info('postAgent', 'jcr:content/logLevel') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/noVersioning') ->
+request_param_info('postAgent', 'jcr:content/noStatusUpdate') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/protocolConnectTimeout') ->
+request_param_info('postAgent', 'jcr:content/noVersioning') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/protocolHTTPConnectionClosed') ->
+request_param_info('postAgent', 'jcr:content/protocolConnectTimeout') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/protocolHTTPExpired') ->
+request_param_info('postAgent', 'jcr:content/protocolHTTPConnectionClosed') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/protocolHTTPHeaders') ->
+request_param_info('postAgent', 'jcr:content/protocolHTTPExpired') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/protocolHTTPHeaders@TypeHint') ->
+request_param_info('postAgent', 'jcr:content/protocolHTTPHeaders') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/protocolHTTPMethod') ->
+request_param_info('postAgent', 'jcr:content/protocolHTTPHeaders@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/protocolHTTPSRelaxed') ->
+request_param_info('postAgent', 'jcr:content/protocolHTTPMethod') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/protocolInterface') ->
+request_param_info('postAgent', 'jcr:content/protocolHTTPSRelaxed') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/protocolSocketTimeout') ->
+request_param_info('postAgent', 'jcr:content/protocolInterface') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/protocolVersion') ->
+request_param_info('postAgent', 'jcr:content/protocolSocketTimeout') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/proxyNTLMDomain') ->
+request_param_info('postAgent', 'jcr:content/protocolVersion') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/proxyNTLMHost') ->
+request_param_info('postAgent', 'jcr:content/proxyNTLMDomain') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/proxyHost') ->
+request_param_info('postAgent', 'jcr:content/proxyNTLMHost') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/proxyPassword') ->
+request_param_info('postAgent', 'jcr:content/proxyHost') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/proxyPort') ->
+request_param_info('postAgent', 'jcr:content/proxyPassword') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/proxyUser') ->
+request_param_info('postAgent', 'jcr:content/proxyPort') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/queueBatchMaxSize') ->
+request_param_info('postAgent', 'jcr:content/proxyUser') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/queueBatchMode') ->
+request_param_info('postAgent', 'jcr:content/queueBatchMaxSize') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/queueBatchWaitTime') ->
+request_param_info('postAgent', 'jcr:content/queueBatchMode') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/retryDelay') ->
+request_param_info('postAgent', 'jcr:content/queueBatchWaitTime') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/reverseReplication') ->
+request_param_info('postAgent', 'jcr:content/retryDelay') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/serializationType') ->
+request_param_info('postAgent', 'jcr:content/reverseReplication') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/sling:resourceType') ->
+request_param_info('postAgent', 'jcr:content/serializationType') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/ssl') ->
+request_param_info('postAgent', 'jcr:content/sling:resourceType') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/transportNTLMDomain') ->
+request_param_info('postAgent', 'jcr:content/ssl') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/transportNTLMHost') ->
+request_param_info('postAgent', 'jcr:content/transportNTLMDomain') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/transportPassword') ->
+request_param_info('postAgent', 'jcr:content/transportNTLMHost') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/transportUri') ->
+request_param_info('postAgent', 'jcr:content/transportPassword') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/transportUser') ->
+request_param_info('postAgent', 'jcr:content/transportUri') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/triggerDistribute') ->
+request_param_info('postAgent', 'jcr:content/transportUser') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/triggerModified') ->
+request_param_info('postAgent', 'jcr:content/triggerDistribute') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/triggerOnOffTime') ->
+request_param_info('postAgent', 'jcr:content/triggerModified') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/triggerReceive') ->
+request_param_info('postAgent', 'jcr:content/triggerOnOffTime') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/triggerSpecific') ->
+request_param_info('postAgent', 'jcr:content/triggerReceive') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:content/userId') ->
+request_param_info('postAgent', 'jcr:content/triggerSpecific') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostAgent', 'jcr:primaryType') ->
+request_param_info('postAgent', 'jcr:content/userId') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAgent', ':operation') ->
+request_param_info('postAgent', 'jcr:primaryType') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAuthorizableKeystore', 'intermediatePath') ->
+request_param_info('postAgent', ':operation') ->
     #{
-        source =>  binding ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
+            not_required
+        ]
+    };
+request_param_info('postAuthorizableKeystore', 'intermediatePath') ->
+    #{
+        source => binding,
+        rules => [
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostAuthorizableKeystore', 'authorizableId') ->
+request_param_info('postAuthorizableKeystore', 'authorizableId') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostAuthorizableKeystore', ':operation') ->
+request_param_info('postAuthorizableKeystore', ':operation') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAuthorizableKeystore', 'currentPassword') ->
+request_param_info('postAuthorizableKeystore', 'currentPassword') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAuthorizableKeystore', 'newPassword') ->
+request_param_info('postAuthorizableKeystore', 'newPassword') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAuthorizableKeystore', 'rePassword') ->
+request_param_info('postAuthorizableKeystore', 'rePassword') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAuthorizableKeystore', 'keyPassword') ->
+request_param_info('postAuthorizableKeystore', 'keyPassword') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAuthorizableKeystore', 'keyStorePass') ->
+request_param_info('postAuthorizableKeystore', 'keyStorePass') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAuthorizableKeystore', 'alias') ->
+request_param_info('postAuthorizableKeystore', 'alias') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAuthorizableKeystore', 'newAlias') ->
+request_param_info('postAuthorizableKeystore', 'newAlias') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAuthorizableKeystore', 'removeAlias') ->
+request_param_info('postAuthorizableKeystore', 'removeAlias') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAuthorizableKeystore', 'cert-chain') ->
+request_param_info('postAuthorizableKeystore', 'cert-chain') ->
     #{
-        source =>   body,
+        source => body,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAuthorizableKeystore', 'pk') ->
+request_param_info('postAuthorizableKeystore', 'pk') ->
     #{
-        source =>   body,
+        source => body,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAuthorizableKeystore', 'keyStore') ->
+request_param_info('postAuthorizableKeystore', 'keyStore') ->
     #{
-        source =>   body,
+        source => body,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAuthorizables', 'authorizableId') ->
+request_param_info('postAuthorizables', 'authorizableId') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostAuthorizables', 'intermediatePath') ->
+request_param_info('postAuthorizables', 'intermediatePath') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostAuthorizables', 'createUser') ->
+request_param_info('postAuthorizables', 'createUser') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAuthorizables', 'createGroup') ->
+request_param_info('postAuthorizables', 'createGroup') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAuthorizables', 'rep:password') ->
+request_param_info('postAuthorizables', 'rep:password') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostAuthorizables', 'profile/givenName') ->
+request_param_info('postAuthorizables', 'profile/givenName') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'keyStorePassword') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'keyStorePassword') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'keyStorePassword@TypeHint') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'keyStorePassword@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'service.ranking') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'service.ranking') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'integer'},
+            {type, integer},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'service.ranking@TypeHint') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'service.ranking@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'idpHttpRedirect') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'idpHttpRedirect') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'idpHttpRedirect@TypeHint') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'idpHttpRedirect@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'createUser') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'createUser') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'createUser@TypeHint') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'createUser@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'defaultRedirectUrl') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'defaultRedirectUrl') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'defaultRedirectUrl@TypeHint') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'defaultRedirectUrl@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'userIDAttribute') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'userIDAttribute') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'userIDAttribute@TypeHint') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'userIDAttribute@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'defaultGroups') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'defaultGroups') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'defaultGroups@TypeHint') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'defaultGroups@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'idpCertAlias') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'idpCertAlias') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'idpCertAlias@TypeHint') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'idpCertAlias@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'addGroupMemberships') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'addGroupMemberships') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'addGroupMemberships@TypeHint') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'addGroupMemberships@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'path') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'path') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'path@TypeHint') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'path@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'synchronizeAttributes') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'synchronizeAttributes') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'synchronizeAttributes@TypeHint') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'synchronizeAttributes@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'clockTolerance') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'clockTolerance') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'integer'},
+            {type, integer},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'clockTolerance@TypeHint') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'clockTolerance@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'groupMembershipAttribute') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'groupMembershipAttribute') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'groupMembershipAttribute@TypeHint') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'groupMembershipAttribute@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'idpUrl') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'idpUrl') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'idpUrl@TypeHint') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'idpUrl@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'logoutUrl') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'logoutUrl') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'logoutUrl@TypeHint') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'logoutUrl@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'serviceProviderEntityId') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'serviceProviderEntityId') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'serviceProviderEntityId@TypeHint') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'serviceProviderEntityId@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'assertionConsumerServiceURL') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'assertionConsumerServiceURL') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'assertionConsumerServiceURL@TypeHint') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'assertionConsumerServiceURL@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'handleLogout') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'handleLogout') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'handleLogout@TypeHint') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'handleLogout@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'spPrivateKeyAlias') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'spPrivateKeyAlias') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'spPrivateKeyAlias@TypeHint') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'spPrivateKeyAlias@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'useEncryption') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'useEncryption') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'useEncryption@TypeHint') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'useEncryption@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'nameIdFormat') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'nameIdFormat') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'nameIdFormat@TypeHint') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'nameIdFormat@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'digestMethod') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'digestMethod') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'digestMethod@TypeHint') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'digestMethod@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'signatureMethod') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'signatureMethod') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'signatureMethod@TypeHint') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'signatureMethod@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'userIntermediatePath') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'userIntermediatePath') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigAdobeGraniteSamlAuthenticationHandler', 'userIntermediatePath@TypeHint') ->
+request_param_info('postConfigAdobeGraniteSamlAuthenticationHandler', 'userIntermediatePath@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.nio') ->
+request_param_info('postConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.nio') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.nio@TypeHint') ->
+request_param_info('postConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.nio@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.keystore') ->
+request_param_info('postConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.keystore') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.keystore@TypeHint') ->
+request_param_info('postConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.keystore@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.keystore.password') ->
+request_param_info('postConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.keystore.password') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.keystore.password@TypeHint') ->
+request_param_info('postConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.keystore.password@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.keystore.key') ->
+request_param_info('postConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.keystore.key') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.keystore.key@TypeHint') ->
+request_param_info('postConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.keystore.key@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.keystore.key.password') ->
+request_param_info('postConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.keystore.key.password') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.keystore.key.password@TypeHint') ->
+request_param_info('postConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.keystore.key.password@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.truststore') ->
+request_param_info('postConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.truststore') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.truststore@TypeHint') ->
+request_param_info('postConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.truststore@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.truststore.password') ->
+request_param_info('postConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.truststore.password') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.truststore.password@TypeHint') ->
+request_param_info('postConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.truststore.password@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.clientcertificate') ->
+request_param_info('postConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.clientcertificate') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.clientcertificate@TypeHint') ->
+request_param_info('postConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.clientcertificate@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.enable') ->
+request_param_info('postConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.enable') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.enable@TypeHint') ->
+request_param_info('postConfigApacheFelixJettyBasedHttpService', 'org.apache.felix.https.enable@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheFelixJettyBasedHttpService', 'org.osgi.service.http.port.secure') ->
+request_param_info('postConfigApacheFelixJettyBasedHttpService', 'org.osgi.service.http.port.secure') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheFelixJettyBasedHttpService', 'org.osgi.service.http.port.secure@TypeHint') ->
+request_param_info('postConfigApacheFelixJettyBasedHttpService', 'org.osgi.service.http.port.secure@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheHttpComponentsProxyConfiguration', 'proxy.host') ->
+request_param_info('postConfigApacheHttpComponentsProxyConfiguration', 'proxy.host') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheHttpComponentsProxyConfiguration', 'proxy.host@TypeHint') ->
+request_param_info('postConfigApacheHttpComponentsProxyConfiguration', 'proxy.host@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheHttpComponentsProxyConfiguration', 'proxy.port') ->
+request_param_info('postConfigApacheHttpComponentsProxyConfiguration', 'proxy.port') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'integer'},
+            {type, integer},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheHttpComponentsProxyConfiguration', 'proxy.port@TypeHint') ->
+request_param_info('postConfigApacheHttpComponentsProxyConfiguration', 'proxy.port@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheHttpComponentsProxyConfiguration', 'proxy.exceptions') ->
+request_param_info('postConfigApacheHttpComponentsProxyConfiguration', 'proxy.exceptions') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheHttpComponentsProxyConfiguration', 'proxy.exceptions@TypeHint') ->
+request_param_info('postConfigApacheHttpComponentsProxyConfiguration', 'proxy.exceptions@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheHttpComponentsProxyConfiguration', 'proxy.enabled') ->
+request_param_info('postConfigApacheHttpComponentsProxyConfiguration', 'proxy.enabled') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheHttpComponentsProxyConfiguration', 'proxy.enabled@TypeHint') ->
+request_param_info('postConfigApacheHttpComponentsProxyConfiguration', 'proxy.enabled@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheHttpComponentsProxyConfiguration', 'proxy.user') ->
+request_param_info('postConfigApacheHttpComponentsProxyConfiguration', 'proxy.user') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheHttpComponentsProxyConfiguration', 'proxy.user@TypeHint') ->
+request_param_info('postConfigApacheHttpComponentsProxyConfiguration', 'proxy.user@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheHttpComponentsProxyConfiguration', 'proxy.password') ->
+request_param_info('postConfigApacheHttpComponentsProxyConfiguration', 'proxy.password') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheHttpComponentsProxyConfiguration', 'proxy.password@TypeHint') ->
+request_param_info('postConfigApacheHttpComponentsProxyConfiguration', 'proxy.password@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheSlingDavExServlet', 'alias') ->
+request_param_info('postConfigApacheSlingDavExServlet', 'alias') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheSlingDavExServlet', 'alias@TypeHint') ->
+request_param_info('postConfigApacheSlingDavExServlet', 'alias@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheSlingDavExServlet', 'dav.create-absolute-uri') ->
+request_param_info('postConfigApacheSlingDavExServlet', 'dav.create-absolute-uri') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheSlingDavExServlet', 'dav.create-absolute-uri@TypeHint') ->
+request_param_info('postConfigApacheSlingDavExServlet', 'dav.create-absolute-uri@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheSlingGetServlet', 'json.maximumresults') ->
+request_param_info('postConfigApacheSlingGetServlet', 'json.maximumresults') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheSlingGetServlet', 'json.maximumresults@TypeHint') ->
+request_param_info('postConfigApacheSlingGetServlet', 'json.maximumresults@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheSlingGetServlet', 'enable.html') ->
+request_param_info('postConfigApacheSlingGetServlet', 'enable.html') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheSlingGetServlet', 'enable.html@TypeHint') ->
+request_param_info('postConfigApacheSlingGetServlet', 'enable.html@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheSlingGetServlet', 'enable.txt') ->
+request_param_info('postConfigApacheSlingGetServlet', 'enable.txt') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheSlingGetServlet', 'enable.txt@TypeHint') ->
+request_param_info('postConfigApacheSlingGetServlet', 'enable.txt@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheSlingGetServlet', 'enable.xml') ->
+request_param_info('postConfigApacheSlingGetServlet', 'enable.xml') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheSlingGetServlet', 'enable.xml@TypeHint') ->
+request_param_info('postConfigApacheSlingGetServlet', 'enable.xml@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheSlingReferrerFilter', 'allow.empty') ->
+request_param_info('postConfigApacheSlingReferrerFilter', 'allow.empty') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheSlingReferrerFilter', 'allow.empty@TypeHint') ->
+request_param_info('postConfigApacheSlingReferrerFilter', 'allow.empty@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheSlingReferrerFilter', 'allow.hosts') ->
+request_param_info('postConfigApacheSlingReferrerFilter', 'allow.hosts') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheSlingReferrerFilter', 'allow.hosts@TypeHint') ->
+request_param_info('postConfigApacheSlingReferrerFilter', 'allow.hosts@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheSlingReferrerFilter', 'allow.hosts.regexp') ->
+request_param_info('postConfigApacheSlingReferrerFilter', 'allow.hosts.regexp') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheSlingReferrerFilter', 'allow.hosts.regexp@TypeHint') ->
+request_param_info('postConfigApacheSlingReferrerFilter', 'allow.hosts.regexp@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheSlingReferrerFilter', 'filter.methods') ->
+request_param_info('postConfigApacheSlingReferrerFilter', 'filter.methods') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigApacheSlingReferrerFilter', 'filter.methods@TypeHint') ->
+request_param_info('postConfigApacheSlingReferrerFilter', 'filter.methods@TypeHint') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostConfigProperty', 'configNodeName') ->
+request_param_info('postConfigProperty', 'configNodeName') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostNode', 'path') ->
+request_param_info('postNode', 'path') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostNode', 'name') ->
+request_param_info('postNode', 'name') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostNode', ':operation') ->
+request_param_info('postNode', ':operation') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostNode', 'deleteAuthorizable') ->
+request_param_info('postNode', 'deleteAuthorizable') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostNode', 'file') ->
+request_param_info('postNode', 'file') ->
     #{
-        source =>   body,
+        source => body,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostNodeRw', 'path') ->
+request_param_info('postNodeRw', 'path') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostNodeRw', 'name') ->
+request_param_info('postNodeRw', 'name') ->
     #{
-        source =>  binding ,
+        source => binding,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostNodeRw', 'addMembers') ->
+request_param_info('postNodeRw', 'addMembers') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
+        ]
+    };
+request_param_info('postPath', 'path') ->
+    #{
+        source => binding,
+        rules => [
+            {type, binary},
+            required
         ]
     };
-
-request_param_info('PostPath', 'path') ->
+request_param_info('postPath', 'jcr:primaryType') ->
     #{
-        source =>  binding ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostPath', 'jcr:primaryType') ->
+request_param_info('postPath', ':name') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostPath', ':name') ->
+request_param_info('postQuery', 'path') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostQuery', 'path') ->
+request_param_info('postQuery', 'p.limit') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
             required
         ]
     };
-
-request_param_info('PostQuery', 'p.limit') ->
+request_param_info('postQuery', '1_property') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostQuery', '1_property') ->
+request_param_info('postQuery', '1_property.value') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostQuery', '1_property.value') ->
+request_param_info('postTreeActivation', 'ignoredeactivated') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, boolean},
             required
         ]
     };
-
-request_param_info('PostTreeActivation', 'ignoredeactivated') ->
+request_param_info('postTreeActivation', 'onlymodified') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, boolean},
             required
         ]
     };
-
-request_param_info('PostTreeActivation', 'onlymodified') ->
+request_param_info('postTreeActivation', 'path') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'boolean'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostTreeActivation', 'path') ->
+request_param_info('postTreeActivation', 'cmd') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             required
         ]
     };
-
-request_param_info('PostTruststore', ':operation') ->
+request_param_info('postTruststore', ':operation') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostTruststore', 'newPassword') ->
+request_param_info('postTruststore', 'newPassword') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostTruststore', 'rePassword') ->
+request_param_info('postTruststore', 'rePassword') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostTruststore', 'keyStoreType') ->
+request_param_info('postTruststore', 'keyStoreType') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostTruststore', 'removeAlias') ->
+request_param_info('postTruststore', 'removeAlias') ->
     #{
-        source => qs_val  ,
+        source => qs_val,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostTruststore', 'certificate') ->
+request_param_info('postTruststore', 'certificate') ->
     #{
-        source =>   body,
+        source => body,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
-request_param_info('PostTruststorePKCS12', 'truststore.p12') ->
+request_param_info('postTruststorePKCS12', 'truststore.p12') ->
     #{
-        source =>   body,
+        source => body,
         rules => [
-            {type, 'binary'},
+            {type, binary},
             not_required
         ]
     };
-
 request_param_info(OperationID, Name) ->
     error({unknown_param, OperationID, Name}).
 
--spec populate_request(
-    OperationID :: operation_id(),
-    Req :: cowboy_req:req(),
-    ValidatorState :: jesse_state:state()
-) ->
-    {ok, Model :: #{}, Req :: cowboy_req:req()} |
-    {error, Reason :: any(), Req :: cowboy_req:req()}.
-
-populate_request(OperationID, Req, ValidatorState) ->
-    Params = request_params(OperationID),
-    populate_request_params(OperationID, Params, Req, ValidatorState, #{}).
-
+-spec populate_request_params(
+        operation_id(), [request_param()], cowboy_req:req(), jesse_state:state(), map()) ->
+    {ok, map(), cowboy_req:req()} | {error, _, cowboy_req:req()}.
 populate_request_params(_, [], Req, _, Model) ->
     {ok, Model, Req};
-
-populate_request_params(OperationID, [FieldParams | T], Req0, ValidatorState, Model) ->
-    case populate_request_param(OperationID, FieldParams, Req0, ValidatorState) of
-        {ok, K, V, Req} ->
-            populate_request_params(OperationID, T, Req, ValidatorState, maps:put(K, V, Model));
+populate_request_params(OperationID, [ReqParamName | T], Req0, ValidatorState, Model0) ->
+    case populate_request_param(OperationID, ReqParamName, Req0, ValidatorState) of
+        {ok, V, Req} ->
+            Model = Model0#{ReqParamName => V},
+            populate_request_params(OperationID, T, Req, ValidatorState, Model);
         Error ->
             Error
     end.
 
-populate_request_param(OperationID, Name, Req0, ValidatorState) ->
-    #{rules := Rules, source := Source} = request_param_info(OperationID, Name),
-    case get_value(Source, Name, Req0) of
+-spec populate_request_param(
+        operation_id(), request_param(), cowboy_req:req(), jesse_state:state()) ->
+    {ok, term(), cowboy_req:req()} | {error, term(), cowboy_req:req()}.
+populate_request_param(OperationID, ReqParamName, Req0, ValidatorState) ->
+    #{rules := Rules, source := Source} = request_param_info(OperationID, ReqParamName),
+    case get_value(Source, ReqParamName, Req0) of
         {error, Reason, Req} ->
             {error, Reason, Req};
         {Value, Req} ->
-            case prepare_param(Rules, Name, Value, ValidatorState) of
-                {ok, Result} -> {ok, Name, Result, Req};
+            case prepare_param(Rules, ReqParamName, Value, ValidatorState) of
+                {ok, Result} -> {ok, Result, Req};
                 {error, Reason} ->
                     {error, Reason, Req}
             end
     end.
 
--spec validate_response(
-    OperationID :: operation_id(),
-    Code :: 200..599,
-    Body :: jesse:json_term(),
-    ValidatorState :: jesse_state:state()
-) -> ok | no_return().
-
-
-validate_response('GetAemProductInfo', 0, Body, ValidatorState) ->
-    validate_response_body('list', 'string', Body, ValidatorState);
-
-validate_response('GetBundleInfo', 200, Body, ValidatorState) ->
-    validate_response_body('BundleInfo', 'BundleInfo', Body, ValidatorState);
-validate_response('GetBundleInfo', 0, Body, ValidatorState) ->
-    validate_response_body('binary', 'string', Body, ValidatorState);
-
-validate_response('GetConfigMgr', 200, Body, ValidatorState) ->
-    validate_response_body('binary', 'string', Body, ValidatorState);
-validate_response('GetConfigMgr', 5XX, Body, ValidatorState) ->
-    validate_response_body('', '', Body, ValidatorState);
-
-validate_response('PostBundle', 0, Body, ValidatorState) ->
-    validate_response_body('', '', Body, ValidatorState);
-
-validate_response('PostJmxRepository', 0, Body, ValidatorState) ->
-    validate_response_body('', '', Body, ValidatorState);
-
-validate_response('PostSamlConfiguration', 200, Body, ValidatorState) ->
-    validate_response_body('SamlConfigurationInfo', 'SamlConfigurationInfo', Body, ValidatorState);
-validate_response('PostSamlConfiguration', 302, Body, ValidatorState) ->
-    validate_response_body('binary', 'string', Body, ValidatorState);
-validate_response('PostSamlConfiguration', 0, Body, ValidatorState) ->
-    validate_response_body('binary', 'string', Body, ValidatorState);
-
-
-validate_response('GetLoginPage', 0, Body, ValidatorState) ->
-    validate_response_body('binary', 'string', Body, ValidatorState);
-
-validate_response('PostCqActions', 0, Body, ValidatorState) ->
-    validate_response_body('', '', Body, ValidatorState);
-
-
-validate_response('GetCrxdeStatus', 200, Body, ValidatorState) ->
-    validate_response_body('binary', 'string', Body, ValidatorState);
-validate_response('GetCrxdeStatus', 404, Body, ValidatorState) ->
-    validate_response_body('binary', 'string', Body, ValidatorState);
-
-validate_response('GetInstallStatus', 200, Body, ValidatorState) ->
-    validate_response_body('InstallStatus', 'InstallStatus', Body, ValidatorState);
-validate_response('GetInstallStatus', 0, Body, ValidatorState) ->
-    validate_response_body('binary', 'string', Body, ValidatorState);
-
-validate_response('GetPackageManagerServlet', 404, Body, ValidatorState) ->
-    validate_response_body('binary', 'string', Body, ValidatorState);
-validate_response('GetPackageManagerServlet', 405, Body, ValidatorState) ->
-    validate_response_body('binary', 'string', Body, ValidatorState);
-
-validate_response('PostPackageService', 0, Body, ValidatorState) ->
-    validate_response_body('binary', 'string', Body, ValidatorState);
-
-validate_response('PostPackageServiceJson', 0, Body, ValidatorState) ->
-    validate_response_body('binary', 'string', Body, ValidatorState);
-
-validate_response('PostPackageUpdate', 0, Body, ValidatorState) ->
-    validate_response_body('binary', 'string', Body, ValidatorState);
-
-validate_response('PostSetPassword', 0, Body, ValidatorState) ->
-    validate_response_body('binary', 'string', Body, ValidatorState);
-
-
-validate_response('GetAemHealthCheck', 0, Body, ValidatorState) ->
-    validate_response_body('binary', 'string', Body, ValidatorState);
-
-validate_response('PostConfigAemHealthCheckServlet', 0, Body, ValidatorState) ->
-    validate_response_body('', '', Body, ValidatorState);
-
-validate_response('PostConfigAemPasswordReset', 0, Body, ValidatorState) ->
-    validate_response_body('', '', Body, ValidatorState);
-
-
-validate_response('SslSetup', 0, Body, ValidatorState) ->
-    validate_response_body('binary', 'string', Body, ValidatorState);
-
-
-validate_response('DeleteAgent', 0, Body, ValidatorState) ->
-    validate_response_body('', '', Body, ValidatorState);
-
-validate_response('DeleteNode', 0, Body, ValidatorState) ->
-    validate_response_body('', '', Body, ValidatorState);
-
-validate_response('GetAgent', 0, Body, ValidatorState) ->
-    validate_response_body('', '', Body, ValidatorState);
-
-validate_response('GetAgents', 0, Body, ValidatorState) ->
-    validate_response_body('binary', 'string', Body, ValidatorState);
-
-validate_response('GetAuthorizableKeystore', 200, Body, ValidatorState) ->
-    validate_response_body('KeystoreInfo', 'KeystoreInfo', Body, ValidatorState);
-validate_response('GetAuthorizableKeystore', 0, Body, ValidatorState) ->
-    validate_response_body('binary', 'string', Body, ValidatorState);
-
-validate_response('GetKeystore', 0, Body, ValidatorState) ->
-    validate_response_body('file', 'file', Body, ValidatorState);
-
-validate_response('GetNode', 0, Body, ValidatorState) ->
-    validate_response_body('', '', Body, ValidatorState);
-
-validate_response('GetPackage', 0, Body, ValidatorState) ->
-    validate_response_body('file', 'file', Body, ValidatorState);
-
-validate_response('GetPackageFilter', 0, Body, ValidatorState) ->
-    validate_response_body('binary', 'string', Body, ValidatorState);
-
-validate_response('GetQuery', 0, Body, ValidatorState) ->
-    validate_response_body('binary', 'string', Body, ValidatorState);
-
-validate_response('GetTruststore', 0, Body, ValidatorState) ->
-    validate_response_body('file', 'file', Body, ValidatorState);
-
-validate_response('GetTruststoreInfo', 200, Body, ValidatorState) ->
-    validate_response_body('TruststoreInfo', 'TruststoreInfo', Body, ValidatorState);
-validate_response('GetTruststoreInfo', 0, Body, ValidatorState) ->
-    validate_response_body('binary', 'string', Body, ValidatorState);
-
-validate_response('PostAgent', 0, Body, ValidatorState) ->
-    validate_response_body('', '', Body, ValidatorState);
-
-validate_response('PostAuthorizableKeystore', 200, Body, ValidatorState) ->
-    validate_response_body('KeystoreInfo', 'KeystoreInfo', Body, ValidatorState);
-validate_response('PostAuthorizableKeystore', 0, Body, ValidatorState) ->
-    validate_response_body('binary', 'string', Body, ValidatorState);
-
-validate_response('PostAuthorizables', 0, Body, ValidatorState) ->
-    validate_response_body('binary', 'string', Body, ValidatorState);
-
-validate_response('PostConfigAdobeGraniteSamlAuthenticationHandler', 0, Body, ValidatorState) ->
-    validate_response_body('', '', Body, ValidatorState);
-
-validate_response('PostConfigApacheFelixJettyBasedHttpService', 0, Body, ValidatorState) ->
-    validate_response_body('', '', Body, ValidatorState);
-
-validate_response('PostConfigApacheHttpComponentsProxyConfiguration', 0, Body, ValidatorState) ->
-    validate_response_body('', '', Body, ValidatorState);
-
-validate_response('PostConfigApacheSlingDavExServlet', 0, Body, ValidatorState) ->
-    validate_response_body('', '', Body, ValidatorState);
-
-validate_response('PostConfigApacheSlingGetServlet', 0, Body, ValidatorState) ->
-    validate_response_body('', '', Body, ValidatorState);
-
-validate_response('PostConfigApacheSlingReferrerFilter', 0, Body, ValidatorState) ->
-    validate_response_body('', '', Body, ValidatorState);
-
-validate_response('PostConfigProperty', 0, Body, ValidatorState) ->
-    validate_response_body('', '', Body, ValidatorState);
-
-validate_response('PostNode', 0, Body, ValidatorState) ->
-    validate_response_body('', '', Body, ValidatorState);
-
-validate_response('PostNodeRw', 0, Body, ValidatorState) ->
-    validate_response_body('', '', Body, ValidatorState);
-
-validate_response('PostPath', 0, Body, ValidatorState) ->
-    validate_response_body('', '', Body, ValidatorState);
-
-validate_response('PostQuery', 0, Body, ValidatorState) ->
-    validate_response_body('binary', 'string', Body, ValidatorState);
-
-validate_response('PostTreeActivation', 0, Body, ValidatorState) ->
-    validate_response_body('', '', Body, ValidatorState);
-
-validate_response('PostTruststore', 0, Body, ValidatorState) ->
-    validate_response_body('binary', 'string', Body, ValidatorState);
-
-validate_response('PostTruststorePKCS12', 0, Body, ValidatorState) ->
-    validate_response_body('binary', 'string', Body, ValidatorState);
-
-
-validate_response(_OperationID, _Code, _Body, _ValidatorState) ->
-    ok.
-
-validate_response_body('list', ReturnBaseType, Body, ValidatorState) ->
+validate_response_body(list, ReturnBaseType, Body, ValidatorState) ->
     [
-        validate(schema, ReturnBaseType, Item, ValidatorState)
+        validate(schema, Item, ReturnBaseType, ValidatorState)
     || Item <- Body];
 
 validate_response_body(_, ReturnBaseType, Body, ValidatorState) ->
-    validate(schema, ReturnBaseType, Body, ValidatorState).
+    validate(schema, Body, ReturnBaseType, ValidatorState).
 
-%%%
-validate(Rule = required, Name, Value, _ValidatorState) ->
-    case Value of
-        undefined -> validation_error(Rule, Name);
+-spec validate(rule(), term(), request_param(), jesse_state:state()) ->
+    ok | {ok, term()}.
+validate(required, undefined, ReqParamName, _) ->
+    validation_error(required, ReqParamName, undefined);
+validate(required, _Value, _, _) ->
+    ok;
+validate(not_required, _Value, _, _) ->
+    ok;
+validate(_, undefined, _, _) ->
+    ok;
+validate({type, boolean}, Value, _, _) when is_boolean(Value) ->
+    ok;
+validate({type, integer}, Value, _, _) when is_integer(Value) ->
+    ok;
+validate({type, float}, Value, _, _) when is_float(Value) ->
+    ok;
+validate({type, binary}, Value, _, _) when is_binary(Value) ->
+    ok;
+validate({max, Max}, Value, _, _) when Value =< Max ->
+    ok;
+validate({min, Min}, Value, _, _) when Min =< Value ->
+    ok;
+validate({exclusive_max, Max}, Value, _, _) when Value < Max ->
+    ok;
+validate({exclusive_min, Min}, Value, _, _) when Min < Value ->
+    ok;
+validate({max_length, MaxLength}, Value, _, _) when is_binary(Value), byte_size(Value) =< MaxLength ->
+    ok;
+validate({min_length, MinLength}, Value, _, _) when is_binary(Value), MinLength =< byte_size(Value) ->
+    ok;
+validate(Rule = {type, byte}, Value, ReqParamName, _) when is_binary(Value) ->
+    try base64:decode(Value) of
+        Decoded -> {ok, Decoded}
+    catch error:_Error -> validation_error(Rule, ReqParamName, Value)
+    end;
+validate(Rule = {type, boolean}, Value, ReqParamName, _) when is_binary(Value) ->
+    case to_binary(string:lowercase(Value)) of
+        <<"true">> -> {ok, true};
+        <<"false">> -> {ok, false};
+        _ -> validation_error(Rule, ReqParamName, Value)
+    end;
+validate(Rule = {type, integer}, Value, ReqParamName, _) when is_binary(Value) ->
+    try
+        {ok, binary_to_integer(Value)}
+    catch
+        error:badarg ->
+            validation_error(Rule, ReqParamName, Value)
+    end;
+validate(Rule = {type, float}, Value, ReqParamName, _) when is_binary(Value) ->
+    try
+        {ok, binary_to_float(Value)}
+    catch
+        error:badarg ->
+            validation_error(Rule, ReqParamName, Value)
+    end;
+validate(Rule = {type, date}, Value, ReqParamName, _) ->
+    case is_binary(Value) of
+        true -> ok;
+        false -> validation_error(Rule, ReqParamName, Value)
+    end;
+validate(Rule = {type, datetime}, Value, ReqParamName, _) ->
+    try calendar:rfc3339_to_system_time(binary_to_list(Value)) of
         _ -> ok
+    catch error:_Error -> validation_error(Rule, ReqParamName, Value)
     end;
-
-validate(not_required, _Name, _Value, _ValidatorState) ->
-    ok;
-
-validate(_, _Name, undefined, _ValidatorState) ->
-    ok;
-
-validate(Rule = {type, 'integer'}, Name, Value, _ValidatorState) ->
-    try
-        {ok, openapi_utils:to_int(Value)}
-    catch
-        error:badarg ->
-            validation_error(Rule, Name)
-    end;
-
-validate(Rule = {type, 'float'}, Name, Value, _ValidatorState) ->
-    try
-        {ok, openapi_utils:to_float(Value)}
-    catch
-        error:badarg ->
-            validation_error(Rule, Name)
-    end;
-
-validate(Rule = {type, 'binary'}, Name, Value, _ValidatorState) ->
-    case is_binary(Value) of
-        true -> ok;
-        false -> validation_error(Rule, Name)
-    end;
-
-validate(_Rule = {type, 'boolean'}, _Name, Value, _ValidatorState) when is_boolean(Value) ->
-    {ok, Value};
-
-validate(Rule = {type, 'boolean'}, Name, Value, _ValidatorState) ->
-    V = binary_to_lower(Value),
-    try
-        case binary_to_existing_atom(V, utf8) of
-            B when is_boolean(B) -> {ok, B};
-            _ -> validation_error(Rule, Name)
-        end
-    catch
-        error:badarg ->
-            validation_error(Rule, Name)
-    end;
-
-validate(Rule = {type, 'date'}, Name, Value, _ValidatorState) ->
-    case is_binary(Value) of
-        true -> ok;
-        false -> validation_error(Rule, Name)
-    end;
-
-validate(Rule = {type, 'datetime'}, Name, Value, _ValidatorState) ->
-    case is_binary(Value) of
-        true -> ok;
-        false -> validation_error(Rule, Name)
-    end;
-
-validate(Rule = {enum, Values}, Name, Value, _ValidatorState) ->
+validate(Rule = {enum, Values}, Value, ReqParamName, _) ->
     try
         FormattedValue = erlang:binary_to_existing_atom(Value, utf8),
         case lists:member(FormattedValue, Values) of
             true -> {ok, FormattedValue};
-            false -> validation_error(Rule, Name)
+            false -> validation_error(Rule, ReqParamName, Value)
         end
     catch
         error:badarg ->
-            validation_error(Rule, Name)
+            validation_error(Rule, ReqParamName, Value)
     end;
-
-validate(Rule = {max, Max}, Name, Value, _ValidatorState) ->
-    case Value =< Max of
-        true -> ok;
-        false -> validation_error(Rule, Name)
-    end;
-
-validate(Rule = {exclusive_max, ExclusiveMax}, Name, Value, _ValidatorState) ->
-    case Value > ExclusiveMax of
-        true -> ok;
-        false -> validation_error(Rule, Name)
-    end;
-
-validate(Rule = {min, Min}, Name, Value, _ValidatorState) ->
-    case Value >= Min of
-        true -> ok;
-        false -> validation_error(Rule, Name)
-    end;
-
-validate(Rule = {exclusive_min, ExclusiveMin}, Name, Value, _ValidatorState) ->
-    case Value =< ExclusiveMin of
-        true -> ok;
-        false -> validation_error(Rule, Name)
-    end;
-
-validate(Rule = {max_length, MaxLength}, Name, Value, _ValidatorState) ->
-    case size(Value) =< MaxLength of
-        true -> ok;
-        false -> validation_error(Rule, Name)
-    end;
-
-validate(Rule = {min_length, MinLength}, Name, Value, _ValidatorState) ->
-    case size(Value) >= MinLength of
-        true -> ok;
-        false -> validation_error(Rule, Name)
-    end;
-
-validate(Rule = {pattern, Pattern}, Name, Value, _ValidatorState) ->
+validate(Rule = {pattern, Pattern}, Value, ReqParamName, _) ->
     {ok, MP} = re:compile(Pattern),
     case re:run(Value, MP) of
         {match, _} -> ok;
-        _ -> validation_error(Rule, Name)
+        _ -> validation_error(Rule, ReqParamName, Value)
     end;
-
-validate(Rule = schema, Name, Value, ValidatorState) ->
-    Definition =  list_to_binary("#/components/schemas/" ++ openapi_utils:to_list(Name)),
+validate(schema, Value, ReqParamName, ValidatorState) ->
+    Definition = iolist_to_binary(["#/components/schemas/", atom_to_binary(ReqParamName, utf8)]),
+    validate({schema, object, Definition}, Value, ReqParamName, ValidatorState);
+validate({schema, list, Definition}, Value, ReqParamName, ValidatorState) ->
+    lists:foreach(
+      fun(Item) ->
+              validate({schema, object, Definition}, Item, ReqParamName, ValidatorState)
+      end, Value);
+validate(Rule = {schema, object, Definition}, Value, ReqParamName, ValidatorState) ->
     try
         _ = validate_with_schema(Value, Definition, ValidatorState),
         ok
@@ -3485,7 +3195,7 @@ validate(Rule = schema, Name, Value, ValidatorState) ->
                 type => schema_invalid,
                 error => Error
             },
-            validation_error(Rule, Name, Info);
+            validation_error(Rule, ReqParamName, Value, Info);
         throw:[{data_invalid, Schema, Error, _, Path} | _] ->
             Info = #{
                 type => data_invalid,
@@ -3493,59 +3203,63 @@ validate(Rule = schema, Name, Value, ValidatorState) ->
                 schema => Schema,
                 path => Path
             },
-            validation_error(Rule, Name, Info)
+            validation_error(Rule, ReqParamName, Value, Info)
     end;
+validate(Rule, Value, ReqParamName, _) ->
+    validation_error(Rule, ReqParamName, Value).
 
-validate(Rule, Name, _Value, _ValidatorState) ->
-    error_logger:info_msg("Can't validate ~p with ~p", [Name, Rule]),
-    error({unknown_validation_rule, Rule}).
+-spec validation_error(rule(), request_param(), term()) -> no_return().
+validation_error(ViolatedRule, Name, Value) ->
+    validation_error(ViolatedRule, Name, Value, #{}).
 
--spec validation_error(Rule :: any(), Name :: any()) -> no_return().
+-spec validation_error(rule(), request_param(), term(), Info :: #{_ := _}) -> no_return().
+validation_error(ViolatedRule, Name, Value, Info) ->
+    throw({wrong_param, Name, Value, ViolatedRule, Info}).
 
-validation_error(ViolatedRule, Name) ->
-    validation_error(ViolatedRule, Name, #{}).
-
--spec validation_error(Rule :: any(), Name :: any(), Info :: #{}) -> no_return().
-
-validation_error(ViolatedRule, Name, Info) ->
-    throw({wrong_param, Name, ViolatedRule, Info}).
-
--spec get_value(body | qs_val | header | binding, Name :: any(), Req0 :: cowboy_req:req()) ->
-    {Value :: any(), Req :: cowboy_req:req()} | 
-    {error, Reason :: any(), Req :: cowboy_req:req()}.
+-spec get_value(body | qs_val | header | binding, request_param(), cowboy_req:req()) ->
+    {any(), cowboy_req:req()} |
+    {error, any(), cowboy_req:req()}.
 get_value(body, _Name, Req0) ->
-    {ok, Body, Req} = cowboy_req:read_body(Req0),
+    {ok, Body, Req} = read_entire_body(Req0),
     case prepare_body(Body) of
         {error, Reason} ->
             {error, Reason, Req};
         Value ->
             {Value, Req}
     end;
-
 get_value(qs_val, Name, Req) ->
     QS = cowboy_req:parse_qs(Req),
-    Value = openapi_utils:get_opt(openapi_utils:to_qs(Name), QS),
+    Value = get_opt(to_qs(Name), QS),
     {Value, Req};
-
 get_value(header, Name, Req) ->
     Headers = cowboy_req:headers(Req),
-    Value =  maps:get(openapi_utils:to_header(Name), Headers, undefined),
+    Value = maps:get(to_header(Name), Headers, undefined),
     {Value, Req};
-
 get_value(binding, Name, Req) ->
-    Value = cowboy_req:binding(openapi_utils:to_binding(Name), Req),
+    Value = cowboy_req:binding(Name, Req),
     {Value, Req}.
 
+-spec read_entire_body(cowboy_req:req()) -> {ok, binary(), cowboy_req:req()}.
+read_entire_body(Req) ->
+    read_entire_body(Req, []).
+
+-spec read_entire_body(cowboy_req:req(), iodata()) -> {ok, binary(), cowboy_req:req()}.
+read_entire_body(Request, Acc) -> % {
+    case cowboy_req:read_body(Request) of
+        {ok, Data, NewRequest} ->
+            {ok, iolist_to_binary(lists:reverse([Data | Acc])), NewRequest};
+        {more, Data, NewRequest} ->
+            read_entire_body(NewRequest, [Data | Acc])
+    end.
+
+prepare_body(<<>>) ->
+    <<>>;
 prepare_body(Body) ->
-    case Body of
-        <<"">> -> <<"">>;
-        _ ->
-            try
-                jsx:decode(Body, [return_maps]) 
-            catch
-              error:_ ->
-                {error, {invalid_body, not_json, Body}}
-            end
+    try
+        json:decode(Body)
+    catch
+        error:Error ->
+            {error, {invalid_json, Body, Error}}
     end.
 
 validate_with_schema(Body, Definition, ValidatorState) ->
@@ -3555,23 +3269,71 @@ validate_with_schema(Body, Definition, ValidatorState) ->
         ValidatorState
     ).
 
-prepare_param(Rules, Name, Value, ValidatorState) ->
+-spec prepare_param([rule()], request_param(), term(), jesse_state:state()) ->
+    {ok, term()} | {error, Reason :: any()}.
+prepare_param(Rules, ReqParamName, Value, ValidatorState) ->
+    Fun = fun(Rule, Acc) ->
+        case validate(Rule, Acc, ReqParamName, ValidatorState) of
+            ok -> Acc;
+            {ok, Prepared} -> Prepared
+        end
+    end,
     try
-        Result = lists:foldl(
-            fun(Rule, Acc) ->
-                case validate(Rule, Name, Acc, ValidatorState) of
-                    ok -> Acc;
-                    {ok, Prepared} -> Prepared
-                end
-            end,
-            Value,
-            Rules
-        ),
+        Result = lists:foldl(Fun, Value, Rules),
         {ok, Result}
     catch
         throw:Reason ->
             {error, Reason}
     end.
 
-binary_to_lower(V) when is_binary(V) ->
-    list_to_binary(string:to_lower(openapi_utils:to_list(V))).
+-spec to_binary(iodata()) -> binary().
+to_binary(V) when is_binary(V)  -> V;
+to_binary(V) when is_list(V)    -> iolist_to_binary(V).
+
+-spec to_header(request_param()) -> binary().
+to_header(Name) ->
+    to_binary(string:lowercase(atom_to_binary(Name, utf8))).
+
+-spec to_qs(request_param()) -> binary().
+to_qs(Name) ->
+    atom_to_binary(Name, utf8).
+
+-spec get_opt(any(), []) -> any().
+get_opt(Key, Opts) ->
+    get_opt(Key, Opts, undefined).
+
+-spec get_opt(any(), [], any()) -> any().
+get_opt(Key, Opts, Default) ->
+    case lists:keyfind(Key, 1, Opts) of
+        {_, Value} -> Value;
+        false -> Default
+    end.
+
+get_openapi_path() ->
+    {ok, AppName} = application:get_application(?MODULE),
+    filename:join(priv_dir(AppName), "openapi.json").
+
+-include_lib("kernel/include/file.hrl").
+
+-spec priv_dir(Application :: atom()) -> file:name_all().
+priv_dir(AppName) ->
+    case code:priv_dir(AppName) of
+        Value when is_list(Value) ->
+            Value ++ "/";
+        _Error ->
+            select_priv_dir([filename:join(["apps", atom_to_list(AppName), "priv"]), "priv"])
+     end.
+
+select_priv_dir(Paths) ->
+    case lists:dropwhile(fun test_priv_dir/1, Paths) of
+        [Path | _] -> Path;
+        _          -> exit(no_priv_dir)
+    end.
+
+test_priv_dir(Path) ->
+    case file:read_file_info(Path) of
+        {ok, #file_info{type = directory}} ->
+            false;
+        _ ->
+            true
+    end.

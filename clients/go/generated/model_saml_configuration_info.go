@@ -3,7 +3,7 @@ Adobe Experience Manager (AEM) API
 
 Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
 
-API version: 3.5.0-pre.0
+API version: 3.7.1-pre.0
 Contact: opensource@shinesolutions.com
 */
 
@@ -14,6 +14,9 @@ package openapi
 import (
 	"encoding/json"
 )
+
+// checks if the SamlConfigurationInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SamlConfigurationInfo{}
 
 // SamlConfigurationInfo struct for SamlConfigurationInfo
 type SamlConfigurationInfo struct {
@@ -49,7 +52,7 @@ func NewSamlConfigurationInfoWithDefaults() *SamlConfigurationInfo {
 
 // GetPid returns the Pid field value if set, zero value otherwise.
 func (o *SamlConfigurationInfo) GetPid() string {
-	if o == nil || o.Pid == nil {
+	if o == nil || IsNil(o.Pid) {
 		var ret string
 		return ret
 	}
@@ -59,7 +62,7 @@ func (o *SamlConfigurationInfo) GetPid() string {
 // GetPidOk returns a tuple with the Pid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationInfo) GetPidOk() (*string, bool) {
-	if o == nil || o.Pid == nil {
+	if o == nil || IsNil(o.Pid) {
 		return nil, false
 	}
 	return o.Pid, true
@@ -67,7 +70,7 @@ func (o *SamlConfigurationInfo) GetPidOk() (*string, bool) {
 
 // HasPid returns a boolean if a field has been set.
 func (o *SamlConfigurationInfo) HasPid() bool {
-	if o != nil && o.Pid != nil {
+	if o != nil && !IsNil(o.Pid) {
 		return true
 	}
 
@@ -81,7 +84,7 @@ func (o *SamlConfigurationInfo) SetPid(v string) {
 
 // GetTitle returns the Title field value if set, zero value otherwise.
 func (o *SamlConfigurationInfo) GetTitle() string {
-	if o == nil || o.Title == nil {
+	if o == nil || IsNil(o.Title) {
 		var ret string
 		return ret
 	}
@@ -91,7 +94,7 @@ func (o *SamlConfigurationInfo) GetTitle() string {
 // GetTitleOk returns a tuple with the Title field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationInfo) GetTitleOk() (*string, bool) {
-	if o == nil || o.Title == nil {
+	if o == nil || IsNil(o.Title) {
 		return nil, false
 	}
 	return o.Title, true
@@ -99,7 +102,7 @@ func (o *SamlConfigurationInfo) GetTitleOk() (*string, bool) {
 
 // HasTitle returns a boolean if a field has been set.
 func (o *SamlConfigurationInfo) HasTitle() bool {
-	if o != nil && o.Title != nil {
+	if o != nil && !IsNil(o.Title) {
 		return true
 	}
 
@@ -113,7 +116,7 @@ func (o *SamlConfigurationInfo) SetTitle(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *SamlConfigurationInfo) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -123,7 +126,7 @@ func (o *SamlConfigurationInfo) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationInfo) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -131,7 +134,7 @@ func (o *SamlConfigurationInfo) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *SamlConfigurationInfo) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -145,7 +148,7 @@ func (o *SamlConfigurationInfo) SetDescription(v string) {
 
 // GetBundleLocation returns the BundleLocation field value if set, zero value otherwise.
 func (o *SamlConfigurationInfo) GetBundleLocation() string {
-	if o == nil || o.BundleLocation == nil {
+	if o == nil || IsNil(o.BundleLocation) {
 		var ret string
 		return ret
 	}
@@ -155,7 +158,7 @@ func (o *SamlConfigurationInfo) GetBundleLocation() string {
 // GetBundleLocationOk returns a tuple with the BundleLocation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationInfo) GetBundleLocationOk() (*string, bool) {
-	if o == nil || o.BundleLocation == nil {
+	if o == nil || IsNil(o.BundleLocation) {
 		return nil, false
 	}
 	return o.BundleLocation, true
@@ -163,7 +166,7 @@ func (o *SamlConfigurationInfo) GetBundleLocationOk() (*string, bool) {
 
 // HasBundleLocation returns a boolean if a field has been set.
 func (o *SamlConfigurationInfo) HasBundleLocation() bool {
-	if o != nil && o.BundleLocation != nil {
+	if o != nil && !IsNil(o.BundleLocation) {
 		return true
 	}
 
@@ -177,7 +180,7 @@ func (o *SamlConfigurationInfo) SetBundleLocation(v string) {
 
 // GetServiceLocation returns the ServiceLocation field value if set, zero value otherwise.
 func (o *SamlConfigurationInfo) GetServiceLocation() string {
-	if o == nil || o.ServiceLocation == nil {
+	if o == nil || IsNil(o.ServiceLocation) {
 		var ret string
 		return ret
 	}
@@ -187,7 +190,7 @@ func (o *SamlConfigurationInfo) GetServiceLocation() string {
 // GetServiceLocationOk returns a tuple with the ServiceLocation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationInfo) GetServiceLocationOk() (*string, bool) {
-	if o == nil || o.ServiceLocation == nil {
+	if o == nil || IsNil(o.ServiceLocation) {
 		return nil, false
 	}
 	return o.ServiceLocation, true
@@ -195,7 +198,7 @@ func (o *SamlConfigurationInfo) GetServiceLocationOk() (*string, bool) {
 
 // HasServiceLocation returns a boolean if a field has been set.
 func (o *SamlConfigurationInfo) HasServiceLocation() bool {
-	if o != nil && o.ServiceLocation != nil {
+	if o != nil && !IsNil(o.ServiceLocation) {
 		return true
 	}
 
@@ -209,7 +212,7 @@ func (o *SamlConfigurationInfo) SetServiceLocation(v string) {
 
 // GetProperties returns the Properties field value if set, zero value otherwise.
 func (o *SamlConfigurationInfo) GetProperties() SamlConfigurationProperties {
-	if o == nil || o.Properties == nil {
+	if o == nil || IsNil(o.Properties) {
 		var ret SamlConfigurationProperties
 		return ret
 	}
@@ -219,7 +222,7 @@ func (o *SamlConfigurationInfo) GetProperties() SamlConfigurationProperties {
 // GetPropertiesOk returns a tuple with the Properties field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationInfo) GetPropertiesOk() (*SamlConfigurationProperties, bool) {
-	if o == nil || o.Properties == nil {
+	if o == nil || IsNil(o.Properties) {
 		return nil, false
 	}
 	return o.Properties, true
@@ -227,7 +230,7 @@ func (o *SamlConfigurationInfo) GetPropertiesOk() (*SamlConfigurationProperties,
 
 // HasProperties returns a boolean if a field has been set.
 func (o *SamlConfigurationInfo) HasProperties() bool {
-	if o != nil && o.Properties != nil {
+	if o != nil && !IsNil(o.Properties) {
 		return true
 	}
 
@@ -240,26 +243,34 @@ func (o *SamlConfigurationInfo) SetProperties(v SamlConfigurationProperties) {
 }
 
 func (o SamlConfigurationInfo) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Pid != nil {
-		toSerialize["pid"] = o.Pid
-	}
-	if o.Title != nil {
-		toSerialize["title"] = o.Title
-	}
-	if o.Description != nil {
-		toSerialize["description"] = o.Description
-	}
-	if o.BundleLocation != nil {
-		toSerialize["bundle_location"] = o.BundleLocation
-	}
-	if o.ServiceLocation != nil {
-		toSerialize["service_location"] = o.ServiceLocation
-	}
-	if o.Properties != nil {
-		toSerialize["properties"] = o.Properties
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o SamlConfigurationInfo) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Pid) {
+		toSerialize["pid"] = o.Pid
+	}
+	if !IsNil(o.Title) {
+		toSerialize["title"] = o.Title
+	}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.BundleLocation) {
+		toSerialize["bundle_location"] = o.BundleLocation
+	}
+	if !IsNil(o.ServiceLocation) {
+		toSerialize["service_location"] = o.ServiceLocation
+	}
+	if !IsNil(o.Properties) {
+		toSerialize["properties"] = o.Properties
+	}
+	return toSerialize, nil
 }
 
 type NullableSamlConfigurationInfo struct {

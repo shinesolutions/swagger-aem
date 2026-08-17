@@ -3,7 +3,7 @@ Adobe Experience Manager (AEM) API
 
 Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
 
-API version: 3.5.0-pre.0
+API version: 3.7.1-pre.0
 Contact: opensource@shinesolutions.com
 */
 
@@ -14,6 +14,9 @@ package openapi
 import (
 	"encoding/json"
 )
+
+// checks if the SamlConfigurationPropertyItemsArray type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SamlConfigurationPropertyItemsArray{}
 
 // SamlConfigurationPropertyItemsArray struct for SamlConfigurationPropertyItemsArray
 type SamlConfigurationPropertyItemsArray struct {
@@ -26,7 +29,7 @@ type SamlConfigurationPropertyItemsArray struct {
 	// Property type, 1=String, 3=long, 11=boolean, 12=Password
 	Type *int32 `json:"type,omitempty"`
 	// Property value
-	Values *[]string `json:"values,omitempty"`
+	Values []string `json:"values,omitempty"`
 	// Property description
 	Description *string `json:"description,omitempty"`
 }
@@ -50,7 +53,7 @@ func NewSamlConfigurationPropertyItemsArrayWithDefaults() *SamlConfigurationProp
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *SamlConfigurationPropertyItemsArray) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -60,7 +63,7 @@ func (o *SamlConfigurationPropertyItemsArray) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationPropertyItemsArray) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -68,7 +71,7 @@ func (o *SamlConfigurationPropertyItemsArray) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *SamlConfigurationPropertyItemsArray) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -82,7 +85,7 @@ func (o *SamlConfigurationPropertyItemsArray) SetName(v string) {
 
 // GetOptional returns the Optional field value if set, zero value otherwise.
 func (o *SamlConfigurationPropertyItemsArray) GetOptional() bool {
-	if o == nil || o.Optional == nil {
+	if o == nil || IsNil(o.Optional) {
 		var ret bool
 		return ret
 	}
@@ -92,7 +95,7 @@ func (o *SamlConfigurationPropertyItemsArray) GetOptional() bool {
 // GetOptionalOk returns a tuple with the Optional field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationPropertyItemsArray) GetOptionalOk() (*bool, bool) {
-	if o == nil || o.Optional == nil {
+	if o == nil || IsNil(o.Optional) {
 		return nil, false
 	}
 	return o.Optional, true
@@ -100,7 +103,7 @@ func (o *SamlConfigurationPropertyItemsArray) GetOptionalOk() (*bool, bool) {
 
 // HasOptional returns a boolean if a field has been set.
 func (o *SamlConfigurationPropertyItemsArray) HasOptional() bool {
-	if o != nil && o.Optional != nil {
+	if o != nil && !IsNil(o.Optional) {
 		return true
 	}
 
@@ -114,7 +117,7 @@ func (o *SamlConfigurationPropertyItemsArray) SetOptional(v bool) {
 
 // GetIsSet returns the IsSet field value if set, zero value otherwise.
 func (o *SamlConfigurationPropertyItemsArray) GetIsSet() bool {
-	if o == nil || o.IsSet == nil {
+	if o == nil || IsNil(o.IsSet) {
 		var ret bool
 		return ret
 	}
@@ -124,7 +127,7 @@ func (o *SamlConfigurationPropertyItemsArray) GetIsSet() bool {
 // GetIsSetOk returns a tuple with the IsSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationPropertyItemsArray) GetIsSetOk() (*bool, bool) {
-	if o == nil || o.IsSet == nil {
+	if o == nil || IsNil(o.IsSet) {
 		return nil, false
 	}
 	return o.IsSet, true
@@ -132,7 +135,7 @@ func (o *SamlConfigurationPropertyItemsArray) GetIsSetOk() (*bool, bool) {
 
 // HasIsSet returns a boolean if a field has been set.
 func (o *SamlConfigurationPropertyItemsArray) HasIsSet() bool {
-	if o != nil && o.IsSet != nil {
+	if o != nil && !IsNil(o.IsSet) {
 		return true
 	}
 
@@ -146,7 +149,7 @@ func (o *SamlConfigurationPropertyItemsArray) SetIsSet(v bool) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *SamlConfigurationPropertyItemsArray) GetType() int32 {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret int32
 		return ret
 	}
@@ -156,7 +159,7 @@ func (o *SamlConfigurationPropertyItemsArray) GetType() int32 {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationPropertyItemsArray) GetTypeOk() (*int32, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -164,7 +167,7 @@ func (o *SamlConfigurationPropertyItemsArray) GetTypeOk() (*int32, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *SamlConfigurationPropertyItemsArray) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -178,17 +181,17 @@ func (o *SamlConfigurationPropertyItemsArray) SetType(v int32) {
 
 // GetValues returns the Values field value if set, zero value otherwise.
 func (o *SamlConfigurationPropertyItemsArray) GetValues() []string {
-	if o == nil || o.Values == nil {
+	if o == nil || IsNil(o.Values) {
 		var ret []string
 		return ret
 	}
-	return *o.Values
+	return o.Values
 }
 
 // GetValuesOk returns a tuple with the Values field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SamlConfigurationPropertyItemsArray) GetValuesOk() (*[]string, bool) {
-	if o == nil || o.Values == nil {
+func (o *SamlConfigurationPropertyItemsArray) GetValuesOk() ([]string, bool) {
+	if o == nil || IsNil(o.Values) {
 		return nil, false
 	}
 	return o.Values, true
@@ -196,7 +199,7 @@ func (o *SamlConfigurationPropertyItemsArray) GetValuesOk() (*[]string, bool) {
 
 // HasValues returns a boolean if a field has been set.
 func (o *SamlConfigurationPropertyItemsArray) HasValues() bool {
-	if o != nil && o.Values != nil {
+	if o != nil && !IsNil(o.Values) {
 		return true
 	}
 
@@ -205,12 +208,12 @@ func (o *SamlConfigurationPropertyItemsArray) HasValues() bool {
 
 // SetValues gets a reference to the given []string and assigns it to the Values field.
 func (o *SamlConfigurationPropertyItemsArray) SetValues(v []string) {
-	o.Values = &v
+	o.Values = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *SamlConfigurationPropertyItemsArray) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -220,7 +223,7 @@ func (o *SamlConfigurationPropertyItemsArray) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationPropertyItemsArray) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -228,7 +231,7 @@ func (o *SamlConfigurationPropertyItemsArray) GetDescriptionOk() (*string, bool)
 
 // HasDescription returns a boolean if a field has been set.
 func (o *SamlConfigurationPropertyItemsArray) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -241,26 +244,34 @@ func (o *SamlConfigurationPropertyItemsArray) SetDescription(v string) {
 }
 
 func (o SamlConfigurationPropertyItemsArray) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Name != nil {
-		toSerialize["name"] = o.Name
-	}
-	if o.Optional != nil {
-		toSerialize["optional"] = o.Optional
-	}
-	if o.IsSet != nil {
-		toSerialize["is_set"] = o.IsSet
-	}
-	if o.Type != nil {
-		toSerialize["type"] = o.Type
-	}
-	if o.Values != nil {
-		toSerialize["values"] = o.Values
-	}
-	if o.Description != nil {
-		toSerialize["description"] = o.Description
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o SamlConfigurationPropertyItemsArray) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.Optional) {
+		toSerialize["optional"] = o.Optional
+	}
+	if !IsNil(o.IsSet) {
+		toSerialize["is_set"] = o.IsSet
+	}
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
+	if !IsNil(o.Values) {
+		toSerialize["values"] = o.Values
+	}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
+	return toSerialize, nil
 }
 
 type NullableSamlConfigurationPropertyItemsArray struct {

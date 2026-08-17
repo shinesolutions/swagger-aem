@@ -9,12 +9,12 @@ import org.openapitools.model.SamlConfigurationPropertyItemsBoolean;
 import org.openapitools.model.SamlConfigurationPropertyItemsLong;
 import org.openapitools.model.SamlConfigurationPropertyItemsString;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 
 
 import io.swagger.annotations.*;
 import java.util.Objects;
 
-import javax.xml.bind.annotation.*;
 
 
 public class SamlConfigurationProperties   {
@@ -66,7 +66,6 @@ public class SamlConfigurationProperties   {
   private SamlConfigurationPropertyItemsString signatureMethod;
 
   private SamlConfigurationPropertyItemsString userIntermediatePath;
-
 
   /**
    **/
@@ -510,30 +509,30 @@ public class SamlConfigurationProperties   {
       return false;
     }
     SamlConfigurationProperties samlConfigurationProperties = (SamlConfigurationProperties) o;
-    return Objects.equals(path, samlConfigurationProperties.path) &&
-        Objects.equals(serviceRanking, samlConfigurationProperties.serviceRanking) &&
-        Objects.equals(idpUrl, samlConfigurationProperties.idpUrl) &&
-        Objects.equals(idpCertAlias, samlConfigurationProperties.idpCertAlias) &&
-        Objects.equals(idpHttpRedirect, samlConfigurationProperties.idpHttpRedirect) &&
-        Objects.equals(serviceProviderEntityId, samlConfigurationProperties.serviceProviderEntityId) &&
-        Objects.equals(assertionConsumerServiceURL, samlConfigurationProperties.assertionConsumerServiceURL) &&
-        Objects.equals(spPrivateKeyAlias, samlConfigurationProperties.spPrivateKeyAlias) &&
-        Objects.equals(keyStorePassword, samlConfigurationProperties.keyStorePassword) &&
-        Objects.equals(defaultRedirectUrl, samlConfigurationProperties.defaultRedirectUrl) &&
-        Objects.equals(userIDAttribute, samlConfigurationProperties.userIDAttribute) &&
-        Objects.equals(useEncryption, samlConfigurationProperties.useEncryption) &&
-        Objects.equals(createUser, samlConfigurationProperties.createUser) &&
-        Objects.equals(addGroupMemberships, samlConfigurationProperties.addGroupMemberships) &&
-        Objects.equals(groupMembershipAttribute, samlConfigurationProperties.groupMembershipAttribute) &&
-        Objects.equals(defaultGroups, samlConfigurationProperties.defaultGroups) &&
-        Objects.equals(nameIdFormat, samlConfigurationProperties.nameIdFormat) &&
-        Objects.equals(synchronizeAttributes, samlConfigurationProperties.synchronizeAttributes) &&
-        Objects.equals(handleLogout, samlConfigurationProperties.handleLogout) &&
-        Objects.equals(logoutUrl, samlConfigurationProperties.logoutUrl) &&
-        Objects.equals(clockTolerance, samlConfigurationProperties.clockTolerance) &&
-        Objects.equals(digestMethod, samlConfigurationProperties.digestMethod) &&
-        Objects.equals(signatureMethod, samlConfigurationProperties.signatureMethod) &&
-        Objects.equals(userIntermediatePath, samlConfigurationProperties.userIntermediatePath);
+    return Objects.equals(this.path, samlConfigurationProperties.path) &&
+        Objects.equals(this.serviceRanking, samlConfigurationProperties.serviceRanking) &&
+        Objects.equals(this.idpUrl, samlConfigurationProperties.idpUrl) &&
+        Objects.equals(this.idpCertAlias, samlConfigurationProperties.idpCertAlias) &&
+        Objects.equals(this.idpHttpRedirect, samlConfigurationProperties.idpHttpRedirect) &&
+        Objects.equals(this.serviceProviderEntityId, samlConfigurationProperties.serviceProviderEntityId) &&
+        Objects.equals(this.assertionConsumerServiceURL, samlConfigurationProperties.assertionConsumerServiceURL) &&
+        Objects.equals(this.spPrivateKeyAlias, samlConfigurationProperties.spPrivateKeyAlias) &&
+        Objects.equals(this.keyStorePassword, samlConfigurationProperties.keyStorePassword) &&
+        Objects.equals(this.defaultRedirectUrl, samlConfigurationProperties.defaultRedirectUrl) &&
+        Objects.equals(this.userIDAttribute, samlConfigurationProperties.userIDAttribute) &&
+        Objects.equals(this.useEncryption, samlConfigurationProperties.useEncryption) &&
+        Objects.equals(this.createUser, samlConfigurationProperties.createUser) &&
+        Objects.equals(this.addGroupMemberships, samlConfigurationProperties.addGroupMemberships) &&
+        Objects.equals(this.groupMembershipAttribute, samlConfigurationProperties.groupMembershipAttribute) &&
+        Objects.equals(this.defaultGroups, samlConfigurationProperties.defaultGroups) &&
+        Objects.equals(this.nameIdFormat, samlConfigurationProperties.nameIdFormat) &&
+        Objects.equals(this.synchronizeAttributes, samlConfigurationProperties.synchronizeAttributes) &&
+        Objects.equals(this.handleLogout, samlConfigurationProperties.handleLogout) &&
+        Objects.equals(this.logoutUrl, samlConfigurationProperties.logoutUrl) &&
+        Objects.equals(this.clockTolerance, samlConfigurationProperties.clockTolerance) &&
+        Objects.equals(this.digestMethod, samlConfigurationProperties.digestMethod) &&
+        Objects.equals(this.signatureMethod, samlConfigurationProperties.signatureMethod) &&
+        Objects.equals(this.userIntermediatePath, samlConfigurationProperties.userIntermediatePath);
   }
 
   @Override
@@ -579,10 +578,7 @@ public class SamlConfigurationProperties   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

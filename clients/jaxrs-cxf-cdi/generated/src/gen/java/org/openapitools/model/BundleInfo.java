@@ -5,25 +5,25 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.model.BundleData;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 
 
 import io.swagger.annotations.*;
 import java.util.Objects;
 
-import javax.xml.bind.annotation.*;
 
 
 public class BundleInfo   {
   
   private String status;
 
-  private List<Integer> s = null;
+  private List<Integer> s = new ArrayList<>();
 
-  private List<BundleData> data = null;
-
+  private List<@Valid BundleData> data = new ArrayList<>();
 
   /**
    * Status description of all bundles
@@ -63,7 +63,7 @@ public class BundleInfo   {
 
   public BundleInfo addSItem(Integer sItem) {
     if (this.s == null) {
-      this.s = new ArrayList<Integer>();
+      this.s = new ArrayList<>();
     }
     this.s.add(sItem);
     return this;
@@ -72,7 +72,7 @@ public class BundleInfo   {
 
   /**
    **/
-  public BundleInfo data(List<BundleData> data) {
+  public BundleInfo data(List<@Valid BundleData> data) {
     this.data = data;
     return this;
   }
@@ -80,16 +80,16 @@ public class BundleInfo   {
   
   @ApiModelProperty(value = "")
   @JsonProperty("data")
-  public List<BundleData> getData() {
+  public List<@Valid BundleData> getData() {
     return data;
   }
-  public void setData(List<BundleData> data) {
+  public void setData(List<@Valid BundleData> data) {
     this.data = data;
   }
 
   public BundleInfo addDataItem(BundleData dataItem) {
     if (this.data == null) {
-      this.data = new ArrayList<BundleData>();
+      this.data = new ArrayList<>();
     }
     this.data.add(dataItem);
     return this;
@@ -106,9 +106,9 @@ public class BundleInfo   {
       return false;
     }
     BundleInfo bundleInfo = (BundleInfo) o;
-    return Objects.equals(status, bundleInfo.status) &&
-        Objects.equals(s, bundleInfo.s) &&
-        Objects.equals(data, bundleInfo.data);
+    return Objects.equals(this.status, bundleInfo.status) &&
+        Objects.equals(this.s, bundleInfo.s) &&
+        Objects.equals(this.data, bundleInfo.data);
   }
 
   @Override
@@ -133,10 +133,7 @@ public class BundleInfo   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

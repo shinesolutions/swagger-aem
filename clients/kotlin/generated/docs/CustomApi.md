@@ -2,14 +2,14 @@
 
 All URIs are relative to *http://localhost*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**getAemHealthCheck**](CustomApi.md#getAemHealthCheck) | **GET** /system/health | 
-[**postConfigAemHealthCheckServlet**](CustomApi.md#postConfigAemHealthCheckServlet) | **POST** /apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck | 
-[**postConfigAemPasswordReset**](CustomApi.md#postConfigAemPasswordReset) | **POST** /apps/system/config/com.shinesolutions.aem.passwordreset.Activator | 
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**getAemHealthCheck**](CustomApi.md#getAemHealthCheck) | **GET** /system/health |  |
+| [**postConfigAemHealthCheckServlet**](CustomApi.md#postConfigAemHealthCheckServlet) | **POST** /apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck |  |
+| [**postConfigAemPasswordReset**](CustomApi.md#postConfigAemPasswordReset) | **POST** /apps/system/config/com.shinesolutions.aem.passwordreset.Activator |  |
 
 
-<a name="getAemHealthCheck"></a>
+<a id="getAemHealthCheck"></a>
 # **getAemHealthCheck**
 > kotlin.String getAemHealthCheck(tags, combineTagsOr)
 
@@ -37,11 +37,10 @@ try {
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **tags** | **kotlin.String**|  | [optional]
- **combineTagsOr** | **kotlin.Boolean**|  | [optional]
+| **tags** | **kotlin.String**|  | [optional] |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **combineTagsOr** | **kotlin.Boolean**|  | [optional] |
 
 ### Return type
 
@@ -50,16 +49,22 @@ Name | Type | Description  | Notes
 ### Authorization
 
 
-Configure aemAuth:
-    ApiClient.username = ""
-    ApiClient.password = ""
+Configure aemAuth statically:
+```kotlin
+ApiClient.username = ""
+ApiClient.password = ""
+```
+Configure aemAuth dynamically:
+```kotlin
+apiInstance.userCredentialProvider = { "user" to "pass" }
+```
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="postConfigAemHealthCheckServlet"></a>
+<a id="postConfigAemHealthCheckServlet"></a>
 # **postConfigAemHealthCheckServlet**
 > postConfigAemHealthCheckServlet(bundlesIgnored, bundlesIgnoredAtTypeHint)
 
@@ -86,11 +91,10 @@ try {
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **bundlesIgnored** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional]
- **bundlesIgnoredAtTypeHint** | **kotlin.String**|  | [optional]
+| **bundlesIgnored** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional] |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **bundlesIgnoredAtTypeHint** | **kotlin.String**|  | [optional] |
 
 ### Return type
 
@@ -99,16 +103,22 @@ null (empty response body)
 ### Authorization
 
 
-Configure aemAuth:
-    ApiClient.username = ""
-    ApiClient.password = ""
+Configure aemAuth statically:
+```kotlin
+ApiClient.username = ""
+ApiClient.password = ""
+```
+Configure aemAuth dynamically:
+```kotlin
+apiInstance.userCredentialProvider = { "user" to "pass" }
+```
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
-<a name="postConfigAemPasswordReset"></a>
+<a id="postConfigAemPasswordReset"></a>
 # **postConfigAemPasswordReset**
 > postConfigAemPasswordReset(pwdresetAuthorizables, pwdresetAuthorizablesAtTypeHint)
 
@@ -135,11 +145,10 @@ try {
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **pwdresetAuthorizables** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional]
- **pwdresetAuthorizablesAtTypeHint** | **kotlin.String**|  | [optional]
+| **pwdresetAuthorizables** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)|  | [optional] |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **pwdresetAuthorizablesAtTypeHint** | **kotlin.String**|  | [optional] |
 
 ### Return type
 
@@ -148,9 +157,15 @@ null (empty response body)
 ### Authorization
 
 
-Configure aemAuth:
-    ApiClient.username = ""
-    ApiClient.password = ""
+Configure aemAuth statically:
+```kotlin
+ApiClient.username = ""
+ApiClient.password = ""
+```
+Configure aemAuth dynamically:
+```kotlin
+apiInstance.userCredentialProvider = { "user" to "pass" }
+```
 
 ### HTTP request headers
 

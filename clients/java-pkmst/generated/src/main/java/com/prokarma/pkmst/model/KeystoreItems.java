@@ -7,6 +7,7 @@ import com.prokarma.pkmst.model.KeystoreChainItems;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 /**
  * Response class to be returned by Api
@@ -17,7 +18,7 @@ import java.util.List;
  * KeystoreItems
  */
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2021-09-03T15:25:27.791+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2026-08-17T02:15:15.504120373Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class KeystoreItems   {
   @JsonProperty("alias")
   private String alias;
@@ -40,10 +41,10 @@ public class KeystoreItems   {
     return this;
   }
 
-   /**
+  /**
    * Keystore alias name
    * @return alias
-  **/
+   */
   @ApiModelProperty(value = "Keystore alias name")
   public String getAlias() {
     return alias;
@@ -58,10 +59,10 @@ public class KeystoreItems   {
     return this;
   }
 
-   /**
+  /**
    * e.g. \"privateKey\"
    * @return entryType
-  **/
+   */
   @ApiModelProperty(value = "e.g. \"privateKey\"")
   public String getEntryType() {
     return entryType;
@@ -76,10 +77,10 @@ public class KeystoreItems   {
     return this;
   }
 
-   /**
+  /**
    * e.g. \"RSA\"
    * @return algorithm
-  **/
+   */
   @ApiModelProperty(value = "e.g. \"RSA\"")
   public String getAlgorithm() {
     return algorithm;
@@ -94,10 +95,10 @@ public class KeystoreItems   {
     return this;
   }
 
-   /**
+  /**
    * e.g. \"PKCS#8\"
    * @return format
-  **/
+   */
   @ApiModelProperty(value = "e.g. \"PKCS#8\"")
   public String getFormat() {
     return format;
@@ -120,10 +121,10 @@ public class KeystoreItems   {
     return this;
   }
 
-   /**
+  /**
    * Get chain
    * @return chain
-  **/
+   */
   @ApiModelProperty(value = "")
   public List<KeystoreChainItems> getChain() {
     return chain;
@@ -174,10 +175,7 @@ public class KeystoreItems   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

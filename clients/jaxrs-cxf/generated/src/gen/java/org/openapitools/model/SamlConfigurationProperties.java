@@ -8,111 +8,154 @@ import javax.validation.constraints.*;
 import javax.validation.Valid;
 
 import io.swagger.annotations.ApiModelProperty;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlEnumValue;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 public class SamlConfigurationProperties  {
   
   @ApiModelProperty(value = "")
+
   @Valid
+
   private SamlConfigurationPropertyItemsArray path;
 
   @ApiModelProperty(value = "")
+
   @Valid
+
   private SamlConfigurationPropertyItemsLong serviceRanking;
 
   @ApiModelProperty(value = "")
+
   @Valid
+
   private SamlConfigurationPropertyItemsString idpUrl;
 
   @ApiModelProperty(value = "")
+
   @Valid
+
   private SamlConfigurationPropertyItemsString idpCertAlias;
 
   @ApiModelProperty(value = "")
+
   @Valid
+
   private SamlConfigurationPropertyItemsBoolean idpHttpRedirect;
 
   @ApiModelProperty(value = "")
+
   @Valid
+
   private SamlConfigurationPropertyItemsString serviceProviderEntityId;
 
   @ApiModelProperty(value = "")
+
   @Valid
+
   private SamlConfigurationPropertyItemsString assertionConsumerServiceURL;
 
   @ApiModelProperty(value = "")
+
   @Valid
+
   private SamlConfigurationPropertyItemsString spPrivateKeyAlias;
 
   @ApiModelProperty(value = "")
+
   @Valid
+
   private SamlConfigurationPropertyItemsString keyStorePassword;
 
   @ApiModelProperty(value = "")
+
   @Valid
+
   private SamlConfigurationPropertyItemsString defaultRedirectUrl;
 
   @ApiModelProperty(value = "")
+
   @Valid
+
   private SamlConfigurationPropertyItemsString userIDAttribute;
 
   @ApiModelProperty(value = "")
+
   @Valid
+
   private SamlConfigurationPropertyItemsBoolean useEncryption;
 
   @ApiModelProperty(value = "")
+
   @Valid
+
   private SamlConfigurationPropertyItemsBoolean createUser;
 
   @ApiModelProperty(value = "")
+
   @Valid
+
   private SamlConfigurationPropertyItemsBoolean addGroupMemberships;
 
   @ApiModelProperty(value = "")
+
   @Valid
+
   private SamlConfigurationPropertyItemsString groupMembershipAttribute;
 
   @ApiModelProperty(value = "")
+
   @Valid
+
   private SamlConfigurationPropertyItemsArray defaultGroups;
 
   @ApiModelProperty(value = "")
+
   @Valid
+
   private SamlConfigurationPropertyItemsString nameIdFormat;
 
   @ApiModelProperty(value = "")
+
   @Valid
+
   private SamlConfigurationPropertyItemsArray synchronizeAttributes;
 
   @ApiModelProperty(value = "")
+
   @Valid
+
   private SamlConfigurationPropertyItemsBoolean handleLogout;
 
   @ApiModelProperty(value = "")
+
   @Valid
+
   private SamlConfigurationPropertyItemsString logoutUrl;
 
   @ApiModelProperty(value = "")
+
   @Valid
+
   private SamlConfigurationPropertyItemsLong clockTolerance;
 
   @ApiModelProperty(value = "")
+
   @Valid
+
   private SamlConfigurationPropertyItemsString digestMethod;
 
   @ApiModelProperty(value = "")
+
   @Valid
+
   private SamlConfigurationPropertyItemsString signatureMethod;
 
   @ApiModelProperty(value = "")
+
   @Valid
+
   private SamlConfigurationPropertyItemsString userIntermediatePath;
  /**
    * Get path
@@ -546,6 +589,45 @@ public class SamlConfigurationProperties  {
     return this;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    SamlConfigurationProperties samlConfigurationProperties = (SamlConfigurationProperties) o;
+    return Objects.equals(this.path, samlConfigurationProperties.path) &&
+        Objects.equals(this.serviceRanking, samlConfigurationProperties.serviceRanking) &&
+        Objects.equals(this.idpUrl, samlConfigurationProperties.idpUrl) &&
+        Objects.equals(this.idpCertAlias, samlConfigurationProperties.idpCertAlias) &&
+        Objects.equals(this.idpHttpRedirect, samlConfigurationProperties.idpHttpRedirect) &&
+        Objects.equals(this.serviceProviderEntityId, samlConfigurationProperties.serviceProviderEntityId) &&
+        Objects.equals(this.assertionConsumerServiceURL, samlConfigurationProperties.assertionConsumerServiceURL) &&
+        Objects.equals(this.spPrivateKeyAlias, samlConfigurationProperties.spPrivateKeyAlias) &&
+        Objects.equals(this.keyStorePassword, samlConfigurationProperties.keyStorePassword) &&
+        Objects.equals(this.defaultRedirectUrl, samlConfigurationProperties.defaultRedirectUrl) &&
+        Objects.equals(this.userIDAttribute, samlConfigurationProperties.userIDAttribute) &&
+        Objects.equals(this.useEncryption, samlConfigurationProperties.useEncryption) &&
+        Objects.equals(this.createUser, samlConfigurationProperties.createUser) &&
+        Objects.equals(this.addGroupMemberships, samlConfigurationProperties.addGroupMemberships) &&
+        Objects.equals(this.groupMembershipAttribute, samlConfigurationProperties.groupMembershipAttribute) &&
+        Objects.equals(this.defaultGroups, samlConfigurationProperties.defaultGroups) &&
+        Objects.equals(this.nameIdFormat, samlConfigurationProperties.nameIdFormat) &&
+        Objects.equals(this.synchronizeAttributes, samlConfigurationProperties.synchronizeAttributes) &&
+        Objects.equals(this.handleLogout, samlConfigurationProperties.handleLogout) &&
+        Objects.equals(this.logoutUrl, samlConfigurationProperties.logoutUrl) &&
+        Objects.equals(this.clockTolerance, samlConfigurationProperties.clockTolerance) &&
+        Objects.equals(this.digestMethod, samlConfigurationProperties.digestMethod) &&
+        Objects.equals(this.signatureMethod, samlConfigurationProperties.signatureMethod) &&
+        Objects.equals(this.userIntermediatePath, samlConfigurationProperties.userIntermediatePath);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(path, serviceRanking, idpUrl, idpCertAlias, idpHttpRedirect, serviceProviderEntityId, assertionConsumerServiceURL, spPrivateKeyAlias, keyStorePassword, defaultRedirectUrl, userIDAttribute, useEncryption, createUser, addGroupMemberships, groupMembershipAttribute, defaultGroups, nameIdFormat, synchronizeAttributes, handleLogout, logoutUrl, clockTolerance, digestMethod, signatureMethod, userIntermediatePath);
+  }
 
   @Override
   public String toString() {
@@ -585,10 +667,7 @@ public class SamlConfigurationProperties  {
    * (except the first line).
    */
   private static String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

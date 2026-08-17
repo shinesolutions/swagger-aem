@@ -1,5 +1,7 @@
-import connexion
-import six
+import flask
+from typing import Dict
+from typing import Tuple
+from typing import Union
 
 from openapi_server import util
 
@@ -14,7 +16,7 @@ def get_aem_health_check(tags=None, combine_tags_or=None):  # noqa: E501
     :param combine_tags_or: 
     :type combine_tags_or: bool
 
-    :rtype: str
+    :rtype: Union[str, Tuple[str, int], Tuple[str, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -29,7 +31,7 @@ def post_config_aem_health_check_servlet(bundles_ignored=None, bundles_ignored_t
     :param bundles_ignored_type_hint: 
     :type bundles_ignored_type_hint: str
 
-    :rtype: None
+    :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -44,6 +46,6 @@ def post_config_aem_password_reset(pwdreset_authorizables=None, pwdreset_authori
     :param pwdreset_authorizables_type_hint: 
     :type pwdreset_authorizables_type_hint: str
 
-    :rtype: None
+    :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
     """
     return 'do some magic!'

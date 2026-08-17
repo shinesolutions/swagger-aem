@@ -15,17 +15,17 @@ get_aem_health_check(Ctx) ->
 -spec get_aem_health_check(ctx:ctx(), maps:map()) -> {ok, binary(), openapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), openapi_utils:response_info()}.
 get_aem_health_check(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
-    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+    Cfg = maps:get(cfg, Optional, application:get_env(openapi_api, config, #{})),
 
     Method = get,
-    Path = [<<"/system/health">>],
+    Path = [?BASE_URL, "/system/health"],
     QS = lists:flatten([])++openapi_utils:optional_params(['tags', 'combineTagsOr'], _OptionalParams),
     Headers = [],
     Body1 = [],
     ContentTypeHeader = openapi_utils:select_header_content_type([]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    openapi_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+    openapi_utils:request(Ctx, Method, Path, QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% 
@@ -36,17 +36,17 @@ post_config_aem_health_check_servlet(Ctx) ->
 -spec post_config_aem_health_check_servlet(ctx:ctx(), maps:map()) -> {ok, [], openapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), openapi_utils:response_info()}.
 post_config_aem_health_check_servlet(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
-    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+    Cfg = maps:get(cfg, Optional, application:get_env(openapi_api, config, #{})),
 
     Method = post,
-    Path = [<<"/apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck">>],
+    Path = [?BASE_URL, "/apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck"],
     QS = lists:flatten([])++openapi_utils:optional_params(['bundles.ignored', 'bundles.ignored@TypeHint'], _OptionalParams),
     Headers = [],
     Body1 = [],
     ContentTypeHeader = openapi_utils:select_header_content_type([]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    openapi_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+    openapi_utils:request(Ctx, Method, Path, QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% 
@@ -57,16 +57,16 @@ post_config_aem_password_reset(Ctx) ->
 -spec post_config_aem_password_reset(ctx:ctx(), maps:map()) -> {ok, [], openapi_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), openapi_utils:response_info()}.
 post_config_aem_password_reset(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
-    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+    Cfg = maps:get(cfg, Optional, application:get_env(openapi_api, config, #{})),
 
     Method = post,
-    Path = [<<"/apps/system/config/com.shinesolutions.aem.passwordreset.Activator">>],
+    Path = [?BASE_URL, "/apps/system/config/com.shinesolutions.aem.passwordreset.Activator"],
     QS = lists:flatten([])++openapi_utils:optional_params(['pwdreset.authorizables', 'pwdreset.authorizables@TypeHint'], _OptionalParams),
     Headers = [],
     Body1 = [],
     ContentTypeHeader = openapi_utils:select_header_content_type([]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    openapi_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+    openapi_utils:request(Ctx, Method, Path, QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 

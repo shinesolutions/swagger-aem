@@ -3,7 +3,7 @@ Adobe Experience Manager (AEM) API
 
 Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
 
-API version: 3.5.0-pre.0
+API version: 3.7.1-pre.0
 Contact: opensource@shinesolutions.com
 */
 
@@ -13,24 +13,20 @@ package openapi
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io"
+	"net/http"
+	"net/url"
 	"reflect"
 )
 
-// Linger please
-var (
-	_ _context.Context
-)
 
-// CustomApiService CustomApi service
-type CustomApiService service
+// CustomAPIService CustomAPI service
+type CustomAPIService service
 
 type ApiGetAemHealthCheckRequest struct {
-	ctx _context.Context
-	ApiService *CustomApiService
+	ctx context.Context
+	ApiService *CustomAPIService
 	tags *string
 	combineTagsOr *bool
 }
@@ -39,22 +35,23 @@ func (r ApiGetAemHealthCheckRequest) Tags(tags string) ApiGetAemHealthCheckReque
 	r.tags = &tags
 	return r
 }
+
 func (r ApiGetAemHealthCheckRequest) CombineTagsOr(combineTagsOr bool) ApiGetAemHealthCheckRequest {
 	r.combineTagsOr = &combineTagsOr
 	return r
 }
 
-func (r ApiGetAemHealthCheckRequest) Execute() (string, *_nethttp.Response, error) {
+func (r ApiGetAemHealthCheckRequest) Execute() (string, *http.Response, error) {
 	return r.ApiService.GetAemHealthCheckExecute(r)
 }
 
 /*
 GetAemHealthCheck Method for GetAemHealthCheck
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAemHealthCheckRequest
 */
-func (a *CustomApiService) GetAemHealthCheck(ctx _context.Context) ApiGetAemHealthCheckRequest {
+func (a *CustomAPIService) GetAemHealthCheck(ctx context.Context) ApiGetAemHealthCheckRequest {
 	return ApiGetAemHealthCheckRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -63,32 +60,30 @@ func (a *CustomApiService) GetAemHealthCheck(ctx _context.Context) ApiGetAemHeal
 
 // Execute executes the request
 //  @return string
-func (a *CustomApiService) GetAemHealthCheckExecute(r ApiGetAemHealthCheckRequest) (string, *_nethttp.Response, error) {
+func (a *CustomAPIService) GetAemHealthCheckExecute(r ApiGetAemHealthCheckRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 		localVarReturnValue  string
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomApiService.GetAemHealthCheck")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomAPIService.GetAemHealthCheck")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/system/health"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.tags != nil {
-		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tags", r.tags, "form", "")
 	}
 	if r.combineTagsOr != nil {
-		localVarQueryParams.Add("combineTagsOr", parameterToString(*r.combineTagsOr, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "combineTagsOr", r.combineTagsOr, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -107,7 +102,7 @@ func (a *CustomApiService) GetAemHealthCheckExecute(r ApiGetAemHealthCheckReques
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -117,15 +112,15 @@ func (a *CustomApiService) GetAemHealthCheckExecute(r ApiGetAemHealthCheckReques
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -135,13 +130,14 @@ func (a *CustomApiService) GetAemHealthCheckExecute(r ApiGetAemHealthCheckReques
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -152,8 +148,8 @@ func (a *CustomApiService) GetAemHealthCheckExecute(r ApiGetAemHealthCheckReques
 }
 
 type ApiPostConfigAemHealthCheckServletRequest struct {
-	ctx _context.Context
-	ApiService *CustomApiService
+	ctx context.Context
+	ApiService *CustomAPIService
 	bundlesIgnored *[]string
 	bundlesIgnoredTypeHint *string
 }
@@ -162,22 +158,23 @@ func (r ApiPostConfigAemHealthCheckServletRequest) BundlesIgnored(bundlesIgnored
 	r.bundlesIgnored = &bundlesIgnored
 	return r
 }
+
 func (r ApiPostConfigAemHealthCheckServletRequest) BundlesIgnoredTypeHint(bundlesIgnoredTypeHint string) ApiPostConfigAemHealthCheckServletRequest {
 	r.bundlesIgnoredTypeHint = &bundlesIgnoredTypeHint
 	return r
 }
 
-func (r ApiPostConfigAemHealthCheckServletRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiPostConfigAemHealthCheckServletRequest) Execute() (*http.Response, error) {
 	return r.ApiService.PostConfigAemHealthCheckServletExecute(r)
 }
 
 /*
 PostConfigAemHealthCheckServlet Method for PostConfigAemHealthCheckServlet
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPostConfigAemHealthCheckServletRequest
 */
-func (a *CustomApiService) PostConfigAemHealthCheckServlet(ctx _context.Context) ApiPostConfigAemHealthCheckServletRequest {
+func (a *CustomAPIService) PostConfigAemHealthCheckServlet(ctx context.Context) ApiPostConfigAemHealthCheckServletRequest {
 	return ApiPostConfigAemHealthCheckServletRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -185,39 +182,37 @@ func (a *CustomApiService) PostConfigAemHealthCheckServlet(ctx _context.Context)
 }
 
 // Execute executes the request
-func (a *CustomApiService) PostConfigAemHealthCheckServletExecute(r ApiPostConfigAemHealthCheckServletRequest) (*_nethttp.Response, error) {
+func (a *CustomAPIService) PostConfigAemHealthCheckServletExecute(r ApiPostConfigAemHealthCheckServletRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomApiService.PostConfigAemHealthCheckServlet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomAPIService.PostConfigAemHealthCheckServlet")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.bundlesIgnored != nil {
 		t := *r.bundlesIgnored
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("bundles.ignored", parameterToString(s.Index(i), "multi"))
+				parameterAddToHeaderOrQuery(localVarQueryParams, "bundles.ignored", s.Index(i).Interface(), "form", "multi")
 			}
 		} else {
-			localVarQueryParams.Add("bundles.ignored", parameterToString(t, "multi"))
+			parameterAddToHeaderOrQuery(localVarQueryParams, "bundles.ignored", t, "form", "multi")
 		}
 	}
 	if r.bundlesIgnoredTypeHint != nil {
-		localVarQueryParams.Add("bundles.ignored@TypeHint", parameterToString(*r.bundlesIgnoredTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "bundles.ignored@TypeHint", r.bundlesIgnoredTypeHint, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -236,7 +231,7 @@ func (a *CustomApiService) PostConfigAemHealthCheckServletExecute(r ApiPostConfi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -246,15 +241,15 @@ func (a *CustomApiService) PostConfigAemHealthCheckServletExecute(r ApiPostConfi
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -265,8 +260,8 @@ func (a *CustomApiService) PostConfigAemHealthCheckServletExecute(r ApiPostConfi
 }
 
 type ApiPostConfigAemPasswordResetRequest struct {
-	ctx _context.Context
-	ApiService *CustomApiService
+	ctx context.Context
+	ApiService *CustomAPIService
 	pwdresetAuthorizables *[]string
 	pwdresetAuthorizablesTypeHint *string
 }
@@ -275,22 +270,23 @@ func (r ApiPostConfigAemPasswordResetRequest) PwdresetAuthorizables(pwdresetAuth
 	r.pwdresetAuthorizables = &pwdresetAuthorizables
 	return r
 }
+
 func (r ApiPostConfigAemPasswordResetRequest) PwdresetAuthorizablesTypeHint(pwdresetAuthorizablesTypeHint string) ApiPostConfigAemPasswordResetRequest {
 	r.pwdresetAuthorizablesTypeHint = &pwdresetAuthorizablesTypeHint
 	return r
 }
 
-func (r ApiPostConfigAemPasswordResetRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiPostConfigAemPasswordResetRequest) Execute() (*http.Response, error) {
 	return r.ApiService.PostConfigAemPasswordResetExecute(r)
 }
 
 /*
 PostConfigAemPasswordReset Method for PostConfigAemPasswordReset
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPostConfigAemPasswordResetRequest
 */
-func (a *CustomApiService) PostConfigAemPasswordReset(ctx _context.Context) ApiPostConfigAemPasswordResetRequest {
+func (a *CustomAPIService) PostConfigAemPasswordReset(ctx context.Context) ApiPostConfigAemPasswordResetRequest {
 	return ApiPostConfigAemPasswordResetRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -298,39 +294,37 @@ func (a *CustomApiService) PostConfigAemPasswordReset(ctx _context.Context) ApiP
 }
 
 // Execute executes the request
-func (a *CustomApiService) PostConfigAemPasswordResetExecute(r ApiPostConfigAemPasswordResetRequest) (*_nethttp.Response, error) {
+func (a *CustomAPIService) PostConfigAemPasswordResetExecute(r ApiPostConfigAemPasswordResetRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomApiService.PostConfigAemPasswordReset")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomAPIService.PostConfigAemPasswordReset")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/apps/system/config/com.shinesolutions.aem.passwordreset.Activator"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.pwdresetAuthorizables != nil {
 		t := *r.pwdresetAuthorizables
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("pwdreset.authorizables", parameterToString(s.Index(i), "multi"))
+				parameterAddToHeaderOrQuery(localVarQueryParams, "pwdreset.authorizables", s.Index(i).Interface(), "form", "multi")
 			}
 		} else {
-			localVarQueryParams.Add("pwdreset.authorizables", parameterToString(t, "multi"))
+			parameterAddToHeaderOrQuery(localVarQueryParams, "pwdreset.authorizables", t, "form", "multi")
 		}
 	}
 	if r.pwdresetAuthorizablesTypeHint != nil {
-		localVarQueryParams.Add("pwdreset.authorizables@TypeHint", parameterToString(*r.pwdresetAuthorizablesTypeHint, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pwdreset.authorizables@TypeHint", r.pwdresetAuthorizablesTypeHint, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -349,7 +343,7 @@ func (a *CustomApiService) PostConfigAemPasswordResetExecute(r ApiPostConfigAemP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -359,15 +353,15 @@ func (a *CustomApiService) PostConfigAemPasswordResetExecute(r ApiPostConfigAemP
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}

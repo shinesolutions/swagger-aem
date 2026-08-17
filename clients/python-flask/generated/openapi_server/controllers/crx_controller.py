@@ -1,5 +1,7 @@
-import connexion
-import six
+import flask
+from typing import Dict
+from typing import Tuple
+from typing import Union
 
 from openapi_server.models.install_status import InstallStatus  # noqa: E501
 from openapi_server import util
@@ -11,7 +13,7 @@ def get_crxde_status():  # noqa: E501
      # noqa: E501
 
 
-    :rtype: str
+    :rtype: Union[str, Tuple[str, int], Tuple[str, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -22,7 +24,7 @@ def get_install_status():  # noqa: E501
      # noqa: E501
 
 
-    :rtype: InstallStatus
+    :rtype: Union[InstallStatus, Tuple[InstallStatus, int], Tuple[InstallStatus, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -33,7 +35,7 @@ def get_package_manager_servlet():  # noqa: E501
      # noqa: E501
 
 
-    :rtype: None
+    :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -46,7 +48,7 @@ def post_package_service(cmd):  # noqa: E501
     :param cmd: 
     :type cmd: str
 
-    :rtype: str
+    :rtype: Union[str, Tuple[str, int], Tuple[str, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -75,7 +77,7 @@ def post_package_service_json(path, cmd, group_name=None, package_name=None, pac
     :param package: 
     :type package: str
 
-    :rtype: str
+    :rtype: Union[str, Tuple[str, int], Tuple[str, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -98,7 +100,7 @@ def post_package_update(group_name, package_name, version, path, filter=None, ch
     :param charset_: 
     :type charset_: str
 
-    :rtype: str
+    :rtype: Union[str, Tuple[str, int], Tuple[str, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -115,6 +117,6 @@ def post_set_password(old, plain, verify):  # noqa: E501
     :param verify: 
     :type verify: str
 
-    :rtype: str
+    :rtype: Union[str, Tuple[str, int], Tuple[str, int, Dict[str, str]]
     """
     return 'do some magic!'

@@ -1,0 +1,61 @@
+# CqApi
+
+All URIs are relative to *http://localhost*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**get_login_page**](CqApi.md#get_login_page) | **GET** /libs/granite/core/content/login.html | 
+[**post_cq_actions**](CqApi.md#post_cq_actions) | **POST** /.cqactions.html | 
+
+
+# **get_login_page**
+> `get_login_page`(req::`HTTP.Request`;) -> `String`
+
+
+
+### Required Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+**`String`**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/html
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **post_cq_actions**
+> `post_cq_actions`(req::`HTTP.Request`, `authorizable_id`::`String`, `changelog`::`String`;) -> `Nothing`
+
+
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **req** | **`HTTP.Request`** | The HTTP Request object | 
+**`authorizable_id`** | **`String`**|  |
+**`changelog`** | **`String`**|  |
+
+### Return type
+
+`Nothing`
+
+### Authorization
+
+[aemAuth](../README.md#aemAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+

@@ -3,6 +3,7 @@ package com.prokarma.pkmst.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 /**
@@ -14,7 +15,7 @@ import io.swagger.annotations.ApiModelProperty;
  * InstallStatusStatus
  */
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2021-09-03T15:25:27.791+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2026-08-17T02:15:15.504120373Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class InstallStatusStatus   {
   @JsonProperty("finished")
   private Boolean finished;
@@ -27,10 +28,10 @@ public class InstallStatusStatus   {
     return this;
   }
 
-   /**
+  /**
    * Get finished
    * @return finished
-  **/
+   */
   @ApiModelProperty(value = "")
   public Boolean getFinished() {
     return finished;
@@ -45,10 +46,10 @@ public class InstallStatusStatus   {
     return this;
   }
 
-   /**
+  /**
    * Get itemCount
    * @return itemCount
-  **/
+   */
   @ApiModelProperty(value = "")
   public Integer getItemCount() {
     return itemCount;
@@ -93,10 +94,7 @@ public class InstallStatusStatus   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

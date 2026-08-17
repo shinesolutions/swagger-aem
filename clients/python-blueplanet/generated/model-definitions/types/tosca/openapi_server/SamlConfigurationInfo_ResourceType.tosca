@@ -1,0 +1,61 @@
+"$schema"   = "http://cyaninc.com/json-schemas/tosca-lite-v1/definition-module#"
+title       = "openapi_server SamlConfigurationInfo"
+package     = openapi_server
+version     = "1.0"
+description = "Defines a SamlConfigurationInfo"
+authors     = ["F. Bar (foo@bar.baz)"]
+
+imports {
+  Root = tosca.resourceTypes.Root
+  SamlConfigurationProperties = openapi_server.resourceTypes.SamlConfigurationProperties
+}
+resourceTypes {
+
+  SamlConfigurationInfo {
+    title = SamlConfigurationInfo
+    description = SamlConfigurationInfo
+    derivedFrom = Root
+    properties {
+        pid {
+          type =  string
+          description = "Persistent Identity (PID)"
+          optional = false
+        }
+        title {
+          type =  string
+          description = "Title"
+          optional = false
+        }
+        description {
+          type =  string
+          description = "Title"
+          optional = false
+        }
+        bundle_location {
+          type =  string
+          description = "needed for configuration binding"
+          optional = false
+        }
+        service_location {
+          type =  string
+          description = "needed for configuraiton binding"
+          optional = false
+        }
+        properties {
+          type = SamlConfigurationProperties
+          description = ""
+          optional = false
+        }
+    }
+  }
+}
+
+serviceTemplates {
+
+  SamlConfigurationInfo {
+    title = SamlConfigurationInfo
+    description = SamlConfigurationInfo
+    implements = openapi_server.resourceTypes.SamlConfigurationInfo
+
+  }
+}

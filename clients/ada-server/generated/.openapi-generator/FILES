@@ -6,6 +6,8 @@ src/-server.adb
 src/-servers.adb
 src/-servers.ads
 src/.ads
+src/aws/_aws.adb
+src/ews/_ews.adb
 src/model/-models.adb
 src/model/-models.ads
 src/server/-skeletons.adb

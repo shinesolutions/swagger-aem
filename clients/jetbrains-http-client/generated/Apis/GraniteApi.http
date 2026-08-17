@@ -1,0 +1,8 @@
+## GraniteApi
+
+### 
+## 
+POST http://localhost/libs/granite/security/post/sslSetup.html?keystorePassword={{keystorePassword}}&keystorePasswordConfirm={{keystorePasswordConfirm}}&truststorePassword={{truststorePassword}}&truststorePasswordConfirm={{truststorePasswordConfirm}}&httpsHostname={{httpsHostname}}&httpsPort={{httpsPort}}
+Content-Type: multipart/form-data
+Accept: text/plain
+Authorization: Basic: {{username-password}}

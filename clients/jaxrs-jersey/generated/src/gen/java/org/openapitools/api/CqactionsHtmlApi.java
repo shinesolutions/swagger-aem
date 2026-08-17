@@ -1,6 +1,5 @@
 package org.openapitools.api;
 
-import org.openapitools.model.*;
 import org.openapitools.api.CqactionsHtmlApiService;
 import org.openapitools.api.factories.CqactionsHtmlApiServiceFactory;
 
@@ -29,7 +28,7 @@ import javax.validation.Valid;
 
 
 @io.swagger.annotations.Api(description = "the .cqactions.html API")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJerseyServerCodegen", date = "2021-09-03T15:25:53.422+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJerseyServerCodegen", date = "2026-08-17T02:15:33.561165235Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class CqactionsHtmlApi  {
    private final CqactionsHtmlApiService delegate;
 
@@ -40,11 +39,11 @@ public class CqactionsHtmlApi  {
          String implClass = servletContext.getInitParameter("CqactionsHtmlApi.implementation");
          if (implClass != null && !"".equals(implClass.trim())) {
             try {
-               delegate = (CqactionsHtmlApiService) Class.forName(implClass).newInstance();
+               delegate = (CqactionsHtmlApiService) Class.forName(implClass).getDeclaredConstructor().newInstance();
             } catch (Exception e) {
                throw new RuntimeException(e);
             }
-         } 
+         }
       }
 
       if (delegate == null) {
@@ -54,7 +53,7 @@ public class CqactionsHtmlApi  {
       this.delegate = delegate;
    }
 
-    @POST
+    @javax.ws.rs.POST
     
     
     

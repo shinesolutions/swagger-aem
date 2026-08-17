@@ -3,6 +3,7 @@ package org.openapitools.model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
@@ -12,17 +13,23 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2021-09-03T15:26:06.461+10:00[Australia/Melbourne]")public class SamlConfigurationPropertyItemsArray   {
-  
-  private @Valid String name;
-  private @Valid Boolean optional;
-  private @Valid Boolean isSet;
-  private @Valid Integer type;
-  private @Valid List<String> values = new ArrayList<String>();
-  private @Valid String description;
+@JsonTypeName("SamlConfigurationPropertyItemsArray")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2026-08-17T02:15:42.417242947Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+public class SamlConfigurationPropertyItemsArray   {
+  private String name;
+  private Boolean optional;
+  private Boolean isSet;
+  private Integer type;
+  private @Valid List<String> values = new ArrayList<>();
+  private String description;
+
+  public SamlConfigurationPropertyItemsArray() {
+  }
 
   /**
    * property name
@@ -33,19 +40,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "property name")
   @JsonProperty("name")
   public String getName() {
     return name;
   }
 
+  @JsonProperty("name")
   public void setName(String name) {
     this.name = name;
   }
 
-/**
+  /**
    * True if optional
    **/
   public SamlConfigurationPropertyItemsArray optional(Boolean optional) {
@@ -54,19 +60,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "True if optional")
   @JsonProperty("optional")
   public Boolean getOptional() {
     return optional;
   }
 
+  @JsonProperty("optional")
   public void setOptional(Boolean optional) {
     this.optional = optional;
   }
 
-/**
+  /**
    * True if property is set
    **/
   public SamlConfigurationPropertyItemsArray isSet(Boolean isSet) {
@@ -75,19 +80,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "True if property is set")
   @JsonProperty("is_set")
   public Boolean getIsSet() {
     return isSet;
   }
 
+  @JsonProperty("is_set")
   public void setIsSet(Boolean isSet) {
     this.isSet = isSet;
   }
 
-/**
+  /**
    * Property type, 1&#x3D;String, 3&#x3D;long, 11&#x3D;boolean, 12&#x3D;Password
    **/
   public SamlConfigurationPropertyItemsArray type(Integer type) {
@@ -96,19 +100,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "Property type, 1=String, 3=long, 11=boolean, 12=Password")
   @JsonProperty("type")
   public Integer getType() {
     return type;
   }
 
+  @JsonProperty("type")
   public void setType(Integer type) {
     this.type = type;
   }
 
-/**
+  /**
    * Property value
    **/
   public SamlConfigurationPropertyItemsArray values(List<String> values) {
@@ -117,19 +120,34 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "Property value")
   @JsonProperty("values")
   public List<String> getValues() {
     return values;
   }
 
+  @JsonProperty("values")
   public void setValues(List<String> values) {
     this.values = values;
   }
 
-/**
+  public SamlConfigurationPropertyItemsArray addValuesItem(String valuesItem) {
+    if (this.values == null) {
+      this.values = new ArrayList<>();
+    }
+
+    this.values.add(valuesItem);
+    return this;
+  }
+
+  public SamlConfigurationPropertyItemsArray removeValuesItem(String valuesItem) {
+    if (valuesItem != null && this.values != null) {
+      this.values.remove(valuesItem);
+    }
+
+    return this;
+  }
+  /**
    * Property description
    **/
   public SamlConfigurationPropertyItemsArray description(String description) {
@@ -138,14 +156,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "Property description")
   @JsonProperty("description")
   public String getDescription() {
     return description;
   }
 
+  @JsonProperty("description")
   public void setDescription(String description) {
     this.description = description;
   }
@@ -193,12 +210,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 
 
 }
-

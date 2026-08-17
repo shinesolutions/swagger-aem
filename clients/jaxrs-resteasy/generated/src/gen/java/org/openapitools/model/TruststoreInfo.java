@@ -7,15 +7,17 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.model.TruststoreItems;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 import io.swagger.annotations.*;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyServerCodegen", date = "2021-09-03T15:25:57.989+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyServerCodegen", date = "2026-08-17T02:15:38.090574223Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class TruststoreInfo   {
   
-  private List<TruststoreItems> aliases = new ArrayList<TruststoreItems>();
+  private List<@Valid TruststoreItems> aliases = new ArrayList<>();
   private Boolean exists;
 
   /**
@@ -23,10 +25,11 @@ public class TruststoreInfo   {
   
   @ApiModelProperty(value = "")
   @JsonProperty("aliases")
-  public List<TruststoreItems> getAliases() {
+  @Valid
+  public List<@Valid TruststoreItems> getAliases() {
     return aliases;
   }
-  public void setAliases(List<TruststoreItems> aliases) {
+  public void setAliases(List<@Valid TruststoreItems> aliases) {
     this.aliases = aliases;
   }
 
@@ -53,8 +56,8 @@ public class TruststoreInfo   {
       return false;
     }
     TruststoreInfo truststoreInfo = (TruststoreInfo) o;
-    return Objects.equals(aliases, truststoreInfo.aliases) &&
-        Objects.equals(exists, truststoreInfo.exists);
+    return Objects.equals(this.aliases, truststoreInfo.aliases) &&
+        Objects.equals(this.exists, truststoreInfo.exists);
   }
 
   @Override
@@ -78,10 +81,7 @@ public class TruststoreInfo   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

@@ -5,15 +5,16 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.model.BundleDataProp;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 
 
 import io.swagger.annotations.*;
 import java.util.Objects;
 
-import javax.xml.bind.annotation.*;
 
 
 public class BundleData   {
@@ -34,8 +35,7 @@ public class BundleData   {
 
   private String category;
 
-  private List<BundleDataProp> props = null;
-
+  private List<@Valid BundleDataProp> props = new ArrayList<>();
 
   /**
    * Bundle ID
@@ -191,7 +191,7 @@ public class BundleData   {
 
   /**
    **/
-  public BundleData props(List<BundleDataProp> props) {
+  public BundleData props(List<@Valid BundleDataProp> props) {
     this.props = props;
     return this;
   }
@@ -199,16 +199,16 @@ public class BundleData   {
   
   @ApiModelProperty(value = "")
   @JsonProperty("props")
-  public List<BundleDataProp> getProps() {
+  public List<@Valid BundleDataProp> getProps() {
     return props;
   }
-  public void setProps(List<BundleDataProp> props) {
+  public void setProps(List<@Valid BundleDataProp> props) {
     this.props = props;
   }
 
   public BundleData addPropsItem(BundleDataProp propsItem) {
     if (this.props == null) {
-      this.props = new ArrayList<BundleDataProp>();
+      this.props = new ArrayList<>();
     }
     this.props.add(propsItem);
     return this;
@@ -225,15 +225,15 @@ public class BundleData   {
       return false;
     }
     BundleData bundleData = (BundleData) o;
-    return Objects.equals(id, bundleData.id) &&
-        Objects.equals(name, bundleData.name) &&
-        Objects.equals(fragment, bundleData.fragment) &&
-        Objects.equals(stateRaw, bundleData.stateRaw) &&
-        Objects.equals(state, bundleData.state) &&
-        Objects.equals(version, bundleData.version) &&
-        Objects.equals(symbolicName, bundleData.symbolicName) &&
-        Objects.equals(category, bundleData.category) &&
-        Objects.equals(props, bundleData.props);
+    return Objects.equals(this.id, bundleData.id) &&
+        Objects.equals(this.name, bundleData.name) &&
+        Objects.equals(this.fragment, bundleData.fragment) &&
+        Objects.equals(this.stateRaw, bundleData.stateRaw) &&
+        Objects.equals(this.state, bundleData.state) &&
+        Objects.equals(this.version, bundleData.version) &&
+        Objects.equals(this.symbolicName, bundleData.symbolicName) &&
+        Objects.equals(this.category, bundleData.category) &&
+        Objects.equals(this.props, bundleData.props);
   }
 
   @Override
@@ -264,10 +264,7 @@ public class BundleData   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

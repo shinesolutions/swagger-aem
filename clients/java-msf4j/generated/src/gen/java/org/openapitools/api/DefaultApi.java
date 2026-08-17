@@ -27,7 +27,7 @@ import javax.ws.rs.*;
 
 
 @io.swagger.annotations.Api(description = "the default API")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaMSF4JServerCodegen", date = "2021-09-03T15:25:23.467+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaMSF4JServerCodegen", date = "2026-08-17T02:15:13.302721680Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class DefaultApi  {
    private final DefaultApiService delegate = DefaultApiServiceFactory.getDefaultApi();
 
@@ -106,7 +106,7 @@ public class DefaultApi  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = KeystoreInfo.class) })
     public Response postAuthorizableKeystore(@ApiParam(value = "",required=true) @PathParam("intermediatePath") String intermediatePath
 ,@ApiParam(value = "",required=true) @PathParam("authorizableId") String authorizableId
-,@ApiParam(value = "") @QueryParam(":operation") String colonOperation
+,@ApiParam(value = "") @QueryParam(":operation") String operation
 ,@ApiParam(value = "") @QueryParam("currentPassword") String currentPassword
 ,@ApiParam(value = "") @QueryParam("newPassword") String newPassword
 ,@ApiParam(value = "") @QueryParam("rePassword") String rePassword
@@ -126,7 +126,7 @@ public class DefaultApi  {
             @FormDataParam("keyStore") FileInfo keyStoreDetail
 )
     throws NotFoundException {
-        return delegate.postAuthorizableKeystore(intermediatePath,authorizableId,colonOperation,currentPassword,newPassword,rePassword,keyPassword,keyStorePass,alias,newAlias,removeAlias,certChainInputStream, certChainDetail,pkInputStream, pkDetail,keyStoreInputStream, keyStoreDetail);
+        return delegate.postAuthorizableKeystore(intermediatePath,authorizableId,operation,currentPassword,newPassword,rePassword,keyPassword,keyStorePass,alias,newAlias,removeAlias,certChainInputStream, certChainDetail,pkInputStream, pkDetail,keyStoreInputStream, keyStoreDetail);
     }
     @POST
     @Path("/{path}/{name}")
@@ -139,14 +139,14 @@ public class DefaultApi  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = Void.class) })
     public Response postNode(@ApiParam(value = "",required=true) @PathParam("path") String path
 ,@ApiParam(value = "",required=true) @PathParam("name") String name
-,@ApiParam(value = "") @QueryParam(":operation") String colonOperation
+,@ApiParam(value = "") @QueryParam(":operation") String operation
 ,@ApiParam(value = "") @QueryParam("deleteAuthorizable") String deleteAuthorizable
 ,
-            @FormDataParam("file") InputStream fileInputStream,
-            @FormDataParam("file") FileInfo fileDetail
+            @FormDataParam("file") InputStream _fileInputStream,
+            @FormDataParam("file") FileInfo _fileDetail
 )
     throws NotFoundException {
-        return delegate.postNode(path,name,colonOperation,deleteAuthorizable,fileInputStream, fileDetail);
+        return delegate.postNode(path,name,operation,deleteAuthorizable,_fileInputStream, _fileDetail);
     }
     @POST
     @Path("/{path}/{name}.rw.html")
@@ -174,10 +174,10 @@ public class DefaultApi  {
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = Void.class) })
     public Response postPath(@ApiParam(value = "",required=true) @PathParam("path") String path
-,@ApiParam(value = "",required=true) @QueryParam("jcr:primaryType") String jcrColonPrimaryType
-,@ApiParam(value = "",required=true) @QueryParam(":name") String colonName
+,@ApiParam(value = "",required=true) @QueryParam("jcr:primaryType") String jcrPrimaryType
+,@ApiParam(value = "",required=true) @QueryParam(":name") String name
 )
     throws NotFoundException {
-        return delegate.postPath(path,jcrColonPrimaryType,colonName);
+        return delegate.postPath(path,jcrPrimaryType,name);
     }
 }

@@ -35,7 +35,7 @@ Method | HTTP request | Description
 [**postNodeRw**](SlingApi.md#postnoderw) | **POST** /{path}/{name}.rw.html | 
 [**postPath**](SlingApi.md#postpath) | **POST** /{path}/ | 
 [**postQuery**](SlingApi.md#postquery) | **POST** /bin/querybuilder.json | 
-[**postTreeActivation**](SlingApi.md#posttreeactivation) | **POST** /etc/replication/treeactivation.html | 
+[**postTreeActivation**](SlingApi.md#posttreeactivation) | **POST** /libs/replication/treeactivation.html | 
 [**postTruststore**](SlingApi.md#posttruststore) | **POST** /libs/granite/security/post/truststore | 
 [**postTruststorePKCS12**](SlingApi.md#posttruststorepkcs12) | **POST** /etc/truststore | 
 
@@ -45,7 +45,7 @@ Method | HTTP request | Description
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -56,7 +56,7 @@ final api_instance = SlingApi();
 final runmode = runmode_example; // String | 
 final name = name_example; // String | 
 
-try { 
+try {
     api_instance.deleteAgent(runmode, name);
 } catch (e) {
     print('Exception when calling SlingApi->deleteAgent: $e\n');
@@ -90,7 +90,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -101,7 +101,7 @@ final api_instance = SlingApi();
 final path = path_example; // String | 
 final name = name_example; // String | 
 
-try { 
+try {
     api_instance.deleteNode(path, name);
 } catch (e) {
     print('Exception when calling SlingApi->deleteNode: $e\n');
@@ -135,7 +135,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -146,7 +146,7 @@ final api_instance = SlingApi();
 final runmode = runmode_example; // String | 
 final name = name_example; // String | 
 
-try { 
+try {
     api_instance.getAgent(runmode, name);
 } catch (e) {
     print('Exception when calling SlingApi->getAgent: $e\n');
@@ -180,7 +180,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -190,7 +190,7 @@ import 'package:openapi/api.dart';
 final api_instance = SlingApi();
 final runmode = runmode_example; // String | 
 
-try { 
+try {
     final result = api_instance.getAgents(runmode);
     print(result);
 } catch (e) {
@@ -224,7 +224,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -235,7 +235,7 @@ final api_instance = SlingApi();
 final intermediatePath = intermediatePath_example; // String | 
 final authorizableId = authorizableId_example; // String | 
 
-try { 
+try {
     final result = api_instance.getAuthorizableKeystore(intermediatePath, authorizableId);
     print(result);
 } catch (e) {
@@ -270,7 +270,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -281,7 +281,7 @@ final api_instance = SlingApi();
 final intermediatePath = intermediatePath_example; // String | 
 final authorizableId = authorizableId_example; // String | 
 
-try { 
+try {
     final result = api_instance.getKeystore(intermediatePath, authorizableId);
     print(result);
 } catch (e) {
@@ -316,7 +316,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -327,7 +327,7 @@ final api_instance = SlingApi();
 final path = path_example; // String | 
 final name = name_example; // String | 
 
-try { 
+try {
     api_instance.getNode(path, name);
 } catch (e) {
     print('Exception when calling SlingApi->getNode: $e\n');
@@ -361,7 +361,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -373,7 +373,7 @@ final group = group_example; // String |
 final name = name_example; // String | 
 final version = version_example; // String | 
 
-try { 
+try {
     final result = api_instance.getPackage(group, name, version);
     print(result);
 } catch (e) {
@@ -409,7 +409,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -421,7 +421,7 @@ final group = group_example; // String |
 final name = name_example; // String | 
 final version = version_example; // String | 
 
-try { 
+try {
     final result = api_instance.getPackageFilter(group, name, version);
     print(result);
 } catch (e) {
@@ -457,7 +457,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -470,7 +470,7 @@ final pPeriodLimit = 8.14; // num |
 final n1property = n1property_example; // String | 
 final n1propertyPeriodValue = n1propertyPeriodValue_example; // String | 
 
-try { 
+try {
     final result = api_instance.getQuery(path, pPeriodLimit, n1property, n1propertyPeriodValue);
     print(result);
 } catch (e) {
@@ -507,7 +507,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -516,7 +516,7 @@ import 'package:openapi/api.dart';
 
 final api_instance = SlingApi();
 
-try { 
+try {
     final result = api_instance.getTruststore();
     print(result);
 } catch (e) {
@@ -547,7 +547,7 @@ This endpoint does not need any parameter.
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -556,7 +556,7 @@ import 'package:openapi/api.dart';
 
 final api_instance = SlingApi();
 
-try { 
+try {
     final result = api_instance.getTruststoreInfo();
     print(result);
 } catch (e) {
@@ -583,11 +583,11 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **postAgent**
-> postAgent(runmode, name, jcrColonContentSlashCqColonDistribute, jcrColonContentSlashCqColonDistributeAtTypeHint, jcrColonContentSlashCqColonName, jcrColonContentSlashCqColonTemplate, jcrColonContentSlashEnabled, jcrColonContentSlashJcrColonDescription, jcrColonContentSlashJcrColonLastModified, jcrColonContentSlashJcrColonLastModifiedBy, jcrColonContentSlashJcrColonMixinTypes, jcrColonContentSlashJcrColonTitle, jcrColonContentSlashLogLevel, jcrColonContentSlashNoStatusUpdate, jcrColonContentSlashNoVersioning, jcrColonContentSlashProtocolConnectTimeout, jcrColonContentSlashProtocolHTTPConnectionClosed, jcrColonContentSlashProtocolHTTPExpired, jcrColonContentSlashProtocolHTTPHeaders, jcrColonContentSlashProtocolHTTPHeadersAtTypeHint, jcrColonContentSlashProtocolHTTPMethod, jcrColonContentSlashProtocolHTTPSRelaxed, jcrColonContentSlashProtocolInterface, jcrColonContentSlashProtocolSocketTimeout, jcrColonContentSlashProtocolVersion, jcrColonContentSlashProxyNTLMDomain, jcrColonContentSlashProxyNTLMHost, jcrColonContentSlashProxyHost, jcrColonContentSlashProxyPassword, jcrColonContentSlashProxyPort, jcrColonContentSlashProxyUser, jcrColonContentSlashQueueBatchMaxSize, jcrColonContentSlashQueueBatchMode, jcrColonContentSlashQueueBatchWaitTime, jcrColonContentSlashRetryDelay, jcrColonContentSlashReverseReplication, jcrColonContentSlashSerializationType, jcrColonContentSlashSlingColonResourceType, jcrColonContentSlashSsl, jcrColonContentSlashTransportNTLMDomain, jcrColonContentSlashTransportNTLMHost, jcrColonContentSlashTransportPassword, jcrColonContentSlashTransportUri, jcrColonContentSlashTransportUser, jcrColonContentSlashTriggerDistribute, jcrColonContentSlashTriggerModified, jcrColonContentSlashTriggerOnOffTime, jcrColonContentSlashTriggerReceive, jcrColonContentSlashTriggerSpecific, jcrColonContentSlashUserId, jcrColonPrimaryType, colonOperation)
+> postAgent(runmode, name, jcrColonContentSlashCqColonDistribute, jcrColonContentSlashCqColonDistributeAtTypeHint, jcrColonContentSlashCqColonName, jcrColonContentSlashCqColonTemplate, jcrColonContentSlashAliasUpdate, jcrColonContentSlashEnabled, jcrColonContentSlashJcrColonDescription, jcrColonContentSlashJcrColonLastModified, jcrColonContentSlashJcrColonLastModifiedBy, jcrColonContentSlashJcrColonMixinTypes, jcrColonContentSlashJcrColonTitle, jcrColonContentSlashLogLevel, jcrColonContentSlashNoStatusUpdate, jcrColonContentSlashNoVersioning, jcrColonContentSlashProtocolConnectTimeout, jcrColonContentSlashProtocolHTTPConnectionClosed, jcrColonContentSlashProtocolHTTPExpired, jcrColonContentSlashProtocolHTTPHeaders, jcrColonContentSlashProtocolHTTPHeadersAtTypeHint, jcrColonContentSlashProtocolHTTPMethod, jcrColonContentSlashProtocolHTTPSRelaxed, jcrColonContentSlashProtocolInterface, jcrColonContentSlashProtocolSocketTimeout, jcrColonContentSlashProtocolVersion, jcrColonContentSlashProxyNTLMDomain, jcrColonContentSlashProxyNTLMHost, jcrColonContentSlashProxyHost, jcrColonContentSlashProxyPassword, jcrColonContentSlashProxyPort, jcrColonContentSlashProxyUser, jcrColonContentSlashQueueBatchMaxSize, jcrColonContentSlashQueueBatchMode, jcrColonContentSlashQueueBatchWaitTime, jcrColonContentSlashRetryDelay, jcrColonContentSlashReverseReplication, jcrColonContentSlashSerializationType, jcrColonContentSlashSlingColonResourceType, jcrColonContentSlashSsl, jcrColonContentSlashTransportNTLMDomain, jcrColonContentSlashTransportNTLMHost, jcrColonContentSlashTransportPassword, jcrColonContentSlashTransportUri, jcrColonContentSlashTransportUser, jcrColonContentSlashTriggerDistribute, jcrColonContentSlashTriggerModified, jcrColonContentSlashTriggerOnOffTime, jcrColonContentSlashTriggerReceive, jcrColonContentSlashTriggerSpecific, jcrColonContentSlashUserId, jcrColonPrimaryType, colonOperation)
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -601,6 +601,7 @@ final jcrColonContentSlashCqColonDistribute = true; // bool |
 final jcrColonContentSlashCqColonDistributeAtTypeHint = jcrColonContentSlashCqColonDistributeAtTypeHint_example; // String | 
 final jcrColonContentSlashCqColonName = jcrColonContentSlashCqColonName_example; // String | 
 final jcrColonContentSlashCqColonTemplate = jcrColonContentSlashCqColonTemplate_example; // String | 
+final jcrColonContentSlashAliasUpdate = true; // bool | 
 final jcrColonContentSlashEnabled = true; // bool | 
 final jcrColonContentSlashJcrColonDescription = jcrColonContentSlashJcrColonDescription_example; // String | 
 final jcrColonContentSlashJcrColonLastModified = jcrColonContentSlashJcrColonLastModified_example; // String | 
@@ -648,8 +649,8 @@ final jcrColonContentSlashUserId = jcrColonContentSlashUserId_example; // String
 final jcrColonPrimaryType = jcrColonPrimaryType_example; // String | 
 final colonOperation = colonOperation_example; // String | 
 
-try { 
-    api_instance.postAgent(runmode, name, jcrColonContentSlashCqColonDistribute, jcrColonContentSlashCqColonDistributeAtTypeHint, jcrColonContentSlashCqColonName, jcrColonContentSlashCqColonTemplate, jcrColonContentSlashEnabled, jcrColonContentSlashJcrColonDescription, jcrColonContentSlashJcrColonLastModified, jcrColonContentSlashJcrColonLastModifiedBy, jcrColonContentSlashJcrColonMixinTypes, jcrColonContentSlashJcrColonTitle, jcrColonContentSlashLogLevel, jcrColonContentSlashNoStatusUpdate, jcrColonContentSlashNoVersioning, jcrColonContentSlashProtocolConnectTimeout, jcrColonContentSlashProtocolHTTPConnectionClosed, jcrColonContentSlashProtocolHTTPExpired, jcrColonContentSlashProtocolHTTPHeaders, jcrColonContentSlashProtocolHTTPHeadersAtTypeHint, jcrColonContentSlashProtocolHTTPMethod, jcrColonContentSlashProtocolHTTPSRelaxed, jcrColonContentSlashProtocolInterface, jcrColonContentSlashProtocolSocketTimeout, jcrColonContentSlashProtocolVersion, jcrColonContentSlashProxyNTLMDomain, jcrColonContentSlashProxyNTLMHost, jcrColonContentSlashProxyHost, jcrColonContentSlashProxyPassword, jcrColonContentSlashProxyPort, jcrColonContentSlashProxyUser, jcrColonContentSlashQueueBatchMaxSize, jcrColonContentSlashQueueBatchMode, jcrColonContentSlashQueueBatchWaitTime, jcrColonContentSlashRetryDelay, jcrColonContentSlashReverseReplication, jcrColonContentSlashSerializationType, jcrColonContentSlashSlingColonResourceType, jcrColonContentSlashSsl, jcrColonContentSlashTransportNTLMDomain, jcrColonContentSlashTransportNTLMHost, jcrColonContentSlashTransportPassword, jcrColonContentSlashTransportUri, jcrColonContentSlashTransportUser, jcrColonContentSlashTriggerDistribute, jcrColonContentSlashTriggerModified, jcrColonContentSlashTriggerOnOffTime, jcrColonContentSlashTriggerReceive, jcrColonContentSlashTriggerSpecific, jcrColonContentSlashUserId, jcrColonPrimaryType, colonOperation);
+try {
+    api_instance.postAgent(runmode, name, jcrColonContentSlashCqColonDistribute, jcrColonContentSlashCqColonDistributeAtTypeHint, jcrColonContentSlashCqColonName, jcrColonContentSlashCqColonTemplate, jcrColonContentSlashAliasUpdate, jcrColonContentSlashEnabled, jcrColonContentSlashJcrColonDescription, jcrColonContentSlashJcrColonLastModified, jcrColonContentSlashJcrColonLastModifiedBy, jcrColonContentSlashJcrColonMixinTypes, jcrColonContentSlashJcrColonTitle, jcrColonContentSlashLogLevel, jcrColonContentSlashNoStatusUpdate, jcrColonContentSlashNoVersioning, jcrColonContentSlashProtocolConnectTimeout, jcrColonContentSlashProtocolHTTPConnectionClosed, jcrColonContentSlashProtocolHTTPExpired, jcrColonContentSlashProtocolHTTPHeaders, jcrColonContentSlashProtocolHTTPHeadersAtTypeHint, jcrColonContentSlashProtocolHTTPMethod, jcrColonContentSlashProtocolHTTPSRelaxed, jcrColonContentSlashProtocolInterface, jcrColonContentSlashProtocolSocketTimeout, jcrColonContentSlashProtocolVersion, jcrColonContentSlashProxyNTLMDomain, jcrColonContentSlashProxyNTLMHost, jcrColonContentSlashProxyHost, jcrColonContentSlashProxyPassword, jcrColonContentSlashProxyPort, jcrColonContentSlashProxyUser, jcrColonContentSlashQueueBatchMaxSize, jcrColonContentSlashQueueBatchMode, jcrColonContentSlashQueueBatchWaitTime, jcrColonContentSlashRetryDelay, jcrColonContentSlashReverseReplication, jcrColonContentSlashSerializationType, jcrColonContentSlashSlingColonResourceType, jcrColonContentSlashSsl, jcrColonContentSlashTransportNTLMDomain, jcrColonContentSlashTransportNTLMHost, jcrColonContentSlashTransportPassword, jcrColonContentSlashTransportUri, jcrColonContentSlashTransportUser, jcrColonContentSlashTriggerDistribute, jcrColonContentSlashTriggerModified, jcrColonContentSlashTriggerOnOffTime, jcrColonContentSlashTriggerReceive, jcrColonContentSlashTriggerSpecific, jcrColonContentSlashUserId, jcrColonPrimaryType, colonOperation);
 } catch (e) {
     print('Exception when calling SlingApi->postAgent: $e\n');
 }
@@ -665,6 +666,7 @@ Name | Type | Description  | Notes
  **jcrColonContentSlashCqColonDistributeAtTypeHint** | **String**|  | [optional] 
  **jcrColonContentSlashCqColonName** | **String**|  | [optional] 
  **jcrColonContentSlashCqColonTemplate** | **String**|  | [optional] 
+ **jcrColonContentSlashAliasUpdate** | **bool**|  | [optional] 
  **jcrColonContentSlashEnabled** | **bool**|  | [optional] 
  **jcrColonContentSlashJcrColonDescription** | **String**|  | [optional] 
  **jcrColonContentSlashJcrColonLastModified** | **String**|  | [optional] 
@@ -732,7 +734,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -755,7 +757,7 @@ final certChain = BINARY_DATA_HERE; // MultipartFile |
 final pk = BINARY_DATA_HERE; // MultipartFile | 
 final keyStore = BINARY_DATA_HERE; // MultipartFile | 
 
-try { 
+try {
     final result = api_instance.postAuthorizableKeystore(intermediatePath, authorizableId, colonOperation, currentPassword, newPassword, rePassword, keyPassword, keyStorePass, alias, newAlias, removeAlias, certChain, pk, keyStore);
     print(result);
 } catch (e) {
@@ -802,7 +804,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -817,7 +819,7 @@ final createGroup = createGroup_example; // String |
 final repColonPassword = repColonPassword_example; // String | 
 final profileSlashGivenName = profileSlashGivenName_example; // String | 
 
-try { 
+try {
     final result = api_instance.postAuthorizables(authorizableId, intermediatePath, createUser, createGroup, repColonPassword, profileSlashGivenName);
     print(result);
 } catch (e) {
@@ -856,7 +858,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -913,7 +915,7 @@ final signatureMethodAtTypeHint = signatureMethodAtTypeHint_example; // String |
 final userIntermediatePath = userIntermediatePath_example; // String | 
 final userIntermediatePathAtTypeHint = userIntermediatePathAtTypeHint_example; // String | 
 
-try { 
+try {
     api_instance.postConfigAdobeGraniteSamlAuthenticationHandler(keyStorePassword, keyStorePasswordAtTypeHint, servicePeriodRanking, servicePeriodRankingAtTypeHint, idpHttpRedirect, idpHttpRedirectAtTypeHint, createUser, createUserAtTypeHint, defaultRedirectUrl, defaultRedirectUrlAtTypeHint, userIDAttribute, userIDAttributeAtTypeHint, defaultGroups, defaultGroupsAtTypeHint, idpCertAlias, idpCertAliasAtTypeHint, addGroupMemberships, addGroupMembershipsAtTypeHint, path, pathAtTypeHint, synchronizeAttributes, synchronizeAttributesAtTypeHint, clockTolerance, clockToleranceAtTypeHint, groupMembershipAttribute, groupMembershipAttributeAtTypeHint, idpUrl, idpUrlAtTypeHint, logoutUrl, logoutUrlAtTypeHint, serviceProviderEntityId, serviceProviderEntityIdAtTypeHint, assertionConsumerServiceURL, assertionConsumerServiceURLAtTypeHint, handleLogout, handleLogoutAtTypeHint, spPrivateKeyAlias, spPrivateKeyAliasAtTypeHint, useEncryption, useEncryptionAtTypeHint, nameIdFormat, nameIdFormatAtTypeHint, digestMethod, digestMethodAtTypeHint, signatureMethod, signatureMethodAtTypeHint, userIntermediatePath, userIntermediatePathAtTypeHint);
 } catch (e) {
     print('Exception when calling SlingApi->postConfigAdobeGraniteSamlAuthenticationHandler: $e\n');
@@ -993,7 +995,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -1022,7 +1024,7 @@ final orgPeriodApachePeriodFelixPeriodHttpsPeriodEnableAtTypeHint = orgPeriodApa
 final orgPeriodOsgiPeriodServicePeriodHttpPeriodPortPeriodSecure = orgPeriodOsgiPeriodServicePeriodHttpPeriodPortPeriodSecure_example; // String | 
 final orgPeriodOsgiPeriodServicePeriodHttpPeriodPortPeriodSecureAtTypeHint = orgPeriodOsgiPeriodServicePeriodHttpPeriodPortPeriodSecureAtTypeHint_example; // String | 
 
-try { 
+try {
     api_instance.postConfigApacheFelixJettyBasedHttpService(orgPeriodApachePeriodFelixPeriodHttpsPeriodNio, orgPeriodApachePeriodFelixPeriodHttpsPeriodNioAtTypeHint, orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystore, orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystoreAtTypeHint, orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodPassword, orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodPasswordAtTypeHint, orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKey, orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKeyAtTypeHint, orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKeyPeriodPassword, orgPeriodApachePeriodFelixPeriodHttpsPeriodKeystorePeriodKeyPeriodPasswordAtTypeHint, orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststore, orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststoreAtTypeHint, orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststorePeriodPassword, orgPeriodApachePeriodFelixPeriodHttpsPeriodTruststorePeriodPasswordAtTypeHint, orgPeriodApachePeriodFelixPeriodHttpsPeriodClientcertificate, orgPeriodApachePeriodFelixPeriodHttpsPeriodClientcertificateAtTypeHint, orgPeriodApachePeriodFelixPeriodHttpsPeriodEnable, orgPeriodApachePeriodFelixPeriodHttpsPeriodEnableAtTypeHint, orgPeriodOsgiPeriodServicePeriodHttpPeriodPortPeriodSecure, orgPeriodOsgiPeriodServicePeriodHttpPeriodPortPeriodSecureAtTypeHint);
 } catch (e) {
     print('Exception when calling SlingApi->postConfigApacheFelixJettyBasedHttpService: $e\n');
@@ -1074,7 +1076,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -1095,7 +1097,7 @@ final proxyPeriodUserAtTypeHint = proxyPeriodUserAtTypeHint_example; // String |
 final proxyPeriodPassword = proxyPeriodPassword_example; // String | 
 final proxyPeriodPasswordAtTypeHint = proxyPeriodPasswordAtTypeHint_example; // String | 
 
-try { 
+try {
     api_instance.postConfigApacheHttpComponentsProxyConfiguration(proxyPeriodHost, proxyPeriodHostAtTypeHint, proxyPeriodPort, proxyPeriodPortAtTypeHint, proxyPeriodExceptions, proxyPeriodExceptionsAtTypeHint, proxyPeriodEnabled, proxyPeriodEnabledAtTypeHint, proxyPeriodUser, proxyPeriodUserAtTypeHint, proxyPeriodPassword, proxyPeriodPasswordAtTypeHint);
 } catch (e) {
     print('Exception when calling SlingApi->postConfigApacheHttpComponentsProxyConfiguration: $e\n');
@@ -1139,7 +1141,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -1152,7 +1154,7 @@ final aliasAtTypeHint = aliasAtTypeHint_example; // String |
 final davPeriodCreateAbsoluteUri = true; // bool | 
 final davPeriodCreateAbsoluteUriAtTypeHint = davPeriodCreateAbsoluteUriAtTypeHint_example; // String | 
 
-try { 
+try {
     api_instance.postConfigApacheSlingDavExServlet(alias, aliasAtTypeHint, davPeriodCreateAbsoluteUri, davPeriodCreateAbsoluteUriAtTypeHint);
 } catch (e) {
     print('Exception when calling SlingApi->postConfigApacheSlingDavExServlet: $e\n');
@@ -1188,7 +1190,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -1205,7 +1207,7 @@ final enablePeriodTxtAtTypeHint = enablePeriodTxtAtTypeHint_example; // String |
 final enablePeriodXml = true; // bool | 
 final enablePeriodXmlAtTypeHint = enablePeriodXmlAtTypeHint_example; // String | 
 
-try { 
+try {
     api_instance.postConfigApacheSlingGetServlet(jsonPeriodMaximumresults, jsonPeriodMaximumresultsAtTypeHint, enablePeriodHtml, enablePeriodHtmlAtTypeHint, enablePeriodTxt, enablePeriodTxtAtTypeHint, enablePeriodXml, enablePeriodXmlAtTypeHint);
 } catch (e) {
     print('Exception when calling SlingApi->postConfigApacheSlingGetServlet: $e\n');
@@ -1245,7 +1247,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -1262,7 +1264,7 @@ final allowPeriodHostsPeriodRegexpAtTypeHint = allowPeriodHostsPeriodRegexpAtTyp
 final filterPeriodMethods = filterPeriodMethods_example; // String | 
 final filterPeriodMethodsAtTypeHint = filterPeriodMethodsAtTypeHint_example; // String | 
 
-try { 
+try {
     api_instance.postConfigApacheSlingReferrerFilter(allowPeriodEmpty, allowPeriodEmptyAtTypeHint, allowPeriodHosts, allowPeriodHostsAtTypeHint, allowPeriodHostsPeriodRegexp, allowPeriodHostsPeriodRegexpAtTypeHint, filterPeriodMethods, filterPeriodMethodsAtTypeHint);
 } catch (e) {
     print('Exception when calling SlingApi->postConfigApacheSlingReferrerFilter: $e\n');
@@ -1302,7 +1304,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -1312,7 +1314,7 @@ import 'package:openapi/api.dart';
 final api_instance = SlingApi();
 final configNodeName = configNodeName_example; // String | 
 
-try { 
+try {
     api_instance.postConfigProperty(configNodeName);
 } catch (e) {
     print('Exception when calling SlingApi->postConfigProperty: $e\n');
@@ -1345,7 +1347,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -1359,7 +1361,7 @@ final colonOperation = colonOperation_example; // String |
 final deleteAuthorizable = deleteAuthorizable_example; // String | 
 final file = BINARY_DATA_HERE; // MultipartFile | 
 
-try { 
+try {
     api_instance.postNode(path, name, colonOperation, deleteAuthorizable, file);
 } catch (e) {
     print('Exception when calling SlingApi->postNode: $e\n');
@@ -1396,7 +1398,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -1408,7 +1410,7 @@ final path = path_example; // String |
 final name = name_example; // String | 
 final addMembers = addMembers_example; // String | 
 
-try { 
+try {
     api_instance.postNodeRw(path, name, addMembers);
 } catch (e) {
     print('Exception when calling SlingApi->postNodeRw: $e\n');
@@ -1443,7 +1445,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -1455,7 +1457,7 @@ final path = path_example; // String |
 final jcrColonPrimaryType = jcrColonPrimaryType_example; // String | 
 final colonName = colonName_example; // String | 
 
-try { 
+try {
     api_instance.postPath(path, jcrColonPrimaryType, colonName);
 } catch (e) {
     print('Exception when calling SlingApi->postPath: $e\n');
@@ -1490,7 +1492,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -1503,7 +1505,7 @@ final pPeriodLimit = 8.14; // num |
 final n1property = n1property_example; // String | 
 final n1propertyPeriodValue = n1propertyPeriodValue_example; // String | 
 
-try { 
+try {
     final result = api_instance.postQuery(path, pPeriodLimit, n1property, n1propertyPeriodValue);
     print(result);
 } catch (e) {
@@ -1536,11 +1538,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **postTreeActivation**
-> postTreeActivation(ignoredeactivated, onlymodified, path)
+> postTreeActivation(ignoredeactivated, onlymodified, path, cmd)
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -1551,9 +1553,10 @@ final api_instance = SlingApi();
 final ignoredeactivated = true; // bool | 
 final onlymodified = true; // bool | 
 final path = path_example; // String | 
+final cmd = cmd_example; // String | 
 
-try { 
-    api_instance.postTreeActivation(ignoredeactivated, onlymodified, path);
+try {
+    api_instance.postTreeActivation(ignoredeactivated, onlymodified, path, cmd);
 } catch (e) {
     print('Exception when calling SlingApi->postTreeActivation: $e\n');
 }
@@ -1566,6 +1569,7 @@ Name | Type | Description  | Notes
  **ignoredeactivated** | **bool**|  | 
  **onlymodified** | **bool**|  | 
  **path** | **String**|  | 
+ **cmd** | **String**|  | [default to 'activate']
 
 ### Return type
 
@@ -1587,7 +1591,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -1602,7 +1606,7 @@ final keyStoreType = keyStoreType_example; // String |
 final removeAlias = removeAlias_example; // String | 
 final certificate = BINARY_DATA_HERE; // MultipartFile | 
 
-try { 
+try {
     final result = api_instance.postTruststore(colonOperation, newPassword, rePassword, keyStoreType, removeAlias, certificate);
     print(result);
 } catch (e) {
@@ -1641,7 +1645,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -1651,7 +1655,7 @@ import 'package:openapi/api.dart';
 final api_instance = SlingApi();
 final truststorePeriodP12 = BINARY_DATA_HERE; // MultipartFile | 
 
-try { 
+try {
     final result = api_instance.postTruststorePKCS12(truststorePeriodP12);
     print(result);
 } catch (e) {

@@ -1,0 +1,40 @@
+"$schema"   = "http://cyaninc.com/json-schemas/tosca-lite-v1/definition-module#"
+title       = "openapi_server BundleDataProp"
+package     = openapi_server
+version     = "1.0"
+description = "Defines a BundleDataProp"
+authors     = ["F. Bar (foo@bar.baz)"]
+
+imports {
+  Root = tosca.resourceTypes.Root
+}
+resourceTypes {
+
+  BundleDataProp {
+    title = BundleDataProp
+    description = BundleDataProp
+    derivedFrom = Root
+    properties {
+        key {
+          type =  string
+          description = "Bundle data key"
+          optional = false
+        }
+        value {
+          type =  string
+          description = "Bundle data value"
+          optional = false
+        }
+    }
+  }
+}
+
+serviceTemplates {
+
+  BundleDataProp {
+    title = BundleDataProp
+    description = BundleDataProp
+    implements = openapi_server.resourceTypes.BundleDataProp
+
+  }
+}

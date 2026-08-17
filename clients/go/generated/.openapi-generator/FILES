@@ -13,11 +13,11 @@ configuration.go
 docs/BundleData.md
 docs/BundleDataProp.md
 docs/BundleInfo.md
-docs/ConsoleApi.md
-docs/CqApi.md
-docs/CrxApi.md
-docs/CustomApi.md
-docs/GraniteApi.md
+docs/ConsoleAPI.md
+docs/CqAPI.md
+docs/CrxAPI.md
+docs/CustomAPI.md
+docs/GraniteAPI.md
 docs/InstallStatus.md
 docs/InstallStatusStatus.md
 docs/KeystoreChainItems.md
@@ -29,7 +29,7 @@ docs/SamlConfigurationPropertyItemsArray.md
 docs/SamlConfigurationPropertyItemsBoolean.md
 docs/SamlConfigurationPropertyItemsLong.md
 docs/SamlConfigurationPropertyItemsString.md
-docs/SlingApi.md
+docs/SlingAPI.md
 docs/TruststoreInfo.md
 docs/TruststoreItems.md
 git_push.sh
@@ -52,4 +52,10 @@ model_saml_configuration_property_items_string.go
 model_truststore_info.go
 model_truststore_items.go
 response.go
+test/api_console_test.go
+test/api_cq_test.go
+test/api_crx_test.go
+test/api_custom_test.go
+test/api_granite_test.go
+test/api_sling_test.go
 utils.go

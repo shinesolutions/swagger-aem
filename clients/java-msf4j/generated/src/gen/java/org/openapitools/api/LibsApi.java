@@ -23,16 +23,16 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.*;
 
-@Path("/libs/granite")
+@Path("/libs")
 
 
 @io.swagger.annotations.Api(description = "the libs API")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaMSF4JServerCodegen", date = "2021-09-03T15:25:23.467+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaMSF4JServerCodegen", date = "2026-08-17T02:15:13.302721680Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class LibsApi  {
    private final LibsApiService delegate = LibsApiServiceFactory.getLibsApi();
 
     @GET
-    @Path("/core/content/login.html")
+    @Path("/granite/core/content/login.html")
     
     @Produces({ "text/html" })
     @io.swagger.annotations.ApiOperation(value = "", notes = "", response = String.class, tags={ "cq", })
@@ -43,7 +43,7 @@ public class LibsApi  {
         return delegate.getLoginPage();
     }
     @GET
-    @Path("/security/truststore.json")
+    @Path("/granite/security/truststore.json")
     
     @Produces({ "application/json" })
     @io.swagger.annotations.ApiOperation(value = "", notes = "", response = TruststoreInfo.class, authorizations = {
@@ -58,7 +58,7 @@ public class LibsApi  {
         return delegate.getTruststoreInfo();
     }
     @POST
-    @Path("/security/post/authorizables")
+    @Path("/granite/security/post/authorizables")
     
     @Produces({ "text/html" })
     @io.swagger.annotations.ApiOperation(value = "", notes = "", response = String.class, authorizations = {
@@ -70,14 +70,31 @@ public class LibsApi  {
 ,@ApiParam(value = "",required=true) @QueryParam("intermediatePath") String intermediatePath
 ,@ApiParam(value = "") @QueryParam("createUser") String createUser
 ,@ApiParam(value = "") @QueryParam("createGroup") String createGroup
-,@ApiParam(value = "") @QueryParam("rep:password") String repColonPassword
+,@ApiParam(value = "") @QueryParam("rep:password") String repPassword
 ,@ApiParam(value = "") @QueryParam("profile/givenName") String profileGivenName
 )
     throws NotFoundException {
-        return delegate.postAuthorizables(authorizableId,intermediatePath,createUser,createGroup,repColonPassword,profileGivenName);
+        return delegate.postAuthorizables(authorizableId,intermediatePath,createUser,createGroup,repPassword,profileGivenName);
     }
     @POST
-    @Path("/security/post/truststore")
+    @Path("/replication/treeactivation.html")
+    
+    
+    @io.swagger.annotations.ApiOperation(value = "", notes = "", response = Void.class, authorizations = {
+        @io.swagger.annotations.Authorization(value = "aemAuth")
+    }, tags={ "sling", })
+    @io.swagger.annotations.ApiResponses(value = { 
+        @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = Void.class) })
+    public Response postTreeActivation(@ApiParam(value = "",required=true) @QueryParam("ignoredeactivated") Boolean ignoredeactivated
+,@ApiParam(value = "",required=true) @QueryParam("onlymodified") Boolean onlymodified
+,@ApiParam(value = "",required=true) @QueryParam("path") String path
+,@ApiParam(value = "",required=true, defaultValue="activate") @DefaultValue("activate") @QueryParam("cmd") String cmd
+)
+    throws NotFoundException {
+        return delegate.postTreeActivation(ignoredeactivated,onlymodified,path,cmd);
+    }
+    @POST
+    @Path("/granite/security/post/truststore")
     @Consumes({ "multipart/form-data" })
     @Produces({ "text/plain" })
     @io.swagger.annotations.ApiOperation(value = "", notes = "", response = String.class, authorizations = {
@@ -85,7 +102,7 @@ public class LibsApi  {
     }, tags={ "sling", })
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public Response postTruststore(@ApiParam(value = "") @QueryParam(":operation") String colonOperation
+    public Response postTruststore(@ApiParam(value = "") @QueryParam(":operation") String operation
 ,@ApiParam(value = "") @QueryParam("newPassword") String newPassword
 ,@ApiParam(value = "") @QueryParam("rePassword") String rePassword
 ,@ApiParam(value = "") @QueryParam("keyStoreType") String keyStoreType
@@ -95,10 +112,10 @@ public class LibsApi  {
             @FormDataParam("certificate") FileInfo certificateDetail
 )
     throws NotFoundException {
-        return delegate.postTruststore(colonOperation,newPassword,rePassword,keyStoreType,removeAlias,certificateInputStream, certificateDetail);
+        return delegate.postTruststore(operation,newPassword,rePassword,keyStoreType,removeAlias,certificateInputStream, certificateDetail);
     }
     @POST
-    @Path("/security/post/sslSetup.html")
+    @Path("/granite/security/post/sslSetup.html")
     @Consumes({ "multipart/form-data" })
     @Produces({ "text/plain" })
     @io.swagger.annotations.ApiOperation(value = "", notes = "", response = String.class, authorizations = {

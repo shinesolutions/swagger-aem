@@ -1,0 +1,16 @@
+.gitignore
+.openapi-generator-ignore
+Cargo.toml
+README.md
+src/apis/console.rs
+src/apis/cq.rs
+src/apis/crx.rs
+src/apis/custom.rs
+src/apis/granite.rs
+src/apis/mod.rs
+src/apis/sling.rs
+src/header.rs
+src/lib.rs
+src/models.rs
+src/server/mod.rs
+src/types.rs

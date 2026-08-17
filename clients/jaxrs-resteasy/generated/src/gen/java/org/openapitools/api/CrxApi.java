@@ -29,7 +29,7 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 
 @io.swagger.annotations.Api(description = "the crx API")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyServerCodegen", date = "2021-09-03T15:25:57.989+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyServerCodegen", date = "2026-08-17T02:15:38.090574223Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class CrxApi  {
 
     @Inject CrxApiService service;
@@ -88,7 +88,7 @@ public class CrxApi  {
     }, tags={ "crx", })
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public Response postPackageService( @NotNull  @QueryParam("cmd") String cmd,@Context SecurityContext securityContext)
+    public Response postPackageService( @NotNull @QueryParam("cmd") String cmd,@Context SecurityContext securityContext)
     throws NotFoundException {
         return service.postPackageService(cmd,securityContext);
     }
@@ -101,7 +101,7 @@ public class CrxApi  {
     }, tags={ "crx", })
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public Response postPackageServiceJson(MultipartFormDataInput input, @PathParam("path") String path, @NotNull  @QueryParam("cmd") String cmd,  @QueryParam("groupName") String groupName,  @QueryParam("packageName") String packageName,  @QueryParam("packageVersion") String packageVersion,  @QueryParam("_charset_") String charset,  @QueryParam("force") Boolean force,  @QueryParam("recursive") Boolean recursive,@Context SecurityContext securityContext)
+    public Response postPackageServiceJson(MultipartFormDataInput input, @PathParam("path") String path, @NotNull @QueryParam("cmd") String cmd, @QueryParam("groupName") String groupName, @QueryParam("packageName") String packageName, @QueryParam("packageVersion") String packageVersion, @QueryParam("_charset_") String charset, @QueryParam("force") Boolean force, @QueryParam("recursive") Boolean recursive,@Context SecurityContext securityContext)
     throws NotFoundException {
         return service.postPackageServiceJson(input,path,cmd,groupName,packageName,packageVersion,charset,force,recursive,securityContext);
     }
@@ -114,7 +114,7 @@ public class CrxApi  {
     }, tags={ "crx", })
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public Response postPackageUpdate( @NotNull  @QueryParam("groupName") String groupName, @NotNull  @QueryParam("packageName") String packageName, @NotNull  @QueryParam("version") String version, @NotNull  @QueryParam("path") String path,  @QueryParam("filter") String filter,  @QueryParam("_charset_") String charset,@Context SecurityContext securityContext)
+    public Response postPackageUpdate( @NotNull @QueryParam("groupName") String groupName, @NotNull @QueryParam("packageName") String packageName, @NotNull @QueryParam("version") String version, @NotNull @QueryParam("path") String path, @QueryParam("filter") String filter, @QueryParam("_charset_") String charset,@Context SecurityContext securityContext)
     throws NotFoundException {
         return service.postPackageUpdate(groupName,packageName,version,path,filter,charset,securityContext);
     }
@@ -127,7 +127,7 @@ public class CrxApi  {
     }, tags={ "crx", })
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public Response postSetPassword( @NotNull  @QueryParam("old") String old, @NotNull  @QueryParam("plain") String plain, @NotNull  @QueryParam("verify") String verify,@Context SecurityContext securityContext)
+    public Response postSetPassword( @NotNull @QueryParam("old") String old, @NotNull @QueryParam("plain") String plain, @NotNull @QueryParam("verify") String verify,@Context SecurityContext securityContext)
     throws NotFoundException {
         return service.postSetPassword(old,plain,verify,securityContext);
     }

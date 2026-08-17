@@ -2,16 +2,17 @@
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**status** | [**InstallStatusStatus**](InstallStatusStatus.md) |  | [optional] 
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **status** | [**InstallStatusStatus**](InstallStatusStatus.md) |  | [optional] |
 
-## Code Sample
+## Example
 
 ```ruby
-require 'SwaggerAemClient'
+require 'swagger_aem'
 
-instance = SwaggerAemClient::InstallStatus.new(status: null)
+instance = SwaggerAemClient::InstallStatus.new(
+  status: null
+)
 ```
-
 

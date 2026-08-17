@@ -8,17 +8,22 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 
 class AppKernel extends Kernel
 {
-    public function registerBundles()
+    /**
+     * @inheritDoc
+     */
+    public function registerBundles(): iterable
     {
-        $bundles = array(
-            new FrameworkBundle()
-        );
-
-        return $bundles;
+        return [
+            new FrameworkBundle(),
+        ];
     }
 
-    public function registerContainerConfiguration(LoaderInterface $loader)
+    /**
+     * @inheritDoc
+     * @throws \Exception
+     */
+    public function registerContainerConfiguration(LoaderInterface $loader): void
     {
-        $loader->load(__DIR__.'/test_config.yml');
+        $loader->load(__DIR__.'/test_config.yaml');
     }
 }

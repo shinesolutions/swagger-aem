@@ -1,3 +1,4 @@
+.github/workflows/maven.yml
 .gitignore
 .travis.yml
 README.md
@@ -58,6 +59,7 @@ src/main/java/com/shinesolutions/swaggeraem4j/auth/ApiKeyAuth.java
 src/main/java/com/shinesolutions/swaggeraem4j/auth/Authentication.java
 src/main/java/com/shinesolutions/swaggeraem4j/auth/HttpBasicAuth.java
 src/main/java/com/shinesolutions/swaggeraem4j/auth/HttpBearerAuth.java
+src/main/java/com/shinesolutions/swaggeraem4j/model/AbstractOpenApiSchema.java
 src/main/java/com/shinesolutions/swaggeraem4j/model/BundleData.java
 src/main/java/com/shinesolutions/swaggeraem4j/model/BundleDataProp.java
 src/main/java/com/shinesolutions/swaggeraem4j/model/BundleInfo.java
@@ -74,6 +76,3 @@ src/main/java/com/shinesolutions/swaggeraem4j/model/SamlConfigurationPropertyIte
 src/main/java/com/shinesolutions/swaggeraem4j/model/SamlConfigurationPropertyItemsString.java
 src/main/java/com/shinesolutions/swaggeraem4j/model/TruststoreInfo.java
 src/main/java/com/shinesolutions/swaggeraem4j/model/TruststoreItems.java
-src/test/java/com/shinesolutions/swaggeraem4j/model/BundleDataPropTest.java
-src/test/java/com/shinesolutions/swaggeraem4j/model/BundleDataTest.java
-src/test/java/com/shinesolutions/swaggeraem4j/model/BundleInfoTest.java

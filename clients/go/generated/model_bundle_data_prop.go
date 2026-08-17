@@ -3,7 +3,7 @@ Adobe Experience Manager (AEM) API
 
 Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
 
-API version: 3.5.0-pre.0
+API version: 3.7.1-pre.0
 Contact: opensource@shinesolutions.com
 */
 
@@ -14,6 +14,9 @@ package openapi
 import (
 	"encoding/json"
 )
+
+// checks if the BundleDataProp type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &BundleDataProp{}
 
 // BundleDataProp struct for BundleDataProp
 type BundleDataProp struct {
@@ -42,7 +45,7 @@ func NewBundleDataPropWithDefaults() *BundleDataProp {
 
 // GetKey returns the Key field value if set, zero value otherwise.
 func (o *BundleDataProp) GetKey() string {
-	if o == nil || o.Key == nil {
+	if o == nil || IsNil(o.Key) {
 		var ret string
 		return ret
 	}
@@ -52,7 +55,7 @@ func (o *BundleDataProp) GetKey() string {
 // GetKeyOk returns a tuple with the Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BundleDataProp) GetKeyOk() (*string, bool) {
-	if o == nil || o.Key == nil {
+	if o == nil || IsNil(o.Key) {
 		return nil, false
 	}
 	return o.Key, true
@@ -60,7 +63,7 @@ func (o *BundleDataProp) GetKeyOk() (*string, bool) {
 
 // HasKey returns a boolean if a field has been set.
 func (o *BundleDataProp) HasKey() bool {
-	if o != nil && o.Key != nil {
+	if o != nil && !IsNil(o.Key) {
 		return true
 	}
 
@@ -74,7 +77,7 @@ func (o *BundleDataProp) SetKey(v string) {
 
 // GetValue returns the Value field value if set, zero value otherwise.
 func (o *BundleDataProp) GetValue() string {
-	if o == nil || o.Value == nil {
+	if o == nil || IsNil(o.Value) {
 		var ret string
 		return ret
 	}
@@ -84,7 +87,7 @@ func (o *BundleDataProp) GetValue() string {
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BundleDataProp) GetValueOk() (*string, bool) {
-	if o == nil || o.Value == nil {
+	if o == nil || IsNil(o.Value) {
 		return nil, false
 	}
 	return o.Value, true
@@ -92,7 +95,7 @@ func (o *BundleDataProp) GetValueOk() (*string, bool) {
 
 // HasValue returns a boolean if a field has been set.
 func (o *BundleDataProp) HasValue() bool {
-	if o != nil && o.Value != nil {
+	if o != nil && !IsNil(o.Value) {
 		return true
 	}
 
@@ -105,14 +108,22 @@ func (o *BundleDataProp) SetValue(v string) {
 }
 
 func (o BundleDataProp) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Key != nil {
-		toSerialize["key"] = o.Key
-	}
-	if o.Value != nil {
-		toSerialize["value"] = o.Value
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o BundleDataProp) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Key) {
+		toSerialize["key"] = o.Key
+	}
+	if !IsNil(o.Value) {
+		toSerialize["value"] = o.Value
+	}
+	return toSerialize, nil
 }
 
 type NullableBundleDataProp struct {

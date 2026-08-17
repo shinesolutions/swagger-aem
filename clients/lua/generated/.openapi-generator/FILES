@@ -23,7 +23,3 @@ openapiclient/model/saml_configuration_property_items_long.lua
 openapiclient/model/saml_configuration_property_items_string.lua
 openapiclient/model/truststore_info.lua
 openapiclient/model/truststore_items.lua
-spec/bundle_data_prop_spec.lua
-spec/bundle_data_spec.lua
-spec/bundle_info_spec.lua
-spec/granite_api_spec.lua

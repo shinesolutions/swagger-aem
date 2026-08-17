@@ -8,18 +8,17 @@ Method | HTTP request | Description
 
 
 # **ssl_setup**
-> str ssl_setup(keystore_password, keystore_password_confirm, truststore_password, truststore_password_confirm, https_hostname, https_port)
-
-
+> str ssl_setup(keystore_password, keystore_password_confirm, truststore_password, truststore_password_confirm, https_hostname, https_port, privatekey_file=privatekey_file, certificate_file=certificate_file)
 
 ### Example
 
 * Basic Authentication (aemAuth):
+
 ```python
-import time
 import swaggeraem
-from swaggeraem.api import granite_api
+from swaggeraem.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = swaggeraem.Configuration(
@@ -33,51 +32,46 @@ configuration = swaggeraem.Configuration(
 
 # Configure HTTP basic authorization: aemAuth
 configuration = swaggeraem.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
 )
 
 # Enter a context with an instance of the API client
 with swaggeraem.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = granite_api.GraniteApi(api_client)
-    keystore_password = "keystorePassword_example" # str | 
-    keystore_password_confirm = "keystorePasswordConfirm_example" # str | 
-    truststore_password = "truststorePassword_example" # str | 
-    truststore_password_confirm = "truststorePasswordConfirm_example" # str | 
-    https_hostname = "httpsHostname_example" # str | 
-    https_port = "httpsPort_example" # str | 
-    privatekey_file = open('/path/to/file', 'rb') # file_type |  (optional)
-    certificate_file = open('/path/to/file', 'rb') # file_type |  (optional)
+    api_instance = swaggeraem.GraniteApi(api_client)
+    keystore_password = 'keystore_password_example' # str | 
+    keystore_password_confirm = 'keystore_password_confirm_example' # str | 
+    truststore_password = 'truststore_password_example' # str | 
+    truststore_password_confirm = 'truststore_password_confirm_example' # str | 
+    https_hostname = 'https_hostname_example' # str | 
+    https_port = 'https_port_example' # str | 
+    privatekey_file = None # bytes |  (optional)
+    certificate_file = None # bytes |  (optional)
 
-    # example passing only required values which don't have defaults set
-    try:
-        api_response = api_instance.ssl_setup(keystore_password, keystore_password_confirm, truststore_password, truststore_password_confirm, https_hostname, https_port)
-        pprint(api_response)
-    except swaggeraem.ApiException as e:
-        print("Exception when calling GraniteApi->ssl_setup: %s\n" % e)
-
-    # example passing only required values which don't have defaults set
-    # and optional values
     try:
         api_response = api_instance.ssl_setup(keystore_password, keystore_password_confirm, truststore_password, truststore_password_confirm, https_hostname, https_port, privatekey_file=privatekey_file, certificate_file=certificate_file)
+        print("The response of GraniteApi->ssl_setup:\n")
         pprint(api_response)
-    except swaggeraem.ApiException as e:
+    except Exception as e:
         print("Exception when calling GraniteApi->ssl_setup: %s\n" % e)
 ```
 
+
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **keystore_password** | **str**|  |
- **keystore_password_confirm** | **str**|  |
- **truststore_password** | **str**|  |
- **truststore_password_confirm** | **str**|  |
- **https_hostname** | **str**|  |
- **https_port** | **str**|  |
- **privatekey_file** | **file_type**|  | [optional]
- **certificate_file** | **file_type**|  | [optional]
+ **keystore_password** | **str**|  | 
+ **keystore_password_confirm** | **str**|  | 
+ **truststore_password** | **str**|  | 
+ **truststore_password_confirm** | **str**|  | 
+ **https_hostname** | **str**|  | 
+ **https_port** | **str**|  | 
+ **privatekey_file** | **bytes**|  | [optional] 
+ **certificate_file** | **bytes**|  | [optional] 
 
 ### Return type
 
@@ -93,6 +87,7 @@ Name | Type | Description  | Notes
  - **Accept**: text/plain
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **0** | Default response |  -  |

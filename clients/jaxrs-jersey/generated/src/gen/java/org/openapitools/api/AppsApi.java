@@ -1,6 +1,5 @@
 package org.openapitools.api;
 
-import org.openapitools.model.*;
 import org.openapitools.api.AppsApiService;
 import org.openapitools.api.factories.AppsApiServiceFactory;
 
@@ -29,7 +28,7 @@ import javax.validation.Valid;
 
 
 @io.swagger.annotations.Api(description = "the apps API")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJerseyServerCodegen", date = "2021-09-03T15:25:53.422+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJerseyServerCodegen", date = "2026-08-17T02:15:33.561165235Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class AppsApi  {
    private final AppsApiService delegate;
 
@@ -40,11 +39,11 @@ public class AppsApi  {
          String implClass = servletContext.getInitParameter("AppsApi.implementation");
          if (implClass != null && !"".equals(implClass.trim())) {
             try {
-               delegate = (AppsApiService) Class.forName(implClass).newInstance();
+               delegate = (AppsApiService) Class.forName(implClass).getDeclaredConstructor().newInstance();
             } catch (Exception e) {
                throw new RuntimeException(e);
             }
-         } 
+         }
       }
 
       if (delegate == null) {
@@ -54,7 +53,7 @@ public class AppsApi  {
       this.delegate = delegate;
    }
 
-    @POST
+    @javax.ws.rs.POST
     @Path("/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config")
     
     
@@ -64,11 +63,11 @@ public class AppsApi  {
     @io.swagger.annotations.ApiResponses(value = {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = Void.class)
     })
-    public Response postConfigAdobeGraniteSamlAuthenticationHandler(@ApiParam(value = "") @QueryParam("keyStorePassword")  String keyStorePassword,@ApiParam(value = "") @QueryParam("keyStorePassword@TypeHint")  String keyStorePasswordAtTypeHint,@ApiParam(value = "") @QueryParam("service.ranking")  Integer serviceRanking,@ApiParam(value = "") @QueryParam("service.ranking@TypeHint")  String serviceRankingAtTypeHint,@ApiParam(value = "") @QueryParam("idpHttpRedirect")  Boolean idpHttpRedirect,@ApiParam(value = "") @QueryParam("idpHttpRedirect@TypeHint")  String idpHttpRedirectAtTypeHint,@ApiParam(value = "") @QueryParam("createUser")  Boolean createUser,@ApiParam(value = "") @QueryParam("createUser@TypeHint")  String createUserAtTypeHint,@ApiParam(value = "") @QueryParam("defaultRedirectUrl")  String defaultRedirectUrl,@ApiParam(value = "") @QueryParam("defaultRedirectUrl@TypeHint")  String defaultRedirectUrlAtTypeHint,@ApiParam(value = "") @QueryParam("userIDAttribute")  String userIDAttribute,@ApiParam(value = "") @QueryParam("userIDAttribute@TypeHint")  String userIDAttributeAtTypeHint,@ApiParam(value = "") @QueryParam("defaultGroups") @Valid  List<String> defaultGroups,@ApiParam(value = "") @QueryParam("defaultGroups@TypeHint")  String defaultGroupsAtTypeHint,@ApiParam(value = "") @QueryParam("idpCertAlias")  String idpCertAlias,@ApiParam(value = "") @QueryParam("idpCertAlias@TypeHint")  String idpCertAliasAtTypeHint,@ApiParam(value = "") @QueryParam("addGroupMemberships")  Boolean addGroupMemberships,@ApiParam(value = "") @QueryParam("addGroupMemberships@TypeHint")  String addGroupMembershipsAtTypeHint,@ApiParam(value = "") @QueryParam("path") @Valid  List<String> path,@ApiParam(value = "") @QueryParam("path@TypeHint")  String pathAtTypeHint,@ApiParam(value = "") @QueryParam("synchronizeAttributes") @Valid  List<String> synchronizeAttributes,@ApiParam(value = "") @QueryParam("synchronizeAttributes@TypeHint")  String synchronizeAttributesAtTypeHint,@ApiParam(value = "") @QueryParam("clockTolerance")  Integer clockTolerance,@ApiParam(value = "") @QueryParam("clockTolerance@TypeHint")  String clockToleranceAtTypeHint,@ApiParam(value = "") @QueryParam("groupMembershipAttribute")  String groupMembershipAttribute,@ApiParam(value = "") @QueryParam("groupMembershipAttribute@TypeHint")  String groupMembershipAttributeAtTypeHint,@ApiParam(value = "") @QueryParam("idpUrl")  String idpUrl,@ApiParam(value = "") @QueryParam("idpUrl@TypeHint")  String idpUrlAtTypeHint,@ApiParam(value = "") @QueryParam("logoutUrl")  String logoutUrl,@ApiParam(value = "") @QueryParam("logoutUrl@TypeHint")  String logoutUrlAtTypeHint,@ApiParam(value = "") @QueryParam("serviceProviderEntityId")  String serviceProviderEntityId,@ApiParam(value = "") @QueryParam("serviceProviderEntityId@TypeHint")  String serviceProviderEntityIdAtTypeHint,@ApiParam(value = "") @QueryParam("assertionConsumerServiceURL")  String assertionConsumerServiceURL,@ApiParam(value = "") @QueryParam("assertionConsumerServiceURL@TypeHint")  String assertionConsumerServiceURLAtTypeHint,@ApiParam(value = "") @QueryParam("handleLogout")  Boolean handleLogout,@ApiParam(value = "") @QueryParam("handleLogout@TypeHint")  String handleLogoutAtTypeHint,@ApiParam(value = "") @QueryParam("spPrivateKeyAlias")  String spPrivateKeyAlias,@ApiParam(value = "") @QueryParam("spPrivateKeyAlias@TypeHint")  String spPrivateKeyAliasAtTypeHint,@ApiParam(value = "") @QueryParam("useEncryption")  Boolean useEncryption,@ApiParam(value = "") @QueryParam("useEncryption@TypeHint")  String useEncryptionAtTypeHint,@ApiParam(value = "") @QueryParam("nameIdFormat")  String nameIdFormat,@ApiParam(value = "") @QueryParam("nameIdFormat@TypeHint")  String nameIdFormatAtTypeHint,@ApiParam(value = "") @QueryParam("digestMethod")  String digestMethod,@ApiParam(value = "") @QueryParam("digestMethod@TypeHint")  String digestMethodAtTypeHint,@ApiParam(value = "") @QueryParam("signatureMethod")  String signatureMethod,@ApiParam(value = "") @QueryParam("signatureMethod@TypeHint")  String signatureMethodAtTypeHint,@ApiParam(value = "") @QueryParam("userIntermediatePath")  String userIntermediatePath,@ApiParam(value = "") @QueryParam("userIntermediatePath@TypeHint")  String userIntermediatePathAtTypeHint,@Context SecurityContext securityContext)
+    public Response postConfigAdobeGraniteSamlAuthenticationHandler(@ApiParam(value = "") @QueryParam("keyStorePassword")  String keyStorePassword,@ApiParam(value = "") @QueryParam("keyStorePassword@TypeHint")  String keyStorePasswordAtTypeHint,@ApiParam(value = "") @QueryParam("service.ranking")  Integer serviceRanking,@ApiParam(value = "") @QueryParam("service.ranking@TypeHint")  String serviceRankingAtTypeHint,@ApiParam(value = "") @QueryParam("idpHttpRedirect")  Boolean idpHttpRedirect,@ApiParam(value = "") @QueryParam("idpHttpRedirect@TypeHint")  String idpHttpRedirectAtTypeHint,@ApiParam(value = "") @QueryParam("createUser")  Boolean createUser,@ApiParam(value = "") @QueryParam("createUser@TypeHint")  String createUserAtTypeHint,@ApiParam(value = "") @QueryParam("defaultRedirectUrl")  String defaultRedirectUrl,@ApiParam(value = "") @QueryParam("defaultRedirectUrl@TypeHint")  String defaultRedirectUrlAtTypeHint,@ApiParam(value = "") @QueryParam("userIDAttribute")  String userIDAttribute,@ApiParam(value = "") @QueryParam("userIDAttribute@TypeHint")  String userIDAttributeAtTypeHint,@ApiParam(value = "") @QueryParam("defaultGroups")  List<String> defaultGroups,@ApiParam(value = "") @QueryParam("defaultGroups@TypeHint")  String defaultGroupsAtTypeHint,@ApiParam(value = "") @QueryParam("idpCertAlias")  String idpCertAlias,@ApiParam(value = "") @QueryParam("idpCertAlias@TypeHint")  String idpCertAliasAtTypeHint,@ApiParam(value = "") @QueryParam("addGroupMemberships")  Boolean addGroupMemberships,@ApiParam(value = "") @QueryParam("addGroupMemberships@TypeHint")  String addGroupMembershipsAtTypeHint,@ApiParam(value = "") @QueryParam("path")  List<String> path,@ApiParam(value = "") @QueryParam("path@TypeHint")  String pathAtTypeHint,@ApiParam(value = "") @QueryParam("synchronizeAttributes")  List<String> synchronizeAttributes,@ApiParam(value = "") @QueryParam("synchronizeAttributes@TypeHint")  String synchronizeAttributesAtTypeHint,@ApiParam(value = "") @QueryParam("clockTolerance")  Integer clockTolerance,@ApiParam(value = "") @QueryParam("clockTolerance@TypeHint")  String clockToleranceAtTypeHint,@ApiParam(value = "") @QueryParam("groupMembershipAttribute")  String groupMembershipAttribute,@ApiParam(value = "") @QueryParam("groupMembershipAttribute@TypeHint")  String groupMembershipAttributeAtTypeHint,@ApiParam(value = "") @QueryParam("idpUrl")  String idpUrl,@ApiParam(value = "") @QueryParam("idpUrl@TypeHint")  String idpUrlAtTypeHint,@ApiParam(value = "") @QueryParam("logoutUrl")  String logoutUrl,@ApiParam(value = "") @QueryParam("logoutUrl@TypeHint")  String logoutUrlAtTypeHint,@ApiParam(value = "") @QueryParam("serviceProviderEntityId")  String serviceProviderEntityId,@ApiParam(value = "") @QueryParam("serviceProviderEntityId@TypeHint")  String serviceProviderEntityIdAtTypeHint,@ApiParam(value = "") @QueryParam("assertionConsumerServiceURL")  String assertionConsumerServiceURL,@ApiParam(value = "") @QueryParam("assertionConsumerServiceURL@TypeHint")  String assertionConsumerServiceURLAtTypeHint,@ApiParam(value = "") @QueryParam("handleLogout")  Boolean handleLogout,@ApiParam(value = "") @QueryParam("handleLogout@TypeHint")  String handleLogoutAtTypeHint,@ApiParam(value = "") @QueryParam("spPrivateKeyAlias")  String spPrivateKeyAlias,@ApiParam(value = "") @QueryParam("spPrivateKeyAlias@TypeHint")  String spPrivateKeyAliasAtTypeHint,@ApiParam(value = "") @QueryParam("useEncryption")  Boolean useEncryption,@ApiParam(value = "") @QueryParam("useEncryption@TypeHint")  String useEncryptionAtTypeHint,@ApiParam(value = "") @QueryParam("nameIdFormat")  String nameIdFormat,@ApiParam(value = "") @QueryParam("nameIdFormat@TypeHint")  String nameIdFormatAtTypeHint,@ApiParam(value = "") @QueryParam("digestMethod")  String digestMethod,@ApiParam(value = "") @QueryParam("digestMethod@TypeHint")  String digestMethodAtTypeHint,@ApiParam(value = "") @QueryParam("signatureMethod")  String signatureMethod,@ApiParam(value = "") @QueryParam("signatureMethod@TypeHint")  String signatureMethodAtTypeHint,@ApiParam(value = "") @QueryParam("userIntermediatePath")  String userIntermediatePath,@ApiParam(value = "") @QueryParam("userIntermediatePath@TypeHint")  String userIntermediatePathAtTypeHint,@Context SecurityContext securityContext)
     throws NotFoundException {
         return delegate.postConfigAdobeGraniteSamlAuthenticationHandler(keyStorePassword, keyStorePasswordAtTypeHint, serviceRanking, serviceRankingAtTypeHint, idpHttpRedirect, idpHttpRedirectAtTypeHint, createUser, createUserAtTypeHint, defaultRedirectUrl, defaultRedirectUrlAtTypeHint, userIDAttribute, userIDAttributeAtTypeHint, defaultGroups, defaultGroupsAtTypeHint, idpCertAlias, idpCertAliasAtTypeHint, addGroupMemberships, addGroupMembershipsAtTypeHint, path, pathAtTypeHint, synchronizeAttributes, synchronizeAttributesAtTypeHint, clockTolerance, clockToleranceAtTypeHint, groupMembershipAttribute, groupMembershipAttributeAtTypeHint, idpUrl, idpUrlAtTypeHint, logoutUrl, logoutUrlAtTypeHint, serviceProviderEntityId, serviceProviderEntityIdAtTypeHint, assertionConsumerServiceURL, assertionConsumerServiceURLAtTypeHint, handleLogout, handleLogoutAtTypeHint, spPrivateKeyAlias, spPrivateKeyAliasAtTypeHint, useEncryption, useEncryptionAtTypeHint, nameIdFormat, nameIdFormatAtTypeHint, digestMethod, digestMethodAtTypeHint, signatureMethod, signatureMethodAtTypeHint, userIntermediatePath, userIntermediatePathAtTypeHint, securityContext);
     }
-    @POST
+    @javax.ws.rs.POST
     @Path("/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck")
     
     
@@ -78,11 +77,11 @@ public class AppsApi  {
     @io.swagger.annotations.ApiResponses(value = {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = Void.class)
     })
-    public Response postConfigAemHealthCheckServlet(@ApiParam(value = "") @QueryParam("bundles.ignored") @Valid  List<String> bundlesIgnored,@ApiParam(value = "") @QueryParam("bundles.ignored@TypeHint")  String bundlesIgnoredAtTypeHint,@Context SecurityContext securityContext)
+    public Response postConfigAemHealthCheckServlet(@ApiParam(value = "") @QueryParam("bundles.ignored")  List<String> bundlesIgnored,@ApiParam(value = "") @QueryParam("bundles.ignored@TypeHint")  String bundlesIgnoredAtTypeHint,@Context SecurityContext securityContext)
     throws NotFoundException {
         return delegate.postConfigAemHealthCheckServlet(bundlesIgnored, bundlesIgnoredAtTypeHint, securityContext);
     }
-    @POST
+    @javax.ws.rs.POST
     @Path("/com.shinesolutions.aem.passwordreset.Activator")
     
     
@@ -92,11 +91,11 @@ public class AppsApi  {
     @io.swagger.annotations.ApiResponses(value = {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = Void.class)
     })
-    public Response postConfigAemPasswordReset(@ApiParam(value = "") @QueryParam("pwdreset.authorizables") @Valid  List<String> pwdresetAuthorizables,@ApiParam(value = "") @QueryParam("pwdreset.authorizables@TypeHint")  String pwdresetAuthorizablesAtTypeHint,@Context SecurityContext securityContext)
+    public Response postConfigAemPasswordReset(@ApiParam(value = "") @QueryParam("pwdreset.authorizables")  List<String> pwdresetAuthorizables,@ApiParam(value = "") @QueryParam("pwdreset.authorizables@TypeHint")  String pwdresetAuthorizablesAtTypeHint,@Context SecurityContext securityContext)
     throws NotFoundException {
         return delegate.postConfigAemPasswordReset(pwdresetAuthorizables, pwdresetAuthorizablesAtTypeHint, securityContext);
     }
-    @POST
+    @javax.ws.rs.POST
     @Path("/org.apache.felix.http")
     
     
@@ -110,7 +109,7 @@ public class AppsApi  {
     throws NotFoundException {
         return delegate.postConfigApacheFelixJettyBasedHttpService(orgApacheFelixHttpsNio, orgApacheFelixHttpsNioAtTypeHint, orgApacheFelixHttpsKeystore, orgApacheFelixHttpsKeystoreAtTypeHint, orgApacheFelixHttpsKeystorePassword, orgApacheFelixHttpsKeystorePasswordAtTypeHint, orgApacheFelixHttpsKeystoreKey, orgApacheFelixHttpsKeystoreKeyAtTypeHint, orgApacheFelixHttpsKeystoreKeyPassword, orgApacheFelixHttpsKeystoreKeyPasswordAtTypeHint, orgApacheFelixHttpsTruststore, orgApacheFelixHttpsTruststoreAtTypeHint, orgApacheFelixHttpsTruststorePassword, orgApacheFelixHttpsTruststorePasswordAtTypeHint, orgApacheFelixHttpsClientcertificate, orgApacheFelixHttpsClientcertificateAtTypeHint, orgApacheFelixHttpsEnable, orgApacheFelixHttpsEnableAtTypeHint, orgOsgiServiceHttpPortSecure, orgOsgiServiceHttpPortSecureAtTypeHint, securityContext);
     }
-    @POST
+    @javax.ws.rs.POST
     @Path("/org.apache.http.proxyconfigurator.config")
     
     
@@ -120,11 +119,11 @@ public class AppsApi  {
     @io.swagger.annotations.ApiResponses(value = {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = Void.class)
     })
-    public Response postConfigApacheHttpComponentsProxyConfiguration(@ApiParam(value = "") @QueryParam("proxy.host")  String proxyHost,@ApiParam(value = "") @QueryParam("proxy.host@TypeHint")  String proxyHostAtTypeHint,@ApiParam(value = "") @QueryParam("proxy.port")  Integer proxyPort,@ApiParam(value = "") @QueryParam("proxy.port@TypeHint")  String proxyPortAtTypeHint,@ApiParam(value = "") @QueryParam("proxy.exceptions") @Valid  List<String> proxyExceptions,@ApiParam(value = "") @QueryParam("proxy.exceptions@TypeHint")  String proxyExceptionsAtTypeHint,@ApiParam(value = "") @QueryParam("proxy.enabled")  Boolean proxyEnabled,@ApiParam(value = "") @QueryParam("proxy.enabled@TypeHint")  String proxyEnabledAtTypeHint,@ApiParam(value = "") @QueryParam("proxy.user")  String proxyUser,@ApiParam(value = "") @QueryParam("proxy.user@TypeHint")  String proxyUserAtTypeHint,@ApiParam(value = "") @QueryParam("proxy.password")  String proxyPassword,@ApiParam(value = "") @QueryParam("proxy.password@TypeHint")  String proxyPasswordAtTypeHint,@Context SecurityContext securityContext)
+    public Response postConfigApacheHttpComponentsProxyConfiguration(@ApiParam(value = "") @QueryParam("proxy.host")  String proxyHost,@ApiParam(value = "") @QueryParam("proxy.host@TypeHint")  String proxyHostAtTypeHint,@ApiParam(value = "") @QueryParam("proxy.port")  Integer proxyPort,@ApiParam(value = "") @QueryParam("proxy.port@TypeHint")  String proxyPortAtTypeHint,@ApiParam(value = "") @QueryParam("proxy.exceptions")  List<String> proxyExceptions,@ApiParam(value = "") @QueryParam("proxy.exceptions@TypeHint")  String proxyExceptionsAtTypeHint,@ApiParam(value = "") @QueryParam("proxy.enabled")  Boolean proxyEnabled,@ApiParam(value = "") @QueryParam("proxy.enabled@TypeHint")  String proxyEnabledAtTypeHint,@ApiParam(value = "") @QueryParam("proxy.user")  String proxyUser,@ApiParam(value = "") @QueryParam("proxy.user@TypeHint")  String proxyUserAtTypeHint,@ApiParam(value = "") @QueryParam("proxy.password")  String proxyPassword,@ApiParam(value = "") @QueryParam("proxy.password@TypeHint")  String proxyPasswordAtTypeHint,@Context SecurityContext securityContext)
     throws NotFoundException {
         return delegate.postConfigApacheHttpComponentsProxyConfiguration(proxyHost, proxyHostAtTypeHint, proxyPort, proxyPortAtTypeHint, proxyExceptions, proxyExceptionsAtTypeHint, proxyEnabled, proxyEnabledAtTypeHint, proxyUser, proxyUserAtTypeHint, proxyPassword, proxyPasswordAtTypeHint, securityContext);
     }
-    @POST
+    @javax.ws.rs.POST
     @Path("/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet")
     
     
@@ -138,7 +137,7 @@ public class AppsApi  {
     throws NotFoundException {
         return delegate.postConfigApacheSlingDavExServlet(alias, aliasAtTypeHint, davCreateAbsoluteUri, davCreateAbsoluteUriAtTypeHint, securityContext);
     }
-    @POST
+    @javax.ws.rs.POST
     @Path("/org.apache.sling.servlets.get.DefaultGetServlet")
     
     
@@ -152,7 +151,7 @@ public class AppsApi  {
     throws NotFoundException {
         return delegate.postConfigApacheSlingGetServlet(jsonMaximumresults, jsonMaximumresultsAtTypeHint, enableHtml, enableHtmlAtTypeHint, enableTxt, enableTxtAtTypeHint, enableXml, enableXmlAtTypeHint, securityContext);
     }
-    @POST
+    @javax.ws.rs.POST
     @Path("/org.apache.sling.security.impl.ReferrerFilter")
     
     
@@ -166,7 +165,7 @@ public class AppsApi  {
     throws NotFoundException {
         return delegate.postConfigApacheSlingReferrerFilter(allowEmpty, allowEmptyAtTypeHint, allowHosts, allowHostsAtTypeHint, allowHostsRegexp, allowHostsRegexpAtTypeHint, filterMethods, filterMethodsAtTypeHint, securityContext);
     }
-    @POST
+    @javax.ws.rs.POST
     @Path("/{configNodeName}")
     
     

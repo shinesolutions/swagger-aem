@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 /**
  * Response class to be returned by Api
@@ -16,7 +17,7 @@ import java.util.List;
  * SamlConfigurationPropertyItemsArray
  */
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2021-09-03T15:25:27.791+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2026-08-17T02:15:15.504120373Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class SamlConfigurationPropertyItemsArray   {
   @JsonProperty("name")
   private String name;
@@ -42,10 +43,10 @@ public class SamlConfigurationPropertyItemsArray   {
     return this;
   }
 
-   /**
+  /**
    * property name
    * @return name
-  **/
+   */
   @ApiModelProperty(value = "property name")
   public String getName() {
     return name;
@@ -60,10 +61,10 @@ public class SamlConfigurationPropertyItemsArray   {
     return this;
   }
 
-   /**
+  /**
    * True if optional
    * @return optional
-  **/
+   */
   @ApiModelProperty(value = "True if optional")
   public Boolean getOptional() {
     return optional;
@@ -78,10 +79,10 @@ public class SamlConfigurationPropertyItemsArray   {
     return this;
   }
 
-   /**
+  /**
    * True if property is set
    * @return isSet
-  **/
+   */
   @ApiModelProperty(value = "True if property is set")
   public Boolean getIsSet() {
     return isSet;
@@ -96,10 +97,10 @@ public class SamlConfigurationPropertyItemsArray   {
     return this;
   }
 
-   /**
+  /**
    * Property type, 1=String, 3=long, 11=boolean, 12=Password
    * @return type
-  **/
+   */
   @ApiModelProperty(value = "Property type, 1=String, 3=long, 11=boolean, 12=Password")
   public Integer getType() {
     return type;
@@ -122,10 +123,10 @@ public class SamlConfigurationPropertyItemsArray   {
     return this;
   }
 
-   /**
+  /**
    * Property value
    * @return values
-  **/
+   */
   @ApiModelProperty(value = "Property value")
   public List<String> getValues() {
     return values;
@@ -140,10 +141,10 @@ public class SamlConfigurationPropertyItemsArray   {
     return this;
   }
 
-   /**
+  /**
    * Property description
    * @return description
-  **/
+   */
   @ApiModelProperty(value = "Property description")
   public String getDescription() {
     return description;
@@ -196,10 +197,7 @@ public class SamlConfigurationPropertyItemsArray   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

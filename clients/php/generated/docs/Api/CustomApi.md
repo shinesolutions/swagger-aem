@@ -1,12 +1,14 @@
 # OpenAPI\Client\CustomApi
 
-All URIs are relative to http://localhost.
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**getAemHealthCheck()**](CustomApi.md#getAemHealthCheck) | **GET** /system/health | 
-[**postConfigAemHealthCheckServlet()**](CustomApi.md#postConfigAemHealthCheckServlet) | **POST** /apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck | 
-[**postConfigAemPasswordReset()**](CustomApi.md#postConfigAemPasswordReset) | **POST** /apps/system/config/com.shinesolutions.aem.passwordreset.Activator | 
+
+All URIs are relative to http://localhost, except if the operation defines another base path.
+
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**getAemHealthCheck()**](CustomApi.md#getAemHealthCheck) | **GET** /system/health |  |
+| [**postConfigAemHealthCheckServlet()**](CustomApi.md#postConfigAemHealthCheckServlet) | **POST** /apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck |  |
+| [**postConfigAemPasswordReset()**](CustomApi.md#postConfigAemPasswordReset) | **POST** /apps/system/config/com.shinesolutions.aem.passwordreset.Activator |  |
 
 
 ## `getAemHealthCheck()`
@@ -49,10 +51,10 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **tags** | **string**|  | [optional]
- **combine_tags_or** | **bool**|  | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **tags** | **string**|  | [optional] |
+| **combine_tags_or** | **bool**|  | [optional] |
 
 ### Return type
 
@@ -110,10 +112,10 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **bundles_ignored** | [**string[]**](../Model/string.md)|  | [optional]
- **bundles_ignored_type_hint** | **string**|  | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **bundles_ignored** | [**string[]**](../Model/string.md)|  | [optional] |
+| **bundles_ignored_type_hint** | **string**|  | [optional] |
 
 ### Return type
 
@@ -171,10 +173,10 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **pwdreset_authorizables** | [**string[]**](../Model/string.md)|  | [optional]
- **pwdreset_authorizables_type_hint** | **string**|  | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **pwdreset_authorizables** | [**string[]**](../Model/string.md)|  | [optional] |
+| **pwdreset_authorizables_type_hint** | **string**|  | [optional] |
 
 ### Return type
 

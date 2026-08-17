@@ -2,13 +2,9 @@ package org.openapitools.api;
 
 import java.io.File;
 
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.MediaType;
 import org.apache.cxf.jaxrs.ext.multipart.*;
 
 import io.swagger.annotations.Api;
@@ -36,6 +32,5 @@ public interface GraniteApi  {
     @ApiOperation(value = "", tags={ "granite" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public String sslSetup(@QueryParam("keystorePassword") @NotNull  String keystorePassword, @QueryParam("keystorePasswordConfirm") @NotNull  String keystorePasswordConfirm, @QueryParam("truststorePassword") @NotNull  String truststorePassword, @QueryParam("truststorePasswordConfirm") @NotNull  String truststorePasswordConfirm, @QueryParam("httpsHostname") @NotNull  String httpsHostname, @QueryParam("httpsPort") @NotNull  String httpsPort,  @Multipart(value = "privatekeyFile" , required = false) Attachment privatekeyFileDetail,  @Multipart(value = "certificateFile" , required = false) Attachment certificateFileDetail);
+    public String sslSetup(@QueryParam("keystorePassword") @NotNull String keystorePassword, @QueryParam("keystorePasswordConfirm") @NotNull String keystorePasswordConfirm, @QueryParam("truststorePassword") @NotNull String truststorePassword, @QueryParam("truststorePasswordConfirm") @NotNull String truststorePasswordConfirm, @QueryParam("httpsHostname") @NotNull String httpsHostname, @QueryParam("httpsPort") @NotNull String httpsPort,  @Multipart(value = "privatekeyFile" , required = false) Attachment privatekeyFileDetail,  @Multipart(value = "certificateFile" , required = false) Attachment certificateFileDetail);
 }
-

@@ -1,5 +1,7 @@
-import connexion
-import six
+import flask
+from typing import Dict
+from typing import Tuple
+from typing import Union
 
 from openapi_server.models.keystore_info import KeystoreInfo  # noqa: E501
 from openapi_server.models.truststore_info import TruststoreInfo  # noqa: E501
@@ -16,7 +18,7 @@ def delete_agent(runmode, name):  # noqa: E501
     :param name: 
     :type name: str
 
-    :rtype: None
+    :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -31,7 +33,7 @@ def delete_node(path, name):  # noqa: E501
     :param name: 
     :type name: str
 
-    :rtype: None
+    :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -46,7 +48,7 @@ def get_agent(runmode, name):  # noqa: E501
     :param name: 
     :type name: str
 
-    :rtype: None
+    :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -59,7 +61,7 @@ def get_agents(runmode):  # noqa: E501
     :param runmode: 
     :type runmode: str
 
-    :rtype: str
+    :rtype: Union[str, Tuple[str, int], Tuple[str, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -74,7 +76,7 @@ def get_authorizable_keystore(intermediate_path, authorizable_id):  # noqa: E501
     :param authorizable_id: 
     :type authorizable_id: str
 
-    :rtype: KeystoreInfo
+    :rtype: Union[KeystoreInfo, Tuple[KeystoreInfo, int], Tuple[KeystoreInfo, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -89,7 +91,7 @@ def get_keystore(intermediate_path, authorizable_id):  # noqa: E501
     :param authorizable_id: 
     :type authorizable_id: str
 
-    :rtype: file
+    :rtype: Union[file, Tuple[file, int], Tuple[file, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -104,7 +106,7 @@ def get_node(path, name):  # noqa: E501
     :param name: 
     :type name: str
 
-    :rtype: None
+    :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -121,7 +123,7 @@ def get_package(group, name, version):  # noqa: E501
     :param version: 
     :type version: str
 
-    :rtype: file
+    :rtype: Union[file, Tuple[file, int], Tuple[file, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -138,7 +140,7 @@ def get_package_filter(group, name, version):  # noqa: E501
     :param version: 
     :type version: str
 
-    :rtype: str
+    :rtype: Union[str, Tuple[str, int], Tuple[str, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -157,7 +159,7 @@ def get_query(path, p_limit, _1_property, _1_property_value):  # noqa: E501
     :param _1_property_value: 
     :type _1_property_value: str
 
-    :rtype: str
+    :rtype: Union[str, Tuple[str, int], Tuple[str, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -168,7 +170,7 @@ def get_truststore():  # noqa: E501
      # noqa: E501
 
 
-    :rtype: file
+    :rtype: Union[file, Tuple[file, int], Tuple[file, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -179,12 +181,12 @@ def get_truststore_info():  # noqa: E501
      # noqa: E501
 
 
-    :rtype: TruststoreInfo
+    :rtype: Union[TruststoreInfo, Tuple[TruststoreInfo, int], Tuple[TruststoreInfo, int, Dict[str, str]]
     """
     return 'do some magic!'
 
 
-def post_agent(runmode, name, jcrcontent_cqdistribute=None, jcrcontent_cqdistribute_type_hint=None, jcrcontent_cqname=None, jcrcontent_cqtemplate=None, jcrcontent_enabled=None, jcrcontent_jcrdescription=None, jcrcontent_jcrlast_modified=None, jcrcontent_jcrlast_modified_by=None, jcrcontent_jcrmixin_types=None, jcrcontent_jcrtitle=None, jcrcontent_log_level=None, jcrcontent_no_status_update=None, jcrcontent_no_versioning=None, jcrcontent_protocol_connect_timeout=None, jcrcontent_protocol_http_connection_closed=None, jcrcontent_protocol_http_expired=None, jcrcontent_protocol_http_headers=None, jcrcontent_protocol_http_headers_type_hint=None, jcrcontent_protocol_http_method=None, jcrcontent_protocol_https_relaxed=None, jcrcontent_protocol_interface=None, jcrcontent_protocol_socket_timeout=None, jcrcontent_protocol_version=None, jcrcontent_proxy_ntlm_domain=None, jcrcontent_proxy_ntlm_host=None, jcrcontent_proxy_host=None, jcrcontent_proxy_password=None, jcrcontent_proxy_port=None, jcrcontent_proxy_user=None, jcrcontent_queue_batch_max_size=None, jcrcontent_queue_batch_mode=None, jcrcontent_queue_batch_wait_time=None, jcrcontent_retry_delay=None, jcrcontent_reverse_replication=None, jcrcontent_serialization_type=None, jcrcontent_slingresource_type=None, jcrcontent_ssl=None, jcrcontent_transport_ntlm_domain=None, jcrcontent_transport_ntlm_host=None, jcrcontent_transport_password=None, jcrcontent_transport_uri=None, jcrcontent_transport_user=None, jcrcontent_trigger_distribute=None, jcrcontent_trigger_modified=None, jcrcontent_trigger_on_off_time=None, jcrcontent_trigger_receive=None, jcrcontent_trigger_specific=None, jcrcontent_user_id=None, jcrprimary_type=None, operation=None):  # noqa: E501
+def post_agent(runmode, name, jcr_content_cq_distribute=None, jcr_content_cq_distribute_type_hint=None, jcr_content_cq_name=None, jcr_content_cq_template=None, jcr_content_alias_update=None, jcr_content_enabled=None, jcr_content_jcr_description=None, jcr_content_jcr_last_modified=None, jcr_content_jcr_last_modified_by=None, jcr_content_jcr_mixin_types=None, jcr_content_jcr_title=None, jcr_content_log_level=None, jcr_content_no_status_update=None, jcr_content_no_versioning=None, jcr_content_protocol_connect_timeout=None, jcr_content_protocol_http_connection_closed=None, jcr_content_protocol_http_expired=None, jcr_content_protocol_http_headers=None, jcr_content_protocol_http_headers_type_hint=None, jcr_content_protocol_http_method=None, jcr_content_protocol_https_relaxed=None, jcr_content_protocol_interface=None, jcr_content_protocol_socket_timeout=None, jcr_content_protocol_version=None, jcr_content_proxy_ntlm_domain=None, jcr_content_proxy_ntlm_host=None, jcr_content_proxy_host=None, jcr_content_proxy_password=None, jcr_content_proxy_port=None, jcr_content_proxy_user=None, jcr_content_queue_batch_max_size=None, jcr_content_queue_batch_mode=None, jcr_content_queue_batch_wait_time=None, jcr_content_retry_delay=None, jcr_content_reverse_replication=None, jcr_content_serialization_type=None, jcr_content_sling_resource_type=None, jcr_content_ssl=None, jcr_content_transport_ntlm_domain=None, jcr_content_transport_ntlm_host=None, jcr_content_transport_password=None, jcr_content_transport_uri=None, jcr_content_transport_user=None, jcr_content_trigger_distribute=None, jcr_content_trigger_modified=None, jcr_content_trigger_on_off_time=None, jcr_content_trigger_receive=None, jcr_content_trigger_specific=None, jcr_content_user_id=None, jcr_primary_type=None, operation=None):  # noqa: E501
     """post_agent
 
      # noqa: E501
@@ -193,108 +195,110 @@ def post_agent(runmode, name, jcrcontent_cqdistribute=None, jcrcontent_cqdistrib
     :type runmode: str
     :param name: 
     :type name: str
-    :param jcrcontent_cqdistribute: 
-    :type jcrcontent_cqdistribute: bool
-    :param jcrcontent_cqdistribute_type_hint: 
-    :type jcrcontent_cqdistribute_type_hint: str
-    :param jcrcontent_cqname: 
-    :type jcrcontent_cqname: str
-    :param jcrcontent_cqtemplate: 
-    :type jcrcontent_cqtemplate: str
-    :param jcrcontent_enabled: 
-    :type jcrcontent_enabled: bool
-    :param jcrcontent_jcrdescription: 
-    :type jcrcontent_jcrdescription: str
-    :param jcrcontent_jcrlast_modified: 
-    :type jcrcontent_jcrlast_modified: str
-    :param jcrcontent_jcrlast_modified_by: 
-    :type jcrcontent_jcrlast_modified_by: str
-    :param jcrcontent_jcrmixin_types: 
-    :type jcrcontent_jcrmixin_types: str
-    :param jcrcontent_jcrtitle: 
-    :type jcrcontent_jcrtitle: str
-    :param jcrcontent_log_level: 
-    :type jcrcontent_log_level: str
-    :param jcrcontent_no_status_update: 
-    :type jcrcontent_no_status_update: bool
-    :param jcrcontent_no_versioning: 
-    :type jcrcontent_no_versioning: bool
-    :param jcrcontent_protocol_connect_timeout: 
-    :type jcrcontent_protocol_connect_timeout: 
-    :param jcrcontent_protocol_http_connection_closed: 
-    :type jcrcontent_protocol_http_connection_closed: bool
-    :param jcrcontent_protocol_http_expired: 
-    :type jcrcontent_protocol_http_expired: str
-    :param jcrcontent_protocol_http_headers: 
-    :type jcrcontent_protocol_http_headers: List[str]
-    :param jcrcontent_protocol_http_headers_type_hint: 
-    :type jcrcontent_protocol_http_headers_type_hint: str
-    :param jcrcontent_protocol_http_method: 
-    :type jcrcontent_protocol_http_method: str
-    :param jcrcontent_protocol_https_relaxed: 
-    :type jcrcontent_protocol_https_relaxed: bool
-    :param jcrcontent_protocol_interface: 
-    :type jcrcontent_protocol_interface: str
-    :param jcrcontent_protocol_socket_timeout: 
-    :type jcrcontent_protocol_socket_timeout: 
-    :param jcrcontent_protocol_version: 
-    :type jcrcontent_protocol_version: str
-    :param jcrcontent_proxy_ntlm_domain: 
-    :type jcrcontent_proxy_ntlm_domain: str
-    :param jcrcontent_proxy_ntlm_host: 
-    :type jcrcontent_proxy_ntlm_host: str
-    :param jcrcontent_proxy_host: 
-    :type jcrcontent_proxy_host: str
-    :param jcrcontent_proxy_password: 
-    :type jcrcontent_proxy_password: str
-    :param jcrcontent_proxy_port: 
-    :type jcrcontent_proxy_port: 
-    :param jcrcontent_proxy_user: 
-    :type jcrcontent_proxy_user: str
-    :param jcrcontent_queue_batch_max_size: 
-    :type jcrcontent_queue_batch_max_size: 
-    :param jcrcontent_queue_batch_mode: 
-    :type jcrcontent_queue_batch_mode: str
-    :param jcrcontent_queue_batch_wait_time: 
-    :type jcrcontent_queue_batch_wait_time: 
-    :param jcrcontent_retry_delay: 
-    :type jcrcontent_retry_delay: str
-    :param jcrcontent_reverse_replication: 
-    :type jcrcontent_reverse_replication: bool
-    :param jcrcontent_serialization_type: 
-    :type jcrcontent_serialization_type: str
-    :param jcrcontent_slingresource_type: 
-    :type jcrcontent_slingresource_type: str
-    :param jcrcontent_ssl: 
-    :type jcrcontent_ssl: str
-    :param jcrcontent_transport_ntlm_domain: 
-    :type jcrcontent_transport_ntlm_domain: str
-    :param jcrcontent_transport_ntlm_host: 
-    :type jcrcontent_transport_ntlm_host: str
-    :param jcrcontent_transport_password: 
-    :type jcrcontent_transport_password: str
-    :param jcrcontent_transport_uri: 
-    :type jcrcontent_transport_uri: str
-    :param jcrcontent_transport_user: 
-    :type jcrcontent_transport_user: str
-    :param jcrcontent_trigger_distribute: 
-    :type jcrcontent_trigger_distribute: bool
-    :param jcrcontent_trigger_modified: 
-    :type jcrcontent_trigger_modified: bool
-    :param jcrcontent_trigger_on_off_time: 
-    :type jcrcontent_trigger_on_off_time: bool
-    :param jcrcontent_trigger_receive: 
-    :type jcrcontent_trigger_receive: bool
-    :param jcrcontent_trigger_specific: 
-    :type jcrcontent_trigger_specific: bool
-    :param jcrcontent_user_id: 
-    :type jcrcontent_user_id: str
-    :param jcrprimary_type: 
-    :type jcrprimary_type: str
+    :param jcr_content_cq_distribute: 
+    :type jcr_content_cq_distribute: bool
+    :param jcr_content_cq_distribute_type_hint: 
+    :type jcr_content_cq_distribute_type_hint: str
+    :param jcr_content_cq_name: 
+    :type jcr_content_cq_name: str
+    :param jcr_content_cq_template: 
+    :type jcr_content_cq_template: str
+    :param jcr_content_alias_update: 
+    :type jcr_content_alias_update: bool
+    :param jcr_content_enabled: 
+    :type jcr_content_enabled: bool
+    :param jcr_content_jcr_description: 
+    :type jcr_content_jcr_description: str
+    :param jcr_content_jcr_last_modified: 
+    :type jcr_content_jcr_last_modified: str
+    :param jcr_content_jcr_last_modified_by: 
+    :type jcr_content_jcr_last_modified_by: str
+    :param jcr_content_jcr_mixin_types: 
+    :type jcr_content_jcr_mixin_types: str
+    :param jcr_content_jcr_title: 
+    :type jcr_content_jcr_title: str
+    :param jcr_content_log_level: 
+    :type jcr_content_log_level: str
+    :param jcr_content_no_status_update: 
+    :type jcr_content_no_status_update: bool
+    :param jcr_content_no_versioning: 
+    :type jcr_content_no_versioning: bool
+    :param jcr_content_protocol_connect_timeout: 
+    :type jcr_content_protocol_connect_timeout: 
+    :param jcr_content_protocol_http_connection_closed: 
+    :type jcr_content_protocol_http_connection_closed: bool
+    :param jcr_content_protocol_http_expired: 
+    :type jcr_content_protocol_http_expired: str
+    :param jcr_content_protocol_http_headers: 
+    :type jcr_content_protocol_http_headers: List[str]
+    :param jcr_content_protocol_http_headers_type_hint: 
+    :type jcr_content_protocol_http_headers_type_hint: str
+    :param jcr_content_protocol_http_method: 
+    :type jcr_content_protocol_http_method: str
+    :param jcr_content_protocol_https_relaxed: 
+    :type jcr_content_protocol_https_relaxed: bool
+    :param jcr_content_protocol_interface: 
+    :type jcr_content_protocol_interface: str
+    :param jcr_content_protocol_socket_timeout: 
+    :type jcr_content_protocol_socket_timeout: 
+    :param jcr_content_protocol_version: 
+    :type jcr_content_protocol_version: str
+    :param jcr_content_proxy_ntlm_domain: 
+    :type jcr_content_proxy_ntlm_domain: str
+    :param jcr_content_proxy_ntlm_host: 
+    :type jcr_content_proxy_ntlm_host: str
+    :param jcr_content_proxy_host: 
+    :type jcr_content_proxy_host: str
+    :param jcr_content_proxy_password: 
+    :type jcr_content_proxy_password: str
+    :param jcr_content_proxy_port: 
+    :type jcr_content_proxy_port: 
+    :param jcr_content_proxy_user: 
+    :type jcr_content_proxy_user: str
+    :param jcr_content_queue_batch_max_size: 
+    :type jcr_content_queue_batch_max_size: 
+    :param jcr_content_queue_batch_mode: 
+    :type jcr_content_queue_batch_mode: str
+    :param jcr_content_queue_batch_wait_time: 
+    :type jcr_content_queue_batch_wait_time: 
+    :param jcr_content_retry_delay: 
+    :type jcr_content_retry_delay: str
+    :param jcr_content_reverse_replication: 
+    :type jcr_content_reverse_replication: bool
+    :param jcr_content_serialization_type: 
+    :type jcr_content_serialization_type: str
+    :param jcr_content_sling_resource_type: 
+    :type jcr_content_sling_resource_type: str
+    :param jcr_content_ssl: 
+    :type jcr_content_ssl: str
+    :param jcr_content_transport_ntlm_domain: 
+    :type jcr_content_transport_ntlm_domain: str
+    :param jcr_content_transport_ntlm_host: 
+    :type jcr_content_transport_ntlm_host: str
+    :param jcr_content_transport_password: 
+    :type jcr_content_transport_password: str
+    :param jcr_content_transport_uri: 
+    :type jcr_content_transport_uri: str
+    :param jcr_content_transport_user: 
+    :type jcr_content_transport_user: str
+    :param jcr_content_trigger_distribute: 
+    :type jcr_content_trigger_distribute: bool
+    :param jcr_content_trigger_modified: 
+    :type jcr_content_trigger_modified: bool
+    :param jcr_content_trigger_on_off_time: 
+    :type jcr_content_trigger_on_off_time: bool
+    :param jcr_content_trigger_receive: 
+    :type jcr_content_trigger_receive: bool
+    :param jcr_content_trigger_specific: 
+    :type jcr_content_trigger_specific: bool
+    :param jcr_content_user_id: 
+    :type jcr_content_user_id: str
+    :param jcr_primary_type: 
+    :type jcr_primary_type: str
     :param operation: 
     :type operation: str
 
-    :rtype: None
+    :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -333,12 +337,12 @@ def post_authorizable_keystore(intermediate_path, authorizable_id, operation=Non
     :param key_store: 
     :type key_store: str
 
-    :rtype: KeystoreInfo
+    :rtype: Union[KeystoreInfo, Tuple[KeystoreInfo, int], Tuple[KeystoreInfo, int, Dict[str, str]]
     """
     return 'do some magic!'
 
 
-def post_authorizables(authorizable_id, intermediate_path, create_user=None, create_group=None, reppassword=None, profile_given_name=None):  # noqa: E501
+def post_authorizables(authorizable_id, intermediate_path, create_user=None, create_group=None, rep_password=None, profile_given_name=None):  # noqa: E501
     """post_authorizables
 
      # noqa: E501
@@ -351,12 +355,12 @@ def post_authorizables(authorizable_id, intermediate_path, create_user=None, cre
     :type create_user: str
     :param create_group: 
     :type create_group: str
-    :param reppassword: 
-    :type reppassword: str
+    :param rep_password: 
+    :type rep_password: str
     :param profile_given_name: 
     :type profile_given_name: str
 
-    :rtype: str
+    :rtype: Union[str, Tuple[str, int], Tuple[str, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -463,7 +467,7 @@ def post_config_adobe_granite_saml_authentication_handler(key_store_password=Non
     :param user_intermediate_path_type_hint: 
     :type user_intermediate_path_type_hint: str
 
-    :rtype: None
+    :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -514,7 +518,7 @@ def post_config_apache_felix_jetty_based_http_service(org_apache_felix_https_nio
     :param org_osgi_service_http_port_secure_type_hint: 
     :type org_osgi_service_http_port_secure_type_hint: str
 
-    :rtype: None
+    :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -549,7 +553,7 @@ def post_config_apache_http_components_proxy_configuration(proxy_host=None, prox
     :param proxy_password_type_hint: 
     :type proxy_password_type_hint: str
 
-    :rtype: None
+    :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -568,7 +572,7 @@ def post_config_apache_sling_dav_ex_servlet(alias=None, alias_type_hint=None, da
     :param dav_create_absolute_uri_type_hint: 
     :type dav_create_absolute_uri_type_hint: str
 
-    :rtype: None
+    :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -595,7 +599,7 @@ def post_config_apache_sling_get_servlet(json_maximumresults=None, json_maximumr
     :param enable_xml_type_hint: 
     :type enable_xml_type_hint: str
 
-    :rtype: None
+    :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -622,7 +626,7 @@ def post_config_apache_sling_referrer_filter(allow_empty=None, allow_empty_type_
     :param filter_methods_type_hint: 
     :type filter_methods_type_hint: str
 
-    :rtype: None
+    :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -635,7 +639,7 @@ def post_config_property(config_node_name):  # noqa: E501
     :param config_node_name: 
     :type config_node_name: str
 
-    :rtype: None
+    :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -656,7 +660,7 @@ def post_node(path, name, operation=None, delete_authorizable=None, file=None): 
     :param file: 
     :type file: str
 
-    :rtype: None
+    :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -673,24 +677,24 @@ def post_node_rw(path, name, add_members=None):  # noqa: E501
     :param add_members: 
     :type add_members: str
 
-    :rtype: None
+    :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
     """
     return 'do some magic!'
 
 
-def post_path(path, jcrprimary_type, name):  # noqa: E501
+def post_path(path, jcr_primary_type, name):  # noqa: E501
     """post_path
 
      # noqa: E501
 
     :param path: 
     :type path: str
-    :param jcrprimary_type: 
-    :type jcrprimary_type: str
+    :param jcr_primary_type: 
+    :type jcr_primary_type: str
     :param name: 
     :type name: str
 
-    :rtype: None
+    :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -709,12 +713,12 @@ def post_query(path, p_limit, _1_property, _1_property_value):  # noqa: E501
     :param _1_property_value: 
     :type _1_property_value: str
 
-    :rtype: str
+    :rtype: Union[str, Tuple[str, int], Tuple[str, int, Dict[str, str]]
     """
     return 'do some magic!'
 
 
-def post_tree_activation(ignoredeactivated, onlymodified, path):  # noqa: E501
+def post_tree_activation(ignoredeactivated, onlymodified, path, cmd):  # noqa: E501
     """post_tree_activation
 
      # noqa: E501
@@ -725,8 +729,10 @@ def post_tree_activation(ignoredeactivated, onlymodified, path):  # noqa: E501
     :type onlymodified: bool
     :param path: 
     :type path: str
+    :param cmd: 
+    :type cmd: str
 
-    :rtype: None
+    :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -749,7 +755,7 @@ def post_truststore(operation=None, new_password=None, re_password=None, key_sto
     :param certificate: 
     :type certificate: str
 
-    :rtype: str
+    :rtype: Union[str, Tuple[str, int], Tuple[str, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -762,6 +768,6 @@ def post_truststore_pkcs12(truststore_p12=None):  # noqa: E501
     :param truststore_p12: 
     :type truststore_p12: str
 
-    :rtype: str
+    :rtype: Union[str, Tuple[str, int], Tuple[str, int, Dict[str, str]]
     """
     return 'do some magic!'

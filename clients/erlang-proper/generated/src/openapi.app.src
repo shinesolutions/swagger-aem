@@ -1,0 +1,21 @@
+{ application, openapi
+, [ {description, "Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API"}
+  , {vsn, "0.1.0"}
+  , {registered, []}
+  , { applications
+    , [ kernel
+      , stdlib
+      , ssl
+      , jsx
+      ]
+    }
+  , { env
+    , [ {host, "http://localhost"}
+      , {basic_auth, {"admin", "admin"}}
+      ]
+    }
+  , {modules, []}
+  , {maintainers, []}
+  , {licenses, []}
+  , {links, ["https://github.com/shinesolutions"]}
+]}.

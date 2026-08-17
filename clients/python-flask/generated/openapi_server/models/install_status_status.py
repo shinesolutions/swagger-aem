@@ -1,11 +1,8 @@
-# coding: utf-8
-
-from __future__ import absolute_import
 from datetime import date, datetime  # noqa: F401
 
 from typing import List, Dict  # noqa: F401
 
-from openapi_server.models.base_model_ import Model
+from openapi_server.models.base_model import Model
 from openapi_server import util
 
 
@@ -48,7 +45,7 @@ class InstallStatusStatus(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def finished(self):
+    def finished(self) -> bool:
         """Gets the finished of this InstallStatusStatus.
 
 
@@ -58,7 +55,7 @@ class InstallStatusStatus(Model):
         return self._finished
 
     @finished.setter
-    def finished(self, finished):
+    def finished(self, finished: bool):
         """Sets the finished of this InstallStatusStatus.
 
 
@@ -69,7 +66,7 @@ class InstallStatusStatus(Model):
         self._finished = finished
 
     @property
-    def item_count(self):
+    def item_count(self) -> int:
         """Gets the item_count of this InstallStatusStatus.
 
 
@@ -79,7 +76,7 @@ class InstallStatusStatus(Model):
         return self._item_count
 
     @item_count.setter
-    def item_count(self, item_count):
+    def item_count(self, item_count: int):
         """Sets the item_count of this InstallStatusStatus.
 
 

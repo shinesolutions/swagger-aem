@@ -1,0 +1,45 @@
+{
+  "namespace": "model",
+  "type": "record",
+  "doc": "",
+  "name": "SamlConfigurationInfo",
+  "fields": [
+    {
+      "name": "pid",
+      "type": ["null", "string"],
+      "doc": "Persistent Identity (PID)",
+      "default": null
+    },
+    {
+      "name": "title",
+      "type": ["null", "string"],
+      "doc": "Title",
+      "default": null
+    },
+    {
+      "name": "description",
+      "type": ["null", "string"],
+      "doc": "Title",
+      "default": null
+    },
+    {
+      "name": "bundle_location",
+      "type": ["null", "string"],
+      "doc": "needed for configuration binding",
+      "default": null
+    },
+    {
+      "name": "service_location",
+      "type": ["null", "string"],
+      "doc": "needed for configuraiton binding",
+      "default": null
+    },
+    {
+      "name": "properties",
+      "type": ["null", "model.SamlConfigurationProperties"],
+      "doc": "",
+      "default": null
+    }
+  ]
+
+}

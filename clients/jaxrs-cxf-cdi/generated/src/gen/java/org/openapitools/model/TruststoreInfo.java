@@ -5,27 +5,27 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.model.TruststoreItems;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 
 
 import io.swagger.annotations.*;
 import java.util.Objects;
 
-import javax.xml.bind.annotation.*;
 
 
 public class TruststoreInfo   {
   
-  private List<TruststoreItems> aliases = null;
+  private List<@Valid TruststoreItems> aliases = new ArrayList<>();
 
   private Boolean exists;
 
-
   /**
    **/
-  public TruststoreInfo aliases(List<TruststoreItems> aliases) {
+  public TruststoreInfo aliases(List<@Valid TruststoreItems> aliases) {
     this.aliases = aliases;
     return this;
   }
@@ -33,16 +33,16 @@ public class TruststoreInfo   {
   
   @ApiModelProperty(value = "")
   @JsonProperty("aliases")
-  public List<TruststoreItems> getAliases() {
+  public List<@Valid TruststoreItems> getAliases() {
     return aliases;
   }
-  public void setAliases(List<TruststoreItems> aliases) {
+  public void setAliases(List<@Valid TruststoreItems> aliases) {
     this.aliases = aliases;
   }
 
   public TruststoreInfo addAliasesItem(TruststoreItems aliasesItem) {
     if (this.aliases == null) {
-      this.aliases = new ArrayList<TruststoreItems>();
+      this.aliases = new ArrayList<>();
     }
     this.aliases.add(aliasesItem);
     return this;
@@ -78,8 +78,8 @@ public class TruststoreInfo   {
       return false;
     }
     TruststoreInfo truststoreInfo = (TruststoreInfo) o;
-    return Objects.equals(aliases, truststoreInfo.aliases) &&
-        Objects.equals(exists, truststoreInfo.exists);
+    return Objects.equals(this.aliases, truststoreInfo.aliases) &&
+        Objects.equals(this.exists, truststoreInfo.exists);
   }
 
   @Override
@@ -103,10 +103,7 @@ public class TruststoreInfo   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

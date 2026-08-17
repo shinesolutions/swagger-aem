@@ -1,0 +1,40 @@
+{
+  "type": "form",
+  "version": "2.0",
+  "cells": [{
+    "label": "General",
+    "children": [
+      {"model": "label"},
+      {"model": "description"}
+    ]
+  },{
+    "label": "Details",
+    "model": "properties",
+    "children": [
+      {"model": "path" },
+      {"model": "service_ranking" },
+      {"model": "idp_url" },
+      {"model": "idp_cert_alias" },
+      {"model": "idp_http_redirect" },
+      {"model": "service_provider_entity_id" },
+      {"model": "assertion_consumer_service_url" },
+      {"model": "sp_private_key_alias" },
+      {"model": "key_store_password" },
+      {"model": "default_redirect_url" },
+      {"model": "user_id_attribute" },
+      {"model": "use_encryption" },
+      {"model": "create_user" },
+      {"model": "add_group_memberships" },
+      {"model": "group_membership_attribute" },
+      {"model": "default_groups" },
+      {"model": "name_id_format" },
+      {"model": "synchronize_attributes" },
+      {"model": "handle_logout" },
+      {"model": "logout_url" },
+      {"model": "clock_tolerance" },
+      {"model": "digest_method" },
+      {"model": "signature_method" },
+      {"model": "user_intermediate_path" },
+    ]
+  }]
+}

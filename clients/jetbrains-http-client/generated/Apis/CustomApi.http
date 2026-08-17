@@ -1,0 +1,17 @@
+## CustomApi
+
+### 
+## 
+GET http://localhost/system/health?tags={{tags}}&combineTagsOr={{combineTagsOr}}
+Accept: application/json
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+POST http://localhost/apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck?bundlesPeriodignored={{bundlesPeriodignored}}&bundlesPeriodignoredAtTypeHint={{bundlesPeriodignoredAtTypeHint}}
+Authorization: Basic: {{username-password}}
+
+### 
+## 
+POST http://localhost/apps/system/config/com.shinesolutions.aem.passwordreset.Activator?pwdresetPeriodauthorizables={{pwdresetPeriodauthorizables}}&pwdresetPeriodauthorizablesAtTypeHint={{pwdresetPeriodauthorizablesAtTypeHint}}
+Authorization: Basic: {{username-password}}

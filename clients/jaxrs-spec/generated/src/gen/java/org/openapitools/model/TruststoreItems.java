@@ -10,18 +10,24 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2021-09-03T15:26:06.461+10:00[Australia/Melbourne]")public class TruststoreItems   {
-  
-  private @Valid String alias;
-  private @Valid String entryType;
-  private @Valid String subject;
-  private @Valid String issuer;
-  private @Valid String notBefore;
-  private @Valid String notAfter;
-  private @Valid Integer serialNumber;
+@JsonTypeName("TruststoreItems")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2026-08-17T02:15:42.417242947Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+public class TruststoreItems   {
+  private String alias;
+  private String entryType;
+  private String subject;
+  private String issuer;
+  private String notBefore;
+  private String notAfter;
+  private Integer serialNumber;
+
+  public TruststoreItems() {
+  }
 
   /**
    * Truststore alias name
@@ -32,26 +38,23 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "Truststore alias name")
   @JsonProperty("alias")
   public String getAlias() {
     return alias;
   }
 
+  @JsonProperty("alias")
   public void setAlias(String alias) {
     this.alias = alias;
   }
 
-/**
+  /**
    **/
   public TruststoreItems entryType(String entryType) {
     this.entryType = entryType;
     return this;
   }
-
-  
 
   
   @ApiModelProperty(value = "")
@@ -60,11 +63,12 @@ import com.fasterxml.jackson.annotation.JsonValue;
     return entryType;
   }
 
+  @JsonProperty("entryType")
   public void setEntryType(String entryType) {
     this.entryType = entryType;
   }
 
-/**
+  /**
    * e.g. \&quot;CN&#x3D;localhost\&quot;
    **/
   public TruststoreItems subject(String subject) {
@@ -73,19 +77,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "e.g. \"CN=localhost\"")
   @JsonProperty("subject")
   public String getSubject() {
     return subject;
   }
 
+  @JsonProperty("subject")
   public void setSubject(String subject) {
     this.subject = subject;
   }
 
-/**
+  /**
    * e.g. \&quot;CN&#x3D;Admin\&quot;
    **/
   public TruststoreItems issuer(String issuer) {
@@ -94,19 +97,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "e.g. \"CN=Admin\"")
   @JsonProperty("issuer")
   public String getIssuer() {
     return issuer;
   }
 
+  @JsonProperty("issuer")
   public void setIssuer(String issuer) {
     this.issuer = issuer;
   }
 
-/**
+  /**
    * e.g. \&quot;Sun Jul 01 12:00:00 AEST 2018\&quot;
    **/
   public TruststoreItems notBefore(String notBefore) {
@@ -115,19 +117,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "e.g. \"Sun Jul 01 12:00:00 AEST 2018\"")
   @JsonProperty("notBefore")
   public String getNotBefore() {
     return notBefore;
   }
 
+  @JsonProperty("notBefore")
   public void setNotBefore(String notBefore) {
     this.notBefore = notBefore;
   }
 
-/**
+  /**
    * e.g. \&quot;Sun Jun 30 23:59:50 AEST 2019\&quot;
    **/
   public TruststoreItems notAfter(String notAfter) {
@@ -136,19 +137,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "e.g. \"Sun Jun 30 23:59:50 AEST 2019\"")
   @JsonProperty("notAfter")
   public String getNotAfter() {
     return notAfter;
   }
 
+  @JsonProperty("notAfter")
   public void setNotAfter(String notAfter) {
     this.notAfter = notAfter;
   }
 
-/**
+  /**
    * 18165099476682912368
    **/
   public TruststoreItems serialNumber(Integer serialNumber) {
@@ -157,14 +157,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "18165099476682912368")
   @JsonProperty("serialNumber")
   public Integer getSerialNumber() {
     return serialNumber;
   }
 
+  @JsonProperty("serialNumber")
   public void setSerialNumber(Integer serialNumber) {
     this.serialNumber = serialNumber;
   }
@@ -214,12 +213,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 
 
 }
-

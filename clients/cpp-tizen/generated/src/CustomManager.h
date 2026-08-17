@@ -5,6 +5,7 @@
 #include <cstring>
 #include <list>
 #include <glib.h>
+#include <list>
 #include "Error.h"
 
 /** \defgroup Operations API Endpoints

@@ -1,6 +1,8 @@
 # SamlConfigurationProperties
 
+
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **path** | [**SamlConfigurationPropertyItemsArray**](SamlConfigurationPropertyItemsArray.md) |  | [optional] 
@@ -28,6 +30,23 @@ Name | Type | Description | Notes
 **signature_method** | [**SamlConfigurationPropertyItemsString**](SamlConfigurationPropertyItemsString.md) |  | [optional] 
 **user_intermediate_path** | [**SamlConfigurationPropertyItemsString**](SamlConfigurationPropertyItemsString.md) |  | [optional] 
 
+## Example
+
+```python
+from swaggeraem.models.saml_configuration_properties import SamlConfigurationProperties
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of SamlConfigurationProperties from a JSON string
+saml_configuration_properties_instance = SamlConfigurationProperties.from_json(json)
+# print the JSON string representation of the object
+print(SamlConfigurationProperties.to_json())
+
+# convert the object into a dict
+saml_configuration_properties_dict = saml_configuration_properties_instance.to_dict()
+# create an instance of SamlConfigurationProperties from a dict
+saml_configuration_properties_from_dict = SamlConfigurationProperties.from_dict(saml_configuration_properties_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

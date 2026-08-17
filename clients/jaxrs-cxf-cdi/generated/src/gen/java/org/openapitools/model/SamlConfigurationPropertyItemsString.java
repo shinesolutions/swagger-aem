@@ -5,12 +5,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 
 
 import io.swagger.annotations.*;
 import java.util.Objects;
 
-import javax.xml.bind.annotation.*;
 
 
 public class SamlConfigurationPropertyItemsString   {
@@ -26,7 +26,6 @@ public class SamlConfigurationPropertyItemsString   {
   private String value;
 
   private String description;
-
 
   /**
    * property name
@@ -152,12 +151,12 @@ public class SamlConfigurationPropertyItemsString   {
       return false;
     }
     SamlConfigurationPropertyItemsString samlConfigurationPropertyItemsString = (SamlConfigurationPropertyItemsString) o;
-    return Objects.equals(name, samlConfigurationPropertyItemsString.name) &&
-        Objects.equals(optional, samlConfigurationPropertyItemsString.optional) &&
-        Objects.equals(isSet, samlConfigurationPropertyItemsString.isSet) &&
-        Objects.equals(type, samlConfigurationPropertyItemsString.type) &&
-        Objects.equals(value, samlConfigurationPropertyItemsString.value) &&
-        Objects.equals(description, samlConfigurationPropertyItemsString.description);
+    return Objects.equals(this.name, samlConfigurationPropertyItemsString.name) &&
+        Objects.equals(this.optional, samlConfigurationPropertyItemsString.optional) &&
+        Objects.equals(this.isSet, samlConfigurationPropertyItemsString.isSet) &&
+        Objects.equals(this.type, samlConfigurationPropertyItemsString.type) &&
+        Objects.equals(this.value, samlConfigurationPropertyItemsString.value) &&
+        Objects.equals(this.description, samlConfigurationPropertyItemsString.description);
   }
 
   @Override
@@ -185,10 +184,7 @@ public class SamlConfigurationPropertyItemsString   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

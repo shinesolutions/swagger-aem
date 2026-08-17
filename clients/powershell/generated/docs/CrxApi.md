@@ -1,4 +1,4 @@
-# PSOpenAPITools.PSOpenAPITools/Api.CrxApi
+# PSOpenAPITools.PSOpenAPITools\Api.CrxApi
 
 All URIs are relative to *http://localhost*
 
@@ -13,7 +13,7 @@ Method | HTTP request | Description
 [**Submit-SetPassword**](CrxApi.md#Submit-SetPassword) | **POST** /crx/explorer/ui/setpassword.jsp | 
 
 
-<a name="Get-CrxdeStatus"></a>
+<a id="Get-CrxdeStatus"></a>
 # **Get-CrxdeStatus**
 > String Get-CrxdeStatus<br>
 
@@ -31,7 +31,7 @@ $Configuration.Password = "YOUR_PASSWORD"
 try {
     $Result = Get-CrxdeStatus
 } catch {
-    Write-Host ("Exception occured when calling Get-CrxdeStatus: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Get-CrxdeStatus: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -54,7 +54,7 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-InstallStatus"></a>
+<a id="Get-InstallStatus"></a>
 # **Get-InstallStatus**
 > InstallStatus Get-InstallStatus<br>
 
@@ -72,7 +72,7 @@ $Configuration.Password = "YOUR_PASSWORD"
 try {
     $Result = Get-InstallStatus
 } catch {
-    Write-Host ("Exception occured when calling Get-InstallStatus: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Get-InstallStatus: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -95,7 +95,7 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-PackageManagerServlet"></a>
+<a id="Get-PackageManagerServlet"></a>
 # **Get-PackageManagerServlet**
 > void Get-PackageManagerServlet<br>
 
@@ -113,7 +113,7 @@ $Configuration.Password = "YOUR_PASSWORD"
 try {
     $Result = Get-PackageManagerServlet
 } catch {
-    Write-Host ("Exception occured when calling Get-PackageManagerServlet: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Get-PackageManagerServlet: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -136,7 +136,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-PackageService"></a>
+<a id="Submit-PackageService"></a>
 # **Submit-PackageService**
 > String Submit-PackageService<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Cmd] <String><br>
@@ -156,7 +156,7 @@ $Cmd = "MyCmd" # String |
 try {
     $Result = Submit-PackageService -Cmd $Cmd
 } catch {
-    Write-Host ("Exception occured when calling Submit-PackageService: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Submit-PackageService: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -182,7 +182,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-PackageServiceJson"></a>
+<a id="Submit-PackageServiceJson"></a>
 # **Submit-PackageServiceJson**
 > String Submit-PackageServiceJson<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Path] <String><br>
@@ -218,7 +218,7 @@ $Package =  # System.IO.FileInfo |  (optional)
 try {
     $Result = Submit-PackageServiceJson -Path $Path -Cmd $Cmd -GroupName $GroupName -PackageName $PackageName -PackageVersion $PackageVersion -Charset $Charset -Force $Force -Recursive $Recursive -Package $Package
 } catch {
-    Write-Host ("Exception occured when calling Submit-PackageServiceJson: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Submit-PackageServiceJson: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -252,7 +252,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-PackageUpdate"></a>
+<a id="Submit-PackageUpdate"></a>
 # **Submit-PackageUpdate**
 > String Submit-PackageUpdate<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-GroupName] <String><br>
@@ -282,7 +282,7 @@ $Charset = "MyCharset" # String |  (optional)
 try {
     $Result = Submit-PackageUpdate -GroupName $GroupName -PackageName $PackageName -Version $Version -Path $Path -Filter $Filter -Charset $Charset
 } catch {
-    Write-Host ("Exception occured when calling Submit-PackageUpdate: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Submit-PackageUpdate: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -313,7 +313,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-SetPassword"></a>
+<a id="Submit-SetPassword"></a>
 # **Submit-SetPassword**
 > String Submit-SetPassword<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Old] <String><br>
@@ -337,7 +337,7 @@ $Verify = "MyVerify" # String |
 try {
     $Result = Submit-SetPassword -Old $Old -Plain $Plain -Verify $Verify
 } catch {
-    Write-Host ("Exception occured when calling Submit-SetPassword: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Submit-SetPassword: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```

@@ -7,24 +7,18 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 import io.swagger.annotations.*;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyEapServerCodegen", date = "2021-09-03T15:26:02.321+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyEapServerCodegen", date = "2026-08-17T02:15:40.232181116Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class TruststoreItems   {
   
-
   private String alias;
-
   private String entryType;
-
   private String subject;
-
   private String issuer;
-
   private String notBefore;
-
   private String notAfter;
-
   private Integer serialNumber;
 
   /**
@@ -127,13 +121,13 @@ public class TruststoreItems   {
       return false;
     }
     TruststoreItems truststoreItems = (TruststoreItems) o;
-    return Objects.equals(alias, truststoreItems.alias) &&
-        Objects.equals(entryType, truststoreItems.entryType) &&
-        Objects.equals(subject, truststoreItems.subject) &&
-        Objects.equals(issuer, truststoreItems.issuer) &&
-        Objects.equals(notBefore, truststoreItems.notBefore) &&
-        Objects.equals(notAfter, truststoreItems.notAfter) &&
-        Objects.equals(serialNumber, truststoreItems.serialNumber);
+    return Objects.equals(this.alias, truststoreItems.alias) &&
+        Objects.equals(this.entryType, truststoreItems.entryType) &&
+        Objects.equals(this.subject, truststoreItems.subject) &&
+        Objects.equals(this.issuer, truststoreItems.issuer) &&
+        Objects.equals(this.notBefore, truststoreItems.notBefore) &&
+        Objects.equals(this.notAfter, truststoreItems.notAfter) &&
+        Objects.equals(this.serialNumber, truststoreItems.serialNumber);
   }
 
   @Override
@@ -162,10 +156,7 @@ public class TruststoreItems   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

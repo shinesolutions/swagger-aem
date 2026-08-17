@@ -135,13 +135,13 @@ class CrxApiSimulation extends Simulation {
         .feed(postPackageServiceJsonPATHFeeder)
         .exec(http("postPackageServiceJson")
         .httpRequest("POST","/crx/packmgr/service/.json/${path}")
-        .queryParam("packageVersion","${packageVersion}")
-        .queryParam("force","${force}")
-        .queryParam("cmd","${cmd}")
-        .queryParam("groupName","${groupName}")
         .queryParam("recursive","${recursive}")
         .queryParam("packageName","${packageName}")
+        .queryParam("packageVersion","${packageVersion}")
+        .queryParam("groupName","${groupName}")
         .queryParam("_charset_","${_charset_}")
+        .queryParam("force","${force}")
+        .queryParam("cmd","${cmd}")
 )
 
     // Run scnpostPackageServiceJson with warm up and reach a constant rate for entire duration
@@ -156,12 +156,12 @@ class CrxApiSimulation extends Simulation {
         .feed(postPackageUpdateQUERYFeeder)
         .exec(http("postPackageUpdate")
         .httpRequest("POST","/crx/packmgr/update.jsp")
-        .queryParam("version","${version}")
-        .queryParam("filter","${filter}")
         .queryParam("packageName","${packageName}")
-        .queryParam("groupName","${groupName}")
         .queryParam("path","${path}")
+        .queryParam("filter","${filter}")
         .queryParam("_charset_","${_charset_}")
+        .queryParam("version","${version}")
+        .queryParam("groupName","${groupName}")
 )
 
     // Run scnpostPackageUpdate with warm up and reach a constant rate for entire duration
@@ -176,9 +176,9 @@ class CrxApiSimulation extends Simulation {
         .feed(postSetPasswordQUERYFeeder)
         .exec(http("postSetPassword")
         .httpRequest("POST","/crx/explorer/ui/setpassword.jsp")
-        .queryParam("old","${old}")
         .queryParam("verify","${verify}")
         .queryParam("plain","${plain}")
+        .queryParam("old","${old}")
 )
 
     // Run scnpostSetPassword with warm up and reach a constant rate for entire duration

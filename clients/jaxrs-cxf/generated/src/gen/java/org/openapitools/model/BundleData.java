@@ -1,74 +1,80 @@
 package org.openapitools.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.model.BundleDataProp;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
 
 import io.swagger.annotations.ApiModelProperty;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlEnumValue;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 public class BundleData  {
   
-  @ApiModelProperty(value = "Bundle ID")
  /**
-   * Bundle ID
-  **/
+  * Bundle ID
+  */
+  @ApiModelProperty(value = "Bundle ID")
+
   private Integer id;
 
-  @ApiModelProperty(value = "Bundle name")
  /**
-   * Bundle name
-  **/
+  * Bundle name
+  */
+  @ApiModelProperty(value = "Bundle name")
+
   private String name;
 
-  @ApiModelProperty(value = "Is bundle a fragment")
  /**
-   * Is bundle a fragment
-  **/
+  * Is bundle a fragment
+  */
+  @ApiModelProperty(value = "Is bundle a fragment")
+
   private Boolean fragment;
 
-  @ApiModelProperty(value = "Numeric raw bundle state value")
  /**
-   * Numeric raw bundle state value
-  **/
+  * Numeric raw bundle state value
+  */
+  @ApiModelProperty(value = "Numeric raw bundle state value")
+
   private Integer stateRaw;
 
-  @ApiModelProperty(value = "Bundle state value")
  /**
-   * Bundle state value
-  **/
+  * Bundle state value
+  */
+  @ApiModelProperty(value = "Bundle state value")
+
   private String state;
 
-  @ApiModelProperty(value = "Bundle version")
  /**
-   * Bundle version
-  **/
+  * Bundle version
+  */
+  @ApiModelProperty(value = "Bundle version")
+
   private String version;
 
-  @ApiModelProperty(value = "Bundle symbolic name")
  /**
-   * Bundle symbolic name
-  **/
+  * Bundle symbolic name
+  */
+  @ApiModelProperty(value = "Bundle symbolic name")
+
   private String symbolicName;
 
-  @ApiModelProperty(value = "Bundle category")
  /**
-   * Bundle category
-  **/
+  * Bundle category
+  */
+  @ApiModelProperty(value = "Bundle category")
+
   private String category;
 
   @ApiModelProperty(value = "")
+
   @Valid
-  private List<BundleDataProp> props = null;
+
+  private List<@Valid BundleDataProp> props = new ArrayList<>();
  /**
    * Bundle ID
    * @return id
@@ -218,15 +224,15 @@ public class BundleData  {
    * @return props
   **/
   @JsonProperty("props")
-  public List<BundleDataProp> getProps() {
+  public List<@Valid BundleDataProp> getProps() {
     return props;
   }
 
-  public void setProps(List<BundleDataProp> props) {
+  public void setProps(List<@Valid BundleDataProp> props) {
     this.props = props;
   }
 
-  public BundleData props(List<BundleDataProp> props) {
+  public BundleData props(List<@Valid BundleDataProp> props) {
     this.props = props;
     return this;
   }
@@ -236,6 +242,30 @@ public class BundleData  {
     return this;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    BundleData bundleData = (BundleData) o;
+    return Objects.equals(this.id, bundleData.id) &&
+        Objects.equals(this.name, bundleData.name) &&
+        Objects.equals(this.fragment, bundleData.fragment) &&
+        Objects.equals(this.stateRaw, bundleData.stateRaw) &&
+        Objects.equals(this.state, bundleData.state) &&
+        Objects.equals(this.version, bundleData.version) &&
+        Objects.equals(this.symbolicName, bundleData.symbolicName) &&
+        Objects.equals(this.category, bundleData.category) &&
+        Objects.equals(this.props, bundleData.props);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, name, fragment, stateRaw, state, version, symbolicName, category, props);
+  }
 
   @Override
   public String toString() {
@@ -260,10 +290,7 @@ public class BundleData  {
    * (except the first line).
    */
   private static String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

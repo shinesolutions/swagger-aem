@@ -1,11 +1,8 @@
-# coding: utf-8
-
-from __future__ import absolute_import
 from datetime import date, datetime  # noqa: F401
 
 from typing import List, Dict  # noqa: F401
 
-from openapi_server.models.base_model_ import Model
+from openapi_server.models.base_model import Model
 from openapi_server.models.keystore_chain_items import KeystoreChainItems
 from openapi_server import util
 
@@ -65,7 +62,7 @@ class KeystoreItems(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def alias(self):
+    def alias(self) -> str:
         """Gets the alias of this KeystoreItems.
 
         Keystore alias name  # noqa: E501
@@ -76,7 +73,7 @@ class KeystoreItems(Model):
         return self._alias
 
     @alias.setter
-    def alias(self, alias):
+    def alias(self, alias: str):
         """Sets the alias of this KeystoreItems.
 
         Keystore alias name  # noqa: E501
@@ -88,7 +85,7 @@ class KeystoreItems(Model):
         self._alias = alias
 
     @property
-    def entry_type(self):
+    def entry_type(self) -> str:
         """Gets the entry_type of this KeystoreItems.
 
         e.g. \"privateKey\"  # noqa: E501
@@ -99,7 +96,7 @@ class KeystoreItems(Model):
         return self._entry_type
 
     @entry_type.setter
-    def entry_type(self, entry_type):
+    def entry_type(self, entry_type: str):
         """Sets the entry_type of this KeystoreItems.
 
         e.g. \"privateKey\"  # noqa: E501
@@ -111,7 +108,7 @@ class KeystoreItems(Model):
         self._entry_type = entry_type
 
     @property
-    def algorithm(self):
+    def algorithm(self) -> str:
         """Gets the algorithm of this KeystoreItems.
 
         e.g. \"RSA\"  # noqa: E501
@@ -122,7 +119,7 @@ class KeystoreItems(Model):
         return self._algorithm
 
     @algorithm.setter
-    def algorithm(self, algorithm):
+    def algorithm(self, algorithm: str):
         """Sets the algorithm of this KeystoreItems.
 
         e.g. \"RSA\"  # noqa: E501
@@ -134,7 +131,7 @@ class KeystoreItems(Model):
         self._algorithm = algorithm
 
     @property
-    def format(self):
+    def format(self) -> str:
         """Gets the format of this KeystoreItems.
 
         e.g. \"PKCS#8\"  # noqa: E501
@@ -145,7 +142,7 @@ class KeystoreItems(Model):
         return self._format
 
     @format.setter
-    def format(self, format):
+    def format(self, format: str):
         """Sets the format of this KeystoreItems.
 
         e.g. \"PKCS#8\"  # noqa: E501
@@ -157,7 +154,7 @@ class KeystoreItems(Model):
         self._format = format
 
     @property
-    def chain(self):
+    def chain(self) -> List[KeystoreChainItems]:
         """Gets the chain of this KeystoreItems.
 
 
@@ -167,7 +164,7 @@ class KeystoreItems(Model):
         return self._chain
 
     @chain.setter
-    def chain(self, chain):
+    def chain(self, chain: List[KeystoreChainItems]):
         """Sets the chain of this KeystoreItems.
 
 

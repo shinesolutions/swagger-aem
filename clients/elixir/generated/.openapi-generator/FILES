@@ -1,6 +1,8 @@
+.formatter.exs
 .gitignore
 README.md
 config/config.exs
+config/runtime.exs
 lib/adobe_experience_manager(aem)api/api/console.ex
 lib/adobe_experience_manager(aem)api/api/cq.ex
 lib/adobe_experience_manager(aem)api/api/crx.ex

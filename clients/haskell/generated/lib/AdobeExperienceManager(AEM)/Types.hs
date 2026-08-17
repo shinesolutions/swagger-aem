@@ -1,6 +1,7 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE DeriveDataTypeable         #-}
 {-# LANGUAGE DeriveGeneric              #-}
+{-# LANGUAGE DuplicateRecordFields      #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds -fno-warn-unused-imports #-}
 
 module AdobeExperienceManager(AEM).Types (
@@ -24,7 +25,7 @@ module AdobeExperienceManager(AEM).Types (
 
 import Data.Data (Data)
 import Data.UUID (UUID)
-import Data.List (stripPrefix)
+import Data.List (lookup)
 import Data.Maybe (fromMaybe)
 import Data.Aeson (Value, FromJSON(..), ToJSON(..), genericToJSON, genericParseJSON)
 import Data.Aeson.Types (Options(..), defaultOptions)
@@ -37,7 +38,6 @@ import qualified Data.Char as Char
 import qualified Data.Text as T
 import qualified Data.Map as Map
 import GHC.Generics (Generic)
-import Data.Function ((&))
 
 
 -- | 
@@ -54,13 +54,32 @@ data BundleData = BundleData
   } deriving (Show, Eq, Generic, Data)
 
 instance FromJSON BundleData where
-  parseJSON = genericParseJSON (removeFieldLabelPrefix True "bundleData")
+  parseJSON = genericParseJSON optionsBundleData
 instance ToJSON BundleData where
-  toJSON = genericToJSON (removeFieldLabelPrefix False "bundleData")
+  toJSON = genericToJSON optionsBundleData
 instance ToSchema BundleData where
   declareNamedSchema = Swagger.genericDeclareNamedSchema
     $ Swagger.fromAesonOptions
-    $ removeFieldLabelPrefix False "bundleData"
+    $ optionsBundleData
+
+optionsBundleData :: Options
+optionsBundleData =
+  defaultOptions
+    { omitNothingFields  = True
+    , fieldLabelModifier = \s -> fromMaybe ("did not find JSON field name for " ++ show s) $ lookup s table
+    }
+  where
+    table =
+      [ ("bundleDataId", "id")
+      , ("bundleDataName", "name")
+      , ("bundleDataFragment", "fragment")
+      , ("bundleDataStateRaw", "stateRaw")
+      , ("bundleDataState", "state")
+      , ("bundleDataVersion", "version")
+      , ("bundleDataSymbolicName", "symbolicName")
+      , ("bundleDataCategory", "category")
+      , ("bundleDataProps", "props")
+      ]
 
 
 -- | 
@@ -70,13 +89,25 @@ data BundleDataProp = BundleDataProp
   } deriving (Show, Eq, Generic, Data)
 
 instance FromJSON BundleDataProp where
-  parseJSON = genericParseJSON (removeFieldLabelPrefix True "bundleDataProp")
+  parseJSON = genericParseJSON optionsBundleDataProp
 instance ToJSON BundleDataProp where
-  toJSON = genericToJSON (removeFieldLabelPrefix False "bundleDataProp")
+  toJSON = genericToJSON optionsBundleDataProp
 instance ToSchema BundleDataProp where
   declareNamedSchema = Swagger.genericDeclareNamedSchema
     $ Swagger.fromAesonOptions
-    $ removeFieldLabelPrefix False "bundleDataProp"
+    $ optionsBundleDataProp
+
+optionsBundleDataProp :: Options
+optionsBundleDataProp =
+  defaultOptions
+    { omitNothingFields  = True
+    , fieldLabelModifier = \s -> fromMaybe ("did not find JSON field name for " ++ show s) $ lookup s table
+    }
+  where
+    table =
+      [ ("bundleDataPropKey", "key")
+      , ("bundleDataPropValue", "value")
+      ]
 
 
 -- | 
@@ -87,13 +118,26 @@ data BundleInfo = BundleInfo
   } deriving (Show, Eq, Generic, Data)
 
 instance FromJSON BundleInfo where
-  parseJSON = genericParseJSON (removeFieldLabelPrefix True "bundleInfo")
+  parseJSON = genericParseJSON optionsBundleInfo
 instance ToJSON BundleInfo where
-  toJSON = genericToJSON (removeFieldLabelPrefix False "bundleInfo")
+  toJSON = genericToJSON optionsBundleInfo
 instance ToSchema BundleInfo where
   declareNamedSchema = Swagger.genericDeclareNamedSchema
     $ Swagger.fromAesonOptions
-    $ removeFieldLabelPrefix False "bundleInfo"
+    $ optionsBundleInfo
+
+optionsBundleInfo :: Options
+optionsBundleInfo =
+  defaultOptions
+    { omitNothingFields  = True
+    , fieldLabelModifier = \s -> fromMaybe ("did not find JSON field name for " ++ show s) $ lookup s table
+    }
+  where
+    table =
+      [ ("bundleInfoStatus", "status")
+      , ("bundleInfoS", "s")
+      , ("bundleInfoData", "data")
+      ]
 
 
 -- | 
@@ -102,13 +146,24 @@ data InstallStatus = InstallStatus
   } deriving (Show, Eq, Generic, Data)
 
 instance FromJSON InstallStatus where
-  parseJSON = genericParseJSON (removeFieldLabelPrefix True "installStatus")
+  parseJSON = genericParseJSON optionsInstallStatus
 instance ToJSON InstallStatus where
-  toJSON = genericToJSON (removeFieldLabelPrefix False "installStatus")
+  toJSON = genericToJSON optionsInstallStatus
 instance ToSchema InstallStatus where
   declareNamedSchema = Swagger.genericDeclareNamedSchema
     $ Swagger.fromAesonOptions
-    $ removeFieldLabelPrefix False "installStatus"
+    $ optionsInstallStatus
+
+optionsInstallStatus :: Options
+optionsInstallStatus =
+  defaultOptions
+    { omitNothingFields  = True
+    , fieldLabelModifier = \s -> fromMaybe ("did not find JSON field name for " ++ show s) $ lookup s table
+    }
+  where
+    table =
+      [ ("installStatusStatus", "status")
+      ]
 
 
 -- | 
@@ -118,13 +173,25 @@ data InstallStatusStatus = InstallStatusStatus
   } deriving (Show, Eq, Generic, Data)
 
 instance FromJSON InstallStatusStatus where
-  parseJSON = genericParseJSON (removeFieldLabelPrefix True "installStatusStatus")
+  parseJSON = genericParseJSON optionsInstallStatusStatus
 instance ToJSON InstallStatusStatus where
-  toJSON = genericToJSON (removeFieldLabelPrefix False "installStatusStatus")
+  toJSON = genericToJSON optionsInstallStatusStatus
 instance ToSchema InstallStatusStatus where
   declareNamedSchema = Swagger.genericDeclareNamedSchema
     $ Swagger.fromAesonOptions
-    $ removeFieldLabelPrefix False "installStatusStatus"
+    $ optionsInstallStatusStatus
+
+optionsInstallStatusStatus :: Options
+optionsInstallStatusStatus =
+  defaultOptions
+    { omitNothingFields  = True
+    , fieldLabelModifier = \s -> fromMaybe ("did not find JSON field name for " ++ show s) $ lookup s table
+    }
+  where
+    table =
+      [ ("installStatusStatusFinished", "finished")
+      , ("installStatusStatusItemCount", "itemCount")
+      ]
 
 
 -- | 
@@ -137,13 +204,28 @@ data KeystoreChainItems = KeystoreChainItems
   } deriving (Show, Eq, Generic, Data)
 
 instance FromJSON KeystoreChainItems where
-  parseJSON = genericParseJSON (removeFieldLabelPrefix True "keystoreChainItems")
+  parseJSON = genericParseJSON optionsKeystoreChainItems
 instance ToJSON KeystoreChainItems where
-  toJSON = genericToJSON (removeFieldLabelPrefix False "keystoreChainItems")
+  toJSON = genericToJSON optionsKeystoreChainItems
 instance ToSchema KeystoreChainItems where
   declareNamedSchema = Swagger.genericDeclareNamedSchema
     $ Swagger.fromAesonOptions
-    $ removeFieldLabelPrefix False "keystoreChainItems"
+    $ optionsKeystoreChainItems
+
+optionsKeystoreChainItems :: Options
+optionsKeystoreChainItems =
+  defaultOptions
+    { omitNothingFields  = True
+    , fieldLabelModifier = \s -> fromMaybe ("did not find JSON field name for " ++ show s) $ lookup s table
+    }
+  where
+    table =
+      [ ("keystoreChainItemsSubject", "subject")
+      , ("keystoreChainItemsIssuer", "issuer")
+      , ("keystoreChainItemsNotBefore", "notBefore")
+      , ("keystoreChainItemsNotAfter", "notAfter")
+      , ("keystoreChainItemsSerialNumber", "serialNumber")
+      ]
 
 
 -- | 
@@ -153,13 +235,25 @@ data KeystoreInfo = KeystoreInfo
   } deriving (Show, Eq, Generic, Data)
 
 instance FromJSON KeystoreInfo where
-  parseJSON = genericParseJSON (removeFieldLabelPrefix True "keystoreInfo")
+  parseJSON = genericParseJSON optionsKeystoreInfo
 instance ToJSON KeystoreInfo where
-  toJSON = genericToJSON (removeFieldLabelPrefix False "keystoreInfo")
+  toJSON = genericToJSON optionsKeystoreInfo
 instance ToSchema KeystoreInfo where
   declareNamedSchema = Swagger.genericDeclareNamedSchema
     $ Swagger.fromAesonOptions
-    $ removeFieldLabelPrefix False "keystoreInfo"
+    $ optionsKeystoreInfo
+
+optionsKeystoreInfo :: Options
+optionsKeystoreInfo =
+  defaultOptions
+    { omitNothingFields  = True
+    , fieldLabelModifier = \s -> fromMaybe ("did not find JSON field name for " ++ show s) $ lookup s table
+    }
+  where
+    table =
+      [ ("keystoreInfoAliases", "aliases")
+      , ("keystoreInfoExists", "exists")
+      ]
 
 
 -- | 
@@ -172,13 +266,28 @@ data KeystoreItems = KeystoreItems
   } deriving (Show, Eq, Generic, Data)
 
 instance FromJSON KeystoreItems where
-  parseJSON = genericParseJSON (removeFieldLabelPrefix True "keystoreItems")
+  parseJSON = genericParseJSON optionsKeystoreItems
 instance ToJSON KeystoreItems where
-  toJSON = genericToJSON (removeFieldLabelPrefix False "keystoreItems")
+  toJSON = genericToJSON optionsKeystoreItems
 instance ToSchema KeystoreItems where
   declareNamedSchema = Swagger.genericDeclareNamedSchema
     $ Swagger.fromAesonOptions
-    $ removeFieldLabelPrefix False "keystoreItems"
+    $ optionsKeystoreItems
+
+optionsKeystoreItems :: Options
+optionsKeystoreItems =
+  defaultOptions
+    { omitNothingFields  = True
+    , fieldLabelModifier = \s -> fromMaybe ("did not find JSON field name for " ++ show s) $ lookup s table
+    }
+  where
+    table =
+      [ ("keystoreItemsAlias", "alias")
+      , ("keystoreItemsEntryType", "entryType")
+      , ("keystoreItemsAlgorithm", "algorithm")
+      , ("keystoreItemsFormat", "format")
+      , ("keystoreItemsChain", "chain")
+      ]
 
 
 -- | 
@@ -192,13 +301,29 @@ data SamlConfigurationInfo = SamlConfigurationInfo
   } deriving (Show, Eq, Generic, Data)
 
 instance FromJSON SamlConfigurationInfo where
-  parseJSON = genericParseJSON (removeFieldLabelPrefix True "samlConfigurationInfo")
+  parseJSON = genericParseJSON optionsSamlConfigurationInfo
 instance ToJSON SamlConfigurationInfo where
-  toJSON = genericToJSON (removeFieldLabelPrefix False "samlConfigurationInfo")
+  toJSON = genericToJSON optionsSamlConfigurationInfo
 instance ToSchema SamlConfigurationInfo where
   declareNamedSchema = Swagger.genericDeclareNamedSchema
     $ Swagger.fromAesonOptions
-    $ removeFieldLabelPrefix False "samlConfigurationInfo"
+    $ optionsSamlConfigurationInfo
+
+optionsSamlConfigurationInfo :: Options
+optionsSamlConfigurationInfo =
+  defaultOptions
+    { omitNothingFields  = True
+    , fieldLabelModifier = \s -> fromMaybe ("did not find JSON field name for " ++ show s) $ lookup s table
+    }
+  where
+    table =
+      [ ("samlConfigurationInfoPid", "pid")
+      , ("samlConfigurationInfoTitle", "title")
+      , ("samlConfigurationInfoDescription", "description")
+      , ("samlConfigurationInfoBundleUnderscorelocation", "bundle_location")
+      , ("samlConfigurationInfoServiceUnderscorelocation", "service_location")
+      , ("samlConfigurationInfoProperties", "properties")
+      ]
 
 
 -- | 
@@ -230,13 +355,47 @@ data SamlConfigurationProperties = SamlConfigurationProperties
   } deriving (Show, Eq, Generic, Data)
 
 instance FromJSON SamlConfigurationProperties where
-  parseJSON = genericParseJSON (removeFieldLabelPrefix True "samlConfigurationProperties")
+  parseJSON = genericParseJSON optionsSamlConfigurationProperties
 instance ToJSON SamlConfigurationProperties where
-  toJSON = genericToJSON (removeFieldLabelPrefix False "samlConfigurationProperties")
+  toJSON = genericToJSON optionsSamlConfigurationProperties
 instance ToSchema SamlConfigurationProperties where
   declareNamedSchema = Swagger.genericDeclareNamedSchema
     $ Swagger.fromAesonOptions
-    $ removeFieldLabelPrefix False "samlConfigurationProperties"
+    $ optionsSamlConfigurationProperties
+
+optionsSamlConfigurationProperties :: Options
+optionsSamlConfigurationProperties =
+  defaultOptions
+    { omitNothingFields  = True
+    , fieldLabelModifier = \s -> fromMaybe ("did not find JSON field name for " ++ show s) $ lookup s table
+    }
+  where
+    table =
+      [ ("samlConfigurationPropertiesPath", "path")
+      , ("samlConfigurationPropertiesServicePeriodranking", "service.ranking")
+      , ("samlConfigurationPropertiesIdpUrl", "idpUrl")
+      , ("samlConfigurationPropertiesIdpCertAlias", "idpCertAlias")
+      , ("samlConfigurationPropertiesIdpHttpRedirect", "idpHttpRedirect")
+      , ("samlConfigurationPropertiesServiceProviderEntityId", "serviceProviderEntityId")
+      , ("samlConfigurationPropertiesAssertionConsumerServiceURL", "assertionConsumerServiceURL")
+      , ("samlConfigurationPropertiesSpPrivateKeyAlias", "spPrivateKeyAlias")
+      , ("samlConfigurationPropertiesKeyStorePassword", "keyStorePassword")
+      , ("samlConfigurationPropertiesDefaultRedirectUrl", "defaultRedirectUrl")
+      , ("samlConfigurationPropertiesUserIDAttribute", "userIDAttribute")
+      , ("samlConfigurationPropertiesUseEncryption", "useEncryption")
+      , ("samlConfigurationPropertiesCreateUser", "createUser")
+      , ("samlConfigurationPropertiesAddGroupMemberships", "addGroupMemberships")
+      , ("samlConfigurationPropertiesGroupMembershipAttribute", "groupMembershipAttribute")
+      , ("samlConfigurationPropertiesDefaultGroups", "defaultGroups")
+      , ("samlConfigurationPropertiesNameIdFormat", "nameIdFormat")
+      , ("samlConfigurationPropertiesSynchronizeAttributes", "synchronizeAttributes")
+      , ("samlConfigurationPropertiesHandleLogout", "handleLogout")
+      , ("samlConfigurationPropertiesLogoutUrl", "logoutUrl")
+      , ("samlConfigurationPropertiesClockTolerance", "clockTolerance")
+      , ("samlConfigurationPropertiesDigestMethod", "digestMethod")
+      , ("samlConfigurationPropertiesSignatureMethod", "signatureMethod")
+      , ("samlConfigurationPropertiesUserIntermediatePath", "userIntermediatePath")
+      ]
 
 
 -- | 
@@ -250,13 +409,29 @@ data SamlConfigurationPropertyItemsArray = SamlConfigurationPropertyItemsArray
   } deriving (Show, Eq, Generic, Data)
 
 instance FromJSON SamlConfigurationPropertyItemsArray where
-  parseJSON = genericParseJSON (removeFieldLabelPrefix True "samlConfigurationPropertyItemsArray")
+  parseJSON = genericParseJSON optionsSamlConfigurationPropertyItemsArray
 instance ToJSON SamlConfigurationPropertyItemsArray where
-  toJSON = genericToJSON (removeFieldLabelPrefix False "samlConfigurationPropertyItemsArray")
+  toJSON = genericToJSON optionsSamlConfigurationPropertyItemsArray
 instance ToSchema SamlConfigurationPropertyItemsArray where
   declareNamedSchema = Swagger.genericDeclareNamedSchema
     $ Swagger.fromAesonOptions
-    $ removeFieldLabelPrefix False "samlConfigurationPropertyItemsArray"
+    $ optionsSamlConfigurationPropertyItemsArray
+
+optionsSamlConfigurationPropertyItemsArray :: Options
+optionsSamlConfigurationPropertyItemsArray =
+  defaultOptions
+    { omitNothingFields  = True
+    , fieldLabelModifier = \s -> fromMaybe ("did not find JSON field name for " ++ show s) $ lookup s table
+    }
+  where
+    table =
+      [ ("samlConfigurationPropertyItemsArrayName", "name")
+      , ("samlConfigurationPropertyItemsArrayOptional", "optional")
+      , ("samlConfigurationPropertyItemsArrayIsUnderscoreset", "is_set")
+      , ("samlConfigurationPropertyItemsArrayType", "type")
+      , ("samlConfigurationPropertyItemsArrayValues", "values")
+      , ("samlConfigurationPropertyItemsArrayDescription", "description")
+      ]
 
 
 -- | 
@@ -270,13 +445,29 @@ data SamlConfigurationPropertyItemsBoolean = SamlConfigurationPropertyItemsBoole
   } deriving (Show, Eq, Generic, Data)
 
 instance FromJSON SamlConfigurationPropertyItemsBoolean where
-  parseJSON = genericParseJSON (removeFieldLabelPrefix True "samlConfigurationPropertyItemsBoolean")
+  parseJSON = genericParseJSON optionsSamlConfigurationPropertyItemsBoolean
 instance ToJSON SamlConfigurationPropertyItemsBoolean where
-  toJSON = genericToJSON (removeFieldLabelPrefix False "samlConfigurationPropertyItemsBoolean")
+  toJSON = genericToJSON optionsSamlConfigurationPropertyItemsBoolean
 instance ToSchema SamlConfigurationPropertyItemsBoolean where
   declareNamedSchema = Swagger.genericDeclareNamedSchema
     $ Swagger.fromAesonOptions
-    $ removeFieldLabelPrefix False "samlConfigurationPropertyItemsBoolean"
+    $ optionsSamlConfigurationPropertyItemsBoolean
+
+optionsSamlConfigurationPropertyItemsBoolean :: Options
+optionsSamlConfigurationPropertyItemsBoolean =
+  defaultOptions
+    { omitNothingFields  = True
+    , fieldLabelModifier = \s -> fromMaybe ("did not find JSON field name for " ++ show s) $ lookup s table
+    }
+  where
+    table =
+      [ ("samlConfigurationPropertyItemsBooleanName", "name")
+      , ("samlConfigurationPropertyItemsBooleanOptional", "optional")
+      , ("samlConfigurationPropertyItemsBooleanIsUnderscoreset", "is_set")
+      , ("samlConfigurationPropertyItemsBooleanType", "type")
+      , ("samlConfigurationPropertyItemsBooleanValue", "value")
+      , ("samlConfigurationPropertyItemsBooleanDescription", "description")
+      ]
 
 
 -- | 
@@ -290,13 +481,29 @@ data SamlConfigurationPropertyItemsLong = SamlConfigurationPropertyItemsLong
   } deriving (Show, Eq, Generic, Data)
 
 instance FromJSON SamlConfigurationPropertyItemsLong where
-  parseJSON = genericParseJSON (removeFieldLabelPrefix True "samlConfigurationPropertyItemsLong")
+  parseJSON = genericParseJSON optionsSamlConfigurationPropertyItemsLong
 instance ToJSON SamlConfigurationPropertyItemsLong where
-  toJSON = genericToJSON (removeFieldLabelPrefix False "samlConfigurationPropertyItemsLong")
+  toJSON = genericToJSON optionsSamlConfigurationPropertyItemsLong
 instance ToSchema SamlConfigurationPropertyItemsLong where
   declareNamedSchema = Swagger.genericDeclareNamedSchema
     $ Swagger.fromAesonOptions
-    $ removeFieldLabelPrefix False "samlConfigurationPropertyItemsLong"
+    $ optionsSamlConfigurationPropertyItemsLong
+
+optionsSamlConfigurationPropertyItemsLong :: Options
+optionsSamlConfigurationPropertyItemsLong =
+  defaultOptions
+    { omitNothingFields  = True
+    , fieldLabelModifier = \s -> fromMaybe ("did not find JSON field name for " ++ show s) $ lookup s table
+    }
+  where
+    table =
+      [ ("samlConfigurationPropertyItemsLongName", "name")
+      , ("samlConfigurationPropertyItemsLongOptional", "optional")
+      , ("samlConfigurationPropertyItemsLongIsUnderscoreset", "is_set")
+      , ("samlConfigurationPropertyItemsLongType", "type")
+      , ("samlConfigurationPropertyItemsLongValue", "value")
+      , ("samlConfigurationPropertyItemsLongDescription", "description")
+      ]
 
 
 -- | 
@@ -310,13 +517,29 @@ data SamlConfigurationPropertyItemsString = SamlConfigurationPropertyItemsString
   } deriving (Show, Eq, Generic, Data)
 
 instance FromJSON SamlConfigurationPropertyItemsString where
-  parseJSON = genericParseJSON (removeFieldLabelPrefix True "samlConfigurationPropertyItemsString")
+  parseJSON = genericParseJSON optionsSamlConfigurationPropertyItemsString
 instance ToJSON SamlConfigurationPropertyItemsString where
-  toJSON = genericToJSON (removeFieldLabelPrefix False "samlConfigurationPropertyItemsString")
+  toJSON = genericToJSON optionsSamlConfigurationPropertyItemsString
 instance ToSchema SamlConfigurationPropertyItemsString where
   declareNamedSchema = Swagger.genericDeclareNamedSchema
     $ Swagger.fromAesonOptions
-    $ removeFieldLabelPrefix False "samlConfigurationPropertyItemsString"
+    $ optionsSamlConfigurationPropertyItemsString
+
+optionsSamlConfigurationPropertyItemsString :: Options
+optionsSamlConfigurationPropertyItemsString =
+  defaultOptions
+    { omitNothingFields  = True
+    , fieldLabelModifier = \s -> fromMaybe ("did not find JSON field name for " ++ show s) $ lookup s table
+    }
+  where
+    table =
+      [ ("samlConfigurationPropertyItemsStringName", "name")
+      , ("samlConfigurationPropertyItemsStringOptional", "optional")
+      , ("samlConfigurationPropertyItemsStringIsUnderscoreset", "is_set")
+      , ("samlConfigurationPropertyItemsStringType", "type")
+      , ("samlConfigurationPropertyItemsStringValue", "value")
+      , ("samlConfigurationPropertyItemsStringDescription", "description")
+      ]
 
 
 -- | 
@@ -326,13 +549,25 @@ data TruststoreInfo = TruststoreInfo
   } deriving (Show, Eq, Generic, Data)
 
 instance FromJSON TruststoreInfo where
-  parseJSON = genericParseJSON (removeFieldLabelPrefix True "truststoreInfo")
+  parseJSON = genericParseJSON optionsTruststoreInfo
 instance ToJSON TruststoreInfo where
-  toJSON = genericToJSON (removeFieldLabelPrefix False "truststoreInfo")
+  toJSON = genericToJSON optionsTruststoreInfo
 instance ToSchema TruststoreInfo where
   declareNamedSchema = Swagger.genericDeclareNamedSchema
     $ Swagger.fromAesonOptions
-    $ removeFieldLabelPrefix False "truststoreInfo"
+    $ optionsTruststoreInfo
+
+optionsTruststoreInfo :: Options
+optionsTruststoreInfo =
+  defaultOptions
+    { omitNothingFields  = True
+    , fieldLabelModifier = \s -> fromMaybe ("did not find JSON field name for " ++ show s) $ lookup s table
+    }
+  where
+    table =
+      [ ("truststoreInfoAliases", "aliases")
+      , ("truststoreInfoExists", "exists")
+      ]
 
 
 -- | 
@@ -347,72 +582,28 @@ data TruststoreItems = TruststoreItems
   } deriving (Show, Eq, Generic, Data)
 
 instance FromJSON TruststoreItems where
-  parseJSON = genericParseJSON (removeFieldLabelPrefix True "truststoreItems")
+  parseJSON = genericParseJSON optionsTruststoreItems
 instance ToJSON TruststoreItems where
-  toJSON = genericToJSON (removeFieldLabelPrefix False "truststoreItems")
+  toJSON = genericToJSON optionsTruststoreItems
 instance ToSchema TruststoreItems where
   declareNamedSchema = Swagger.genericDeclareNamedSchema
     $ Swagger.fromAesonOptions
-    $ removeFieldLabelPrefix False "truststoreItems"
+    $ optionsTruststoreItems
 
-
-uncapitalize :: String -> String
-uncapitalize (first:rest) = Char.toLower first : rest
-uncapitalize [] = []
-
--- | Remove a field label prefix during JSON parsing.
---   Also perform any replacements for special characters.
---   The @forParsing@ parameter is to distinguish between the cases in which we're using this
---   to power a @FromJSON@ or a @ToJSON@ instance. In the first case we're parsing, and we want
---   to replace special characters with their quoted equivalents (because we cannot have special
---   chars in identifier names), while we want to do viceversa when sending data instead.
-removeFieldLabelPrefix :: Bool -> String -> Options
-removeFieldLabelPrefix forParsing prefix =
+optionsTruststoreItems :: Options
+optionsTruststoreItems =
   defaultOptions
     { omitNothingFields  = True
-    , fieldLabelModifier = uncapitalize . fromMaybe (error ("did not find prefix " ++ prefix)) . stripPrefix prefix . replaceSpecialChars
+    , fieldLabelModifier = \s -> fromMaybe ("did not find JSON field name for " ++ show s) $ lookup s table
     }
   where
-    replaceSpecialChars field = foldl (&) field (map mkCharReplacement specialChars)
-    specialChars =
-      [ ("@", "'At")
-      , ("\\", "'Back_Slash")
-      , ("<=", "'Less_Than_Or_Equal_To")
-      , ("\"", "'Double_Quote")
-      , ("[", "'Left_Square_Bracket")
-      , ("]", "'Right_Square_Bracket")
-      , ("^", "'Caret")
-      , ("_", "'Underscore")
-      , ("`", "'Backtick")
-      , ("!", "'Exclamation")
-      , ("#", "'Hash")
-      , ("$", "'Dollar")
-      , ("%", "'Percent")
-      , ("&", "'Ampersand")
-      , ("'", "'Quote")
-      , ("(", "'Left_Parenthesis")
-      , (")", "'Right_Parenthesis")
-      , ("*", "'Star")
-      , ("+", "'Plus")
-      , (",", "'Comma")
-      , ("-", "'Dash")
-      , (".", "'Period")
-      , ("/", "'Slash")
-      , (":", "'Colon")
-      , ("{", "'Left_Curly_Bracket")
-      , ("|", "'Pipe")
-      , ("<", "'LessThan")
-      , ("!=", "'Not_Equal")
-      , ("=", "'Equal")
-      , ("}", "'Right_Curly_Bracket")
-      , (">", "'GreaterThan")
-      , ("~", "'Tilde")
-      , ("?", "'Question_Mark")
-      , (">=", "'Greater_Than_Or_Equal_To")
-      , ("~=", "'Tilde_Equal")
+    table =
+      [ ("truststoreItemsAlias", "alias")
+      , ("truststoreItemsEntryType", "entryType")
+      , ("truststoreItemsSubject", "subject")
+      , ("truststoreItemsIssuer", "issuer")
+      , ("truststoreItemsNotBefore", "notBefore")
+      , ("truststoreItemsNotAfter", "notAfter")
+      , ("truststoreItemsSerialNumber", "serialNumber")
       ]
-    mkCharReplacement (replaceStr, searchStr) = T.unpack . replacer (T.pack searchStr) (T.pack replaceStr) . T.pack
-    replacer =
-      if forParsing
-        then flip T.replace
-        else T.replace
+

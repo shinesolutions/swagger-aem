@@ -4,11 +4,11 @@
     "contact" : {
       "email" : "opensource@shinesolutions.com",
       "name" : "Shine Solutions",
-      "url" : "http://shinesolutions.com"
+      "url" : "https://github.com/shinesolutions"
     },
     "description" : "Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API",
     "title" : "Adobe Experience Manager (AEM) API",
-    "version" : "3.5.0-pre.0"
+    "version" : "3.7.1-pre.0"
   },
   "servers" : [ {
     "url" : "/"
@@ -223,17 +223,10 @@
           "style" : "form"
         } ],
         "requestBody" : {
-          "$ref" : "#/components/requestBodies/inline_object",
           "content" : {
             "multipart/form-data" : {
               "schema" : {
-                "properties" : {
-                  "file" : {
-                    "format" : "binary",
-                    "type" : "string"
-                  }
-                },
-                "type" : "object"
+                "$ref" : "#/components/schemas/postNode_request"
               }
             }
           }
@@ -1125,6 +1118,15 @@
         }, {
           "explode" : true,
           "in" : "query",
+          "name" : "jcr:content/aliasUpdate",
+          "required" : false,
+          "schema" : {
+            "type" : "boolean"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
           "name" : "jcr:content/enabled",
           "required" : false,
           "schema" : {
@@ -1548,7 +1550,7 @@
         "tags" : [ "sling" ]
       }
     },
-    "/etc/replication/treeactivation.html" : {
+    "/libs/replication/treeactivation.html" : {
       "post" : {
         "operationId" : "postTreeActivation",
         "parameters" : [ {
@@ -1575,6 +1577,16 @@
           "name" : "path",
           "required" : true,
           "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "cmd",
+          "required" : true,
+          "schema" : {
+            "default" : "activate",
             "type" : "string"
           },
           "style" : "form"
@@ -1912,17 +1924,10 @@
           "style" : "form"
         } ],
         "requestBody" : {
-          "$ref" : "#/components/requestBodies/inline_object_1",
           "content" : {
             "multipart/form-data" : {
               "schema" : {
-                "properties" : {
-                  "package" : {
-                    "format" : "binary",
-                    "type" : "string"
-                  }
-                },
-                "type" : "object"
+                "$ref" : "#/components/schemas/postPackageServiceJson_request"
               }
             }
           }
@@ -2750,17 +2755,10 @@
           "style" : "form"
         } ],
         "requestBody" : {
-          "$ref" : "#/components/requestBodies/inline_object_2",
           "content" : {
             "multipart/form-data" : {
               "schema" : {
-                "properties" : {
-                  "certificate" : {
-                    "format" : "binary",
-                    "type" : "string"
-                  }
-                },
-                "type" : "object"
+                "$ref" : "#/components/schemas/postTruststore_request"
               }
             }
           }
@@ -2831,17 +2829,10 @@
       "post" : {
         "operationId" : "postTruststorePKCS12",
         "requestBody" : {
-          "$ref" : "#/components/requestBodies/inline_object_3",
           "content" : {
             "multipart/form-data" : {
               "schema" : {
-                "properties" : {
-                  "truststore.p12" : {
-                    "format" : "binary",
-                    "type" : "string"
-                  }
-                },
-                "type" : "object"
+                "$ref" : "#/components/schemas/postTruststorePKCS12_request"
               }
             }
           }
@@ -3307,25 +3298,10 @@
           "style" : "form"
         } ],
         "requestBody" : {
-          "$ref" : "#/components/requestBodies/inline_object_4",
           "content" : {
             "multipart/form-data" : {
               "schema" : {
-                "properties" : {
-                  "cert-chain" : {
-                    "format" : "binary",
-                    "type" : "string"
-                  },
-                  "pk" : {
-                    "format" : "binary",
-                    "type" : "string"
-                  },
-                  "keyStore" : {
-                    "format" : "binary",
-                    "type" : "string"
-                  }
-                },
-                "type" : "object"
+                "$ref" : "#/components/schemas/postAuthorizableKeystore_request"
               }
             }
           }
@@ -3499,21 +3475,10 @@
           "style" : "form"
         } ],
         "requestBody" : {
-          "$ref" : "#/components/requestBodies/inline_object_5",
           "content" : {
             "multipart/form-data" : {
               "schema" : {
-                "properties" : {
-                  "privatekeyFile" : {
-                    "format" : "binary",
-                    "type" : "string"
-                  },
-                  "certificateFile" : {
-                    "format" : "binary",
-                    "type" : "string"
-                  }
-                },
-                "type" : "object"
+                "$ref" : "#/components/schemas/sslSetup_request"
               }
             }
           }
@@ -3535,62 +3500,6 @@
     }
   },
   "components" : {
-    "requestBodies" : {
-      "inline_object_1" : {
-        "content" : {
-          "multipart/form-data" : {
-            "schema" : {
-              "$ref" : "#/components/schemas/inline_object_1"
-            }
-          }
-        }
-      },
-      "inline_object" : {
-        "content" : {
-          "multipart/form-data" : {
-            "schema" : {
-              "$ref" : "#/components/schemas/inline_object"
-            }
-          }
-        }
-      },
-      "inline_object_5" : {
-        "content" : {
-          "multipart/form-data" : {
-            "schema" : {
-              "$ref" : "#/components/schemas/inline_object_5"
-            }
-          }
-        }
-      },
-      "inline_object_4" : {
-        "content" : {
-          "multipart/form-data" : {
-            "schema" : {
-              "$ref" : "#/components/schemas/inline_object_4"
-            }
-          }
-        }
-      },
-      "inline_object_3" : {
-        "content" : {
-          "multipart/form-data" : {
-            "schema" : {
-              "$ref" : "#/components/schemas/inline_object_3"
-            }
-          }
-        }
-      },
-      "inline_object_2" : {
-        "content" : {
-          "multipart/form-data" : {
-            "schema" : {
-              "$ref" : "#/components/schemas/inline_object_2"
-            }
-          }
-        }
-      }
-    },
     "schemas" : {
       "InstallStatus" : {
         "example" : {
@@ -3624,21 +3533,21 @@
       "TruststoreInfo" : {
         "example" : {
           "aliases" : [ {
-            "entryType" : "entryType",
-            "notAfter" : "notAfter",
-            "serialNumber" : 0,
-            "subject" : "subject",
             "alias" : "alias",
+            "entryType" : "entryType",
+            "subject" : "subject",
             "issuer" : "issuer",
-            "notBefore" : "notBefore"
+            "notBefore" : "notBefore",
+            "notAfter" : "notAfter",
+            "serialNumber" : 0
           }, {
-            "entryType" : "entryType",
-            "notAfter" : "notAfter",
-            "serialNumber" : 0,
-            "subject" : "subject",
             "alias" : "alias",
+            "entryType" : "entryType",
+            "subject" : "subject",
             "issuer" : "issuer",
-            "notBefore" : "notBefore"
+            "notBefore" : "notBefore",
+            "notAfter" : "notAfter",
+            "serialNumber" : 0
           } ],
           "exists" : true
         },
@@ -3710,13 +3619,13 @@
       },
       "TruststoreItems" : {
         "example" : {
-          "entryType" : "entryType",
-          "notAfter" : "notAfter",
-          "serialNumber" : 0,
-          "subject" : "subject",
           "alias" : "alias",
+          "entryType" : "entryType",
+          "subject" : "subject",
           "issuer" : "issuer",
-          "notBefore" : "notBefore"
+          "notBefore" : "notBefore",
+          "notAfter" : "notAfter",
+          "serialNumber" : 0
         },
         "properties" : {
           "alias" : {
@@ -3975,41 +3884,41 @@
       },
       "BundleInfo" : {
         "example" : {
+          "status" : "status",
           "s" : [ 0, 0 ],
           "data" : [ {
+            "id" : 6,
+            "name" : "name",
             "fragment" : true,
             "stateRaw" : 1,
-            "name" : "name",
-            "symbolicName" : "symbolicName",
-            "id" : 6,
             "state" : "state",
-            "category" : "category",
             "version" : "version",
+            "symbolicName" : "symbolicName",
+            "category" : "category",
             "props" : [ {
-              "value" : "value",
-              "key" : "key"
+              "key" : "key",
+              "value" : "value"
             }, {
-              "value" : "value",
-              "key" : "key"
+              "key" : "key",
+              "value" : "value"
             } ]
           }, {
+            "id" : 6,
+            "name" : "name",
             "fragment" : true,
             "stateRaw" : 1,
-            "name" : "name",
-            "symbolicName" : "symbolicName",
-            "id" : 6,
             "state" : "state",
-            "category" : "category",
             "version" : "version",
+            "symbolicName" : "symbolicName",
+            "category" : "category",
             "props" : [ {
-              "value" : "value",
-              "key" : "key"
+              "key" : "key",
+              "value" : "value"
             }, {
-              "value" : "value",
-              "key" : "key"
+              "key" : "key",
+              "value" : "value"
             } ]
-          } ],
-          "status" : "status"
+          } ]
         },
         "properties" : {
           "status" : {
@@ -4033,20 +3942,20 @@
       },
       "BundleData" : {
         "example" : {
+          "id" : 6,
+          "name" : "name",
           "fragment" : true,
           "stateRaw" : 1,
-          "name" : "name",
-          "symbolicName" : "symbolicName",
-          "id" : 6,
           "state" : "state",
-          "category" : "category",
           "version" : "version",
+          "symbolicName" : "symbolicName",
+          "category" : "category",
           "props" : [ {
-            "value" : "value",
-            "key" : "key"
+            "key" : "key",
+            "value" : "value"
           }, {
-            "value" : "value",
-            "key" : "key"
+            "key" : "key",
+            "value" : "value"
           } ]
         },
         "properties" : {
@@ -4093,8 +4002,8 @@
       },
       "BundleDataProp" : {
         "example" : {
-          "value" : "value",
-          "key" : "key"
+          "key" : "key",
+          "value" : "value"
         },
         "properties" : {
           "key" : {
@@ -4108,7 +4017,7 @@
         },
         "type" : "object"
       },
-      "inline_object" : {
+      "postNode_request" : {
         "properties" : {
           "file" : {
             "format" : "binary",
@@ -4117,7 +4026,7 @@
         },
         "type" : "object"
       },
-      "inline_object_1" : {
+      "postPackageServiceJson_request" : {
         "properties" : {
           "package" : {
             "format" : "binary",
@@ -4126,7 +4035,7 @@
         },
         "type" : "object"
       },
-      "inline_object_2" : {
+      "postTruststore_request" : {
         "properties" : {
           "certificate" : {
             "format" : "binary",
@@ -4135,7 +4044,7 @@
         },
         "type" : "object"
       },
-      "inline_object_3" : {
+      "postTruststorePKCS12_request" : {
         "properties" : {
           "truststore.p12" : {
             "format" : "binary",
@@ -4144,7 +4053,7 @@
         },
         "type" : "object"
       },
-      "inline_object_4" : {
+      "postAuthorizableKeystore_request" : {
         "properties" : {
           "cert-chain" : {
             "format" : "binary",
@@ -4161,7 +4070,7 @@
         },
         "type" : "object"
       },
-      "inline_object_5" : {
+      "sslSetup_request" : {
         "properties" : {
           "privatekeyFile" : {
             "format" : "binary",

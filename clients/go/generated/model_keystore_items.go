@@ -3,7 +3,7 @@ Adobe Experience Manager (AEM) API
 
 Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
 
-API version: 3.5.0-pre.0
+API version: 3.7.1-pre.0
 Contact: opensource@shinesolutions.com
 */
 
@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the KeystoreItems type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &KeystoreItems{}
+
 // KeystoreItems struct for KeystoreItems
 type KeystoreItems struct {
 	// Keystore alias name
@@ -25,7 +28,7 @@ type KeystoreItems struct {
 	Algorithm *string `json:"algorithm,omitempty"`
 	// e.g. \"PKCS#8\"
 	Format *string `json:"format,omitempty"`
-	Chain *[]KeystoreChainItems `json:"chain,omitempty"`
+	Chain []KeystoreChainItems `json:"chain,omitempty"`
 }
 
 // NewKeystoreItems instantiates a new KeystoreItems object
@@ -47,7 +50,7 @@ func NewKeystoreItemsWithDefaults() *KeystoreItems {
 
 // GetAlias returns the Alias field value if set, zero value otherwise.
 func (o *KeystoreItems) GetAlias() string {
-	if o == nil || o.Alias == nil {
+	if o == nil || IsNil(o.Alias) {
 		var ret string
 		return ret
 	}
@@ -57,7 +60,7 @@ func (o *KeystoreItems) GetAlias() string {
 // GetAliasOk returns a tuple with the Alias field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KeystoreItems) GetAliasOk() (*string, bool) {
-	if o == nil || o.Alias == nil {
+	if o == nil || IsNil(o.Alias) {
 		return nil, false
 	}
 	return o.Alias, true
@@ -65,7 +68,7 @@ func (o *KeystoreItems) GetAliasOk() (*string, bool) {
 
 // HasAlias returns a boolean if a field has been set.
 func (o *KeystoreItems) HasAlias() bool {
-	if o != nil && o.Alias != nil {
+	if o != nil && !IsNil(o.Alias) {
 		return true
 	}
 
@@ -79,7 +82,7 @@ func (o *KeystoreItems) SetAlias(v string) {
 
 // GetEntryType returns the EntryType field value if set, zero value otherwise.
 func (o *KeystoreItems) GetEntryType() string {
-	if o == nil || o.EntryType == nil {
+	if o == nil || IsNil(o.EntryType) {
 		var ret string
 		return ret
 	}
@@ -89,7 +92,7 @@ func (o *KeystoreItems) GetEntryType() string {
 // GetEntryTypeOk returns a tuple with the EntryType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KeystoreItems) GetEntryTypeOk() (*string, bool) {
-	if o == nil || o.EntryType == nil {
+	if o == nil || IsNil(o.EntryType) {
 		return nil, false
 	}
 	return o.EntryType, true
@@ -97,7 +100,7 @@ func (o *KeystoreItems) GetEntryTypeOk() (*string, bool) {
 
 // HasEntryType returns a boolean if a field has been set.
 func (o *KeystoreItems) HasEntryType() bool {
-	if o != nil && o.EntryType != nil {
+	if o != nil && !IsNil(o.EntryType) {
 		return true
 	}
 
@@ -111,7 +114,7 @@ func (o *KeystoreItems) SetEntryType(v string) {
 
 // GetAlgorithm returns the Algorithm field value if set, zero value otherwise.
 func (o *KeystoreItems) GetAlgorithm() string {
-	if o == nil || o.Algorithm == nil {
+	if o == nil || IsNil(o.Algorithm) {
 		var ret string
 		return ret
 	}
@@ -121,7 +124,7 @@ func (o *KeystoreItems) GetAlgorithm() string {
 // GetAlgorithmOk returns a tuple with the Algorithm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KeystoreItems) GetAlgorithmOk() (*string, bool) {
-	if o == nil || o.Algorithm == nil {
+	if o == nil || IsNil(o.Algorithm) {
 		return nil, false
 	}
 	return o.Algorithm, true
@@ -129,7 +132,7 @@ func (o *KeystoreItems) GetAlgorithmOk() (*string, bool) {
 
 // HasAlgorithm returns a boolean if a field has been set.
 func (o *KeystoreItems) HasAlgorithm() bool {
-	if o != nil && o.Algorithm != nil {
+	if o != nil && !IsNil(o.Algorithm) {
 		return true
 	}
 
@@ -143,7 +146,7 @@ func (o *KeystoreItems) SetAlgorithm(v string) {
 
 // GetFormat returns the Format field value if set, zero value otherwise.
 func (o *KeystoreItems) GetFormat() string {
-	if o == nil || o.Format == nil {
+	if o == nil || IsNil(o.Format) {
 		var ret string
 		return ret
 	}
@@ -153,7 +156,7 @@ func (o *KeystoreItems) GetFormat() string {
 // GetFormatOk returns a tuple with the Format field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KeystoreItems) GetFormatOk() (*string, bool) {
-	if o == nil || o.Format == nil {
+	if o == nil || IsNil(o.Format) {
 		return nil, false
 	}
 	return o.Format, true
@@ -161,7 +164,7 @@ func (o *KeystoreItems) GetFormatOk() (*string, bool) {
 
 // HasFormat returns a boolean if a field has been set.
 func (o *KeystoreItems) HasFormat() bool {
-	if o != nil && o.Format != nil {
+	if o != nil && !IsNil(o.Format) {
 		return true
 	}
 
@@ -175,17 +178,17 @@ func (o *KeystoreItems) SetFormat(v string) {
 
 // GetChain returns the Chain field value if set, zero value otherwise.
 func (o *KeystoreItems) GetChain() []KeystoreChainItems {
-	if o == nil || o.Chain == nil {
+	if o == nil || IsNil(o.Chain) {
 		var ret []KeystoreChainItems
 		return ret
 	}
-	return *o.Chain
+	return o.Chain
 }
 
 // GetChainOk returns a tuple with the Chain field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *KeystoreItems) GetChainOk() (*[]KeystoreChainItems, bool) {
-	if o == nil || o.Chain == nil {
+func (o *KeystoreItems) GetChainOk() ([]KeystoreChainItems, bool) {
+	if o == nil || IsNil(o.Chain) {
 		return nil, false
 	}
 	return o.Chain, true
@@ -193,7 +196,7 @@ func (o *KeystoreItems) GetChainOk() (*[]KeystoreChainItems, bool) {
 
 // HasChain returns a boolean if a field has been set.
 func (o *KeystoreItems) HasChain() bool {
-	if o != nil && o.Chain != nil {
+	if o != nil && !IsNil(o.Chain) {
 		return true
 	}
 
@@ -202,27 +205,35 @@ func (o *KeystoreItems) HasChain() bool {
 
 // SetChain gets a reference to the given []KeystoreChainItems and assigns it to the Chain field.
 func (o *KeystoreItems) SetChain(v []KeystoreChainItems) {
-	o.Chain = &v
+	o.Chain = v
 }
 
 func (o KeystoreItems) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Alias != nil {
-		toSerialize["alias"] = o.Alias
-	}
-	if o.EntryType != nil {
-		toSerialize["entryType"] = o.EntryType
-	}
-	if o.Algorithm != nil {
-		toSerialize["algorithm"] = o.Algorithm
-	}
-	if o.Format != nil {
-		toSerialize["format"] = o.Format
-	}
-	if o.Chain != nil {
-		toSerialize["chain"] = o.Chain
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o KeystoreItems) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Alias) {
+		toSerialize["alias"] = o.Alias
+	}
+	if !IsNil(o.EntryType) {
+		toSerialize["entryType"] = o.EntryType
+	}
+	if !IsNil(o.Algorithm) {
+		toSerialize["algorithm"] = o.Algorithm
+	}
+	if !IsNil(o.Format) {
+		toSerialize["format"] = o.Format
+	}
+	if !IsNil(o.Chain) {
+		toSerialize["chain"] = o.Chain
+	}
+	return toSerialize, nil
 }
 
 type NullableKeystoreItems struct {

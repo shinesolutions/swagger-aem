@@ -61,7 +61,7 @@ POST     /:path/:name                     controllers.SlingApiController.postNod
 POST     /:path/:name.rw.html                     controllers.SlingApiController.postNodeRw(request: Request, path: String, name: String)
 POST     /:path/                     controllers.SlingApiController.postPath(request: Request, path: String)
 POST     /bin/querybuilder.json                     controllers.SlingApiController.postQuery(request: Request)
-POST     /etc/replication/treeactivation.html                     controllers.SlingApiController.postTreeActivation(request: Request)
+POST     /libs/replication/treeactivation.html                     controllers.SlingApiController.postTreeActivation(request: Request)
 POST     /libs/granite/security/post/truststore                     controllers.SlingApiController.postTruststore(request: Request)
 POST     /etc/truststore                     controllers.SlingApiController.postTruststorePKCS12(request: Request)
 

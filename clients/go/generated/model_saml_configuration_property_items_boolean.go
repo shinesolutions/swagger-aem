@@ -3,7 +3,7 @@ Adobe Experience Manager (AEM) API
 
 Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
 
-API version: 3.5.0-pre.0
+API version: 3.7.1-pre.0
 Contact: opensource@shinesolutions.com
 */
 
@@ -14,6 +14,9 @@ package openapi
 import (
 	"encoding/json"
 )
+
+// checks if the SamlConfigurationPropertyItemsBoolean type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SamlConfigurationPropertyItemsBoolean{}
 
 // SamlConfigurationPropertyItemsBoolean struct for SamlConfigurationPropertyItemsBoolean
 type SamlConfigurationPropertyItemsBoolean struct {
@@ -50,7 +53,7 @@ func NewSamlConfigurationPropertyItemsBooleanWithDefaults() *SamlConfigurationPr
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *SamlConfigurationPropertyItemsBoolean) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -60,7 +63,7 @@ func (o *SamlConfigurationPropertyItemsBoolean) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationPropertyItemsBoolean) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -68,7 +71,7 @@ func (o *SamlConfigurationPropertyItemsBoolean) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *SamlConfigurationPropertyItemsBoolean) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -82,7 +85,7 @@ func (o *SamlConfigurationPropertyItemsBoolean) SetName(v string) {
 
 // GetOptional returns the Optional field value if set, zero value otherwise.
 func (o *SamlConfigurationPropertyItemsBoolean) GetOptional() bool {
-	if o == nil || o.Optional == nil {
+	if o == nil || IsNil(o.Optional) {
 		var ret bool
 		return ret
 	}
@@ -92,7 +95,7 @@ func (o *SamlConfigurationPropertyItemsBoolean) GetOptional() bool {
 // GetOptionalOk returns a tuple with the Optional field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationPropertyItemsBoolean) GetOptionalOk() (*bool, bool) {
-	if o == nil || o.Optional == nil {
+	if o == nil || IsNil(o.Optional) {
 		return nil, false
 	}
 	return o.Optional, true
@@ -100,7 +103,7 @@ func (o *SamlConfigurationPropertyItemsBoolean) GetOptionalOk() (*bool, bool) {
 
 // HasOptional returns a boolean if a field has been set.
 func (o *SamlConfigurationPropertyItemsBoolean) HasOptional() bool {
-	if o != nil && o.Optional != nil {
+	if o != nil && !IsNil(o.Optional) {
 		return true
 	}
 
@@ -114,7 +117,7 @@ func (o *SamlConfigurationPropertyItemsBoolean) SetOptional(v bool) {
 
 // GetIsSet returns the IsSet field value if set, zero value otherwise.
 func (o *SamlConfigurationPropertyItemsBoolean) GetIsSet() bool {
-	if o == nil || o.IsSet == nil {
+	if o == nil || IsNil(o.IsSet) {
 		var ret bool
 		return ret
 	}
@@ -124,7 +127,7 @@ func (o *SamlConfigurationPropertyItemsBoolean) GetIsSet() bool {
 // GetIsSetOk returns a tuple with the IsSet field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationPropertyItemsBoolean) GetIsSetOk() (*bool, bool) {
-	if o == nil || o.IsSet == nil {
+	if o == nil || IsNil(o.IsSet) {
 		return nil, false
 	}
 	return o.IsSet, true
@@ -132,7 +135,7 @@ func (o *SamlConfigurationPropertyItemsBoolean) GetIsSetOk() (*bool, bool) {
 
 // HasIsSet returns a boolean if a field has been set.
 func (o *SamlConfigurationPropertyItemsBoolean) HasIsSet() bool {
-	if o != nil && o.IsSet != nil {
+	if o != nil && !IsNil(o.IsSet) {
 		return true
 	}
 
@@ -146,7 +149,7 @@ func (o *SamlConfigurationPropertyItemsBoolean) SetIsSet(v bool) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *SamlConfigurationPropertyItemsBoolean) GetType() int32 {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret int32
 		return ret
 	}
@@ -156,7 +159,7 @@ func (o *SamlConfigurationPropertyItemsBoolean) GetType() int32 {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationPropertyItemsBoolean) GetTypeOk() (*int32, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -164,7 +167,7 @@ func (o *SamlConfigurationPropertyItemsBoolean) GetTypeOk() (*int32, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *SamlConfigurationPropertyItemsBoolean) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -178,7 +181,7 @@ func (o *SamlConfigurationPropertyItemsBoolean) SetType(v int32) {
 
 // GetValue returns the Value field value if set, zero value otherwise.
 func (o *SamlConfigurationPropertyItemsBoolean) GetValue() bool {
-	if o == nil || o.Value == nil {
+	if o == nil || IsNil(o.Value) {
 		var ret bool
 		return ret
 	}
@@ -188,7 +191,7 @@ func (o *SamlConfigurationPropertyItemsBoolean) GetValue() bool {
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationPropertyItemsBoolean) GetValueOk() (*bool, bool) {
-	if o == nil || o.Value == nil {
+	if o == nil || IsNil(o.Value) {
 		return nil, false
 	}
 	return o.Value, true
@@ -196,7 +199,7 @@ func (o *SamlConfigurationPropertyItemsBoolean) GetValueOk() (*bool, bool) {
 
 // HasValue returns a boolean if a field has been set.
 func (o *SamlConfigurationPropertyItemsBoolean) HasValue() bool {
-	if o != nil && o.Value != nil {
+	if o != nil && !IsNil(o.Value) {
 		return true
 	}
 
@@ -210,7 +213,7 @@ func (o *SamlConfigurationPropertyItemsBoolean) SetValue(v bool) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *SamlConfigurationPropertyItemsBoolean) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -220,7 +223,7 @@ func (o *SamlConfigurationPropertyItemsBoolean) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SamlConfigurationPropertyItemsBoolean) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -228,7 +231,7 @@ func (o *SamlConfigurationPropertyItemsBoolean) GetDescriptionOk() (*string, boo
 
 // HasDescription returns a boolean if a field has been set.
 func (o *SamlConfigurationPropertyItemsBoolean) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -241,26 +244,34 @@ func (o *SamlConfigurationPropertyItemsBoolean) SetDescription(v string) {
 }
 
 func (o SamlConfigurationPropertyItemsBoolean) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Name != nil {
-		toSerialize["name"] = o.Name
-	}
-	if o.Optional != nil {
-		toSerialize["optional"] = o.Optional
-	}
-	if o.IsSet != nil {
-		toSerialize["is_set"] = o.IsSet
-	}
-	if o.Type != nil {
-		toSerialize["type"] = o.Type
-	}
-	if o.Value != nil {
-		toSerialize["value"] = o.Value
-	}
-	if o.Description != nil {
-		toSerialize["description"] = o.Description
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o SamlConfigurationPropertyItemsBoolean) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.Optional) {
+		toSerialize["optional"] = o.Optional
+	}
+	if !IsNil(o.IsSet) {
+		toSerialize["is_set"] = o.IsSet
+	}
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
+	if !IsNil(o.Value) {
+		toSerialize["value"] = o.Value
+	}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
+	return toSerialize, nil
 }
 
 type NullableSamlConfigurationPropertyItemsBoolean struct {

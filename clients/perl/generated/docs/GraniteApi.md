@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::GraniteApi;
@@ -38,7 +38,7 @@ my $https_port = "https_port_example"; # string |
 my $privatekey_file = "/path/to/file"; # string | 
 my $certificate_file = "/path/to/file"; # string | 
 
-eval { 
+eval {
     my $result = $api_instance->ssl_setup(keystore_password => $keystore_password, keystore_password_confirm => $keystore_password_confirm, truststore_password => $truststore_password, truststore_password_confirm => $truststore_password_confirm, https_hostname => $https_hostname, https_port => $https_port, privatekey_file => $privatekey_file, certificate_file => $certificate_file);
     print Dumper($result);
 };

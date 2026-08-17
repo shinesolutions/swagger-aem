@@ -1,34 +1,42 @@
 package org.openapitools.model;
 
+import java.net.URI;
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.model.BundleData;
+import org.springframework.lang.Nullable;
 import org.openapitools.jackson.nullable.JsonNullable;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+import java.time.OffsetDateTime;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+
+import java.util.*;
+import jakarta.annotation.Generated;
 
 /**
  * BundleInfo
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-09-03T15:28:35.636+10:00[Australia/Melbourne]")
-public class BundleInfo   {
-  @JsonProperty("status")
-  private String status;
 
-  @JsonProperty("s")
-  @Valid
-  private List<Integer> s = null;
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-08-17T02:18:23.350215970Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+public class BundleInfo {
 
-  @JsonProperty("data")
-  @Valid
-  private List<BundleData> data = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable String status;
 
-  public BundleInfo status(String status) {
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private List<Integer> s = new ArrayList<>();
+
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private List<@Valid BundleData> data = new ArrayList<>();
+
+  public BundleInfo status(@Nullable String status) {
     this.status = status;
     return this;
   }
@@ -36,15 +44,16 @@ public class BundleInfo   {
   /**
    * Status description of all bundles
    * @return status
-  */
-  @ApiModelProperty(value = "Status description of all bundles")
-
-
-  public String getStatus() {
+   */
+  
+  @Schema(name = "status", description = "Status description of all bundles", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("status")
+  public @Nullable String getStatus() {
     return status;
   }
 
-  public void setStatus(String status) {
+  @JsonProperty("status")
+  public void setStatus(@Nullable String status) {
     this.status = status;
   }
 
@@ -64,19 +73,20 @@ public class BundleInfo   {
   /**
    * Get s
    * @return s
-  */
-  @ApiModelProperty(value = "")
-
-
+   */
+  
+  @Schema(name = "s", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("s")
   public List<Integer> getS() {
     return s;
   }
 
+  @JsonProperty("s")
   public void setS(List<Integer> s) {
     this.s = s;
   }
 
-  public BundleInfo data(List<BundleData> data) {
+  public BundleInfo data(List<@Valid BundleData> data) {
     this.data = data;
     return this;
   }
@@ -92,19 +102,18 @@ public class BundleInfo   {
   /**
    * Get data
    * @return data
-  */
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public List<BundleData> getData() {
+   */
+  @Valid 
+  @Schema(name = "data", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("data")
+  public List<@Valid BundleData> getData() {
     return data;
   }
 
-  public void setData(List<BundleData> data) {
+  @JsonProperty("data")
+  public void setData(List<@Valid BundleData> data) {
     this.data = data;
   }
-
 
   @Override
   public boolean equals(Object o) {
@@ -129,7 +138,6 @@ public class BundleInfo   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class BundleInfo {\n");
-    
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    s: ").append(toIndentedString(s)).append("\n");
     sb.append("    data: ").append(toIndentedString(data)).append("\n");
@@ -141,11 +149,8 @@ public class BundleInfo   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+  private String toIndentedString(@Nullable Object o) {
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

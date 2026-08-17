@@ -1,51 +1,60 @@
 package org.openapitools.model;
 
+import java.net.URI;
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.model.BundleDataProp;
+import org.springframework.lang.Nullable;
 import org.openapitools.jackson.nullable.JsonNullable;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+import java.time.OffsetDateTime;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+
+import java.util.*;
+import jakarta.annotation.Generated;
 
 /**
  * BundleData
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-09-03T15:28:35.636+10:00[Australia/Melbourne]")
-public class BundleData   {
-  @JsonProperty("id")
-  private Integer id;
 
-  @JsonProperty("name")
-  private String name;
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-08-17T02:18:23.350215970Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+public class BundleData {
 
-  @JsonProperty("fragment")
-  private Boolean fragment;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable Integer id;
 
-  @JsonProperty("stateRaw")
-  private Integer stateRaw;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable String name;
 
-  @JsonProperty("state")
-  private String state;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable Boolean fragment;
 
-  @JsonProperty("version")
-  private String version;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable Integer stateRaw;
 
-  @JsonProperty("symbolicName")
-  private String symbolicName;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable String state;
 
-  @JsonProperty("category")
-  private String category;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable String version;
 
-  @JsonProperty("props")
-  @Valid
-  private List<BundleDataProp> props = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable String symbolicName;
 
-  public BundleData id(Integer id) {
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable String category;
+
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private List<@Valid BundleDataProp> props = new ArrayList<>();
+
+  public BundleData id(@Nullable Integer id) {
     this.id = id;
     return this;
   }
@@ -53,19 +62,20 @@ public class BundleData   {
   /**
    * Bundle ID
    * @return id
-  */
-  @ApiModelProperty(value = "Bundle ID")
-
-
-  public Integer getId() {
+   */
+  
+  @Schema(name = "id", description = "Bundle ID", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("id")
+  public @Nullable Integer getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  @JsonProperty("id")
+  public void setId(@Nullable Integer id) {
     this.id = id;
   }
 
-  public BundleData name(String name) {
+  public BundleData name(@Nullable String name) {
     this.name = name;
     return this;
   }
@@ -73,19 +83,20 @@ public class BundleData   {
   /**
    * Bundle name
    * @return name
-  */
-  @ApiModelProperty(value = "Bundle name")
-
-
-  public String getName() {
+   */
+  
+  @Schema(name = "name", description = "Bundle name", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("name")
+  public @Nullable String getName() {
     return name;
   }
 
-  public void setName(String name) {
+  @JsonProperty("name")
+  public void setName(@Nullable String name) {
     this.name = name;
   }
 
-  public BundleData fragment(Boolean fragment) {
+  public BundleData fragment(@Nullable Boolean fragment) {
     this.fragment = fragment;
     return this;
   }
@@ -93,19 +104,20 @@ public class BundleData   {
   /**
    * Is bundle a fragment
    * @return fragment
-  */
-  @ApiModelProperty(value = "Is bundle a fragment")
-
-
-  public Boolean getFragment() {
+   */
+  
+  @Schema(name = "fragment", description = "Is bundle a fragment", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("fragment")
+  public @Nullable Boolean getFragment() {
     return fragment;
   }
 
-  public void setFragment(Boolean fragment) {
+  @JsonProperty("fragment")
+  public void setFragment(@Nullable Boolean fragment) {
     this.fragment = fragment;
   }
 
-  public BundleData stateRaw(Integer stateRaw) {
+  public BundleData stateRaw(@Nullable Integer stateRaw) {
     this.stateRaw = stateRaw;
     return this;
   }
@@ -113,19 +125,20 @@ public class BundleData   {
   /**
    * Numeric raw bundle state value
    * @return stateRaw
-  */
-  @ApiModelProperty(value = "Numeric raw bundle state value")
-
-
-  public Integer getStateRaw() {
+   */
+  
+  @Schema(name = "stateRaw", description = "Numeric raw bundle state value", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("stateRaw")
+  public @Nullable Integer getStateRaw() {
     return stateRaw;
   }
 
-  public void setStateRaw(Integer stateRaw) {
+  @JsonProperty("stateRaw")
+  public void setStateRaw(@Nullable Integer stateRaw) {
     this.stateRaw = stateRaw;
   }
 
-  public BundleData state(String state) {
+  public BundleData state(@Nullable String state) {
     this.state = state;
     return this;
   }
@@ -133,19 +146,20 @@ public class BundleData   {
   /**
    * Bundle state value
    * @return state
-  */
-  @ApiModelProperty(value = "Bundle state value")
-
-
-  public String getState() {
+   */
+  
+  @Schema(name = "state", description = "Bundle state value", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("state")
+  public @Nullable String getState() {
     return state;
   }
 
-  public void setState(String state) {
+  @JsonProperty("state")
+  public void setState(@Nullable String state) {
     this.state = state;
   }
 
-  public BundleData version(String version) {
+  public BundleData version(@Nullable String version) {
     this.version = version;
     return this;
   }
@@ -153,19 +167,20 @@ public class BundleData   {
   /**
    * Bundle version
    * @return version
-  */
-  @ApiModelProperty(value = "Bundle version")
-
-
-  public String getVersion() {
+   */
+  
+  @Schema(name = "version", description = "Bundle version", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("version")
+  public @Nullable String getVersion() {
     return version;
   }
 
-  public void setVersion(String version) {
+  @JsonProperty("version")
+  public void setVersion(@Nullable String version) {
     this.version = version;
   }
 
-  public BundleData symbolicName(String symbolicName) {
+  public BundleData symbolicName(@Nullable String symbolicName) {
     this.symbolicName = symbolicName;
     return this;
   }
@@ -173,19 +188,20 @@ public class BundleData   {
   /**
    * Bundle symbolic name
    * @return symbolicName
-  */
-  @ApiModelProperty(value = "Bundle symbolic name")
-
-
-  public String getSymbolicName() {
+   */
+  
+  @Schema(name = "symbolicName", description = "Bundle symbolic name", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("symbolicName")
+  public @Nullable String getSymbolicName() {
     return symbolicName;
   }
 
-  public void setSymbolicName(String symbolicName) {
+  @JsonProperty("symbolicName")
+  public void setSymbolicName(@Nullable String symbolicName) {
     this.symbolicName = symbolicName;
   }
 
-  public BundleData category(String category) {
+  public BundleData category(@Nullable String category) {
     this.category = category;
     return this;
   }
@@ -193,19 +209,20 @@ public class BundleData   {
   /**
    * Bundle category
    * @return category
-  */
-  @ApiModelProperty(value = "Bundle category")
-
-
-  public String getCategory() {
+   */
+  
+  @Schema(name = "category", description = "Bundle category", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("category")
+  public @Nullable String getCategory() {
     return category;
   }
 
-  public void setCategory(String category) {
+  @JsonProperty("category")
+  public void setCategory(@Nullable String category) {
     this.category = category;
   }
 
-  public BundleData props(List<BundleDataProp> props) {
+  public BundleData props(List<@Valid BundleDataProp> props) {
     this.props = props;
     return this;
   }
@@ -221,19 +238,18 @@ public class BundleData   {
   /**
    * Get props
    * @return props
-  */
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public List<BundleDataProp> getProps() {
+   */
+  @Valid 
+  @Schema(name = "props", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("props")
+  public List<@Valid BundleDataProp> getProps() {
     return props;
   }
 
-  public void setProps(List<BundleDataProp> props) {
+  @JsonProperty("props")
+  public void setProps(List<@Valid BundleDataProp> props) {
     this.props = props;
   }
-
 
   @Override
   public boolean equals(Object o) {
@@ -264,7 +280,6 @@ public class BundleData   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class BundleData {\n");
-    
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    fragment: ").append(toIndentedString(fragment)).append("\n");
@@ -282,11 +297,8 @@ public class BundleData   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+  private String toIndentedString(@Nullable Object o) {
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

@@ -1,11 +1,8 @@
-# coding: utf-8
-
-from __future__ import absolute_import
 from datetime import date, datetime  # noqa: F401
 
 from typing import List, Dict  # noqa: F401
 
-from openapi_server.models.base_model_ import Model
+from openapi_server.models.base_model import Model
 from openapi_server.models.saml_configuration_properties import SamlConfigurationProperties
 from openapi_server import util
 
@@ -70,7 +67,7 @@ class SamlConfigurationInfo(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def pid(self):
+    def pid(self) -> str:
         """Gets the pid of this SamlConfigurationInfo.
 
         Persistent Identity (PID)  # noqa: E501
@@ -81,7 +78,7 @@ class SamlConfigurationInfo(Model):
         return self._pid
 
     @pid.setter
-    def pid(self, pid):
+    def pid(self, pid: str):
         """Sets the pid of this SamlConfigurationInfo.
 
         Persistent Identity (PID)  # noqa: E501
@@ -93,7 +90,7 @@ class SamlConfigurationInfo(Model):
         self._pid = pid
 
     @property
-    def title(self):
+    def title(self) -> str:
         """Gets the title of this SamlConfigurationInfo.
 
         Title  # noqa: E501
@@ -104,7 +101,7 @@ class SamlConfigurationInfo(Model):
         return self._title
 
     @title.setter
-    def title(self, title):
+    def title(self, title: str):
         """Sets the title of this SamlConfigurationInfo.
 
         Title  # noqa: E501
@@ -116,7 +113,7 @@ class SamlConfigurationInfo(Model):
         self._title = title
 
     @property
-    def description(self):
+    def description(self) -> str:
         """Gets the description of this SamlConfigurationInfo.
 
         Title  # noqa: E501
@@ -127,7 +124,7 @@ class SamlConfigurationInfo(Model):
         return self._description
 
     @description.setter
-    def description(self, description):
+    def description(self, description: str):
         """Sets the description of this SamlConfigurationInfo.
 
         Title  # noqa: E501
@@ -139,7 +136,7 @@ class SamlConfigurationInfo(Model):
         self._description = description
 
     @property
-    def bundle_location(self):
+    def bundle_location(self) -> str:
         """Gets the bundle_location of this SamlConfigurationInfo.
 
         needed for configuration binding  # noqa: E501
@@ -150,7 +147,7 @@ class SamlConfigurationInfo(Model):
         return self._bundle_location
 
     @bundle_location.setter
-    def bundle_location(self, bundle_location):
+    def bundle_location(self, bundle_location: str):
         """Sets the bundle_location of this SamlConfigurationInfo.
 
         needed for configuration binding  # noqa: E501
@@ -162,7 +159,7 @@ class SamlConfigurationInfo(Model):
         self._bundle_location = bundle_location
 
     @property
-    def service_location(self):
+    def service_location(self) -> str:
         """Gets the service_location of this SamlConfigurationInfo.
 
         needed for configuraiton binding  # noqa: E501
@@ -173,7 +170,7 @@ class SamlConfigurationInfo(Model):
         return self._service_location
 
     @service_location.setter
-    def service_location(self, service_location):
+    def service_location(self, service_location: str):
         """Sets the service_location of this SamlConfigurationInfo.
 
         needed for configuraiton binding  # noqa: E501
@@ -185,7 +182,7 @@ class SamlConfigurationInfo(Model):
         self._service_location = service_location
 
     @property
-    def properties(self):
+    def properties(self) -> SamlConfigurationProperties:
         """Gets the properties of this SamlConfigurationInfo.
 
 
@@ -195,7 +192,7 @@ class SamlConfigurationInfo(Model):
         return self._properties
 
     @properties.setter
-    def properties(self, properties):
+    def properties(self, properties: SamlConfigurationProperties):
         """Sets the properties of this SamlConfigurationInfo.
 
 

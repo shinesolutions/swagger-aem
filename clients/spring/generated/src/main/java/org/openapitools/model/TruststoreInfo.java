@@ -1,30 +1,39 @@
 package org.openapitools.model;
 
+import java.net.URI;
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.model.TruststoreItems;
+import org.springframework.lang.Nullable;
 import org.openapitools.jackson.nullable.JsonNullable;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+import java.time.OffsetDateTime;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+
+import java.util.*;
+import jakarta.annotation.Generated;
 
 /**
  * TruststoreInfo
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-09-03T15:28:35.636+10:00[Australia/Melbourne]")
-public class TruststoreInfo   {
-  @JsonProperty("aliases")
-  @Valid
-  private List<TruststoreItems> aliases = null;
 
-  @JsonProperty("exists")
-  private Boolean exists;
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-08-17T02:18:23.350215970Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+public class TruststoreInfo {
 
-  public TruststoreInfo aliases(List<TruststoreItems> aliases) {
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private List<@Valid TruststoreItems> aliases = new ArrayList<>();
+
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable Boolean exists;
+
+  public TruststoreInfo aliases(List<@Valid TruststoreItems> aliases) {
     this.aliases = aliases;
     return this;
   }
@@ -40,20 +49,20 @@ public class TruststoreInfo   {
   /**
    * Get aliases
    * @return aliases
-  */
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public List<TruststoreItems> getAliases() {
+   */
+  @Valid 
+  @Schema(name = "aliases", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("aliases")
+  public List<@Valid TruststoreItems> getAliases() {
     return aliases;
   }
 
-  public void setAliases(List<TruststoreItems> aliases) {
+  @JsonProperty("aliases")
+  public void setAliases(List<@Valid TruststoreItems> aliases) {
     this.aliases = aliases;
   }
 
-  public TruststoreInfo exists(Boolean exists) {
+  public TruststoreInfo exists(@Nullable Boolean exists) {
     this.exists = exists;
     return this;
   }
@@ -61,18 +70,18 @@ public class TruststoreInfo   {
   /**
    * False if truststore don't exist
    * @return exists
-  */
-  @ApiModelProperty(value = "False if truststore don't exist")
-
-
-  public Boolean getExists() {
+   */
+  
+  @Schema(name = "exists", description = "False if truststore don't exist", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("exists")
+  public @Nullable Boolean getExists() {
     return exists;
   }
 
-  public void setExists(Boolean exists) {
+  @JsonProperty("exists")
+  public void setExists(@Nullable Boolean exists) {
     this.exists = exists;
   }
-
 
   @Override
   public boolean equals(Object o) {
@@ -96,7 +105,6 @@ public class TruststoreInfo   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class TruststoreInfo {\n");
-    
     sb.append("    aliases: ").append(toIndentedString(aliases)).append("\n");
     sb.append("    exists: ").append(toIndentedString(exists)).append("\n");
     sb.append("}");
@@ -107,11 +115,8 @@ public class TruststoreInfo   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+  private String toIndentedString(@Nullable Object o) {
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

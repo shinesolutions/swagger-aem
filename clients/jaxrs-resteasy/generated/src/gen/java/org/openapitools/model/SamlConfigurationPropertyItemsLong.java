@@ -7,9 +7,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 import io.swagger.annotations.*;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyServerCodegen", date = "2021-09-03T15:25:57.989+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyServerCodegen", date = "2026-08-17T02:15:38.090574223Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class SamlConfigurationPropertyItemsLong   {
   
   private String name;
@@ -107,12 +108,12 @@ public class SamlConfigurationPropertyItemsLong   {
       return false;
     }
     SamlConfigurationPropertyItemsLong samlConfigurationPropertyItemsLong = (SamlConfigurationPropertyItemsLong) o;
-    return Objects.equals(name, samlConfigurationPropertyItemsLong.name) &&
-        Objects.equals(optional, samlConfigurationPropertyItemsLong.optional) &&
-        Objects.equals(isSet, samlConfigurationPropertyItemsLong.isSet) &&
-        Objects.equals(type, samlConfigurationPropertyItemsLong.type) &&
-        Objects.equals(value, samlConfigurationPropertyItemsLong.value) &&
-        Objects.equals(description, samlConfigurationPropertyItemsLong.description);
+    return Objects.equals(this.name, samlConfigurationPropertyItemsLong.name) &&
+        Objects.equals(this.optional, samlConfigurationPropertyItemsLong.optional) &&
+        Objects.equals(this.isSet, samlConfigurationPropertyItemsLong.isSet) &&
+        Objects.equals(this.type, samlConfigurationPropertyItemsLong.type) &&
+        Objects.equals(this.value, samlConfigurationPropertyItemsLong.value) &&
+        Objects.equals(this.description, samlConfigurationPropertyItemsLong.description);
   }
 
   @Override
@@ -140,10 +141,7 @@ public class SamlConfigurationPropertyItemsLong   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

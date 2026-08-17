@@ -18,13 +18,13 @@ Method | HTTP request | Description
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 
 final api_instance = CqApi();
 
-try { 
+try {
     final result = api_instance.getLoginPage();
     print(result);
 } catch (e) {
@@ -55,7 +55,7 @@ No authorization required
 
 
 
-### Example 
+### Example
 ```dart
 import 'package:openapi/api.dart';
 // TODO Configure HTTP basic authorization: aemAuth
@@ -66,7 +66,7 @@ final api_instance = CqApi();
 final authorizableId = authorizableId_example; // String | 
 final changelog = changelog_example; // String | 
 
-try { 
+try {
     api_instance.postCqActions(authorizableId, changelog);
 } catch (e) {
     print('Exception when calling CqApi->postCqActions: $e\n');

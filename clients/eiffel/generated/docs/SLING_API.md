@@ -27,7 +27,7 @@ Feature | HTTP request | Description
 [**post_node_rw**](SLING_API.md#post_node_rw) | **Post** /{path}/{name}.rw.html | 
 [**post_path**](SLING_API.md#post_path) | **Post** /{path}/ | 
 [**post_query**](SLING_API.md#post_query) | **Post** /bin/querybuilder.json | 
-[**post_tree_activation**](SLING_API.md#post_tree_activation) | **Post** /etc/replication/treeactivation.html | 
+[**post_tree_activation**](SLING_API.md#post_tree_activation) | **Post** /libs/replication/treeactivation.html | 
 [**post_truststore**](SLING_API.md#post_truststore) | **Post** /libs/granite/security/post/truststore | 
 [**post_truststore_pk_cs12**](SLING_API.md#post_truststore_pk_cs12) | **Post** /etc/truststore | 
 [**query**](SLING_API.md#query) | **Get** /bin/querybuilder.json | 
@@ -37,7 +37,7 @@ Feature | HTTP request | Description
 
 # **agent**
 > agent (runmode: STRING_32 ; name: STRING_32 )
-	
+
 
 
 
@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 
 # **agents**
 > agents (runmode: STRING_32 ): detachable STRING_32
-	
+
 
 
 
@@ -94,7 +94,7 @@ Name | Type | Description  | Notes
 
 # **authorizable_keystore**
 > authorizable_keystore (intermediate_path: STRING_32 ; authorizable_id: STRING_32 ): detachable KEYSTORE_INFO
-	
+
 
 
 
@@ -123,7 +123,7 @@ Name | Type | Description  | Notes
 
 # **delete_agent**
 > delete_agent (runmode: STRING_32 ; name: STRING_32 )
-	
+
 
 
 
@@ -152,7 +152,7 @@ Name | Type | Description  | Notes
 
 # **delete_node**
 > delete_node (path: STRING_32 ; name: STRING_32 )
-	
+
 
 
 
@@ -181,7 +181,7 @@ Name | Type | Description  | Notes
 
 # **keystore**
 > keystore (intermediate_path: STRING_32 ; authorizable_id: STRING_32 ): detachable FILE
-	
+
 
 
 
@@ -210,7 +210,7 @@ Name | Type | Description  | Notes
 
 # **node**
 > node (path: STRING_32 ; name: STRING_32 )
-	
+
 
 
 
@@ -239,7 +239,7 @@ Name | Type | Description  | Notes
 
 # **package**
 > package (group: STRING_32 ; name: STRING_32 ; version: STRING_32 ): detachable FILE
-	
+
 
 
 
@@ -269,7 +269,7 @@ Name | Type | Description  | Notes
 
 # **package_filter**
 > package_filter (group: STRING_32 ; name: STRING_32 ; version: STRING_32 ): detachable STRING_32
-	
+
 
 
 
@@ -298,8 +298,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_agent**
-> post_agent (runmode: STRING_32 ; name: STRING_32 ; jcrcontent_cqdistribute:  detachable BOOLEAN ; jcrcontent_cqdistribute_type_hint:  detachable STRING_32 ; jcrcontent_cqname:  detachable STRING_32 ; jcrcontent_cqtemplate:  detachable STRING_32 ; jcrcontent_enabled:  detachable BOOLEAN ; jcrcontent_jcrdescription:  detachable STRING_32 ; jcrcontent_jcrlast_modified:  detachable STRING_32 ; jcrcontent_jcrlast_modified_by:  detachable STRING_32 ; jcrcontent_jcrmixin_types:  detachable STRING_32 ; jcrcontent_jcrtitle:  detachable STRING_32 ; jcrcontent_log_level:  detachable STRING_32 ; jcrcontent_no_status_update:  detachable BOOLEAN ; jcrcontent_no_versioning:  detachable BOOLEAN ; jcrcontent_protocol_connect_timeout:  detachable REAL_32 ; jcrcontent_protocol_ht_tp_connection_closed:  detachable BOOLEAN ; jcrcontent_protocol_ht_tp_expired:  detachable STRING_32 ; jcrcontent_protocol_ht_tp_headers:  detachable LIST [STRING_32] ; jcrcontent_protocol_ht_tp_headers_type_hint:  detachable STRING_32 ; jcrcontent_protocol_ht_tp_method:  detachable STRING_32 ; jcrcontent_protocol_ht_tp_srelaxed:  detachable BOOLEAN ; jcrcontent_protocol_interface:  detachable STRING_32 ; jcrcontent_protocol_socket_timeout:  detachable REAL_32 ; jcrcontent_protocol_version:  detachable STRING_32 ; jcrcontent_proxy_nt_lm_domain:  detachable STRING_32 ; jcrcontent_proxy_nt_lm_host:  detachable STRING_32 ; jcrcontent_proxy_host:  detachable STRING_32 ; jcrcontent_proxy_password:  detachable STRING_32 ; jcrcontent_proxy_port:  detachable REAL_32 ; jcrcontent_proxy_user:  detachable STRING_32 ; jcrcontent_queue_batch_max_size:  detachable REAL_32 ; jcrcontent_queue_batch_mode:  detachable STRING_32 ; jcrcontent_queue_batch_wait_time:  detachable REAL_32 ; jcrcontent_retry_delay:  detachable STRING_32 ; jcrcontent_reverse_replication:  detachable BOOLEAN ; jcrcontent_serialization_type:  detachable STRING_32 ; jcrcontent_slingresource_type:  detachable STRING_32 ; jcrcontent_ssl:  detachable STRING_32 ; jcrcontent_transport_nt_lm_domain:  detachable STRING_32 ; jcrcontent_transport_nt_lm_host:  detachable STRING_32 ; jcrcontent_transport_password:  detachable STRING_32 ; jcrcontent_transport_uri:  detachable STRING_32 ; jcrcontent_transport_user:  detachable STRING_32 ; jcrcontent_trigger_distribute:  detachable BOOLEAN ; jcrcontent_trigger_modified:  detachable BOOLEAN ; jcrcontent_trigger_on_off_time:  detachable BOOLEAN ; jcrcontent_trigger_receive:  detachable BOOLEAN ; jcrcontent_trigger_specific:  detachable BOOLEAN ; jcrcontent_user_id:  detachable STRING_32 ; jcrprimary_type:  detachable STRING_32 ; operation:  detachable STRING_32 )
-	
+> post_agent (runmode: STRING_32 ; name: STRING_32 ; jcr_content_cq_distribute:  detachable BOOLEAN ; jcr_content_cq_distribute_type_hint:  detachable STRING_32 ; jcr_content_cq_name:  detachable STRING_32 ; jcr_content_cq_template:  detachable STRING_32 ; jcr_content_alias_update:  detachable BOOLEAN ; jcr_content_enabled:  detachable BOOLEAN ; jcr_content_jcr_description:  detachable STRING_32 ; jcr_content_jcr_last_modified:  detachable STRING_32 ; jcr_content_jcr_last_modified_by:  detachable STRING_32 ; jcr_content_jcr_mixin_types:  detachable STRING_32 ; jcr_content_jcr_title:  detachable STRING_32 ; jcr_content_log_level:  detachable STRING_32 ; jcr_content_no_status_update:  detachable BOOLEAN ; jcr_content_no_versioning:  detachable BOOLEAN ; jcr_content_protocol_connect_timeout:  detachable REAL_32 ; jcr_content_protocol_ht_tp_connection_closed:  detachable BOOLEAN ; jcr_content_protocol_ht_tp_expired:  detachable STRING_32 ; jcr_content_protocol_ht_tp_headers:  detachable LIST [STRING_32] ; jcr_content_protocol_ht_tp_headers_type_hint:  detachable STRING_32 ; jcr_content_protocol_ht_tp_method:  detachable STRING_32 ; jcr_content_protocol_ht_tp_srelaxed:  detachable BOOLEAN ; jcr_content_protocol_interface:  detachable STRING_32 ; jcr_content_protocol_socket_timeout:  detachable REAL_32 ; jcr_content_protocol_version:  detachable STRING_32 ; jcr_content_proxy_nt_lm_domain:  detachable STRING_32 ; jcr_content_proxy_nt_lm_host:  detachable STRING_32 ; jcr_content_proxy_host:  detachable STRING_32 ; jcr_content_proxy_password:  detachable STRING_32 ; jcr_content_proxy_port:  detachable REAL_32 ; jcr_content_proxy_user:  detachable STRING_32 ; jcr_content_queue_batch_max_size:  detachable REAL_32 ; jcr_content_queue_batch_mode:  detachable STRING_32 ; jcr_content_queue_batch_wait_time:  detachable REAL_32 ; jcr_content_retry_delay:  detachable STRING_32 ; jcr_content_reverse_replication:  detachable BOOLEAN ; jcr_content_serialization_type:  detachable STRING_32 ; jcr_content_sling_resource_type:  detachable STRING_32 ; jcr_content_ssl:  detachable STRING_32 ; jcr_content_transport_nt_lm_domain:  detachable STRING_32 ; jcr_content_transport_nt_lm_host:  detachable STRING_32 ; jcr_content_transport_password:  detachable STRING_32 ; jcr_content_transport_uri:  detachable STRING_32 ; jcr_content_transport_user:  detachable STRING_32 ; jcr_content_trigger_distribute:  detachable BOOLEAN ; jcr_content_trigger_modified:  detachable BOOLEAN ; jcr_content_trigger_on_off_time:  detachable BOOLEAN ; jcr_content_trigger_receive:  detachable BOOLEAN ; jcr_content_trigger_specific:  detachable BOOLEAN ; jcr_content_user_id:  detachable STRING_32 ; jcr_primary_type:  detachable STRING_32 ; var_operation:  detachable STRING_32 )
+
 
 
 
@@ -310,56 +310,57 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **runmode** | **STRING_32**|  | [default to null]
  **name** | **STRING_32**|  | [default to null]
- **jcrcontent_cqdistribute** | **BOOLEAN**|  | [optional] [default to null]
- **jcrcontent_cqdistribute_type_hint** | **STRING_32**|  | [optional] [default to null]
- **jcrcontent_cqname** | **STRING_32**|  | [optional] [default to null]
- **jcrcontent_cqtemplate** | **STRING_32**|  | [optional] [default to null]
- **jcrcontent_enabled** | **BOOLEAN**|  | [optional] [default to null]
- **jcrcontent_jcrdescription** | **STRING_32**|  | [optional] [default to null]
- **jcrcontent_jcrlast_modified** | **STRING_32**|  | [optional] [default to null]
- **jcrcontent_jcrlast_modified_by** | **STRING_32**|  | [optional] [default to null]
- **jcrcontent_jcrmixin_types** | **STRING_32**|  | [optional] [default to null]
- **jcrcontent_jcrtitle** | **STRING_32**|  | [optional] [default to null]
- **jcrcontent_log_level** | **STRING_32**|  | [optional] [default to null]
- **jcrcontent_no_status_update** | **BOOLEAN**|  | [optional] [default to null]
- **jcrcontent_no_versioning** | **BOOLEAN**|  | [optional] [default to null]
- **jcrcontent_protocol_connect_timeout** | **REAL_32**|  | [optional] [default to null]
- **jcrcontent_protocol_ht_tp_connection_closed** | **BOOLEAN**|  | [optional] [default to null]
- **jcrcontent_protocol_ht_tp_expired** | **STRING_32**|  | [optional] [default to null]
- **jcrcontent_protocol_ht_tp_headers** | [**LIST [STRING_32]**](STRING_32.md)|  | [optional] [default to null]
- **jcrcontent_protocol_ht_tp_headers_type_hint** | **STRING_32**|  | [optional] [default to null]
- **jcrcontent_protocol_ht_tp_method** | **STRING_32**|  | [optional] [default to null]
- **jcrcontent_protocol_ht_tp_srelaxed** | **BOOLEAN**|  | [optional] [default to null]
- **jcrcontent_protocol_interface** | **STRING_32**|  | [optional] [default to null]
- **jcrcontent_protocol_socket_timeout** | **REAL_32**|  | [optional] [default to null]
- **jcrcontent_protocol_version** | **STRING_32**|  | [optional] [default to null]
- **jcrcontent_proxy_nt_lm_domain** | **STRING_32**|  | [optional] [default to null]
- **jcrcontent_proxy_nt_lm_host** | **STRING_32**|  | [optional] [default to null]
- **jcrcontent_proxy_host** | **STRING_32**|  | [optional] [default to null]
- **jcrcontent_proxy_password** | **STRING_32**|  | [optional] [default to null]
- **jcrcontent_proxy_port** | **REAL_32**|  | [optional] [default to null]
- **jcrcontent_proxy_user** | **STRING_32**|  | [optional] [default to null]
- **jcrcontent_queue_batch_max_size** | **REAL_32**|  | [optional] [default to null]
- **jcrcontent_queue_batch_mode** | **STRING_32**|  | [optional] [default to null]
- **jcrcontent_queue_batch_wait_time** | **REAL_32**|  | [optional] [default to null]
- **jcrcontent_retry_delay** | **STRING_32**|  | [optional] [default to null]
- **jcrcontent_reverse_replication** | **BOOLEAN**|  | [optional] [default to null]
- **jcrcontent_serialization_type** | **STRING_32**|  | [optional] [default to null]
- **jcrcontent_slingresource_type** | **STRING_32**|  | [optional] [default to null]
- **jcrcontent_ssl** | **STRING_32**|  | [optional] [default to null]
- **jcrcontent_transport_nt_lm_domain** | **STRING_32**|  | [optional] [default to null]
- **jcrcontent_transport_nt_lm_host** | **STRING_32**|  | [optional] [default to null]
- **jcrcontent_transport_password** | **STRING_32**|  | [optional] [default to null]
- **jcrcontent_transport_uri** | **STRING_32**|  | [optional] [default to null]
- **jcrcontent_transport_user** | **STRING_32**|  | [optional] [default to null]
- **jcrcontent_trigger_distribute** | **BOOLEAN**|  | [optional] [default to null]
- **jcrcontent_trigger_modified** | **BOOLEAN**|  | [optional] [default to null]
- **jcrcontent_trigger_on_off_time** | **BOOLEAN**|  | [optional] [default to null]
- **jcrcontent_trigger_receive** | **BOOLEAN**|  | [optional] [default to null]
- **jcrcontent_trigger_specific** | **BOOLEAN**|  | [optional] [default to null]
- **jcrcontent_user_id** | **STRING_32**|  | [optional] [default to null]
- **jcrprimary_type** | **STRING_32**|  | [optional] [default to null]
- **operation** | **STRING_32**|  | [optional] [default to null]
+ **jcr_content_cq_distribute** | **BOOLEAN**|  | [optional] [default to null]
+ **jcr_content_cq_distribute_type_hint** | **STRING_32**|  | [optional] [default to null]
+ **jcr_content_cq_name** | **STRING_32**|  | [optional] [default to null]
+ **jcr_content_cq_template** | **STRING_32**|  | [optional] [default to null]
+ **jcr_content_alias_update** | **BOOLEAN**|  | [optional] [default to null]
+ **jcr_content_enabled** | **BOOLEAN**|  | [optional] [default to null]
+ **jcr_content_jcr_description** | **STRING_32**|  | [optional] [default to null]
+ **jcr_content_jcr_last_modified** | **STRING_32**|  | [optional] [default to null]
+ **jcr_content_jcr_last_modified_by** | **STRING_32**|  | [optional] [default to null]
+ **jcr_content_jcr_mixin_types** | **STRING_32**|  | [optional] [default to null]
+ **jcr_content_jcr_title** | **STRING_32**|  | [optional] [default to null]
+ **jcr_content_log_level** | **STRING_32**|  | [optional] [default to null]
+ **jcr_content_no_status_update** | **BOOLEAN**|  | [optional] [default to null]
+ **jcr_content_no_versioning** | **BOOLEAN**|  | [optional] [default to null]
+ **jcr_content_protocol_connect_timeout** | **REAL_32**|  | [optional] [default to null]
+ **jcr_content_protocol_ht_tp_connection_closed** | **BOOLEAN**|  | [optional] [default to null]
+ **jcr_content_protocol_ht_tp_expired** | **STRING_32**|  | [optional] [default to null]
+ **jcr_content_protocol_ht_tp_headers** | [**LIST [STRING_32]**](STRING_32.md)|  | [optional] [default to null]
+ **jcr_content_protocol_ht_tp_headers_type_hint** | **STRING_32**|  | [optional] [default to null]
+ **jcr_content_protocol_ht_tp_method** | **STRING_32**|  | [optional] [default to null]
+ **jcr_content_protocol_ht_tp_srelaxed** | **BOOLEAN**|  | [optional] [default to null]
+ **jcr_content_protocol_interface** | **STRING_32**|  | [optional] [default to null]
+ **jcr_content_protocol_socket_timeout** | **REAL_32**|  | [optional] [default to null]
+ **jcr_content_protocol_version** | **STRING_32**|  | [optional] [default to null]
+ **jcr_content_proxy_nt_lm_domain** | **STRING_32**|  | [optional] [default to null]
+ **jcr_content_proxy_nt_lm_host** | **STRING_32**|  | [optional] [default to null]
+ **jcr_content_proxy_host** | **STRING_32**|  | [optional] [default to null]
+ **jcr_content_proxy_password** | **STRING_32**|  | [optional] [default to null]
+ **jcr_content_proxy_port** | **REAL_32**|  | [optional] [default to null]
+ **jcr_content_proxy_user** | **STRING_32**|  | [optional] [default to null]
+ **jcr_content_queue_batch_max_size** | **REAL_32**|  | [optional] [default to null]
+ **jcr_content_queue_batch_mode** | **STRING_32**|  | [optional] [default to null]
+ **jcr_content_queue_batch_wait_time** | **REAL_32**|  | [optional] [default to null]
+ **jcr_content_retry_delay** | **STRING_32**|  | [optional] [default to null]
+ **jcr_content_reverse_replication** | **BOOLEAN**|  | [optional] [default to null]
+ **jcr_content_serialization_type** | **STRING_32**|  | [optional] [default to null]
+ **jcr_content_sling_resource_type** | **STRING_32**|  | [optional] [default to null]
+ **jcr_content_ssl** | **STRING_32**|  | [optional] [default to null]
+ **jcr_content_transport_nt_lm_domain** | **STRING_32**|  | [optional] [default to null]
+ **jcr_content_transport_nt_lm_host** | **STRING_32**|  | [optional] [default to null]
+ **jcr_content_transport_password** | **STRING_32**|  | [optional] [default to null]
+ **jcr_content_transport_uri** | **STRING_32**|  | [optional] [default to null]
+ **jcr_content_transport_user** | **STRING_32**|  | [optional] [default to null]
+ **jcr_content_trigger_distribute** | **BOOLEAN**|  | [optional] [default to null]
+ **jcr_content_trigger_modified** | **BOOLEAN**|  | [optional] [default to null]
+ **jcr_content_trigger_on_off_time** | **BOOLEAN**|  | [optional] [default to null]
+ **jcr_content_trigger_receive** | **BOOLEAN**|  | [optional] [default to null]
+ **jcr_content_trigger_specific** | **BOOLEAN**|  | [optional] [default to null]
+ **jcr_content_user_id** | **STRING_32**|  | [optional] [default to null]
+ **jcr_primary_type** | **STRING_32**|  | [optional] [default to null]
+ **var_operation** | **STRING_32**|  | [optional] [default to null]
 
 ### Return type
 
@@ -377,8 +378,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_authorizable_keystore**
-> post_authorizable_keystore (intermediate_path: STRING_32 ; authorizable_id: STRING_32 ; operation:  detachable STRING_32 ; current_password:  detachable STRING_32 ; new_password:  detachable STRING_32 ; re_password:  detachable STRING_32 ; key_password:  detachable STRING_32 ; key_store_pass:  detachable STRING_32 ; var_alias:  detachable STRING_32 ; new_alias:  detachable STRING_32 ; remove_alias:  detachable STRING_32 ; cert_chain:  detachable FILE ; pk:  detachable FILE ; key_store:  detachable FILE ): detachable KEYSTORE_INFO
-	
+> post_authorizable_keystore (intermediate_path: STRING_32 ; authorizable_id: STRING_32 ; var_operation:  detachable STRING_32 ; current_password:  detachable STRING_32 ; new_password:  detachable STRING_32 ; re_password:  detachable STRING_32 ; key_password:  detachable STRING_32 ; key_store_pass:  detachable STRING_32 ; var_alias:  detachable STRING_32 ; new_alias:  detachable STRING_32 ; remove_alias:  detachable STRING_32 ; cert_chain:  detachable FILE ; pk:  detachable FILE ; key_store:  detachable FILE ): detachable KEYSTORE_INFO
+
 
 
 
@@ -389,7 +390,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **intermediate_path** | **STRING_32**|  | [default to null]
  **authorizable_id** | **STRING_32**|  | [default to null]
- **operation** | **STRING_32**|  | [optional] [default to null]
+ **var_operation** | **STRING_32**|  | [optional] [default to null]
  **current_password** | **STRING_32**|  | [optional] [default to null]
  **new_password** | **STRING_32**|  | [optional] [default to null]
  **re_password** | **STRING_32**|  | [optional] [default to null]
@@ -418,8 +419,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_authorizables**
-> post_authorizables (authorizable_id: STRING_32 ; intermediate_path: STRING_32 ; create_user:  detachable STRING_32 ; create_group:  detachable STRING_32 ; reppassword:  detachable STRING_32 ; profile_given_name:  detachable STRING_32 ): detachable STRING_32
-	
+> post_authorizables (authorizable_id: STRING_32 ; intermediate_path: STRING_32 ; create_user:  detachable STRING_32 ; create_group:  detachable STRING_32 ; rep_password:  detachable STRING_32 ; profile_given_name:  detachable STRING_32 ): detachable STRING_32
+
 
 
 
@@ -432,7 +433,7 @@ Name | Type | Description  | Notes
  **intermediate_path** | **STRING_32**|  | [default to null]
  **create_user** | **STRING_32**|  | [optional] [default to null]
  **create_group** | **STRING_32**|  | [optional] [default to null]
- **reppassword** | **STRING_32**|  | [optional] [default to null]
+ **rep_password** | **STRING_32**|  | [optional] [default to null]
  **profile_given_name** | **STRING_32**|  | [optional] [default to null]
 
 ### Return type
@@ -452,7 +453,7 @@ Name | Type | Description  | Notes
 
 # **post_config_adobe_granite_saml_authentication_handler**
 > post_config_adobe_granite_saml_authentication_handler (key_store_password:  detachable STRING_32 ; key_store_password_type_hint:  detachable STRING_32 ; service_ranking:  detachable INTEGER_32 ; service_ranking_type_hint:  detachable STRING_32 ; idp_http_redirect:  detachable BOOLEAN ; idp_http_redirect_type_hint:  detachable STRING_32 ; create_user:  detachable BOOLEAN ; create_user_type_hint:  detachable STRING_32 ; default_redirect_url:  detachable STRING_32 ; default_redirect_url_type_hint:  detachable STRING_32 ; user_id_attribute:  detachable STRING_32 ; user_id_attribute_type_hint:  detachable STRING_32 ; default_groups:  detachable LIST [STRING_32] ; default_groups_type_hint:  detachable STRING_32 ; idp_cert_alias:  detachable STRING_32 ; idp_cert_alias_type_hint:  detachable STRING_32 ; add_group_memberships:  detachable BOOLEAN ; add_group_memberships_type_hint:  detachable STRING_32 ; path:  detachable LIST [STRING_32] ; path_type_hint:  detachable STRING_32 ; synchronize_attributes:  detachable LIST [STRING_32] ; synchronize_attributes_type_hint:  detachable STRING_32 ; clock_tolerance:  detachable INTEGER_32 ; clock_tolerance_type_hint:  detachable STRING_32 ; group_membership_attribute:  detachable STRING_32 ; group_membership_attribute_type_hint:  detachable STRING_32 ; idp_url:  detachable STRING_32 ; idp_url_type_hint:  detachable STRING_32 ; logout_url:  detachable STRING_32 ; logout_url_type_hint:  detachable STRING_32 ; service_provider_entity_id:  detachable STRING_32 ; service_provider_entity_id_type_hint:  detachable STRING_32 ; assertion_consumer_service_ur_l:  detachable STRING_32 ; assertion_consumer_service_ur_ltype_hint:  detachable STRING_32 ; handle_logout:  detachable BOOLEAN ; handle_logout_type_hint:  detachable STRING_32 ; sp_private_key_alias:  detachable STRING_32 ; sp_private_key_alias_type_hint:  detachable STRING_32 ; use_encryption:  detachable BOOLEAN ; use_encryption_type_hint:  detachable STRING_32 ; name_id_format:  detachable STRING_32 ; name_id_format_type_hint:  detachable STRING_32 ; digest_method:  detachable STRING_32 ; digest_method_type_hint:  detachable STRING_32 ; signature_method:  detachable STRING_32 ; signature_method_type_hint:  detachable STRING_32 ; user_intermediate_path:  detachable STRING_32 ; user_intermediate_path_type_hint:  detachable STRING_32 )
-	
+
 
 
 
@@ -527,7 +528,7 @@ Name | Type | Description  | Notes
 
 # **post_config_apache_felix_jetty_based_http_service**
 > post_config_apache_felix_jetty_based_http_service (org_apache_felix_https_nio:  detachable BOOLEAN ; org_apache_felix_https_nio_type_hint:  detachable STRING_32 ; org_apache_felix_https_keystore:  detachable STRING_32 ; org_apache_felix_https_keystore_type_hint:  detachable STRING_32 ; org_apache_felix_https_keystore_password:  detachable STRING_32 ; org_apache_felix_https_keystore_password_type_hint:  detachable STRING_32 ; org_apache_felix_https_keystore_key:  detachable STRING_32 ; org_apache_felix_https_keystore_key_type_hint:  detachable STRING_32 ; org_apache_felix_https_keystore_key_password:  detachable STRING_32 ; org_apache_felix_https_keystore_key_password_type_hint:  detachable STRING_32 ; org_apache_felix_https_truststore:  detachable STRING_32 ; org_apache_felix_https_truststore_type_hint:  detachable STRING_32 ; org_apache_felix_https_truststore_password:  detachable STRING_32 ; org_apache_felix_https_truststore_password_type_hint:  detachable STRING_32 ; org_apache_felix_https_clientcertificate:  detachable STRING_32 ; org_apache_felix_https_clientcertificate_type_hint:  detachable STRING_32 ; org_apache_felix_https_enable:  detachable BOOLEAN ; org_apache_felix_https_enable_type_hint:  detachable STRING_32 ; org_osgi_service_http_port_secure:  detachable STRING_32 ; org_osgi_service_http_port_secure_type_hint:  detachable STRING_32 )
-	
+
 
 
 
@@ -574,7 +575,7 @@ Name | Type | Description  | Notes
 
 # **post_config_apache_http_components_proxy_configuration**
 > post_config_apache_http_components_proxy_configuration (proxy_host:  detachable STRING_32 ; proxy_host_type_hint:  detachable STRING_32 ; proxy_port:  detachable INTEGER_32 ; proxy_port_type_hint:  detachable STRING_32 ; proxy_exceptions:  detachable LIST [STRING_32] ; proxy_exceptions_type_hint:  detachable STRING_32 ; proxy_enabled:  detachable BOOLEAN ; proxy_enabled_type_hint:  detachable STRING_32 ; proxy_user:  detachable STRING_32 ; proxy_user_type_hint:  detachable STRING_32 ; proxy_password:  detachable STRING_32 ; proxy_password_type_hint:  detachable STRING_32 )
-	
+
 
 
 
@@ -613,7 +614,7 @@ Name | Type | Description  | Notes
 
 # **post_config_apache_sling_dav_ex_servlet**
 > post_config_apache_sling_dav_ex_servlet (var_alias:  detachable STRING_32 ; alias_type_hint:  detachable STRING_32 ; dav_create_absolute_uri:  detachable BOOLEAN ; dav_create_absolute_uri_type_hint:  detachable STRING_32 )
-	
+
 
 
 
@@ -644,7 +645,7 @@ Name | Type | Description  | Notes
 
 # **post_config_apache_sling_get_servlet**
 > post_config_apache_sling_get_servlet (json_maximumresults:  detachable STRING_32 ; json_maximumresults_type_hint:  detachable STRING_32 ; enable_html:  detachable BOOLEAN ; enable_html_type_hint:  detachable STRING_32 ; enable_txt:  detachable BOOLEAN ; enable_txt_type_hint:  detachable STRING_32 ; enable_xml:  detachable BOOLEAN ; enable_xml_type_hint:  detachable STRING_32 )
-	
+
 
 
 
@@ -679,7 +680,7 @@ Name | Type | Description  | Notes
 
 # **post_config_apache_sling_referrer_filter**
 > post_config_apache_sling_referrer_filter (allow_empty:  detachable BOOLEAN ; allow_empty_type_hint:  detachable STRING_32 ; allow_hosts:  detachable STRING_32 ; allow_hosts_type_hint:  detachable STRING_32 ; allow_hosts_regexp:  detachable STRING_32 ; allow_hosts_regexp_type_hint:  detachable STRING_32 ; filter_methods:  detachable STRING_32 ; filter_methods_type_hint:  detachable STRING_32 )
-	
+
 
 
 
@@ -714,7 +715,7 @@ Name | Type | Description  | Notes
 
 # **post_config_property**
 > post_config_property (config_node_name: STRING_32 )
-	
+
 
 
 
@@ -741,8 +742,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_node**
-> post_node (path: STRING_32 ; name: STRING_32 ; operation:  detachable STRING_32 ; delete_authorizable:  detachable STRING_32 ; file:  detachable FILE )
-	
+> post_node (path: STRING_32 ; name: STRING_32 ; var_operation:  detachable STRING_32 ; delete_authorizable:  detachable STRING_32 ; file:  detachable FILE )
+
 
 
 
@@ -753,7 +754,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path** | **STRING_32**|  | [default to null]
  **name** | **STRING_32**|  | [default to null]
- **operation** | **STRING_32**|  | [optional] [default to null]
+ **var_operation** | **STRING_32**|  | [optional] [default to null]
  **delete_authorizable** | **STRING_32**|  | [optional] [default to null]
  **file** | **FILE**|  | [optional] [default to null]
 
@@ -774,7 +775,7 @@ Name | Type | Description  | Notes
 
 # **post_node_rw**
 > post_node_rw (path: STRING_32 ; name: STRING_32 ; add_members:  detachable STRING_32 )
-	
+
 
 
 
@@ -803,8 +804,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_path**
-> post_path (path: STRING_32 ; jcrprimary_type: STRING_32 ; name: STRING_32 )
-	
+> post_path (path: STRING_32 ; jcr_primary_type: STRING_32 ; var_name: STRING_32 )
+
 
 
 
@@ -814,8 +815,8 @@ Name | Type | Description  | Notes
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path** | **STRING_32**|  | [default to null]
- **jcrprimary_type** | **STRING_32**|  | [default to null]
- **name** | **STRING_32**|  | [default to null]
+ **jcr_primary_type** | **STRING_32**|  | [default to null]
+ **var_name** | **STRING_32**|  | [default to null]
 
 ### Return type
 
@@ -834,7 +835,7 @@ Name | Type | Description  | Notes
 
 # **post_query**
 > post_query (path: STRING_32 ; p_limit: REAL_32 ; var_1_property: STRING_32 ; var_1_property_value: STRING_32 ): detachable STRING_32
-	
+
 
 
 
@@ -864,8 +865,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_tree_activation**
-> post_tree_activation (ignoredeactivated: BOOLEAN ; onlymodified: BOOLEAN ; path: STRING_32 )
-	
+> post_tree_activation (ignoredeactivated: BOOLEAN ; onlymodified: BOOLEAN ; path: STRING_32 ; cmd: STRING_32 )
+
 
 
 
@@ -877,6 +878,7 @@ Name | Type | Description  | Notes
  **ignoredeactivated** | **BOOLEAN**|  | [default to null]
  **onlymodified** | **BOOLEAN**|  | [default to null]
  **path** | **STRING_32**|  | [default to null]
+ **cmd** | **STRING_32**|  | [default to activate]
 
 ### Return type
 
@@ -894,8 +896,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_truststore**
-> post_truststore (operation:  detachable STRING_32 ; new_password:  detachable STRING_32 ; re_password:  detachable STRING_32 ; key_store_type:  detachable STRING_32 ; remove_alias:  detachable STRING_32 ; certificate:  detachable FILE ): detachable STRING_32
-	
+> post_truststore (var_operation:  detachable STRING_32 ; new_password:  detachable STRING_32 ; re_password:  detachable STRING_32 ; key_store_type:  detachable STRING_32 ; remove_alias:  detachable STRING_32 ; certificate:  detachable FILE ): detachable STRING_32
+
 
 
 
@@ -904,7 +906,7 @@ Name | Type | Description  | Notes
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **operation** | **STRING_32**|  | [optional] [default to null]
+ **var_operation** | **STRING_32**|  | [optional] [default to null]
  **new_password** | **STRING_32**|  | [optional] [default to null]
  **re_password** | **STRING_32**|  | [optional] [default to null]
  **key_store_type** | **STRING_32**|  | [optional] [default to null]
@@ -928,7 +930,7 @@ Name | Type | Description  | Notes
 
 # **post_truststore_pk_cs12**
 > post_truststore_pk_cs12 (truststore_p12:  detachable FILE ): detachable STRING_32
-	
+
 
 
 
@@ -956,7 +958,7 @@ Name | Type | Description  | Notes
 
 # **query**
 > query (path: STRING_32 ; p_limit: REAL_32 ; var_1_property: STRING_32 ; var_1_property_value: STRING_32 ): detachable STRING_32
-	
+
 
 
 
@@ -987,7 +989,7 @@ Name | Type | Description  | Notes
 
 # **truststore**
 > truststore : detachable FILE
-	
+
 
 
 
@@ -1012,7 +1014,7 @@ This endpoint does not need any parameter.
 
 # **truststore_info**
 > truststore_info : detachable TRUSTSTORE_INFO
-	
+
 
 
 

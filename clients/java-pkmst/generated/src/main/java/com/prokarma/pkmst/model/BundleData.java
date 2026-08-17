@@ -7,6 +7,7 @@ import com.prokarma.pkmst.model.BundleDataProp;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 /**
  * Response class to be returned by Api
@@ -17,7 +18,7 @@ import java.util.List;
  * BundleData
  */
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2021-09-03T15:25:27.791+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2026-08-17T02:15:15.504120373Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class BundleData   {
   @JsonProperty("id")
   private Integer id;
@@ -52,10 +53,10 @@ public class BundleData   {
     return this;
   }
 
-   /**
+  /**
    * Bundle ID
    * @return id
-  **/
+   */
   @ApiModelProperty(value = "Bundle ID")
   public Integer getId() {
     return id;
@@ -70,10 +71,10 @@ public class BundleData   {
     return this;
   }
 
-   /**
+  /**
    * Bundle name
    * @return name
-  **/
+   */
   @ApiModelProperty(value = "Bundle name")
   public String getName() {
     return name;
@@ -88,10 +89,10 @@ public class BundleData   {
     return this;
   }
 
-   /**
+  /**
    * Is bundle a fragment
    * @return fragment
-  **/
+   */
   @ApiModelProperty(value = "Is bundle a fragment")
   public Boolean getFragment() {
     return fragment;
@@ -106,10 +107,10 @@ public class BundleData   {
     return this;
   }
 
-   /**
+  /**
    * Numeric raw bundle state value
    * @return stateRaw
-  **/
+   */
   @ApiModelProperty(value = "Numeric raw bundle state value")
   public Integer getStateRaw() {
     return stateRaw;
@@ -124,10 +125,10 @@ public class BundleData   {
     return this;
   }
 
-   /**
+  /**
    * Bundle state value
    * @return state
-  **/
+   */
   @ApiModelProperty(value = "Bundle state value")
   public String getState() {
     return state;
@@ -142,10 +143,10 @@ public class BundleData   {
     return this;
   }
 
-   /**
+  /**
    * Bundle version
    * @return version
-  **/
+   */
   @ApiModelProperty(value = "Bundle version")
   public String getVersion() {
     return version;
@@ -160,10 +161,10 @@ public class BundleData   {
     return this;
   }
 
-   /**
+  /**
    * Bundle symbolic name
    * @return symbolicName
-  **/
+   */
   @ApiModelProperty(value = "Bundle symbolic name")
   public String getSymbolicName() {
     return symbolicName;
@@ -178,10 +179,10 @@ public class BundleData   {
     return this;
   }
 
-   /**
+  /**
    * Bundle category
    * @return category
-  **/
+   */
   @ApiModelProperty(value = "Bundle category")
   public String getCategory() {
     return category;
@@ -204,10 +205,10 @@ public class BundleData   {
     return this;
   }
 
-   /**
+  /**
    * Get props
    * @return props
-  **/
+   */
   @ApiModelProperty(value = "")
   public List<BundleDataProp> getProps() {
     return props;
@@ -266,10 +267,7 @@ public class BundleData   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

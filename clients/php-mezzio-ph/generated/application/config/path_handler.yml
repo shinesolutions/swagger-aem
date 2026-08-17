@@ -1,0 +1,116 @@
+dependencies:
+  factories:
+    Mezzio\Router\RouterInterface: Articus\PathHandler\RouteInjectionFactory
+    Articus\PathHandler\MetadataProviderInterface: Articus\PathHandler\MetadataProvider\Factory\Annotation
+    Articus\PathHandler\Handler\PluginManager: Articus\PathHandler\Handler\Factory\PluginManager
+    Articus\PathHandler\Consumer\PluginManager: Articus\PathHandler\Consumer\Factory\PluginManager
+    Articus\PathHandler\Attribute\PluginManager: Articus\PathHandler\Attribute\Factory\PluginManager
+    Articus\PathHandler\Producer\PluginManager: Articus\PathHandler\Producer\Factory\PluginManager
+
+Articus\PathHandler\RouteInjectionFactory:
+  paths:
+    '':
+    - App\Handler\CqactionsHtml
+    - App\Handler\AppsSystemConfigComAdobeGraniteAuthSamlSamlAuthenticationHandlerConfig
+    - App\Handler\AppsSystemConfigComShinesolutionsAemPasswordresetActivator
+    - App\Handler\AppsSystemConfigComShinesolutionsHealthcheckHcImplActiveBundleHealthCheck
+    - App\Handler\AppsSystemConfigOrgApacheFelixHttp
+    - App\Handler\AppsSystemConfigOrgApacheHttpProxyconfiguratorConfig
+    - App\Handler\AppsSystemConfigOrgApacheSlingJcrDavexImplServletsSlingDavExServlet
+    - App\Handler\AppsSystemConfigOrgApacheSlingSecurityImplReferrerFilter
+    - App\Handler\AppsSystemConfigOrgApacheSlingServletsGetDefaultGetServlet
+    - App\Handler\AppsSystemConfigConfigNodeName
+    - App\Handler\BinQuerybuilderJson
+    - App\Handler\CrxExplorerUiSetpasswordJsp
+    - App\Handler\CrxPackmgrInstallstatusJsp
+    - App\Handler\CrxPackmgrServiceJsp
+    - App\Handler\CrxPackmgrServiceJsonPath
+    - App\Handler\CrxPackmgrServiceScriptHtml
+    - App\Handler\CrxPackmgrUpdateJsp
+    - App\Handler\CrxServerCrxDefaultJcrRoot1Json
+    - App\Handler\EtcPackagesGroupNameVersionZip
+    - App\Handler\EtcPackagesGroupNameVersionZipJcrContentVltDefinitionFilterTidy2Json
+    - App\Handler\EtcReplicationAgentsRunmode1Json
+    - App\Handler\EtcReplicationAgentsRunmodeName
+    - App\Handler\EtcTruststore
+    - App\Handler\EtcTruststoreTruststoreP12
+    - App\Handler\LibsGraniteCoreContentLoginHtml
+    - App\Handler\LibsGraniteSecurityPostAuthorizables
+    - App\Handler\LibsGraniteSecurityPostSslSetupHtml
+    - App\Handler\LibsGraniteSecurityPostTruststore
+    - App\Handler\LibsGraniteSecurityTruststoreJson
+    - App\Handler\LibsReplicationTreeactivationHtml
+    - App\Handler\SystemConsoleBundlesName
+    - App\Handler\SystemConsoleBundlesNameJson
+    - App\Handler\SystemConsoleConfigMgr
+    - App\Handler\SystemConsoleConfigMgrComAdobeGraniteAuthSamlSamlAuthenticationHandler
+    - App\Handler\SystemConsoleJmxComAdobeGraniteTypeRepositoryOpAction
+    - App\Handler\SystemConsoleStatusProductinfoJson
+    - App\Handler\SystemHealth
+    - App\Handler\IntermediatePathAuthorizableIdKsHtml
+    - App\Handler\IntermediatePathAuthorizableIdKsJson
+    - App\Handler\IntermediatePathAuthorizableIdKeystoreStoreP12
+    - App\Handler\Path
+    - App\Handler\PathName
+    - App\Handler\PathNameRwHtml
+
+Articus\PathHandler\Handler\PluginManager:
+  abstract_factories:
+  - Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory
+
+#Articus\PathHandler\Consumer\PluginManager:
+#  factories:
+#  invokables:
+
+#Articus\PathHandler\Attribute\PluginManager:
+#  factories:
+#  invokables:
+
+#Articus\PathHandler\Producer\PluginManager:
+#  factories:
+#  invokables:
+
+Laminas\ServiceManager\AbstractFactory\ConfigAbstractFactory:
+  App\Handler\CqactionsHtml: []
+  App\Handler\AppsSystemConfigComAdobeGraniteAuthSamlSamlAuthenticationHandlerConfig: []
+  App\Handler\AppsSystemConfigComShinesolutionsAemPasswordresetActivator: []
+  App\Handler\AppsSystemConfigComShinesolutionsHealthcheckHcImplActiveBundleHealthCheck: []
+  App\Handler\AppsSystemConfigOrgApacheFelixHttp: []
+  App\Handler\AppsSystemConfigOrgApacheHttpProxyconfiguratorConfig: []
+  App\Handler\AppsSystemConfigOrgApacheSlingJcrDavexImplServletsSlingDavExServlet: []
+  App\Handler\AppsSystemConfigOrgApacheSlingSecurityImplReferrerFilter: []
+  App\Handler\AppsSystemConfigOrgApacheSlingServletsGetDefaultGetServlet: []
+  App\Handler\AppsSystemConfigConfigNodeName: []
+  App\Handler\BinQuerybuilderJson: []
+  App\Handler\CrxExplorerUiSetpasswordJsp: []
+  App\Handler\CrxPackmgrInstallstatusJsp: []
+  App\Handler\CrxPackmgrServiceJsp: []
+  App\Handler\CrxPackmgrServiceJsonPath: []
+  App\Handler\CrxPackmgrServiceScriptHtml: []
+  App\Handler\CrxPackmgrUpdateJsp: []
+  App\Handler\CrxServerCrxDefaultJcrRoot1Json: []
+  App\Handler\EtcPackagesGroupNameVersionZip: []
+  App\Handler\EtcPackagesGroupNameVersionZipJcrContentVltDefinitionFilterTidy2Json: []
+  App\Handler\EtcReplicationAgentsRunmode1Json: []
+  App\Handler\EtcReplicationAgentsRunmodeName: []
+  App\Handler\EtcTruststore: []
+  App\Handler\EtcTruststoreTruststoreP12: []
+  App\Handler\LibsGraniteCoreContentLoginHtml: []
+  App\Handler\LibsGraniteSecurityPostAuthorizables: []
+  App\Handler\LibsGraniteSecurityPostSslSetupHtml: []
+  App\Handler\LibsGraniteSecurityPostTruststore: []
+  App\Handler\LibsGraniteSecurityTruststoreJson: []
+  App\Handler\LibsReplicationTreeactivationHtml: []
+  App\Handler\SystemConsoleBundlesName: []
+  App\Handler\SystemConsoleBundlesNameJson: []
+  App\Handler\SystemConsoleConfigMgr: []
+  App\Handler\SystemConsoleConfigMgrComAdobeGraniteAuthSamlSamlAuthenticationHandler: []
+  App\Handler\SystemConsoleJmxComAdobeGraniteTypeRepositoryOpAction: []
+  App\Handler\SystemConsoleStatusProductinfoJson: []
+  App\Handler\SystemHealth: []
+  App\Handler\IntermediatePathAuthorizableIdKsHtml: []
+  App\Handler\IntermediatePathAuthorizableIdKsJson: []
+  App\Handler\IntermediatePathAuthorizableIdKeystoreStoreP12: []
+  App\Handler\Path: []
+  App\Handler\PathName: []
+  App\Handler\PathNameRwHtml: []

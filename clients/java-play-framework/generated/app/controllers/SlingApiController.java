@@ -22,11 +22,12 @@ import openapitools.OpenAPIUtils;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 import com.typesafe.config.Config;
 
 import openapitools.OpenAPIUtils.ApiAction;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPlayFrameworkCodegen", date = "2021-09-03T15:25:32.040+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPlayFrameworkCodegen", date = "2026-08-17T02:15:17.717598878Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class SlingApiController extends Controller {
     private final SlingApiControllerImpInterface imp;
     private final ObjectMapper mapper;
@@ -129,369 +130,376 @@ public class SlingApiController extends Controller {
 
     @ApiAction
     public Result postAgent(Http.Request request, String runmode,String name) throws Exception {
-        String valuejcrColonContentCqColonDistribute = request.getQueryString("jcr:content/cq:distribute");
-        Boolean jcrColonContentCqColonDistribute;
-        if (valuejcrColonContentCqColonDistribute != null) {
-            jcrColonContentCqColonDistribute = Boolean.valueOf(valuejcrColonContentCqColonDistribute);
+        String valuejcrContentCqDistribute = request.getQueryString("jcr:content/cq:distribute");
+        Boolean jcrContentCqDistribute;
+        if (valuejcrContentCqDistribute != null) {
+            jcrContentCqDistribute = Boolean.valueOf(valuejcrContentCqDistribute);
         } else {
-            jcrColonContentCqColonDistribute = null;
+            jcrContentCqDistribute = null;
         }
-        String valuejcrColonContentCqColonDistributeAtTypeHint = request.getQueryString("jcr:content/cq:distribute@TypeHint");
-        String jcrColonContentCqColonDistributeAtTypeHint;
-        if (valuejcrColonContentCqColonDistributeAtTypeHint != null) {
-            jcrColonContentCqColonDistributeAtTypeHint = valuejcrColonContentCqColonDistributeAtTypeHint;
+        String valuejcrContentCqDistributeAtTypeHint = request.getQueryString("jcr:content/cq:distribute@TypeHint");
+        String jcrContentCqDistributeAtTypeHint;
+        if (valuejcrContentCqDistributeAtTypeHint != null) {
+            jcrContentCqDistributeAtTypeHint = valuejcrContentCqDistributeAtTypeHint;
         } else {
-            jcrColonContentCqColonDistributeAtTypeHint = null;
+            jcrContentCqDistributeAtTypeHint = null;
         }
-        String valuejcrColonContentCqColonName = request.getQueryString("jcr:content/cq:name");
-        String jcrColonContentCqColonName;
-        if (valuejcrColonContentCqColonName != null) {
-            jcrColonContentCqColonName = valuejcrColonContentCqColonName;
+        String valuejcrContentCqName = request.getQueryString("jcr:content/cq:name");
+        String jcrContentCqName;
+        if (valuejcrContentCqName != null) {
+            jcrContentCqName = valuejcrContentCqName;
         } else {
-            jcrColonContentCqColonName = null;
+            jcrContentCqName = null;
         }
-        String valuejcrColonContentCqColonTemplate = request.getQueryString("jcr:content/cq:template");
-        String jcrColonContentCqColonTemplate;
-        if (valuejcrColonContentCqColonTemplate != null) {
-            jcrColonContentCqColonTemplate = valuejcrColonContentCqColonTemplate;
+        String valuejcrContentCqTemplate = request.getQueryString("jcr:content/cq:template");
+        String jcrContentCqTemplate;
+        if (valuejcrContentCqTemplate != null) {
+            jcrContentCqTemplate = valuejcrContentCqTemplate;
         } else {
-            jcrColonContentCqColonTemplate = null;
+            jcrContentCqTemplate = null;
         }
-        String valuejcrColonContentEnabled = request.getQueryString("jcr:content/enabled");
-        Boolean jcrColonContentEnabled;
-        if (valuejcrColonContentEnabled != null) {
-            jcrColonContentEnabled = Boolean.valueOf(valuejcrColonContentEnabled);
+        String valuejcrContentAliasUpdate = request.getQueryString("jcr:content/aliasUpdate");
+        Boolean jcrContentAliasUpdate;
+        if (valuejcrContentAliasUpdate != null) {
+            jcrContentAliasUpdate = Boolean.valueOf(valuejcrContentAliasUpdate);
         } else {
-            jcrColonContentEnabled = null;
+            jcrContentAliasUpdate = null;
         }
-        String valuejcrColonContentJcrColonDescription = request.getQueryString("jcr:content/jcr:description");
-        String jcrColonContentJcrColonDescription;
-        if (valuejcrColonContentJcrColonDescription != null) {
-            jcrColonContentJcrColonDescription = valuejcrColonContentJcrColonDescription;
+        String valuejcrContentEnabled = request.getQueryString("jcr:content/enabled");
+        Boolean jcrContentEnabled;
+        if (valuejcrContentEnabled != null) {
+            jcrContentEnabled = Boolean.valueOf(valuejcrContentEnabled);
         } else {
-            jcrColonContentJcrColonDescription = null;
+            jcrContentEnabled = null;
         }
-        String valuejcrColonContentJcrColonLastModified = request.getQueryString("jcr:content/jcr:lastModified");
-        String jcrColonContentJcrColonLastModified;
-        if (valuejcrColonContentJcrColonLastModified != null) {
-            jcrColonContentJcrColonLastModified = valuejcrColonContentJcrColonLastModified;
+        String valuejcrContentJcrDescription = request.getQueryString("jcr:content/jcr:description");
+        String jcrContentJcrDescription;
+        if (valuejcrContentJcrDescription != null) {
+            jcrContentJcrDescription = valuejcrContentJcrDescription;
         } else {
-            jcrColonContentJcrColonLastModified = null;
+            jcrContentJcrDescription = null;
         }
-        String valuejcrColonContentJcrColonLastModifiedBy = request.getQueryString("jcr:content/jcr:lastModifiedBy");
-        String jcrColonContentJcrColonLastModifiedBy;
-        if (valuejcrColonContentJcrColonLastModifiedBy != null) {
-            jcrColonContentJcrColonLastModifiedBy = valuejcrColonContentJcrColonLastModifiedBy;
+        String valuejcrContentJcrLastModified = request.getQueryString("jcr:content/jcr:lastModified");
+        String jcrContentJcrLastModified;
+        if (valuejcrContentJcrLastModified != null) {
+            jcrContentJcrLastModified = valuejcrContentJcrLastModified;
         } else {
-            jcrColonContentJcrColonLastModifiedBy = null;
+            jcrContentJcrLastModified = null;
         }
-        String valuejcrColonContentJcrColonMixinTypes = request.getQueryString("jcr:content/jcr:mixinTypes");
-        String jcrColonContentJcrColonMixinTypes;
-        if (valuejcrColonContentJcrColonMixinTypes != null) {
-            jcrColonContentJcrColonMixinTypes = valuejcrColonContentJcrColonMixinTypes;
+        String valuejcrContentJcrLastModifiedBy = request.getQueryString("jcr:content/jcr:lastModifiedBy");
+        String jcrContentJcrLastModifiedBy;
+        if (valuejcrContentJcrLastModifiedBy != null) {
+            jcrContentJcrLastModifiedBy = valuejcrContentJcrLastModifiedBy;
         } else {
-            jcrColonContentJcrColonMixinTypes = null;
+            jcrContentJcrLastModifiedBy = null;
         }
-        String valuejcrColonContentJcrColonTitle = request.getQueryString("jcr:content/jcr:title");
-        String jcrColonContentJcrColonTitle;
-        if (valuejcrColonContentJcrColonTitle != null) {
-            jcrColonContentJcrColonTitle = valuejcrColonContentJcrColonTitle;
+        String valuejcrContentJcrMixinTypes = request.getQueryString("jcr:content/jcr:mixinTypes");
+        String jcrContentJcrMixinTypes;
+        if (valuejcrContentJcrMixinTypes != null) {
+            jcrContentJcrMixinTypes = valuejcrContentJcrMixinTypes;
         } else {
-            jcrColonContentJcrColonTitle = null;
+            jcrContentJcrMixinTypes = null;
         }
-        String valuejcrColonContentLogLevel = request.getQueryString("jcr:content/logLevel");
-        String jcrColonContentLogLevel;
-        if (valuejcrColonContentLogLevel != null) {
-            jcrColonContentLogLevel = valuejcrColonContentLogLevel;
+        String valuejcrContentJcrTitle = request.getQueryString("jcr:content/jcr:title");
+        String jcrContentJcrTitle;
+        if (valuejcrContentJcrTitle != null) {
+            jcrContentJcrTitle = valuejcrContentJcrTitle;
         } else {
-            jcrColonContentLogLevel = null;
+            jcrContentJcrTitle = null;
         }
-        String valuejcrColonContentNoStatusUpdate = request.getQueryString("jcr:content/noStatusUpdate");
-        Boolean jcrColonContentNoStatusUpdate;
-        if (valuejcrColonContentNoStatusUpdate != null) {
-            jcrColonContentNoStatusUpdate = Boolean.valueOf(valuejcrColonContentNoStatusUpdate);
+        String valuejcrContentLogLevel = request.getQueryString("jcr:content/logLevel");
+        String jcrContentLogLevel;
+        if (valuejcrContentLogLevel != null) {
+            jcrContentLogLevel = valuejcrContentLogLevel;
         } else {
-            jcrColonContentNoStatusUpdate = null;
+            jcrContentLogLevel = null;
         }
-        String valuejcrColonContentNoVersioning = request.getQueryString("jcr:content/noVersioning");
-        Boolean jcrColonContentNoVersioning;
-        if (valuejcrColonContentNoVersioning != null) {
-            jcrColonContentNoVersioning = Boolean.valueOf(valuejcrColonContentNoVersioning);
+        String valuejcrContentNoStatusUpdate = request.getQueryString("jcr:content/noStatusUpdate");
+        Boolean jcrContentNoStatusUpdate;
+        if (valuejcrContentNoStatusUpdate != null) {
+            jcrContentNoStatusUpdate = Boolean.valueOf(valuejcrContentNoStatusUpdate);
         } else {
-            jcrColonContentNoVersioning = null;
+            jcrContentNoStatusUpdate = null;
         }
-        String valuejcrColonContentProtocolConnectTimeout = request.getQueryString("jcr:content/protocolConnectTimeout");
-        BigDecimal jcrColonContentProtocolConnectTimeout;
-        if (valuejcrColonContentProtocolConnectTimeout != null) {
-            jcrColonContentProtocolConnectTimeout = new BigDecimal(valuejcrColonContentProtocolConnectTimeout);
+        String valuejcrContentNoVersioning = request.getQueryString("jcr:content/noVersioning");
+        Boolean jcrContentNoVersioning;
+        if (valuejcrContentNoVersioning != null) {
+            jcrContentNoVersioning = Boolean.valueOf(valuejcrContentNoVersioning);
         } else {
-            jcrColonContentProtocolConnectTimeout = null;
+            jcrContentNoVersioning = null;
         }
-        String valuejcrColonContentProtocolHTTPConnectionClosed = request.getQueryString("jcr:content/protocolHTTPConnectionClosed");
-        Boolean jcrColonContentProtocolHTTPConnectionClosed;
-        if (valuejcrColonContentProtocolHTTPConnectionClosed != null) {
-            jcrColonContentProtocolHTTPConnectionClosed = Boolean.valueOf(valuejcrColonContentProtocolHTTPConnectionClosed);
+        String valuejcrContentProtocolConnectTimeout = request.getQueryString("jcr:content/protocolConnectTimeout");
+        BigDecimal jcrContentProtocolConnectTimeout;
+        if (valuejcrContentProtocolConnectTimeout != null) {
+            jcrContentProtocolConnectTimeout = new BigDecimal(valuejcrContentProtocolConnectTimeout);
         } else {
-            jcrColonContentProtocolHTTPConnectionClosed = null;
+            jcrContentProtocolConnectTimeout = null;
         }
-        String valuejcrColonContentProtocolHTTPExpired = request.getQueryString("jcr:content/protocolHTTPExpired");
-        String jcrColonContentProtocolHTTPExpired;
-        if (valuejcrColonContentProtocolHTTPExpired != null) {
-            jcrColonContentProtocolHTTPExpired = valuejcrColonContentProtocolHTTPExpired;
+        String valuejcrContentProtocolHTTPConnectionClosed = request.getQueryString("jcr:content/protocolHTTPConnectionClosed");
+        Boolean jcrContentProtocolHTTPConnectionClosed;
+        if (valuejcrContentProtocolHTTPConnectionClosed != null) {
+            jcrContentProtocolHTTPConnectionClosed = Boolean.valueOf(valuejcrContentProtocolHTTPConnectionClosed);
         } else {
-            jcrColonContentProtocolHTTPExpired = null;
+            jcrContentProtocolHTTPConnectionClosed = null;
         }
-        String[] jcrColonContentProtocolHTTPHeadersArray = request.queryString().get("jcr:content/protocolHTTPHeaders");
-        List<String> jcrColonContentProtocolHTTPHeadersList = OpenAPIUtils.parametersToList("multi", jcrColonContentProtocolHTTPHeadersArray);
-        List<String> jcrColonContentProtocolHTTPHeaders = new ArrayList<>();
-        for (String curParam : jcrColonContentProtocolHTTPHeadersList) {
+        String valuejcrContentProtocolHTTPExpired = request.getQueryString("jcr:content/protocolHTTPExpired");
+        String jcrContentProtocolHTTPExpired;
+        if (valuejcrContentProtocolHTTPExpired != null) {
+            jcrContentProtocolHTTPExpired = valuejcrContentProtocolHTTPExpired;
+        } else {
+            jcrContentProtocolHTTPExpired = null;
+        }
+        String[] jcrContentProtocolHTTPHeadersArray = request.queryString().get("jcr:content/protocolHTTPHeaders");
+        List<String> jcrContentProtocolHTTPHeadersList = OpenAPIUtils.parametersToList("multi", jcrContentProtocolHTTPHeadersArray);
+        List<String> jcrContentProtocolHTTPHeaders = new ArrayList<>();
+        for (String curParam : jcrContentProtocolHTTPHeadersList) {
             if (!curParam.isEmpty()) {
                 //noinspection UseBulkOperation
-                jcrColonContentProtocolHTTPHeaders.add(curParam);
+                jcrContentProtocolHTTPHeaders.add(curParam);
             }
         }
-        String valuejcrColonContentProtocolHTTPHeadersAtTypeHint = request.getQueryString("jcr:content/protocolHTTPHeaders@TypeHint");
-        String jcrColonContentProtocolHTTPHeadersAtTypeHint;
-        if (valuejcrColonContentProtocolHTTPHeadersAtTypeHint != null) {
-            jcrColonContentProtocolHTTPHeadersAtTypeHint = valuejcrColonContentProtocolHTTPHeadersAtTypeHint;
+        String valuejcrContentProtocolHTTPHeadersAtTypeHint = request.getQueryString("jcr:content/protocolHTTPHeaders@TypeHint");
+        String jcrContentProtocolHTTPHeadersAtTypeHint;
+        if (valuejcrContentProtocolHTTPHeadersAtTypeHint != null) {
+            jcrContentProtocolHTTPHeadersAtTypeHint = valuejcrContentProtocolHTTPHeadersAtTypeHint;
         } else {
-            jcrColonContentProtocolHTTPHeadersAtTypeHint = null;
+            jcrContentProtocolHTTPHeadersAtTypeHint = null;
         }
-        String valuejcrColonContentProtocolHTTPMethod = request.getQueryString("jcr:content/protocolHTTPMethod");
-        String jcrColonContentProtocolHTTPMethod;
-        if (valuejcrColonContentProtocolHTTPMethod != null) {
-            jcrColonContentProtocolHTTPMethod = valuejcrColonContentProtocolHTTPMethod;
+        String valuejcrContentProtocolHTTPMethod = request.getQueryString("jcr:content/protocolHTTPMethod");
+        String jcrContentProtocolHTTPMethod;
+        if (valuejcrContentProtocolHTTPMethod != null) {
+            jcrContentProtocolHTTPMethod = valuejcrContentProtocolHTTPMethod;
         } else {
-            jcrColonContentProtocolHTTPMethod = null;
+            jcrContentProtocolHTTPMethod = null;
         }
-        String valuejcrColonContentProtocolHTTPSRelaxed = request.getQueryString("jcr:content/protocolHTTPSRelaxed");
-        Boolean jcrColonContentProtocolHTTPSRelaxed;
-        if (valuejcrColonContentProtocolHTTPSRelaxed != null) {
-            jcrColonContentProtocolHTTPSRelaxed = Boolean.valueOf(valuejcrColonContentProtocolHTTPSRelaxed);
+        String valuejcrContentProtocolHTTPSRelaxed = request.getQueryString("jcr:content/protocolHTTPSRelaxed");
+        Boolean jcrContentProtocolHTTPSRelaxed;
+        if (valuejcrContentProtocolHTTPSRelaxed != null) {
+            jcrContentProtocolHTTPSRelaxed = Boolean.valueOf(valuejcrContentProtocolHTTPSRelaxed);
         } else {
-            jcrColonContentProtocolHTTPSRelaxed = null;
+            jcrContentProtocolHTTPSRelaxed = null;
         }
-        String valuejcrColonContentProtocolInterface = request.getQueryString("jcr:content/protocolInterface");
-        String jcrColonContentProtocolInterface;
-        if (valuejcrColonContentProtocolInterface != null) {
-            jcrColonContentProtocolInterface = valuejcrColonContentProtocolInterface;
+        String valuejcrContentProtocolInterface = request.getQueryString("jcr:content/protocolInterface");
+        String jcrContentProtocolInterface;
+        if (valuejcrContentProtocolInterface != null) {
+            jcrContentProtocolInterface = valuejcrContentProtocolInterface;
         } else {
-            jcrColonContentProtocolInterface = null;
+            jcrContentProtocolInterface = null;
         }
-        String valuejcrColonContentProtocolSocketTimeout = request.getQueryString("jcr:content/protocolSocketTimeout");
-        BigDecimal jcrColonContentProtocolSocketTimeout;
-        if (valuejcrColonContentProtocolSocketTimeout != null) {
-            jcrColonContentProtocolSocketTimeout = new BigDecimal(valuejcrColonContentProtocolSocketTimeout);
+        String valuejcrContentProtocolSocketTimeout = request.getQueryString("jcr:content/protocolSocketTimeout");
+        BigDecimal jcrContentProtocolSocketTimeout;
+        if (valuejcrContentProtocolSocketTimeout != null) {
+            jcrContentProtocolSocketTimeout = new BigDecimal(valuejcrContentProtocolSocketTimeout);
         } else {
-            jcrColonContentProtocolSocketTimeout = null;
+            jcrContentProtocolSocketTimeout = null;
         }
-        String valuejcrColonContentProtocolVersion = request.getQueryString("jcr:content/protocolVersion");
-        String jcrColonContentProtocolVersion;
-        if (valuejcrColonContentProtocolVersion != null) {
-            jcrColonContentProtocolVersion = valuejcrColonContentProtocolVersion;
+        String valuejcrContentProtocolVersion = request.getQueryString("jcr:content/protocolVersion");
+        String jcrContentProtocolVersion;
+        if (valuejcrContentProtocolVersion != null) {
+            jcrContentProtocolVersion = valuejcrContentProtocolVersion;
         } else {
-            jcrColonContentProtocolVersion = null;
+            jcrContentProtocolVersion = null;
         }
-        String valuejcrColonContentProxyNTLMDomain = request.getQueryString("jcr:content/proxyNTLMDomain");
-        String jcrColonContentProxyNTLMDomain;
-        if (valuejcrColonContentProxyNTLMDomain != null) {
-            jcrColonContentProxyNTLMDomain = valuejcrColonContentProxyNTLMDomain;
+        String valuejcrContentProxyNTLMDomain = request.getQueryString("jcr:content/proxyNTLMDomain");
+        String jcrContentProxyNTLMDomain;
+        if (valuejcrContentProxyNTLMDomain != null) {
+            jcrContentProxyNTLMDomain = valuejcrContentProxyNTLMDomain;
         } else {
-            jcrColonContentProxyNTLMDomain = null;
+            jcrContentProxyNTLMDomain = null;
         }
-        String valuejcrColonContentProxyNTLMHost = request.getQueryString("jcr:content/proxyNTLMHost");
-        String jcrColonContentProxyNTLMHost;
-        if (valuejcrColonContentProxyNTLMHost != null) {
-            jcrColonContentProxyNTLMHost = valuejcrColonContentProxyNTLMHost;
+        String valuejcrContentProxyNTLMHost = request.getQueryString("jcr:content/proxyNTLMHost");
+        String jcrContentProxyNTLMHost;
+        if (valuejcrContentProxyNTLMHost != null) {
+            jcrContentProxyNTLMHost = valuejcrContentProxyNTLMHost;
         } else {
-            jcrColonContentProxyNTLMHost = null;
+            jcrContentProxyNTLMHost = null;
         }
-        String valuejcrColonContentProxyHost = request.getQueryString("jcr:content/proxyHost");
-        String jcrColonContentProxyHost;
-        if (valuejcrColonContentProxyHost != null) {
-            jcrColonContentProxyHost = valuejcrColonContentProxyHost;
+        String valuejcrContentProxyHost = request.getQueryString("jcr:content/proxyHost");
+        String jcrContentProxyHost;
+        if (valuejcrContentProxyHost != null) {
+            jcrContentProxyHost = valuejcrContentProxyHost;
         } else {
-            jcrColonContentProxyHost = null;
+            jcrContentProxyHost = null;
         }
-        String valuejcrColonContentProxyPassword = request.getQueryString("jcr:content/proxyPassword");
-        String jcrColonContentProxyPassword;
-        if (valuejcrColonContentProxyPassword != null) {
-            jcrColonContentProxyPassword = valuejcrColonContentProxyPassword;
+        String valuejcrContentProxyPassword = request.getQueryString("jcr:content/proxyPassword");
+        String jcrContentProxyPassword;
+        if (valuejcrContentProxyPassword != null) {
+            jcrContentProxyPassword = valuejcrContentProxyPassword;
         } else {
-            jcrColonContentProxyPassword = null;
+            jcrContentProxyPassword = null;
         }
-        String valuejcrColonContentProxyPort = request.getQueryString("jcr:content/proxyPort");
-        BigDecimal jcrColonContentProxyPort;
-        if (valuejcrColonContentProxyPort != null) {
-            jcrColonContentProxyPort = new BigDecimal(valuejcrColonContentProxyPort);
+        String valuejcrContentProxyPort = request.getQueryString("jcr:content/proxyPort");
+        BigDecimal jcrContentProxyPort;
+        if (valuejcrContentProxyPort != null) {
+            jcrContentProxyPort = new BigDecimal(valuejcrContentProxyPort);
         } else {
-            jcrColonContentProxyPort = null;
+            jcrContentProxyPort = null;
         }
-        String valuejcrColonContentProxyUser = request.getQueryString("jcr:content/proxyUser");
-        String jcrColonContentProxyUser;
-        if (valuejcrColonContentProxyUser != null) {
-            jcrColonContentProxyUser = valuejcrColonContentProxyUser;
+        String valuejcrContentProxyUser = request.getQueryString("jcr:content/proxyUser");
+        String jcrContentProxyUser;
+        if (valuejcrContentProxyUser != null) {
+            jcrContentProxyUser = valuejcrContentProxyUser;
         } else {
-            jcrColonContentProxyUser = null;
+            jcrContentProxyUser = null;
         }
-        String valuejcrColonContentQueueBatchMaxSize = request.getQueryString("jcr:content/queueBatchMaxSize");
-        BigDecimal jcrColonContentQueueBatchMaxSize;
-        if (valuejcrColonContentQueueBatchMaxSize != null) {
-            jcrColonContentQueueBatchMaxSize = new BigDecimal(valuejcrColonContentQueueBatchMaxSize);
+        String valuejcrContentQueueBatchMaxSize = request.getQueryString("jcr:content/queueBatchMaxSize");
+        BigDecimal jcrContentQueueBatchMaxSize;
+        if (valuejcrContentQueueBatchMaxSize != null) {
+            jcrContentQueueBatchMaxSize = new BigDecimal(valuejcrContentQueueBatchMaxSize);
         } else {
-            jcrColonContentQueueBatchMaxSize = null;
+            jcrContentQueueBatchMaxSize = null;
         }
-        String valuejcrColonContentQueueBatchMode = request.getQueryString("jcr:content/queueBatchMode");
-        String jcrColonContentQueueBatchMode;
-        if (valuejcrColonContentQueueBatchMode != null) {
-            jcrColonContentQueueBatchMode = valuejcrColonContentQueueBatchMode;
+        String valuejcrContentQueueBatchMode = request.getQueryString("jcr:content/queueBatchMode");
+        String jcrContentQueueBatchMode;
+        if (valuejcrContentQueueBatchMode != null) {
+            jcrContentQueueBatchMode = valuejcrContentQueueBatchMode;
         } else {
-            jcrColonContentQueueBatchMode = null;
+            jcrContentQueueBatchMode = null;
         }
-        String valuejcrColonContentQueueBatchWaitTime = request.getQueryString("jcr:content/queueBatchWaitTime");
-        BigDecimal jcrColonContentQueueBatchWaitTime;
-        if (valuejcrColonContentQueueBatchWaitTime != null) {
-            jcrColonContentQueueBatchWaitTime = new BigDecimal(valuejcrColonContentQueueBatchWaitTime);
+        String valuejcrContentQueueBatchWaitTime = request.getQueryString("jcr:content/queueBatchWaitTime");
+        BigDecimal jcrContentQueueBatchWaitTime;
+        if (valuejcrContentQueueBatchWaitTime != null) {
+            jcrContentQueueBatchWaitTime = new BigDecimal(valuejcrContentQueueBatchWaitTime);
         } else {
-            jcrColonContentQueueBatchWaitTime = null;
+            jcrContentQueueBatchWaitTime = null;
         }
-        String valuejcrColonContentRetryDelay = request.getQueryString("jcr:content/retryDelay");
-        String jcrColonContentRetryDelay;
-        if (valuejcrColonContentRetryDelay != null) {
-            jcrColonContentRetryDelay = valuejcrColonContentRetryDelay;
+        String valuejcrContentRetryDelay = request.getQueryString("jcr:content/retryDelay");
+        String jcrContentRetryDelay;
+        if (valuejcrContentRetryDelay != null) {
+            jcrContentRetryDelay = valuejcrContentRetryDelay;
         } else {
-            jcrColonContentRetryDelay = null;
+            jcrContentRetryDelay = null;
         }
-        String valuejcrColonContentReverseReplication = request.getQueryString("jcr:content/reverseReplication");
-        Boolean jcrColonContentReverseReplication;
-        if (valuejcrColonContentReverseReplication != null) {
-            jcrColonContentReverseReplication = Boolean.valueOf(valuejcrColonContentReverseReplication);
+        String valuejcrContentReverseReplication = request.getQueryString("jcr:content/reverseReplication");
+        Boolean jcrContentReverseReplication;
+        if (valuejcrContentReverseReplication != null) {
+            jcrContentReverseReplication = Boolean.valueOf(valuejcrContentReverseReplication);
         } else {
-            jcrColonContentReverseReplication = null;
+            jcrContentReverseReplication = null;
         }
-        String valuejcrColonContentSerializationType = request.getQueryString("jcr:content/serializationType");
-        String jcrColonContentSerializationType;
-        if (valuejcrColonContentSerializationType != null) {
-            jcrColonContentSerializationType = valuejcrColonContentSerializationType;
+        String valuejcrContentSerializationType = request.getQueryString("jcr:content/serializationType");
+        String jcrContentSerializationType;
+        if (valuejcrContentSerializationType != null) {
+            jcrContentSerializationType = valuejcrContentSerializationType;
         } else {
-            jcrColonContentSerializationType = null;
+            jcrContentSerializationType = null;
         }
-        String valuejcrColonContentSlingColonResourceType = request.getQueryString("jcr:content/sling:resourceType");
-        String jcrColonContentSlingColonResourceType;
-        if (valuejcrColonContentSlingColonResourceType != null) {
-            jcrColonContentSlingColonResourceType = valuejcrColonContentSlingColonResourceType;
+        String valuejcrContentSlingResourceType = request.getQueryString("jcr:content/sling:resourceType");
+        String jcrContentSlingResourceType;
+        if (valuejcrContentSlingResourceType != null) {
+            jcrContentSlingResourceType = valuejcrContentSlingResourceType;
         } else {
-            jcrColonContentSlingColonResourceType = null;
+            jcrContentSlingResourceType = null;
         }
-        String valuejcrColonContentSsl = request.getQueryString("jcr:content/ssl");
-        String jcrColonContentSsl;
-        if (valuejcrColonContentSsl != null) {
-            jcrColonContentSsl = valuejcrColonContentSsl;
+        String valuejcrContentSsl = request.getQueryString("jcr:content/ssl");
+        String jcrContentSsl;
+        if (valuejcrContentSsl != null) {
+            jcrContentSsl = valuejcrContentSsl;
         } else {
-            jcrColonContentSsl = null;
+            jcrContentSsl = null;
         }
-        String valuejcrColonContentTransportNTLMDomain = request.getQueryString("jcr:content/transportNTLMDomain");
-        String jcrColonContentTransportNTLMDomain;
-        if (valuejcrColonContentTransportNTLMDomain != null) {
-            jcrColonContentTransportNTLMDomain = valuejcrColonContentTransportNTLMDomain;
+        String valuejcrContentTransportNTLMDomain = request.getQueryString("jcr:content/transportNTLMDomain");
+        String jcrContentTransportNTLMDomain;
+        if (valuejcrContentTransportNTLMDomain != null) {
+            jcrContentTransportNTLMDomain = valuejcrContentTransportNTLMDomain;
         } else {
-            jcrColonContentTransportNTLMDomain = null;
+            jcrContentTransportNTLMDomain = null;
         }
-        String valuejcrColonContentTransportNTLMHost = request.getQueryString("jcr:content/transportNTLMHost");
-        String jcrColonContentTransportNTLMHost;
-        if (valuejcrColonContentTransportNTLMHost != null) {
-            jcrColonContentTransportNTLMHost = valuejcrColonContentTransportNTLMHost;
+        String valuejcrContentTransportNTLMHost = request.getQueryString("jcr:content/transportNTLMHost");
+        String jcrContentTransportNTLMHost;
+        if (valuejcrContentTransportNTLMHost != null) {
+            jcrContentTransportNTLMHost = valuejcrContentTransportNTLMHost;
         } else {
-            jcrColonContentTransportNTLMHost = null;
+            jcrContentTransportNTLMHost = null;
         }
-        String valuejcrColonContentTransportPassword = request.getQueryString("jcr:content/transportPassword");
-        String jcrColonContentTransportPassword;
-        if (valuejcrColonContentTransportPassword != null) {
-            jcrColonContentTransportPassword = valuejcrColonContentTransportPassword;
+        String valuejcrContentTransportPassword = request.getQueryString("jcr:content/transportPassword");
+        String jcrContentTransportPassword;
+        if (valuejcrContentTransportPassword != null) {
+            jcrContentTransportPassword = valuejcrContentTransportPassword;
         } else {
-            jcrColonContentTransportPassword = null;
+            jcrContentTransportPassword = null;
         }
-        String valuejcrColonContentTransportUri = request.getQueryString("jcr:content/transportUri");
-        String jcrColonContentTransportUri;
-        if (valuejcrColonContentTransportUri != null) {
-            jcrColonContentTransportUri = valuejcrColonContentTransportUri;
+        String valuejcrContentTransportUri = request.getQueryString("jcr:content/transportUri");
+        String jcrContentTransportUri;
+        if (valuejcrContentTransportUri != null) {
+            jcrContentTransportUri = valuejcrContentTransportUri;
         } else {
-            jcrColonContentTransportUri = null;
+            jcrContentTransportUri = null;
         }
-        String valuejcrColonContentTransportUser = request.getQueryString("jcr:content/transportUser");
-        String jcrColonContentTransportUser;
-        if (valuejcrColonContentTransportUser != null) {
-            jcrColonContentTransportUser = valuejcrColonContentTransportUser;
+        String valuejcrContentTransportUser = request.getQueryString("jcr:content/transportUser");
+        String jcrContentTransportUser;
+        if (valuejcrContentTransportUser != null) {
+            jcrContentTransportUser = valuejcrContentTransportUser;
         } else {
-            jcrColonContentTransportUser = null;
+            jcrContentTransportUser = null;
         }
-        String valuejcrColonContentTriggerDistribute = request.getQueryString("jcr:content/triggerDistribute");
-        Boolean jcrColonContentTriggerDistribute;
-        if (valuejcrColonContentTriggerDistribute != null) {
-            jcrColonContentTriggerDistribute = Boolean.valueOf(valuejcrColonContentTriggerDistribute);
+        String valuejcrContentTriggerDistribute = request.getQueryString("jcr:content/triggerDistribute");
+        Boolean jcrContentTriggerDistribute;
+        if (valuejcrContentTriggerDistribute != null) {
+            jcrContentTriggerDistribute = Boolean.valueOf(valuejcrContentTriggerDistribute);
         } else {
-            jcrColonContentTriggerDistribute = null;
+            jcrContentTriggerDistribute = null;
         }
-        String valuejcrColonContentTriggerModified = request.getQueryString("jcr:content/triggerModified");
-        Boolean jcrColonContentTriggerModified;
-        if (valuejcrColonContentTriggerModified != null) {
-            jcrColonContentTriggerModified = Boolean.valueOf(valuejcrColonContentTriggerModified);
+        String valuejcrContentTriggerModified = request.getQueryString("jcr:content/triggerModified");
+        Boolean jcrContentTriggerModified;
+        if (valuejcrContentTriggerModified != null) {
+            jcrContentTriggerModified = Boolean.valueOf(valuejcrContentTriggerModified);
         } else {
-            jcrColonContentTriggerModified = null;
+            jcrContentTriggerModified = null;
         }
-        String valuejcrColonContentTriggerOnOffTime = request.getQueryString("jcr:content/triggerOnOffTime");
-        Boolean jcrColonContentTriggerOnOffTime;
-        if (valuejcrColonContentTriggerOnOffTime != null) {
-            jcrColonContentTriggerOnOffTime = Boolean.valueOf(valuejcrColonContentTriggerOnOffTime);
+        String valuejcrContentTriggerOnOffTime = request.getQueryString("jcr:content/triggerOnOffTime");
+        Boolean jcrContentTriggerOnOffTime;
+        if (valuejcrContentTriggerOnOffTime != null) {
+            jcrContentTriggerOnOffTime = Boolean.valueOf(valuejcrContentTriggerOnOffTime);
         } else {
-            jcrColonContentTriggerOnOffTime = null;
+            jcrContentTriggerOnOffTime = null;
         }
-        String valuejcrColonContentTriggerReceive = request.getQueryString("jcr:content/triggerReceive");
-        Boolean jcrColonContentTriggerReceive;
-        if (valuejcrColonContentTriggerReceive != null) {
-            jcrColonContentTriggerReceive = Boolean.valueOf(valuejcrColonContentTriggerReceive);
+        String valuejcrContentTriggerReceive = request.getQueryString("jcr:content/triggerReceive");
+        Boolean jcrContentTriggerReceive;
+        if (valuejcrContentTriggerReceive != null) {
+            jcrContentTriggerReceive = Boolean.valueOf(valuejcrContentTriggerReceive);
         } else {
-            jcrColonContentTriggerReceive = null;
+            jcrContentTriggerReceive = null;
         }
-        String valuejcrColonContentTriggerSpecific = request.getQueryString("jcr:content/triggerSpecific");
-        Boolean jcrColonContentTriggerSpecific;
-        if (valuejcrColonContentTriggerSpecific != null) {
-            jcrColonContentTriggerSpecific = Boolean.valueOf(valuejcrColonContentTriggerSpecific);
+        String valuejcrContentTriggerSpecific = request.getQueryString("jcr:content/triggerSpecific");
+        Boolean jcrContentTriggerSpecific;
+        if (valuejcrContentTriggerSpecific != null) {
+            jcrContentTriggerSpecific = Boolean.valueOf(valuejcrContentTriggerSpecific);
         } else {
-            jcrColonContentTriggerSpecific = null;
+            jcrContentTriggerSpecific = null;
         }
-        String valuejcrColonContentUserId = request.getQueryString("jcr:content/userId");
-        String jcrColonContentUserId;
-        if (valuejcrColonContentUserId != null) {
-            jcrColonContentUserId = valuejcrColonContentUserId;
+        String valuejcrContentUserId = request.getQueryString("jcr:content/userId");
+        String jcrContentUserId;
+        if (valuejcrContentUserId != null) {
+            jcrContentUserId = valuejcrContentUserId;
         } else {
-            jcrColonContentUserId = null;
+            jcrContentUserId = null;
         }
-        String valuejcrColonPrimaryType = request.getQueryString("jcr:primaryType");
-        String jcrColonPrimaryType;
-        if (valuejcrColonPrimaryType != null) {
-            jcrColonPrimaryType = valuejcrColonPrimaryType;
+        String valuejcrPrimaryType = request.getQueryString("jcr:primaryType");
+        String jcrPrimaryType;
+        if (valuejcrPrimaryType != null) {
+            jcrPrimaryType = valuejcrPrimaryType;
         } else {
-            jcrColonPrimaryType = null;
+            jcrPrimaryType = null;
         }
-        String valuecolonOperation = request.getQueryString(":operation");
-        String colonOperation;
-        if (valuecolonOperation != null) {
-            colonOperation = valuecolonOperation;
+        String valueoperation = request.getQueryString(":operation");
+        String operation;
+        if (valueoperation != null) {
+            operation = valueoperation;
         } else {
-            colonOperation = null;
+            operation = null;
         }
-        return imp.postAgentHttp(request, runmode, name, jcrColonContentCqColonDistribute, jcrColonContentCqColonDistributeAtTypeHint, jcrColonContentCqColonName, jcrColonContentCqColonTemplate, jcrColonContentEnabled, jcrColonContentJcrColonDescription, jcrColonContentJcrColonLastModified, jcrColonContentJcrColonLastModifiedBy, jcrColonContentJcrColonMixinTypes, jcrColonContentJcrColonTitle, jcrColonContentLogLevel, jcrColonContentNoStatusUpdate, jcrColonContentNoVersioning, jcrColonContentProtocolConnectTimeout, jcrColonContentProtocolHTTPConnectionClosed, jcrColonContentProtocolHTTPExpired, jcrColonContentProtocolHTTPHeaders, jcrColonContentProtocolHTTPHeadersAtTypeHint, jcrColonContentProtocolHTTPMethod, jcrColonContentProtocolHTTPSRelaxed, jcrColonContentProtocolInterface, jcrColonContentProtocolSocketTimeout, jcrColonContentProtocolVersion, jcrColonContentProxyNTLMDomain, jcrColonContentProxyNTLMHost, jcrColonContentProxyHost, jcrColonContentProxyPassword, jcrColonContentProxyPort, jcrColonContentProxyUser, jcrColonContentQueueBatchMaxSize, jcrColonContentQueueBatchMode, jcrColonContentQueueBatchWaitTime, jcrColonContentRetryDelay, jcrColonContentReverseReplication, jcrColonContentSerializationType, jcrColonContentSlingColonResourceType, jcrColonContentSsl, jcrColonContentTransportNTLMDomain, jcrColonContentTransportNTLMHost, jcrColonContentTransportPassword, jcrColonContentTransportUri, jcrColonContentTransportUser, jcrColonContentTriggerDistribute, jcrColonContentTriggerModified, jcrColonContentTriggerOnOffTime, jcrColonContentTriggerReceive, jcrColonContentTriggerSpecific, jcrColonContentUserId, jcrColonPrimaryType, colonOperation);
+        return imp.postAgentHttp(request, runmode, name, jcrContentCqDistribute, jcrContentCqDistributeAtTypeHint, jcrContentCqName, jcrContentCqTemplate, jcrContentAliasUpdate, jcrContentEnabled, jcrContentJcrDescription, jcrContentJcrLastModified, jcrContentJcrLastModifiedBy, jcrContentJcrMixinTypes, jcrContentJcrTitle, jcrContentLogLevel, jcrContentNoStatusUpdate, jcrContentNoVersioning, jcrContentProtocolConnectTimeout, jcrContentProtocolHTTPConnectionClosed, jcrContentProtocolHTTPExpired, jcrContentProtocolHTTPHeaders, jcrContentProtocolHTTPHeadersAtTypeHint, jcrContentProtocolHTTPMethod, jcrContentProtocolHTTPSRelaxed, jcrContentProtocolInterface, jcrContentProtocolSocketTimeout, jcrContentProtocolVersion, jcrContentProxyNTLMDomain, jcrContentProxyNTLMHost, jcrContentProxyHost, jcrContentProxyPassword, jcrContentProxyPort, jcrContentProxyUser, jcrContentQueueBatchMaxSize, jcrContentQueueBatchMode, jcrContentQueueBatchWaitTime, jcrContentRetryDelay, jcrContentReverseReplication, jcrContentSerializationType, jcrContentSlingResourceType, jcrContentSsl, jcrContentTransportNTLMDomain, jcrContentTransportNTLMHost, jcrContentTransportPassword, jcrContentTransportUri, jcrContentTransportUser, jcrContentTriggerDistribute, jcrContentTriggerModified, jcrContentTriggerOnOffTime, jcrContentTriggerReceive, jcrContentTriggerSpecific, jcrContentUserId, jcrPrimaryType, operation);
     }
 
     @ApiAction
     public Result postAuthorizableKeystore(Http.Request request, String intermediatePath,String authorizableId) throws Exception {
-        String valuecolonOperation = request.getQueryString(":operation");
-        String colonOperation;
-        if (valuecolonOperation != null) {
-            colonOperation = valuecolonOperation;
+        String valueoperation = request.getQueryString(":operation");
+        String operation;
+        if (valueoperation != null) {
+            operation = valueoperation;
         } else {
-            colonOperation = null;
+            operation = null;
         }
         String valuecurrentPassword = request.getQueryString("currentPassword");
         String currentPassword;
@@ -555,7 +563,7 @@ public class SlingApiController extends Controller {
         Http.MultipartFormData.FilePart<TemporaryFile> pk = bodypk.getFile("pk");
         Http.MultipartFormData<TemporaryFile> bodykeyStore = request.body().asMultipartFormData();
         Http.MultipartFormData.FilePart<TemporaryFile> keyStore = bodykeyStore.getFile("keyStore");
-        return imp.postAuthorizableKeystoreHttp(request, intermediatePath, authorizableId, colonOperation, currentPassword, newPassword, rePassword, keyPassword, keyStorePass, alias, newAlias, removeAlias, certChain, pk, keyStore);
+        return imp.postAuthorizableKeystoreHttp(request, intermediatePath, authorizableId, operation, currentPassword, newPassword, rePassword, keyPassword, keyStorePass, alias, newAlias, removeAlias, certChain, pk, keyStore);
     }
 
     @ApiAction
@@ -588,12 +596,12 @@ public class SlingApiController extends Controller {
         } else {
             createGroup = null;
         }
-        String valuerepColonPassword = request.getQueryString("rep:password");
-        String repColonPassword;
-        if (valuerepColonPassword != null) {
-            repColonPassword = valuerepColonPassword;
+        String valuerepPassword = request.getQueryString("rep:password");
+        String repPassword;
+        if (valuerepPassword != null) {
+            repPassword = valuerepPassword;
         } else {
-            repColonPassword = null;
+            repPassword = null;
         }
         String valueprofileGivenName = request.getQueryString("profile/givenName");
         String profileGivenName;
@@ -602,7 +610,7 @@ public class SlingApiController extends Controller {
         } else {
             profileGivenName = null;
         }
-        return imp.postAuthorizablesHttp(request, authorizableId, intermediatePath, createUser, createGroup, repColonPassword, profileGivenName);
+        return imp.postAuthorizablesHttp(request, authorizableId, intermediatePath, createUser, createGroup, repPassword, profileGivenName);
     }
 
     @ApiAction
@@ -1350,12 +1358,12 @@ public class SlingApiController extends Controller {
 
     @ApiAction
     public Result postNode(Http.Request request, String path,String name) throws Exception {
-        String valuecolonOperation = request.getQueryString(":operation");
-        String colonOperation;
-        if (valuecolonOperation != null) {
-            colonOperation = valuecolonOperation;
+        String valueoperation = request.getQueryString(":operation");
+        String operation;
+        if (valueoperation != null) {
+            operation = valueoperation;
         } else {
-            colonOperation = null;
+            operation = null;
         }
         String valuedeleteAuthorizable = request.getQueryString("deleteAuthorizable");
         String deleteAuthorizable;
@@ -1364,9 +1372,9 @@ public class SlingApiController extends Controller {
         } else {
             deleteAuthorizable = null;
         }
-        Http.MultipartFormData<TemporaryFile> bodyfile = request.body().asMultipartFormData();
-        Http.MultipartFormData.FilePart<TemporaryFile> file = bodyfile.getFile("file");
-        return imp.postNodeHttp(request, path, name, colonOperation, deleteAuthorizable, file);
+        Http.MultipartFormData<TemporaryFile> body_file = request.body().asMultipartFormData();
+        Http.MultipartFormData.FilePart<TemporaryFile> _file = body_file.getFile("file");
+        return imp.postNodeHttp(request, path, name, operation, deleteAuthorizable, _file);
     }
 
     @ApiAction
@@ -1383,21 +1391,21 @@ public class SlingApiController extends Controller {
 
     @ApiAction
     public Result postPath(Http.Request request, String path) throws Exception {
-        String valuejcrColonPrimaryType = request.getQueryString("jcr:primaryType");
-        String jcrColonPrimaryType;
-        if (valuejcrColonPrimaryType != null) {
-            jcrColonPrimaryType = valuejcrColonPrimaryType;
+        String valuejcrPrimaryType = request.getQueryString("jcr:primaryType");
+        String jcrPrimaryType;
+        if (valuejcrPrimaryType != null) {
+            jcrPrimaryType = valuejcrPrimaryType;
         } else {
             throw new IllegalArgumentException("'jcr:primaryType' parameter is required");
         }
-        String valuecolonName = request.getQueryString(":name");
-        String colonName;
-        if (valuecolonName != null) {
-            colonName = valuecolonName;
+        String valuename = request.getQueryString(":name");
+        String name;
+        if (valuename != null) {
+            name = valuename;
         } else {
             throw new IllegalArgumentException("':name' parameter is required");
         }
-        return imp.postPathHttp(request, path, jcrColonPrimaryType, colonName);
+        return imp.postPathHttp(request, path, jcrPrimaryType, name);
     }
 
     @ApiAction
@@ -1456,17 +1464,24 @@ public class SlingApiController extends Controller {
         } else {
             throw new IllegalArgumentException("'path' parameter is required");
         }
-        return imp.postTreeActivationHttp(request, ignoredeactivated, onlymodified, path);
+        String valuecmd = request.getQueryString("cmd");
+        String cmd;
+        if (valuecmd != null) {
+            cmd = valuecmd;
+        } else {
+            throw new IllegalArgumentException("'cmd' parameter is required");
+        }
+        return imp.postTreeActivationHttp(request, ignoredeactivated, onlymodified, path, cmd);
     }
 
     @ApiAction
     public Result postTruststore(Http.Request request) throws Exception {
-        String valuecolonOperation = request.getQueryString(":operation");
-        String colonOperation;
-        if (valuecolonOperation != null) {
-            colonOperation = valuecolonOperation;
+        String valueoperation = request.getQueryString(":operation");
+        String operation;
+        if (valueoperation != null) {
+            operation = valueoperation;
         } else {
-            colonOperation = null;
+            operation = null;
         }
         String valuenewPassword = request.getQueryString("newPassword");
         String newPassword;
@@ -1498,7 +1513,7 @@ public class SlingApiController extends Controller {
         }
         Http.MultipartFormData<TemporaryFile> bodycertificate = request.body().asMultipartFormData();
         Http.MultipartFormData.FilePart<TemporaryFile> certificate = bodycertificate.getFile("certificate");
-        return imp.postTruststoreHttp(request, colonOperation, newPassword, rePassword, keyStoreType, removeAlias, certificate);
+        return imp.postTruststoreHttp(request, operation, newPassword, rePassword, keyStoreType, removeAlias, certificate);
     }
 
     @ApiAction

@@ -2,12 +2,12 @@
 
 All URIs are relative to *http://localhost*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**sslSetup**](GraniteApi.md#sslSetup) | **POST** /libs/granite/security/post/sslSetup.html | 
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**sslSetup**](GraniteApi.md#sslSetup) | **POST** /libs/granite/security/post/sslSetup.html |  |
 
 
-<a name="sslSetup"></a>
+<a id="sslSetup"></a>
 # **sslSetup**
 > String sslSetup(keystorePassword, keystorePasswordConfirm, truststorePassword, truststorePasswordConfirm, httpsHostname, httpsPort, privatekeyFile, certificateFile)
 
@@ -58,16 +58,16 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **keystorePassword** | **String**|  |
- **keystorePasswordConfirm** | **String**|  |
- **truststorePassword** | **String**|  |
- **truststorePasswordConfirm** | **String**|  |
- **httpsHostname** | **String**|  |
- **httpsPort** | **String**|  |
- **privatekeyFile** | **File**|  | [optional]
- **certificateFile** | **File**|  | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **keystorePassword** | **String**|  | |
+| **keystorePasswordConfirm** | **String**|  | |
+| **truststorePassword** | **String**|  | |
+| **truststorePasswordConfirm** | **String**|  | |
+| **httpsHostname** | **String**|  | |
+| **httpsPort** | **String**|  | |
+| **privatekeyFile** | **File**|  | [optional] |
+| **certificateFile** | **File**|  | [optional] |
 
 ### Return type
 
@@ -85,5 +85,5 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Default response |  -  |
+| **0** | Default response |  -  |
 

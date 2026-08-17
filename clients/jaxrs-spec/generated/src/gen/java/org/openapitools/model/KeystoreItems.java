@@ -3,6 +3,7 @@ package org.openapitools.model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.model.KeystoreChainItems;
 import javax.validation.constraints.*;
@@ -13,16 +14,22 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2021-09-03T15:26:06.461+10:00[Australia/Melbourne]")public class KeystoreItems   {
-  
-  private @Valid String alias;
-  private @Valid String entryType;
-  private @Valid String algorithm;
-  private @Valid String format;
-  private @Valid List<KeystoreChainItems> chain = new ArrayList<KeystoreChainItems>();
+@JsonTypeName("KeystoreItems")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2026-08-17T02:15:42.417242947Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+public class KeystoreItems   {
+  private String alias;
+  private String entryType;
+  private String algorithm;
+  private String format;
+  private @Valid List<@Valid KeystoreChainItems> chain = new ArrayList<>();
+
+  public KeystoreItems() {
+  }
 
   /**
    * Keystore alias name
@@ -33,19 +40,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "Keystore alias name")
   @JsonProperty("alias")
   public String getAlias() {
     return alias;
   }
 
+  @JsonProperty("alias")
   public void setAlias(String alias) {
     this.alias = alias;
   }
 
-/**
+  /**
    * e.g. \&quot;privateKey\&quot;
    **/
   public KeystoreItems entryType(String entryType) {
@@ -54,19 +60,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "e.g. \"privateKey\"")
   @JsonProperty("entryType")
   public String getEntryType() {
     return entryType;
   }
 
+  @JsonProperty("entryType")
   public void setEntryType(String entryType) {
     this.entryType = entryType;
   }
 
-/**
+  /**
    * e.g. \&quot;RSA\&quot;
    **/
   public KeystoreItems algorithm(String algorithm) {
@@ -75,19 +80,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "e.g. \"RSA\"")
   @JsonProperty("algorithm")
   public String getAlgorithm() {
     return algorithm;
   }
 
+  @JsonProperty("algorithm")
   public void setAlgorithm(String algorithm) {
     this.algorithm = algorithm;
   }
 
-/**
+  /**
    * e.g. \&quot;PKCS#8\&quot;
    **/
   public KeystoreItems format(String format) {
@@ -96,38 +100,52 @@ import com.fasterxml.jackson.annotation.JsonValue;
   }
 
   
-
-  
   @ApiModelProperty(value = "e.g. \"PKCS#8\"")
   @JsonProperty("format")
   public String getFormat() {
     return format;
   }
 
+  @JsonProperty("format")
   public void setFormat(String format) {
     this.format = format;
   }
 
-/**
+  /**
    **/
-  public KeystoreItems chain(List<KeystoreChainItems> chain) {
+  public KeystoreItems chain(List<@Valid KeystoreChainItems> chain) {
     this.chain = chain;
     return this;
   }
 
   
-
-  
   @ApiModelProperty(value = "")
   @JsonProperty("chain")
-  public List<KeystoreChainItems> getChain() {
+  @Valid public List<@Valid KeystoreChainItems> getChain() {
     return chain;
   }
 
-  public void setChain(List<KeystoreChainItems> chain) {
+  @JsonProperty("chain")
+  public void setChain(List<@Valid KeystoreChainItems> chain) {
     this.chain = chain;
   }
 
+  public KeystoreItems addChainItem(KeystoreChainItems chainItem) {
+    if (this.chain == null) {
+      this.chain = new ArrayList<>();
+    }
+
+    this.chain.add(chainItem);
+    return this;
+  }
+
+  public KeystoreItems removeChainItem(KeystoreChainItems chainItem) {
+    if (chainItem != null && this.chain != null) {
+      this.chain.remove(chainItem);
+    }
+
+    return this;
+  }
 
   @Override
   public boolean equals(Object o) {
@@ -169,12 +187,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 
 
 }
-

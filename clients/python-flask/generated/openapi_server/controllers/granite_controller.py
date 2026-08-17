@@ -1,5 +1,7 @@
-import connexion
-import six
+import flask
+from typing import Dict
+from typing import Tuple
+from typing import Union
 
 from openapi_server import util
 
@@ -26,6 +28,6 @@ def ssl_setup(keystore_password, keystore_password_confirm, truststore_password,
     :param certificate_file: 
     :type certificate_file: str
 
-    :rtype: str
+    :rtype: Union[str, Tuple[str, int], Tuple[str, int, Dict[str, str]]
     """
     return 'do some magic!'

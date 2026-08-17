@@ -2,16 +2,18 @@ package apimodels;
 
 import apimodels.BundleDataProp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import com.fasterxml.jackson.annotation.*;
 import java.util.Set;
 import javax.validation.*;
 import java.util.Objects;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 /**
  * BundleData
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPlayFrameworkCodegen", date = "2021-09-03T15:25:32.040+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPlayFrameworkCodegen", date = "2026-08-17T02:15:17.717598878Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 @SuppressWarnings({"UnusedReturnValue", "WeakerAccess"})
 public class BundleData   {
   @JsonProperty("id")
@@ -49,7 +51,7 @@ public class BundleData   {
   @JsonProperty("props")
   @Valid
 
-  private List<BundleDataProp> props = null;
+  private List<@Valid BundleDataProp> props = null;
 
   public BundleData id(Integer id) {
     this.id = id;
@@ -187,16 +189,16 @@ public class BundleData   {
     this.category = category;
   }
 
-  public BundleData props(List<BundleDataProp> props) {
+  public BundleData props(List<@Valid BundleDataProp> props) {
     this.props = props;
     return this;
   }
 
   public BundleData addPropsItem(BundleDataProp propsItem) {
-    if (props == null) {
-      props = new ArrayList<>();
+    if (this.props == null) {
+      this.props = new ArrayList<>();
     }
-    props.add(propsItem);
+    this.props.add(propsItem);
     return this;
   }
 
@@ -204,11 +206,11 @@ public class BundleData   {
    * Get props
    * @return props
   **/
-  public List<BundleDataProp> getProps() {
+  public List<@Valid BundleDataProp> getProps() {
     return props;
   }
 
-  public void setProps(List<BundleDataProp> props) {
+  public void setProps(List<@Valid BundleDataProp> props) {
     this.props = props;
   }
 
@@ -262,10 +264,7 @@ public class BundleData   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

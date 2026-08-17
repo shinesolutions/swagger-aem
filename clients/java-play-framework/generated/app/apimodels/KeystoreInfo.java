@@ -2,37 +2,39 @@ package apimodels;
 
 import apimodels.KeystoreItems;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import com.fasterxml.jackson.annotation.*;
 import java.util.Set;
 import javax.validation.*;
 import java.util.Objects;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 /**
  * KeystoreInfo
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPlayFrameworkCodegen", date = "2021-09-03T15:25:32.040+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPlayFrameworkCodegen", date = "2026-08-17T02:15:17.717598878Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 @SuppressWarnings({"UnusedReturnValue", "WeakerAccess"})
 public class KeystoreInfo   {
   @JsonProperty("aliases")
   @Valid
 
-  private List<KeystoreItems> aliases = null;
+  private List<@Valid KeystoreItems> aliases = null;
 
   @JsonProperty("exists")
   
   private Boolean exists;
 
-  public KeystoreInfo aliases(List<KeystoreItems> aliases) {
+  public KeystoreInfo aliases(List<@Valid KeystoreItems> aliases) {
     this.aliases = aliases;
     return this;
   }
 
   public KeystoreInfo addAliasesItem(KeystoreItems aliasesItem) {
-    if (aliases == null) {
-      aliases = new ArrayList<>();
+    if (this.aliases == null) {
+      this.aliases = new ArrayList<>();
     }
-    aliases.add(aliasesItem);
+    this.aliases.add(aliasesItem);
     return this;
   }
 
@@ -40,11 +42,11 @@ public class KeystoreInfo   {
    * Get aliases
    * @return aliases
   **/
-  public List<KeystoreItems> getAliases() {
+  public List<@Valid KeystoreItems> getAliases() {
     return aliases;
   }
 
-  public void setAliases(List<KeystoreItems> aliases) {
+  public void setAliases(List<@Valid KeystoreItems> aliases) {
     this.aliases = aliases;
   }
 
@@ -101,10 +103,7 @@ public class KeystoreInfo   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

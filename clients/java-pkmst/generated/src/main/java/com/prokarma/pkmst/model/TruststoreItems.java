@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiModelProperty;
  * TruststoreItems
  */
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2021-09-03T15:25:27.791+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2026-08-17T02:15:15.504120373Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class TruststoreItems   {
   @JsonProperty("alias")
   private String alias;
@@ -42,10 +42,10 @@ public class TruststoreItems   {
     return this;
   }
 
-   /**
+  /**
    * Truststore alias name
    * @return alias
-  **/
+   */
   @ApiModelProperty(value = "Truststore alias name")
   public String getAlias() {
     return alias;
@@ -60,10 +60,10 @@ public class TruststoreItems   {
     return this;
   }
 
-   /**
+  /**
    * Get entryType
    * @return entryType
-  **/
+   */
   @ApiModelProperty(value = "")
   public String getEntryType() {
     return entryType;
@@ -78,10 +78,10 @@ public class TruststoreItems   {
     return this;
   }
 
-   /**
+  /**
    * e.g. \"CN=localhost\"
    * @return subject
-  **/
+   */
   @ApiModelProperty(value = "e.g. \"CN=localhost\"")
   public String getSubject() {
     return subject;
@@ -96,10 +96,10 @@ public class TruststoreItems   {
     return this;
   }
 
-   /**
+  /**
    * e.g. \"CN=Admin\"
    * @return issuer
-  **/
+   */
   @ApiModelProperty(value = "e.g. \"CN=Admin\"")
   public String getIssuer() {
     return issuer;
@@ -114,10 +114,10 @@ public class TruststoreItems   {
     return this;
   }
 
-   /**
+  /**
    * e.g. \"Sun Jul 01 12:00:00 AEST 2018\"
    * @return notBefore
-  **/
+   */
   @ApiModelProperty(value = "e.g. \"Sun Jul 01 12:00:00 AEST 2018\"")
   public String getNotBefore() {
     return notBefore;
@@ -132,10 +132,10 @@ public class TruststoreItems   {
     return this;
   }
 
-   /**
+  /**
    * e.g. \"Sun Jun 30 23:59:50 AEST 2019\"
    * @return notAfter
-  **/
+   */
   @ApiModelProperty(value = "e.g. \"Sun Jun 30 23:59:50 AEST 2019\"")
   public String getNotAfter() {
     return notAfter;
@@ -150,10 +150,10 @@ public class TruststoreItems   {
     return this;
   }
 
-   /**
+  /**
    * 18165099476682912368
    * @return serialNumber
-  **/
+   */
   @ApiModelProperty(value = "18165099476682912368")
   public Integer getSerialNumber() {
     return serialNumber;
@@ -208,10 +208,7 @@ public class TruststoreItems   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

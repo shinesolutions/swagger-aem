@@ -2,26 +2,27 @@
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**pid** | **String** | Persistent Identity (PID) | [optional] 
-**title** | **String** | Title | [optional] 
-**description** | **String** | Title | [optional] 
-**bundle_location** | **String** | needed for configuration binding | [optional] 
-**service_location** | **String** | needed for configuraiton binding | [optional] 
-**properties** | [**SamlConfigurationProperties**](SamlConfigurationProperties.md) |  | [optional] 
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **pid** | **String** | Persistent Identity (PID) | [optional] |
+| **title** | **String** | Title | [optional] |
+| **description** | **String** | Title | [optional] |
+| **bundle_location** | **String** | needed for configuration binding | [optional] |
+| **service_location** | **String** | needed for configuraiton binding | [optional] |
+| **properties** | [**SamlConfigurationProperties**](SamlConfigurationProperties.md) |  | [optional] |
 
-## Code Sample
+## Example
 
 ```ruby
-require 'SwaggerAemClient'
+require 'swagger_aem'
 
-instance = SwaggerAemClient::SamlConfigurationInfo.new(pid: null,
-                                 title: null,
-                                 description: null,
-                                 bundle_location: null,
-                                 service_location: null,
-                                 properties: null)
+instance = SwaggerAemClient::SamlConfigurationInfo.new(
+  pid: null,
+  title: null,
+  description: null,
+  bundle_location: null,
+  service_location: null,
+  properties: null
+)
 ```
-
 

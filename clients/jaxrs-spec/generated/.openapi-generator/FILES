@@ -8,6 +8,7 @@ src/gen/java/org/openapitools/api/DefaultApi.java
 src/gen/java/org/openapitools/api/EtcApi.java
 src/gen/java/org/openapitools/api/LibsApi.java
 src/gen/java/org/openapitools/api/RestApplication.java
+src/gen/java/org/openapitools/api/RestResourceRoot.java
 src/gen/java/org/openapitools/api/SystemApi.java
 src/gen/java/org/openapitools/model/BundleData.java
 src/gen/java/org/openapitools/model/BundleDataProp.java

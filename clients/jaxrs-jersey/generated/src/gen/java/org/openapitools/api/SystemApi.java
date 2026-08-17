@@ -1,6 +1,5 @@
 package org.openapitools.api;
 
-import org.openapitools.model.*;
 import org.openapitools.api.SystemApiService;
 import org.openapitools.api.factories.SystemApiServiceFactory;
 
@@ -31,7 +30,7 @@ import javax.validation.Valid;
 
 
 @io.swagger.annotations.Api(description = "the system API")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJerseyServerCodegen", date = "2021-09-03T15:25:53.422+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJerseyServerCodegen", date = "2026-08-17T02:15:33.561165235Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class SystemApi  {
    private final SystemApiService delegate;
 
@@ -42,11 +41,11 @@ public class SystemApi  {
          String implClass = servletContext.getInitParameter("SystemApi.implementation");
          if (implClass != null && !"".equals(implClass.trim())) {
             try {
-               delegate = (SystemApiService) Class.forName(implClass).newInstance();
+               delegate = (SystemApiService) Class.forName(implClass).getDeclaredConstructor().newInstance();
             } catch (Exception e) {
                throw new RuntimeException(e);
             }
-         } 
+         }
       }
 
       if (delegate == null) {
@@ -56,7 +55,7 @@ public class SystemApi  {
       this.delegate = delegate;
    }
 
-    @GET
+    @javax.ws.rs.GET
     @Path("/health")
     
     @Produces({ "application/json" })
@@ -70,7 +69,7 @@ public class SystemApi  {
     throws NotFoundException {
         return delegate.getAemHealthCheck(tags, combineTagsOr, securityContext);
     }
-    @GET
+    @javax.ws.rs.GET
     @Path("/console/status-productinfo.json")
     
     @Produces({ "application/json" })
@@ -84,7 +83,7 @@ public class SystemApi  {
     throws NotFoundException {
         return delegate.getAemProductInfo(securityContext);
     }
-    @GET
+    @javax.ws.rs.GET
     @Path("/console/bundles/{name}.json")
     
     @Produces({ "application/json" })
@@ -99,7 +98,7 @@ public class SystemApi  {
     throws NotFoundException {
         return delegate.getBundleInfo(name, securityContext);
     }
-    @GET
+    @javax.ws.rs.GET
     @Path("/console/configMgr")
     
     @Produces({ "text/xml" })
@@ -114,7 +113,7 @@ public class SystemApi  {
     throws NotFoundException {
         return delegate.getConfigMgr(securityContext);
     }
-    @POST
+    @javax.ws.rs.POST
     @Path("/console/bundles/{name}")
     
     
@@ -128,7 +127,7 @@ public class SystemApi  {
     throws NotFoundException {
         return delegate.postBundle(name, action, securityContext);
     }
-    @POST
+    @javax.ws.rs.POST
     @Path("/console/jmx/com.adobe.granite:type=Repository/op/{action}")
     
     
@@ -142,7 +141,7 @@ public class SystemApi  {
     throws NotFoundException {
         return delegate.postJmxRepository(action, securityContext);
     }
-    @POST
+    @javax.ws.rs.POST
     @Path("/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler")
     
     @Produces({ "text/plain" })
@@ -154,7 +153,7 @@ public class SystemApi  {
         @io.swagger.annotations.ApiResponse(code = 302, message = "Default response", response = String.class),
         @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = String.class)
     })
-    public Response postSamlConfiguration(@ApiParam(value = "") @QueryParam("post")  Boolean post,@ApiParam(value = "") @QueryParam("apply")  Boolean apply,@ApiParam(value = "") @QueryParam("delete")  Boolean delete,@ApiParam(value = "") @QueryParam("action")  String action,@ApiParam(value = "") @QueryParam("$location")  String $location,@ApiParam(value = "") @QueryParam("path") @Valid  List<String> path,@ApiParam(value = "") @QueryParam("service.ranking")  Integer serviceRanking,@ApiParam(value = "") @QueryParam("idpUrl")  String idpUrl,@ApiParam(value = "") @QueryParam("idpCertAlias")  String idpCertAlias,@ApiParam(value = "") @QueryParam("idpHttpRedirect")  Boolean idpHttpRedirect,@ApiParam(value = "") @QueryParam("serviceProviderEntityId")  String serviceProviderEntityId,@ApiParam(value = "") @QueryParam("assertionConsumerServiceURL")  String assertionConsumerServiceURL,@ApiParam(value = "") @QueryParam("spPrivateKeyAlias")  String spPrivateKeyAlias,@ApiParam(value = "") @QueryParam("keyStorePassword")  String keyStorePassword,@ApiParam(value = "") @QueryParam("defaultRedirectUrl")  String defaultRedirectUrl,@ApiParam(value = "") @QueryParam("userIDAttribute")  String userIDAttribute,@ApiParam(value = "") @QueryParam("useEncryption")  Boolean useEncryption,@ApiParam(value = "") @QueryParam("createUser")  Boolean createUser,@ApiParam(value = "") @QueryParam("addGroupMemberships")  Boolean addGroupMemberships,@ApiParam(value = "") @QueryParam("groupMembershipAttribute")  String groupMembershipAttribute,@ApiParam(value = "") @QueryParam("defaultGroups") @Valid  List<String> defaultGroups,@ApiParam(value = "") @QueryParam("nameIdFormat")  String nameIdFormat,@ApiParam(value = "") @QueryParam("synchronizeAttributes") @Valid  List<String> synchronizeAttributes,@ApiParam(value = "") @QueryParam("handleLogout")  Boolean handleLogout,@ApiParam(value = "") @QueryParam("logoutUrl")  String logoutUrl,@ApiParam(value = "") @QueryParam("clockTolerance")  Integer clockTolerance,@ApiParam(value = "") @QueryParam("digestMethod")  String digestMethod,@ApiParam(value = "") @QueryParam("signatureMethod")  String signatureMethod,@ApiParam(value = "") @QueryParam("userIntermediatePath")  String userIntermediatePath,@ApiParam(value = "") @QueryParam("propertylist") @Valid  List<String> propertylist,@Context SecurityContext securityContext)
+    public Response postSamlConfiguration(@ApiParam(value = "") @QueryParam("post")  Boolean post,@ApiParam(value = "") @QueryParam("apply")  Boolean apply,@ApiParam(value = "") @QueryParam("delete")  Boolean delete,@ApiParam(value = "") @QueryParam("action")  String action,@ApiParam(value = "") @QueryParam("$location")  String $location,@ApiParam(value = "") @QueryParam("path")  List<String> path,@ApiParam(value = "") @QueryParam("service.ranking")  Integer serviceRanking,@ApiParam(value = "") @QueryParam("idpUrl")  String idpUrl,@ApiParam(value = "") @QueryParam("idpCertAlias")  String idpCertAlias,@ApiParam(value = "") @QueryParam("idpHttpRedirect")  Boolean idpHttpRedirect,@ApiParam(value = "") @QueryParam("serviceProviderEntityId")  String serviceProviderEntityId,@ApiParam(value = "") @QueryParam("assertionConsumerServiceURL")  String assertionConsumerServiceURL,@ApiParam(value = "") @QueryParam("spPrivateKeyAlias")  String spPrivateKeyAlias,@ApiParam(value = "") @QueryParam("keyStorePassword")  String keyStorePassword,@ApiParam(value = "") @QueryParam("defaultRedirectUrl")  String defaultRedirectUrl,@ApiParam(value = "") @QueryParam("userIDAttribute")  String userIDAttribute,@ApiParam(value = "") @QueryParam("useEncryption")  Boolean useEncryption,@ApiParam(value = "") @QueryParam("createUser")  Boolean createUser,@ApiParam(value = "") @QueryParam("addGroupMemberships")  Boolean addGroupMemberships,@ApiParam(value = "") @QueryParam("groupMembershipAttribute")  String groupMembershipAttribute,@ApiParam(value = "") @QueryParam("defaultGroups")  List<String> defaultGroups,@ApiParam(value = "") @QueryParam("nameIdFormat")  String nameIdFormat,@ApiParam(value = "") @QueryParam("synchronizeAttributes")  List<String> synchronizeAttributes,@ApiParam(value = "") @QueryParam("handleLogout")  Boolean handleLogout,@ApiParam(value = "") @QueryParam("logoutUrl")  String logoutUrl,@ApiParam(value = "") @QueryParam("clockTolerance")  Integer clockTolerance,@ApiParam(value = "") @QueryParam("digestMethod")  String digestMethod,@ApiParam(value = "") @QueryParam("signatureMethod")  String signatureMethod,@ApiParam(value = "") @QueryParam("userIntermediatePath")  String userIntermediatePath,@ApiParam(value = "") @QueryParam("propertylist")  List<String> propertylist,@Context SecurityContext securityContext)
     throws NotFoundException {
         return delegate.postSamlConfiguration(post, apply, delete, action, $location, path, serviceRanking, idpUrl, idpCertAlias, idpHttpRedirect, serviceProviderEntityId, assertionConsumerServiceURL, spPrivateKeyAlias, keyStorePassword, defaultRedirectUrl, userIDAttribute, useEncryption, createUser, addGroupMemberships, groupMembershipAttribute, defaultGroups, nameIdFormat, synchronizeAttributes, handleLogout, logoutUrl, clockTolerance, digestMethod, signatureMethod, userIntermediatePath, propertylist, securityContext);
     }

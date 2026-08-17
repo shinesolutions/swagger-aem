@@ -1,11 +1,8 @@
-# coding: utf-8
-
-from __future__ import absolute_import
 from datetime import date, datetime  # noqa: F401
 
 from typing import List, Dict  # noqa: F401
 
-from openapi_server.models.base_model_ import Model
+from openapi_server.models.base_model import Model
 from openapi_server import util
 
 
@@ -48,7 +45,7 @@ class BundleDataProp(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def key(self):
+    def key(self) -> str:
         """Gets the key of this BundleDataProp.
 
         Bundle data key  # noqa: E501
@@ -59,7 +56,7 @@ class BundleDataProp(Model):
         return self._key
 
     @key.setter
-    def key(self, key):
+    def key(self, key: str):
         """Sets the key of this BundleDataProp.
 
         Bundle data key  # noqa: E501
@@ -71,7 +68,7 @@ class BundleDataProp(Model):
         self._key = key
 
     @property
-    def value(self):
+    def value(self) -> str:
         """Gets the value of this BundleDataProp.
 
         Bundle data value  # noqa: E501
@@ -82,7 +79,7 @@ class BundleDataProp(Model):
         return self._value
 
     @value.setter
-    def value(self, value):
+    def value(self, value: str):
         """Sets the value of this BundleDataProp.
 
         Bundle data value  # noqa: E501

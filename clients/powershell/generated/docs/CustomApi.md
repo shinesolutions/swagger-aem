@@ -1,4 +1,4 @@
-# PSOpenAPITools.PSOpenAPITools/Api.CustomApi
+# PSOpenAPITools.PSOpenAPITools\Api.CustomApi
 
 All URIs are relative to *http://localhost*
 
@@ -9,7 +9,7 @@ Method | HTTP request | Description
 [**Submit-ConfigAemPasswordReset**](CustomApi.md#Submit-ConfigAemPasswordReset) | **POST** /apps/system/config/com.shinesolutions.aem.passwordreset.Activator | 
 
 
-<a name="Get-AemHealthCheck"></a>
+<a id="Get-AemHealthCheck"></a>
 # **Get-AemHealthCheck**
 > String Get-AemHealthCheck<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Tags] <String><br>
@@ -31,7 +31,7 @@ $CombineTagsOr = $true # Boolean |  (optional)
 try {
     $Result = Get-AemHealthCheck -Tags $Tags -CombineTagsOr $CombineTagsOr
 } catch {
-    Write-Host ("Exception occured when calling Get-AemHealthCheck: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Get-AemHealthCheck: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -58,7 +58,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-ConfigAemHealthCheckServlet"></a>
+<a id="Submit-ConfigAemHealthCheckServlet"></a>
 # **Submit-ConfigAemHealthCheckServlet**
 > void Submit-ConfigAemHealthCheckServlet<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-BundlesIgnored] <String[]><br>
@@ -80,7 +80,7 @@ $BundlesIgnoredTypeHint = "MyBundlesIgnoredTypeHint" # String |  (optional)
 try {
     $Result = Submit-ConfigAemHealthCheckServlet -BundlesIgnored $BundlesIgnored -BundlesIgnoredTypeHint $BundlesIgnoredTypeHint
 } catch {
-    Write-Host ("Exception occured when calling Submit-ConfigAemHealthCheckServlet: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Submit-ConfigAemHealthCheckServlet: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -107,7 +107,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-ConfigAemPasswordReset"></a>
+<a id="Submit-ConfigAemPasswordReset"></a>
 # **Submit-ConfigAemPasswordReset**
 > void Submit-ConfigAemPasswordReset<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PwdresetAuthorizables] <String[]><br>
@@ -129,7 +129,7 @@ $PwdresetAuthorizablesTypeHint = "MyPwdresetAuthorizablesTypeHint" # String |  (
 try {
     $Result = Submit-ConfigAemPasswordReset -PwdresetAuthorizables $PwdresetAuthorizables -PwdresetAuthorizablesTypeHint $PwdresetAuthorizablesTypeHint
 } catch {
-    Write-Host ("Exception occured when calling Submit-ConfigAemPasswordReset: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Submit-ConfigAemPasswordReset: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```

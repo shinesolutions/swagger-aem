@@ -1,11 +1,13 @@
 # OpenAPI\Client\CqApi
 
-All URIs are relative to http://localhost.
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**getLoginPage()**](CqApi.md#getLoginPage) | **GET** /libs/granite/core/content/login.html | 
-[**postCqActions()**](CqApi.md#postCqActions) | **POST** /.cqactions.html | 
+
+All URIs are relative to http://localhost, except if the operation defines another base path.
+
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**getLoginPage()**](CqApi.md#getLoginPage) | **GET** /libs/granite/core/content/login.html |  |
+| [**postCqActions()**](CqApi.md#postCqActions) | **POST** /.cqactions.html |  |
 
 
 ## `getLoginPage()`
@@ -98,10 +100,10 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **authorizable_id** | **string**|  |
- **changelog** | **string**|  |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **authorizable_id** | **string**|  | |
+| **changelog** | **string**|  | |
 
 ### Return type
 

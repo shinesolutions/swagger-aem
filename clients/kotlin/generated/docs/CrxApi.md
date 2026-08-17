@@ -2,18 +2,18 @@
 
 All URIs are relative to *http://localhost*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**getCrxdeStatus**](CrxApi.md#getCrxdeStatus) | **GET** /crx/server/crx.default/jcr:root/.1.json | 
-[**getInstallStatus**](CrxApi.md#getInstallStatus) | **GET** /crx/packmgr/installstatus.jsp | 
-[**getPackageManagerServlet**](CrxApi.md#getPackageManagerServlet) | **GET** /crx/packmgr/service/script.html | 
-[**postPackageService**](CrxApi.md#postPackageService) | **POST** /crx/packmgr/service.jsp | 
-[**postPackageServiceJson**](CrxApi.md#postPackageServiceJson) | **POST** /crx/packmgr/service/.json/{path} | 
-[**postPackageUpdate**](CrxApi.md#postPackageUpdate) | **POST** /crx/packmgr/update.jsp | 
-[**postSetPassword**](CrxApi.md#postSetPassword) | **POST** /crx/explorer/ui/setpassword.jsp | 
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**getCrxdeStatus**](CrxApi.md#getCrxdeStatus) | **GET** /crx/server/crx.default/jcr:root/.1.json |  |
+| [**getInstallStatus**](CrxApi.md#getInstallStatus) | **GET** /crx/packmgr/installstatus.jsp |  |
+| [**getPackageManagerServlet**](CrxApi.md#getPackageManagerServlet) | **GET** /crx/packmgr/service/script.html |  |
+| [**postPackageService**](CrxApi.md#postPackageService) | **POST** /crx/packmgr/service.jsp |  |
+| [**postPackageServiceJson**](CrxApi.md#postPackageServiceJson) | **POST** /crx/packmgr/service/.json/{path} |  |
+| [**postPackageUpdate**](CrxApi.md#postPackageUpdate) | **POST** /crx/packmgr/update.jsp |  |
+| [**postSetPassword**](CrxApi.md#postSetPassword) | **POST** /crx/explorer/ui/setpassword.jsp |  |
 
 
-<a name="getCrxdeStatus"></a>
+<a id="getCrxdeStatus"></a>
 # **getCrxdeStatus**
 > kotlin.String getCrxdeStatus()
 
@@ -48,16 +48,22 @@ This endpoint does not need any parameter.
 ### Authorization
 
 
-Configure aemAuth:
-    ApiClient.username = ""
-    ApiClient.password = ""
+Configure aemAuth statically:
+```kotlin
+ApiClient.username = ""
+ApiClient.password = ""
+```
+Configure aemAuth dynamically:
+```kotlin
+apiInstance.userCredentialProvider = { "user" to "pass" }
+```
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: plain/text
+ - **Accept**: Not defined
 
-<a name="getInstallStatus"></a>
+<a id="getInstallStatus"></a>
 # **getInstallStatus**
 > InstallStatus getInstallStatus()
 
@@ -92,16 +98,22 @@ This endpoint does not need any parameter.
 ### Authorization
 
 
-Configure aemAuth:
-    ApiClient.username = ""
-    ApiClient.password = ""
+Configure aemAuth statically:
+```kotlin
+ApiClient.username = ""
+ApiClient.password = ""
+```
+Configure aemAuth dynamically:
+```kotlin
+apiInstance.userCredentialProvider = { "user" to "pass" }
+```
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="getPackageManagerServlet"></a>
+<a id="getPackageManagerServlet"></a>
 # **getPackageManagerServlet**
 > getPackageManagerServlet()
 
@@ -135,16 +147,22 @@ null (empty response body)
 ### Authorization
 
 
-Configure aemAuth:
-    ApiClient.username = ""
-    ApiClient.password = ""
+Configure aemAuth statically:
+```kotlin
+ApiClient.username = ""
+ApiClient.password = ""
+```
+Configure aemAuth dynamically:
+```kotlin
+apiInstance.userCredentialProvider = { "user" to "pass" }
+```
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/html
+ - **Accept**: Not defined
 
-<a name="postPackageService"></a>
+<a id="postPackageService"></a>
 # **postPackageService**
 > kotlin.String postPackageService(cmd)
 
@@ -171,10 +189,9 @@ try {
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **cmd** | **kotlin.String**|  |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **cmd** | **kotlin.String**|  | |
 
 ### Return type
 
@@ -183,16 +200,22 @@ Name | Type | Description  | Notes
 ### Authorization
 
 
-Configure aemAuth:
-    ApiClient.username = ""
-    ApiClient.password = ""
+Configure aemAuth statically:
+```kotlin
+ApiClient.username = ""
+ApiClient.password = ""
+```
+Configure aemAuth dynamically:
+```kotlin
+apiInstance.userCredentialProvider = { "user" to "pass" }
+```
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/xml
+ - **Accept**: Not defined
 
-<a name="postPackageServiceJson"></a>
+<a id="postPackageServiceJson"></a>
 # **postPackageServiceJson**
 > kotlin.String postPackageServiceJson(path, cmd, groupName, packageName, packageVersion, charset, force, recursive, `package`)
 
@@ -227,18 +250,17 @@ try {
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **path** | **kotlin.String**|  |
- **cmd** | **kotlin.String**|  |
- **groupName** | **kotlin.String**|  | [optional]
- **packageName** | **kotlin.String**|  | [optional]
- **packageVersion** | **kotlin.String**|  | [optional]
- **charset** | **kotlin.String**|  | [optional]
- **force** | **kotlin.Boolean**|  | [optional]
- **recursive** | **kotlin.Boolean**|  | [optional]
- **&#x60;package&#x60;** | **java.io.File**|  | [optional]
+| **path** | **kotlin.String**|  | |
+| **cmd** | **kotlin.String**|  | |
+| **groupName** | **kotlin.String**|  | [optional] |
+| **packageName** | **kotlin.String**|  | [optional] |
+| **packageVersion** | **kotlin.String**|  | [optional] |
+| **charset** | **kotlin.String**|  | [optional] |
+| **force** | **kotlin.Boolean**|  | [optional] |
+| **recursive** | **kotlin.Boolean**|  | [optional] |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **&#x60;package&#x60;** | **java.io.File**|  | [optional] |
 
 ### Return type
 
@@ -247,16 +269,22 @@ Name | Type | Description  | Notes
 ### Authorization
 
 
-Configure aemAuth:
-    ApiClient.username = ""
-    ApiClient.password = ""
+Configure aemAuth statically:
+```kotlin
+ApiClient.username = ""
+ApiClient.password = ""
+```
+Configure aemAuth dynamically:
+```kotlin
+apiInstance.userCredentialProvider = { "user" to "pass" }
+```
 
 ### HTTP request headers
 
  - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
-<a name="postPackageUpdate"></a>
+<a id="postPackageUpdate"></a>
 # **postPackageUpdate**
 > kotlin.String postPackageUpdate(groupName, packageName, version, path, filter, charset)
 
@@ -288,15 +316,14 @@ try {
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **groupName** | **kotlin.String**|  |
- **packageName** | **kotlin.String**|  |
- **version** | **kotlin.String**|  |
- **path** | **kotlin.String**|  |
- **filter** | **kotlin.String**|  | [optional]
- **charset** | **kotlin.String**|  | [optional]
+| **groupName** | **kotlin.String**|  | |
+| **packageName** | **kotlin.String**|  | |
+| **version** | **kotlin.String**|  | |
+| **path** | **kotlin.String**|  | |
+| **filter** | **kotlin.String**|  | [optional] |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **charset** | **kotlin.String**|  | [optional] |
 
 ### Return type
 
@@ -305,16 +332,22 @@ Name | Type | Description  | Notes
 ### Authorization
 
 
-Configure aemAuth:
-    ApiClient.username = ""
-    ApiClient.password = ""
+Configure aemAuth statically:
+```kotlin
+ApiClient.username = ""
+ApiClient.password = ""
+```
+Configure aemAuth dynamically:
+```kotlin
+apiInstance.userCredentialProvider = { "user" to "pass" }
+```
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="postSetPassword"></a>
+<a id="postSetPassword"></a>
 # **postSetPassword**
 > kotlin.String postSetPassword(old, plain, verify)
 
@@ -343,12 +376,11 @@ try {
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **old** | **kotlin.String**|  |
- **plain** | **kotlin.String**|  |
- **verify** | **kotlin.String**|  |
+| **old** | **kotlin.String**|  | |
+| **plain** | **kotlin.String**|  | |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **verify** | **kotlin.String**|  | |
 
 ### Return type
 
@@ -357,9 +389,15 @@ Name | Type | Description  | Notes
 ### Authorization
 
 
-Configure aemAuth:
-    ApiClient.username = ""
-    ApiClient.password = ""
+Configure aemAuth statically:
+```kotlin
+ApiClient.username = ""
+ApiClient.password = ""
+```
+Configure aemAuth dynamically:
+```kotlin
+apiInstance.userCredentialProvider = { "user" to "pass" }
+```
 
 ### HTTP request headers
 

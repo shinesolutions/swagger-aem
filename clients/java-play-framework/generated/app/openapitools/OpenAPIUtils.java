@@ -28,11 +28,11 @@ public class OpenAPIUtils {
         Set<ConstraintViolation<T>> constraintViolations = validator.validate(obj);
         if (constraintViolations.size() > 0) {
             StringBuilder errors = new StringBuilder();
-            for (ConstraintViolation<T> contraintes : constraintViolations) {
-                errors.append(String.format("%s.%s %s\n",
-                contraintes.getRootBeanClass().getSimpleName(),
-                contraintes.getPropertyPath(),
-                contraintes.getMessage()));
+            for (ConstraintViolation<T> constraints : constraintViolations) {
+                errors.append(String.format(java.util.Locale.ROOT, "%s.%s %s\n",
+                constraints.getRootBeanClass().getSimpleName(),
+                constraints.getPropertyPath(),
+                constraints.getMessage()));
             }
             throw new RuntimeException("Bean validation : " + errors);
         }

@@ -1,1 +1,1 @@
-truststorePassword,httpsHostname,truststorePasswordConfirm,keystorePassword,httpsPort,keystorePasswordConfirm
+httpsHostname,keystorePasswordConfirm,truststorePassword,truststorePasswordConfirm,httpsPort,keystorePassword

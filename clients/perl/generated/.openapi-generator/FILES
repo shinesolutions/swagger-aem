@@ -2,6 +2,7 @@
 .travis.yml
 README.md
 bin/autodoc
+cpanfile
 docs/BundleData.md
 docs/BundleDataProp.md
 docs/BundleInfo.md
@@ -52,7 +53,3 @@ lib/WWW/OpenAPIClient/Object/TruststoreItems.pm
 lib/WWW/OpenAPIClient/Role.pm
 lib/WWW/OpenAPIClient/Role/AutoDoc.pm
 lib/WWW/OpenAPIClient/SlingApi.pm
-t/BundleDataPropTest.t
-t/BundleDataTest.t
-t/BundleInfoTest.t
-t/GraniteApiTest.t

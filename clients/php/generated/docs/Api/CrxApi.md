@@ -1,16 +1,18 @@
 # OpenAPI\Client\CrxApi
 
-All URIs are relative to http://localhost.
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**getCrxdeStatus()**](CrxApi.md#getCrxdeStatus) | **GET** /crx/server/crx.default/jcr:root/.1.json | 
-[**getInstallStatus()**](CrxApi.md#getInstallStatus) | **GET** /crx/packmgr/installstatus.jsp | 
-[**getPackageManagerServlet()**](CrxApi.md#getPackageManagerServlet) | **GET** /crx/packmgr/service/script.html | 
-[**postPackageService()**](CrxApi.md#postPackageService) | **POST** /crx/packmgr/service.jsp | 
-[**postPackageServiceJson()**](CrxApi.md#postPackageServiceJson) | **POST** /crx/packmgr/service/.json/{path} | 
-[**postPackageUpdate()**](CrxApi.md#postPackageUpdate) | **POST** /crx/packmgr/update.jsp | 
-[**postSetPassword()**](CrxApi.md#postSetPassword) | **POST** /crx/explorer/ui/setpassword.jsp | 
+
+All URIs are relative to http://localhost, except if the operation defines another base path.
+
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**getCrxdeStatus()**](CrxApi.md#getCrxdeStatus) | **GET** /crx/server/crx.default/jcr:root/.1.json |  |
+| [**getInstallStatus()**](CrxApi.md#getInstallStatus) | **GET** /crx/packmgr/installstatus.jsp |  |
+| [**getPackageManagerServlet()**](CrxApi.md#getPackageManagerServlet) | **GET** /crx/packmgr/service/script.html |  |
+| [**postPackageService()**](CrxApi.md#postPackageService) | **POST** /crx/packmgr/service.jsp |  |
+| [**postPackageServiceJson()**](CrxApi.md#postPackageServiceJson) | **POST** /crx/packmgr/service/.json/{path} |  |
+| [**postPackageUpdate()**](CrxApi.md#postPackageUpdate) | **POST** /crx/packmgr/update.jsp |  |
+| [**postSetPassword()**](CrxApi.md#postSetPassword) | **POST** /crx/explorer/ui/setpassword.jsp |  |
 
 
 ## `getCrxdeStatus()`
@@ -222,9 +224,9 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **cmd** | **string**|  |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **cmd** | **string**|  | |
 
 ### Return type
 
@@ -278,7 +280,7 @@ $package_version = 'package_version_example'; // string
 $_charset_ = '_charset__example'; // string
 $force = True; // bool
 $recursive = True; // bool
-$package = "/path/to/file.txt"; // \SplFileObject
+$package = '/path/to/file.txt'; // \SplFileObject
 
 try {
     $result = $apiInstance->postPackageServiceJson($path, $cmd, $group_name, $package_name, $package_version, $_charset_, $force, $recursive, $package);
@@ -290,17 +292,17 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **path** | **string**|  |
- **cmd** | **string**|  |
- **group_name** | **string**|  | [optional]
- **package_name** | **string**|  | [optional]
- **package_version** | **string**|  | [optional]
- **_charset_** | **string**|  | [optional]
- **force** | **bool**|  | [optional]
- **recursive** | **bool**|  | [optional]
- **package** | **\SplFileObject****\SplFileObject**|  | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **path** | **string**|  | |
+| **cmd** | **string**|  | |
+| **group_name** | **string**|  | [optional] |
+| **package_name** | **string**|  | [optional] |
+| **package_version** | **string**|  | [optional] |
+| **_charset_** | **string**|  | [optional] |
+| **force** | **bool**|  | [optional] |
+| **recursive** | **bool**|  | [optional] |
+| **package** | **\SplFileObject****\SplFileObject**|  | [optional] |
 
 ### Return type
 
@@ -363,14 +365,14 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **group_name** | **string**|  |
- **package_name** | **string**|  |
- **version** | **string**|  |
- **path** | **string**|  |
- **filter** | **string**|  | [optional]
- **_charset_** | **string**|  | [optional]
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **group_name** | **string**|  | |
+| **package_name** | **string**|  | |
+| **version** | **string**|  | |
+| **path** | **string**|  | |
+| **filter** | **string**|  | [optional] |
+| **_charset_** | **string**|  | [optional] |
 
 ### Return type
 
@@ -430,11 +432,11 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **old** | **string**|  |
- **plain** | **string**|  |
- **verify** | **string**|  |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **old** | **string**|  | |
+| **plain** | **string**|  | |
+| **verify** | **string**|  | |
 
 ### Return type
 

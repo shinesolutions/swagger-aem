@@ -3,7 +3,7 @@ Adobe Experience Manager (AEM) API
 
 Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
 
-API version: 3.5.0-pre.0
+API version: 3.7.1-pre.0
 Contact: opensource@shinesolutions.com
 */
 
@@ -14,6 +14,9 @@ package openapi
 import (
 	"encoding/json"
 )
+
+// checks if the BundleData type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &BundleData{}
 
 // BundleData struct for BundleData
 type BundleData struct {
@@ -33,7 +36,7 @@ type BundleData struct {
 	SymbolicName *string `json:"symbolicName,omitempty"`
 	// Bundle category
 	Category *string `json:"category,omitempty"`
-	Props *[]BundleDataProp `json:"props,omitempty"`
+	Props []BundleDataProp `json:"props,omitempty"`
 }
 
 // NewBundleData instantiates a new BundleData object
@@ -55,7 +58,7 @@ func NewBundleDataWithDefaults() *BundleData {
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *BundleData) GetId() int32 {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		var ret int32
 		return ret
 	}
@@ -65,7 +68,7 @@ func (o *BundleData) GetId() int32 {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BundleData) GetIdOk() (*int32, bool) {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
 	return o.Id, true
@@ -73,7 +76,7 @@ func (o *BundleData) GetIdOk() (*int32, bool) {
 
 // HasId returns a boolean if a field has been set.
 func (o *BundleData) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
@@ -87,7 +90,7 @@ func (o *BundleData) SetId(v int32) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *BundleData) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -97,7 +100,7 @@ func (o *BundleData) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BundleData) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -105,7 +108,7 @@ func (o *BundleData) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *BundleData) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -119,7 +122,7 @@ func (o *BundleData) SetName(v string) {
 
 // GetFragment returns the Fragment field value if set, zero value otherwise.
 func (o *BundleData) GetFragment() bool {
-	if o == nil || o.Fragment == nil {
+	if o == nil || IsNil(o.Fragment) {
 		var ret bool
 		return ret
 	}
@@ -129,7 +132,7 @@ func (o *BundleData) GetFragment() bool {
 // GetFragmentOk returns a tuple with the Fragment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BundleData) GetFragmentOk() (*bool, bool) {
-	if o == nil || o.Fragment == nil {
+	if o == nil || IsNil(o.Fragment) {
 		return nil, false
 	}
 	return o.Fragment, true
@@ -137,7 +140,7 @@ func (o *BundleData) GetFragmentOk() (*bool, bool) {
 
 // HasFragment returns a boolean if a field has been set.
 func (o *BundleData) HasFragment() bool {
-	if o != nil && o.Fragment != nil {
+	if o != nil && !IsNil(o.Fragment) {
 		return true
 	}
 
@@ -151,7 +154,7 @@ func (o *BundleData) SetFragment(v bool) {
 
 // GetStateRaw returns the StateRaw field value if set, zero value otherwise.
 func (o *BundleData) GetStateRaw() int32 {
-	if o == nil || o.StateRaw == nil {
+	if o == nil || IsNil(o.StateRaw) {
 		var ret int32
 		return ret
 	}
@@ -161,7 +164,7 @@ func (o *BundleData) GetStateRaw() int32 {
 // GetStateRawOk returns a tuple with the StateRaw field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BundleData) GetStateRawOk() (*int32, bool) {
-	if o == nil || o.StateRaw == nil {
+	if o == nil || IsNil(o.StateRaw) {
 		return nil, false
 	}
 	return o.StateRaw, true
@@ -169,7 +172,7 @@ func (o *BundleData) GetStateRawOk() (*int32, bool) {
 
 // HasStateRaw returns a boolean if a field has been set.
 func (o *BundleData) HasStateRaw() bool {
-	if o != nil && o.StateRaw != nil {
+	if o != nil && !IsNil(o.StateRaw) {
 		return true
 	}
 
@@ -183,7 +186,7 @@ func (o *BundleData) SetStateRaw(v int32) {
 
 // GetState returns the State field value if set, zero value otherwise.
 func (o *BundleData) GetState() string {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		var ret string
 		return ret
 	}
@@ -193,7 +196,7 @@ func (o *BundleData) GetState() string {
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BundleData) GetStateOk() (*string, bool) {
-	if o == nil || o.State == nil {
+	if o == nil || IsNil(o.State) {
 		return nil, false
 	}
 	return o.State, true
@@ -201,7 +204,7 @@ func (o *BundleData) GetStateOk() (*string, bool) {
 
 // HasState returns a boolean if a field has been set.
 func (o *BundleData) HasState() bool {
-	if o != nil && o.State != nil {
+	if o != nil && !IsNil(o.State) {
 		return true
 	}
 
@@ -215,7 +218,7 @@ func (o *BundleData) SetState(v string) {
 
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *BundleData) GetVersion() string {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
@@ -225,7 +228,7 @@ func (o *BundleData) GetVersion() string {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BundleData) GetVersionOk() (*string, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
 	return o.Version, true
@@ -233,7 +236,7 @@ func (o *BundleData) GetVersionOk() (*string, bool) {
 
 // HasVersion returns a boolean if a field has been set.
 func (o *BundleData) HasVersion() bool {
-	if o != nil && o.Version != nil {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
@@ -247,7 +250,7 @@ func (o *BundleData) SetVersion(v string) {
 
 // GetSymbolicName returns the SymbolicName field value if set, zero value otherwise.
 func (o *BundleData) GetSymbolicName() string {
-	if o == nil || o.SymbolicName == nil {
+	if o == nil || IsNil(o.SymbolicName) {
 		var ret string
 		return ret
 	}
@@ -257,7 +260,7 @@ func (o *BundleData) GetSymbolicName() string {
 // GetSymbolicNameOk returns a tuple with the SymbolicName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BundleData) GetSymbolicNameOk() (*string, bool) {
-	if o == nil || o.SymbolicName == nil {
+	if o == nil || IsNil(o.SymbolicName) {
 		return nil, false
 	}
 	return o.SymbolicName, true
@@ -265,7 +268,7 @@ func (o *BundleData) GetSymbolicNameOk() (*string, bool) {
 
 // HasSymbolicName returns a boolean if a field has been set.
 func (o *BundleData) HasSymbolicName() bool {
-	if o != nil && o.SymbolicName != nil {
+	if o != nil && !IsNil(o.SymbolicName) {
 		return true
 	}
 
@@ -279,7 +282,7 @@ func (o *BundleData) SetSymbolicName(v string) {
 
 // GetCategory returns the Category field value if set, zero value otherwise.
 func (o *BundleData) GetCategory() string {
-	if o == nil || o.Category == nil {
+	if o == nil || IsNil(o.Category) {
 		var ret string
 		return ret
 	}
@@ -289,7 +292,7 @@ func (o *BundleData) GetCategory() string {
 // GetCategoryOk returns a tuple with the Category field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BundleData) GetCategoryOk() (*string, bool) {
-	if o == nil || o.Category == nil {
+	if o == nil || IsNil(o.Category) {
 		return nil, false
 	}
 	return o.Category, true
@@ -297,7 +300,7 @@ func (o *BundleData) GetCategoryOk() (*string, bool) {
 
 // HasCategory returns a boolean if a field has been set.
 func (o *BundleData) HasCategory() bool {
-	if o != nil && o.Category != nil {
+	if o != nil && !IsNil(o.Category) {
 		return true
 	}
 
@@ -311,17 +314,17 @@ func (o *BundleData) SetCategory(v string) {
 
 // GetProps returns the Props field value if set, zero value otherwise.
 func (o *BundleData) GetProps() []BundleDataProp {
-	if o == nil || o.Props == nil {
+	if o == nil || IsNil(o.Props) {
 		var ret []BundleDataProp
 		return ret
 	}
-	return *o.Props
+	return o.Props
 }
 
 // GetPropsOk returns a tuple with the Props field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BundleData) GetPropsOk() (*[]BundleDataProp, bool) {
-	if o == nil || o.Props == nil {
+func (o *BundleData) GetPropsOk() ([]BundleDataProp, bool) {
+	if o == nil || IsNil(o.Props) {
 		return nil, false
 	}
 	return o.Props, true
@@ -329,7 +332,7 @@ func (o *BundleData) GetPropsOk() (*[]BundleDataProp, bool) {
 
 // HasProps returns a boolean if a field has been set.
 func (o *BundleData) HasProps() bool {
-	if o != nil && o.Props != nil {
+	if o != nil && !IsNil(o.Props) {
 		return true
 	}
 
@@ -338,39 +341,47 @@ func (o *BundleData) HasProps() bool {
 
 // SetProps gets a reference to the given []BundleDataProp and assigns it to the Props field.
 func (o *BundleData) SetProps(v []BundleDataProp) {
-	o.Props = &v
+	o.Props = v
 }
 
 func (o BundleData) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
-		toSerialize["id"] = o.Id
-	}
-	if o.Name != nil {
-		toSerialize["name"] = o.Name
-	}
-	if o.Fragment != nil {
-		toSerialize["fragment"] = o.Fragment
-	}
-	if o.StateRaw != nil {
-		toSerialize["stateRaw"] = o.StateRaw
-	}
-	if o.State != nil {
-		toSerialize["state"] = o.State
-	}
-	if o.Version != nil {
-		toSerialize["version"] = o.Version
-	}
-	if o.SymbolicName != nil {
-		toSerialize["symbolicName"] = o.SymbolicName
-	}
-	if o.Category != nil {
-		toSerialize["category"] = o.Category
-	}
-	if o.Props != nil {
-		toSerialize["props"] = o.Props
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o BundleData) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.Fragment) {
+		toSerialize["fragment"] = o.Fragment
+	}
+	if !IsNil(o.StateRaw) {
+		toSerialize["stateRaw"] = o.StateRaw
+	}
+	if !IsNil(o.State) {
+		toSerialize["state"] = o.State
+	}
+	if !IsNil(o.Version) {
+		toSerialize["version"] = o.Version
+	}
+	if !IsNil(o.SymbolicName) {
+		toSerialize["symbolicName"] = o.SymbolicName
+	}
+	if !IsNil(o.Category) {
+		toSerialize["category"] = o.Category
+	}
+	if !IsNil(o.Props) {
+		toSerialize["props"] = o.Props
+	}
+	return toSerialize, nil
 }
 
 type NullableBundleData struct {

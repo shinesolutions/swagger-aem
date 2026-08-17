@@ -23,9 +23,9 @@ import javax.validation.Valid;
 
 
 @io.swagger.annotations.Api(description = "the bin API")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyEapServerCodegen", date = "2021-09-03T15:26:02.321+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyEapServerCodegen", date = "2026-08-17T02:15:40.232181116Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public interface BinApi  {
-   
+
     @GET
     
     
@@ -35,7 +35,7 @@ public interface BinApi  {
     }, tags={ "sling", })
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public Response getQuery( @NotNull  @QueryParam("path") String path, @NotNull  @QueryParam("p.limit") BigDecimal pLimit, @NotNull  @QueryParam("1_property") String _1property, @NotNull  @QueryParam("1_property.value") String _1propertyValue,@Context SecurityContext securityContext);
+    public Response getQuery( @NotNull @QueryParam("path") String path, @NotNull @QueryParam("p.limit") BigDecimal pLimit, @NotNull @QueryParam("1_property") String _1property, @NotNull @QueryParam("1_property.value") String _1propertyValue,@Context SecurityContext securityContext);
     @POST
     
     
@@ -45,5 +45,5 @@ public interface BinApi  {
     }, tags={ "sling", })
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public Response postQuery( @NotNull  @QueryParam("path") String path, @NotNull  @QueryParam("p.limit") BigDecimal pLimit, @NotNull  @QueryParam("1_property") String _1property, @NotNull  @QueryParam("1_property.value") String _1propertyValue,@Context SecurityContext securityContext);
+    public Response postQuery( @NotNull @QueryParam("path") String path, @NotNull @QueryParam("p.limit") BigDecimal pLimit, @NotNull @QueryParam("1_property") String _1property, @NotNull @QueryParam("1_property.value") String _1propertyValue,@Context SecurityContext securityContext);
 }

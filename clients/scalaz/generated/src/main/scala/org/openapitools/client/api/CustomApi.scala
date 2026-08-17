@@ -32,7 +32,7 @@ object CustomApi {
     implicit val returnTypeDecoder: EntityDecoder[String] = jsonOf[String]
 
     val path = "/system/health"
-    
+
     val httpMethod = Method.GET
     val contentType = `Content-Type`(MediaType.`application/json`)
     val headers = Headers(
@@ -48,10 +48,10 @@ object CustomApi {
 
     } yield resp
   }
-  
+
   def postConfigAemHealthCheckServlet(host: String, bundlesIgnored: List[String] = List.empty[String] , bundlesIgnoredTypeHint: String)(implicit bundlesIgnoredQuery: QueryParam[List[String]], bundlesIgnoredTypeHintQuery: QueryParam[String]): Task[Unit] = {
     val path = "/apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck"
-    
+
     val httpMethod = Method.POST
     val contentType = `Content-Type`(MediaType.`application/json`)
     val headers = Headers(
@@ -67,10 +67,10 @@ object CustomApi {
 
     } yield resp
   }
-  
+
   def postConfigAemPasswordReset(host: String, pwdresetAuthorizables: List[String] = List.empty[String] , pwdresetAuthorizablesTypeHint: String)(implicit pwdresetAuthorizablesQuery: QueryParam[List[String]], pwdresetAuthorizablesTypeHintQuery: QueryParam[String]): Task[Unit] = {
     val path = "/apps/system/config/com.shinesolutions.aem.passwordreset.Activator"
-    
+
     val httpMethod = Method.POST
     val contentType = `Content-Type`(MediaType.`application/json`)
     val headers = Headers(
@@ -86,7 +86,7 @@ object CustomApi {
 
     } yield resp
   }
-  
+
 }
 
 class HttpServiceCustomApi(service: HttpService) {
@@ -98,7 +98,7 @@ class HttpServiceCustomApi(service: HttpService) {
     implicit val returnTypeDecoder: EntityDecoder[String] = jsonOf[String]
 
     val path = "/system/health"
-    
+
     val httpMethod = Method.GET
     val contentType = `Content-Type`(MediaType.`application/json`)
     val headers = Headers(
@@ -114,10 +114,10 @@ class HttpServiceCustomApi(service: HttpService) {
 
     } yield resp
   }
-  
+
   def postConfigAemHealthCheckServlet(bundlesIgnored: List[String] = List.empty[String] , bundlesIgnoredTypeHint: String)(implicit bundlesIgnoredQuery: QueryParam[List[String]], bundlesIgnoredTypeHintQuery: QueryParam[String]): Task[Unit] = {
     val path = "/apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck"
-    
+
     val httpMethod = Method.POST
     val contentType = `Content-Type`(MediaType.`application/json`)
     val headers = Headers(
@@ -133,10 +133,10 @@ class HttpServiceCustomApi(service: HttpService) {
 
     } yield resp
   }
-  
+
   def postConfigAemPasswordReset(pwdresetAuthorizables: List[String] = List.empty[String] , pwdresetAuthorizablesTypeHint: String)(implicit pwdresetAuthorizablesQuery: QueryParam[List[String]], pwdresetAuthorizablesTypeHintQuery: QueryParam[String]): Task[Unit] = {
     val path = "/apps/system/config/com.shinesolutions.aem.passwordreset.Activator"
-    
+
     val httpMethod = Method.POST
     val contentType = `Content-Type`(MediaType.`application/json`)
     val headers = Headers(
@@ -152,5 +152,5 @@ class HttpServiceCustomApi(service: HttpService) {
 
     } yield resp
   }
-  
+
 }

@@ -23,7 +23,7 @@ Method | HTTP request | Description
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::CrxApi;
@@ -36,7 +36,7 @@ my $api_instance = WWW::OpenAPIClient::CrxApi->new(
 );
 
 
-eval { 
+eval {
     my $result = $api_instance->get_crxde_status();
     print Dumper($result);
 };
@@ -68,7 +68,7 @@ This endpoint does not need any parameter.
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::CrxApi;
@@ -81,7 +81,7 @@ my $api_instance = WWW::OpenAPIClient::CrxApi->new(
 );
 
 
-eval { 
+eval {
     my $result = $api_instance->get_install_status();
     print Dumper($result);
 };
@@ -113,7 +113,7 @@ This endpoint does not need any parameter.
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::CrxApi;
@@ -126,7 +126,7 @@ my $api_instance = WWW::OpenAPIClient::CrxApi->new(
 );
 
 
-eval { 
+eval {
     $api_instance->get_package_manager_servlet();
 };
 if ($@) {
@@ -157,7 +157,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::CrxApi;
@@ -171,7 +171,7 @@ my $api_instance = WWW::OpenAPIClient::CrxApi->new(
 
 my $cmd = "cmd_example"; # string | 
 
-eval { 
+eval {
     my $result = $api_instance->post_package_service(cmd => $cmd);
     print Dumper($result);
 };
@@ -206,7 +206,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::CrxApi;
@@ -228,7 +228,7 @@ my $force = null; # boolean |
 my $recursive = null; # boolean | 
 my $package = "/path/to/file"; # string | 
 
-eval { 
+eval {
     my $result = $api_instance->post_package_service_json(path => $path, cmd => $cmd, group_name => $group_name, package_name => $package_name, package_version => $package_version, _charset_ => $_charset_, force => $force, recursive => $recursive, package => $package);
     print Dumper($result);
 };
@@ -271,7 +271,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::CrxApi;
@@ -290,7 +290,7 @@ my $path = "path_example"; # string |
 my $filter = "filter_example"; # string | 
 my $_charset_ = "_charset__example"; # string | 
 
-eval { 
+eval {
     my $result = $api_instance->post_package_update(group_name => $group_name, package_name => $package_name, version => $version, path => $path, filter => $filter, _charset_ => $_charset_);
     print Dumper($result);
 };
@@ -330,7 +330,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::CrxApi;
@@ -346,7 +346,7 @@ my $old = "old_example"; # string |
 my $plain = "plain_example"; # string | 
 my $verify = "verify_example"; # string | 
 
-eval { 
+eval {
     my $result = $api_instance->post_set_password(old => $old, plain => $plain, verify => $verify);
     print Dumper($result);
 };

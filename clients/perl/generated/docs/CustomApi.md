@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::CustomApi;
@@ -34,7 +34,7 @@ my $api_instance = WWW::OpenAPIClient::CustomApi->new(
 my $tags = "tags_example"; # string | 
 my $combine_tags_or = null; # boolean | 
 
-eval { 
+eval {
     my $result = $api_instance->get_aem_health_check(tags => $tags, combine_tags_or => $combine_tags_or);
     print Dumper($result);
 };
@@ -70,7 +70,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::CustomApi;
@@ -85,7 +85,7 @@ my $api_instance = WWW::OpenAPIClient::CustomApi->new(
 my $bundles/ignored = [("null")]; # ARRAY[string] | 
 my $bundles/ignored@type_hint = "bundles/ignored@type_hint_example"; # string | 
 
-eval { 
+eval {
     $api_instance->post_config_aem_health_check_servlet(bundles/ignored => $bundles/ignored, bundles/ignored@type_hint => $bundles/ignored@type_hint);
 };
 if ($@) {
@@ -120,7 +120,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::CustomApi;
@@ -135,7 +135,7 @@ my $api_instance = WWW::OpenAPIClient::CustomApi->new(
 my $pwdreset/authorizables = [("null")]; # ARRAY[string] | 
 my $pwdreset/authorizables@type_hint = "pwdreset/authorizables@type_hint_example"; # string | 
 
-eval { 
+eval {
     $api_instance->post_config_aem_password_reset(pwdreset/authorizables => $pwdreset/authorizables, pwdreset/authorizables@type_hint => $pwdreset/authorizables@type_hint);
 };
 if ($@) {

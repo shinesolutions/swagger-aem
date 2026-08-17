@@ -2,13 +2,13 @@
 
 All URIs are relative to *http://localhost*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**getLoginPage**](CqApi.md#getLoginPage) | **GET** /libs/granite/core/content/login.html | 
-[**postCqActions**](CqApi.md#postCqActions) | **POST** /.cqactions.html | 
+| Method | HTTP request | Description |
+| ------------- | ------------- | ------------- |
+| [**getLoginPage**](CqApi.md#getLoginPage) | **GET** /libs/granite/core/content/login.html |  |
+| [**postCqActions**](CqApi.md#postCqActions) | **POST** /.cqactions.html |  |
 
 
-<a name="getLoginPage"></a>
+<a id="getLoginPage"></a>
 # **getLoginPage**
 > kotlin.String getLoginPage()
 
@@ -47,9 +47,9 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/html
+ - **Accept**: Not defined
 
-<a name="postCqActions"></a>
+<a id="postCqActions"></a>
 # **postCqActions**
 > postCqActions(authorizableId, changelog)
 
@@ -76,11 +76,10 @@ try {
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **authorizableId** | **kotlin.String**|  |
- **changelog** | **kotlin.String**|  |
+| **authorizableId** | **kotlin.String**|  | |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **changelog** | **kotlin.String**|  | |
 
 ### Return type
 
@@ -89,9 +88,15 @@ null (empty response body)
 ### Authorization
 
 
-Configure aemAuth:
-    ApiClient.username = ""
-    ApiClient.password = ""
+Configure aemAuth statically:
+```kotlin
+ApiClient.username = ""
+ApiClient.password = ""
+```
+Configure aemAuth dynamically:
+```kotlin
+apiInstance.userCredentialProvider = { "user" to "pass" }
+```
 
 ### HTTP request headers
 

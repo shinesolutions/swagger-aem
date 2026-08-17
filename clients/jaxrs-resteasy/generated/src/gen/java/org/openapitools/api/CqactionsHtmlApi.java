@@ -26,7 +26,7 @@ import javax.validation.Valid;
 
 
 @io.swagger.annotations.Api(description = "the .cqactions.html API")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyServerCodegen", date = "2021-09-03T15:25:57.989+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyServerCodegen", date = "2026-08-17T02:15:38.090574223Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class CqactionsHtmlApi  {
 
     @Inject CqactionsHtmlApiService service;
@@ -40,7 +40,7 @@ public class CqactionsHtmlApi  {
     }, tags={ "cq", })
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = Void.class) })
-    public Response postCqActions( @NotNull  @QueryParam("authorizableId") String authorizableId, @NotNull  @QueryParam("changelog") String changelog,@Context SecurityContext securityContext)
+    public Response postCqActions( @NotNull @QueryParam("authorizableId") String authorizableId, @NotNull @QueryParam("changelog") String changelog,@Context SecurityContext securityContext)
     throws NotFoundException {
         return service.postCqActions(authorizableId,changelog,securityContext);
     }

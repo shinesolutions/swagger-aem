@@ -22,7 +22,7 @@ Method | HTTP request | Description
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::ConsoleApi;
@@ -35,7 +35,7 @@ my $api_instance = WWW::OpenAPIClient::ConsoleApi->new(
 );
 
 
-eval { 
+eval {
     my $result = $api_instance->get_aem_product_info();
     print Dumper($result);
 };
@@ -67,7 +67,7 @@ This endpoint does not need any parameter.
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::ConsoleApi;
@@ -81,7 +81,7 @@ my $api_instance = WWW::OpenAPIClient::ConsoleApi->new(
 
 my $name = "name_example"; # string | 
 
-eval { 
+eval {
     my $result = $api_instance->get_bundle_info(name => $name);
     print Dumper($result);
 };
@@ -116,7 +116,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::ConsoleApi;
@@ -129,7 +129,7 @@ my $api_instance = WWW::OpenAPIClient::ConsoleApi->new(
 );
 
 
-eval { 
+eval {
     my $result = $api_instance->get_config_mgr();
     print Dumper($result);
 };
@@ -161,7 +161,7 @@ This endpoint does not need any parameter.
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::ConsoleApi;
@@ -176,7 +176,7 @@ my $api_instance = WWW::OpenAPIClient::ConsoleApi->new(
 my $name = "name_example"; # string | 
 my $action = "action_example"; # string | 
 
-eval { 
+eval {
     $api_instance->post_bundle(name => $name, action => $action);
 };
 if ($@) {
@@ -211,7 +211,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::ConsoleApi;
@@ -225,7 +225,7 @@ my $api_instance = WWW::OpenAPIClient::ConsoleApi->new(
 
 my $action = "action_example"; # string | 
 
-eval { 
+eval {
     $api_instance->post_jmx_repository(action => $action);
 };
 if ($@) {
@@ -259,7 +259,7 @@ void (empty response body)
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::ConsoleApi;
@@ -302,7 +302,7 @@ my $signature_method = "signature_method_example"; # string |
 my $user_intermediate_path = "user_intermediate_path_example"; # string | 
 my $propertylist = [("null")]; # ARRAY[string] | 
 
-eval { 
+eval {
     my $result = $api_instance->post_saml_configuration(post => $post, apply => $apply, delete => $delete, action => $action, __location => $__location, path => $path, service/ranking => $service/ranking, idp_url => $idp_url, idp_cert_alias => $idp_cert_alias, idp_http_redirect => $idp_http_redirect, service_provider_entity_id => $service_provider_entity_id, assertion_consumer_service_url => $assertion_consumer_service_url, sp_private_key_alias => $sp_private_key_alias, key_store_password => $key_store_password, default_redirect_url => $default_redirect_url, user_id_attribute => $user_id_attribute, use_encryption => $use_encryption, create_user => $create_user, add_group_memberships => $add_group_memberships, group_membership_attribute => $group_membership_attribute, default_groups => $default_groups, name_id_format => $name_id_format, synchronize_attributes => $synchronize_attributes, handle_logout => $handle_logout, logout_url => $logout_url, clock_tolerance => $clock_tolerance, digest_method => $digest_method, signature_method => $signature_method, user_intermediate_path => $user_intermediate_path, propertylist => $propertylist);
     print Dumper($result);
 };

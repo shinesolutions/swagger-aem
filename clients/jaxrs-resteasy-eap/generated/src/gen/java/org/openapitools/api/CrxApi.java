@@ -25,9 +25,9 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 
 @io.swagger.annotations.Api(description = "the crx API")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyEapServerCodegen", date = "2021-09-03T15:26:02.321+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaResteasyEapServerCodegen", date = "2026-08-17T02:15:40.232181116Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public interface CrxApi  {
-   
+
     @GET
     @Path("/server/crx.default/jcr:root/.1.json")
     
@@ -73,7 +73,7 @@ public interface CrxApi  {
     }, tags={ "crx", })
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public Response postPackageService( @NotNull  @QueryParam("cmd") String cmd,@Context SecurityContext securityContext);
+    public Response postPackageService( @NotNull @QueryParam("cmd") String cmd,@Context SecurityContext securityContext);
     @POST
     @Path("/packmgr/service/.json/{path}")
     @Consumes({ "multipart/form-data" })
@@ -83,7 +83,7 @@ public interface CrxApi  {
     }, tags={ "crx", })
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public Response postPackageServiceJson(MultipartFormDataInput input, @PathParam("path") String path, @NotNull  @QueryParam("cmd") String cmd,  @QueryParam("groupName") String groupName,  @QueryParam("packageName") String packageName,  @QueryParam("packageVersion") String packageVersion,  @QueryParam("_charset_") String charset,  @QueryParam("force") Boolean force,  @QueryParam("recursive") Boolean recursive,@Context SecurityContext securityContext);
+    public Response postPackageServiceJson(MultipartFormDataInput input, @PathParam("path") String path, @NotNull @QueryParam("cmd") String cmd, @QueryParam("groupName") String groupName, @QueryParam("packageName") String packageName, @QueryParam("packageVersion") String packageVersion, @QueryParam("_charset_") String charset, @QueryParam("force") Boolean force, @QueryParam("recursive") Boolean recursive,@Context SecurityContext securityContext);
     @POST
     @Path("/packmgr/update.jsp")
     
@@ -93,7 +93,7 @@ public interface CrxApi  {
     }, tags={ "crx", })
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public Response postPackageUpdate( @NotNull  @QueryParam("groupName") String groupName, @NotNull  @QueryParam("packageName") String packageName, @NotNull  @QueryParam("version") String version, @NotNull  @QueryParam("path") String path,  @QueryParam("filter") String filter,  @QueryParam("_charset_") String charset,@Context SecurityContext securityContext);
+    public Response postPackageUpdate( @NotNull @QueryParam("groupName") String groupName, @NotNull @QueryParam("packageName") String packageName, @NotNull @QueryParam("version") String version, @NotNull @QueryParam("path") String path, @QueryParam("filter") String filter, @QueryParam("_charset_") String charset,@Context SecurityContext securityContext);
     @POST
     @Path("/explorer/ui/setpassword.jsp")
     
@@ -103,5 +103,5 @@ public interface CrxApi  {
     }, tags={ "crx", })
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public Response postSetPassword( @NotNull  @QueryParam("old") String old, @NotNull  @QueryParam("plain") String plain, @NotNull  @QueryParam("verify") String verify,@Context SecurityContext securityContext);
+    public Response postSetPassword( @NotNull @QueryParam("old") String old, @NotNull @QueryParam("plain") String plain, @NotNull @QueryParam("verify") String verify,@Context SecurityContext securityContext);
 }

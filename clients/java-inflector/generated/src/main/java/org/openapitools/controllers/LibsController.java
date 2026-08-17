@@ -13,9 +13,9 @@ import org.openapitools.model.*;
 import java.io.File;
 import org.openapitools.model.TruststoreInfo;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaInflectorServerCodegen", date = "2021-09-03T15:25:18.608+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaInflectorServerCodegen", date = "2026-08-17T02:15:06.513440410Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class LibsController  {
-  /** 
+  /**
    * Uncomment and implement as you see fit.  These operations will map
    * Directly to operation calls from the routing logic.  Because the inflector
    * Code allows you to implement logic incrementally, they are disabled.
@@ -34,13 +34,19 @@ public class LibsController  {
   */
 
   /*
-    public ResponseContext postAuthorizables(RequestContext request , String authorizableId, String intermediatePath, String createUser, String createGroup, String repColonPassword, String profileGivenName) {
+    public ResponseContext postAuthorizables(RequestContext request , String authorizableId, String intermediatePath, String createUser, String createGroup, String repPassword, String profileGivenName) {
         return new ResponseContext().status(Status.INTERNAL_SERVER_ERROR).entity( "Not implemented" );
     }
   */
 
   /*
-    public ResponseContext postTruststore(RequestContext request , String colonOperation, String newPassword, String rePassword, String keyStoreType, String removeAlias, FormDataContentDisposition fileDetail) {
+    public ResponseContext postTreeActivation(RequestContext request , Boolean ignoredeactivated, Boolean onlymodified, String path, String cmd) {
+        return new ResponseContext().status(Status.INTERNAL_SERVER_ERROR).entity( "Not implemented" );
+    }
+  */
+
+  /*
+    public ResponseContext postTruststore(RequestContext request , String operation, String newPassword, String rePassword, String keyStoreType, String removeAlias, FormDataContentDisposition fileDetail) {
         return new ResponseContext().status(Status.INTERNAL_SERVER_ERROR).entity( "Not implemented" );
     }
   */
@@ -52,4 +58,3 @@ public class LibsController  {
   */
 
 }
-

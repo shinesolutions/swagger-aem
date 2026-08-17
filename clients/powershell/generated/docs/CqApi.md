@@ -1,4 +1,4 @@
-# PSOpenAPITools.PSOpenAPITools/Api.CqApi
+# PSOpenAPITools.PSOpenAPITools\Api.CqApi
 
 All URIs are relative to *http://localhost*
 
@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**Submit-CqActions**](CqApi.md#Submit-CqActions) | **POST** /.cqactions.html | 
 
 
-<a name="Get-LoginPage"></a>
+<a id="Get-LoginPage"></a>
 # **Get-LoginPage**
 > String Get-LoginPage<br>
 
@@ -20,7 +20,7 @@ Method | HTTP request | Description
 try {
     $Result = Get-LoginPage
 } catch {
-    Write-Host ("Exception occured when calling Get-LoginPage: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Get-LoginPage: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -43,7 +43,7 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-CqActions"></a>
+<a id="Submit-CqActions"></a>
 # **Submit-CqActions**
 > void Submit-CqActions<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-AuthorizableId] <String><br>
@@ -65,7 +65,7 @@ $Changelog = "MyChangelog" # String |
 try {
     $Result = Submit-CqActions -AuthorizableId $AuthorizableId -Changelog $Changelog
 } catch {
-    Write-Host ("Exception occured when calling Submit-CqActions: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Submit-CqActions: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```

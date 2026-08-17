@@ -127,7 +127,7 @@ Class | Method | HTTP request | Description
 *SlingApi* | [**postNodeRw**](docs/SlingApi.md#postNodeRw) | **POST** /{path}/{name}.rw.html | 
 *SlingApi* | [**postPath**](docs/SlingApi.md#postPath) | **POST** /{path}/ | 
 *SlingApi* | [**postQuery**](docs/SlingApi.md#postQuery) | **POST** /bin/querybuilder.json | 
-*SlingApi* | [**postTreeActivation**](docs/SlingApi.md#postTreeActivation) | **POST** /etc/replication/treeactivation.html | 
+*SlingApi* | [**postTreeActivation**](docs/SlingApi.md#postTreeActivation) | **POST** /libs/replication/treeactivation.html | 
 *SlingApi* | [**postTruststore**](docs/SlingApi.md#postTruststore) | **POST** /libs/granite/security/post/truststore | 
 *SlingApi* | [**postTruststorePKCS12**](docs/SlingApi.md#postTruststorePKCS12) | **POST** /etc/truststore | 
 

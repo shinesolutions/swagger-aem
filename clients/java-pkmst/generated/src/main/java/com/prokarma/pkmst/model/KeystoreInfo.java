@@ -7,6 +7,7 @@ import com.prokarma.pkmst.model.KeystoreItems;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 /**
  * Response class to be returned by Api
@@ -17,7 +18,7 @@ import java.util.List;
  * KeystoreInfo
  */
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2021-09-03T15:25:27.791+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2026-08-17T02:15:15.504120373Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class KeystoreInfo   {
   @JsonProperty("aliases")
   
@@ -39,10 +40,10 @@ public class KeystoreInfo   {
     return this;
   }
 
-   /**
+  /**
    * Get aliases
    * @return aliases
-  **/
+   */
   @ApiModelProperty(value = "")
   public List<KeystoreItems> getAliases() {
     return aliases;
@@ -57,10 +58,10 @@ public class KeystoreInfo   {
     return this;
   }
 
-   /**
+  /**
    * False if truststore don't exist
    * @return exists
-  **/
+   */
   @ApiModelProperty(value = "False if truststore don't exist")
   public Boolean getExists() {
     return exists;
@@ -105,10 +106,7 @@ public class KeystoreInfo   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

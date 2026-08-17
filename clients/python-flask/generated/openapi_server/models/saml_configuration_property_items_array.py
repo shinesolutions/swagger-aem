@@ -1,11 +1,8 @@
-# coding: utf-8
-
-from __future__ import absolute_import
 from datetime import date, datetime  # noqa: F401
 
 from typing import List, Dict  # noqa: F401
 
-from openapi_server.models.base_model_ import Model
+from openapi_server.models.base_model import Model
 from openapi_server import util
 
 
@@ -68,7 +65,7 @@ class SamlConfigurationPropertyItemsArray(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def name(self):
+    def name(self) -> str:
         """Gets the name of this SamlConfigurationPropertyItemsArray.
 
         property name  # noqa: E501
@@ -79,7 +76,7 @@ class SamlConfigurationPropertyItemsArray(Model):
         return self._name
 
     @name.setter
-    def name(self, name):
+    def name(self, name: str):
         """Sets the name of this SamlConfigurationPropertyItemsArray.
 
         property name  # noqa: E501
@@ -91,7 +88,7 @@ class SamlConfigurationPropertyItemsArray(Model):
         self._name = name
 
     @property
-    def optional(self):
+    def optional(self) -> bool:
         """Gets the optional of this SamlConfigurationPropertyItemsArray.
 
         True if optional  # noqa: E501
@@ -102,7 +99,7 @@ class SamlConfigurationPropertyItemsArray(Model):
         return self._optional
 
     @optional.setter
-    def optional(self, optional):
+    def optional(self, optional: bool):
         """Sets the optional of this SamlConfigurationPropertyItemsArray.
 
         True if optional  # noqa: E501
@@ -114,7 +111,7 @@ class SamlConfigurationPropertyItemsArray(Model):
         self._optional = optional
 
     @property
-    def is_set(self):
+    def is_set(self) -> bool:
         """Gets the is_set of this SamlConfigurationPropertyItemsArray.
 
         True if property is set  # noqa: E501
@@ -125,7 +122,7 @@ class SamlConfigurationPropertyItemsArray(Model):
         return self._is_set
 
     @is_set.setter
-    def is_set(self, is_set):
+    def is_set(self, is_set: bool):
         """Sets the is_set of this SamlConfigurationPropertyItemsArray.
 
         True if property is set  # noqa: E501
@@ -137,7 +134,7 @@ class SamlConfigurationPropertyItemsArray(Model):
         self._is_set = is_set
 
     @property
-    def type(self):
+    def type(self) -> int:
         """Gets the type of this SamlConfigurationPropertyItemsArray.
 
         Property type, 1=String, 3=long, 11=boolean, 12=Password  # noqa: E501
@@ -148,7 +145,7 @@ class SamlConfigurationPropertyItemsArray(Model):
         return self._type
 
     @type.setter
-    def type(self, type):
+    def type(self, type: int):
         """Sets the type of this SamlConfigurationPropertyItemsArray.
 
         Property type, 1=String, 3=long, 11=boolean, 12=Password  # noqa: E501
@@ -160,7 +157,7 @@ class SamlConfigurationPropertyItemsArray(Model):
         self._type = type
 
     @property
-    def values(self):
+    def values(self) -> List[str]:
         """Gets the values of this SamlConfigurationPropertyItemsArray.
 
         Property value  # noqa: E501
@@ -171,7 +168,7 @@ class SamlConfigurationPropertyItemsArray(Model):
         return self._values
 
     @values.setter
-    def values(self, values):
+    def values(self, values: List[str]):
         """Sets the values of this SamlConfigurationPropertyItemsArray.
 
         Property value  # noqa: E501
@@ -183,7 +180,7 @@ class SamlConfigurationPropertyItemsArray(Model):
         self._values = values
 
     @property
-    def description(self):
+    def description(self) -> str:
         """Gets the description of this SamlConfigurationPropertyItemsArray.
 
         Property description  # noqa: E501
@@ -194,7 +191,7 @@ class SamlConfigurationPropertyItemsArray(Model):
         return self._description
 
     @description.setter
-    def description(self, description):
+    def description(self, description: str):
         """Sets the description of this SamlConfigurationPropertyItemsArray.
 
         Property description  # noqa: E501

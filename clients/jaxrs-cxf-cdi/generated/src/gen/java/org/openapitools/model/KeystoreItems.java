@@ -5,15 +5,16 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openapitools.model.KeystoreChainItems;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 
 
 import io.swagger.annotations.*;
 import java.util.Objects;
 
-import javax.xml.bind.annotation.*;
 
 
 public class KeystoreItems   {
@@ -26,8 +27,7 @@ public class KeystoreItems   {
 
   private String format;
 
-  private List<KeystoreChainItems> chain = null;
-
+  private List<@Valid KeystoreChainItems> chain = new ArrayList<>();
 
   /**
    * Keystore alias name
@@ -107,7 +107,7 @@ public class KeystoreItems   {
 
   /**
    **/
-  public KeystoreItems chain(List<KeystoreChainItems> chain) {
+  public KeystoreItems chain(List<@Valid KeystoreChainItems> chain) {
     this.chain = chain;
     return this;
   }
@@ -115,16 +115,16 @@ public class KeystoreItems   {
   
   @ApiModelProperty(value = "")
   @JsonProperty("chain")
-  public List<KeystoreChainItems> getChain() {
+  public List<@Valid KeystoreChainItems> getChain() {
     return chain;
   }
-  public void setChain(List<KeystoreChainItems> chain) {
+  public void setChain(List<@Valid KeystoreChainItems> chain) {
     this.chain = chain;
   }
 
   public KeystoreItems addChainItem(KeystoreChainItems chainItem) {
     if (this.chain == null) {
-      this.chain = new ArrayList<KeystoreChainItems>();
+      this.chain = new ArrayList<>();
     }
     this.chain.add(chainItem);
     return this;
@@ -141,11 +141,11 @@ public class KeystoreItems   {
       return false;
     }
     KeystoreItems keystoreItems = (KeystoreItems) o;
-    return Objects.equals(alias, keystoreItems.alias) &&
-        Objects.equals(entryType, keystoreItems.entryType) &&
-        Objects.equals(algorithm, keystoreItems.algorithm) &&
-        Objects.equals(format, keystoreItems.format) &&
-        Objects.equals(chain, keystoreItems.chain);
+    return Objects.equals(this.alias, keystoreItems.alias) &&
+        Objects.equals(this.entryType, keystoreItems.entryType) &&
+        Objects.equals(this.algorithm, keystoreItems.algorithm) &&
+        Objects.equals(this.format, keystoreItems.format) &&
+        Objects.equals(this.chain, keystoreItems.chain);
   }
 
   @Override
@@ -172,10 +172,7 @@ public class KeystoreItems   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

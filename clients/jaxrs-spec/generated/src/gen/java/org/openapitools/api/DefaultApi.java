@@ -14,9 +14,13 @@ import java.util.List;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
 
+/**
+* Represents a collection of functions to interact with the API endpoints.
+*/
 @Path("")
 @Api(description = "the default API")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2021-09-03T15:26:06.461+10:00[Australia/Melbourne]")public class DefaultApi {
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2026-08-17T02:15:42.417242947Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+public class DefaultApi {
 
     @DELETE
     @Path("/{path}/{name}")
@@ -85,7 +89,7 @@ import javax.validation.Valid;
         @ApiResponse(code = 200, message = "Retrieved Authorizable Keystore info", response = KeystoreInfo.class),
         @ApiResponse(code = 200, message = "Default response", response = String.class)
     })
-    public Response postAuthorizableKeystore(@PathParam("intermediatePath") String intermediatePath,@PathParam("authorizableId") String authorizableId,@QueryParam(":operation")    String colonOperation,@QueryParam("currentPassword")    String currentPassword,@QueryParam("newPassword")    String newPassword,@QueryParam("rePassword")    String rePassword,@QueryParam("keyPassword")    String keyPassword,@QueryParam("keyStorePass")    String keyStorePass,@QueryParam("alias")    String alias,@QueryParam("newAlias")    String newAlias,@QueryParam("removeAlias")    String removeAlias, @FormParam(value = "cert-chain") InputStream certChainInputStream, @FormParam(value = "pk") InputStream pkInputStream, @FormParam(value = "keyStore") InputStream keyStoreInputStream) {
+    public Response postAuthorizableKeystore(@PathParam("intermediatePath") String intermediatePath,@PathParam("authorizableId") String authorizableId,@QueryParam(":operation")   String operation,@QueryParam("currentPassword")   String currentPassword,@QueryParam("newPassword")   String newPassword,@QueryParam("rePassword")   String rePassword,@QueryParam("keyPassword")   String keyPassword,@QueryParam("keyStorePass")   String keyStorePass,@QueryParam("alias")   String alias,@QueryParam("newAlias")   String newAlias,@QueryParam("removeAlias")   String removeAlias,@FormParam(value = "cert-chain") InputStream certChainInputStream,@FormParam(value = "pk") InputStream pkInputStream,@FormParam(value = "keyStore") InputStream keyStoreInputStream) {
         return Response.ok().entity("magic!").build();
     }
 
@@ -99,7 +103,7 @@ import javax.validation.Valid;
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = Void.class)
     })
-    public Response postNode(@PathParam("path") String path,@PathParam("name") String name,@QueryParam(":operation")    String colonOperation,@QueryParam("deleteAuthorizable")    String deleteAuthorizable, @FormParam(value = "file") InputStream fileInputStream) {
+    public Response postNode(@PathParam("path") String path,@PathParam("name") String name,@QueryParam(":operation")   String operation,@QueryParam("deleteAuthorizable")   String deleteAuthorizable,@FormParam(value = "file") InputStream _fileInputStream) {
         return Response.ok().entity("magic!").build();
     }
 
@@ -112,7 +116,7 @@ import javax.validation.Valid;
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = Void.class)
     })
-    public Response postNodeRw(@PathParam("path") String path,@PathParam("name") String name,@QueryParam("addMembers")    String addMembers) {
+    public Response postNodeRw(@PathParam("path") String path,@PathParam("name") String name,@QueryParam("addMembers")   String addMembers) {
         return Response.ok().entity("magic!").build();
     }
 
@@ -125,7 +129,7 @@ import javax.validation.Valid;
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = Void.class)
     })
-    public Response postPath(@PathParam("path") String path,@QueryParam("jcr:primaryType") @NotNull    String jcrColonPrimaryType,@QueryParam(":name") @NotNull    String colonName) {
+    public Response postPath(@PathParam("path") String path,@QueryParam("jcr:primaryType") @NotNull   String jcrPrimaryType,@QueryParam(":name") @NotNull   String name) {
         return Response.ok().entity("magic!").build();
     }
 }

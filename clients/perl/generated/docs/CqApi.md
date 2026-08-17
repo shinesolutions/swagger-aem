@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::CqApi;
@@ -26,7 +26,7 @@ my $api_instance = WWW::OpenAPIClient::CqApi->new(
 );
 
 
-eval { 
+eval {
     my $result = $api_instance->get_login_page();
     print Dumper($result);
 };
@@ -58,7 +58,7 @@ No authorization required
 
 
 
-### Example 
+### Example
 ```perl
 use Data::Dumper;
 use WWW::OpenAPIClient::CqApi;
@@ -73,7 +73,7 @@ my $api_instance = WWW::OpenAPIClient::CqApi->new(
 my $authorizable_id = "authorizable_id_example"; # string | 
 my $changelog = "changelog_example"; # string | 
 
-eval { 
+eval {
     $api_instance->post_cq_actions(authorizable_id => $authorizable_id, changelog => $changelog);
 };
 if ($@) {

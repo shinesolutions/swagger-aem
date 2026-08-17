@@ -3,7 +3,7 @@
  *
  * Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
  *
- * OpenAPI document version: 3.5.0-pre.0
+ * OpenAPI document version: 3.7.1-pre.0
  * Maintained by: opensource@shinesolutions.com
  *
  * AUTO-GENERATED FILE, DO NOT MODIFY!
@@ -21,7 +21,7 @@ public interface PathHandlerInterface {
     /**
      * <p><b>Endpoint</b>: {@link Methods#GET GET} "/system/console/status-productinfo.json" (<i>privileged: true</i>)</p>
      *
-     * <p><b>Produces</b>: [{mediaType=application/json}]</p>
+     * <p><b>Produces</b>: [{isJson=true, mediaType=application/json}]</p>
      * <p><b>Returns</b>: {@link java.util.List List} of {@link String}</p>
      *
      * <p><b>Responses</b>:</p>
@@ -47,7 +47,7 @@ public interface PathHandlerInterface {
      * </li>
      * </ul>
      *
-     * <p><b>Produces</b>: [{mediaType=application/json}]</p>
+     * <p><b>Produces</b>: [{isJson=true, mediaType=application/json}]</p>
      * <p><b>Returns</b>: {@link BundleInfo}</p>
      *
      * <p><b>Responses</b>:</p>
@@ -454,7 +454,7 @@ public interface PathHandlerInterface {
     /**
      * <p><b>Endpoint</b>: {@link Methods#GET GET} "/crx/packmgr/installstatus.jsp" (<i>privileged: true</i>)</p>
      *
-     * <p><b>Produces</b>: [{mediaType=application/json}]</p>
+     * <p><b>Produces</b>: [{isJson=true, mediaType=application/json}]</p>
      * <p><b>Returns</b>: {@link InstallStatus}</p>
      *
      * <p><b>Responses</b>:</p>
@@ -587,7 +587,7 @@ public interface PathHandlerInterface {
      *
      * <p><b>Consumes</b>: [{mediaType=multipart/form-data}]</p>
      *
-     * <p><b>Produces</b>: [{mediaType=application/json}]</p>
+     * <p><b>Produces</b>: [{isJson=true, mediaType=application/json}]</p>
      * <p><b>Returns</b>: {@link String}</p>
      *
      * <p><b>Responses</b>:</p>
@@ -653,7 +653,7 @@ public interface PathHandlerInterface {
      * </li>
      * </ul>
      *
-     * <p><b>Produces</b>: [{mediaType=application/json}]</p>
+     * <p><b>Produces</b>: [{isJson=true, mediaType=application/json}]</p>
      * <p><b>Returns</b>: {@link String}</p>
      *
      * <p><b>Responses</b>:</p>
@@ -729,7 +729,7 @@ public interface PathHandlerInterface {
      * </li>
      * </ul>
      *
-     * <p><b>Produces</b>: [{mediaType=application/json}]</p>
+     * <p><b>Produces</b>: [{isJson=true, mediaType=application/json}]</p>
      * <p><b>Returns</b>: {@link String}</p>
      *
      * <p><b>Responses</b>:</p>
@@ -999,7 +999,7 @@ public interface PathHandlerInterface {
      * </li>
      * </ul>
      *
-     * <p><b>Produces</b>: [{mediaType=application/json}]</p>
+     * <p><b>Produces</b>: [{isJson=true, mediaType=application/json}]</p>
      * <p><b>Returns</b>: {@link String}</p>
      *
      * <p><b>Responses</b>:</p>
@@ -1184,7 +1184,7 @@ public interface PathHandlerInterface {
      * </li>
      * </ul>
      *
-     * <p><b>Produces</b>: [{mediaType=application/json}]</p>
+     * <p><b>Produces</b>: [{isJson=true, mediaType=application/json}]</p>
      * <p><b>Returns</b>: {@link String}</p>
      *
      * <p><b>Responses</b>:</p>
@@ -1234,7 +1234,7 @@ public interface PathHandlerInterface {
      * </li>
      * </ul>
      *
-     * <p><b>Produces</b>: [{mediaType=application/json}]</p>
+     * <p><b>Produces</b>: [{isJson=true, mediaType=application/json}]</p>
      * <p><b>Returns</b>: {@link String}</p>
      *
      * <p><b>Responses</b>:</p>
@@ -1262,7 +1262,7 @@ public interface PathHandlerInterface {
     /**
      * <p><b>Endpoint</b>: {@link Methods#GET GET} "/libs/granite/security/truststore.json" (<i>privileged: true</i>)</p>
      *
-     * <p><b>Produces</b>: [{mediaType=application/json}]</p>
+     * <p><b>Produces</b>: [{isJson=true, mediaType=application/json}]</p>
      * <p><b>Returns</b>: {@link TruststoreInfo}</p>
      *
      * <p><b>Responses</b>:</p>
@@ -1323,6 +1323,14 @@ public interface PathHandlerInterface {
      * <p>"<b>jcr:content/cq:template</b>"
      * <p>
      * - Parameter type: <b>{@link String}</b><br/>
+     * - Appears in: <b>{@link HttpServerExchange#getQueryParameters Query}</b><br/>
+     * - Required: <b>false</b>
+     * </p>
+     * </li>
+     * <li>
+     * <p>"<b>jcr:content/aliasUpdate</b>"
+     * <p>
+     * - Parameter type: <b>{@link Boolean}</b><br/>
      * - Appears in: <b>{@link HttpServerExchange#getQueryParameters Query}</b><br/>
      * - Required: <b>false</b>
      * </p>
@@ -3002,7 +3010,7 @@ public interface PathHandlerInterface {
      * </li>
      * </ul>
      *
-     * <p><b>Produces</b>: [{mediaType=application/json}]</p>
+     * <p><b>Produces</b>: [{isJson=true, mediaType=application/json}]</p>
      * <p><b>Returns</b>: {@link String}</p>
      *
      * <p><b>Responses</b>:</p>
@@ -3014,7 +3022,7 @@ public interface PathHandlerInterface {
     HttpHandler postQuery();
 
     /**
-     * <p><b>Endpoint</b>: {@link Methods#POST POST} "/etc/replication/treeactivation.html" (<i>privileged: true</i>)</p>
+     * <p><b>Endpoint</b>: {@link Methods#POST POST} "/libs/replication/treeactivation.html" (<i>privileged: true</i>)</p>
      *
      * <p><b>Request parameters</b>:</p>
      * <ul>
@@ -3039,6 +3047,15 @@ public interface PathHandlerInterface {
      * <p>
      * - Parameter type: <b>{@link String}</b><br/>
      * - Appears in: <b>{@link HttpServerExchange#getQueryParameters Query}</b><br/>
+     * - Required: <b>true</b>
+     * </p>
+     * </li>
+     * <li>
+     * <p>"<b>cmd</b>"
+     * <p>
+     * - Parameter type: <b>{@link String}</b><br/>
+     * - Appears in: <b>{@link HttpServerExchange#getQueryParameters Query}</b><br/>
+     * - Default value: <b>activate</b><br/>
      * - Required: <b>true</b>
      * </p>
      * </li>

@@ -1,4 +1,4 @@
-# PSOpenAPITools.PSOpenAPITools/Api.SlingApi
+# PSOpenAPITools.PSOpenAPITools\Api.SlingApi
 
 All URIs are relative to *http://localhost*
 
@@ -30,12 +30,12 @@ Method | HTTP request | Description
 [**Submit-NodeRw**](SlingApi.md#Submit-NodeRw) | **POST** /{path}/{name}.rw.html | 
 [**Submit-Path**](SlingApi.md#Submit-Path) | **POST** /{path}/ | 
 [**Submit-Query**](SlingApi.md#Submit-Query) | **POST** /bin/querybuilder.json | 
-[**Submit-TreeActivation**](SlingApi.md#Submit-TreeActivation) | **POST** /etc/replication/treeactivation.html | 
+[**Submit-TreeActivation**](SlingApi.md#Submit-TreeActivation) | **POST** /libs/replication/treeactivation.html | 
 [**Submit-Truststore**](SlingApi.md#Submit-Truststore) | **POST** /libs/granite/security/post/truststore | 
 [**Submit-TruststorePKCS12**](SlingApi.md#Submit-TruststorePKCS12) | **POST** /etc/truststore | 
 
 
-<a name="Invoke-DeleteAgent"></a>
+<a id="Invoke-DeleteAgent"></a>
 # **Invoke-DeleteAgent**
 > void Invoke-DeleteAgent<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Runmode] <String><br>
@@ -57,7 +57,7 @@ $Name = "MyName" # String |
 try {
     $Result = Invoke-DeleteAgent -Runmode $Runmode -Name $Name
 } catch {
-    Write-Host ("Exception occured when calling Invoke-DeleteAgent: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Invoke-DeleteAgent: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -84,7 +84,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Invoke-DeleteNode"></a>
+<a id="Invoke-DeleteNode"></a>
 # **Invoke-DeleteNode**
 > void Invoke-DeleteNode<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Path] <String><br>
@@ -106,7 +106,7 @@ $Name = "MyName" # String |
 try {
     $Result = Invoke-DeleteNode -Path $Path -Name $Name
 } catch {
-    Write-Host ("Exception occured when calling Invoke-DeleteNode: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Invoke-DeleteNode: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -133,7 +133,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-Agent"></a>
+<a id="Get-Agent"></a>
 # **Get-Agent**
 > void Get-Agent<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Runmode] <String><br>
@@ -155,7 +155,7 @@ $Name = "MyName" # String |
 try {
     $Result = Get-Agent -Runmode $Runmode -Name $Name
 } catch {
-    Write-Host ("Exception occured when calling Get-Agent: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Get-Agent: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -182,7 +182,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-Agents"></a>
+<a id="Get-Agents"></a>
 # **Get-Agents**
 > String Get-Agents<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Runmode] <String><br>
@@ -202,7 +202,7 @@ $Runmode = "MyRunmode" # String |
 try {
     $Result = Get-Agents -Runmode $Runmode
 } catch {
-    Write-Host ("Exception occured when calling Get-Agents: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Get-Agents: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -228,7 +228,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-AuthorizableKeystore"></a>
+<a id="Get-AuthorizableKeystore"></a>
 # **Get-AuthorizableKeystore**
 > KeystoreInfo Get-AuthorizableKeystore<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-IntermediatePath] <String><br>
@@ -250,7 +250,7 @@ $AuthorizableId = "MyAuthorizableId" # String |
 try {
     $Result = Get-AuthorizableKeystore -IntermediatePath $IntermediatePath -AuthorizableId $AuthorizableId
 } catch {
-    Write-Host ("Exception occured when calling Get-AuthorizableKeystore: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Get-AuthorizableKeystore: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -277,7 +277,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-Keystore"></a>
+<a id="Get-Keystore"></a>
 # **Get-Keystore**
 > System.IO.FileInfo Get-Keystore<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-IntermediatePath] <String><br>
@@ -299,7 +299,7 @@ $AuthorizableId = "MyAuthorizableId" # String |
 try {
     $Result = Get-Keystore -IntermediatePath $IntermediatePath -AuthorizableId $AuthorizableId
 } catch {
-    Write-Host ("Exception occured when calling Get-Keystore: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Get-Keystore: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -326,7 +326,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-Node"></a>
+<a id="Get-Node"></a>
 # **Get-Node**
 > void Get-Node<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Path] <String><br>
@@ -348,7 +348,7 @@ $Name = "MyName" # String |
 try {
     $Result = Get-Node -Path $Path -Name $Name
 } catch {
-    Write-Host ("Exception occured when calling Get-Node: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Get-Node: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -375,7 +375,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-Package"></a>
+<a id="Get-Package"></a>
 # **Get-Package**
 > System.IO.FileInfo Get-Package<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Group] <String><br>
@@ -399,7 +399,7 @@ $Version = "MyVersion" # String |
 try {
     $Result = Get-Package -Group $Group -Name $Name -Version $Version
 } catch {
-    Write-Host ("Exception occured when calling Get-Package: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Get-Package: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -427,7 +427,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-PackageFilter"></a>
+<a id="Get-PackageFilter"></a>
 # **Get-PackageFilter**
 > String Get-PackageFilter<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Group] <String><br>
@@ -451,7 +451,7 @@ $Version = "MyVersion" # String |
 try {
     $Result = Get-PackageFilter -Group $Group -Name $Name -Version $Version
 } catch {
-    Write-Host ("Exception occured when calling Get-PackageFilter: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Get-PackageFilter: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -479,7 +479,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-Query"></a>
+<a id="Get-Query"></a>
 # **Get-Query**
 > String Get-Query<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Path] <String><br>
@@ -505,7 +505,7 @@ $Var1PropertyValue = "MyVar1PropertyValue" # String |
 try {
     $Result = Get-Query -Path $Path -PLimit $PLimit -Var1Property $Var1Property -Var1PropertyValue $Var1PropertyValue
 } catch {
-    Write-Host ("Exception occured when calling Get-Query: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Get-Query: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -534,7 +534,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-Truststore"></a>
+<a id="Get-Truststore"></a>
 # **Get-Truststore**
 > System.IO.FileInfo Get-Truststore<br>
 
@@ -552,7 +552,7 @@ $Configuration.Password = "YOUR_PASSWORD"
 try {
     $Result = Get-Truststore
 } catch {
-    Write-Host ("Exception occured when calling Get-Truststore: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Get-Truststore: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -575,7 +575,7 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Get-TruststoreInfo"></a>
+<a id="Get-TruststoreInfo"></a>
 # **Get-TruststoreInfo**
 > TruststoreInfo Get-TruststoreInfo<br>
 
@@ -593,7 +593,7 @@ $Configuration.Password = "YOUR_PASSWORD"
 try {
     $Result = Get-TruststoreInfo
 } catch {
-    Write-Host ("Exception occured when calling Get-TruststoreInfo: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Get-TruststoreInfo: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -616,60 +616,61 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-Agent"></a>
+<a id="Submit-Agent"></a>
 # **Submit-Agent**
 > void Submit-Agent<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Runmode] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Name] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentCqdistribute] <System.Nullable[Boolean]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentCqdistributeTypeHint] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentCqname] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentCqtemplate] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentEnabled] <System.Nullable[Boolean]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentJcrdescription] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentJcrlastModified] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentJcrlastModifiedBy] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentJcrmixinTypes] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentJcrtitle] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentLogLevel] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentNoStatusUpdate] <System.Nullable[Boolean]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentNoVersioning] <System.Nullable[Boolean]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentProtocolConnectTimeout] <System.Nullable[Decimal]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentProtocolHTTPConnectionClosed] <System.Nullable[Boolean]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentProtocolHTTPExpired] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentProtocolHTTPHeaders] <String[]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentProtocolHTTPHeadersTypeHint] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentProtocolHTTPMethod] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentProtocolHTTPSRelaxed] <System.Nullable[Boolean]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentProtocolInterface] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentProtocolSocketTimeout] <System.Nullable[Decimal]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentProtocolVersion] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentProxyNTLMDomain] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentProxyNTLMHost] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentProxyHost] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentProxyPassword] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentProxyPort] <System.Nullable[Decimal]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentProxyUser] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentQueueBatchMaxSize] <System.Nullable[Decimal]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentQueueBatchMode] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentQueueBatchWaitTime] <System.Nullable[Decimal]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentRetryDelay] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentReverseReplication] <System.Nullable[Boolean]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentSerializationType] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentSlingresourceType] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentSsl] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentTransportNTLMDomain] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentTransportNTLMHost] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentTransportPassword] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentTransportUri] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentTransportUser] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentTriggerDistribute] <System.Nullable[Boolean]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentTriggerModified] <System.Nullable[Boolean]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentTriggerOnOffTime] <System.Nullable[Boolean]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentTriggerReceive] <System.Nullable[Boolean]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentTriggerSpecific] <System.Nullable[Boolean]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrcontentUserId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrprimaryType] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentCqDistribute] <System.Nullable[Boolean]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentCqDistributeTypeHint] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentCqName] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentCqTemplate] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentAliasUpdate] <System.Nullable[Boolean]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentEnabled] <System.Nullable[Boolean]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentJcrDescription] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentJcrLastModified] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentJcrLastModifiedBy] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentJcrMixinTypes] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentJcrTitle] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentLogLevel] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentNoStatusUpdate] <System.Nullable[Boolean]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentNoVersioning] <System.Nullable[Boolean]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentProtocolConnectTimeout] <System.Nullable[Decimal]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentProtocolHTTPConnectionClosed] <System.Nullable[Boolean]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentProtocolHTTPExpired] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentProtocolHTTPHeaders] <String[]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentProtocolHTTPHeadersTypeHint] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentProtocolHTTPMethod] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentProtocolHTTPSRelaxed] <System.Nullable[Boolean]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentProtocolInterface] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentProtocolSocketTimeout] <System.Nullable[Decimal]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentProtocolVersion] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentProxyNTLMDomain] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentProxyNTLMHost] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentProxyHost] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentProxyPassword] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentProxyPort] <System.Nullable[Decimal]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentProxyUser] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentQueueBatchMaxSize] <System.Nullable[Decimal]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentQueueBatchMode] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentQueueBatchWaitTime] <System.Nullable[Decimal]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentRetryDelay] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentReverseReplication] <System.Nullable[Boolean]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentSerializationType] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentSlingResourceType] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentSsl] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentTransportNTLMDomain] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentTransportNTLMHost] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentTransportPassword] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentTransportUri] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentTransportUser] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentTriggerDistribute] <System.Nullable[Boolean]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentTriggerModified] <System.Nullable[Boolean]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentTriggerOnOffTime] <System.Nullable[Boolean]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentTriggerReceive] <System.Nullable[Boolean]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentTriggerSpecific] <System.Nullable[Boolean]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrContentUserId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrPrimaryType] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Operation] <String><br>
 
 
@@ -684,61 +685,62 @@ $Configuration.Password = "YOUR_PASSWORD"
 
 $Runmode = "MyRunmode" # String | 
 $Name = "MyName" # String | 
-$JcrcontentCqdistribute = $true # Boolean |  (optional)
-$JcrcontentCqdistributeTypeHint = "MyJcrcontentCqdistributeTypeHint" # String |  (optional)
-$JcrcontentCqname = "MyJcrcontentCqname" # String |  (optional)
-$JcrcontentCqtemplate = "MyJcrcontentCqtemplate" # String |  (optional)
-$JcrcontentEnabled = $true # Boolean |  (optional)
-$JcrcontentJcrdescription = "MyJcrcontentJcrdescription" # String |  (optional)
-$JcrcontentJcrlastModified = "MyJcrcontentJcrlastModified" # String |  (optional)
-$JcrcontentJcrlastModifiedBy = "MyJcrcontentJcrlastModifiedBy" # String |  (optional)
-$JcrcontentJcrmixinTypes = "MyJcrcontentJcrmixinTypes" # String |  (optional)
-$JcrcontentJcrtitle = "MyJcrcontentJcrtitle" # String |  (optional)
-$JcrcontentLogLevel = "MyJcrcontentLogLevel" # String |  (optional)
-$JcrcontentNoStatusUpdate = $true # Boolean |  (optional)
-$JcrcontentNoVersioning = $true # Boolean |  (optional)
-$JcrcontentProtocolConnectTimeout = 8.14 # Decimal |  (optional)
-$JcrcontentProtocolHTTPConnectionClosed = $true # Boolean |  (optional)
-$JcrcontentProtocolHTTPExpired = "MyJcrcontentProtocolHTTPExpired" # String |  (optional)
-$JcrcontentProtocolHTTPHeaders = "MyJcrcontentProtocolHTTPHeaders" # String[] |  (optional)
-$JcrcontentProtocolHTTPHeadersTypeHint = "MyJcrcontentProtocolHTTPHeadersTypeHint" # String |  (optional)
-$JcrcontentProtocolHTTPMethod = "MyJcrcontentProtocolHTTPMethod" # String |  (optional)
-$JcrcontentProtocolHTTPSRelaxed = $true # Boolean |  (optional)
-$JcrcontentProtocolInterface = "MyJcrcontentProtocolInterface" # String |  (optional)
-$JcrcontentProtocolSocketTimeout = 8.14 # Decimal |  (optional)
-$JcrcontentProtocolVersion = "MyJcrcontentProtocolVersion" # String |  (optional)
-$JcrcontentProxyNTLMDomain = "MyJcrcontentProxyNTLMDomain" # String |  (optional)
-$JcrcontentProxyNTLMHost = "MyJcrcontentProxyNTLMHost" # String |  (optional)
-$JcrcontentProxyHost = "MyJcrcontentProxyHost" # String |  (optional)
-$JcrcontentProxyPassword = "MyJcrcontentProxyPassword" # String |  (optional)
-$JcrcontentProxyPort = 8.14 # Decimal |  (optional)
-$JcrcontentProxyUser = "MyJcrcontentProxyUser" # String |  (optional)
-$JcrcontentQueueBatchMaxSize = 8.14 # Decimal |  (optional)
-$JcrcontentQueueBatchMode = "MyJcrcontentQueueBatchMode" # String |  (optional)
-$JcrcontentQueueBatchWaitTime = 8.14 # Decimal |  (optional)
-$JcrcontentRetryDelay = "MyJcrcontentRetryDelay" # String |  (optional)
-$JcrcontentReverseReplication = $true # Boolean |  (optional)
-$JcrcontentSerializationType = "MyJcrcontentSerializationType" # String |  (optional)
-$JcrcontentSlingresourceType = "MyJcrcontentSlingresourceType" # String |  (optional)
-$JcrcontentSsl = "MyJcrcontentSsl" # String |  (optional)
-$JcrcontentTransportNTLMDomain = "MyJcrcontentTransportNTLMDomain" # String |  (optional)
-$JcrcontentTransportNTLMHost = "MyJcrcontentTransportNTLMHost" # String |  (optional)
-$JcrcontentTransportPassword = "MyJcrcontentTransportPassword" # String |  (optional)
-$JcrcontentTransportUri = "MyJcrcontentTransportUri" # String |  (optional)
-$JcrcontentTransportUser = "MyJcrcontentTransportUser" # String |  (optional)
-$JcrcontentTriggerDistribute = $true # Boolean |  (optional)
-$JcrcontentTriggerModified = $true # Boolean |  (optional)
-$JcrcontentTriggerOnOffTime = $true # Boolean |  (optional)
-$JcrcontentTriggerReceive = $true # Boolean |  (optional)
-$JcrcontentTriggerSpecific = $true # Boolean |  (optional)
-$JcrcontentUserId = "MyJcrcontentUserId" # String |  (optional)
-$JcrprimaryType = "MyJcrprimaryType" # String |  (optional)
+$JcrContentCqDistribute = $true # Boolean |  (optional)
+$JcrContentCqDistributeTypeHint = "MyJcrContentCqDistributeTypeHint" # String |  (optional)
+$JcrContentCqName = "MyJcrContentCqName" # String |  (optional)
+$JcrContentCqTemplate = "MyJcrContentCqTemplate" # String |  (optional)
+$JcrContentAliasUpdate = $true # Boolean |  (optional)
+$JcrContentEnabled = $true # Boolean |  (optional)
+$JcrContentJcrDescription = "MyJcrContentJcrDescription" # String |  (optional)
+$JcrContentJcrLastModified = "MyJcrContentJcrLastModified" # String |  (optional)
+$JcrContentJcrLastModifiedBy = "MyJcrContentJcrLastModifiedBy" # String |  (optional)
+$JcrContentJcrMixinTypes = "MyJcrContentJcrMixinTypes" # String |  (optional)
+$JcrContentJcrTitle = "MyJcrContentJcrTitle" # String |  (optional)
+$JcrContentLogLevel = "MyJcrContentLogLevel" # String |  (optional)
+$JcrContentNoStatusUpdate = $true # Boolean |  (optional)
+$JcrContentNoVersioning = $true # Boolean |  (optional)
+$JcrContentProtocolConnectTimeout = 8.14 # Decimal |  (optional)
+$JcrContentProtocolHTTPConnectionClosed = $true # Boolean |  (optional)
+$JcrContentProtocolHTTPExpired = "MyJcrContentProtocolHTTPExpired" # String |  (optional)
+$JcrContentProtocolHTTPHeaders = "MyJcrContentProtocolHTTPHeaders" # String[] |  (optional)
+$JcrContentProtocolHTTPHeadersTypeHint = "MyJcrContentProtocolHTTPHeadersTypeHint" # String |  (optional)
+$JcrContentProtocolHTTPMethod = "MyJcrContentProtocolHTTPMethod" # String |  (optional)
+$JcrContentProtocolHTTPSRelaxed = $true # Boolean |  (optional)
+$JcrContentProtocolInterface = "MyJcrContentProtocolInterface" # String |  (optional)
+$JcrContentProtocolSocketTimeout = 8.14 # Decimal |  (optional)
+$JcrContentProtocolVersion = "MyJcrContentProtocolVersion" # String |  (optional)
+$JcrContentProxyNTLMDomain = "MyJcrContentProxyNTLMDomain" # String |  (optional)
+$JcrContentProxyNTLMHost = "MyJcrContentProxyNTLMHost" # String |  (optional)
+$JcrContentProxyHost = "MyJcrContentProxyHost" # String |  (optional)
+$JcrContentProxyPassword = "MyJcrContentProxyPassword" # String |  (optional)
+$JcrContentProxyPort = 8.14 # Decimal |  (optional)
+$JcrContentProxyUser = "MyJcrContentProxyUser" # String |  (optional)
+$JcrContentQueueBatchMaxSize = 8.14 # Decimal |  (optional)
+$JcrContentQueueBatchMode = "MyJcrContentQueueBatchMode" # String |  (optional)
+$JcrContentQueueBatchWaitTime = 8.14 # Decimal |  (optional)
+$JcrContentRetryDelay = "MyJcrContentRetryDelay" # String |  (optional)
+$JcrContentReverseReplication = $true # Boolean |  (optional)
+$JcrContentSerializationType = "MyJcrContentSerializationType" # String |  (optional)
+$JcrContentSlingResourceType = "MyJcrContentSlingResourceType" # String |  (optional)
+$JcrContentSsl = "MyJcrContentSsl" # String |  (optional)
+$JcrContentTransportNTLMDomain = "MyJcrContentTransportNTLMDomain" # String |  (optional)
+$JcrContentTransportNTLMHost = "MyJcrContentTransportNTLMHost" # String |  (optional)
+$JcrContentTransportPassword = "MyJcrContentTransportPassword" # String |  (optional)
+$JcrContentTransportUri = "MyJcrContentTransportUri" # String |  (optional)
+$JcrContentTransportUser = "MyJcrContentTransportUser" # String |  (optional)
+$JcrContentTriggerDistribute = $true # Boolean |  (optional)
+$JcrContentTriggerModified = $true # Boolean |  (optional)
+$JcrContentTriggerOnOffTime = $true # Boolean |  (optional)
+$JcrContentTriggerReceive = $true # Boolean |  (optional)
+$JcrContentTriggerSpecific = $true # Boolean |  (optional)
+$JcrContentUserId = "MyJcrContentUserId" # String |  (optional)
+$JcrPrimaryType = "MyJcrPrimaryType" # String |  (optional)
 $Operation = "MyOperation" # String |  (optional)
 
 try {
-    $Result = Submit-Agent -Runmode $Runmode -Name $Name -JcrcontentCqdistribute $JcrcontentCqdistribute -JcrcontentCqdistributeTypeHint $JcrcontentCqdistributeTypeHint -JcrcontentCqname $JcrcontentCqname -JcrcontentCqtemplate $JcrcontentCqtemplate -JcrcontentEnabled $JcrcontentEnabled -JcrcontentJcrdescription $JcrcontentJcrdescription -JcrcontentJcrlastModified $JcrcontentJcrlastModified -JcrcontentJcrlastModifiedBy $JcrcontentJcrlastModifiedBy -JcrcontentJcrmixinTypes $JcrcontentJcrmixinTypes -JcrcontentJcrtitle $JcrcontentJcrtitle -JcrcontentLogLevel $JcrcontentLogLevel -JcrcontentNoStatusUpdate $JcrcontentNoStatusUpdate -JcrcontentNoVersioning $JcrcontentNoVersioning -JcrcontentProtocolConnectTimeout $JcrcontentProtocolConnectTimeout -JcrcontentProtocolHTTPConnectionClosed $JcrcontentProtocolHTTPConnectionClosed -JcrcontentProtocolHTTPExpired $JcrcontentProtocolHTTPExpired -JcrcontentProtocolHTTPHeaders $JcrcontentProtocolHTTPHeaders -JcrcontentProtocolHTTPHeadersTypeHint $JcrcontentProtocolHTTPHeadersTypeHint -JcrcontentProtocolHTTPMethod $JcrcontentProtocolHTTPMethod -JcrcontentProtocolHTTPSRelaxed $JcrcontentProtocolHTTPSRelaxed -JcrcontentProtocolInterface $JcrcontentProtocolInterface -JcrcontentProtocolSocketTimeout $JcrcontentProtocolSocketTimeout -JcrcontentProtocolVersion $JcrcontentProtocolVersion -JcrcontentProxyNTLMDomain $JcrcontentProxyNTLMDomain -JcrcontentProxyNTLMHost $JcrcontentProxyNTLMHost -JcrcontentProxyHost $JcrcontentProxyHost -JcrcontentProxyPassword $JcrcontentProxyPassword -JcrcontentProxyPort $JcrcontentProxyPort -JcrcontentProxyUser $JcrcontentProxyUser -JcrcontentQueueBatchMaxSize $JcrcontentQueueBatchMaxSize -JcrcontentQueueBatchMode $JcrcontentQueueBatchMode -JcrcontentQueueBatchWaitTime $JcrcontentQueueBatchWaitTime -JcrcontentRetryDelay $JcrcontentRetryDelay -JcrcontentReverseReplication $JcrcontentReverseReplication -JcrcontentSerializationType $JcrcontentSerializationType -JcrcontentSlingresourceType $JcrcontentSlingresourceType -JcrcontentSsl $JcrcontentSsl -JcrcontentTransportNTLMDomain $JcrcontentTransportNTLMDomain -JcrcontentTransportNTLMHost $JcrcontentTransportNTLMHost -JcrcontentTransportPassword $JcrcontentTransportPassword -JcrcontentTransportUri $JcrcontentTransportUri -JcrcontentTransportUser $JcrcontentTransportUser -JcrcontentTriggerDistribute $JcrcontentTriggerDistribute -JcrcontentTriggerModified $JcrcontentTriggerModified -JcrcontentTriggerOnOffTime $JcrcontentTriggerOnOffTime -JcrcontentTriggerReceive $JcrcontentTriggerReceive -JcrcontentTriggerSpecific $JcrcontentTriggerSpecific -JcrcontentUserId $JcrcontentUserId -JcrprimaryType $JcrprimaryType -Operation $Operation
+    $Result = Submit-Agent -Runmode $Runmode -Name $Name -JcrContentCqDistribute $JcrContentCqDistribute -JcrContentCqDistributeTypeHint $JcrContentCqDistributeTypeHint -JcrContentCqName $JcrContentCqName -JcrContentCqTemplate $JcrContentCqTemplate -JcrContentAliasUpdate $JcrContentAliasUpdate -JcrContentEnabled $JcrContentEnabled -JcrContentJcrDescription $JcrContentJcrDescription -JcrContentJcrLastModified $JcrContentJcrLastModified -JcrContentJcrLastModifiedBy $JcrContentJcrLastModifiedBy -JcrContentJcrMixinTypes $JcrContentJcrMixinTypes -JcrContentJcrTitle $JcrContentJcrTitle -JcrContentLogLevel $JcrContentLogLevel -JcrContentNoStatusUpdate $JcrContentNoStatusUpdate -JcrContentNoVersioning $JcrContentNoVersioning -JcrContentProtocolConnectTimeout $JcrContentProtocolConnectTimeout -JcrContentProtocolHTTPConnectionClosed $JcrContentProtocolHTTPConnectionClosed -JcrContentProtocolHTTPExpired $JcrContentProtocolHTTPExpired -JcrContentProtocolHTTPHeaders $JcrContentProtocolHTTPHeaders -JcrContentProtocolHTTPHeadersTypeHint $JcrContentProtocolHTTPHeadersTypeHint -JcrContentProtocolHTTPMethod $JcrContentProtocolHTTPMethod -JcrContentProtocolHTTPSRelaxed $JcrContentProtocolHTTPSRelaxed -JcrContentProtocolInterface $JcrContentProtocolInterface -JcrContentProtocolSocketTimeout $JcrContentProtocolSocketTimeout -JcrContentProtocolVersion $JcrContentProtocolVersion -JcrContentProxyNTLMDomain $JcrContentProxyNTLMDomain -JcrContentProxyNTLMHost $JcrContentProxyNTLMHost -JcrContentProxyHost $JcrContentProxyHost -JcrContentProxyPassword $JcrContentProxyPassword -JcrContentProxyPort $JcrContentProxyPort -JcrContentProxyUser $JcrContentProxyUser -JcrContentQueueBatchMaxSize $JcrContentQueueBatchMaxSize -JcrContentQueueBatchMode $JcrContentQueueBatchMode -JcrContentQueueBatchWaitTime $JcrContentQueueBatchWaitTime -JcrContentRetryDelay $JcrContentRetryDelay -JcrContentReverseReplication $JcrContentReverseReplication -JcrContentSerializationType $JcrContentSerializationType -JcrContentSlingResourceType $JcrContentSlingResourceType -JcrContentSsl $JcrContentSsl -JcrContentTransportNTLMDomain $JcrContentTransportNTLMDomain -JcrContentTransportNTLMHost $JcrContentTransportNTLMHost -JcrContentTransportPassword $JcrContentTransportPassword -JcrContentTransportUri $JcrContentTransportUri -JcrContentTransportUser $JcrContentTransportUser -JcrContentTriggerDistribute $JcrContentTriggerDistribute -JcrContentTriggerModified $JcrContentTriggerModified -JcrContentTriggerOnOffTime $JcrContentTriggerOnOffTime -JcrContentTriggerReceive $JcrContentTriggerReceive -JcrContentTriggerSpecific $JcrContentTriggerSpecific -JcrContentUserId $JcrContentUserId -JcrPrimaryType $JcrPrimaryType -Operation $Operation
 } catch {
-    Write-Host ("Exception occured when calling Submit-Agent: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Submit-Agent: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -749,55 +751,56 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **Runmode** | **String**|  | 
  **Name** | **String**|  | 
- **JcrcontentCqdistribute** | **Boolean**|  | [optional] 
- **JcrcontentCqdistributeTypeHint** | **String**|  | [optional] 
- **JcrcontentCqname** | **String**|  | [optional] 
- **JcrcontentCqtemplate** | **String**|  | [optional] 
- **JcrcontentEnabled** | **Boolean**|  | [optional] 
- **JcrcontentJcrdescription** | **String**|  | [optional] 
- **JcrcontentJcrlastModified** | **String**|  | [optional] 
- **JcrcontentJcrlastModifiedBy** | **String**|  | [optional] 
- **JcrcontentJcrmixinTypes** | **String**|  | [optional] 
- **JcrcontentJcrtitle** | **String**|  | [optional] 
- **JcrcontentLogLevel** | **String**|  | [optional] 
- **JcrcontentNoStatusUpdate** | **Boolean**|  | [optional] 
- **JcrcontentNoVersioning** | **Boolean**|  | [optional] 
- **JcrcontentProtocolConnectTimeout** | **Decimal**|  | [optional] 
- **JcrcontentProtocolHTTPConnectionClosed** | **Boolean**|  | [optional] 
- **JcrcontentProtocolHTTPExpired** | **String**|  | [optional] 
- **JcrcontentProtocolHTTPHeaders** | [**String[]**](String.md)|  | [optional] 
- **JcrcontentProtocolHTTPHeadersTypeHint** | **String**|  | [optional] 
- **JcrcontentProtocolHTTPMethod** | **String**|  | [optional] 
- **JcrcontentProtocolHTTPSRelaxed** | **Boolean**|  | [optional] 
- **JcrcontentProtocolInterface** | **String**|  | [optional] 
- **JcrcontentProtocolSocketTimeout** | **Decimal**|  | [optional] 
- **JcrcontentProtocolVersion** | **String**|  | [optional] 
- **JcrcontentProxyNTLMDomain** | **String**|  | [optional] 
- **JcrcontentProxyNTLMHost** | **String**|  | [optional] 
- **JcrcontentProxyHost** | **String**|  | [optional] 
- **JcrcontentProxyPassword** | **String**|  | [optional] 
- **JcrcontentProxyPort** | **Decimal**|  | [optional] 
- **JcrcontentProxyUser** | **String**|  | [optional] 
- **JcrcontentQueueBatchMaxSize** | **Decimal**|  | [optional] 
- **JcrcontentQueueBatchMode** | **String**|  | [optional] 
- **JcrcontentQueueBatchWaitTime** | **Decimal**|  | [optional] 
- **JcrcontentRetryDelay** | **String**|  | [optional] 
- **JcrcontentReverseReplication** | **Boolean**|  | [optional] 
- **JcrcontentSerializationType** | **String**|  | [optional] 
- **JcrcontentSlingresourceType** | **String**|  | [optional] 
- **JcrcontentSsl** | **String**|  | [optional] 
- **JcrcontentTransportNTLMDomain** | **String**|  | [optional] 
- **JcrcontentTransportNTLMHost** | **String**|  | [optional] 
- **JcrcontentTransportPassword** | **String**|  | [optional] 
- **JcrcontentTransportUri** | **String**|  | [optional] 
- **JcrcontentTransportUser** | **String**|  | [optional] 
- **JcrcontentTriggerDistribute** | **Boolean**|  | [optional] 
- **JcrcontentTriggerModified** | **Boolean**|  | [optional] 
- **JcrcontentTriggerOnOffTime** | **Boolean**|  | [optional] 
- **JcrcontentTriggerReceive** | **Boolean**|  | [optional] 
- **JcrcontentTriggerSpecific** | **Boolean**|  | [optional] 
- **JcrcontentUserId** | **String**|  | [optional] 
- **JcrprimaryType** | **String**|  | [optional] 
+ **JcrContentCqDistribute** | **Boolean**|  | [optional] 
+ **JcrContentCqDistributeTypeHint** | **String**|  | [optional] 
+ **JcrContentCqName** | **String**|  | [optional] 
+ **JcrContentCqTemplate** | **String**|  | [optional] 
+ **JcrContentAliasUpdate** | **Boolean**|  | [optional] 
+ **JcrContentEnabled** | **Boolean**|  | [optional] 
+ **JcrContentJcrDescription** | **String**|  | [optional] 
+ **JcrContentJcrLastModified** | **String**|  | [optional] 
+ **JcrContentJcrLastModifiedBy** | **String**|  | [optional] 
+ **JcrContentJcrMixinTypes** | **String**|  | [optional] 
+ **JcrContentJcrTitle** | **String**|  | [optional] 
+ **JcrContentLogLevel** | **String**|  | [optional] 
+ **JcrContentNoStatusUpdate** | **Boolean**|  | [optional] 
+ **JcrContentNoVersioning** | **Boolean**|  | [optional] 
+ **JcrContentProtocolConnectTimeout** | **Decimal**|  | [optional] 
+ **JcrContentProtocolHTTPConnectionClosed** | **Boolean**|  | [optional] 
+ **JcrContentProtocolHTTPExpired** | **String**|  | [optional] 
+ **JcrContentProtocolHTTPHeaders** | [**String[]**](String.md)|  | [optional] 
+ **JcrContentProtocolHTTPHeadersTypeHint** | **String**|  | [optional] 
+ **JcrContentProtocolHTTPMethod** | **String**|  | [optional] 
+ **JcrContentProtocolHTTPSRelaxed** | **Boolean**|  | [optional] 
+ **JcrContentProtocolInterface** | **String**|  | [optional] 
+ **JcrContentProtocolSocketTimeout** | **Decimal**|  | [optional] 
+ **JcrContentProtocolVersion** | **String**|  | [optional] 
+ **JcrContentProxyNTLMDomain** | **String**|  | [optional] 
+ **JcrContentProxyNTLMHost** | **String**|  | [optional] 
+ **JcrContentProxyHost** | **String**|  | [optional] 
+ **JcrContentProxyPassword** | **String**|  | [optional] 
+ **JcrContentProxyPort** | **Decimal**|  | [optional] 
+ **JcrContentProxyUser** | **String**|  | [optional] 
+ **JcrContentQueueBatchMaxSize** | **Decimal**|  | [optional] 
+ **JcrContentQueueBatchMode** | **String**|  | [optional] 
+ **JcrContentQueueBatchWaitTime** | **Decimal**|  | [optional] 
+ **JcrContentRetryDelay** | **String**|  | [optional] 
+ **JcrContentReverseReplication** | **Boolean**|  | [optional] 
+ **JcrContentSerializationType** | **String**|  | [optional] 
+ **JcrContentSlingResourceType** | **String**|  | [optional] 
+ **JcrContentSsl** | **String**|  | [optional] 
+ **JcrContentTransportNTLMDomain** | **String**|  | [optional] 
+ **JcrContentTransportNTLMHost** | **String**|  | [optional] 
+ **JcrContentTransportPassword** | **String**|  | [optional] 
+ **JcrContentTransportUri** | **String**|  | [optional] 
+ **JcrContentTransportUser** | **String**|  | [optional] 
+ **JcrContentTriggerDistribute** | **Boolean**|  | [optional] 
+ **JcrContentTriggerModified** | **Boolean**|  | [optional] 
+ **JcrContentTriggerOnOffTime** | **Boolean**|  | [optional] 
+ **JcrContentTriggerReceive** | **Boolean**|  | [optional] 
+ **JcrContentTriggerSpecific** | **Boolean**|  | [optional] 
+ **JcrContentUserId** | **String**|  | [optional] 
+ **JcrPrimaryType** | **String**|  | [optional] 
  **Operation** | **String**|  | [optional] 
 
 ### Return type
@@ -815,7 +818,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-AuthorizableKeystore"></a>
+<a id="Submit-AuthorizableKeystore"></a>
 # **Submit-AuthorizableKeystore**
 > KeystoreInfo Submit-AuthorizableKeystore<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-IntermediatePath] <String><br>
@@ -861,7 +864,7 @@ $KeyStore =  # System.IO.FileInfo |  (optional)
 try {
     $Result = Submit-AuthorizableKeystore -IntermediatePath $IntermediatePath -AuthorizableId $AuthorizableId -Operation $Operation -CurrentPassword $CurrentPassword -NewPassword $NewPassword -RePassword $RePassword -KeyPassword $KeyPassword -KeyStorePass $KeyStorePass -Alias $Alias -NewAlias $NewAlias -RemoveAlias $RemoveAlias -CertChain $CertChain -Pk $Pk -KeyStore $KeyStore
 } catch {
-    Write-Host ("Exception occured when calling Submit-AuthorizableKeystore: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Submit-AuthorizableKeystore: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -900,14 +903,14 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-Authorizables"></a>
+<a id="Submit-Authorizables"></a>
 # **Submit-Authorizables**
 > String Submit-Authorizables<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-AuthorizableId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-IntermediatePath] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreateUser] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreateGroup] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Reppassword] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-RepPassword] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ProfileGivenName] <String><br>
 
 
@@ -924,13 +927,13 @@ $AuthorizableId = "MyAuthorizableId" # String |
 $IntermediatePath = "MyIntermediatePath" # String | 
 $CreateUser = "MyCreateUser" # String |  (optional)
 $CreateGroup = "MyCreateGroup" # String |  (optional)
-$Reppassword = "MyReppassword" # String |  (optional)
+$RepPassword = "MyRepPassword" # String |  (optional)
 $ProfileGivenName = "MyProfileGivenName" # String |  (optional)
 
 try {
-    $Result = Submit-Authorizables -AuthorizableId $AuthorizableId -IntermediatePath $IntermediatePath -CreateUser $CreateUser -CreateGroup $CreateGroup -Reppassword $Reppassword -ProfileGivenName $ProfileGivenName
+    $Result = Submit-Authorizables -AuthorizableId $AuthorizableId -IntermediatePath $IntermediatePath -CreateUser $CreateUser -CreateGroup $CreateGroup -RepPassword $RepPassword -ProfileGivenName $ProfileGivenName
 } catch {
-    Write-Host ("Exception occured when calling Submit-Authorizables: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Submit-Authorizables: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -943,7 +946,7 @@ Name | Type | Description  | Notes
  **IntermediatePath** | **String**|  | 
  **CreateUser** | **String**|  | [optional] 
  **CreateGroup** | **String**|  | [optional] 
- **Reppassword** | **String**|  | [optional] 
+ **RepPassword** | **String**|  | [optional] 
  **ProfileGivenName** | **String**|  | [optional] 
 
 ### Return type
@@ -961,7 +964,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-ConfigAdobeGraniteSamlAuthenticationHandler"></a>
+<a id="Submit-ConfigAdobeGraniteSamlAuthenticationHandler"></a>
 # **Submit-ConfigAdobeGraniteSamlAuthenticationHandler**
 > void Submit-ConfigAdobeGraniteSamlAuthenticationHandler<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-KeyStorePassword] <String><br>
@@ -1075,7 +1078,7 @@ $UserIntermediatePathTypeHint = "MyUserIntermediatePathTypeHint" # String |  (op
 try {
     $Result = Submit-ConfigAdobeGraniteSamlAuthenticationHandler -KeyStorePassword $KeyStorePassword -KeyStorePasswordTypeHint $KeyStorePasswordTypeHint -ServiceRanking $ServiceRanking -ServiceRankingTypeHint $ServiceRankingTypeHint -IdpHttpRedirect $IdpHttpRedirect -IdpHttpRedirectTypeHint $IdpHttpRedirectTypeHint -CreateUser $CreateUser -CreateUserTypeHint $CreateUserTypeHint -DefaultRedirectUrl $DefaultRedirectUrl -DefaultRedirectUrlTypeHint $DefaultRedirectUrlTypeHint -UserIDAttribute $UserIDAttribute -UserIDAttributeTypeHint $UserIDAttributeTypeHint -DefaultGroups $DefaultGroups -DefaultGroupsTypeHint $DefaultGroupsTypeHint -IdpCertAlias $IdpCertAlias -IdpCertAliasTypeHint $IdpCertAliasTypeHint -AddGroupMemberships $AddGroupMemberships -AddGroupMembershipsTypeHint $AddGroupMembershipsTypeHint -Path $Path -PathTypeHint $PathTypeHint -SynchronizeAttributes $SynchronizeAttributes -SynchronizeAttributesTypeHint $SynchronizeAttributesTypeHint -ClockTolerance $ClockTolerance -ClockToleranceTypeHint $ClockToleranceTypeHint -GroupMembershipAttribute $GroupMembershipAttribute -GroupMembershipAttributeTypeHint $GroupMembershipAttributeTypeHint -IdpUrl $IdpUrl -IdpUrlTypeHint $IdpUrlTypeHint -LogoutUrl $LogoutUrl -LogoutUrlTypeHint $LogoutUrlTypeHint -ServiceProviderEntityId $ServiceProviderEntityId -ServiceProviderEntityIdTypeHint $ServiceProviderEntityIdTypeHint -AssertionConsumerServiceURL $AssertionConsumerServiceURL -AssertionConsumerServiceURLTypeHint $AssertionConsumerServiceURLTypeHint -HandleLogout $HandleLogout -HandleLogoutTypeHint $HandleLogoutTypeHint -SpPrivateKeyAlias $SpPrivateKeyAlias -SpPrivateKeyAliasTypeHint $SpPrivateKeyAliasTypeHint -UseEncryption $UseEncryption -UseEncryptionTypeHint $UseEncryptionTypeHint -NameIdFormat $NameIdFormat -NameIdFormatTypeHint $NameIdFormatTypeHint -DigestMethod $DigestMethod -DigestMethodTypeHint $DigestMethodTypeHint -SignatureMethod $SignatureMethod -SignatureMethodTypeHint $SignatureMethodTypeHint -UserIntermediatePath $UserIntermediatePath -UserIntermediatePathTypeHint $UserIntermediatePathTypeHint
 } catch {
-    Write-Host ("Exception occured when calling Submit-ConfigAdobeGraniteSamlAuthenticationHandler: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Submit-ConfigAdobeGraniteSamlAuthenticationHandler: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -1148,7 +1151,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-ConfigApacheFelixJettyBasedHttpService"></a>
+<a id="Submit-ConfigApacheFelixJettyBasedHttpService"></a>
 # **Submit-ConfigApacheFelixJettyBasedHttpService**
 > void Submit-ConfigApacheFelixJettyBasedHttpService<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-OrgApacheFelixHttpsNio] <System.Nullable[Boolean]><br>
@@ -1206,7 +1209,7 @@ $OrgOsgiServiceHttpPortSecureTypeHint = "MyOrgOsgiServiceHttpPortSecureTypeHint"
 try {
     $Result = Submit-ConfigApacheFelixJettyBasedHttpService -OrgApacheFelixHttpsNio $OrgApacheFelixHttpsNio -OrgApacheFelixHttpsNioTypeHint $OrgApacheFelixHttpsNioTypeHint -OrgApacheFelixHttpsKeystore $OrgApacheFelixHttpsKeystore -OrgApacheFelixHttpsKeystoreTypeHint $OrgApacheFelixHttpsKeystoreTypeHint -OrgApacheFelixHttpsKeystorePassword $OrgApacheFelixHttpsKeystorePassword -OrgApacheFelixHttpsKeystorePasswordTypeHint $OrgApacheFelixHttpsKeystorePasswordTypeHint -OrgApacheFelixHttpsKeystoreKey $OrgApacheFelixHttpsKeystoreKey -OrgApacheFelixHttpsKeystoreKeyTypeHint $OrgApacheFelixHttpsKeystoreKeyTypeHint -OrgApacheFelixHttpsKeystoreKeyPassword $OrgApacheFelixHttpsKeystoreKeyPassword -OrgApacheFelixHttpsKeystoreKeyPasswordTypeHint $OrgApacheFelixHttpsKeystoreKeyPasswordTypeHint -OrgApacheFelixHttpsTruststore $OrgApacheFelixHttpsTruststore -OrgApacheFelixHttpsTruststoreTypeHint $OrgApacheFelixHttpsTruststoreTypeHint -OrgApacheFelixHttpsTruststorePassword $OrgApacheFelixHttpsTruststorePassword -OrgApacheFelixHttpsTruststorePasswordTypeHint $OrgApacheFelixHttpsTruststorePasswordTypeHint -OrgApacheFelixHttpsClientcertificate $OrgApacheFelixHttpsClientcertificate -OrgApacheFelixHttpsClientcertificateTypeHint $OrgApacheFelixHttpsClientcertificateTypeHint -OrgApacheFelixHttpsEnable $OrgApacheFelixHttpsEnable -OrgApacheFelixHttpsEnableTypeHint $OrgApacheFelixHttpsEnableTypeHint -OrgOsgiServiceHttpPortSecure $OrgOsgiServiceHttpPortSecure -OrgOsgiServiceHttpPortSecureTypeHint $OrgOsgiServiceHttpPortSecureTypeHint
 } catch {
-    Write-Host ("Exception occured when calling Submit-ConfigApacheFelixJettyBasedHttpService: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Submit-ConfigApacheFelixJettyBasedHttpService: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -1251,7 +1254,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-ConfigApacheHttpComponentsProxyConfiguration"></a>
+<a id="Submit-ConfigApacheHttpComponentsProxyConfiguration"></a>
 # **Submit-ConfigApacheHttpComponentsProxyConfiguration**
 > void Submit-ConfigApacheHttpComponentsProxyConfiguration<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ProxyHost] <String><br>
@@ -1293,7 +1296,7 @@ $ProxyPasswordTypeHint = "MyProxyPasswordTypeHint" # String |  (optional)
 try {
     $Result = Submit-ConfigApacheHttpComponentsProxyConfiguration -ProxyHost $ProxyHost -ProxyHostTypeHint $ProxyHostTypeHint -ProxyPort $ProxyPort -ProxyPortTypeHint $ProxyPortTypeHint -ProxyExceptions $ProxyExceptions -ProxyExceptionsTypeHint $ProxyExceptionsTypeHint -ProxyEnabled $ProxyEnabled -ProxyEnabledTypeHint $ProxyEnabledTypeHint -ProxyUser $ProxyUser -ProxyUserTypeHint $ProxyUserTypeHint -ProxyPassword $ProxyPassword -ProxyPasswordTypeHint $ProxyPasswordTypeHint
 } catch {
-    Write-Host ("Exception occured when calling Submit-ConfigApacheHttpComponentsProxyConfiguration: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Submit-ConfigApacheHttpComponentsProxyConfiguration: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -1330,7 +1333,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-ConfigApacheSlingDavExServlet"></a>
+<a id="Submit-ConfigApacheSlingDavExServlet"></a>
 # **Submit-ConfigApacheSlingDavExServlet**
 > void Submit-ConfigApacheSlingDavExServlet<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Alias] <String><br>
@@ -1356,7 +1359,7 @@ $DavCreateAbsoluteUriTypeHint = "MyDavCreateAbsoluteUriTypeHint" # String |  (op
 try {
     $Result = Submit-ConfigApacheSlingDavExServlet -Alias $Alias -AliasTypeHint $AliasTypeHint -DavCreateAbsoluteUri $DavCreateAbsoluteUri -DavCreateAbsoluteUriTypeHint $DavCreateAbsoluteUriTypeHint
 } catch {
-    Write-Host ("Exception occured when calling Submit-ConfigApacheSlingDavExServlet: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Submit-ConfigApacheSlingDavExServlet: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -1385,7 +1388,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-ConfigApacheSlingGetServlet"></a>
+<a id="Submit-ConfigApacheSlingGetServlet"></a>
 # **Submit-ConfigApacheSlingGetServlet**
 > void Submit-ConfigApacheSlingGetServlet<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JsonMaximumresults] <String><br>
@@ -1419,7 +1422,7 @@ $EnableXmlTypeHint = "MyEnableXmlTypeHint" # String |  (optional)
 try {
     $Result = Submit-ConfigApacheSlingGetServlet -JsonMaximumresults $JsonMaximumresults -JsonMaximumresultsTypeHint $JsonMaximumresultsTypeHint -EnableHtml $EnableHtml -EnableHtmlTypeHint $EnableHtmlTypeHint -EnableTxt $EnableTxt -EnableTxtTypeHint $EnableTxtTypeHint -EnableXml $EnableXml -EnableXmlTypeHint $EnableXmlTypeHint
 } catch {
-    Write-Host ("Exception occured when calling Submit-ConfigApacheSlingGetServlet: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Submit-ConfigApacheSlingGetServlet: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -1452,7 +1455,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-ConfigApacheSlingReferrerFilter"></a>
+<a id="Submit-ConfigApacheSlingReferrerFilter"></a>
 # **Submit-ConfigApacheSlingReferrerFilter**
 > void Submit-ConfigApacheSlingReferrerFilter<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-AllowEmpty] <System.Nullable[Boolean]><br>
@@ -1486,7 +1489,7 @@ $FilterMethodsTypeHint = "MyFilterMethodsTypeHint" # String |  (optional)
 try {
     $Result = Submit-ConfigApacheSlingReferrerFilter -AllowEmpty $AllowEmpty -AllowEmptyTypeHint $AllowEmptyTypeHint -AllowHosts $AllowHosts -AllowHostsTypeHint $AllowHostsTypeHint -AllowHostsRegexp $AllowHostsRegexp -AllowHostsRegexpTypeHint $AllowHostsRegexpTypeHint -FilterMethods $FilterMethods -FilterMethodsTypeHint $FilterMethodsTypeHint
 } catch {
-    Write-Host ("Exception occured when calling Submit-ConfigApacheSlingReferrerFilter: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Submit-ConfigApacheSlingReferrerFilter: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -1519,7 +1522,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-ConfigProperty"></a>
+<a id="Submit-ConfigProperty"></a>
 # **Submit-ConfigProperty**
 > void Submit-ConfigProperty<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ConfigNodeName] <String><br>
@@ -1539,7 +1542,7 @@ $ConfigNodeName = "MyConfigNodeName" # String |
 try {
     $Result = Submit-ConfigProperty -ConfigNodeName $ConfigNodeName
 } catch {
-    Write-Host ("Exception occured when calling Submit-ConfigProperty: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Submit-ConfigProperty: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -1565,7 +1568,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-Node"></a>
+<a id="Submit-Node"></a>
 # **Submit-Node**
 > void Submit-Node<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Path] <String><br>
@@ -1593,7 +1596,7 @@ $File =  # System.IO.FileInfo |  (optional)
 try {
     $Result = Submit-Node -Path $Path -Name $Name -Operation $Operation -DeleteAuthorizable $DeleteAuthorizable -File $File
 } catch {
-    Write-Host ("Exception occured when calling Submit-Node: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Submit-Node: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -1623,7 +1626,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-NodeRw"></a>
+<a id="Submit-NodeRw"></a>
 # **Submit-NodeRw**
 > void Submit-NodeRw<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Path] <String><br>
@@ -1647,7 +1650,7 @@ $AddMembers = "MyAddMembers" # String |  (optional)
 try {
     $Result = Submit-NodeRw -Path $Path -Name $Name -AddMembers $AddMembers
 } catch {
-    Write-Host ("Exception occured when calling Submit-NodeRw: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Submit-NodeRw: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -1675,11 +1678,11 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-Path"></a>
+<a id="Submit-Path"></a>
 # **Submit-Path**
 > void Submit-Path<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Path] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrprimaryType] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-JcrPrimaryType] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Name] <String><br>
 
 
@@ -1693,13 +1696,13 @@ $Configuration.Username = "YOUR_USERNAME"
 $Configuration.Password = "YOUR_PASSWORD"
 
 $Path = "MyPath" # String | 
-$JcrprimaryType = "MyJcrprimaryType" # String | 
+$JcrPrimaryType = "MyJcrPrimaryType" # String | 
 $Name = "MyName" # String | 
 
 try {
-    $Result = Submit-Path -Path $Path -JcrprimaryType $JcrprimaryType -Name $Name
+    $Result = Submit-Path -Path $Path -JcrPrimaryType $JcrPrimaryType -Name $Name
 } catch {
-    Write-Host ("Exception occured when calling Submit-Path: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Submit-Path: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -1709,7 +1712,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **Path** | **String**|  | 
- **JcrprimaryType** | **String**|  | 
+ **JcrPrimaryType** | **String**|  | 
  **Name** | **String**|  | 
 
 ### Return type
@@ -1727,7 +1730,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-Query"></a>
+<a id="Submit-Query"></a>
 # **Submit-Query**
 > String Submit-Query<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Path] <String><br>
@@ -1753,7 +1756,7 @@ $Var1PropertyValue = "MyVar1PropertyValue" # String |
 try {
     $Result = Submit-Query -Path $Path -PLimit $PLimit -Var1Property $Var1Property -Var1PropertyValue $Var1PropertyValue
 } catch {
-    Write-Host ("Exception occured when calling Submit-Query: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Submit-Query: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -1782,12 +1785,13 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-TreeActivation"></a>
+<a id="Submit-TreeActivation"></a>
 # **Submit-TreeActivation**
 > void Submit-TreeActivation<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Ignoredeactivated] <Boolean><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Onlymodified] <Boolean><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Path] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Cmd] <String><br>
 
 
 
@@ -1802,11 +1806,12 @@ $Configuration.Password = "YOUR_PASSWORD"
 $Ignoredeactivated = $true # Boolean | 
 $Onlymodified = $true # Boolean | 
 $Path = "MyPath" # String | 
+$Cmd = "MyCmd" # String |  (default to "activate")
 
 try {
-    $Result = Submit-TreeActivation -Ignoredeactivated $Ignoredeactivated -Onlymodified $Onlymodified -Path $Path
+    $Result = Submit-TreeActivation -Ignoredeactivated $Ignoredeactivated -Onlymodified $Onlymodified -Path $Path -Cmd $Cmd
 } catch {
-    Write-Host ("Exception occured when calling Submit-TreeActivation: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Submit-TreeActivation: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -1818,6 +1823,7 @@ Name | Type | Description  | Notes
  **Ignoredeactivated** | **Boolean**|  | 
  **Onlymodified** | **Boolean**|  | 
  **Path** | **String**|  | 
+ **Cmd** | **String**|  | [default to &quot;activate&quot;]
 
 ### Return type
 
@@ -1834,7 +1840,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-Truststore"></a>
+<a id="Submit-Truststore"></a>
 # **Submit-Truststore**
 > String Submit-Truststore<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Operation] <String><br>
@@ -1864,7 +1870,7 @@ $Certificate =  # System.IO.FileInfo |  (optional)
 try {
     $Result = Submit-Truststore -Operation $Operation -NewPassword $NewPassword -RePassword $RePassword -KeyStoreType $KeyStoreType -RemoveAlias $RemoveAlias -Certificate $Certificate
 } catch {
-    Write-Host ("Exception occured when calling Submit-Truststore: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Submit-Truststore: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```
@@ -1895,7 +1901,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="Submit-TruststorePKCS12"></a>
+<a id="Submit-TruststorePKCS12"></a>
 # **Submit-TruststorePKCS12**
 > String Submit-TruststorePKCS12<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-TruststoreP12] <System.IO.FileInfo><br>
@@ -1915,7 +1921,7 @@ $TruststoreP12 =  # System.IO.FileInfo |  (optional)
 try {
     $Result = Submit-TruststorePKCS12 -TruststoreP12 $TruststoreP12
 } catch {
-    Write-Host ("Exception occured when calling Submit-TruststorePKCS12: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Exception occurred when calling Submit-TruststorePKCS12: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
 }
 ```

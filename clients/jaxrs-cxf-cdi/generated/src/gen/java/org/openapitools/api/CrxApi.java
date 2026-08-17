@@ -1,6 +1,5 @@
 package org.openapitools.api;
 
-import java.io.File;
 import org.openapitools.model.InstallStatus;
 import org.openapitools.api.CrxApiService;
 
@@ -21,13 +20,14 @@ import org.apache.cxf.jaxrs.ext.multipart.Multipart;
 import java.util.Map;
 import java.util.List;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 @Path("/crx")
 @RequestScoped
 
-@Api(description = "the crx API")
+@Api
 
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSCXFCDIServerCodegen", date = "2021-09-03T15:25:48.597+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSCXFCDIServerCodegen", date = "2026-08-17T02:15:31.267227214Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 
 public class CrxApi  {
 
@@ -105,8 +105,8 @@ public class CrxApi  {
          }, tags={ "crx" })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Default response", response = String.class) })
-    public Response postPackageServiceJson(@ApiParam(value = "",required=true) @PathParam("path") String path,  @NotNull @ApiParam(value = "",required=true)  @QueryParam("cmd") String cmd, @ApiParam(value = "")  @QueryParam("groupName") String groupName, @ApiParam(value = "")  @QueryParam("packageName") String packageName, @ApiParam(value = "")  @QueryParam("packageVersion") String packageVersion, @ApiParam(value = "")  @QueryParam("_charset_") String charset, @ApiParam(value = "")  @QueryParam("force") Boolean force, @ApiParam(value = "")  @QueryParam("recursive") Boolean recursive,  @Multipart(value = "package", required = false) InputStream _packageInputStream, @Multipart(value = "package" , required = false) Attachment _packageDetail) {
-        return delegate.postPackageServiceJson(path, cmd, groupName, packageName, packageVersion, charset, force, recursive, _packageInputStream, _packageDetail, securityContext);
+    public Response postPackageServiceJson(@ApiParam(value = "",required=true) @PathParam("path") String path,  @NotNull @ApiParam(value = "",required=true)  @QueryParam("cmd") String cmd, @ApiParam(value = "")  @QueryParam("groupName") String groupName, @ApiParam(value = "")  @QueryParam("packageName") String packageName, @ApiParam(value = "")  @QueryParam("packageVersion") String packageVersion, @ApiParam(value = "")  @QueryParam("_charset_") String charset, @ApiParam(value = "")  @QueryParam("force") Boolean force, @ApiParam(value = "")  @QueryParam("recursive") Boolean recursive,  @Multipart(value = "package" , required = false) Attachment _packageDetail) {
+        return delegate.postPackageServiceJson(path, cmd, groupName, packageName, packageVersion, charset, force, recursive, _packageDetail, securityContext);
     }
 
     @POST

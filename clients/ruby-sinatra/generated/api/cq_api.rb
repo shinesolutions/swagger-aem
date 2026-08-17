@@ -4,9 +4,9 @@ require 'json'
 MyApp.add_route('GET', '/libs/granite/core/content/login.html', {
   "resourcePath" => "/Cq",
   "summary" => "",
-  "nickname" => "get_login_page", 
+  "nickname" => "get_login_page",
   "responseClass" => "String",
-  "endpoint" => "/libs/granite/core/content/login.html", 
+  "endpoint" => "/libs/granite/core/content/login.html",
   "notes" => "",
   "parameters" => [
     ]}) do
@@ -20,9 +20,9 @@ end
 MyApp.add_route('POST', '/.cqactions.html', {
   "resourcePath" => "/Cq",
   "summary" => "",
-  "nickname" => "post_cq_actions", 
+  "nickname" => "post_cq_actions",
   "responseClass" => "void",
-  "endpoint" => "/.cqactions.html", 
+  "endpoint" => "/.cqactions.html",
   "notes" => "",
   "parameters" => [
     {

@@ -1,96 +1,105 @@
 package org.openapitools.model;
 
+import java.net.URI;
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import org.openapitools.model.SamlConfigurationPropertyItemsArray;
 import org.openapitools.model.SamlConfigurationPropertyItemsBoolean;
 import org.openapitools.model.SamlConfigurationPropertyItemsLong;
 import org.openapitools.model.SamlConfigurationPropertyItemsString;
+import org.springframework.lang.Nullable;
 import org.openapitools.jackson.nullable.JsonNullable;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+import java.time.OffsetDateTime;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+
+import java.util.*;
+import jakarta.annotation.Generated;
 
 /**
  * SamlConfigurationProperties
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-09-03T15:28:35.636+10:00[Australia/Melbourne]")
-public class SamlConfigurationProperties   {
-  @JsonProperty("path")
-  private SamlConfigurationPropertyItemsArray path;
 
-  @JsonProperty("service.ranking")
-  private SamlConfigurationPropertyItemsLong serviceRanking;
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-08-17T02:18:23.350215970Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+public class SamlConfigurationProperties {
 
-  @JsonProperty("idpUrl")
-  private SamlConfigurationPropertyItemsString idpUrl;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable SamlConfigurationPropertyItemsArray path;
 
-  @JsonProperty("idpCertAlias")
-  private SamlConfigurationPropertyItemsString idpCertAlias;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable SamlConfigurationPropertyItemsLong serviceRanking;
 
-  @JsonProperty("idpHttpRedirect")
-  private SamlConfigurationPropertyItemsBoolean idpHttpRedirect;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable SamlConfigurationPropertyItemsString idpUrl;
 
-  @JsonProperty("serviceProviderEntityId")
-  private SamlConfigurationPropertyItemsString serviceProviderEntityId;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable SamlConfigurationPropertyItemsString idpCertAlias;
 
-  @JsonProperty("assertionConsumerServiceURL")
-  private SamlConfigurationPropertyItemsString assertionConsumerServiceURL;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable SamlConfigurationPropertyItemsBoolean idpHttpRedirect;
 
-  @JsonProperty("spPrivateKeyAlias")
-  private SamlConfigurationPropertyItemsString spPrivateKeyAlias;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable SamlConfigurationPropertyItemsString serviceProviderEntityId;
 
-  @JsonProperty("keyStorePassword")
-  private SamlConfigurationPropertyItemsString keyStorePassword;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable SamlConfigurationPropertyItemsString assertionConsumerServiceURL;
 
-  @JsonProperty("defaultRedirectUrl")
-  private SamlConfigurationPropertyItemsString defaultRedirectUrl;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable SamlConfigurationPropertyItemsString spPrivateKeyAlias;
 
-  @JsonProperty("userIDAttribute")
-  private SamlConfigurationPropertyItemsString userIDAttribute;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable SamlConfigurationPropertyItemsString keyStorePassword;
 
-  @JsonProperty("useEncryption")
-  private SamlConfigurationPropertyItemsBoolean useEncryption;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable SamlConfigurationPropertyItemsString defaultRedirectUrl;
 
-  @JsonProperty("createUser")
-  private SamlConfigurationPropertyItemsBoolean createUser;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable SamlConfigurationPropertyItemsString userIDAttribute;
 
-  @JsonProperty("addGroupMemberships")
-  private SamlConfigurationPropertyItemsBoolean addGroupMemberships;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable SamlConfigurationPropertyItemsBoolean useEncryption;
 
-  @JsonProperty("groupMembershipAttribute")
-  private SamlConfigurationPropertyItemsString groupMembershipAttribute;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable SamlConfigurationPropertyItemsBoolean createUser;
 
-  @JsonProperty("defaultGroups")
-  private SamlConfigurationPropertyItemsArray defaultGroups;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable SamlConfigurationPropertyItemsBoolean addGroupMemberships;
 
-  @JsonProperty("nameIdFormat")
-  private SamlConfigurationPropertyItemsString nameIdFormat;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable SamlConfigurationPropertyItemsString groupMembershipAttribute;
 
-  @JsonProperty("synchronizeAttributes")
-  private SamlConfigurationPropertyItemsArray synchronizeAttributes;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable SamlConfigurationPropertyItemsArray defaultGroups;
 
-  @JsonProperty("handleLogout")
-  private SamlConfigurationPropertyItemsBoolean handleLogout;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable SamlConfigurationPropertyItemsString nameIdFormat;
 
-  @JsonProperty("logoutUrl")
-  private SamlConfigurationPropertyItemsString logoutUrl;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable SamlConfigurationPropertyItemsArray synchronizeAttributes;
 
-  @JsonProperty("clockTolerance")
-  private SamlConfigurationPropertyItemsLong clockTolerance;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable SamlConfigurationPropertyItemsBoolean handleLogout;
 
-  @JsonProperty("digestMethod")
-  private SamlConfigurationPropertyItemsString digestMethod;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable SamlConfigurationPropertyItemsString logoutUrl;
 
-  @JsonProperty("signatureMethod")
-  private SamlConfigurationPropertyItemsString signatureMethod;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable SamlConfigurationPropertyItemsLong clockTolerance;
 
-  @JsonProperty("userIntermediatePath")
-  private SamlConfigurationPropertyItemsString userIntermediatePath;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable SamlConfigurationPropertyItemsString digestMethod;
 
-  public SamlConfigurationProperties path(SamlConfigurationPropertyItemsArray path) {
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable SamlConfigurationPropertyItemsString signatureMethod;
+
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private @Nullable SamlConfigurationPropertyItemsString userIntermediatePath;
+
+  public SamlConfigurationProperties path(@Nullable SamlConfigurationPropertyItemsArray path) {
     this.path = path;
     return this;
   }
@@ -98,20 +107,20 @@ public class SamlConfigurationProperties   {
   /**
    * Get path
    * @return path
-  */
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public SamlConfigurationPropertyItemsArray getPath() {
+   */
+  @Valid 
+  @Schema(name = "path", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("path")
+  public @Nullable SamlConfigurationPropertyItemsArray getPath() {
     return path;
   }
 
-  public void setPath(SamlConfigurationPropertyItemsArray path) {
+  @JsonProperty("path")
+  public void setPath(@Nullable SamlConfigurationPropertyItemsArray path) {
     this.path = path;
   }
 
-  public SamlConfigurationProperties serviceRanking(SamlConfigurationPropertyItemsLong serviceRanking) {
+  public SamlConfigurationProperties serviceRanking(@Nullable SamlConfigurationPropertyItemsLong serviceRanking) {
     this.serviceRanking = serviceRanking;
     return this;
   }
@@ -119,20 +128,20 @@ public class SamlConfigurationProperties   {
   /**
    * Get serviceRanking
    * @return serviceRanking
-  */
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public SamlConfigurationPropertyItemsLong getServiceRanking() {
+   */
+  @Valid 
+  @Schema(name = "service.ranking", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("service.ranking")
+  public @Nullable SamlConfigurationPropertyItemsLong getServiceRanking() {
     return serviceRanking;
   }
 
-  public void setServiceRanking(SamlConfigurationPropertyItemsLong serviceRanking) {
+  @JsonProperty("service.ranking")
+  public void setServiceRanking(@Nullable SamlConfigurationPropertyItemsLong serviceRanking) {
     this.serviceRanking = serviceRanking;
   }
 
-  public SamlConfigurationProperties idpUrl(SamlConfigurationPropertyItemsString idpUrl) {
+  public SamlConfigurationProperties idpUrl(@Nullable SamlConfigurationPropertyItemsString idpUrl) {
     this.idpUrl = idpUrl;
     return this;
   }
@@ -140,20 +149,20 @@ public class SamlConfigurationProperties   {
   /**
    * Get idpUrl
    * @return idpUrl
-  */
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public SamlConfigurationPropertyItemsString getIdpUrl() {
+   */
+  @Valid 
+  @Schema(name = "idpUrl", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("idpUrl")
+  public @Nullable SamlConfigurationPropertyItemsString getIdpUrl() {
     return idpUrl;
   }
 
-  public void setIdpUrl(SamlConfigurationPropertyItemsString idpUrl) {
+  @JsonProperty("idpUrl")
+  public void setIdpUrl(@Nullable SamlConfigurationPropertyItemsString idpUrl) {
     this.idpUrl = idpUrl;
   }
 
-  public SamlConfigurationProperties idpCertAlias(SamlConfigurationPropertyItemsString idpCertAlias) {
+  public SamlConfigurationProperties idpCertAlias(@Nullable SamlConfigurationPropertyItemsString idpCertAlias) {
     this.idpCertAlias = idpCertAlias;
     return this;
   }
@@ -161,20 +170,20 @@ public class SamlConfigurationProperties   {
   /**
    * Get idpCertAlias
    * @return idpCertAlias
-  */
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public SamlConfigurationPropertyItemsString getIdpCertAlias() {
+   */
+  @Valid 
+  @Schema(name = "idpCertAlias", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("idpCertAlias")
+  public @Nullable SamlConfigurationPropertyItemsString getIdpCertAlias() {
     return idpCertAlias;
   }
 
-  public void setIdpCertAlias(SamlConfigurationPropertyItemsString idpCertAlias) {
+  @JsonProperty("idpCertAlias")
+  public void setIdpCertAlias(@Nullable SamlConfigurationPropertyItemsString idpCertAlias) {
     this.idpCertAlias = idpCertAlias;
   }
 
-  public SamlConfigurationProperties idpHttpRedirect(SamlConfigurationPropertyItemsBoolean idpHttpRedirect) {
+  public SamlConfigurationProperties idpHttpRedirect(@Nullable SamlConfigurationPropertyItemsBoolean idpHttpRedirect) {
     this.idpHttpRedirect = idpHttpRedirect;
     return this;
   }
@@ -182,20 +191,20 @@ public class SamlConfigurationProperties   {
   /**
    * Get idpHttpRedirect
    * @return idpHttpRedirect
-  */
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public SamlConfigurationPropertyItemsBoolean getIdpHttpRedirect() {
+   */
+  @Valid 
+  @Schema(name = "idpHttpRedirect", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("idpHttpRedirect")
+  public @Nullable SamlConfigurationPropertyItemsBoolean getIdpHttpRedirect() {
     return idpHttpRedirect;
   }
 
-  public void setIdpHttpRedirect(SamlConfigurationPropertyItemsBoolean idpHttpRedirect) {
+  @JsonProperty("idpHttpRedirect")
+  public void setIdpHttpRedirect(@Nullable SamlConfigurationPropertyItemsBoolean idpHttpRedirect) {
     this.idpHttpRedirect = idpHttpRedirect;
   }
 
-  public SamlConfigurationProperties serviceProviderEntityId(SamlConfigurationPropertyItemsString serviceProviderEntityId) {
+  public SamlConfigurationProperties serviceProviderEntityId(@Nullable SamlConfigurationPropertyItemsString serviceProviderEntityId) {
     this.serviceProviderEntityId = serviceProviderEntityId;
     return this;
   }
@@ -203,20 +212,20 @@ public class SamlConfigurationProperties   {
   /**
    * Get serviceProviderEntityId
    * @return serviceProviderEntityId
-  */
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public SamlConfigurationPropertyItemsString getServiceProviderEntityId() {
+   */
+  @Valid 
+  @Schema(name = "serviceProviderEntityId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("serviceProviderEntityId")
+  public @Nullable SamlConfigurationPropertyItemsString getServiceProviderEntityId() {
     return serviceProviderEntityId;
   }
 
-  public void setServiceProviderEntityId(SamlConfigurationPropertyItemsString serviceProviderEntityId) {
+  @JsonProperty("serviceProviderEntityId")
+  public void setServiceProviderEntityId(@Nullable SamlConfigurationPropertyItemsString serviceProviderEntityId) {
     this.serviceProviderEntityId = serviceProviderEntityId;
   }
 
-  public SamlConfigurationProperties assertionConsumerServiceURL(SamlConfigurationPropertyItemsString assertionConsumerServiceURL) {
+  public SamlConfigurationProperties assertionConsumerServiceURL(@Nullable SamlConfigurationPropertyItemsString assertionConsumerServiceURL) {
     this.assertionConsumerServiceURL = assertionConsumerServiceURL;
     return this;
   }
@@ -224,20 +233,20 @@ public class SamlConfigurationProperties   {
   /**
    * Get assertionConsumerServiceURL
    * @return assertionConsumerServiceURL
-  */
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public SamlConfigurationPropertyItemsString getAssertionConsumerServiceURL() {
+   */
+  @Valid 
+  @Schema(name = "assertionConsumerServiceURL", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("assertionConsumerServiceURL")
+  public @Nullable SamlConfigurationPropertyItemsString getAssertionConsumerServiceURL() {
     return assertionConsumerServiceURL;
   }
 
-  public void setAssertionConsumerServiceURL(SamlConfigurationPropertyItemsString assertionConsumerServiceURL) {
+  @JsonProperty("assertionConsumerServiceURL")
+  public void setAssertionConsumerServiceURL(@Nullable SamlConfigurationPropertyItemsString assertionConsumerServiceURL) {
     this.assertionConsumerServiceURL = assertionConsumerServiceURL;
   }
 
-  public SamlConfigurationProperties spPrivateKeyAlias(SamlConfigurationPropertyItemsString spPrivateKeyAlias) {
+  public SamlConfigurationProperties spPrivateKeyAlias(@Nullable SamlConfigurationPropertyItemsString spPrivateKeyAlias) {
     this.spPrivateKeyAlias = spPrivateKeyAlias;
     return this;
   }
@@ -245,20 +254,20 @@ public class SamlConfigurationProperties   {
   /**
    * Get spPrivateKeyAlias
    * @return spPrivateKeyAlias
-  */
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public SamlConfigurationPropertyItemsString getSpPrivateKeyAlias() {
+   */
+  @Valid 
+  @Schema(name = "spPrivateKeyAlias", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("spPrivateKeyAlias")
+  public @Nullable SamlConfigurationPropertyItemsString getSpPrivateKeyAlias() {
     return spPrivateKeyAlias;
   }
 
-  public void setSpPrivateKeyAlias(SamlConfigurationPropertyItemsString spPrivateKeyAlias) {
+  @JsonProperty("spPrivateKeyAlias")
+  public void setSpPrivateKeyAlias(@Nullable SamlConfigurationPropertyItemsString spPrivateKeyAlias) {
     this.spPrivateKeyAlias = spPrivateKeyAlias;
   }
 
-  public SamlConfigurationProperties keyStorePassword(SamlConfigurationPropertyItemsString keyStorePassword) {
+  public SamlConfigurationProperties keyStorePassword(@Nullable SamlConfigurationPropertyItemsString keyStorePassword) {
     this.keyStorePassword = keyStorePassword;
     return this;
   }
@@ -266,20 +275,20 @@ public class SamlConfigurationProperties   {
   /**
    * Get keyStorePassword
    * @return keyStorePassword
-  */
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public SamlConfigurationPropertyItemsString getKeyStorePassword() {
+   */
+  @Valid 
+  @Schema(name = "keyStorePassword", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("keyStorePassword")
+  public @Nullable SamlConfigurationPropertyItemsString getKeyStorePassword() {
     return keyStorePassword;
   }
 
-  public void setKeyStorePassword(SamlConfigurationPropertyItemsString keyStorePassword) {
+  @JsonProperty("keyStorePassword")
+  public void setKeyStorePassword(@Nullable SamlConfigurationPropertyItemsString keyStorePassword) {
     this.keyStorePassword = keyStorePassword;
   }
 
-  public SamlConfigurationProperties defaultRedirectUrl(SamlConfigurationPropertyItemsString defaultRedirectUrl) {
+  public SamlConfigurationProperties defaultRedirectUrl(@Nullable SamlConfigurationPropertyItemsString defaultRedirectUrl) {
     this.defaultRedirectUrl = defaultRedirectUrl;
     return this;
   }
@@ -287,20 +296,20 @@ public class SamlConfigurationProperties   {
   /**
    * Get defaultRedirectUrl
    * @return defaultRedirectUrl
-  */
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public SamlConfigurationPropertyItemsString getDefaultRedirectUrl() {
+   */
+  @Valid 
+  @Schema(name = "defaultRedirectUrl", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("defaultRedirectUrl")
+  public @Nullable SamlConfigurationPropertyItemsString getDefaultRedirectUrl() {
     return defaultRedirectUrl;
   }
 
-  public void setDefaultRedirectUrl(SamlConfigurationPropertyItemsString defaultRedirectUrl) {
+  @JsonProperty("defaultRedirectUrl")
+  public void setDefaultRedirectUrl(@Nullable SamlConfigurationPropertyItemsString defaultRedirectUrl) {
     this.defaultRedirectUrl = defaultRedirectUrl;
   }
 
-  public SamlConfigurationProperties userIDAttribute(SamlConfigurationPropertyItemsString userIDAttribute) {
+  public SamlConfigurationProperties userIDAttribute(@Nullable SamlConfigurationPropertyItemsString userIDAttribute) {
     this.userIDAttribute = userIDAttribute;
     return this;
   }
@@ -308,20 +317,20 @@ public class SamlConfigurationProperties   {
   /**
    * Get userIDAttribute
    * @return userIDAttribute
-  */
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public SamlConfigurationPropertyItemsString getUserIDAttribute() {
+   */
+  @Valid 
+  @Schema(name = "userIDAttribute", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("userIDAttribute")
+  public @Nullable SamlConfigurationPropertyItemsString getUserIDAttribute() {
     return userIDAttribute;
   }
 
-  public void setUserIDAttribute(SamlConfigurationPropertyItemsString userIDAttribute) {
+  @JsonProperty("userIDAttribute")
+  public void setUserIDAttribute(@Nullable SamlConfigurationPropertyItemsString userIDAttribute) {
     this.userIDAttribute = userIDAttribute;
   }
 
-  public SamlConfigurationProperties useEncryption(SamlConfigurationPropertyItemsBoolean useEncryption) {
+  public SamlConfigurationProperties useEncryption(@Nullable SamlConfigurationPropertyItemsBoolean useEncryption) {
     this.useEncryption = useEncryption;
     return this;
   }
@@ -329,20 +338,20 @@ public class SamlConfigurationProperties   {
   /**
    * Get useEncryption
    * @return useEncryption
-  */
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public SamlConfigurationPropertyItemsBoolean getUseEncryption() {
+   */
+  @Valid 
+  @Schema(name = "useEncryption", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("useEncryption")
+  public @Nullable SamlConfigurationPropertyItemsBoolean getUseEncryption() {
     return useEncryption;
   }
 
-  public void setUseEncryption(SamlConfigurationPropertyItemsBoolean useEncryption) {
+  @JsonProperty("useEncryption")
+  public void setUseEncryption(@Nullable SamlConfigurationPropertyItemsBoolean useEncryption) {
     this.useEncryption = useEncryption;
   }
 
-  public SamlConfigurationProperties createUser(SamlConfigurationPropertyItemsBoolean createUser) {
+  public SamlConfigurationProperties createUser(@Nullable SamlConfigurationPropertyItemsBoolean createUser) {
     this.createUser = createUser;
     return this;
   }
@@ -350,20 +359,20 @@ public class SamlConfigurationProperties   {
   /**
    * Get createUser
    * @return createUser
-  */
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public SamlConfigurationPropertyItemsBoolean getCreateUser() {
+   */
+  @Valid 
+  @Schema(name = "createUser", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("createUser")
+  public @Nullable SamlConfigurationPropertyItemsBoolean getCreateUser() {
     return createUser;
   }
 
-  public void setCreateUser(SamlConfigurationPropertyItemsBoolean createUser) {
+  @JsonProperty("createUser")
+  public void setCreateUser(@Nullable SamlConfigurationPropertyItemsBoolean createUser) {
     this.createUser = createUser;
   }
 
-  public SamlConfigurationProperties addGroupMemberships(SamlConfigurationPropertyItemsBoolean addGroupMemberships) {
+  public SamlConfigurationProperties addGroupMemberships(@Nullable SamlConfigurationPropertyItemsBoolean addGroupMemberships) {
     this.addGroupMemberships = addGroupMemberships;
     return this;
   }
@@ -371,20 +380,20 @@ public class SamlConfigurationProperties   {
   /**
    * Get addGroupMemberships
    * @return addGroupMemberships
-  */
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public SamlConfigurationPropertyItemsBoolean getAddGroupMemberships() {
+   */
+  @Valid 
+  @Schema(name = "addGroupMemberships", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("addGroupMemberships")
+  public @Nullable SamlConfigurationPropertyItemsBoolean getAddGroupMemberships() {
     return addGroupMemberships;
   }
 
-  public void setAddGroupMemberships(SamlConfigurationPropertyItemsBoolean addGroupMemberships) {
+  @JsonProperty("addGroupMemberships")
+  public void setAddGroupMemberships(@Nullable SamlConfigurationPropertyItemsBoolean addGroupMemberships) {
     this.addGroupMemberships = addGroupMemberships;
   }
 
-  public SamlConfigurationProperties groupMembershipAttribute(SamlConfigurationPropertyItemsString groupMembershipAttribute) {
+  public SamlConfigurationProperties groupMembershipAttribute(@Nullable SamlConfigurationPropertyItemsString groupMembershipAttribute) {
     this.groupMembershipAttribute = groupMembershipAttribute;
     return this;
   }
@@ -392,20 +401,20 @@ public class SamlConfigurationProperties   {
   /**
    * Get groupMembershipAttribute
    * @return groupMembershipAttribute
-  */
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public SamlConfigurationPropertyItemsString getGroupMembershipAttribute() {
+   */
+  @Valid 
+  @Schema(name = "groupMembershipAttribute", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("groupMembershipAttribute")
+  public @Nullable SamlConfigurationPropertyItemsString getGroupMembershipAttribute() {
     return groupMembershipAttribute;
   }
 
-  public void setGroupMembershipAttribute(SamlConfigurationPropertyItemsString groupMembershipAttribute) {
+  @JsonProperty("groupMembershipAttribute")
+  public void setGroupMembershipAttribute(@Nullable SamlConfigurationPropertyItemsString groupMembershipAttribute) {
     this.groupMembershipAttribute = groupMembershipAttribute;
   }
 
-  public SamlConfigurationProperties defaultGroups(SamlConfigurationPropertyItemsArray defaultGroups) {
+  public SamlConfigurationProperties defaultGroups(@Nullable SamlConfigurationPropertyItemsArray defaultGroups) {
     this.defaultGroups = defaultGroups;
     return this;
   }
@@ -413,20 +422,20 @@ public class SamlConfigurationProperties   {
   /**
    * Get defaultGroups
    * @return defaultGroups
-  */
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public SamlConfigurationPropertyItemsArray getDefaultGroups() {
+   */
+  @Valid 
+  @Schema(name = "defaultGroups", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("defaultGroups")
+  public @Nullable SamlConfigurationPropertyItemsArray getDefaultGroups() {
     return defaultGroups;
   }
 
-  public void setDefaultGroups(SamlConfigurationPropertyItemsArray defaultGroups) {
+  @JsonProperty("defaultGroups")
+  public void setDefaultGroups(@Nullable SamlConfigurationPropertyItemsArray defaultGroups) {
     this.defaultGroups = defaultGroups;
   }
 
-  public SamlConfigurationProperties nameIdFormat(SamlConfigurationPropertyItemsString nameIdFormat) {
+  public SamlConfigurationProperties nameIdFormat(@Nullable SamlConfigurationPropertyItemsString nameIdFormat) {
     this.nameIdFormat = nameIdFormat;
     return this;
   }
@@ -434,20 +443,20 @@ public class SamlConfigurationProperties   {
   /**
    * Get nameIdFormat
    * @return nameIdFormat
-  */
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public SamlConfigurationPropertyItemsString getNameIdFormat() {
+   */
+  @Valid 
+  @Schema(name = "nameIdFormat", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("nameIdFormat")
+  public @Nullable SamlConfigurationPropertyItemsString getNameIdFormat() {
     return nameIdFormat;
   }
 
-  public void setNameIdFormat(SamlConfigurationPropertyItemsString nameIdFormat) {
+  @JsonProperty("nameIdFormat")
+  public void setNameIdFormat(@Nullable SamlConfigurationPropertyItemsString nameIdFormat) {
     this.nameIdFormat = nameIdFormat;
   }
 
-  public SamlConfigurationProperties synchronizeAttributes(SamlConfigurationPropertyItemsArray synchronizeAttributes) {
+  public SamlConfigurationProperties synchronizeAttributes(@Nullable SamlConfigurationPropertyItemsArray synchronizeAttributes) {
     this.synchronizeAttributes = synchronizeAttributes;
     return this;
   }
@@ -455,20 +464,20 @@ public class SamlConfigurationProperties   {
   /**
    * Get synchronizeAttributes
    * @return synchronizeAttributes
-  */
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public SamlConfigurationPropertyItemsArray getSynchronizeAttributes() {
+   */
+  @Valid 
+  @Schema(name = "synchronizeAttributes", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("synchronizeAttributes")
+  public @Nullable SamlConfigurationPropertyItemsArray getSynchronizeAttributes() {
     return synchronizeAttributes;
   }
 
-  public void setSynchronizeAttributes(SamlConfigurationPropertyItemsArray synchronizeAttributes) {
+  @JsonProperty("synchronizeAttributes")
+  public void setSynchronizeAttributes(@Nullable SamlConfigurationPropertyItemsArray synchronizeAttributes) {
     this.synchronizeAttributes = synchronizeAttributes;
   }
 
-  public SamlConfigurationProperties handleLogout(SamlConfigurationPropertyItemsBoolean handleLogout) {
+  public SamlConfigurationProperties handleLogout(@Nullable SamlConfigurationPropertyItemsBoolean handleLogout) {
     this.handleLogout = handleLogout;
     return this;
   }
@@ -476,20 +485,20 @@ public class SamlConfigurationProperties   {
   /**
    * Get handleLogout
    * @return handleLogout
-  */
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public SamlConfigurationPropertyItemsBoolean getHandleLogout() {
+   */
+  @Valid 
+  @Schema(name = "handleLogout", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("handleLogout")
+  public @Nullable SamlConfigurationPropertyItemsBoolean getHandleLogout() {
     return handleLogout;
   }
 
-  public void setHandleLogout(SamlConfigurationPropertyItemsBoolean handleLogout) {
+  @JsonProperty("handleLogout")
+  public void setHandleLogout(@Nullable SamlConfigurationPropertyItemsBoolean handleLogout) {
     this.handleLogout = handleLogout;
   }
 
-  public SamlConfigurationProperties logoutUrl(SamlConfigurationPropertyItemsString logoutUrl) {
+  public SamlConfigurationProperties logoutUrl(@Nullable SamlConfigurationPropertyItemsString logoutUrl) {
     this.logoutUrl = logoutUrl;
     return this;
   }
@@ -497,20 +506,20 @@ public class SamlConfigurationProperties   {
   /**
    * Get logoutUrl
    * @return logoutUrl
-  */
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public SamlConfigurationPropertyItemsString getLogoutUrl() {
+   */
+  @Valid 
+  @Schema(name = "logoutUrl", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("logoutUrl")
+  public @Nullable SamlConfigurationPropertyItemsString getLogoutUrl() {
     return logoutUrl;
   }
 
-  public void setLogoutUrl(SamlConfigurationPropertyItemsString logoutUrl) {
+  @JsonProperty("logoutUrl")
+  public void setLogoutUrl(@Nullable SamlConfigurationPropertyItemsString logoutUrl) {
     this.logoutUrl = logoutUrl;
   }
 
-  public SamlConfigurationProperties clockTolerance(SamlConfigurationPropertyItemsLong clockTolerance) {
+  public SamlConfigurationProperties clockTolerance(@Nullable SamlConfigurationPropertyItemsLong clockTolerance) {
     this.clockTolerance = clockTolerance;
     return this;
   }
@@ -518,20 +527,20 @@ public class SamlConfigurationProperties   {
   /**
    * Get clockTolerance
    * @return clockTolerance
-  */
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public SamlConfigurationPropertyItemsLong getClockTolerance() {
+   */
+  @Valid 
+  @Schema(name = "clockTolerance", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("clockTolerance")
+  public @Nullable SamlConfigurationPropertyItemsLong getClockTolerance() {
     return clockTolerance;
   }
 
-  public void setClockTolerance(SamlConfigurationPropertyItemsLong clockTolerance) {
+  @JsonProperty("clockTolerance")
+  public void setClockTolerance(@Nullable SamlConfigurationPropertyItemsLong clockTolerance) {
     this.clockTolerance = clockTolerance;
   }
 
-  public SamlConfigurationProperties digestMethod(SamlConfigurationPropertyItemsString digestMethod) {
+  public SamlConfigurationProperties digestMethod(@Nullable SamlConfigurationPropertyItemsString digestMethod) {
     this.digestMethod = digestMethod;
     return this;
   }
@@ -539,20 +548,20 @@ public class SamlConfigurationProperties   {
   /**
    * Get digestMethod
    * @return digestMethod
-  */
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public SamlConfigurationPropertyItemsString getDigestMethod() {
+   */
+  @Valid 
+  @Schema(name = "digestMethod", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("digestMethod")
+  public @Nullable SamlConfigurationPropertyItemsString getDigestMethod() {
     return digestMethod;
   }
 
-  public void setDigestMethod(SamlConfigurationPropertyItemsString digestMethod) {
+  @JsonProperty("digestMethod")
+  public void setDigestMethod(@Nullable SamlConfigurationPropertyItemsString digestMethod) {
     this.digestMethod = digestMethod;
   }
 
-  public SamlConfigurationProperties signatureMethod(SamlConfigurationPropertyItemsString signatureMethod) {
+  public SamlConfigurationProperties signatureMethod(@Nullable SamlConfigurationPropertyItemsString signatureMethod) {
     this.signatureMethod = signatureMethod;
     return this;
   }
@@ -560,20 +569,20 @@ public class SamlConfigurationProperties   {
   /**
    * Get signatureMethod
    * @return signatureMethod
-  */
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public SamlConfigurationPropertyItemsString getSignatureMethod() {
+   */
+  @Valid 
+  @Schema(name = "signatureMethod", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("signatureMethod")
+  public @Nullable SamlConfigurationPropertyItemsString getSignatureMethod() {
     return signatureMethod;
   }
 
-  public void setSignatureMethod(SamlConfigurationPropertyItemsString signatureMethod) {
+  @JsonProperty("signatureMethod")
+  public void setSignatureMethod(@Nullable SamlConfigurationPropertyItemsString signatureMethod) {
     this.signatureMethod = signatureMethod;
   }
 
-  public SamlConfigurationProperties userIntermediatePath(SamlConfigurationPropertyItemsString userIntermediatePath) {
+  public SamlConfigurationProperties userIntermediatePath(@Nullable SamlConfigurationPropertyItemsString userIntermediatePath) {
     this.userIntermediatePath = userIntermediatePath;
     return this;
   }
@@ -581,19 +590,18 @@ public class SamlConfigurationProperties   {
   /**
    * Get userIntermediatePath
    * @return userIntermediatePath
-  */
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public SamlConfigurationPropertyItemsString getUserIntermediatePath() {
+   */
+  @Valid 
+  @Schema(name = "userIntermediatePath", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("userIntermediatePath")
+  public @Nullable SamlConfigurationPropertyItemsString getUserIntermediatePath() {
     return userIntermediatePath;
   }
 
-  public void setUserIntermediatePath(SamlConfigurationPropertyItemsString userIntermediatePath) {
+  @JsonProperty("userIntermediatePath")
+  public void setUserIntermediatePath(@Nullable SamlConfigurationPropertyItemsString userIntermediatePath) {
     this.userIntermediatePath = userIntermediatePath;
   }
-
 
   @Override
   public boolean equals(Object o) {
@@ -639,7 +647,6 @@ public class SamlConfigurationProperties   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class SamlConfigurationProperties {\n");
-    
     sb.append("    path: ").append(toIndentedString(path)).append("\n");
     sb.append("    serviceRanking: ").append(toIndentedString(serviceRanking)).append("\n");
     sb.append("    idpUrl: ").append(toIndentedString(idpUrl)).append("\n");
@@ -672,11 +679,8 @@ public class SamlConfigurationProperties   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+  private String toIndentedString(@Nullable Object o) {
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

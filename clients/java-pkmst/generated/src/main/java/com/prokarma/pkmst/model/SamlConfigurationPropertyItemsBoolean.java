@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiModelProperty;
  * SamlConfigurationPropertyItemsBoolean
  */
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2021-09-03T15:25:27.791+10:00[Australia/Melbourne]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2026-08-17T02:15:15.504120373Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class SamlConfigurationPropertyItemsBoolean   {
   @JsonProperty("name")
   private String name;
@@ -39,10 +39,10 @@ public class SamlConfigurationPropertyItemsBoolean   {
     return this;
   }
 
-   /**
+  /**
    * property name
    * @return name
-  **/
+   */
   @ApiModelProperty(value = "property name")
   public String getName() {
     return name;
@@ -57,10 +57,10 @@ public class SamlConfigurationPropertyItemsBoolean   {
     return this;
   }
 
-   /**
+  /**
    * True if optional
    * @return optional
-  **/
+   */
   @ApiModelProperty(value = "True if optional")
   public Boolean getOptional() {
     return optional;
@@ -75,10 +75,10 @@ public class SamlConfigurationPropertyItemsBoolean   {
     return this;
   }
 
-   /**
+  /**
    * True if property is set
    * @return isSet
-  **/
+   */
   @ApiModelProperty(value = "True if property is set")
   public Boolean getIsSet() {
     return isSet;
@@ -93,10 +93,10 @@ public class SamlConfigurationPropertyItemsBoolean   {
     return this;
   }
 
-   /**
+  /**
    * Property type, 1=String, 3=long, 11=boolean, 12=Password
    * @return type
-  **/
+   */
   @ApiModelProperty(value = "Property type, 1=String, 3=long, 11=boolean, 12=Password")
   public Integer getType() {
     return type;
@@ -111,10 +111,10 @@ public class SamlConfigurationPropertyItemsBoolean   {
     return this;
   }
 
-   /**
+  /**
    * Property value
    * @return value
-  **/
+   */
   @ApiModelProperty(value = "Property value")
   public Boolean getValue() {
     return value;
@@ -129,10 +129,10 @@ public class SamlConfigurationPropertyItemsBoolean   {
     return this;
   }
 
-   /**
+  /**
    * Property description
    * @return description
-  **/
+   */
   @ApiModelProperty(value = "Property description")
   public String getDescription() {
     return description;
@@ -185,10 +185,7 @@ public class SamlConfigurationPropertyItemsBoolean   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

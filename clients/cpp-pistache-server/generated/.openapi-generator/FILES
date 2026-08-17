@@ -1,5 +1,7 @@
 CMakeLists.txt
 README.md
+api/ApiBase.cpp
+api/ApiBase.h
 api/ConsoleApi.cpp
 api/ConsoleApi.h
 api/CqApi.cpp

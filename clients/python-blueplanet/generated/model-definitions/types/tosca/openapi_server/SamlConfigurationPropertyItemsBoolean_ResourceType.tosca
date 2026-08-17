@@ -1,0 +1,60 @@
+"$schema"   = "http://cyaninc.com/json-schemas/tosca-lite-v1/definition-module#"
+title       = "openapi_server SamlConfigurationPropertyItemsBoolean"
+package     = openapi_server
+version     = "1.0"
+description = "Defines a SamlConfigurationPropertyItemsBoolean"
+authors     = ["F. Bar (foo@bar.baz)"]
+
+imports {
+  Root = tosca.resourceTypes.Root
+}
+resourceTypes {
+
+  SamlConfigurationPropertyItemsBoolean {
+    title = SamlConfigurationPropertyItemsBoolean
+    description = SamlConfigurationPropertyItemsBoolean
+    derivedFrom = Root
+    properties {
+        name {
+          type =  string
+          description = "property name"
+          optional = false
+        }
+        optional {
+          type =  boolean
+          description = "True if optional"
+          optional = false
+        }
+        is_set {
+          type =  boolean
+          description = "True if property is set"
+          optional = false
+        }
+        type {
+          type =  integer
+          description = "Property type, 1&#x3D;String, 3&#x3D;long, 11&#x3D;boolean, 12&#x3D;Password"
+          optional = false
+        }
+        value {
+          type =  boolean
+          description = "Property value"
+          optional = false
+        }
+        description {
+          type =  string
+          description = "Property description"
+          optional = false
+        }
+    }
+  }
+}
+
+serviceTemplates {
+
+  SamlConfigurationPropertyItemsBoolean {
+    title = SamlConfigurationPropertyItemsBoolean
+    description = SamlConfigurationPropertyItemsBoolean
+    implements = openapi_server.resourceTypes.SamlConfigurationPropertyItemsBoolean
+
+  }
+}

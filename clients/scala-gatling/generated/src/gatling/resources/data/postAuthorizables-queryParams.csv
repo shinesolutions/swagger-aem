@@ -1,1 +1,1 @@
-createUser,authorizableId,createGroup,rep:password,profile/givenName,intermediatePath
+createUser,authorizableId,rep:password,createGroup,profile/givenName,intermediatePath

@@ -1,4 +1,5 @@
 .gitignore
+.gitlab-ci.yml
 .rspec
 .rubocop.yml
 .travis.yml
@@ -37,6 +38,7 @@ lib/swagger_aem/api/granite_api.rb
 lib/swagger_aem/api/sling_api.rb
 lib/swagger_aem/api_client.rb
 lib/swagger_aem/api_error.rb
+lib/swagger_aem/api_model_base.rb
 lib/swagger_aem/configuration.rb
 lib/swagger_aem/models/bundle_data.rb
 lib/swagger_aem/models/bundle_data_prop.rb
@@ -55,7 +57,5 @@ lib/swagger_aem/models/saml_configuration_property_items_string.rb
 lib/swagger_aem/models/truststore_info.rb
 lib/swagger_aem/models/truststore_items.rb
 lib/swagger_aem/version.rb
-spec/api_client_spec.rb
-spec/configuration_spec.rb
 spec/spec_helper.rb
 swagger_aem.gemspec

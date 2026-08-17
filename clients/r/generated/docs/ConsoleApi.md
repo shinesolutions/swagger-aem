@@ -22,11 +22,13 @@ Method | HTTP request | Description
 library(openapi)
 
 
-api.instance <- ConsoleApi$new()
+api_instance <- ConsoleApi$new()
 # Configure HTTP basic authorization: aemAuth
-api.instance$apiClient$username <- 'TODO_YOUR_USERNAME';
-api.instance$apiClient$password <- 'TODO_YOUR_PASSWORD';
-result <- api.instance$GetAemProductInfo()
+api_instance$api_client$username <- Sys.getenv("USERNAME")
+api_instance$api_client$password <- Sys.getenv("PASSWORD")
+# to save the result into a file, simply add the optional `data_file` parameter, e.g.
+# result <- api_instance$GetAemProductInfo(data_file = "result.txt")
+result <- api_instance$GetAemProductInfo()
 dput(result)
 ```
 
@@ -60,13 +62,16 @@ This endpoint does not need any parameter.
 ```R
 library(openapi)
 
-var.name <- 'name_example' # character | 
+# prepare function argument(s)
+var_name <- "name_example" # character | 
 
-api.instance <- ConsoleApi$new()
+api_instance <- ConsoleApi$new()
 # Configure HTTP basic authorization: aemAuth
-api.instance$apiClient$username <- 'TODO_YOUR_USERNAME';
-api.instance$apiClient$password <- 'TODO_YOUR_PASSWORD';
-result <- api.instance$GetBundleInfo(var.name)
+api_instance$api_client$username <- Sys.getenv("USERNAME")
+api_instance$api_client$password <- Sys.getenv("PASSWORD")
+# to save the result into a file, simply add the optional `data_file` parameter, e.g.
+# result <- api_instance$GetBundleInfo(var_namedata_file = "result.txt")
+result <- api_instance$GetBundleInfo(var_name)
 dput(result)
 ```
 
@@ -105,11 +110,13 @@ Name | Type | Description  | Notes
 library(openapi)
 
 
-api.instance <- ConsoleApi$new()
+api_instance <- ConsoleApi$new()
 # Configure HTTP basic authorization: aemAuth
-api.instance$apiClient$username <- 'TODO_YOUR_USERNAME';
-api.instance$apiClient$password <- 'TODO_YOUR_PASSWORD';
-result <- api.instance$GetConfigMgr()
+api_instance$api_client$username <- Sys.getenv("USERNAME")
+api_instance$api_client$password <- Sys.getenv("PASSWORD")
+# to save the result into a file, simply add the optional `data_file` parameter, e.g.
+# result <- api_instance$GetConfigMgr(data_file = "result.txt")
+result <- api_instance$GetConfigMgr()
 dput(result)
 ```
 
@@ -144,14 +151,15 @@ This endpoint does not need any parameter.
 ```R
 library(openapi)
 
-var.name <- 'name_example' # character | 
-var.action <- 'action_example' # character | 
+# prepare function argument(s)
+var_name <- "name_example" # character | 
+var_action <- "action_example" # character | 
 
-api.instance <- ConsoleApi$new()
+api_instance <- ConsoleApi$new()
 # Configure HTTP basic authorization: aemAuth
-api.instance$apiClient$username <- 'TODO_YOUR_USERNAME';
-api.instance$apiClient$password <- 'TODO_YOUR_PASSWORD';
-api.instance$PostBundle(var.name, var.action)
+api_instance$api_client$username <- Sys.getenv("USERNAME")
+api_instance$api_client$password <- Sys.getenv("PASSWORD")
+api_instance$PostBundle(var_name, var_action)
 ```
 
 ### Parameters
@@ -188,13 +196,14 @@ void (empty response body)
 ```R
 library(openapi)
 
-var.action <- 'action_example' # character | 
+# prepare function argument(s)
+var_action <- "action_example" # character | 
 
-api.instance <- ConsoleApi$new()
+api_instance <- ConsoleApi$new()
 # Configure HTTP basic authorization: aemAuth
-api.instance$apiClient$username <- 'TODO_YOUR_USERNAME';
-api.instance$apiClient$password <- 'TODO_YOUR_PASSWORD';
-api.instance$PostJmxRepository(var.action)
+api_instance$api_client$username <- Sys.getenv("USERNAME")
+api_instance$api_client$password <- Sys.getenv("PASSWORD")
+api_instance$PostJmxRepository(var_action)
 ```
 
 ### Parameters
@@ -222,7 +231,7 @@ void (empty response body)
 | **0** | Default response |  -  |
 
 # **PostSamlConfiguration**
-> SamlConfigurationInfo PostSamlConfiguration(post=var.post, apply=var.apply, delete=var.delete, action=var.action, location=var.location, path=var.path, service.ranking=var.service.ranking, idp.url=var.idp.url, idp.cert.alias=var.idp.cert.alias, idp.http.redirect=var.idp.http.redirect, service.provider.entity.id=var.service.provider.entity.id, assertion.consumer.service.url=var.assertion.consumer.service.url, sp.private.key.alias=var.sp.private.key.alias, key.store.password=var.key.store.password, default.redirect.url=var.default.redirect.url, user.id.attribute=var.user.id.attribute, use.encryption=var.use.encryption, create.user=var.create.user, add.group.memberships=var.add.group.memberships, group.membership.attribute=var.group.membership.attribute, default.groups=var.default.groups, name.id.format=var.name.id.format, synchronize.attributes=var.synchronize.attributes, handle.logout=var.handle.logout, logout.url=var.logout.url, clock.tolerance=var.clock.tolerance, digest.method=var.digest.method, signature.method=var.signature.method, user.intermediate.path=var.user.intermediate.path, propertylist=var.propertylist)
+> SamlConfigurationInfo PostSamlConfiguration(post = var.post, apply = var.apply, delete = var.delete, action = var.action, location = var.location, path = var.path, service_ranking = var.service_ranking, idp_url = var.idp_url, idp_cert_alias = var.idp_cert_alias, idp_http_redirect = var.idp_http_redirect, service_provider_entity_id = var.service_provider_entity_id, assertion_consumer_service_url = var.assertion_consumer_service_url, sp_private_key_alias = var.sp_private_key_alias, key_store_password = var.key_store_password, default_redirect_url = var.default_redirect_url, user_id_attribute = var.user_id_attribute, use_encryption = var.use_encryption, create_user = var.create_user, add_group_memberships = var.add_group_memberships, group_membership_attribute = var.group_membership_attribute, default_groups = var.default_groups, name_id_format = var.name_id_format, synchronize_attributes = var.synchronize_attributes, handle_logout = var.handle_logout, logout_url = var.logout_url, clock_tolerance = var.clock_tolerance, digest_method = var.digest_method, signature_method = var.signature_method, user_intermediate_path = var.user_intermediate_path, propertylist = var.propertylist)
 
 
 
@@ -230,42 +239,45 @@ void (empty response body)
 ```R
 library(openapi)
 
-var.post <- 'post_example' # character | 
-var.apply <- 'apply_example' # character | 
-var.delete <- 'delete_example' # character | 
-var.action <- 'action_example' # character | 
-var.location <- 'location_example' # character | 
-var.path <- list("inner_example") # array[character] | 
-var.service.ranking <- 56 # integer | 
-var.idp.url <- 'idp.url_example' # character | 
-var.idp.cert.alias <- 'idp.cert.alias_example' # character | 
-var.idp.http.redirect <- 'idp.http.redirect_example' # character | 
-var.service.provider.entity.id <- 'service.provider.entity.id_example' # character | 
-var.assertion.consumer.service.url <- 'assertion.consumer.service.url_example' # character | 
-var.sp.private.key.alias <- 'sp.private.key.alias_example' # character | 
-var.key.store.password <- 'key.store.password_example' # character | 
-var.default.redirect.url <- 'default.redirect.url_example' # character | 
-var.user.id.attribute <- 'user.id.attribute_example' # character | 
-var.use.encryption <- 'use.encryption_example' # character | 
-var.create.user <- 'create.user_example' # character | 
-var.add.group.memberships <- 'add.group.memberships_example' # character | 
-var.group.membership.attribute <- 'group.membership.attribute_example' # character | 
-var.default.groups <- list("inner_example") # array[character] | 
-var.name.id.format <- 'name.id.format_example' # character | 
-var.synchronize.attributes <- list("inner_example") # array[character] | 
-var.handle.logout <- 'handle.logout_example' # character | 
-var.logout.url <- 'logout.url_example' # character | 
-var.clock.tolerance <- 56 # integer | 
-var.digest.method <- 'digest.method_example' # character | 
-var.signature.method <- 'signature.method_example' # character | 
-var.user.intermediate.path <- 'user.intermediate.path_example' # character | 
-var.propertylist <- list("inner_example") # array[character] | 
+# prepare function argument(s)
+var_post <- "post_example" # character |  (Optional)
+var_apply <- "apply_example" # character |  (Optional)
+var_delete <- "delete_example" # character |  (Optional)
+var_action <- "action_example" # character |  (Optional)
+var_location <- "location_example" # character |  (Optional)
+var_path <- c("inner_example") # array[character] |  (Optional)
+var_service_ranking <- 56 # integer |  (Optional)
+var_idp_url <- "idp_url_example" # character |  (Optional)
+var_idp_cert_alias <- "idp_cert_alias_example" # character |  (Optional)
+var_idp_http_redirect <- "idp_http_redirect_example" # character |  (Optional)
+var_service_provider_entity_id <- "service_provider_entity_id_example" # character |  (Optional)
+var_assertion_consumer_service_url <- "assertion_consumer_service_url_example" # character |  (Optional)
+var_sp_private_key_alias <- "sp_private_key_alias_example" # character |  (Optional)
+var_key_store_password <- "key_store_password_example" # character |  (Optional)
+var_default_redirect_url <- "default_redirect_url_example" # character |  (Optional)
+var_user_id_attribute <- "user_id_attribute_example" # character |  (Optional)
+var_use_encryption <- "use_encryption_example" # character |  (Optional)
+var_create_user <- "create_user_example" # character |  (Optional)
+var_add_group_memberships <- "add_group_memberships_example" # character |  (Optional)
+var_group_membership_attribute <- "group_membership_attribute_example" # character |  (Optional)
+var_default_groups <- c("inner_example") # array[character] |  (Optional)
+var_name_id_format <- "name_id_format_example" # character |  (Optional)
+var_synchronize_attributes <- c("inner_example") # array[character] |  (Optional)
+var_handle_logout <- "handle_logout_example" # character |  (Optional)
+var_logout_url <- "logout_url_example" # character |  (Optional)
+var_clock_tolerance <- 56 # integer |  (Optional)
+var_digest_method <- "digest_method_example" # character |  (Optional)
+var_signature_method <- "signature_method_example" # character |  (Optional)
+var_user_intermediate_path <- "user_intermediate_path_example" # character |  (Optional)
+var_propertylist <- c("inner_example") # array[character] |  (Optional)
 
-api.instance <- ConsoleApi$new()
+api_instance <- ConsoleApi$new()
 # Configure HTTP basic authorization: aemAuth
-api.instance$apiClient$username <- 'TODO_YOUR_USERNAME';
-api.instance$apiClient$password <- 'TODO_YOUR_PASSWORD';
-result <- api.instance$PostSamlConfiguration(post=var.post, apply=var.apply, delete=var.delete, action=var.action, location=var.location, path=var.path, service.ranking=var.service.ranking, idp.url=var.idp.url, idp.cert.alias=var.idp.cert.alias, idp.http.redirect=var.idp.http.redirect, service.provider.entity.id=var.service.provider.entity.id, assertion.consumer.service.url=var.assertion.consumer.service.url, sp.private.key.alias=var.sp.private.key.alias, key.store.password=var.key.store.password, default.redirect.url=var.default.redirect.url, user.id.attribute=var.user.id.attribute, use.encryption=var.use.encryption, create.user=var.create.user, add.group.memberships=var.add.group.memberships, group.membership.attribute=var.group.membership.attribute, default.groups=var.default.groups, name.id.format=var.name.id.format, synchronize.attributes=var.synchronize.attributes, handle.logout=var.handle.logout, logout.url=var.logout.url, clock.tolerance=var.clock.tolerance, digest.method=var.digest.method, signature.method=var.signature.method, user.intermediate.path=var.user.intermediate.path, propertylist=var.propertylist)
+api_instance$api_client$username <- Sys.getenv("USERNAME")
+api_instance$api_client$password <- Sys.getenv("PASSWORD")
+# to save the result into a file, simply add the optional `data_file` parameter, e.g.
+# result <- api_instance$PostSamlConfiguration(post = var_post, apply = var_apply, delete = var_delete, action = var_action, location = var_location, path = var_path, service_ranking = var_service_ranking, idp_url = var_idp_url, idp_cert_alias = var_idp_cert_alias, idp_http_redirect = var_idp_http_redirect, service_provider_entity_id = var_service_provider_entity_id, assertion_consumer_service_url = var_assertion_consumer_service_url, sp_private_key_alias = var_sp_private_key_alias, key_store_password = var_key_store_password, default_redirect_url = var_default_redirect_url, user_id_attribute = var_user_id_attribute, use_encryption = var_use_encryption, create_user = var_create_user, add_group_memberships = var_add_group_memberships, group_membership_attribute = var_group_membership_attribute, default_groups = var_default_groups, name_id_format = var_name_id_format, synchronize_attributes = var_synchronize_attributes, handle_logout = var_handle_logout, logout_url = var_logout_url, clock_tolerance = var_clock_tolerance, digest_method = var_digest_method, signature_method = var_signature_method, user_intermediate_path = var_user_intermediate_path, propertylist = var_propertylistdata_file = "result.txt")
+result <- api_instance$PostSamlConfiguration(post = var_post, apply = var_apply, delete = var_delete, action = var_action, location = var_location, path = var_path, service_ranking = var_service_ranking, idp_url = var_idp_url, idp_cert_alias = var_idp_cert_alias, idp_http_redirect = var_idp_http_redirect, service_provider_entity_id = var_service_provider_entity_id, assertion_consumer_service_url = var_assertion_consumer_service_url, sp_private_key_alias = var_sp_private_key_alias, key_store_password = var_key_store_password, default_redirect_url = var_default_redirect_url, user_id_attribute = var_user_id_attribute, use_encryption = var_use_encryption, create_user = var_create_user, add_group_memberships = var_add_group_memberships, group_membership_attribute = var_group_membership_attribute, default_groups = var_default_groups, name_id_format = var_name_id_format, synchronize_attributes = var_synchronize_attributes, handle_logout = var_handle_logout, logout_url = var_logout_url, clock_tolerance = var_clock_tolerance, digest_method = var_digest_method, signature_method = var_signature_method, user_intermediate_path = var_user_intermediate_path, propertylist = var_propertylist)
 dput(result)
 ```
 
@@ -279,29 +291,29 @@ Name | Type | Description  | Notes
  **action** | **character**|  | [optional] 
  **location** | **character**|  | [optional] 
  **path** | list( **character** )|  | [optional] 
- **service.ranking** | **integer**|  | [optional] 
- **idp.url** | **character**|  | [optional] 
- **idp.cert.alias** | **character**|  | [optional] 
- **idp.http.redirect** | **character**|  | [optional] 
- **service.provider.entity.id** | **character**|  | [optional] 
- **assertion.consumer.service.url** | **character**|  | [optional] 
- **sp.private.key.alias** | **character**|  | [optional] 
- **key.store.password** | **character**|  | [optional] 
- **default.redirect.url** | **character**|  | [optional] 
- **user.id.attribute** | **character**|  | [optional] 
- **use.encryption** | **character**|  | [optional] 
- **create.user** | **character**|  | [optional] 
- **add.group.memberships** | **character**|  | [optional] 
- **group.membership.attribute** | **character**|  | [optional] 
- **default.groups** | list( **character** )|  | [optional] 
- **name.id.format** | **character**|  | [optional] 
- **synchronize.attributes** | list( **character** )|  | [optional] 
- **handle.logout** | **character**|  | [optional] 
- **logout.url** | **character**|  | [optional] 
- **clock.tolerance** | **integer**|  | [optional] 
- **digest.method** | **character**|  | [optional] 
- **signature.method** | **character**|  | [optional] 
- **user.intermediate.path** | **character**|  | [optional] 
+ **service_ranking** | **integer**|  | [optional] 
+ **idp_url** | **character**|  | [optional] 
+ **idp_cert_alias** | **character**|  | [optional] 
+ **idp_http_redirect** | **character**|  | [optional] 
+ **service_provider_entity_id** | **character**|  | [optional] 
+ **assertion_consumer_service_url** | **character**|  | [optional] 
+ **sp_private_key_alias** | **character**|  | [optional] 
+ **key_store_password** | **character**|  | [optional] 
+ **default_redirect_url** | **character**|  | [optional] 
+ **user_id_attribute** | **character**|  | [optional] 
+ **use_encryption** | **character**|  | [optional] 
+ **create_user** | **character**|  | [optional] 
+ **add_group_memberships** | **character**|  | [optional] 
+ **group_membership_attribute** | **character**|  | [optional] 
+ **default_groups** | list( **character** )|  | [optional] 
+ **name_id_format** | **character**|  | [optional] 
+ **synchronize_attributes** | list( **character** )|  | [optional] 
+ **handle_logout** | **character**|  | [optional] 
+ **logout_url** | **character**|  | [optional] 
+ **clock_tolerance** | **integer**|  | [optional] 
+ **digest_method** | **character**|  | [optional] 
+ **signature_method** | **character**|  | [optional] 
+ **user_intermediate_path** | **character**|  | [optional] 
  **propertylist** | list( **character** )|  | [optional] 
 
 ### Return type

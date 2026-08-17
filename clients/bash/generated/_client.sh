@@ -10,6 +10,7 @@
 # !
 # ! Based on: https://github.com/Valodim/zsh-curl-completion/blob/master/_curl
 # !
+# ! Generator version: 7.24.0
 # !
 # !
 # ! Installation:
@@ -642,6 +643,8 @@ case $state in
 "jcr:content/cq:distribute@TypeHint=:[QUERY] "
 "jcr:content/cq:name=:[QUERY] "
 "jcr:content/cq:template=:[QUERY] "
+"jcr:content/aliasUpdate=true:[QUERY] "
+          "jcr:content/aliasUpdate=false:[QUERY] "
 "jcr:content/enabled=true:[QUERY] "
           "jcr:content/enabled=false:[QUERY] "
 "jcr:content/jcr:description=:[QUERY] "
@@ -933,6 +936,7 @@ case $state in
 "onlymodified=true:[QUERY] "
           "onlymodified=false:[QUERY] "
 "path=:[QUERY] "
+"cmd=:[QUERY] "
           )
         _describe -t actions 'operations' _op_arguments -S '' && ret=0
         ;;

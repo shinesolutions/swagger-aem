@@ -6,18 +6,17 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.openapitools.model.InstallStatusStatus;
 import javax.validation.constraints.*;
+import javax.validation.Valid;
 
 
 import io.swagger.annotations.*;
 import java.util.Objects;
 
-import javax.xml.bind.annotation.*;
 
 
 public class InstallStatus   {
   
   private InstallStatusStatus status;
-
 
   /**
    **/
@@ -47,7 +46,7 @@ public class InstallStatus   {
       return false;
     }
     InstallStatus installStatus = (InstallStatus) o;
-    return Objects.equals(status, installStatus.status);
+    return Objects.equals(this.status, installStatus.status);
   }
 
   @Override
@@ -70,10 +69,7 @@ public class InstallStatus   {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 }
 

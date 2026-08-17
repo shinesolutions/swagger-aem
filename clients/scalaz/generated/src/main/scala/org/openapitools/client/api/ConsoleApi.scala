@@ -34,7 +34,7 @@ object ConsoleApi {
     implicit val returnTypeDecoder: EntityDecoder[List[String]] = jsonOf[List[String]]
 
     val path = "/system/console/status-productinfo.json"
-    
+
     val httpMethod = Method.GET
     val contentType = `Content-Type`(MediaType.`application/json`)
     val headers = Headers(
@@ -50,12 +50,12 @@ object ConsoleApi {
 
     } yield resp
   }
-  
+
   def getBundleInfo(host: String, name: String): Task[BundleInfo] = {
     implicit val returnTypeDecoder: EntityDecoder[BundleInfo] = jsonOf[BundleInfo]
 
     val path = "/system/console/bundles/{name}.json".replaceAll("\\{" + "name" + "\\}",escape(name.toString))
-    
+
     val httpMethod = Method.GET
     val contentType = `Content-Type`(MediaType.`application/json`)
     val headers = Headers(
@@ -71,12 +71,12 @@ object ConsoleApi {
 
     } yield resp
   }
-  
+
   def getConfigMgr(host: String): Task[String] = {
     implicit val returnTypeDecoder: EntityDecoder[String] = jsonOf[String]
 
     val path = "/system/console/configMgr"
-    
+
     val httpMethod = Method.GET
     val contentType = `Content-Type`(MediaType.`application/json`)
     val headers = Headers(
@@ -92,10 +92,10 @@ object ConsoleApi {
 
     } yield resp
   }
-  
+
   def postBundle(host: String, name: String, action: String)(implicit actionQuery: QueryParam[String]): Task[Unit] = {
     val path = "/system/console/bundles/{name}".replaceAll("\\{" + "name" + "\\}",escape(name.toString))
-    
+
     val httpMethod = Method.POST
     val contentType = `Content-Type`(MediaType.`application/json`)
     val headers = Headers(
@@ -111,10 +111,10 @@ object ConsoleApi {
 
     } yield resp
   }
-  
+
   def postJmxRepository(host: String, action: String): Task[Unit] = {
-    val path = "/system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action}".replaceAll("\\{" + "action" + "\\}",escape(action.toString))
-    
+    val path = "/system/console/jmx/com.adobe.granite:type=Repository/op/{action}".replaceAll("\\{" + "action" + "\\}",escape(action.toString))
+
     val httpMethod = Method.POST
     val contentType = `Content-Type`(MediaType.`application/json`)
     val headers = Headers(
@@ -130,12 +130,12 @@ object ConsoleApi {
 
     } yield resp
   }
-  
+
   def postSamlConfiguration(host: String, post: Boolean, apply: Boolean, delete: Boolean, action: String, location: String, `path`: List[String] = List.empty[String] , serviceRanking: Integer, idpUrl: String, idpCertAlias: String, idpHttpRedirect: Boolean, serviceProviderEntityId: String, assertionConsumerServiceURL: String, spPrivateKeyAlias: String, keyStorePassword: String, defaultRedirectUrl: String, userIDAttribute: String, useEncryption: Boolean, createUser: Boolean, addGroupMemberships: Boolean, groupMembershipAttribute: String, defaultGroups: List[String] = List.empty[String] , nameIdFormat: String, synchronizeAttributes: List[String] = List.empty[String] , handleLogout: Boolean, logoutUrl: String, clockTolerance: Integer, digestMethod: String, signatureMethod: String, userIntermediatePath: String, propertylist: List[String] = List.empty[String] )(implicit postQuery: QueryParam[Boolean], applyQuery: QueryParam[Boolean], deleteQuery: QueryParam[Boolean], actionQuery: QueryParam[String], locationQuery: QueryParam[String], `path`Query: QueryParam[List[String]], serviceRankingQuery: QueryParam[Integer], idpUrlQuery: QueryParam[String], idpCertAliasQuery: QueryParam[String], idpHttpRedirectQuery: QueryParam[Boolean], serviceProviderEntityIdQuery: QueryParam[String], assertionConsumerServiceURLQuery: QueryParam[String], spPrivateKeyAliasQuery: QueryParam[String], keyStorePasswordQuery: QueryParam[String], defaultRedirectUrlQuery: QueryParam[String], userIDAttributeQuery: QueryParam[String], useEncryptionQuery: QueryParam[Boolean], createUserQuery: QueryParam[Boolean], addGroupMembershipsQuery: QueryParam[Boolean], groupMembershipAttributeQuery: QueryParam[String], defaultGroupsQuery: QueryParam[List[String]], nameIdFormatQuery: QueryParam[String], synchronizeAttributesQuery: QueryParam[List[String]], handleLogoutQuery: QueryParam[Boolean], logoutUrlQuery: QueryParam[String], clockToleranceQuery: QueryParam[Integer], digestMethodQuery: QueryParam[String], signatureMethodQuery: QueryParam[String], userIntermediatePathQuery: QueryParam[String], propertylistQuery: QueryParam[List[String]]): Task[SamlConfigurationInfo] = {
     implicit val returnTypeDecoder: EntityDecoder[SamlConfigurationInfo] = jsonOf[SamlConfigurationInfo]
 
     val path = "/system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler"
-    
+
     val httpMethod = Method.POST
     val contentType = `Content-Type`(MediaType.`application/json`)
     val headers = Headers(
@@ -151,7 +151,7 @@ object ConsoleApi {
 
     } yield resp
   }
-  
+
 }
 
 class HttpServiceConsoleApi(service: HttpService) {
@@ -163,7 +163,7 @@ class HttpServiceConsoleApi(service: HttpService) {
     implicit val returnTypeDecoder: EntityDecoder[List[String]] = jsonOf[List[String]]
 
     val path = "/system/console/status-productinfo.json"
-    
+
     val httpMethod = Method.GET
     val contentType = `Content-Type`(MediaType.`application/json`)
     val headers = Headers(
@@ -179,12 +179,12 @@ class HttpServiceConsoleApi(service: HttpService) {
 
     } yield resp
   }
-  
+
   def getBundleInfo(name: String): Task[BundleInfo] = {
     implicit val returnTypeDecoder: EntityDecoder[BundleInfo] = jsonOf[BundleInfo]
 
     val path = "/system/console/bundles/{name}.json".replaceAll("\\{" + "name" + "\\}",escape(name.toString))
-    
+
     val httpMethod = Method.GET
     val contentType = `Content-Type`(MediaType.`application/json`)
     val headers = Headers(
@@ -200,12 +200,12 @@ class HttpServiceConsoleApi(service: HttpService) {
 
     } yield resp
   }
-  
+
   def getConfigMgr(): Task[String] = {
     implicit val returnTypeDecoder: EntityDecoder[String] = jsonOf[String]
 
     val path = "/system/console/configMgr"
-    
+
     val httpMethod = Method.GET
     val contentType = `Content-Type`(MediaType.`application/json`)
     val headers = Headers(
@@ -221,10 +221,10 @@ class HttpServiceConsoleApi(service: HttpService) {
 
     } yield resp
   }
-  
+
   def postBundle(name: String, action: String)(implicit actionQuery: QueryParam[String]): Task[Unit] = {
     val path = "/system/console/bundles/{name}".replaceAll("\\{" + "name" + "\\}",escape(name.toString))
-    
+
     val httpMethod = Method.POST
     val contentType = `Content-Type`(MediaType.`application/json`)
     val headers = Headers(
@@ -240,10 +240,10 @@ class HttpServiceConsoleApi(service: HttpService) {
 
     } yield resp
   }
-  
+
   def postJmxRepository(action: String): Task[Unit] = {
-    val path = "/system/console/jmx/com.adobe.granite:type&#x3D;Repository/op/{action}".replaceAll("\\{" + "action" + "\\}",escape(action.toString))
-    
+    val path = "/system/console/jmx/com.adobe.granite:type=Repository/op/{action}".replaceAll("\\{" + "action" + "\\}",escape(action.toString))
+
     val httpMethod = Method.POST
     val contentType = `Content-Type`(MediaType.`application/json`)
     val headers = Headers(
@@ -259,12 +259,12 @@ class HttpServiceConsoleApi(service: HttpService) {
 
     } yield resp
   }
-  
+
   def postSamlConfiguration(post: Boolean, apply: Boolean, delete: Boolean, action: String, location: String, `path`: List[String] = List.empty[String] , serviceRanking: Integer, idpUrl: String, idpCertAlias: String, idpHttpRedirect: Boolean, serviceProviderEntityId: String, assertionConsumerServiceURL: String, spPrivateKeyAlias: String, keyStorePassword: String, defaultRedirectUrl: String, userIDAttribute: String, useEncryption: Boolean, createUser: Boolean, addGroupMemberships: Boolean, groupMembershipAttribute: String, defaultGroups: List[String] = List.empty[String] , nameIdFormat: String, synchronizeAttributes: List[String] = List.empty[String] , handleLogout: Boolean, logoutUrl: String, clockTolerance: Integer, digestMethod: String, signatureMethod: String, userIntermediatePath: String, propertylist: List[String] = List.empty[String] )(implicit postQuery: QueryParam[Boolean], applyQuery: QueryParam[Boolean], deleteQuery: QueryParam[Boolean], actionQuery: QueryParam[String], locationQuery: QueryParam[String], `path`Query: QueryParam[List[String]], serviceRankingQuery: QueryParam[Integer], idpUrlQuery: QueryParam[String], idpCertAliasQuery: QueryParam[String], idpHttpRedirectQuery: QueryParam[Boolean], serviceProviderEntityIdQuery: QueryParam[String], assertionConsumerServiceURLQuery: QueryParam[String], spPrivateKeyAliasQuery: QueryParam[String], keyStorePasswordQuery: QueryParam[String], defaultRedirectUrlQuery: QueryParam[String], userIDAttributeQuery: QueryParam[String], useEncryptionQuery: QueryParam[Boolean], createUserQuery: QueryParam[Boolean], addGroupMembershipsQuery: QueryParam[Boolean], groupMembershipAttributeQuery: QueryParam[String], defaultGroupsQuery: QueryParam[List[String]], nameIdFormatQuery: QueryParam[String], synchronizeAttributesQuery: QueryParam[List[String]], handleLogoutQuery: QueryParam[Boolean], logoutUrlQuery: QueryParam[String], clockToleranceQuery: QueryParam[Integer], digestMethodQuery: QueryParam[String], signatureMethodQuery: QueryParam[String], userIntermediatePathQuery: QueryParam[String], propertylistQuery: QueryParam[List[String]]): Task[SamlConfigurationInfo] = {
     implicit val returnTypeDecoder: EntityDecoder[SamlConfigurationInfo] = jsonOf[SamlConfigurationInfo]
 
     val path = "/system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler"
-    
+
     val httpMethod = Method.POST
     val contentType = `Content-Type`(MediaType.`application/json`)
     val headers = Headers(
@@ -280,5 +280,5 @@ class HttpServiceConsoleApi(service: HttpService) {
 
     } yield resp
   }
-  
+
 }

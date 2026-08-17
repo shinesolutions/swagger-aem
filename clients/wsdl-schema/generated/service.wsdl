@@ -1,0 +1,2421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:schemas="http://localhost/soap/ServiceV1/model" xmlns:wsdl="http://localhost/soap/ServiceV1/service" targetNamespace="http://localhost/soap/ServiceV1/service" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xs:schema xmlns:tns="http://localhost/soap/ServiceV1/model" targetNamespace="http://localhost/soap/ServiceV1/model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="GetSystemConsoleStatus-productinfo.json_RequestMessage" type="schemas:GetSystemConsoleStatus-productinfo.json_RequestMessage" />
+      <xs:element name="GetSystemConsoleStatus-productinfo.json_ResponseMessage" type="schemas:GetSystemConsoleStatus-productinfo.json_ResponseMessage" />
+      <xs:element name="GetSystemConsoleBundlesByName}.jso_RequestMessage" type="schemas:GetSystemConsoleBundlesByName}.jso_RequestMessage" />
+      <xs:element name="GetSystemConsoleBundlesByName}.jso_ResponseMessage" type="schemas:GetSystemConsoleBundlesByName}.jso_ResponseMessage" />
+      <xs:element name="GetSystemConsoleConfigmgr_RequestMessage" type="schemas:GetSystemConsoleConfigmgr_RequestMessage" />
+      <xs:element name="GetSystemConsoleConfigmgr_ResponseMessage" type="schemas:GetSystemConsoleConfigmgr_ResponseMessage" />
+      <xs:element name="GetSystemConsoleConfigmgr_5XX">
+        <xs:annotation>
+          <xs:documentation>Unexpected error.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PostSystemConsoleBundlesByName_RequestMessage" type="schemas:PostSystemConsoleBundlesByName_RequestMessage" />
+      <xs:element name="PostSystemConsoleBundlesByName_ResponseMessage" type="schemas:PostSystemConsoleBundlesByName_ResponseMessage" />
+      <xs:element name="PostSystemConsoleJmxCom.adobe.granite:type&#x3D;repositoryOpByAction_RequestMessage" type="schemas:PostSystemConsoleJmxCom.adobe.granite:type&#x3D;repositoryOpByAction_RequestMessage" />
+      <xs:element name="PostSystemConsoleJmxCom.adobe.granite:type&#x3D;repositoryOpByAction_ResponseMessage" type="schemas:PostSystemConsoleJmxCom.adobe.granite:type&#x3D;repositoryOpByAction_ResponseMessage" />
+      <xs:element name="PostSystemConsoleConfigmgrCom.adobe.granite.auth.saml.samlauthenticationhandler_RequestMessage" type="schemas:PostSystemConsoleConfigmgrCom.adobe.granite.auth.saml.samlauthenticationhandler_RequestMessage" />
+      <xs:element name="PostSystemConsoleConfigmgrCom.adobe.granite.auth.saml.samlauthenticationhandler_ResponseMessage" type="schemas:PostSystemConsoleConfigmgrCom.adobe.granite.auth.saml.samlauthenticationhandler_ResponseMessage" />
+      <xs:element name="GetLibsGraniteCoreContentLogin.html_RequestMessage" type="schemas:GetLibsGraniteCoreContentLogin.html_RequestMessage" />
+      <xs:element name="GetLibsGraniteCoreContentLogin.html_ResponseMessage" type="schemas:GetLibsGraniteCoreContentLogin.html_ResponseMessage" />
+      <xs:element name="Post.cqactions.html_RequestMessage" type="schemas:Post.cqactions.html_RequestMessage" />
+      <xs:element name="Post.cqactions.html_ResponseMessage" type="schemas:Post.cqactions.html_ResponseMessage" />
+      <xs:element name="GetCrxServerCrx.defaultJcr:root.1.json_RequestMessage" type="schemas:GetCrxServerCrx.defaultJcr:root.1.json_RequestMessage" />
+      <xs:element name="GetCrxServerCrx.defaultJcr:root.1.json_ResponseMessage" type="schemas:GetCrxServerCrx.defaultJcr:root.1.json_ResponseMessage" />
+      <xs:element name="GetCrxServerCrx.defaultJcr:root.1.json_404" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>CRXDE is disabled</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="GetCrxPackmgrInstallstatus.jsp_RequestMessage" type="schemas:GetCrxPackmgrInstallstatus.jsp_RequestMessage" />
+      <xs:element name="GetCrxPackmgrInstallstatus.jsp_ResponseMessage" type="schemas:GetCrxPackmgrInstallstatus.jsp_ResponseMessage" />
+      <xs:element name="GetCrxPackmgrServiceScript.html_RequestMessage" type="schemas:GetCrxPackmgrServiceScript.html_RequestMessage" />
+      <xs:element name="GetCrxPackmgrServiceScript.html_ResponseMessage" type="schemas:GetCrxPackmgrServiceScript.html_ResponseMessage" />
+      <xs:element name="GetCrxPackmgrServiceScript.html_404" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Package Manager Servlet is disabled</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="GetCrxPackmgrServiceScript.html_405" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Package Manager Servlet is active</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PostCrxPackmgrService.jsp_RequestMessage" type="schemas:PostCrxPackmgrService.jsp_RequestMessage" />
+      <xs:element name="PostCrxPackmgrService.jsp_ResponseMessage" type="schemas:PostCrxPackmgrService.jsp_ResponseMessage" />
+      <xs:element name="PostCrxPackmgrService.jsonByPath_RequestMessage" type="schemas:PostCrxPackmgrService.jsonByPath_RequestMessage" />
+      <xs:element name="PostCrxPackmgrService.jsonByPath_ResponseMessage" type="schemas:PostCrxPackmgrService.jsonByPath_ResponseMessage" />
+      <xs:element name="PostCrxPackmgrUpdate.jsp_RequestMessage" type="schemas:PostCrxPackmgrUpdate.jsp_RequestMessage" />
+      <xs:element name="PostCrxPackmgrUpdate.jsp_ResponseMessage" type="schemas:PostCrxPackmgrUpdate.jsp_ResponseMessage" />
+      <xs:element name="PostCrxExplorerUiSetpassword.jsp_RequestMessage" type="schemas:PostCrxExplorerUiSetpassword.jsp_RequestMessage" />
+      <xs:element name="PostCrxExplorerUiSetpassword.jsp_ResponseMessage" type="schemas:PostCrxExplorerUiSetpassword.jsp_ResponseMessage" />
+      <xs:element name="GetSystemHealth_RequestMessage" type="schemas:GetSystemHealth_RequestMessage" />
+      <xs:element name="GetSystemHealth_ResponseMessage" type="schemas:GetSystemHealth_ResponseMessage" />
+      <xs:element name="PostAppsSystemConfigCom.shinesolutions.healthcheck.hc.impl.activebundlehealthcheck_RequestMessage" type="schemas:PostAppsSystemConfigCom.shinesolutions.healthcheck.hc.impl.activebundlehealthcheck_RequestMessage" />
+      <xs:element name="PostAppsSystemConfigCom.shinesolutions.healthcheck.hc.impl.activebundlehealthcheck_ResponseMessage" type="schemas:PostAppsSystemConfigCom.shinesolutions.healthcheck.hc.impl.activebundlehealthcheck_ResponseMessage" />
+      <xs:element name="PostAppsSystemConfigCom.shinesolutions.aem.passwordreset.activator_RequestMessage" type="schemas:PostAppsSystemConfigCom.shinesolutions.aem.passwordreset.activator_RequestMessage" />
+      <xs:element name="PostAppsSystemConfigCom.shinesolutions.aem.passwordreset.activator_ResponseMessage" type="schemas:PostAppsSystemConfigCom.shinesolutions.aem.passwordreset.activator_ResponseMessage" />
+      <xs:element name="PostLibsGraniteSecurityPostSslsetup.html_RequestMessage" type="schemas:PostLibsGraniteSecurityPostSslsetup.html_RequestMessage" />
+      <xs:element name="PostLibsGraniteSecurityPostSslsetup.html_ResponseMessage" type="schemas:PostLibsGraniteSecurityPostSslsetup.html_ResponseMessage" />
+      <xs:element name="DeleteEtcReplicationByGents.{runmodeAndName_RequestMessage" type="schemas:DeleteEtcReplicationByGents.{runmodeAndName_RequestMessage" />
+      <xs:element name="DeleteEtcReplicationByGents.{runmodeAndName_ResponseMessage" type="schemas:DeleteEtcReplicationByGents.{runmodeAndName_ResponseMessage" />
+      <xs:element name="DeleteByPathAndName_RequestMessage" type="schemas:DeleteByPathAndName_RequestMessage" />
+      <xs:element name="DeleteByPathAndName_ResponseMessage" type="schemas:DeleteByPathAndName_ResponseMessage" />
+      <xs:element name="GetEtcReplicationByGents.{runmodeAndName_RequestMessage" type="schemas:GetEtcReplicationByGents.{runmodeAndName_RequestMessage" />
+      <xs:element name="GetEtcReplicationByGents.{runmodeAndName_ResponseMessage" type="schemas:GetEtcReplicationByGents.{runmodeAndName_ResponseMessage" />
+      <xs:element name="GetEtcReplicationByGents.{runmode}.-1.jso_RequestMessage" type="schemas:GetEtcReplicationByGents.{runmode}.-1.jso_RequestMessage" />
+      <xs:element name="GetEtcReplicationByGents.{runmode}.-1.jso_ResponseMessage" type="schemas:GetEtcReplicationByGents.{runmode}.-1.jso_ResponseMessage" />
+      <xs:element name="GetByIntermediatepathAndAuthorizableid}.ks.jso_RequestMessage" type="schemas:GetByIntermediatepathAndAuthorizableid}.ks.jso_RequestMessage" />
+      <xs:element name="GetByIntermediatepathAndAuthorizableid}.ks.jso_ResponseMessage" type="schemas:GetByIntermediatepathAndAuthorizableid}.ks.jso_ResponseMessage" />
+      <xs:element name="GetKeystoreStore.p12ByIntermediatepathAndAuthorizableid_RequestMessage" type="schemas:GetKeystoreStore.p12ByIntermediatepathAndAuthorizableid_RequestMessage" />
+      <xs:element name="GetKeystoreStore.p12ByIntermediatepathAndAuthorizableid_ResponseMessage" type="schemas:GetKeystoreStore.p12ByIntermediatepathAndAuthorizableid_ResponseMessage" />
+      <xs:element name="GetByPathAndName_RequestMessage" type="schemas:GetByPathAndName_RequestMessage" />
+      <xs:element name="GetByPathAndName_ResponseMessage" type="schemas:GetByPathAndName_ResponseMessage" />
+      <xs:element name="GetEtcPackagesByGroupAndName}-{version}.zi_RequestMessage" type="schemas:GetEtcPackagesByGroupAndName}-{version}.zi_RequestMessage" />
+      <xs:element name="GetEtcPackagesByGroupAndName}-{version}.zi_ResponseMessage" type="schemas:GetEtcPackagesByGroupAndName}-{version}.zi_ResponseMessage" />
+      <xs:element name="GetEtcPackagesJcr:contentVlt:definitionFilter.tidy.2.jsonByGroupAndName}-{version}.zi_RequestMessage" type="schemas:GetEtcPackagesJcr:contentVlt:definitionFilter.tidy.2.jsonByGroupAndName}-{version}.zi_RequestMessage" />
+      <xs:element name="GetEtcPackagesJcr:contentVlt:definitionFilter.tidy.2.jsonByGroupAndName}-{version}.zi_ResponseMessage" type="schemas:GetEtcPackagesJcr:contentVlt:definitionFilter.tidy.2.jsonByGroupAndName}-{version}.zi_ResponseMessage" />
+      <xs:element name="GetBinQuerybuilder.json_RequestMessage" type="schemas:GetBinQuerybuilder.json_RequestMessage" />
+      <xs:element name="GetBinQuerybuilder.json_ResponseMessage" type="schemas:GetBinQuerybuilder.json_ResponseMessage" />
+      <xs:element name="GetEtcTruststoreTruststore.p12_RequestMessage" type="schemas:GetEtcTruststoreTruststore.p12_RequestMessage" />
+      <xs:element name="GetEtcTruststoreTruststore.p12_ResponseMessage" type="schemas:GetEtcTruststoreTruststore.p12_ResponseMessage" />
+      <xs:element name="GetLibsGraniteSecurityTruststore.json_RequestMessage" type="schemas:GetLibsGraniteSecurityTruststore.json_RequestMessage" />
+      <xs:element name="GetLibsGraniteSecurityTruststore.json_ResponseMessage" type="schemas:GetLibsGraniteSecurityTruststore.json_ResponseMessage" />
+      <xs:element name="PostEtcReplicationByGents.{runmodeAndName_RequestMessage" type="schemas:PostEtcReplicationByGents.{runmodeAndName_RequestMessage" />
+      <xs:element name="PostEtcReplicationByGents.{runmodeAndName_ResponseMessage" type="schemas:PostEtcReplicationByGents.{runmodeAndName_ResponseMessage" />
+      <xs:element name="PostByIntermediatepathAndAuthorizableid}.ks.htm_RequestMessage" type="schemas:PostByIntermediatepathAndAuthorizableid}.ks.htm_RequestMessage" />
+      <xs:element name="PostByIntermediatepathAndAuthorizableid}.ks.htm_ResponseMessage" type="schemas:PostByIntermediatepathAndAuthorizableid}.ks.htm_ResponseMessage" />
+      <xs:element name="PostLibsGraniteSecurityPostAuthorizables_RequestMessage" type="schemas:PostLibsGraniteSecurityPostAuthorizables_RequestMessage" />
+      <xs:element name="PostLibsGraniteSecurityPostAuthorizables_ResponseMessage" type="schemas:PostLibsGraniteSecurityPostAuthorizables_ResponseMessage" />
+      <xs:element name="PostAppsSystemConfigCom.adobe.granite.auth.saml.samlauthenticationhandler.config_RequestMessage" type="schemas:PostAppsSystemConfigCom.adobe.granite.auth.saml.samlauthenticationhandler.config_RequestMessage" />
+      <xs:element name="PostAppsSystemConfigCom.adobe.granite.auth.saml.samlauthenticationhandler.config_ResponseMessage" type="schemas:PostAppsSystemConfigCom.adobe.granite.auth.saml.samlauthenticationhandler.config_ResponseMessage" />
+      <xs:element name="PostAppsSystemConfigOrg.apache.felix.http_RequestMessage" type="schemas:PostAppsSystemConfigOrg.apache.felix.http_RequestMessage" />
+      <xs:element name="PostAppsSystemConfigOrg.apache.felix.http_ResponseMessage" type="schemas:PostAppsSystemConfigOrg.apache.felix.http_ResponseMessage" />
+      <xs:element name="PostAppsSystemConfigOrg.apache.http.proxyconfigurator.config_RequestMessage" type="schemas:PostAppsSystemConfigOrg.apache.http.proxyconfigurator.config_RequestMessage" />
+      <xs:element name="PostAppsSystemConfigOrg.apache.http.proxyconfigurator.config_ResponseMessage" type="schemas:PostAppsSystemConfigOrg.apache.http.proxyconfigurator.config_ResponseMessage" />
+      <xs:element name="PostAppsSystemConfigOrg.apache.sling.jcr.davex.impl.servlets.slingdavexservlet_RequestMessage" type="schemas:PostAppsSystemConfigOrg.apache.sling.jcr.davex.impl.servlets.slingdavexservlet_RequestMessage" />
+      <xs:element name="PostAppsSystemConfigOrg.apache.sling.jcr.davex.impl.servlets.slingdavexservlet_ResponseMessage" type="schemas:PostAppsSystemConfigOrg.apache.sling.jcr.davex.impl.servlets.slingdavexservlet_ResponseMessage" />
+      <xs:element name="PostAppsSystemConfigOrg.apache.sling.servlets.get.defaultgetservlet_RequestMessage" type="schemas:PostAppsSystemConfigOrg.apache.sling.servlets.get.defaultgetservlet_RequestMessage" />
+      <xs:element name="PostAppsSystemConfigOrg.apache.sling.servlets.get.defaultgetservlet_ResponseMessage" type="schemas:PostAppsSystemConfigOrg.apache.sling.servlets.get.defaultgetservlet_ResponseMessage" />
+      <xs:element name="PostAppsSystemConfigOrg.apache.sling.security.impl.referrerfilter_RequestMessage" type="schemas:PostAppsSystemConfigOrg.apache.sling.security.impl.referrerfilter_RequestMessage" />
+      <xs:element name="PostAppsSystemConfigOrg.apache.sling.security.impl.referrerfilter_ResponseMessage" type="schemas:PostAppsSystemConfigOrg.apache.sling.security.impl.referrerfilter_ResponseMessage" />
+      <xs:element name="PostAppsSystemConfigByConfignodename_RequestMessage" type="schemas:PostAppsSystemConfigByConfignodename_RequestMessage" />
+      <xs:element name="PostAppsSystemConfigByConfignodename_ResponseMessage" type="schemas:PostAppsSystemConfigByConfignodename_ResponseMessage" />
+      <xs:element name="PostByPathAndName_RequestMessage" type="schemas:PostByPathAndName_RequestMessage" />
+      <xs:element name="PostByPathAndName_ResponseMessage" type="schemas:PostByPathAndName_ResponseMessage" />
+      <xs:element name="PostByPathAndName}.rw.htm_RequestMessage" type="schemas:PostByPathAndName}.rw.htm_RequestMessage" />
+      <xs:element name="PostByPathAndName}.rw.htm_ResponseMessage" type="schemas:PostByPathAndName}.rw.htm_ResponseMessage" />
+      <xs:element name="PostByPath_RequestMessage" type="schemas:PostByPath_RequestMessage" />
+      <xs:element name="PostByPath_ResponseMessage" type="schemas:PostByPath_ResponseMessage" />
+      <xs:element name="PostBinQuerybuilder.json_RequestMessage" type="schemas:PostBinQuerybuilder.json_RequestMessage" />
+      <xs:element name="PostBinQuerybuilder.json_ResponseMessage" type="schemas:PostBinQuerybuilder.json_ResponseMessage" />
+      <xs:element name="PostLibsReplicationTreeactivation.html_RequestMessage" type="schemas:PostLibsReplicationTreeactivation.html_RequestMessage" />
+      <xs:element name="PostLibsReplicationTreeactivation.html_ResponseMessage" type="schemas:PostLibsReplicationTreeactivation.html_ResponseMessage" />
+      <xs:element name="PostLibsGraniteSecurityPostTruststore_RequestMessage" type="schemas:PostLibsGraniteSecurityPostTruststore_RequestMessage" />
+      <xs:element name="PostLibsGraniteSecurityPostTruststore_ResponseMessage" type="schemas:PostLibsGraniteSecurityPostTruststore_ResponseMessage" />
+      <xs:element name="PostEtcTruststore_RequestMessage" type="schemas:PostEtcTruststore_RequestMessage" />
+      <xs:element name="PostEtcTruststore_ResponseMessage" type="schemas:PostEtcTruststore_ResponseMessage" />
+      <xs:complexType name="BundleData">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" type="xs:integer">
+            <xs:annotation>
+              <xs:documentation>Bundle ID</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="name" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Bundle name</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="fragment" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>Is bundle a fragment</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="stateRaw" type="xs:integer">
+            <xs:annotation>
+              <xs:documentation>Numeric raw bundle state value</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="state" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Bundle state value</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="version" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Bundle version</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="symbolicName" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Bundle symbolic name</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="category" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Bundle category</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="props" type="schemas:BundleDataProp" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="BundleDataProp">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="key" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Bundle data key</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="value" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Bundle data value</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="BundleInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="status" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Status description of all bundles</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="s" type="xs:integer" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="data" type="schemas:BundleData" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="InstallStatus">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="status" type="schemas:InstallStatus_status" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="InstallStatusStatus">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="finished" type="xs:boolean" />
+          <xs:element minOccurs="0" name="itemCount" type="xs:integer" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="KeystoreChainItems">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="subject" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>e.g. \&quot;CN&#x3D;localhost\&quot;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="issuer" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>e.g. \&quot;CN&#x3D;Admin\&quot;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="notBefore" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>e.g. \&quot;Sun Jul 01 12:00:00 AEST 2018\&quot;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="notAfter" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>e.g. \&quot;Sun Jun 30 23:59:50 AEST 2019\&quot;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="serialNumber" type="xs:integer">
+            <xs:annotation>
+              <xs:documentation>18165099476682912368</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="KeystoreInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="aliases" type="schemas:KeystoreItems" />
+          <xs:element minOccurs="0" name="exists" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>False if truststore don&#39;t exist</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="KeystoreItems">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="alias" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Keystore alias name</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="entryType" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>e.g. \&quot;privateKey\&quot;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="algorithm" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>e.g. \&quot;RSA\&quot;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="format" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>e.g. \&quot;PKCS#8\&quot;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="chain" type="schemas:KeystoreChainItems" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SamlConfigurationInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="pid" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Persistent Identity (PID)</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="title" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Title</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="description" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Title</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="bundle_location" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>needed for configuration binding</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="service_location" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>needed for configuraiton binding</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="properties" type="schemas:SamlConfigurationProperties" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SamlConfigurationProperties">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="path" type="schemas:SamlConfigurationPropertyItemsArray" />
+          <xs:element minOccurs="0" name="service.ranking" type="schemas:SamlConfigurationPropertyItemsLong" />
+          <xs:element minOccurs="0" name="idpUrl" type="schemas:SamlConfigurationPropertyItemsString" />
+          <xs:element minOccurs="0" name="idpCertAlias" type="schemas:SamlConfigurationPropertyItemsString" />
+          <xs:element minOccurs="0" name="idpHttpRedirect" type="schemas:SamlConfigurationPropertyItemsBoolean" />
+          <xs:element minOccurs="0" name="serviceProviderEntityId" type="schemas:SamlConfigurationPropertyItemsString" />
+          <xs:element minOccurs="0" name="assertionConsumerServiceURL" type="schemas:SamlConfigurationPropertyItemsString" />
+          <xs:element minOccurs="0" name="spPrivateKeyAlias" type="schemas:SamlConfigurationPropertyItemsString" />
+          <xs:element minOccurs="0" name="keyStorePassword" type="schemas:SamlConfigurationPropertyItemsString" />
+          <xs:element minOccurs="0" name="defaultRedirectUrl" type="schemas:SamlConfigurationPropertyItemsString" />
+          <xs:element minOccurs="0" name="userIDAttribute" type="schemas:SamlConfigurationPropertyItemsString" />
+          <xs:element minOccurs="0" name="useEncryption" type="schemas:SamlConfigurationPropertyItemsBoolean" />
+          <xs:element minOccurs="0" name="createUser" type="schemas:SamlConfigurationPropertyItemsBoolean" />
+          <xs:element minOccurs="0" name="addGroupMemberships" type="schemas:SamlConfigurationPropertyItemsBoolean" />
+          <xs:element minOccurs="0" name="groupMembershipAttribute" type="schemas:SamlConfigurationPropertyItemsString" />
+          <xs:element minOccurs="0" name="defaultGroups" type="schemas:SamlConfigurationPropertyItemsArray" />
+          <xs:element minOccurs="0" name="nameIdFormat" type="schemas:SamlConfigurationPropertyItemsString" />
+          <xs:element minOccurs="0" name="synchronizeAttributes" type="schemas:SamlConfigurationPropertyItemsArray" />
+          <xs:element minOccurs="0" name="handleLogout" type="schemas:SamlConfigurationPropertyItemsBoolean" />
+          <xs:element minOccurs="0" name="logoutUrl" type="schemas:SamlConfigurationPropertyItemsString" />
+          <xs:element minOccurs="0" name="clockTolerance" type="schemas:SamlConfigurationPropertyItemsLong" />
+          <xs:element minOccurs="0" name="digestMethod" type="schemas:SamlConfigurationPropertyItemsString" />
+          <xs:element minOccurs="0" name="signatureMethod" type="schemas:SamlConfigurationPropertyItemsString" />
+          <xs:element minOccurs="0" name="userIntermediatePath" type="schemas:SamlConfigurationPropertyItemsString" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SamlConfigurationPropertyItemsArray">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="name" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>property name</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="optional" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>True if optional</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="is_set" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>True if property is set</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="type" type="xs:integer">
+            <xs:annotation>
+              <xs:documentation>Property type, 1&#x3D;String, 3&#x3D;long, 11&#x3D;boolean, 12&#x3D;Password</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="values" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Property value</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="description" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Property description</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SamlConfigurationPropertyItemsBoolean">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="name" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>property name</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="optional" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>True if optional</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="is_set" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>True if property is set</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="type" type="xs:integer">
+            <xs:annotation>
+              <xs:documentation>Property type, 1&#x3D;String, 3&#x3D;long, 11&#x3D;boolean, 12&#x3D;Password</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="value" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>Property value</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="description" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Property description</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SamlConfigurationPropertyItemsLong">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="name" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>property name</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="optional" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>True if optional</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="is_set" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>True if property is set</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="type" type="xs:integer">
+            <xs:annotation>
+              <xs:documentation>Property type, 1&#x3D;String, 3&#x3D;long, 11&#x3D;boolean, 12&#x3D;Password</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="value" type="xs:integer">
+            <xs:annotation>
+              <xs:documentation>Property value</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="description" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Property description</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SamlConfigurationPropertyItemsString">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="name" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>property name</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="optional" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>True if optional</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="is_set" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>True if property is set</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="type" type="xs:integer">
+            <xs:annotation>
+              <xs:documentation>Property type, 1&#x3D;String, 3&#x3D;long, 11&#x3D;boolean, 12&#x3D;Password</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="value" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Property value</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="description" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Property description</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TruststoreInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="aliases" type="schemas:TruststoreItems" />
+          <xs:element minOccurs="0" name="exists" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>False if truststore don&#39;t exist</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TruststoreItems">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="alias" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Truststore alias name</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="entryType" type="xs:string" />
+          <xs:element minOccurs="0" name="subject" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>e.g. \&quot;CN&#x3D;localhost\&quot;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="issuer" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>e.g. \&quot;CN&#x3D;Admin\&quot;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="notBefore" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>e.g. \&quot;Sun Jul 01 12:00:00 AEST 2018\&quot;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="notAfter" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>e.g. \&quot;Sun Jun 30 23:59:50 AEST 2019\&quot;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="serialNumber" type="xs:integer">
+            <xs:annotation>
+              <xs:documentation>18165099476682912368</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetSystemConsoleStatus-productinfo.json_RequestMessage" />
+      <xs:complexType name="GetSystemConsoleStatus-productinfo.json_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="unbounded" name="String" type="schemas:String">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetSystemConsoleBundlesByName}.jso_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="name" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetSystemConsoleBundlesByName}.jso_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="BundleInfo" type="schemas:BundleInfo">
+            <xs:annotation>
+              <xs:documentation>Retrieved bundle info</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetSystemConsoleBundlesByName}.jso_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="String" type="schemas:String">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetSystemConsoleConfigmgr_RequestMessage" />
+      <xs:complexType name="GetSystemConsoleConfigmgr_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="String" type="schemas:String">
+            <xs:annotation>
+              <xs:documentation>OK</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostSystemConsoleBundlesByName_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="name" type="xs:string" />
+          <xs:element minOccurs="1" name="action" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostSystemConsoleBundlesByName_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostSystemConsoleJmxCom.adobe.granite:type&#x3D;repositoryOpByAction_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="action" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostSystemConsoleJmxCom.adobe.granite:type&#x3D;repositoryOpByAction_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostSystemConsoleConfigmgrCom.adobe.granite.auth.saml.samlauthenticationhandler_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="post" type="xs:boolean" />
+          <xs:element minOccurs="0" name="apply" type="xs:boolean" />
+          <xs:element minOccurs="0" name="delete" type="xs:boolean" />
+          <xs:element minOccurs="0" name="action" type="xs:string" />
+          <xs:element minOccurs="0" name="Dollarlocation" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="path" type="xs:string" />
+          <xs:element minOccurs="0" name="servicePeriodranking" type="xs:integer" />
+          <xs:element minOccurs="0" name="idpUrl" type="xs:string" />
+          <xs:element minOccurs="0" name="idpCertAlias" type="xs:string" />
+          <xs:element minOccurs="0" name="idpHttpRedirect" type="xs:boolean" />
+          <xs:element minOccurs="0" name="serviceProviderEntityId" type="xs:string" />
+          <xs:element minOccurs="0" name="assertionConsumerServiceURL" type="xs:string" />
+          <xs:element minOccurs="0" name="spPrivateKeyAlias" type="xs:string" />
+          <xs:element minOccurs="0" name="keyStorePassword" type="xs:string" />
+          <xs:element minOccurs="0" name="defaultRedirectUrl" type="xs:string" />
+          <xs:element minOccurs="0" name="userIDAttribute" type="xs:string" />
+          <xs:element minOccurs="0" name="useEncryption" type="xs:boolean" />
+          <xs:element minOccurs="0" name="createUser" type="xs:boolean" />
+          <xs:element minOccurs="0" name="addGroupMemberships" type="xs:boolean" />
+          <xs:element minOccurs="0" name="groupMembershipAttribute" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="defaultGroups" type="xs:string" />
+          <xs:element minOccurs="0" name="nameIdFormat" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="synchronizeAttributes" type="xs:string" />
+          <xs:element minOccurs="0" name="handleLogout" type="xs:boolean" />
+          <xs:element minOccurs="0" name="logoutUrl" type="xs:string" />
+          <xs:element minOccurs="0" name="clockTolerance" type="xs:integer" />
+          <xs:element minOccurs="0" name="digestMethod" type="xs:string" />
+          <xs:element minOccurs="0" name="signatureMethod" type="xs:string" />
+          <xs:element minOccurs="0" name="userIntermediatePath" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="propertylist" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostSystemConsoleConfigmgrCom.adobe.granite.auth.saml.samlauthenticationhandler_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="SamlConfigurationInfo" type="schemas:SamlConfigurationInfo">
+            <xs:annotation>
+              <xs:documentation>Retrieved AEM SAML Configuration</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostSystemConsoleConfigmgrCom.adobe.granite.auth.saml.samlauthenticationhandler_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="String" type="schemas:String">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostSystemConsoleConfigmgrCom.adobe.granite.auth.saml.samlauthenticationhandler_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="String" type="schemas:String">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetLibsGraniteCoreContentLogin.html_RequestMessage" />
+      <xs:complexType name="GetLibsGraniteCoreContentLogin.html_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="String" type="schemas:String">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Post.cqactions.html_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="authorizableId" type="xs:string" />
+          <xs:element minOccurs="1" name="changelog" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Post.cqactions.html_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetCrxServerCrx.defaultJcr:root.1.json_RequestMessage" />
+      <xs:complexType name="GetCrxServerCrx.defaultJcr:root.1.json_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="String" type="schemas:String">
+            <xs:annotation>
+              <xs:documentation>CRXDE is enabled</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetCrxPackmgrInstallstatus.jsp_RequestMessage" />
+      <xs:complexType name="GetCrxPackmgrInstallstatus.jsp_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="InstallStatus" type="schemas:InstallStatus">
+            <xs:annotation>
+              <xs:documentation>Retrieved CRX package manager install status</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetCrxPackmgrInstallstatus.jsp_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="String" type="schemas:String">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetCrxPackmgrServiceScript.html_RequestMessage" />
+      <xs:complexType name="PostCrxPackmgrService.jsp_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="cmd" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostCrxPackmgrService.jsp_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="String" type="schemas:String">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostCrxPackmgrService.jsonByPath_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="path" type="xs:string" />
+          <xs:element minOccurs="1" name="cmd" type="xs:string" />
+          <xs:element minOccurs="0" name="groupName" type="xs:string" />
+          <xs:element minOccurs="0" name="packageName" type="xs:string" />
+          <xs:element minOccurs="0" name="packageVersion" type="xs:string" />
+          <xs:element minOccurs="0" name="charset" type="xs:string" />
+          <xs:element minOccurs="0" name="force" type="xs:boolean" />
+          <xs:element minOccurs="0" name="recursive" type="xs:boolean" />
+          <xs:element minOccurs="0" name="package" type="xs:hexBinary" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostCrxPackmgrService.jsonByPath_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="String" type="schemas:String">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostCrxPackmgrUpdate.jsp_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="groupName" type="xs:string" />
+          <xs:element minOccurs="1" name="packageName" type="xs:string" />
+          <xs:element minOccurs="1" name="version" type="xs:string" />
+          <xs:element minOccurs="1" name="path" type="xs:string" />
+          <xs:element minOccurs="0" name="filter" type="xs:string" />
+          <xs:element minOccurs="0" name="charset" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostCrxPackmgrUpdate.jsp_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="String" type="schemas:String">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostCrxExplorerUiSetpassword.jsp_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="old" type="xs:string" />
+          <xs:element minOccurs="1" name="plain" type="xs:string" />
+          <xs:element minOccurs="1" name="verify" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostCrxExplorerUiSetpassword.jsp_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="String" type="schemas:String">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetSystemHealth_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="tags" type="xs:string" />
+          <xs:element minOccurs="0" name="combineTagsOr" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetSystemHealth_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="String" type="schemas:String">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostAppsSystemConfigCom.shinesolutions.healthcheck.hc.impl.activebundlehealthcheck_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="bundlesPeriodignored" type="xs:string" />
+          <xs:element minOccurs="0" name="bundlesPeriodignoredAtTypeHint" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostAppsSystemConfigCom.shinesolutions.healthcheck.hc.impl.activebundlehealthcheck_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostAppsSystemConfigCom.shinesolutions.aem.passwordreset.activator_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="pwdresetPeriodauthorizables" type="xs:string" />
+          <xs:element minOccurs="0" name="pwdresetPeriodauthorizablesAtTypeHint" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostAppsSystemConfigCom.shinesolutions.aem.passwordreset.activator_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostLibsGraniteSecurityPostSslsetup.html_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="keystorePassword" type="xs:string" />
+          <xs:element minOccurs="1" name="keystorePasswordConfirm" type="xs:string" />
+          <xs:element minOccurs="1" name="truststorePassword" type="xs:string" />
+          <xs:element minOccurs="1" name="truststorePasswordConfirm" type="xs:string" />
+          <xs:element minOccurs="1" name="httpsHostname" type="xs:string" />
+          <xs:element minOccurs="1" name="httpsPort" type="xs:string" />
+          <xs:element minOccurs="0" name="privatekeyFile" type="xs:hexBinary" />
+          <xs:element minOccurs="0" name="certificateFile" type="xs:hexBinary" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostLibsGraniteSecurityPostSslsetup.html_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="String" type="schemas:String">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="DeleteEtcReplicationByGents.{runmodeAndName_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="runmode" type="xs:string" />
+          <xs:element minOccurs="1" name="name" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="DeleteEtcReplicationByGents.{runmodeAndName_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="DeleteByPathAndName_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="path" type="xs:string" />
+          <xs:element minOccurs="1" name="name" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="DeleteByPathAndName_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetEtcReplicationByGents.{runmodeAndName_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="runmode" type="xs:string" />
+          <xs:element minOccurs="1" name="name" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetEtcReplicationByGents.{runmodeAndName_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetEtcReplicationByGents.{runmode}.-1.jso_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="runmode" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetEtcReplicationByGents.{runmode}.-1.jso_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="String" type="schemas:String">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetByIntermediatepathAndAuthorizableid}.ks.jso_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="intermediatePath" type="xs:string" />
+          <xs:element minOccurs="1" name="authorizableId" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetByIntermediatepathAndAuthorizableid}.ks.jso_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="KeystoreInfo" type="schemas:KeystoreInfo">
+            <xs:annotation>
+              <xs:documentation>Retrieved Authorizable Keystore info</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetByIntermediatepathAndAuthorizableid}.ks.jso_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="String" type="schemas:String">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetKeystoreStore.p12ByIntermediatepathAndAuthorizableid_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="intermediatePath" type="xs:string" />
+          <xs:element minOccurs="1" name="authorizableId" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetKeystoreStore.p12ByIntermediatepathAndAuthorizableid_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetByPathAndName_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="path" type="xs:string" />
+          <xs:element minOccurs="1" name="name" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetByPathAndName_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetEtcPackagesByGroupAndName}-{version}.zi_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="group" type="xs:string" />
+          <xs:element minOccurs="1" name="name" type="xs:string" />
+          <xs:element minOccurs="1" name="version" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetEtcPackagesByGroupAndName}-{version}.zi_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetEtcPackagesJcr:contentVlt:definitionFilter.tidy.2.jsonByGroupAndName}-{version}.zi_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="group" type="xs:string" />
+          <xs:element minOccurs="1" name="name" type="xs:string" />
+          <xs:element minOccurs="1" name="version" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetEtcPackagesJcr:contentVlt:definitionFilter.tidy.2.jsonByGroupAndName}-{version}.zi_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="String" type="schemas:String">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetBinQuerybuilder.json_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="path" type="xs:string" />
+          <xs:element minOccurs="1" name="pPeriodlimit" type="xs:bigdecimal" />
+          <xs:element minOccurs="1" name="1Property" type="xs:string" />
+          <xs:element minOccurs="1" name="1PropertyPeriodvalue" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetBinQuerybuilder.json_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="String" type="schemas:String">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetEtcTruststoreTruststore.p12_RequestMessage" />
+      <xs:complexType name="GetEtcTruststoreTruststore.p12_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetLibsGraniteSecurityTruststore.json_RequestMessage" />
+      <xs:complexType name="GetLibsGraniteSecurityTruststore.json_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="TruststoreInfo" type="schemas:TruststoreInfo">
+            <xs:annotation>
+              <xs:documentation>Retrieved AEM Truststore info</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetLibsGraniteSecurityTruststore.json_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="String" type="schemas:String">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostEtcReplicationByGents.{runmodeAndName_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="runmode" type="xs:string" />
+          <xs:element minOccurs="1" name="name" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrContentSlashcqDistribute" type="xs:boolean" />
+          <xs:element minOccurs="0" name="jcrContentSlashcqDistributeAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrContentSlashcqName" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrContentSlashcqTemplate" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrContentSlashaliasUpdate" type="xs:boolean" />
+          <xs:element minOccurs="0" name="jcrContentSlashenabled" type="xs:boolean" />
+          <xs:element minOccurs="0" name="jcrContentSlashjcrDescription" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrContentSlashjcrLastModified" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrContentSlashjcrLastModifiedBy" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrContentSlashjcrMixinTypes" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrContentSlashjcrTitle" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrContentSlashlogLevel" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrContentSlashnoStatusUpdate" type="xs:boolean" />
+          <xs:element minOccurs="0" name="jcrContentSlashnoVersioning" type="xs:boolean" />
+          <xs:element minOccurs="0" name="jcrContentSlashprotocolConnectTimeout" type="xs:bigdecimal" />
+          <xs:element minOccurs="0" name="jcrContentSlashprotocolHTTPConnectionClosed" type="xs:boolean" />
+          <xs:element minOccurs="0" name="jcrContentSlashprotocolHTTPExpired" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="jcrContentSlashprotocolHTTPHeaders" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrContentSlashprotocolHTTPHeadersAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrContentSlashprotocolHTTPMethod" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrContentSlashprotocolHTTPSRelaxed" type="xs:boolean" />
+          <xs:element minOccurs="0" name="jcrContentSlashprotocolInterface" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrContentSlashprotocolSocketTimeout" type="xs:bigdecimal" />
+          <xs:element minOccurs="0" name="jcrContentSlashprotocolVersion" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrContentSlashproxyNTLMDomain" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrContentSlashproxyNTLMHost" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrContentSlashproxyHost" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrContentSlashproxyPassword" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrContentSlashproxyPort" type="xs:bigdecimal" />
+          <xs:element minOccurs="0" name="jcrContentSlashproxyUser" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrContentSlashqueueBatchMaxSize" type="xs:bigdecimal" />
+          <xs:element minOccurs="0" name="jcrContentSlashqueueBatchMode" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrContentSlashqueueBatchWaitTime" type="xs:bigdecimal" />
+          <xs:element minOccurs="0" name="jcrContentSlashretryDelay" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrContentSlashreverseReplication" type="xs:boolean" />
+          <xs:element minOccurs="0" name="jcrContentSlashserializationType" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrContentSlashslingResourceType" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrContentSlashssl" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrContentSlashtransportNTLMDomain" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrContentSlashtransportNTLMHost" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrContentSlashtransportPassword" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrContentSlashtransportUri" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrContentSlashtransportUser" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrContentSlashtriggerDistribute" type="xs:boolean" />
+          <xs:element minOccurs="0" name="jcrContentSlashtriggerModified" type="xs:boolean" />
+          <xs:element minOccurs="0" name="jcrContentSlashtriggerOnOffTime" type="xs:boolean" />
+          <xs:element minOccurs="0" name="jcrContentSlashtriggerReceive" type="xs:boolean" />
+          <xs:element minOccurs="0" name="jcrContentSlashtriggerSpecific" type="xs:boolean" />
+          <xs:element minOccurs="0" name="jcrContentSlashuserId" type="xs:string" />
+          <xs:element minOccurs="0" name="jcrPrimaryType" type="xs:string" />
+          <xs:element minOccurs="0" name="operation" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostEtcReplicationByGents.{runmodeAndName_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostByIntermediatepathAndAuthorizableid}.ks.htm_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="intermediatePath" type="xs:string" />
+          <xs:element minOccurs="1" name="authorizableId" type="xs:string" />
+          <xs:element minOccurs="0" name="operation" type="xs:string" />
+          <xs:element minOccurs="0" name="currentPassword" type="xs:string" />
+          <xs:element minOccurs="0" name="newPassword" type="xs:string" />
+          <xs:element minOccurs="0" name="rePassword" type="xs:string" />
+          <xs:element minOccurs="0" name="keyPassword" type="xs:string" />
+          <xs:element minOccurs="0" name="keyStorePass" type="xs:string" />
+          <xs:element minOccurs="0" name="alias" type="xs:string" />
+          <xs:element minOccurs="0" name="newAlias" type="xs:string" />
+          <xs:element minOccurs="0" name="removeAlias" type="xs:string" />
+          <xs:element minOccurs="0" name="certChain" type="xs:hexBinary" />
+          <xs:element minOccurs="0" name="pk" type="xs:hexBinary" />
+          <xs:element minOccurs="0" name="keyStore" type="xs:hexBinary" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostByIntermediatepathAndAuthorizableid}.ks.htm_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="KeystoreInfo" type="schemas:KeystoreInfo">
+            <xs:annotation>
+              <xs:documentation>Retrieved Authorizable Keystore info</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostByIntermediatepathAndAuthorizableid}.ks.htm_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="String" type="schemas:String">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostLibsGraniteSecurityPostAuthorizables_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="authorizableId" type="xs:string" />
+          <xs:element minOccurs="1" name="intermediatePath" type="xs:string" />
+          <xs:element minOccurs="0" name="createUser" type="xs:string" />
+          <xs:element minOccurs="0" name="createGroup" type="xs:string" />
+          <xs:element minOccurs="0" name="repPassword" type="xs:string" />
+          <xs:element minOccurs="0" name="profileSlashgivenName" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostLibsGraniteSecurityPostAuthorizables_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="String" type="schemas:String">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostAppsSystemConfigCom.adobe.granite.auth.saml.samlauthenticationhandler.config_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="keyStorePassword" type="xs:string" />
+          <xs:element minOccurs="0" name="keyStorePasswordAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="servicePeriodranking" type="xs:integer" />
+          <xs:element minOccurs="0" name="servicePeriodrankingAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="idpHttpRedirect" type="xs:boolean" />
+          <xs:element minOccurs="0" name="idpHttpRedirectAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="createUser" type="xs:boolean" />
+          <xs:element minOccurs="0" name="createUserAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="defaultRedirectUrl" type="xs:string" />
+          <xs:element minOccurs="0" name="defaultRedirectUrlAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="userIDAttribute" type="xs:string" />
+          <xs:element minOccurs="0" name="userIDAttributeAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="defaultGroups" type="xs:string" />
+          <xs:element minOccurs="0" name="defaultGroupsAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="idpCertAlias" type="xs:string" />
+          <xs:element minOccurs="0" name="idpCertAliasAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="addGroupMemberships" type="xs:boolean" />
+          <xs:element minOccurs="0" name="addGroupMembershipsAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="path" type="xs:string" />
+          <xs:element minOccurs="0" name="pathAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="synchronizeAttributes" type="xs:string" />
+          <xs:element minOccurs="0" name="synchronizeAttributesAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="clockTolerance" type="xs:integer" />
+          <xs:element minOccurs="0" name="clockToleranceAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="groupMembershipAttribute" type="xs:string" />
+          <xs:element minOccurs="0" name="groupMembershipAttributeAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="idpUrl" type="xs:string" />
+          <xs:element minOccurs="0" name="idpUrlAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="logoutUrl" type="xs:string" />
+          <xs:element minOccurs="0" name="logoutUrlAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="serviceProviderEntityId" type="xs:string" />
+          <xs:element minOccurs="0" name="serviceProviderEntityIdAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="assertionConsumerServiceURL" type="xs:string" />
+          <xs:element minOccurs="0" name="assertionConsumerServiceURLAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="handleLogout" type="xs:boolean" />
+          <xs:element minOccurs="0" name="handleLogoutAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="spPrivateKeyAlias" type="xs:string" />
+          <xs:element minOccurs="0" name="spPrivateKeyAliasAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="useEncryption" type="xs:boolean" />
+          <xs:element minOccurs="0" name="useEncryptionAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="nameIdFormat" type="xs:string" />
+          <xs:element minOccurs="0" name="nameIdFormatAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="digestMethod" type="xs:string" />
+          <xs:element minOccurs="0" name="digestMethodAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="signatureMethod" type="xs:string" />
+          <xs:element minOccurs="0" name="signatureMethodAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="userIntermediatePath" type="xs:string" />
+          <xs:element minOccurs="0" name="userIntermediatePathAtTypeHint" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostAppsSystemConfigCom.adobe.granite.auth.saml.samlauthenticationhandler.config_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostAppsSystemConfigOrg.apache.felix.http_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="orgPeriodapachePeriodfelixPeriodhttpsPeriodnio" type="xs:boolean" />
+          <xs:element minOccurs="0" name="orgPeriodapachePeriodfelixPeriodhttpsPeriodnioAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystore" type="xs:string" />
+          <xs:element minOccurs="0" name="orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystoreAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodpassword" type="xs:string" />
+          <xs:element minOccurs="0" name="orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodpasswordAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkey" type="xs:string" />
+          <xs:element minOccurs="0" name="orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyPeriodpassword" type="xs:string" />
+          <xs:element minOccurs="0" name="orgPeriodapachePeriodfelixPeriodhttpsPeriodkeystorePeriodkeyPeriodpasswordAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststore" type="xs:string" />
+          <xs:element minOccurs="0" name="orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststoreAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststorePeriodpassword" type="xs:string" />
+          <xs:element minOccurs="0" name="orgPeriodapachePeriodfelixPeriodhttpsPeriodtruststorePeriodpasswordAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="orgPeriodapachePeriodfelixPeriodhttpsPeriodclientcertificate" type="xs:string" />
+          <xs:element minOccurs="0" name="orgPeriodapachePeriodfelixPeriodhttpsPeriodclientcertificateAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="orgPeriodapachePeriodfelixPeriodhttpsPeriodenable" type="xs:boolean" />
+          <xs:element minOccurs="0" name="orgPeriodapachePeriodfelixPeriodhttpsPeriodenableAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="orgPeriodosgiPeriodservicePeriodhttpPeriodportPeriodsecure" type="xs:string" />
+          <xs:element minOccurs="0" name="orgPeriodosgiPeriodservicePeriodhttpPeriodportPeriodsecureAtTypeHint" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostAppsSystemConfigOrg.apache.felix.http_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostAppsSystemConfigOrg.apache.http.proxyconfigurator.config_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="proxyPeriodhost" type="xs:string" />
+          <xs:element minOccurs="0" name="proxyPeriodhostAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="proxyPeriodport" type="xs:integer" />
+          <xs:element minOccurs="0" name="proxyPeriodportAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="proxyPeriodexceptions" type="xs:string" />
+          <xs:element minOccurs="0" name="proxyPeriodexceptionsAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="proxyPeriodenabled" type="xs:boolean" />
+          <xs:element minOccurs="0" name="proxyPeriodenabledAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="proxyPerioduser" type="xs:string" />
+          <xs:element minOccurs="0" name="proxyPerioduserAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="proxyPeriodpassword" type="xs:string" />
+          <xs:element minOccurs="0" name="proxyPeriodpasswordAtTypeHint" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostAppsSystemConfigOrg.apache.http.proxyconfigurator.config_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostAppsSystemConfigOrg.apache.sling.jcr.davex.impl.servlets.slingdavexservlet_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="alias" type="xs:string" />
+          <xs:element minOccurs="0" name="aliasAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="davPeriodcreateAbsoluteUri" type="xs:boolean" />
+          <xs:element minOccurs="0" name="davPeriodcreateAbsoluteUriAtTypeHint" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostAppsSystemConfigOrg.apache.sling.jcr.davex.impl.servlets.slingdavexservlet_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostAppsSystemConfigOrg.apache.sling.servlets.get.defaultgetservlet_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="jsonPeriodmaximumresults" type="xs:string" />
+          <xs:element minOccurs="0" name="jsonPeriodmaximumresultsAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="enablePeriodhtml" type="xs:boolean" />
+          <xs:element minOccurs="0" name="enablePeriodhtmlAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="enablePeriodtxt" type="xs:boolean" />
+          <xs:element minOccurs="0" name="enablePeriodtxtAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="enablePeriodxml" type="xs:boolean" />
+          <xs:element minOccurs="0" name="enablePeriodxmlAtTypeHint" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostAppsSystemConfigOrg.apache.sling.servlets.get.defaultgetservlet_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostAppsSystemConfigOrg.apache.sling.security.impl.referrerfilter_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="allowPeriodempty" type="xs:boolean" />
+          <xs:element minOccurs="0" name="allowPeriodemptyAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="allowPeriodhosts" type="xs:string" />
+          <xs:element minOccurs="0" name="allowPeriodhostsAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="allowPeriodhostsPeriodregexp" type="xs:string" />
+          <xs:element minOccurs="0" name="allowPeriodhostsPeriodregexpAtTypeHint" type="xs:string" />
+          <xs:element minOccurs="0" name="filterPeriodmethods" type="xs:string" />
+          <xs:element minOccurs="0" name="filterPeriodmethodsAtTypeHint" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostAppsSystemConfigOrg.apache.sling.security.impl.referrerfilter_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostAppsSystemConfigByConfignodename_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="configNodeName" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostAppsSystemConfigByConfignodename_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostByPathAndName_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="path" type="xs:string" />
+          <xs:element minOccurs="1" name="name" type="xs:string" />
+          <xs:element minOccurs="0" name="operation" type="xs:string" />
+          <xs:element minOccurs="0" name="deleteAuthorizable" type="xs:string" />
+          <xs:element minOccurs="0" name="file" type="xs:hexBinary" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostByPathAndName_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostByPathAndName}.rw.htm_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="path" type="xs:string" />
+          <xs:element minOccurs="1" name="name" type="xs:string" />
+          <xs:element minOccurs="0" name="addMembers" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostByPathAndName}.rw.htm_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostByPath_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="path" type="xs:string" />
+          <xs:element minOccurs="1" name="jcrPrimaryType" type="xs:string" />
+          <xs:element minOccurs="1" name="name" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostByPath_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostBinQuerybuilder.json_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="path" type="xs:string" />
+          <xs:element minOccurs="1" name="pPeriodlimit" type="xs:bigdecimal" />
+          <xs:element minOccurs="1" name="1Property" type="xs:string" />
+          <xs:element minOccurs="1" name="1PropertyPeriodvalue" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostBinQuerybuilder.json_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="String" type="schemas:String">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostLibsReplicationTreeactivation.html_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="ignoredeactivated" type="xs:boolean" />
+          <xs:element minOccurs="1" name="onlymodified" type="xs:boolean" />
+          <xs:element minOccurs="1" name="path" type="xs:string" />
+          <xs:element minOccurs="1" default="activate" name="cmd" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostLibsReplicationTreeactivation.html_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostLibsGraniteSecurityPostTruststore_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="operation" type="xs:string" />
+          <xs:element minOccurs="0" name="newPassword" type="xs:string" />
+          <xs:element minOccurs="0" name="rePassword" type="xs:string" />
+          <xs:element minOccurs="0" name="keyStoreType" type="xs:string" />
+          <xs:element minOccurs="0" name="removeAlias" type="xs:string" />
+          <xs:element minOccurs="0" name="certificate" type="xs:hexBinary" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostLibsGraniteSecurityPostTruststore_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="String" type="schemas:String">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostEtcTruststore_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="truststorePeriodp12" type="xs:hexBinary" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostEtcTruststore_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="String" type="schemas:String">
+            <xs:annotation>
+              <xs:documentation>Default response</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </types>
+  <message name="GetSystemConsoleStatus-productinfo.json_RequestMessage">
+    <part name="GetSystemConsoleStatus-productinfo.json_RequestMessage" element="schemas:GetSystemConsoleStatus-productinfo.json_RequestMessage" />
+  </message>
+  <message name="GetSystemConsoleStatus-productinfo.json_ResponseMessage">
+    <part name="GetSystemConsoleStatus-productinfo.json_ResponseMessage" element="schemas:GetSystemConsoleStatus-productinfo.json_ResponseMessage" />
+  </message>
+  <message name="GetSystemConsoleBundlesByName}.jso_RequestMessage">
+    <part name="GetSystemConsoleBundlesByName}.jso_RequestMessage" element="schemas:GetSystemConsoleBundlesByName}.jso_RequestMessage" />
+  </message>
+  <message name="GetSystemConsoleBundlesByName}.jso_ResponseMessage">
+    <part name="GetSystemConsoleBundlesByName}.jso_ResponseMessage" element="schemas:GetSystemConsoleBundlesByName}.jso_ResponseMessage" />
+  </message>
+  <message name="GetSystemConsoleBundlesByName}.jso_ResponseMessage">
+    <part name="GetSystemConsoleBundlesByName}.jso_ResponseMessage" element="schemas:GetSystemConsoleBundlesByName}.jso_ResponseMessage" />
+  </message>
+  <message name="GetSystemConsoleConfigmgr_RequestMessage">
+    <part name="GetSystemConsoleConfigmgr_RequestMessage" element="schemas:GetSystemConsoleConfigmgr_RequestMessage" />
+  </message>
+  <message name="GetSystemConsoleConfigmgr_ResponseMessage">
+    <part name="GetSystemConsoleConfigmgr_ResponseMessage" element="schemas:GetSystemConsoleConfigmgr_ResponseMessage" />
+  </message>
+  <message name="GetSystemConsoleConfigmgr_5XX">
+    <part name="GetSystemConsoleConfigmgr_5XX" element="schemas:GetSystemConsoleConfigmgr_5XX" />
+  </message>
+  <message name="PostSystemConsoleBundlesByName_RequestMessage">
+    <part name="PostSystemConsoleBundlesByName_RequestMessage" element="schemas:PostSystemConsoleBundlesByName_RequestMessage" />
+  </message>
+  <message name="PostSystemConsoleBundlesByName_ResponseMessage">
+    <part name="PostSystemConsoleBundlesByName_ResponseMessage" element="schemas:PostSystemConsoleBundlesByName_ResponseMessage" />
+  </message>
+  <message name="PostSystemConsoleJmxCom.adobe.granite:type&#x3D;repositoryOpByAction_RequestMessage">
+    <part name="PostSystemConsoleJmxCom.adobe.granite:type&#x3D;repositoryOpByAction_RequestMessage" element="schemas:PostSystemConsoleJmxCom.adobe.granite:type&#x3D;repositoryOpByAction_RequestMessage" />
+  </message>
+  <message name="PostSystemConsoleJmxCom.adobe.granite:type&#x3D;repositoryOpByAction_ResponseMessage">
+    <part name="PostSystemConsoleJmxCom.adobe.granite:type&#x3D;repositoryOpByAction_ResponseMessage" element="schemas:PostSystemConsoleJmxCom.adobe.granite:type&#x3D;repositoryOpByAction_ResponseMessage" />
+  </message>
+  <message name="PostSystemConsoleConfigmgrCom.adobe.granite.auth.saml.samlauthenticationhandler_RequestMessage">
+    <part name="PostSystemConsoleConfigmgrCom.adobe.granite.auth.saml.samlauthenticationhandler_RequestMessage" element="schemas:PostSystemConsoleConfigmgrCom.adobe.granite.auth.saml.samlauthenticationhandler_RequestMessage" />
+  </message>
+  <message name="PostSystemConsoleConfigmgrCom.adobe.granite.auth.saml.samlauthenticationhandler_ResponseMessage">
+    <part name="PostSystemConsoleConfigmgrCom.adobe.granite.auth.saml.samlauthenticationhandler_ResponseMessage" element="schemas:PostSystemConsoleConfigmgrCom.adobe.granite.auth.saml.samlauthenticationhandler_ResponseMessage" />
+  </message>
+  <message name="PostSystemConsoleConfigmgrCom.adobe.granite.auth.saml.samlauthenticationhandler_ResponseMessage">
+    <part name="PostSystemConsoleConfigmgrCom.adobe.granite.auth.saml.samlauthenticationhandler_ResponseMessage" element="schemas:PostSystemConsoleConfigmgrCom.adobe.granite.auth.saml.samlauthenticationhandler_ResponseMessage" />
+  </message>
+  <message name="GetLibsGraniteCoreContentLogin.html_RequestMessage">
+    <part name="GetLibsGraniteCoreContentLogin.html_RequestMessage" element="schemas:GetLibsGraniteCoreContentLogin.html_RequestMessage" />
+  </message>
+  <message name="GetLibsGraniteCoreContentLogin.html_ResponseMessage">
+    <part name="GetLibsGraniteCoreContentLogin.html_ResponseMessage" element="schemas:GetLibsGraniteCoreContentLogin.html_ResponseMessage" />
+  </message>
+  <message name="Post.cqactions.html_RequestMessage">
+    <part name="Post.cqactions.html_RequestMessage" element="schemas:Post.cqactions.html_RequestMessage" />
+  </message>
+  <message name="Post.cqactions.html_ResponseMessage">
+    <part name="Post.cqactions.html_ResponseMessage" element="schemas:Post.cqactions.html_ResponseMessage" />
+  </message>
+  <message name="GetCrxServerCrx.defaultJcr:root.1.json_RequestMessage">
+    <part name="GetCrxServerCrx.defaultJcr:root.1.json_RequestMessage" element="schemas:GetCrxServerCrx.defaultJcr:root.1.json_RequestMessage" />
+  </message>
+  <message name="GetCrxServerCrx.defaultJcr:root.1.json_ResponseMessage">
+    <part name="GetCrxServerCrx.defaultJcr:root.1.json_ResponseMessage" element="schemas:GetCrxServerCrx.defaultJcr:root.1.json_ResponseMessage" />
+  </message>
+  <message name="GetCrxServerCrx.defaultJcr:root.1.json_404">
+    <part name="GetCrxServerCrx.defaultJcr:root.1.json_404" element="schemas:GetCrxServerCrx.defaultJcr:root.1.json_404" />
+  </message>
+  <message name="GetCrxPackmgrInstallstatus.jsp_RequestMessage">
+    <part name="GetCrxPackmgrInstallstatus.jsp_RequestMessage" element="schemas:GetCrxPackmgrInstallstatus.jsp_RequestMessage" />
+  </message>
+  <message name="GetCrxPackmgrInstallstatus.jsp_ResponseMessage">
+    <part name="GetCrxPackmgrInstallstatus.jsp_ResponseMessage" element="schemas:GetCrxPackmgrInstallstatus.jsp_ResponseMessage" />
+  </message>
+  <message name="GetCrxPackmgrInstallstatus.jsp_ResponseMessage">
+    <part name="GetCrxPackmgrInstallstatus.jsp_ResponseMessage" element="schemas:GetCrxPackmgrInstallstatus.jsp_ResponseMessage" />
+  </message>
+  <message name="GetCrxPackmgrServiceScript.html_RequestMessage">
+    <part name="GetCrxPackmgrServiceScript.html_RequestMessage" element="schemas:GetCrxPackmgrServiceScript.html_RequestMessage" />
+  </message>
+  <message name="GetCrxPackmgrServiceScript.html_404">
+    <part name="GetCrxPackmgrServiceScript.html_404" element="schemas:GetCrxPackmgrServiceScript.html_404" />
+  </message>
+  <message name="GetCrxPackmgrServiceScript.html_405">
+    <part name="GetCrxPackmgrServiceScript.html_405" element="schemas:GetCrxPackmgrServiceScript.html_405" />
+  </message>
+  <message name="PostCrxPackmgrService.jsp_RequestMessage">
+    <part name="PostCrxPackmgrService.jsp_RequestMessage" element="schemas:PostCrxPackmgrService.jsp_RequestMessage" />
+  </message>
+  <message name="PostCrxPackmgrService.jsp_ResponseMessage">
+    <part name="PostCrxPackmgrService.jsp_ResponseMessage" element="schemas:PostCrxPackmgrService.jsp_ResponseMessage" />
+  </message>
+  <message name="PostCrxPackmgrService.jsonByPath_RequestMessage">
+    <part name="PostCrxPackmgrService.jsonByPath_RequestMessage" element="schemas:PostCrxPackmgrService.jsonByPath_RequestMessage" />
+  </message>
+  <message name="PostCrxPackmgrService.jsonByPath_ResponseMessage">
+    <part name="PostCrxPackmgrService.jsonByPath_ResponseMessage" element="schemas:PostCrxPackmgrService.jsonByPath_ResponseMessage" />
+  </message>
+  <message name="PostCrxPackmgrUpdate.jsp_RequestMessage">
+    <part name="PostCrxPackmgrUpdate.jsp_RequestMessage" element="schemas:PostCrxPackmgrUpdate.jsp_RequestMessage" />
+  </message>
+  <message name="PostCrxPackmgrUpdate.jsp_ResponseMessage">
+    <part name="PostCrxPackmgrUpdate.jsp_ResponseMessage" element="schemas:PostCrxPackmgrUpdate.jsp_ResponseMessage" />
+  </message>
+  <message name="PostCrxExplorerUiSetpassword.jsp_RequestMessage">
+    <part name="PostCrxExplorerUiSetpassword.jsp_RequestMessage" element="schemas:PostCrxExplorerUiSetpassword.jsp_RequestMessage" />
+  </message>
+  <message name="PostCrxExplorerUiSetpassword.jsp_ResponseMessage">
+    <part name="PostCrxExplorerUiSetpassword.jsp_ResponseMessage" element="schemas:PostCrxExplorerUiSetpassword.jsp_ResponseMessage" />
+  </message>
+  <message name="GetSystemHealth_RequestMessage">
+    <part name="GetSystemHealth_RequestMessage" element="schemas:GetSystemHealth_RequestMessage" />
+  </message>
+  <message name="GetSystemHealth_ResponseMessage">
+    <part name="GetSystemHealth_ResponseMessage" element="schemas:GetSystemHealth_ResponseMessage" />
+  </message>
+  <message name="PostAppsSystemConfigCom.shinesolutions.healthcheck.hc.impl.activebundlehealthcheck_RequestMessage">
+    <part name="PostAppsSystemConfigCom.shinesolutions.healthcheck.hc.impl.activebundlehealthcheck_RequestMessage" element="schemas:PostAppsSystemConfigCom.shinesolutions.healthcheck.hc.impl.activebundlehealthcheck_RequestMessage" />
+  </message>
+  <message name="PostAppsSystemConfigCom.shinesolutions.healthcheck.hc.impl.activebundlehealthcheck_ResponseMessage">
+    <part name="PostAppsSystemConfigCom.shinesolutions.healthcheck.hc.impl.activebundlehealthcheck_ResponseMessage" element="schemas:PostAppsSystemConfigCom.shinesolutions.healthcheck.hc.impl.activebundlehealthcheck_ResponseMessage" />
+  </message>
+  <message name="PostAppsSystemConfigCom.shinesolutions.aem.passwordreset.activator_RequestMessage">
+    <part name="PostAppsSystemConfigCom.shinesolutions.aem.passwordreset.activator_RequestMessage" element="schemas:PostAppsSystemConfigCom.shinesolutions.aem.passwordreset.activator_RequestMessage" />
+  </message>
+  <message name="PostAppsSystemConfigCom.shinesolutions.aem.passwordreset.activator_ResponseMessage">
+    <part name="PostAppsSystemConfigCom.shinesolutions.aem.passwordreset.activator_ResponseMessage" element="schemas:PostAppsSystemConfigCom.shinesolutions.aem.passwordreset.activator_ResponseMessage" />
+  </message>
+  <message name="PostLibsGraniteSecurityPostSslsetup.html_RequestMessage">
+    <part name="PostLibsGraniteSecurityPostSslsetup.html_RequestMessage" element="schemas:PostLibsGraniteSecurityPostSslsetup.html_RequestMessage" />
+  </message>
+  <message name="PostLibsGraniteSecurityPostSslsetup.html_ResponseMessage">
+    <part name="PostLibsGraniteSecurityPostSslsetup.html_ResponseMessage" element="schemas:PostLibsGraniteSecurityPostSslsetup.html_ResponseMessage" />
+  </message>
+  <message name="DeleteEtcReplicationByGents.{runmodeAndName_RequestMessage">
+    <part name="DeleteEtcReplicationByGents.{runmodeAndName_RequestMessage" element="schemas:DeleteEtcReplicationByGents.{runmodeAndName_RequestMessage" />
+  </message>
+  <message name="DeleteEtcReplicationByGents.{runmodeAndName_ResponseMessage">
+    <part name="DeleteEtcReplicationByGents.{runmodeAndName_ResponseMessage" element="schemas:DeleteEtcReplicationByGents.{runmodeAndName_ResponseMessage" />
+  </message>
+  <message name="DeleteByPathAndName_RequestMessage">
+    <part name="DeleteByPathAndName_RequestMessage" element="schemas:DeleteByPathAndName_RequestMessage" />
+  </message>
+  <message name="DeleteByPathAndName_ResponseMessage">
+    <part name="DeleteByPathAndName_ResponseMessage" element="schemas:DeleteByPathAndName_ResponseMessage" />
+  </message>
+  <message name="GetEtcReplicationByGents.{runmodeAndName_RequestMessage">
+    <part name="GetEtcReplicationByGents.{runmodeAndName_RequestMessage" element="schemas:GetEtcReplicationByGents.{runmodeAndName_RequestMessage" />
+  </message>
+  <message name="GetEtcReplicationByGents.{runmodeAndName_ResponseMessage">
+    <part name="GetEtcReplicationByGents.{runmodeAndName_ResponseMessage" element="schemas:GetEtcReplicationByGents.{runmodeAndName_ResponseMessage" />
+  </message>
+  <message name="GetEtcReplicationByGents.{runmode}.-1.jso_RequestMessage">
+    <part name="GetEtcReplicationByGents.{runmode}.-1.jso_RequestMessage" element="schemas:GetEtcReplicationByGents.{runmode}.-1.jso_RequestMessage" />
+  </message>
+  <message name="GetEtcReplicationByGents.{runmode}.-1.jso_ResponseMessage">
+    <part name="GetEtcReplicationByGents.{runmode}.-1.jso_ResponseMessage" element="schemas:GetEtcReplicationByGents.{runmode}.-1.jso_ResponseMessage" />
+  </message>
+  <message name="GetByIntermediatepathAndAuthorizableid}.ks.jso_RequestMessage">
+    <part name="GetByIntermediatepathAndAuthorizableid}.ks.jso_RequestMessage" element="schemas:GetByIntermediatepathAndAuthorizableid}.ks.jso_RequestMessage" />
+  </message>
+  <message name="GetByIntermediatepathAndAuthorizableid}.ks.jso_ResponseMessage">
+    <part name="GetByIntermediatepathAndAuthorizableid}.ks.jso_ResponseMessage" element="schemas:GetByIntermediatepathAndAuthorizableid}.ks.jso_ResponseMessage" />
+  </message>
+  <message name="GetByIntermediatepathAndAuthorizableid}.ks.jso_ResponseMessage">
+    <part name="GetByIntermediatepathAndAuthorizableid}.ks.jso_ResponseMessage" element="schemas:GetByIntermediatepathAndAuthorizableid}.ks.jso_ResponseMessage" />
+  </message>
+  <message name="GetKeystoreStore.p12ByIntermediatepathAndAuthorizableid_RequestMessage">
+    <part name="GetKeystoreStore.p12ByIntermediatepathAndAuthorizableid_RequestMessage" element="schemas:GetKeystoreStore.p12ByIntermediatepathAndAuthorizableid_RequestMessage" />
+  </message>
+  <message name="GetKeystoreStore.p12ByIntermediatepathAndAuthorizableid_ResponseMessage">
+    <part name="GetKeystoreStore.p12ByIntermediatepathAndAuthorizableid_ResponseMessage" element="schemas:GetKeystoreStore.p12ByIntermediatepathAndAuthorizableid_ResponseMessage" />
+  </message>
+  <message name="GetByPathAndName_RequestMessage">
+    <part name="GetByPathAndName_RequestMessage" element="schemas:GetByPathAndName_RequestMessage" />
+  </message>
+  <message name="GetByPathAndName_ResponseMessage">
+    <part name="GetByPathAndName_ResponseMessage" element="schemas:GetByPathAndName_ResponseMessage" />
+  </message>
+  <message name="GetEtcPackagesByGroupAndName}-{version}.zi_RequestMessage">
+    <part name="GetEtcPackagesByGroupAndName}-{version}.zi_RequestMessage" element="schemas:GetEtcPackagesByGroupAndName}-{version}.zi_RequestMessage" />
+  </message>
+  <message name="GetEtcPackagesByGroupAndName}-{version}.zi_ResponseMessage">
+    <part name="GetEtcPackagesByGroupAndName}-{version}.zi_ResponseMessage" element="schemas:GetEtcPackagesByGroupAndName}-{version}.zi_ResponseMessage" />
+  </message>
+  <message name="GetEtcPackagesJcr:contentVlt:definitionFilter.tidy.2.jsonByGroupAndName}-{version}.zi_RequestMessage">
+    <part name="GetEtcPackagesJcr:contentVlt:definitionFilter.tidy.2.jsonByGroupAndName}-{version}.zi_RequestMessage" element="schemas:GetEtcPackagesJcr:contentVlt:definitionFilter.tidy.2.jsonByGroupAndName}-{version}.zi_RequestMessage" />
+  </message>
+  <message name="GetEtcPackagesJcr:contentVlt:definitionFilter.tidy.2.jsonByGroupAndName}-{version}.zi_ResponseMessage">
+    <part name="GetEtcPackagesJcr:contentVlt:definitionFilter.tidy.2.jsonByGroupAndName}-{version}.zi_ResponseMessage" element="schemas:GetEtcPackagesJcr:contentVlt:definitionFilter.tidy.2.jsonByGroupAndName}-{version}.zi_ResponseMessage" />
+  </message>
+  <message name="GetBinQuerybuilder.json_RequestMessage">
+    <part name="GetBinQuerybuilder.json_RequestMessage" element="schemas:GetBinQuerybuilder.json_RequestMessage" />
+  </message>
+  <message name="GetBinQuerybuilder.json_ResponseMessage">
+    <part name="GetBinQuerybuilder.json_ResponseMessage" element="schemas:GetBinQuerybuilder.json_ResponseMessage" />
+  </message>
+  <message name="GetEtcTruststoreTruststore.p12_RequestMessage">
+    <part name="GetEtcTruststoreTruststore.p12_RequestMessage" element="schemas:GetEtcTruststoreTruststore.p12_RequestMessage" />
+  </message>
+  <message name="GetEtcTruststoreTruststore.p12_ResponseMessage">
+    <part name="GetEtcTruststoreTruststore.p12_ResponseMessage" element="schemas:GetEtcTruststoreTruststore.p12_ResponseMessage" />
+  </message>
+  <message name="GetLibsGraniteSecurityTruststore.json_RequestMessage">
+    <part name="GetLibsGraniteSecurityTruststore.json_RequestMessage" element="schemas:GetLibsGraniteSecurityTruststore.json_RequestMessage" />
+  </message>
+  <message name="GetLibsGraniteSecurityTruststore.json_ResponseMessage">
+    <part name="GetLibsGraniteSecurityTruststore.json_ResponseMessage" element="schemas:GetLibsGraniteSecurityTruststore.json_ResponseMessage" />
+  </message>
+  <message name="GetLibsGraniteSecurityTruststore.json_ResponseMessage">
+    <part name="GetLibsGraniteSecurityTruststore.json_ResponseMessage" element="schemas:GetLibsGraniteSecurityTruststore.json_ResponseMessage" />
+  </message>
+  <message name="PostEtcReplicationByGents.{runmodeAndName_RequestMessage">
+    <part name="PostEtcReplicationByGents.{runmodeAndName_RequestMessage" element="schemas:PostEtcReplicationByGents.{runmodeAndName_RequestMessage" />
+  </message>
+  <message name="PostEtcReplicationByGents.{runmodeAndName_ResponseMessage">
+    <part name="PostEtcReplicationByGents.{runmodeAndName_ResponseMessage" element="schemas:PostEtcReplicationByGents.{runmodeAndName_ResponseMessage" />
+  </message>
+  <message name="PostByIntermediatepathAndAuthorizableid}.ks.htm_RequestMessage">
+    <part name="PostByIntermediatepathAndAuthorizableid}.ks.htm_RequestMessage" element="schemas:PostByIntermediatepathAndAuthorizableid}.ks.htm_RequestMessage" />
+  </message>
+  <message name="PostByIntermediatepathAndAuthorizableid}.ks.htm_ResponseMessage">
+    <part name="PostByIntermediatepathAndAuthorizableid}.ks.htm_ResponseMessage" element="schemas:PostByIntermediatepathAndAuthorizableid}.ks.htm_ResponseMessage" />
+  </message>
+  <message name="PostByIntermediatepathAndAuthorizableid}.ks.htm_ResponseMessage">
+    <part name="PostByIntermediatepathAndAuthorizableid}.ks.htm_ResponseMessage" element="schemas:PostByIntermediatepathAndAuthorizableid}.ks.htm_ResponseMessage" />
+  </message>
+  <message name="PostLibsGraniteSecurityPostAuthorizables_RequestMessage">
+    <part name="PostLibsGraniteSecurityPostAuthorizables_RequestMessage" element="schemas:PostLibsGraniteSecurityPostAuthorizables_RequestMessage" />
+  </message>
+  <message name="PostLibsGraniteSecurityPostAuthorizables_ResponseMessage">
+    <part name="PostLibsGraniteSecurityPostAuthorizables_ResponseMessage" element="schemas:PostLibsGraniteSecurityPostAuthorizables_ResponseMessage" />
+  </message>
+  <message name="PostAppsSystemConfigCom.adobe.granite.auth.saml.samlauthenticationhandler.config_RequestMessage">
+    <part name="PostAppsSystemConfigCom.adobe.granite.auth.saml.samlauthenticationhandler.config_RequestMessage" element="schemas:PostAppsSystemConfigCom.adobe.granite.auth.saml.samlauthenticationhandler.config_RequestMessage" />
+  </message>
+  <message name="PostAppsSystemConfigCom.adobe.granite.auth.saml.samlauthenticationhandler.config_ResponseMessage">
+    <part name="PostAppsSystemConfigCom.adobe.granite.auth.saml.samlauthenticationhandler.config_ResponseMessage" element="schemas:PostAppsSystemConfigCom.adobe.granite.auth.saml.samlauthenticationhandler.config_ResponseMessage" />
+  </message>
+  <message name="PostAppsSystemConfigOrg.apache.felix.http_RequestMessage">
+    <part name="PostAppsSystemConfigOrg.apache.felix.http_RequestMessage" element="schemas:PostAppsSystemConfigOrg.apache.felix.http_RequestMessage" />
+  </message>
+  <message name="PostAppsSystemConfigOrg.apache.felix.http_ResponseMessage">
+    <part name="PostAppsSystemConfigOrg.apache.felix.http_ResponseMessage" element="schemas:PostAppsSystemConfigOrg.apache.felix.http_ResponseMessage" />
+  </message>
+  <message name="PostAppsSystemConfigOrg.apache.http.proxyconfigurator.config_RequestMessage">
+    <part name="PostAppsSystemConfigOrg.apache.http.proxyconfigurator.config_RequestMessage" element="schemas:PostAppsSystemConfigOrg.apache.http.proxyconfigurator.config_RequestMessage" />
+  </message>
+  <message name="PostAppsSystemConfigOrg.apache.http.proxyconfigurator.config_ResponseMessage">
+    <part name="PostAppsSystemConfigOrg.apache.http.proxyconfigurator.config_ResponseMessage" element="schemas:PostAppsSystemConfigOrg.apache.http.proxyconfigurator.config_ResponseMessage" />
+  </message>
+  <message name="PostAppsSystemConfigOrg.apache.sling.jcr.davex.impl.servlets.slingdavexservlet_RequestMessage">
+    <part name="PostAppsSystemConfigOrg.apache.sling.jcr.davex.impl.servlets.slingdavexservlet_RequestMessage" element="schemas:PostAppsSystemConfigOrg.apache.sling.jcr.davex.impl.servlets.slingdavexservlet_RequestMessage" />
+  </message>
+  <message name="PostAppsSystemConfigOrg.apache.sling.jcr.davex.impl.servlets.slingdavexservlet_ResponseMessage">
+    <part name="PostAppsSystemConfigOrg.apache.sling.jcr.davex.impl.servlets.slingdavexservlet_ResponseMessage" element="schemas:PostAppsSystemConfigOrg.apache.sling.jcr.davex.impl.servlets.slingdavexservlet_ResponseMessage" />
+  </message>
+  <message name="PostAppsSystemConfigOrg.apache.sling.servlets.get.defaultgetservlet_RequestMessage">
+    <part name="PostAppsSystemConfigOrg.apache.sling.servlets.get.defaultgetservlet_RequestMessage" element="schemas:PostAppsSystemConfigOrg.apache.sling.servlets.get.defaultgetservlet_RequestMessage" />
+  </message>
+  <message name="PostAppsSystemConfigOrg.apache.sling.servlets.get.defaultgetservlet_ResponseMessage">
+    <part name="PostAppsSystemConfigOrg.apache.sling.servlets.get.defaultgetservlet_ResponseMessage" element="schemas:PostAppsSystemConfigOrg.apache.sling.servlets.get.defaultgetservlet_ResponseMessage" />
+  </message>
+  <message name="PostAppsSystemConfigOrg.apache.sling.security.impl.referrerfilter_RequestMessage">
+    <part name="PostAppsSystemConfigOrg.apache.sling.security.impl.referrerfilter_RequestMessage" element="schemas:PostAppsSystemConfigOrg.apache.sling.security.impl.referrerfilter_RequestMessage" />
+  </message>
+  <message name="PostAppsSystemConfigOrg.apache.sling.security.impl.referrerfilter_ResponseMessage">
+    <part name="PostAppsSystemConfigOrg.apache.sling.security.impl.referrerfilter_ResponseMessage" element="schemas:PostAppsSystemConfigOrg.apache.sling.security.impl.referrerfilter_ResponseMessage" />
+  </message>
+  <message name="PostAppsSystemConfigByConfignodename_RequestMessage">
+    <part name="PostAppsSystemConfigByConfignodename_RequestMessage" element="schemas:PostAppsSystemConfigByConfignodename_RequestMessage" />
+  </message>
+  <message name="PostAppsSystemConfigByConfignodename_ResponseMessage">
+    <part name="PostAppsSystemConfigByConfignodename_ResponseMessage" element="schemas:PostAppsSystemConfigByConfignodename_ResponseMessage" />
+  </message>
+  <message name="PostByPathAndName_RequestMessage">
+    <part name="PostByPathAndName_RequestMessage" element="schemas:PostByPathAndName_RequestMessage" />
+  </message>
+  <message name="PostByPathAndName_ResponseMessage">
+    <part name="PostByPathAndName_ResponseMessage" element="schemas:PostByPathAndName_ResponseMessage" />
+  </message>
+  <message name="PostByPathAndName}.rw.htm_RequestMessage">
+    <part name="PostByPathAndName}.rw.htm_RequestMessage" element="schemas:PostByPathAndName}.rw.htm_RequestMessage" />
+  </message>
+  <message name="PostByPathAndName}.rw.htm_ResponseMessage">
+    <part name="PostByPathAndName}.rw.htm_ResponseMessage" element="schemas:PostByPathAndName}.rw.htm_ResponseMessage" />
+  </message>
+  <message name="PostByPath_RequestMessage">
+    <part name="PostByPath_RequestMessage" element="schemas:PostByPath_RequestMessage" />
+  </message>
+  <message name="PostByPath_ResponseMessage">
+    <part name="PostByPath_ResponseMessage" element="schemas:PostByPath_ResponseMessage" />
+  </message>
+  <message name="PostBinQuerybuilder.json_RequestMessage">
+    <part name="PostBinQuerybuilder.json_RequestMessage" element="schemas:PostBinQuerybuilder.json_RequestMessage" />
+  </message>
+  <message name="PostBinQuerybuilder.json_ResponseMessage">
+    <part name="PostBinQuerybuilder.json_ResponseMessage" element="schemas:PostBinQuerybuilder.json_ResponseMessage" />
+  </message>
+  <message name="PostLibsReplicationTreeactivation.html_RequestMessage">
+    <part name="PostLibsReplicationTreeactivation.html_RequestMessage" element="schemas:PostLibsReplicationTreeactivation.html_RequestMessage" />
+  </message>
+  <message name="PostLibsReplicationTreeactivation.html_ResponseMessage">
+    <part name="PostLibsReplicationTreeactivation.html_ResponseMessage" element="schemas:PostLibsReplicationTreeactivation.html_ResponseMessage" />
+  </message>
+  <message name="PostLibsGraniteSecurityPostTruststore_RequestMessage">
+    <part name="PostLibsGraniteSecurityPostTruststore_RequestMessage" element="schemas:PostLibsGraniteSecurityPostTruststore_RequestMessage" />
+  </message>
+  <message name="PostLibsGraniteSecurityPostTruststore_ResponseMessage">
+    <part name="PostLibsGraniteSecurityPostTruststore_ResponseMessage" element="schemas:PostLibsGraniteSecurityPostTruststore_ResponseMessage" />
+  </message>
+  <message name="PostEtcTruststore_RequestMessage">
+    <part name="PostEtcTruststore_RequestMessage" element="schemas:PostEtcTruststore_RequestMessage" />
+  </message>
+  <message name="PostEtcTruststore_ResponseMessage">
+    <part name="PostEtcTruststore_ResponseMessage" element="schemas:PostEtcTruststore_ResponseMessage" />
+  </message>
+  <portType name="ServiceV1_PortType">
+    <operation name="GetSystemConsoleStatus-productinfo.json">
+      <input message="wsdl:GetSystemConsoleStatus-productinfo.json_RequestMessage" />
+      <output message="wsdl:GetSystemConsoleStatus-productinfo.json_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="GetSystemConsoleBundlesByName}.jso">
+      <input message="wsdl:GetSystemConsoleBundlesByName}.jso_RequestMessage" />
+      <output message="wsdl:GetSystemConsoleBundlesByName}.jso_ResponseMessage">
+        <documentation>Retrieved bundle info</documentation>
+      </output>
+      <output message="wsdl:GetSystemConsoleBundlesByName}.jso_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="GetSystemConsoleConfigmgr">
+      <input message="wsdl:GetSystemConsoleConfigmgr_RequestMessage" />
+      <output message="wsdl:GetSystemConsoleConfigmgr_ResponseMessage">
+        <documentation>OK</documentation>
+      </output>
+      <fault name="GetSystemConsoleConfigmgr_5XX" message="wsdl:GetSystemConsoleConfigmgr_5XX">
+        <documentation>Unexpected error.</documentation>
+      </fault>
+    </operation>
+    <operation name="PostSystemConsoleBundlesByName">
+      <input message="wsdl:PostSystemConsoleBundlesByName_RequestMessage" />
+      <output message="wsdl:PostSystemConsoleBundlesByName_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="PostSystemConsoleJmxCom.adobe.granite:type&#x3D;repositoryOpByAction">
+      <input message="wsdl:PostSystemConsoleJmxCom.adobe.granite:type&#x3D;repositoryOpByAction_RequestMessage" />
+      <output message="wsdl:PostSystemConsoleJmxCom.adobe.granite:type&#x3D;repositoryOpByAction_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="PostSystemConsoleConfigmgrCom.adobe.granite.auth.saml.samlauthenticationhandler">
+      <input message="wsdl:PostSystemConsoleConfigmgrCom.adobe.granite.auth.saml.samlauthenticationhandler_RequestMessage" />
+      <output message="wsdl:PostSystemConsoleConfigmgrCom.adobe.granite.auth.saml.samlauthenticationhandler_ResponseMessage">
+        <documentation>Retrieved AEM SAML Configuration</documentation>
+      </output>
+      <output message="wsdl:PostSystemConsoleConfigmgrCom.adobe.granite.auth.saml.samlauthenticationhandler_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+      <output message="wsdl:PostSystemConsoleConfigmgrCom.adobe.granite.auth.saml.samlauthenticationhandler_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="GetLibsGraniteCoreContentLogin.html">
+      <input message="wsdl:GetLibsGraniteCoreContentLogin.html_RequestMessage" />
+      <output message="wsdl:GetLibsGraniteCoreContentLogin.html_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="Post.cqactions.html">
+      <input message="wsdl:Post.cqactions.html_RequestMessage" />
+      <output message="wsdl:Post.cqactions.html_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="GetCrxServerCrx.defaultJcr:root.1.json">
+      <input message="wsdl:GetCrxServerCrx.defaultJcr:root.1.json_RequestMessage" />
+      <output message="wsdl:GetCrxServerCrx.defaultJcr:root.1.json_ResponseMessage">
+        <documentation>CRXDE is enabled</documentation>
+      </output>
+      <fault name="GetCrxServerCrx.defaultJcr:root.1.json_404" message="wsdl:GetCrxServerCrx.defaultJcr:root.1.json_404">
+        <documentation>CRXDE is disabled</documentation>
+      </fault>
+    </operation>
+    <operation name="GetCrxPackmgrInstallstatus.jsp">
+      <input message="wsdl:GetCrxPackmgrInstallstatus.jsp_RequestMessage" />
+      <output message="wsdl:GetCrxPackmgrInstallstatus.jsp_ResponseMessage">
+        <documentation>Retrieved CRX package manager install status</documentation>
+      </output>
+      <output message="wsdl:GetCrxPackmgrInstallstatus.jsp_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="GetCrxPackmgrServiceScript.html">
+      <input message="wsdl:GetCrxPackmgrServiceScript.html_RequestMessage" />
+      <fault name="GetCrxPackmgrServiceScript.html_404" message="wsdl:GetCrxPackmgrServiceScript.html_404">
+        <documentation>Package Manager Servlet is disabled</documentation>
+      </fault>
+      <fault name="GetCrxPackmgrServiceScript.html_405" message="wsdl:GetCrxPackmgrServiceScript.html_405">
+        <documentation>Package Manager Servlet is active</documentation>
+      </fault>
+    </operation>
+    <operation name="PostCrxPackmgrService.jsp">
+      <input message="wsdl:PostCrxPackmgrService.jsp_RequestMessage" />
+      <output message="wsdl:PostCrxPackmgrService.jsp_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="PostCrxPackmgrService.jsonByPath">
+      <input message="wsdl:PostCrxPackmgrService.jsonByPath_RequestMessage" />
+      <output message="wsdl:PostCrxPackmgrService.jsonByPath_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="PostCrxPackmgrUpdate.jsp">
+      <input message="wsdl:PostCrxPackmgrUpdate.jsp_RequestMessage" />
+      <output message="wsdl:PostCrxPackmgrUpdate.jsp_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="PostCrxExplorerUiSetpassword.jsp">
+      <input message="wsdl:PostCrxExplorerUiSetpassword.jsp_RequestMessage" />
+      <output message="wsdl:PostCrxExplorerUiSetpassword.jsp_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="GetSystemHealth">
+      <input message="wsdl:GetSystemHealth_RequestMessage" />
+      <output message="wsdl:GetSystemHealth_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="PostAppsSystemConfigCom.shinesolutions.healthcheck.hc.impl.activebundlehealthcheck">
+      <input message="wsdl:PostAppsSystemConfigCom.shinesolutions.healthcheck.hc.impl.activebundlehealthcheck_RequestMessage" />
+      <output message="wsdl:PostAppsSystemConfigCom.shinesolutions.healthcheck.hc.impl.activebundlehealthcheck_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="PostAppsSystemConfigCom.shinesolutions.aem.passwordreset.activator">
+      <input message="wsdl:PostAppsSystemConfigCom.shinesolutions.aem.passwordreset.activator_RequestMessage" />
+      <output message="wsdl:PostAppsSystemConfigCom.shinesolutions.aem.passwordreset.activator_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="PostLibsGraniteSecurityPostSslsetup.html">
+      <input message="wsdl:PostLibsGraniteSecurityPostSslsetup.html_RequestMessage" />
+      <output message="wsdl:PostLibsGraniteSecurityPostSslsetup.html_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="DeleteEtcReplicationByGents.{runmodeAndName">
+      <input message="wsdl:DeleteEtcReplicationByGents.{runmodeAndName_RequestMessage" />
+      <output message="wsdl:DeleteEtcReplicationByGents.{runmodeAndName_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="DeleteByPathAndName">
+      <input message="wsdl:DeleteByPathAndName_RequestMessage" />
+      <output message="wsdl:DeleteByPathAndName_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="GetEtcReplicationByGents.{runmodeAndName">
+      <input message="wsdl:GetEtcReplicationByGents.{runmodeAndName_RequestMessage" />
+      <output message="wsdl:GetEtcReplicationByGents.{runmodeAndName_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="GetEtcReplicationByGents.{runmode}.-1.jso">
+      <input message="wsdl:GetEtcReplicationByGents.{runmode}.-1.jso_RequestMessage" />
+      <output message="wsdl:GetEtcReplicationByGents.{runmode}.-1.jso_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="GetByIntermediatepathAndAuthorizableid}.ks.jso">
+      <input message="wsdl:GetByIntermediatepathAndAuthorizableid}.ks.jso_RequestMessage" />
+      <output message="wsdl:GetByIntermediatepathAndAuthorizableid}.ks.jso_ResponseMessage">
+        <documentation>Retrieved Authorizable Keystore info</documentation>
+      </output>
+      <output message="wsdl:GetByIntermediatepathAndAuthorizableid}.ks.jso_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="GetKeystoreStore.p12ByIntermediatepathAndAuthorizableid">
+      <input message="wsdl:GetKeystoreStore.p12ByIntermediatepathAndAuthorizableid_RequestMessage" />
+      <output message="wsdl:GetKeystoreStore.p12ByIntermediatepathAndAuthorizableid_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="GetByPathAndName">
+      <input message="wsdl:GetByPathAndName_RequestMessage" />
+      <output message="wsdl:GetByPathAndName_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="GetEtcPackagesByGroupAndName}-{version}.zi">
+      <input message="wsdl:GetEtcPackagesByGroupAndName}-{version}.zi_RequestMessage" />
+      <output message="wsdl:GetEtcPackagesByGroupAndName}-{version}.zi_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="GetEtcPackagesJcr:contentVlt:definitionFilter.tidy.2.jsonByGroupAndName}-{version}.zi">
+      <input message="wsdl:GetEtcPackagesJcr:contentVlt:definitionFilter.tidy.2.jsonByGroupAndName}-{version}.zi_RequestMessage" />
+      <output message="wsdl:GetEtcPackagesJcr:contentVlt:definitionFilter.tidy.2.jsonByGroupAndName}-{version}.zi_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="GetBinQuerybuilder.json">
+      <input message="wsdl:GetBinQuerybuilder.json_RequestMessage" />
+      <output message="wsdl:GetBinQuerybuilder.json_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="GetEtcTruststoreTruststore.p12">
+      <input message="wsdl:GetEtcTruststoreTruststore.p12_RequestMessage" />
+      <output message="wsdl:GetEtcTruststoreTruststore.p12_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="GetLibsGraniteSecurityTruststore.json">
+      <input message="wsdl:GetLibsGraniteSecurityTruststore.json_RequestMessage" />
+      <output message="wsdl:GetLibsGraniteSecurityTruststore.json_ResponseMessage">
+        <documentation>Retrieved AEM Truststore info</documentation>
+      </output>
+      <output message="wsdl:GetLibsGraniteSecurityTruststore.json_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="PostEtcReplicationByGents.{runmodeAndName">
+      <input message="wsdl:PostEtcReplicationByGents.{runmodeAndName_RequestMessage" />
+      <output message="wsdl:PostEtcReplicationByGents.{runmodeAndName_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="PostByIntermediatepathAndAuthorizableid}.ks.htm">
+      <input message="wsdl:PostByIntermediatepathAndAuthorizableid}.ks.htm_RequestMessage" />
+      <output message="wsdl:PostByIntermediatepathAndAuthorizableid}.ks.htm_ResponseMessage">
+        <documentation>Retrieved Authorizable Keystore info</documentation>
+      </output>
+      <output message="wsdl:PostByIntermediatepathAndAuthorizableid}.ks.htm_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="PostLibsGraniteSecurityPostAuthorizables">
+      <input message="wsdl:PostLibsGraniteSecurityPostAuthorizables_RequestMessage" />
+      <output message="wsdl:PostLibsGraniteSecurityPostAuthorizables_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="PostAppsSystemConfigCom.adobe.granite.auth.saml.samlauthenticationhandler.config">
+      <input message="wsdl:PostAppsSystemConfigCom.adobe.granite.auth.saml.samlauthenticationhandler.config_RequestMessage" />
+      <output message="wsdl:PostAppsSystemConfigCom.adobe.granite.auth.saml.samlauthenticationhandler.config_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="PostAppsSystemConfigOrg.apache.felix.http">
+      <input message="wsdl:PostAppsSystemConfigOrg.apache.felix.http_RequestMessage" />
+      <output message="wsdl:PostAppsSystemConfigOrg.apache.felix.http_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="PostAppsSystemConfigOrg.apache.http.proxyconfigurator.config">
+      <input message="wsdl:PostAppsSystemConfigOrg.apache.http.proxyconfigurator.config_RequestMessage" />
+      <output message="wsdl:PostAppsSystemConfigOrg.apache.http.proxyconfigurator.config_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="PostAppsSystemConfigOrg.apache.sling.jcr.davex.impl.servlets.slingdavexservlet">
+      <input message="wsdl:PostAppsSystemConfigOrg.apache.sling.jcr.davex.impl.servlets.slingdavexservlet_RequestMessage" />
+      <output message="wsdl:PostAppsSystemConfigOrg.apache.sling.jcr.davex.impl.servlets.slingdavexservlet_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="PostAppsSystemConfigOrg.apache.sling.servlets.get.defaultgetservlet">
+      <input message="wsdl:PostAppsSystemConfigOrg.apache.sling.servlets.get.defaultgetservlet_RequestMessage" />
+      <output message="wsdl:PostAppsSystemConfigOrg.apache.sling.servlets.get.defaultgetservlet_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="PostAppsSystemConfigOrg.apache.sling.security.impl.referrerfilter">
+      <input message="wsdl:PostAppsSystemConfigOrg.apache.sling.security.impl.referrerfilter_RequestMessage" />
+      <output message="wsdl:PostAppsSystemConfigOrg.apache.sling.security.impl.referrerfilter_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="PostAppsSystemConfigByConfignodename">
+      <input message="wsdl:PostAppsSystemConfigByConfignodename_RequestMessage" />
+      <output message="wsdl:PostAppsSystemConfigByConfignodename_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="PostByPathAndName">
+      <input message="wsdl:PostByPathAndName_RequestMessage" />
+      <output message="wsdl:PostByPathAndName_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="PostByPathAndName}.rw.htm">
+      <input message="wsdl:PostByPathAndName}.rw.htm_RequestMessage" />
+      <output message="wsdl:PostByPathAndName}.rw.htm_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="PostByPath">
+      <input message="wsdl:PostByPath_RequestMessage" />
+      <output message="wsdl:PostByPath_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="PostBinQuerybuilder.json">
+      <input message="wsdl:PostBinQuerybuilder.json_RequestMessage" />
+      <output message="wsdl:PostBinQuerybuilder.json_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="PostLibsReplicationTreeactivation.html">
+      <input message="wsdl:PostLibsReplicationTreeactivation.html_RequestMessage" />
+      <output message="wsdl:PostLibsReplicationTreeactivation.html_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="PostLibsGraniteSecurityPostTruststore">
+      <input message="wsdl:PostLibsGraniteSecurityPostTruststore_RequestMessage" />
+      <output message="wsdl:PostLibsGraniteSecurityPostTruststore_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+    <operation name="PostEtcTruststore">
+      <input message="wsdl:PostEtcTruststore_RequestMessage" />
+      <output message="wsdl:PostEtcTruststore_ResponseMessage">
+        <documentation>Default response</documentation>
+      </output>
+    </operation>
+  </portType>
+  <binding name="ServiceV1_Binding" type="wsdl:ServiceV1_PortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="GetSystemConsoleStatus-productinfo.json">
+      <soap:operation soapAction="GetSystemConsoleStatus-productinfo.json" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="GetSystemConsoleBundlesByName}.jso">
+      <soap:operation soapAction="GetSystemConsoleBundlesByName}.jso" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetSystemConsoleConfigmgr">
+      <soap:operation soapAction="GetSystemConsoleConfigmgr" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+      <fault name="GetSystemConsoleConfigmgr_5XX">
+        <soap:fault use="literal" name="GetSystemConsoleConfigmgr_5XX" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </fault>
+    </operation>
+    <operation name="PostSystemConsoleBundlesByName">
+      <soap:operation soapAction="PostSystemConsoleBundlesByName" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="PostSystemConsoleJmxCom.adobe.granite:type&#x3D;repositoryOpByAction">
+      <soap:operation soapAction="PostSystemConsoleJmxCom.adobe.granite:type&#x3D;repositoryOpByAction" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="PostSystemConsoleConfigmgrCom.adobe.granite.auth.saml.samlauthenticationhandler">
+      <soap:operation soapAction="PostSystemConsoleConfigmgrCom.adobe.granite.auth.saml.samlauthenticationhandler" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetLibsGraniteCoreContentLogin.html">
+      <soap:operation soapAction="GetLibsGraniteCoreContentLogin.html" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="Post.cqactions.html">
+      <soap:operation soapAction="Post.cqactions.html" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="GetCrxServerCrx.defaultJcr:root.1.json">
+      <soap:operation soapAction="GetCrxServerCrx.defaultJcr:root.1.json" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+      <fault name="GetCrxServerCrx.defaultJcr:root.1.json_404">
+        <soap:fault use="literal" name="GetCrxServerCrx.defaultJcr:root.1.json_404" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </fault>
+    </operation>
+    <operation name="GetCrxPackmgrInstallstatus.jsp">
+      <soap:operation soapAction="GetCrxPackmgrInstallstatus.jsp" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetCrxPackmgrServiceScript.html">
+      <soap:operation soapAction="GetCrxPackmgrServiceScript.html" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <fault name="GetCrxPackmgrServiceScript.html_404">
+        <soap:fault use="literal" name="GetCrxPackmgrServiceScript.html_404" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </fault>
+      <fault name="GetCrxPackmgrServiceScript.html_405">
+        <soap:fault use="literal" name="GetCrxPackmgrServiceScript.html_405" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </fault>
+    </operation>
+    <operation name="PostCrxPackmgrService.jsp">
+      <soap:operation soapAction="PostCrxPackmgrService.jsp" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="PostCrxPackmgrService.jsonByPath">
+      <soap:operation soapAction="PostCrxPackmgrService.jsonByPath" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="PostCrxPackmgrUpdate.jsp">
+      <soap:operation soapAction="PostCrxPackmgrUpdate.jsp" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="PostCrxExplorerUiSetpassword.jsp">
+      <soap:operation soapAction="PostCrxExplorerUiSetpassword.jsp" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="GetSystemHealth">
+      <soap:operation soapAction="GetSystemHealth" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="PostAppsSystemConfigCom.shinesolutions.healthcheck.hc.impl.activebundlehealthcheck">
+      <soap:operation soapAction="PostAppsSystemConfigCom.shinesolutions.healthcheck.hc.impl.activebundlehealthcheck" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="PostAppsSystemConfigCom.shinesolutions.aem.passwordreset.activator">
+      <soap:operation soapAction="PostAppsSystemConfigCom.shinesolutions.aem.passwordreset.activator" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="PostLibsGraniteSecurityPostSslsetup.html">
+      <soap:operation soapAction="PostLibsGraniteSecurityPostSslsetup.html" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="DeleteEtcReplicationByGents.{runmodeAndName">
+      <soap:operation soapAction="DeleteEtcReplicationByGents.{runmodeAndName" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="DeleteByPathAndName">
+      <soap:operation soapAction="DeleteByPathAndName" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="GetEtcReplicationByGents.{runmodeAndName">
+      <soap:operation soapAction="GetEtcReplicationByGents.{runmodeAndName" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="GetEtcReplicationByGents.{runmode}.-1.jso">
+      <soap:operation soapAction="GetEtcReplicationByGents.{runmode}.-1.jso" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="GetByIntermediatepathAndAuthorizableid}.ks.jso">
+      <soap:operation soapAction="GetByIntermediatepathAndAuthorizableid}.ks.jso" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetKeystoreStore.p12ByIntermediatepathAndAuthorizableid">
+      <soap:operation soapAction="GetKeystoreStore.p12ByIntermediatepathAndAuthorizableid" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="GetByPathAndName">
+      <soap:operation soapAction="GetByPathAndName" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="GetEtcPackagesByGroupAndName}-{version}.zi">
+      <soap:operation soapAction="GetEtcPackagesByGroupAndName}-{version}.zi" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="GetEtcPackagesJcr:contentVlt:definitionFilter.tidy.2.jsonByGroupAndName}-{version}.zi">
+      <soap:operation soapAction="GetEtcPackagesJcr:contentVlt:definitionFilter.tidy.2.jsonByGroupAndName}-{version}.zi" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="GetBinQuerybuilder.json">
+      <soap:operation soapAction="GetBinQuerybuilder.json" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="GetEtcTruststoreTruststore.p12">
+      <soap:operation soapAction="GetEtcTruststoreTruststore.p12" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="GetLibsGraniteSecurityTruststore.json">
+      <soap:operation soapAction="GetLibsGraniteSecurityTruststore.json" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="PostEtcReplicationByGents.{runmodeAndName">
+      <soap:operation soapAction="PostEtcReplicationByGents.{runmodeAndName" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="PostByIntermediatepathAndAuthorizableid}.ks.htm">
+      <soap:operation soapAction="PostByIntermediatepathAndAuthorizableid}.ks.htm" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="PostLibsGraniteSecurityPostAuthorizables">
+      <soap:operation soapAction="PostLibsGraniteSecurityPostAuthorizables" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="PostAppsSystemConfigCom.adobe.granite.auth.saml.samlauthenticationhandler.config">
+      <soap:operation soapAction="PostAppsSystemConfigCom.adobe.granite.auth.saml.samlauthenticationhandler.config" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="PostAppsSystemConfigOrg.apache.felix.http">
+      <soap:operation soapAction="PostAppsSystemConfigOrg.apache.felix.http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="PostAppsSystemConfigOrg.apache.http.proxyconfigurator.config">
+      <soap:operation soapAction="PostAppsSystemConfigOrg.apache.http.proxyconfigurator.config" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="PostAppsSystemConfigOrg.apache.sling.jcr.davex.impl.servlets.slingdavexservlet">
+      <soap:operation soapAction="PostAppsSystemConfigOrg.apache.sling.jcr.davex.impl.servlets.slingdavexservlet" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="PostAppsSystemConfigOrg.apache.sling.servlets.get.defaultgetservlet">
+      <soap:operation soapAction="PostAppsSystemConfigOrg.apache.sling.servlets.get.defaultgetservlet" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="PostAppsSystemConfigOrg.apache.sling.security.impl.referrerfilter">
+      <soap:operation soapAction="PostAppsSystemConfigOrg.apache.sling.security.impl.referrerfilter" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="PostAppsSystemConfigByConfignodename">
+      <soap:operation soapAction="PostAppsSystemConfigByConfignodename" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="PostByPathAndName">
+      <soap:operation soapAction="PostByPathAndName" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="PostByPathAndName}.rw.htm">
+      <soap:operation soapAction="PostByPathAndName}.rw.htm" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="PostByPath">
+      <soap:operation soapAction="PostByPath" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="PostBinQuerybuilder.json">
+      <soap:operation soapAction="PostBinQuerybuilder.json" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="PostLibsReplicationTreeactivation.html">
+      <soap:operation soapAction="PostLibsReplicationTreeactivation.html" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="PostLibsGraniteSecurityPostTruststore">
+      <soap:operation soapAction="PostLibsGraniteSecurityPostTruststore" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+    <operation name="PostEtcTruststore">
+      <soap:operation soapAction="PostEtcTruststore" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+    </operation>
+  </binding>
+  <service name="ServiceV1">
+    <documentation>Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API</documentation>
+    <port name="default_Port" binding="wsdl:ServiceV1_Binding">
+      <soap:address location="http://localhost/soap/ServiceV1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </port>
+  </service>
+</definitions>

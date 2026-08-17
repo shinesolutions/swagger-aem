@@ -11,14 +11,14 @@ Before you build/run service replace .deploy(new PetApi()) with your actual serv
                 .start();
 ```
 
-To Use-it : in the generated folder try 
+To Use-it : in the generated folder try
 ```
-mvn package 
+mvn package
 ```
 
-for build jar, then start your server: 
+for build jar, then start your server:
 ```
-java -jar target/openapi-jaxrs-server-3.5.0-pre.0.jar
+java -jar target/openapi-jaxrs-server-3.7.1-pre.0.jar
 ```
 
 Java Microservice listening on default port 9090.
