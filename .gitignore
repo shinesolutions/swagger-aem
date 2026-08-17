@@ -4,6 +4,8 @@ doc/
 clients/ruby/generated/bin/
 stage/
 # End of Studio gitignore
+# Studio customisations:
+# - Disable lib/ due to disruption to other langs
 
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,macos,ruby,python,java,node
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,macos,ruby,python,java,node
@@ -219,7 +221,8 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+# Studio customisation: disruptive to other langs
+# lib/
 lib64/
 parts/
 sdist/

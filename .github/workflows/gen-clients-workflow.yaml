@@ -15,7 +15,7 @@ jobs:
           GITHUB_ACTIONS: ${{ env.GITHUB_ACTIONS }}
       - uses: cliffano/command-docker-action@v2.0.0
         with:
-          command: 'make deps generate'
+          command: 'make deps init-spec generate'
           image: cliffano/studio
           shell: bash
           # based on https://github.com/cliffano/packer-studio/blob/main/provisioners/shell/info-post.sh#L5

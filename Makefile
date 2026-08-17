@@ -4,7 +4,7 @@
 ################################################################
 
 # Swaggy C info
-SWAGGY_C_VERSION = 6.2.2
+SWAGGY_C_VERSION = 6.3.0
 
 # The version of OpenAPI Generator (https://openapi-generator.tech/) used for generating the API clients
 OPENAPI_GENERATOR_VERSION = 7.24.0
@@ -155,6 +155,7 @@ generate-all:
 		  --generator-name $$generator \
 		  --output /local/clients/$$generator/generated; \
 	done
+	$(call run_hook,x-post-generate-all)
 
 # Generate API clients for primary generators only
 # This target requires APP_BASE_DIR parameter to be supplied by user
@@ -170,6 +171,7 @@ generate-primary:
 		  --generator-name $$generator \
 		  --output /local/clients/$$generator/generated; \
 	done
+	$(call run_hook,x-post-generate-primary)
 
 ################################################################
 # API clients building targets for primary generators

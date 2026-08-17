@@ -23,6 +23,6 @@ jobs:
           image: cliffano/studio:3.8.0
           shell: bash
           command: |
-            make deps build-python test-python &&
+            make clean deps init-spec generate-primary build-python test-python &&
             make publish-python
           env_file: '/tmp/.env'

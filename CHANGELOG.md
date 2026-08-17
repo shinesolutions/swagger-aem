@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Simplify GitHub Actions release workflows to not use custom action
-- Restructure project to use Swaggy C 6.2.2
+- Restructure project to use Swaggy C 6.3.0
 - Upgrade OpenAPI Generator to 7.24.0
 
 ### Removed
