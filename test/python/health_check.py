@@ -11,7 +11,7 @@ class TestHealthCheck(unittest.TestCase):
 
       # Stub the underlying HTTP call so no real AEM server is needed
       mock_request.return_value = urllib3.HTTPResponse(
-          body=b'OK',
+          body=b'"OK"',
           status=200,
           headers={'Content-Type': 'application/json'}
       )
