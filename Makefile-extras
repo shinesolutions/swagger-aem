@@ -1,0 +1,19 @@
+# Both x-post-generate-all and x-post-generate-primary targets
+# replace the use of CGI escape with ERB Util url encode
+# in order to handle package file with space(s) in the name
+# https://github.com/shinesolutions/swagger-aem/pull/75
+RUBY_CRX_API_FILE = clients/ruby/generated/lib/swagger_aem/api/crx_api.rb
+
+x-post-generate-all:
+	sed -i \
+	  -e "s/^require 'cgi'$$/require 'erb'/" \
+	  -e "s/CGI\.escape(/ERB::Util.url_encode(/g" \
+	  $(RUBY_CRX_API_FILE)
+
+x-post-generate-primary:
+	sed -i \
+	  -e "s/^require 'cgi'$$/require 'erb'/" \
+	  -e "s/CGI\.escape(/ERB::Util.url_encode(/g" \
+	  $(RUBY_CRX_API_FILE)
+
+.PHONY: x-post-generate-all x-post-generate-primary
