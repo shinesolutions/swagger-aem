@@ -10,7 +10,6 @@ jobs:
       - uses: actions/checkout@v7
         with:
           token: ${{ secrets.SHINEOPENSOURCE_GITHUB_TOKEN }}
-          ref: main
       - uses: cliffano/command-docker-action@v2.1.0
         with:
           image: cliffano/studio:3.8.0

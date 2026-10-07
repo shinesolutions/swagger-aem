@@ -1,4 +1,4 @@
-# OpenAPI Client Generator Project Standards
+# AGENTS.md
 
 This repository contains an OpenAPI client generation project following a
 unified standard for tooling, build automation, and coding conventions.
@@ -11,8 +11,8 @@ The key components of the standard include:
 - Contract-first API workflows (specification-driven)
 - Documentation generation (Bootprint)
 
-This document outlines the common conventions that apply across OpenAPI client
-generator projects.
+This document outlines the common conventions that apply across the OpenAPI
+client generator projects.
 
 ## Runtime & Dependencies
 
@@ -81,20 +81,16 @@ You can run the container using: `docker run --rm --workdir /opt/workspace -v /v
 
 ## Code Style and Linting
 
-Applies to: `.github/workflows/**/*.yml`, `.github/workflows/**/*.yaml`, `specification/**/*.yml`, `specification/**/*.yaml`, `swaggy-c.yml`, `Makefile`
-
 - Keep OpenAPI specification changes explicit and backward-compatible when possible
 - Keep generator config updates small and reproducible
 
-### Specification-First Development
+### OpenAPI Client Generator Code Guidelines
 
-- Treat the OpenAPI specification as the source of truth
-- Keep schema changes explicit and reviewable
-- Avoid hidden behavior changes in generated clients by documenting spec updates
+Applies to: `.github/workflows/**/*.yml`, `.github/workflows/**/*.yaml`, `specification/**/*.yml`, `specification/**/*.yaml`, `swaggy-c.yml`, `Makefile`
 
-### Style & Formatting
+#### Style & Formatting
 
-#### YAML and Workflow Files
+##### YAML and Workflow Files
 
 Guidelines:
 
@@ -103,7 +99,7 @@ Guidelines:
 - Prefer explicit keys and step names in workflows
 - Keep shell fragments small and deterministic
 
-#### Makefile and Generator Config
+##### Makefile and Generator Config
 
 Guidelines:
 
@@ -111,13 +107,19 @@ Guidelines:
 - Prefer clear variable names for generator and version values
 - Avoid hardcoded local-only paths when shared config variables exist
 
-### Generation Conventions
+#### Specification-First Development
+
+- Treat the OpenAPI specification as the source of truth
+- Keep schema changes explicit and reviewable
+- Avoid hidden behavior changes in generated clients by documenting spec updates
+
+#### Generation Conventions
 
 - Use `generate-primary` for routine CI flows unless all generators are required
 - Keep language-specific build/test behavior isolated to dedicated targets
 - Ensure generated client paths remain stable across runs
 
-### Validation
+#### Validation
 
 - Treat pipeline failures as contract or build regressions
 - Validate spec initialization and generation before testing
@@ -125,19 +127,34 @@ Guidelines:
 
 ## Testing
 
-Applies to: `test/javascript/**/*.js`, `test/python/**/*.py`, `test/ruby/**/*.rb`, `.github/workflows/**/*.yml`, `.github/workflows/**/*.yaml`
-
 - Language-specific tests live in `test/javascript/`, `test/python/`, and `test/ruby/`
 - Run tests with `make test` or language-specific targets
 
-### Test Structure
+### Testing Guidelines
+
+Applies to: `test/javascript/**/*.js`, `test/python/**/*.py`, `test/ruby/**/*.rb`, `.github/workflows/**/*.yml`, `.github/workflows/**/*.yaml`
+
+#### Validation Strategy
+
+This project validates generated client behavior using language-specific test
+suites (JavaScript, Python, Ruby) executed against the generated client code,
+alongside deterministic spec/generation checks.
+
+Primary validation commands:
+
+```bash
+make ci
+make test
+```
+
+#### Test Structure
 
 - JavaScript tests live in `test/javascript/`
 - Python tests live in `test/python/`
 - Ruby tests live in `test/ruby/`
 - Keep fixtures deterministic and tied to stable spec behavior
 
-### Running Tests
+#### Running Tests
 
 ```bash
 make test               # Run all primary language tests
@@ -146,14 +163,20 @@ make test-python        # Run Python tests only
 make test-ruby          # Run Ruby tests only
 ```
 
-### Test Expectations
+#### What to Validate
 
 - Validate generated client behavior, not generator internals
 - Assert exact values for deterministic transformations
 - Keep tests resilient to formatting-only regeneration
 - Fail fast when required outputs or artifacts are missing
 
-### Regression Prevention
+#### Workflow Test Practices
+
+- Keep CI steps deterministic and idempotent
+- Avoid network-dependent checks unless required by spec initialization (`make init-spec`) or documentation publishing (`make doc`)
+- Fail fast on missing configuration values
+
+#### Regression Prevention
 
 When specification or generator configuration changes:
 
