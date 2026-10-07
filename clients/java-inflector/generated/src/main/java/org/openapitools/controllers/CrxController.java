@@ -13,7 +13,7 @@ import org.openapitools.model.*;
 import java.io.File;
 import org.openapitools.model.InstallStatus;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaInflectorServerCodegen", date = "2026-08-17T07:12:38.973476137Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaInflectorServerCodegen", date = "2026-10-07T01:21:17.359658762Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class CrxController  {
   /**
    * Uncomment and implement as you see fit.  These operations will map

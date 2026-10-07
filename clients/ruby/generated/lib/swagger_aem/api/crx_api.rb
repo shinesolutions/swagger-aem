@@ -10,7 +10,7 @@ Generator version: 7.24.0
 
 =end
 
-require 'cgi'
+require 'erb'
 
 module SwaggerAemClient
   class CrxApi
@@ -278,7 +278,7 @@ module SwaggerAemClient
         fail ArgumentError, "Missing the required parameter 'cmd' when calling CrxApi.post_package_service_json"
       end
       # resource path
-      local_var_path = '/crx/packmgr/service/.json/{path}'.sub('{path}', CGI.escape(path.to_s))
+      local_var_path = '/crx/packmgr/service/.json/{path}'.sub('{path}', ERB::Util.url_encode(path.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}

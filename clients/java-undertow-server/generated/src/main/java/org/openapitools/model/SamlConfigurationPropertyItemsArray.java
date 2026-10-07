@@ -23,7 +23,7 @@ import java.util.List;
 
 
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaUndertowServerCodegen", date = "2026-08-17T07:12:52.513315767Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaUndertowServerCodegen", date = "2026-10-07T01:21:30.386925645Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class SamlConfigurationPropertyItemsArray   {
   
   private String name;

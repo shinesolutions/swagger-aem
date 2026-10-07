@@ -23,7 +23,7 @@ import com.typesafe.config.Config;
 
 import openapitools.OpenAPIUtils.ApiAction;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPlayFrameworkCodegen", date = "2026-08-17T07:12:50.232821425Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPlayFrameworkCodegen", date = "2026-10-07T01:21:28.217991712Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class CqApiController extends Controller {
     private final CqApiControllerImpInterface imp;
     private final ObjectMapper mapper;

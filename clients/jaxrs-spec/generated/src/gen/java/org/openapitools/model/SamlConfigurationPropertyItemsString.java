@@ -16,7 +16,7 @@ import org.openapitools.jackson.nullable.JsonNullable;
 
 
 @JsonTypeName("SamlConfigurationPropertyItemsString")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2026-08-17T07:13:15.121519061Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2026-10-07T01:21:52.551486958Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class SamlConfigurationPropertyItemsString   {
   private String name;
   private Boolean optional;

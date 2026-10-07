@@ -10,7 +10,7 @@ import org.openapitools.model.SamlConfigurationProperties;
 /**
  * SamlConfigurationInfo
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaMSF4JServerCodegen", date = "2026-08-17T07:12:45.791437416Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaMSF4JServerCodegen", date = "2026-10-07T01:21:23.951966871Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class SamlConfigurationInfo   {
   @JsonProperty("pid")
   private String pid;

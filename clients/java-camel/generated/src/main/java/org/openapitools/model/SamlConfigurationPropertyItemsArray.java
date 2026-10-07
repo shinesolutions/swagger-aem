@@ -22,7 +22,7 @@ import jakarta.annotation.Generated;
  * SamlConfigurationPropertyItemsArray
  */
 
-@Generated(value = "org.openapitools.codegen.languages.JavaCamelServerCodegen", date = "2026-08-17T07:12:57.134939377Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+@Generated(value = "org.openapitools.codegen.languages.JavaCamelServerCodegen", date = "2026-10-07T01:21:34.906381765Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class SamlConfigurationPropertyItemsArray {
 
   private String name;

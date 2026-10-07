@@ -17,7 +17,7 @@ import java.util.List;
  * SamlConfigurationPropertyItemsArray
  */
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2026-08-17T07:12:48.036788598Z[Etc/UTC]", comments = "Generator version: 7.24.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaPKMSTServerCodegen", date = "2026-10-07T01:21:26.080403674Z[Etc/UTC]", comments = "Generator version: 7.24.0")
 public class SamlConfigurationPropertyItemsArray   {
   @JsonProperty("name")
   private String name;
