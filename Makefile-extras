@@ -17,3 +17,91 @@ x-post-generate-primary:
 	  $(RUBY_CRX_API_FILE)
 
 .PHONY: x-post-generate-all x-post-generate-primary
+
+################################################################
+# Java client targets, published to Maven Central as com.shinesolutions:swaggeraem4j
+# Swaggy C has no Java targets. These build and publish the committed Java client in
+# clients/java/generated as it is, without regenerating it, e.g.:
+#   make -f Makefile-extras build-java test-java publish-java
+
+SHELL := /bin/bash
+MVN ?= mvn -B -ntp
+JAVA_CLIENT_DIR = clients/java/generated
+# Maven settings with the Central Portal user token for the "central" server, read from the environment
+JAVA_SETTINGS = $(CURDIR)/clients/java/settings.xml
+
+build-java:
+	cd $(JAVA_CLIENT_DIR) && $(MVN) clean package -DskipTests
+
+test-java:
+	cd $(JAVA_CLIENT_DIR) && $(MVN) test
+
+# Sign the jar, sources, javadoc and pom (sign-artifacts profile of the generated pom.xml) and upload
+# them to the Maven Central Portal. The generated pom.xml has no Maven Central publishing, so the
+# central-publishing-maven-plugin from clients/java/central-publishing-plugin.xml is first added to
+# its build plugins (an uncommitted change in the working tree). The deployment is not published
+# automatically: once validated it waits at https://central.sonatype.com -> Publishing -> Deployments
+# to be published or dropped.
+# Requires these environment variables:
+#   MAVEN_GPG_KEY (ASCII-armored secret key) and MAVEN_GPG_PASSPHRASE, signed with Bouncy Castle so
+#   no GPG keyring is needed
+#   MAVEN_CENTRAL_USERNAME and MAVEN_CENTRAL_PASSWORD, the Central Portal user token for the
+#   com.shinesolutions namespace, for the Maven server ID "central" in clients/java/settings.xml
+publish-java:
+	grep -q central-publishing-maven-plugin $(JAVA_CLIENT_DIR)/pom.xml || { \
+	  awk 'FNR == NR { plugin = plugin $$0 "\n"; next } \
+	    !done && /<\/plugins>/ { printf "%s", plugin; done = 1 } { print }' \
+	    clients/java/central-publishing-plugin.xml $(JAVA_CLIENT_DIR)/pom.xml > $(JAVA_CLIENT_DIR)/pom.xml.tmp && \
+	  mv $(JAVA_CLIENT_DIR)/pom.xml.tmp $(JAVA_CLIENT_DIR)/pom.xml; }
+	cd $(JAVA_CLIENT_DIR) && $(MVN) -s $(JAVA_SETTINGS) -Psign-artifacts deploy -DskipTests -Dgpg.signer=bc
+
+# Upload test: sign the Java client and upload it to the Central Portal as a pre-release test
+# version, never publishing it, then print the deployment ID to check with publish-java-status and
+# drop with publish-java-drop. Checks the GPG key, the Central token, the upload and Central's
+# validation. Uploads the current pom.xml version with -rc.0 (e.g. 0.10.0 -> 0.10.0-rc.0),
+# which can be uploaded again once dropped.
+# Builds in a temporary copy of clients/java and Makefile-extras from the working tree (without build
+# output), so the repository is untouched. Signs with MAVEN_GPG_KEY and MAVEN_GPG_PASSPHRASE and
+# uploads with MAVEN_CENTRAL_USERNAME and MAVEN_CENTRAL_PASSWORD.
+# For example, in aem-platform-buildenv with Docker, with this repository mounted read-only:
+#   docker run --rm -v "$(pwd)":/workspace/swagger-aem:ro -w /workspace/swagger-aem \
+#     -e MAVEN_GPG_KEY -e MAVEN_GPG_PASSPHRASE -e MAVEN_CENTRAL_USERNAME -e MAVEN_CENTRAL_PASSWORD \
+#     shinesolutions/aem-platform-buildenv:6.4.1 make -f Makefile-extras publish-java-test
+publish-java-test:
+	@set -euo pipefail; \
+	work=$$(mktemp -d); trap 'rm -rf "$$work"' EXIT; \
+	tar -c --exclude=target clients/java Makefile-extras | tar -x -C "$$work"; \
+	cd "$$work"; \
+	current=$$(cd $(JAVA_CLIENT_DIR) && $(MVN) -q help:evaluate -Dexpression=project.version -DforceStdout); \
+	version="$${current%%-*}-rc.0"; \
+	echo "Uploading swaggeraem4j $$current to the Central Portal as $$version (it is not published)"; \
+	(cd $(JAVA_CLIENT_DIR) && $(MVN) -q versions:set -DnewVersion="$$version" -DgenerateBackupPoms=false); \
+	$(MAKE) -f Makefile-extras publish-java | tee deploy.log; \
+	id=$$(sed -n 's/.*deploymentId: \([0-9a-f-]*\).*/\1/p' deploy.log | tail -1); \
+	echo "Deployment $$id ($$version) is validated and not published. Check and drop it with:"; \
+	echo "  make -f Makefile-extras publish-java-status DEPLOYMENT_ID=$$id"; \
+	echo "  make -f Makefile-extras publish-java-drop DEPLOYMENT_ID=$$id"
+
+# Central Portal deployments (publish-java prints the deployment ID). Uses the user token in
+# MAVEN_CENTRAL_USERNAME and MAVEN_CENTRAL_PASSWORD; the Authorization header is passed to curl on
+# stdin so the token is not visible in the process list.
+#   publish-java-status: show a deployment's state (e.g. VALIDATED, PUBLISHED, FAILED) and any errors
+#   publish-java-drop:   drop (delete) a deployment that has not been published
+define central_api
+	set -euo pipefail; \
+	test -n "$(DEPLOYMENT_ID)" || { echo "Set DEPLOYMENT_ID, e.g. make -f Makefile-extras $@ DEPLOYMENT_ID=<id>"; exit 1; }; \
+	test -n "$${MAVEN_CENTRAL_USERNAME:-}" && test -n "$${MAVEN_CENTRAL_PASSWORD:-}" \
+	  || { echo "Set MAVEN_CENTRAL_USERNAME and MAVEN_CENTRAL_PASSWORD"; exit 1; }; \
+	token=$$(printf '%s:%s' "$$MAVEN_CENTRAL_USERNAME" "$$MAVEN_CENTRAL_PASSWORD" | base64 | tr -d '\n'); \
+	printf 'Authorization: Bearer %s\n' "$$token" \
+	  | curl -sS --fail-with-body -X $(1) -H @- -w '\nHTTP %{http_code}\n' \
+	      "https://central.sonatype.com/api/v1/publisher/$(2)"
+endef
+
+publish-java-status:
+	@$(call central_api,POST,status?id=$(DEPLOYMENT_ID))
+
+publish-java-drop:
+	@$(call central_api,DELETE,deployment/$(DEPLOYMENT_ID))
+
+.PHONY: build-java test-java publish-java publish-java-test publish-java-status publish-java-drop

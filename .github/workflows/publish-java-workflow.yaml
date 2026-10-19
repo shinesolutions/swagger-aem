@@ -1,0 +1,25 @@
+---
+name: Publish Java
+'on':
+  push:
+    tags:
+      - '*'
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    container: shinesolutions/aem-platform-buildenv:6.4.1
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          set-safe-directory: ${{ github.workspace }}
+          ref: main
+      - env:
+          MAVEN_CENTRAL_USERNAME: ${{ secrets.SHINEOPENSOURCE_MAVEN_CENTRAL_USERNAME }}
+          MAVEN_CENTRAL_PASSWORD: ${{ secrets.SHINEOPENSOURCE_MAVEN_CENTRAL_PASSWORD }}
+          MAVEN_GPG_KEY: ${{ secrets.SHINEOPENSOURCE_MAVEN_GPG_KEY }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.SHINEOPENSOURCE_MAVEN_GPG_PASSPHRASE }}
+        run: |
+          make -f Makefile-extras build-java test-java &&
+          make -f Makefile-extras publish-java

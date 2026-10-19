@@ -1,0 +1,18 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+  <!--
+    Maven Central Portal (central.sonatype.com) user token for the com.shinesolutions namespace,
+    used by central-publishing-maven-plugin (publishingServerId "central") in make publish-java.
+    The values are read from the environment; never put the token itself in this file:
+      export MAVEN_CENTRAL_USERNAME=... MAVEN_CENTRAL_PASSWORD=...
+  -->
+  <servers>
+    <server>
+      <id>central</id>
+      <username>${env.MAVEN_CENTRAL_USERNAME}</username>
+      <password>${env.MAVEN_CENTRAL_PASSWORD}</password>
+    </server>
+  </servers>
+</settings>
