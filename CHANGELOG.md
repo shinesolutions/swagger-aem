@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Publish Java client swaggeraem4j to Maven Central
 
+### Changed
+- Regenerate Java client with OpenAPI Generator 7.24.0 and remove stale files
+
 ## 4.0.0 - 2026-10-07
 ### Added
 - Added the possibility to configure the aliasUpdate for a replication flush agent. - thanks to Robin Brouns @rubnig
