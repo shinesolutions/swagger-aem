@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Fixed
+- Update followlocation setting
+
 ## 4.0.0 - 2026-10-07
 ### Added
 - Added the possibility to configure the aliasUpdate for a replication flush agent. - thanks to Robin Brouns @rubnig
