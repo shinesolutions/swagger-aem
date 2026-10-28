@@ -4,16 +4,27 @@
 # https://github.com/shinesolutions/swagger-aem/pull/75
 RUBY_CRX_API_FILE = clients/ruby/generated/lib/swagger_aem/api/crx_api.rb
 
+# Both targets also make the Ruby API client not follow redirects by default,
+# as the generated client's `opts[:follow_location] || true` always follows them,
+# and ruby_aem relies on getting 302 responses back, e.g. to tell a node exists
+RUBY_API_CLIENT_FILE = clients/ruby/generated/lib/swagger_aem/api_client.rb
+
 x-post-generate-all:
 	sed -i \
 	  -e "s/^require 'cgi'$$/require 'erb'/" \
 	  -e "s/CGI\.escape(/ERB::Util.url_encode(/g" \
 	  $(RUBY_CRX_API_FILE)
+	sed -i \
+	  -e "s/opts\[:follow_location\] || true$$/opts[:follow_location] || false/" \
+	  $(RUBY_API_CLIENT_FILE)
 
 x-post-generate-primary:
 	sed -i \
 	  -e "s/^require 'cgi'$$/require 'erb'/" \
 	  -e "s/CGI\.escape(/ERB::Util.url_encode(/g" \
 	  $(RUBY_CRX_API_FILE)
+	sed -i \
+	  -e "s/opts\[:follow_location\] || true$$/opts[:follow_location] || false/" \
+	  $(RUBY_API_CLIENT_FILE)
 
 .PHONY: x-post-generate-all x-post-generate-primary
