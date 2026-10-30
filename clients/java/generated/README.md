@@ -1,8 +1,8 @@
 # swaggeraem4j
 
 Adobe Experience Manager (AEM) API
-- API version: 3.7.1-pre.0
-  - Build date: 2026-10-07T01:21:05.039853646Z[Etc/UTC]
+- API version: 4.0.1-pre.0
+  - Build date: 2026-10-19T04:04:33.753912075Z[Etc/UTC]
   - Generator version: 7.24.0
 
 Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
@@ -42,7 +42,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.shinesolutions</groupId>
   <artifactId>swaggeraem4j</artifactId>
-  <version>0.10.0</version>
+  <version>4.0.1-pre.0</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -58,7 +58,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "com.shinesolutions:swaggeraem4j:0.10.0"
+     implementation "com.shinesolutions:swaggeraem4j:4.0.1-pre.0"
   }
 ```
 
@@ -72,7 +72,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/swaggeraem4j-0.10.0.jar`
+* `target/swaggeraem4j-4.0.1-pre.0.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
