@@ -77,14 +77,6 @@
         "property": "jobs.build.steps[0].with.ref",
         "post_release_value": "main"
       }
-    },
-    {
-      "path": ".github/workflows/publish-java-workflow.yaml",
-      "type": "yaml",
-      "params": {
-        "property": "jobs.build.steps[0].with.ref",
-        "post_release_value": "main"
-      }
     }
   ]
 }

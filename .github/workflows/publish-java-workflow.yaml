@@ -12,8 +12,6 @@ jobs:
     container: shinesolutions/aem-platform-buildenv:6.4.1
     steps:
       - uses: actions/checkout@v7
-        with:
-          ref: main
       - env:
           MAVEN_CENTRAL_USERNAME: ${{ secrets.SHINEOPENSOURCE_MVNREPOSITORY_TOKEN_USERNAME }}
           MAVEN_CENTRAL_PASSWORD: ${{ secrets.SHINEOPENSOURCE_MVNREPOSITORY_TOKEN_PASSWORD }}
