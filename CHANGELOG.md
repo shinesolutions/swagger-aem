@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Regenerate Java client with OpenAPI Generator 7.24.0 and remove stale files
 
+### Fixed
+- Fix Java publishing checkout failing on dubious repository ownership in the build container
+- Fix Java publishing credentials to use the Maven Central token secrets of aem-orchestrator
+
 ## 4.0.1 - 2026-10-28
 ### Fixed
 - Ruby API client no longer follows redirects by default, so 302 responses are returned to the caller again; the post-generate hooks in Makefile-extras keep this when the clients are regenerated
