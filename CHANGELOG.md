@@ -9,7 +9,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Publish Java client swaggeraem4j to Maven Central
 
 ### Changed
-- Publish Java client from the pushed tag, similar to aem-orchestrator
 - Regenerate Java client with OpenAPI Generator 7.24.0 and remove stale files
 
 ### Fixed
