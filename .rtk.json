@@ -15,6 +15,13 @@
       }
     },
     {
+      "path": "clients/java/generated/pom.xml",
+      "type": "text",
+      "params": {
+        "regex": "(?<=<name>swaggeraem4j</name>\\s*<version>)[^<]+"
+      }
+    },
+    {
       "path": "clients/javascript/conf.json",
       "type": "json",
       "params": {

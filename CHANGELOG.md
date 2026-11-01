@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fix Java publishing checkout failing on dubious repository ownership in the build container
 - Fix Java publishing credentials to use the Maven Central token secrets of aem-orchestrator
+- Fix Java client pom.xml version not following the release version
 
 ## 4.0.1 - 2026-10-28
 ### Fixed
