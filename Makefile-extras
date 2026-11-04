@@ -77,7 +77,7 @@ publish-java:
 # For example, in aem-platform-buildenv with Docker, with this repository mounted read-only:
 #   docker run --rm -v "$(pwd)":/workspace/swagger-aem:ro -w /workspace/swagger-aem \
 #     -e MAVEN_GPG_KEY -e MAVEN_GPG_PASSPHRASE -e MAVEN_CENTRAL_USERNAME -e MAVEN_CENTRAL_PASSWORD \
-#     shinesolutions/aem-platform-buildenv:6.4.1 make -f Makefile-extras publish-java-test
+#     shinesolutions/aem-platform-buildenv:6.5.0 make -f Makefile-extras publish-java-test
 publish-java-test:
 	@set -euo pipefail; \
 	work=$$(mktemp -d); trap 'rm -rf "$$work"' EXIT; \
