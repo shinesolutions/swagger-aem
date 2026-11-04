@@ -16,9 +16,9 @@
     },
     {
       "path": "clients/java/generated/pom.xml",
-      "type": "text",
+      "type": "xml",
       "params": {
-        "regex": "(?<=<name>swaggeraem4j</name>\\s*<version>)[^<]+"
+        "property": "project.version"
       }
     },
     {
