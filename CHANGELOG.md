@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+### Changed
+- Upgrade aem-platform-buildenv to 6.5.0, which has RTK 4.4.0
+- Use the RTK xml resource type for the pom.xml version
+- Upgrade release-action to 2.2.0
 
 ## 4.1.0 - 2026-11-02
 ### Added

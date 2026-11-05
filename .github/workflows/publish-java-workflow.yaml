@@ -9,7 +9,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-24.04
-    container: shinesolutions/aem-platform-buildenv:6.4.1
+    container: shinesolutions/aem-platform-buildenv:6.5.0
     steps:
       - uses: actions/checkout@v7
         with:
