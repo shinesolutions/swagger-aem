@@ -4,8 +4,12 @@ name: Publish API Documentation
   push:
     tags:
       - '*'
+permissions:
+  contents: read
 jobs:
   build:
+    # Fail a hung build instead of running to GitHub's 6 hour default
+    timeout-minutes: 60
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7

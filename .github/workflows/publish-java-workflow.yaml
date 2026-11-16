@@ -8,6 +8,8 @@ permissions:
   contents: read
 jobs:
   build:
+    # Fail a hung build instead of running to GitHub's 6 hour default
+    timeout-minutes: 60
     runs-on: ubuntu-24.04
     container: shinesolutions/aem-platform-buildenv:6.5.0
     steps:
