@@ -14,6 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Upgrade aem-platform-buildenv to 6.7.0, which has RTK 4.4.0
 - Use the RTK xml resource type for the pom.xml version
 - Upgrade release-action to 2.2.0
+- Regenerate the stale 2021 package-lock.json from package.json, which locks only validator 13.15.35 and drops about 230 unused packages flagged by Dependabot
+- Upgrade gson from 2.6.2 to 2.15.0 in the Java integration tests (CVE-2022-25647)
+- Upgrade yard from 0.9.20 to 0.9.45 in the Ruby integration tests (CVE-2024-27285, CVE-2026-41493, CVE-2026-49342)
 
 ## 4.1.0 - 2026-11-02
 ### Added
