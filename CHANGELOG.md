@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Speed up CI: skip CI for release tags, same-repo pull requests and version bump commits, cancel superseded branch runs, and add job timeouts
 - Make the GitHub Actions workflows' GITHUB_TOKEN read-only
-- Upgrade aem-platform-buildenv to 6.6.0, which has RTK 4.4.0
+- Upgrade aem-platform-buildenv to 6.7.0, which has RTK 4.4.0
 - Use the RTK xml resource type for the pom.xml version
 - Upgrade release-action to 2.2.0
 
