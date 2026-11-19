@@ -28,8 +28,6 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7
-        with:
-          token: ${{ secrets.SHINEOPENSOURCE_GITHUB_TOKEN }}
       - uses: iamsauravsharma/create-dotenv@v2.0.1
         with:
           file-path: '/tmp/.env'
@@ -44,7 +42,9 @@ jobs:
           # TODO: replace /root with studio-user's home when available
           extra_path: '/root/.cargo/bin:/root/.local/bin:/root/go/bin:/opt/poetry-venv/bin:/opt/poetry/bin:/usr/local/go/bin:/usr/local/maven/bin:/usr/local/node/bin:/usr/local/openjdk-jdk/bin'
           env_file: '/tmp/.env'
-      - uses: peaceiris/actions-gh-pages@v4
+      # Dependabot can't push to gh-pages, as it gets no Actions secrets
+      - if: github.actor != 'dependabot[bot]'
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.SHINEOPENSOURCE_GITHUB_TOKEN }}
           publish_dir: stage/gh-pages
